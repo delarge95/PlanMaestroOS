@@ -1,0 +1,50 @@
+---
+import MediaFrame from "@components/MediaFrame.astro";
+
+type StoryItem = {
+  title: string;
+  body: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  body: string;
+  mediaSrc: string;
+  mediaAlt: string;
+  mediaLabel?: string;
+  tone?: "cyan" | "warm" | "green";
+  items: StoryItem[];
+};
+
+const {
+  eyebrow,
+  title,
+  body,
+  mediaSrc,
+  mediaAlt,
+  mediaLabel,
+  tone = "cyan",
+  items
+} = Astro.props;
+---
+
+<section class:list={["scroll-story", `story-${tone}`]}>
+  <div class="scroll-story-media" data-reveal>
+    <div class="scroll-story-copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+      <p>{body}</p>
+    </div>
+    <MediaFrame src={mediaSrc} alt={mediaAlt} label={mediaLabel} />
+  </div>
+  <div class="scroll-story-steps" aria-label={`${title} steps`}>
+    {items.map((item, index) => (
+      <article class="story-step" data-story-step data-reveal>
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+      </article>
+    ))}
+  </div>
+</section>

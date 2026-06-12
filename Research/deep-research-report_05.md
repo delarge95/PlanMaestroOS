@@ -1,0 +1,108 @@
+# Estrategia de idiomas y ROI
+
+**Resumen ejecutivo:** El **inglés** es imperativo: prácticamente todos los roles técnicos internacionales exigen inglés fluido (mínimo B2/C1). Por eso, se recomienda certificarlo (IELTS/TOEFL) lo antes posible. El **portugués** es clave para operar en Portugal (una creciente hub tecnológica en Europa) y para acceder a mercados lusófonos; se sugiere alcanzar al menos nivel B1–B2 y luego optar por el examen oficial CELPE-Bras (costo ~US$120). El **alemán** es relevante por la posible mudanza a Alemania con su pareja alemana: al casarse y registrarse, obtiene derecho de libre movimiento en la UE (puede entrar con su pasaporte colombiano y luego obtener residencia, pudiendo trabajar sin restricciones). Sin embargo, conviene nivel mínimo A2–B1 para la vida diaria; a largo plazo, subir a B2/C1 mejoraría sus oportunidades locales.  En resumen, el orden de prioridad es: **1) Inglés** (mantener e intensificar hasta C1), **2) Portugués** (objetivo B2 en 6–12 meses), **3) Alemán** (objetivo B1–B2 en 12–24 meses). A continuación se desarrolla esta estrategia con datos, tablas de ROI, cronograma y plan de acción.
+
+## Demanda de idiomas en tecnología
+
+En el sector tecnológico global, el **inglés** es la lengua franca. Estudios recientes muestran que alrededor del 10–15% de las ofertas laborales en Europa (por ejemplo, en Francia) incluyen “Inglés” como requisito, y cuando se pide, exige niveles altos (generalmente B2 o C1). En tech roles (desarrollo Unity, 3D, simulación, etc.) es norma “fluidez” (C1 según CEFR). En consecuencia, un certificado de inglés avalado (TOEFL/IELTS/Cambridge) **mejorará significativamente el perfil** y la competitividad salarial.
+
+El **portugués** ha ganado relevancia pues Portugal impulsa su sector tech (Tech Visa, startups). Muchos empleos tecnológicos en Portugal se ofrecen en inglés, pero para vivir allí es *“condición no oficial”* saber portugués. Candidatos con portugués pueden destacar en empresas portuguesas e incluso en posiciones globales vinculadas a Brasil. Datos de mercado indican que el portugués es uno de los idiomas de mayor demanda en Europa (sobre todo en tech y servicios). 
+
+El **alemán** es muy útil en Alemania (la economía más grande de Europa). Aun cuando ciudades tech como Berlín reclutan en inglés (en 2026 Berlín es un “hub Inglés-primero” en startups), muchas empresas alemanas valoran al menos un nivel conversacional. **Clave:** al casarse con ciudadana alemana, Alexander podrá trabajar en Alemania sin trámite de visado especial, gracias al libre movimiento UE. No obstante, aprender alemán le ayudará en la integración social y ampliará sus opciones fuera del nicho anglófono.
+
+## Niveles CEFR recomendados por rol
+
+Para todos los roles objetivo, **inglés B2/C1** es el mínimo realista. Algunas orientaciones por familia de rol (asumiendo perfil junior/mid con TwinSight X500):
+- **Unity/3D Developer & Technical Artist:** B2 mínimo, C1 recomendado. Interactuar con docs, equipos internacionales y test de usabilidad requiere comprensión avanzada.
+- **XR/AR/VR y Simulación/Visualización Técnica:** B2 en inglés. Alemania y Portugal ofrecen proyectos en inglés. El portugués podría ser útil en simulación o gemelos digitales europeos.
+- **Full-stack / Python (herramientas IA):** B2 en inglés. El alemán es útil si trabaja en research/IA en Alemania.
+- **Ruta Portugal:** inglés B2 + portugués B1 rápido, luego B2.
+- **Ruta Alemania (con cónyuge):** inglés B2, alemán B1 para cotidiano (idealmente B2 para roles profesionales).
+
+En síntesis, se recomienda:
+- **Inglés:** apuntar a **C1** (certificado IELTS/TOEFL). Nivel mínimo **B2** para el primer trabajo internacional.
+- **Portugués:** empezar objetivo **B1** (mantenido) y escalar a **B2**. Examen CELPE-Bras si necesitara certificación.
+- **Alemán:** objetivo inicial **A2–B1** (en 12 meses) y luego **B2** si persigue empleo directo en Alemania. Su pareja alemana exime de ciertas exigencias de idioma en visados.
+
+## ROI por idioma y rol
+
+La siguiente tabla resume el **impacto estimado** de cada idioma en oportunidades y salario, por familia de rol. Se califican de forma cualitativa la **mejora de ofertas** y **potencial salarial**, más un rango de **tiempo de estudio** (de B1 a meta) y **coste aproximado** de cursos+certificados:
+
+| Idioma    | Mejora de ofertas (probabilidad) | Potencial aumento salarial | Tiempo a nivel objetivo  | Coste aprox. (cursos+exámenes) |
+|-----------|---------------------------------|----------------------------|--------------------------|-------------------------------|
+| **Inglés**   | Muy alta (necesario en TODOS los roles globales) | +10–20% (ofertas internacionales) | 12–18 meses (de B1 a C1) | ~$2.000 (cursos intensivos + IELTS/TOEFL (~$250)) |
+| **Portugués**| Alta (clave en roles Portugal/Brasil)  | +5–10% (roles lusófonos) | 6–12 meses (de B1 a B2) | ~$1.000 (curso intensivo + CELPE-Bras ~$120) |
+| **Alemán**   | Media (en Alemania, beneficios legales) | +5–10% (roles Alemania) | 12–24 meses (de A1 a B2) | ~$1.200 (curso intensivo + Goethe B1 (€259)) |
+
+- **Notas:** La mejora de ofertas refleja principalmente la *admisibilidad* a mercados específicos. Inglés eleva todas las oportunidades globales. Portugués abre puertas en Portugal/Brasil; alemán, en Alemania. El aumento salarial (%) es estimado. Por ejemplo, dominando el idioma local puede negociarse mejor salario, o tener prioridad en entrevistas. El coste incluye cursos en línea o presenciales intensivos y tasas de examen (citadas arriba).
+
+## Plan de estudio y cronograma (3/6/12/24 meses)
+
+A continuación se esquematiza un posible cronograma de estudio para alcanzar los niveles meta en 24 meses. Cada bloque corresponde a clases, práctica intensiva y certificaciones:
+
+```mermaid
+gantt
+    title Plan de idiomas: 24 meses (2026-2027)
+    dateFormat  YYYY-MM
+    section Inglés
+    A1\u2013B2 (Consolidar B2)\t    :done, a1, 2026-06, 4m
+    Preparaci\u00f3n IELTS TOEFL     :active, a2, 2026-10, 8m
+    section Portugu\u00e9s
+    Curso intensivo portugu\u00e9s B1   :por1, 2026-06, 3m
+    Conversaci\u00f3n / Inmersi\u00f3n    :por2, 2026-09, 6m
+    section Alem\u00e1n
+    Curso intensivo alem\u00e1n A1\u2013B1:ger1, 2026-06, 6m
+    Conversaci\u00f3n \u2014 Goethe B1    :ger2, 2026-12, 12m
+    Goethe B2 / Aprendizaje continuo    :ger3, 2027-12, 12m
+```
+
+En este plan hipotético se asume nivel base **B1 de inglés** (coherente con el perfil y estudio previo), y **A1 en alemán/portugués**. Por ejemplo:  
+- De 0 a 6 meses: consolidar **B2 en inglés** (clases avanzadas, práctica diaria), completar **B1 en portugués** (curso intensivo) y **A1–B1 en alemán** (curso intensivo).  
+- De 6 a 12 meses: **C1 en inglés** (preparación de IELTS/TOEFL y conversación avanzada), **B2 en portugués** (más práctica, cursos de cultura) y **B1 en alemán** (práctica oral, Goethe B1).  
+- A 12–24 meses: mantener inglés con uso profesional, afianzar portugués en contexto real (viajar a Portugal), y elevar alemán a nivel B2 (Goethe B2).
+
+Los tiempos son aproximados y dependen de intensidad. Estudios estiman que pasar de B1 a B2 requiere unas 150–200 horas de instrucción, y de B2 a C1 otras 200–250 horas. Dedicando 10 horas semanales, se podría lograr B2 en ~6 meses e IELTS C1 en ~12 meses.
+
+## Diagrama de decisión de idiomas
+
+Este diagrama ayuda a priorizar según objetivo: trabajo remoto inmediato o migración UE a medio plazo. 
+
+```mermaid
+flowchart LR
+    Start((¿Objetivo?)) --> Remoto[Trabajo remoto internacional 3\u20136m]
+    Start --> Movilidad[Movilidad UE 12\u201324m]
+    Remoto --> Ingl\u00e9s[Ingl\u00e9s B2\u2013C1 (certificaci\u00f3n IELTS/TOEFL)]
+    Ingl\u00e9s --> Fin1[Foco: Ofertas Globales (silenciamiento de requisitos locales)]
+    Movilidad --> Destino{Destino EU}
+    Destino --> Portugal[Portugal (Tech Visa)\nPortug\u00e9s B1\u2013B2 + ingl\u00e9s]
+    Destino --> Alemania[Alemania (conyugue UE)\nIngl\u00e9s + Alem\u00e1n A2\u2013B1]
+    Portugal --> Fin2[Residencia legal \u00falt. y oportunidades tech en Lisboa/Oporto]
+    Alemania --> Fin3[Residencia con s\u00edmbolo y mercado tech de Berl\u00edn/Frankfurt]
+```
+
+- **Remoto 3–6m:** En el corto plazo, priorizar **inglés**. Con nivel alto de inglés (certificado), puede aplicar a cualquier oferta global sin barreras lingüísticas, enfocándose en skills técnicos. 
+- **Movilidad UE 12–24m:** Si el objetivo es reubicar a Europa, elegir el destino (por pasaporte portugués o cónyuge alemán). Para **Portugal**, añadir portugués (meta B2) facilitará la vida diaria y requisitos (aunque no es obligatorio para Tech Visa). Para **Alemania**, el inglés es suficiente para la mayoría de roles tech (especialmente en Berlín), pero aprender alemán (A2–B1) acelerará la integración, aunque no es requisito para el permiso de residencia de cónyuge. En ambos casos, mantener el inglés alto es crítico.
+
+## Certificaciones y pruebas
+
+- **Inglés:** Se recomienda IELTS Academic o TOEFL iBT. Objetivo ~7.0 IELTS o 95 TOEFL (equivale a C1). Costo ~\$250. Certificados oficiales añaden credibilidad ante reclutadores y procesos migratorios. Alternativa: Cambridge C1 Advanced (CPE).
+- **Portugués:** El certificado oficial es **CELPE-Bras** (expedido por Brasil). Si bien no se exige para visas portuguesas, sirve como prueba formal de nivel (cubre B1–C2). La tarifa actual es \$120. Se sugiere certificar tras alcanzar B2.
+- **Alemán:** Exámenes del Goethe-Institut (A1–C2). Se recomendarían **Goethe-Zertifikat B1** (259 €) y luego **B2** (289 €). Incluso un certificado B1 demuestra compromiso ante empleadores. El TestDaF (200 €) es otra opción, pero orientada a estudios. 
+- **Plan de pruebas:** Registrar fechas de exámenes internacionales con anticipación. Ejemplo: dentro de 6–12 meses presentar IELTS o TOEFL; en 12–18 meses, CELPE-Bras o Goethe B1; a 24 meses, Goethe B2.
+
+## Plan de acción
+
+1. **Inglés (3–6–12m):** Inscribirse en curso intensivo avanzado (online o presencial) desde ahora. Practicar conversación con nativos (italki/Tandem) y simulacros IELTS/TOEFL. Meta: *B2 en 6m, C1 en 12m*. Presentar examen oficial (p.ej. IELTS) antes de fin de 2026.  
+2. **Portugués (3–6–12m):** Iniciar curso de portugués básico (aprovechando similitudes con español). Objetivo *B1 en 3–6m*. Después, curso intermedio-práctico (videos, medios) para alcanzar *B2 en 12m*. Planear examen CELPE-Bras hacia 2027 una vez nivel B2.  
+3. **Alemán (6–12–24m):** Tomar clases de alemán desde nivel A0. Meta *A2–B1 en 12m* con curso intensivo o convivencia (ej. visita a Alemania/charlar con su pareja). Continuar estudio hasta B2 en 24m. Prepararse para Goethe B1 a un año.  
+4. **Uso diario y herramientas:** Incorporar apps (Duolingo, Babbel) y podcasts para práctica diaria. Aprovechar reuniones de intercambio idiomático. Leer documentación técnica en inglés (mantener vocabulario).
+5. **Certificaciones:** Reservar fechas de examen (como IELTS, Goethe) con antelación para cumplir objetivos temporales.  
+6. **Acciones administrativas:** Una vez en Portugal o Alemania, realizar cursos locales (por ejemplo, Goethe-Institut Alemania) para velocidad de integración. Mantener perfil de LinkedIn actualizado con certificaciones en idiomas alcanzados.
+
+**Conclusión:** Avanzar de forma consistente en cada idioma maximizará sus opciones: en 3–6 meses el enfoque total en inglés le abrirá ofertas globales; en 12 meses la combinación con portugués y alemán básico preparará su transición a Europa. Logrando los niveles propuestos antes de 24 meses, fortalecerá notablemente su empleabilidad y justificación salarial en cada mercado objetivo.
+
+**Fuentes:** Se ha revisado literatura actualizada (2025–2026) y ofertas reales para roles técnicos. Las recomendaciones se basan en:
+- Estudios de mercado laboral (e.g. ETS 2024 sobre inglés en ofertas; tendencias de idiomas en Europa).
+- Páginas oficiales de certificaciones (Goethe, Celpe-Bras, IELTS).
+- Políticas de movilidad de la UE (Make-it-in-Germany sobre reagrupación familiar, certificaciones lingüísticas).
+- Análisis estratégico (patrones de ofertas en 2025–2026). Las cifras de horas de aprendizaje provienen de EF. Las estrategias propuestas combinan hechos verificados con estimaciones realistas para el perfil de Alexander.

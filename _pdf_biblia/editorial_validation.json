@@ -1,0 +1,17 @@
+{
+  "root_markdown": 47,
+  "research_markdown": 18,
+  "research_pdfs": 12,
+  "historic_index": 9,
+  "audit_findings": 10,
+  "pdf_exists": true,
+  "pdf_bytes": 120627,
+  "has_passport_2028": true,
+  "has_no_current_eu_rule": true,
+  "has_toc": true,
+  "has_source_map": true,
+  "has_web_bridge": true,
+  "passed": true,
+  "compiled": true,
+  "pdf": "E:\\Laboral\\_pdf_biblia\\dist\\Biblia_Profesional_Alexander_EDITORIAL_v1.pdf"
+}

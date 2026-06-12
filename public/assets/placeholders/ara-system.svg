@@ -1,0 +1,25 @@
+<svg width="1400" height="820" viewBox="0 0 1400 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="820" fill="#090B0D"/>
+  <text x="70" y="88" fill="#F2F6FA" font-family="Inter, Arial" font-size="44" font-weight="700">ARA Framework</text>
+  <text x="70" y="128" fill="#9AA4AE" font-family="Inter, Arial" font-size="20">AI-assisted research automation prototype placeholder</text>
+  <g transform="translate(140 244)" font-family="Inter, Arial">
+    <rect width="260" height="140" rx="18" fill="#151A20" stroke="#303946"/>
+    <text x="34" y="62" fill="#F2F6FA" font-size="28" font-weight="700">Research</text>
+    <text x="34" y="98" fill="#9AA4AE" font-size="18">source gathering</text>
+    <path d="M280 70H390" stroke="#69D99A" stroke-width="4" stroke-linecap="round"/>
+    <g transform="translate(410 0)">
+      <rect width="260" height="140" rx="18" fill="#151A20" stroke="#303946"/>
+      <text x="34" y="62" fill="#F2F6FA" font-size="28" font-weight="700">Agents</text>
+      <text x="34" y="98" fill="#9AA4AE" font-size="18">workflow routing</text>
+    </g>
+    <path d="M690 70H800" stroke="#69D99A" stroke-width="4" stroke-linecap="round"/>
+    <g transform="translate(820 0)">
+      <rect width="260" height="140" rx="18" fill="#151A20" stroke="#303946"/>
+      <text x="34" y="62" fill="#F2F6FA" font-size="28" font-weight="700">Reports</text>
+      <text x="34" y="98" fill="#9AA4AE" font-size="18">structured output</text>
+    </g>
+  </g>
+  <rect x="140" y="484" width="1080" height="132" rx="20" fill="#10151B" stroke="#2E3844"/>
+  <text x="182" y="536" fill="#F2F6FA" font-family="Inter, Arial" font-size="28" font-weight="700">Supporting system</text>
+  <text x="182" y="578" fill="#9AA4AE" font-family="Inter, Arial" font-size="20">Python orchestration, documentation systems and AI-assisted research tooling. Kept secondary to the Unity/3D work.</text>
+</svg>

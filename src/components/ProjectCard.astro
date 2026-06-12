@@ -1,0 +1,30 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import MediaFrame from "@components/MediaFrame.astro";
+import TechTag from "@components/TechTag.astro";
+import type { Project } from "@data/projects";
+
+type Props = {
+  project: Project;
+  featured?: boolean;
+};
+
+const { project, featured = false } = Astro.props;
+---
+
+<article class:list={["project-card", featured && "project-featured", `accent-${project.accent}`]} data-reveal>
+  <MediaFrame src={project.media} alt={project.mediaAlt} label={project.eyebrow} />
+  <div class="project-card-body">
+    <p class="eyebrow">{project.eyebrow}</p>
+    <h3>{project.title}</h3>
+    <p class="project-subtitle">{project.subtitle}</p>
+    <p>{project.summary}</p>
+    <div class="tag-row" aria-label={`${project.title} stack`}>
+      {project.stack.slice(0, featured ? 7 : 5).map((tag) => <TechTag label={tag} tone={project.accent} />)}
+    </div>
+    <div class="card-actions">
+      <CTAButton href={project.href} label="View case study" variant="primary" />
+      {project.links[0] && <CTAButton href={project.links[0].href} label={project.links[0].label} variant="ghost" />}
+    </div>
+  </div>
+</article>

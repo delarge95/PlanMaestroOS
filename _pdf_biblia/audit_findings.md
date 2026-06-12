@@ -1,0 +1,102 @@
+# Auditoria de coherencia y consistencia
+
+Generado: 2026-06-12 01:56
+
+Regla global: la informacion actual y no historica manda sobre `Historic`; los datos de mercado se tratan como snapshots; el tracker operativo manda sobre estado de aplicaciones.
+
+| ID | Severidad | Categoria | Alcance | Hallazgo | Resolucion |
+| --- | --- | --- | --- | --- | --- |
+| AUD-001 | High | Work authorization | Root + Research | El pasaporte portugues no debe presentarse como autorizacion laboral UE actual. | Regla canonica: pasaporte/citizenship esperado alrededor de 2028; hasta emision legal, aplicar como Colombia-based remote contractor/B2B. |
+| AUD-002 | Low | Historic data | Historic | Existen datos historicos como 'July 2026' que contradicen la regla actual. | Historic queda fuera del cuerpo del PDF y se indexa como obsoleto; no corrige ni domina los modulos actuales. |
+| AUD-003 | Medium | Seniority | Root + Research | Aparece 'Senior Technical Artist' en benchmarks, riesgos o textos negativos; no debe convertirse en titulo personal. | Usar 'Real-Time 3D Developer / Unity Technical Artist'. Senior solo como benchmark aspiracional o rol a largo plazo. |
+| AUD-004 | Medium | TwinSight framing | Root + Research | TwinSight puede relacionarse con digital twin, pero no debe presentarse como digital twin industrial completo sin IoT/live state. | Framing canonico: Unity WebGL technical visualization, assembly inspection prototype, digital-twin-adjacent. |
+| AUD-005 | Medium | AI tooling | Root + Research | ARA/AI tooling es ruta secundaria; no debe implicar seniority de AI engineer productivo. | ARA se presenta como Python automation / AI tooling prototype, subordinado a TwinSight salvo que se vuelva portfolio-ready. |
+| AUD-006 | High | Public proof | Root | GitHub, demo live, CV publico y portfolio son condiciones de credibilidad pendientes hasta que existan URLs reales. | Mantener placeholders explicitos y no afirmar disponibilidad publica hasta verificar links. |
+| AUD-007 | Medium | Metrics | Root + Research | Metricas de TwinSight deben coincidir con tesis final antes de usarse publicamente. | Mantener metricas como condicionales si no han sido verificadas contra documento final de tesis. |
+| AUD-008 | Medium | Market freshness | Root + Research | Empresas, vacantes, salarios y remote policies son datos temporales. | El PDF es snapshot; para aplicar se usa tracker vivo y verificacion semanal/top targets. |
+| AUD-009 | Low | Duplicates | Root + Research | Hay variantes/duplicados, especialmente 28D y agent_A4. | Se incluyen por trazabilidad, marcados como duplicate/reference; la version complete/canonica manda. |
+| AUD-010 | Medium | Legal/tax | Root + Research | Impuestos, contractor setup, residencia y permisos requieren validacion profesional antes de decisiones reales. | Tratar los modulos como estrategia informativa; validar con contador/abogado antes de mudanza, facturacion internacional o aceptacion de oferta. |
+
+
+## Evidencia detallada
+
+### AUD-001 - Work authorization
+
+- Severidad: High
+- Alcance: Root + Research
+- Hallazgo: El pasaporte portugues no debe presentarse como autorizacion laboral UE actual.
+- Resolucion: Regla canonica: pasaporte/citizenship esperado alrededor de 2028; hasta emision legal, aplicar como Colombia-based remote contractor/B2B.
+- Evidencia: 00_master_audit_blueprint.md:1138: 9. ¿El pasaporte portugués sigue estimado en ~2 años o cambió la previsión?; 04_eu_portugal_germany_mobility_strategy.md:31: The Portuguese Sephardic citizenship route itself was not re-audited as a legal case file. The user states that the Portuguese passport is highly likely within approximately two years. This document treats that as a **hi; 04_eu_portugal_germany_mobility_strategy.md:52: The user expects a Portuguese passport within approximately two years through the Sephardic Jewish ancestry route. Once a Portuguese passport is actually issued, Alexander becomes an EU citizen with the general right to ; 04_eu_portugal_germany_mobility_strategy.md:411: > I am in the final/advanced pathway toward Portuguese citizenship and expect EU mobility within approximately two years, but I am currently applying as a Colombia-based remote contractor.; 05_language_strategy_and_roi.md:17: 3. **Portuguese** — strategically relevant because a Portuguese passport is expected with high probability in approximately two years.; 05_language_strategy_and_roi.md:171: - a Portuguese passport is expected in approximately two years with high probability;; 06_education_courses_rebelway_masters_phd.md:514: Do not pursue PhD now. Re-evaluate only after 2–3 years of industry experience or after a strong funded research opportunity appears.; 07_portfolio_strategy_and_project_architecture.md:36: | EU status | No current EU work authorization. Future Portuguese passport expected in ~2 years. |; 10_github_linkedin_cv_strategy.md:1105: I am currently based in Colombia and available for remote contractor/B2B work. I do not currently hold EU work authorization, but I expect Portuguese citizenship/passport in approximately two years.; 12_application_system_and_tracker.md:19: - Future mobility: Portuguese passport expected in approximately two years; Germany route possible through legal marriage and residence with German partner.; 13_interview_negotiation_and_offer_risk.md:12: - Future mobility: Portuguese passport expected in approximately two years; Germany route possible through marriage and residence processing.; 13_interview_negotiation_and_offer_risk.md:576: | Passport pending | EU citizenship expected in approximately two years, not current work authorization |
+
+### AUD-002 - Historic data
+
+- Severidad: Low
+- Alcance: Historic
+- Hallazgo: Existen datos historicos como 'July 2026' que contradicen la regla actual.
+- Resolucion: Historic queda fuera del cuerpo del PDF y se indexa como obsoleto; no corrige ni domina los modulos actuales.
+- Evidencia: Historic/alexander_woodcock_context.md:19: | **Citizenship** | Colombian → EU Passport (Portugal) expected July 2026 |
+
+### AUD-003 - Seniority
+
+- Severidad: Medium
+- Alcance: Root + Research
+- Hallazgo: Aparece 'Senior Technical Artist' en benchmarks, riesgos o textos negativos; no debe convertirse en titulo personal.
+- Resolucion: Usar 'Real-Time 3D Developer / Unity Technical Artist'. Senior solo como benchmark aspiracional o rol a largo plazo.
+- Evidencia: 00_master_audit_blueprint.md:158: | “Senior Technical Artist” | No corresponde al nivel formal actual. |; 01_source_of_truth_profile.md:85: | Nivel que no debe afirmarse | Senior Technical Artist, Lead, Production Engineer, EU-based worker, industry-proven specialist |; 01_source_of_truth_profile.md:201: | `Senior Technical Artist` | No hay experiencia industrial formal suficiente |; 02_market_role_fit_and_positioning.md:537: | `Senior Technical Artist` | Not supported by formal industry experience |; 02_market_role_fit_and_positioning.md:816: The profile should not be marketed as a generic multimedia engineer, generic 3D artist, AI engineer, full-stack developer, or senior technical artist.; 07_portfolio_strategy_and_project_architecture.md:42: - “Senior Technical Artist” as a primary title.; 10_github_linkedin_cv_strategy.md:62: - “Senior Technical Artist.”; 10_github_linkedin_cv_strategy.md:438: Senior Technical Artist; 10_github_linkedin_cv_strategy.md:1051: Senior Technical Artist; 12_application_system_and_tracker.md:150: - Senior Technical Artist AAA.
+
+### AUD-004 - TwinSight framing
+
+- Severidad: Medium
+- Alcance: Root + Research
+- Hallazgo: TwinSight puede relacionarse con digital twin, pero no debe presentarse como digital twin industrial completo sin IoT/live state.
+- Resolucion: Framing canonico: Unity WebGL technical visualization, assembly inspection prototype, digital-twin-adjacent.
+- Evidencia: 02_market_role_fit_and_positioning.md:242: | Requisitos típicos | Unity/Unreal, C#/C++, 3D visualization, CAD/BIM/industrial data, simulation logic, sometimes robotics/IoT/cloud |; 02_market_role_fit_and_positioning.md:427: | Digital Twin Visualization Developer | Primary aspirational | Medium-high | Use carefully; avoid claiming full digital twin if no data sync |; 02_market_role_fit_and_positioning.md:447: | TwinSight X500 | Unity, WebGL, C#, interactive 3D, technical visualization, CAD-to-realtime optimization, UI, visualization modes, academic validation | Tech art, digital twin adjacent, simulation adjacent, product vis; 02_market_role_fit_and_positioning.md:585: | Digital Twin | Use as target market/adjacent field; do not call TwinSight a full digital twin unless data integration exists |; 03_salary_benchmark_and_remote_colombia.md:230: - ingeniería mecánica, sistemas, IoT o datos en tiempo real;; 03_salary_benchmark_and_remote_colombia.md:236: La ruta no debe venderse como `Digital Twin Engineer` si TwinSight no integra datos vivos, IoT, sensores o sincronización en tiempo real. La formulación más honesta es:; 03_salary_benchmark_and_remote_colombia.md:690: | Digital twin salary | Puede requerir IoT/engineering |; 08_twinsight_x500_case_study.md:64: - a production digital twin connected to live telemetry;; 08_twinsight_x500_case_study.md:589: > It is adjacent to digital twin visualization, but I would not call it a full digital twin because it does not include live data, bidirectional synchronization or operational telemetry. It is more accurately described a; 08_twinsight_x500_case_study.md:834: > TwinSight X500 is an academic prototype, not a commercial training product. It does not include live telemetry, physics simulation, certified maintenance workflows or production-grade backend infrastructure. The projec
+
+### AUD-005 - AI tooling
+
+- Severidad: Medium
+- Alcance: Root + Research
+- Hallazgo: ARA/AI tooling es ruta secundaria; no debe implicar seniority de AI engineer productivo.
+- Resolucion: ARA se presenta como Python automation / AI tooling prototype, subordinado a TwinSight salvo que se vuelva portfolio-ready.
+- Evidencia: 02_market_role_fit_and_positioning.md:532: | `AI Engineer` | ARA does not prove ML engineering or production AI yet |; 02_market_role_fit_and_positioning.md:602: | Presenting ARA as production AI platform | Risk if unstable or not deployed | Present as prototype/tooling proof with limitations |; 07_portfolio_strategy_and_project_architecture.md:136: | ARA Framework | Python, LangGraph, automation, multi-agent logic, research tooling. | Production AI engineering, ML research. |; 07_portfolio_strategy_and_project_architecture.md:301: - Production AI deployment.; 09_ara_ai_tools_and_secondary_projects.md:608: > ARA demonstrates automation and systems design, not production AI authority.; 09_ara_ai_tools_and_secondary_projects.md:692: - “production AI system” unless deployed and monitored;; 10_github_linkedin_cv_strategy.md:273: ARA must be positioned as tooling, not as a production AI company product.; 10_github_linkedin_cv_strategy.md:525: Positioned as a tooling and automation project, not a production AI platform.
+
+### AUD-006 - Public proof
+
+- Severidad: High
+- Alcance: Root
+- Hallazgo: GitHub, demo live, CV publico y portfolio son condiciones de credibilidad pendientes hasta que existan URLs reales.
+- Resolucion: Mantener placeholders explicitos y no afirmar disponibilidad publica hasta verificar links.
+- Evidencia: Archivos relevantes: 17_cv_base_and_role_variants.md, 18_linkedin_final_rewrite.md, 19B_github_readme_twinsight_final.md, 20_portfolio_copy_and_site_structure.md, 36_public_profile_launch_sequence.md.
+
+### AUD-007 - Metrics
+
+- Severidad: Medium
+- Alcance: Root + Research
+- Hallazgo: Metricas de TwinSight deben coincidir con tesis final antes de usarse publicamente.
+- Resolucion: Mantener metricas como condicionales si no han sido verificadas contra documento final de tesis.
+- Evidencia: 00_master_audit_blueprint.md:46: - La tesis debe tratarse como: **completa, pendiente de sustentación**.; 00_master_audit_blueprint.md:72: | Tesis | **Completada, pendiente de sustentación** |; 00_master_audit_blueprint.md:107: | Tesis completa y pendiente de sustentación | Defendible según contexto actualizado del usuario | CV con wording: “pending defense” |; 00_master_audit_blueprint.md:119: | Métricas finales de tesis | Confirmar versión final: triángulos, SUS, NASA-TLX, participantes, task-condition records. |; 00_master_audit_blueprint.md:224: | Contexto actual del usuario | Tesis completa, pendiente sustentación | Fuente vigente |; 00_master_audit_blueprint.md:473: - tesis completa pendiente de sustentación;; 00_master_audit_blueprint.md:488: - disponibilidad laboral exacta post-sustentación;; 00_master_audit_blueprint.md:709: - validación SUS/NASA-TLX;; 00_master_audit_blueprint.md:933: - prioridad post-sustentación;; 00_master_audit_blueprint.md:1130: 1. ¿Fecha estimada de sustentación?; 00_master_audit_blueprint.md:1134: 5. ¿Las métricas finales son exactamente: 6.5M → 95,617 tris, SUS 91.88, NASA-TLX 8.69 vs 19.89, 12 participantes, 96 registros?; 01_source_of_truth_profile.md:69: | Estado de tesis | **Tesis completa, pendiente de sustentación** |
+
+### AUD-008 - Market freshness
+
+- Severidad: Medium
+- Alcance: Root + Research
+- Hallazgo: Empresas, vacantes, salarios y remote policies son datos temporales.
+- Resolucion: El PDF es snapshot; para aplicar se usa tracker vivo y verificacion semanal/top targets.
+- Evidencia: Modulos relevantes: 03_salary_benchmark_and_remote_colombia.md, 11_company_targets_job_boards_recruiters.md, 30_live_job_postings_market_snapshot.md, 31_application_targeting_matrix_and_search_protocol.md.
+
+### AUD-009 - Duplicates
+
+- Severidad: Low
+- Alcance: Root + Research
+- Hallazgo: Hay variantes/duplicados, especialmente 28D y agent_A4.
+- Resolucion: Se incluyen por trazabilidad, marcados como duplicate/reference; la version complete/canonica manda.
+- Evidencia: 28D_artstation_portfolio_benchmark_complete.md; 28D_artstation_portfolio_benchmark.md; 28D_artstation_portfolio_benchmark (1).md; Research/agent_A4_artstation_portfolio_benchmark*.md.
+
+### AUD-010 - Legal/tax
+
+- Severidad: Medium
+- Alcance: Root + Research
+- Hallazgo: Impuestos, contractor setup, residencia y permisos requieren validacion profesional antes de decisiones reales.
+- Resolucion: Tratar los modulos como estrategia informativa; validar con contador/abogado antes de mudanza, facturacion internacional o aceptacion de oferta.
+- Evidencia: Modulos relevantes: 03_salary_benchmark_and_remote_colombia.md, 04_eu_portugal_germany_mobility_strategy.md, 13_interview_negotiation_and_offer_risk.md, 24_offer_evaluation_scorecard.md.
+

@@ -1,0 +1,45 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { isPlaceholderLink, links } from "@data/links";
+
+const contactLinks = [
+  ["Email", links.email],
+  ["LinkedIn", links.linkedIn],
+  ["GitHub", links.githubProfile],
+  ["ArtStation", links.artStation],
+  ["CV", links.cv]
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Alexander Woodcock Salomon for remote Unity WebGL, technical visualization and technical art opportunities."
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">Contact</p>
+      <h1>Available for remote technical 3D work from Colombia.</h1>
+      <p class="hero-copy">
+        Best-fit work includes Unity WebGL, interactive 3D, technical visualization, Unity Technical Artist, 3D pipeline and Python-assisted tooling roles.
+      </p>
+      <div class="contact-actions">
+        <CTAButton href={links.email} label="Email" />
+        <CTAButton href={links.linkedIn} label="LinkedIn" variant="secondary" />
+        <CTAButton href={links.cv} label="Download CV" variant="ghost" />
+      </div>
+    </div>
+    <aside class="contact-panel" data-reveal>
+      <p class="eyebrow">Public links</p>
+      <div class="link-table">
+        {contactLinks.map(([label, href]) =>
+          isPlaceholderLink(href) ? (
+            <span><strong>{label}</strong><em>{href}</em></span>
+          ) : (
+            <a href={href}><strong>{label}</strong><em>{href}</em></a>
+          )
+        )}
+      </div>
+    </aside>
+  </section>
+</BaseLayout>

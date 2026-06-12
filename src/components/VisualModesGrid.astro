@@ -1,0 +1,22 @@
+---
+const modes = [
+  ["Realistic", "Material and form readability."],
+  ["X-ray", "Internal visibility and hidden relationships."],
+  ["Ghosted", "Transparent inspection without losing context."],
+  ["Blueprint", "Technical drawing-style interpretation."],
+  ["Wireframe", "Structure and topology reading."],
+  ["Thermal-style", "Qualitative visual exploration, not simulation."]
+];
+---
+
+<div class="visual-modes-grid" data-reveal>
+  {modes.map(([title, description]) => (
+    <article>
+      <div class="mode-readout" aria-hidden="true">
+        <span></span>
+      </div>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </article>
+  ))}
+</div>

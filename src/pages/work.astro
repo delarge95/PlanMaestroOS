@@ -1,0 +1,26 @@
+---
+import ProjectCard from "@components/ProjectCard.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { projects } from "@data/projects";
+---
+
+<BaseLayout
+  title="Work"
+  description="Selected work by Alexander Woodcock Salomon: TwinSight X500, Human character pipeline and ARA Framework."
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">Selected work</p>
+      <h1>Selected systems for real-time 3D work.</h1>
+      <p class="hero-copy">
+        TwinSight leads with Unity WebGL technical visualization. Human follows as the 3D pipeline pillar. ARA rounds out the set with automation and documentation range.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="project-grid">
+      {projects.map((project, index) => <ProjectCard project={project} featured={index < 2} />)}
+    </div>
+  </section>
+</BaseLayout>

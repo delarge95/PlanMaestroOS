@@ -1,0 +1,16 @@
+---
+type Props = {
+  src: string;
+  alt: string;
+  label?: string;
+  aspect?: "wide" | "square" | "portrait";
+  priority?: boolean;
+};
+
+const { src, alt, label, aspect = "wide", priority = false } = Astro.props;
+---
+
+<figure class:list={["media-frame", `media-${aspect}`]} data-reveal>
+  <img src={src} alt={alt} loading={priority ? "eager" : "lazy"} decoding="async" />
+  {label && <figcaption>{label}</figcaption>}
+</figure>

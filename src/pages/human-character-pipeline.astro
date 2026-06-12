@@ -1,0 +1,139 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import CaseStudySection from "@components/CaseStudySection.astro";
+import DisclosureBlock from "@components/DisclosureBlock.astro";
+import MediaFrame from "@components/MediaFrame.astro";
+import PipelineTimeline from "@components/PipelineTimeline.astro";
+import ScrollStory from "@components/ScrollStory.astro";
+import TechTag from "@components/TechTag.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { links } from "@data/links";
+import { getProject, humanPipelineStages } from "@data/projects";
+
+const project = getProject("human")!;
+const breakdowns = [
+  ["Sculpting and form", "A structured study of facial form, anatomy, planes and proportion through a detailed Blender workflow."],
+  ["Topology", "Clean facial edge flow, loops around eyes and mouth, deformation-aware structure and readable mesh presentation."],
+  ["UVs and textures", "Asset organization through UV layout, texture planning and material map preparation."],
+  ["Skin material", "Lookdev focused on believable skin response, surface layering, roughness variation and eye material setup."],
+  ["Grooming", "Eyebrows, beard, eyelashes and hair strategy as part of the final character read."],
+  ["Lighting and render", "Controlled lighting, camera, render settings and final presentation instead of a single beauty image."]
+];
+const pipelineStory = [
+  {
+    title: "Form before polish",
+    body: "The study starts with sculpting decisions: planes, proportion, facial structure and the kind of observation that keeps later detail grounded."
+  },
+  {
+    title: "Topology makes it readable",
+    body: "The mesh is treated as evidence. Loops, density and edge flow matter because they reveal how well the asset can survive production use."
+  },
+  {
+    title: "Materials carry the close-up",
+    body: "Skin, eyes and surface variation are handled as lookdev problems, not only texture slots to fill."
+  },
+  {
+    title: "Presentation closes the loop",
+    body: "Grooming, lighting and render control make the work legible as a pipeline study rather than a lone final image."
+  }
+];
+---
+
+<BaseLayout
+  title="Human Character Pipeline Study — Blender"
+  description="Human Character Pipeline Study is a Blender technical art breakdown by Alexander Woodcock Salomon following CG Cookie HUMAN training material."
+  image={project.media}
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">Second pillar: 3D workflow depth</p>
+      <h1>Human Character Pipeline Study — Blender</h1>
+      <p class="hero-copy">Blender study in sculpting, topology, UVs, textures, materials, grooming, lighting and rendering.</p>
+      <p>{project.summary}</p>
+      <div class="tag-row">
+        {project.stack.map((tag) => <TechTag label={tag} tone="warm" />)}
+      </div>
+      <div class="hero-actions">
+        <CTAButton href="#breakdown" label="View breakdown" />
+        <CTAButton href={links.humanArtStation} label="ArtStation" variant="secondary" />
+        <CTAButton href="/focus/3d-pipeline" label="3D pipeline variant" variant="ghost" />
+      </div>
+      <div class="case-meta">
+        <div><span>Project type</span><strong>Training-based portfolio study</strong></div>
+        <div><span>Tool</span><strong>Blender</strong></div>
+        <div><span>Positioning</span><strong>3D production literacy</strong></div>
+        <div><span>Certification</span><strong>Not presented as certified</strong></div>
+      </div>
+    </div>
+    <MediaFrame src={project.media} alt={project.mediaAlt} label="Replace with final Human render and breakdown sheet" priority />
+  </section>
+
+  <CaseStudySection
+    eyebrow="Why this belongs here"
+    title="The craft behind technical-art judgment."
+    body="TwinSight shows real-time technical visualization. Human shows the upstream 3D judgment behind form, topology, UVs, materials, grooming, lighting and render presentation."
+  >
+    <DisclosureBlock
+      title="Training context"
+      tone="warning"
+      body="Character pipeline study completed in Blender following CG Cookie HUMAN training material. The final execution, scene setup, grooming/material work and presentation are framed as a portfolio learning piece, not a formal certification or professional character commission."
+    />
+  </CaseStudySection>
+
+  <ScrollStory
+    eyebrow="Pipeline pass"
+    title="A character study shown as process, not just result."
+    body="Each stage answers a production question: form, topology, materials and presentation. The final render matters more when the process is readable."
+    mediaSrc="/assets/placeholders/human-breakdown.svg"
+    mediaAlt="Human character pipeline breakdown slots placeholder"
+    mediaLabel="Slots for final render, clay, wireframe, UVs, materials and groom"
+    tone="warm"
+    items={pipelineStory}
+  />
+
+  <CaseStudySection
+    eyebrow="Breakdown"
+    title="A full 3D workflow, not only a final render."
+    body="The project should be shown through final render, clay, wireframe/topology, UVs, texture/material sheets, grooming, lighting setup and lessons learned."
+  >
+    <MediaFrame src="/assets/placeholders/human-breakdown.svg" alt="Human pipeline breakdown slots placeholder" label="Replace with final Human breakdown images" />
+    <div id="breakdown" class="breakdown-grid">
+      {breakdowns.map(([title, body]) => <article><h3>{title}</h3><p>{body}</p></article>)}
+    </div>
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Workflow"
+    title="Production sequence."
+    body="The workflow can evolve cleanly as real captures are exported from Blender."
+  >
+    <PipelineTimeline items={humanPipelineStages} tone="warm" />
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Role relevance"
+    title="How Human supports the target profile."
+    body="Human does not reposition the site as a pure character artist portfolio. It supports technical art roles by showing visual standards and full 3D workflow literacy."
+  >
+    <div class="feature-grid">
+      <article><h3>Unity Technical Artist</h3><p>Relevant through materials, topology awareness, rendering literacy and pipeline habits.</p></article>
+      <article><h3>Real-Time 3D</h3><p>Useful as upstream asset craft, especially when connected to optimization and real-time constraints.</p></article>
+      <article><h3>3D Generalist</h3><p>Strong visual support, but kept secondary to the broader technical 3D positioning.</p></article>
+    </div>
+    <DisclosureBlock
+      title="Claim boundary"
+      body="This page does not claim professional character-artist production experience. It presents a disciplined learning project and breakdown-ready portfolio study."
+    />
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Next asset pass"
+    title="Final media needed."
+  >
+    <div class="feature-grid">
+      <article><h3>Beauty and clay</h3><p>Export final render, clay render and turntable if available.</p></article>
+      <article><h3>Technical sheets</h3><p>Export topology, UV layout, texture maps, material nodes and groom setup.</p></article>
+      <article><h3>ArtStation package</h3><p>Publish as a technical breakdown with CG Cookie context and lessons learned.</p></article>
+    </div>
+  </CaseStudySection>
+</BaseLayout>

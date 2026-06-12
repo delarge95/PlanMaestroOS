@@ -1,0 +1,52 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import CaseStudySection from "@components/CaseStudySection.astro";
+import DisclosureBlock from "@components/DisclosureBlock.astro";
+import MediaFrame from "@components/MediaFrame.astro";
+import TechTag from "@components/TechTag.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { links } from "@data/links";
+import { getProject } from "@data/projects";
+
+const project = getProject("ara")!;
+---
+
+<BaseLayout
+  title="ARA Framework"
+  description="ARA Framework is a secondary Python and AI-assisted research automation prototype in Alexander Woodcock Salomon's portfolio."
+  image={project.media}
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">{project.eyebrow}</p>
+      <h1>ARA Framework</h1>
+      <p class="hero-copy">{project.subtitle}</p>
+      <p>{project.summary}</p>
+      <div class="tag-row">
+        {project.stack.map((tag) => <TechTag label={tag} tone="green" />)}
+      </div>
+      <div class="hero-actions">
+        <CTAButton href={links.araGithub} label="View GitHub" />
+        <CTAButton href="/work" label="Back to work" variant="secondary" />
+      </div>
+    </div>
+    <MediaFrame src={project.media} alt={project.mediaAlt} label="Replace with final ARA architecture screenshot" priority />
+  </section>
+
+  <CaseStudySection
+    eyebrow="Controlled positioning"
+    title="Useful automation, kept in its lane."
+    body="ARA supports Alexander's Python, automation, documentation and AI-assisted workflow story. It stays secondary to the real-time 3D and technical visualization work."
+  >
+    <div class="feature-grid">
+      <article><h3>Research workflows</h3><p>Multi-step research, literature analysis and structured synthesis workflows.</p></article>
+      <article><h3>Agent orchestration</h3><p>LangGraph-style workflow thinking, checkpoints and report generation concepts.</p></article>
+      <article><h3>Documentation systems</h3><p>Structured Markdown outputs, source organization and repeatable strategy modules.</p></article>
+    </div>
+    <DisclosureBlock
+      title="Scope boundary"
+      tone="warning"
+      body="ARA is presented as a research automation prototype. It is not described as an enterprise AI platform, ML research system or production deployment."
+    />
+  </CaseStudySection>
+</BaseLayout>

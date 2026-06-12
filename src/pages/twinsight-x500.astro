@@ -1,0 +1,187 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import CaseStudySection from "@components/CaseStudySection.astro";
+import DisclosureBlock from "@components/DisclosureBlock.astro";
+import MediaFrame from "@components/MediaFrame.astro";
+import MetricBlock from "@components/MetricBlock.astro";
+import PipelineTimeline from "@components/PipelineTimeline.astro";
+import ScrollStory from "@components/ScrollStory.astro";
+import TechTag from "@components/TechTag.astro";
+import VisualModesGrid from "@components/VisualModesGrid.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { links } from "@data/links";
+import { getProject, twinsightMetrics } from "@data/projects";
+
+const project = getProject("twinsight")!;
+const features = [
+  ["Component selection", "Select individual drone parts, highlight them and inspect related information in context."],
+  ["Exploded assembly", "Separate assemblies while preserving enough spatial logic to read component hierarchy."],
+  ["Section cuts", "Cut through geometry to inspect hidden structures without losing the whole assembly."],
+  ["Inspection UI", "Use contextual panels for part information, modes and inspection state."],
+  ["CAD optimization", "Turn heavy CAD-derived routes into a WebGL-ready real-time model."],
+  ["Evaluation", "Use SUS, NASA-TLX Raw and Think-Aloud methods for academic formative validation."]
+];
+const pipeline = [
+  "CAD-derived source inspection",
+  "Conversion and tessellation route exploration",
+  "Blender cleanup and optimization",
+  "UV, material and visual-mode preparation",
+  "Unity import and scene organization",
+  "Runtime selection, clipping and exploded states",
+  "UI Toolkit technical panels",
+  "WebGL build and academic evaluation"
+];
+const inspectionStory = [
+  {
+    title: "Start from the full assembly",
+    body: "The user lands in a readable drone view instead of a dense CAD scene. Orientation, scale and hierarchy come first."
+  },
+  {
+    title: "Isolate what matters",
+    body: "Selection, highlight and exploded states make a single component easier to understand without removing it from the system."
+  },
+  {
+    title: "Look inside the model",
+    body: "Clipping and X-ray-style modes expose hidden structures while keeping the interaction simple enough for a browser workflow."
+  },
+  {
+    title: "Read the technical layer",
+    body: "UI panels, labels and visual modes connect geometry to inspection decisions instead of acting as decorative effects."
+  }
+];
+---
+
+<BaseLayout
+  title="TwinSight X500"
+  description="TwinSight X500 is a Unity WebGL technical visualization prototype for drone assembly inspection by Alexander Woodcock Salomon."
+  image={project.media}
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">{project.eyebrow}</p>
+      <h1>TwinSight X500</h1>
+      <p class="hero-copy">{project.subtitle}</p>
+      <p>{project.summary}</p>
+      <div class="tag-row">
+        {project.stack.map((tag) => <TechTag label={tag} tone="cyan" />)}
+      </div>
+      <div class="hero-actions">
+        <CTAButton href={links.twinsightDemo} label="Watch demo" />
+        <CTAButton href={links.twinsightGithub} label="View GitHub" variant="secondary" />
+        <CTAButton href={links.twinsightLiveDemo} label="Open WebGL prototype" variant="ghost" />
+      </div>
+      <div class="case-meta">
+        <div><span>Role</span><strong>Real-Time 3D Developer / Unity Technical Artist</strong></div>
+        <div><span>Domain</span><strong>Technical visualization / CAD-to-realtime</strong></div>
+        <div><span>Platform</span><strong>Browser / Unity WebGL</strong></div>
+        <div><span>Project type</span><strong>Academic/portfolio prototype</strong></div>
+      </div>
+    </div>
+    <MediaFrame src={project.media} alt={project.mediaAlt} label="Replace with final TwinSight hero capture" priority />
+  </section>
+
+  <CaseStudySection
+    eyebrow="Problem"
+    title="2D documentation makes spatial relationships harder to understand."
+    body="Drone assembly documentation is often presented through static diagrams, part lists and written instructions. Users must mentally reconstruct component orientation, hidden structures and assembly hierarchy."
+  >
+    <div class="feature-grid">
+      <article><h3>Static diagrams</h3><p>Useful for reference, but limited for direct spatial inspection.</p></article>
+      <article><h3>Hidden structures</h3><p>Internal relationships are difficult to infer from 2D views alone.</p></article>
+      <article><h3>Cognitive load</h3><p>Users must translate diagrams into a mental 3D model before acting.</p></article>
+    </div>
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Solution"
+    title="Interactive technical visualization in the browser."
+    body="TwinSight converts CAD-derived drone geometry into a Unity WebGL viewer where users can navigate, select components, activate exploded view, cut through geometry, switch visual modes and read technical information."
+  >
+    <div class="feature-grid">
+      {features.map(([title, body]) => <article><h3>{title}</h3><p>{body}</p></article>)}
+    </div>
+  </CaseStudySection>
+
+  <ScrollStory
+    eyebrow="Inspection flow"
+    title="Slow down only where the model needs it."
+    body="The key interactions are shown as a sequence: full assembly, isolation, sectioning and technical reading. Each state connects the visual change to an inspection decision."
+    mediaSrc="/assets/placeholders/twinsight-visual-modes.svg"
+    mediaAlt="TwinSight inspection flow placeholder showing visual modes and technical readouts"
+    mediaLabel="Interaction flow slots: assembly, selection, section, mode"
+    tone="cyan"
+    items={inspectionStory}
+  />
+
+  <CaseStudySection
+    eyebrow="Pipeline"
+    title="CAD-to-realtime optimization."
+    body="The technical challenge was preserving assembly readability while reducing geometry complexity and organizing the model for runtime interaction in a browser."
+  >
+    <MediaFrame src="/assets/placeholders/pipeline-diagram.svg" alt="CAD-to-realtime pipeline placeholder" label="Pipeline diagram placeholder" />
+    <PipelineTimeline items={pipeline} tone="cyan" />
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Optimization and evaluation"
+    title="Metrics stay useful and conservative."
+    body="The strategy records strong portfolio metrics. They are shown with a verification note until the final public thesis/report numbers are confirmed."
+  >
+    <div class="metric-grid">
+      {twinsightMetrics.map((metric) => <MetricBlock metric={metric} />)}
+    </div>
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Unity WebGL architecture"
+    title="Runtime systems, visual states and technical UI."
+    body="The Unity application coordinates selection, camera/navigation, exploded-view state, clipping, visual-mode switching, technical metadata and UI Toolkit panels inside a WebGL build."
+  >
+    <div class="breakdown-grid">
+      <article><h3>Interaction controller</h3><p>Coordinates user input, selected components, camera flow and viewer state.</p></article>
+      <article><h3>Visualization states</h3><p>Switches between realistic, X-ray, ghosted, blueprint, wireframe and thermal-style views.</p></article>
+      <article><h3>Technical panels</h3><p>Connects selected geometry with contextual component information and inspection controls.</p></article>
+    </div>
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Technical art"
+    title="Visual modes for inspection, not decoration."
+    body="The visual modes are framed as technical inspection workflows. The thermal-style mode is explicitly qualitative and not a physics or sensor simulation."
+  >
+    <MediaFrame src="/assets/placeholders/twinsight-visual-modes.svg" alt="TwinSight visual modes placeholder grid" label="Replace with final mode captures" />
+    <VisualModesGrid />
+    <DisclosureBlock
+      title="Thermal-style mode disclaimer"
+      tone="warning"
+      body="The thermal-style mode is a qualitative visual mode. It is not a physical thermal simulation, FEA result or sensor-driven thermal analysis."
+    />
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Role and ownership"
+    title="My contribution."
+    body={project.role}
+  >
+    <DisclosureBlock
+      title="AI-assisted workflow"
+      body="AI assistance supported parts of implementation and iteration. Final architecture decisions, debugging, Unity integration, asset preparation, evaluation design, documentation and project ownership remained my responsibility."
+    />
+    <DisclosureBlock
+      title="Scope limitations"
+      tone="warning"
+      body="TwinSight X500 is an academic/portfolio prototype, not a deployed industrial product. It does not include live sensor integration, predictive maintenance, WebAR, multi-user collaboration or production monitoring."
+    />
+  </CaseStudySection>
+
+  <CaseStudySection
+    eyebrow="Next steps"
+    title="Future improvements."
+  >
+    <div class="feature-grid">
+      <article><h3>Guided assembly</h3><p>Add step-by-step inspection flows, search and filtering for components.</p></article>
+      <article><h3>Performance experiments</h3><p>Explore WebGPU, improved loading and deeper profiling documentation.</p></article>
+      <article><h3>Digital twin extension</h3><p>Add sensor/state data only as a future extension, not a current claim.</p></article>
+    </div>
+  </CaseStudySection>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import { isPlaceholderLink } from "@data/links";
+
+type Props = {
+  href: string;
+  label: string;
+  variant?: "primary" | "secondary" | "ghost";
+};
+
+const { href, label, variant = "primary" } = Astro.props;
+const disabled = isPlaceholderLink(href);
+---
+
+<a
+  class:list={["cta-button", `cta-${variant}`, disabled && "is-disabled"]}
+  href={disabled ? undefined : href}
+  aria-disabled={disabled ? "true" : "false"}
+  data-placeholder={disabled ? href : undefined}
+>
+  <span>{label}</span>
+  <span class="cta-arrow" aria-hidden="true">-&gt;</span>
+</a>

@@ -1,0 +1,10 @@
+{
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "_obsidian/attachments",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "_obsidian/inbox",
+  "showLineNumber": false,
+  "spellcheck": true,
+  "promptDelete": true,
+  "useMarkdownLinks": false
+}

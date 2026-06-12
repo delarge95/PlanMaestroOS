@@ -1,0 +1,23 @@
+{
+  "name": "alexander-woodcock-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.1",
+    "animejs": "^4.2.2",
+    "astro": "^5.15.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "playwright": "^1.60.0",
+    "typescript": "^5.9.3"
+  }
+}

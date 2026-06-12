@@ -1,0 +1,10 @@
+---
+type Props = {
+  label: string;
+  tone?: "default" | "cyan" | "warm" | "green";
+};
+
+const { label, tone = "default" } = Astro.props;
+---
+
+<span class:list={["tech-tag", `tag-${tone}`]}>{label}</span>

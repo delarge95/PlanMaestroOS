@@ -1,0 +1,25 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import { links } from "@data/links";
+
+const nav = [
+  ["Work", "/work"],
+  ["TwinSight", "/twinsight-x500"],
+  ["Human", "/human-character-pipeline"],
+  ["About", "/about"],
+  ["Contact", "/contact"]
+];
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Alexander Woodcock Salomon home">
+    <span>AWS</span>
+    <strong>Alexander Woodcock</strong>
+  </a>
+  <nav aria-label="Primary navigation">
+    {nav.map(([label, href]) => <a href={href}>{label}</a>)}
+  </nav>
+  <div class="header-actions">
+    <CTAButton href={links.githubProfile} label="GitHub" variant="ghost" />
+  </div>
+</header>

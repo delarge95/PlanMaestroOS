@@ -1,0 +1,84 @@
+\documentclass[11pt,openany]{book}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\setmonofont{Consolas}
+\usepackage{microtype}
+\usepackage{xcolor}
+\definecolor{Accent}{HTML}{1F4E79}
+\definecolor{SoftAccent}{HTML}{EAF2F8}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{pdflscape}
+\usepackage{fancyhdr}
+\usepackage{fvextra}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{enumitem}
+\hypersetup{
+  unicode=true,
+  colorlinks=true,
+  linkcolor=Accent,
+  urlcolor=Accent,
+  citecolor=Accent,
+  pdftitle={Biblia Profesional Editorial Alexander Woodcock Salomon},
+  pdfauthor={Alexander Woodcock Salomon},
+  pdfsubject={Estrategia profesional, investigacion de mercado y empleabilidad},
+  pdfcreator={Codex + XeLaTeX}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{Accent}{Biblia Profesional}}
+\fancyhead[R]{\small\leftmark}
+\fancyfoot[C]{\thepage}
+\setlength{\parskip}{0.58em}
+\setlength{\parindent}{0pt}
+\setlength{\headheight}{15pt}
+\emergencystretch=3em
+\sloppy
+\renewcommand{\arraystretch}{1.18}
+\setlist{itemsep=0.18em, topsep=0.35em}
+\DefineVerbatimEnvironment{mdcode}{Verbatim}{fontsize=\scriptsize,breaklines=true,breakanywhere=true}
+
+\begin{document}
+
+\begin{titlepage}
+\pagecolor{SoftAccent}
+\centering
+\vspace*{2.2cm}
+{\Huge\bfseries\textcolor{Accent}{Biblia Profesional Editorial}\par}
+\vspace{0.35cm}
+{\LARGE Alexander Woodcock Salomon\par}
+\vspace{1.2cm}
+{\Large Estrategia de empleabilidad, mercado, portafolio y ejecucion\par}
+\vspace{1.4cm}
+{\large Version editorial v1\par}
+{\large Generado: 2026-06-12 01:56\par}
+\vfill
+{\large Real-Time 3D Developer / Unity Technical Artist\par}
+{\small Interactive technical visualization, CAD-to-realtime optimization, Unity WebGL deployment\par}
+\vspace{1cm}
+{\small Fuente viva: \texttt{E:\textbackslash{}Laboral}\par}
+\clearpage
+\nopagecolor
+\end{titlepage}
+
+\frontmatter
+\tableofcontents
+\clearpage
+
+\mainmatter
+\input{chapters/01_guia_resumen.tex}
+\input{chapters/02_perfil_posicionamiento.tex}
+\input{chapters/03_mercado_salario_movilidad.tex}
+\input{chapters/04_portafolio_prueba_tecnica.tex}
+\input{chapters/05_sistema_aplicacion.tex}
+\input{chapters/06_ejecucion.tex}
+\input{chapters/07_entrevista_negociacion.tex}
+\input{chapters/08_materiales_publicos_benchmarks.tex}
+\input{chapters/09_auditoria_riesgos.tex}
+\input{chapters/10_research_source_map.tex}
+\input{chapters/11_portfolio_web_bridge.tex}
+
+\end{document}

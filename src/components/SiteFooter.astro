@@ -1,0 +1,17 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import { links } from "@data/links";
+---
+
+<footer class="site-footer">
+  <div>
+    <p class="eyebrow">Remote from Colombia</p>
+    <h2>Real-time 3D, technical visualization and 3D pipeline craft.</h2>
+  </div>
+  <div class="footer-links">
+    <CTAButton href={links.linkedIn} label="LinkedIn" variant="secondary" />
+    <CTAButton href={links.githubProfile} label="GitHub" variant="secondary" />
+    <CTAButton href={links.email} label="Email" variant="ghost" />
+  </div>
+  <p class="footer-note">Built as a living portfolio system. Public claims stay conservative until final links, media and metrics are verified.</p>
+</footer>

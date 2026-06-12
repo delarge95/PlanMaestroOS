@@ -1,0 +1,54 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import TechTag from "@components/TechTag.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { links } from "@data/links";
+
+const skills = [
+  "Unity WebGL",
+  "C# runtime systems",
+  "CAD-to-Realtime",
+  "Blender pipeline",
+  "Topology and UVs",
+  "Technical UI",
+  "Python automation",
+  "Technical documentation"
+];
+---
+
+<BaseLayout
+  title="About"
+  description="About Alexander Woodcock Salomon, a Real-Time 3D Developer / Unity Technical Artist focused on Unity WebGL, technical visualization and Blender pipeline craft."
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">About</p>
+      <h1>Technical 3D systems with a production artist's eye.</h1>
+      <p class="hero-copy">
+        I combine Multimedia Engineering, advanced Electronic Engineering coursework, real-time 3D development, Blender asset workflows, Python-assisted tooling and technical documentation.
+      </p>
+      <div class="tag-row">
+        {skills.map((skill) => <TechTag label={skill} tone="cyan" />)}
+      </div>
+      <div class="hero-actions">
+        <CTAButton href="/work" label="View work" />
+        <CTAButton href={links.linkedIn} label="LinkedIn" variant="secondary" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell split-section">
+    <div>
+      <p class="eyebrow">Positioning</p>
+      <h2>Real-Time 3D Developer / Unity Technical Artist.</h2>
+    </div>
+    <div class="contact-panel" data-reveal>
+      <p>
+        My strongest public piece is TwinSight X500, a Unity WebGL technical visualization prototype for drone assembly inspection. The Human character pipeline study adds 3D production depth: sculpting, topology, UVs, materials, grooming, lighting and rendering.
+      </p>
+      <p>
+        I am based in Colombia and available for remote contractor/B2B work with international teams, especially where interactive 3D, technical visualization, Unity WebGL and asset pipeline literacy matter.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

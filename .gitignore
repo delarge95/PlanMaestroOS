@@ -1,0 +1,32 @@
+# Build and preview artifacts
+_pdf_biblia/build/
+_pdf_biblia/build_editorial/
+_pdf_biblia/tex/
+_pdf_biblia/**/preview*.png
+_pdf_biblia/**/content_preview*.png
+_pdf_biblia/**/source_preview*.png
+
+# Python runtime artifacts
+__pycache__/
+*.pyc
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Local OS/editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Web app dependencies and build outputs
+node_modules/
+/dist/
+.astro/
+.npm-cache/
+qa-screenshots/

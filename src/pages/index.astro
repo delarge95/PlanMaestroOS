@@ -1,0 +1,105 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import FocusVariantSwitcher from "@components/FocusVariantSwitcher";
+import MediaFrame from "@components/MediaFrame.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import TechTag from "@components/TechTag.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { focusVariants } from "@data/focusVariants";
+import { links } from "@data/links";
+import { projects } from "@data/projects";
+
+const twinsight = projects.find((project) => project.id === "twinsight")!;
+const human = projects.find((project) => project.id === "human")!;
+const ara = projects.find((project) => project.id === "ara")!;
+const coreStack = ["Unity WebGL", "C#", "Blender", "CAD-to-Realtime", "Technical UI", "Python Tooling"];
+---
+
+<BaseLayout
+  title="Real-Time 3D Developer / Unity Technical Artist"
+  description="Portfolio for Alexander Woodcock Salomon, focused on Unity WebGL technical visualization, CAD-to-realtime optimization and Blender 3D pipeline craft."
+>
+  <section class="page-shell hero">
+    <div class="hero-content">
+      <p class="eyebrow">Remote contractor from Colombia</p>
+      <h1>Real-Time 3D Developer / Unity Technical Artist</h1>
+      <p class="hero-copy">
+        I build browser-ready 3D tools for inspecting complex products and assets, from Unity WebGL prototypes to Blender production studies.
+      </p>
+      <div class="tag-row" aria-label="Core stack">
+        {coreStack.map((tag) => <TechTag label={tag} tone="cyan" />)}
+      </div>
+      <div class="hero-actions">
+        <CTAButton href="/twinsight-x500" label="View TwinSight X500" />
+        <CTAButton href="/human-character-pipeline" label="View Human pipeline" variant="secondary" />
+        <CTAButton href={links.githubProfile} label="GitHub" variant="ghost" />
+        <CTAButton href="/contact" label="Contact" variant="ghost" />
+      </div>
+    </div>
+    <MediaFrame
+      src={twinsight.media}
+      alt={twinsight.mediaAlt}
+      label="Flagship: Unity WebGL technical visualization"
+      priority
+    />
+  </section>
+
+  <section class="page-shell proof-strip" aria-label="Portfolio evidence summary" data-reveal>
+    <div>
+      <strong>TwinSight X500</strong>
+      <p>Unity WebGL, runtime interaction, CAD-to-realtime and formative evaluation.</p>
+    </div>
+    <div>
+      <strong>Human Pipeline</strong>
+      <p>Blender sculpt, topology, UVs, materials, grooming, lighting and render control.</p>
+    </div>
+    <div>
+      <strong>ARA Framework</strong>
+      <p>Python tooling, research automation and structured technical documentation.</p>
+    </div>
+    <div>
+      <strong>Focus Variants</strong>
+      <p>Reusable routes for technical visualization, Unity WebGL, TA and 3D pipeline applications.</p>
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="section-intro">
+      <div>
+        <p class="eyebrow">Two anchors</p>
+        <h2>Runtime systems, production craft.</h2>
+      </div>
+      <p>
+        TwinSight is the flagship for Unity/WebGL roles. Human has real weight as the second pillar because it shows the 3D workflow behind strong technical-art judgment.
+      </p>
+    </div>
+    <div class="two-proof-grid">
+      <ProjectCard project={twinsight} featured />
+      <ProjectCard project={human} featured />
+    </div>
+  </section>
+
+  <section class="section-shell split-section">
+    <div>
+      <p class="eyebrow">Application-ready storytelling</p>
+      <h2>Same portfolio, different emphasis per role.</h2>
+      <p class="section-lead">
+        The site is structured as a living portfolio. It can lead with technical visualization, Unity WebGL, technical art, or Blender pipeline depth while keeping the facts consistent.
+      </p>
+    </div>
+    <FocusVariantSwitcher variants={focusVariants} client:load />
+  </section>
+
+  <section class="section-shell">
+    <div class="section-intro">
+      <div>
+        <p class="eyebrow">Supporting system</p>
+        <h2>Automation stays useful, not loud.</h2>
+      </div>
+      <p>
+        ARA adds Python automation and AI-assisted workflow range, while the public identity stays centered on Unity, WebGL and 3D pipeline craft.
+      </p>
+    </div>
+    <ProjectCard project={ara} />
+  </section>
+</BaseLayout>
