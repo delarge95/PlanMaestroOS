@@ -1,6 +1,6 @@
 # Auditoria de coherencia y consistencia
 
-Generado: 2026-06-12 01:56
+Generado: 2026-06-12 02:16
 
 Regla global: la informacion actual y no historica manda sobre `Historic`; los datos de mercado se tratan como snapshots; el tracker operativo manda sobre estado de aplicaciones.
 

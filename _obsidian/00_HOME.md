@@ -84,3 +84,5 @@ Este vault usa `E:\Laboral` como raiz. Los modulos numerados existentes se conse
 
 - Research actual: [[Research/cerrando_sistema]]
 - Historico desactualizado: [[Historic/alexander_woodcock_context]]
+
+- [[10_BIBLIA_COMPLETA]]

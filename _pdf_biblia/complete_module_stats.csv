@@ -1,0 +1,66 @@
+﻿id,relative_path,title,status,section,blocks_total,blocks_removed,characters_removed,original_lines,original_bytes,tex_file
+root_001,00_master_audit_blueprint.md,00 — Master Audit Blueprint,canonical,root,278,0,0,1145,41340,chapters/001_00_master_audit_blueprint_md.tex
+root_002,01_source_of_truth_profile.md,01 — Source of Truth Profile,canonical,root,222,0,0,929,44966,chapters/002_01_source_of_truth_profile_md.tex
+root_003,02_market_role_fit_and_positioning.md,02 — Market Role Fit and Positioning,canonical,root,225,0,0,838,51943,chapters/003_02_market_role_fit_and_positioning_md.tex
+root_004,03_salary_benchmark_and_remote_colombia.md,03 — Salary Benchmark and Remote-from-Colombia Feasibility,canonical,root,268,0,0,808,37461,chapters/004_03_salary_benchmark_and_remote_colombia_md.tex
+root_005,04_eu_portugal_germany_mobility_strategy.md,04 — EU / Portugal / Germany Mobility Strategy,canonical,root,233,0,0,694,28914,chapters/005_04_eu_portugal_germany_mobility_strategy_md.tex
+root_006,05_language_strategy_and_roi.md,05_language_strategy_and_roi.md,canonical,root,315,0,0,962,33441,chapters/006_05_language_strategy_and_roi_md.tex
+root_007,06_education_courses_rebelway_masters_phd.md,"06 — Education, Courses, Rebelway, Master’s and PhD Strategy",canonical,root,215,0,0,740,27083,chapters/007_06_education_courses_rebelway_masters_phd_md.tex
+root_008,07_portfolio_strategy_and_project_architecture.md,07 — Portfolio Strategy and Project Architecture,canonical,root,209,0,0,776,23584,chapters/008_07_portfolio_strategy_and_project_architecture_md.tex
+root_009,08_twinsight_x500_case_study.md,08 — TwinSight X500 Case Study,canonical,root,299,0,0,893,35749,chapters/009_08_twinsight_x500_case_study_md.tex
+root_010,08B_twinsight_case_study_final_structure.md,08B_twinsight_case_study_final_structure,canonical,root,280,0,0,1111,28854,chapters/010_08B_twinsight_case_study_final_structure_md.tex
+root_011,09_ara_ai_tools_and_secondary_projects.md,"09 — ARA, AI Tools and Secondary Projects Strategy",canonical,root,245,0,0,840,22193,chapters/011_09_ara_ai_tools_and_secondary_projects_md.tex
+root_012,10_github_linkedin_cv_strategy.md,"10 — GitHub, LinkedIn and CV Strategy",canonical,root,341,0,0,1210,37476,chapters/012_10_github_linkedin_cv_strategy_md.tex
+root_013,11_company_targets_job_boards_recruiters.md,11_company_targets_job_boards_recruiters.md,canonical,root,70,0,0,879,57137,chapters/013_11_company_targets_job_boards_recruiters_md.tex
+root_014,12_application_system_and_tracker.md,12_application_system_and_tracker.md,canonical,root,381,0,0,1327,28466,chapters/014_12_application_system_and_tracker_md.tex
+root_015,13_interview_negotiation_and_offer_risk.md,"13 — Interview, Negotiation and Offer-Risk Framework",canonical,root,227,0,0,816,29697,chapters/015_13_interview_negotiation_and_offer_risk_md.tex
+root_016,14_30_60_90_execution_plan.md,14_30_60_90_execution_plan,canonical,root,227,0,0,927,21495,chapters/016_14_30_60_90_execution_plan_md.tex
+root_017,15_final_integrated_strategy.md,15_final_integrated_strategy,canonical,root,273,0,0,981,25430,chapters/017_15_final_integrated_strategy_md.tex
+root_018,16_final_consistency_audit_and_gap_register.md,16_final_consistency_audit_and_gap_register,canonical,root,189,0,0,740,21044,chapters/018_16_final_consistency_audit_and_gap_register_md.tex
+root_019,17_cv_base_and_role_variants.md,17_cv_base_and_role_variants,canonical,root,320,0,0,1152,35817,chapters/019_17_cv_base_and_role_variants_md.tex
+root_020,18_linkedin_final_rewrite.md,18_linkedin_final_rewrite,canonical,root,334,0,0,1285,34630,chapters/020_18_linkedin_final_rewrite_md.tex
+root_021,19_github_readme_templates.md,19_github_readme_templates,canonical,root,266,0,0,1413,29663,chapters/021_19_github_readme_templates_md.tex
+root_022,19B_github_readme_twinsight_final.md,19B_github_readme_twinsight_final,canonical,root,121,0,0,787,17937,chapters/022_19B_github_readme_twinsight_final_md.tex
+root_023,20_portfolio_copy_and_site_structure.md,20_portfolio_copy_and_site_structure,canonical,root,328,0,0,1246,28730,chapters/023_20_portfolio_copy_and_site_structure_md.tex
+root_024,21_twinsight_demo_video_script_and_shotlist.md,21_twinsight_demo_video_script_and_shotlist,canonical,root,208,0,0,912,22069,chapters/024_21_twinsight_demo_video_script_and_shotlist_md.tex
+root_025,21B_twinsight_demo_video_final_plan.md,21B_twinsight_demo_video_final_plan,canonical,root,204,0,0,896,20404,chapters/025_21B_twinsight_demo_video_final_plan_md.tex
+root_026,22_outreach_templates_english_spanish.md,22_outreach_templates_english_spanish,canonical,root,238,0,0,1164,38336,chapters/026_22_outreach_templates_english_spanish_md.tex
+root_027,23_interview_answer_bank.md,23_interview_answer_bank,canonical,root,259,0,0,902,38555,chapters/027_23_interview_answer_bank_md.tex
+root_028,24_offer_evaluation_scorecard.md,24_offer_evaluation_scorecard,canonical,root,261,0,0,1050,24475,chapters/028_24_offer_evaluation_scorecard_md.tex
+root_029,26_weekly_execution_dashboard.md,26_weekly_execution_dashboard,canonical,root,287,0,0,1095,21174,chapters/029_26_weekly_execution_dashboard_md.tex
+root_030,27_strategy_scenarios_conservative_balanced_aggressive.md,27_strategy_scenarios_conservative_balanced_aggressive,canonical,root,299,0,0,1089,24913,chapters/030_27_strategy_scenarios_conservative_balanced_aggressive_md.tex
+root_031,28_competitor_profile_benchmark.md,28_competitor_profile_benchmark,canonical,root,237,0,0,889,27817,chapters/031_28_competitor_profile_benchmark_md.tex
+root_032,28B_public_cv_resume_benchmark.md,28B_public_cv_resume_benchmark.md,canonical,root,261,0,0,916,19450,chapters/032_28B_public_cv_resume_benchmark_md.tex
+root_033,28C_github_profiles_benchmark.md,29_github_profiles_benchmark.md,reference,root,164,0,0,737,16736,chapters/033_28C_github_profiles_benchmark_md.tex
+root_034,28D_artstation_portfolio_benchmark (1).md,28D — ArtStation / Portfolio Benchmark,duplicate,root,54,0,0,271,7160,chapters/034_28D_artstation_portfolio_benchmark_1_md.tex
+root_035,28D_artstation_portfolio_benchmark.md,28D — ArtStation / Portfolio Benchmark,duplicate,root,111,0,0,439,11037,chapters/035_28D_artstation_portfolio_benchmark_md.tex
+root_036,28D_artstation_portfolio_benchmark_complete.md,28D — Benchmark actualizado de portafolios técnicos y arte 3D en tiempo real,canonical,root,211,0,0,855,21709,chapters/036_28D_artstation_portfolio_benchmark_complete_md.tex
+root_037,29_portfolio_case_study_benchmark.md,29_portfolio_case_study_benchmark,canonical,root,260,0,0,1011,27005,chapters/037_29_portfolio_case_study_benchmark_md.tex
+root_038,29B_demo_reels_benchmark.md,29B_demo_reels_benchmark,canonical,root,208,0,0,882,21424,chapters/038_29B_demo_reels_benchmark_md.tex
+root_039,29C_artstation_breakdown_benchmark.md,29C_artstation_breakdown_benchmark,reference,root,185,0,0,838,20561,chapters/039_29C_artstation_breakdown_benchmark_md.tex
+root_040,30_live_job_postings_market_snapshot.md,30 — Live job postings market snapshot,canonical,root,45,0,0,221,10018,chapters/040_30_live_job_postings_market_snapshot_md.tex
+root_041,31_application_targeting_matrix_and_search_protocol.md,31_application_targeting_matrix_and_search_protocol,canonical,root,256,0,0,1073,23901,chapters/041_31_application_targeting_matrix_and_search_protocol_md.tex
+root_042,32_application_materials_gap_closure_plan.md,32_application_materials_gap_closure_plan,canonical,root,248,0,0,1007,20331,chapters/042_32_application_materials_gap_closure_plan_md.tex
+root_043,33_portfolio_asset_production_sprint.md,33_portfolio_asset_production_sprint,canonical,root,227,0,0,1025,19463,chapters/043_33_portfolio_asset_production_sprint_md.tex
+root_044,34_weekly_application_execution_system.md,34_weekly_application_execution_system,canonical,root,279,0,0,1128,19366,chapters/044_34_weekly_application_execution_system_md.tex
+root_045,35_interview_defense_and_technical_screen_system.md,35_interview_defense_and_technical_screen_system,canonical,root,274,0,0,952,31285,chapters/045_35_interview_defense_and_technical_screen_system_md.tex
+root_046,36_public_profile_launch_sequence.md,36_public_profile_launch_sequence,canonical,root,283,0,0,1167,20824,chapters/046_36_public_profile_launch_sequence_md.tex
+root_047,README.md,Alexander Woodcock Salomon Portfolio,canonical,root,9,0,0,22,560,chapters/047_README_md.tex
+research_048,Research/agent_A4_artstation_portfolio_benchmark (1).md,A4 — ArtStation / Portfolio Benchmark,research_duplicate,research,25,0,0,139,5292,chapters/048_Research_agent_A4_artstation_portfolio_benchmark_1_md.tex
+research_049,Research/agent_A4_artstation_portfolio_benchmark.md,A4 — ArtStation / Portfolio Benchmark,research_duplicate,research,9,0,0,48,4466,chapters/049_Research_agent_A4_artstation_portfolio_benchmark_md.tex
+research_050,Research/agente_B2_digital_twin_simulation_live_jobs_partial_capture.md,B2_digital_twin_simulation_live_jobs_partial_capture,research_snapshot,research,23,0,0,104,5217,chapters/050_Research_agente_B2_digital_twin_simulation_live_jobs_partial_capture_md.tex
+research_051,Research/cerrando_sistema.md,Estado actual,research_snapshot,research,98,0,0,340,7715,chapters/051_Research_cerrando_sistema_md.tex
+research_052,Research/D2_conferences_events_demo_venues.md,D2_conferences_events_demo_venues,research_snapshot,research,21,0,0,272,34907,chapters/052_Research_D2_conferences_events_demo_venues_md.tex
+research_053,Research/deep-research-report_00.md,Resumen Ejecutivo,research_snapshot,research,149,0,0,461,58099,chapters/053_Research_deep_research_report_00_md.tex
+research_054,Research/deep-research-report_01_structure.md,Auditoría por Secciones del Informe de Estrategia de Empleo,research_snapshot,research,75,0,0,469,56289,chapters/054_Research_deep_research_report_01_structure_md.tex
+research_055,Research/deep-research-report_02.md,Auditoría de roles y posicionamiento,research_snapshot,research,32,0,0,108,18163,chapters/055_Research_deep_research_report_02_md.tex
+research_056,Research/deep-research-report_03.md,Executive Summary,research_snapshot,research,31,0,0,106,14225,chapters/056_Research_deep_research_report_03_md.tex
+research_057,Research/deep-research-report_04.md,Benchmark salarial y trabajo remoto (Colombia),research_snapshot,research,23,0,0,89,12392,chapters/057_Research_deep_research_report_04_md.tex
+research_058,Research/deep-research-report_05.md,Estrategia de idiomas y ROI,research_snapshot,research,32,0,0,108,12530,chapters/058_Research_deep_research_report_05_md.tex
+research_059,Research/deep-research-report_06.md,Estrategia formativa en Unity/Real-Time 3D y visualización técnica,research_snapshot,research,33,0,0,114,16093,chapters/059_Research_deep_research_report_06_md.tex
+research_060,Research/deep-research-report_11.md,Resumen Ejecutivo,research_snapshot,research,38,0,0,148,22881,chapters/060_Research_deep_research_report_11_md.tex
+research_061,Research/deep-research-report_13.md,"13. Entrevistas técnicas, negociación y riesgos de oferta",research_snapshot,research,43,0,0,172,26955,chapters/061_Research_deep_research_report_13_md.tex
+research_062,Research/deep-research-report_C3.md,Resumen ejecutivo,research_snapshot,research,15,0,0,85,13472,chapters/062_Research_deep_research_report_C3_md.tex
+research_063,Research/deep-research-report_C4.md,"Becas nacionales (Portugal, Alemania)",research_snapshot,research,7,0,0,22,12690,chapters/063_Research_deep_research_report_C4_md.tex
+research_064,Research/E1_technical_volunteering_opportunities.md,E1 — Technical Volunteering Opportunities,research_snapshot,research,116,0,0,471,20000,chapters/064_Research_E1_technical_volunteering_opportunities_md.tex
+research_065,Research/paquete_continuidad_agent_research.md,paquete_continuidad_agent_research,research_snapshot,research,177,0,0,932,22572,chapters/065_Research_paquete_continuidad_agent_research_md.tex
