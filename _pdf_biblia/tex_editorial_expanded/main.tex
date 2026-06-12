@@ -1,0 +1,95 @@
+\documentclass[10pt,openany]{book}
+\usepackage[a4paper,margin=1.95cm,headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\setmonofont{Consolas}
+\usepackage{microtype}
+\usepackage{xcolor}
+\definecolor{Accent}{HTML}{1F5D6D}
+\definecolor{SoftAccent}{HTML}{EEF6F7}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\providecommand{\arraybackslash}{\let\\\tabularnewline}
+\usepackage{pdflscape}
+\usepackage{fancyhdr}
+\usepackage{fvextra}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\hypersetup{
+  unicode=true,
+  colorlinks=true,
+  linkcolor=Accent,
+  urlcolor=Accent,
+  citecolor=Accent,
+  pdftitle={Biblia Profesional Editorial Ampliada Alexander Woodcock Salomon},
+  pdfauthor={Alexander Woodcock Salomon},
+  pdfsubject={Estrategia profesional ampliada, mercado, estudio, portafolio y empleabilidad},
+  pdfcreator={Codex + XeLaTeX}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{Accent}{Editorial ampliada}}
+\fancyhead[R]{\small\leftmark}
+\fancyfoot[C]{\thepage}
+\setlength{\parskip}{0.46em}
+\setlength{\parindent}{0pt}
+\setlist{itemsep=0.12em, topsep=0.28em, parsep=0.05em}
+\renewcommand{\arraystretch}{1.13}
+\emergencystretch=4em
+\sloppy
+\renewcommand{\chaptername}{Capitulo}
+\renewcommand{\contentsname}{Indice}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\color{Accent}}{\chaptertitlename\ \thechapter}{12pt}{\Huge}
+\titleformat{\section}{\Large\bfseries\color{Accent}}{\thesection}{0.6em}{}
+\DefineVerbatimEnvironment{mdcode}{Verbatim}{fontsize=\scriptsize,breaklines=true,breakanywhere=true,frame=single,rulecolor=\color{black!18}}
+
+\begin{document}
+\pagecolor{SoftAccent}
+\thispagestyle{empty}
+\begin{center}
+\centering
+\vspace*{1.8cm}
+{\Huge\bfseries\textcolor{Accent}{Biblia Profesional Editorial Ampliada}\par}
+\vspace{0.35cm}
+{\LARGE Alexander Woodcock Salomon\par}
+\vspace{1cm}
+{\Large Version de trabajo: estrategia, mercado, estudio, portafolio, aplicaciones y negociacion\par}
+\vspace{1.2cm}
+{\large Version v2\par}
+{\large Generado: 2026-06-12 02:43\par}
+\vfill
+{\large Real-Time 3D Developer / Unity Technical Artist\par}
+{\small Documento intermedio: mas completo que la editorial breve, mas legible que la biblia completa.\par}
+\vspace{0.8cm}
+{\small Fuente viva: \texttt{E:\textbackslash{}Laboral}\par}
+\end{center}
+\clearpage
+\nopagecolor
+
+\tableofcontents
+\clearpage
+
+\input{chapters/01_guia_decision.tex}
+\input{chapters/02_perfil_posicionamiento.tex}
+\input{chapters/03_mercado_salario_contratos.tex}
+\input{chapters/04_movilidad_idiomas.tex}
+\input{chapters/05_educacion_cursos_roadmaps.tex}
+\input{chapters/06_portafolio_twinsight_ara.tex}
+\input{chapters/07_public_profiles.tex}
+\input{chapters/08_empresas_busqueda.tex}
+\input{chapters/09_aplicaciones_outreach_tracker.tex}
+\input{chapters/10_entrevistas_ofertas.tex}
+\input{chapters/11_roadmap_ejecucion.tex}
+\input{chapters/12_benchmarks_estandares.tex}
+\input{chapters/13_voluntariado_eventos_oportunidades.tex}
+\input{chapters/14_matrices_estudio_salario.tex}
+\input{chapters/15_materiales_publicos_copy.tex}
+\input{chapters/16_busqueda_empresas_ampliada.tex}
+\input{chapters/17_interview_answer_bank_ampliado.tex}
+\input{chapters/18_roadmap_24_meses.tex}
+\input{chapters/14_auditoria_errata.tex}
+
+\end{document}

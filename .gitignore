@@ -2,6 +2,7 @@
 _pdf_biblia/build/
 _pdf_biblia/build_editorial/
 _pdf_biblia/build_complete/
+_pdf_biblia/build_editorial_expanded/
 _pdf_biblia/tex/
 _pdf_biblia/**/preview*.png
 _pdf_biblia/**/content_preview*.png
