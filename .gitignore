@@ -7,6 +7,8 @@ _pdf_biblia/tex/
 _pdf_biblia/**/preview*.png
 _pdf_biblia/**/content_preview*.png
 _pdf_biblia/**/source_preview*.png
+_roadmap_laboral/build/
+_roadmap_laboral/node_modules/
 
 # Python runtime artifacts
 __pycache__/

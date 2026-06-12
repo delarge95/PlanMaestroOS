@@ -1,0 +1,99 @@
+\documentclass[10pt,openany]{book}
+\usepackage[a4paper,margin=1.9cm,headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\setmonofont{Consolas}
+\usepackage{microtype}
+\usepackage{xcolor}
+\definecolor{Accent}{HTML}{245E6F}
+\definecolor{SoftAccent}{HTML}{EEF7F5}
+\definecolor{RuleGray}{HTML}{D7DEE2}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\providecommand{\arraybackslash}{\let\\\tabularnewline}
+\usepackage{pdflscape}
+\usepackage{fancyhdr}
+\usepackage{fvextra}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\hypersetup{
+  unicode=true,
+  colorlinks=true,
+  linkcolor=Accent,
+  urlcolor=Accent,
+  citecolor=Accent,
+  pdftitle={Plan de Estrategia Laboral Alexander Woodcock Salomon},
+  pdfauthor={Alexander Woodcock Salomon},
+  pdfsubject={Roadmap laboral prescriptivo, portfolio, aplicaciones, estudio y negociacion},
+  pdfcreator={Codex + XeLaTeX}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{Accent}{Plan de estrategia laboral}}
+\fancyhead[R]{\small\leftmark}
+\fancyfoot[C]{\thepage}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\setlist{itemsep=0.12em, topsep=0.25em, parsep=0.04em}
+\renewcommand{\arraystretch}{1.12}
+\emergencystretch=4em
+\sloppy
+\renewcommand{\chaptername}{Capitulo}
+\renewcommand{\contentsname}{Indice}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\color{Accent}}{\chaptertitlename\ \thechapter}{12pt}{\Huge}
+\titleformat{\section}{\Large\bfseries\color{Accent}}{\thesection}{0.6em}{}
+\DefineVerbatimEnvironment{mdcode}{Verbatim}{fontsize=\scriptsize,breaklines=true,breakanywhere=true,frame=single,rulecolor=\color{RuleGray}}
+
+\begin{document}
+\pagecolor{SoftAccent}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.4cm}
+{\Huge\bfseries\textcolor{Accent}{Plan de Estrategia Laboral}\par}
+\vspace{0.35cm}
+{\LARGE Roadmap prescriptivo para Alexander Woodcock Salomon\par}
+\vspace{0.9cm}
+{\Large Cerrar portfolio, conseguir empleo remoto afin y construir experiencia en Unity Technical Art\par}
+\vspace{1cm}
+{\large Version v1\par}
+{\large Generado: 2026-06-12 12:39\par}
+\vfill
+{\large Prioridad: Unity Technical Artist / Real-Time 3D Developer\par}
+{\small Formato: PDF + Obsidian + Tracker XLSX\par}
+\vspace{0.6cm}
+{\small Fuente viva: \texttt{E:\textbackslash{}Laboral}\par}
+\end{center}
+\clearpage
+\nopagecolor
+
+\tableofcontents
+\clearpage
+
+\input{chapters/01_modo_uso_decisiones.tex}
+\input{chapters/02_diagnostico_actual.tex}
+\input{chapters/03_estrategia_madre.tex}
+\input{chapters/04_roadmap_16_semanas.tex}
+\input{chapters/05_semana_tipo.tex}
+\input{chapters/06_portfolio_twinsight.tex}
+\input{chapters/07_canales_publicos.tex}
+\input{chapters/08_busqueda_aplicaciones.tex}
+\input{chapters/09_estudio_cursos.tex}
+\input{chapters/10_ara_secundarios.tex}
+\input{chapters/11_entrevistas_negociacion.tex}
+\input{chapters/12_legal_idiomas_movilidad.tex}
+\input{chapters/13_tracker_uso.tex}
+\input{chapters/14_pivotes_riesgos.tex}
+\input{chapters/15_playbook_semana_por_semana.tex}
+\input{chapters/16_plantillas_operativas.tex}
+\input{chapters/17_checklists_cierre.tex}
+\input{chapters/18_arboles_decision.tex}
+\input{chapters/19_curriculum_aplicado_12_semanas.tex}
+\input{chapters/20_playbooks_por_rol.tex}
+\input{chapters/21_banco_respuestas_extendido.tex}
+\input{chapters/22_negociacion_contratos.tex}
+\input{chapters/15_auditoria_fuentes.tex}
+
+\end{document}

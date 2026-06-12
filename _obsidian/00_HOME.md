@@ -87,3 +87,4 @@ Este vault usa `E:\Laboral` como raiz. Los modulos numerados existentes se conse
 
 - [[10_BIBLIA_COMPLETA]]
 - [[11_BIBLIA_EDITORIAL_AMPLIADA]]
+- [[12_ROADMAP_ESTRATEGIA_LABORAL]]
