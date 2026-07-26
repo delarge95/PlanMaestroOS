@@ -1,0 +1,8 @@
+---
+import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
+import WeeklyGridPlanner from '../../components/schedules/WeeklyGridPlanner.tsx';
+---
+
+<PlanMaestroLayout title="Cronograma y Matriz Semanal" activeDomain="schedules" activePhase="fase-1">
+  <WeeklyGridPlanner client:load />
+</PlanMaestroLayout>

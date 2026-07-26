@@ -1,0 +1,87 @@
+---
+import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
+import ClinicalExecutionHub from '../../components/clinical/ClinicalExecutionHub.tsx';
+import DomainDocAccordion from '../../components/docs/DomainDocAccordion.tsx';
+import ragData from '../../data/rag_index.json';
+
+const clinicalMods = ragData.clinical_modules;
+
+const clinicalDocsList = [
+  { name: 'reporte_clinico_neurodesarrollo_ansiedad.pdf', type: 'PDF', path: '_pdf_biblia/...', description: 'Diagnóstico clínico de TDAH Inatento y Ansiedad Social de Desempeño' },
+  { name: 'plan_accion_tdah_ansiedad_social-1.pdf', type: 'PDF', path: '_pdf_biblia/...', description: 'Módulos A-F de TDAH y A-F de Ansiedad Social con 9 Niveles de Exposición' }
+];
+---
+
+<PlanMaestroLayout title="Dominio Clínico Conductual" activeDomain="clinical" activePhase="fase-1">
+  <div class="clinical-shell">
+
+    <!-- SUITE INTERACTIVA DE TAREAS CLÍNICAS DE EJECUCIÓN (TDAH & ANSIEDAD SOCIAL) -->
+    <ClinicalExecutionHub client:load />
+
+    <div class="clin-grid">
+      {clinicalMods.map((mod: any) => (
+        <div class="clin-card">
+          <h3>{mod.title}</h3>
+          {mod.exercises && (
+            <ul>
+              {mod.exercises.map((ex: string) => (
+                <li>{ex}</li>
+              ))}
+            </ul>
+          )}
+          {mod.levels && (
+            <ol>
+              {mod.levels.map((lvl: string) => (
+                <li><strong>{lvl.split(':')[0]}:</strong> {lvl.split(':')[1]}</li>
+              ))}
+            </ol>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- ACCORDEÓN DOCUMENTOS FUENTE -->
+    <DomainDocAccordion
+      client:load
+      domainTitle="Clínica Conductual & Evaluaciones"
+      domainColor="#d946ef"
+      categoryFilter="clinical"
+      sourceDocsList={clinicalDocsList}
+    />
+  </div>
+
+  <style>
+    .clinical-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .clin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .clin-card {
+      background: #080c0e;
+      border: 1px solid rgba(217,70,239,0.2);
+      border-top: 3px solid #d946ef;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .clin-card h3 {
+      font-size: 1.1rem;
+      color: #effff6;
+      margin: 0 0 14px;
+    }
+    .clin-card ul, .clin-card ol {
+      margin: 0;
+      padding-left: 18px;
+      color: #a8b9b2;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .clin-card li {
+      margin-bottom: 6px;
+    }
+  </style>
+</PlanMaestroLayout>

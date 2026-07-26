@@ -1,0 +1,17 @@
+---
+type Props = {
+  items: string[];
+  tone?: "cyan" | "warm" | "green";
+};
+
+const { items, tone = "cyan" } = Astro.props;
+---
+
+<ol class:list={["pipeline-timeline", `timeline-${tone}`]} data-reveal>
+  {items.map((item, index) => (
+    <li>
+      <span>{String(index + 1).padStart(2, "0")}</span>
+      <p>{item}</p>
+    </li>
+  ))}
+</ol>

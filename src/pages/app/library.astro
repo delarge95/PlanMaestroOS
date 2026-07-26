@@ -1,0 +1,54 @@
+---
+import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
+import InteractiveDocViewer from '../../components/docs/InteractiveDocViewer.tsx';
+import NotionObsidianIntegrationHub from '../../components/docs/NotionObsidianIntegrationHub.tsx';
+---
+
+<PlanMaestroLayout title="Biblioteca & Buscador RAG" activeDomain="library" activePhase="fase-1">
+  <div class="library-shell">
+    <div class="lib-header">
+      <span class="lib-badge">RAG ENGINE • ALMÁCIGO DE HECHOS VERIFICADOS</span>
+      <h2>Explorador de Conocimiento & Trazabilidad de Fuentes</h2>
+      <p>
+        Buscador semántico en tiempo real sobre los 47 documentos de auditoría laboral, los 3 libros de entrenamiento PDF (*Overcoming Gravity*, *Overcoming Tendonitis*, *The Min-Max Program*), los reportes clínicos y la biblia de carrera.
+      </p>
+    </div>
+
+    <!-- HUB DE INTEGRACIÓN CON OBSIDIAN Y NOTION -->
+    <NotionObsidianIntegrationHub client:load />
+
+    <!-- BUSCADOR RAG Y NAVEGADOR DE DOCUMENTOS -->
+    <InteractiveDocViewer client:load />
+  </div>
+
+  <style>
+    .library-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .lib-header {
+      background: #080c0e;
+      border: 1px solid rgba(236,72,153,0.3);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .lib-badge {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.68rem;
+      color: #ec4899;
+      font-weight: 800;
+    }
+    .lib-header h2 {
+      font-size: 1.5rem;
+      color: #effff6;
+      margin: 6px 0;
+    }
+    .lib-header p {
+      color: #a8b9b2;
+      font-size: 0.88rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+  </style>
+</PlanMaestroLayout>

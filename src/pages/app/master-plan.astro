@@ -1,0 +1,144 @@
+---
+import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
+import ragData from '../../data/master_rag_dataset.json';
+import NotionObsidianIntegrationHub from '../../components/docs/NotionObsidianIntegrationHub.tsx';
+
+const germanModule = ragData.german_module;
+---
+
+<PlanMaestroLayout title="Plan Maestro v3" activeDomain="general" activePhase="fase-1">
+  <div class="mp-container">
+    <div class="mp-header">
+      <span class="mp-badge">DOCUMENTO MAESTRO • VERA ESTRATEGIA</span>
+      <h2>Plan Maestro v3 – Integración Clínica, Laboral, Física y Alemán</h2>
+      <p>
+        Este documento define la arquitectura de prioridades, reglas de inicio, control de distractores, 25h de trabajo profundo por semana y el nuevo hábito ininterrumpido de Alemán.
+      </p>
+    </div>
+
+    <!-- HUB DE INTEGRACIÓN CON OBSIDIAN & NOTION -->
+    <NotionObsidianIntegrationHub
+      client:load
+      documentTitle="Plan Maestro Total OS v3"
+      documentPath="investigacion/plan_maestro_v3.md"
+    />
+
+    <div class="mp-grid">
+      <div class="mp-card">
+        <h3>1. Principios Rectores</h3>
+        <ul>
+          <li><strong>TwinSight manda:</strong> Todo lo demás apoya o espera, salvo la tesis y sustentación inmediata.</li>
+          <li><strong>No trabajar desde voluntad pura:</strong> El sistema depende de arquitectura externa (Agenda única, 3 tareas/día).</li>
+          <li><strong>25 horas útiles semanales:</strong> El roadmap laboral está diseñado para 25h/sem real, no 60h imaginarias.</li>
+          <li><strong>Alemán a paso lento pero seguro:</strong> 20 a 35 min diarios (lunes a domingo) sostenidos sin romper el hábito.</li>
+        </ul>
+      </div>
+
+      <div class="mp-card" style="border-top-color: #f59e0b">
+        <h3 style="color: #f59e0b">2. Módulo de Alemán (NUEVO v3)</h3>
+        <p><strong>Ubicación fija:</strong> {germanModule.schedule}</p>
+        <div class="german-steps">
+          {germanModule.components?.map((c: any, i: number) => (
+            <div class="g-step">
+              <span class="g-num">{i + 1}</span>
+              <div>
+                <strong>{c.name} ({c.duration})</strong>
+                <small>{c.objective}</small>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .mp-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .mp-header {
+      background: #080c0e;
+      border: 1px solid rgba(174,255,224,0.12);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .mp-badge {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 0.68rem;
+      color: #77e7ff;
+      font-weight: 800;
+    }
+    .mp-header h2 {
+      font-size: 1.5rem;
+      color: #effff6;
+      margin: 6px 0;
+    }
+    .mp-header p {
+      color: #a8b9b2;
+      font-size: 0.88rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .mp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .mp-card {
+      background: #080c0e;
+      border: 1px solid rgba(174,255,224,0.12);
+      border-top: 3px solid #77e7ff;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .mp-card h3 {
+      font-size: 1.1rem;
+      margin: 0 0 14px;
+      color: #effff6;
+    }
+    .mp-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #a8b9b2;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .german-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .g-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(245,158,11,0.2);
+    }
+    .g-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f59e0b;
+      color: #040608;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: grid;
+      place-items: center;
+    }
+    .g-step strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #effff6;
+    }
+    .g-step small {
+      color: #a8b9b2;
+      font-size: 0.75rem;
+    }
+  </style>
+</PlanMaestroLayout>

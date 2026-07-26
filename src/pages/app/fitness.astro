@@ -1,0 +1,57 @@
+---
+import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
+import FitAppWorkoutLogger from '../../components/fitness/FitAppWorkoutLogger.tsx';
+import CustomRoutineBuilder from '../../components/fitness/CustomRoutineBuilder.tsx';
+import MinMaxRoutineTable from '../../components/fitness/MinMaxRoutineTable.tsx';
+import ExerciseDatabaseBrowser from '../../components/fitness/ExerciseDatabaseBrowser.tsx';
+import PrehabSkillView from '../../components/fitness/PrehabSkillView.tsx';
+import BooksLibraryView from '../../components/fitness/BooksLibraryView.tsx';
+import DomainDocAccordion from '../../components/docs/DomainDocAccordion.tsx';
+
+const fitnessDocsList = [
+  { name: 'Overcoming Gravity 2nd Ed', type: 'PDF', path: '_pdf_biblia/Planeacion_Integral/investigacion/Overcoming Gravity...', description: 'Manual técnico de calistenia y progresiones por Steven Low' },
+  { name: 'Overcoming Tendonitis', type: 'PDF', path: '_pdf_biblia/Planeacion_Integral/investigacion/overcoming-tendonitis...', description: 'Tratamiento de tendinopatías e isométricos HSR' },
+  { name: 'The Min-Max Program', type: 'PDF', path: '_pdf_biblia/Planeacion_Integral/investigacion/The_Min-Max_Program...', description: 'Programa Nippard 12 semanas bajo volumen alta intensidad' },
+  { name: 'plan_fitness.md', type: 'Markdown', path: '_pdf_biblia/Planeacion_Integral/investigacion/plan_fitness.md', description: 'Plan de calistenia híbrida y rehabilitación de Alexander' }
+];
+---
+
+<PlanMaestroLayout title="Dominio Fitness & Base de Datos FitApp" activeDomain="fitness" activePhase="fase-1">
+  <div class="fitness-shell">
+
+    <!-- 1. FITAPP REGISTRO DE ENTRENAMIENTO EN VIVO & TEMPORIZADOR -->
+    <FitAppWorkoutLogger client:load />
+
+    <!-- 2. CREADOR DE RUTINAS PERSONALIZADAS FITAPP -->
+    <CustomRoutineBuilder client:load />
+
+    <!-- 3. RUTINAS DEL PROGRAMA MIN-MAX VINCULADAS CON FITAPP -->
+    <MinMaxRoutineTable client:load />
+
+    <!-- 4. BASE DE DATOS COMPLETA DE 150+ EJERCICIOS FITAPP-FREE -->
+    <ExerciseDatabaseBrowser client:load />
+
+    <!-- 5. PREHAB, SKILLS & MOVILIDAD -->
+    <PrehabSkillView client:load />
+
+    <!-- 6. LIBROS FUENTE & BIBLIOTECA FÍSICA -->
+    <BooksLibraryView client:load />
+
+    <!-- 7. ACCORDEÓN DOCUMENTOS FUENTE -->
+    <DomainDocAccordion
+      client:load
+      domainTitle="Fitness & Rehabilitación"
+      domainColor="#10b981"
+      categoryFilter="fitness"
+      sourceDocsList={fitnessDocsList}
+    />
+  </div>
+
+  <style>
+    .fitness-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+  </style>
+</PlanMaestroLayout>

@@ -34,3 +34,5 @@ node_modules/
 .astro/
 .npm-cache/
 qa-screenshots/
+*.pdf
+

@@ -1,0 +1,699 @@
+{
+  "version": "3.0.0",
+  "generated_at": "2026-07-24",
+  "system_info": {
+    "app_name": "Plan Maestro Total OS",
+    "owner": "Alexander Woodcock",
+    "role": "Unity Technical Artist / Real-Time 3D Developer",
+    "target_income": "$1000 - $1500 USD / mes (Remoto Internacional)"
+  },
+  "sources": [
+    {
+      "id": "src-min-max",
+      "title": "The Min-Max Program",
+      "author": "Jeff Nippard",
+      "type": "Libro PDF",
+      "path": "_pdf_biblia/Planeacion_Integral/investigacion/The_Min-Max_Program_-_Jeff_Nippard.pdf",
+      "description": "Programa de 12 semanas (2 bloques de 6 semanas) basado en entrenamiento de bajo volumen y alta intensidad (1-2 series por ejercicio a RIR 0-1)."
+    },
+    {
+      "id": "src-overcoming-gravity",
+      "title": "Overcoming Gravity: A Systematic Approach to Gymnastics and Bodyweight Strength",
+      "author": "Steven Low",
+      "type": "Libro PDF",
+      "path": "_pdf_biblia/Planeacion_Integral/investigacion/Overcoming Gravity_ A Systematic Approach to Gymnastics and -- Low, Steven -- 2, 2016.pdf",
+      "description": "Manual técnico de progresiones en calistenia y gimnasia: parada de manos, plancha, muscle-up, anillas y estabilidad articular."
+    },
+    {
+      "id": "src-overcoming-tendonitis",
+      "title": "Overcoming Tendonitis: A Systematic Approach to Evidence-Based Treatment",
+      "author": "Steven Low",
+      "type": "Libro PDF",
+      "path": "_pdf_biblia/Planeacion_Integral/investigacion/overcoming-tendonitis-a-systematic-approach-to-the-evidence-based-treatment-of-tendinopathy-4-pdf-free (1).pdf",
+      "description": "Protocolos de rehabilitación tendinosa: cargas isométricas (Spanish Squats 3-5x45s), Heavy Slow Resistance (HSR) y tempo 3-0-3."
+    },
+    {
+      "id": "src-reporte-clinico",
+      "title": "Reporte Clínico de Neurodesarrollo y Ansiedad",
+      "author": "Equipo Clínico Profesional",
+      "type": "Reporte PDF",
+      "path": "_pdf_biblia/Planeacion_Integral/investigacion/reporte_clinico_neurodesarrollo_ansiedad.pdf",
+      "description": "Diagnóstico de TDAH Inatento, Ansiedad Social de Desempeño, insomnio subclínico y posible perfil TEA."
+    },
+    {
+      "id": "src-plan-accion-tdah",
+      "title": "Plan de Acción Conductual para TDAH y Ansiedad Social",
+      "author": "Equipo Clínico Profesional",
+      "type": "Plan PDF",
+      "path": "_pdf_biblia/Planeacion_Integral/investigacion/plan_accion_tdah_ansiedad_social-1.pdf",
+      "description": "Módulos conductuales A-F de TDAH y A-F de Ansiedad Social, jerarquía de exposición de 9 niveles, video feedback y control de rumiación."
+    },
+    {
+      "id": "src-plan-maestro-v3",
+      "title": "Plan Maestro v3",
+      "author": "Alexander Woodcock",
+      "type": "Documento Markdown",
+      "path": "_pdf_biblia/Planeacion_Integral/investigacion/plan_maestro_v3.md",
+      "description": "Documento consolidador v3 con arquitectura de prioridades, rutina diaria base, hábito de Alemán y reglas de rescate."
+    },
+    {
+      "id": "src-plan-fitness",
+      "title": "Plan Fitness, Calistenia Híbrida y Rehabilitación",
+      "author": "Alexander Woodcock",
+      "type": "Documento Markdown",
+      "path": "_pdf_biblia/Planeacion_Integral/investigacion/plan_fitness.md",
+      "description": "Plan físico de 3 fases combinando Nippard Min-Max con calistenia en anillas y rehabilitación tendinosa."
+    },
+    {
+      "id": "src-horarios-fase",
+      "title": "Manual Operativo y Cronograma Maestro Fase por Fase (v3)",
+      "author": "Alexander Woodcock",
+      "type": "Documento Markdown",
+      "path": "_pdf_biblia/Planeacion_Integral/horarios_maestros_fase_por_fase.md",
+      "description": "Manual operativo completo hora por hora y día por día con explicaciones pedagógicas, clínicas y físicas."
+    },
+    {
+      "id": "src-horarios-grid",
+      "title": "Matriz Semanal Grid de Horarios Integrados (v3)",
+      "author": "Alexander Woodcock",
+      "type": "Documento Markdown",
+      "path": "_pdf_biblia/Planeacion_Integral/horarios_matriz_semanal_grid.md",
+      "description": "Matriz semanal tipo hoja de cálculo (Excel) con días en la primera fila y horas a la izquierda."
+    },
+    {
+      "id": "src-biblia-pdf",
+      "title": "Biblia de Carrera Profesional",
+      "author": "Alexander Woodcock",
+      "type": "Documento PDF",
+      "path": "_pdf_biblia/build_complete/biblia.pdf",
+      "description": "Biblia de posicionamiento laboral, análisis de mercado, Paquete Mínimo Vendible y estandarización."
+    },
+    {
+      "id": "src-roadmap-pdf",
+      "title": "Roadmap Laboral de 16 Semanas",
+      "author": "Alexander Woodcock",
+      "type": "Documento PDF",
+      "path": "_roadmap_laboral/build/roadmap.pdf",
+      "description": "Plan paso a paso de 16 semanas para lanzamiento público, aplicaciones cualificadas y contratación remota."
+    }
+  ],
+  "minmax_program": {
+    "description": "Cuadros calcados del programa The Min-Max Program de Jeff Nippard con sustitución directa de Calistenia / Anillas para Alexander.",
+    "weeks": [
+      {
+        "week_number": 1,
+        "block": 1,
+        "days": [
+          {
+            "day_name": "Day 1: Upper 1",
+            "exercises": [
+              {
+                "name": "DB Incline Press / Barbell Bench Press",
+                "calisthenics_substitution": "Pseudo Planche Pushups / Fondos en Anillas",
+                "reason": "Permite rotación articular natural del hombro izquierdo evitando dolor por abducción fija.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Cable Flye",
+                "calisthenics_substitution": "Ring Chest Flyes / Aperturas en Anillas",
+                "reason": "Tensión constante en pectoral con peso corporal y apoyo en suspensión.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Machine Lateral Raise",
+                "calisthenics_substitution": "Ring Lateral Leans / Elevar lateral en paralelas",
+                "reason": "Aislamiento de deltoides lateral adaptado.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "1-Arm Cable Overhead Triceps Extension",
+                "calisthenics_substitution": "Ring Triceps Extensions (Extensión de tríceps en anillas)",
+                "reason": "Carga directa al tríceps manteniendo codo protegido.",
+                "sets": 2,
+                "rir": "1-2"
+              }
+            ]
+          },
+          {
+            "day_name": "Day 2: Lower 1",
+            "exercises": [
+              {
+                "name": "Nordic Ham Curl / Lying Leg Curl",
+                "calisthenics_substitution": "Nordic Hamstring Curls en suelo con apoyo",
+                "reason": "Fuerza excéntrica pura en isquiotibiales para salud de rodilla.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Barbell Lunge / Leg Press",
+                "calisthenics_substitution": "Progresiones de Pistol Squat (Sentadilla a 1 pierna)",
+                "reason": "Fuerza unilateral de cuádriceps sin comprimir la columna lumbar.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Sissy Squat / Leg Extension",
+                "calisthenics_substitution": "Spanish Squats Isométricos (3-5x45s) / Sissy Squats libres",
+                "reason": "Anestesia y fortalecimiento aislado del tendón rotuliano.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Donkey Calf Raise / Seated Calf Raise",
+                "calisthenics_substitution": "Elevaciones de talón unilaterales en escalón",
+                "reason": "Aislamiento de sóleo y gemelos.",
+                "sets": 2,
+                "rir": "1-2"
+              }
+            ]
+          },
+          {
+            "day_name": "Day 3: Upper 2",
+            "exercises": [
+              {
+                "name": "1-Arm Cable Pulldown / Lat Pulldown",
+                "calisthenics_substitution": "Dominadas Pronadas Lastradas / Dominadas en Anillas",
+                "reason": "Tirón vertical de máxima sobrecarga para dorsal ancho.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Chest-Supported DB Row / Seated Row",
+                "calisthenics_substitution": "Archer Ring Rows (Remos en anillas estilo arquero)",
+                "reason": "Tirón horizontal unilateral con activación de romboides y escápula.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Cable Shrug-In",
+                "calisthenics_substitution": "Encogimientos escapulares en barra / anillas",
+                "reason": "Estabilidad de trapecio superior y cuello.",
+                "sets": 2,
+                "rir": "1-2"
+              }
+            ]
+          },
+          {
+            "day_name": "Day 4: Lower 2",
+            "exercises": [
+              {
+                "name": "Sissy Squat / Hack Squat",
+                "calisthenics_substitution": "Spanish Squats cargados con tempo 3-0-3",
+                "reason": "Estímulo de cuádriceps sin agravar la tendinopatía rotuliana.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Seated Cable Deadlift / Romanian Deadlift",
+                "calisthenics_substitution": "Single-Leg Romanian Deadlift (Peso muerto rumano a 1 pierna)",
+                "reason": "Trabajo de glúteo e isquios en bisagra de cadera.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "45° Hyperextension",
+                "calisthenics_substitution": "Reverse Hyperextensions / Elephant Walks 3x20",
+                "reason": "Descompresión lumbar y flexibilidad activa de la cadena posterior.",
+                "sets": 2,
+                "rir": "1-2"
+              }
+            ]
+          },
+          {
+            "day_name": "Day 5: Arms + Delts",
+            "exercises": [
+              {
+                "name": "Standing DB Curl / Incline DB Curl",
+                "calisthenics_substitution": "Pelican Curls / Ring Biceps Curls en anillas",
+                "reason": "Flexión de codo con peso corporal y rotación neutra.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Skull Crusher / Cable Pushdown",
+                "calisthenics_substitution": "Bodyweight Triceps Extensions en barra baja / anillas",
+                "reason": "Sobrecarga en tríceps con alineación de muñecas.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Preacher Hammer Curl",
+                "calisthenics_substitution": "Ring Hammer Curls agarre neutro",
+                "reason": "Trabajo del braquial anterior sin estrés en la muñeca.",
+                "sets": 2,
+                "rir": "1-2"
+              },
+              {
+                "name": "Close Grip Dip",
+                "calisthenics_substitution": "Fondos en Anillas con rotación externa al subir",
+                "reason": "Empuje vertical en suspensión desarrollando manguito rotador.",
+                "sets": 2,
+                "rir": "1-2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "clinical_modules": [
+    {
+      "id": "tdah-modulo-a",
+      "title": "Módulo A TDAH: Sistema Externo Único",
+      "exercises": [
+        "Agenda / Calendario Único (una sola fuente de verdad)",
+        "Lista Maestra de Proyectos en Notion/Obsidian",
+        "Lista Diaria Máxima de 3 Tareas en la planeación matutina",
+        "Revisión Semanal Fija los Sábados de 09:00 a 11:00"
+      ]
+    },
+    {
+      "id": "tdah-modulo-b",
+      "title": "Módulo B TDAH: Inicio de Tareas (Anti-Inercia)",
+      "exercises": [
+        "Definir micro-tarea de los primeros 10 minutos",
+        "Abrir archivo/software exacto sin pestañas secundarias",
+        "Ejecutar 'Versión Mala' inicial para romper parálisis",
+        "Registrar la fricción mental en 1 línea sin juzgar",
+        "Escribir frase exacta de reentrada para la siguiente sesión"
+      ]
+    },
+    {
+      "id": "ansiedad-modulo-e",
+      "title": "Módulo E Ansiedad Social: Exposición Graduada (9 Niveles)",
+      "levels": [
+        "Nivel 1: Explicar tema de 3 min en voz alta a solas",
+        "Nivel 2: Grabar audio de 5 min y escucharlo sin juzgar",
+        "Nivel 3: Grabar video de 5 min y hacer video feedback",
+        "Nivel 4: Presentar 3 diapos a 1 persona segura (pareja/amigo)",
+        "Nivel 5: Presentar demo imperfecta tolerando errores visibles",
+        "Nivel 6: Presentar a grupo pequeño de 2-3 personas",
+        "Nivel 7: Simular jurado hostil con preguntas incómodas",
+        "Nivel 8: Ensayo completo de 20 min sin leer diapositivas",
+        "Nivel 9: Sustentación real / Entrevista laboral de alta presión"
+      ]
+    }
+  ],
+  "german_module": {
+    "schedule": "13:30 – 14:00 (Lunes a Domingo)",
+    "daily_minutes": 30,
+    "components": [
+      {
+        "name": "Duolingo",
+        "duration": "5 min",
+        "objective": "Vocabulario, racha diaria y fijación de palabras"
+      },
+      {
+        "name": "Libros A1 + Audios",
+        "duration": "15-20 min",
+        "objective": "Lectura y escucha activa con Menschen A1 o Grammatik Aktiv"
+      },
+      {
+        "name": "IA Conversacional",
+        "duration": "5-10 min",
+        "objective": "Micro-interacción de voz/chat en alemán básico A1 con corrección"
+      }
+    ]
+  },
+  "career_docs": [
+    {
+      "id": "00_master_audit_blueprint",
+      "filename": "00_master_audit_blueprint.md",
+      "title": "00 — Master Audit Blueprint",
+      "path": "00_master_audit_blueprint.md",
+      "size_bytes": 41340,
+      "excerpt": "# 00 — Master Audit Blueprint  \n## Auditoría estructural para reconstrucción de estrategia laboral internacional  \n**Perfil:** Alexander Woodcock Salomón  \n**Fecha de corte operativa:** 2026-06-11  \n**Estado del documento:** Blueprint de auditoría. No es estrategia final. No aplica correcciones aún."
+    },
+    {
+      "id": "01_source_of_truth_profile",
+      "filename": "01_source_of_truth_profile.md",
+      "title": "01 — Source of Truth Profile",
+      "path": "01_source_of_truth_profile.md",
+      "size_bytes": 44966,
+      "excerpt": "# 01 — Source of Truth Profile\n## Perfil maestro verificable para reconstrucción de estrategia laboral internacional\n\n**Perfil:** Alexander Woodcock Salomón  \n**Fecha de corte operativa:** 2026-06-11  \n**Estado del documento:** Fuente de verdad operativa. No es CV, LinkedIn, portfolio ni estrategia "
+    },
+    {
+      "id": "02_market_role_fit_and_positioning",
+      "filename": "02_market_role_fit_and_positioning.md",
+      "title": "02 — Market Role Fit and Positioning",
+      "path": "02_market_role_fit_and_positioning.md",
+      "size_bytes": 51943,
+      "excerpt": "# 02 — Market Role Fit and Positioning\n## Auditoría y reconstrucción del encaje entre perfil, roles objetivo y mercado laboral 2025–2026\n\n**Perfil:** Alexander Woodcock Salomón  \n**Fecha de corte operativa:** 2026-06-11  \n**Estado del documento:** sección corregida y terminada para integración poste"
+    },
+    {
+      "id": "03_salary_benchmark_and_remote_colombia",
+      "filename": "03_salary_benchmark_and_remote_colombia.md",
+      "title": "03 — Salary Benchmark and Remote-from-Colombia Feasibility",
+      "path": "03_salary_benchmark_and_remote_colombia.md",
+      "size_bytes": 37461,
+      "excerpt": "# 03 — Salary Benchmark and Remote-from-Colombia Feasibility\n## Auditoría y reconstrucción del benchmark salarial, contratación remota y viabilidad administrativa 2025–2026\n\n**Perfil:** Alexander Woodcock Salomón  \n**Fecha de corte operativa:** 2026-06-11  \n**Estado del documento:** sección corregid"
+    },
+    {
+      "id": "04_eu_portugal_germany_mobility_strategy",
+      "filename": "04_eu_portugal_germany_mobility_strategy.md",
+      "title": "04 — EU / Portugal / Germany Mobility Strategy",
+      "path": "04_eu_portugal_germany_mobility_strategy.md",
+      "size_bytes": 28914,
+      "excerpt": "# 04 — EU / Portugal / Germany Mobility Strategy\n\n## 1. Purpose and scope\n\nThis file defines the legal and operational mobility framework for Alexander Woodcock Salomón, a Colombia-based Unity / Real-Time 3D / Technical Visualization candidate.\n\nIt is not tax, immigration, or legal advice. It is a s"
+    },
+    {
+      "id": "05_language_strategy_and_roi",
+      "filename": "05_language_strategy_and_roi.md",
+      "title": "05_language_strategy_and_roi.md",
+      "path": "05_language_strategy_and_roi.md",
+      "size_bytes": 33441,
+      "excerpt": "# 05_language_strategy_and_roi.md\n\n# Language Strategy and ROI Framework\n\n## 0. Scope\n\nThis section defines the language strategy for Alexander Woodcock Salomón’s international job-search plan.\n\nThe analysis is built around the already defined positioning:\n\n> Real-Time 3D Developer / Unity Technical"
+    },
+    {
+      "id": "06_education_courses_rebelway_masters_phd",
+      "filename": "06_education_courses_rebelway_masters_phd.md",
+      "title": "06 — Education, Courses, Rebelway, Master’s and PhD Strategy",
+      "path": "06_education_courses_rebelway_masters_phd.md",
+      "size_bytes": 27083,
+      "excerpt": "# 06 — Education, Courses, Rebelway, Master’s and PhD Strategy\n\n**Candidate:** Alexander Woodcock Salomón  \n**Current status:** Ingeniería Multimedia thesis completed; defense pending  \n**Primary employment target:** Unity / Real-Time 3D / Technical Visualization / CAD-to-realtime / WebGL  \n**Time h"
+    },
+    {
+      "id": "07_portfolio_strategy_and_project_architecture",
+      "filename": "07_portfolio_strategy_and_project_architecture.md",
+      "title": "07 — Portfolio Strategy and Project Architecture",
+      "path": "07_portfolio_strategy_and_project_architecture.md",
+      "size_bytes": 23584,
+      "excerpt": "# 07 — Portfolio Strategy and Project Architecture\n\n## 0. Purpose of this section\n\nThis file defines the portfolio architecture for Alexander Woodcock Salomón’s international job-search strategy.\n\nIt does **not** write the final portfolio copy yet. It defines what the portfolio must prove, which pro"
+    },
+    {
+      "id": "08B_twinsight_case_study_final_structure",
+      "filename": "08B_twinsight_case_study_final_structure.md",
+      "title": "08B_twinsight_case_study_final_structure",
+      "path": "08B_twinsight_case_study_final_structure.md",
+      "size_bytes": 28854,
+      "excerpt": "# 08B_twinsight_case_study_final_structure\n\n## 0. Module status\n\n```text\nModule: 08B_twinsight_case_study_final_structure.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Final portfolio case-study structure for TwinSight X500\nInputs: 08, 17, 19, 20, 21, 21B, 29, 29B, 29C, B1, B5\nUse: Port"
+    },
+    {
+      "id": "08_twinsight_x500_case_study",
+      "filename": "08_twinsight_x500_case_study.md",
+      "title": "08 — TwinSight X500 Case Study",
+      "path": "08_twinsight_x500_case_study.md",
+      "size_bytes": 35749,
+      "excerpt": "# 08 — TwinSight X500 Case Study\n\n## Document purpose\n\nThis document defines the complete portfolio case study structure for **TwinSight X500 / WebGL-Thesis-Proposal**, the flagship project for Alexander Woodcock Salomón’s international job-search strategy.\n\nThe objective is to convert the thesis pr"
+    },
+    {
+      "id": "09_ara_ai_tools_and_secondary_projects",
+      "filename": "09_ara_ai_tools_and_secondary_projects.md",
+      "title": "09 — ARA, AI Tools and Secondary Projects Strategy",
+      "path": "09_ara_ai_tools_and_secondary_projects.md",
+      "size_bytes": 22193,
+      "excerpt": "# 09 — ARA, AI Tools and Secondary Projects Strategy\n\n## 0. Purpose of this section\n\nThis file defines how Alexander Woodcock Salomón should use ARA Framework, ai-news-aggregator, FitApp-Free, the hyperrealistic Blender portrait and minor repositories inside the broader international job-search stra"
+    },
+    {
+      "id": "10_github_linkedin_cv_strategy",
+      "filename": "10_github_linkedin_cv_strategy.md",
+      "title": "10 — GitHub, LinkedIn and CV Strategy",
+      "path": "10_github_linkedin_cv_strategy.md",
+      "size_bytes": 37476,
+      "excerpt": "# 10 — GitHub, LinkedIn and CV Strategy\n\n## 0. Purpose of this section\n\nThis file defines how Alexander Woodcock Salomón should structure GitHub, LinkedIn and CV materials for an international job-search strategy focused on:\n\n1. Real-Time 3D / Interactive Technical Visualization Developer.\n2. Unity "
+    },
+    {
+      "id": "11_company_targets_job_boards_recruiters",
+      "filename": "11_company_targets_job_boards_recruiters.md",
+      "title": "11_company_targets_job_boards_recruiters.md",
+      "path": "11_company_targets_job_boards_recruiters.md",
+      "size_bytes": 57137,
+      "excerpt": "# 11_company_targets_job_boards_recruiters.md\n\n## Scope\n\nThis file consolidates the Deep Research output, the partial agent collection, and manual cleanup into a structured target ecosystem for Alexander Woodcock Salomón.\n\nThe target profile is:\n\n- Colombia-based.\n- Spanish native; English C1 self-a"
+    },
+    {
+      "id": "12_application_system_and_tracker",
+      "filename": "12_application_system_and_tracker.md",
+      "title": "12_application_system_and_tracker.md",
+      "path": "12_application_system_and_tracker.md",
+      "size_bytes": 28466,
+      "excerpt": "# 12_application_system_and_tracker.md\n\n# Application System and Tracker\n\n## 0. Purpose\n\nThis file defines the operating system for Alexander Woodcock Salomón’s international job search.\n\nThe goal is not to “apply more.” The goal is to run a controlled pipeline that converts the existing portfolio a"
+    },
+    {
+      "id": "13_interview_negotiation_and_offer_risk",
+      "filename": "13_interview_negotiation_and_offer_risk.md",
+      "title": "13 — Interview, Negotiation and Offer-Risk Framework",
+      "path": "13_interview_negotiation_and_offer_risk.md",
+      "size_bytes": 29697,
+      "excerpt": "# 13 — Interview, Negotiation and Offer-Risk Framework\n\n## 1. Purpose and scope\n\nThis file defines a practical interview, negotiation and offer-risk framework for a Colombia-based Unity / Real-Time 3D / Technical Visualization candidate.\n\nIt is built around the source-of-truth profile established in"
+    },
+    {
+      "id": "14_30_60_90_execution_plan",
+      "filename": "14_30_60_90_execution_plan.md",
+      "title": "14_30_60_90_execution_plan",
+      "path": "14_30_60_90_execution_plan.md",
+      "size_bytes": 21495,
+      "excerpt": "# 14_30_60_90_execution_plan\n\n## Purpose\n\nThis section converts the prior strategy files into a 90-day execution system.\n\nIt is not a market research document. It is an operating plan for moving from thesis completion and portfolio preparation into structured international applications, interviews, "
+    },
+    {
+      "id": "15_final_integrated_strategy",
+      "filename": "15_final_integrated_strategy.md",
+      "title": "15_final_integrated_strategy",
+      "path": "15_final_integrated_strategy.md",
+      "size_bytes": 25430,
+      "excerpt": "# 15_final_integrated_strategy\n\n## Purpose\n\nThis is the integrated strategy document that connects the previous sections into one coherent operating model.\n\nIt does not replace the detailed files. It functions as the final synthesis layer:\n\n- what the profile is;\n- which roles to target;\n- how to po"
+    },
+    {
+      "id": "16_final_consistency_audit_and_gap_register",
+      "filename": "16_final_consistency_audit_and_gap_register.md",
+      "title": "16_final_consistency_audit_and_gap_register",
+      "path": "16_final_consistency_audit_and_gap_register.md",
+      "size_bytes": 21044,
+      "excerpt": "# 16_final_consistency_audit_and_gap_register\n\n## Purpose\n\nThis document is the final consistency audit before converting the research system into application materials.\n\nIt checks whether the strategy files from `00` to `15` are coherent, actionable, and safe to use publicly. It does not rewrite th"
+    },
+    {
+      "id": "17_cv_base_and_role_variants",
+      "filename": "17_cv_base_and_role_variants.md",
+      "title": "17_cv_base_and_role_variants",
+      "path": "17_cv_base_and_role_variants.md",
+      "size_bytes": 35817,
+      "excerpt": "# 17_cv_base_and_role_variants\n\n## Purpose\n\nThis document converts the approved career strategy into CV-ready material.\n\nIt includes:\n\n- a base one-page CV structure;\n- role-specific CV variants;\n- reusable bullet banks;\n- project descriptions;\n- skills blocks;\n- education wording;\n- training/course"
+    },
+    {
+      "id": "18_linkedin_final_rewrite",
+      "filename": "18_linkedin_final_rewrite.md",
+      "title": "18_linkedin_final_rewrite",
+      "path": "18_linkedin_final_rewrite.md",
+      "size_bytes": 34630,
+      "excerpt": "# 18_linkedin_final_rewrite\n\n## Purpose\n\nThis document converts the approved career strategy and CV positioning into a complete LinkedIn profile rewrite.\n\nIt includes:\n\n- final headline recommendation;\n- 15 headline alternatives;\n- About section;\n- Experience rewrite;\n- Education rewrite;\n- Projects"
+    },
+    {
+      "id": "19B_github_readme_twinsight_final",
+      "filename": "19B_github_readme_twinsight_final.md",
+      "title": "19B_github_readme_twinsight_final",
+      "path": "19B_github_readme_twinsight_final.md",
+      "size_bytes": 17937,
+      "excerpt": "# 19B_github_readme_twinsight_final\n\n## 0. Module status\n\n```text\nModule: 19B_github_readme_twinsight_final.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Final GitHub README content for TwinSight X500 / WebGL-Thesis-Proposal\nInputs: 08B, 19, 20B, 21B, 29, 29B, 29C\nUse: GitHub README, po"
+    },
+    {
+      "id": "19_github_readme_templates",
+      "filename": "19_github_readme_templates.md",
+      "title": "19_github_readme_templates",
+      "path": "19_github_readme_templates.md",
+      "size_bytes": 29663,
+      "excerpt": "# 19_github_readme_templates\n\n## Purpose\n\nThis document provides GitHub-facing templates and cleanup rules for Alexander Woodcock Salomón’s portfolio repositories.\n\nIt includes:\n\n- GitHub profile README template;\n- pinned repository order;\n- repository naming rules;\n- TwinSight X500 README template;"
+    },
+    {
+      "id": "20_portfolio_copy_and_site_structure",
+      "filename": "20_portfolio_copy_and_site_structure.md",
+      "title": "20_portfolio_copy_and_site_structure",
+      "path": "20_portfolio_copy_and_site_structure.md",
+      "size_bytes": 28730,
+      "excerpt": "# 20_portfolio_copy_and_site_structure\n\n## Purpose\n\nThis document provides the copy, structure, page architecture and content rules for the public portfolio.\n\nIt converts the strategy, CV, LinkedIn, GitHub and TwinSight materials into a web-ready structure.\n\nThe portfolio should communicate one clea"
+    },
+    {
+      "id": "21B_twinsight_demo_video_final_plan",
+      "filename": "21B_twinsight_demo_video_final_plan.md",
+      "title": "21B_twinsight_demo_video_final_plan",
+      "path": "21B_twinsight_demo_video_final_plan.md",
+      "size_bytes": 20404,
+      "excerpt": "# 21B_twinsight_demo_video_final_plan\n\n## 0. Module status\n\n```text\nModule: 21B_twinsight_demo_video_final_plan.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Final production plan for TwinSight X500 demo videos\nInput modules: 21, 29, 29B, 29C, B1, B5\nPrimary artifact: demo video system "
+    },
+    {
+      "id": "21_twinsight_demo_video_script_and_shotlist",
+      "filename": "21_twinsight_demo_video_script_and_shotlist.md",
+      "title": "21_twinsight_demo_video_script_and_shotlist",
+      "path": "21_twinsight_demo_video_script_and_shotlist.md",
+      "size_bytes": 22069,
+      "excerpt": "# 21_twinsight_demo_video_script_and_shotlist\n\n## Purpose\n\nThis document defines the video plan for presenting **TwinSight X500** as the flagship portfolio asset.\n\nIt includes:\n\n- 60-second demo script;\n- 90-second demo script;\n- 120-second demo script;\n- silent version;\n- LinkedIn cutdown;\n- techni"
+    },
+    {
+      "id": "22_outreach_templates_english_spanish",
+      "filename": "22_outreach_templates_english_spanish.md",
+      "title": "22_outreach_templates_english_spanish",
+      "path": "22_outreach_templates_english_spanish.md",
+      "size_bytes": 38336,
+      "excerpt": "# 22_outreach_templates_english_spanish\n\n## Purpose\n\nThis document provides reusable outreach templates for the international job-search system.\n\nIt includes English and Spanish versions for:\n\n- recruiter connection messages;\n- hiring manager messages;\n- technical art lead messages;\n- Unity technica"
+    },
+    {
+      "id": "23_interview_answer_bank",
+      "filename": "23_interview_answer_bank.md",
+      "title": "23_interview_answer_bank",
+      "path": "23_interview_answer_bank.md",
+      "size_bytes": 38555,
+      "excerpt": "# 23_interview_answer_bank\n\n## Purpose\n\nThis document provides prepared interview answers for Alexander Woodcock Salomón’s target roles.\n\nIt converts the strategy, CV, LinkedIn, portfolio, TwinSight case study, negotiation framework and outreach documents into interview-ready language.\n\nThe answers "
+    },
+    {
+      "id": "24_offer_evaluation_scorecard",
+      "filename": "24_offer_evaluation_scorecard.md",
+      "title": "24_offer_evaluation_scorecard",
+      "path": "24_offer_evaluation_scorecard.md",
+      "size_bytes": 24475,
+      "excerpt": "# 24_offer_evaluation_scorecard\n\n## Purpose\n\nThis document provides a practical system for evaluating, negotiating, accepting or rejecting job offers.\n\nIt is designed for a Colombia-based Real-Time 3D Developer / Unity Technical Artist targeting international remote work, contractor/B2B roles, Unity"
+    },
+    {
+      "id": "26_weekly_execution_dashboard",
+      "filename": "26_weekly_execution_dashboard.md",
+      "title": "26_weekly_execution_dashboard",
+      "path": "26_weekly_execution_dashboard.md",
+      "size_bytes": 21174,
+      "excerpt": "# 26_weekly_execution_dashboard\n\n## Purpose\n\nThis document defines the weekly operating system for executing the international job-search strategy.\n\nIt explains how to use:\n\n```text\n25_application_tracker_template.xlsx\n```\n\nand how to make weekly decisions based on evidence instead of mood, anxiety,"
+    },
+    {
+      "id": "27_strategy_scenarios_conservative_balanced_aggressive",
+      "filename": "27_strategy_scenarios_conservative_balanced_aggressive.md",
+      "title": "27_strategy_scenarios_conservative_balanced_aggressive",
+      "path": "27_strategy_scenarios_conservative_balanced_aggressive.md",
+      "size_bytes": 24913,
+      "excerpt": "# 27_strategy_scenarios_conservative_balanced_aggressive\n\n## Purpose\n\nThis file defines three execution scenarios for the international job-search roadmap:\n\n1. **Conservative**\n2. **Balanced**\n3. **Aggressive**\n\nThe goal is to decide how much risk, volume, salary ambition, contractor exposure, portf"
+    },
+    {
+      "id": "28B_public_cv_resume_benchmark",
+      "filename": "28B_public_cv_resume_benchmark.md",
+      "title": "28B_public_cv_resume_benchmark.md",
+      "path": "28B_public_cv_resume_benchmark.md",
+      "size_bytes": 19450,
+      "excerpt": "# 28B_public_cv_resume_benchmark.md\n\n## 0. Module status\n\n```text\nModule: 28B_public_cv_resume_benchmark\nTask: A2_retry_public_cv_resume_benchmark\nGenerated: 2026-06-11\nProject: Laboral / Alexander Woodcock Salomón\nPurpose: Convert public CV/resume benchmark results into actionable updates for Alexa"
+    },
+    {
+      "id": "28C_github_profiles_benchmark",
+      "filename": "28C_github_profiles_benchmark.md",
+      "title": "29_github_profiles_benchmark.md",
+      "path": "28C_github_profiles_benchmark.md",
+      "size_bytes": 16736,
+      "excerpt": "# 29_github_profiles_benchmark.md\n\n## 0. Module status\n\n```text\nModule: 29_github_profiles_benchmark\nTask: A3_github_profiles_benchmark\nGenerated: 2026-06-11\nProject: Laboral / Alexander Woodcock Salomón\nPurpose: Convert GitHub benchmark results into actionable updates for Alexander's public GitHub "
+    },
+    {
+      "id": "28D_artstation_portfolio_benchmark (1)",
+      "filename": "28D_artstation_portfolio_benchmark (1).md",
+      "title": "---",
+      "path": "28D_artstation_portfolio_benchmark (1).md",
+      "size_bytes": 7160,
+      "excerpt": "---\ntipo: modulo_benchmark\nmodulo: 28D_artstation_portfolio_benchmark\nestado: corregido\nfecha: 2026-06-11\nfuente_base: A4_artstation_portfolio_benchmark\nperfil_objetivo: Alexander Woodcock — Real-Time 3D / Unity WebGL / Technical Visualization\nrevision: 2\nnota: reemplaza la versión anterior porque A"
+    },
+    {
+      "id": "28D_artstation_portfolio_benchmark",
+      "filename": "28D_artstation_portfolio_benchmark.md",
+      "title": "---",
+      "path": "28D_artstation_portfolio_benchmark.md",
+      "size_bytes": 11037,
+      "excerpt": "---\ntipo: modulo_benchmark\nmodulo: 28D_artstation_portfolio_benchmark\nestado: generado\nfecha: 2026-06-11\nfuente_base: A4_artstation_portfolio_benchmark\nperfil_objetivo: Alexander Woodcock — Real-Time 3D / Unity WebGL / Technical Visualization\n---\n\n# 28D — ArtStation / Portfolio Benchmark\n\n## 1. Esta"
+    },
+    {
+      "id": "28D_artstation_portfolio_benchmark_complete",
+      "filename": "28D_artstation_portfolio_benchmark_complete.md",
+      "title": "---",
+      "path": "28D_artstation_portfolio_benchmark_complete.md",
+      "size_bytes": 21709,
+      "excerpt": "---\nmodule: 28D_artstation_portfolio_benchmark\nstatus: updated_complete\nsource_task: A4_retry_accessible_portfolio_benchmark\nscope: accessible_portfolios_and_technical_breakdowns\nartstation_direct_access: blocked_by_cloudflare\ndate: 2026-06-11\nowner_profile: Alexander Woodcock Salomon\ntarget_positio"
+    },
+    {
+      "id": "28E_artstation_profile_optimization_strategy",
+      "filename": "28E_artstation_profile_optimization_strategy.md",
+      "title": "28E — ArtStation Profile Optimization Strategy",
+      "path": "28E_artstation_profile_optimization_strategy.md",
+      "size_bytes": 8675,
+      "excerpt": "# 28E — ArtStation Profile Optimization Strategy\n\n## 0. Module status\n\n```text\nModule: 28E_artstation_profile_optimization_strategy.md\nStatus: Complete v1\nInput: Perplexity Deep Research output + 01_source_of_truth_profile.md\nPurpose: Strategy and copy-pasteable texts for optimizing Alexander Woodco"
+    },
+    {
+      "id": "28_competitor_profile_benchmark",
+      "filename": "28_competitor_profile_benchmark.md",
+      "title": "28_competitor_profile_benchmark",
+      "path": "28_competitor_profile_benchmark.md",
+      "size_bytes": 27817,
+      "excerpt": "# 28_competitor_profile_benchmark\n\n## Scope\n\nThis module integrates the result of:\n\n```text\nA1_linkedin_profiles_benchmark\n```\n\nThe source data was collected from publicly visible search snippets and LinkedIn-result metadata. LinkedIn profile pages were not fully accessible without login, so this be"
+    },
+    {
+      "id": "29B_demo_reels_benchmark",
+      "filename": "29B_demo_reels_benchmark.md",
+      "title": "29B_demo_reels_benchmark",
+      "path": "29B_demo_reels_benchmark.md",
+      "size_bytes": 21424,
+      "excerpt": "# 29B_demo_reels_benchmark\n\n## 0. Estado del módulo\n\n```text\nModule: 29B_demo_reels_benchmark.md\nInput task: F1_demo_reels_benchmark\nDate generated: 2026-06-11\nStatus: Complete v1\nSource type: public videos, public portfolio pages, public company demo/case pages\nUse: TwinSight X500 demo video planni"
+    },
+    {
+      "id": "29C_artstation_breakdown_benchmark",
+      "filename": "29C_artstation_breakdown_benchmark.md",
+      "title": "29C_artstation_breakdown_benchmark",
+      "path": "29C_artstation_breakdown_benchmark.md",
+      "size_bytes": 20561,
+      "excerpt": "# 29C_artstation_breakdown_benchmark\n\n## 0. Module status\n\n```text\nModule: 29C_artstation_breakdown_benchmark.md\nInput task: F3_artstation_breakdown_benchmark\nDate generated: 2026-06-11\nStatus: Complete v1\nSource type: public portfolio-pattern benchmark + accessible snippet-derived examples\nPrimary "
+    },
+    {
+      "id": "29_portfolio_case_study_benchmark",
+      "filename": "29_portfolio_case_study_benchmark.md",
+      "title": "29_portfolio_case_study_benchmark",
+      "path": "29_portfolio_case_study_benchmark.md",
+      "size_bytes": 27005,
+      "excerpt": "# 29_portfolio_case_study_benchmark\n\n## Module status\n\n```text\nModule: 29_portfolio_case_study_benchmark.md\nInput task: A5_technical_visualization_case_studies\nDate generated: 2026-06-11\nStatus: Partial but usable\nSource type: public web case studies\n```\n\n## Scope\n\nThis module benchmarks public case"
+    },
+    {
+      "id": "30_live_job_postings_market_snapshot",
+      "filename": "30_live_job_postings_market_snapshot.md",
+      "title": "---",
+      "path": "30_live_job_postings_market_snapshot.md",
+      "size_bytes": 10018,
+      "excerpt": "---\nmodule: 30_live_job_postings_market_snapshot\nstatus: complete_from_B1_B2_B5_inputs\ncreated: 2026-06-12\nsource_modules:\n  - agente_B1.pdf\n  - agente_B2_digital_twin_simulation_live_jobs_partial_capture.md\n  - agente_B5.pdf\ntarget_profile: Alexander Woodcock Salomon\nfocus:\n  - Unity Developer\n  - "
+    },
+    {
+      "id": "31_application_targeting_matrix_and_search_protocol",
+      "filename": "31_application_targeting_matrix_and_search_protocol.md",
+      "title": "31_application_targeting_matrix_and_search_protocol",
+      "path": "31_application_targeting_matrix_and_search_protocol.md",
+      "size_bytes": 23901,
+      "excerpt": "# 31_application_targeting_matrix_and_search_protocol\n\n## 0. Module status\n\n```text\nModule: 31_application_targeting_matrix_and_search_protocol.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Convert job-market evidence into an application targeting system\nInputs: 30_live_job_postings_mar"
+    },
+    {
+      "id": "32_application_materials_gap_closure_plan",
+      "filename": "32_application_materials_gap_closure_plan.md",
+      "title": "32_application_materials_gap_closure_plan",
+      "path": "32_application_materials_gap_closure_plan.md",
+      "size_bytes": 20331,
+      "excerpt": "# 32_application_materials_gap_closure_plan\n\n## 0. Module status\n\n```text\nModule: 32_application_materials_gap_closure_plan.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Close application-material gaps before serious job applications\nInputs: 17, 18, 19B, 20B, 21B, 24, 25, 26, 27, 30, 31"
+    },
+    {
+      "id": "33_portfolio_asset_production_sprint",
+      "filename": "33_portfolio_asset_production_sprint.md",
+      "title": "33_portfolio_asset_production_sprint",
+      "path": "33_portfolio_asset_production_sprint.md",
+      "size_bytes": 19463,
+      "excerpt": "# 33_portfolio_asset_production_sprint\n\n## 0. Module status\n\n```text\nModule: 33_portfolio_asset_production_sprint.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Execute the production of portfolio assets needed before serious applications\nInputs: 08B, 19B, 20B, 21B, 29, 29B, 29C, 30, 31,"
+    },
+    {
+      "id": "34_weekly_application_execution_system",
+      "filename": "34_weekly_application_execution_system.md",
+      "title": "34_weekly_application_execution_system",
+      "path": "34_weekly_application_execution_system.md",
+      "size_bytes": 19366,
+      "excerpt": "# 34_weekly_application_execution_system\n\n## 0. Module status\n\n```text\nModule: 34_weekly_application_execution_system.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Weekly operating system for applications, follow-ups, tracker updates and portfolio iteration\nInputs: 25, 26, 27, 30, 31, 3"
+    },
+    {
+      "id": "35_interview_defense_and_technical_screen_system",
+      "filename": "35_interview_defense_and_technical_screen_system.md",
+      "title": "35_interview_defense_and_technical_screen_system",
+      "path": "35_interview_defense_and_technical_screen_system.md",
+      "size_bytes": 31285,
+      "excerpt": "# 35_interview_defense_and_technical_screen_system\n\n## 0. Module status\n\n```text\nModule: 35_interview_defense_and_technical_screen_system.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Interview defense system for Unity WebGL / Real-Time 3D / Technical Visualization roles\nInputs: 08B, 17"
+    },
+    {
+      "id": "36_public_profile_launch_sequence",
+      "filename": "36_public_profile_launch_sequence.md",
+      "title": "36_public_profile_launch_sequence",
+      "path": "36_public_profile_launch_sequence.md",
+      "size_bytes": 20824,
+      "excerpt": "# 36_public_profile_launch_sequence\n\n## 0. Module status\n\n```text\nModule: 36_public_profile_launch_sequence.md\nDate generated: 2026-06-12\nStatus: Complete v1\nPurpose: Public launch sequence for Alexander’s professional proof package\nInputs: 08B, 18, 19B, 20B, 21B, 29B, 29C, 31, 32, 33, 34, 35\nUse: p"
+    }
+  ]
+}

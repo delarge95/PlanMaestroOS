@@ -1,0 +1,74 @@
+---
+import CTAButton from "@components/CTAButton.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import TechTag from "@components/TechTag.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { focusVariantProjects, focusVariants, getFocusVariant } from "@data/focusVariants";
+import { projects } from "@data/projects";
+
+export function getStaticPaths() {
+  return focusVariants.map((variant) => ({
+    params: { slug: variant.slug },
+    props: { slug: variant.slug }
+  }));
+}
+
+const { slug } = Astro.props;
+const variant = getFocusVariant(slug);
+
+if (!variant) {
+  throw new Error(`Unknown focus variant: ${slug}`);
+}
+
+const orderedProjects = focusVariantProjects(variant);
+const primary = projects.find((project) => project.id === variant.primaryProjectId)!;
+---
+
+<BaseLayout
+  title={variant.title}
+  description={`${variant.title} portfolio focus for Alexander Woodcock Salomon. ${variant.summary}`}
+  image={primary.media}
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">{variant.eyebrow}</p>
+      <h1>{variant.title}</h1>
+      <p class="hero-copy">{variant.summary}</p>
+      <div class="tag-row">
+        {primary.stack.slice(0, 7).map((tag) => <TechTag label={tag} tone={primary.accent} />)}
+      </div>
+      <div class="hero-actions">
+        <CTAButton href={variant.ctaHref} label={variant.ctaLabel} />
+        <CTAButton href="/work" label="All work" variant="secondary" />
+      </div>
+    </div>
+    <ProjectCard project={primary} featured />
+  </section>
+
+  <section class="section-shell">
+    <div class="section-intro">
+      <div>
+        <p class="eyebrow">Emphasis</p>
+        <h2>What this route emphasizes.</h2>
+      </div>
+      <ul class="dense-list">
+        {variant.proofPoints.map((point) => <li>{point}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="section-intro">
+      <div>
+        <p class="eyebrow">Ordered evidence</p>
+        <h2>Projects sorted for this application path.</h2>
+      </div>
+      <p>
+        The facts stay the same. The route changes the order and emphasis so the portfolio can support different applications quickly.
+      </p>
+    </div>
+    <div class="project-grid">
+      {orderedProjects.map((project, index) => <ProjectCard project={project} featured={index === 0} />)}
+    </div>
+  </section>
+</BaseLayout>

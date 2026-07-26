@@ -1,0 +1,16 @@
+---
+import type { Metric } from "@data/projects";
+
+type Props = {
+  metric: Metric;
+};
+
+const { metric } = Astro.props;
+---
+
+<article class:list={["metric-block", metric.status && `metric-${metric.status}`]} data-reveal>
+  <p class="metric-label">{metric.label}</p>
+  <strong>{metric.value}</strong>
+  <p>{metric.detail}</p>
+  {metric.status === "verify" && <span class="metric-note">Verify before public launch</span>}
+</article>

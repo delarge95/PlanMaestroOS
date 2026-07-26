@@ -10,5 +10,13 @@ export default defineConfig({
   server: {
     host: "127.0.0.1",
     port: 4321
+  },
+  vite: {
+    esbuild: {
+      jsx: 'transform'
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom']
+    }
   }
 });
