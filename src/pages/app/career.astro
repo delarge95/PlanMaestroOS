@@ -1,39 +1,8 @@
 ---
 import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
-import InteractiveRoadmapDashboard from '../../components/career/InteractiveRoadmapDashboard.tsx';
-import DomainDocAccordion from '../../components/docs/DomainDocAccordion.tsx';
-
-const careerDocsList = [
-  { name: '00_master_audit_blueprint.md', type: 'Markdown', path: '00_master_audit_blueprint.md', description: 'Blueprint maestro de auditoría laboral' },
-  { name: '01_source_of_truth_profile.md', type: 'Markdown', path: '01_source_of_truth_profile.md', description: 'Perfil fuente de verdad laboral' },
-  { name: '08_twinsight_x500_case_study.md', type: 'Markdown', path: '08_twinsight_x500_case_study.md', description: 'Caso de estudio técnico TwinSight X500' },
-  { name: '10_github_linkedin_cv_strategy.md', type: 'Markdown', path: '10_github_linkedin_cv_strategy.md', description: 'Estrategia de CV de 1 página y LinkedIn' },
-  { name: '14_30_60_90_execution_plan.md', type: 'Markdown', path: '14_30_60_90_execution_plan.md', description: 'Plan de ejecución 30-60-90 días' },
-  { name: 'biblia.pdf', type: 'PDF', path: '_pdf_biblia/build_complete/biblia.pdf', description: 'Biblia de posicionamiento profesional' },
-  { name: 'roadmap.pdf', type: 'PDF', path: '_roadmap_laboral/build/roadmap.pdf', description: 'Roadmap laboral de 16 semanas' }
-];
+import CareerTabWorkspace from '../../components/career/CareerTabWorkspace.tsx';
 ---
 
-<PlanMaestroLayout title="Dominio Laboral & Roadmap 16 Semanas" activeDomain="career" activePhase="fase-1">
-  <div class="career-shell">
-    {/* DASHBOARD INTERACTIVO DE ROADMAP 16 SEMANAS / 90 DÍAS */}
-    <InteractiveRoadmapDashboard client:load />
-
-    {/* ACCORDEÓN VISOR DE DOCUMENTOS DE AUDITORÍA Y ROADMAP */}
-    <DomainDocAccordion
-      client:load
-      domainTitle="Laboral & Posicionamiento"
-      domainColor="#3b82f6"
-      categoryFilter="career"
-      sourceDocsList={careerDocsList}
-    />
-  </div>
-
-  <style>
-    .career-shell {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-  </style>
+<PlanMaestroLayout title="Dominio Laboral & Portafolio" activeDomain="career" activePhase="fase-1">
+  <CareerTabWorkspace client:load />
 </PlanMaestroLayout>

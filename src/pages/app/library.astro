@@ -1,8 +1,6 @@
 ---
 import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
-import InteractiveDocViewer from '../../components/docs/InteractiveDocViewer.tsx';
-import NotionObsidianIntegrationHub from '../../components/docs/NotionObsidianIntegrationHub.tsx';
-import SecondBrainInspector from '../../components/docs/SecondBrainInspector.tsx';
+import LibraryTabWorkspace from '../../components/docs/LibraryTabWorkspace.tsx';
 ---
 
 <PlanMaestroLayout title="Biblioteca & Buscador RAG" activeDomain="library" activePhase="fase-1">
@@ -15,21 +13,15 @@ import SecondBrainInspector from '../../components/docs/SecondBrainInspector.tsx
       </p>
     </div>
 
-    <!-- INSPECTOR EN VIVO DEL SEGUNDO CEREBRO (NOTION EMBED & REINTERPRETED CHARTS) -->
-    <SecondBrainInspector client:load />
-
-    <!-- HUB DE INTEGRACIÓN CON OBSIDIAN Y NOTION -->
-    <NotionObsidianIntegrationHub client:load />
-
-    <!-- BUSCADOR RAG Y NAVEGADOR DE DOCUMENTOS -->
-    <InteractiveDocViewer client:load />
+    <!-- PESTAÑAS HORIZONTALES ESTILO APPLE DE SUBSECCIONES -->
+    <LibraryTabWorkspace client:load />
   </div>
 
   <style>
     .library-shell {
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 24px;
     }
     .lib-header {
       background: rgba(12, 14, 18, 0.75);

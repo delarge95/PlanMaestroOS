@@ -1,8 +1,8 @@
 ---
 import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
-import DailyOperatingView from '../../components/schedules/DailyOperatingView.tsx';
+import TodayTabWorkspace from '../../components/schedules/TodayTabWorkspace.tsx';
 ---
 
-<PlanMaestroLayout title="Centro Operativo Hoy" activeDomain="today" activePhase="fase-1">
-  <DailyOperatingView client:load />
+<PlanMaestroLayout title="Hoy - Centro de Operación Diaria" activeDomain="today" activePhase="fase-1">
+  <TodayTabWorkspace client:load />
 </PlanMaestroLayout>
