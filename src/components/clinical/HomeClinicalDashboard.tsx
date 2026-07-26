@@ -4,8 +4,11 @@ import SecondBrainInspector from '../docs/SecondBrainInspector';
 import FocusModeShell from './FocusModeShell';
 import ErrorBoundary from '../ErrorBoundary';
 
+import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
+
 const TABS = [
   { id: 'now', label: '🎯 Bloque AHORA & Prioridades TDAH' },
+  { id: 'rescue', label: '🛡️ Rescate Clínico Sin Culpa (Cero Deuda)' },
   { id: 'second_brain', label: '🧠 Inspección Segundo Cerebro (Notion/Obsidian)' },
   { id: 'sections', label: '🗺️ Navegación de Secciones OS' }
 ];
@@ -18,18 +21,21 @@ export default function HomeClinicalDashboard() {
     <ErrorBoundary>
       <FocusModeShell isActive={isFocusActive} onExit={() => setIsFocusActive(false)}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          {/* APPLE SEGMENTED CONTROL BAR */}
+          {/* APPLE SEGMENTED CONTROL BAR (STICKY) */}
           <div style={{
+            position: 'sticky',
+            top: '12px',
+            zIndex: 90,
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
-            background: 'rgba(118, 118, 128, 0.24)',
+            background: 'rgba(28, 28, 30, 0.85)',
             backdropFilter: 'blur(30px) saturate(190%)',
             WebkitBackdropFilter: 'blur(30px) saturate(190%)',
-            padding: '4px',
-            borderRadius: '16px',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+            padding: '6px',
+            borderRadius: '18px',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255,255,255,0.1) inset',
             overflowX: 'auto',
             maxWidth: '100%'
           }}>
@@ -156,7 +162,10 @@ export default function HomeClinicalDashboard() {
             </div>
           )}
 
-          {/* TAB 2: SECOND BRAIN INSPECTOR */}
+          {/* TAB 2: RESCUE PROTOCOL */}
+          {activeTab === 'rescue' && <ClinicalUncompletedTaskProtocol />}
+
+          {/* TAB 3: SECOND BRAIN INSPECTOR */}
           {activeTab === 'second_brain' && <SecondBrainInspector />}
 
           {/* TAB 3: SECTIONS MAP */}

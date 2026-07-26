@@ -22,18 +22,21 @@ export default function CareerTabWorkspace() {
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {/* APPLE SEGMENTED CONTROL BAR */}
+        {/* APPLE SEGMENTED CONTROL BAR (STICKY) */}
         <div style={{
+          position: 'sticky',
+          top: '12px',
+          zIndex: 90,
           display: 'flex',
           alignItems: 'center',
           gap: '4px',
-          background: 'rgba(118, 118, 128, 0.24)',
+          background: 'rgba(28, 28, 30, 0.85)',
           backdropFilter: 'blur(30px) saturate(190%)',
           WebkitBackdropFilter: 'blur(30px) saturate(190%)',
-          padding: '4px',
-          borderRadius: '16px',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+          padding: '6px',
+          borderRadius: '18px',
+          border: '1px solid rgba(255, 255, 255, 0.15)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255,255,255,0.1) inset',
           overflowX: 'auto',
           maxWidth: '100%'
         }}>

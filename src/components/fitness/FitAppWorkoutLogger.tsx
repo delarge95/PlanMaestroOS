@@ -25,33 +25,46 @@ interface CompletedWorkout {
 
 const DEFAULT_ROUTINES = [
   {
-    title: 'Día 1: Empuje Min-Max (Chest, Shoulders, Triceps)',
+    title: 'Día 1: Empuje Min-Max (Pecho, Hombro, Tríceps)',
+    program: 'Min-Max Nippard + Calistenia Anillas (Fase 1/2/3)',
     exercises: [
+      { name: 'Pseudo Planche Pushups / Fondos en Anillas', target: '3 series × 6-10 reps • RPE 8-9', restSec: 120 },
       { name: 'Incline Dumbbell Press', target: '3 series × 6-10 reps • RPE 8-9', restSec: 120 },
-      { name: 'Standing Overhead Barbell Press', target: '3 series × 6-8 reps • RPE 8-9', restSec: 120 },
+      { name: 'Pike Pushups / Shoulder Press', target: '3 series × 6-8 reps • RPE 8-9', restSec: 120 },
       { name: 'Cable Lateral Raise', target: '3 series × 10-15 reps • RPE 9-10', restSec: 90 },
-      { name: 'Dips / Fondos en Paralelas o Anillas', target: '3 series × 8-12 reps • RPE 8-9', restSec: 90 },
-      { name: 'Triceps Rope Pushdown', target: '3 series × 10-12 reps • RPE 9', restSec: 90 }
+      { name: '1-Arm Cable Overhead Triceps Extension', target: '3 series × 10-12 reps • RPE 9', restSec: 90 }
     ]
   },
   {
-    title: 'Día 2: Tracción Min-Max (Back, Rear Delts, Biceps)',
+    title: 'Día 2: Pierna HSR & Cuádriceps (Rehabilitación Rodilla)',
+    program: 'Protocolo HSR Tempo 3-0-3 & Spanish Squats',
     exercises: [
-      { name: 'Barbell Bent Over Row', target: '3 series × 6-10 reps • RPE 8-9', restSec: 120 },
-      { name: 'Lat Pulldown (Polea Alta)', target: '3 series × 8-10 reps • RPE 8-9', restSec: 120 },
+      { name: 'Spanish Squats (Isométrico Rotuliano)', target: '3-5 series × 45s sostén • Sin Dolor', restSec: 90 },
+      { name: 'Box Pistol / Progresión Pistol Squat', target: '3 series × 6-8 reps • Tempo 3-0-3', restSec: 120 },
+      { name: 'Leg Extension (Prensa Cuádriceps)', target: '3 series × 10-12 reps • RPE 8', restSec: 90 },
+      { name: 'Nordic Ham Curl / Lying Leg Curl', target: '3 series × 8-10 reps • RPE 8', restSec: 120 },
+      { name: 'Standing Calf Raise', target: '4 series × 12-15 reps • RPE 9', restSec: 60 }
+    ]
+  },
+  {
+    title: 'Día 3: Tracción Min-Max & Dorsal (Espalda, Bíceps)',
+    program: 'Min-Max Nippard + Dominadas Lastradas & Archer Rows',
+    exercises: [
+      { name: 'Dominadas Lastradas / Lat Pulldown', target: '3 series × 6-8 reps • RPE 8-9', restSec: 120 },
+      { name: 'Archer Ring Rows / Seated Cable Row', target: '3 series × 8-10 reps • RPE 8-9', restSec: 120 },
       { name: 'Face Pull (Polea con Cuerda)', target: '3 series × 12-15 reps • RPE 9', restSec: 90 },
       { name: 'Incline Dumbbell Biceps Curl', target: '3 series × 10-12 reps • RPE 9', restSec: 90 },
-      { name: 'Hammer Curl (Mancuernas Neutrales)', target: '3 series × 10-12 reps • RPE 9', restSec: 90 }
+      { name: 'Preacher Hammer Curl', target: '3 series × 10-12 reps • RPE 9', restSec: 90 }
     ]
   },
   {
-    title: 'Día 3: Pierna & Core Min-Max (Quads, Hams, Calves)',
+    title: 'Día 4: Calistenia Híbrida PM (Movilidad & Cadena Posterior)',
+    program: 'Plan Fitness Alexander PM (David Thurin & Elephant Walks)',
     exercises: [
-      { name: 'Barbell Back Squat (Sentadilla Trasera)', target: '3 series × 6-8 reps • RPE 8', restSec: 180 },
-      { name: 'Romanian Deadlift (Peso Muerto Rumano)', target: '3 series × 8-10 reps • RPE 8', restSec: 120 },
-      { name: 'Leg Extension (Prensa de Cuádriceps)', target: '3 series × 10-12 reps • RPE 9', restSec: 90 },
-      { name: 'Seated Leg Curl (Isquiotibiales)', target: '3 series × 10-12 reps • RPE 9', restSec: 90 },
-      { name: 'Standing Calf Raise', target: '4 series × 12-15 reps • RPE 9-10', restSec: 60 }
+      { name: 'Elephant Walks (Cadena Posterior)', target: '3 series × 30 reps • Movilidad Activa', restSec: 60 },
+      { name: '90/90 Hip Switches (Movilidad Cadera)', target: '3 series × 12 reps por lado', restSec: 60 },
+      { name: 'Jefferson Curls (Descompresión Lumbar)', target: '3 series × 10 reps lentas (Peso Ligero)', restSec: 90 },
+      { name: 'Spanish Squats (Regulación Rodilla)', target: '3 series × 45s sostén', restSec: 60 }
     ]
   }
 ];
@@ -61,6 +74,7 @@ export default function FitAppWorkoutLogger() {
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [activeTab, setActiveTab] = useState<'logger' | 'history' | 'stats'>('logger');
 
   // Active workout logs per exercise
   const [exerciseLogs, setExerciseLogs] = useState<Record<string, LoggedSet[]>>({});
@@ -110,19 +124,18 @@ export default function FitAppWorkoutLogger() {
       }, 1000);
     } else if (timerSeconds === 0 && timerActive) {
       setTimerActive(false);
-      // Play subtle chime sound if supported
       try {
         const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.frequency.value = 587.33; // D5 note
+        osc.frequency.value = 587.33;
         gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.3);
       } catch (e) {
-        // ignore audio errors
+        // ignore
       }
     }
     return () => clearInterval(timerInterval);
@@ -134,7 +147,6 @@ export default function FitAppWorkoutLogger() {
   const handleStartWorkout = () => {
     setIsSessionActive(true);
     setSessionStartTime(Date.now());
-    // Init exercise logs structure
     const initialLogs: Record<string, LoggedSet[]> = {};
     activeRoutine.exercises.forEach((ex) => {
       initialLogs[ex.name] = [
@@ -146,7 +158,6 @@ export default function FitAppWorkoutLogger() {
     setExerciseLogs(initialLogs);
   };
 
-  // Toggle set completed & trigger rest timer
   const handleToggleSet = (exName: string, setIdx: number, defaultRestSec: number) => {
     setExerciseLogs((prev) => {
       const currentSets = [...(prev[exName] || [])];
@@ -154,7 +165,6 @@ export default function FitAppWorkoutLogger() {
       currentSets[setIdx] = { ...currentSets[setIdx], completed: isNowCompleted };
 
       if (isNowCompleted) {
-        // Trigger rest timer
         startRestTimer(defaultRestSec);
       }
 
@@ -192,7 +202,6 @@ export default function FitAppWorkoutLogger() {
     setTimerActive(true);
   };
 
-  // Finish workout & save history
   const handleFinishWorkout = () => {
     let totalVolume = 0;
     const completedExercises: any[] = [];
@@ -201,7 +210,7 @@ export default function FitAppWorkoutLogger() {
       const doneSets = sets.filter((s) => s.completed);
       if (doneSets.length > 0) {
         doneSets.forEach((s) => {
-          totalVolume += s.weight * s.reps;
+          totalVolume += (s.weight || 0) * (s.reps || 0);
         });
         completedExercises.push({
           name,
@@ -231,398 +240,331 @@ export default function FitAppWorkoutLogger() {
     setSessionStartTime(null);
   };
 
+  const handleDeleteHistoryItem = (id: string) => {
+    const updated = history.filter((h) => h.id !== id);
+    setHistory(updated);
+    try {
+      localStorage.setItem('fitapp_workout_history', JSON.stringify(updated));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const formatTime = (totalSec: number) => {
     const mins = Math.floor(totalSec / 60);
     const secs = totalSec % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // Stats calculation
+  const totalVolumeAllTime = history.reduce((acc, h) => acc + h.totalVolumeKg, 0);
+  const totalWorkoutsCount = history.length;
+  const totalMinutesAllTime = history.reduce((acc, h) => acc + h.durationMinutes, 0);
+
   return (
     <ErrorBoundary>
       <div
         style={{
-          background: 'rgba(10, 15, 20, 0.75)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(16, 185, 129, 0.2)',
+          background: 'rgba(28, 28, 30, 0.75)',
+          backdropFilter: 'blur(40px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
           borderRadius: '24px',
           padding: '24px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '24px',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-          color: '#effff6'
+          gap: '20px',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255,255,255,0.08) inset',
+          color: '#ffffff'
         }}
       >
-        {/* HEADER & CONTROLS */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        {/* TOP PROGRAM IDENTIFIER BANNER */}
+        <div style={{ background: 'rgba(48, 209, 88, 0.12)', border: '1px solid rgba(48, 209, 88, 0.3)', borderRadius: '16px', padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#10b981', fontWeight: 800, letterSpacing: '0.05em' }}>
-              FITAPP WORKOUT LOGGER & TRACKER EN VIVO
+            <span style={{ fontSize: '0.68rem', fontFamily: '-apple-system, SF Pro Text, sans-serif', color: '#30d158', fontWeight: 800, textTransform: 'uppercase' }}>
+              PROGRAMA ACTIVO DE ENTRENAMIENTO & REHABILITACIÓN
             </span>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
-              Registro Interactivo de Sesión & Temporizador de Descanso
-            </h3>
+            <strong style={{ display: 'block', fontSize: '1rem', color: '#ffffff' }}>
+              {activeRoutine.program}
+            </strong>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            {isSessionActive ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
-                  <span style={{ fontSize: '0.68rem', color: '#10b981', display: 'block', fontWeight: 700 }}>TIEMPO TRANSCURRIDO</span>
-                  <strong style={{ fontSize: '1.1rem', fontFamily: 'Azeret Mono, monospace', color: '#ffffff' }}>{formatTime(elapsedSeconds)}</strong>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleFinishWorkout}
-                  style={{
-                    background: 'linear-gradient(135deg, #10b981, #059669)',
-                    border: 'none',
-                    color: '#ffffff',
-                    fontWeight: 800,
-                    padding: '10px 20px',
-                    borderRadius: '12px',
-                    cursor: 'pointer',
-                    fontSize: '0.88rem',
-                    boxShadow: '0 4px 15px rgba(16, 185, 129, 0.4)'
-                  }}
-                >
-                  ✓ Finalizar & Guardar Sesión
-                </button>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={handleStartWorkout}
-                style={{
-                  background: 'linear-gradient(135deg, #10b981, #059669)',
-                  border: 'none',
-                  color: '#ffffff',
-                  fontWeight: 800,
-                  padding: '10px 22px',
-                  borderRadius: '12px',
-                  cursor: 'pointer',
-                  fontSize: '0.9rem',
-                  boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)'
-                }}
-              >
-                ▶ Iniciar Sesión de Hoy
-              </button>
-            )}
+          <div style={{ display: 'flex', gap: '6px' }}>
+            <button
+              type="button"
+              onClick={() => setActiveTab('logger')}
+              style={{ background: activeTab === 'logger' ? '#30d158' : 'transparent', color: activeTab === 'logger' ? '#000' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+            >
+              ⚡ Tracker en Vivo
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('history')}
+              style={{ background: activeTab === 'history' ? '#0a84ff' : 'transparent', color: activeTab === 'history' ? '#fff' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+            >
+              📜 Historial ({history.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('stats')}
+              style={{ background: activeTab === 'stats' ? '#ff9f0a' : 'transparent', color: activeTab === 'stats' ? '#000' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+            >
+              📊 Estadísticas
+            </button>
           </div>
         </div>
 
-        {/* ROUTINE SELECTOR TABS */}
-        <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '4px' }}>
-          {DEFAULT_ROUTINES.map((rt, idx) => {
-            const isSelected = selectedRoutineIndex === idx;
-            return (
-              <button
-                key={idx}
-                type="button"
-                disabled={isSessionActive}
-                onClick={() => setSelectedRoutineIndex(idx)}
-                style={{
-                  background: isSelected ? 'rgba(16, 185, 129, 0.18)' : 'rgba(0, 0, 0, 0.3)',
-                  border: `1px solid ${isSelected ? 'rgba(16, 185, 129, 0.5)' : 'rgba(255, 255, 255, 0.08)'}`,
-                  color: isSelected ? '#10b981' : '#a8b9b2',
-                  padding: '8px 16px',
-                  borderRadius: '12px',
-                  fontSize: '0.82rem',
-                  fontWeight: isSelected ? 700 : 500,
-                  cursor: isSessionActive ? 'not-allowed' : 'pointer',
-                  opacity: isSessionActive && !isSelected ? 0.5 : 1,
-                  whiteSpace: 'nowrap',
-                  transition: 'all 150ms ease'
-                }}
-              >
-                {rt.title}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* REST TIMER FLOATING / TOP BANNER */}
-        {timerSeconds !== null && (
-          <div
-            style={{
-              background: timerSeconds === 0 ? 'rgba(16, 185, 129, 0.25)' : 'rgba(10, 14, 20, 0.9)',
-              border: `1px solid ${timerSeconds === 0 ? '#10b981' : 'rgba(120, 230, 255, 0.3)'}`,
-              borderRadius: '16px',
-              padding: '14px 20px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.4)'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <span style={{ fontSize: '1.6rem' }}>⏱️</span>
+        {/* TAB 1: LOGGER EN VIVO */}
+        {activeTab === 'logger' && (
+          <>
+            {/* CONTROLS */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
-                <span style={{ fontSize: '0.7rem', fontFamily: 'Azeret Mono, monospace', color: timerSeconds === 0 ? '#10b981' : '#77e7ff', fontWeight: 800 }}>
-                  {timerSeconds === 0 ? '¡DESCANSO COMPLETADO!' : 'TEMPORIZADOR DE DESCANSO EN CURSO'}
-                </span>
-                <h4 style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>
-                  {timerSeconds === 0 ? '¡Siguiente Serie Lista! A Entrenar 💪' : `Tiempo restante: ${formatTime(timerSeconds)}`}
-                </h4>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                  {activeRoutine.title}
+                </h3>
+              </div>
+
+              <div>
+                {isSessionActive ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ background: 'rgba(48, 209, 88, 0.15)', border: '1px solid rgba(48, 209, 88, 0.3)', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
+                      <span style={{ fontSize: '0.68rem', color: '#30d158', display: 'block', fontWeight: 700 }}>TIEMPO TRANSCURRIDO</span>
+                      <strong style={{ fontSize: '1.1rem', fontFamily: 'SF Mono, monospace', color: '#ffffff' }}>{formatTime(elapsedSeconds)}</strong>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleFinishWorkout}
+                      style={{
+                        background: '#30d158',
+                        border: 'none',
+                        color: '#000000',
+                        fontWeight: 800,
+                        padding: '10px 20px',
+                        borderRadius: '12px',
+                        cursor: 'pointer',
+                        fontSize: '0.88rem'
+                      }}
+                    >
+                      ✓ Finalizar & Guardar Sesión
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleStartWorkout}
+                    style={{
+                      background: '#30d158',
+                      border: 'none',
+                      color: '#000000',
+                      fontWeight: 800,
+                      padding: '10px 22px',
+                      borderRadius: '12px',
+                      cursor: 'pointer',
+                      fontSize: '0.9rem'
+                    }}
+                  >
+                    ▶ Iniciar Sesión de Hoy
+                  </button>
+                )}
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '8px' }}>
-              {[30, 60, 90, 120, 180].map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => startRestTimer(s)}
-                  style={{
-                    background: initialTimerSec === s ? 'rgba(16, 185, 129, 0.3)' : 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    color: '#effff6',
-                    padding: '4px 10px',
-                    borderRadius: '8px',
-                    fontSize: '0.75rem',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {s}s
-                </button>
-              ))}
-              <button
-                type="button"
-                onClick={() => { setTimerActive(false); setTimerSeconds(null); }}
-                style={{ background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.4)', color: '#f87171', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', cursor: 'pointer' }}
-              >
-                ✕ Cerrar
-              </button>
+            {/* ROUTINES SELECTOR */}
+            <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
+              {DEFAULT_ROUTINES.map((rt, idx) => {
+                const isSelected = selectedRoutineIndex === idx;
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    disabled={isSessionActive}
+                    onClick={() => setSelectedRoutineIndex(idx)}
+                    style={{
+                      background: isSelected ? 'rgba(48, 209, 88, 0.2)' : 'rgba(255, 255, 255, 0.04)',
+                      border: `1px solid ${isSelected ? 'rgba(48, 209, 88, 0.5)' : 'rgba(255, 255, 255, 0.1)'}`,
+                      color: isSelected ? '#30d158' : '#98989d',
+                      padding: '8px 16px',
+                      borderRadius: '12px',
+                      fontSize: '0.82rem',
+                      fontWeight: isSelected ? 700 : 500,
+                      cursor: isSessionActive ? 'not-allowed' : 'pointer',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    {rt.title}
+                  </button>
+                );
+              })}
             </div>
+
+            {/* REST TIMER BANNER */}
+            {timerSeconds !== null && (
+              <div style={{ background: timerSeconds === 0 ? 'rgba(48, 209, 88, 0.25)' : 'rgba(10, 14, 20, 0.9)', border: `1px solid ${timerSeconds === 0 ? '#30d158' : 'rgba(100, 210, 255, 0.3)'}`, borderRadius: '16px', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <span style={{ fontSize: '1.6rem' }}>⏱️</span>
+                  <div>
+                    <span style={{ fontSize: '0.7rem', fontFamily: 'SF Mono, monospace', color: timerSeconds === 0 ? '#30d158' : '#64d2ff', fontWeight: 800 }}>
+                      {timerSeconds === 0 ? '¡DESCANSO COMPLETADO!' : 'TEMPORIZADOR DE DESCANSO EN CURSO'}
+                    </span>
+                    <h4 style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>
+                      {timerSeconds === 0 ? '¡Siguiente Serie Lista! A Entrenar 💪' : `Tiempo restante: ${formatTime(timerSeconds)}`}
+                    </h4>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {[30, 60, 90, 120, 180].map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => startRestTimer(s)}
+                      style={{ background: initialTimerSec === s ? 'rgba(48, 209, 88, 0.3)' : 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#ffffff', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', cursor: 'pointer' }}
+                    >
+                      {s}s
+                    </button>
+                  ))}
+                  <button type="button" onClick={() => { setTimerActive(false); setTimerSeconds(null); }} style={{ background: 'rgba(255,69,58,0.2)', border: '1px solid rgba(255,69,58,0.4)', color: '#ff453a', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', cursor: 'pointer' }}>
+                    ✕ Cerrar
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* EXERCISES LIST */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {activeRoutine.exercises.map((exItem, exIdx) => {
+                const exData = findExerciseByName(exItem.name.split('/')[0].trim());
+                const currentSets = exerciseLogs[exItem.name] || [
+                  { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
+                  { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
+                  { setNum: 3, weight: 0, reps: 10, rpe: 8, completed: false }
+                ];
+
+                return (
+                  <div key={exIdx} style={{ background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: '#30d158', fontWeight: 800 }}>
+                            EJERCICIO #{exIdx + 1}
+                          </span>
+                          <span style={{ fontSize: '0.72rem', color: '#98989d', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '6px' }}>
+                            {exItem.target}
+                          </span>
+                        </div>
+                        <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '4px 0 0', color: '#ffffff' }}>
+                          {exItem.name}
+                        </h4>
+                      </div>
+
+                      {exData && (
+                        <button type="button" onClick={() => setModalExercise(exData)} style={{ background: 'rgba(48, 209, 88, 0.12)', border: '1px solid rgba(48, 209, 88, 0.3)', color: '#30d158', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
+                          ▶ Ver Guía FitApp & Video
+                        </button>
+                      )}
+                    </div>
+
+                    <div style={{ overflowX: 'auto' }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
+                        <thead>
+                          <tr style={{ color: '#636366', borderBottom: '1px solid rgba(255,255,255,0.08)', textTransform: 'uppercase', fontFamily: 'SF Mono, monospace', fontSize: '0.65rem' }}>
+                            <th style={{ padding: '6px', textAlign: 'center', width: '50px' }}>Serie</th>
+                            <th style={{ padding: '6px', textAlign: 'center' }}>Peso (kg)</th>
+                            <th style={{ padding: '6px', textAlign: 'center' }}>Reps</th>
+                            <th style={{ padding: '6px', textAlign: 'center' }}>RPE</th>
+                            <th style={{ padding: '6px', textAlign: 'center', width: '80px' }}>Listo</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {currentSets.map((s, sIdx) => (
+                            <tr key={sIdx} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: s.completed ? 'rgba(48, 209, 88, 0.08)' : 'transparent' }}>
+                              <td style={{ padding: '8px', textAlign: 'center', fontWeight: 700, color: s.completed ? '#30d158' : '#98989d' }}>#{s.setNum}</td>
+                              <td style={{ padding: '8px', textAlign: 'center' }}>
+                                <input type="number" step="0.5" value={s.weight || ''} placeholder="0" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'weight', parseFloat(e.target.value) || 0)} style={{ width: '70px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: '#ffffff', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
+                              </td>
+                              <td style={{ padding: '8px', textAlign: 'center' }}>
+                                <input type="number" value={s.reps || ''} placeholder="10" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'reps', parseInt(e.target.value) || 0)} style={{ width: '60px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: '#ffffff', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
+                              </td>
+                              <td style={{ padding: '8px', textAlign: 'center' }}>
+                                <input type="number" step="0.5" max="10" min="6" value={s.rpe || ''} placeholder="8" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'rpe', parseFloat(e.target.value) || 8)} style={{ width: '50px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: '#ffffff', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
+                              </td>
+                              <td style={{ padding: '8px', textAlign: 'center' }}>
+                                <button type="button" onClick={() => handleToggleSet(exItem.name, sIdx, exItem.restSec)} style={{ background: s.completed ? '#30d158' : 'rgba(255,255,255,0.06)', border: `1px solid ${s.completed ? '#30d158' : 'rgba(255,255,255,0.15)'}`, color: s.completed ? '#000000' : '#98989d', width: '28px', height: '28px', borderRadius: '6px', fontWeight: 800, cursor: 'pointer' }}>
+                                  {s.completed ? '✓' : ''}
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <button type="button" onClick={() => handleAddSet(exItem.name)} style={{ background: 'transparent', border: 'none', color: '#30d158', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
+                        + Agregar otra serie
+                      </button>
+                      <button type="button" onClick={() => startRestTimer(exItem.restSec)} style={{ background: 'rgba(100, 210, 255, 0.1)', border: '1px solid rgba(100, 210, 255, 0.25)', color: '#64d2ff', fontSize: '0.72rem', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
+                        ⏱️ Iniciar Descanso ({exItem.restSec}s)
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {/* TAB 2: HISTORIAL DE SESIONES */}
+        {activeTab === 'history' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+              📜 Historial Completo de Entrenamientos Guardados ({history.length})
+            </h4>
+
+            {history.length === 0 ? (
+              <p style={{ fontSize: '0.85rem', color: '#98989d' }}>Aún no has completado ninguna sesión registrada.</p>
+            ) : (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '14px' }}>
+                {history.map((h) => (
+                  <div key={h.id} style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.72rem', color: '#30d158', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
+                        {h.date} • {h.durationMinutes} min
+                      </span>
+                      <button type="button" onClick={() => handleDeleteHistoryItem(h.id)} style={{ background: 'transparent', border: 'none', color: '#ff453a', fontSize: '0.75rem', cursor: 'pointer', fontWeight: 700 }}>
+                        ✕ Quitar
+                      </button>
+                    </div>
+
+                    <strong style={{ fontSize: '0.92rem', color: '#ffffff' }}>{h.routineTitle}</strong>
+                    <span style={{ fontSize: '0.78rem', color: '#98989d' }}>Volumen: <strong>{h.totalVolumeKg} kg</strong> • {h.exercises.length} ejercicios realizados</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
-        {/* EXERCISES LIST & SET LOGGERS */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {activeRoutine.exercises.map((exItem, exIdx) => {
-            const exData = findExerciseByName(exItem.name);
-            const currentSets = exerciseLogs[exItem.name] || [
-              { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
-              { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
-              { setNum: 3, weight: 0, reps: 10, rpe: 8, completed: false }
-            ];
+        {/* TAB 3: ESTADÍSTICAS FITAPP */}
+        {activeTab === 'stats' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+            <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <span style={{ fontSize: '0.72rem', color: '#30d158', fontWeight: 700, textTransform: 'uppercase' }}>VOLUMEN TOTAL ACUMULADO</span>
+              <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>{totalVolumeAllTime.toLocaleString()} kg</strong>
+              <span style={{ fontSize: '0.75rem', color: '#98989d' }}>Suma de peso × repeticiones registradas</span>
+            </div>
 
-            return (
-              <div
-                key={exIdx}
-                style={{
-                  background: 'rgba(0, 0, 0, 0.4)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: '16px',
-                  padding: '18px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '14px'
-                }}
-              >
-                {/* EXERCISE TITLE & FITAPP DATA LINK */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#10b981', fontWeight: 800 }}>
-                        EJERCICIO #{exIdx + 1}
-                      </span>
-                      <span style={{ fontSize: '0.72rem', color: '#a8b9b2', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '6px' }}>
-                        {exItem.target}
-                      </span>
-                    </div>
-                    <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '4px 0 0', color: '#ffffff' }}>
-                      {exItem.name}
-                    </h4>
-                  </div>
+            <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <span style={{ fontSize: '0.72rem', color: '#0a84ff', fontWeight: 700, textTransform: 'uppercase' }}>SESIONES COMPLETADAS</span>
+              <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>{totalWorkoutsCount}</strong>
+              <span style={{ fontSize: '0.75rem', color: '#98989d' }}>Entrenamientos registrados en FitApp</span>
+            </div>
 
-                  {exData && (
-                    <button
-                      type="button"
-                      onClick={() => setModalExercise(exData)}
-                      style={{
-                        background: 'rgba(16, 185, 129, 0.12)',
-                        border: '1px solid rgba(16, 185, 129, 0.3)',
-                        color: '#10b981',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '0.75rem',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                      }}
-                    >
-                      ▶ Ver Guía FitApp & Video
-                    </button>
-                  )}
-                </div>
-
-                {/* SETS LOGGING TABLE */}
-                <div style={{ overflowX: 'auto' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
-                    <thead>
-                      <tr style={{ color: '#65756f', borderBottom: '1px solid rgba(255,255,255,0.08)', textTransform: 'uppercase', fontFamily: 'Azeret Mono, monospace', fontSize: '0.65rem' }}>
-                        <th style={{ padding: '6px', textAlign: 'center', width: '50px' }}>Serie</th>
-                        <th style={{ padding: '6px', textAlign: 'center' }}>Peso (kg)</th>
-                        <th style={{ padding: '6px', textAlign: 'center' }}>Reps</th>
-                        <th style={{ padding: '6px', textAlign: 'center' }}>RPE</th>
-                        <th style={{ padding: '6px', textAlign: 'center', width: '80px' }}>Listo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {currentSets.map((s, sIdx) => (
-                        <tr key={sIdx} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: s.completed ? 'rgba(16, 185, 129, 0.06)' : 'transparent' }}>
-                          <td style={{ padding: '8px', textAlign: 'center', fontWeight: 700, color: s.completed ? '#10b981' : '#a8b9b2' }}>
-                            #{s.setNum}
-                          </td>
-                          <td style={{ padding: '8px', textAlign: 'center' }}>
-                            <input
-                              type="number"
-                              step="0.5"
-                              value={s.weight || ''}
-                              placeholder="0"
-                              onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'weight', parseFloat(e.target.value) || 0)}
-                              style={{
-                                width: '70px',
-                                background: 'rgba(0,0,0,0.5)',
-                                border: '1px solid rgba(255,255,255,0.12)',
-                                borderRadius: '6px',
-                                padding: '4px 6px',
-                                color: '#ffffff',
-                                textAlign: 'center',
-                                fontSize: '0.82rem',
-                                outline: 'none'
-                              }}
-                            />
-                          </td>
-                          <td style={{ padding: '8px', textAlign: 'center' }}>
-                            <input
-                              type="number"
-                              value={s.reps || ''}
-                              placeholder="10"
-                              onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'reps', parseInt(e.target.value) || 0)}
-                              style={{
-                                width: '60px',
-                                background: 'rgba(0,0,0,0.5)',
-                                border: '1px solid rgba(255,255,255,0.12)',
-                                borderRadius: '6px',
-                                padding: '4px 6px',
-                                color: '#ffffff',
-                                textAlign: 'center',
-                                fontSize: '0.82rem',
-                                outline: 'none'
-                              }}
-                            />
-                          </td>
-                          <td style={{ padding: '8px', textAlign: 'center' }}>
-                            <input
-                              type="number"
-                              step="0.5"
-                              max="10"
-                              min="6"
-                              value={s.rpe || ''}
-                              placeholder="8"
-                              onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'rpe', parseFloat(e.target.value) || 8)}
-                              style={{
-                                width: '50px',
-                                background: 'rgba(0,0,0,0.5)',
-                                border: '1px solid rgba(255,255,255,0.12)',
-                                borderRadius: '6px',
-                                padding: '4px 6px',
-                                color: '#ffffff',
-                                textAlign: 'center',
-                                fontSize: '0.82rem',
-                                outline: 'none'
-                              }}
-                            />
-                          </td>
-                          <td style={{ padding: '8px', textAlign: 'center' }}>
-                            <button
-                              type="button"
-                              onClick={() => handleToggleSet(exItem.name, sIdx, exItem.restSec)}
-                              style={{
-                                background: s.completed ? '#10b981' : 'rgba(255,255,255,0.06)',
-                                border: `1px solid ${s.completed ? '#10b981' : 'rgba(255,255,255,0.15)'}`,
-                                color: s.completed ? '#040608' : '#a8b9b2',
-                                width: '28px',
-                                height: '28px',
-                                borderRadius: '6px',
-                                fontWeight: 800,
-                                cursor: 'pointer',
-                                transition: 'all 150ms ease'
-                              }}
-                            >
-                              {s.completed ? '✓' : ''}
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <button
-                    type="button"
-                    onClick={() => handleAddSet(exItem.name)}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#10b981',
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      padding: 0
-                    }}
-                  >
-                    + Agregar otra serie
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => startRestTimer(exItem.restSec)}
-                    style={{
-                      background: 'rgba(119, 231, 255, 0.1)',
-                      border: '1px solid rgba(119, 231, 255, 0.25)',
-                      color: '#77e7ff',
-                      fontSize: '0.72rem',
-                      borderRadius: '6px',
-                      padding: '4px 10px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    ⏱️ Iniciar Descanso ({exItem.restSec}s)
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* WORKOUT HISTORY LOG SUMMARY */}
-        {history.length > 0 && (
-          <div style={{ marginTop: '12px', paddingTop: '18px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <h4 style={{ fontSize: '0.95rem', fontWeight: 800, margin: '0 0 12px', color: '#ffffff' }}>
-              📜 Historial Reciente de Sesiones Guardadas ({history.length})
-            </h4>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
-              {history.slice(0, 4).map((h) => (
-                <div key={h.id} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '14px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#10b981', fontFamily: 'Azeret Mono, monospace' }}>
-                    <span>{h.date}</span>
-                    <span>{h.durationMinutes} min</span>
-                  </div>
-                  <strong style={{ display: 'block', fontSize: '0.85rem', color: '#ffffff', margin: '4px 0' }}>
-                    {h.routineTitle}
-                  </strong>
-                  <span style={{ fontSize: '0.75rem', color: '#a8b9b2' }}>
-                    Volumen Total: <strong>{h.totalVolumeKg} kg</strong> • {h.exercises.length} ejercicios registrados
-                  </span>
-                </div>
-              ))}
+            <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <span style={{ fontSize: '0.72rem', color: '#ff9f0a', fontWeight: 700, textTransform: 'uppercase' }}>TIEMPO EN GIMNASIO</span>
+              <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>{totalMinutesAllTime} min</strong>
+              <span style={{ fontSize: '0.75rem', color: '#98989d' }}>Horas de estímulo muscular efectivo</span>
             </div>
           </div>
         )}

@@ -319,13 +319,41 @@ export default function MinMaxRoutineTable() {
                     {day.exercises.map((ex, eIdx) => (
                       <tr key={eIdx} style={{ borderBottom: eIdx === day.exercises.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.05)' }}>
                         <td style={{ padding: '14px 18px', fontWeight: 600, color: '#c6d7d0' }}>
-                          <button
-                            type="button"
-                            onClick={() => handleOpenExercise(ex.name)}
-                            style={{ background: 'none', border: 'none', color: '#c6d7d0', cursor: 'pointer', textAlign: 'left', padding: 0, fontSize: '0.85rem', textDecoration: 'underline' }}
-                          >
-                            {ex.name}
-                          </button>
+                          {ex.name.includes('/') || ex.name.toLowerCase().includes(' or ') ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                              {ex.name.split(/\s*[/]\s*|\s+or\s+/i).map((part, pIdx) => (
+                                <button
+                                  key={pIdx}
+                                  type="button"
+                                  onClick={() => handleOpenExercise(part.trim())}
+                                  style={{
+                                    background: 'rgba(10, 132, 255, 0.12)',
+                                    border: '1px solid rgba(10, 132, 255, 0.3)',
+                                    borderRadius: '8px',
+                                    padding: '5px 10px',
+                                    color: '#64d2ff',
+                                    cursor: 'pointer',
+                                    textAlign: 'left',
+                                    fontSize: '0.82rem',
+                                    fontWeight: 700,
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '4px'
+                                  }}
+                                >
+                                  <span>📍 {part.trim()}</span>
+                                </button>
+                              ))}
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => handleOpenExercise(ex.name)}
+                              style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', textAlign: 'left', padding: 0, fontSize: '0.85rem', textDecoration: 'underline', fontWeight: 700 }}
+                            >
+                              {ex.name}
+                            </button>
+                          )}
                         </td>
                         <td style={{ padding: '14px 18px' }}>
                           <button
