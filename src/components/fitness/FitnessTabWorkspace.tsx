@@ -15,8 +15,11 @@ const fitnessDocsList = [
   { name: 'plan_fitness.md', type: 'Markdown', path: '_pdf_biblia/Planeacion_Integral/investigacion/plan_fitness.md', description: 'Plan de calistenia híbrida y rehabilitación de Alexander' }
 ];
 
+import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
+
 const TABS = [
   { id: 'logger', label: '⚡ Sesión en Vivo & Tracker' },
+  { id: 'analytics', label: '📊 Analítica Integrada & Progresión' },
   { id: 'custom', label: '🛠️ Creador de Rutinas' },
   { id: 'minmax', label: '📋 Programa Min-Max (Nippard)' },
   { id: 'database', label: '🏋️ Base de Datos 150+ Ejercicios' },
@@ -79,6 +82,7 @@ export default function FitnessTabWorkspace() {
         {/* SUBSECTION CONTENT */}
         <div style={{ minHeight: '500px' }}>
           {activeTab === 'logger' && <FitAppWorkoutLogger />}
+          {activeTab === 'analytics' && <FitAppAnalyticsDashboard />}
           {activeTab === 'custom' && <CustomRoutineBuilder />}
           {activeTab === 'minmax' && <MinMaxRoutineTable />}
           {activeTab === 'database' && <ExerciseDatabaseBrowser />}

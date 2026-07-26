@@ -6,6 +6,9 @@ import ErrorBoundary from '../ErrorBoundary';
 
 import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
 
+import MorningEveningWorkflowsModal from './MorningEveningWorkflowsModal';
+import type { EnergyLevel } from '../../data/canonicalDomainModel';
+
 const TABS = [
   { id: 'now', label: '🎯 Bloque AHORA & Prioridades TDAH' },
   { id: 'rescue', label: '🛡️ Rescate Clínico Sin Culpa (Cero Deuda)' },
@@ -16,6 +19,8 @@ const TABS = [
 export default function HomeClinicalDashboard() {
   const [activeTab, setActiveTab] = useState<string>('now');
   const [isFocusActive, setIsFocusActive] = useState<boolean>(false);
+  const [workflowMode, setWorkflowMode] = useState<'morning' | 'evening' | null>(null);
+  const [currentEnergy, setCurrentEnergy] = useState<EnergyLevel>('medium');
 
   return (
     <ErrorBoundary>
@@ -67,7 +72,58 @@ export default function HomeClinicalDashboard() {
             })}
           </div>
 
-          {/* TAB 1: NOW & PRIORITIES */}
+          {/* MORNING / EVENING WORKFLOW QUICK LAUNCHERS */}
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => setWorkflowMode('morning')}
+              style={{
+                background: 'rgba(48, 209, 88, 0.15)',
+                border: '1px solid rgba(48, 209, 88, 0.4)',
+                color: '#30d158',
+                padding: '8px 16px',
+                borderRadius: '12px',
+                fontSize: '0.8rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              🌅 Modo Inicio (60s Arranque Rápido)
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setWorkflowMode('evening')}
+              style={{
+                background: 'rgba(191, 90, 242, 0.15)',
+                border: '1px solid rgba(191, 90, 242, 0.4)',
+                color: '#bf5af2',
+                padding: '8px 16px',
+                borderRadius: '12px',
+                fontSize: '0.8rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              🌙 Modo Cierre (3m Desconexión Nocturna)
+            </button>
+
+            <span style={{ fontSize: '0.78rem', color: '#98989d', alignSelf: 'center', marginLeft: 'auto' }}>
+              Nivel de Energía Activo: <strong style={{ color: '#fff', textTransform: 'uppercase' }}>{currentEnergy}</strong>
+            </span>
+          </div>
+
+          <MorningEveningWorkflowsModal
+            mode={workflowMode}
+            onClose={() => setWorkflowMode(null)}
+            onSelectEnergy={(level) => setCurrentEnergy(level)}
+          />
           {activeTab === 'now' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
               <ClinicalCurrentBlockPanel
