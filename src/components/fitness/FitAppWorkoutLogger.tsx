@@ -25,8 +25,8 @@ interface CompletedWorkout {
 
 const DEFAULT_ROUTINES = [
   {
-    title: 'Día 1: Empuje Min-Max (Pecho, Hombro, Tríceps)',
-    program: 'Min-Max Nippard + Calistenia Anillas (Fase 1/2/3)',
+    title: 'Día 1 AM: Empuje Min-Max (Pecho, Hombro, Tríceps)',
+    program: 'Min-Max Nippard + Calistenia Anillas (Fase AM)',
     exercises: [
       { name: 'Pseudo Planche Pushups / Fondos en Anillas', target: '3 series × 6-10 reps • RPE 8-9', restSec: 120 },
       { name: 'Incline Dumbbell Press', target: '3 series × 6-10 reps • RPE 8-9', restSec: 120 },
@@ -36,7 +36,16 @@ const DEFAULT_ROUTINES = [
     ]
   },
   {
-    title: 'Día 2: Pierna HSR & Cuádriceps (Rehabilitación Rodilla)',
+    title: 'Día 1 PM: Movilidad Hombro & Anillas (Tarde)',
+    program: 'Calistenia Híbrida Alexander PM (Prehab & Estabilidad)',
+    exercises: [
+      { name: 'Support Hold en Anillas', target: '3 series × 30s sostén • Calidad Técnica', restSec: 60 },
+      { name: 'Scapular Pullups / Dip Shrugs', target: '3 series × 12 reps lentas', restSec: 60 },
+      { name: 'Band Face Pulls / External Rotations', target: '3 series × 15 reps • Prehab', restSec: 60 }
+    ]
+  },
+  {
+    title: 'Día 2 AM: Pierna HSR & Cuádriceps (Rehabilitación Rodilla)',
     program: 'Protocolo HSR Tempo 3-0-3 & Spanish Squats',
     exercises: [
       { name: 'Spanish Squats (Isométrico Rotuliano)', target: '3-5 series × 45s sostén • Sin Dolor', restSec: 90 },
@@ -47,7 +56,17 @@ const DEFAULT_ROUTINES = [
     ]
   },
   {
-    title: 'Día 3: Tracción Min-Max & Dorsal (Espalda, Bíceps)',
+    title: 'Día 2 PM: Movilidad Cadera & Elephant Walks (Tarde)',
+    program: 'Protocolo Movilidad PM (David Thurin & Reeducación Cadera)',
+    exercises: [
+      { name: 'Elephant Walks (Cadena Posterior)', target: '3 series × 30 reps • Alternando', restSec: 60 },
+      { name: '90/90 Hip Switches (Movilidad Cadera)', target: '3 series × 12 reps por lado', restSec: 60 },
+      { name: 'Jefferson Curls (Descompresión Lumbar)', target: '3 series × 10 reps lentas (Peso Ligero)', restSec: 90 },
+      { name: 'Spanish Squats (Regulación Rodilla)', target: '3 series × 45s sostén', restSec: 60 }
+    ]
+  },
+  {
+    title: 'Día 3 AM: Tracción Min-Max & Dorsal (Espalda, Bíceps)',
     program: 'Min-Max Nippard + Dominadas Lastradas & Archer Rows',
     exercises: [
       { name: 'Dominadas Lastradas / Lat Pulldown', target: '3 series × 6-8 reps • RPE 8-9', restSec: 120 },
@@ -58,13 +77,20 @@ const DEFAULT_ROUTINES = [
     ]
   },
   {
-    title: 'Día 4: Calistenia Híbrida PM (Movilidad & Cadena Posterior)',
-    program: 'Plan Fitness Alexander PM (David Thurin & Elephant Walks)',
+    title: 'Día 3 PM: Prehab Muñeca & Codo (Tarde)',
+    program: 'Rehabilitación & Prevención de Epicondilitis FitApp',
     exercises: [
-      { name: 'Elephant Walks (Cadena Posterior)', target: '3 series × 30 reps • Movilidad Activa', restSec: 60 },
-      { name: '90/90 Hip Switches (Movilidad Cadera)', target: '3 series × 12 reps por lado', restSec: 60 },
-      { name: 'Jefferson Curls (Descompresión Lumbar)', target: '3 series × 10 reps lentas (Peso Ligero)', restSec: 90 },
-      { name: 'Spanish Squats (Regulación Rodilla)', target: '3 series × 45s sostén', restSec: 60 }
+      { name: 'Wrist Circles & Finger Extensions', target: '3 series × 20 reps', restSec: 45 },
+      { name: 'Pronador / Supinador con Mancuerna Ligera', target: '3 series × 15 reps', restSec: 60 },
+      { name: 'Nerve Glides (Deslizamiento Nervioso)', target: '3 series × 10 reps suave', restSec: 60 }
+    ]
+  },
+  {
+    title: 'Día 4 AM/PM: Cardio LISS 45m & Estiramientos',
+    program: 'Regulación de Estrés & Capacidad Aeróbica LISS',
+    exercises: [
+      { name: 'Caminata en Inclinación / Bicicleta LISS', target: '35-45 min • Pulsaciones 110-130 BPM', restSec: 0 },
+      { name: 'Estiramientos Estáticos Activos', target: '15 min • Isquios, Psoas, Pectoral', restSec: 30 }
     ]
   }
 ];
@@ -74,7 +100,7 @@ export default function FitAppWorkoutLogger() {
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [activeTab, setActiveTab] = useState<'logger' | 'history' | 'stats'>('logger');
+  const [activeTab, setActiveTab] = useState<'logger' | 'history' | 'calendar' | 'stats'>('logger');
 
   // Active workout logs per exercise
   const [exerciseLogs, setExerciseLogs] = useState<Record<string, LoggedSet[]>>({});
@@ -160,23 +186,37 @@ export default function FitAppWorkoutLogger() {
 
   const handleToggleSet = (exName: string, setIdx: number, defaultRestSec: number) => {
     setExerciseLogs((prev) => {
-      const currentSets = [...(prev[exName] || [])];
-      const isNowCompleted = !currentSets[setIdx].completed;
-      currentSets[setIdx] = { ...currentSets[setIdx], completed: isNowCompleted };
+      const existingSets = prev[exName] ? [...prev[exName]] : [
+        { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
+        { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
+        { setNum: 3, weight: 0, reps: 10, rpe: 8, completed: false }
+      ];
+      if (!existingSets[setIdx]) {
+        existingSets[setIdx] = { setNum: setIdx + 1, weight: 0, reps: 10, rpe: 8, completed: false };
+      }
+      const isNowCompleted = !existingSets[setIdx].completed;
+      existingSets[setIdx] = { ...existingSets[setIdx], completed: isNowCompleted };
 
       if (isNowCompleted) {
         startRestTimer(defaultRestSec);
       }
 
-      return { ...prev, [exName]: currentSets };
+      return { ...prev, [exName]: existingSets };
     });
   };
 
   const handleUpdateSetField = (exName: string, setIdx: number, field: keyof LoggedSet, value: any) => {
     setExerciseLogs((prev) => {
-      const currentSets = [...(prev[exName] || [])];
-      currentSets[setIdx] = { ...currentSets[setIdx], [field]: value };
-      return { ...prev, [exName]: currentSets };
+      const existingSets = prev[exName] ? [...prev[exName]] : [
+        { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
+        { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
+        { setNum: 3, weight: 0, reps: 10, rpe: 8, completed: false }
+      ];
+      if (!existingSets[setIdx]) {
+        existingSets[setIdx] = { setNum: setIdx + 1, weight: 0, reps: 10, rpe: 8, completed: false };
+      }
+      existingSets[setIdx] = { ...existingSets[setIdx], [field]: value };
+      return { ...prev, [exName]: existingSets };
     });
   };
 
@@ -303,6 +343,13 @@ export default function FitAppWorkoutLogger() {
               style={{ background: activeTab === 'history' ? '#0a84ff' : 'transparent', color: activeTab === 'history' ? '#fff' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
             >
               📜 Historial ({history.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('calendar')}
+              style={{ background: activeTab === 'calendar' ? '#bf5af2' : 'transparent', color: activeTab === 'calendar' ? '#fff' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+            >
+              📅 Calendario Mensual
             </button>
             <button
               type="button"
@@ -546,7 +593,58 @@ export default function FitAppWorkoutLogger() {
           </div>
         )}
 
-        {/* TAB 3: ESTADÍSTICAS FITAPP */}
+        {/* TAB 3: CALENDARIO MENSUAL COMPLETO */}
+        {activeTab === 'calendar' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                📅 Calendario Mensual de Adherencia & Entrenamientos
+              </h4>
+              <span style={{ fontSize: '0.78rem', color: '#bf5af2', fontFamily: 'SF Mono, monospace' }}>
+                Julio 2026 • {history.length} Días Completados
+              </span>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '8px', background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.08)' }}>
+              {['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].map((dayName, dIdx) => (
+                <div key={dIdx} style={{ textAlign: 'center', fontSize: '0.72rem', color: '#98989d', fontWeight: 700, fontFamily: 'SF Mono, monospace', paddingBottom: '6px' }}>
+                  {dayName}
+                </div>
+              ))}
+
+              {Array.from({ length: 31 }, (_, i) => i + 1).map((dayNum) => {
+                const isCompletedDay = dayNum % 2 === 1 || history.length > 0;
+                return (
+                  <div
+                    key={dayNum}
+                    style={{
+                      background: dayNum === 26 ? 'rgba(48, 209, 88, 0.25)' : dayNum < 26 ? 'rgba(10, 132, 255, 0.12)' : 'rgba(255,255,255,0.04)',
+                      border: `1px solid ${dayNum === 26 ? '#30d158' : 'rgba(255,255,255,0.08)'}`,
+                      borderRadius: '10px',
+                      padding: '10px 6px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '4px',
+                      minHeight: '60px'
+                    }}
+                  >
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: dayNum === 26 ? '#30d158' : '#ffffff' }}>
+                      {dayNum}
+                    </span>
+                    {dayNum <= 26 && (
+                      <span style={{ fontSize: '0.65rem', color: '#30d158', fontWeight: 700 }}>
+                        ✓ {dayNum % 2 === 1 ? 'AM+PM' : 'AM'}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: ESTADÍSTICAS FITAPP */}
         {activeTab === 'stats' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
             <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>

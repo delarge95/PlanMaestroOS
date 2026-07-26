@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import FitAppWorkoutLogger from './FitAppWorkoutLogger';
+import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
 import CustomRoutineBuilder from './CustomRoutineBuilder';
-import MinMaxRoutineTable from './MinMaxRoutineTable';
+import FitAppRoutinesCatalog from './FitAppRoutinesCatalog';
 import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
 import PrehabSkillView from './PrehabSkillView';
 import BooksLibraryView from './BooksLibraryView';
@@ -15,13 +16,11 @@ const fitnessDocsList = [
   { name: 'plan_fitness.md', type: 'Markdown', path: '_pdf_biblia/Planeacion_Integral/investigacion/plan_fitness.md', description: 'Plan de calistenia híbrida y rehabilitación de Alexander' }
 ];
 
-import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
-
 const TABS = [
   { id: 'logger', label: '⚡ Tracker' },
   { id: 'analytics', label: '📊 Analítica' },
   { id: 'custom', label: '🛠️ Creador' },
-  { id: 'minmax', label: '📋 Min-Max' },
+  { id: 'routines', label: '📋 Rutinas' },
   { id: 'database', label: '🏋️ Ejercicios' },
   { id: 'prehab', label: '🤸 Prehab' },
   { id: 'books', label: '📖 Libros' }
@@ -84,7 +83,7 @@ export default function FitnessTabWorkspace() {
           {activeTab === 'logger' && <FitAppWorkoutLogger />}
           {activeTab === 'analytics' && <FitAppAnalyticsDashboard />}
           {activeTab === 'custom' && <CustomRoutineBuilder />}
-          {activeTab === 'minmax' && <MinMaxRoutineTable />}
+          {activeTab === 'routines' && <FitAppRoutinesCatalog />}
           {activeTab === 'database' && <ExerciseDatabaseBrowser />}
           {activeTab === 'prehab' && <PrehabSkillView />}
           {activeTab === 'books' && (
