@@ -21,11 +21,11 @@ export default function HomeClinicalDashboard() {
     <ErrorBoundary>
       <FocusModeShell isActive={isFocusActive} onExit={() => setIsFocusActive(false)}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          {/* APPLE SEGMENTED CONTROL BAR (STICKY) */}
+          {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
           <div style={{
             position: 'sticky',
-            top: '12px',
-            zIndex: 90,
+            top: '68px',
+            zIndex: 85,
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
