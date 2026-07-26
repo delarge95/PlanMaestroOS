@@ -2,17 +2,21 @@
 import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
 import InteractiveDocViewer from '../../components/docs/InteractiveDocViewer.tsx';
 import NotionObsidianIntegrationHub from '../../components/docs/NotionObsidianIntegrationHub.tsx';
+import SecondBrainInspector from '../../components/docs/SecondBrainInspector.tsx';
 ---
 
 <PlanMaestroLayout title="Biblioteca & Buscador RAG" activeDomain="library" activePhase="fase-1">
   <div class="library-shell">
     <div class="lib-header">
-      <span class="lib-badge">RAG ENGINE • ALMÁCIGO DE HECHOS VERIFICADOS</span>
+      <span class="lib-badge">SEGUNDO CEREBRO • ALMÁCIGO DE HECHOS VERIFICADOS</span>
       <h2>Explorador de Conocimiento & Trazabilidad de Fuentes</h2>
       <p>
         Buscador semántico en tiempo real sobre los 47 documentos de auditoría laboral, los 3 libros de entrenamiento PDF (*Overcoming Gravity*, *Overcoming Tendonitis*, *The Min-Max Program*), los reportes clínicos y la biblia de carrera.
       </p>
     </div>
+
+    <!-- INSPECTOR EN VIVO DEL SEGUNDO CEREBRO (NOTION EMBED & REINTERPRETED CHARTS) -->
+    <SecondBrainInspector client:load />
 
     <!-- HUB DE INTEGRACIÓN CON OBSIDIAN Y NOTION -->
     <NotionObsidianIntegrationHub client:load />
@@ -28,24 +32,26 @@ import NotionObsidianIntegrationHub from '../../components/docs/NotionObsidianIn
       gap: 28px;
     }
     .lib-header {
-      background: #080c0e;
-      border: 1px solid rgba(236,72,153,0.3);
-      border-radius: 12px;
+      background: rgba(12, 14, 18, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
       padding: 24px;
+      backdrop-filter: blur(40px);
     }
     .lib-badge {
-      font-family: 'Azeret Mono', monospace;
-      font-size: 0.68rem;
-      color: #ec4899;
-      font-weight: 800;
+      font-family: -apple-system, SF Pro Text, sans-serif;
+      font-size: 0.72rem;
+      color: #bf5af2;
+      font-weight: 700;
+      letter-spacing: 0.04em;
     }
     .lib-header h2 {
       font-size: 1.5rem;
-      color: #effff6;
+      color: #ffffff;
       margin: 6px 0;
     }
     .lib-header p {
-      color: #a8b9b2;
+      color: #98989d;
       font-size: 0.88rem;
       margin: 0;
       line-height: 1.5;

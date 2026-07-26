@@ -2,6 +2,7 @@
 import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
 import ragData from '../../data/master_rag_dataset.json';
 import NotionObsidianIntegrationHub from '../../components/docs/NotionObsidianIntegrationHub.tsx';
+import SecondBrainInspector from '../../components/docs/SecondBrainInspector.tsx';
 
 const germanModule = ragData.german_module;
 ---
@@ -15,6 +16,9 @@ const germanModule = ragData.german_module;
         Este documento define la arquitectura de prioridades, reglas de inicio, control de distractores, 25h de trabajo profundo por semana y el nuevo hábito ininterrumpido de Alemán.
       </p>
     </div>
+
+    <!-- INSPECTOR EN VIVO DEL SEGUNDO CEREBRO (NOTION & OBSIDIAN) -->
+    <SecondBrainInspector client:load />
 
     <!-- HUB DE INTEGRACIÓN CON OBSIDIAN & NOTION -->
     <NotionObsidianIntegrationHub
@@ -34,8 +38,8 @@ const germanModule = ragData.german_module;
         </ul>
       </div>
 
-      <div class="mp-card" style="border-top-color: #f59e0b">
-        <h3 style="color: #f59e0b">2. Módulo de Alemán (NUEVO v3)</h3>
+      <div class="mp-card" style="border-top-color: #ff9f0a">
+        <h3 style="color: #ff9f0a">2. Módulo de Alemán (NUEVO v3)</h3>
         <p><strong>Ubicación fija:</strong> {germanModule.schedule}</p>
         <div class="german-steps">
           {germanModule.components?.map((c: any, i: number) => (
@@ -59,24 +63,25 @@ const germanModule = ragData.german_module;
       gap: 24px;
     }
     .mp-header {
-      background: #080c0e;
-      border: 1px solid rgba(174,255,224,0.12);
-      border-radius: 12px;
+      background: rgba(12, 14, 18, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
       padding: 24px;
+      backdrop-filter: blur(40px);
     }
     .mp-badge {
-      font-family: 'Azeret Mono', monospace;
-      font-size: 0.68rem;
-      color: #77e7ff;
-      font-weight: 800;
+      font-family: -apple-system, SF Pro Text, sans-serif;
+      font-size: 0.72rem;
+      color: #0a84ff;
+      font-weight: 700;
     }
     .mp-header h2 {
       font-size: 1.5rem;
-      color: #effff6;
+      color: #ffffff;
       margin: 6px 0;
     }
     .mp-header p {
-      color: #a8b9b2;
+      color: #98989d;
       font-size: 0.88rem;
       margin: 0;
       line-height: 1.5;
@@ -87,21 +92,21 @@ const germanModule = ragData.german_module;
       gap: 20px;
     }
     .mp-card {
-      background: #080c0e;
-      border: 1px solid rgba(174,255,224,0.12);
-      border-top: 3px solid #77e7ff;
-      border-radius: 12px;
+      background: rgba(12, 14, 18, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 3px solid #0a84ff;
+      border-radius: 18px;
       padding: 20px;
     }
     .mp-card h3 {
       font-size: 1.1rem;
       margin: 0 0 14px;
-      color: #effff6;
+      color: #ffffff;
     }
     .mp-card ul {
       margin: 0;
       padding-left: 18px;
-      color: #a8b9b2;
+      color: #98989d;
       font-size: 0.85rem;
       line-height: 1.6;
     }
@@ -118,14 +123,14 @@ const germanModule = ragData.german_module;
       background: rgba(0,0,0,0.3);
       padding: 10px;
       border-radius: 8px;
-      border: 1px solid rgba(245,158,11,0.2);
+      border: 1px solid rgba(255,159,10,0.2);
     }
     .g-num {
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: #f59e0b;
-      color: #040608;
+      background: #ff9f0a;
+      color: #000000;
       font-weight: 800;
       font-size: 0.75rem;
       display: grid;
@@ -134,10 +139,10 @@ const germanModule = ragData.german_module;
     .g-step strong {
       display: block;
       font-size: 0.85rem;
-      color: #effff6;
+      color: #ffffff;
     }
     .g-step small {
-      color: #a8b9b2;
+      color: #98989d;
       font-size: 0.75rem;
     }
   </style>
