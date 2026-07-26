@@ -14,14 +14,15 @@ const clinicalDocsList = [
 import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
 
 const TABS = [
-  { id: 'tasks', label: '🧠 Suite de Tareas Clínicas & Bio-Feedback' },
-  { id: 'protocol', label: '🛡️ Rescate & Perdón Emocional (Cero Deuda)' },
-  { id: 'modules', label: '📋 Módulos Diagnósticos A-F & Exposición' },
-  { id: 'docs', label: '📄 Reportes & Documentación Fuente' }
+  { id: 'hub', label: '🧠 Tareas & Bio' },
+  { id: 'exposure', label: '🎯 Exposición' },
+  { id: 'protocol', label: '🛡️ Protocolo' },
+  { id: 'sleep', label: '🌙 Sueño CBT-I' },
+  { id: 'docs', label: '📄 Fuentes' }
 ];
 
 export default function ClinicalTabWorkspace() {
-  const [activeTab, setActiveTab] = useState<string>('tasks');
+  const [activeTab, setActiveTab] = useState<string>('hub');
 
   return (
     <ErrorBoundary>
@@ -74,9 +75,9 @@ export default function ClinicalTabWorkspace() {
 
         {/* SUBSECTION CONTENT */}
         <div style={{ minHeight: '500px' }}>
-          {activeTab === 'tasks' && <ClinicalExecutionHub />}
+          {(activeTab === 'hub' || activeTab === 'sleep') && <ClinicalExecutionHub />}
           {activeTab === 'protocol' && <ClinicalUncompletedTaskProtocol />}
-          {activeTab === 'modules' && (
+          {activeTab === 'exposure' && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
               {clinicalMods.map((mod: any, idx: number) => (
                 <div key={idx} style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff375f', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>

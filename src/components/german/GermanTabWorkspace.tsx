@@ -9,9 +9,10 @@ const germanDocsList = [
 ];
 
 const TABS = [
-  { id: 'habit', label: '🇩🇪 Hábito Diario 25 min & Flashcards' },
-  { id: 'plan', label: '📚 Plan de Estudio A1-A2 & Recursos' },
-  { id: 'docs', label: '📄 Documentos Fuente & ROI UE' }
+  { id: 'habit', label: '🇩🇪 Alemán 25m' },
+  { id: 'grammar', label: '📑 Gramática' },
+  { id: 'audio', label: '🎧 Audios A1' },
+  { id: 'docs', label: '📄 Fuentes' }
 ];
 
 export default function GermanTabWorkspace() {
@@ -68,8 +69,8 @@ export default function GermanTabWorkspace() {
 
         {/* SUBSECTION CONTENT */}
         <div style={{ minHeight: '500px' }}>
-          {activeTab === 'habit' && <GermanLearningHub />}
-          {activeTab === 'plan' && (
+          {(activeTab === 'habit' || activeTab === 'grammar' || activeTab === 'audio') && <GermanLearningHub />}
+          {activeTab === 'docs' && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
               <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
                 <span style={{ fontSize: '1.8rem' }}>📱</span>

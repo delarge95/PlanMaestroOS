@@ -10,10 +10,10 @@ import MorningEveningWorkflowsModal from './MorningEveningWorkflowsModal';
 import type { EnergyLevel } from '../../data/canonicalDomainModel';
 
 const TABS = [
-  { id: 'now', label: '🎯 Bloque AHORA & Prioridades TDAH' },
-  { id: 'rescue', label: '🛡️ Rescate Clínico Sin Culpa (Cero Deuda)' },
-  { id: 'second_brain', label: '🧠 Inspección Segundo Cerebro (Notion/Obsidian)' },
-  { id: 'sections', label: '🗺️ Navegación de Secciones OS' }
+  { id: 'now', label: '🎯 AHORA' },
+  { id: 'rescue', label: '🛡️ Rescate' },
+  { id: 'second_brain', label: '🧠 2º Cerebro' },
+  { id: 'sections', label: '🗺️ Secciones' }
 ];
 
 export default function HomeClinicalDashboard() {

@@ -18,13 +18,13 @@ const fitnessDocsList = [
 import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
 
 const TABS = [
-  { id: 'logger', label: '⚡ Sesión en Vivo & Tracker' },
-  { id: 'analytics', label: '📊 Analítica Integrada & Progresión' },
-  { id: 'custom', label: '🛠️ Creador de Rutinas' },
-  { id: 'minmax', label: '📋 Programa Min-Max (Nippard)' },
-  { id: 'database', label: '🏋️ Base de Datos 150+ Ejercicios' },
-  { id: 'prehab', label: '🤸 Prehab & Movilidad' },
-  { id: 'books', label: '📖 Libros & Fuentes PDF' }
+  { id: 'logger', label: '⚡ Tracker' },
+  { id: 'analytics', label: '📊 Analítica' },
+  { id: 'custom', label: '🛠️ Creador' },
+  { id: 'minmax', label: '📋 Min-Max' },
+  { id: 'database', label: '🏋️ Ejercicios' },
+  { id: 'prehab', label: '🤸 Prehab' },
+  { id: 'books', label: '📖 Libros' }
 ];
 
 export default function FitnessTabWorkspace() {

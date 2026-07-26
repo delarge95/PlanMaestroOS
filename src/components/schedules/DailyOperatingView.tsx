@@ -3,133 +3,149 @@ import ErrorBoundary from '../ErrorBoundary';
 import InertiaRescueModal from '../clinical/InertiaRescueModal';
 
 interface DailyBlock {
+  id: string;
   time: string;
-  title: string;
+  shortTitle: string;
+  fullTitle: string;
   category: 'clinical' | 'fitness' | 'career' | 'german' | 'general';
   rule: string;
-  status: 'pending' | 'in_progress' | 'completed';
+  minViableAction: string;
+  status: 'pending' | 'in_progress' | 'completed' | 'skipped';
   actionUrl?: string;
   actionLabel?: string;
 }
 
 const initialDailyBlocks: DailyBlock[] = [
-  { time: '05:30 - 06:00', title: 'Despertar 05:30 & Salida al Gym', category: 'general', rule: 'Ropa lista desde anoche. Cero celular recreativo.', status: 'completed' },
-  { time: '06:20 - 06:40', title: 'Prehab AM: Muñecas, Nerve Glides & Spanish Squats', category: 'fitness', rule: 'Spanish Squats 3-5x45s obligatorios para rodillas.', status: 'completed', actionUrl: '/app/fitness', actionLabel: '💪 Guía Prehab FitApp' },
-  { time: '06:40 - 06:55', title: 'Skill Work Técnico: Wall Handstand & Support Hold', category: 'fitness', rule: 'Wall Handstand (30-45s) y Support Hold en anillas.', status: 'completed', actionUrl: '/app/fitness', actionLabel: '💪 Ver Skills FitApp' },
-  { time: '06:55 - 07:40', title: 'Bloque Min-Max AM Adaptado', category: 'fitness', rule: '1-2 series a RIR 1-2. Anillas en empujes/fondos.', status: 'completed', actionUrl: '/app/fitness', actionLabel: '⏱️ Logger & Timer FitApp' },
-  { time: '09:00 - 09:20', title: 'Planeación Diaria TDAH (Agenda Única)', category: 'clinical', rule: 'Elegir máximo 3 tareas escritas para hoy.', status: 'completed', actionUrl: '/app/clinical', actionLabel: '📊 Bio-Feedback TDAH' },
-  { time: '09:20 - 11:40', title: 'Bloque A: Trabajo Profundo (Tesis / TwinSight)', category: 'career', rule: 'Celular fuera del cuarto. Tarea 10 min + Versión Mala.', status: 'in_progress', actionUrl: '/app/career', actionLabel: '🚀 TwinSight Roadmap' },
-  { time: '12:00 - 13:30', title: 'Almuerzo & Cocina (1h 30m)', category: 'general', rule: 'Cocinar, comer y descanso digestivo sin trabajo.', status: 'pending' },
-  { time: '13:30 - 14:00', title: 'Estudio Diario de Alemán (v3)', category: 'german', rule: '5 min Duolingo + 20 min Libros/Audios A1 + IA.', status: 'pending', actionUrl: '/app/german', actionLabel: '🇩🇪 Hábito 25 min Alemán' },
-  { time: '14:00 - 14:40', title: 'Sustentación CBT (Exposición Graduada)', category: 'clinical', rule: 'Guion de 3 ideas. Max 10 min rumiación post-evento.', status: 'pending', actionUrl: '/app/clinical', actionLabel: '🎯 Exposición CBT' },
-  { time: '14:45 - 16:45', title: 'Bloque B: Producción MVP (TwinSight Case / GitHub)', category: 'career', rule: 'Cerrar activo público con criterios de terminado.', status: 'pending', actionUrl: '/app/career', actionLabel: '💻 Entregables Laborales' },
-  { time: '17:15 - 18:30', title: 'PM Físico: Movilidad Cadera & Elephant Walks', category: 'fitness', rule: 'Elephant Walks 3x20, 90/90 switches, Rutina Thurin.', status: 'pending', actionUrl: '/app/fitness', actionLabel: '💪 Movilidad FitApp' },
-  { time: '21:00 - 21:30', title: 'Rutina Cierre & Higiene de Sueño', category: 'general', rule: 'Pantalla fuera de cama a las 21:00. Audio relajante.', status: 'pending', actionUrl: '/app/clinical', actionLabel: '🌙 Sueño CBT-I' }
+  { id: 'b1', time: '05:30 - 06:00', shortTitle: '🌅 Despertar 05:30', fullTitle: 'Despertar 05:30 & Salida al Gimnasio', category: 'general', rule: 'Ropa lista desde anoche. Cero celular recreativo.', minViableAction: 'Ponerse los zapatos sin pensar.', status: 'completed' },
+  { id: 'b2', time: '06:20 - 06:40', shortTitle: '💪 Prehab AM', fullTitle: 'Prehab AM: Muñecas, Nerve Glides & Spanish Squats', category: 'fitness', rule: 'Spanish Squats 3-5x45s obligatorios para rodillas.', minViableAction: '1 serie isométrica de 30s en pared.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Guía Prehab' },
+  { id: 'b3', time: '06:40 - 06:55', shortTitle: '🤸 Skill Work', fullTitle: 'Skill Work Técnico: Wall Handstand & Support Hold', category: 'fitness', rule: 'Wall Handstand (30-45s) y Support Hold en anillas.', minViableAction: '1 aguante de 20s en pared.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Skills FitApp' },
+  { id: 'b4', time: '06:55 - 07:40', shortTitle: '🏋️ Min-Max AM', fullTitle: 'Bloque Min-Max AM Adaptado (Jeff Nippard)', category: 'fitness', rule: '1-2 series a RIR 1-2. Anillas en empujes/fondos.', minViableAction: '1 serie efectiva al fallo técnico.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Logger Gym' },
+  { id: 'b5', time: '09:00 - 09:20', shortTitle: '📝 Agenda TDAH', fullTitle: 'Planeación Diaria TDAH (Agenda Única)', category: 'clinical', rule: 'Elegir máximo 3 tareas escritas para hoy.', minViableAction: 'Escribir 1 sola prioridad en papel.', status: 'completed', actionUrl: '/app/clinical', actionLabel: 'Bio-Feedback' },
+  { id: 'b6', time: '09:20 - 11:40', shortTitle: '🧠 TwinSight MVP', fullTitle: 'Bloque A: Trabajo Profundo (Tesis / TwinSight)', category: 'career', rule: 'Celular fuera del cuarto. Tarea 10 min + Versión Mala.', minViableAction: 'Escribir 1 borrador feo durante 10 min.', status: 'in_progress', actionUrl: '/app/career', actionLabel: 'TwinSight' },
+  { id: 'b7', time: '12:00 - 13:30', shortTitle: '🥗 Almuerzo', fullTitle: 'Almuerzo & Descanso Digestivo (1h 30m)', category: 'general', rule: 'Cocinar, comer y descanso sin trabajo.', minViableAction: 'Servir comida y descansar 20m.', status: 'pending' },
+  { id: 'b8', time: '13:30 - 14:00', shortTitle: '🇩🇪 Alemán 25m', fullTitle: 'Estudio Diario de Alemán A1 (Hábito Inviolable)', category: 'german', rule: '5 min Duolingo + 20 min Libros/Audios A1 + IA.', minViableAction: '1 lección de 3 min en Duolingo.', status: 'pending', actionUrl: '/app/german', actionLabel: 'Alemán A1' },
+  { id: 'b9', time: '14:00 - 14:40', shortTitle: '🎯 Sustentación CBT', fullTitle: 'Sustentación CBT (Exposición Graduada)', category: 'clinical', rule: 'Guion de 3 ideas. Max 10 min rumiación post-evento.', minViableAction: 'Leer el guion de 3 puntos en voz alta.', status: 'pending', actionUrl: '/app/clinical', actionLabel: 'Exposición' },
+  { id: 'b10', time: '14:45 - 16:45', shortTitle: '💻 TwinSight Case', fullTitle: 'Bloque B: Producción MVP (TwinSight Case / GitHub)', category: 'career', rule: 'Cerrar activo público con criterios de terminado.', minViableAction: 'Hacer 1 commit en GitHub.', status: 'pending', actionUrl: '/app/career', actionLabel: 'GitHub' },
+  { id: 'b11', time: '17:15 - 18:30', shortTitle: '🤸 Movilidad PM', fullTitle: 'PM Físico: Movilidad Cadera & Elephant Walks', category: 'fitness', rule: 'Elephant Walks 3x20, 90/90 switches, Rutina Thurin.', minViableAction: '10 Elephant Walks.', status: 'pending', actionUrl: '/app/fitness', actionLabel: 'Movilidad' },
+  { id: 'b12', time: '21:00 - 21:30', shortTitle: '🌙 Sueño CBT-I', fullTitle: 'Rutina Cierre & Higiene de Sueño', category: 'general', rule: 'Pantalla fuera de cama a las 21:00. Audio relajante.', minViableAction: 'Apagar pantalla a las 21:00.', status: 'pending', actionUrl: '/app/clinical', actionLabel: 'Sueño CBT-I' }
 ];
 
 export default function DailyOperatingView() {
   const [blocks, setBlocks] = useState<DailyBlock[]>(() => JSON.parse(JSON.stringify(initialDailyBlocks)));
   const [isRescueModalOpen, setIsRescueModalOpen] = useState(false);
+  const [selectedBlock, setSelectedBlock] = useState<DailyBlock | null>(null);
 
-  const toggleStatus = (idx: number, e: React.MouseEvent) => {
+  const toggleStatus = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    try {
-      const updated = [...blocks];
-      updated[idx] = { ...updated[idx] };
-      if (updated[idx].status === 'pending') updated[idx].status = 'in_progress';
-      else if (updated[idx].status === 'in_progress') updated[idx].status = 'completed';
-      else updated[idx].status = 'pending';
-      setBlocks(updated);
-    } catch (err) {
-      console.error(err);
-    }
+    setBlocks(prev => prev.map(b => {
+      if (b.id !== id) return b;
+      const nextStatus = b.status === 'pending' ? 'in_progress' : b.status === 'in_progress' ? 'completed' : 'pending';
+      return { ...b, status: nextStatus };
+    }));
+  };
+
+  const handleSkipWithoutGuilt = (id: string) => {
+    setBlocks(prev => prev.map(b => b.id === id ? { ...b, status: 'skipped' } : b));
+    setSelectedBlock(null);
+  };
+
+  const handleReorganizeRestOfDay = (fromId: string) => {
+    let found = false;
+    setBlocks(prev => prev.map(b => {
+      if (b.id === fromId) found = true;
+      if (found && b.status === 'pending') {
+        return { ...b, rule: `[Ajustado] ${b.rule}` };
+      }
+      return b;
+    }));
+    setSelectedBlock(null);
   };
 
   const getCategoryColor = (cat: string) => {
     switch (cat) {
-      case 'clinical': return '#d946ef';
-      case 'fitness': return '#10b981';
-      case 'career': return '#3b82f6';
-      case 'german': return '#f59e0b';
-      default: return '#77e7ff';
+      case 'clinical': return '#bf5af2';
+      case 'fitness': return '#30d158';
+      case 'career': return '#0a84ff';
+      case 'german': return '#ff9f0a';
+      default: return '#64d2ff';
     }
   };
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         {/* HEADER CONTROLS */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: '#77e7ff', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: '#64d2ff', fontWeight: 800 }}>
               CENTRO OPERATIVO DIARIO
             </span>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: '#effff6' }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
               Línea Temporal de Hoy • 05:30 – 21:30
             </h2>
           </div>
 
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <button
               type="button"
               onClick={() => setIsRescueModalOpen(true)}
               style={{
-                background: 'rgba(239, 68, 68, 0.15)',
-                border: '1px solid rgba(239, 68, 68, 0.4)',
-                color: '#f87171',
-                padding: '8px 16px',
-                borderRadius: '12px',
+                background: 'rgba(255, 69, 58, 0.15)',
+                border: '1px solid rgba(255, 69, 58, 0.4)',
+                color: '#ff453a',
+                padding: '6px 14px',
+                borderRadius: '10px',
                 fontWeight: 800,
-                fontSize: '0.82rem',
+                fontSize: '0.78rem',
                 cursor: 'pointer'
               }}
             >
               🚨 Rescate "No puedo empezar"
             </button>
 
-            <div style={{ background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', color: '#81f6b0', padding: '6px 14px', borderRadius: '12px', fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', fontWeight: 700 }}>
-              Completados: {blocks.filter(b => b.status === 'completed').length} / {blocks.length}
+            <div style={{ background: 'rgba(48,209,88,0.15)', border: '1px solid rgba(48,209,88,0.3)', color: '#30d158', padding: '6px 12px', borderRadius: '10px', fontFamily: 'SF Mono, monospace', fontSize: '0.72rem', fontWeight: 700 }}>
+              Hecho: {blocks.filter(b => b.status === 'completed').length} / {blocks.length}
             </div>
           </div>
         </div>
 
-        {/* DAILY TIMELINE BLOCKS */}
-        <div style={{ display: 'grid', gap: '14px' }}>
-          {blocks.map((b, idx) => {
+        {/* DAILY TIMELINE COMPACT BLOCKS */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
+          {blocks.map((b) => {
             const catColor = getCategoryColor(b.category);
+            const isSelected = selectedBlock?.id === b.id;
+
             return (
               <div
-                key={idx}
+                key={b.id}
+                onClick={() => setSelectedBlock(b)}
+                title={`${b.fullTitle}\n\nRegla: ${b.rule}\nVersión Mínima: ${b.minViableAction}`}
                 style={{
-                  background: b.status === 'completed' ? 'rgba(16,185,129,0.06)' : b.status === 'in_progress' ? 'rgba(119,231,255,0.1)' : '#080c0e',
-                  border: `1px solid ${b.status === 'in_progress' ? '#77e7ff' : 'rgba(174,255,224,0.12)'}`,
+                  background: b.status === 'completed' ? 'rgba(48,209,88,0.06)' : b.status === 'in_progress' ? 'rgba(10,132,255,0.15)' : b.status === 'skipped' ? 'rgba(255,255,255,0.03)' : 'rgba(28,28,30,0.85)',
+                  border: `1px solid ${isSelected ? '#ffffff' : b.status === 'in_progress' ? '#0a84ff' : 'rgba(255,255,255,0.12)'}`,
                   borderLeft: `4px solid ${catColor}`,
-                  borderRadius: '12px',
-                  padding: '16px 20px',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '14px',
-                  transition: 'all 150ms ease'
+                  gap: '10px',
+                  cursor: 'pointer',
+                  transition: 'all 150ms ease',
+                  opacity: b.status === 'skipped' ? 0.5 : 1
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: 1, minWidth: '260px' }}>
-                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.8rem', color: catColor, fontWeight: 700, minWidth: '110px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', overflow: 'hidden' }}>
+                  <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.7rem', color: catColor, fontWeight: 700 }}>
                     {b.time}
                   </span>
-                  <div>
-                    <strong style={{ fontSize: '0.98rem', color: b.status === 'completed' ? '#a8b9b2' : '#effff6', textDecoration: b.status === 'completed' ? 'line-through' : 'none' }}>
-                      {b.title}
-                    </strong>
-                    <span style={{ display: 'block', fontSize: '0.78rem', color: '#65756f', marginTop: '2px' }}>
-                      {b.rule}
-                    </span>
-                  </div>
+                  <strong style={{ fontSize: '0.9rem', color: b.status === 'completed' ? '#98989d' : '#ffffff', textDecoration: b.status === 'completed' || b.status === 'skipped' ? 'line-through' : 'none', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {b.shortTitle}
+                  </strong>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                   {b.actionUrl && (
                     <a
                       href={b.actionUrl}
@@ -138,9 +154,9 @@ export default function DailyOperatingView() {
                         background: 'rgba(255,255,255,0.06)',
                         border: '1px solid rgba(255,255,255,0.12)',
                         color: catColor,
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '0.75rem',
+                        padding: '4px 8px',
+                        borderRadius: '6px',
+                        fontSize: '0.72rem',
                         fontWeight: 700,
                         textDecoration: 'none'
                       }}
@@ -151,26 +167,96 @@ export default function DailyOperatingView() {
 
                   <button
                     type="button"
-                    onClick={(e) => toggleStatus(idx, e)}
+                    onClick={(e) => toggleStatus(b.id, e)}
                     style={{
-                      fontFamily: 'Azeret Mono, monospace',
-                      fontSize: '0.72rem',
+                      fontFamily: 'SF Mono, monospace',
+                      fontSize: '0.68rem',
                       fontWeight: 800,
-                      padding: '6px 12px',
+                      padding: '4px 8px',
                       borderRadius: '999px',
                       border: 'none',
                       cursor: 'pointer',
-                      background: b.status === 'completed' ? 'rgba(16,185,129,0.2)' : b.status === 'in_progress' ? 'rgba(119,231,255,0.2)' : 'rgba(255,255,255,0.05)',
-                      color: b.status === 'completed' ? '#81f6b0' : b.status === 'in_progress' ? '#77e7ff' : '#65756f'
+                      background: b.status === 'completed' ? 'rgba(48,209,88,0.2)' : b.status === 'in_progress' ? 'rgba(10,132,255,0.2)' : b.status === 'skipped' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.08)',
+                      color: b.status === 'completed' ? '#30d158' : b.status === 'in_progress' ? '#0a84ff' : b.status === 'skipped' ? '#98989d' : '#8e8e93'
                     }}
                   >
-                    {b.status === 'completed' ? '✓ HECHO' : b.status === 'in_progress' ? '► EN CURSO' : '○ PENDIENTE'}
+                    {b.status === 'completed' ? '✓' : b.status === 'in_progress' ? '►' : b.status === 'skipped' ? '⊘' : '○'}
                   </button>
                 </div>
               </div>
             );
           })}
         </div>
+
+        {/* SELECTED BLOCK REORGANIZATION CARD (DIRECT ACTION MENU) */}
+        {selectedBlock && (
+          <div
+            style={{
+              background: 'rgba(28, 28, 30, 0.95)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              borderRadius: '18px',
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '14px',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.8)'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div>
+                <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: getCategoryColor(selectedBlock.category), fontWeight: 800 }}>
+                  DESVÍO & REORGANIZACIÓN SIN CULPA • {selectedBlock.time}
+                </span>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+                  {selectedBlock.fullTitle}
+                </h4>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedBlock(null)}
+                style={{ background: 'rgba(255,255,255,0.08)', border: 'none', color: '#98989d', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', fontWeight: 700 }}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '12px', borderRadius: '12px', fontSize: '0.82rem', color: '#98989d', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div><strong style={{ color: '#fff' }}>Regla Original:</strong> {selectedBlock.rule}</div>
+              <div><strong style={{ color: '#30d158' }}>Versión Mínima (2 Min):</strong> {selectedBlock.minViableAction}</div>
+            </div>
+
+            {/* REORGANIZATION BUTTONS */}
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => handleSkipWithoutGuilt(selectedBlock.id)}
+                style={{ background: 'rgba(255, 69, 58, 0.2)', border: '1px solid rgba(255, 69, 58, 0.4)', color: '#ff453a', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
+              >
+                🛡️ Saltar Sin Culpa (Cero Deuda)
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleReorganizeRestOfDay(selectedBlock.id)}
+                style={{ background: 'rgba(100, 210, 255, 0.2)', border: '1px solid rgba(100, 210, 255, 0.4)', color: '#64d2ff', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
+              >
+                🔄 Reorganizar Resto del Día con Margen
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setBlocks(prev => prev.map(b => b.id === selectedBlock.id ? { ...b, status: 'completed' } : b));
+                  setSelectedBlock(null);
+                }}
+                style={{ background: 'rgba(48, 209, 88, 0.2)', border: '1px solid rgba(48, 209, 88, 0.4)', color: '#30d158', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
+              >
+                ✅ Marcar Completado (Versión Mínima)
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* INERTIA RESCUE MODAL */}
         <InertiaRescueModal

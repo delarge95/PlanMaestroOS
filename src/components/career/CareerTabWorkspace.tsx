@@ -11,9 +11,11 @@ const careerDocsList = [
 ];
 
 const TABS = [
-  { id: 'roadmap', label: '🚀 Roadmap 16 Semanas & Entregables' },
-  { id: 'targeting', label: '💼 Aplicaciones & Matriz de Roles' },
-  { id: 'docs', label: '📁 Biblia de Carrera & Documentos' }
+  { id: 'roadmap', label: '🚀 Roadmap' },
+  { id: 'twinsight', label: '💻 TwinSight' },
+  { id: 'portfolio', label: '📄 Portafolio' },
+  { id: 'jobs', label: '💼 Empleos' },
+  { id: 'docs', label: '📚 Fuentes' }
 ];
 
 export default function CareerTabWorkspace() {
