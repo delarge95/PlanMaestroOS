@@ -1,32 +1,15 @@
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
-import MinMaxRoutineTable from './MinMaxRoutineTable';
-import ExerciseModal from './ExerciseModal';
-import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
+import UnifiedRoutineTable from './UnifiedRoutineTable';
+import { minMaxWeeks, powerbuildingWeeks, gluteWeeks } from '../../data/exercises/fitappRoutineDataset';
 
 export default function FitAppRoutinesCatalog() {
   const [selectedProgram, setSelectedProgram] = useState<'minmax' | 'powerbuilding' | 'glute'>('minmax');
-  const [modalExercise, setModalExercise] = useState<ExerciseEntry | null>(null);
-
-  const openExerciseModal = (name: string) => {
-    const found = findExerciseByName(name);
-    if (found) {
-      setModalExercise(found);
-    } else {
-      setModalExercise({
-        name: name,
-        category: 'FitApp-Free Routine Exercise',
-        discipline: 'Fitness',
-        techniquePoints: ['Ejecutar con tempo controlado 3-0-3.', 'Respetar RIR/RPE y series de calentamiento indicadas.'],
-        muscles: { strength: ['Músculos objetivos de la rutina'] }
-      });
-    }
-  };
 
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', color: '#ffffff' }}>
-        {/* TOP SELECTOR BAR FOR OFFICIAL FITAPP-FREE PROGRAMS */}
+        {/* TOP SELECTOR BAR FOR FITAPP-FREE OFFICIAL ROUTINES */}
         <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', padding: '6px', background: 'rgba(255,255,255,0.04)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)' }}>
           <button
             type="button"
@@ -83,100 +66,41 @@ export default function FitAppRoutinesCatalog() {
           </button>
         </div>
 
-        {/* PROGRAM 1: JEFF NIPPARD MIN-MAX (PRIMARY VALID ROUTINE) */}
-        {selectedProgram === 'minmax' && <MinMaxRoutineTable />}
+        {/* PROGRAM 1: MIN-MAX PROGRAM (UNIFIED ARCHITECTURE) */}
+        {selectedProgram === 'minmax' && (
+          <UnifiedRoutineTable
+            programTitle="The Min-Max Program (Jeff Nippard 12 Semanas)"
+            programSubtitle="Bajo Volumen, Máxima Intensidad & Sustituciones de Calistenia (Overcoming Gravity)"
+            programBadge="PROGRAMA PRINCIPAL VÁLIDO • FITAPP-FREE DATASET"
+            badgeColor="#30d158"
+            summaryText="Estructura: 5 Días/sem (45 min) • RIR 1-2 (Bloque 1) / RIR 0 + Drop Sets (Bloque 2) • Regla Tempo HSR 3-0-3 en empujes y piernas"
+            weeks={minMaxWeeks}
+          />
+        )}
 
-        {/* PROGRAM 2: FITAPP POWERBUILDING PROGRAM */}
+        {/* PROGRAM 2: POWERBUILDING PROGRAM (UNIFIED ARCHITECTURE) */}
         {selectedProgram === 'powerbuilding' && (
-          <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '20px', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div>
-              <span style={{ fontSize: '0.72rem', fontFamily: 'SF Mono, monospace', color: '#0a84ff', fontWeight: 800 }}>
-                RUTINA OFICIAL FITAPP-FREE • WORKOUTPROGRAM.TS
-              </span>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0' }}>
-                FitApp Powerbuilding Program (Full Body 4 Días)
-              </h3>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <strong style={{ color: '#0a84ff', fontSize: '1rem' }}>Day 1: Full Body 1 (Squat, OHP)</strong>
-                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#fff', lineHeight: 1.6 }}>
-                  <li><button type="button" onClick={() => openExerciseModal('Back Squat')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Back Squat</button>: 3 series (75-80% 1RM)</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Overhead Press')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Overhead Press</button>: 3x8 (RPE 7.5)</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Glute Ham Raise')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Glute Ham Raise / Nordic</button>: 3x8-10</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Helms Row')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Helms Row</button>: 3x12-15</li>
-                </ul>
-              </div>
-
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <strong style={{ color: '#0a84ff', fontSize: '1rem' }}>Day 2: Full Body 2 (Deadlift, Bench)</strong>
-                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#fff', lineHeight: 1.6 }}>
-                  <li><button type="button" onClick={() => openExerciseModal('Deadlift')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Deadlift</button>: 3x4 (80% 1RM)</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Barbell Bench Press')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Barbell Bench Press</button>: Top Set + 2x10</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Weighted Pullup')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Weighted Pull-Up</button>: 3x5-8</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Floor Skull Crusher')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Floor Skull Crusher</button>: 3x10-12</li>
-                </ul>
-              </div>
-
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <strong style={{ color: '#0a84ff', fontSize: '1rem' }}>Day 3: Full Body 3 (Squat, Dip)</strong>
-                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#fff', lineHeight: 1.6 }}>
-                  <li><button type="button" onClick={() => openExerciseModal('Back Squat')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Back Squat</button>: 3x4 (80% 1RM)</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Weighted Dip')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Weighted Dip</button>: 3x8</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Face Pull')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Face Pull</button>: 4x15-20</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Hanging Leg Raise')} style={{ background: 'none', border: 'none', color: '#64d2ff', textDecoration: 'underline', cursor: 'pointer' }}>Hanging Leg Raise</button>: 3x10-12</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <UnifiedRoutineTable
+            programTitle="FitApp Powerbuilding Program (Base 4 Días)"
+            programSubtitle="Fuerza en Básicos (Squat, Deadlift, Bench, OHP) + Hipertrofia Estructural"
+            programBadge="PROGRAMA BASE FITAPP-FREE • WORKOUTPROGRAM.TS"
+            badgeColor="#0a84ff"
+            summaryText="Estructura: 4 Días/sem • Enfoque en % 1RM y RPE 7-9 • Accesorios de hipertrofia y balance de hombros"
+            weeks={powerbuildingWeeks}
+          />
         )}
 
-        {/* PROGRAM 3: JEFF NIPPARD GLUTE HYPERTROPHY */}
+        {/* PROGRAM 3: GLUTE HYPERTROPHY PROGRAM (UNIFIED ARCHITECTURE) */}
         {selectedProgram === 'glute' && (
-          <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '20px', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div>
-              <span style={{ fontSize: '0.72rem', fontFamily: 'SF Mono, monospace', color: '#bf5af2', fontWeight: 800 }}>
-                RUTINA OFICIAL FITAPP-FREE • JEFFNIPPARDGLUTEPROGRAM.TS
-              </span>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0' }}>
-                Jeff Nippard Glute Hypertrophy Program (5 Días)
-              </h3>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <strong style={{ color: '#bf5af2', fontSize: '1rem' }}>Day 1: Lower Body (Fuerza Base)</strong>
-                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#fff', lineHeight: 1.6 }}>
-                  <li><button type="button" onClick={() => openExerciseModal('Back Squat')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Back Squat (Postura Ancha)</button>: 3x5 (75-80%)</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Barbell RDL')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Barbell RDL</button>: 3x6-8</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Seated Leg Curl')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Seated Leg Curl</button>: 3x12-15</li>
-                </ul>
-              </div>
-
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <strong style={{ color: '#bf5af2', fontSize: '1rem' }}>Day 3: Lower Body (Hipertrofia Glúteo)</strong>
-                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#fff', lineHeight: 1.6 }}>
-                  <li><button type="button" onClick={() => openExerciseModal('Barbell Hip Thrust')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Barbell Hip Thrust</button>: 3x8-10 + Dropset</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Cable Pullthrough')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Cable Pullthrough</button>: 3x10-12</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Cable Glute Kick Back')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Cable Glute Kickback</button>: 3x12-15</li>
-                </ul>
-              </div>
-
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <strong style={{ color: '#bf5af2', fontSize: '1rem' }}>Day 5: Lower Body (Densidad)</strong>
-                <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#fff', lineHeight: 1.6 }}>
-                  <li><button type="button" onClick={() => openExerciseModal('Walking Lunge')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Walking Lunge</button>: 3x20 zancadas</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Lower Back Extension')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Hyperextension 45°</button>: 3x15-20</li>
-                  <li><button type="button" onClick={() => openExerciseModal('Frog Pump')} style={{ background: 'none', border: 'none', color: '#bf5af2', textDecoration: 'underline', cursor: 'pointer' }}>Frog Pumps</button>: 2x30-50</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <UnifiedRoutineTable
+            programTitle="Jeff Nippard Glute Hypertrophy Program"
+            programSubtitle="Especialización de Cadena Posterior, Glúteo Mayor y Medial con Pirámides y Bombeo Metabólico"
+            programBadge="PROGRAMA ESPECIALIZADO FITAPP-FREE • JEFFNIPPARDGLUTEPROGRAM.TS"
+            badgeColor="#bf5af2"
+            summaryText="Estructura: 5 Días/sem • Bloque de Acumulación (Sem 1-6) + Bloque Metabólico (Sem 7-8) • Hip Thrusts & RDLs"
+            weeks={gluteWeeks}
+          />
         )}
-
-        {/* EXERCISE DETAIL MODAL */}
-        <ExerciseModal exercise={modalExercise} onClose={() => setModalExercise(null)} />
       </div>
     </ErrorBoundary>
   );
