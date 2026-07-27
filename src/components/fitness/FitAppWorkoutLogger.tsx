@@ -613,7 +613,6 @@ export default function FitAppWorkoutLogger() {
               ))}
 
               {Array.from({ length: 31 }, (_, i) => i + 1).map((dayNum) => {
-                const isCompletedDay = dayNum % 2 === 1 || history.length > 0;
                 return (
                   <div
                     key={dayNum}
