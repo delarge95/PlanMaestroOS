@@ -2,6 +2,8 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 
 export default defineConfig({
+  site: "https://delarge95.github.io",
+  base: "/PlanMaestroOS/",
   integrations: [react()],
   devToolbar: {
     enabled: false
