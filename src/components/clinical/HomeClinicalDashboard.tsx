@@ -8,7 +8,6 @@ import { useAppStore } from '../../store/appStore';
 import Button from '../ui/Button';
 import ListRow from '../ui/ListRow';
 import Sheet from '../ui/Sheet';
-import Menu from '../ui/Menu';
 import Disclosure from '../ui/Disclosure';
 import Toast from '../ui/Toast';
 import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
@@ -124,30 +123,6 @@ export default function HomeClinicalDashboard() {
                 <Settings2 size={18} aria-hidden="true" style={{ color: 'var(--color-accent-primary)' }} />
                 <span>Herramientas</span>
               </button>
-
-              <Menu
-                triggerLabel="Opciones de pantalla"
-                items={[
-                  {
-                    id: 'simple_mode',
-                    label: isSimpleMode ? 'Desactivar Modo Simple' : 'Activar Modo Simple',
-                    icon: <Leaf size={16} />,
-                    onClick: toggleSimpleMode
-                  },
-                  {
-                    id: 'morning_workflow',
-                    label: 'Modo Inicio (Mañana)',
-                    icon: '🌅',
-                    onClick: () => setWorkflowMode('morning')
-                  },
-                  {
-                    id: 'evening_workflow',
-                    label: 'Modo Cierre (Noche)',
-                    icon: '🌙',
-                    onClick: () => setWorkflowMode('evening')
-                  }
-                ]}
-              />
             </div>
           </div>
 

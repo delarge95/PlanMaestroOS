@@ -1,0 +1,222 @@
+/* NavigationShell.module.css - Responsive 3-Destination Navigation per Clinical Design 03 */
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  height: 64px;
+  box-sizing: border-box;
+}
+
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.brandLink {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.breadcrumbText {
+  font-size: var(--font-size-meta);
+  color: var(--text-tertiary);
+}
+
+/* === DESKTOP NAV (>= 768px) === */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: var(--surface);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.navItem {
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-label);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms var(--ease-standard);
+  font-family: var(--font-family-system);
+}
+
+.navItem:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.navItemActive {
+  background: var(--color-accent-primary) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.desktopRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* === MAIN CONTENT CONTAINER === */
+.appMain {
+  flex: 1;
+  padding: var(--space-4);
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  min-height: calc(100vh - 64px);
+}
+
+.appMainSimple {
+  max-width: 760px;
+}
+
+/* === MOBILE BOTTOM NAV (< 768px) === */
+.mobileNav {
+  display: none;
+}
+
+.mobileNavItem {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 64px;
+  min-height: 44px;
+  justify-content: center;
+  color: var(--text-tertiary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-system);
+}
+
+.mobileNavItemActive {
+  color: var(--color-accent-primary);
+}
+
+/* === DESKTOP POPOVER MENU === */
+.morePopover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  width: 260px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border-visible);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  box-shadow: var(--shadow-float);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 150;
+  animation: popoverFadeIn 140ms ease-out;
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popoverGroupLabel {
+  font-size: var(--font-size-meta);
+  color: var(--text-tertiary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 8px 2px;
+}
+
+.popoverItem {
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: var(--font-size-label);
+  font-weight: 550;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 120ms ease;
+}
+
+.popoverItem:hover, .popoverItem:focus {
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+/* === RESPONSIVE MEDIA QUERIES (768px BREAKPOINT) === */
+@media (max-width: 767px) {
+  .desktopNav {
+    display: none !important;
+  }
+
+  .desktopRight {
+    display: none !important;
+  }
+
+  .mobileNav {
+    display: flex !important;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 95;
+    height: calc(60px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    background: rgba(13, 14, 18, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--color-border-visible);
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .appMain {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom)) !important;
+    min-height: calc(100vh - 64px - 80px);
+  }
+}

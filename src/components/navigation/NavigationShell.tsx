@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Zap, Calendar, ChevronDown, HeartPulse, BriefcaseBusiness, Languages, Dumbbell, LibraryBig, Sprout } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import Sheet from '../ui/Sheet';
 import ListRow from '../ui/ListRow';
 import Button from '../ui/Button';
+import styles from './NavigationShell.module.css';
 
 export interface NavigationShellProps {
   currentPath?: string;
@@ -17,7 +19,12 @@ export function NavigationShell({
   breadcrumb,
   children
 }: NavigationShellProps) {
-  const [isMoreSheetOpen, setIsMoreSheetOpen] = useState(false);
+  const [isMorePopoverOpen, setIsMorePopoverOpen] = useState(false);
+  const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
+
+  const moreButtonRef = useRef<HTMLButtonElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
   const isSimpleMode = useAppStore((s) => s.isSimpleMode);
   const toggleSimpleMode = useAppStore((s) => s.toggleSimpleMode);
 
@@ -26,305 +33,242 @@ export function NavigationShell({
   const isPlanActive = activeDomain === 'plan' || currentPath === '/app/schedules';
   const isMoreActive = !isNowActive && !isPlanActive;
 
+  // Close desktop popover on click outside or Escape
+  useEffect(() => {
+    if (!isMorePopoverOpen) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(e.target as Node) &&
+        moreButtonRef.current &&
+        !moreButtonRef.current.contains(e.target as Node)
+      ) {
+        setIsMorePopoverOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMorePopoverOpen(false);
+        moreButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMorePopoverOpen]);
+
+  const workAreas = [
+    { href: '/app/clinical', label: 'Clínica', icon: HeartPulse },
+    { href: '/app/career', label: 'Carrera', icon: BriefcaseBusiness },
+    { href: '/app/german', label: 'Idioma', icon: Languages },
+    { href: '/app/fitness', label: 'Fitness', icon: Dumbbell },
+  ];
+
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg)', color: 'var(--text)' }}>
+    <div className={styles.wrapper}>
       {/* HEADER PRINCIPAL COMPACTO */}
-      <header
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 90,
-          background: 'rgba(0, 0, 0, 0.85)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          borderBottom: '1px solid var(--color-border-subtle)',
-          padding: 'var(--space-2) var(--space-4)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: 'var(--space-md)'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-          <a
-            href="/app"
-            style={{
-              textDecoration: 'none',
-              color: 'var(--text)',
-              fontSize: '1.1rem',
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-2)'
-            }}
-          >
-            <span style={{ color: 'var(--color-accent-primary)' }}>⚡</span>
+      <header className={styles.header}>
+        <div className={styles.brandGroup}>
+          <a href="/app" className={styles.brandLink}>
+            <Zap size={20} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
             <span>Plan Maestro OS</span>
           </a>
 
           {breadcrumb ? (
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
-              {breadcrumb}
-            </span>
+            <span className={styles.breadcrumbText}>{breadcrumb}</span>
           ) : isMoreActive ? (
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
+            <span className={styles.breadcrumbText}>
               Más / {activeDomain.toUpperCase()}
             </span>
           ) : null}
         </div>
 
-        {/* NAVEGACIÓN PRINCIPAL ESCRITORIO (3 DESTINOS) */}
-        <nav
-          className="desktop-nav"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 'var(--space-2)',
-            background: 'var(--surface)',
-            padding: '4px',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--color-border-subtle)'
-          }}
-        >
+        {/* NAVEGACIÓN PRINCIPAL ESCRITORIO (3 DESTINOS) - >= 768px */}
+        <nav className={styles.desktopNav} aria-label="Navegación principal">
           <a
             href="/app"
-            style={{
-              textDecoration: 'none',
-              padding: 'var(--space-1) var(--space-3)',
-              borderRadius: 'var(--radius-sm)',
-              fontSize: 'var(--font-size-label)',
-              fontWeight: isNowActive ? 700 : 500,
-              color: isNowActive ? 'var(--text)' : 'var(--text-tertiary)',
-              background: isNowActive ? 'var(--color-accent-primary)' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-1)'
-            }}
+            className={`${styles.navItem} ${isNowActive ? styles.navItemActive : ''}`}
           >
-            <span>🎯</span>
+            <Zap size={16} aria-hidden="true" />
             <span>Ahora</span>
           </a>
 
           <a
             href="/app/schedules"
-            style={{
-              textDecoration: 'none',
-              padding: 'var(--space-1) var(--space-3)',
-              borderRadius: 'var(--radius-sm)',
-              fontSize: 'var(--font-size-label)',
-              fontWeight: isPlanActive ? 700 : 500,
-              color: isPlanActive ? 'var(--text)' : 'var(--text-tertiary)',
-              background: isPlanActive ? 'var(--color-accent-primary)' : 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-1)'
-            }}
+            className={`${styles.navItem} ${isPlanActive ? styles.navItemActive : ''}`}
           >
-            <span>📅</span>
+            <Calendar size={16} aria-hidden="true" />
             <span>Plan</span>
           </a>
 
-          <button
-            type="button"
-            onClick={() => setIsMoreSheetOpen(true)}
-            style={{
-              border: 'none',
-              padding: 'var(--space-1) var(--space-3)',
-              borderRadius: 'var(--radius-sm)',
-              fontSize: 'var(--font-size-label)',
-              fontWeight: isMoreActive ? 700 : 500,
-              color: isMoreActive ? 'var(--text)' : 'var(--text-tertiary)',
-              background: isMoreActive ? 'var(--color-surface-raised)' : 'transparent',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-1)'
-            }}
-          >
-            <span>🎛️</span>
-            <span>Más</span>
-          </button>
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <button
+              ref={moreButtonRef}
+              type="button"
+              aria-haspopup="menu"
+              aria-expanded={isMorePopoverOpen}
+              onClick={() => setIsMorePopoverOpen((prev) => !prev)}
+              className={`${styles.navItem} ${isMoreActive ? styles.navItemActive : ''}`}
+            >
+              <span>Más</span>
+              <ChevronDown
+                size={14}
+                aria-hidden="true"
+                style={{
+                  transition: 'transform 150ms ease',
+                  transform: isMorePopoverOpen ? 'rotate(180deg)' : 'rotate(0deg)'
+                }}
+              />
+            </button>
+
+            {/* DESKTOP POPOVER MENU PARA "MÁS" */}
+            {isMorePopoverOpen && (
+              <div ref={popoverRef} role="menu" className={styles.morePopover}>
+                <div>
+                  <span className={styles.popoverGroupLabel}>Áreas</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    {workAreas.map((area) => {
+                      const Icon = area.icon;
+                      return (
+                        <a
+                          key={area.href}
+                          href={area.href}
+                          role="menuitem"
+                          className={styles.popoverItem}
+                          onClick={() => setIsMorePopoverOpen(false)}
+                        >
+                          <Icon size={16} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
+                          <span>{area.label}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: '6px' }}>
+                  <span className={styles.popoverGroupLabel}>Recursos</span>
+                  <a
+                    href="/app/library"
+                    role="menuitem"
+                    className={styles.popoverItem}
+                    onClick={() => setIsMorePopoverOpen(false)}
+                  >
+                    <LibraryBig size={16} style={{ color: 'var(--color-accent-warning)' }} aria-hidden="true" />
+                    <span>Biblioteca</span>
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
 
-        {/* MODO SIMPLE TOGGLE ACCESIBLE */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+        {/* MODO SIMPLE TOGGLE ACCESIBLE ESCRITORIO (>= 768px) */}
+        <div className={styles.desktopRight}>
           <Button
-            variant={isSimpleMode ? 'primary' : 'ghost'}
+            variant="ghost"
             size="sm"
+            aria-pressed={isSimpleMode}
             onClick={toggleSimpleMode}
             aria-label={isSimpleMode ? 'Desactivar Modo Simple' : 'Activar Modo Simple de baja estimulación'}
           >
-            {isSimpleMode ? '🌿 Modo Simple Activo' : '🌱 Modo Simple'}
+            <Sprout size={17} aria-hidden="true" style={{ color: isSimpleMode ? 'var(--color-state-done)' : 'var(--text-tertiary)' }} />
+            <span>Modo simple</span>
           </Button>
         </div>
       </header>
 
       {/* CONTENIDO PRINCIPAL DE LA PÁGINA */}
-      <main style={{ flex: 1, padding: 'var(--space-4)', maxWidth: isSimpleMode ? '760px' : '1100px', width: '100%', margin: '0 auto', boxSizing: 'border-box' }}>
+      <main className={`${styles.appMain} ${isSimpleMode ? styles.appMainSimple : ''}`}>
         {children}
       </main>
 
-      {/* BOTTOM BAR NAVEGACIÓN MÓVIL (PERSISTENTE 3 DESTINOS) */}
-      <nav
-        className="mobile-bottom-nav"
-        style={{
-          position: 'sticky',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 95,
-          background: 'rgba(13, 14, 18, 0.95)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderTop: '1px solid var(--color-border-visible)',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          padding: 'var(--space-2) 0',
-          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.5)'
-        }}
-      >
+      {/* BOTTOM BAR NAVEGACIÓN MÓVIL (< 768px) */}
+      <nav className={styles.mobileNav} aria-label="Navegación móvil">
         <a
           href="/app"
-          style={{
-            textDecoration: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '2px',
-            minWidth: '64px',
-            minHeight: '44px',
-            justifyContent: 'center',
-            color: isNowActive ? 'var(--color-accent-primary)' : 'var(--text-tertiary)'
-          }}
+          className={`${styles.mobileNavItem} ${isNowActive ? styles.mobileNavItemActive : ''}`}
         >
-          <span style={{ fontSize: '1.2rem' }}>🎯</span>
+          <Zap size={20} aria-hidden="true" />
           <span style={{ fontSize: 'var(--font-size-meta)', fontWeight: isNowActive ? 700 : 500 }}>Ahora</span>
         </a>
 
         <a
           href="/app/schedules"
-          style={{
-            textDecoration: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '2px',
-            minWidth: '64px',
-            minHeight: '44px',
-            justifyContent: 'center',
-            color: isPlanActive ? 'var(--color-accent-primary)' : 'var(--text-tertiary)'
-          }}
+          className={`${styles.mobileNavItem} ${isPlanActive ? styles.mobileNavItemActive : ''}`}
         >
-          <span style={{ fontSize: '1.2rem' }}>📅</span>
+          <Calendar size={20} aria-hidden="true" />
           <span style={{ fontSize: 'var(--font-size-meta)', fontWeight: isPlanActive ? 700 : 500 }}>Plan</span>
         </a>
 
         <button
           type="button"
-          onClick={() => setIsMoreSheetOpen(true)}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '2px',
-            minWidth: '64px',
-            minHeight: '44px',
-            justifyContent: 'center',
-            color: isMoreActive ? 'var(--color-accent-primary)' : 'var(--text-tertiary)',
-            cursor: 'pointer'
-          }}
+          onClick={() => setIsMobileSheetOpen(true)}
+          className={`${styles.mobileNavItem} ${isMoreActive ? styles.mobileNavItemActive : ''}`}
         >
-          <span style={{ fontSize: '1.2rem' }}>🎛️</span>
+          <ChevronDown size={20} aria-hidden="true" />
           <span style={{ fontSize: 'var(--font-size-meta)', fontWeight: isMoreActive ? 700 : 500 }}>Más</span>
         </button>
       </nav>
 
-      {/* MENÚ MÁS (ORGANIZADO POR INTENCIÓN EN SHEET ACCESIBLE) */}
+      {/* SHEET NAVEGACIÓN MÓVIL (< 768px) */}
       <Sheet
-        isOpen={isMoreSheetOpen}
-        onClose={() => setIsMoreSheetOpen(false)}
-        title="Navegación & Herramientas"
-        description="Selecciona un área o recurso para trabajar"
+        isOpen={isMobileSheetOpen}
+        onClose={() => setIsMobileSheetOpen(false)}
+        title="Navegación"
+        description="Selecciona un área o activa Modo simple"
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-          {/* BLOQUE 1: ÁREAS */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+          {/* ÁREAS */}
           <div>
             <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
-              Áreas de Trabajo
+              Áreas
             </span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              <ListRow
-                title="Clínica & Salud Mental"
-                meta="Regulación TDAH, ansiedad social, check-in diario"
-                icon="🧠"
-                onClick={() => { window.location.href = '/app/clinical'; }}
-                active={currentPath === '/app/clinical'}
-              />
-              <ListRow
-                title="Laboral & Carrera"
-                meta="TwinSight MVP, portafolio y entregables de tesis"
-                icon="💼"
-                onClick={() => { window.location.href = '/app/career'; }}
-                active={currentPath === '/app/career'}
-              />
-              <ListRow
-                title="Alemán A1"
-                meta="Estudio diario de 25 min, Duolingo e IA"
-                icon="🇩🇪"
-                onClick={() => { window.location.href = '/app/german'; }}
-                active={currentPath === '/app/german'}
-              />
-              <ListRow
-                title="Fitness & Rehabilitación"
-                meta="FitApp tracker, rutinas Min-Max y prehab"
-                icon="🏋️"
-                onClick={() => { window.location.href = '/app/fitness'; }}
-                active={currentPath === '/app/fitness'}
-              />
+              {workAreas.map((area) => {
+                const Icon = area.icon;
+                return (
+                  <ListRow
+                    key={area.href}
+                    title={area.label}
+                    icon={<Icon size={18} style={{ color: 'var(--color-accent-primary)' }} />}
+                    onClick={() => { window.location.href = area.href; }}
+                    active={currentPath === area.href}
+                  />
+                );
+              })}
             </div>
           </div>
 
-          {/* BLOQUE 2: RECURSOS */}
+          {/* BIBLIOTECA */}
           <div>
             <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
-              Recursos & Documentación
+              Recursos
             </span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              <ListRow
-                title="Biblioteca de Referencias"
-                meta="Manuales técnicos, Overcoming Gravity y teoría"
-                icon="📖"
-                onClick={() => { window.location.href = '/app/library'; }}
-                active={currentPath === '/app/library'}
-              />
-              <ListRow
-                title="Plan Maestro & Documentos"
-                meta="Directrices, estrategia y blueprint completo"
-                icon="📜"
-                onClick={() => { window.location.href = '/app/master-plan'; }}
-                active={currentPath === '/app/master-plan'}
-              />
-            </div>
+            <ListRow
+              title="Biblioteca"
+              icon={<LibraryBig size={18} style={{ color: 'var(--color-accent-warning)' }} />}
+              onClick={() => { window.location.href = '/app/library'; }}
+              active={currentPath === '/app/library'}
+            />
           </div>
 
-          {/* BLOQUE 3: SISTEMA */}
-          <div>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
-              Preferencias del Sistema
-            </span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              <ListRow
-                title={isSimpleMode ? "Desactivar Modo Simple" : "Activar Modo Simple"}
-                meta={isSimpleMode ? "Volver a vista completa" : "Reducir a 1 columna sin métricas ni distracciones"}
-                icon="🌱"
-                badge={isSimpleMode ? "Activo" : "Baja estimulación"}
-                badgeTone={isSimpleMode ? "success" : "default"}
-                onClick={() => { toggleSimpleMode(); setIsMoreSheetOpen(false); }}
-              />
-            </div>
+          {/* MÓVIL: MODO SIMPLE INTEGRADO DENTRO DEL SHEET */}
+          <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-md)' }}>
+            <ListRow
+              title="Modo simple"
+              meta="Reducir a 1 columna sin distracciones"
+              icon={<Sprout size={18} style={{ color: 'var(--color-state-done)' }} />}
+              badge={isSimpleMode ? 'Activo' : undefined}
+              badgeTone={isSimpleMode ? 'success' : 'default'}
+              onClick={() => { toggleSimpleMode(); setIsMobileSheetOpen(false); }}
+            />
           </div>
         </div>
       </Sheet>

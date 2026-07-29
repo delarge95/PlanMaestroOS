@@ -1,13 +1,13 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InteractiveDocViewer from './InteractiveDocViewer';
 import SecondBrainInspector from './SecondBrainInspector';
 import NotionObsidianIntegrationHub from './NotionObsidianIntegrationHub';
 
 const TABS = [
-  { id: 'rag', label: '🔍 Buscador RAG Semántico & Documentos' },
-  { id: 'second_brain', label: '🧠 Inspección Segundo Cerebro (Notion/Obsidian)' },
-  { id: 'hub', label: '🔌 Hub de Conexiones & Exportador YAML' }
+  { id: 'rag', label: 'Referencias & Buscador RAG' },
+  { id: 'second_brain', label: 'Plan & Segundo Cerebro' },
+  { id: 'hub', label: 'Documentación & Hub' }
 ];
 
 export default function LibraryTabWorkspace() {
