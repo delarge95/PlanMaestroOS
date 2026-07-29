@@ -209,7 +209,7 @@ export default function UnifiedRoutineTable({
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: '#64d2ff',
+                            color: 'var(--color-accent-primary)',
                             cursor: 'pointer',
                             textAlign: 'left',
                             padding: 0,

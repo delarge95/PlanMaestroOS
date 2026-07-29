@@ -10,17 +10,17 @@ interface Props {
 const { title, activeDomain = 'general', activePhase = 'fase-1' } = Astro.props;
 
 const domainColors: Record<string, string> = {
-  general: '#0a84ff',
-  today: '#64d2ff',
-  schedules: '#bf5af2',
-  career: '#0a84ff',
-  fitness: '#30d158',
-  german: '#ff9f0a',
-  clinical: '#ff375f',
-  library: '#5e5ce6'
+  general: 'var(--color-accent-primary)',
+  today: 'var(--color-accent-primary)',
+  schedules: 'var(--color-accent-primary)',
+  career: 'var(--color-accent-primary)',
+  fitness: 'var(--color-state-done)',
+  german: 'var(--color-accent-warning)',
+  clinical: 'var(--color-accent-primary)',
+  library: 'var(--color-accent-primary)'
 };
 
-const activeColor = domainColors[activeDomain] || '#0a84ff';
+const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
 ---
 
 <!DOCTYPE html>

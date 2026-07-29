@@ -1,115 +1,40 @@
+# AUDIT-03: Layout, Espaciado y Densidad de Elementos
+**Severidad:** ALTA | **Impacto:** Overwhelm visual, incapacidad de saber dónde enfocar
 
-**10 tamaños de fuente distintos** en una sola pantalla. El ojo no puede establecer
-jerarquía visual porque la escala es tan granular que las diferencias son perceptivamente
-insignificantes (0.75 vs 0.78 vs 0.80 son indistinguibles a distancia de pantalla normal).
+---
 
-Adicionalmente, hay `fontWeight: 800` en botones secundarios, lo que provoca que elementos
-no-primarios compitan visualmente con los primarios.
+## Problema Identificado
+
+En `HomeClinicalDashboard.tsx`, el tab "AHORA" renderiza simultáneamente:
+
+1. Segmented control con 4 tabs (sticky)
+2. 2 botones de workflow (Inicio + Cierre) con label largo
+3. Indicador de nivel de energía
+4. `ClinicalCurrentBlockPanel` — panel del bloque actual (componente completo)
+5. Grid con 2 cards grandes:
+   - Card de 3 tareas (con 3 sub-items cada una con 2 líneas de texto)
+   - Card de principios terapéuticos (con 3 sub-items de 2+ líneas)
+
+**Total de elementos informativos simultáneos:** >20 unidades de información.
+El Working Memory del cerebro humano procesa 4 ± 1 chunks. Un usuario con TDAH tiene
+este límite reducido efectivamente a 2-3 chunks antes de que ocurra el "mental freeze".
+
+Adicionalmente, todos los elementos tienen el mismo peso visual (mismo tamaño de card,
+mismo padding), lo que elimina cualquier jerarquía espacial natural.
 
 ---
 
 ## Solución Propuesta
 
-### Escala tipográfica de 4 niveles (Type Scale Minimalista)
+### Principio de "Una Pantalla, Un Objetivo"
 
-| Nivel | Tamaño | Weight | Uso |
-|---|---|---|---|
-| Display | `1.25rem` | `700` | Solo títulos de sección principales (h2) |
-| Body | `0.9rem` | `400` | Todo texto de contenido, descripciones |
-| Label | `0.78rem` | `500` | Metadatos, horas, subtítulos de card |
-| Micro | `0.68rem` | `600` | Solo badges de estado (máx 3 palabras) |
+Cada vista del tab "AHORA" debe responder a una sola pregunta:
+**"¿Qué hago ahora mismo?"**
 
-Se elimina todo tamaño intermedio. Si un texto no encaja en estos 4, se sube o baja
-al nivel más cercano.
+Todo lo demás (principios terapéuticos, workflow launchers, mapa de secciones) debe estar
+disponible pero NO visible por defecto. Se accede mediante interacción intencional.
 
----
-
-## Método de Ejecución
-
-### Paso 1 — Añadir tokens de tipografía al mismo archivo `tokens.css`
-
-```css
-/* Añadir en src/styles/tokens.css */
-:root {
-  --font-family-system: -apple-system, 'SF Pro Text', system-ui, sans-serif;
-
-  --font-size-display: 1.25rem;
-  --font-size-body:    0.90rem;
-  --font-size-label:   0.78rem;
-  --font-size-micro:   0.68rem;
-
-  --font-weight-regular: 400;
-  --font-weight-medium:  500;
-  --font-weight-bold:    700;
-
-  --line-height-display: 1.3;
-  --line-height-body:    1.55;
-  --line-height-label:   1.4;
-}
-```
-
-### Paso 2 — Crear una utilidad de estilos tipográficos compartidos
-
-**Archivo nuevo:** `src/styles/typography.ts`  
-**Por qué:** En lugar de copiar el mismo objeto de estilos en cada componente, importas
-la función y aplicas consistencia automática.
-
-```typescript
-// src/styles/typography.ts
-export const typo = {
-  display: {
-    fontSize: 'var(--font-size-display)',
-    fontWeight: 700,
-    lineHeight: 1.3,
-    fontFamily: 'var(--font-family-system)',
-  },
-  body: {
-    fontSize: 'var(--font-size-body)',
-    fontWeight: 400,
-    lineHeight: 1.55,
-    fontFamily: 'var(--font-family-system)',
-  },
-  label: {
-    fontSize: 'var(--font-size-label)',
-    fontWeight: 500,
-    lineHeight: 1.4,
-    fontFamily: 'var(--font-family-system)',
-  },
-  micro: {
-    fontSize: 'var(--font-size-micro)',
-    fontWeight: 600,
-    lineHeight: 1.2,
-    fontFamily: 'var(--font-family-system)',
-    textTransform: 'uppercase' as const,
-    letterSpacing: '0.04em',
-  },
-} as const;
-```
-
-### Paso 3 — Aplicar en los componentes
-
-ANTES en `HomeClinicalDashboard.tsx`:
-```tsx
-<h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
-  Prioridades Inviolables del Día
-</h3>
-```
-
-DESPUÉS:
-```tsx
-import { typo } from '../../styles/typography';
-
-<h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>
-  Prioridades del Día
-</h3>
-```
-
-### Paso 4 — Reducir longitud de textos en badges y labels
-
-El label `"REGLA TDAH: MÁXIMO 3 TAREAS HOY"` tiene 32 caracteres.
-Los labels micro deben tener máximo 3 palabras. Propuesta: `"MÁXIMO 3 TAREAS"`.
-
-El label `"REGULACIÓN EMOCIONAL & PERMISO"` → reemplazar por `"PRINCIPIOS"`.
+### Estructura propuesta para tab "AHORA":
 [Hero: Bloque actual + Tarea actual] ← Ocupa 60% del viewport
 [Tres tareas del día en lista compacta] ← Expandible bajo demanda
 [Botón "Ver más herramientas" → drawer] ← Workflow, principios, energía dentro del drawer

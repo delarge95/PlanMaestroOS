@@ -46,11 +46,11 @@ body {
   margin: 0;
   overflow-x: clip;
   background:
-    radial-gradient(circle at 72% 18%, rgba(119, 231, 255, 0.1), transparent 25rem),
-    radial-gradient(circle at 18% 22%, rgba(129, 246, 176, 0.08), transparent 22rem),
-    linear-gradient(180deg, rgba(239, 255, 246, 0.034), transparent 24rem),
-    repeating-linear-gradient(90deg, rgba(174, 255, 224, 0.032) 0 1px, transparent 1px 88px),
-    repeating-linear-gradient(0deg, rgba(174, 255, 224, 0.018) 0 1px, transparent 1px 74px),
+    radial-gradient(circle at 72% 18%, rgba(10, 132, 255, 0.05), transparent 25rem),
+    radial-gradient(circle at 18% 22%, rgba(255, 159, 10, 0.04), transparent 22rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24rem),
+    repeating-linear-gradient(90deg, var(--color-border-subtle) 0 1px, transparent 1px 88px),
+    repeating-linear-gradient(0deg, var(--color-border-subtle) 0 1px, transparent 1px 74px),
     var(--bg);
   color: var(--text);
   font-family: var(--body);

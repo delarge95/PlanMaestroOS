@@ -64,11 +64,11 @@ export default function DailyOperatingView() {
 
   const getCategoryColor = (cat: string) => {
     switch (cat) {
-      case 'clinical': return '#bf5af2';
-      case 'fitness': return '#30d158';
-      case 'career': return '#0a84ff';
-      case 'german': return '#ff9f0a';
-      default: return '#64d2ff';
+      case 'clinical': return 'var(--color-accent-primary)';
+      case 'fitness': return 'var(--color-state-done)';
+      case 'career': return 'var(--color-accent-primary)';
+      case 'german': return 'var(--color-accent-warning)';
+      default: return 'var(--color-accent-primary)';
     }
   };
 
@@ -78,7 +78,7 @@ export default function DailyOperatingView() {
         {/* HEADER CONTROLS */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: '#64d2ff', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 800 }}>
               CENTRO OPERATIVO DIARIO
             </span>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
@@ -239,7 +239,7 @@ export default function DailyOperatingView() {
               <button
                 type="button"
                 onClick={() => handleReorganizeRestOfDay(selectedBlock.id)}
-                style={{ background: 'rgba(100, 210, 255, 0.2)', border: '1px solid rgba(100, 210, 255, 0.4)', color: '#64d2ff', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
+                style={{ background: 'rgba(100, 210, 255, 0.2)', border: '1px solid rgba(100, 210, 255, 0.4)', color: 'var(--color-accent-primary)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
               >
                 🔄 Reorganizar Resto del Día con Margen
               </button>
