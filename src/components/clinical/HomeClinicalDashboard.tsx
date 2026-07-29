@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import ClinicalCurrentBlockPanel from './ClinicalCurrentBlockPanel';
+import FocusCard from './FocusCard';
 import SecondBrainInspector from '../docs/SecondBrainInspector';
 import FocusModeShell from './FocusModeShell';
 import ErrorBoundary from '../ErrorBoundary';
 import { typo } from '../../styles/typography';
+import { useAppStore } from '../../store/appStore';
 
 import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
 
 import MorningEveningWorkflowsModal from './MorningEveningWorkflowsModal';
-import type { EnergyLevel } from '../../data/canonicalDomainModel';
 
 const TABS = [
   { id: 'now', label: '🎯 AHORA' },
@@ -17,12 +18,18 @@ const TABS = [
 ];
 
 export default function HomeClinicalDashboard() {
-  const [activeTab, setActiveTab] = useState<string>('now');
-  const [isFocusActive, setIsFocusActive] = useState<boolean>(false);
+  // AUDIT-08: Estado global persistente via Zustand
+  const activeTab = useAppStore(s => s.clinicalActiveTab);
+  const setActiveTab = useAppStore(s => s.setClinicalActiveTab);
+  const isFocusActive = useAppStore(s => s.isFocusActive);
+  const setIsFocusActive = useAppStore(s => s.setFocusActive);
+  const currentEnergy = useAppStore(s => s.currentEnergy);
+  const setCurrentEnergy = useAppStore(s => s.setCurrentEnergy);
+
+  // UI-only states: no necesitan persistir
   const [workflowMode, setWorkflowMode] = useState<'morning' | 'evening' | null>(null);
   const [showToolsDrawer, setShowToolsDrawer] = useState<boolean>(false);
   const [showPrinciples, setShowPrinciples] = useState<boolean>(false);
-  const [currentEnergy, setCurrentEnergy] = useState<EnergyLevel>('medium');
 
   return (
     <ErrorBoundary>
@@ -164,7 +171,14 @@ export default function HomeClinicalDashboard() {
           {/* TAB 1: AHORA */}
           {activeTab === 'now' && (
             <div key="now" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', animation: 'fadeIn 180ms ease-out' }}>
-              {/* HERO: BLOQUE ACTUAL (60% ATENCIÓN) */}
+              {/* HERO: FOCUS CARD (PASO 1 AUDIT-07) */}
+              <FocusCard
+                taskName="TwinSight MVP & Tesis Cierre"
+                blockEndsAt="11:40"
+                onStart={() => setIsFocusActive(true)}
+              />
+
+              {/* BLOQUE ACTUAL DETALLADO */}
               <ClinicalCurrentBlockPanel
                 isFocusModeActive={isFocusActive}
                 onToggleFocusMode={() => setIsFocusActive(!isFocusActive)}
@@ -185,10 +199,10 @@ export default function HomeClinicalDashboard() {
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>
-                      Prioridades del Día
+                      Tareas del día
                     </h3>
                     <span style={{ ...typo.micro, color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: '4px 10px', borderRadius: '999px' }}>
-                      MÁXIMO 3 TAREAS
+                      Hoy: 3 tareas
                     </span>
                   </div>
 
@@ -198,7 +212,7 @@ export default function HomeClinicalDashboard() {
                         <strong style={{ ...typo.body, fontWeight: 700, color: 'var(--color-text-primary)', display: 'block' }}>1. TwinSight MVP & Tesis</strong>
                         <span style={{ ...typo.label, color: 'var(--color-accent-primary)' }}>Bloque A (09:20 - 11:40) • Versión Mala</span>
                       </div>
-                      <span style={{ ...typo.micro, color: 'var(--color-state-done)', background: 'var(--color-state-done-soft)', padding: '2px 6px', borderRadius: '4px' }}>En curso</span>
+                      <span style={{ ...typo.micro, color: 'var(--color-state-done)', background: 'var(--color-state-done-soft)', padding: '2px 6px', borderRadius: '4px' }}>Activa</span>
                     </div>
 
                     <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -219,7 +233,7 @@ export default function HomeClinicalDashboard() {
                   </div>
                 </div>
 
-                {/* PASO 2: PRINCIPIOS TERAPÉUTICOS COLAPSABLES */}
+                {/* PASO 2: RECORDATORIOS COLAPSABLES */}
                 <button
                   type="button"
                   onClick={() => setShowPrinciples(p => !p)}
@@ -240,7 +254,7 @@ export default function HomeClinicalDashboard() {
                     transition: 'all 150ms ease'
                   }}
                 >
-                  <span>🧠 Principios Terapéuticos Activos</span>
+                  <span>🧠 Recordatorios</span>
                   <span>{showPrinciples ? '▲' : '▼'}</span>
                 </button>
 

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InertiaRescueModal from '../clinical/InertiaRescueModal';
 
@@ -34,6 +34,12 @@ export default function DailyOperatingView() {
   const [blocks, setBlocks] = useState<DailyBlock[]>(() => JSON.parse(JSON.stringify(initialDailyBlocks)));
   const [isRescueModalOpen, setIsRescueModalOpen] = useState(false);
   const [selectedBlock, setSelectedBlock] = useState<DailyBlock | null>(null);
+  const [showCompleteFeedback, setShowCompleteFeedback] = useState<boolean>(false);
+
+  const triggerCompletionFeedback = () => {
+    setShowCompleteFeedback(true);
+    setTimeout(() => setShowCompleteFeedback(false), 1200);
+  };
 
   const toggleStatus = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -41,6 +47,9 @@ export default function DailyOperatingView() {
     setBlocks(prev => prev.map(b => {
       if (b.id !== id) return b;
       const nextStatus = b.status === 'pending' ? 'in_progress' : b.status === 'in_progress' ? 'completed' : 'pending';
+      if (nextStatus === 'completed') {
+        triggerCompletionFeedback();
+      }
       return { ...b, status: nextStatus };
     }));
   };
@@ -291,6 +300,13 @@ export default function DailyOperatingView() {
           onClose={() => setIsRescueModalOpen(false)}
           currentTaskName="Bloque A: Trabajo Profundo"
         />
+
+        {/* AUDIT-07: COMPLETION FEEDBACK OVERLAY */}
+        {showCompleteFeedback && (
+          <div className="task-complete-feedback">
+            ✓ Listo
+          </div>
+        )}
       </div>
     </ErrorBoundary>
   );

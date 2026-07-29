@@ -1,5 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import styles from './ClinicalExecutionHub.module.css';
 
 interface BioFeedbackLog {
   date: string;
@@ -193,38 +194,10 @@ export default function ClinicalExecutionHub() {
 
   return (
     <ErrorBoundary>
-      <div
-        style={{
-          background: 'rgba(10, 15, 22, 0.8)',
-          backdropFilter: 'blur(28px)',
-          WebkitBackdropFilter: 'blur(28px)',
-          border: '1px solid rgba(217, 70, 239, 0.25)',
-          borderRadius: '24px',
-          padding: '24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-          color: 'var(--color-text-primary)'
-        }}
-      >
+      <div className={styles.container}>
         {/* TOAST NOTIFICATION */}
         {toastMsg && (
-          <div
-            style={{
-              position: 'fixed',
-              bottom: '24px',
-              right: '24px',
-              background: 'linear-gradient(135deg, #d946ef, #8b5cf6)',
-              color: 'var(--color-text-primary)',
-              padding: '14px 22px',
-              borderRadius: '14px',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              boxShadow: '0 10px 30px rgba(217, 70, 239, 0.5)',
-              zIndex: 99999
-            }}
-          >
+          <div className={styles.toast}>
             {toastMsg}
           </div>
         )}
@@ -241,7 +214,7 @@ export default function ClinicalExecutionHub() {
           </div>
 
           {/* TAB NAVIGATION */}
-          <div style={{ display: 'flex', gap: '8px', background: 'rgba(0,0,0,0.4)', padding: '4px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+          <div className={styles.tabBar}>
             <button
               type="button"
               onClick={() => setActiveTab('checkin')}
