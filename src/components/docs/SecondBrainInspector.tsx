@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Props {
@@ -16,7 +16,7 @@ const SAMPLE_OBSIDIAN_NOTES = [
 > **Vault Status**: Sincronizado con Obsidian local.
 > **Última modificación**: Hoy 09:30
 
-## Principios Inviolables
+## Principios Guía
 - **TwinSight Manda**: Todo apoya a la tesis y caso de estudio principal.
 - **25 Horas de Trabajo Profundo**: Diseñado para energía real TDAH.
 - **Hábito Diario de Alemán**: 13:30 a 14:00 (25 min sin interrupción).

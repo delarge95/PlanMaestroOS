@@ -574,7 +574,7 @@ export default function ClinicalExecutionHub() {
               </div>
 
               <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '12px', fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
-                💡 <strong style={{ color: 'var(--color-text-primary)' }}>Regla inviolable de corte:</strong> "Suficientemente terminado" es el único estándar requerido hoy. Un borrador feo guardado supera a la parálisis perfecta.
+                💡 <strong style={{ color: 'var(--color-text-primary)' }}>Criterio de corte:</strong> "Suficientemente terminado" es el único estándar requerido hoy. Un borrador feo guardado supera a la parálisis perfecta.
               </div>
             </div>
           </div>

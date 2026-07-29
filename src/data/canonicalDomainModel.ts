@@ -125,7 +125,7 @@ export const DEFAULT_CANONICAL_ENTITIES: CanonicalEntity[] = [
     minViableVersion: '3 series de Spanish Squats + 2 series de fondos en anillas en casa (15 min).',
     normalVersion: 'Sesión completa de 45 min en gym con 1 serie efectiva por ejercicio RPE 7.',
     extendedVersion: 'Sesión de 60 min con trabajo de skills de Handstand.',
-    clinicalConstraints: ['Usar anillas en empujes para rotación natural', 'Tempo HSR 3-0-3 obligatorio', 'Dolor < 3/10'],
+    clinicalConstraints: ['Usar anillas en empujes para rotación natural', 'Tempo HSR 3-0-3 recomendado', 'Dolor < 3/10'],
     reviewCadence: 'weekly',
     lastUpdated: '2026-07-26'
   }

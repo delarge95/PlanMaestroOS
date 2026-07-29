@@ -17,13 +17,13 @@ interface DailyBlock {
 
 const initialDailyBlocks: DailyBlock[] = [
   { id: 'b1', time: '05:30 - 06:00', shortTitle: '🌅 Despertar 05:30', fullTitle: 'Despertar 05:30 & Salida al Gimnasio', category: 'general', rule: 'Ropa lista desde anoche. Cero celular recreativo.', minViableAction: 'Ponerse los zapatos sin pensar.', status: 'completed' },
-  { id: 'b2', time: '06:20 - 06:40', shortTitle: '💪 Prehab AM', fullTitle: 'Prehab AM: Muñecas, Nerve Glides & Spanish Squats', category: 'fitness', rule: 'Spanish Squats 3-5x45s obligatorios para rodillas.', minViableAction: '1 serie isométrica de 30s en pared.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Guía Prehab' },
+  { id: 'b2', time: '06:20 - 06:40', shortTitle: '💪 Prehab AM', fullTitle: 'Prehab AM: Muñecas, Nerve Glides & Spanish Squats', category: 'fitness', rule: 'Spanish Squats 3-5x45s sugeridos para rodillas.', minViableAction: '1 serie isométrica de 30s en pared.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Guía Prehab' },
   { id: 'b3', time: '06:40 - 06:55', shortTitle: '🤸 Skill Work', fullTitle: 'Skill Work Técnico: Wall Handstand & Support Hold', category: 'fitness', rule: 'Wall Handstand (30-45s) y Support Hold en anillas.', minViableAction: '1 aguante de 20s en pared.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Skills FitApp' },
   { id: 'b4', time: '06:55 - 07:40', shortTitle: '🏋️ Min-Max AM', fullTitle: 'Bloque Min-Max AM Adaptado (Jeff Nippard)', category: 'fitness', rule: '1-2 series a RIR 1-2. Anillas en empujes/fondos.', minViableAction: '1 serie efectiva al fallo técnico.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Logger Gym' },
   { id: 'b5', time: '09:00 - 09:20', shortTitle: '📝 Agenda TDAH', fullTitle: 'Planeación Diaria TDAH (Agenda Única)', category: 'clinical', rule: 'Elegir máximo 3 tareas escritas para hoy.', minViableAction: 'Escribir 1 sola prioridad en papel.', status: 'completed', actionUrl: '/app/clinical', actionLabel: 'Bio-Feedback' },
   { id: 'b6', time: '09:20 - 11:40', shortTitle: '🧠 TwinSight MVP', fullTitle: 'Bloque A: Trabajo Profundo (Tesis / TwinSight)', category: 'career', rule: 'Celular fuera del cuarto. Tarea 10 min + Versión Mala.', minViableAction: 'Escribir 1 borrador feo durante 10 min.', status: 'in_progress', actionUrl: '/app/career', actionLabel: 'TwinSight' },
   { id: 'b7', time: '12:00 - 13:30', shortTitle: '🥗 Almuerzo', fullTitle: 'Almuerzo & Descanso Digestivo (1h 30m)', category: 'general', rule: 'Cocinar, comer y descanso sin trabajo.', minViableAction: 'Servir comida y descansar 20m.', status: 'pending' },
-  { id: 'b8', time: '13:30 - 14:00', shortTitle: '🇩🇪 Alemán 25m', fullTitle: 'Estudio Diario de Alemán A1 (Hábito Inviolable)', category: 'german', rule: '5 min Duolingo + 20 min Libros/Audios A1 + IA.', minViableAction: '1 lección de 3 min en Duolingo.', status: 'pending', actionUrl: '/app/german', actionLabel: 'Alemán A1' },
+  { id: 'b8', time: '13:30 - 14:00', shortTitle: '🇩🇪 Alemán 25m', fullTitle: 'Estudio Diario de Alemán A1', category: 'german', rule: '5 min Duolingo + 20 min Libros/Audios A1 + IA.', minViableAction: '1 lección de 3 min en Duolingo.', status: 'pending', actionUrl: '/app/german', actionLabel: 'Alemán A1' },
   { id: 'b9', time: '14:00 - 14:40', shortTitle: '🎯 Sustentación CBT', fullTitle: 'Sustentación CBT (Exposición Graduada)', category: 'clinical', rule: 'Guion de 3 ideas. Max 10 min rumiación post-evento.', minViableAction: 'Leer el guion de 3 puntos en voz alta.', status: 'pending', actionUrl: '/app/clinical', actionLabel: 'Exposición' },
   { id: 'b10', time: '14:45 - 16:45', shortTitle: '💻 TwinSight Case', fullTitle: 'Bloque B: Producción MVP (TwinSight Case / GitHub)', category: 'career', rule: 'Cerrar activo público con criterios de terminado.', minViableAction: 'Hacer 1 commit en GitHub.', status: 'pending', actionUrl: '/app/career', actionLabel: 'GitHub' },
   { id: 'b11', time: '17:15 - 18:30', shortTitle: '🤸 Movilidad PM', fullTitle: 'PM Físico: Movilidad Cadera & Elephant Walks', category: 'fitness', rule: 'Elephant Walks 3x20, 90/90 switches, Rutina Thurin.', minViableAction: '10 Elephant Walks.', status: 'pending', actionUrl: '/app/fitness', actionLabel: 'Movilidad' },
@@ -35,6 +35,25 @@ export default function DailyOperatingView() {
   const [isRescueModalOpen, setIsRescueModalOpen] = useState(false);
   const [selectedBlock, setSelectedBlock] = useState<DailyBlock | null>(null);
   const [showCompleteFeedback, setShowCompleteFeedback] = useState<boolean>(false);
+  const [latestWorkoutSummary, setLatestWorkoutSummary] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    try {
+      const savedHistory = localStorage.getItem('fitapp_workout_history');
+      if (savedHistory) {
+        const history = JSON.parse(savedHistory);
+        if (Array.isArray(history) && history.length > 0) {
+          const latest = history[0];
+          setLatestWorkoutSummary(`${latest.routineTitle} (${latest.durationMinutes}m · ${latest.totalVolumeKg}kg)`);
+          setBlocks((prev) => prev.map((b) => (
+            b.id === 'b4' ? { ...b, status: 'completed' } : b
+          )));
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
 
   const triggerCompletionFeedback = () => {
     setShowCompleteFeedback(true);
@@ -122,7 +141,12 @@ export default function DailyOperatingView() {
             </h2>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+            {latestWorkoutSummary && (
+              <div style={{ background: 'rgba(48, 209, 88, 0.15)', border: '1px solid var(--color-state-done)', color: 'var(--color-state-done)', padding: '6px 12px', borderRadius: '10px', fontSize: '0.72rem', fontWeight: 600 }}>
+                🏋️ {latestWorkoutSummary}
+              </div>
+            )}
             <button
               type="button"
               onClick={() => setIsRescueModalOpen(true)}

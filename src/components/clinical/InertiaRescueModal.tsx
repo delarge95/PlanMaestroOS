@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Props {
@@ -95,7 +95,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)', padding: '14px', borderRadius: '16px' }}>
                 <strong style={{ fontSize: '0.88rem', color: 'var(--color-accent-danger)', display: 'block', marginBottom: '4px' }}>
-                  💡 Regla Inviolable de Inicio (10 Minutos):
+                  💡 Comprensa de inicio (10 Minutos):
                 </strong>
                 <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45 }}>
                   No tienes que terminar la tarea ni hacerla bien. Solo debes estar presente 10 minutos. Si a los 10 minutos quieres parar, estás clínicamente autorizado a hacerlo sin culpa.
@@ -235,7 +235,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ background: 'rgba(168, 85, 247, 0.08)', border: '1px solid rgba(168, 85, 247, 0.2)', padding: '14px', borderRadius: '16px' }}>
                 <strong style={{ fontSize: '0.88rem', color: 'var(--color-accent-primary)', display: 'block', marginBottom: '4px' }}>
-                  📌 Paso de Reentrada Obligatorio:
+                  📌 Paso de Reentrada Sugerido:
                 </strong>
                 <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45 }}>
                   Escribe el próximo paso exacto de 2 minutos para cuando retomes esta tarea (ej. "Abrir archivo X y editar línea 14").

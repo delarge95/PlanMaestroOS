@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import type { EnergyLevel } from '../../data/canonicalDomainModel';
 
@@ -172,7 +172,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                   </p>
 
                   <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(48,209,88,0.3)', padding: '14px', borderRadius: '14px', fontSize: '0.84rem', color: 'var(--color-state-done)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <strong>✅ Tus 3 Prioridades Inviolables para Hoy:</strong>
+                    <strong>✅ Tus 3 tareas elegidas para hoy:</strong>
                     <span>1. TwinSight MVP & Tesis (Bloque A)</span>
                     <span>2. Hábito 13:30 Alemán A1 (25 min)</span>
                     <span>3. Ejercicio FitApp / Movilidad HSR</span>

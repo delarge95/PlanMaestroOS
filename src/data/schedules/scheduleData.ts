@@ -202,7 +202,7 @@ function buildGrid(phase: number) {
           activity: germanTopics[dIdx],
           domain: 'german',
           module: 'Módulo Aprendizaje de Alemán A1 (Hábito Diario v3)',
-          rule: 'Inviolable 7 días/semana. 5 min Duolingo + 20 min Libros/Audios A1 + IA Conversacional.',
+          rule: 'Hábito diario 7 días/semana. 5 min Duolingo + 20 min Libros/Audios A1 + IA Conversacional.',
           sourceRef: 'plan_maestro_v3.md#modulo-aleman',
           microActions: ['Completar 1 lección Duolingo (5m)', 'Leer/escuchar capítulo A1 (15m)', 'Practicar 3 oraciones con IA (5m)']
         };

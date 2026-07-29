@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Props {
@@ -125,7 +125,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             gap: '16px'
           }}>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', fontWeight: 700 }}>
-              Las 3 Prioridades Inviolables del Día
+              Las 3 tareas principales del día
             </span>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
