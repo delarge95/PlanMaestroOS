@@ -1,4 +1,4 @@
-﻿---
+---
 import '../styles/global.css';
 
 interface Props {
@@ -438,7 +438,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         errDiv.style.right = '20px';
         errDiv.style.padding = '20px';
         errDiv.style.background = 'var(--color-accent-danger)';
-        errDiv.style.color = '#fff';
+        errDiv.style.color = 'var(--color-text-primary)';
         errDiv.style.zIndex = '999999';
         errDiv.style.borderRadius = '8px';
         errDiv.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
@@ -456,7 +456,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         errDiv.style.right = '20px';
         errDiv.style.padding = '20px';
         errDiv.style.background = 'var(--color-accent-warning)';
-        errDiv.style.color = '#fff';
+        errDiv.style.color = 'var(--color-text-primary)';
         errDiv.style.zIndex = '999999';
         errDiv.style.borderRadius = '8px';
         errDiv.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
@@ -473,8 +473,8 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         errDiv.style.left = '20px';
         errDiv.style.right = '20px';
         errDiv.style.padding = '20px';
-        errDiv.style.background = '#8b5cf6';
-        errDiv.style.color = '#fff';
+        errDiv.style.background = 'var(--color-accent-danger)';
+        errDiv.style.color = 'var(--color-text-primary)';
         errDiv.style.zIndex = '999999';
         errDiv.style.borderRadius = '8px';
         errDiv.innerHTML = `<strong>ASTRO HYDRATION ERROR:</strong> ${e.detail}`;
