@@ -117,6 +117,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         <!-- HEADER CONTEXTUAL -->
         <header class="app-header">
           <div class="header-left">
+            <span class="breadcrumb-text">PLAN MAESTRO →</span>
             <span class="domain-pill" style={`--pill-color: ${activeColor}`}>
               {activeDomain.toUpperCase()}
             </span>
@@ -344,7 +345,14 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
       .header-left {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 10px;
+      }
+      .breadcrumb-text {
+        font-family: 'Azeret Mono', monospace;
+        font-size: var(--font-size-micro, 0.68rem);
+        color: var(--color-text-tertiary);
+        letter-spacing: 0.04em;
+        font-weight: 600;
       }
       .domain-pill {
         font-family: 'Azeret Mono', monospace;
