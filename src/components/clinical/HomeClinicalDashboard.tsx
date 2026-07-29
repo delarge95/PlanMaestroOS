@@ -6,53 +6,78 @@ import FocusModeShell from './FocusModeShell';
 import ErrorBoundary from '../ErrorBoundary';
 import { typo } from '../../styles/typography';
 import { useAppStore } from '../../store/appStore';
+import Button from '../ui/Button';
+import styles from './HomeClinicalDashboard.module.css';
 
 import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
-
 import MorningEveningWorkflowsModal from './MorningEveningWorkflowsModal';
 
 const TABS = [
-  { id: 'now', label: '🎯 AHORA' },
+  { id: 'now', label: '🎯 Ahora' },
   { id: 'rescue', label: '🛡️ Rescate' },
   { id: 'second_brain', label: '🧠 2º Cerebro' }
 ];
 
+interface DailyTask {
+  id: string;
+  title: string;
+  meta: string;
+  status: 'active' | 'pending';
+  done: boolean;
+}
+
 export default function HomeClinicalDashboard() {
   // AUDIT-08: Estado global persistente via Zustand
-  const activeTab = useAppStore(s => s.clinicalActiveTab);
-  const setActiveTab = useAppStore(s => s.setClinicalActiveTab);
-  const isFocusActive = useAppStore(s => s.isFocusActive);
-  const setIsFocusActive = useAppStore(s => s.setFocusActive);
-  const currentEnergy = useAppStore(s => s.currentEnergy);
-  const setCurrentEnergy = useAppStore(s => s.setCurrentEnergy);
+  const activeTab = useAppStore((state) => state.clinicalActiveTab);
+  const setActiveTab = useAppStore((state) => state.setClinicalActiveTab);
+  const isFocusActive = useAppStore((state) => state.isFocusActive);
+  const setIsFocusActive = useAppStore((state) => state.setFocusActive);
+  const currentEnergy = useAppStore((state) => state.currentEnergy);
+  const setCurrentEnergy = useAppStore((state) => state.setCurrentEnergy);
 
-  // UI-only states: no necesitan persistir
+  // UI-only states: no necesitan persistir entre sesiones
   const [workflowMode, setWorkflowMode] = useState<'morning' | 'evening' | null>(null);
-  const [showToolsDrawer, setShowToolsDrawer] = useState<boolean>(false);
-  const [showPrinciples, setShowPrinciples] = useState<boolean>(false);
+  const [showToolsDrawer, setShowToolsDrawer] = useState(false);
+  const [showPrinciples, setShowPrinciples] = useState(false);
+  const [deferredUntil, setDeferredUntil] = useState<string | null>(null);
+  const [completionFlash, setCompletionFlash] = useState(false);
+  const [dailyTasks, setDailyTasks] = useState<DailyTask[]>([
+    { id: 'twinsight', title: 'TwinSight MVP & Tesis', meta: 'Bloque A · 09:20 - 11:40', status: 'active', done: false },
+    { id: 'cbt', title: 'Ensayo Sustentación CBT', meta: 'Exposición · 14:00 - 14:40', status: 'pending', done: false },
+    { id: 'german', title: 'Alemán A1 Diario', meta: '13:30 - 14:00 · 25 min', status: 'pending', done: false }
+  ]);
+
+  const handleTaskToggle = (taskId: string) => {
+    setDailyTasks((previousTasks) => {
+      const targetTask = previousTasks.find((task) => task.id === taskId);
+      const nextTasks = previousTasks.map((task) => (
+        task.id === taskId ? { ...task, done: !task.done } : task
+      ));
+      if (targetTask && !targetTask.done) {
+        setCompletionFlash(true);
+        window.setTimeout(() => setCompletionFlash(false), 1200);
+      }
+      return nextTasks;
+    });
+  };
+
+  // AUDIT-07: Defer action stores reentry time
+  const handleDeferFocus = () => {
+    const reentryAt = new Date(Date.now() + 30 * 60 * 1000);
+    setDeferredUntil(reentryAt.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }));
+    setIsFocusActive(false);
+  };
 
   return (
     <ErrorBoundary>
       <FocusModeShell isActive={isFocusActive} onExit={() => setIsFocusActive(false)}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-          {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
-          <div style={{
-            position: 'sticky',
-            top: '68px',
-            zIndex: 85,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 'var(--space-xs)',
-            background: 'var(--color-surface-base)',
-            backdropFilter: 'blur(30px) saturate(190%)',
-            WebkitBackdropFilter: 'blur(30px) saturate(190%)',
-            padding: '6px',
-            borderRadius: '18px',
-            border: '1px solid var(--color-border-visible)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)',
-            overflowX: 'auto',
-            maxWidth: '100%'
-          }}>
+        <div className={styles.wrapper}>
+
+          {/* AUDIT-04: Breadcrumb contextual */}
+          <p className={styles.breadcrumb}>Plan Maestro → Clínica</p>
+
+          {/* AUDIT-04: Tab bar with key transitions */}
+          <div className={styles.tabBar}>
             {TABS.map((tab) => {
               const isSelected = activeTab === tab.id;
               return (
@@ -60,19 +85,7 @@ export default function HomeClinicalDashboard() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  style={{
-                    ...typo.label,
-                    background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
-                    color: isSelected ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
-                    border: 'none',
-                    padding: '8px 18px',
-                    borderRadius: '12px',
-                    fontWeight: isSelected ? 700 : 500,
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap',
-                    boxShadow: isSelected ? '0 3px 12px rgba(10, 132, 255, 0.35)' : 'none',
-                    transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
-                  }}
+                  className={`${styles.tabBtn} ${isSelected ? styles.tabBtnActive : ''}`}
                 >
                   {tab.label}
                 </button>
@@ -80,84 +93,92 @@ export default function HomeClinicalDashboard() {
             })}
           </div>
 
-          {/* COMPACT TOOLS BAR (PASO 1: SINGLE DISCREET ACTIVATOR) */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-sm)' }}>
-            <button
+          {/* Toolbar: Herramientas + nivel de energía */}
+          <div className={styles.toolbarRow}>
+            <Button
               type="button"
-              onClick={() => setShowToolsDrawer(!showToolsDrawer)}
-              style={{
-                ...typo.label,
-                background: 'transparent',
-                border: '1px solid var(--color-border-visible)',
-                color: 'var(--color-text-secondary)',
-                padding: '6px 14px',
-                borderRadius: '10px',
-                fontWeight: 500,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 'var(--space-xs)'
-              }}
+              variant="secondary"
+              size="sm"
+              onClick={() => setShowToolsDrawer((previous) => !previous)}
+              aria-label="Abrir herramientas del día"
             >
-              ⚙️ Herramientas del día {showToolsDrawer ? '▲' : '▼'}
-            </button>
+              ⚙️ Herramientas {showToolsDrawer ? '▲' : '▼'}
+            </Button>
 
             <span style={{ ...typo.label, color: 'var(--color-text-tertiary)' }}>
-              Energía: <strong style={{ color: 'var(--color-text-primary)', textTransform: 'uppercase' }}>{currentEnergy}</strong>
+              Energía: <strong style={{ color: 'var(--color-text-primary)', textTransform: 'capitalize' }}>{currentEnergy}</strong>
             </span>
           </div>
 
-          {/* EXPANDABLE TOOLS & WORKFLOW LAUNCHERS DRAWER */}
-          {showToolsDrawer && (
-            <div style={{
-              background: 'var(--color-surface-raised)',
-              border: '1px solid var(--color-border-visible)',
-              borderRadius: '16px',
-              padding: 'var(--space-md)',
-              display: 'flex',
-              gap: 'var(--space-sm)',
-              flexWrap: 'wrap',
-              alignItems: 'center'
-            }}>
-              <button
-                type="button"
-                onClick={() => { setWorkflowMode('morning'); setShowToolsDrawer(false); }}
-                style={{
-                  ...typo.label,
-                  background: 'var(--color-accent-primary-soft)',
-                  border: '1px solid var(--color-border-visible)',
-                  color: 'var(--color-accent-primary)',
-                  padding: '8px 16px',
-                  borderRadius: '12px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}
-              >
-                🌅 Modo Inicio (60s)
-              </button>
+          {/* AUDIT-07: Defer banner con tiempo de reentrada */}
+          {deferredUntil && (
+            <div className={styles.deferBanner}>
+              ⏳ Reentrada sugerida a las <strong>{deferredUntil}</strong>. Escribe la primera acción de 2 minutos antes de volver.
+            </div>
+          )}
 
-              <button
-                type="button"
-                onClick={() => { setWorkflowMode('evening'); setShowToolsDrawer(false); }}
+          {/* AUDIT-08: Herramientas como drawer/modal accesible */}
+          {showToolsDrawer && (
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Herramientas del día"
+              style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: 200,
+                background: 'rgba(0, 0, 0, 0.58)',
+                display: 'flex',
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+                padding: 'var(--space-lg)'
+              }}
+              onClick={() => setShowToolsDrawer(false)}
+            >
+              <div
                 style={{
-                  ...typo.label,
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid var(--color-border-subtle)',
-                  color: 'var(--color-text-secondary)',
-                  padding: '8px 16px',
-                  borderRadius: '12px',
-                  fontWeight: 500,
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
+                  width: 'min(760px, 100%)',
+                  background: 'var(--color-surface-base)',
+                  border: '1px solid var(--color-border-visible)',
+                  borderRadius: '20px',
+                  padding: 'var(--space-lg)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--space-md)',
+                  boxShadow: '0 24px 80px rgba(0, 0, 0, 0.6)'
                 }}
+                onClick={(event) => event.stopPropagation()}
               >
-                🌙 Modo Cierre (3m)
-              </button>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--space-md)', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <div>
+                    <h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>Herramientas del día</h3>
+                    <p style={{ ...typo.label, marginTop: 'var(--space-xs)', color: 'var(--color-text-secondary)' }}>
+                      Workflow, energía y salida rápida.
+                    </p>
+                  </div>
+                  <Button variant="ghost" size="sm" onClick={() => setShowToolsDrawer(false)} aria-label="Cerrar herramientas">Cerrar</Button>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+                  <span style={{ ...typo.label, color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>Nivel de energía</span>
+                  <div style={{ display: 'flex', gap: 'var(--space-xs)', flexWrap: 'wrap' }}>
+                    {(['high', 'medium', 'low', 'crisis'] as const).map((level) => (
+                      <Button key={level} variant={currentEnergy === level ? 'primary' : 'secondary'} size="sm" onClick={() => setCurrentEnergy(level)}>
+                        {level === 'crisis' ? '⚠ Crisis' : level === 'high' ? '⚡ Alta' : level === 'medium' ? '○ Media' : '▽ Baja'}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+                  <Button variant="secondary" size="md" onClick={() => { setWorkflowMode('morning'); setShowToolsDrawer(false); }}>
+                    🌅 Modo Inicio
+                  </Button>
+                  <Button variant="ghost" size="md" onClick={() => { setWorkflowMode('evening'); setShowToolsDrawer(false); }}>
+                    🌙 Modo Cierre
+                  </Button>
+                </div>
+              </div>
             </div>
           )}
 
@@ -167,120 +188,90 @@ export default function HomeClinicalDashboard() {
             onSelectEnergy={(level) => setCurrentEnergy(level)}
           />
 
-          {/* TAB "AHORA" - FOCO UNIFICADO COLUMNA ÚNICA (PASO 3) */}
-          {/* TAB 1: AHORA */}
+          {/* AUDIT-07: Completion flash overlay */}
+          {completionFlash && <div className="task-complete-feedback">✓</div>}
+
+          {/* AUDIT-04: Tab content with key for fade transition */}
           {activeTab === 'now' && (
-            <div key="now" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', animation: 'fadeIn 180ms ease-out' }}>
-              {/* HERO: FOCUS CARD (PASO 1 AUDIT-07) */}
+            <div key="now" className={styles.tabContent}>
+              {/* AUDIT-07 Paso 1: FocusCard hero */}
               <FocusCard
                 taskName="TwinSight MVP & Tesis Cierre"
                 blockEndsAt="11:40"
                 onStart={() => setIsFocusActive(true)}
+                onDefer={handleDeferFocus}
+                deferredUntil={deferredUntil}
               />
 
-              {/* BLOQUE ACTUAL DETALLADO */}
               <ClinicalCurrentBlockPanel
                 isFocusModeActive={isFocusActive}
                 onToggleFocusMode={() => setIsFocusActive(!isFocusActive)}
               />
 
-              {/* COLUMNA ÚNICA: PRIORIDADES DEL DÍA (COMPACTO) */}
+              {/* Tareas del día */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-                {/* 3 TASKS CARD */}
-                <div style={{
-                  background: 'var(--color-surface-base)',
-                  backdropFilter: 'blur(40px)',
-                  border: '1px solid var(--color-border-subtle)',
-                  borderRadius: '20px',
-                  padding: 'var(--space-lg)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-md)'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>
-                      Tareas del día
-                    </h3>
-                    <span style={{ ...typo.micro, color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: '4px 10px', borderRadius: '999px' }}>
+                <div className={styles.taskCard}>
+                  <div className={styles.taskCardHeader}>
+                    <h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>Tareas del día</h3>
+                    <span style={{ ...typo.micro, color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: 'var(--space-xs) var(--space-sm)', borderRadius: '999px' }}>
                       Hoy: 3 tareas
                     </span>
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-accent-primary)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <strong style={{ ...typo.body, fontWeight: 700, color: 'var(--color-text-primary)', display: 'block' }}>1. TwinSight MVP & Tesis</strong>
-                        <span style={{ ...typo.label, color: 'var(--color-accent-primary)' }}>Bloque A (09:20 - 11:40) • Versión Mala</span>
-                      </div>
-                      <span style={{ ...typo.micro, color: 'var(--color-state-done)', background: 'var(--color-state-done-soft)', padding: '2px 6px', borderRadius: '4px' }}>Activa</span>
-                    </div>
-
-                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <strong style={{ ...typo.body, fontWeight: 700, color: 'var(--color-text-primary)', display: 'block' }}>2. Ensayo Sustentación CBT</strong>
-                        <span style={{ ...typo.label, color: 'var(--color-text-secondary)' }}>Exposición (14:00 - 14:40) • 3 Ideas</span>
-                      </div>
-                      <span style={{ ...typo.micro, color: 'var(--color-text-tertiary)', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: '4px' }}>Pendiente</span>
-                    </div>
-
-                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <strong style={{ ...typo.body, fontWeight: 700, color: 'var(--color-text-primary)', display: 'block' }}>3. Alemán A1 Diario (v3)</strong>
-                        <span style={{ ...typo.label, color: 'var(--color-accent-warning)' }}>13:30 - 14:00 • 5m Duolingo + 20m A1</span>
-                      </div>
-                      <span style={{ ...typo.micro, color: 'var(--color-text-tertiary)', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: '4px' }}>Pendiente</span>
-                    </div>
+                    {dailyTasks.map((task, index) => (
+                      <button
+                        key={task.id}
+                        type="button"
+                        onClick={() => handleTaskToggle(task.id)}
+                        className={`${styles.taskItem} ${task.status === 'active' && !task.done ? styles.taskItemActive : ''} ${task.done ? styles.taskItemDone : ''}`}
+                      >
+                        <div>
+                          <strong style={{ ...typo.body, fontWeight: 600, color: 'var(--color-text-primary)', display: 'block' }}>
+                            {index + 1}. {task.title}
+                          </strong>
+                          <span style={{ ...typo.label, color: task.status === 'active' && !task.done ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)' }}>
+                            {task.meta}
+                          </span>
+                        </div>
+                        <span style={{
+                          ...typo.micro,
+                          color: task.done ? 'var(--color-state-done)' : task.status === 'active' ? 'var(--color-accent-primary)' : 'var(--color-text-tertiary)',
+                          background: task.done ? 'var(--color-state-done-soft)' : task.status === 'active' ? 'var(--color-accent-primary-soft)' : 'rgba(255,255,255,0.06)',
+                          padding: 'var(--space-xs) var(--space-sm)',
+                          borderRadius: '999px'
+                        }}>
+                          {task.done ? 'Hecha' : task.status === 'active' ? 'Activa' : 'Pendiente'}
+                        </span>
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                {/* PASO 2: RECORDATORIOS COLAPSABLES */}
+                {/* Recordatorios colapsables */}
                 <button
                   type="button"
-                  onClick={() => setShowPrinciples(p => !p)}
-                  style={{
-                    width: '100%',
-                    background: 'var(--color-surface-raised)',
-                    border: '1px solid var(--color-border-subtle)',
-                    borderRadius: '14px',
-                    padding: '12px 18px',
-                    color: 'var(--color-text-secondary)',
-                    fontSize: 'var(--font-size-label)',
-                    fontWeight: 500,
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    transition: 'all 150ms ease'
-                  }}
+                  onClick={() => setShowPrinciples((previous) => !previous)}
+                  className={styles.collapseBtn}
                 >
                   <span>🧠 Recordatorios</span>
                   <span>{showPrinciples ? '▲' : '▼'}</span>
                 </button>
 
                 {showPrinciples && (
-                  <div style={{
-                    background: 'var(--color-surface-base)',
-                    backdropFilter: 'blur(40px)',
-                    border: '1px solid var(--color-border-subtle)',
-                    borderRadius: '16px',
-                    padding: 'var(--space-md)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 'var(--space-sm)'
-                  }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', ...typo.body, color: 'var(--color-text-secondary)' }}>
-                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-state-done)' }}>
-                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Suficientemente Terminado &gt; Ideal:</strong>
-                        Cierra la tarea cuando cumpla el criterio mínimo sin seguir refinando indefinidamente.
+                  <div className={styles.principlesPanel}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', ...typo.body, color: 'var(--color-text-secondary)' }}>
+                      <div className={styles.principleItem} style={{ borderLeft: '3px solid var(--color-state-done)' }}>
+                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Suficientemente terminado &gt; Ideal:</strong>
+                        Cierra cuando cumpla el criterio mínimo, sin refinar indefinidamente.
                       </div>
-                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-primary)' }}>
-                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>El Descanso No Se Gana:</strong>
-                        El sueño y el ocio son parte de la salud mental y la función cognitiva, no un premio condicionado al rendimiento.
+                      <div className={styles.principleItem} style={{ borderLeft: '3px solid var(--color-accent-primary)' }}>
+                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>El descanso no se gana:</strong>
+                        El sueño y el ocio son parte de la salud mental, no un premio al rendimiento.
                       </div>
-                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-warning)' }}>
-                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Paso de Reentrada Escrito:</strong>
-                        Antes de levantarte de la mesa, deja escrita la primera acción exacta de 2 min.
+                      <div className={styles.principleItem} style={{ borderLeft: '3px solid var(--color-accent-warning)' }}>
+                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Paso de reentrada escrito:</strong>
+                        Antes de levantarte, deja escrita la primera acción exacta de 2 min.
                       </div>
                     </div>
                   </div>
@@ -289,19 +280,18 @@ export default function HomeClinicalDashboard() {
             </div>
           )}
 
-          {/* TAB 2: RESCUE PROTOCOL */}
           {activeTab === 'rescue' && (
-            <div key="rescue" style={{ animation: 'fadeIn 180ms ease-out' }}>
+            <div key="rescue" className={styles.tabContent}>
               <ClinicalUncompletedTaskProtocol />
             </div>
           )}
 
-          {/* TAB 3: SECOND BRAIN INSPECTOR */}
           {activeTab === 'second_brain' && (
-            <div key="second_brain" style={{ animation: 'fadeIn 180ms ease-out' }}>
+            <div key="second_brain" className={styles.tabContent}>
               <SecondBrainInspector />
             </div>
           )}
+
         </div>
       </FocusModeShell>
     </ErrorBoundary>

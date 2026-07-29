@@ -1,5 +1,5 @@
 // src/store/appStore.ts
-// AUDIT-08: Estado global persistente con Zustand
+// AUDIT-08: Estado global persistente con Zustand + persist middleware
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { EnergyLevel } from '../data/canonicalDomainModel';
@@ -23,23 +23,23 @@ interface AppState {
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      currentEnergy: 'medium',
+      currentEnergy: 'medium' as EnergyLevel,
       clinicalActiveTab: 'now',
       isFocusActive: false,
       schedulesActiveTab: 'daily',
 
-      setCurrentEnergy: (level) => set({ currentEnergy: level }),
-      setClinicalActiveTab: (tab) => set({ clinicalActiveTab: tab }),
-      setFocusActive: (active) => set({ isFocusActive: active }),
-      setSchedulesActiveTab: (tab) => set({ schedulesActiveTab: tab }),
+      setCurrentEnergy: (level: EnergyLevel) => set({ currentEnergy: level }),
+      setClinicalActiveTab: (tab: string) => set({ clinicalActiveTab: tab }),
+      setFocusActive: (active: boolean) => set({ isFocusActive: active }),
+      setSchedulesActiveTab: (tab: string) => set({ schedulesActiveTab: tab }),
     }),
     {
-      name: 'plan-maestro-state', // clave en localStorage
-      partialize: (state) => ({
+      name: 'plan-maestro-state-v2',
+      // AUDIT-08: Solo persiste estado navegacional; isFocusActive NO persiste
+      partialize: (state: AppState) => ({
         currentEnergy: state.currentEnergy,
         clinicalActiveTab: state.clinicalActiveTab,
         schedulesActiveTab: state.schedulesActiveTab,
-        // isFocusActive deliberadamente NO persiste → siempre arranca desactivado
       }),
     }
   )

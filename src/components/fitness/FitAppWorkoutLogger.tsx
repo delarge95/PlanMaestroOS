@@ -1,7 +1,9 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
+import { useAppStore } from '../../store/appStore';
+import type { EnergyLevel } from '../../data/canonicalDomainModel';
 
 interface LoggedSet {
   setNum: number;
@@ -96,11 +98,14 @@ const DEFAULT_ROUTINES = [
 ];
 
 export default function FitAppWorkoutLogger() {
+  const setCurrentEnergy = useAppStore((s) => s.setCurrentEnergy);
+
   const [selectedRoutineIndex, setSelectedRoutineIndex] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [activeTab, setActiveTab] = useState<'logger' | 'history' | 'calendar' | 'stats'>('logger');
+  const [perceivedEnergy, setPerceivedEnergy] = useState<EnergyLevel>('medium');
 
   // Active workout logs per exercise
   const [exerciseLogs, setExerciseLogs] = useState<Record<string, LoggedSet[]>>({});
@@ -276,6 +281,9 @@ export default function FitAppWorkoutLogger() {
       console.error(e);
     }
 
+    // AUDIT-06: Sync perceived post-workout energy to global store
+    setCurrentEnergy(perceivedEnergy);
+
     setIsSessionActive(false);
     setSessionStartTime(null);
   };
@@ -374,11 +382,38 @@ export default function FitAppWorkoutLogger() {
 
               <div>
                 {isSessionActive ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                     <div style={{ background: 'rgba(48, 209, 88, 0.15)', border: '1px solid rgba(48, 209, 88, 0.3)', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
                       <span style={{ fontSize: '0.68rem', color: 'var(--color-state-done)', display: 'block', fontWeight: 700 }}>TIEMPO TRANSCURRIDO</span>
                       <strong style={{ fontSize: '1.1rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-text-primary)' }}>{formatTime(elapsedSeconds)}</strong>
                     </div>
+
+                    {/* AUDIT-06: Energía percibida post-entrenamiento */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--color-text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>Energía al terminar</span>
+                      <div style={{ display: 'flex', gap: '6px' }}>
+                        {(['high', 'medium', 'low', 'crisis'] as const).map((level) => (
+                          <button
+                            key={level}
+                            type="button"
+                            onClick={() => setPerceivedEnergy(level)}
+                            style={{
+                              background: perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.06)',
+                              border: `1px solid ${perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.12)'}`,
+                              color: perceivedEnergy === level ? '#fff' : 'var(--color-text-secondary)',
+                              padding: '4px 10px',
+                              borderRadius: '8px',
+                              fontSize: '0.72rem',
+                              fontWeight: 600,
+                              cursor: 'pointer'
+                            }}
+                          >
+                            {level === 'high' ? '⚡ Alta' : level === 'medium' ? '○ Media' : level === 'low' ? '▽ Baja' : '⚠ Crisis'}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
                     <button
                       type="button"
                       onClick={handleFinishWorkout}

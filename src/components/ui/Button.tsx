@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
-export type ButtonSize = 'sm' | 'md';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps {
   variant?: ButtonVariant;
@@ -13,6 +13,7 @@ interface ButtonProps {
   style?: React.CSSProperties;
   className?: string;
   title?: string;
+  'aria-label'?: string;
 }
 
 const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
@@ -43,9 +44,11 @@ const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
   }
 };
 
+// AUDIT-05: Consistent tap targets — sm min 36px, md min 44px, lg min 52px
 const sizeStyles: Record<ButtonSize, React.CSSProperties> = {
-  sm: { padding: '6px 12px', fontSize: 'var(--font-size-label)', borderRadius: '8px' },
-  md: { padding: '10px 18px', fontSize: 'var(--font-size-body)', borderRadius: '12px' }
+  sm: { padding: '6px 14px', fontSize: 'var(--font-size-label)', borderRadius: '8px', minHeight: '36px', minWidth: '36px' },
+  md: { padding: '10px 18px', fontSize: 'var(--font-size-body)', borderRadius: '12px', minHeight: '44px', minWidth: '44px' },
+  lg: { padding: '14px 24px', fontSize: 'var(--font-size-body)', borderRadius: '14px', minHeight: '52px', minWidth: '52px' }
 };
 
 export function Button({
@@ -57,7 +60,8 @@ export function Button({
   type = 'button',
   style,
   className,
-  title
+  title,
+  'aria-label': ariaLabel
 }: ButtonProps) {
   return (
     <button
@@ -65,6 +69,8 @@ export function Button({
       onClick={onClick}
       disabled={disabled}
       title={title}
+      aria-label={ariaLabel}
+      aria-disabled={disabled}
       className={className}
       style={{
         ...variantStyles[variant],
@@ -78,6 +84,8 @@ export function Button({
         transition: 'all 150ms ease',
         fontFamily: 'var(--font-family-system)',
         lineHeight: 1.2,
+        // AUDIT-05: focus-visible outline applied via CSS class .btn-focus
+        outline: 'none',
         ...style
       }}
       onMouseDown={(e) => {
@@ -88,6 +96,15 @@ export function Button({
       }}
       onMouseLeave={(e) => {
         if (!disabled) e.currentTarget.style.transform = 'scale(1)';
+      }}
+      onFocus={(e) => {
+        if (!disabled) {
+          e.currentTarget.style.boxShadow = `${variantStyles[variant].boxShadow ?? ''}, 0 0 0 3px rgba(10, 132, 255, 0.5)`.trim().replace(/^,\s*/, '');
+        }
+      }}
+      onBlur={(e) => {
+        // Restore original boxShadow on blur
+        e.currentTarget.style.boxShadow = (variantStyles[variant] as React.CSSProperties).boxShadow as string ?? '';
       }}
     >
       {children}
