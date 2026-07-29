@@ -408,7 +408,7 @@ export default function FitAppWorkoutLogger() {
                               cursor: 'pointer'
                             }}
                           >
-                            {level === 'high' ? '⚡ Alta' : level === 'medium' ? '○ Media' : level === 'low' ? '▽ Baja' : '⚠ Crisis'}
+                            {level === 'high' ? 'Alta' : level === 'medium' ? 'Media' : level === 'low' ? 'Baja' : 'Soporte / Bajar ritmo'}
                           </button>
                         ))}
                       </div>

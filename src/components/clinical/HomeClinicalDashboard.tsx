@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { Settings2, ArrowLeft, ShieldAlert, BookOpen, Leaf } from 'lucide-react';
 import FocusCard from './FocusCard';
 import SecondBrainInspector from '../docs/SecondBrainInspector';
 import FocusModeShell from './FocusModeShell';
@@ -22,6 +23,8 @@ interface NextTask {
 }
 
 export default function HomeClinicalDashboard() {
+  const toolsButtonRef = useRef<HTMLButtonElement>(null);
+
   // Zustand global state
   const isFocusActive = useAppStore((state) => state.isFocusActive);
   const setIsFocusActive = useAppStore((state) => state.setFocusActive);
@@ -32,7 +35,7 @@ export default function HomeClinicalDashboard() {
 
   // Local UI state
   const [showToolsSheet, setShowToolsSheet] = useState(false);
-  const [activeToolPanel, setActiveToolPanel] = useState<'none' | 'rescue' | 'second_brain'>('none');
+  const [sheetSubView, setSheetSubView] = useState<'main' | 'rescue' | 'second_brain'>('main');
   const [workflowMode, setWorkflowMode] = useState<'morning' | 'evening' | null>(null);
   const [deferredUntil, setDeferredUntil] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -61,6 +64,22 @@ export default function HomeClinicalDashboard() {
     setToastMessage(`⏳ Tarea pospuesta ${minutes} min. Reentrada a las ${formatted}.`);
   };
 
+  const handleCloseToolsSheet = () => {
+    setShowToolsSheet(false);
+    setSheetSubView('main');
+    // Return focus to tools button
+    setTimeout(() => {
+      toolsButtonRef.current?.focus();
+    }, 50);
+  };
+
+  const energyLabels: Record<string, string> = {
+    high: 'Alta',
+    medium: 'Media',
+    low: 'Baja',
+    crisis: 'Soporte / Bajar ritmo'
+  };
+
   return (
     <ErrorBoundary>
       <FocusModeShell isActive={isFocusActive} onExit={() => setIsFocusActive(false)}>
@@ -77,15 +96,34 @@ export default function HomeClinicalDashboard() {
               </h1>
             </div>
 
+            {/* BOTÓN HERRAMIENTAS MODERNO CON ICONO LUCIDE Settings2 */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => setShowToolsSheet(true)}
+              <button
+                ref={toolsButtonRef}
+                type="button"
+                onClick={() => { setSheetSubView('main'); setShowToolsSheet(true); }}
                 aria-label="Abrir herramientas del día"
+                style={{
+                  background: 'var(--surface-elevated)',
+                  border: '1px solid var(--color-border-visible)',
+                  color: 'var(--text)',
+                  padding: '8px 14px',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: 'var(--font-size-label)',
+                  fontWeight: 550,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-2)',
+                  transition: 'all 150ms var(--ease-standard)',
+                  outline: 'none'
+                }}
+                onFocus={(e) => { e.currentTarget.style.boxShadow = '0 0 0 3px var(--focus)'; }}
+                onBlur={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
               >
-                ⚙️ Herramientas
-              </Button>
+                <Settings2 size={18} aria-hidden="true" style={{ color: 'var(--color-accent-primary)' }} />
+                <span>Herramientas</span>
+              </button>
 
               <Menu
                 triggerLabel="Opciones de pantalla"
@@ -93,7 +131,7 @@ export default function HomeClinicalDashboard() {
                   {
                     id: 'simple_mode',
                     label: isSimpleMode ? 'Desactivar Modo Simple' : 'Activar Modo Simple',
-                    icon: '🌱',
+                    icon: <Leaf size={16} />,
                     onClick: toggleSimpleMode
                   },
                   {
@@ -151,104 +189,124 @@ export default function HomeClinicalDashboard() {
             </div>
           </div>
 
-          {/* 3. RECORDATORIOS Y PRINCIPIOS TERAPÉUTICOS (SOLO BAJO DEMANDA) */}
+          {/* 3. RECORDATORIOS (TITULOS DE 1 LÍNEA CON DETALLE EN DISCLOSURE) */}
           {!isSimpleMode && (
             <Disclosure label="Recordatorios de regulación cognitiva" summary="3 principios">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)' }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: 'var(--space-2) var(--space-3)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--color-state-done)' }}>
-                  <strong style={{ color: 'var(--text)', display: 'block' }}>Suficientemente terminado &gt; Ideal:</strong>
-                  Cierra la entrega cuando cumpla el criterio mínimo, sin refinar indefinidamente.
-                </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: 'var(--space-2) var(--space-3)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--color-accent-primary)' }}>
-                  <strong style={{ color: 'var(--text)', display: 'block' }}>El descanso no se gana:</strong>
-                  El descanso es un requisito fisiológico para la regulación ejecutiva, no un premio.
-                </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: 'var(--space-2) var(--space-3)', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--color-accent-warning)' }}>
-                  <strong style={{ color: 'var(--text)', display: 'block' }}>Paso de reentrada escrito:</strong>
-                  Antes de levantarte de la mesa, deja escrita la primera acción exacta de 2 min.
-                </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+                <Disclosure label="Terminado es suficiente">
+                  <p style={{ margin: 0, fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                    Cierra la entrega cuando cumpla el criterio mínimo acordado, sin refinar ni sobre-analizar indefinidamente.
+                  </p>
+                </Disclosure>
+
+                <Disclosure label="Descansar también cuenta">
+                  <p style={{ margin: 0, fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                    El descanso es un requisito fisiológico para la regulación ejecutiva y la memoria, no un premio al rendimiento.
+                  </p>
+                </Disclosure>
+
+                <Disclosure label="Deja el próximo paso">
+                  <p style={{ margin: 0, fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                    Antes de levantarte de la mesa, deja escrita la primera acción exacta de 2 minutos para cuando retomes.
+                  </p>
+                </Disclosure>
               </div>
             </Disclosure>
           )}
 
-          {/* SHEET DE HERRAMIENTAS DEL DÍA */}
+          {/* SHEET DE HERRAMIENTAS CON NAVEGACIÓN INTERNA ANIDADA */}
           <Sheet
             isOpen={showToolsSheet}
-            onClose={() => setShowToolsSheet(false)}
-            title="Herramientas del Día"
-            description="Recursos de apoyo y regulación ejecutiva"
+            onClose={handleCloseToolsSheet}
+            title={sheetSubView === 'main' ? 'Herramientas del Día' : sheetSubView === 'rescue' ? 'Herramientas / Rescate' : 'Herramientas / 2º Cerebro'}
+            description={sheetSubView === 'main' ? 'Recursos de apoyo y regulación ejecutiva' : sheetSubView === 'rescue' ? 'Desbloqueo de inicio en 10 minutos sin compromiso' : 'Bóveda de notas e inspector de Obsidian'}
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-              {/* Nivel de Energía */}
-              <div>
-                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
-                  Percepción de Energía Actual
-                </span>
-                <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-                  {(['high', 'medium', 'low', 'crisis'] as const).map((level) => (
-                    <Button
-                      key={level}
-                      variant={currentEnergy === level ? 'primary' : 'secondary'}
-                      size="sm"
-                      onClick={() => setCurrentEnergy(level)}
-                    >
-                      {level === 'high' ? '⚡ Alta' : level === 'medium' ? '○ Media' : level === 'low' ? '▽ Baja' : '⚠ Crisis'}
-                    </Button>
-                  ))}
-                </div>
-              </div>
+            {sheetSubView === 'main' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+                {/* NIVEL DE ENERGÍA SOBRIO */}
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-2)' }}>
+                    <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase' }}>
+                      Nivel de Energía Actual
+                    </span>
+                    <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
+                      Puedes volver a esto cuando quieras
+                    </span>
+                  </div>
 
-              {/* Acceso a Rescate & 2º Cerebro */}
-              <div>
-                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
-                  Herramientas de Asistencia
-                </span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                  <ListRow
-                    title="Rescate de Inercia (10 Minutos)"
-                    meta="Desbloqueo de inicio sin juicio ni compromiso"
-                    icon="🛡️"
-                    onClick={() => { setActiveToolPanel('rescue'); setShowToolsSheet(false); }}
-                  />
-                  <ListRow
-                    title="Segundo Cerebro & Notas"
-                    meta="Inspector de notas y bóveda de Obsidian"
-                    icon="🧠"
-                    onClick={() => { setActiveToolPanel('second_brain'); setShowToolsSheet(false); }}
-                  />
-                  <ListRow
-                    title={isSimpleMode ? "Desactivar Modo Simple" : "Activar Modo Simple"}
-                    meta="Reducir interfaz a 1 columna de baja estimulación"
-                    icon="🌱"
-                    badge={isSimpleMode ? "Activo" : "Baja estimulación"}
-                    badgeTone={isSimpleMode ? "success" : "default"}
-                    onClick={() => { toggleSimpleMode(); setShowToolsSheet(false); }}
-                  />
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 'var(--space-2)' }}>
+                    {(['high', 'medium', 'low', 'crisis'] as const).map((level) => (
+                      <Button
+                        key={level}
+                        variant={currentEnergy === level ? 'primary' : 'secondary'}
+                        size="sm"
+                        onClick={() => setCurrentEnergy(level)}
+                      >
+                        {energyLabels[level]}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* ACCESOS A PANELES INTERNOS EN EL SHEET */}
+                <div>
+                  <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
+                    Herramientas de Asistencia
+                  </span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                    <ListRow
+                      title="Rescate de Inercia (10 Minutos)"
+                      meta="Desbloqueo de inicio sin juicio ni compromiso"
+                      icon={<ShieldAlert size={18} style={{ color: 'var(--color-accent-warning)' }} />}
+                      onClick={() => setSheetSubView('rescue')}
+                    />
+                    <ListRow
+                      title="Segundo Cerebro & Bóveda"
+                      meta="Inspector de notas y contexto de Obsidian"
+                      icon={<BookOpen size={18} style={{ color: 'var(--color-accent-primary)' }} />}
+                      onClick={() => setSheetSubView('second_brain')}
+                    />
+                    <ListRow
+                      title={isSimpleMode ? "Desactivar Modo Simple" : "Activar Modo Simple"}
+                      meta="Reducir interfaz a 1 columna de baja estimulación"
+                      icon={<Leaf size={18} style={{ color: 'var(--color-state-done)' }} />}
+                      badge={isSimpleMode ? "Activo" : "Baja estimulación"}
+                      badgeTone={isSimpleMode ? "success" : "default"}
+                      onClick={() => { toggleSimpleMode(); handleCloseToolsSheet(); }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+
+            {sheetSubView === 'rescue' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSheetSubView('main')}
+                  style={{ alignSelf: 'flex-start' }}
+                >
+                  <ArrowLeft size={16} /> Volver a Herramientas
+                </Button>
+                <ClinicalUncompletedTaskProtocol />
+              </div>
+            )}
+
+            {sheetSubView === 'second_brain' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSheetSubView('main')}
+                  style={{ alignSelf: 'flex-start' }}
+                >
+                  <ArrowLeft size={16} /> Volver a Herramientas
+                </Button>
+                <SecondBrainInspector />
+              </div>
+            )}
           </Sheet>
-
-          {/* VISTAS DE HERRAMIENTAS ACTIVAS (Bajo demanda) */}
-          {activeToolPanel === 'rescue' && (
-            <div style={{ marginTop: 'var(--space-md)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-sm)' }}>
-                <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 600, color: 'var(--text-secondary)' }}>Herramienta: Rescate de Inercia</span>
-                <Button variant="ghost" size="sm" onClick={() => setActiveToolPanel('none')}>Cerrar panel</Button>
-              </div>
-              <ClinicalUncompletedTaskProtocol />
-            </div>
-          )}
-
-          {activeToolPanel === 'second_brain' && (
-            <div style={{ marginTop: 'var(--space-md)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-sm)' }}>
-                <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 600, color: 'var(--text-secondary)' }}>Herramienta: Inspector 2º Cerebro</span>
-                <Button variant="ghost" size="sm" onClick={() => setActiveToolPanel('none')}>Cerrar panel</Button>
-              </div>
-              <SecondBrainInspector />
-            </div>
-          )}
 
           {/* MODAL MAÑANA / NOCHE */}
           <MorningEveningWorkflowsModal
