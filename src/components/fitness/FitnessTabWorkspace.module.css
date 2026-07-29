@@ -1,0 +1,122 @@
+/* FitnessTabWorkspace.module.css - Pure CSS Modules for Fitness Navigation */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.tabList {
+  position: sticky;
+  top: 68px;
+  z-index: 85;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(13, 14, 18, 0.9);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-visible);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.tabButton {
+  background: transparent;
+  color: var(--text-tertiary);
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-label);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px; /* WCAG 2.2 AA Touch Target */
+  font-family: var(--font-family-system);
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+}
+
+.tabButton:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tabButton:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.tabButtonActive {
+  background: var(--color-accent-primary) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(10, 132, 255, 0.35);
+}
+
+.tabPanel {
+  min-height: 500px;
+  width: 100%;
+}
+
+.subSectionNav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: var(--space-md);
+  padding-bottom: 4px;
+}
+
+.subSectionButton {
+  background: var(--surface);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--text-secondary);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.subSectionButtonActive {
+  background: var(--surface-elevated);
+  border-color: var(--color-border-visible);
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 767px) {
+  .tabList {
+    top: 60px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .tabButton {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: var(--font-size-meta);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabButton, .subSectionButton {
+    transition: none !important;
+  }
+}

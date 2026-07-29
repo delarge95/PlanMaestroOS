@@ -1,52 +1,19 @@
 ---
 import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
-import LibraryTabWorkspace from '../../components/docs/LibraryTabWorkspace.tsx';
+import LibraryPage from '../../components/library/LibraryPage.tsx';
 ---
 
-<PlanMaestroLayout title="Biblioteca & Buscador RAG" activeDomain="library" activePhase="fase-1">
+<PlanMaestroLayout title="Biblioteca" activeDomain="library" breadcrumb="Más / Biblioteca">
   <div class="library-shell">
-    <div class="lib-header">
-      <span class="lib-badge">SEGUNDO CEREBRO • ALMÁCIGO DE HECHOS VERIFICADOS</span>
-      <h2>Explorador de Conocimiento & Trazabilidad de Fuentes</h2>
-      <p>
-        Buscador semántico en tiempo real sobre los 47 documentos de auditoría laboral, los 3 libros de entrenamiento PDF (*Overcoming Gravity*, *Overcoming Tendonitis*, *The Min-Max Program*), los reportes clínicos y la biblia de carrera.
-      </p>
-    </div>
-
-    <!-- PESTAÑAS HORIZONTALES ESTILO APPLE DE SUBSECCIONES -->
-    <LibraryTabWorkspace client:load />
+    <LibraryPage client:load />
   </div>
 
   <style>
     .library-shell {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-    }
-    .lib-header {
-      background: var(--color-surface-base);
-      border: 1px solid var(--color-border-visible);
-      border-radius: 20px;
-      padding: 24px;
-      backdrop-filter: blur(40px);
-    }
-    .lib-badge {
-      font-family: -apple-system, SF Pro Text, sans-serif;
-      font-size: 0.72rem;
-      color: var(--color-accent-primary);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-    .lib-header h2 {
-      font-size: 1.5rem;
-      color: var(--color-text-primary);
-      margin: 6px 0;
-    }
-    .lib-header p {
-      color: var(--color-text-secondary);
-      font-size: 0.88rem;
-      margin: 0;
-      line-height: 1.5;
+      gap: 16px;
+      width: 100%;
     }
   </style>
 </PlanMaestroLayout>
