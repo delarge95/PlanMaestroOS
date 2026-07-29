@@ -121,10 +121,10 @@ export default function CustomRoutineBuilder() {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
               CREADOR DE RUTINAS A LA MEDIDA FITAPP
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Diseña & Guarda tus Propias Rutinas Personalizadas
             </h3>
           </div>
@@ -313,7 +313,7 @@ export default function CustomRoutineBuilder() {
                 background: 'linear-gradient(135deg, #77e7ff, #3b82f6)',
                 border: 'none',
                 color: '#040608',
-                fontWeight: 800,
+                fontWeight: 700,
                 padding: '12px',
                 borderRadius: '12px',
                 fontSize: '0.9rem',
@@ -333,7 +333,7 @@ export default function CustomRoutineBuilder() {
               <div key={r.id} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(119,231,255,0.2)', borderRadius: '16px', padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '12px' }}>
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <h4 style={{ fontSize: '0.98rem', fontWeight: 800, margin: 0, color: 'var(--color-text-primary)' }}>{r.title}</h4>
+                    <h4 style={{ fontSize: '0.98rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>{r.title}</h4>
                     <button
                       type="button"
                       onClick={() => handleDeleteRoutine(r.id)}

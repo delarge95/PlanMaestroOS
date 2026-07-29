@@ -85,10 +85,10 @@ export default function GermanLearningHub() {
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-warning)', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-warning)', fontWeight: 700, letterSpacing: '0.05em' }}>
               MÓDULO DE ALEMÁN A1-A2 • 13:30 - 14:00 DIARIO
             </span>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Hábito Sostenido de 25 Minutos
             </h3>
           </div>
@@ -106,7 +106,7 @@ export default function GermanLearningHub() {
                 background: 'linear-gradient(135deg, #f59e0b, #d97706)',
                 border: 'none',
                 color: '#040608',
-                fontWeight: 800,
+                fontWeight: 700,
                 padding: '10px 20px',
                 borderRadius: '12px',
                 cursor: 'pointer',
@@ -123,8 +123,8 @@ export default function GermanLearningHub() {
         {isTimerRunning && activeTimer !== null && (
           <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '16px', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
             <div>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-warning)', fontWeight: 800 }}>TEMPORIZADOR ACTIVO DE ALEMÁN</span>
-              <h4 style={{ margin: '2px 0 0', fontSize: '1.4rem', fontWeight: 800, fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-primary)' }}>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-warning)', fontWeight: 700 }}>TEMPORIZADOR ACTIVO DE ALEMÁN</span>
+              <h4 style={{ margin: '2px 0 0', fontSize: '1.4rem', fontWeight: 700, fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-primary)' }}>
                 {formatTime(activeTimer)}
               </h4>
             </div>
@@ -187,7 +187,7 @@ export default function GermanLearningHub() {
         {/* FLASHCARDS INTERACTIVAS */}
         <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.72rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-warning)', fontWeight: 800 }}>
+            <span style={{ fontSize: '0.72rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-warning)', fontWeight: 700 }}>
               TARJETA A1 #{cardIndex + 1} DE {A1_FLASHCARDS.length} • {currentCard.category.toUpperCase()}
             </span>
             <div style={{ display: 'flex', gap: '8px' }}>
@@ -223,7 +223,7 @@ export default function GermanLearningHub() {
               transition: 'all 200ms ease'
             }}
           >
-            <h4 style={{ fontSize: '1.3rem', color: 'var(--color-text-primary)', margin: 0, fontWeight: 800 }}>
+            <h4 style={{ fontSize: '1.3rem', color: 'var(--color-text-primary)', margin: 0, fontWeight: 700 }}>
               {currentCard.german}
             </h4>
             <span style={{ fontSize: '0.82rem', color: 'var(--color-accent-warning)', fontStyle: 'italic', fontFamily: 'Azeret Mono, monospace' }}>

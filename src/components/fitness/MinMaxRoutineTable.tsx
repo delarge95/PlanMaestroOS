@@ -209,10 +209,10 @@ export default function MinMaxRoutineTable() {
         {/* HEADER SECTION */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 700, letterSpacing: '0.05em' }}>
               ROUTINES & CALISTHENICS SUBSTITUTIONS • CONECTADO A FITAPP
             </span>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '4px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               The Min-Max Program (Jeff Nippard & Overcoming Gravity)
             </h2>
           </div>
@@ -299,7 +299,7 @@ export default function MinMaxRoutineTable() {
           {currentWorkouts.map((day, idx) => (
             <div key={idx} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', overflow: 'hidden' }}>
               <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-text-primary)', margin: 0 }}>{day.day_name}</h3>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>{day.day_name}</h3>
                 <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-state-done)', background: 'rgba(16,185,129,0.12)', padding: '4px 10px', borderRadius: '999px' }}>
                   {day.exercises.length} Ejercicios
                 </span>

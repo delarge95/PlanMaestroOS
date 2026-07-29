@@ -54,7 +54,7 @@ export default function BooksLibraryView() {
   return (
     <div style={{ marginTop: '28px' }}>
       <div style={{ marginBottom: '20px' }}>
-        <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-state-done)', fontWeight: 800 }}>
+        <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
           FUENTE BIBLIOGRÁFICA & TEORÍA FÍSICA
         </span>
         <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>

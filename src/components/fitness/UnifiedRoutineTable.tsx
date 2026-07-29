@@ -87,10 +87,10 @@ export default function UnifiedRoutineTable({
         {/* HEADER SECTION */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: badgeColor, fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: badgeColor, fontWeight: 700, letterSpacing: '0.05em' }}>
               {programBadge}
             </span>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '4px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               {programTitle}
             </h2>
             <p style={{ fontSize: '0.83rem', color: 'var(--color-text-secondary)', margin: '2px 0 0' }}>{programSubtitle}</p>
@@ -177,7 +177,7 @@ export default function UnifiedRoutineTable({
         {currentDay && (
           <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', overflow: 'hidden' }}>
             <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-text-primary)', margin: 0 }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                 {currentDay.dayName}
               </h3>
               <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: badgeColor, background: 'rgba(255,255,255,0.06)', padding: '4px 10px', borderRadius: '999px' }}>

@@ -63,10 +63,10 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
           {/* MODAL HEADER */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-danger)', background: 'rgba(239, 68, 68, 0.15)', padding: '4px 10px', borderRadius: '999px', fontWeight: 800 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-danger)', background: 'rgba(239, 68, 68, 0.15)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
                 PROTOCOLO DE RESCATE TDAH • PASO {step} DE 3
               </span>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '6px 0 0', color: 'var(--color-text-primary)' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '6px 0 0', color: 'var(--color-text-primary)' }}>
                 Desbloqueo de Inercia: {currentTaskName}
               </h3>
             </div>
@@ -104,7 +104,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
 
               {/* TIMER DISPLAY */}
               <div style={{ textAlign: 'center', background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px', borderRadius: '20px' }}>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '3.5rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.05em' }}>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '3.5rem', fontWeight: 700, color: 'var(--color-accent-primary)', letterSpacing: '0.05em' }}>
                   {formatTime(timerSeconds)}
                 </span>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '14px' }}>
@@ -117,7 +117,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                       color: isTimerRunning ? 'var(--color-accent-danger)' : 'var(--color-state-done)',
                       padding: '8px 20px',
                       borderRadius: '10px',
-                      fontWeight: 800,
+                      fontWeight: 700,
                       cursor: 'pointer'
                     }}
                   >
@@ -150,7 +150,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                   color: '#040608',
                   padding: '12px',
                   borderRadius: '12px',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   fontSize: '0.9rem',
                   cursor: 'pointer',
                   textAlign: 'center',
@@ -219,7 +219,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                     color: '#040608',
                     padding: '12px',
                     borderRadius: '12px',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     fontSize: '0.9rem',
                     cursor: 'pointer'
                   }}
@@ -288,7 +288,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                     color: '#040608',
                     padding: '12px',
                     borderRadius: '12px',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     fontSize: '0.9rem',
                     cursor: 'pointer'
                   }}

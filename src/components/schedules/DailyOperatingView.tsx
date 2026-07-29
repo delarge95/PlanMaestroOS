@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InertiaRescueModal from '../clinical/InertiaRescueModal';
 
@@ -105,10 +105,10 @@ export default function DailyOperatingView() {
         {/* HEADER CONTROLS */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
               CENTRO OPERATIVO DIARIO
             </span>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Línea Temporal de Hoy • 05:30 – 21:30
             </h2>
           </div>

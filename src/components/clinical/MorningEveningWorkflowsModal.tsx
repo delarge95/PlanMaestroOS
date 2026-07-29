@@ -58,7 +58,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
               <span style={{ fontSize: '0.72rem', color: mode === 'morning' ? 'var(--color-state-done)' : 'var(--color-accent-primary)', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
                 {mode === 'morning' ? '🌅 MODO INICIO RÁPIDO (60 SEGUNDOS)' : '🌙 MODO CIERRE DEL DÍA (3 MINUTOS)'}
               </span>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                 {mode === 'morning' ? 'Arranque del Día Sin Fricción' : 'Balance & Desconexión Nocturna'}
               </h3>
             </div>
@@ -158,7 +158,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                   <button
                     type="button"
                     onClick={() => setMorningStep(2)}
-                    style={{ background: 'var(--color-state-done)', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', marginTop: '10px' }}
+                    style={{ background: 'var(--color-state-done)', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', marginTop: '10px' }}
                   >
                     Siguiente → Confirmar Prioridades
                   </button>
@@ -181,7 +181,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                   <button
                     type="button"
                     onClick={handleFinishMorning}
-                    style={{ background: 'var(--color-state-done)', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontWeight: 800, cursor: 'pointer', marginTop: '10px' }}
+                    style={{ background: 'var(--color-state-done)', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', marginTop: '10px' }}
                   >
                     🚀 ¡Listo! Arrancar el Día
                   </button>
@@ -210,7 +210,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                   <button
                     type="button"
                     onClick={() => setEveningStep(2)}
-                    style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 800, cursor: 'pointer' }}
+                    style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
                   >
                     Siguiente → Activar Higiene de Sueño
                   </button>
@@ -233,7 +233,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                   <button
                     type="button"
                     onClick={onClose}
-                    style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 800, cursor: 'pointer' }}
+                    style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
                   >
                     😴 Cerrar Día & A Descansar
                   </button>

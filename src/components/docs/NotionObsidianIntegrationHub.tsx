@@ -159,7 +159,7 @@ ${documentContent}
               color: 'var(--color-text-primary)',
               padding: '12px 20px',
               borderRadius: '12px',
-              fontWeight: 800,
+              fontWeight: 700,
               fontSize: '0.85rem',
               boxShadow: '0 10px 30px rgba(168, 85, 247, 0.5)',
               zIndex: 9999
@@ -172,10 +172,10 @@ ${documentContent}
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
               CONECTOR EN VIVO DE CONOCIMIENTO & NOTAS
             </span>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Integración Nativa con Obsidian & Notion Workspace
             </h3>
           </div>
@@ -358,7 +358,7 @@ ${documentContent}
                       padding: '6px 14px',
                       borderRadius: '8px',
                       fontSize: '0.78rem',
-                      fontWeight: 800,
+                      fontWeight: 700,
                       cursor: 'pointer'
                     }}
                   >
@@ -519,7 +519,7 @@ ${documentContent}
                     padding: '8px 18px',
                     borderRadius: '10px',
                     fontSize: '0.82rem',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     cursor: 'pointer'
                   }}
                 >

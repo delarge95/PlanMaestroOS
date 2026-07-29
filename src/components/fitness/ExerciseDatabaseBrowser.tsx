@@ -30,10 +30,10 @@ export default function ExerciseDatabaseBrowser() {
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 700, letterSpacing: '0.05em' }}>
               BIBLIOTECA INTERACTIVA FITAPP-FREE
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Base de Datos Completa de Ejercicios ({filteredList.length})
             </h3>
           </div>

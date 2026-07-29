@@ -197,14 +197,14 @@ export default function InteractiveRoadmapDashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div style={{ display: 'flex', gap: '8px', marginBottom: '6px' }}>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#3b82f6', background: 'rgba(59, 130, 246, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 800 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#3b82f6', background: 'rgba(59, 130, 246, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
                 ROADMAP LABORAL 16 SEMANAS / 90 DÍAS
               </span>
               <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
                 META: $1,500 – $3,000 USD/MES
               </span>
             </div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               Plan de Ejecución Estratégica & Contratación Internacional
             </h2>
           </div>
@@ -214,7 +214,7 @@ export default function InteractiveRoadmapDashboard() {
             <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', display: 'block', fontWeight: 600 }}>
               PROGRESO DE HITOS COMPLETADOS
             </span>
-            <span style={{ fontSize: '1.4rem', fontWeight: 800, color: '#3b82f6' }}>
+            <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#3b82f6' }}>
               {doneCount}/{allMilestoneIds.length} ({overallProgress}%)
             </span>
           </div>
@@ -272,7 +272,7 @@ export default function InteractiveRoadmapDashboard() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ background: 'rgba(59, 130, 246, 0.08)', border: '1px solid rgba(59, 130, 246, 0.2)', padding: '14px 18px', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
             <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '0 0 4px', color: 'var(--color-text-primary)' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 4px', color: 'var(--color-text-primary)' }}>
                 {currentPhaseData.title}
               </h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: 0 }}>
@@ -317,7 +317,7 @@ export default function InteractiveRoadmapDashboard() {
                           cursor: 'pointer',
                           display: 'grid',
                           placeItems: 'center',
-                          fontWeight: 800,
+                          fontWeight: 700,
                           fontSize: '0.85rem',
                           marginTop: '2px',
                           flexShrink: 0
@@ -335,7 +335,7 @@ export default function InteractiveRoadmapDashboard() {
                             🔗 Conectado a: {m.connectedTimeBlock}
                           </span>
                         </div>
-                        <h4 style={{ fontSize: '1rem', fontWeight: 800, margin: 0, color: isChecked ? '#6ee7b7' : 'var(--color-text-primary)' }}>
+                        <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: isChecked ? '#6ee7b7' : 'var(--color-text-primary)' }}>
                           {m.title}
                         </h4>
                       </div>

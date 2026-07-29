@@ -219,7 +219,7 @@ export default function ClinicalExecutionHub() {
               color: 'var(--color-text-primary)',
               padding: '14px 22px',
               borderRadius: '14px',
-              fontWeight: 800,
+              fontWeight: 700,
               fontSize: '0.88rem',
               boxShadow: '0 10px 30px rgba(217, 70, 239, 0.5)',
               zIndex: 99999
@@ -232,10 +232,10 @@ export default function ClinicalExecutionHub() {
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#d946ef', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#d946ef', fontWeight: 700, letterSpacing: '0.05em' }}>
               SUITE DE TAREAS CLÍNICAS INTERACTIVAS • TDAH & ANSIEDAD SOCIAL
             </span>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Prótesis Ejecutiva & Regulación Emocional
             </h3>
           </div>
@@ -394,7 +394,7 @@ export default function ClinicalExecutionHub() {
                   background: 'linear-gradient(135deg, #d946ef, #8b5cf6)',
                   border: 'none',
                   color: 'var(--color-text-primary)',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   padding: '12px',
                   borderRadius: '12px',
                   fontSize: '0.88rem',
@@ -446,7 +446,7 @@ export default function ClinicalExecutionHub() {
 
                 {isRuminationActive && activeRuminationTimer !== null && (
                   <div style={{ background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.4)', padding: '8px 14px', borderRadius: '12px', textAlign: 'center' }}>
-                    <span style={{ fontSize: '0.65rem', color: 'var(--color-accent-danger)', fontFamily: 'Azeret Mono, monospace', fontWeight: 800 }}>LÍMITE DE RUMIACIÓN POST-EVENTO</span>
+                    <span style={{ fontSize: '0.65rem', color: 'var(--color-accent-danger)', fontFamily: 'Azeret Mono, monospace', fontWeight: 700 }}>LÍMITE DE RUMIACIÓN POST-EVENTO</span>
                     <strong style={{ fontSize: '1.1rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-primary)', display: 'block' }}>{formatTime(activeRuminationTimer)}</strong>
                   </div>
                 )}
@@ -486,7 +486,7 @@ export default function ClinicalExecutionHub() {
                           color: exp.completed ? '#040608' : 'var(--color-text-primary)',
                           padding: '6px 14px',
                           borderRadius: '8px',
-                          fontWeight: 800,
+                          fontWeight: 700,
                           fontSize: '0.78rem',
                           cursor: 'pointer'
                         }}
@@ -541,17 +541,17 @@ export default function ClinicalExecutionHub() {
             <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-danger)', fontWeight: 800 }}>
+                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-danger)', fontWeight: 700 }}>
                     PROTOCOLO CLÍNICO DE DESBLOQUEO INICIAL
                   </span>
-                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                     Salida de Emergencia: Entrada de 10 Minutos & Versión Mala
                   </h4>
                 </div>
 
                 {isRescueTimerActive && rescueTimer !== null && (
                   <div style={{ background: 'rgba(16,185,129,0.2)', border: '1px solid rgba(16,185,129,0.4)', padding: '8px 16px', borderRadius: '12px', textAlign: 'center' }}>
-                    <span style={{ fontSize: '0.65rem', color: 'var(--color-state-done)', fontFamily: 'Azeret Mono, monospace', fontWeight: 800 }}>TEMPORIZADOR DE ENTRADA</span>
+                    <span style={{ fontSize: '0.65rem', color: 'var(--color-state-done)', fontFamily: 'Azeret Mono, monospace', fontWeight: 700 }}>TEMPORIZADOR DE ENTRADA</span>
                     <strong style={{ fontSize: '1.2rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-primary)', display: 'block' }}>{formatTime(rescueTimer)}</strong>
                   </div>
                 )}
@@ -567,7 +567,7 @@ export default function ClinicalExecutionHub() {
                     color: 'var(--color-text-primary)',
                     padding: '10px 20px',
                     borderRadius: '12px',
-                    fontWeight: 800,
+                    fontWeight: 700,
                     fontSize: '0.88rem',
                     cursor: 'pointer',
                     boxShadow: '0 4px 15px rgba(239,68,68,0.4)'
@@ -612,10 +612,10 @@ export default function ClinicalExecutionHub() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.25)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800 }}>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
                   HIGIENE DE SUEÑO & CONTROL DE ESTÍMULOS CBT-I
                 </span>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                   Checklist Nocturna de Desconexión (21:00)
                 </h4>
               </div>

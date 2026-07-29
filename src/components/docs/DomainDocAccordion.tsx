@@ -34,7 +34,7 @@ export default function DomainDocAccordion({ domainTitle, domainColor, categoryF
           <div style={{ textAlign: 'left', display: 'flex', alignItems: 'center', gap: '14px' }}>
             <span style={{ fontSize: '1.4rem' }}>📄</span>
             <div>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: domainColor, fontWeight: 800 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: domainColor, fontWeight: 700 }}>
                 CONSULTA DE FUENTES ORIGINALES COMPLETAS
               </span>
               <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>

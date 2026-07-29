@@ -73,7 +73,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
         }}>
           {/* HEADER BAR */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 12px', borderRadius: '999px', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 12px', borderRadius: '999px', fontWeight: 700 }}>
               ⚡ MODO FOCO ZEN ACTIVO • CERO DISTRACCIONES
             </span>
             <button
@@ -103,10 +103,10 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             padding: '28px',
             boxShadow: '0 30px 60px rgba(0, 0, 0, 0.6)'
           }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
               BLOQUE A EN EJECUCIÓN (09:20 – 11:40)
             </span>
-            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '6px 0 12px', color: 'var(--color-text-primary)' }}>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '6px 0 12px', color: 'var(--color-text-primary)' }}>
               Trabajo Profundo: TwinSight MVP & Tesis
             </h2>
             <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', padding: '12px 16px', borderRadius: '12px', fontSize: '0.85rem', color: '#6ee7b7' }}>
@@ -170,7 +170,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             flexDirection: 'column',
             gap: '12px'
           }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
               📌 Paso de Reentrada Escrito (Al Cierre)
             </span>
             <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0 }}>

@@ -187,7 +187,7 @@ export default function SecondBrainInspector({
                   <span style={{ fontSize: '1.2rem' }}>🟢</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>88%</strong>
+                  <strong style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>88%</strong>
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>Semana Activa</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
@@ -205,7 +205,7 @@ export default function SecondBrainInspector({
                   <span style={{ fontSize: '1.2rem' }}>🚀</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>22.5h</strong>
+                  <strong style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>22.5h</strong>
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>/ 25h meta</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
@@ -223,7 +223,7 @@ export default function SecondBrainInspector({
                   <span style={{ fontSize: '1.2rem' }}>💪</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>4,850 kg</strong>
+                  <strong style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>4,850 kg</strong>
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>Esta semana</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
@@ -265,7 +265,7 @@ export default function SecondBrainInspector({
                   background: 'var(--color-accent-warning)',
                   border: 'none',
                   color: '#000000',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   padding: '10px 18px',
                   borderRadius: '10px',
                   fontSize: '0.82rem',
@@ -358,7 +358,7 @@ export default function SecondBrainInspector({
             {/* NOTE CONTENT PREVIEW */}
             <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h4 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--color-text-primary)', fontWeight: 800 }}>{selectedNote.filename}</h4>
+                <h4 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--color-text-primary)', fontWeight: 700 }}>{selectedNote.filename}</h4>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   {selectedNote.tags.map((t, idx) => (
                     <span key={idx} style={{ fontSize: '0.68rem', background: 'rgba(191,90,242,0.15)', color: 'var(--color-accent-primary)', padding: '2px 8px', borderRadius: '4px', fontFamily: 'SF Mono, monospace' }}>

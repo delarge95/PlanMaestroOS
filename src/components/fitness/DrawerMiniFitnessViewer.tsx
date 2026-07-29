@@ -128,14 +128,14 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
       {/* HEADER & PROGRESS BAR */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800 }}>
+          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
             MINI-VENTANA FITNESS FITAPP
           </span>
           <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
             Progreso: {doneSetsCount}/{totalSets} series ({progressPct}%)
           </span>
         </div>
-        <h4 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 8px', color: 'var(--color-text-primary)' }}>
+        <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--color-text-primary)' }}>
           {currentRoutine.dayTitle}
         </h4>
         <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>

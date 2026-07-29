@@ -66,7 +66,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
         {/* LEFT SIDEBAR: DOCS TREE & SEARCH */}
         <div style={{ background: '#080c0e', border: '1px solid rgba(174,255,224,0.12)', borderRadius: '12px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#ec4899', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#ec4899', fontWeight: 700 }}>
               DOCUMENTOS FUENTE #{categoryFilter.toUpperCase()}
             </span>
             <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '4px 0 12px', color: 'var(--color-text-primary)' }}>
@@ -160,7 +160,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
           {/* RAG RESULTS LIST */}
           {ragResults.length > 0 && (
             <div style={{ marginTop: '16px', background: 'rgba(0,0,0,0.4)', borderRadius: '8px', padding: '14px', border: '1px solid rgba(119,231,255,0.2)' }}>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-accent-primary)', fontWeight: 800 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
                 {ragResults.length} RESULTADOS ENCONTRADOS:
               </span>
               <div style={{ display: 'grid', gap: '10px', marginTop: '10px' }}>
@@ -187,7 +187,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
           <div style={{ background: '#080c0e', border: '1px solid rgba(174,255,224,0.12)', borderRadius: '12px', padding: '24px', flex: 1 }}>
             <div style={{ borderBottom: '1px solid rgba(174,255,224,0.1)', paddingBottom: '16px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: '#ec4899', fontWeight: 800 }}>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: '#ec4899', fontWeight: 700 }}>
                   DOCUMENTO FUENTE #{currentDoc.filename.slice(0, 2)}
                 </span>
                 <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>

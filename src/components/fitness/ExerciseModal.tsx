@@ -65,7 +65,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
               <span style={{ 
                 fontFamily: 'Azeret Mono, monospace', 
                 fontSize: '0.68rem', 
-                fontWeight: 800, 
+                fontWeight: 700, 
                 color: 'var(--color-state-done)', 
                 background: 'rgba(16, 185, 129, 0.12)', 
                 padding: '4px 10px', 
@@ -87,7 +87,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                 </span>
               )}
             </div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: 'var(--color-text-primary)' }}>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', color: 'var(--color-text-primary)' }}>
               {exercise.name}
             </h2>
           </div>
