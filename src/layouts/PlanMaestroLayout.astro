@@ -1,26 +1,22 @@
 ---
 import '../styles/global.css';
+import NavigationShell from '../components/navigation/NavigationShell.tsx';
 
 interface Props {
   title: string;
-  activeDomain?: 'general' | 'today' | 'schedules' | 'career' | 'fitness' | 'german' | 'clinical' | 'library';
+  activeDomain?: 'now' | 'plan' | 'more' | 'clinical' | 'career' | 'german' | 'fitness' | 'library' | 'master-plan' | 'general' | 'schedules' | 'today';
   activePhase?: 'fase-1' | 'fase-2' | 'fase-3';
+  breadcrumb?: string;
 }
 
-const { title, activeDomain = 'general', activePhase = 'fase-1' } = Astro.props;
+const { title, activeDomain = 'now', activePhase = 'fase-1', breadcrumb } = Astro.props;
 
-const domainColors: Record<string, string> = {
-  general: 'var(--color-accent-primary)',
-  today: 'var(--color-accent-primary)',
-  schedules: 'var(--color-accent-primary)',
-  career: 'var(--color-accent-primary)',
-  fitness: 'var(--color-state-done)',
-  german: 'var(--color-accent-warning)',
-  clinical: 'var(--color-accent-primary)',
-  library: 'var(--color-accent-primary)'
-};
-
-const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
+// Map legacy domains to NavigationShell domains
+const mappedDomain = (activeDomain === 'general' || activeDomain === 'today')
+  ? 'now'
+  : activeDomain === 'schedules'
+  ? 'plan'
+  : activeDomain;
 ---
 
 <!DOCTYPE html>
@@ -28,411 +24,23 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} | Plan Maestro Total OS v3</title>
+    <title>{title} | Plan Maestro OS</title>
     <meta name="description" content="Sistema Operativo Personal Interactivo, Trazable y Multi-Dominio de Alexander Woodcock" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="app-body">
-    <div class="app-container">
-      <!-- SIDEBAR PERSISTENTE - ORDEN ESTRICTO -->
-      <aside class="app-sidebar">
-        <div class="sidebar-header">
-          <a href="/app" class="brand-logo">
-            <span class="logo-badge">PM</span>
-            <div class="logo-text">
-              <strong>Plan Maestro OS</strong>
-              <small>v3.0 • Total System</small>
-            </div>
-          </a>
-        </div>
-
-        <nav class="sidebar-nav">
-          <div class="nav-group">
-            <span class="nav-label">OPERACIÓN DIARIA & MATRIZ</span>
-            <!-- 1. Home / Dashboard Principal -->
-            <a href="/app" class={activeDomain === 'general' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-              <span>Home / Dashboard Principal</span>
-            </a>
-            <!-- 2. Hoy -->
-            <a href="/app/today" class={activeDomain === 'today' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Hoy</span>
-              <span class="badge-today">Live</span>
-            </a>
-            <!-- 3. Cronograma y matriz -->
-            <a href="/app/schedules" class={activeDomain === 'schedules' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              <span>Cronograma y matriz</span>
-            </a>
-          </div>
-
-          <div class="nav-group">
-            <span class="nav-label">SECCIONES ESTRATÉGICAS</span>
-            <!-- 4. Laboral -->
-            <a href="/app/career" class={activeDomain === 'career' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              <span>Laboral</span>
-            </a>
-            <!-- 5. Fitness -->
-            <a href="/app/fitness" class={activeDomain === 'fitness' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span>Fitness</span>
-            </a>
-            <!-- 6. Alemán -->
-            <a href="/app/german" class={activeDomain === 'german' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></svg>
-              <span>Alemán</span>
-            </a>
-            <!-- 7. Clínica -->
-            <a href="/app/clinical" class={activeDomain === 'clinical' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-              <span>Clínica</span>
-            </a>
-          </div>
-
-          <div class="nav-group">
-            <span class="nav-label">CONOCIMIENTO & RAG</span>
-            <!-- 8. Biblioteca (Al final) -->
-            <a href="/app/library" class={activeDomain === 'library' ? 'nav-item active' : 'nav-item'}>
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-              <span>Biblioteca</span>
-            </a>
-          </div>
-        </nav>
-
-        <div class="sidebar-footer">
-          <div class="user-pill">
-            <div class="avatar">AW</div>
-            <div class="user-info">
-              <strong>Alexander Woodcock</strong>
-              <small>Unity Tech Artist</small>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <!-- MAIN CONTENT WRAPPER -->
-      <div class="app-main-wrapper">
-        <!-- HEADER CONTEXTUAL -->
-        <header class="app-header">
-          <div class="header-left">
-            <span class="breadcrumb-text">PLAN MAESTRO →</span>
-            <span class="domain-pill" style={`--pill-color: ${activeColor}`}>
-              {activeDomain.toUpperCase()}
-            </span>
-            <h1 class="page-header-title">{title}</h1>
-          </div>
-
-          <div class="header-right">
-            <!-- Phase Selector with type="button" -->
-            <div class="phase-selector">
-              <span class="phase-label">FASE ACTUAL:</span>
-              <button type="button" class={activePhase === 'fase-1' ? 'phase-btn active' : 'phase-btn'}>Fase 1 (Sem 1-4)</button>
-              <button type="button" class={activePhase === 'fase-2' ? 'phase-btn active' : 'phase-btn'}>Fase 2 (Sem 5-8)</button>
-              <button type="button" class={activePhase === 'fase-3' ? 'phase-btn active' : 'phase-btn'}>Fase 3 (Sem 9-16)</button>
-            </div>
-
-            {/* Integrations Quick Buttons */}
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <a
-                href="obsidian://open?vault=Laboral"
-                title="Abrir Obsidian Vault"
-                style="background: var(--color-accent-primary-soft); border: 1px solid var(--color-border-visible); color: var(--color-accent-primary); padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
-              >
-                🟣 Obsidian
-              </a>
-              <a
-                href="https://www.notion.so"
-                target="_blank"
-                rel="noreferrer"
-                title="Abrir Notion Workspace"
-                style="background: var(--color-accent-warning-soft); border: 1px solid var(--color-border-visible); color: var(--color-accent-warning); padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
-              >
-                ⬛ Notion
-              </a>
-              <a
-                href="/app/fitness"
-                title="Ir a FitApp Workout Logger"
-                style="background: var(--color-state-done-soft); border: 1px solid var(--color-border-visible); color: var(--color-state-done); padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
-              >
-                💪 FitApp
-              </a>
-            </div>
-
-            <!-- Search Quick Button -->
-            <a href="/app/library" class="rag-search-btn">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-              <span>Buscador RAG...</span>
-              <kbd>⌘K</kbd>
-            </a>
-          </div>
-        </header>
-
-        <!-- PAGE CONTENT CONTAINER -->
-        <main class="app-content-shell">
-          <slot />
-        </main>
-      </div>
-    </div>
+    <NavigationShell client:load currentPath={Astro.url.pathname} activeDomain={mappedDomain} breadcrumb={breadcrumb}>
+      <slot />
+    </NavigationShell>
 
     <style>
       .app-body {
         margin: 0;
         padding: 0;
-        background: #040608;
-        color: var(--color-text-primary);
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-family-system);
         min-height: 100vh;
-      }
-      .app-container {
-        display: flex;
-        min-height: 100vh;
-      }
-      .app-sidebar {
-        width: 270px;
-        background: rgba(10, 14, 17, 0.95);
-        border-right: 1px solid var(--color-border-subtle);
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 100;
-        backdrop-filter: blur(20px);
-      }
-      .sidebar-header {
-        padding: 20px 18px;
-        border-bottom: 1px solid var(--color-border-subtle);
-      }
-      .brand-logo {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-        color: var(--color-text-primary);
-      }
-      .logo-badge {
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        background: var(--color-accent-primary);
-        color: #ffffff;
-        font-weight: 800;
-        font-size: 0.85rem;
-        display: grid;
-        place-items: center;
-      }
-      .logo-text {
-        display: flex;
-        flex-direction: column;
-      }
-      .logo-text strong {
-        font-size: 0.95rem;
-        letter-spacing: -0.01em;
-      }
-      .logo-text small {
-        color: var(--color-text-tertiary);
-        font-size: 0.7rem;
-        font-family: 'Azeret Mono', monospace;
-      }
-      .sidebar-nav {
-        flex: 1;
-        overflow-y: auto;
-        padding: 16px 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-      .nav-group {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .nav-label {
-        font-family: 'Azeret Mono', monospace;
-        font-size: 0.65rem;
-        color: var(--color-text-tertiary);
-        padding: 0 8px 6px;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-      }
-      .nav-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 9px 10px;
-        border-radius: 6px;
-        color: var(--color-text-secondary);
-        text-decoration: none;
-        font-size: 0.85rem;
-        font-weight: 500;
-        transition: all 150ms ease;
-      }
-      .nav-item:hover {
-        background: var(--color-border-subtle);
-        color: var(--color-text-primary);
-      }
-      .nav-item.active {
-        background: var(--color-accent-primary-soft);
-        color: var(--color-accent-primary);
-        font-weight: 700;
-        border-left: 3px solid var(--color-accent-primary);
-      }
-      .badge-today {
-        margin-left: auto;
-        font-size: 0.62rem;
-        font-family: 'Azeret Mono', monospace;
-        background: var(--color-accent-danger-soft);
-        color: var(--color-accent-danger);
-        padding: 2px 6px;
-        border-radius: 999px;
-        font-weight: 700;
-      }
-      .sidebar-footer {
-        padding: 16px;
-        border-top: 1px solid var(--color-border-subtle);
-      }
-      .user-pill {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background: var(--color-accent-primary-soft);
-        color: var(--color-accent-primary);
-        font-weight: 700;
-        font-size: 0.75rem;
-        display: grid;
-        place-items: center;
-        border: 1px solid var(--color-border-visible);
-      }
-      .user-info {
-        display: flex;
-        flex-direction: column;
-      }
-      .user-info strong {
-        font-size: 0.82rem;
-      }
-      .user-info small {
-        font-size: 0.68rem;
-        color: var(--color-text-tertiary);
-      }
-      .app-main-wrapper {
-        margin-left: 270px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-      }
-      .app-header {
-        height: 64px;
-        border-bottom: 1px solid var(--color-border-subtle);
-        background: rgba(5, 8, 10, 0.8); /* rgba(0,0,0,*) glass — excepción documentada */
-        backdrop-filter: blur(12px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 28px;
-        position: sticky;
-        top: 0;
-        z-index: 90;
-      }
-      .header-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .breadcrumb-text {
-        font-family: 'Azeret Mono', monospace;
-        font-size: var(--font-size-micro, 0.68rem);
-        color: var(--color-text-tertiary);
-        letter-spacing: 0.04em;
-        font-weight: 600;
-      }
-      .domain-pill {
-        font-family: 'Azeret Mono', monospace;
-        font-size: 0.65rem;
-        font-weight: 800;
-        padding: 3px 8px;
-        border-radius: 4px;
-        background: var(--color-border-subtle);
-        color: var(--pill-color, var(--color-accent-primary));
-        border: 1px solid var(--pill-color, var(--color-accent-primary));
-      }
-      .page-header-title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin: 0;
-      }
-      .header-right {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-      .phase-selector {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 3px 4px;
-        border-radius: 6px;
-        border: 1px solid var(--color-border-subtle);
-      }
-      .phase-label {
-        font-family: 'Azeret Mono', monospace;
-        font-size: 0.62rem;
-        color: var(--color-text-tertiary);
-        padding: 0 6px;
-        font-weight: 700;
-      }
-      .phase-btn {
-        background: transparent;
-        border: none;
-        color: var(--color-text-secondary);
-        font-size: 0.72rem;
-        padding: 4px 8px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 150ms ease;
-      }
-      .phase-btn.active {
-        background: var(--color-accent-primary-soft);
-        color: var(--color-accent-primary);
-        font-weight: 700;
-      }
-      .rag-search-btn {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--color-border-subtle);
-        padding: 6px 12px;
-        border-radius: 6px;
-        color: var(--color-text-secondary);
-        text-decoration: none;
-        font-size: 0.78rem;
-        transition: all 150ms ease;
-      }
-      .rag-search-btn:hover {
-        background: var(--color-border-subtle);
-        color: var(--color-text-primary);
-      }
-      .rag-search-btn kbd {
-        font-family: 'Azeret Mono', monospace;
-        font-size: 0.62rem;
-        background: rgba(0, 0, 0, 0.4); /* rgba(0,0,0,*) — excepción documentada */
-        padding: 2px 5px;
-        border-radius: 4px;
-        border: 1px solid var(--color-border-subtle);
-      }
-      .app-content-shell {
-        padding: 28px;
-        flex: 1;
       }
     </style>
 
@@ -455,39 +63,6 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         document.body.appendChild(errDiv);
         return false;
       };
-
-      window.addEventListener('unhandledrejection', function(event) {
-        const errDiv = document.createElement('div');
-        errDiv.style.position = 'fixed';
-        errDiv.style.bottom = '20px';
-        errDiv.style.left = '20px';
-        errDiv.style.right = '20px';
-        errDiv.style.padding = '20px';
-        errDiv.style.background = 'var(--color-accent-warning)';
-        errDiv.style.color = 'var(--color-text-primary)';
-        errDiv.style.zIndex = '999999';
-        errDiv.style.borderRadius = '8px';
-        errDiv.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
-        errDiv.style.fontFamily = 'monospace';
-        errDiv.innerHTML = `<strong>UNHANDLED PROMISE:</strong> ${event.reason}<br><pre style="white-space:pre-wrap;font-size:10px;margin-top:10px;">${event.reason && event.reason.stack ? event.reason.stack : ''}</pre>`;
-        document.body.appendChild(errDiv);
-      });
-      
-      // Also catch Astro island hydration errors if possible
-      document.addEventListener('astro:unhandled-error', (e: any) => {
-        const errDiv = document.createElement('div');
-        errDiv.style.position = 'fixed';
-        errDiv.style.top = '20px';
-        errDiv.style.left = '20px';
-        errDiv.style.right = '20px';
-        errDiv.style.padding = '20px';
-        errDiv.style.background = 'var(--color-accent-danger)';
-        errDiv.style.color = 'var(--color-text-primary)';
-        errDiv.style.zIndex = '999999';
-        errDiv.style.borderRadius = '8px';
-        errDiv.innerHTML = `<strong>ASTRO HYDRATION ERROR:</strong> ${e.detail}`;
-        document.body.appendChild(errDiv);
-      });
     </script>
   </body>
 </html>
