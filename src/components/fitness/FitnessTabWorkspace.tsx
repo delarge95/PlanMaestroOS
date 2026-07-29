@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Dumbbell, BookOpen, BarChart3, LibraryBig, Activity, Database, Wrench } from 'lucide-react';
+import { Dumbbell, BookOpen, BarChart3, LibraryBig, Target, Database, Wrench } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import FitAppWorkoutLogger from './FitAppWorkoutLogger';
 import FitAppRoutinesCatalog from './FitAppRoutinesCatalog';
-import CalisthenicsLearningHub from './CalisthenicsLearningHub';
+import SkillsWorkspace from './skills/SkillsWorkspace';
 import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
 import CustomRoutineBuilder from './CustomRoutineBuilder';
 import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
@@ -13,7 +13,7 @@ import styles from './FitnessTabWorkspace.module.css';
 
 export default function FitnessTabWorkspace() {
   const [activeMainTab, setActiveMainTab] = useState<'today' | 'routines' | 'progress' | 'library'>('today');
-  const [routinesSubTab, setRoutinesSubTab] = useState<'catalog' | 'calisthenics' | 'database' | 'custom'>('catalog');
+  const [routinesSubTab, setRoutinesSubTab] = useState<'catalog' | 'skills' | 'database' | 'custom'>('catalog');
 
   return (
     <ErrorBoundary>
@@ -70,7 +70,7 @@ export default function FitnessTabWorkspace() {
           {/* HOY -> TRACKER ACTIVO EN VIVO */}
           {activeMainTab === 'today' && <FitAppWorkoutLogger />}
 
-          {/* RUTINAS -> CATÁLOGO + SUB-VISTAS SECUNDARIAS */}
+          {/* RUTINAS -> CATÁLOGO + HABILIDADES + SUB-VISTAS SECUNDARIAS */}
           {activeMainTab === 'routines' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
               <div className={styles.subSectionNav}>
@@ -83,10 +83,10 @@ export default function FitnessTabWorkspace() {
                 </button>
                 <button
                   type="button"
-                  className={`${styles.subSectionButton} ${routinesSubTab === 'calisthenics' ? styles.subSectionButtonActive : ''}`}
-                  onClick={() => setRoutinesSubTab('calisthenics')}
+                  className={`${styles.subSectionButton} ${routinesSubTab === 'skills' ? styles.subSectionButtonActive : ''}`}
+                  onClick={() => setRoutinesSubTab('skills')}
                 >
-                  <Activity size={15} /> Calistenia & Progresiones
+                  <Target size={15} /> Habilidades
                 </button>
                 <button
                   type="button"
@@ -105,7 +105,7 @@ export default function FitnessTabWorkspace() {
               </div>
 
               {routinesSubTab === 'catalog' && <FitAppRoutinesCatalog />}
-              {routinesSubTab === 'calisthenics' && <CalisthenicsLearningHub />}
+              {routinesSubTab === 'skills' && <SkillsWorkspace />}
               {routinesSubTab === 'database' && <ExerciseDatabaseBrowser />}
               {routinesSubTab === 'custom' && <CustomRoutineBuilder />}
             </div>
