@@ -34,13 +34,13 @@ export default function HomeClinicalDashboard() {
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
-            background: 'rgba(28, 28, 30, 0.85)',
+            background: 'var(--color-surface-base)',
             backdropFilter: 'blur(30px) saturate(190%)',
             WebkitBackdropFilter: 'blur(30px) saturate(190%)',
             padding: '6px',
             borderRadius: '18px',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255,255,255,0.1) inset',
+            border: '1px solid var(--color-border-visible)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)',
             overflowX: 'auto',
             maxWidth: '100%'
           }}>
@@ -52,8 +52,8 @@ export default function HomeClinicalDashboard() {
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
                   style={{
-                    background: isSelected ? '#ffffff' : 'transparent',
-                    color: isSelected ? '#000000' : '#8e8e93',
+                    background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
+                    color: isSelected ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                     border: 'none',
                     padding: '8px 18px',
                     borderRadius: '12px',
@@ -62,7 +62,7 @@ export default function HomeClinicalDashboard() {
                     fontFamily: '-apple-system, SF Pro Text, system-ui, sans-serif',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
-                    boxShadow: isSelected ? '0 3px 12px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0,0,0,0.2)' : 'none',
+                    boxShadow: isSelected ? '0 3px 12px rgba(10, 132, 255, 0.35)' : 'none',
                     transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
                   }}
                 >
@@ -78,13 +78,13 @@ export default function HomeClinicalDashboard() {
               type="button"
               onClick={() => setWorkflowMode('morning')}
               style={{
-                background: 'rgba(48, 209, 88, 0.15)',
-                border: '1px solid rgba(48, 209, 88, 0.4)',
-                color: '#30d158',
+                background: 'rgba(10, 132, 255, 0.12)',
+                border: '1px solid var(--color-border-visible)',
+                color: 'var(--color-accent-primary)',
                 padding: '8px 16px',
                 borderRadius: '12px',
                 fontSize: '0.8rem',
-                fontWeight: 800,
+                fontWeight: 600,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -98,13 +98,13 @@ export default function HomeClinicalDashboard() {
               type="button"
               onClick={() => setWorkflowMode('evening')}
               style={{
-                background: 'rgba(191, 90, 242, 0.15)',
-                border: '1px solid rgba(191, 90, 242, 0.4)',
-                color: '#bf5af2',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid var(--color-border-subtle)',
+                color: 'var(--color-text-secondary)',
                 padding: '8px 16px',
                 borderRadius: '12px',
                 fontSize: '0.8rem',
-                fontWeight: 800,
+                fontWeight: 500,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -114,8 +114,8 @@ export default function HomeClinicalDashboard() {
               🌙 Modo Cierre (3m Desconexión Nocturna)
             </button>
 
-            <span style={{ fontSize: '0.78rem', color: '#98989d', alignSelf: 'center', marginLeft: 'auto' }}>
-              Nivel de Energía Activo: <strong style={{ color: '#fff', textTransform: 'uppercase' }}>{currentEnergy}</strong>
+            <span style={{ fontSize: '0.78rem', color: 'var(--color-text-tertiary)', alignSelf: 'center', marginLeft: 'auto' }}>
+              Nivel de Energía Activo: <strong style={{ color: 'var(--color-text-primary)', textTransform: 'uppercase' }}>{currentEnergy}</strong>
             </span>
           </div>
 
@@ -138,78 +138,78 @@ export default function HomeClinicalDashboard() {
               }}>
                 {/* 3 TASKS CARD */}
                 <div style={{
-                  background: 'rgba(28, 28, 30, 0.75)',
+                  background: 'var(--color-surface-base)',
                   backdropFilter: 'blur(40px)',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  border: '1px solid var(--color-border-subtle)',
                   borderRadius: '20px',
                   padding: '24px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '14px'
                 }}>
-                  <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.68rem', color: '#30d158', background: 'rgba(48, 209, 88, 0.15)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700, width: 'fit-content' }}>
-                    REGLA TDAH: MÁXIMO 3 TAREAS HOY
+                  <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.68rem', color: 'var(--color-accent-primary)', background: 'rgba(10, 132, 255, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 600, width: 'fit-content' }}>
+                    FOCO DIARIO • MÁXIMO 3 TAREAS
                   </span>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
-                    Prioridades Inviolables del Día
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    Prioridades del Día
                   </h3>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(10,132,255,0.3)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-accent-primary)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <strong style={{ fontSize: '0.88rem', color: '#ffffff', display: 'block' }}>1. TwinSight MVP & Tesis</strong>
-                        <span style={{ fontSize: '0.75rem', color: '#0a84ff' }}>Bloque A (09:20 - 11:40) • Versión Mala</span>
+                        <strong style={{ fontSize: '0.88rem', color: 'var(--color-text-primary)', display: 'block' }}>1. TwinSight MVP & Tesis</strong>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)' }}>Bloque A (09:20 - 11:40) • Versión Mala</span>
                       </div>
-                      <span style={{ fontSize: '0.7rem', color: '#30d158', background: 'rgba(48,209,88,0.15)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>En curso</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--color-state-done)', background: 'rgba(48,209,88,0.15)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>En curso</span>
                     </div>
 
-                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <strong style={{ fontSize: '0.88rem', color: '#ffffff', display: 'block' }}>2. Ensayo Sustentación CBT</strong>
-                        <span style={{ fontSize: '0.75rem', color: '#bf5af2' }}>Exposición (14:00 - 14:40) • 3 Ideas</span>
+                        <strong style={{ fontSize: '0.88rem', color: 'var(--color-text-primary)', display: 'block' }}>2. Ensayo Sustentación CBT</strong>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Exposición (14:00 - 14:40) • 3 Ideas</span>
                       </div>
-                      <span style={{ fontSize: '0.7rem', color: '#98989d', background: 'rgba(255,255,255,0.08)', padding: '2px 6px', borderRadius: '4px' }}>Pendiente</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--color-text-tertiary)', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: '4px' }}>Pendiente</span>
                     </div>
 
-                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <strong style={{ fontSize: '0.88rem', color: '#ffffff', display: 'block' }}>3. Alemán A1 Diario (v3)</strong>
-                        <span style={{ fontSize: '0.75rem', color: '#ff9f0a' }}>13:30 - 14:00 • 5m Duolingo + 20m A1</span>
+                        <strong style={{ fontSize: '0.88rem', color: 'var(--color-text-primary)', display: 'block' }}>3. Alemán A1 Diario (v3)</strong>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-warning)' }}>13:30 - 14:00 • 5m Duolingo + 20m A1</span>
                       </div>
-                      <span style={{ fontSize: '0.7rem', color: '#98989d', background: 'rgba(255,255,255,0.08)', padding: '2px 6px', borderRadius: '4px' }}>Pendiente</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--color-text-tertiary)', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: '4px' }}>Pendiente</span>
                     </div>
                   </div>
                 </div>
 
                 {/* EMOTIONAL REGULATION & CLINICAL PERMISSION CARD */}
                 <div style={{
-                  background: 'rgba(28, 28, 30, 0.75)',
+                  background: 'var(--color-surface-base)',
                   backdropFilter: 'blur(40px)',
-                  border: '1px solid rgba(255, 55, 95, 0.25)',
+                  border: '1px solid var(--color-border-subtle)',
                   borderRadius: '20px',
                   padding: '24px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '14px'
                 }}>
-                  <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.68rem', color: '#ff375f', background: 'rgba(255, 55, 95, 0.15)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700, width: 'fit-content' }}>
-                    REGULACIÓN EMOCIONAL & PERMISO
+                  <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.68rem', color: 'var(--color-text-secondary)', background: 'rgba(255, 255, 255, 0.08)', padding: '4px 10px', borderRadius: '999px', fontWeight: 600, width: 'fit-content' }}>
+                    PRINCIPIOS CLÍNICOS
                   </span>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                     Principios Terapéuticos Activos
                   </h3>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.82rem', color: '#98989d', lineHeight: 1.45 }}>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid #30d158' }}>
-                      <strong style={{ color: '#ffffff', display: 'block' }}>Suficientemente Terminado &gt; Ideal:</strong>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.82rem', color: 'var(--color-text-secondary)', lineHeight: 1.45 }}>
+                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-state-done)' }}>
+                      <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Suficientemente Terminado &gt; Ideal:</strong>
                       Cierra la tarea cuando cumpla el criterio mínimo sin seguir refinando indefinidamente.
                     </div>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid #bf5af2' }}>
-                      <strong style={{ color: '#ffffff', display: 'block' }}>El Descanso No Se Gana:</strong>
+                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-primary)' }}>
+                      <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>El Descanso No Se Gana:</strong>
                       El sueño y el ocio son parte de la salud mental y la función cognitiva, no un premio condicionado al rendimiento.
                     </div>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid #64d2ff' }}>
-                      <strong style={{ color: '#ffffff', display: 'block' }}>Paso de Reentrada Escrito:</strong>
+                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-warning)' }}>
+                      <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Paso de Reentrada Escrito:</strong>
                       Antes de levantarte de la mesa, deja escrita la primera acción exacta de 2 min.
                     </div>
                   </div>
@@ -227,40 +227,40 @@ export default function HomeClinicalDashboard() {
           {/* TAB 3: SECTIONS MAP */}
           {activeTab === 'sections' && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
-              <a href="/app/today" style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #64d2ff', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <a href="/app/today" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>⚡</span>
                 <h4 style={{ fontSize: '1rem', margin: 0, fontWeight: 700 }}>Centro Operativo Hoy</h4>
-                <p style={{ fontSize: '0.78rem', color: '#98989d', margin: 0 }}>Línea temporal del día 05:30 – 21:30.</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: 0 }}>Línea temporal del día 05:30 – 21:30.</p>
               </a>
 
-              <a href="/app/schedules" style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #bf5af2', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <a href="/app/schedules" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>📅</span>
                 <h4 style={{ fontSize: '1rem', margin: 0, fontWeight: 700 }}>Cronograma y Matriz</h4>
-                <p style={{ fontSize: '0.78rem', color: '#98989d', margin: 0 }}>Matriz semanal de 19 bloques por fase.</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: 0 }}>Matriz semanal de 19 bloques por fase.</p>
               </a>
 
-              <a href="/app/career" style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #0a84ff', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <a href="/app/career" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>🚀</span>
                 <h4 style={{ fontSize: '1rem', margin: 0, fontWeight: 700 }}>Laboral & Roadmap</h4>
-                <p style={{ fontSize: '0.78rem', color: '#98989d', margin: 0 }}>TwinSight, Portfolio y Roadmap 16 semanas.</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: 0 }}>TwinSight, Portfolio y Roadmap 16 semanas.</p>
               </a>
 
-              <a href="/app/fitness" style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #30d158', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <a href="/app/fitness" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-state-done)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>💪</span>
                 <h4 style={{ fontSize: '1rem', margin: 0, fontWeight: 700 }}>Fitness & FitApp</h4>
-                <p style={{ fontSize: '0.78rem', color: '#98989d', margin: 0 }}>Tracker en vivo, Min-Max y 150+ ejercicios.</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: 0 }}>Tracker en vivo, Min-Max y 150+ ejercicios.</p>
               </a>
 
-              <a href="/app/german" style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <a href="/app/german" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-warning)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>🇩🇪</span>
                 <h4 style={{ fontSize: '1rem', margin: 0, fontWeight: 700 }}>Alemán A1</h4>
-                <p style={{ fontSize: '0.78rem', color: '#98989d', margin: 0 }}>Hábito diario 13:30 – 14:00.</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: 0 }}>Hábito diario 13:30 – 14:00.</p>
               </a>
 
-              <a href="/app/clinical" style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff375f', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <a href="/app/clinical" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>🧠</span>
                 <h4 style={{ fontSize: '1rem', margin: 0, fontWeight: 700 }}>Clínica Conductual</h4>
-                <p style={{ fontSize: '0.78rem', color: '#98989d', margin: 0 }}>TDAH, Ansiedad Social y Sueño CBT-I.</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: 0 }}>TDAH, Ansiedad Social y Sueño CBT-I.</p>
               </a>
             </div>
           )}

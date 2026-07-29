@@ -1,0 +1,26 @@
+/* src/styles/tokens.css - AUDIT-01: Centralized Design System Tokens */
+:root {
+  /* === COLORES DE ACENTO (máximo 2 en pantalla simultáneamente) === */
+  --color-accent-primary: #0a84ff;    /* Acción confirmada, progreso */
+  --color-accent-warning: #ff9f0a;    /* Alerta, pendiente importante */
+  --color-accent-danger:  #ff453a;    /* Solo errores críticos */
+
+  /* === SUPERFICIE === */
+  --color-surface-base:    rgba(28, 28, 30, 0.95);
+  --color-surface-raised:  rgba(44, 44, 46, 0.85);
+  --color-surface-overlay: rgba(58, 58, 60, 0.70);
+
+  /* === TEXTO === */
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #aeaeb2;
+  --color-text-tertiary:  #636366;
+
+  /* === BORDES === */
+  --color-border-subtle:  rgba(255, 255, 255, 0.08);
+  --color-border-visible: rgba(255, 255, 255, 0.15);
+
+  /* === ESTADOS SEMÁNTICOS (SOLO badges y bordes izquierdos) === */
+  --color-state-active:    var(--color-accent-primary);
+  --color-state-pending:   var(--color-text-tertiary);
+  --color-state-done:      #30d158;   /* Verde solo para "completado" */
+}
