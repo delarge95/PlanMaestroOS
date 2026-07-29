@@ -23,4 +23,20 @@
   --color-state-active:    var(--color-accent-primary);
   --color-state-pending:   var(--color-text-tertiary);
   --color-state-done:      #30d158;   /* Verde solo para "completado" */
+
+  /* === TIPOGRAFÍA (AUDIT-02: Escala de 4 Niveles) === */
+  --font-family-system: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+
+  --font-size-display: 1.25rem;
+  --font-size-body:    0.90rem;
+  --font-size-label:   0.78rem;
+  --font-size-micro:   0.68rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+  --font-weight-bold:    700;
+
+  --line-height-display: 1.3;
+  --line-height-body:    1.55;
+  --line-height-label:   1.4;
 }
