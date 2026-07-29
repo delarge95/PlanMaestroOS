@@ -7,21 +7,25 @@ export type EffortTarget = {
 
 export type ExercisePrescription = {
   id?: string;
-  exerciseId: string;             // ID canónico de la base FitApp
-  displayName: string;            // Nombre mostrado en la UI
-  warmupSets: number | string;    // Número o rango '1-2'
-  workingSets: number | string;   // Número de series efectivas
-  targetReps?: string;            // e.g. '8-10'
-  repRange?: string;              // e.g. '8-10' (legacy alias)
-  restPeriod?: string;            // e.g. '2-3 min'
-  rest?: string;                  // e.g. '2-3 min' (legacy alias)
-  earlySetRpe?: string;           // RPE/RIR de primeras series
+  exerciseId: string;               // ID canónico de la base FitApp
+  displayName: string;              // Nombre exacto mostrado en el PDF (p. ej. 'Barbell Incline Press')
+  lastSetIntensityTechnique?: string; // 'N/A', 'Drop set', 'Myo-reps', 'Lengthened Partials'
+  intensityTechnique?: string;        // Alias técnico
+  warmupSets: number | string;      // Rango o número exacto del PDF (p. ej., '2-4', '1-2', '0-1')
+  workingSets: number | string;     // Número de series efectivas
+  targetReps?: string;              // Rango de repeticiones (p. ej. '6-8')
+  repRange?: string;                // Legacy alias
+  rirPerSet?: string[];             // RIR/RPE individual por cada serie (p. ej. ['2', '1'])
+  earlySetRpe?: string;             // RPE/RIR de primeras series
   lastSetRpe?: string;            // RPE/RIR de última serie
-  effort?: EffortTarget;          // Objeto de esfuerzo (legacy alias)
-  intensityTechnique?: string;    // Técnica especial de última serie
-  substituteOptions?: string[];   // Alternativas Nivel 1 y 2
-  substituteExerciseIds?: string[]; // Alternativas (legacy alias)
-  notes?: string;                 // Notas técnicas y operativas del PDF
+  effort?: EffortTarget;            // Objeto de esfuerzo (legacy alias)
+  restPeriod?: string;              // Tiempo de descanso (p. ej. '3-5 min')
+  rest?: string;                    // Legacy alias
+  substitutionOption1?: string;     // Sustitución opción 1 recomendada por la rutina (PDF)
+  substitutionOption2?: string;     // Sustitución opción 2 recomendada por la rutina (PDF)
+  substituteOptions?: string[];     // Alternativas Nivel 1 y 2
+  substituteExerciseIds?: string[]; // Legacy alias
+  notes: string;                    // Notas técnicas y operativas exactas del PDF
   sourceRef?: { programId: string; block: string; week: number; day: string };
 };
 

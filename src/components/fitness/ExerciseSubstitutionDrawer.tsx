@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeftRight, Check, RotateCcw } from 'lucide-react';
+import { ArrowLeftRight, Check, RotateCcw, Star } from 'lucide-react';
 import Sheet from '../ui/Sheet';
 import Button from '../ui/Button';
 import ListRow from '../ui/ListRow';
@@ -33,6 +33,10 @@ export function ExerciseSubstitutionDrawer({
 
   const alternatives = getExerciseAlternatives(originalExerciseId, sourceSubstitutes);
 
+  // Group into PDF recommended vs FitApp general compatibles
+  const pdfAlternatives = alternatives.filter((a) => a.reason === 'source-program');
+  const fitAppAlternatives = alternatives.filter((a) => a.reason !== 'source-program');
+
   return (
     <Sheet
       isOpen={isOpen}
@@ -61,51 +65,77 @@ export function ExerciseSubstitutionDrawer({
           )}
         </div>
 
-        {/* LISTA DE ALTERNATIVAS POR CAPAS */}
-        <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase' }}>
-          Alternativas Compatibles (Programa → Plan Fitness → FitApp)
-        </span>
+        {/* 1. SECCIÓN RECOMENDACIONES OFICIALES DEL PDF */}
+        <div>
+          <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}>
+            <Star size={14} /> ⭐ Recomendaciones Oficiales del PDF (Entrenador)
+          </span>
 
-        {alternatives.length === 0 ? (
-          <p style={{ fontSize: 'var(--font-size-body)', color: 'var(--text-secondary)' }}>
-            No hay sustituciones seguras configuradas para este ejercicio.
-          </p>
-        ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
             {/* OPCIÓN ORIGINAL */}
             <ListRow
               title={originalName}
-              meta="Ejercicio original prescrito por el programa fuente"
+              meta="Ejercicio original prescrito por el PDF"
               icon={<ArrowLeftRight size={18} style={{ color: 'var(--color-accent-primary)' }} />}
               active={currentActiveId === originalExerciseId}
-              badge={currentActiveId === originalExerciseId ? 'Seleccionado' : undefined}
+              badge={currentActiveId === originalExerciseId ? 'Original Activo' : undefined}
               badgeTone={currentActiveId === originalExerciseId ? 'success' : 'default'}
               onClick={() => clearOverride(prescriptionId)}
             />
 
-            {/* ALTERNATIVAS */}
-            {alternatives.map((alt) => {
+            {/* SUSTITUTOS OFICIALES DEL PDF */}
+            {pdfAlternatives.map((alt) => {
               const isSelected = currentActiveId === alt.exerciseId;
-              const reasonLabel =
-                alt.reason === 'source-program'
-                  ? 'Alternativa del Programa'
-                  : alt.reason === 'plan-fitness'
-                  ? 'Plan Fitness (Salud Articular)'
-                  : 'Motor FitApp Compatible';
-
               return (
-                <ListRow
+                <div
                   key={alt.exerciseId}
-                  title={alt.name}
-                  meta={`${reasonLabel} · ${alt.note || ''}`}
-                  icon={isSelected ? <Check size={18} style={{ color: 'var(--color-state-done)' }} /> : <ArrowLeftRight size={18} style={{ color: 'var(--text-tertiary)' }} />}
-                  active={isSelected}
-                  badge={isSelected ? 'Seleccionado' : undefined}
-                  badgeTone={isSelected ? 'success' : 'default'}
-                  onClick={() => setOverride(prescriptionId, alt.exerciseId)}
-                />
+                  style={{
+                    border: isSelected ? '2px solid var(--color-accent-primary)' : '1px solid var(--color-border-visible)',
+                    borderRadius: 'var(--radius-md)',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <ListRow
+                    title={alt.name}
+                    meta={`Recomendación Oficial PDF · ${alt.note || 'Sustitución directa de la rutina'}`}
+                    icon={isSelected ? <Check size={18} style={{ color: 'var(--color-state-done)' }} /> : <Star size={18} style={{ color: '#f59e0b' }} />}
+                    active={isSelected}
+                    badge={isSelected ? 'Seleccionado' : '⭐ Recomendado PDF'}
+                    badgeTone={isSelected ? 'success' : 'warning'}
+                    onClick={() => setOverride(prescriptionId, alt.exerciseId)}
+                  />
+                </div>
               );
             })}
+          </div>
+        </div>
+
+        {/* 2. SECCIÓN OTROS SUSTITUTOS COMPATIBLES FITAPP */}
+        {fitAppAlternatives.length > 0 && (
+          <div>
+            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              🔄 Alternativas Adicionales Compatibles (Motor FitApp)
+            </span>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+              {fitAppAlternatives.map((alt) => {
+                const isSelected = currentActiveId === alt.exerciseId;
+                const reasonLabel = alt.reason === 'plan-fitness' ? 'Plan Fitness (Salud Articular)' : 'FitApp Compatible';
+
+                return (
+                  <ListRow
+                    key={alt.exerciseId}
+                    title={alt.name}
+                    meta={`${reasonLabel} · ${alt.note || ''}`}
+                    icon={isSelected ? <Check size={18} style={{ color: 'var(--color-state-done)' }} /> : <ArrowLeftRight size={18} style={{ color: 'var(--text-tertiary)' }} />}
+                    active={isSelected}
+                    badge={isSelected ? 'Seleccionado' : undefined}
+                    badgeTone={isSelected ? 'success' : 'default'}
+                    onClick={() => setOverride(prescriptionId, alt.exerciseId)}
+                  />
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

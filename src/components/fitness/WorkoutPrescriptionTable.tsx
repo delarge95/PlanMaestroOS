@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeftRight, Info, ExternalLink } from 'lucide-react';
+import { ArrowLeftRight, Info, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import type { TrainingProgram } from '../../data/fitness/programs/types';
 import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
@@ -21,6 +21,7 @@ export function WorkoutPrescriptionTable({
   const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
 
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
+  const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
 
   // Active drawer state
   const [substitutionTarget, setSubstitutionTarget] = useState<{
@@ -28,6 +29,8 @@ export function WorkoutPrescriptionTable({
     originalId: string;
     originalName: string;
     sourceSubs: string[];
+    opt1?: string;
+    opt2?: string;
   } | null>(null);
 
   const safeWeekIndex = Math.min(Math.max(currentWeek - 1, 0), (program.weeks?.length || 1) - 1);
@@ -35,6 +38,10 @@ export function WorkoutPrescriptionTable({
   const weekNum = activeWeek?.weekNumber || activeWeek?.week || 1;
   const activeDay = activeWeek?.days?.[selectedDayIndex] || activeWeek?.days?.[0];
   const dayTitle = activeDay?.name || activeDay?.title || 'Día 1';
+
+  const toggleNote = (id: string) => {
+    setExpandedNoteId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
@@ -126,10 +133,10 @@ export function WorkoutPrescriptionTable({
         </div>
       </div>
 
-      {/* NOTA DE LA SEMANA */}
+      {/* NOTA DE LA SEMANA Y BLOQUE */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', background: 'var(--surface-elevated)', border: '1px solid var(--color-border-subtle)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
         <Info size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
-        <span>{activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayTitle}: {activeWeek?.isDeload ? 'Semana de descarga estratégica.' : 'Sobrecarga progresiva estándar.'}</span>
+        <span>{activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayTitle}: {activeWeek?.isDeload ? 'Semana de descarga estratégica. Reducir carga y mantener margen.' : 'Prescripción exacta del PDF.'}</span>
       </div>
 
       {/* TABLA DE PRESCRIPCIÓN RESPONSIVA */}
@@ -137,12 +144,12 @@ export function WorkoutPrescriptionTable({
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--font-size-body)' }}>
           <thead>
             <tr style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid var(--color-border-subtle)' }}>
-              <th style={{ padding: '10px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>EJERCICIO (FITAPP)</th>
-              <th style={{ padding: '10px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>CALENTAMIENTO</th>
-              <th style={{ padding: '10px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>SERIES × REPS</th>
-              <th style={{ padding: '10px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>ESFUERZO (RIR/RPE)</th>
-              <th style={{ padding: '10px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>DESCANSO</th>
-              <th style={{ padding: '10px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>ACCIONES</th>
+              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>EJERCICIO & NOTAS</th>
+              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>CALENTAMIENTO</th>
+              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>SERIES × REPS</th>
+              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>ESFUERZO (RIR/RPE)</th>
+              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>DESCANSO</th>
+              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>SUSTITUCIONES (PDF)</th>
             </tr>
           </thead>
           <tbody>
@@ -151,17 +158,28 @@ export function WorkoutPrescriptionTable({
               const overrideId = overrides[pId];
               const effectiveExerciseId = overrideId || prescription.exerciseId;
               const effectiveDetails = getExerciseDetails(effectiveExerciseId);
-              const reps = prescription.targetReps || prescription.repRange || '8-10';
-              const rest = prescription.restPeriod || prescription.rest || '2 min';
+              const reps = prescription.targetReps || prescription.repRange || '6-8';
+              const rest = prescription.restPeriod || prescription.rest || '1-2 min';
+
+              // Effort per set formatting
+              const rirSets = prescription.rirPerSet || [];
               const earlyEffort = prescription.earlySetRpe || prescription.effort?.early || 'RIR 1';
               const lastEffort = prescription.lastSetRpe || prescription.effort?.last || 'RIR 0';
-              const sourceSubs = prescription.substituteOptions || prescription.substituteExerciseIds || [];
+
+              const sourceSubs = [
+                ...(prescription.substitutionOption1 ? [prescription.substitutionOption1] : []),
+                ...(prescription.substitutionOption2 ? [prescription.substitutionOption2] : []),
+                ...(prescription.substituteOptions || []),
+                ...(prescription.substituteExerciseIds || [])
+              ];
+
+              const isNoteExpanded = expandedNoteId === pId;
 
               return (
-                <tr key={pId} style={{ borderBottom: '1px solid var(--color-border-subtle)' }}>
-                  {/* EJERCICIO */}
-                  <td style={{ padding: '12px 14px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                <tr key={pId} style={{ borderBottom: '1px solid var(--color-border-subtle)', background: pIdx % 2 === 1 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
+                  {/* EJERCICIO Y NOTAS COMPLETAS */}
+                  <td style={{ padding: '12px 14px', verticalAlign: 'top', maxWidth: '280px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                       <ExerciseLink
                         exerciseId={effectiveExerciseId}
                         displayName={prescription.displayName || effectiveDetails.name}
@@ -172,61 +190,123 @@ export function WorkoutPrescriptionTable({
                           ✓ Sustituido (Original: {prescription.displayName})
                         </span>
                       )}
+
+                      {/* NOTA OPERATIVA DEL ENTRENADOR (DESPLEGABLE / VISIBLE) */}
                       {prescription.notes && (
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-                          {prescription.notes}
-                        </span>
+                        <div style={{ marginTop: '2px' }}>
+                          <button
+                            type="button"
+                            onClick={() => toggleNote(pId)}
+                            style={{
+                              background: 'transparent',
+                              border: 'none',
+                              color: 'var(--color-accent-primary)',
+                              fontSize: '0.74rem',
+                              fontWeight: 600,
+                              cursor: 'pointer',
+                              padding: 0,
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px'
+                            }}
+                          >
+                            <span>{isNoteExpanded ? 'Ocultar nota técnica' : 'Ver nota del PDF'}</span>
+                            {isNoteExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+                          </button>
+
+                          {(isNoteExpanded || prescription.notes.length <= 80) && (
+                            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.45, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--color-accent-primary)' }}>
+                              {prescription.notes}
+                            </p>
+                          )}
+                        </div>
                       )}
                     </div>
                   </td>
 
                   {/* CALENTAMIENTO */}
-                  <td style={{ padding: '12px 14px', color: 'var(--text-secondary)' }}>
+                  <td style={{ padding: '12px 14px', verticalAlign: 'top', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
                     {prescription.warmupSets} series
                   </td>
 
                   {/* SERIES X REPS */}
-                  <td style={{ padding: '12px 14px', fontWeight: 600 }}>
+                  <td style={{ padding: '12px 14px', verticalAlign: 'top', fontWeight: 700, whiteSpace: 'nowrap' }}>
                     {prescription.workingSets} × {reps}
                   </td>
 
-                  {/* ESFUERZO */}
-                  <td style={{ padding: '12px 14px' }}>
-                    <span style={{ background: 'var(--surface-elevated)', border: '1px solid var(--color-border-visible)', padding: '2px 8px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 600 }}>
-                      S1: {earlyEffort} / S2+: {lastEffort}
-                    </span>
+                  {/* ESFUERZO INDIVIDUAL POR SERIE (RIR / RPE) */}
+                  <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                      {rirSets.length > 0 ? (
+                        rirSets.map((rirVal, rIdx) => (
+                          <span
+                            key={rIdx}
+                            style={{
+                              background: 'var(--surface-elevated)',
+                              border: '1px solid var(--color-border-visible)',
+                              padding: '2px 6px',
+                              borderRadius: '4px',
+                              fontSize: '0.76rem',
+                              fontWeight: 600,
+                              color: rirVal === '0' || rirVal.includes('Fallo') ? '#ff453a' : 'var(--text)'
+                            }}
+                          >
+                            S{rIdx + 1}: RIR {rirVal}
+                          </span>
+                        ))
+                      ) : (
+                        <span style={{ background: 'var(--surface-elevated)', border: '1px solid var(--color-border-visible)', padding: '2px 6px', borderRadius: '4px', fontSize: '0.76rem', fontWeight: 600 }}>
+                          S1: {earlyEffort} / S2+: {lastEffort}
+                        </span>
+                      )}
+                    </div>
                   </td>
 
                   {/* DESCANSO */}
-                  <td style={{ padding: '12px 14px', color: 'var(--text-secondary)' }}>
+                  <td style={{ padding: '12px 14px', verticalAlign: 'top', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
                     {rest}
                   </td>
 
-                  {/* ACCIONES */}
-                  <td style={{ padding: '12px 14px' }}>
-                    <button
-                      type="button"
-                      onClick={() => setSubstitutionTarget({
-                        prescriptionId: pId,
-                        originalId: prescription.exerciseId,
-                        originalName: prescription.displayName,
-                        sourceSubs
-                      })}
-                      style={{
-                        background: 'transparent',
-                        border: '1px solid var(--color-border-visible)',
-                        color: 'var(--text)',
-                        padding: '4px 8px',
-                        borderRadius: '6px',
-                        fontSize: '0.78rem',
-                        cursor: 'pointer',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '4px'
-                      }}
-                    >
-                      <ArrowLeftRight size={13} /> Sustituir
-                    </button>
+                  {/* ACCIÓN SUSTITUIR Y SUSTITUTOS DEL PDF */}
+                  <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <button
+                        type="button"
+                        onClick={() => setSubstitutionTarget({
+                          prescriptionId: pId,
+                          originalId: prescription.exerciseId,
+                          originalName: prescription.displayName,
+                          sourceSubs,
+                          opt1: prescription.substitutionOption1,
+                          opt2: prescription.substitutionOption2
+                        })}
+                        style={{
+                          background: 'var(--surface-elevated)',
+                          border: '1px solid var(--color-border-visible)',
+                          color: 'var(--text)',
+                          padding: '6px 10px',
+                          borderRadius: '6px',
+                          fontSize: '0.78rem',
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          width: 'fit-content'
+                        }}
+                      >
+                        <ArrowLeftRight size={14} /> Sustituir
+                      </button>
+
+                      {/* MOSTRAR SUGESTIONES OFICIALES DEL PDF SI EXISTEN */}
+                      {(prescription.substitutionOption1 || prescription.substitutionOption2) && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+                          <span style={{ fontWeight: 700, color: 'var(--color-accent-primary)' }}>⭐ Recomendado en PDF:</span>
+                          {prescription.substitutionOption1 && <span>1. {prescription.substitutionOption1}</span>}
+                          {prescription.substitutionOption2 && <span>2. {prescription.substitutionOption2}</span>}
+                        </div>
+                      )}
+                    </div>
                   </td>
                 </tr>
               );
@@ -235,7 +315,7 @@ export function WorkoutPrescriptionTable({
         </table>
       </div>
 
-      {/* DRAWER DE SUSTITUCCIÓN */}
+      {/* DRAWER DE SUSTITUCCIÓN DESTACANDO OPCIONES DEL PDF */}
       {substitutionTarget && (
         <ExerciseSubstitutionDrawer
           isOpen={Boolean(substitutionTarget)}
