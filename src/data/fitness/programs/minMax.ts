@@ -1,287 +1,267 @@
-// src/data/fitness/programs/minMax.ts - Jeff Nippard Min-Max Program (12 Weeks)
-import type { TrainingProgram } from './types';
-import { resolveExerciseId } from '../exerciseResolver';
+// src/data/fitness/programs/minMax.ts - Official Jeff Nippard Min-Max Program (12 Weeks)
+import type { TrainingProgram, ProgramWeek } from './types';
 
-const minMaxDaysTemplate = [
-  {
-    id: 'minmax-d1',
-    title: 'Upper 1 (Empuje & Pecho)',
-    order: 1,
-    exercises: [
-      {
-        id: 'mm-d1-ex1',
-        exerciseId: resolveExerciseId('Barbell Incline Press'),
-        displayName: 'Barbell Incline Press',
-        warmupSets: '2',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '3-5 min',
-        effort: { type: 'rir' as const, early: '1', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('DB Incline Press'), resolveExerciseId('Smith Machine Incline Press')],
-        notes: 'Banca a 30°. Pausa de 1s en la parte inferior manteniendo tensión.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 1' }
-      },
-      {
-        id: 'mm-d1-ex2',
-        exerciseId: resolveExerciseId('Pec Deck'),
-        displayName: 'Pec Deck / Aperturas',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '1-2 min',
-        effort: { type: 'rir' as const, early: '0', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('DB Flye'), resolveExerciseId('Cable Flye')],
-        notes: 'Pausa 1s en la contracción peak.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 1' }
-      },
-      {
-        id: 'mm-d1-ex3',
-        exerciseId: resolveExerciseId('Pull-Up (Wide Grip)'),
-        displayName: 'Pull-Up (Wide Grip)',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '2-3 min',
-        effort: { type: 'rir' as const, early: '1', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Lat Pulldown'), resolveExerciseId('Chin-Up')],
-        notes: 'Agarre prono 1.5x ancho de hombros. Excéntrica controlada de 3s.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 1' }
-      },
-      {
-        id: 'mm-d1-ex4',
-        exerciseId: resolveExerciseId('Triceps Pressdown'),
-        displayName: 'Triceps Pressdown',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '1-2 min',
-        effort: { type: 'rir' as const, early: '0', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Close-Grip Bench Press')],
-        notes: 'Cuerda o barra. Fijar codos al costado del cuerpo.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 1' }
-      },
-      {
-        id: 'mm-d1-ex5',
-        exerciseId: resolveExerciseId('EZ-Bar Preacher Curl'),
-        displayName: 'EZ-Bar Preacher Curl',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '1-2 min',
-        effort: { type: 'rir' as const, early: '0', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('DB Preacher Curl')],
-        notes: 'Tríceps pegados al pad. Rango completo y estricto.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 1' }
-      }
-    ]
-  },
-  {
-    id: 'minmax-d2',
-    title: 'Lower 1 (Cuádriceps & Rodilla)',
-    order: 2,
-    exercises: [
-      {
-        id: 'mm-d2-ex1',
-        exerciseId: resolveExerciseId('Lying Leg Curl'),
-        displayName: 'Lying Leg Curl',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '1-2 min',
-        effort: { type: 'rir' as const, early: '0', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Seated Leg Curl')],
-        notes: 'Máximo estiramiento en la posición baja.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Lower 1' }
-      },
-      {
-        id: 'mm-d2-ex2',
-        exerciseId: resolveExerciseId('Squat (Your Choice)'),
-        displayName: 'Back Squat / Sentadilla',
-        warmupSets: '3',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '3-5 min',
-        effort: { type: 'rir' as const, early: '1', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Barbell Lunge'), resolveExerciseId('DB Lunge')],
-        notes: 'Profundidad paralela o más. Controlar el descenso.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Lower 1' }
-      },
-      {
-        id: 'mm-d2-ex3',
-        exerciseId: resolveExerciseId('Spanish Squats'),
-        displayName: 'Spanish Squats (Prehab Rodilla)',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '3-5x45s',
-        rest: '1 min',
-        effort: { type: 'rpe' as const, early: '7', last: '8' },
-        substituteExerciseIds: [resolveExerciseId('Leg Extension')],
-        notes: 'Isométrico analgésico de rodilla con banda o pared.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Lower 1' }
-      },
-      {
-        id: 'mm-d2-ex4',
-        exerciseId: resolveExerciseId('Standing Calf Raise'),
-        displayName: 'Standing Calf Raise',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '8-10',
-        rest: '1-2 min',
-        effort: { type: 'rir' as const, early: '0', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Leg Extension')],
-        notes: 'Pausa de 1-2s en el estiramiento profundo.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Lower 1' }
-      }
-    ]
-  },
-  {
-    id: 'minmax-d3',
-    title: 'Upper 2 (Tracción & Espalda)',
-    order: 3,
-    exercises: [
-      {
-        id: 'mm-d3-ex1',
-        exerciseId: resolveExerciseId('Close-Grip Lat Pulldown'),
-        displayName: 'Lat Pulldown (Jalón al Pecho)',
-        warmupSets: '2',
-        workingSets: 2,
-        repRange: '8-10',
-        rest: '2-3 min',
-        effort: { type: 'rir' as const, early: '1', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Pull-Up')],
-        notes: 'Llevar barra al pecho superior sin balancear el torso.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 2' }
-      },
-      {
-        id: 'mm-d3-ex2',
-        exerciseId: resolveExerciseId('Chest-Supported T-Bar Row'),
-        displayName: 'Remo en Anillas / T-Bar',
-        warmupSets: '2',
-        workingSets: 2,
-        repRange: '8-10',
-        rest: '2-3 min',
-        effort: { type: 'rir' as const, early: '1', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Pull-Up')],
-        notes: 'Retracción escapular completa al final de cada repetición.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 2' }
-      },
-      {
-        id: 'mm-d3-ex3',
-        exerciseId: resolveExerciseId('Machine Chest Press'),
-        displayName: 'Fondos en Anillas / Press Pecho',
-        warmupSets: '2',
-        workingSets: 2,
-        repRange: '8-10',
-        rest: '3 min',
-        effort: { type: 'rir' as const, early: '1', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Barbell Incline Press')],
-        notes: 'Pausa de 1 segundo en el estiramiento abajo.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Upper 2' }
-      }
-    ]
-  },
-  {
-    id: 'minmax-d4',
-    title: 'Lower 2 (Cadena Posterior & Bisagra)',
-    order: 4,
-    exercises: [
-      {
-        id: 'mm-d4-ex1',
-        exerciseId: resolveExerciseId('Barbell RDL'),
-        displayName: 'Barbell Romanian Deadlift (RDL)',
-        warmupSets: '2',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '2-3 min',
-        effort: { type: 'rir' as const, early: '2', last: '1' },
-        substituteExerciseIds: [resolveExerciseId('Machine Hip Thrust')],
-        notes: 'Empujar caderas atrás manteniendo la barra rozando los muslos.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Lower 2' }
-      },
-      {
-        id: 'mm-d4-ex2',
-        exerciseId: resolveExerciseId('Machine Hip Thrust'),
-        displayName: 'Hip Thrust de Glúteo',
-        warmupSets: '2',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '2-3 min',
-        effort: { type: 'rir' as const, early: '1', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Barbell RDL')],
-        notes: 'Contracción máxima de 1 segundo en el punto alto.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Lower 2' }
-      }
-    ]
-  },
-  {
-    id: 'minmax-d5',
-    title: 'Arms & Delts (Brazos & Hombros)',
-    order: 5,
-    exercises: [
-      {
-        id: 'mm-d5-ex1',
-        exerciseId: resolveExerciseId('Bayesian Cable Curl'),
-        displayName: 'Biceps Curl (Preacher / Bayesian)',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '6-8',
-        rest: '1-2 min',
-        effort: { type: 'rir' as const, early: '0', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('EZ-Bar Preacher Curl')],
-        notes: 'Estiramiento profundo y contracción estricta.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Arms & Delts' }
-      },
-      {
-        id: 'mm-d5-ex2',
-        exerciseId: resolveExerciseId('Overhead Cable Triceps Extension'),
-        displayName: 'Extensión de Tríceps Copa',
-        warmupSets: '1',
-        workingSets: 2,
-        repRange: '8-10',
-        rest: '1-2 min',
-        effort: { type: 'rir' as const, early: '0', last: '0' },
-        substituteExerciseIds: [resolveExerciseId('Triceps Pressdown')],
-        notes: 'Sentir estiramiento en la porción larga del tríceps.',
-        sourceRef: { programId: 'min-max', block: '1', week: 1, day: 'Arms & Delts' }
-      }
-    ]
+const generateMinMaxWeeks = (): ProgramWeek[] => {
+  const weeks: ProgramWeek[] = [];
+
+  for (let w = 1; w <= 12; w++) {
+    const isBlock2 = w >= 7;
+    const isDeload = w === 6 || w === 12;
+    const earlyRpe = isDeload ? '6-7' : isBlock2 ? 'RIR 0 / Fallo' : 'RIR 1';
+    const lastRpe = isDeload ? '7' : isBlock2 ? 'Fallo + Drop Set' : 'RIR 0';
+
+    weeks.push({
+      weekNumber: w,
+      title: w <= 5 ? `Bloque 1: Acumulación Base RIR 1 (Semana ${w})` : w === 6 ? `Semana 6: Descarga Activa (Deload)` : w <= 11 ? `Bloque 2: Máxima Intensidad RIR 0 & Drop Sets (Semana ${w})` : `Semana 12: Deload Final & Test`,
+      isDeload,
+      days: [
+        {
+          id: `mm-w${w}-d1`,
+          name: 'Día 1: Upper 1 (Empuje & Pecho)',
+          targetMuscles: ['Pectorales', 'Dorsales', 'Tríceps', 'Bíceps'],
+          exercises: [
+            {
+              exerciseId: '45° Incline Barbell Press',
+              displayName: 'Incline Barbell Press (Press Inclinado)',
+              warmupSets: 2,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '3-5 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Dumbbell Incline Press', 'Smith Machine Incline Press'],
+              notes: 'Banca inclinada a 30°. Pausa de 1s abajo con máxima tensión en pectoral superior.'
+            },
+            {
+              exerciseId: 'Pec Deck Flye',
+              displayName: 'Pec Deck / DB Flye',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '1-2 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              intensityTechnique: isBlock2 ? 'Lengthened Partials (Parciales en Estiramiento)' : undefined,
+              substituteOptions: ['Pec Deck Flye', 'Low-to-High Cable Flye'],
+              notes: 'Pausa de 1 segundo en el estiramiento profundo.'
+            },
+            {
+              exerciseId: 'Pull-Up',
+              displayName: 'Pull-Up (Wide-Grip)',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '2-3 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Pull-Up', 'Wide-Grip Lat Pulldown'],
+              notes: 'Agarre prono amplio. Excéntrica de 3 segundos.'
+            },
+            {
+              exerciseId: 'Cable Tricep Pushdown (V-Bar)',
+              displayName: 'Triceps Pressdown',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '1-2 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Cable Tricep Pushdown (V-Bar)', 'Chest Dip'],
+              notes: 'Fijar codos al costado del cuerpo.'
+            },
+            {
+              exerciseId: 'EZ-Bar Preacher Curl',
+              displayName: 'EZ-Bar Preacher Curl',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '1-2 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['EZ-Bar Preacher Curl', 'DB Alternating Curl'],
+              notes: 'Tríceps fijos sobre el respaldo sin impulso.'
+            }
+          ]
+        },
+        {
+          id: `mm-w${w}-d2`,
+          name: 'Día 2: Lower 1 (Sentadilla & Prehab Rodilla)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Pantorrillas'],
+          exercises: [
+            {
+              exerciseId: 'Lying Leg Curl',
+              displayName: 'Lying Leg Curl',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '1-2 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Lying Leg Curl', 'Seated Leg Curl'],
+              notes: 'Máximo estiramiento en la posición inicial.'
+            },
+            {
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat (Sentadilla Trasera)',
+              warmupSets: 3,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '3-5 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Barbell Lunge', 'Leg Press (45°)'],
+              notes: 'Profundidad limpia a paralela.'
+            },
+            {
+              exerciseId: 'Spanish Squats',
+              displayName: 'Spanish Squats (Soporte Rotuliano)',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '3-5 x 45s holds',
+              restPeriod: '1 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Spanish Squats', 'Leg Extension'],
+              notes: 'Isométrico para salud del tendón rotuliano.'
+            },
+            {
+              exerciseId: 'Standing Calf Raise',
+              displayName: 'Standing Calf Raise',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '8-10',
+              restPeriod: '1-2 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Standing Calf Raise', 'Leg Press Calf Press'],
+              notes: 'Pausa de 1-2s en el estiramiento.'
+            }
+          ]
+        },
+        {
+          id: `mm-w${w}-d3`,
+          name: 'Día 3: Upper 2 (Tracción & Espalda Media)',
+          targetMuscles: ['Dorsales', 'Trapecios', 'Hombro Posterior'],
+          exercises: [
+            {
+              exerciseId: 'Wide-Grip Lat Pulldown',
+              displayName: 'Close-Grip / Wide-Grip Lat Pulldown',
+              warmupSets: 2,
+              workingSets: 2,
+              targetReps: '8-10',
+              restPeriod: '2-3 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Wide-Grip Lat Pulldown', 'Pull-Up'],
+              notes: 'Tracción al pecho superior.'
+            },
+            {
+              exerciseId: 'Chest-Supported Dumbbell Row',
+              displayName: 'Chest-Supported T-Bar / DB Row',
+              warmupSets: 2,
+              workingSets: 2,
+              targetReps: '8-10',
+              restPeriod: '2-3 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Chest-Supported Dumbbell Row', 'Barbell Row'],
+              notes: 'Retracción escapular sostenida.'
+            },
+            {
+              exerciseId: 'Chest Press Machine',
+              displayName: 'Chest Press Machine / Dip',
+              warmupSets: 2,
+              workingSets: 2,
+              targetReps: '8-10',
+              restPeriod: '3 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Chest Press Machine', 'Barbell Bench Press'],
+              notes: 'Pausa de 1s abajo.'
+            }
+          ]
+        },
+        {
+          id: `mm-w${w}-d4`,
+          name: 'Día 4: Lower 2 (Bisagra de Cadera & Glúteo)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos'],
+          exercises: [
+            {
+              exerciseId: 'Barbell RDL',
+              displayName: 'Barbell Romanian Deadlift (RDL)',
+              warmupSets: 2,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '2-3 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Barbell RDL', 'Barbell Hip Thrust'],
+              notes: 'Bisagra pélvica limpia.'
+            },
+            {
+              exerciseId: 'Barbell Hip Thrust',
+              displayName: 'Barbell Hip Thrust',
+              warmupSets: 2,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '2-3 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['Barbell Hip Thrust', 'Machine Hip Abduction'],
+              notes: 'Bloqueo arriba sintiendo contracción de glúteos.'
+            }
+          ]
+        },
+        {
+          id: `mm-w${w}-d5`,
+          name: 'Día 5: Arms & Delts (Aislamiento)',
+          targetMuscles: ['Bíceps', 'Tríceps', 'Deltoides Lateral'],
+          exercises: [
+            {
+              exerciseId: 'DB Incline Curl',
+              displayName: 'Bayesian / Incline DB Curl',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '6-8',
+              restPeriod: '1-2 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['DB Incline Curl', 'EZ-Bar Preacher Curl'],
+              notes: 'Estiramiento profundo.'
+            },
+            {
+              exerciseId: 'DB French Press',
+              displayName: 'Overhead Cable / DB Triceps Extension',
+              warmupSets: 1,
+              workingSets: 2,
+              targetReps: '8-10',
+              restPeriod: '1-2 min',
+              earlySetRpe: earlyRpe,
+              lastSetRpe: lastRpe,
+              substituteOptions: ['DB French Press', 'Cable Tricep Pushdown (V-Bar)'],
+              notes: 'Extensión por encima de la cabeza.'
+            }
+          ]
+        }
+      ]
+    });
   }
-];
+
+  return weeks;
+};
 
 export const minMaxProgram: TrainingProgram = {
   id: 'min-max',
-  title: 'The Min-Max Program (Jeff Nippard)',
-  source: 'The_Min-Max_Program_-_Jeff_Nippard.pdf',
+  title: 'The Min-Max Program',
+  source: 'Jeff Nippard (2024)',
+  pdfUrl: '/library/fitness/the-min-max-program.pdf',
   durationWeeks: 12,
   split: ['Upper 1', 'Lower 1', 'Upper 2', 'Lower 2', 'Arms & Delts'],
-  methodology: ['Mínimo Volumen / Máxima Intensidad', '1-2 Hard Sets a RIR 0-1', 'Bloque 1 (Acumulación) + Bloque 2 (Fallo & Técnicas)'],
-  equipment: ['Barra', 'Mancuernas', 'Poleas', 'Anillas'],
-  weeks: Array.from({ length: 12 }, (_, index) => {
-    const weekNum = index + 1;
-    const isBlock2 = weekNum >= 7;
-    const isDeload = weekNum === 6 || weekNum === 12;
-    const blockLabel = `Bloque ${isBlock2 ? '2' : '1'}`;
-
-    return {
-      week: weekNum,
-      block: blockLabel,
-      isIntro: weekNum === 1,
-      isDeload,
-      days: minMaxDaysTemplate.map((d) => ({
-        ...d,
-        id: `mm-w${weekNum}-${d.id}`,
-        exercises: d.exercises.map((ex) => ({
-          ...ex,
-          id: `mm-w${weekNum}-${ex.id}`,
-          intensityTechnique: isBlock2 && !isDeload ? ('drop-set' as const) : ('none' as const),
-          effort: isDeload
-            ? { type: 'rir' as const, early: '3', last: '2' }
-            : isBlock2
-            ? { type: 'rir' as const, early: '0', last: '0' }
-            : ex.effort,
-          sourceRef: { programId: 'min-max', block: blockLabel, week: weekNum, day: d.title }
-        }))
-      }))
-    };
-  })
+  methodology: [
+    'Mínimo Volumen / Máxima Intensidad',
+    '1-2 Hard Sets a RIR 0-1',
+    'Bloque 1 (Acumulación) + Bloque 2 (Fallo & Técnicas)'
+  ],
+  equipment: ['Barbell', 'Dumbbells', 'Cables', 'Machines'],
+  weeks: generateMinMaxWeeks()
 };

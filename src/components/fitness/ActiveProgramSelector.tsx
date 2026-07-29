@@ -1,7 +1,8 @@
 import React from 'react';
-import { Play, Check, Dumbbell } from 'lucide-react';
+import { Play, Check, Dumbbell, ExternalLink } from 'lucide-react';
 import { allPrograms } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
+import { libraryAssetUrl } from '../../lib/library/openDocument';
 
 export function ActiveProgramSelector() {
   const activeProgramId = useActiveProgramStore((s) => s.programId);
@@ -43,9 +44,28 @@ export function ActiveProgramSelector() {
                 {program.title}
               </h3>
 
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0 }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: '0 0 var(--space-2)' }}>
                 Metodología: {program.methodology.join(' · ')}
               </p>
+
+              {program.pdfUrl && (
+                <a
+                  href={libraryAssetUrl(program.pdfUrl)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: '0.78rem',
+                    color: 'var(--color-accent-primary)',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}
+                >
+                  Ver PDF Oficial ↗ <ExternalLink size={12} />
+                </a>
+              )}
             </div>
 
             <button

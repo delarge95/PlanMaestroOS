@@ -2,12 +2,14 @@
 import type { TrainingProgram } from './types';
 import { minMaxProgram } from './minMax';
 import { powerbuildingProgram } from './powerbuilding';
+import { bodybuildingTransformationProgram } from './bodybuildingTransformation';
 import { gluteHypertrophyProgram } from './gluteHypertrophy';
 import { calisthenicsProgram } from './calisthenics';
 
 export * from './types';
 export { minMaxProgram } from './minMax';
 export { powerbuildingProgram } from './powerbuilding';
+export { bodybuildingTransformationProgram } from './bodybuildingTransformation';
 export { gluteHypertrophyProgram } from './gluteHypertrophy';
 export { calisthenicsProgram } from './calisthenics';
 export { calisthenicsSkillTree } from './calisthenicsPaths';
@@ -15,6 +17,7 @@ export { calisthenicsSkillTree } from './calisthenicsPaths';
 export const allPrograms: TrainingProgram[] = [
   minMaxProgram,
   powerbuildingProgram,
+  bodybuildingTransformationProgram,
   gluteHypertrophyProgram,
   calisthenicsProgram
 ];
