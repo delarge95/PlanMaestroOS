@@ -229,37 +229,37 @@ export default function HomeClinicalDashboard() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
               <a href="/app/today" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>⚡</span>
-                <h4 style={{ ...typo.display, fontSize: '1rem', margin: 0 }}>Centro Operativo Hoy</h4>
+                <h4 style={{ ...typo.body, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>Centro Operativo Hoy</h4>
                 <p style={{ ...typo.label, color: 'var(--color-text-secondary)', margin: 0 }}>Línea temporal del día 05:30 – 21:30.</p>
               </a>
 
               <a href="/app/schedules" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>📅</span>
-                <h4 style={{ ...typo.display, fontSize: '1rem', margin: 0 }}>Cronograma y Matriz</h4>
+                <h4 style={{ ...typo.body, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>Cronograma y Matriz</h4>
                 <p style={{ ...typo.label, color: 'var(--color-text-secondary)', margin: 0 }}>Matriz semanal de 19 bloques por fase.</p>
               </a>
 
               <a href="/app/career" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>🚀</span>
-                <h4 style={{ ...typo.display, fontSize: '1rem', margin: 0 }}>Laboral & Roadmap</h4>
+                <h4 style={{ ...typo.body, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>Laboral & Roadmap</h4>
                 <p style={{ ...typo.label, color: 'var(--color-text-secondary)', margin: 0 }}>TwinSight, Portfolio y Roadmap 16 semanas.</p>
               </a>
 
               <a href="/app/fitness" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-state-done)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>💪</span>
-                <h4 style={{ ...typo.display, fontSize: '1rem', margin: 0 }}>Fitness & FitApp</h4>
+                <h4 style={{ ...typo.body, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>Fitness & FitApp</h4>
                 <p style={{ ...typo.label, color: 'var(--color-text-secondary)', margin: 0 }}>Tracker en vivo, Min-Max y 150+ ejercicios.</p>
               </a>
 
               <a href="/app/german" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-warning)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>🇩🇪</span>
-                <h4 style={{ ...typo.display, fontSize: '1rem', margin: 0 }}>Alemán A1</h4>
+                <h4 style={{ ...typo.body, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>Alemán A1</h4>
                 <p style={{ ...typo.label, color: 'var(--color-text-secondary)', margin: 0 }}>Hábito diario 13:30 – 14:00.</p>
               </a>
 
               <a href="/app/clinical" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>🧠</span>
-                <h4 style={{ ...typo.display, fontSize: '1rem', margin: 0 }}>Clínica Conductual</h4>
+                <h4 style={{ ...typo.body, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>Clínica Conductual</h4>
                 <p style={{ ...typo.label, color: 'var(--color-text-secondary)', margin: 0 }}>TDAH, Ansiedad Social y Sueño CBT-I.</p>
               </a>
             </div>
