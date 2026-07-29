@@ -21,12 +21,14 @@ export default function HomeClinicalDashboard() {
   const [activeTab, setActiveTab] = useState<string>('now');
   const [isFocusActive, setIsFocusActive] = useState<boolean>(false);
   const [workflowMode, setWorkflowMode] = useState<'morning' | 'evening' | null>(null);
+  const [showToolsDrawer, setShowToolsDrawer] = useState<boolean>(false);
+  const [showPrinciples, setShowPrinciples] = useState<boolean>(false);
   const [currentEnergy, setCurrentEnergy] = useState<EnergyLevel>('medium');
 
   return (
     <ErrorBoundary>
       <FocusModeShell isActive={isFocusActive} onExit={() => setIsFocusActive(false)}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
           {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
           <div style={{
             position: 'sticky',
@@ -34,7 +36,7 @@ export default function HomeClinicalDashboard() {
             zIndex: 85,
             display: 'flex',
             alignItems: 'center',
-            gap: '4px',
+            gap: 'var(--space-xs)',
             background: 'var(--color-surface-base)',
             backdropFilter: 'blur(30px) saturate(190%)',
             WebkitBackdropFilter: 'blur(30px) saturate(190%)',
@@ -72,95 +74,131 @@ export default function HomeClinicalDashboard() {
             })}
           </div>
 
-          {/* MORNING / EVENING WORKFLOW QUICK LAUNCHERS */}
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          {/* COMPACT TOOLS BAR (PASO 1: SINGLE DISCREET ACTIVATOR) */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-sm)' }}>
             <button
               type="button"
-              onClick={() => setWorkflowMode('morning')}
+              onClick={() => setShowToolsDrawer(!showToolsDrawer)}
               style={{
                 ...typo.label,
-                background: 'rgba(10, 132, 255, 0.12)',
+                background: 'transparent',
                 border: '1px solid var(--color-border-visible)',
-                color: 'var(--color-accent-primary)',
-                padding: '8px 16px',
-                borderRadius: '12px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              🌅 Modo Inicio (60s)
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setWorkflowMode('evening')}
-              style={{
-                ...typo.label,
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid var(--color-border-subtle)',
                 color: 'var(--color-text-secondary)',
-                padding: '8px 16px',
-                borderRadius: '12px',
+                padding: '6px 14px',
+                borderRadius: '10px',
                 fontWeight: 500,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: 'var(--space-xs)'
               }}
             >
-              🌙 Modo Cierre (3m)
+              ⚙️ Herramientas del día {showToolsDrawer ? '▲' : '▼'}
             </button>
 
-            <span style={{ ...typo.label, color: 'var(--color-text-tertiary)', alignSelf: 'center', marginLeft: 'auto' }}>
+            <span style={{ ...typo.label, color: 'var(--color-text-tertiary)' }}>
               Energía: <strong style={{ color: 'var(--color-text-primary)', textTransform: 'uppercase' }}>{currentEnergy}</strong>
             </span>
           </div>
+
+          {/* EXPANDABLE TOOLS & WORKFLOW LAUNCHERS DRAWER */}
+          {showToolsDrawer && (
+            <div style={{
+              background: 'var(--color-surface-raised)',
+              border: '1px solid var(--color-border-visible)',
+              borderRadius: '16px',
+              padding: 'var(--space-md)',
+              display: 'flex',
+              gap: 'var(--space-sm)',
+              flexWrap: 'wrap',
+              alignItems: 'center'
+            }}>
+              <button
+                type="button"
+                onClick={() => { setWorkflowMode('morning'); setShowToolsDrawer(false); }}
+                style={{
+                  ...typo.label,
+                  background: 'var(--color-accent-primary-soft)',
+                  border: '1px solid var(--color-border-visible)',
+                  color: 'var(--color-accent-primary)',
+                  padding: '8px 16px',
+                  borderRadius: '12px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                🌅 Modo Inicio (60s)
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setWorkflowMode('evening'); setShowToolsDrawer(false); }}
+                style={{
+                  ...typo.label,
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid var(--color-border-subtle)',
+                  color: 'var(--color-text-secondary)',
+                  padding: '8px 16px',
+                  borderRadius: '12px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                🌙 Modo Cierre (3m)
+              </button>
+            </div>
+          )}
 
           <MorningEveningWorkflowsModal
             mode={workflowMode}
             onClose={() => setWorkflowMode(null)}
             onSelectEnergy={(level) => setCurrentEnergy(level)}
           />
+
+          {/* TAB "AHORA" - FOCO UNIFICADO COLUMNA ÚNICA (PASO 3) */}
           {activeTab === 'now' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+              {/* HERO: BLOQUE ACTUAL (60% ATENCIÓN) */}
               <ClinicalCurrentBlockPanel
                 isFocusModeActive={isFocusActive}
                 onToggleFocusMode={() => setIsFocusActive(!isFocusActive)}
               />
 
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                gap: '20px'
-              }}>
+              {/* COLUMNA ÚNICA: PRIORIDADES DEL DÍA (COMPACTO) */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                 {/* 3 TASKS CARD */}
                 <div style={{
                   background: 'var(--color-surface-base)',
                   backdropFilter: 'blur(40px)',
                   border: '1px solid var(--color-border-subtle)',
                   borderRadius: '20px',
-                  padding: '24px',
+                  padding: 'var(--space-lg)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '14px'
+                  gap: 'var(--space-md)'
                 }}>
-                  <span style={{ ...typo.micro, color: 'var(--color-accent-primary)', background: 'rgba(10, 132, 255, 0.12)', padding: '4px 10px', borderRadius: '999px', width: 'fit-content' }}>
-                    MÁXIMO 3 TAREAS
-                  </span>
-                  <h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>
-                    Prioridades del Día
-                  </h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>
+                      Prioridades del Día
+                    </h3>
+                    <span style={{ ...typo.micro, color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: '4px 10px', borderRadius: '999px' }}>
+                      MÁXIMO 3 TAREAS
+                    </span>
+                  </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
                     <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-accent-primary)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
                         <strong style={{ ...typo.body, fontWeight: 700, color: 'var(--color-text-primary)', display: 'block' }}>1. TwinSight MVP & Tesis</strong>
                         <span style={{ ...typo.label, color: 'var(--color-accent-primary)' }}>Bloque A (09:20 - 11:40) • Versión Mala</span>
                       </div>
-                      <span style={{ ...typo.micro, color: 'var(--color-state-done)', background: 'rgba(48,209,88,0.15)', padding: '2px 6px', borderRadius: '4px' }}>En curso</span>
+                      <span style={{ ...typo.micro, color: 'var(--color-state-done)', background: 'var(--color-state-done-soft)', padding: '2px 6px', borderRadius: '4px' }}>En curso</span>
                     </div>
 
                     <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -181,39 +219,58 @@ export default function HomeClinicalDashboard() {
                   </div>
                 </div>
 
-                {/* EMOTIONAL REGULATION & CLINICAL PERMISSION CARD */}
-                <div style={{
-                  background: 'var(--color-surface-base)',
-                  backdropFilter: 'blur(40px)',
-                  border: '1px solid var(--color-border-subtle)',
-                  borderRadius: '20px',
-                  padding: '24px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '14px'
-                }}>
-                  <span style={{ ...typo.micro, color: 'var(--color-text-secondary)', background: 'rgba(255, 255, 255, 0.08)', padding: '4px 10px', borderRadius: '999px', width: 'fit-content' }}>
-                    PRINCIPIOS
-                  </span>
-                  <h3 style={{ ...typo.display, margin: 0, color: 'var(--color-text-primary)' }}>
-                    Principios Terapéuticos Activos
-                  </h3>
+                {/* PASO 2: PRINCIPIOS TERAPÉUTICOS COLAPSABLES */}
+                <button
+                  type="button"
+                  onClick={() => setShowPrinciples(p => !p)}
+                  style={{
+                    width: '100%',
+                    background: 'var(--color-surface-raised)',
+                    border: '1px solid var(--color-border-subtle)',
+                    borderRadius: '14px',
+                    padding: '12px 18px',
+                    color: 'var(--color-text-secondary)',
+                    fontSize: 'var(--font-size-label)',
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    transition: 'all 150ms ease'
+                  }}
+                >
+                  <span>🧠 Principios Terapéuticos Activos</span>
+                  <span>{showPrinciples ? '▲' : '▼'}</span>
+                </button>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', ...typo.body, color: 'var(--color-text-secondary)' }}>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-state-done)' }}>
-                      <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Suficientemente Terminado &gt; Ideal:</strong>
-                      Cierra la tarea cuando cumpla el criterio mínimo sin seguir refinando indefinidamente.
-                    </div>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-primary)' }}>
-                      <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>El Descanso No Se Gana:</strong>
-                      El sueño y el ocio son parte de la salud mental y la función cognitiva, no un premio condicionado al rendimiento.
-                    </div>
-                    <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-warning)' }}>
-                      <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Paso de Reentrada Escrito:</strong>
-                      Antes de levantarte de la mesa, deja escrita la primera acción exacta de 2 min.
+                {showPrinciples && (
+                  <div style={{
+                    background: 'var(--color-surface-base)',
+                    backdropFilter: 'blur(40px)',
+                    border: '1px solid var(--color-border-subtle)',
+                    borderRadius: '16px',
+                    padding: 'var(--space-md)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 'var(--space-sm)'
+                  }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', ...typo.body, color: 'var(--color-text-secondary)' }}>
+                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-state-done)' }}>
+                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Suficientemente Terminado &gt; Ideal:</strong>
+                        Cierra la tarea cuando cumpla el criterio mínimo sin seguir refinando indefinidamente.
+                      </div>
+                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-primary)' }}>
+                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>El Descanso No Se Gana:</strong>
+                        El sueño y el ocio son parte de la salud mental y la función cognitiva, no un premio condicionado al rendimiento.
+                      </div>
+                      <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', borderLeft: '3px solid var(--color-accent-warning)' }}>
+                        <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Paso de Reentrada Escrito:</strong>
+                        Antes de levantarte de la mesa, deja escrita la primera acción exacta de 2 min.
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           )}
@@ -224,9 +281,9 @@ export default function HomeClinicalDashboard() {
           {/* TAB 3: SECOND BRAIN INSPECTOR */}
           {activeTab === 'second_brain' && <SecondBrainInspector />}
 
-          {/* TAB 3: SECTIONS MAP */}
+          {/* TAB 4: SECTIONS MAP */}
           {activeTab === 'sections' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-sm)' }}>
               <a href="/app/today" style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '18px', textDecoration: 'none', color: '#fff', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <span style={{ fontSize: '1.4rem' }}>⚡</span>
                 <h4 style={{ ...typo.body, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>Centro Operativo Hoy</h4>

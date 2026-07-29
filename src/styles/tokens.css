@@ -53,4 +53,11 @@
   --line-height-display: 1.3;
   --line-height-body:    1.55;
   --line-height-label:   1.4;
+
+  /* === ESPACIADO (AUDIT-03: Tokens de Espaciado) === */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
 }
