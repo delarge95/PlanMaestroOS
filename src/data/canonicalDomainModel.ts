@@ -29,6 +29,34 @@ export interface CanonicalEntity {
   lastUpdated: string;
 }
 
+export interface SetRecord {
+  setNum: number;
+  reps?: number;
+  weight?: number; // kg
+  rpe?: number;
+  durationSeconds?: number;
+  completed: boolean;
+}
+
+export interface ExerciseRecord {
+  name: string;
+  category?: string;
+  restSec?: number;
+  sets: SetRecord[];
+}
+
+export interface WorkoutSession {
+  id: string;
+  date: string; // ISO format
+  routineTitle: string;
+  durationMinutes: number;
+  totalVolumeKg: number;
+  exercises: ExerciseRecord[];
+  perceivedEnergy: EnergyLevel; // Conexión directa con el modelo clínico TDAH
+  painScore?: number; // 0-10 escala clínica de dolor articular (HSR)
+  notes?: string;
+}
+
 export interface DayEnergyState {
   currentLevel: EnergyLevel;
   date: string;

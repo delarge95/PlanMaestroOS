@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import FitAppWorkoutLogger from './FitAppWorkoutLogger';
 import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
@@ -8,6 +8,7 @@ import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
 import PrehabSkillView from './PrehabSkillView';
 import BooksLibraryView from './BooksLibraryView';
 import DomainDocAccordion from '../docs/DomainDocAccordion';
+import { typo } from '../../styles/typography';
 
 const fitnessDocsList = [
   { name: 'Overcoming Gravity 2nd Ed', type: 'PDF', path: '_pdf_biblia/Planeacion_Integral/investigacion/Overcoming Gravity...', description: 'Manual técnico de calistenia y progresiones por Steven Low' },
@@ -31,7 +32,7 @@ export default function FitnessTabWorkspace() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
         {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
         <div style={{
           position: 'sticky',
@@ -39,14 +40,14 @@ export default function FitnessTabWorkspace() {
           zIndex: 85,
           display: 'flex',
           alignItems: 'center',
-          gap: '4px',
-          background: 'rgba(28, 28, 30, 0.85)',
+          gap: 'var(--space-xs)',
+          background: 'var(--color-surface-base)',
           backdropFilter: 'blur(30px) saturate(190%)',
           WebkitBackdropFilter: 'blur(30px) saturate(190%)',
           padding: '6px',
           borderRadius: '18px',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255,255,255,0.1) inset',
+          border: '1px solid var(--color-border-visible)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)',
           overflowX: 'auto',
           maxWidth: '100%'
         }}>
@@ -58,17 +59,16 @@ export default function FitnessTabWorkspace() {
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  background: isSelected ? 'var(--color-text-primary)' : 'transparent',
-                  color: isSelected ? '#000000' : 'var(--color-text-tertiary)',
+                  ...typo.label,
+                  background: isSelected ? 'var(--color-state-done)' : 'transparent',
+                  color: isSelected ? '#ffffff' : 'var(--color-text-tertiary)',
                   border: 'none',
                   padding: '8px 18px',
                   borderRadius: '12px',
-                  fontSize: '0.84rem',
                   fontWeight: isSelected ? 700 : 500,
-                  fontFamily: '-apple-system, SF Pro Text, system-ui, sans-serif',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  boxShadow: isSelected ? '0 3px 12px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0,0,0,0.2)' : 'none',
+                  boxShadow: isSelected ? '0 3px 12px var(--color-state-done-soft)' : 'none',
                   transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
               >
@@ -78,8 +78,8 @@ export default function FitnessTabWorkspace() {
           })}
         </div>
 
-        {/* SUBSECTION CONTENT */}
-        <div style={{ minHeight: '500px' }}>
+        {/* SUBSECTION CONTENT WITH SMOOTH FADE-IN */}
+        <div key={activeTab} style={{ minHeight: '500px', animation: 'fadeIn 180ms ease-out' }}>
           {activeTab === 'logger' && <FitAppWorkoutLogger />}
           {activeTab === 'analytics' && <FitAppAnalyticsDashboard />}
           {activeTab === 'custom' && <CustomRoutineBuilder />}
@@ -87,11 +87,11 @@ export default function FitnessTabWorkspace() {
           {activeTab === 'database' && <ExerciseDatabaseBrowser />}
           {activeTab === 'prehab' && <PrehabSkillView />}
           {activeTab === 'books' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
               <BooksLibraryView />
               <DomainDocAccordion
                 domainTitle="Fitness & Rehabilitación"
-                domainColor="#30d158"
+                domainColor="var(--color-state-done)"
                 categoryFilter="fitness"
                 sourceDocsList={fitnessDocsList}
               />
