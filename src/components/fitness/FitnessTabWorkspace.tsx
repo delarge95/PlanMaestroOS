@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { Dumbbell, BarChart3, Wrench, BookOpen, Database, Activity, LibraryBig } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import FitAppWorkoutLogger from './FitAppWorkoutLogger';
 import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
 import CustomRoutineBuilder from './CustomRoutineBuilder';
 import FitAppRoutinesCatalog from './FitAppRoutinesCatalog';
 import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
-import PrehabSkillView from './PrehabSkillView';
+import CalisthenicsLearningHub from './CalisthenicsLearningHub';
+import TendonLoadMonitor from './TendonLoadMonitor';
 import BooksLibraryView from './BooksLibraryView';
 import DomainDocAccordion from '../docs/DomainDocAccordion';
-import { typo } from '../../styles/typography';
 
 const fitnessDocsList = [
   { name: 'Overcoming Gravity 2nd Ed', type: 'PDF', path: '_pdf_biblia/Planeacion_Integral/investigacion/Overcoming Gravity...', description: 'Manual técnico de calistenia y progresiones por Steven Low' },
@@ -18,13 +19,13 @@ const fitnessDocsList = [
 ];
 
 const TABS = [
-  { id: 'logger', label: '⚡ Tracker' },
-  { id: 'analytics', label: '📊 Analítica' },
-  { id: 'custom', label: '🛠️ Creador' },
-  { id: 'routines', label: '📋 Rutinas' },
-  { id: 'database', label: '🏋️ Ejercicios' },
-  { id: 'prehab', label: '🤸 Prehab' },
-  { id: 'books', label: '📖 Libros' }
+  { id: 'logger', label: 'Tracker Activo', icon: Dumbbell },
+  { id: 'routines', label: 'Catálogo de Rutinas', icon: BookOpen },
+  { id: 'calisthenics', label: 'Calistenia & Prehab', icon: Activity },
+  { id: 'analytics', label: 'Analítica', icon: BarChart3 },
+  { id: 'database', label: 'Base de Ejercicios', icon: Database },
+  { id: 'custom', label: 'Creador', icon: Wrench },
+  { id: 'books', label: 'Fuentes & Libros', icon: LibraryBig }
 ];
 
 export default function FitnessTabWorkspace() {
@@ -33,19 +34,19 @@ export default function FitnessTabWorkspace() {
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-        {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
+        {/* CONTROL BAR STICKY ESTILO APPLE CON ICONOS LUCIDE */}
         <div style={{
           position: 'sticky',
           top: '68px',
           zIndex: 85,
           display: 'flex',
           alignItems: 'center',
-          gap: 'var(--space-xs)',
-          background: 'var(--color-surface-base)',
+          gap: '4px',
+          background: 'rgba(28, 28, 30, 0.85)',
           backdropFilter: 'blur(30px) saturate(190%)',
           WebkitBackdropFilter: 'blur(30px) saturate(190%)',
           padding: '6px',
-          borderRadius: '18px',
+          borderRadius: 'var(--radius-lg)',
           border: '1px solid var(--color-border-visible)',
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)',
           overflowX: 'auto',
@@ -53,39 +54,49 @@ export default function FitnessTabWorkspace() {
         }}>
           {TABS.map((tab) => {
             const isSelected = activeTab === tab.id;
+            const Icon = tab.icon;
+
             return (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  ...typo.label,
-                  background: isSelected ? 'var(--color-state-done)' : 'transparent',
-                  color: isSelected ? '#ffffff' : 'var(--color-text-tertiary)',
+                  background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
+                  color: isSelected ? '#ffffff' : 'var(--text-tertiary)',
                   border: 'none',
-                  padding: '8px 18px',
-                  borderRadius: '12px',
+                  padding: '8px 16px',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: '0.84rem',
                   fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  boxShadow: isSelected ? '0 3px 12px var(--color-state-done-soft)' : 'none',
-                  transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'all 150ms ease'
                 }}
               >
-                {tab.label}
+                <Icon size={16} aria-hidden="true" />
+                <span>{tab.label}</span>
               </button>
             );
           })}
         </div>
 
-        {/* SUBSECTION CONTENT WITH SMOOTH FADE-IN */}
-        <div key={activeTab} style={{ minHeight: '500px', animation: 'fadeIn 180ms ease-out' }}>
+        {/* SUBSECTION CONTENT */}
+        <div key={activeTab} style={{ minHeight: '500px' }}>
           {activeTab === 'logger' && <FitAppWorkoutLogger />}
-          {activeTab === 'analytics' && <FitAppAnalyticsDashboard />}
-          {activeTab === 'custom' && <CustomRoutineBuilder />}
           {activeTab === 'routines' && <FitAppRoutinesCatalog />}
+          {activeTab === 'calisthenics' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+              <TendonLoadMonitor />
+              <CalisthenicsLearningHub />
+            </div>
+          )}
+          {activeTab === 'analytics' && <FitAppAnalyticsDashboard />}
           {activeTab === 'database' && <ExerciseDatabaseBrowser />}
-          {activeTab === 'prehab' && <PrehabSkillView />}
+          {activeTab === 'custom' && <CustomRoutineBuilder />}
           {activeTab === 'books' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
               <BooksLibraryView />

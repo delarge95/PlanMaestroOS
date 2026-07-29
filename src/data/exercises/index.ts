@@ -44,6 +44,8 @@ export const allExercisesMap: ExerciseMap = {
   ...weightedCalisthenicsExercises
 };
 
+export const exerciseDatabase = allExercisesMap;
+
 export const allExercisesList: ExerciseEntry[] = Object.entries(allExercisesMap).map(([name, info]) => ({
   name,
   discipline: info.category || 'General',

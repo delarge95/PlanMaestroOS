@@ -1,13 +1,17 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import type { ExerciseEntry } from '../../data/exercises';
 
+import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
+
 interface Props {
-  exercise: ExerciseEntry | null;
+  exercise?: ExerciseEntry | null;
+  exerciseId?: string | null;
   onClose: () => void;
 }
 
-export default function ExerciseModal({ exercise, onClose }: Props) {
-  if (!exercise) return null;
+export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) {
+  const targetExercise = exercise || (exerciseId ? getExerciseDetails(exerciseId) : null);
+  if (!targetExercise) return null;
 
   const [activeTab, setActiveTab] = useState<'technique' | 'muscles' | 'substitutions'>('technique');
 
@@ -19,7 +23,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
     return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=1` : null;
   };
 
-  const embedUrl = getYoutubeEmbedUrl(exercise.youtubeLink);
+  const embedUrl = getYoutubeEmbedUrl(targetExercise.youtubeLink);
 
   return (
     <div 
@@ -72,9 +76,9 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                 borderRadius: '999px',
                 border: '1px solid rgba(16, 185, 129, 0.25)'
               }}>
-                {exercise.category.toUpperCase()}
+                {targetExercise.category.toUpperCase()}
               </span>
-              {exercise.subcategory && (
+              {targetExercise.subcategory && (
                 <span style={{ 
                   fontFamily: 'Azeret Mono, monospace', 
                   fontSize: '0.68rem', 
@@ -83,12 +87,12 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                   padding: '4px 10px', 
                   borderRadius: '999px' 
                 }}>
-                  {exercise.subcategory}
+                  {targetExercise.subcategory}
                 </span>
               )}
             </div>
             <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', color: 'var(--color-text-primary)' }}>
-              {exercise.name}
+              {targetExercise.name}
             </h2>
           </div>
 
@@ -118,15 +122,15 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
           <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: '#000', aspectRatio: '16/9' }}>
             <iframe
               src={embedUrl}
-              title={exercise.name}
+              title={targetExercise.name}
               style={{ width: '100%', height: '100%', border: 'none' }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
-        ) : exercise.youtubeLink ? (
+        ) : targetExercise.youtubeLink ? (
           <a
-            href={exercise.youtubeLink}
+            href={targetExercise.youtubeLink}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -164,7 +168,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
               fontSize: '0.85rem'
             }}
           >
-            Puntos de Técnica ({exercise.techniquePoints.length})
+            Puntos de Técnica ({targetExercise.techniquePoints.length})
           </button>
           <button
             type="button"
@@ -182,7 +186,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
           >
             Músculos Solicitados
           </button>
-          {exercise.substitutions && exercise.substitutions.length > 0 && (
+          {targetExercise.substitutions && targetExercise.substitutions.length > 0 && (
             <button
               type="button"
               onClick={() => setActiveTab('substitutions')}
@@ -197,7 +201,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                 fontSize: '0.85rem'
               }}
             >
-              Sustituciones ({exercise.substitutions.length})
+              Sustituciones ({targetExercise.substitutions.length})
             </button>
           )}
         </div>
@@ -206,7 +210,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
         <div style={{ flex: 1, minHeight: '160px' }}>
           {activeTab === 'technique' && (
             <ol style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {exercise.techniquePoints.map((pt, idx) => (
+              {targetExercise.techniquePoints.map((pt, idx) => (
                 <li key={idx} style={{ fontSize: '0.88rem', color: '#e2e8f0', lineHeight: 1.5 }}>
                   {pt}
                 </li>
@@ -221,7 +225,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                   Fuerza Primaria:
                 </strong>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
-                  {exercise.muscles.strength.map((m, idx) => (
+                  {targetExercise.muscles.strength.map((m, idx) => (
                     <span key={idx} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#6ee7b7', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', border: '1px solid rgba(16,185,129,0.3)' }}>
                       {m}
                     </span>
@@ -229,13 +233,13 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                 </div>
               </div>
 
-              {exercise.muscles.stability && exercise.muscles.stability.length > 0 && (
+              {targetExercise.muscles.stability && targetExercise.muscles.stability.length > 0 && (
                 <div>
                   <strong style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                     Estabilidad / Sostén:
                   </strong>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
-                    {exercise.muscles.stability.map((m, idx) => (
+                    {targetExercise.muscles.stability.map((m, idx) => (
                       <span key={idx} style={{ background: 'rgba(119, 231, 255, 0.12)', color: 'var(--color-accent-primary)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', border: '1px solid rgba(119,231,255,0.25)' }}>
                         {m}
                       </span>
@@ -248,7 +252,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
 
           {activeTab === 'substitutions' && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {exercise.substitutions?.map((sub, idx) => (
+              {targetExercise.substitutions?.map((sub, idx) => (
                 <span key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.85rem', color: 'var(--color-text-primary)' }}>
                   🔄 {sub}
                 </span>
