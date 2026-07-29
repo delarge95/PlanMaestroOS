@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface BioFeedbackLog {
@@ -205,7 +205,7 @@ export default function ClinicalExecutionHub() {
           flexDirection: 'column',
           gap: '24px',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-          color: '#effff6'
+          color: 'var(--color-text-primary)'
         }}
       >
         {/* TOAST NOTIFICATION */}
@@ -216,7 +216,7 @@ export default function ClinicalExecutionHub() {
               bottom: '24px',
               right: '24px',
               background: 'linear-gradient(135deg, #d946ef, #8b5cf6)',
-              color: '#ffffff',
+              color: 'var(--color-text-primary)',
               padding: '14px 22px',
               borderRadius: '14px',
               fontWeight: 800,
@@ -235,7 +235,7 @@ export default function ClinicalExecutionHub() {
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#d946ef', fontWeight: 800, letterSpacing: '0.05em' }}>
               SUITE DE TAREAS CLÍNICAS INTERACTIVAS • TDAH & ANSIEDAD SOCIAL
             </span>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Prótesis Ejecutiva & Regulación Emocional
             </h3>
           </div>
@@ -248,7 +248,7 @@ export default function ClinicalExecutionHub() {
               style={{
                 background: activeTab === 'checkin' ? 'rgba(217, 70, 239, 0.25)' : 'transparent',
                 border: activeTab === 'checkin' ? '1px solid rgba(217, 70, 239, 0.5)' : 'none',
-                color: activeTab === 'checkin' ? '#d946ef' : '#a8b9b2',
+                color: activeTab === 'checkin' ? '#d946ef' : 'var(--color-text-secondary)',
                 padding: '8px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -265,7 +265,7 @@ export default function ClinicalExecutionHub() {
               style={{
                 background: activeTab === 'exposure' ? 'rgba(59, 130, 246, 0.25)' : 'transparent',
                 border: activeTab === 'exposure' ? '1px solid rgba(59, 130, 246, 0.5)' : 'none',
-                color: activeTab === 'exposure' ? '#3b82f6' : '#a8b9b2',
+                color: activeTab === 'exposure' ? '#3b82f6' : 'var(--color-text-secondary)',
                 padding: '8px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -282,7 +282,7 @@ export default function ClinicalExecutionHub() {
               style={{
                 background: activeTab === 'rescue' ? 'rgba(239, 68, 68, 0.25)' : 'transparent',
                 border: activeTab === 'rescue' ? '1px solid rgba(239, 68, 68, 0.5)' : 'none',
-                color: activeTab === 'rescue' ? '#f87171' : '#a8b9b2',
+                color: activeTab === 'rescue' ? 'var(--color-accent-danger)' : 'var(--color-text-secondary)',
                 padding: '8px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -299,7 +299,7 @@ export default function ClinicalExecutionHub() {
               style={{
                 background: activeTab === 'sleep' ? 'rgba(16, 185, 129, 0.25)' : 'transparent',
                 border: activeTab === 'sleep' ? '1px solid rgba(16, 185, 129, 0.5)' : 'none',
-                color: activeTab === 'sleep' ? '#10b981' : '#a8b9b2',
+                color: activeTab === 'sleep' ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
                 padding: '8px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -316,7 +316,7 @@ export default function ClinicalExecutionHub() {
         {activeTab === 'checkin' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
             <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(217,70,239,0.2)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <strong style={{ fontSize: '0.92rem', color: '#ffffff' }}>
+              <strong style={{ fontSize: '0.92rem', color: 'var(--color-text-primary)' }}>
                 Registro Subjetivo de Estado Físico & Emocional del Día:
               </strong>
 
@@ -324,8 +324,8 @@ export default function ClinicalExecutionHub() {
                 {/* ENERGY */}
                 <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '12px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: '#77e7ff' }}>⚡ Nivel de Energía</span>
-                    <strong style={{ fontSize: '0.9rem', color: '#77e7ff' }}>{energy}/10</strong>
+                    <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-primary)' }}>⚡ Nivel de Energía</span>
+                    <strong style={{ fontSize: '0.9rem', color: 'var(--color-accent-primary)' }}>{energy}/10</strong>
                   </div>
                   <input
                     type="range"
@@ -333,7 +333,7 @@ export default function ClinicalExecutionHub() {
                     max="10"
                     value={energy}
                     onChange={(e) => setEnergy(parseInt(e.target.value))}
-                    style={{ width: '100%', accentColor: '#77e7ff' }}
+                    style={{ width: '100%', accentColor: 'var(--color-accent-primary)' }}
                   />
                 </div>
 
@@ -356,8 +356,8 @@ export default function ClinicalExecutionHub() {
                 {/* PAIN / TENDINOPATHY */}
                 <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '12px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: '#f87171' }}>🦴 Molestia Articular / Tendón</span>
-                    <strong style={{ fontSize: '0.9rem', color: '#f87171' }}>{pain}/10</strong>
+                    <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-danger)' }}>🦴 Molestia Articular / Tendón</span>
+                    <strong style={{ fontSize: '0.9rem', color: 'var(--color-accent-danger)' }}>{pain}/10</strong>
                   </div>
                   <input
                     type="range"
@@ -365,15 +365,15 @@ export default function ClinicalExecutionHub() {
                     max="10"
                     value={pain}
                     onChange={(e) => setPain(parseInt(e.target.value))}
-                    style={{ width: '100%', accentColor: '#f87171' }}
+                    style={{ width: '100%', accentColor: 'var(--color-accent-danger)' }}
                   />
                 </div>
 
                 {/* SLEEP HOURS */}
                 <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', padding: '14px', borderRadius: '12px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: '#10b981' }}>😴 Horas de Sueño</span>
-                    <strong style={{ fontSize: '0.9rem', color: '#10b981' }}>{sleepHours}h</strong>
+                    <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-state-done)' }}>😴 Horas de Sueño</span>
+                    <strong style={{ fontSize: '0.9rem', color: 'var(--color-state-done)' }}>{sleepHours}h</strong>
                   </div>
                   <input
                     type="range"
@@ -382,7 +382,7 @@ export default function ClinicalExecutionHub() {
                     step="0.5"
                     value={sleepHours}
                     onChange={(e) => setSleepHours(parseFloat(e.target.value))}
-                    style={{ width: '100%', accentColor: '#10b981' }}
+                    style={{ width: '100%', accentColor: 'var(--color-state-done)' }}
                   />
                 </div>
               </div>
@@ -393,7 +393,7 @@ export default function ClinicalExecutionHub() {
                 style={{
                   background: 'linear-gradient(135deg, #d946ef, #8b5cf6)',
                   border: 'none',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   fontWeight: 800,
                   padding: '12px',
                   borderRadius: '12px',
@@ -409,18 +409,18 @@ export default function ClinicalExecutionHub() {
             {/* HISTORIAL RECIENTE */}
             {feedbackLogs.length > 0 && (
               <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px' }}>
-                <strong style={{ fontSize: '0.85rem', color: '#a8b9b2', fontFamily: 'Azeret Mono, monospace' }}>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', fontFamily: 'Azeret Mono, monospace' }}>
                   REGISTROS RECIENTES:
                 </strong>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px', marginTop: '10px' }}>
                   {feedbackLogs.map((log, idx) => (
                     <div key={idx} style={{ background: 'rgba(0,0,0,0.4)', padding: '10px', borderRadius: '10px', fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                       <span style={{ color: '#d946ef', fontWeight: 700 }}>{log.date}</span>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', color: '#a8b9b2' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--color-text-secondary)' }}>
                         <span>⚡ {log.energy}/10</span>
                         <span>🧠 Ans: {log.anxiety}/10</span>
                       </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', color: '#a8b9b2' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--color-text-secondary)' }}>
                         <span>🦴 Pain: {log.pain}/10</span>
                         <span>😴 {log.sleepHours}h</span>
                       </div>
@@ -438,16 +438,16 @@ export default function ClinicalExecutionHub() {
             <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(59, 130, 246, 0.25)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <strong style={{ fontSize: '0.95rem', color: '#ffffff' }}>Jerarquía de Exposición Graduada a Ansiedad Social / Desempeño:</strong>
-                  <p style={{ fontSize: '0.78rem', color: '#a8b9b2', margin: '2px 0 0' }}>
+                  <strong style={{ fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>Jerarquía de Exposición Graduada a Ansiedad Social / Desempeño:</strong>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: '2px 0 0' }}>
                     Registra la ansiedad previa (0-10) y posterior (0-10). Al marcar como hecha se activa el límite de rumiación de 10 min.
                   </p>
                 </div>
 
                 {isRuminationActive && activeRuminationTimer !== null && (
                   <div style={{ background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.4)', padding: '8px 14px', borderRadius: '12px', textAlign: 'center' }}>
-                    <span style={{ fontSize: '0.65rem', color: '#f87171', fontFamily: 'Azeret Mono, monospace', fontWeight: 800 }}>LÍMITE DE RUMIACIÓN POST-EVENTO</span>
-                    <strong style={{ fontSize: '1.1rem', fontFamily: 'Azeret Mono, monospace', color: '#ffffff', display: 'block' }}>{formatTime(activeRuminationTimer)}</strong>
+                    <span style={{ fontSize: '0.65rem', color: 'var(--color-accent-danger)', fontFamily: 'Azeret Mono, monospace', fontWeight: 800 }}>LÍMITE DE RUMIACIÓN POST-EVENTO</span>
+                    <strong style={{ fontSize: '1.1rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-primary)', display: 'block' }}>{formatTime(activeRuminationTimer)}</strong>
                   </div>
                 )}
               </div>
@@ -472,18 +472,18 @@ export default function ClinicalExecutionHub() {
                           <span style={{ fontSize: '0.65rem', fontFamily: 'Azeret Mono, monospace', background: 'rgba(59,130,246,0.2)', color: '#3b82f6', padding: '2px 8px', borderRadius: '4px', fontWeight: 700 }}>
                             NIVEL {exp.hierarchyLevel.toUpperCase()}
                           </span>
-                          <strong style={{ fontSize: '0.95rem', color: '#ffffff' }}>{exp.title}</strong>
+                          <strong style={{ fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>{exp.title}</strong>
                         </div>
-                        <p style={{ fontSize: '0.8rem', color: '#a8b9b2', margin: '4px 0 0' }}>{exp.description}</p>
+                        <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', margin: '4px 0 0' }}>{exp.description}</p>
                       </div>
 
                       <button
                         type="button"
                         onClick={() => handleToggleExposure(exp.id)}
                         style={{
-                          background: exp.completed ? '#10b981' : 'rgba(255,255,255,0.06)',
-                          border: `1px solid ${exp.completed ? '#10b981' : 'rgba(255,255,255,0.15)'}`,
-                          color: exp.completed ? '#040608' : '#effff6',
+                          background: exp.completed ? 'var(--color-state-done)' : 'rgba(255,255,255,0.06)',
+                          border: `1px solid ${exp.completed ? 'var(--color-state-done)' : 'rgba(255,255,255,0.15)'}`,
+                          color: exp.completed ? '#040608' : 'var(--color-text-primary)',
                           padding: '6px 14px',
                           borderRadius: '8px',
                           fontWeight: 800,
@@ -495,7 +495,7 @@ export default function ClinicalExecutionHub() {
                       </button>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '16px', fontSize: '0.78rem', color: '#a8b9b2', flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: '16px', fontSize: '0.78rem', color: 'var(--color-text-secondary)', flexWrap: 'wrap' }}>
                       <label style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         Ansiedad Pre-Evento (0-10):
                         <input
@@ -523,7 +523,7 @@ export default function ClinicalExecutionHub() {
                       <button
                         type="button"
                         onClick={startRuminationTimer}
-                        style={{ background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', color: '#f87171', padding: '4px 10px', borderRadius: '6px', fontSize: '0.72rem', cursor: 'pointer' }}
+                        style={{ background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.3)', color: 'var(--color-accent-danger)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.72rem', cursor: 'pointer' }}
                       >
                         ⏱️ Iniciar Límite de Rumiación (10 min)
                       </button>
@@ -541,18 +541,18 @@ export default function ClinicalExecutionHub() {
             <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#f87171', fontWeight: 800 }}>
+                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-danger)', fontWeight: 800 }}>
                     PROTOCOLO CLÍNICO DE DESBLOQUEO INICIAL
                   </span>
-                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                     Salida de Emergencia: Entrada de 10 Minutos & Versión Mala
                   </h4>
                 </div>
 
                 {isRescueTimerActive && rescueTimer !== null && (
                   <div style={{ background: 'rgba(16,185,129,0.2)', border: '1px solid rgba(16,185,129,0.4)', padding: '8px 16px', borderRadius: '12px', textAlign: 'center' }}>
-                    <span style={{ fontSize: '0.65rem', color: '#10b981', fontFamily: 'Azeret Mono, monospace', fontWeight: 800 }}>TEMPORIZADOR DE ENTRADA</span>
-                    <strong style={{ fontSize: '1.2rem', fontFamily: 'Azeret Mono, monospace', color: '#ffffff', display: 'block' }}>{formatTime(rescueTimer)}</strong>
+                    <span style={{ fontSize: '0.65rem', color: 'var(--color-state-done)', fontFamily: 'Azeret Mono, monospace', fontWeight: 800 }}>TEMPORIZADOR DE ENTRADA</span>
+                    <strong style={{ fontSize: '1.2rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-primary)', display: 'block' }}>{formatTime(rescueTimer)}</strong>
                   </div>
                 )}
               </div>
@@ -564,7 +564,7 @@ export default function ClinicalExecutionHub() {
                   style={{
                     background: 'linear-gradient(135deg, #ef4444, #dc2626)',
                     border: 'none',
-                    color: '#ffffff',
+                    color: 'var(--color-text-primary)',
                     padding: '10px 20px',
                     borderRadius: '12px',
                     fontWeight: 800,
@@ -578,7 +578,7 @@ export default function ClinicalExecutionHub() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontSize: '0.78rem', color: '#f87171', fontFamily: 'Azeret Mono, monospace', fontWeight: 700 }}>
+                <label style={{ fontSize: '0.78rem', color: 'var(--color-accent-danger)', fontFamily: 'Azeret Mono, monospace', fontWeight: 700 }}>
                   Escribe aquí una "Versión Mala" o 3 Bullets Caóticos sin Juzgar:
                 </label>
                 <textarea
@@ -592,7 +592,7 @@ export default function ClinicalExecutionHub() {
                     border: '1px solid rgba(255,255,255,0.15)',
                     borderRadius: '12px',
                     padding: '12px',
-                    color: '#ffffff',
+                    color: 'var(--color-text-primary)',
                     fontSize: '0.85rem',
                     outline: 'none',
                     resize: 'vertical'
@@ -600,8 +600,8 @@ export default function ClinicalExecutionHub() {
                 />
               </div>
 
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '12px', fontSize: '0.78rem', color: '#a8b9b2', lineHeight: 1.4 }}>
-                💡 <strong style={{ color: '#effff6' }}>Regla inviolable de corte:</strong> "Suficientemente terminado" es el único estándar requerido hoy. Un borrador feo guardado supera a la parálisis perfecta.
+              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '12px', fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+                💡 <strong style={{ color: 'var(--color-text-primary)' }}>Regla inviolable de corte:</strong> "Suficientemente terminado" es el único estándar requerido hoy. Un borrador feo guardado supera a la parálisis perfecta.
               </div>
             </div>
           </div>
@@ -612,10 +612,10 @@ export default function ClinicalExecutionHub() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.25)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#10b981', fontWeight: 800 }}>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800 }}>
                   HIGIENE DE SUEÑO & CONTROL DE ESTÍMULOS CBT-I
                 </span>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                   Checklist Nocturna de Desconexión (21:00)
                 </h4>
               </div>
@@ -626,9 +626,9 @@ export default function ClinicalExecutionHub() {
                     type="checkbox"
                     checked={screensOff21}
                     onChange={(e) => setScreensOff21(e.target.checked)}
-                    style={{ width: '18px', height: '18px', accentColor: '#10b981' }}
+                    style={{ width: '18px', height: '18px', accentColor: 'var(--color-state-done)' }}
                   />
-                  <span style={{ fontSize: '0.85rem', color: screensOff21 ? '#10b981' : '#effff6' }}>
+                  <span style={{ fontSize: '0.85rem', color: screensOff21 ? 'var(--color-state-done)' : 'var(--color-text-primary)' }}>
                     📱 <strong>21:00 Pantallas Fuera:</strong> Teléfono guardado fuera del alcance de la cama.
                   </span>
                 </label>
@@ -638,9 +638,9 @@ export default function ClinicalExecutionHub() {
                     type="checkbox"
                     checked={roomCold}
                     onChange={(e) => setRoomCold(e.target.checked)}
-                    style={{ width: '18px', height: '18px', accentColor: '#10b981' }}
+                    style={{ width: '18px', height: '18px', accentColor: 'var(--color-state-done)' }}
                   />
-                  <span style={{ fontSize: '0.85rem', color: roomCold ? '#10b981' : '#effff6' }}>
+                  <span style={{ fontSize: '0.85rem', color: roomCold ? 'var(--color-state-done)' : 'var(--color-text-primary)' }}>
                     ❄️ <strong>Temperatura & Oscuridad:</strong> Habitación ventilada y oscura.
                   </span>
                 </label>
@@ -650,16 +650,16 @@ export default function ClinicalExecutionHub() {
                     type="checkbox"
                     checked={relaxingAudio}
                     onChange={(e) => setRelaxingAudio(e.target.checked)}
-                    style={{ width: '18px', height: '18px', accentColor: '#10b981' }}
+                    style={{ width: '18px', height: '18px', accentColor: 'var(--color-state-done)' }}
                   />
-                  <span style={{ fontSize: '0.85rem', color: relaxingAudio ? '#10b981' : '#effff6' }}>
+                  <span style={{ fontSize: '0.85rem', color: relaxingAudio ? 'var(--color-state-done)' : 'var(--color-text-primary)' }}>
                     🎧 <strong>Audio de Regulación:</strong> Ruido blanco o audio de distensión sin contenido cognitivo activo.
                   </span>
                 </label>
               </div>
 
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '12px', padding: '12px', fontSize: '0.78rem', color: '#a8b9b2', lineHeight: 1.4 }}>
-                😴 <strong style={{ color: '#10b981' }}>Recordatorio Terapéutico:</strong> El descanso y el sueño no son premios condicionados al rendimiento. Son un requisito fisiológico para la regulación ejecutiva de mañana.
+              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '12px', padding: '12px', fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+                😴 <strong style={{ color: 'var(--color-state-done)' }}>Recordatorio Terapéutico:</strong> El descanso y el sueño no son premios condicionados al rendimiento. Son un requisito fisiológico para la regulación ejecutiva de mañana.
               </div>
             </div>
           </div>

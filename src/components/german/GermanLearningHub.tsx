@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Flashcard {
@@ -79,24 +79,24 @@ export default function GermanLearningHub() {
           flexDirection: 'column',
           gap: '24px',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-          color: '#effff6'
+          color: 'var(--color-text-primary)'
         }}
       >
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#f59e0b', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-warning)', fontWeight: 800, letterSpacing: '0.05em' }}>
               MÓDULO DE ALEMÁN A1-A2 • 13:30 - 14:00 DIARIO
             </span>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Hábito Sostenido de 25 Minutos
             </h3>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ background: 'rgba(245, 158, 11, 0.15)', border: '1px solid rgba(245, 158, 11, 0.3)', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
-              <span style={{ fontSize: '0.65rem', color: '#f59e0b', display: 'block', fontWeight: 700, fontFamily: 'Azeret Mono, monospace' }}>RACHA CONSECUTIVA</span>
-              <strong style={{ fontSize: '1.1rem', color: '#ffffff' }}>🔥 {streakDays} Días</strong>
+              <span style={{ fontSize: '0.65rem', color: 'var(--color-accent-warning)', display: 'block', fontWeight: 700, fontFamily: 'Azeret Mono, monospace' }}>RACHA CONSECUTIVA</span>
+              <strong style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)' }}>🔥 {streakDays} Días</strong>
             </div>
 
             <button
@@ -123,8 +123,8 @@ export default function GermanLearningHub() {
         {isTimerRunning && activeTimer !== null && (
           <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '16px', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
             <div>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'Azeret Mono, monospace', color: '#f59e0b', fontWeight: 800 }}>TEMPORIZADOR ACTIVO DE ALEMÁN</span>
-              <h4 style={{ margin: '2px 0 0', fontSize: '1.4rem', fontWeight: 800, fontFamily: 'Azeret Mono, monospace', color: '#ffffff' }}>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-warning)', fontWeight: 800 }}>TEMPORIZADOR ACTIVO DE ALEMÁN</span>
+              <h4 style={{ margin: '2px 0 0', fontSize: '1.4rem', fontWeight: 800, fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-primary)' }}>
                 {formatTime(activeTimer)}
               </h4>
             </div>
@@ -135,7 +135,7 @@ export default function GermanLearningHub() {
                 onClick={() => setActivePhase('duolingo')}
                 style={{
                   background: activePhase === 'duolingo' ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.06)',
-                  border: `1px solid ${activePhase === 'duolingo' ? '#10b981' : 'rgba(255,255,255,0.1)'}`,
+                  border: `1px solid ${activePhase === 'duolingo' ? 'var(--color-state-done)' : 'rgba(255,255,255,0.1)'}`,
                   color: '#fff',
                   padding: '6px 12px',
                   borderRadius: '8px',
@@ -152,7 +152,7 @@ export default function GermanLearningHub() {
                 onClick={() => setActivePhase('reading')}
                 style={{
                   background: activePhase === 'reading' ? 'rgba(119,231,255,0.3)' : 'rgba(255,255,255,0.06)',
-                  border: `1px solid ${activePhase === 'reading' ? '#77e7ff' : 'rgba(255,255,255,0.1)'}`,
+                  border: `1px solid ${activePhase === 'reading' ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.1)'}`,
                   color: '#fff',
                   padding: '6px 12px',
                   borderRadius: '8px',
@@ -169,7 +169,7 @@ export default function GermanLearningHub() {
                 onClick={() => setActivePhase('audio')}
                 style={{
                   background: activePhase === 'audio' ? 'rgba(245,158,11,0.3)' : 'rgba(255,255,255,0.06)',
-                  border: `1px solid ${activePhase === 'audio' ? '#f59e0b' : 'rgba(255,255,255,0.1)'}`,
+                  border: `1px solid ${activePhase === 'audio' ? 'var(--color-accent-warning)' : 'rgba(255,255,255,0.1)'}`,
                   color: '#fff',
                   padding: '6px 12px',
                   borderRadius: '8px',
@@ -187,7 +187,7 @@ export default function GermanLearningHub() {
         {/* FLASHCARDS INTERACTIVAS */}
         <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.72rem', fontFamily: 'Azeret Mono, monospace', color: '#f59e0b', fontWeight: 800 }}>
+            <span style={{ fontSize: '0.72rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-warning)', fontWeight: 800 }}>
               TARJETA A1 #{cardIndex + 1} DE {A1_FLASHCARDS.length} • {currentCard.category.toUpperCase()}
             </span>
             <div style={{ display: 'flex', gap: '8px' }}>
@@ -223,19 +223,19 @@ export default function GermanLearningHub() {
               transition: 'all 200ms ease'
             }}
           >
-            <h4 style={{ fontSize: '1.3rem', color: '#ffffff', margin: 0, fontWeight: 800 }}>
+            <h4 style={{ fontSize: '1.3rem', color: 'var(--color-text-primary)', margin: 0, fontWeight: 800 }}>
               {currentCard.german}
             </h4>
-            <span style={{ fontSize: '0.82rem', color: '#f59e0b', fontStyle: 'italic', fontFamily: 'Azeret Mono, monospace' }}>
+            <span style={{ fontSize: '0.82rem', color: 'var(--color-accent-warning)', fontStyle: 'italic', fontFamily: 'Azeret Mono, monospace' }}>
               🗣️ Pronunciación: {currentCard.phonetic}
             </span>
 
             {showAnswer ? (
-              <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', color: '#81f6b0', fontSize: '1.05rem', fontWeight: 700 }}>
+              <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', color: 'var(--color-state-done)', fontSize: '1.05rem', fontWeight: 700 }}>
                 🇲🇽 {currentCard.spanish}
               </div>
             ) : (
-              <span style={{ fontSize: '0.75rem', color: '#65756f', marginTop: '6px' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-tertiary)', marginTop: '6px' }}>
                 (Haz clic para revelar la traducción en español)
               </span>
             )}

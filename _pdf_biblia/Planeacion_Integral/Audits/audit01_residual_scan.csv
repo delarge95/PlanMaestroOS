@@ -1,0 +1,15 @@
+Archivo,Hex hardcodeados,RGBA hardcodeados,Violaciones de acento,Severidad
+DailyOperatingView.tsx,18,27,#0a84ff #30d158 #ff453a,CRÍTICO
+TodayTabWorkspace.tsx,3,6,"neutros (#fff, #000, #8e8e93)",BAJO
+pages/app/index.astro,4,4,#f87171 (rojo fuera de sistema),MEDIO
+PlanMaestroLayout.astro,29,28,paleta vieja completa,CRÍTICO
+ClinicalUncompletedTaskProtocol.tsx,-,-,#ff375f #ff9f0a #64d2ff #30d158,ALTO
+MorningEveningWorkflowsModal.tsx,-,-,#bf5af2 #ff453a #ff9f0a #64d2ff #30d158,ALTO
+EntityInspectorDrawer.tsx,-,-,#bf5af2 #ff375f #ff9f0a #64d2ff #0a84ff #30d158,ALTO
+SecondBrainInspector.tsx,-,-,#bf5af2 #ff453a #ff9f0a #0a84ff #30d158,ALTO
+FitAppWorkoutLogger.tsx,-,-,#ff453a #ff9f0a #64d2ff #bf5af2 #0a84ff #30d158,ALTO
+FitAppAnalyticsDashboard.tsx,-,-,#bf5af2 #ff9f0a #64d2ff #0a84ff #30d158,ALTO
+ClinicalTabWorkspace.tsx,-,-,#ff375f,MEDIO
+UnifiedRoutineTable.tsx,-,-,#ff9f0a #30d158,MEDIO
+SphericalGallery.tsx,-,-,#77e7ff #81f6b0 (paleta vieja),MEDIO
+ErrorBoundary.tsx,-,-,#f87171,BAJO

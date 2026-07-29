@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InertiaRescueModal from './InertiaRescueModal';
 
@@ -46,7 +46,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
-        color: '#effff6'
+        color: 'var(--color-text-primary)'
       }}>
         {/* PANEL TOP BAR */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
@@ -55,11 +55,11 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               width: '10px',
               height: '10px',
               borderRadius: '50%',
-              background: '#10b981',
+              background: 'var(--color-state-done)',
               boxShadow: '0 0 12px #10b981',
               display: 'inline-block'
             }} />
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: '#10b981', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               AHORA EN EJECUCIÓN • {activeBlock.time} (Hora Local: {currentHour || '18:57'})
             </span>
           </div>
@@ -72,7 +72,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               style={{
                 background: 'rgba(239, 68, 68, 0.15)',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
-                color: '#f87171',
+                color: 'var(--color-accent-danger)',
                 padding: '6px 14px',
                 borderRadius: '10px',
                 fontSize: '0.78rem',
@@ -94,8 +94,8 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
                 onClick={onToggleFocusMode}
                 style={{
                   background: isFocusModeActive ? 'rgba(16, 185, 129, 0.25)' : 'rgba(119, 231, 255, 0.15)',
-                  border: `1px solid ${isFocusModeActive ? '#10b981' : '#77e7ff'}`,
-                  color: isFocusModeActive ? '#10b981' : '#77e7ff',
+                  border: `1px solid ${isFocusModeActive ? 'var(--color-state-done)' : 'var(--color-accent-primary)'}`,
+                  color: isFocusModeActive ? 'var(--color-state-done)' : 'var(--color-accent-primary)',
                   padding: '6px 14px',
                   borderRadius: '10px',
                   fontSize: '0.78rem',
@@ -115,11 +115,11 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
 
         {/* ACTIVE ACTIVITY TITLE */}
         <div>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: '0 0 6px', color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: '0 0 6px', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
             {activeBlock.activity}
           </h2>
-          <p style={{ fontSize: '0.92rem', color: '#a8b9b2', margin: 0, lineHeight: 1.5 }}>
-            <strong style={{ color: '#77e7ff' }}>Acción de Inicio (10 Min):</strong> {activeBlock.startAction}
+          <p style={{ fontSize: '0.92rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
+            <strong style={{ color: 'var(--color-accent-primary)' }}>Acción de Inicio (10 Min):</strong> {activeBlock.startAction}
           </p>
         </div>
 
@@ -134,10 +134,10 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
           gap: '14px'
         }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#c084fc', textTransform: 'uppercase', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
               Regla Clínica Vigente
             </span>
-            <p style={{ fontSize: '0.85rem', color: '#ffffff', margin: '4px 0 0', fontWeight: 600 }}>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)', margin: '4px 0 0', fontWeight: 600 }}>
               {activeBlock.clinicalRule}
             </p>
           </div>
@@ -145,7 +145,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#fcd34d', textTransform: 'uppercase', fontWeight: 700 }}>
               Mínimo Viable de Entrada
             </span>
-            <p style={{ fontSize: '0.85rem', color: '#a8b9b2', margin: '4px 0 0' }}>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: '4px 0 0' }}>
               {activeBlock.rescueTip}
             </p>
           </div>
@@ -174,7 +174,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             style={{
               background: 'rgba(16, 185, 129, 0.15)',
               border: '1px solid rgba(16, 185, 129, 0.35)',
-              color: '#10b981',
+              color: 'var(--color-state-done)',
               padding: '8px 14px',
               borderRadius: '10px',
               fontSize: '0.78rem',
@@ -193,7 +193,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             style={{
               background: 'rgba(245, 158, 11, 0.15)',
               border: '1px solid rgba(245, 158, 11, 0.35)',
-              color: '#f59e0b',
+              color: 'var(--color-accent-warning)',
               padding: '8px 14px',
               borderRadius: '10px',
               fontSize: '0.78rem',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
 import ErrorBoundary from '../ErrorBoundary';
@@ -209,10 +209,10 @@ export default function MinMaxRoutineTable() {
         {/* HEADER SECTION */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#10b981', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800, letterSpacing: '0.05em' }}>
               ROUTINES & CALISTHENICS SUBSTITUTIONS • CONECTADO A FITAPP
             </span>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '4px 0 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '4px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               The Min-Max Program (Jeff Nippard & Overcoming Gravity)
             </h2>
           </div>
@@ -224,8 +224,8 @@ export default function MinMaxRoutineTable() {
                 type="button"
                 onClick={(e) => { e.preventDefault(); setSelectedBlock(1); setSelectedWeek(1); }}
                 style={{
-                  background: selectedBlock === 1 ? '#10b981' : 'transparent',
-                  color: selectedBlock === 1 ? '#040608' : '#a8b9b2',
+                  background: selectedBlock === 1 ? 'var(--color-state-done)' : 'transparent',
+                  color: selectedBlock === 1 ? '#040608' : 'var(--color-text-secondary)',
                   border: 'none',
                   padding: '6px 12px',
                   borderRadius: '6px',
@@ -240,8 +240,8 @@ export default function MinMaxRoutineTable() {
                 type="button"
                 onClick={(e) => { e.preventDefault(); setSelectedBlock(2); setSelectedWeek(7); }}
                 style={{
-                  background: selectedBlock === 2 ? '#10b981' : 'transparent',
-                  color: selectedBlock === 2 ? '#040608' : '#a8b9b2',
+                  background: selectedBlock === 2 ? 'var(--color-state-done)' : 'transparent',
+                  color: selectedBlock === 2 ? '#040608' : 'var(--color-text-secondary)',
                   border: 'none',
                   padding: '6px 12px',
                   borderRadius: '6px',
@@ -259,7 +259,7 @@ export default function MinMaxRoutineTable() {
               onChange={(e) => setSelectedWeek(Number(e.target.value))}
               style={{
                 background: 'rgba(0,0,0,0.5)',
-                color: '#10b981',
+                color: 'var(--color-state-done)',
                 border: '1px solid #10b981',
                 padding: '6px 12px',
                 borderRadius: '10px',
@@ -284,14 +284,14 @@ export default function MinMaxRoutineTable() {
           borderRadius: '16px', 
           marginBottom: '24px', 
           fontSize: '0.85rem', 
-          color: '#a8b9b2', 
+          color: 'var(--color-text-secondary)', 
           display: 'flex', 
           gap: '20px', 
           flexWrap: 'wrap' 
         }}>
-          <div><strong style={{ color: '#10b981' }}>Estructura:</strong> 5 días/sem (45 min) • RIR {selectedBlock === 1 ? '1-2' : '0-1'}</div>
-          <div><strong style={{ color: '#77e7ff' }}>Regla HSR Tempo:</strong> 3-0-3 en empujes y piernas</div>
-          <div><strong style={{ color: '#f59e0b' }}>Tip:</strong> Haz clic en cualquier ejercicio para ver video de FitApp y guía técnica.</div>
+          <div><strong style={{ color: 'var(--color-state-done)' }}>Estructura:</strong> 5 días/sem (45 min) • RIR {selectedBlock === 1 ? '1-2' : '0-1'}</div>
+          <div><strong style={{ color: 'var(--color-accent-primary)' }}>Regla HSR Tempo:</strong> 3-0-3 en empujes y piernas</div>
+          <div><strong style={{ color: 'var(--color-accent-warning)' }}>Tip:</strong> Haz clic en cualquier ejercicio para ver video de FitApp y guía técnica.</div>
         </div>
 
         {/* WORKOUT DAYS GRID */}
@@ -299,8 +299,8 @@ export default function MinMaxRoutineTable() {
           {currentWorkouts.map((day, idx) => (
             <div key={idx} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', overflow: 'hidden' }}>
               <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>{day.day_name}</h3>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: '#10b981', background: 'rgba(16,185,129,0.12)', padding: '4px 10px', borderRadius: '999px' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-text-primary)', margin: 0 }}>{day.day_name}</h3>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-state-done)', background: 'rgba(16,185,129,0.12)', padding: '4px 10px', borderRadius: '999px' }}>
                   {day.exercises.length} Ejercicios
                 </span>
               </div>
@@ -308,7 +308,7 @@ export default function MinMaxRoutineTable() {
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                   <thead>
-                    <tr style={{ background: 'rgba(0,0,0,0.4)', color: '#65756f', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem' }}>
+                    <tr style={{ background: 'rgba(0,0,0,0.4)', color: 'var(--color-text-tertiary)', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem' }}>
                       <th style={{ padding: '12px 18px', width: '28%' }}>EJERCICIO BASE NIPPARD</th>
                       <th style={{ padding: '12px 18px', width: '38%' }}>VARIACIÓN CALISTENIA FITAPP</th>
                       <th style={{ padding: '12px 18px', width: '24%' }}>JUSTIFICACIÓN CLÍNICA</th>
@@ -318,7 +318,7 @@ export default function MinMaxRoutineTable() {
                   <tbody>
                     {day.exercises.map((ex, eIdx) => (
                       <tr key={eIdx} style={{ borderBottom: eIdx === day.exercises.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.05)' }}>
-                        <td style={{ padding: '14px 18px', fontWeight: 600, color: '#c6d7d0' }}>
+                        <td style={{ padding: '14px 18px', fontWeight: 600, color: 'var(--color-text-secondary)' }}>
                           {ex.name.includes('/') || ex.name.toLowerCase().includes(' or ') ? (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                               {ex.name.split(/\s*[/]\s*|\s+or\s+/i).map((part, pIdx) => (
@@ -331,7 +331,7 @@ export default function MinMaxRoutineTable() {
                                     border: '1px solid rgba(10, 132, 255, 0.3)',
                                     borderRadius: '8px',
                                     padding: '5px 10px',
-                                    color: '#64d2ff',
+                                    color: 'var(--color-accent-primary)',
                                     cursor: 'pointer',
                                     textAlign: 'left',
                                     fontSize: '0.82rem',
@@ -349,7 +349,7 @@ export default function MinMaxRoutineTable() {
                             <button
                               type="button"
                               onClick={() => handleOpenExercise(ex.name)}
-                              style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', textAlign: 'left', padding: 0, fontSize: '0.85rem', textDecoration: 'underline', fontWeight: 700 }}
+                              style={{ background: 'none', border: 'none', color: 'var(--color-text-primary)', cursor: 'pointer', textAlign: 'left', padding: 0, fontSize: '0.85rem', textDecoration: 'underline', fontWeight: 700 }}
                             >
                               {ex.name}
                             </button>
@@ -364,7 +364,7 @@ export default function MinMaxRoutineTable() {
                               border: '1px solid rgba(16,185,129,0.3)',
                               padding: '6px 12px',
                               borderRadius: '8px',
-                              color: '#81f6b0',
+                              color: 'var(--color-state-done)',
                               fontWeight: 700,
                               fontSize: '0.82rem',
                               cursor: 'pointer',
@@ -378,10 +378,10 @@ export default function MinMaxRoutineTable() {
                             <span style={{ fontSize: '0.7rem', opacity: 0.8 }}>▶ Info</span>
                           </button>
                         </td>
-                        <td style={{ padding: '14px 18px', color: '#a8b9b2', fontSize: '0.82rem', lineHeight: 1.4 }}>
+                        <td style={{ padding: '14px 18px', color: 'var(--color-text-secondary)', fontSize: '0.82rem', lineHeight: 1.4 }}>
                           {ex.reason}
                         </td>
-                        <td style={{ padding: '14px 18px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', fontWeight: 700, color: '#77e7ff' }}>
+                        <td style={{ padding: '14px 18px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', fontWeight: 700, color: 'var(--color-accent-primary)' }}>
                           {ex.sets} × RIR {ex.rir}
                         </td>
                       </tr>

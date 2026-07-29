@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import InteractiveDocViewer from './InteractiveDocViewer';
 import ErrorBoundary from '../ErrorBoundary';
 
@@ -37,14 +37,14 @@ export default function DomainDocAccordion({ domainTitle, domainColor, categoryF
               <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: domainColor, fontWeight: 800 }}>
                 CONSULTA DE FUENTES ORIGINALES COMPLETAS
               </span>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '2px 0 0', color: '#effff6' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                 Ver Documentos e Investigación Completa de {domainTitle}
               </h3>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', color: '#65756f', background: 'rgba(255,255,255,0.05)', padding: '4px 10px', borderRadius: '6px' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', color: 'var(--color-text-tertiary)', background: 'rgba(255,255,255,0.05)', padding: '4px 10px', borderRadius: '6px' }}>
               {sourceDocsList.length} Documentos Incluidos
             </span>
             <span style={{ fontSize: '1.2rem', color: domainColor, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms ease' }}>
@@ -61,12 +61,12 @@ export default function DomainDocAccordion({ domainTitle, domainColor, categoryF
               {sourceDocsList.map((doc, idx) => (
                 <div key={idx} style={{ background: 'rgba(0,0,0,0.4)', padding: '12px 14px', borderRadius: '8px', border: '1px solid rgba(174,255,224,0.1)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <strong style={{ fontSize: '0.85rem', color: '#effff6' }}>{doc.name}</strong>
+                    <strong style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)' }}>{doc.name}</strong>
                     <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.65rem', color: domainColor }}>
                       {doc.type}
                     </span>
                   </div>
-                  <p style={{ fontSize: '0.78rem', color: '#a8b9b2', margin: 0, lineHeight: 1.3 }}>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.3 }}>
                     {doc.description}
                   </p>
                 </div>

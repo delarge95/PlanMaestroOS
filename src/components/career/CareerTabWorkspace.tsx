@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InteractiveRoadmapDashboard from './InteractiveRoadmapDashboard';
 import DomainDocAccordion from '../docs/DomainDocAccordion';
@@ -50,8 +50,8 @@ export default function CareerTabWorkspace() {
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  background: isSelected ? '#ffffff' : 'transparent',
-                  color: isSelected ? '#000000' : '#8e8e93',
+                  background: isSelected ? 'var(--color-text-primary)' : 'transparent',
+                  color: isSelected ? '#000000' : 'var(--color-text-tertiary)',
                   border: 'none',
                   padding: '8px 18px',
                   borderRadius: '12px',
@@ -75,13 +75,13 @@ export default function CareerTabWorkspace() {
           {activeTab === 'roadmap' && <InteractiveRoadmapDashboard />}
           {activeTab === 'targeting' && (
             <div style={{ background: 'rgba(28, 28, 30, 0.75)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '20px', padding: '24px', backdropFilter: 'blur(40px)' }}>
-              <span style={{ fontSize: '0.72rem', color: '#0a84ff', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
                 SISTEMA DE APLICACIONES SEMANALES
               </span>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '4px 0 12px', color: '#ffffff' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '4px 0 12px', color: 'var(--color-text-primary)' }}>
                 Targeting & Cadencia de 15 Aplicaciones / Semana
               </h3>
-              <p style={{ fontSize: '0.88rem', color: '#98989d', margin: 0, lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
                 Enfoque en vacantes de Unity Technical Artist, WebGL 3D Developer y Technical Visualization Specialist en la Unión Europea y remoto LatAm.
               </p>
             </div>

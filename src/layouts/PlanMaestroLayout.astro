@@ -1,4 +1,4 @@
----
+﻿---
 import '../styles/global.css';
 
 interface Props {
@@ -137,7 +137,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
               <a
                 href="obsidian://open?vault=Laboral"
                 title="Abrir Obsidian Vault"
-                style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35); color: #c084fc; padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
+                style="background: var(--color-accent-primary-soft); border: 1px solid var(--color-border-visible); color: var(--color-accent-primary); padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
               >
                 🟣 Obsidian
               </a>
@@ -146,14 +146,14 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
                 target="_blank"
                 rel="noreferrer"
                 title="Abrir Notion Workspace"
-                style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #f59e0b; padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
+                style="background: var(--color-accent-warning-soft); border: 1px solid var(--color-border-visible); color: var(--color-accent-warning); padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
               >
                 ⬛ Notion
               </a>
               <a
                 href="/app/fitness"
                 title="Ir a FitApp Workout Logger"
-                style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #10b981; padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
+                style="background: var(--color-state-done-soft); border: 1px solid var(--color-border-visible); color: var(--color-state-done); padding: 5px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 4px;"
               >
                 💪 FitApp
               </a>
@@ -180,7 +180,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         margin: 0;
         padding: 0;
         background: #040608;
-        color: #effff6;
+        color: var(--color-text-primary);
         font-family: 'Space Grotesk', system-ui, sans-serif;
         min-height: 100vh;
       }
@@ -191,7 +191,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
       .app-sidebar {
         width: 270px;
         background: rgba(10, 14, 17, 0.95);
-        border-right: 1px solid rgba(174, 255, 224, 0.12);
+        border-right: 1px solid var(--color-border-subtle);
         display: flex;
         flex-direction: column;
         position: fixed;
@@ -203,21 +203,21 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
       }
       .sidebar-header {
         padding: 20px 18px;
-        border-bottom: 1px solid rgba(174, 255, 224, 0.08);
+        border-bottom: 1px solid var(--color-border-subtle);
       }
       .brand-logo {
         display: flex;
         align-items: center;
         gap: 12px;
         text-decoration: none;
-        color: #effff6;
+        color: var(--color-text-primary);
       }
       .logo-badge {
         width: 36px;
         height: 36px;
         border-radius: 8px;
-        background: linear-gradient(135deg, #77e7ff, #81f6b0);
-        color: #040608;
+        background: var(--color-accent-primary);
+        color: #ffffff;
         font-weight: 800;
         font-size: 0.85rem;
         display: grid;
@@ -232,7 +232,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         letter-spacing: -0.01em;
       }
       .logo-text small {
-        color: #65756f;
+        color: var(--color-text-tertiary);
         font-size: 0.7rem;
         font-family: 'Azeret Mono', monospace;
       }
@@ -252,7 +252,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
       .nav-label {
         font-family: 'Azeret Mono', monospace;
         font-size: 0.65rem;
-        color: #65756f;
+        color: var(--color-text-tertiary);
         padding: 0 8px 6px;
         font-weight: 700;
         letter-spacing: 0.05em;
@@ -263,35 +263,35 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         gap: 10px;
         padding: 9px 10px;
         border-radius: 6px;
-        color: #a8b9b2;
+        color: var(--color-text-secondary);
         text-decoration: none;
         font-size: 0.85rem;
         font-weight: 500;
         transition: all 150ms ease;
       }
       .nav-item:hover {
-        background: rgba(174, 255, 224, 0.06);
-        color: #effff6;
+        background: var(--color-border-subtle);
+        color: var(--color-text-primary);
       }
       .nav-item.active {
-        background: rgba(119, 231, 255, 0.12);
-        color: #77e7ff;
+        background: var(--color-accent-primary-soft);
+        color: var(--color-accent-primary);
         font-weight: 700;
-        border-left: 3px solid #77e7ff;
+        border-left: 3px solid var(--color-accent-primary);
       }
       .badge-today {
         margin-left: auto;
         font-size: 0.62rem;
         font-family: 'Azeret Mono', monospace;
-        background: rgba(239, 68, 68, 0.2);
-        color: #f87171;
+        background: var(--color-accent-danger-soft);
+        color: var(--color-accent-danger);
         padding: 2px 6px;
         border-radius: 999px;
         font-weight: 700;
       }
       .sidebar-footer {
         padding: 16px;
-        border-top: 1px solid rgba(174, 255, 224, 0.08);
+        border-top: 1px solid var(--color-border-subtle);
       }
       .user-pill {
         display: flex;
@@ -302,13 +302,13 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background: rgba(129, 246, 176, 0.2);
-        color: #81f6b0;
+        background: var(--color-accent-primary-soft);
+        color: var(--color-accent-primary);
         font-weight: 700;
         font-size: 0.75rem;
         display: grid;
         place-items: center;
-        border: 1px solid rgba(129, 246, 176, 0.3);
+        border: 1px solid var(--color-border-visible);
       }
       .user-info {
         display: flex;
@@ -319,7 +319,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
       }
       .user-info small {
         font-size: 0.68rem;
-        color: #65756f;
+        color: var(--color-text-tertiary);
       }
       .app-main-wrapper {
         margin-left: 270px;
@@ -330,8 +330,8 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
       }
       .app-header {
         height: 64px;
-        border-bottom: 1px solid rgba(174, 255, 224, 0.1);
-        background: rgba(5, 8, 10, 0.8);
+        border-bottom: 1px solid var(--color-border-subtle);
+        background: rgba(5, 8, 10, 0.8); /* rgba(0,0,0,*) glass — excepción documentada */
         backdrop-filter: blur(12px);
         display: flex;
         align-items: center;
@@ -352,9 +352,9 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         font-weight: 800;
         padding: 3px 8px;
         border-radius: 4px;
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--pill-color, var(--cyan));
-        border: 1px solid var(--pill-color, var(--cyan));
+        background: var(--color-border-subtle);
+        color: var(--pill-color, var(--color-accent-primary));
+        border: 1px solid var(--pill-color, var(--color-accent-primary));
       }
       .page-header-title {
         font-size: 1.1rem;
@@ -373,19 +373,19 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         background: rgba(255, 255, 255, 0.03);
         padding: 3px 4px;
         border-radius: 6px;
-        border: 1px solid rgba(174, 255, 224, 0.1);
+        border: 1px solid var(--color-border-subtle);
       }
       .phase-label {
         font-family: 'Azeret Mono', monospace;
         font-size: 0.62rem;
-        color: #65756f;
+        color: var(--color-text-tertiary);
         padding: 0 6px;
         font-weight: 700;
       }
       .phase-btn {
         background: transparent;
         border: none;
-        color: #a8b9b2;
+        color: var(--color-text-secondary);
         font-size: 0.72rem;
         padding: 4px 8px;
         border-radius: 4px;
@@ -393,8 +393,8 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         transition: all 150ms ease;
       }
       .phase-btn.active {
-        background: rgba(119, 231, 255, 0.2);
-        color: #77e7ff;
+        background: var(--color-accent-primary-soft);
+        color: var(--color-accent-primary);
         font-weight: 700;
       }
       .rag-search-btn {
@@ -402,25 +402,25 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         align-items: center;
         gap: 8px;
         background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(174, 255, 224, 0.15);
+        border: 1px solid var(--color-border-subtle);
         padding: 6px 12px;
         border-radius: 6px;
-        color: #a8b9b2;
+        color: var(--color-text-secondary);
         text-decoration: none;
         font-size: 0.78rem;
         transition: all 150ms ease;
       }
       .rag-search-btn:hover {
-        background: rgba(174, 255, 224, 0.08);
-        color: #effff6;
+        background: var(--color-border-subtle);
+        color: var(--color-text-primary);
       }
       .rag-search-btn kbd {
         font-family: 'Azeret Mono', monospace;
         font-size: 0.62rem;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.4); /* rgba(0,0,0,*) — excepción documentada */
         padding: 2px 5px;
         border-radius: 4px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--color-border-subtle);
       }
       .app-content-shell {
         padding: 28px;
@@ -437,7 +437,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         errDiv.style.left = '20px';
         errDiv.style.right = '20px';
         errDiv.style.padding = '20px';
-        errDiv.style.background = '#ef4444';
+        errDiv.style.background = 'var(--color-accent-danger)';
         errDiv.style.color = '#fff';
         errDiv.style.zIndex = '999999';
         errDiv.style.borderRadius = '8px';
@@ -455,7 +455,7 @@ const activeColor = domainColors[activeDomain] || 'var(--color-accent-primary)';
         errDiv.style.left = '20px';
         errDiv.style.right = '20px';
         errDiv.style.padding = '20px';
-        errDiv.style.background = '#f59e0b';
+        errDiv.style.background = 'var(--color-accent-warning)';
         errDiv.style.color = '#fff';
         errDiv.style.zIndex = '999999';
         errDiv.style.borderRadius = '8px';

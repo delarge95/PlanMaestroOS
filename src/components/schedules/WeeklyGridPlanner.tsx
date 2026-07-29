@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { TIME_BLOCKS, DAYS_LIST, masterScheduleByPhase, type GridCell } from '../../data/schedules/scheduleData';
 import DrawerMiniFitnessViewer from '../fitness/DrawerMiniFitnessViewer';
 import ExerciseModal from '../fitness/ExerciseModal';
@@ -55,7 +55,7 @@ export default function WeeklyGridPlanner() {
               style={{
                 background: selectedPhase === 1 ? 'var(--color-accent-primary)' : 'transparent',
                 border: 'none',
-                color: selectedPhase === 1 ? '#ffffff' : 'var(--color-text-tertiary)',
+                color: selectedPhase === 1 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.78rem',
@@ -72,7 +72,7 @@ export default function WeeklyGridPlanner() {
               style={{
                 background: selectedPhase === 2 ? 'var(--color-accent-primary)' : 'transparent',
                 border: 'none',
-                color: selectedPhase === 2 ? '#ffffff' : 'var(--color-text-tertiary)',
+                color: selectedPhase === 2 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.78rem',
@@ -89,7 +89,7 @@ export default function WeeklyGridPlanner() {
               style={{
                 background: selectedPhase === 3 ? 'var(--color-accent-primary)' : 'transparent',
                 border: 'none',
-                color: selectedPhase === 3 ? '#ffffff' : 'var(--color-text-tertiary)',
+                color: selectedPhase === 3 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.78rem',

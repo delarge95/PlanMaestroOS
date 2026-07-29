@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import ClinicalExecutionHub from './ClinicalExecutionHub';
 import DomainDocAccordion from '../docs/DomainDocAccordion';
@@ -53,8 +53,8 @@ export default function ClinicalTabWorkspace() {
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  background: isSelected ? '#ffffff' : 'transparent',
-                  color: isSelected ? '#000000' : '#8e8e93',
+                  background: isSelected ? 'var(--color-text-primary)' : 'transparent',
+                  color: isSelected ? '#000000' : 'var(--color-text-tertiary)',
                   border: 'none',
                   padding: '8px 18px',
                   borderRadius: '12px',
@@ -81,16 +81,16 @@ export default function ClinicalTabWorkspace() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
               {clinicalMods.map((mod: any, idx: number) => (
                 <div key={idx} style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff375f', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
-                  <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: '0 0 14px' }}>{mod.title}</h3>
+                  <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '0 0 14px' }}>{mod.title}</h3>
                   {mod.exercises && (
-                    <ul style={{ margin: 0, paddingLeft: '18px', color: '#98989d', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                    <ul style={{ margin: 0, paddingLeft: '18px', color: 'var(--color-text-secondary)', fontSize: '0.85rem', lineHeight: 1.6 }}>
                       {mod.exercises.map((ex: string, eIdx: number) => (
                         <li key={eIdx}>{ex}</li>
                       ))}
                     </ul>
                   )}
                   {mod.levels && (
-                    <ol style={{ margin: 0, paddingLeft: '18px', color: '#98989d', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                    <ol style={{ margin: 0, paddingLeft: '18px', color: 'var(--color-text-secondary)', fontSize: '0.85rem', lineHeight: 1.6 }}>
                       {mod.levels.map((lvl: string, lIdx: number) => (
                         <li key={lIdx}><strong>{lvl.split(':')[0]}:</strong> {lvl.split(':')[1]}</li>
                       ))}

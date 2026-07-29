@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import GermanLearningHub from './GermanLearningHub';
 import DomainDocAccordion from '../docs/DomainDocAccordion';
@@ -47,8 +47,8 @@ export default function GermanTabWorkspace() {
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  background: isSelected ? '#ffffff' : 'transparent',
-                  color: isSelected ? '#000000' : '#8e8e93',
+                  background: isSelected ? 'var(--color-text-primary)' : 'transparent',
+                  color: isSelected ? '#000000' : 'var(--color-text-tertiary)',
                   border: 'none',
                   padding: '8px 18px',
                   borderRadius: '12px',
@@ -74,24 +74,24 @@ export default function GermanTabWorkspace() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
               <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
                 <span style={{ fontSize: '1.8rem' }}>📱</span>
-                <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: '8px 0 4px' }}>1. Duolingo (5 min)</h3>
-                <p style={{ fontSize: '0.84rem', color: '#98989d', margin: 0, lineHeight: 1.5 }}>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '8px 0 4px' }}>1. Duolingo (5 min)</h3>
+                <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
                   Mantenimiento de racha diaria, vocabulario rápido y fijación de palabras básicas.
                 </p>
               </div>
 
               <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
                 <span style={{ fontSize: '1.8rem' }}>📚</span>
-                <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: '8px 0 4px' }}>2. Libros A1 + Audios (15-20 min)</h3>
-                <p style={{ fontSize: '0.84rem', color: '#98989d', margin: 0, lineHeight: 1.5 }}>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '8px 0 4px' }}>2. Libros A1 + Audios (15-20 min)</h3>
+                <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
                   Set de libros descargados (Menschen A1 / Grammatik aktiv) siguiendo audios oficiales nativos.
                 </p>
               </div>
 
               <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
                 <span style={{ fontSize: '1.8rem' }}>🤖</span>
-                <h3 style={{ fontSize: '1.1rem', color: '#ffffff', margin: '8px 0 4px' }}>3. IA Conversacional (5-10 min)</h3>
-                <p style={{ fontSize: '0.84rem', color: '#98989d', margin: 0, lineHeight: 1.5 }}>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '8px 0 4px' }}>3. IA Conversacional (5-10 min)</h3>
+                <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
                   Micro-prácticas con ChatGPT / IA de voz en alemán básico A1 con corrección gramatical inmediata.
                 </p>
               </div>

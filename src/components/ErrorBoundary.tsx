@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import type { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
@@ -27,7 +27,7 @@ export default class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: '20px', background: 'rgba(239, 68, 68, 0.2)', border: '1px solid #ef4444', borderRadius: '8px', color: '#f87171' }}>
+        <div style={{ padding: '20px', background: 'rgba(239, 68, 68, 0.2)', border: '1px solid #ef4444', borderRadius: '8px', color: 'var(--color-accent-danger)' }}>
           <h3>React Error!</h3>
           <p>{this.state.error?.message}</p>
         </div>

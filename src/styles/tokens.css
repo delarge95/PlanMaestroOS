@@ -24,6 +24,20 @@
   --color-state-pending:   var(--color-text-tertiary);
   --color-state-done:      #30d158;   /* Verde solo para "completado" */
 
+  /* === TOKENS DERIVADOS (rgba semánticos para fondos/bordes soft) === */
+  --color-accent-primary-soft:  rgba(10, 132, 255, 0.12);
+  --color-accent-primary-glow:  rgba(10, 132, 255, 0.20);
+  --color-accent-warning-soft:  rgba(255, 159, 10, 0.12);
+  --color-accent-warning-glow:  rgba(255, 159, 10, 0.25);
+  --color-accent-danger-soft:   rgba(255, 69, 58, 0.12);
+  --color-accent-danger-glow:   rgba(255, 69, 58, 0.25);
+  --color-state-done-soft:      rgba(48, 209, 88, 0.12);
+  --color-state-done-glow:      rgba(48, 209, 88, 0.25);
+
+  /* === GLOW DECORATIVO DEL BODY (reemplaza paleta vieja verde-menta/cian) === */
+  --color-glow-primary: rgba(10, 132, 255, 0.04);
+  --color-glow-warning: rgba(255, 159, 10, 0.03);
+
   /* === TIPOGRAFÍA (AUDIT-02: Escala de 4 Niveles) === */
   --font-family-system: -apple-system, 'SF Pro Text', system-ui, sans-serif;
 

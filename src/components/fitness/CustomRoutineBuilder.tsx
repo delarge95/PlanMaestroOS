@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { filterExercises, type ExerciseEntry } from '../../data/exercises';
 
@@ -121,10 +121,10 @@ export default function CustomRoutineBuilder() {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#77e7ff', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 800, letterSpacing: '0.05em' }}>
               CREADOR DE RUTINAS A LA MEDIDA FITAPP
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Diseña & Guarda tus Propias Rutinas Personalizadas
             </h3>
           </div>
@@ -135,7 +135,7 @@ export default function CustomRoutineBuilder() {
             style={{
               background: isBuilding ? 'rgba(239,68,68,0.15)' : 'rgba(119, 231, 255, 0.15)',
               border: `1px solid ${isBuilding ? 'rgba(239,68,68,0.4)' : 'rgba(119, 231, 255, 0.4)'}`,
-              color: isBuilding ? '#f87171' : '#77e7ff',
+              color: isBuilding ? 'var(--color-accent-danger)' : 'var(--color-accent-primary)',
               padding: '8px 16px',
               borderRadius: '12px',
               fontWeight: 700,
@@ -151,7 +151,7 @@ export default function CustomRoutineBuilder() {
         {isBuilding && (
           <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(119,231,255,0.2)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: '#77e7ff', textTransform: 'uppercase', fontWeight: 700 }}>
+              <label style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
                 Título de la Rutina:
               </label>
               <input
@@ -164,7 +164,7 @@ export default function CustomRoutineBuilder() {
                   border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: '10px',
                   padding: '10px 14px',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   fontSize: '0.9rem',
                   outline: 'none'
                 }}
@@ -172,7 +172,7 @@ export default function CustomRoutineBuilder() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: '#a8b9b2', textTransform: 'uppercase', fontWeight: 700 }}>
+              <label style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-secondary)', textTransform: 'uppercase', fontWeight: 700 }}>
                 Descripción o Enfoque Objetivo:
               </label>
               <input
@@ -185,7 +185,7 @@ export default function CustomRoutineBuilder() {
                   border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: '10px',
                   padding: '8px 14px',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   fontSize: '0.85rem',
                   outline: 'none'
                 }}
@@ -195,7 +195,7 @@ export default function CustomRoutineBuilder() {
             {/* SELECTED EXERCISES LIST */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: '#10b981', fontWeight: 700 }}>
+                <span style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-state-done)', fontWeight: 700 }}>
                   EJERCICIOS INCLUIDOS ({selectedExercises.length}):
                 </span>
                 <button
@@ -204,7 +204,7 @@ export default function CustomRoutineBuilder() {
                   style={{
                     background: 'rgba(16, 185, 129, 0.15)',
                     border: '1px solid rgba(16, 185, 129, 0.3)',
-                    color: '#10b981',
+                    color: 'var(--color-state-done)',
                     padding: '4px 10px',
                     borderRadius: '8px',
                     fontSize: '0.75rem',
@@ -229,7 +229,7 @@ export default function CustomRoutineBuilder() {
                       border: '1px solid rgba(255,255,255,0.15)',
                       borderRadius: '8px',
                       padding: '8px 12px',
-                      color: '#ffffff',
+                      color: 'var(--color-text-primary)',
                       fontSize: '0.85rem'
                     }}
                   />
@@ -249,8 +249,8 @@ export default function CustomRoutineBuilder() {
                           cursor: 'pointer'
                         }}
                       >
-                        <span style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 600 }}>{ex.name}</span>
-                        <span style={{ fontSize: '0.7rem', color: '#10b981', fontFamily: 'Azeret Mono, monospace' }}>{ex.category}</span>
+                        <span style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)', fontWeight: 600 }}>{ex.name}</span>
+                        <span style={{ fontSize: '0.7rem', color: 'var(--color-state-done)', fontFamily: 'Azeret Mono, monospace' }}>{ex.category}</span>
                       </div>
                     ))}
                   </div>
@@ -258,7 +258,7 @@ export default function CustomRoutineBuilder() {
               )}
 
               {selectedExercises.length === 0 ? (
-                <p style={{ fontSize: '0.8rem', color: '#65756f', fontStyle: 'italic', margin: '4px 0' }}>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-text-tertiary)', fontStyle: 'italic', margin: '4px 0' }}>
                   Aún no has agregado ningún ejercicio. Haz clic en "+ Buscar & Agregar Ejercicio".
                 </p>
               ) : (
@@ -266,12 +266,12 @@ export default function CustomRoutineBuilder() {
                   {selectedExercises.map((exItem) => (
                     <div key={exItem.id} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
                       <div>
-                        <strong style={{ fontSize: '0.85rem', color: '#ffffff' }}>{exItem.name}</strong>
-                        <span style={{ fontSize: '0.7rem', color: '#a8b9b2', display: 'block' }}>{exItem.category}</span>
+                        <strong style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)' }}>{exItem.name}</strong>
+                        <span style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)', display: 'block' }}>{exItem.category}</span>
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.75rem' }}>
-                        <label style={{ color: '#a8b9b2' }}>
+                        <label style={{ color: 'var(--color-text-secondary)' }}>
                           Series:
                           <input
                             type="number"
@@ -281,7 +281,7 @@ export default function CustomRoutineBuilder() {
                           />
                         </label>
 
-                        <label style={{ color: '#a8b9b2' }}>
+                        <label style={{ color: 'var(--color-text-secondary)' }}>
                           Reps:
                           <input
                             type="text"
@@ -294,7 +294,7 @@ export default function CustomRoutineBuilder() {
                         <button
                           type="button"
                           onClick={() => handleRemoveExercise(exItem.id)}
-                          style={{ background: 'rgba(239,68,68,0.2)', border: 'none', color: '#f87171', borderRadius: '6px', padding: '4px 8px', cursor: 'pointer' }}
+                          style={{ background: 'rgba(239,68,68,0.2)', border: 'none', color: 'var(--color-accent-danger)', borderRadius: '6px', padding: '4px 8px', cursor: 'pointer' }}
                         >
                           ✕
                         </button>
@@ -333,17 +333,17 @@ export default function CustomRoutineBuilder() {
               <div key={r.id} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(119,231,255,0.2)', borderRadius: '16px', padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '12px' }}>
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <h4 style={{ fontSize: '0.98rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>{r.title}</h4>
+                    <h4 style={{ fontSize: '0.98rem', fontWeight: 800, margin: 0, color: 'var(--color-text-primary)' }}>{r.title}</h4>
                     <button
                       type="button"
                       onClick={() => handleDeleteRoutine(r.id)}
-                      style={{ background: 'transparent', border: 'none', color: '#f87171', fontSize: '0.8rem', cursor: 'pointer' }}
+                      style={{ background: 'transparent', border: 'none', color: 'var(--color-accent-danger)', fontSize: '0.8rem', cursor: 'pointer' }}
                     >
                       🗑️
                     </button>
                   </div>
-                  <p style={{ fontSize: '0.78rem', color: '#a8b9b2', margin: '4px 0 10px' }}>{r.description}</p>
-                  <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '0.75rem', color: '#effff6', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: '4px 0 10px' }}>{r.description}</p>
+                  <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '0.75rem', color: 'var(--color-text-primary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {r.exercises.map((ex) => (
                       <li key={ex.id}>
                         {ex.name} ({ex.targetSets}s × {ex.targetReps})

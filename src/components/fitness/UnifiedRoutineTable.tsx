@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
 import ErrorBoundary from '../ErrorBoundary';
@@ -90,16 +90,16 @@ export default function UnifiedRoutineTable({
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: badgeColor, fontWeight: 800, letterSpacing: '0.05em' }}>
               {programBadge}
             </span>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '4px 0 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '4px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               {programTitle}
             </h2>
-            <p style={{ fontSize: '0.83rem', color: '#98989d', margin: '2px 0 0' }}>{programSubtitle}</p>
+            <p style={{ fontSize: '0.83rem', color: 'var(--color-text-secondary)', margin: '2px 0 0' }}>{programSubtitle}</p>
           </div>
 
           {/* WEEK SELECTOR */}
           {weeks.length > 1 && (
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.78rem', color: '#8e8e93', fontWeight: 600 }}>Semana:</span>
+              <span style={{ fontSize: '0.78rem', color: 'var(--color-text-tertiary)', fontWeight: 600 }}>Semana:</span>
               <select
                 value={selectedWeekIdx}
                 onChange={(e) => {
@@ -143,7 +143,7 @@ export default function UnifiedRoutineTable({
         }}>
           <div>{summaryText}</div>
           {currentWeek?.notes && (
-            <div style={{ fontSize: '0.78rem', color: '#98989d', fontStyle: 'italic', width: '100%', marginTop: '4px' }}>
+            <div style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', fontStyle: 'italic', width: '100%', marginTop: '4px' }}>
               💡 <strong>Notas de Semana:</strong> {currentWeek.notes}
             </div>
           )}
@@ -158,7 +158,7 @@ export default function UnifiedRoutineTable({
               onClick={() => setSelectedDayIdx(idx)}
               style={{
                 background: selectedDayIdx === idx ? badgeColor : 'rgba(255,255,255,0.06)',
-                color: selectedDayIdx === idx ? '#000000' : '#ffffff',
+                color: selectedDayIdx === idx ? '#000000' : 'var(--color-text-primary)',
                 border: selectedDayIdx === idx ? 'none' : '1px solid rgba(255,255,255,0.1)',
                 padding: '8px 16px',
                 borderRadius: '12px',
@@ -177,7 +177,7 @@ export default function UnifiedRoutineTable({
         {currentDay && (
           <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', overflow: 'hidden' }}>
             <div style={{ background: 'rgba(255,255,255,0.03)', padding: '14px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-text-primary)', margin: 0 }}>
                 {currentDay.dayName}
               </h3>
               <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: badgeColor, background: 'rgba(255,255,255,0.06)', padding: '4px 10px', borderRadius: '999px' }}>
@@ -188,7 +188,7 @@ export default function UnifiedRoutineTable({
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.84rem' }}>
                 <thead>
-                  <tr style={{ background: 'rgba(0,0,0,0.5)', color: '#8e8e93', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem' }}>
+                  <tr style={{ background: 'rgba(0,0,0,0.5)', color: 'var(--color-text-tertiary)', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem' }}>
                     <th style={{ padding: '12px 16px', width: '25%' }}>EJERCICIO PRINCIPAL</th>
                     <th style={{ padding: '12px 16px', width: '25%' }}>OPCIONES DE SUSTITUCIÓN</th>
                     <th style={{ padding: '12px 16px', width: '8%', textAlign: 'center' }}>CAL.</th>
@@ -202,7 +202,7 @@ export default function UnifiedRoutineTable({
                   {currentDay.exercises.map((ex, eIdx) => (
                     <tr key={eIdx} style={{ borderBottom: eIdx === currentDay.exercises.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.05)' }}>
                       {/* PRIMARY EXERCISE */}
-                      <td style={{ padding: '14px 16px', fontWeight: 700, color: '#ffffff' }}>
+                      <td style={{ padding: '14px 16px', fontWeight: 700, color: 'var(--color-text-primary)' }}>
                         <button
                           type="button"
                           onClick={() => handleOpenExercise(ex.name)}
@@ -246,12 +246,12 @@ export default function UnifiedRoutineTable({
                               🔄 {ex.subOption2}
                             </button>
                           )}
-                          {!ex.subOption1 && !ex.subOption2 && <span style={{ color: '#636366', fontSize: '0.75rem' }}>Específico</span>}
+                          {!ex.subOption1 && !ex.subOption2 && <span style={{ color: 'var(--color-text-tertiary)', fontSize: '0.75rem' }}>Específico</span>}
                         </div>
                       </td>
 
                       {/* WARMUP SETS */}
-                      <td style={{ padding: '14px 16px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', color: '#8e8e93', fontSize: '0.8rem' }}>
+                      <td style={{ padding: '14px 16px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-tertiary)', fontSize: '0.8rem' }}>
                         {ex.warmupSets || '1-2'}
                       </td>
 
@@ -261,24 +261,24 @@ export default function UnifiedRoutineTable({
                       </td>
 
                       {/* RIR / RPE */}
-                      <td style={{ padding: '14px 16px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', fontWeight: 700, color: '#ff9f0a', fontSize: '0.8rem' }}>
+                      <td style={{ padding: '14px 16px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', fontWeight: 700, color: 'var(--color-accent-warning)', fontSize: '0.8rem' }}>
                         {ex.rirOrRpe}
                       </td>
 
                       {/* REST */}
-                      <td style={{ padding: '14px 16px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', color: '#98989d', fontSize: '0.78rem' }}>
+                      <td style={{ padding: '14px 16px', textAlign: 'center', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-text-secondary)', fontSize: '0.78rem' }}>
                         {ex.rest}
                       </td>
 
                       {/* NOTES */}
-                      <td style={{ padding: '14px 16px', color: '#a8b9b2', fontSize: '0.78rem', lineHeight: 1.4 }}>
+                      <td style={{ padding: '14px 16px', color: 'var(--color-text-secondary)', fontSize: '0.78rem', lineHeight: 1.4 }}>
                         {ex.notes}
                         {ex.calisthenicsSub && (
                           <div style={{ marginTop: '4px' }}>
                             <button
                               type="button"
                               onClick={() => handleOpenExercise(ex.calisthenicsSub!)}
-                              style={{ background: 'rgba(48,209,88,0.12)', border: '1px solid rgba(48,209,88,0.3)', padding: '2px 6px', borderRadius: '6px', color: '#30d158', fontSize: '0.74rem', cursor: 'pointer' }}
+                              style={{ background: 'rgba(48,209,88,0.12)', border: '1px solid rgba(48,209,88,0.3)', padding: '2px 6px', borderRadius: '6px', color: 'var(--color-state-done)', fontSize: '0.74rem', cursor: 'pointer' }}
                             >
                               ⚡ Calistenia: {ex.calisthenicsSub}
                             </button>

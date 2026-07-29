@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import type { ExerciseEntry } from '../../data/exercises';
 
 interface Props {
@@ -54,7 +54,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
           display: 'flex',
           flexDirection: 'column',
           gap: '20px',
-          color: '#effff6'
+          color: 'var(--color-text-primary)'
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -66,7 +66,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                 fontFamily: 'Azeret Mono, monospace', 
                 fontSize: '0.68rem', 
                 fontWeight: 800, 
-                color: '#10b981', 
+                color: 'var(--color-state-done)', 
                 background: 'rgba(16, 185, 129, 0.12)', 
                 padding: '4px 10px', 
                 borderRadius: '999px',
@@ -78,7 +78,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                 <span style={{ 
                   fontFamily: 'Azeret Mono, monospace', 
                   fontSize: '0.68rem', 
-                  color: '#77e7ff', 
+                  color: 'var(--color-accent-primary)', 
                   background: 'rgba(119, 231, 255, 0.1)', 
                   padding: '4px 10px', 
                   borderRadius: '999px' 
@@ -87,7 +87,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
                 </span>
               )}
             </div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: '#ffffff' }}>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 800, margin: 0, letterSpacing: '-0.02em', color: 'var(--color-text-primary)' }}>
               {exercise.name}
             </h2>
           </div>
@@ -98,7 +98,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
             style={{
               background: 'rgba(255, 255, 255, 0.06)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
-              color: '#a8b9b2',
+              color: 'var(--color-text-secondary)',
               width: '36px',
               height: '36px',
               borderRadius: '50%',
@@ -134,7 +134,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
               background: 'rgba(239, 68, 68, 0.12)',
               border: '1px solid rgba(239, 68, 68, 0.3)',
               borderRadius: '16px',
-              color: '#f87171',
+              color: 'var(--color-accent-danger)',
               textDecoration: 'none',
               display: 'flex',
               alignItems: 'center',
@@ -156,7 +156,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
             style={{
               background: activeTab === 'technique' ? 'rgba(16, 185, 129, 0.2)' : 'transparent',
               border: 'none',
-              color: activeTab === 'technique' ? '#10b981' : '#a8b9b2',
+              color: activeTab === 'technique' ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
               padding: '6px 14px',
               borderRadius: '8px',
               cursor: 'pointer',
@@ -172,7 +172,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
             style={{
               background: activeTab === 'muscles' ? 'rgba(119, 231, 255, 0.2)' : 'transparent',
               border: 'none',
-              color: activeTab === 'muscles' ? '#77e7ff' : '#a8b9b2',
+              color: activeTab === 'muscles' ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)',
               padding: '6px 14px',
               borderRadius: '8px',
               cursor: 'pointer',
@@ -189,7 +189,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
               style={{
                 background: activeTab === 'substitutions' ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
                 border: 'none',
-                color: activeTab === 'substitutions' ? '#f59e0b' : '#a8b9b2',
+                color: activeTab === 'substitutions' ? 'var(--color-accent-warning)' : 'var(--color-text-secondary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 cursor: 'pointer',
@@ -217,7 +217,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
           {activeTab === 'muscles' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <strong style={{ fontSize: '0.78rem', color: '#10b981', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
+                <strong style={{ fontSize: '0.78rem', color: 'var(--color-state-done)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                   Fuerza Primaria:
                 </strong>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
@@ -231,12 +231,12 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
 
               {exercise.muscles.stability && exercise.muscles.stability.length > 0 && (
                 <div>
-                  <strong style={{ fontSize: '0.78rem', color: '#77e7ff', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
+                  <strong style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                     Estabilidad / Sostén:
                   </strong>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                     {exercise.muscles.stability.map((m, idx) => (
-                      <span key={idx} style={{ background: 'rgba(119, 231, 255, 0.12)', color: '#77e7ff', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', border: '1px solid rgba(119,231,255,0.25)' }}>
+                      <span key={idx} style={{ background: 'rgba(119, 231, 255, 0.12)', color: 'var(--color-accent-primary)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', border: '1px solid rgba(119,231,255,0.25)' }}>
                         {m}
                       </span>
                     ))}
@@ -249,7 +249,7 @@ export default function ExerciseModal({ exercise, onClose }: Props) {
           {activeTab === 'substitutions' && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {exercise.substitutions?.map((sub, idx) => (
-                <span key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.85rem', color: '#effff6' }}>
+                <span key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.85rem', color: 'var(--color-text-primary)' }}>
                   🔄 {sub}
                 </span>
               ))}

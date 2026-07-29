@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import UnifiedRoutineTable from './UnifiedRoutineTable';
 import { minMaxWeeks, powerbuildingWeeks, gluteWeeks } from '../../data/exercises/fitappRoutineDataset';
@@ -16,7 +16,7 @@ export default function FitAppRoutinesCatalog() {
             onClick={() => setSelectedProgram('minmax')}
             style={{
               background: selectedProgram === 'minmax' ? 'var(--color-accent-primary)' : 'transparent',
-              color: selectedProgram === 'minmax' ? '#ffffff' : 'var(--color-text-tertiary)',
+              color: selectedProgram === 'minmax' ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
               border: 'none',
               padding: '10px 18px',
               borderRadius: '12px',
@@ -34,7 +34,7 @@ export default function FitAppRoutinesCatalog() {
             onClick={() => setSelectedProgram('powerbuilding')}
             style={{
               background: selectedProgram === 'powerbuilding' ? 'var(--color-accent-primary)' : 'transparent',
-              color: selectedProgram === 'powerbuilding' ? '#ffffff' : 'var(--color-text-tertiary)',
+              color: selectedProgram === 'powerbuilding' ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
               border: 'none',
               padding: '10px 18px',
               borderRadius: '12px',
@@ -52,7 +52,7 @@ export default function FitAppRoutinesCatalog() {
             onClick={() => setSelectedProgram('glute')}
             style={{
               background: selectedProgram === 'glute' ? 'var(--color-accent-primary)' : 'transparent',
-              color: selectedProgram === 'glute' ? '#ffffff' : 'var(--color-text-tertiary)',
+              color: selectedProgram === 'glute' ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
               border: 'none',
               padding: '10px 18px',
               borderRadius: '12px',

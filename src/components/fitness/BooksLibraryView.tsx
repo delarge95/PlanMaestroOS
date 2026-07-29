@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 
 const booksData = [
   {
@@ -54,10 +54,10 @@ export default function BooksLibraryView() {
   return (
     <div style={{ marginTop: '28px' }}>
       <div style={{ marginBottom: '20px' }}>
-        <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: '#10b981', fontWeight: 800 }}>
+        <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-state-done)', fontWeight: 800 }}>
           FUENTE BIBLIOGRÁFICA & TEORÍA FÍSICA
         </span>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: '#effff6' }}>
+        <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
           Libros de Referencia Subidos & Manuales Técnicos
         </h2>
       </div>
@@ -81,24 +81,24 @@ export default function BooksLibraryView() {
               <span style={{ background: `${book.color}22`, color: book.color, border: `1px solid ${book.color}44`, padding: '3px 8px', borderRadius: '4px', fontSize: '0.68rem', fontFamily: 'Azeret Mono, monospace', fontWeight: 700 }}>
                 {book.cover_tag}
               </span>
-              <span style={{ fontSize: '0.72rem', color: '#65756f', fontFamily: 'Azeret Mono, monospace' }}>PDF Incluido</span>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-text-tertiary)', fontFamily: 'Azeret Mono, monospace' }}>PDF Incluido</span>
             </div>
 
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#effff6', marginBottom: '8px', lineHeight: 1.3 }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '8px', lineHeight: 1.3 }}>
               {book.title}
             </h3>
             <div style={{ fontSize: '0.8rem', color: book.color, fontWeight: 600, marginBottom: '12px' }}>
               {book.author}
             </div>
-            <p style={{ fontSize: '0.82rem', color: '#a8b9b2', lineHeight: 1.5, margin: 0 }}>
+            <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>
               {book.summary}
             </p>
 
             <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid rgba(174,255,224,0.08)' }}>
-              <strong style={{ fontSize: '0.75rem', color: '#effff6', display: 'block', marginBottom: '6px', fontFamily: 'Azeret Mono, monospace' }}>
+              <strong style={{ fontSize: '0.75rem', color: 'var(--color-text-primary)', display: 'block', marginBottom: '6px', fontFamily: 'Azeret Mono, monospace' }}>
                 PRINCIPIOS APLICADOS EN TU PLAN:
               </strong>
-              <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '0.78rem', color: '#a8b9b2', lineHeight: 1.4 }}>
+              <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
                 {book.key_takeaways.slice(0, 2).map((take, tIdx) => (
                   <li key={tIdx} style={{ marginBottom: '4px' }}>{take}</li>
                 ))}

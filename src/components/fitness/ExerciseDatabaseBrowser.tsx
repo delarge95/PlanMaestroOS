@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { EXERCISE_CATEGORIES, filterExercises, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
 import ErrorBoundary from '../ErrorBoundary';
@@ -30,10 +30,10 @@ export default function ExerciseDatabaseBrowser() {
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#10b981', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800, letterSpacing: '0.05em' }}>
               BIBLIOTECA INTERACTIVA FITAPP-FREE
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Base de Datos Completa de Ejercicios ({filteredList.length})
             </h3>
           </div>
@@ -51,13 +51,13 @@ export default function ExerciseDatabaseBrowser() {
                 border: '1px solid rgba(255, 255, 255, 0.15)',
                 borderRadius: '12px',
                 padding: '10px 14px 10px 36px',
-                color: '#effff6',
+                color: 'var(--color-text-primary)',
                 fontSize: '0.85rem',
                 outline: 'none',
                 transition: 'all 150ms ease'
               }}
             />
-            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#65756f', fontSize: '0.85rem' }}>
+            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-tertiary)', fontSize: '0.85rem' }}>
               🔍
             </span>
           </div>
@@ -75,7 +75,7 @@ export default function ExerciseDatabaseBrowser() {
                 style={{
                   background: isSelected ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.04)',
                   border: `1px solid ${isSelected ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255, 255, 255, 0.08)'}`,
-                  color: isSelected ? '#10b981' : '#a8b9b2',
+                  color: isSelected ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
                   padding: '6px 14px',
                   borderRadius: '999px',
                   fontSize: '0.78rem',
@@ -122,20 +122,20 @@ export default function ExerciseDatabaseBrowser() {
             >
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.65rem', color: '#10b981', fontWeight: 700 }}>
+                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.65rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
                     {ex.category}
                   </span>
                   {ex.youtubeLink && (
-                    <span style={{ fontSize: '0.72rem', color: '#f87171', background: 'rgba(239, 68, 68, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-danger)', background: 'rgba(239, 68, 68, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>
                       ▶ Video
                     </span>
                   )}
                 </div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0 0 6px', color: '#effff6', lineHeight: 1.3 }}>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0 0 6px', color: 'var(--color-text-primary)', lineHeight: 1.3 }}>
                   {ex.name}
                 </h4>
                 {ex.subcategory && (
-                  <span style={{ fontSize: '0.72rem', color: '#77e7ff' }}>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)' }}>
                     {ex.subcategory}
                   </span>
                 )}
@@ -143,7 +143,7 @@ export default function ExerciseDatabaseBrowser() {
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
                 {ex.muscles.strength.slice(0, 3).map((m, mIdx) => (
-                  <span key={mIdx} style={{ fontSize: '0.68rem', color: '#a8b9b2', background: 'rgba(255,255,255,0.05)', padding: '2px 6px', borderRadius: '4px' }}>
+                  <span key={mIdx} style={{ fontSize: '0.68rem', color: 'var(--color-text-secondary)', background: 'rgba(255,255,255,0.05)', padding: '2px 6px', borderRadius: '4px' }}>
                     {m}
                   </span>
                 ))}

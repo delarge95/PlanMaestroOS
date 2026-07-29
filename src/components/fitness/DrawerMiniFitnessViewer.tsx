@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 
 interface Props {
@@ -128,14 +128,14 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
       {/* HEADER & PROGRESS BAR */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#10b981', fontWeight: 800 }}>
+          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800 }}>
             MINI-VENTANA FITNESS FITAPP
           </span>
-          <span style={{ fontSize: '0.75rem', color: '#77e7ff', fontWeight: 700 }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
             Progreso: {doneSetsCount}/{totalSets} series ({progressPct}%)
           </span>
         </div>
-        <h4 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 8px', color: '#ffffff' }}>
+        <h4 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 8px', color: 'var(--color-text-primary)' }}>
           {currentRoutine.dayTitle}
         </h4>
         <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
@@ -168,7 +168,7 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                     background: 'none',
                     border: 'none',
                     padding: 0,
-                    color: '#10b981',
+                    color: 'var(--color-state-done)',
                     fontWeight: 700,
                     fontSize: '0.88rem',
                     textAlign: 'left',
@@ -179,27 +179,27 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                   }}
                 >
                   <span>⚡ {ex.calisthenics_substitution}</span>
-                  <span style={{ fontSize: '0.7rem', color: '#f87171', background: 'rgba(239,68,68,0.15)', padding: '2px 6px', borderRadius: '4px' }}>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--color-accent-danger)', background: 'rgba(239,68,68,0.15)', padding: '2px 6px', borderRadius: '4px' }}>
                     ▶ FitApp Video
                   </span>
                 </button>
-                <span style={{ fontSize: '0.75rem', color: '#a8b9b2', display: 'block', marginTop: '2px' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>
                   Original: {ex.name}
                 </span>
               </div>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: '#77e7ff', background: 'rgba(119,231,255,0.1)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', background: 'rgba(119,231,255,0.1)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
                 RIR {ex.rir}
               </span>
             </div>
 
             {/* REASON CUE */}
-            <span style={{ fontSize: '0.78rem', color: '#65756f', lineHeight: 1.35 }}>
+            <span style={{ fontSize: '0.78rem', color: 'var(--color-text-tertiary)', lineHeight: 1.35 }}>
               💡 {ex.reason}
             </span>
 
             {/* SETS CHECKBOXES (FITAPP STYLE) */}
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px' }}>
-              <span style={{ fontSize: '0.72rem', color: '#a8b9b2', fontWeight: 600 }}>Series:</span>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontWeight: 600 }}>Series:</span>
               {Array.from({ length: ex.sets }).map((_, setIdx) => {
                 const isChecked = !!completedSets[`${exIdx}-${setIdx}`];
                 return (
@@ -209,8 +209,8 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                     onClick={() => toggleSet(exIdx, setIdx)}
                     style={{
                       background: isChecked ? 'rgba(16, 185, 129, 0.25)' : 'rgba(255, 255, 255, 0.05)',
-                      border: `1px solid ${isChecked ? '#10b981' : 'rgba(255, 255, 255, 0.15)'}`,
-                      color: isChecked ? '#10b981' : '#a8b9b2',
+                      border: `1px solid ${isChecked ? 'var(--color-state-done)' : 'rgba(255, 255, 255, 0.15)'}`,
+                      color: isChecked ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
                       padding: '4px 10px',
                       borderRadius: '8px',
                       fontSize: '0.75rem',

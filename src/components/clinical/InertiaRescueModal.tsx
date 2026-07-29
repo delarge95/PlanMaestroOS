@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Props {
@@ -58,15 +58,15 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
           display: 'flex',
           flexDirection: 'column',
           gap: '20px',
-          color: '#effff6'
+          color: 'var(--color-text-primary)'
         }}>
           {/* MODAL HEADER */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#f87171', background: 'rgba(239, 68, 68, 0.15)', padding: '4px 10px', borderRadius: '999px', fontWeight: 800 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-danger)', background: 'rgba(239, 68, 68, 0.15)', padding: '4px 10px', borderRadius: '999px', fontWeight: 800 }}>
                 PROTOCOLO DE RESCATE TDAH • PASO {step} DE 3
               </span>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '6px 0 0', color: '#ffffff' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '6px 0 0', color: 'var(--color-text-primary)' }}>
                 Desbloqueo de Inercia: {currentTaskName}
               </h3>
             </div>
@@ -76,7 +76,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
               style={{
                 background: 'rgba(255, 255, 255, 0.06)',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
-                color: '#a8b9b2',
+                color: 'var(--color-text-secondary)',
                 width: '36px',
                 height: '36px',
                 borderRadius: '50%',
@@ -94,17 +94,17 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
           {step === 1 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)', padding: '14px', borderRadius: '16px' }}>
-                <strong style={{ fontSize: '0.88rem', color: '#f87171', display: 'block', marginBottom: '4px' }}>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--color-accent-danger)', display: 'block', marginBottom: '4px' }}>
                   💡 Regla Inviolable de Inicio (10 Minutos):
                 </strong>
-                <p style={{ fontSize: '0.82rem', color: '#a8b9b2', margin: 0, lineHeight: 1.45 }}>
+                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45 }}>
                   No tienes que terminar la tarea ni hacerla bien. Solo debes estar presente 10 minutos. Si a los 10 minutos quieres parar, estás clínicamente autorizado a hacerlo sin culpa.
                 </p>
               </div>
 
               {/* TIMER DISPLAY */}
               <div style={{ textAlign: 'center', background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px', borderRadius: '20px' }}>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '3.5rem', fontWeight: 800, color: '#77e7ff', letterSpacing: '0.05em' }}>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '3.5rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.05em' }}>
                   {formatTime(timerSeconds)}
                 </span>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '14px' }}>
@@ -113,8 +113,8 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                     onClick={() => setIsTimerRunning(!isTimerRunning)}
                     style={{
                       background: isTimerRunning ? 'rgba(239, 68, 68, 0.25)' : 'rgba(16, 185, 129, 0.25)',
-                      border: `1px solid ${isTimerRunning ? '#f87171' : '#10b981'}`,
-                      color: isTimerRunning ? '#f87171' : '#10b981',
+                      border: `1px solid ${isTimerRunning ? 'var(--color-accent-danger)' : 'var(--color-state-done)'}`,
+                      color: isTimerRunning ? 'var(--color-accent-danger)' : 'var(--color-state-done)',
                       padding: '8px 20px',
                       borderRadius: '10px',
                       fontWeight: 800,
@@ -129,7 +129,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                     style={{
                       background: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid rgba(255, 255, 255, 0.1)',
-                      color: '#a8b9b2',
+                      color: 'var(--color-text-secondary)',
                       padding: '8px 14px',
                       borderRadius: '10px',
                       cursor: 'pointer',
@@ -166,10 +166,10 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
           {step === 2 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ background: 'rgba(119, 231, 255, 0.08)', border: '1px solid rgba(119, 231, 255, 0.2)', padding: '14px', borderRadius: '16px' }}>
-                <strong style={{ fontSize: '0.88rem', color: '#77e7ff', display: 'block', marginBottom: '4px' }}>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--color-accent-primary)', display: 'block', marginBottom: '4px' }}>
                   ✍️ Escribe la Peor Versión Posible:
                 </strong>
-                <p style={{ fontSize: '0.82rem', color: '#a8b9b2', margin: 0, lineHeight: 1.45 }}>
+                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45 }}>
                   Prohibido buscar elegancia. Escribe 3 frases feas, incompletas o en viñetas. Romper el lienzo en blanco es la única victoria requerida.
                 </p>
               </div>
@@ -185,7 +185,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                   border: '1px solid rgba(255, 255, 255, 0.15)',
                   borderRadius: '14px',
                   padding: '14px',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   fontSize: '0.88rem',
                   fontFamily: 'inherit',
                   resize: 'vertical',
@@ -200,7 +200,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                   style={{
                     background: 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
-                    color: '#a8b9b2',
+                    color: 'var(--color-text-secondary)',
                     padding: '10px 16px',
                     borderRadius: '10px',
                     cursor: 'pointer',
@@ -234,10 +234,10 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
           {step === 3 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ background: 'rgba(168, 85, 247, 0.08)', border: '1px solid rgba(168, 85, 247, 0.2)', padding: '14px', borderRadius: '16px' }}>
-                <strong style={{ fontSize: '0.88rem', color: '#c084fc', display: 'block', marginBottom: '4px' }}>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--color-accent-primary)', display: 'block', marginBottom: '4px' }}>
                   📌 Paso de Reentrada Obligatorio:
                 </strong>
-                <p style={{ fontSize: '0.82rem', color: '#a8b9b2', margin: 0, lineHeight: 1.45 }}>
+                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45 }}>
                   Escribe el próximo paso exacto de 2 minutos para cuando retomes esta tarea (ej. "Abrir archivo X y editar línea 14").
                 </p>
               </div>
@@ -253,7 +253,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                   border: '1px solid rgba(255, 255, 255, 0.15)',
                   borderRadius: '14px',
                   padding: '12px 14px',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   fontSize: '0.88rem',
                   outline: 'none'
                 }}
@@ -266,7 +266,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                   style={{
                     background: 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
-                    color: '#a8b9b2',
+                    color: 'var(--color-text-secondary)',
                     padding: '10px 16px',
                     borderRadius: '10px',
                     cursor: 'pointer',
@@ -283,7 +283,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
                   }}
                   style={{
                     flex: 1,
-                    background: '#10b981',
+                    background: 'var(--color-state-done)',
                     border: 'none',
                     color: '#040608',
                     padding: '12px',

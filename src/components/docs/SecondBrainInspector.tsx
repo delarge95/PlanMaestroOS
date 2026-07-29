@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Props {
@@ -102,16 +102,16 @@ export default function SecondBrainInspector({
           flexDirection: 'column',
           gap: '20px',
           boxShadow: '0 30px 70px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255,255,255,0.08) inset',
-          color: '#ffffff'
+          color: 'var(--color-text-primary)'
         }}
       >
         {/* HEADER & VIEW MODE SELECTOR (APPLE GLASS STYLE) */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px' }}>
           <div>
-            <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.72rem', color: '#0a84ff', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+            <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
               SEGUNDO CEREBRO • INTEGRACIÓN DIRECTA NOTION & OBSIDIAN
             </span>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               Inspección en la Web & Reinterpretación de Datos
             </h3>
           </div>
@@ -122,8 +122,8 @@ export default function SecondBrainInspector({
               type="button"
               onClick={() => setViewMode('reinterpreted')}
               style={{
-                background: viewMode === 'reinterpreted' ? '#0a84ff' : 'transparent',
-                color: viewMode === 'reinterpreted' ? '#ffffff' : '#98989d',
+                background: viewMode === 'reinterpreted' ? 'var(--color-accent-primary)' : 'transparent',
+                color: viewMode === 'reinterpreted' ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
                 borderRadius: '10px',
@@ -140,8 +140,8 @@ export default function SecondBrainInspector({
               type="button"
               onClick={() => setViewMode('notion_embed')}
               style={{
-                background: viewMode === 'notion_embed' ? '#ff9f0a' : 'transparent',
-                color: viewMode === 'notion_embed' ? '#000000' : '#98989d',
+                background: viewMode === 'notion_embed' ? 'var(--color-accent-warning)' : 'transparent',
+                color: viewMode === 'notion_embed' ? '#000000' : 'var(--color-text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
                 borderRadius: '10px',
@@ -158,8 +158,8 @@ export default function SecondBrainInspector({
               type="button"
               onClick={() => setViewMode('obsidian_vault')}
               style={{
-                background: viewMode === 'obsidian_vault' ? '#bf5af2' : 'transparent',
-                color: viewMode === 'obsidian_vault' ? '#ffffff' : '#98989d',
+                background: viewMode === 'obsidian_vault' ? 'var(--color-accent-primary)' : 'transparent',
+                color: viewMode === 'obsidian_vault' ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
                 borderRadius: '10px',
@@ -181,60 +181,60 @@ export default function SecondBrainInspector({
               {/* HABIT RING CARD */}
               <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#30d158', fontWeight: 700, textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-state-done)', fontWeight: 700, textTransform: 'uppercase' }}>
                     EJECUCIÓN DE HÁBITOS
                   </span>
                   <span style={{ fontSize: '1.2rem' }}>🟢</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>88%</strong>
-                  <span style={{ fontSize: '0.8rem', color: '#98989d' }}>Semana Activa</span>
+                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>88%</strong>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>Semana Activa</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
-                  <div style={{ width: '88%', height: '100%', background: '#30d158', borderRadius: '999px' }} />
+                  <div style={{ width: '88%', height: '100%', background: 'var(--color-state-done)', borderRadius: '999px' }} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#98989d' }}>Alemán (14/14 días) • Prehab Gym (6/7)</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>Alemán (14/14 días) • Prehab Gym (6/7)</span>
               </div>
 
               {/* DEEP WORK HOURS CARD */}
               <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#0a84ff', fontWeight: 700, textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
                     TRABAJO PROFUNDO SEMANAL
                   </span>
                   <span style={{ fontSize: '1.2rem' }}>🚀</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>22.5h</strong>
-                  <span style={{ fontSize: '0.8rem', color: '#98989d' }}>/ 25h meta</span>
+                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>22.5h</strong>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>/ 25h meta</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
-                  <div style={{ width: '90%', height: '100%', background: '#0a84ff', borderRadius: '999px' }} />
+                  <div style={{ width: '90%', height: '100%', background: 'var(--color-accent-primary)', borderRadius: '999px' }} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#98989d' }}>Bloque A Tesis + Bloque B TwinSight MVP</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>Bloque A Tesis + Bloque B TwinSight MVP</span>
               </div>
 
               {/* FITNESS VOLUME CARD */}
               <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#ff9f0a', fontWeight: 700, textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-warning)', fontWeight: 700, textTransform: 'uppercase' }}>
                     VOLUMEN ACUMULADO FITAPP
                   </span>
                   <span style={{ fontSize: '1.2rem' }}>💪</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>4,850 kg</strong>
-                  <span style={{ fontSize: '0.8rem', color: '#98989d' }}>Esta semana</span>
+                  <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>4,850 kg</strong>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>Esta semana</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
-                  <div style={{ width: '75%', height: '100%', background: '#ff9f0a', borderRadius: '999px' }} />
+                  <div style={{ width: '75%', height: '100%', background: 'var(--color-accent-warning)', borderRadius: '999px' }} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#98989d' }}>Nippard Min-Max + Calistenia Anillas</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>Nippard Min-Max + Calistenia Anillas</span>
               </div>
             </div>
 
-            <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px', fontSize: '0.82rem', color: '#98989d', lineHeight: 1.5 }}>
-              💡 <strong style={{ color: '#ffffff' }}>Nota de Arquitectura del Segundo Cerebro:</strong> Los datos superiores reinterpretados provienen de la agregación activa de tu base de datos de Notion y notas de Obsidian. Permiten evaluar la efectividad sin necesidad de entrar a la interfaz nativa de Notion si buscas reducir fricción.
+            <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px', fontSize: '0.82rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+              💡 <strong style={{ color: 'var(--color-text-primary)' }}>Nota de Arquitectura del Segundo Cerebro:</strong> Los datos superiores reinterpretados provienen de la agregación activa de tu base de datos de Notion y notas de Obsidian. Permiten evaluar la efectividad sin necesidad de entrar a la interfaz nativa de Notion si buscas reducir fricción.
             </div>
           </div>
         )}
@@ -254,7 +254,7 @@ export default function SecondBrainInspector({
                   border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: '10px',
                   padding: '10px 14px',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   fontSize: '0.85rem'
                 }}
               />
@@ -262,7 +262,7 @@ export default function SecondBrainInspector({
                 type="button"
                 onClick={handleSaveNotionUrl}
                 style={{
-                  background: '#ff9f0a',
+                  background: 'var(--color-accent-warning)',
                   border: 'none',
                   color: '#000000',
                   fontWeight: 800,
@@ -280,14 +280,14 @@ export default function SecondBrainInspector({
             <div style={{ background: '#000000', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '18px', overflow: 'hidden', height: '500px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ background: '#1c1c1e', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                 <div style={{ display: 'flex', gap: '6px' }}>
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff453a' }} />
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff9f0a' }} />
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#30d158' }} />
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-accent-danger)' }} />
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-accent-warning)' }} />
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-state-done)' }} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#98989d', fontFamily: 'SF Mono, monospace' }}>
+                <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontFamily: 'SF Mono, monospace' }}>
                   Notion In-App Live Inspector • {notionEmbedUrl}
                 </span>
-                <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: '#0a84ff', textDecoration: 'none', fontWeight: 600 }}>
+                <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
                   ↗ Abrir Web
                 </a>
               </div>
@@ -306,7 +306,7 @@ export default function SecondBrainInspector({
           <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '16px', minHeight: '420px' }}>
             {/* FILE TREE */}
             <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: '#bf5af2', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
                 VAULT: {vaultName.toUpperCase()}
               </span>
 
@@ -320,7 +320,7 @@ export default function SecondBrainInspector({
                       textAlign: 'left',
                       background: selectedNoteIndex === idx ? 'rgba(191, 90, 242, 0.2)' : 'rgba(255,255,255,0.04)',
                       border: `1px solid ${selectedNoteIndex === idx ? 'rgba(191, 90, 242, 0.4)' : 'transparent'}`,
-                      color: selectedNoteIndex === idx ? '#bf5af2' : '#98989d',
+                      color: selectedNoteIndex === idx ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)',
                       padding: '8px 12px',
                       borderRadius: '10px',
                       fontSize: '0.78rem',
@@ -340,7 +340,7 @@ export default function SecondBrainInspector({
                   style={{
                     background: 'rgba(191, 90, 242, 0.15)',
                     border: '1px solid rgba(191, 90, 242, 0.35)',
-                    color: '#bf5af2',
+                    color: 'var(--color-accent-primary)',
                     padding: '8px 12px',
                     borderRadius: '10px',
                     fontSize: '0.75rem',
@@ -358,10 +358,10 @@ export default function SecondBrainInspector({
             {/* NOTE CONTENT PREVIEW */}
             <div style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h4 style={{ fontSize: '1.1rem', margin: 0, color: '#ffffff', fontWeight: 800 }}>{selectedNote.filename}</h4>
+                <h4 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--color-text-primary)', fontWeight: 800 }}>{selectedNote.filename}</h4>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   {selectedNote.tags.map((t, idx) => (
-                    <span key={idx} style={{ fontSize: '0.68rem', background: 'rgba(191,90,242,0.15)', color: '#bf5af2', padding: '2px 8px', borderRadius: '4px', fontFamily: 'SF Mono, monospace' }}>
+                    <span key={idx} style={{ fontSize: '0.68rem', background: 'rgba(191,90,242,0.15)', color: 'var(--color-accent-primary)', padding: '2px 8px', borderRadius: '4px', fontFamily: 'SF Mono, monospace' }}>
                       {t}
                     </span>
                   ))}

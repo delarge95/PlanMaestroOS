@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
@@ -315,16 +315,16 @@ export default function FitAppWorkoutLogger() {
           flexDirection: 'column',
           gap: '20px',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255,255,255,0.08) inset',
-          color: '#ffffff'
+          color: 'var(--color-text-primary)'
         }}
       >
         {/* TOP PROGRAM IDENTIFIER BANNER */}
         <div style={{ background: 'rgba(48, 209, 88, 0.12)', border: '1px solid rgba(48, 209, 88, 0.3)', borderRadius: '16px', padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           <div>
-            <span style={{ fontSize: '0.68rem', fontFamily: '-apple-system, SF Pro Text, sans-serif', color: '#30d158', fontWeight: 800, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.68rem', fontFamily: '-apple-system, SF Pro Text, sans-serif', color: 'var(--color-state-done)', fontWeight: 800, textTransform: 'uppercase' }}>
               PROGRAMA ACTIVO DE ENTRENAMIENTO & REHABILITACIÓN
             </span>
-            <strong style={{ display: 'block', fontSize: '1rem', color: '#ffffff' }}>
+            <strong style={{ display: 'block', fontSize: '1rem', color: 'var(--color-text-primary)' }}>
               {activeRoutine.program}
             </strong>
           </div>
@@ -333,28 +333,28 @@ export default function FitAppWorkoutLogger() {
             <button
               type="button"
               onClick={() => setActiveTab('logger')}
-              style={{ background: activeTab === 'logger' ? '#30d158' : 'transparent', color: activeTab === 'logger' ? '#000' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: activeTab === 'logger' ? 'var(--color-state-done)' : 'transparent', color: activeTab === 'logger' ? '#000' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
             >
               ⚡ Tracker en Vivo
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('history')}
-              style={{ background: activeTab === 'history' ? '#0a84ff' : 'transparent', color: activeTab === 'history' ? '#fff' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: activeTab === 'history' ? 'var(--color-accent-primary)' : 'transparent', color: activeTab === 'history' ? '#fff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
             >
               📜 Historial ({history.length})
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('calendar')}
-              style={{ background: activeTab === 'calendar' ? '#bf5af2' : 'transparent', color: activeTab === 'calendar' ? '#fff' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: activeTab === 'calendar' ? 'var(--color-accent-primary)' : 'transparent', color: activeTab === 'calendar' ? '#fff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
             >
               📅 Calendario Mensual
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('stats')}
-              style={{ background: activeTab === 'stats' ? '#ff9f0a' : 'transparent', color: activeTab === 'stats' ? '#000' : '#98989d', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: activeTab === 'stats' ? 'var(--color-accent-warning)' : 'transparent', color: activeTab === 'stats' ? '#000' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
             >
               📊 Estadísticas
             </button>
@@ -367,7 +367,7 @@ export default function FitAppWorkoutLogger() {
             {/* CONTROLS */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: 'var(--color-text-primary)' }}>
                   {activeRoutine.title}
                 </h3>
               </div>
@@ -376,14 +376,14 @@ export default function FitAppWorkoutLogger() {
                 {isSessionActive ? (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div style={{ background: 'rgba(48, 209, 88, 0.15)', border: '1px solid rgba(48, 209, 88, 0.3)', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
-                      <span style={{ fontSize: '0.68rem', color: '#30d158', display: 'block', fontWeight: 700 }}>TIEMPO TRANSCURRIDO</span>
-                      <strong style={{ fontSize: '1.1rem', fontFamily: 'SF Mono, monospace', color: '#ffffff' }}>{formatTime(elapsedSeconds)}</strong>
+                      <span style={{ fontSize: '0.68rem', color: 'var(--color-state-done)', display: 'block', fontWeight: 700 }}>TIEMPO TRANSCURRIDO</span>
+                      <strong style={{ fontSize: '1.1rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-text-primary)' }}>{formatTime(elapsedSeconds)}</strong>
                     </div>
                     <button
                       type="button"
                       onClick={handleFinishWorkout}
                       style={{
-                        background: '#30d158',
+                        background: 'var(--color-state-done)',
                         border: 'none',
                         color: '#000000',
                         fontWeight: 800,
@@ -401,7 +401,7 @@ export default function FitAppWorkoutLogger() {
                     type="button"
                     onClick={handleStartWorkout}
                     style={{
-                      background: '#30d158',
+                      background: 'var(--color-state-done)',
                       border: 'none',
                       color: '#000000',
                       fontWeight: 800,
@@ -430,7 +430,7 @@ export default function FitAppWorkoutLogger() {
                     style={{
                       background: isSelected ? 'rgba(48, 209, 88, 0.2)' : 'rgba(255, 255, 255, 0.04)',
                       border: `1px solid ${isSelected ? 'rgba(48, 209, 88, 0.5)' : 'rgba(255, 255, 255, 0.1)'}`,
-                      color: isSelected ? '#30d158' : '#98989d',
+                      color: isSelected ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
                       padding: '8px 16px',
                       borderRadius: '12px',
                       fontSize: '0.82rem',
@@ -447,14 +447,14 @@ export default function FitAppWorkoutLogger() {
 
             {/* REST TIMER BANNER */}
             {timerSeconds !== null && (
-              <div style={{ background: timerSeconds === 0 ? 'rgba(48, 209, 88, 0.25)' : 'rgba(10, 14, 20, 0.9)', border: `1px solid ${timerSeconds === 0 ? '#30d158' : 'rgba(100, 210, 255, 0.3)'}`, borderRadius: '16px', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ background: timerSeconds === 0 ? 'rgba(48, 209, 88, 0.25)' : 'rgba(10, 14, 20, 0.9)', border: `1px solid ${timerSeconds === 0 ? 'var(--color-state-done)' : 'rgba(100, 210, 255, 0.3)'}`, borderRadius: '16px', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <span style={{ fontSize: '1.6rem' }}>⏱️</span>
                   <div>
-                    <span style={{ fontSize: '0.7rem', fontFamily: 'SF Mono, monospace', color: timerSeconds === 0 ? '#30d158' : '#64d2ff', fontWeight: 800 }}>
+                    <span style={{ fontSize: '0.7rem', fontFamily: 'SF Mono, monospace', color: timerSeconds === 0 ? 'var(--color-state-done)' : 'var(--color-accent-primary)', fontWeight: 800 }}>
                       {timerSeconds === 0 ? '¡DESCANSO COMPLETADO!' : 'TEMPORIZADOR DE DESCANSO EN CURSO'}
                     </span>
-                    <h4 style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>
+                    <h4 style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
                       {timerSeconds === 0 ? '¡Siguiente Serie Lista! A Entrenar 💪' : `Tiempo restante: ${formatTime(timerSeconds)}`}
                     </h4>
                   </div>
@@ -466,12 +466,12 @@ export default function FitAppWorkoutLogger() {
                       key={s}
                       type="button"
                       onClick={() => startRestTimer(s)}
-                      style={{ background: initialTimerSec === s ? 'rgba(48, 209, 88, 0.3)' : 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#ffffff', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', cursor: 'pointer' }}
+                      style={{ background: initialTimerSec === s ? 'rgba(48, 209, 88, 0.3)' : 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--color-text-primary)', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', cursor: 'pointer' }}
                     >
                       {s}s
                     </button>
                   ))}
-                  <button type="button" onClick={() => { setTimerActive(false); setTimerSeconds(null); }} style={{ background: 'rgba(255,69,58,0.2)', border: '1px solid rgba(255,69,58,0.4)', color: '#ff453a', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', cursor: 'pointer' }}>
+                  <button type="button" onClick={() => { setTimerActive(false); setTimerSeconds(null); }} style={{ background: 'rgba(255,69,58,0.2)', border: '1px solid rgba(255,69,58,0.4)', color: 'var(--color-accent-danger)', padding: '4px 10px', borderRadius: '8px', fontSize: '0.75rem', cursor: 'pointer' }}>
                     ✕ Cerrar
                   </button>
                 </div>
@@ -493,20 +493,20 @@ export default function FitAppWorkoutLogger() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: '#30d158', fontWeight: 800 }}>
+                          <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 800 }}>
                             EJERCICIO #{exIdx + 1}
                           </span>
-                          <span style={{ fontSize: '0.72rem', color: '#98989d', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '6px' }}>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '6px' }}>
                             {exItem.target}
                           </span>
                         </div>
-                        <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '4px 0 0', color: '#ffffff' }}>
+                        <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
                           {exItem.name}
                         </h4>
                       </div>
 
                       {exData && (
-                        <button type="button" onClick={() => setModalExercise(exData)} style={{ background: 'rgba(48, 209, 88, 0.12)', border: '1px solid rgba(48, 209, 88, 0.3)', color: '#30d158', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
+                        <button type="button" onClick={() => setModalExercise(exData)} style={{ background: 'rgba(48, 209, 88, 0.12)', border: '1px solid rgba(48, 209, 88, 0.3)', color: 'var(--color-state-done)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
                           ▶ Ver Guía FitApp & Video
                         </button>
                       )}
@@ -515,7 +515,7 @@ export default function FitAppWorkoutLogger() {
                     <div style={{ overflowX: 'auto' }}>
                       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
                         <thead>
-                          <tr style={{ color: '#636366', borderBottom: '1px solid rgba(255,255,255,0.08)', textTransform: 'uppercase', fontFamily: 'SF Mono, monospace', fontSize: '0.65rem' }}>
+                          <tr style={{ color: 'var(--color-text-tertiary)', borderBottom: '1px solid rgba(255,255,255,0.08)', textTransform: 'uppercase', fontFamily: 'SF Mono, monospace', fontSize: '0.65rem' }}>
                             <th style={{ padding: '6px', textAlign: 'center', width: '50px' }}>Serie</th>
                             <th style={{ padding: '6px', textAlign: 'center' }}>Peso (kg)</th>
                             <th style={{ padding: '6px', textAlign: 'center' }}>Reps</th>
@@ -526,18 +526,18 @@ export default function FitAppWorkoutLogger() {
                         <tbody>
                           {currentSets.map((s, sIdx) => (
                             <tr key={sIdx} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: s.completed ? 'rgba(48, 209, 88, 0.08)' : 'transparent' }}>
-                              <td style={{ padding: '8px', textAlign: 'center', fontWeight: 700, color: s.completed ? '#30d158' : '#98989d' }}>#{s.setNum}</td>
+                              <td style={{ padding: '8px', textAlign: 'center', fontWeight: 700, color: s.completed ? 'var(--color-state-done)' : 'var(--color-text-secondary)' }}>#{s.setNum}</td>
                               <td style={{ padding: '8px', textAlign: 'center' }}>
-                                <input type="number" step="0.5" value={s.weight || ''} placeholder="0" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'weight', parseFloat(e.target.value) || 0)} style={{ width: '70px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: '#ffffff', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
+                                <input type="number" step="0.5" value={s.weight || ''} placeholder="0" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'weight', parseFloat(e.target.value) || 0)} style={{ width: '70px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: 'var(--color-text-primary)', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
                               </td>
                               <td style={{ padding: '8px', textAlign: 'center' }}>
-                                <input type="number" value={s.reps || ''} placeholder="10" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'reps', parseInt(e.target.value) || 0)} style={{ width: '60px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: '#ffffff', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
+                                <input type="number" value={s.reps || ''} placeholder="10" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'reps', parseInt(e.target.value) || 0)} style={{ width: '60px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: 'var(--color-text-primary)', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
                               </td>
                               <td style={{ padding: '8px', textAlign: 'center' }}>
-                                <input type="number" step="0.5" max="10" min="6" value={s.rpe || ''} placeholder="8" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'rpe', parseFloat(e.target.value) || 8)} style={{ width: '50px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: '#ffffff', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
+                                <input type="number" step="0.5" max="10" min="6" value={s.rpe || ''} placeholder="8" onChange={(e) => handleUpdateSetField(exItem.name, sIdx, 'rpe', parseFloat(e.target.value) || 8)} style={{ width: '50px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '4px 6px', color: 'var(--color-text-primary)', textAlign: 'center', fontSize: '0.82rem', outline: 'none' }} />
                               </td>
                               <td style={{ padding: '8px', textAlign: 'center' }}>
-                                <button type="button" onClick={() => handleToggleSet(exItem.name, sIdx, exItem.restSec)} style={{ background: s.completed ? '#30d158' : 'rgba(255,255,255,0.06)', border: `1px solid ${s.completed ? '#30d158' : 'rgba(255,255,255,0.15)'}`, color: s.completed ? '#000000' : '#98989d', width: '28px', height: '28px', borderRadius: '6px', fontWeight: 800, cursor: 'pointer' }}>
+                                <button type="button" onClick={() => handleToggleSet(exItem.name, sIdx, exItem.restSec)} style={{ background: s.completed ? 'var(--color-state-done)' : 'rgba(255,255,255,0.06)', border: `1px solid ${s.completed ? 'var(--color-state-done)' : 'rgba(255,255,255,0.15)'}`, color: s.completed ? '#000000' : 'var(--color-text-secondary)', width: '28px', height: '28px', borderRadius: '6px', fontWeight: 800, cursor: 'pointer' }}>
                                   {s.completed ? '✓' : ''}
                                 </button>
                               </td>
@@ -548,10 +548,10 @@ export default function FitAppWorkoutLogger() {
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <button type="button" onClick={() => handleAddSet(exItem.name)} style={{ background: 'transparent', border: 'none', color: '#30d158', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
+                      <button type="button" onClick={() => handleAddSet(exItem.name)} style={{ background: 'transparent', border: 'none', color: 'var(--color-state-done)', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
                         + Agregar otra serie
                       </button>
-                      <button type="button" onClick={() => startRestTimer(exItem.restSec)} style={{ background: 'rgba(100, 210, 255, 0.1)', border: '1px solid rgba(100, 210, 255, 0.25)', color: '#64d2ff', fontSize: '0.72rem', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
+                      <button type="button" onClick={() => startRestTimer(exItem.restSec)} style={{ background: 'rgba(100, 210, 255, 0.1)', border: '1px solid rgba(100, 210, 255, 0.25)', color: 'var(--color-accent-primary)', fontSize: '0.72rem', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
                         ⏱️ Iniciar Descanso ({exItem.restSec}s)
                       </button>
                     </div>
@@ -565,27 +565,27 @@ export default function FitAppWorkoutLogger() {
         {/* TAB 2: HISTORIAL DE SESIONES */}
         {activeTab === 'history' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: 'var(--color-text-primary)' }}>
               📜 Historial Completo de Entrenamientos Guardados ({history.length})
             </h4>
 
             {history.length === 0 ? (
-              <p style={{ fontSize: '0.85rem', color: '#98989d' }}>Aún no has completado ninguna sesión registrada.</p>
+              <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>Aún no has completado ninguna sesión registrada.</p>
             ) : (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '14px' }}>
                 {history.map((h) => (
                   <div key={h.id} style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.72rem', color: '#30d158', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
                         {h.date} • {h.durationMinutes} min
                       </span>
-                      <button type="button" onClick={() => handleDeleteHistoryItem(h.id)} style={{ background: 'transparent', border: 'none', color: '#ff453a', fontSize: '0.75rem', cursor: 'pointer', fontWeight: 700 }}>
+                      <button type="button" onClick={() => handleDeleteHistoryItem(h.id)} style={{ background: 'transparent', border: 'none', color: 'var(--color-accent-danger)', fontSize: '0.75rem', cursor: 'pointer', fontWeight: 700 }}>
                         ✕ Quitar
                       </button>
                     </div>
 
-                    <strong style={{ fontSize: '0.92rem', color: '#ffffff' }}>{h.routineTitle}</strong>
-                    <span style={{ fontSize: '0.78rem', color: '#98989d' }}>Volumen: <strong>{h.totalVolumeKg} kg</strong> • {h.exercises.length} ejercicios realizados</span>
+                    <strong style={{ fontSize: '0.92rem', color: 'var(--color-text-primary)' }}>{h.routineTitle}</strong>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>Volumen: <strong>{h.totalVolumeKg} kg</strong> • {h.exercises.length} ejercicios realizados</span>
                   </div>
                 ))}
               </div>
@@ -597,17 +597,17 @@ export default function FitAppWorkoutLogger() {
         {activeTab === 'calendar' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: 'var(--color-text-primary)' }}>
                 📅 Calendario Mensual de Adherencia & Entrenamientos
               </h4>
-              <span style={{ fontSize: '0.78rem', color: '#bf5af2', fontFamily: 'SF Mono, monospace' }}>
+              <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontFamily: 'SF Mono, monospace' }}>
                 Julio 2026 • {history.length} Días Completados
               </span>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '8px', background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.08)' }}>
               {['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].map((dayName, dIdx) => (
-                <div key={dIdx} style={{ textAlign: 'center', fontSize: '0.72rem', color: '#98989d', fontWeight: 700, fontFamily: 'SF Mono, monospace', paddingBottom: '6px' }}>
+                <div key={dIdx} style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontWeight: 700, fontFamily: 'SF Mono, monospace', paddingBottom: '6px' }}>
                   {dayName}
                 </div>
               ))}
@@ -618,7 +618,7 @@ export default function FitAppWorkoutLogger() {
                     key={dayNum}
                     style={{
                       background: dayNum === 26 ? 'rgba(48, 209, 88, 0.25)' : dayNum < 26 ? 'rgba(10, 132, 255, 0.12)' : 'rgba(255,255,255,0.04)',
-                      border: `1px solid ${dayNum === 26 ? '#30d158' : 'rgba(255,255,255,0.08)'}`,
+                      border: `1px solid ${dayNum === 26 ? 'var(--color-state-done)' : 'rgba(255,255,255,0.08)'}`,
                       borderRadius: '10px',
                       padding: '10px 6px',
                       display: 'flex',
@@ -628,11 +628,11 @@ export default function FitAppWorkoutLogger() {
                       minHeight: '60px'
                     }}
                   >
-                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: dayNum === 26 ? '#30d158' : '#ffffff' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: dayNum === 26 ? 'var(--color-state-done)' : 'var(--color-text-primary)' }}>
                       {dayNum}
                     </span>
                     {dayNum <= 26 && (
-                      <span style={{ fontSize: '0.65rem', color: '#30d158', fontWeight: 700 }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
                         ✓ {dayNum % 2 === 1 ? 'AM+PM' : 'AM'}
                       </span>
                     )}
@@ -647,21 +647,21 @@ export default function FitAppWorkoutLogger() {
         {activeTab === 'stats' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
             <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <span style={{ fontSize: '0.72rem', color: '#30d158', fontWeight: 700, textTransform: 'uppercase' }}>VOLUMEN TOTAL ACUMULADO</span>
-              <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>{totalVolumeAllTime.toLocaleString()} kg</strong>
-              <span style={{ fontSize: '0.75rem', color: '#98989d' }}>Suma de peso × repeticiones registradas</span>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 700, textTransform: 'uppercase' }}>VOLUMEN TOTAL ACUMULADO</span>
+              <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>{totalVolumeAllTime.toLocaleString()} kg</strong>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Suma de peso × repeticiones registradas</span>
             </div>
 
             <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <span style={{ fontSize: '0.72rem', color: '#0a84ff', fontWeight: 700, textTransform: 'uppercase' }}>SESIONES COMPLETADAS</span>
-              <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>{totalWorkoutsCount}</strong>
-              <span style={{ fontSize: '0.75rem', color: '#98989d' }}>Entrenamientos registrados en FitApp</span>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>SESIONES COMPLETADAS</span>
+              <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>{totalWorkoutsCount}</strong>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Entrenamientos registrados en FitApp</span>
             </div>
 
             <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <span style={{ fontSize: '0.72rem', color: '#ff9f0a', fontWeight: 700, textTransform: 'uppercase' }}>TIEMPO EN GIMNASIO</span>
-              <strong style={{ fontSize: '2rem', fontWeight: 800, color: '#ffffff' }}>{totalMinutesAllTime} min</strong>
-              <span style={{ fontSize: '0.75rem', color: '#98989d' }}>Horas de estímulo muscular efectivo</span>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-warning)', fontWeight: 700, textTransform: 'uppercase' }}>TIEMPO EN GIMNASIO</span>
+              <strong style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>{totalMinutesAllTime} min</strong>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Horas de estímulo muscular efectivo</span>
             </div>
           </div>
         )}

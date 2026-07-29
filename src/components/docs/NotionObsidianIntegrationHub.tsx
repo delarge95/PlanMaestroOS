@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Props {
@@ -145,7 +145,7 @@ ${documentContent}
           flexDirection: 'column',
           gap: '20px',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-          color: '#effff6'
+          color: 'var(--color-text-primary)'
         }}
       >
         {/* NOTIFICATION TOAST */}
@@ -156,7 +156,7 @@ ${documentContent}
               bottom: '24px',
               right: '24px',
               background: 'linear-gradient(135deg, #a855f7, #6366f1)',
-              color: '#ffffff',
+              color: 'var(--color-text-primary)',
               padding: '12px 20px',
               borderRadius: '12px',
               fontWeight: 800,
@@ -172,10 +172,10 @@ ${documentContent}
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#c084fc', fontWeight: 800, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 800, letterSpacing: '0.05em' }}>
               CONECTOR EN VIVO DE CONOCIMIENTO & NOTAS
             </span>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Integración Nativa con Obsidian & Notion Workspace
             </h3>
           </div>
@@ -188,7 +188,7 @@ ${documentContent}
               style={{
                 background: activeTab === 'obsidian' ? 'rgba(168, 85, 247, 0.25)' : 'transparent',
                 border: activeTab === 'obsidian' ? '1px solid rgba(168, 85, 247, 0.5)' : 'none',
-                color: activeTab === 'obsidian' ? '#c084fc' : '#a8b9b2',
+                color: activeTab === 'obsidian' ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -205,7 +205,7 @@ ${documentContent}
               style={{
                 background: activeTab === 'notion' ? 'rgba(245, 158, 11, 0.25)' : 'transparent',
                 border: activeTab === 'notion' ? '1px solid rgba(245, 158, 11, 0.5)' : 'none',
-                color: activeTab === 'notion' ? '#f59e0b' : '#a8b9b2',
+                color: activeTab === 'notion' ? 'var(--color-accent-warning)' : 'var(--color-text-secondary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -225,8 +225,8 @@ ${documentContent}
             <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(168, 85, 247, 0.2)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <strong style={{ fontSize: '0.9rem', color: '#ffffff' }}>Vault Local de Obsidian:</strong>
-                  <p style={{ fontSize: '0.78rem', color: '#a8b9b2', margin: '2px 0 0' }}>
+                  <strong style={{ fontSize: '0.9rem', color: 'var(--color-text-primary)' }}>Vault Local de Obsidian:</strong>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: '2px 0 0' }}>
                     Configura el nombre de tu Vault para activar la apertura automática mediante el protocolo `obsidian://`.
                   </p>
                 </div>
@@ -242,7 +242,7 @@ ${documentContent}
                       border: '1px solid rgba(255,255,255,0.15)',
                       borderRadius: '8px',
                       padding: '6px 12px',
-                      color: '#ffffff',
+                      color: 'var(--color-text-primary)',
                       fontSize: '0.82rem'
                     }}
                   />
@@ -252,7 +252,7 @@ ${documentContent}
                     style={{
                       background: 'rgba(168, 85, 247, 0.2)',
                       border: '1px solid rgba(168, 85, 247, 0.4)',
-                      color: '#c084fc',
+                      color: 'var(--color-accent-primary)',
                       padding: '6px 12px',
                       borderRadius: '8px',
                       fontSize: '0.78rem',
@@ -291,7 +291,7 @@ ${documentContent}
                   style={{
                     background: 'rgba(255,255,255,0.04)',
                     border: '1px solid rgba(255,255,255,0.1)',
-                    color: '#a8b9b2',
+                    color: 'var(--color-text-secondary)',
                     padding: '8px 14px',
                     borderRadius: '10px',
                     fontSize: '0.8rem',
@@ -310,7 +310,7 @@ ${documentContent}
                   style={{
                     background: 'rgba(255,255,255,0.04)',
                     border: '1px solid rgba(255,255,255,0.1)',
-                    color: '#a8b9b2',
+                    color: 'var(--color-text-secondary)',
                     padding: '8px 14px',
                     borderRadius: '10px',
                     fontSize: '0.8rem',
@@ -329,7 +329,7 @@ ${documentContent}
             {/* EXPORTER WITH YAML FRONTMATTER */}
             <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <strong style={{ fontSize: '0.88rem', color: '#ffffff' }}>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--color-text-primary)' }}>
                   Exportador a Markdown con YAML Frontmatter:
                 </strong>
                 <div style={{ display: 'flex', gap: '8px' }}>
@@ -339,7 +339,7 @@ ${documentContent}
                     style={{
                       background: 'rgba(255,255,255,0.06)',
                       border: '1px solid rgba(255,255,255,0.15)',
-                      color: '#effff6',
+                      color: 'var(--color-text-primary)',
                       padding: '6px 12px',
                       borderRadius: '8px',
                       fontSize: '0.78rem',
@@ -354,7 +354,7 @@ ${documentContent}
                     style={{
                       background: 'linear-gradient(135deg, #a855f7, #7c3aed)',
                       border: 'none',
-                      color: '#ffffff',
+                      color: 'var(--color-text-primary)',
                       padding: '6px 14px',
                       borderRadius: '8px',
                       fontSize: '0.78rem',
@@ -368,7 +368,7 @@ ${documentContent}
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <label style={{ fontSize: '0.75rem', color: '#a8b9b2', fontFamily: 'Azeret Mono, monospace' }}>
+                <label style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', fontFamily: 'Azeret Mono, monospace' }}>
                   Etiquetas YAML:
                 </label>
                 <input
@@ -380,7 +380,7 @@ ${documentContent}
                     border: '1px solid rgba(255,255,255,0.12)',
                     borderRadius: '6px',
                     padding: '4px 10px',
-                    color: '#c084fc',
+                    color: 'var(--color-accent-primary)',
                     fontSize: '0.78rem',
                     width: '100%',
                     maxWidth: '300px'
@@ -397,7 +397,7 @@ ${documentContent}
                   padding: '12px',
                   fontSize: '0.75rem',
                   fontFamily: 'Azeret Mono, monospace',
-                  color: '#a8b9b2',
+                  color: 'var(--color-text-secondary)',
                   maxHeight: '140px',
                   overflowY: 'auto',
                   margin: 0,
@@ -416,8 +416,8 @@ ${documentContent}
             <div style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(245, 158, 11, 0.25)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <strong style={{ fontSize: '0.9rem', color: '#ffffff' }}>Credenciales & Integración Notion API:</strong>
-                  <p style={{ fontSize: '0.78rem', color: '#a8b9b2', margin: '2px 0 0' }}>
+                  <strong style={{ fontSize: '0.9rem', color: 'var(--color-text-primary)' }}>Credenciales & Integración Notion API:</strong>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', margin: '2px 0 0' }}>
                     Conecta tus bases de datos de Notion para sincronizar tareas del Plan Maestro, aplicaciones laborales y entrenamientos.
                   </p>
                 </div>
@@ -428,7 +428,7 @@ ${documentContent}
                     padding: '4px 10px',
                     borderRadius: '999px',
                     background: notionToken ? 'rgba(16,185,129,0.2)' : 'rgba(245,158,11,0.2)',
-                    color: notionToken ? '#10b981' : '#f59e0b',
+                    color: notionToken ? 'var(--color-state-done)' : 'var(--color-accent-warning)',
                     border: `1px solid ${notionToken ? 'rgba(16,185,129,0.4)' : 'rgba(245,158,11,0.4)'}`
                   }}
                 >
@@ -438,7 +438,7 @@ ${documentContent}
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
                 <div>
-                  <label style={{ fontSize: '0.72rem', color: '#f59e0b', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.72rem', color: 'var(--color-accent-warning)', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
                     Notion Internal Integration Token:
                   </label>
                   <input
@@ -451,7 +451,7 @@ ${documentContent}
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.72rem', color: '#77e7ff', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
                     Master Plan Database ID:
                   </label>
                   <input
@@ -477,7 +477,7 @@ ${documentContent}
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.72rem', color: '#10b981', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
                     Workout Logs Database ID:
                   </label>
                   <input
@@ -498,7 +498,7 @@ ${documentContent}
                   style={{
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid rgba(255,255,255,0.15)',
-                    color: '#ffffff',
+                    color: 'var(--color-text-primary)',
                     padding: '8px 14px',
                     borderRadius: '10px',
                     fontSize: '0.8rem',

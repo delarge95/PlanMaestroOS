@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InteractiveDocViewer from './InteractiveDocViewer';
 import SecondBrainInspector from './SecondBrainInspector';
@@ -42,8 +42,8 @@ export default function LibraryTabWorkspace() {
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  background: isSelected ? '#ffffff' : 'transparent',
-                  color: isSelected ? '#000000' : '#8e8e93',
+                  background: isSelected ? 'var(--color-text-primary)' : 'transparent',
+                  color: isSelected ? '#000000' : 'var(--color-text-tertiary)',
                   border: 'none',
                   padding: '8px 18px',
                   borderRadius: '12px',

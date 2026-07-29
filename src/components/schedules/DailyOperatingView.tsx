@@ -72,6 +72,33 @@ export default function DailyOperatingView() {
     }
   };
 
+  const getStatusBg = (status: string) => {
+    switch (status) {
+      case 'completed': return 'var(--color-state-done-soft)';
+      case 'in_progress': return 'var(--color-accent-primary-glow)';
+      case 'skipped': return 'rgba(255,255,255,0.03)';
+      default: return 'var(--color-surface-base)';
+    }
+  };
+
+  const getStatusBtnBg = (status: string) => {
+    switch (status) {
+      case 'completed': return 'var(--color-state-done-soft)';
+      case 'in_progress': return 'var(--color-accent-primary-soft)';
+      case 'skipped': return 'rgba(255,255,255,0.1)';
+      default: return 'var(--color-border-subtle)';
+    }
+  };
+
+  const getStatusBtnColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'var(--color-state-done)';
+      case 'in_progress': return 'var(--color-accent-primary)';
+      case 'skipped': return 'var(--color-text-secondary)';
+      default: return 'var(--color-text-tertiary)';
+    }
+  };
+
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -81,7 +108,7 @@ export default function DailyOperatingView() {
             <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 800 }}>
               CENTRO OPERATIVO DIARIO
             </span>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Línea Temporal de Hoy • 05:30 – 21:30
             </h2>
           </div>
@@ -91,12 +118,12 @@ export default function DailyOperatingView() {
               type="button"
               onClick={() => setIsRescueModalOpen(true)}
               style={{
-                background: 'rgba(255, 69, 58, 0.15)',
-                border: '1px solid rgba(255, 69, 58, 0.4)',
-                color: '#ff453a',
+                background: 'var(--color-accent-danger-soft)',
+                border: '1px solid var(--color-accent-danger-glow)',
+                color: 'var(--color-accent-danger)',
                 padding: '6px 14px',
                 borderRadius: '10px',
-                fontWeight: 800,
+                fontWeight: 700,
                 fontSize: '0.78rem',
                 cursor: 'pointer'
               }}
@@ -104,7 +131,7 @@ export default function DailyOperatingView() {
               🚨 Rescate "No puedo empezar"
             </button>
 
-            <div style={{ background: 'rgba(48,209,88,0.15)', border: '1px solid rgba(48,209,88,0.3)', color: '#30d158', padding: '6px 12px', borderRadius: '10px', fontFamily: 'SF Mono, monospace', fontSize: '0.72rem', fontWeight: 700 }}>
+            <div style={{ background: 'var(--color-state-done-soft)', border: '1px solid var(--color-state-done-glow)', color: 'var(--color-state-done)', padding: '6px 12px', borderRadius: '10px', fontFamily: 'SF Mono, monospace', fontSize: '0.72rem', fontWeight: 700 }}>
               Hecho: {blocks.filter(b => b.status === 'completed').length} / {blocks.length}
             </div>
           </div>
@@ -122,8 +149,8 @@ export default function DailyOperatingView() {
                 onClick={() => setSelectedBlock(b)}
                 title={`${b.fullTitle}\n\nRegla: ${b.rule}\nVersión Mínima: ${b.minViableAction}`}
                 style={{
-                  background: b.status === 'completed' ? 'rgba(48,209,88,0.06)' : b.status === 'in_progress' ? 'rgba(10,132,255,0.15)' : b.status === 'skipped' ? 'rgba(255,255,255,0.03)' : 'rgba(28,28,30,0.85)',
-                  border: `1px solid ${isSelected ? '#ffffff' : b.status === 'in_progress' ? '#0a84ff' : 'rgba(255,255,255,0.12)'}`,
+                  background: getStatusBg(b.status),
+                  border: `1px solid ${isSelected ? 'var(--color-border-visible)' : b.status === 'in_progress' ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
                   borderLeft: `4px solid ${catColor}`,
                   borderRadius: '14px',
                   padding: '12px 14px',
@@ -140,7 +167,7 @@ export default function DailyOperatingView() {
                   <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.7rem', color: catColor, fontWeight: 700 }}>
                     {b.time}
                   </span>
-                  <strong style={{ fontSize: '0.9rem', color: b.status === 'completed' ? '#98989d' : '#ffffff', textDecoration: b.status === 'completed' || b.status === 'skipped' ? 'line-through' : 'none', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <strong style={{ fontSize: '0.9rem', color: b.status === 'completed' ? 'var(--color-text-secondary)' : 'var(--color-text-primary)', textDecoration: b.status === 'completed' || b.status === 'skipped' ? 'line-through' : 'none', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {b.shortTitle}
                   </strong>
                 </div>
@@ -151,8 +178,8 @@ export default function DailyOperatingView() {
                       href={b.actionUrl}
                       onClick={(e) => e.stopPropagation()}
                       style={{
-                        background: 'rgba(255,255,255,0.06)',
-                        border: '1px solid rgba(255,255,255,0.12)',
+                        background: 'var(--color-border-subtle)',
+                        border: '1px solid var(--color-border-subtle)',
                         color: catColor,
                         padding: '4px 8px',
                         borderRadius: '6px',
@@ -171,13 +198,13 @@ export default function DailyOperatingView() {
                     style={{
                       fontFamily: 'SF Mono, monospace',
                       fontSize: '0.68rem',
-                      fontWeight: 800,
+                      fontWeight: 700,
                       padding: '4px 8px',
                       borderRadius: '999px',
                       border: 'none',
                       cursor: 'pointer',
-                      background: b.status === 'completed' ? 'rgba(48,209,88,0.2)' : b.status === 'in_progress' ? 'rgba(10,132,255,0.2)' : b.status === 'skipped' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.08)',
-                      color: b.status === 'completed' ? '#30d158' : b.status === 'in_progress' ? '#0a84ff' : b.status === 'skipped' ? '#98989d' : '#8e8e93'
+                      background: getStatusBtnBg(b.status),
+                      color: getStatusBtnColor(b.status)
                     }}
                   >
                     {b.status === 'completed' ? '✓' : b.status === 'in_progress' ? '►' : b.status === 'skipped' ? '⊘' : '○'}
@@ -188,26 +215,26 @@ export default function DailyOperatingView() {
           })}
         </div>
 
-        {/* SELECTED BLOCK REORGANIZATION CARD (DIRECT ACTION MENU) */}
+        {/* SELECTED BLOCK REORGANIZATION CARD */}
         {selectedBlock && (
           <div
             style={{
-              background: 'rgba(28, 28, 30, 0.95)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              background: 'var(--color-surface-base)',
+              border: '1px solid var(--color-border-visible)',
               borderRadius: '18px',
               padding: '20px',
               display: 'flex',
               flexDirection: 'column',
               gap: '14px',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.8)'
+              boxShadow: '0 20px 50px rgba(0,0,0,0.8)' /* rgba(0,0,0,*) sombra — excepción documentada */
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: getCategoryColor(selectedBlock.category), fontWeight: 800 }}>
+                <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: getCategoryColor(selectedBlock.category), fontWeight: 700 }}>
                   DESVÍO & REORGANIZACIÓN SIN CULPA • {selectedBlock.time}
                 </span>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                   {selectedBlock.fullTitle}
                 </h4>
               </div>
@@ -215,15 +242,15 @@ export default function DailyOperatingView() {
               <button
                 type="button"
                 onClick={() => setSelectedBlock(null)}
-                style={{ background: 'rgba(255,255,255,0.08)', border: 'none', color: '#98989d', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', fontWeight: 700 }}
+                style={{ background: 'var(--color-border-subtle)', border: 'none', color: 'var(--color-text-secondary)', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', fontWeight: 700 }}
               >
                 ✕
               </button>
             </div>
 
-            <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '12px', borderRadius: '12px', fontSize: '0.82rem', color: '#98989d', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div><strong style={{ color: '#fff' }}>Regla Original:</strong> {selectedBlock.rule}</div>
-              <div><strong style={{ color: '#30d158' }}>Versión Mínima (2 Min):</strong> {selectedBlock.minViableAction}</div>
+            <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px', borderRadius: '12px', fontSize: '0.82rem', color: 'var(--color-text-secondary)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div><strong style={{ color: 'var(--color-text-primary)' }}>Regla Original:</strong> {selectedBlock.rule}</div>
+              <div><strong style={{ color: 'var(--color-state-done)' }}>Versión Mínima (2 Min):</strong> {selectedBlock.minViableAction}</div>
             </div>
 
             {/* REORGANIZATION BUTTONS */}
@@ -231,7 +258,7 @@ export default function DailyOperatingView() {
               <button
                 type="button"
                 onClick={() => handleSkipWithoutGuilt(selectedBlock.id)}
-                style={{ background: 'rgba(255, 69, 58, 0.2)', border: '1px solid rgba(255, 69, 58, 0.4)', color: '#ff453a', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
+                style={{ background: 'var(--color-accent-danger-soft)', border: '1px solid var(--color-accent-danger-glow)', color: 'var(--color-accent-danger)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
               >
                 🛡️ Saltar Sin Culpa (Cero Deuda)
               </button>
@@ -239,7 +266,7 @@ export default function DailyOperatingView() {
               <button
                 type="button"
                 onClick={() => handleReorganizeRestOfDay(selectedBlock.id)}
-                style={{ background: 'rgba(100, 210, 255, 0.2)', border: '1px solid rgba(100, 210, 255, 0.4)', color: 'var(--color-accent-primary)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
+                style={{ background: 'var(--color-accent-primary-soft)', border: '1px solid var(--color-border-visible)', color: 'var(--color-accent-primary)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
               >
                 🔄 Reorganizar Resto del Día con Margen
               </button>
@@ -250,7 +277,7 @@ export default function DailyOperatingView() {
                   setBlocks(prev => prev.map(b => b.id === selectedBlock.id ? { ...b, status: 'completed' } : b));
                   setSelectedBlock(null);
                 }}
-                style={{ background: 'rgba(48, 209, 88, 0.2)', border: '1px solid rgba(48, 209, 88, 0.4)', color: '#30d158', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 800, cursor: 'pointer' }}
+                style={{ background: 'var(--color-state-done-soft)', border: '1px solid var(--color-state-done-glow)', color: 'var(--color-state-done)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
               >
                 ✅ Marcar Completado (Versión Mínima)
               </button>

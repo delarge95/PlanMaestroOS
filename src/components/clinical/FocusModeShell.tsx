@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 
 interface Props {
@@ -61,7 +61,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        color: '#effff6'
+        color: 'var(--color-text-primary)'
       }}>
         {/* ZEN FOCUS CONTAINER */}
         <div style={{
@@ -73,7 +73,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
         }}>
           {/* HEADER BAR */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', color: '#10b981', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 12px', borderRadius: '999px', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 12px', borderRadius: '999px', fontWeight: 800 }}>
               ⚡ MODO FOCO ZEN ACTIVO • CERO DISTRACCIONES
             </span>
             <button
@@ -82,7 +82,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
               style={{
                 background: 'rgba(255, 255, 255, 0.08)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#effff6',
+                color: 'var(--color-text-primary)',
                 padding: '8px 16px',
                 borderRadius: '12px',
                 fontWeight: 700,
@@ -103,10 +103,10 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             padding: '28px',
             boxShadow: '0 30px 60px rgba(0, 0, 0, 0.6)'
           }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#77e7ff', textTransform: 'uppercase', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 800 }}>
               BLOQUE A EN EJECUCIÓN (09:20 – 11:40)
             </span>
-            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '6px 0 12px', color: '#ffffff' }}>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '6px 0 12px', color: 'var(--color-text-primary)' }}>
               Trabajo Profundo: TwinSight MVP & Tesis
             </h2>
             <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', padding: '12px 16px', borderRadius: '12px', fontSize: '0.85rem', color: '#6ee7b7' }}>
@@ -124,7 +124,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             flexDirection: 'column',
             gap: '16px'
           }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: '#a8b9b2', textTransform: 'uppercase', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', fontWeight: 700 }}>
               Las 3 Prioridades Inviolables del Día
             </span>
 
@@ -136,11 +136,11 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
                   onClick={() => toggleTask(t.id)}
                   style={{
                     background: t.done ? 'rgba(16, 185, 129, 0.12)' : 'rgba(0, 0, 0, 0.35)',
-                    border: `1px solid ${t.done ? '#10b981' : 'rgba(255, 255, 255, 0.08)'}`,
+                    border: `1px solid ${t.done ? 'var(--color-state-done)' : 'rgba(255, 255, 255, 0.08)'}`,
                     borderRadius: '14px',
                     padding: '14px 18px',
                     textAlign: 'left',
-                    color: t.done ? '#6ee7b7' : '#ffffff',
+                    color: t.done ? '#6ee7b7' : 'var(--color-text-primary)',
                     fontWeight: 600,
                     fontSize: '0.9rem',
                     cursor: 'pointer',
@@ -151,7 +151,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
                     transition: 'all 150ms ease'
                   }}
                 >
-                  <span style={{ fontSize: '1rem', color: t.done ? '#10b981' : '#a8b9b2' }}>
+                  <span style={{ fontSize: '1rem', color: t.done ? 'var(--color-state-done)' : 'var(--color-text-secondary)' }}>
                     {t.done ? '✓' : '○'}
                   </span>
                   <span>{t.text}</span>
@@ -170,10 +170,10 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             flexDirection: 'column',
             gap: '12px'
           }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: '#c084fc', textTransform: 'uppercase', fontWeight: 800 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 800 }}>
               📌 Paso de Reentrada Escrito (Al Cierre)
             </span>
-            <p style={{ fontSize: '0.82rem', color: '#a8b9b2', margin: 0 }}>
+            <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0 }}>
               Antes de cerrar la sesión, escribe la micro-acción exacta de 2 minutos para cuando retomes:
             </p>
             <input
@@ -187,7 +187,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
                 border: '1px solid rgba(255, 255, 255, 0.15)',
                 borderRadius: '12px',
                 padding: '12px 14px',
-                color: '#ffffff',
+                color: 'var(--color-text-primary)',
                 fontSize: '0.88rem',
                 outline: 'none'
               }}

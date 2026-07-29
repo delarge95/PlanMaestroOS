@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import ragIndex from '../../data/rag_index.json';
 import ErrorBoundary from '../ErrorBoundary';
 import { searchRAG, type RAGSearchResult } from '../../data/ragEngine';
@@ -69,7 +69,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#ec4899', fontWeight: 800 }}>
               DOCUMENTOS FUENTE #{categoryFilter.toUpperCase()}
             </span>
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '4px 0 12px', color: '#effff6' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '4px 0 12px', color: 'var(--color-text-primary)' }}>
               Explorador de Archivos
             </h3>
           <input
@@ -83,7 +83,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
               border: '1px solid rgba(174,255,224,0.15)',
               borderRadius: '6px',
               padding: '8px 12px',
-              color: '#effff6',
+              color: 'var(--color-text-primary)',
               fontSize: '0.8rem',
               boxSizing: 'border-box'
             }}
@@ -102,13 +102,13 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
                 border: selectedDocId === doc.id ? '1px solid #ec4899' : '1px solid transparent',
                 borderRadius: '6px',
                 padding: '8px 10px',
-                color: selectedDocId === doc.id ? '#ec4899' : '#a8b9b2',
+                color: selectedDocId === doc.id ? '#ec4899' : 'var(--color-text-secondary)',
                 fontSize: '0.8rem',
                 cursor: 'pointer',
                 transition: 'all 150ms ease'
               }}
             >
-              <div style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#65756f' }}>
+              <div style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-text-tertiary)' }}>
                 {doc.filename}
               </div>
               <div style={{ fontWeight: selectedDocId === doc.id ? 700 : 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -135,7 +135,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
                 border: '1px solid #77e7ff',
                 borderRadius: '8px',
                 padding: '10px 14px',
-                color: '#effff6',
+                color: 'var(--color-text-primary)',
                 fontSize: '0.88rem'
               }}
             />
@@ -143,7 +143,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
               type="submit"
               onClick={(e) => e.stopPropagation()}
               style={{
-                background: '#77e7ff',
+                background: 'var(--color-accent-primary)',
                 color: '#040608',
                 border: 'none',
                 padding: '0 20px',
@@ -160,19 +160,19 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
           {/* RAG RESULTS LIST */}
           {ragResults.length > 0 && (
             <div style={{ marginTop: '16px', background: 'rgba(0,0,0,0.4)', borderRadius: '8px', padding: '14px', border: '1px solid rgba(119,231,255,0.2)' }}>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: '#77e7ff', fontWeight: 800 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-accent-primary)', fontWeight: 800 }}>
                 {ragResults.length} RESULTADOS ENCONTRADOS:
               </span>
               <div style={{ display: 'grid', gap: '10px', marginTop: '10px' }}>
                 {ragResults.map((res, rIdx) => (
                   <div key={rIdx} style={{ background: '#040608', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #77e7ff' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                      <strong style={{ fontSize: '0.85rem', color: '#effff6' }}>{res.title}</strong>
-                      <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#65756f' }}>
+                      <strong style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)' }}>{res.title}</strong>
+                      <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-text-tertiary)' }}>
                         Source: {res.source}
                       </span>
                     </div>
-                    <p style={{ fontSize: '0.8rem', color: '#a8b9b2', margin: 0, lineHeight: 1.4 }}>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.4 }}>
                       "{res.content}..."
                     </p>
                   </div>
@@ -190,11 +190,11 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
                 <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: '#ec4899', fontWeight: 800 }}>
                   DOCUMENTO FUENTE #{currentDoc.filename.slice(0, 2)}
                 </span>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: '#effff6' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
                   {currentDoc.title}
                 </h2>
               </div>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: '#65756f', background: 'rgba(255,255,255,0.04)', padding: '4px 8px', borderRadius: '4px' }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-text-tertiary)', background: 'rgba(255,255,255,0.04)', padding: '4px 8px', borderRadius: '4px' }}>
                 {(currentDoc.size_bytes / 1024).toFixed(1)} KB
               </span>
             </div>
@@ -205,13 +205,13 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
                 Cargando contenido completo del documento...
               </div>
             ) : (
-              <div style={{ color: '#c6d7d0', fontSize: '0.88rem', lineHeight: 1.6, whiteSpace: 'pre-wrap', fontFamily: 'Space Grotesk, sans-serif', maxHeight: '480px', overflowY: 'auto' }}>
+              <div style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.6, whiteSpace: 'pre-wrap', fontFamily: 'Space Grotesk, sans-serif', maxHeight: '480px', overflowY: 'auto' }}>
                 {docContent}
               </div>
             )}
           </div>
         ) : (
-          <div style={{ padding: '40px', textAlign: 'center', color: '#65756f' }}>
+          <div style={{ padding: '40px', textAlign: 'center', color: 'var(--color-text-tertiary)' }}>
             Selecciona un documento para visualizar su contenido.
           </div>
         )}
