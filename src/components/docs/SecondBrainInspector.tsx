@@ -6,6 +6,31 @@ interface Props {
   defaultObsidianNote?: string;
 }
 
+/**
+ * Security: Validates that the provided Notion URL is from a trusted domain.
+ * This prevents Open Redirect, arbitrary Iframe Injection, and loading of untrusted domains.
+ */
+export function isValidNotionUrl(urlStr: string): boolean {
+  try {
+    const url = new URL(urlStr);
+    if (url.protocol !== 'https:') return false;
+    const hostname = url.hostname.toLowerCase();
+
+    const allowedDomains = [
+      'notion.so',
+      'notion.site',
+      'notion.com',
+      'v1.embednotion.com'
+    ];
+
+    return allowedDomains.some(domain =>
+      hostname === domain || hostname.endsWith('.' + domain)
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
 const SAMPLE_OBSIDIAN_NOTES = [
   {
     filename: '01_Plan_Maestro_Total_v3.md',
@@ -59,6 +84,7 @@ export default function SecondBrainInspector({
   // Notion state
   const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(defaultNotionUrl);
   const [inputUrl, setInputUrl] = useState<string>('');
+  const [urlError, setUrlError] = useState<string | null>(null);
 
   // Obsidian state
   const [selectedNoteIndex, setSelectedNoteIndex] = useState<number>(0);
@@ -67,7 +93,9 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidNotionUrl(savedNotion)) {
+        setNotionEmbedUrl(savedNotion);
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +104,18 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+
+    if (!isValidNotionUrl(trimmed)) {
+      setUrlError('URL inválida o no permitida. Solo se admiten dominios oficiales de Notion o embednotion.com.');
+      return;
+    }
+
+    setUrlError(null);
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -276,6 +312,12 @@ export default function SecondBrainInspector({
               </button>
             </div>
 
+            {urlError && (
+              <div style={{ color: 'var(--color-accent-danger)', fontSize: '0.82rem', fontWeight: 600, marginTop: '-6px', marginLeft: '4px' }}>
+                ⚠️ {urlError}
+              </div>
+            )}
+
             {/* EMBEDDED MACOS WINDOW FRAME */}
             <div style={{ background: '#000000', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '18px', overflow: 'hidden', height: '500px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ background: '#1c1c1e', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -296,6 +338,7 @@ export default function SecondBrainInspector({
                 src={notionEmbedUrl}
                 title="Notion Second Brain Live Inspection"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
               />
             </div>
           </div>
