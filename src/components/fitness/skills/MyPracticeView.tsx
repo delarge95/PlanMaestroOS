@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, ArrowRight, RefreshCw, ExternalLink, Activity, Info, CheckCircle2 } from 'lucide-react';
+import { Play, ArrowRight, RefreshCw, Activity, Info, CheckCircle2 } from 'lucide-react';
 import { useSkillStateStore } from '../../../data/fitness/skills/skillStateStore';
 import { skillSteps } from '../../../data/fitness/skills/skillSteps';
 import { skillPaths } from '../../../data/fitness/skills/skillPaths';
@@ -32,8 +32,9 @@ export function MyPracticeView({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-      {/* 1. SECCIÓN DE HABILIDAD ACTIVA (ÚNICA SUPERFICIE DESTACADA EN PRIMERA VISTA) */}
-      <div
+      {/* 1. SECCIÓN DE HABILIDAD ACTIVA CON JERARQUÍA CORREGIDA (RUTA = H1 DOMINANTE, PASO = H2 SECUNDARIO) */}
+      <section
+        aria-labelledby="active-path-title"
         style={{
           background: 'var(--surface-elevated)',
           border: '1px solid var(--color-border-visible)',
@@ -41,53 +42,69 @@ export function MyPracticeView({
           padding: 'var(--space-md)',
           display: 'flex',
           flexDirection: 'column',
-          gap: 'var(--space-sm)'
+          gap: 'var(--space-xs)'
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.74rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            {activePath?.title || 'Habilidad Activa'}
-          </span>
-          <span style={{ fontSize: '0.72rem', background: 'rgba(255,255,255,0.06)', padding: '2px 8px', borderRadius: '12px', color: 'var(--text-tertiary)' }}>
-            Paso {activeStep.order} de {activePath?.stepIds.length || 5}
-          </span>
-        </div>
+        <p style={{ fontSize: '0.74rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>
+          Habilidad activa
+        </p>
 
-        <div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '0 0 4px', color: 'var(--text)' }}>
+        {/* H1 PRINCIPAL DE LA RUTA (28-32px DESKTOP / 24-28px MÓVIL) */}
+        <h1
+          id="active-path-title"
+          style={{
+            fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+            fontWeight: 800,
+            lineHeight: 1.15,
+            color: 'var(--text)',
+            margin: '2px 0 4px'
+          }}
+        >
+          {activePath?.title || 'Dominada básica y tracción'}
+        </h1>
+
+        {/* METADATO COMPACTO DE PASO ACTUAL */}
+        <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', margin: '0 0 12px' }}>
+          Paso actual · {activeStep.order} de {activePath?.stepIds.length || 5}
+        </p>
+
+        {/* H2 SECUNDARIO DEL PASO ACTUAL */}
+        <div style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)', marginBottom: '8px' }}>
+          <h2 style={{ fontSize: '1.12rem', fontWeight: 700, margin: '0 0 4px', color: 'var(--text)' }}>
             {activeStep.title}
           </h2>
           <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0 }}>
-            Objetivo: <strong>{activeStep.practice.target}</strong> ({activeStep.practice.defaultSets} series)
+            Objetivo de hoy · <strong>{activeStep.practice.target}</strong> ({activeStep.practice.defaultSets} series)
           </p>
         </div>
 
         {/* CTA PRINCIPAL: PRACTICAR HOY (MÍNIMO 44PX ALTO) */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
-          <button
-            type="button"
-            onClick={() => onStartPractice(activeStep.id)}
-            style={{
-              flex: 1,
-              minWidth: '160px',
-              minHeight: '44px',
-              background: 'var(--color-accent-primary)',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 700,
-              fontSize: '0.92rem',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px'
-            }}
-          >
-            <Play size={18} fill="currentColor" />
-            <span>Practicar hoy</span>
-          </button>
+        <button
+          type="button"
+          onClick={() => onStartPractice(activeStep.id)}
+          style={{
+            width: '100%',
+            minHeight: '44px',
+            background: 'var(--color-accent-primary)',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: 'var(--radius-md)',
+            fontWeight: 700,
+            fontSize: '0.94rem',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            marginBottom: '6px'
+          }}
+        >
+          <Play size={18} fill="currentColor" />
+          <span>Practicar hoy</span>
+        </button>
 
+        {/* ACCIONES SECUNDARIAS */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
           <Button
             variant="secondary"
             size="md"
@@ -95,7 +112,7 @@ export function MyPracticeView({
             style={{ minHeight: '44px' }}
           >
             <Info size={16} />
-            <span>Ver detalles</span>
+            <span>Ver ejercicio</span>
           </Button>
 
           <Button
@@ -105,10 +122,10 @@ export function MyPracticeView({
             style={{ minHeight: '44px' }}
           >
             <RefreshCw size={16} />
-            <span>Cambiar</span>
+            <span>Cambiar ruta</span>
           </Button>
         </div>
-      </div>
+      </section>
 
       {/* 2. SIGUIENTE PASO EN LA RUTA */}
       {nextStep && (
@@ -125,14 +142,14 @@ export function MyPracticeView({
         </div>
       )}
 
-      {/* 3. PREPARACIÓN TRANSVERSAL Y PREHAB */}
+      {/* 3. PREPARACIÓN TRANSVERSAL COMPACTA */}
       {prepSteps.length > 0 && (
         <div>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '6px' }}>
-            <Activity size={14} /> Preparación Sugerida (Prehab & Movilidad)
+            <Activity size={14} /> Preparación Sugerida (Prehab)
           </span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {prepSteps.map((prep) => prep && (
+            {prepSteps.slice(0, 2).map((prep) => prep && (
               <ListRow
                 key={prep.id}
                 title={prep.title}

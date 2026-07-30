@@ -1,6 +1,24 @@
 import type { ExerciseInfo } from '../types';
 
 export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
+  "Incline DB Y-Raise": {
+    image: "",
+    category: "Free Weights",
+    subcategory: "Shoulders (Lateral & Rear Delts)",
+    attachments: ["Dumbbells", "Incline Bench"],
+    muscles: {
+      strength: ["Lateral Deltoids", "Lower Trapezius", "Rear Deltoids"],
+      stability: ["Scapular Stabilizers"],
+      mobility: []
+    },
+    techniquePoints: [
+      "Siéntate boca abajo en un banco inclinado a 30° apoyando el pecho.",
+      "Eleva las mancuernas hacia los lados y arriba formando una 'Y' con el torso.",
+      "Pausa de 1 segundo en la cima manteniendo tensión constante."
+    ],
+    youtubeLink: "https://www.youtube.com/watch?v=0j3e070E3gY",
+    substitutions: ["Cable Y-Raise", "Standing DB Lateral Raise"]
+  },
   "3\" Block Pull": {
     image: "",
     category: "Free Weights",

@@ -1,6 +1,61 @@
 import type { ExerciseInfo } from '../types';
 
 export const calisthenicsExercises: { [key: string]: ExerciseInfo } = {
+  "Active Hang": {
+    image: "",
+    category: "Calisthenics",
+    subcategory: "Pull-Up (Scapular Control)",
+    attachments: ["Bar", "Rings"],
+    muscles: {
+      strength: ["Latissimus Dorsi", "Lower Trapezius", "Rhomboids"],
+      stability: ["Scapular Stabilizers", "Forearms", "Core"],
+      mobility: []
+    },
+    techniquePoints: [
+      "Suspéndete de la barra con agarre prono a la anchura de los hombros.",
+      "Deprime y retrae activamente las escápulas tirando de los hombros lejos de las orejas sin doblar los codos.",
+      "Mantén la contracción isométrica en la parte alta con torso tenso.",
+      "Desciende con control manteniendo tensión sin colapsar bruscamente la articulación del hombro."
+    ],
+    youtubeLink: "https://www.youtube.com/watch?v=132Xg12mG60",
+    substitutions: ["Scapular Pull-Up", "Passive Hang", "Wide-Grip Lat Pulldown"]
+  },
+  "Spanish Squats": {
+    image: "",
+    category: "Calisthenics",
+    subcategory: "Patellar Tendon Prehab",
+    attachments: ["Band"],
+    muscles: {
+      strength: ["Quadriceps"],
+      stability: ["Core", "Knee Joint"],
+      mobility: []
+    },
+    techniquePoints: [
+      "Engancha una banda gruesa detrás de las rodillas a la altura de las corvas.",
+      "Siéntate hacia atrás a 90° manteniendo espinillas verticales sin inclinar el torso.",
+      "Sostén la posición isométrica de 45 segundos para carga sobre tendón rotuliano."
+    ],
+    youtubeLink: "https://www.youtube.com/watch?v=0_J60H1iK_Y",
+    substitutions: ["Leg Extension", "Sissy Squat", "Wall Sit Hold"]
+  },
+  "Dragon Flag": {
+    image: "",
+    category: "Calisthenics",
+    subcategory: "Core (Lever)",
+    attachments: ["Bench", "Floor"],
+    muscles: {
+      strength: ["Rectus Abdominis", "Hip Flexors", "Lats"],
+      stability: ["Core", "Upper Back"],
+      mobility: []
+    },
+    techniquePoints: [
+      "Túmbate sobre un banco y agarra firme el borde detrás de la cabeza.",
+      "Eleva el cuerpo tenso como una tabla apoyándote solo en omóplatos.",
+      "Desciende con excéntrica lenta manteniendo cuerpo recto."
+    ],
+    youtubeLink: "https://www.youtube.com/watch?v=pvz7j1x7Z7k",
+    substitutions: ["Bent-Knee Dragon Flag", "Lying Leg Raise", "Hanging Leg Raise"]
+  },
   "45° Hyperextension": {
     image: "",
     category: "Calisthenics",

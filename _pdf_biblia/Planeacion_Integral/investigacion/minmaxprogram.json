@@ -1,0 +1,754 @@
+{
+  "programa": "The Min-Max Program",
+  "autor": "Jeff Nippard",
+  "duracion_semanas": 12,
+  "metrica_esfuerzo": "RIR (Reps in Reserve)",
+  "dias_por_semana": 5,
+  "estructura_dias": [
+    "Día 1: UPPER 1",
+    "Día 2: LOWER 1",
+    "Día 3: UPPER 2",
+    "Día 4: LOWER 2",
+    "Día 5: ARMS + DELTS"
+  ],
+  "definiciones_plantillas_dias": {
+    "UPPER_1": [
+      {
+        "id": "barbell_incline_press",
+        "ejercicio": "Barbell Incline Press",
+        "series_calentamiento": "2-4",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "3-5 min",
+        "sustituciones_recomendadas": [
+          "Smith Machine Incline Press",
+          "DB Incline Press"
+        ],
+        "notas": "A 30º or 45º bench will work here. Pause for 1 second at the bottom of each rep while maintaining tension on the pecs."
+      },
+      {
+        "id": "pec_deck",
+        "ejercicio": "Pec Deck",
+        "series_calentamiento": "1-2",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "DB Flye",
+          "Cable Flye"
+        ],
+        "notas": "Pause for 1 second at the bottom of each rep while maintaining tension on the pecs."
+      },
+      {
+        "id": "incline_db_y_raise",
+        "ejercicio": "Incline DB Y-Raise",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Cable Y-Raise",
+          "Machine Lateral Raise"
+        ],
+        "notas": "Use a 30º incline bench (back against the bench) and lift the weight up and out in a Y shape."
+      },
+      {
+        "id": "pull_up_wide_grip",
+        "ejercicio": "Pull-Up (Wide Grip)",
+        "series_calentamiento": "1-2",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "2-3 min",
+        "sustituciones_recomendadas": [
+          "Lat Pulldown (Wide Grip)",
+          "1-Arm Cable Pulldown"
+        ],
+        "notas": "Control the negative and feel your lats pulling apart. Full ROM!"
+      },
+      {
+        "id": "kelso_shrug",
+        "ejercicio": "Kelso Shrug",
+        "series_calentamiento": "1-2",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "2-3 min",
+        "sustituciones_recomendadas": [
+          "Seated Cable Kelso Shrug",
+          "Incline DB Kelso Shrug"
+        ],
+        "notas": "Pause for about 1 second at the top and then allow your shoulder blades to peel apart on the way back down, under control."
+      },
+      {
+        "id": "ez_bar_preacher_curl",
+        "ejercicio": "EZ-Bar Preacher Curl",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Machine Preacher Curl",
+          "DB Preacher Curl"
+        ],
+        "notas": "Keep your triceps firmly pinned against the pad as you curl. Smooth controlled reps."
+      },
+      {
+        "id": "triceps_pressdown",
+        "ejercicio": "Triceps Pressdown",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Close-Grip Bench Press",
+          "Smith Machine JM Press"
+        ],
+        "notas": "You can use a rope or bar attachment for these, whichever you find more comfortable."
+      },
+      {
+        "id": "dragon_flag",
+        "ejercicio": "Dragon Flag",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Bent-Knee Dragon Flag",
+          "Lying Leg Raise"
+        ],
+        "notas": "Keep your body as rigid as possible throughout the ROM."
+      }
+    ],
+    "LOWER_1": [
+      {
+        "id": "lying_leg_curl",
+        "ejercicio": "Lying Leg Curl",
+        "series_calentamiento": "1-2",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Seated Leg Curl",
+          "Nordic Ham Curl"
+        ],
+        "notas": "Set the machine so that you get the biggest stretch possible at the bottom. Prevent your butt from popping up as you curl."
+      },
+      {
+        "id": "squat_your_choice",
+        "ejercicio": "Squat (Your Choice)",
+        "series_calentamiento": "2-4",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "3-5 min",
+        "sustituciones_recomendadas": [
+          "See Notes",
+          "See Notes"
+        ],
+        "notas": "This can be a Barbell Back Squat, Barbell Front Squat, Pendulum Squat, Hack Squat, Belt Squat, or Smith Machine Squat."
+      },
+      {
+        "id": "smith_machine_lunge",
+        "ejercicio": "Smith Machine Lunge",
+        "series_calentamiento": "2-4",
+        "series_trabajo": 1,
+        "repeticiones": "6-8",
+        "descanso": "2-4 min",
+        "sustituciones_recomendadas": [
+          "DB Lunge",
+          "Barbell Lunge"
+        ],
+        "notas": "Minimize contribution from your back leg!"
+      },
+      {
+        "id": "leg_extension_lower1",
+        "ejercicio": "Leg Extension",
+        "series_calentamiento": "1-2",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Reverse Nordic",
+          "Sissy Squat"
+        ],
+        "notas": "Set the seat back as far as it will go while still feeling comfortable. Grab the handles as hard as you can to pull your butt down into the seat (using straps can help here)."
+      },
+      {
+        "id": "machine_hip_abduction",
+        "ejercicio": "Machine Hip Abduction",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 1,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Cable Hip Abduction",
+          "Standing Plate Abduction"
+        ],
+        "notas": "If possible, place foam pads in between the outside of your knees and the pads on the machine. This will increase your range of motion on the machine."
+      },
+      {
+        "id": "standing_calf_raise_lower1",
+        "ejercicio": "Standing Calf Raise",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Leg Press Calf Press",
+          "Donkey Calf Raise"
+        ],
+        "notas": "1-2 second pause at the bottom of each rep. Instead of just going up onto your toes, think about rolling your ankle back and forth on the balls of your feet."
+      }
+    ],
+    "UPPER_2": [
+      {
+        "id": "close_grip_lat_pulldown",
+        "ejercicio": "Close-Grip Lat Pulldown",
+        "series_calentamiento": "2-3",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "2-3 min",
+        "sustituciones_recomendadas": [
+          "Close-Grip Pull-Up",
+          "1-Arm Cable Pulldown"
+        ],
+        "notas": "Lean back by ~15º and drive your elbows down as you squeeze your shoulder blades together. This should feel like a mix of lats and mid-traps."
+      },
+      {
+        "id": "chest_supported_t_bar_row",
+        "ejercicio": "Chest-Supported T-Bar Row",
+        "series_calentamiento": "2-3",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "2-3 min",
+        "sustituciones_recomendadas": [
+          "Chest-Supported Machine Row",
+          "Chest-Supported DB Row"
+        ],
+        "notas": "Flare elbows out at roughly 45º and squeeze your shoulder blades together hard at the top of each rep."
+      },
+      {
+        "id": "machine_shrug",
+        "ejercicio": "Machine Shrug",
+        "series_calentamiento": "1-2",
+        "series_trabajo": 1,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Barbell Shrug",
+          "Cable Shrug-In"
+        ],
+        "notas": "Think about shrugging \"up to your ears\". Use straps, if possible."
+      },
+      {
+        "id": "machine_chest_press",
+        "ejercicio": "Machine Chest Press",
+        "series_calentamiento": "2-4",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "3-5 min",
+        "sustituciones_recomendadas": [
+          "Smith Machine Bench Press",
+          "DB Bench Press"
+        ],
+        "notas": "1 second pause at the bottom of each rep while maintaining tension on the pecs."
+      },
+      {
+        "id": "high_cable_lateral_raise",
+        "ejercicio": "High-Cable Lateral Raise",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "DB Lateral Raise",
+          "Machine Lateral Raise"
+        ],
+        "notas": "Set the cable at roughly hip height. Let your hand go slightly past your midline at the bottom of each rep to get a deep stretch on the side delt."
+      },
+      {
+        "id": "one_arm_reverse_pec_deck",
+        "ejercicio": "1-Arm Reverse Pec Deck",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 1,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Lying Reverse DB Flye",
+          "Reverse Cable Crossover"
+        ],
+        "notas": "Sweep the weight out to create the largest semi-circle possible with your arm."
+      },
+      {
+        "id": "cable_crunch",
+        "ejercicio": "Cable Crunch",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Weighted Crunch",
+          "Machine Crunch"
+        ],
+        "notas": "Round your lower back as you crunch. Maintain a mind-muscle connection with your 6-pack."
+      }
+    ],
+    "LOWER_2": [
+      {
+        "id": "leg_extension_lower2",
+        "ejercicio": "Leg Extension",
+        "series_calentamiento": "1-2",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Reverse Nordic",
+          "Sissy Squat"
+        ],
+        "notas": "Set the seat back as far as it will go while still feeling comfortable. Grab the handles as hard as you can to pull your butt down into the seat (using straps can help here)."
+      },
+      {
+        "id": "barbell_rdl",
+        "ejercicio": "Barbell RDL",
+        "series_calentamiento": "2-3",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "2-3 min",
+        "sustituciones_recomendadas": [
+          "DB RDL",
+          "Seated Cable Deadlift"
+        ],
+        "notas": "Stick your glutes straight back as you lower the bar straight down, centered over the middle of your foot. Get a nice deep stretch at the bottom, but keep your spine neutral (don't round forward)."
+      },
+      {
+        "id": "machine_hip_thrust",
+        "ejercicio": "Machine Hip Thrust",
+        "series_calentamiento": "2-4",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "2-3 min",
+        "sustituciones_recomendadas": [
+          "Barbell Hip Thrust",
+          "45º Hyperextension"
+        ],
+        "notas": "Squeeze your glutes hard at the top and control the weight on the way down."
+      },
+      {
+        "id": "leg_press",
+        "ejercicio": "Leg Press",
+        "series_calentamiento": "2-4",
+        "series_trabajo": 1,
+        "repeticiones": "6-8",
+        "descanso": "2-3 min",
+        "sustituciones_recomendadas": [
+          "Smith Machine Squat",
+          "Barbell Squat"
+        ],
+        "notas": "Feet lower on the platform for more quad focus. Get as deep as you can without excessive back rounding."
+      },
+      {
+        "id": "standing_calf_raise_lower2",
+        "ejercicio": "Standing Calf Raise",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Leg Press Calf Press",
+          "Donkey Calf Raise"
+        ],
+        "notas": "1-2 second pause at the bottom of each rep. Instead of just going up onto your toes, think about rolling your ankle back and forth on the balls of your feet."
+      }
+    ],
+    "ARMS_DELTS": [
+      {
+        "id": "bayesian_cable_curl",
+        "ejercicio": "Bayesian Cable Curl",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Incline DB Curl",
+          "Standing DB Curl"
+        ],
+        "notas": "As you curl, optionally lean forward to prevent the cable from hitting your wrist at the top. Control the negative and feel a deep stretch at the bottom of each rep."
+      },
+      {
+        "id": "overhead_cable_triceps_extension",
+        "ejercicio": "Overhead Cable Triceps Extension",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Overhead DB Triceps Extension",
+          "Skull Crusher"
+        ],
+        "notas": "Feel a deep stretch on the triceps throughout the entire negative."
+      },
+      {
+        "id": "modified_zottman_curl",
+        "ejercicio": "Modified Zottman Curl",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 1,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "DB Hammer Curl",
+          "Preacher Hammer Curl"
+        ],
+        "notas": "Hammer curl on the way up and supinated curl (palms up) on the way down."
+      },
+      {
+        "id": "cable_triceps_kickback",
+        "ejercicio": "Cable Triceps Kickback",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Seated Dip Machine",
+          "Close Grip Dip"
+        ],
+        "notas": "Keep your upper arm behind your torso throughout the ROM."
+      },
+      {
+        "id": "db_wrist_curl",
+        "ejercicio": "DB Wrist Curl",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Cable Wrist Curl"
+        ],
+        "notas": "Smooth, controlled reps."
+      },
+      {
+        "id": "db_wrist_extension",
+        "ejercicio": "DB Wrist Extension",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Cable Wrist Extension"
+        ],
+        "notas": "Smooth, controlled reps."
+      },
+      {
+        "id": "alternating_db_curl",
+        "ejercicio": "Alternating DB Curl",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 1,
+        "repeticiones": "6-8",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "Barbell Curl",
+          "EZ-Bar Curl"
+        ],
+        "notas": "Slow, controlled reps!"
+      },
+      {
+        "id": "machine_lateral_raise",
+        "ejercicio": "Machine Lateral Raise",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "8-10",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [
+          "High-Cable Lateral Raise",
+          "DB Lateral Raise"
+        ],
+        "notas": "Focus on squeezing your side delt to move the weight."
+      },
+      {
+        "id": "dead_hang_optional",
+        "ejercicio": "Dead Hang (optional)",
+        "series_calentamiento": "0-1",
+        "series_trabajo": 2,
+        "repeticiones": "N/A",
+        "descanso": "1-2 min",
+        "sustituciones_recomendadas": [],
+        "notas": "Try to add a few more seconds each week!"
+      }
+    ]
+  },
+  "configuracion_semanas": [
+    {
+      "semana": 1,
+      "bloque": 1,
+      "fase": "Intro Week",
+      "rir_map": {
+        "UPPER_1": [
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "LOWER_1": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 3, "set_2": 2},
+          {"set_1": 1, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "UPPER_2": [
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": null},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "LOWER_2": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 3, "set_2": 2},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": null},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "ARMS_DELTS": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0}
+        ]
+      },
+      "tecnicas_intensidad_map": {
+        "UPPER_1": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "LOWER_1": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "UPPER_2": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "LOWER_2": ["N/A", "N/A", "N/A", "N/A", "N/A"],
+        "ARMS_DELTS": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
+      }
+    },
+    {
+      "semana": "2 a 6",
+      "bloque": 1,
+      "fase": "Bloque 1 - Alta Intensidad",
+      "rir_map": {
+        "UPPER_1": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "LOWER_1": [
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "UPPER_2": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "LOWER_2": [
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "ARMS_DELTS": [
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0}
+        ]
+      },
+      "tecnicas_intensidad_map": {
+        "UPPER_1": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "LOWER_1": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "UPPER_2": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "LOWER_2": ["N/A", "N/A", "N/A", "N/A", "N/A"],
+        "ARMS_DELTS": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
+      }
+    },
+    {
+      "semana": 7,
+      "bloque": 2,
+      "fase": "Deload Week",
+      "rir_map": {
+        "UPPER_1": [
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "LOWER_1": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 3, "set_2": 2},
+          {"set_1": 1, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "UPPER_2": [
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": null},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "LOWER_2": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 3, "set_2": 2},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": null},
+          {"set_1": 1, "set_2": 0}
+        ],
+        "ARMS_DELTS": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0}
+        ]
+      },
+      "tecnicas_intensidad_map": {
+        "UPPER_1": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "LOWER_1": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "UPPER_2": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"],
+        "LOWER_2": ["N/A", "N/A", "N/A", "N/A", "N/A"],
+        "ARMS_DELTS": ["N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]
+      }
+    },
+    {
+      "semana": "8 a 12",
+      "bloque": 2,
+      "fase": "Bloque 2 - Técnicas de Intensificación en Última Serie",
+      "rir_map": {
+        "UPPER_1": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "LOWER_1": [
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "UPPER_2": [
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "LOWER_2": [
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 2, "set_2": 1},
+          {"set_1": 1, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0}
+        ],
+        "ARMS_DELTS": [
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": null},
+          {"set_1": 0, "set_2": 0},
+          {"set_1": 0, "set_2": 0}
+        ]
+      },
+      "tecnicas_intensidad_map": {
+        "UPPER_1": [
+          "N/A",
+          "Two Drop Sets (~25% per)",
+          "N/A",
+          "Lengthened Partials (Extend Set)",
+          "N/A",
+          "Myo-reps",
+          "Myo-reps",
+          "N/A"
+        ],
+        "LOWER_1": [
+          "Lengthened Partials (Extend Set)",
+          "N/A",
+          "N/A",
+          "Lengthened Partials (Extend Set)",
+          "N/A",
+          "Lengthened Partials (Extend Set)"
+        ],
+        "UPPER_2": [
+          "Lengthened Partials (Extend Set)",
+          "Two Drop Sets (~25% per)",
+          "N/A",
+          "Weighted Static Hold (30 sec)",
+          "N/A",
+          "N/A",
+          "N/A"
+        ],
+        "LOWER_2": [
+          "Lengthened Partials (Extend Set)",
+          "N/A",
+          "N/A",
+          "N/A",
+          "Lengthened Partials (Extend Set)"
+        ],
+        "ARMS_DELTS": [
+          "N/A",
+          "N/A",
+          "N/A",
+          "Two Drop Sets (~25% per)",
+          "N/A",
+          "N/A",
+          "Two Drop Sets (~25% per)",
+          "Myo-reps",
+          "N/A"
+        ]
+      }
+    }
+  ]
+}
