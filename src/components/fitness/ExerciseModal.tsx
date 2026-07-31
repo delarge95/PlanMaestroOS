@@ -126,6 +126,8 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
               style={{ width: '100%', height: '100%', border: 'none' }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              // Security hardener: sandbox the YouTube player to prevent untrusted actions
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
             />
           </div>
         ) : targetExercise.youtubeLink ? (
