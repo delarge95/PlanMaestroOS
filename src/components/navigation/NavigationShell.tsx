@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Zap, Calendar, ChevronDown, HeartPulse, BriefcaseBusiness, Languages, Dumbbell, LibraryBig, Sprout } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
+import { withBase } from '../../utils/url';
 import Sheet from '../ui/Sheet';
 import ListRow from '../ui/ListRow';
 import Button from '../ui/Button';
@@ -76,7 +77,7 @@ export function NavigationShell({
       {/* HEADER PRINCIPAL COMPACTO */}
       <header className={styles.header}>
         <div className={styles.brandGroup}>
-          <a href="/app" className={styles.brandLink}>
+          <a href={withBase('/app')} className={styles.brandLink}>
             <Zap size={20} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
             <span>Plan Maestro OS</span>
           </a>
@@ -93,7 +94,7 @@ export function NavigationShell({
         {/* NAVEGACIÓN PRINCIPAL ESCRITORIO (3 DESTINOS) - >= 768px */}
         <nav className={styles.desktopNav} aria-label="Navegación principal">
           <a
-            href="/app"
+            href={withBase('/app')}
             className={`${styles.navItem} ${isNowActive ? styles.navItemActive : ''}`}
           >
             <Zap size={16} aria-hidden="true" />
@@ -101,7 +102,7 @@ export function NavigationShell({
           </a>
 
           <a
-            href="/app/schedules"
+            href={withBase('/app/schedules')}
             className={`${styles.navItem} ${isPlanActive ? styles.navItemActive : ''}`}
           >
             <Calendar size={16} aria-hidden="true" />
@@ -139,7 +140,7 @@ export function NavigationShell({
                       return (
                         <a
                           key={area.href}
-                          href={area.href}
+                          href={withBase(area.href)}
                           role="menuitem"
                           className={styles.popoverItem}
                           onClick={() => setIsMorePopoverOpen(false)}
@@ -155,7 +156,7 @@ export function NavigationShell({
                 <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: '6px' }}>
                   <span className={styles.popoverGroupLabel}>Recursos</span>
                   <a
-                    href="/app/library"
+                    href={withBase('/app/library')}
                     role="menuitem"
                     className={styles.popoverItem}
                     onClick={() => setIsMorePopoverOpen(false)}
@@ -192,7 +193,7 @@ export function NavigationShell({
       {/* BOTTOM BAR NAVEGACIÓN MÓVIL (< 768px) */}
       <nav className={styles.mobileNav} aria-label="Navegación móvil">
         <a
-          href="/app"
+          href={withBase('/app')}
           className={`${styles.mobileNavItem} ${isNowActive ? styles.mobileNavItemActive : ''}`}
         >
           <Zap size={20} aria-hidden="true" />
@@ -200,7 +201,7 @@ export function NavigationShell({
         </a>
 
         <a
-          href="/app/schedules"
+          href={withBase('/app/schedules')}
           className={`${styles.mobileNavItem} ${isPlanActive ? styles.mobileNavItemActive : ''}`}
         >
           <Calendar size={20} aria-hidden="true" />
@@ -238,7 +239,7 @@ export function NavigationShell({
                     key={area.href}
                     title={area.label}
                     icon={<Icon size={18} style={{ color: 'var(--color-accent-primary)' }} />}
-                    onClick={() => { window.location.href = area.href; }}
+                    onClick={() => { window.location.href = withBase(area.href); }}
                     active={currentPath === area.href}
                   />
                 );
@@ -254,7 +255,7 @@ export function NavigationShell({
             <ListRow
               title="Biblioteca"
               icon={<LibraryBig size={18} style={{ color: 'var(--color-accent-warning)' }} />}
-              onClick={() => { window.location.href = '/app/library'; }}
+              onClick={() => { window.location.href = withBase('/app/library'); }}
               active={currentPath === '/app/library'}
             />
           </div>

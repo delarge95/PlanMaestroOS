@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InertiaRescueModal from './InertiaRescueModal';
 import Button from '../ui/Button';
+import { withBase } from '../../utils/url';
 
 interface Props {
   onToggleFocusMode?: () => void;
@@ -145,7 +146,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
         {/* 1-CLICK MULTI-DOMAIN QUICK ACTION LAUNCHERS */}
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', paddingTop: '4px' }}>
           <a
-            href="/app/fitness"
+            href={withBase('/app/fitness')}
             style={{
               background: 'var(--color-state-done-soft)',
               border: '1px solid var(--color-border-subtle)',
@@ -164,7 +165,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
           </a>
 
           <a
-            href="/app/german"
+            href={withBase('/app/german')}
             style={{
               background: 'var(--color-accent-warning-soft)',
               border: '1px solid var(--color-border-subtle)',
@@ -183,7 +184,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
           </a>
 
           <a
-            href="/app/clinical"
+            href={withBase('/app/clinical')}
             style={{
               background: 'var(--color-accent-primary-soft)',
               border: '1px solid var(--color-border-subtle)',
@@ -202,7 +203,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
           </a>
 
           <a
-            href="/app/career"
+            href={withBase('/app/career')}
             style={{
               background: 'var(--color-accent-primary-soft)',
               border: '1px solid var(--color-border-subtle)',
