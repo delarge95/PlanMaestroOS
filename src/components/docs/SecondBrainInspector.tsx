@@ -51,6 +51,28 @@ const SAMPLE_OBSIDIAN_NOTES = [
   }
 ];
 
+// Whitelist validator for third-party Notion embeds to prevent phishing, XSS, and clickjacking
+const isValidNotionUrl = (urlStr: string): boolean => {
+  try {
+    const url = new URL(urlStr);
+    if (url.protocol !== 'https:') return false;
+
+    const allowedDomains = [
+      'notion.so',
+      'notion.site',
+      'notion.com',
+      'v1.embednotion.com'
+    ];
+
+    const hostname = url.hostname.toLowerCase();
+    return allowedDomains.some(domain =>
+      hostname === domain || hostname.endsWith('.' + domain)
+    );
+  } catch (e) {
+    return false;
+  }
+};
+
 export default function SecondBrainInspector({
   defaultNotionUrl = 'https://v1.embednotion.com/embed/plan-maestro'
 }: Props) {
@@ -67,7 +89,9 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidNotionUrl(savedNotion)) {
+        setNotionEmbedUrl(savedNotion);
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +100,15 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+    if (!isValidNotionUrl(trimmed)) {
+      alert('URL inválida. Debe ser HTTPS y pertenecer a un dominio de Notion permitido (notion.so, notion.site, notion.com, v1.embednotion.com).');
+      return;
+    }
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -296,6 +325,7 @@ export default function SecondBrainInspector({
                 src={notionEmbedUrl}
                 title="Notion Second Brain Live Inspection"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
               />
             </div>
           </div>
