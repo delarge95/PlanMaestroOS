@@ -1,247 +1,1805 @@
-// src/data/fitness/programs/powerbuilding.ts - Official Jeff Nippard Powerbuilding System (10 Weeks)
-import type { TrainingProgram, ProgramWeek } from './types';
-
-const generatePowerbuildingWeeks = (): ProgramWeek[] => {
-  const weeks: ProgramWeek[] = [];
-
-  for (let w = 1; w <= 10; w++) {
-    const isDeload = w === 5 || w === 10;
-    const isPeak = w === 9;
-    const earlyRpe = isDeload ? '6-7' : isPeak ? '9' : '7.5-8.5';
-    const lastRpe = isDeload ? '7' : isPeak ? '9.5' : '8.5';
-
-    weeks.push({
-      weekNumber: w,
-      title: w <= 4 ? `Bloque 1: Fuerza Base & Hipertrofia (Semana ${w})` : w === 5 ? `Semana 5: Descarga de Mitad de Ciclo (Deload)` : w <= 8 ? `Bloque 2: Intensificación & Carga Pesada (Semana ${w})` : w === 9 ? `Semana 9: Pico de Fuerza (Peaking 1RM)` : `Semana 10: Deload Final & Test`,
-      isDeload,
-      days: [
-        {
-          id: `pb-w${w}-d1`,
-          name: 'Día 1: Lower #1 (Squat & Peso Muerto Fuerza)',
-          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Espalda Baja', 'Abs'],
-          exercises: [
-            {
-              exerciseId: 'Back Squat',
-              displayName: 'Back Squat (Sentadilla Trasera)',
-              warmupSets: 4,
-              workingSets: isDeload ? 2 : 3,
-              targetReps: isPeak ? '1-2' : '4-6',
-              restPeriod: '3-4 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Smith Machine Squat', 'Leg Press (45°)'],
-              notes: 'Top Set: 1x4 RPE 8.5 (o %1RM indicado). Mantener tensión en torso y profundidad constante.'
-            },
-            {
-              exerciseId: 'Barbell RDL',
-              displayName: 'Snatch-Grip Romanian Deadlift',
-              warmupSets: 2,
-              workingSets: 3,
-              targetReps: '8-10',
-              restPeriod: '2-3 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Barbell RDL', 'Dumbbell RDL'],
-              notes: 'Agarre amplio snatch-grip. Enfoque en tensión constante de isquiotibiales y glúteos.'
-            },
-            {
-              exerciseId: 'Leg Extension',
-              displayName: 'Leg Extension (Cuádriceps)',
-              warmupSets: 1,
-              workingSets: 3,
-              targetReps: '12-15',
-              restPeriod: '1-2 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Leg Extension', 'Spanish Squats'],
-              notes: 'Contracción muscular constante.'
-            },
-            {
-              exerciseId: 'Standing Calf Raise',
-              displayName: 'Standing Calf Raise',
-              warmupSets: 0,
-              workingSets: 4,
-              targetReps: '15-20',
-              restPeriod: '1-2 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Standing Calf Raise', 'Leg Press Calf Press'],
-              notes: 'Pausa de 1 segundo en flexión estirada.'
-            }
-          ]
-        },
-        {
-          id: `pb-w${w}-d2`,
-          name: 'Día 2: Upper #1 (Bench Press & Remo Fuerza)',
-          targetMuscles: ['Pectorales', 'Dorsales', 'Hombros', 'Tríceps'],
-          exercises: [
-            {
-              exerciseId: 'Barbell Bench Press',
-              displayName: 'Barbell Bench Press (Press de Banca)',
-              warmupSets: 3,
-              workingSets: isDeload ? 2 : 3,
-              targetReps: isPeak ? '1-2' : '5-6',
-              restPeriod: '3-4 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Chest Press Machine', 'Dumbbell Incline Press'],
-              notes: 'Top set pesado RPE 8.5 seguido de series back-off con pausa de 1 segundo en pecho.'
-            },
-            {
-              exerciseId: 'Chest-Supported Dumbbell Row',
-              displayName: 'Pendlay Row / Chest-Supported Row',
-              warmupSets: 2,
-              workingSets: 3,
-              targetReps: '8-10',
-              restPeriod: '2-3 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Chest-Supported Dumbbell Row', 'Wide-Grip Lat Pulldown'],
-              notes: 'Minimizar impulso corporal. Tracción estricta con dorsales y espalda media.'
-            },
-            {
-              exerciseId: 'Chest Dip',
-              displayName: 'Weighted Dip / DB Floor Press',
-              warmupSets: 2,
-              workingSets: 3,
-              targetReps: '6-8',
-              restPeriod: '2-3 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Chest Dip', 'Barbell Incline Press'],
-              notes: 'Adicionar peso si el RPE es inferior a 8.'
-            },
-            {
-              exerciseId: 'Pull-Up',
-              displayName: 'Eccentric-Accentuated Pull-Up',
-              warmupSets: 1,
-              workingSets: 2,
-              targetReps: 'AMRAP (Al fallo)',
-              restPeriod: '2-3 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Pull-Up', 'Wide-Grip Lat Pulldown'],
-              notes: 'Excéntrica de 3 segundos en cada repetición manteniendo forma estricta.'
-            }
-          ]
-        },
-        {
-          id: `pb-w${w}-d3`,
-          name: 'Día 3: Lower #2 (Deadlift & Accesorio de Pierna)',
-          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Cuádriceps', 'Core'],
-          exercises: [
-            {
-              exerciseId: 'Deadlift',
-              displayName: 'Conventional / Sumo Deadlift',
-              warmupSets: 4,
-              workingSets: isDeload ? 2 : 3,
-              targetReps: isPeak ? '1-2' : '3-5',
-              restPeriod: '4-5 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Barbell RDL', 'Conventional Deadlift'],
-              notes: 'Usar la postura (convencional o sumo) donde se tenga mayor palanca mecánica.'
-            },
-            {
-              exerciseId: 'Barbell Hip Thrust',
-              displayName: 'Barbell Hip Thrust',
-              warmupSets: 2,
-              workingSets: 3,
-              targetReps: '8-10',
-              restPeriod: '2-3 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Barbell Hip Thrust', 'Machine Hip Abduction'],
-              notes: 'Bloqueo completo con retroversión pélvica y máxima contracción de glúteos.'
-            },
-            {
-              exerciseId: 'Lying Leg Curl',
-              displayName: 'Lying Leg Curl',
-              warmupSets: 1,
-              workingSets: 3,
-              targetReps: '10-12',
-              restPeriod: '1-2 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Lying Leg Curl', 'Seated Leg Curl'],
-              notes: 'Excéntrica suave.'
-            }
-          ]
-        },
-        {
-          id: `pb-w${w}-d4`,
-          name: 'Día 4: Upper #2 (OHP & Accesorios de Hipertrofia)',
-          targetMuscles: ['Hombros', 'Pecho Superior', 'Bíceps', 'Tríceps'],
-          exercises: [
-            {
-              exerciseId: 'Barbell Overhead Press (OHP) / Military Press',
-              displayName: 'Overhead Press (OHP)',
-              warmupSets: 3,
-              workingSets: 3,
-              targetReps: '6-8',
-              restPeriod: '2-3 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Barbell Overhead Press (OHP) / Military Press', 'Seated DB Press'],
-              notes: 'Resetear barra en cada repetición sin rebotar en el pecho.'
-            },
-            {
-              exerciseId: '45° Incline Barbell Press',
-              displayName: 'Close-Grip Bench Press',
-              warmupSets: 2,
-              workingSets: 3,
-              targetReps: '10-12',
-              restPeriod: '2-3 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['45° Incline Barbell Press', 'Chest Dip'],
-              notes: 'Agarre al ancho de hombros cerrando codos hacia el torso.'
-            },
-            {
-              exerciseId: 'EZ-Bar Preacher Curl',
-              displayName: 'Barbell / EZ-Bar Curl',
-              warmupSets: 0,
-              workingSets: 3,
-              targetReps: '12-15',
-              restPeriod: '1 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['EZ-Bar Preacher Curl', 'DB Alternating Curl'],
-              notes: 'Enfoque en la tensión y bombeo muscular.'
-            },
-            {
-              exerciseId: 'Cable Tricep Pushdown (V-Bar)',
-              displayName: 'Skull Crusher',
-              warmupSets: 0,
-              workingSets: 3,
-              targetReps: '8-10',
-              restPeriod: '1 min',
-              earlySetRpe: earlyRpe,
-              lastSetRpe: lastRpe,
-              substituteOptions: ['Cable Tricep Pushdown (V-Bar)', 'DB French Press'],
-              notes: 'Tensión constante en tríceps sobre banco plano.'
-            }
-          ]
-        }
-      ]
-    });
-  }
-
-  return weeks;
-};
+// src/data/fitness/programs/powerbuilding.ts - 100% Faithful FitApp Jeff Nippard Powerbuilding System
+import type { TrainingProgram } from './types';
 
 export const powerbuildingProgram: TrainingProgram = {
   id: 'powerbuilding',
   title: 'Powerbuilding System (Fuerza & Hipertrofia)',
   source: 'Jeff Nippard (2020)',
   pdfUrl: '/library/fitness/powerbuilding-system.pdf',
-  durationWeeks: 10,
-  split: ['Lower #1', 'Upper #1', 'Lower #2', 'Upper #2'],
+  durationWeeks: 8,
+  split: ['Full Body 1: Squat & OHP', 'Full Body 2: Deadlift & Bench', 'Full Body 3: Squat & Dip'],
   methodology: [
     'Combinación de Fuerza %1RM + RPE y Hipertrofia',
     'Top Sets Pesados + Back-off Sets',
-    'Fase de Peaking para 1RM en Semana 9'
+    'Deloads Estratégicos en Semanas 4 y 8'
   ],
   equipment: ['Barbell', 'Dumbbells', 'Bench', 'Dip Station'],
-  weeks: generatePowerbuildingWeeks()
+  weeks: [
+    {
+      weekNumber: 1,
+      title: 'Semana 1 (Fase de Fuerza Base)',
+      isDeload: false,
+      days: [
+        {
+          id: 'pb-w1-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w1-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5 / 8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w1-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w1-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w1-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w1-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w1-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w1-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w1-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w1-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w1-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w1-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w1-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w1-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w1-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w1-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      weekNumber: 2,
+      title: 'Semana 2 (Fase de Fuerza Base)',
+      isDeload: false,
+      days: [
+        {
+          id: 'pb-w2-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w2-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5 / 8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w2-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w2-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w2-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w2-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w2-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w2-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w2-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w2-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w2-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w2-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w2-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w2-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w2-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w2-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      weekNumber: 3,
+      title: 'Semana 3 (Fase de Fuerza Base)',
+      isDeload: false,
+      days: [
+        {
+          id: 'pb-w3-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w3-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5 / 8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w3-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w3-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w3-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w3-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w3-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w3-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w3-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w3-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w3-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w3-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w3-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w3-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w3-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w3-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      weekNumber: 4,
+      title: 'Semana 4 (Deload Estratégico)',
+      isDeload: true,
+      days: [
+        {
+          id: 'pb-w4-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w4-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w4-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w4-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w4-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w4-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w4-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w4-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w4-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w4-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w4-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w4-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w4-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w4-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w4-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w4-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      weekNumber: 5,
+      title: 'Semana 5 (Fase de Fuerza Base)',
+      isDeload: false,
+      days: [
+        {
+          id: 'pb-w5-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w5-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5 / 8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w5-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w5-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w5-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w5-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w5-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w5-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w5-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w5-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w5-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w5-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w5-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w5-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w5-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w5-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      weekNumber: 6,
+      title: 'Semana 6 (Fase de Fuerza Base)',
+      isDeload: false,
+      days: [
+        {
+          id: 'pb-w6-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w6-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5 / 8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w6-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w6-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w6-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w6-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w6-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w6-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w6-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w6-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w6-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w6-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w6-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w6-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w6-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w6-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      weekNumber: 7,
+      title: 'Semana 7 (Fase de Fuerza Base)',
+      isDeload: false,
+      days: [
+        {
+          id: 'pb-w7-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w7-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5 / 8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w7-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w7-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w7-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w7-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w7-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w7-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w7-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w7-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w7-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w7-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w7-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w7-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w7-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w7-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      weekNumber: 8,
+      title: 'Semana 8 (Deload Estratégico)',
+      isDeload: true,
+      days: [
+        {
+          id: 'pb-w8-d1',
+          name: 'Día 1: Full Body 1 (Squat & OHP)',
+          targetMuscles: ['Cuádriceps', 'Isquiotibiales', 'Hombros', 'Espalda Alta', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w8-d1-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '5',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Safety Bar Squat',
+              substitutionOption2: 'Front Squat',
+              substituteOptions: ['Safety Bar Squat', 'Front Squat'],
+              notes: 'Top Set: 1x5 a 75-80% 1RM. Back-off: 2x8 al 70%. Velocidad explosiva.'
+            },
+            {
+              id: 'pb-w8-d1-ex2',
+              exerciseId: 'Overhead Press',
+              displayName: 'Overhead Press',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'Seated DB Press',
+              substitutionOption2: 'Machine Shoulder Press',
+              substituteOptions: ['Seated DB Press', 'Machine Shoulder Press'],
+              notes: 'Resetear en cada repetición. Mantener glúteos e inframaxilar apretados.'
+            },
+            {
+              id: 'pb-w8-d1-ex3',
+              exerciseId: 'Glute Ham Raise',
+              displayName: 'Glute Ham Raise',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '8-10',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Nordic Ham Curl',
+              substitutionOption2: 'Seated Leg Curl',
+              substituteOptions: ['Nordic Ham Curl', 'Seated Leg Curl'],
+              notes: 'Caderas alineadas. Usar brazos en excéntrica si es necesario.'
+            },
+            {
+              id: 'pb-w8-d1-ex4',
+              exerciseId: 'Chest-Supported Row',
+              displayName: 'Helms Row',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Chest-Supported Row',
+              substitutionOption2: 'Pendlay Row',
+              substituteOptions: ['Chest-Supported Row', 'Pendlay Row'],
+              notes: 'Forma estricta. Codos proyectados atrás a 45°.'
+            },
+            {
+              id: 'pb-w8-d1-ex5',
+              exerciseId: 'DB Hammer Curl',
+              displayName: 'Hammer Curl',
+              warmupSets: '0',
+              workingSets: 3,
+              targetReps: '20-25',
+              earlySetRpe: 'RPE 9.0',
+              lastSetRpe: 'RPE 10',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Cable Rope Curl',
+              substitutionOption2: 'Preacher Hammer Curl',
+              substituteOptions: ['Cable Rope Curl', 'Preacher Hammer Curl'],
+              notes: 'Codos fijos a los lados. Squeeze de braquial al subir.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w8-d2',
+          name: 'Día 2: Full Body 2 (Deadlift & Bench)',
+          targetMuscles: ['Isquiotibiales', 'Glúteos', 'Pectorales', 'Dorsales', 'Tríceps'],
+          exercises: [
+            {
+              id: 'pb-w8-d2-ex1',
+              exerciseId: 'Deadlift',
+              displayName: 'Deadlift',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '3-5 min',
+              substitutionOption1: 'Sumo Deadlift',
+              substitutionOption2: 'Trap Bar Deadlift',
+              substituteOptions: ['Sumo Deadlift', 'Trap Bar Deadlift'],
+              notes: 'Posición convencional o sumo. Tensar dorsales antes del despegue.'
+            },
+            {
+              id: 'pb-w8-d2-ex2',
+              exerciseId: 'Barbell Bench Press',
+              displayName: 'Barbell Bench Press',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '3 / 10',
+              earlySetRpe: 'RPE 6.5',
+              lastSetRpe: 'RPE 7.0',
+              restPeriod: '4-5 min',
+              substitutionOption1: 'Flat DB Press',
+              substitutionOption2: 'Machine Chest Press',
+              substituteOptions: ['Flat DB Press', 'Machine Chest Press'],
+              notes: 'Top set 1x3 al 82.5%. 2 series de 10 reps con 1s de pausa en el pecho.'
+            },
+            {
+              id: 'pb-w8-d2-ex3',
+              exerciseId: 'Weighted Pull-Up',
+              displayName: 'Weighted Pull-Up',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '5-8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Lat Pulldown',
+              substitutionOption2: 'Chin-Up',
+              substituteOptions: ['Lat Pulldown', 'Chin-Up'],
+              notes: 'Agarre 1.5x ancho de hombros. Pecho directo a la barra.'
+            },
+            {
+              id: 'pb-w8-d2-ex4',
+              exerciseId: 'EZ-Bar Skull Crusher',
+              displayName: 'Floor Skull Crusher',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '10-12',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'EZ-Bar Skull Crusher',
+              substitutionOption2: 'Triceps Pressdown',
+              substituteOptions: ['EZ-Bar Skull Crusher', 'Triceps Pressdown'],
+              notes: 'Llevar la barra detrás de la cabeza tocando suavemente el suelo.'
+            }
+          ]
+        },
+        {
+          id: 'pb-w8-d3',
+          name: 'Día 3: Full Body 3 (Squat & Dip)',
+          targetMuscles: ['Cuádriceps', 'Pectorales', 'Tríceps', 'Deltoides Posterior', 'Bíceps'],
+          exercises: [
+            {
+              id: 'pb-w8-d3-ex1',
+              exerciseId: 'Back Squat',
+              displayName: 'Back Squat',
+              warmupSets: '4',
+              workingSets: 3,
+              targetReps: '4',
+              earlySetRpe: '80% 1RM',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '3-4 min',
+              substitutionOption1: 'Box Squat',
+              substitutionOption2: 'Leg Press',
+              substituteOptions: ['Box Squat', 'Leg Press'],
+              notes: 'Mantener tensión en la parte alta de la espalda contra la barra.'
+            },
+            {
+              id: 'pb-w8-d3-ex2',
+              exerciseId: 'Weighted Dip',
+              displayName: 'Weighted Dip',
+              warmupSets: '2',
+              workingSets: 3,
+              targetReps: '8',
+              earlySetRpe: 'RPE 7.5',
+              lastSetRpe: 'RPE 8.5',
+              restPeriod: '2-3 min',
+              substitutionOption1: 'DB Floor Press',
+              substitutionOption2: 'Close-Grip Bench Press',
+              substituteOptions: ['DB Floor Press', 'Close-Grip Bench Press'],
+              notes: 'Inclinación ligera de torso para mayor enfoque en pecho.'
+            },
+            {
+              id: 'pb-w8-d3-ex3',
+              exerciseId: 'Face Pull',
+              displayName: 'Face Pull',
+              warmupSets: '0',
+              workingSets: 4,
+              targetReps: '15-20',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Reverse Cable Flye',
+              substitutionOption2: 'Band Pull-Apart',
+              substituteOptions: ['Reverse Cable Flye', 'Band Pull-Apart'],
+              notes: 'Retraer escápulas y rotar externamente al tirar hacia la cara.'
+            },
+            {
+              id: 'pb-w8-d3-ex4',
+              exerciseId: 'Incline DB Curl',
+              displayName: 'Incline Dumbbell Curl',
+              warmupSets: '1',
+              workingSets: 3,
+              targetReps: '12-15',
+              earlySetRpe: 'RPE 8.0',
+              lastSetRpe: 'RPE 9.0',
+              restPeriod: '1-2 min',
+              substitutionOption1: 'Bayesian Cable Curl',
+              substitutionOption2: 'EZ-Bar Curl',
+              substituteOptions: ['Bayesian Cable Curl', 'EZ-Bar Curl'],
+              notes: 'Ejecutar un brazo a la vez iniciando con el lado más débil.'
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
+
+export default powerbuildingProgram;

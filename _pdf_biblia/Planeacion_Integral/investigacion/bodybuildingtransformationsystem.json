@@ -1,0 +1,1019 @@
+{
+  "programa": "The Bodybuilding Transformation System",
+  "autor": "Jeff Nippard",
+  "duracion_semanas": 12,
+  "metrica_esfuerzo": "RPE (Rating of Perceived Exertion)",
+  "dias_por_semana": 5,
+  "fases": [
+    {
+      "nombre": "Foundation Block (Strength Focus)",
+      "semanas": "1 - 5",
+      "estructura_dias": [
+        "Día 1: Upper (Strength Focus)",
+        "Día 2: Lower (Strength Focus)",
+        "Día 3: Back & Arms",
+        "Día 4: Chest & Shoulders",
+        "Día 5: Legs & Abs"
+      ]
+    },
+    {
+      "nombre": "Hypertrophy Block",
+      "semanas": "6 - 12",
+      "estructura_dias": [
+        "Día 1: Upper (Hypertrophy Focus)",
+        "Día 2: Lower (Hypertrophy Focus)",
+        "Día 3: Back & Arms",
+        "Día 4: Chest & Shoulders",
+        "Día 5: Legs & Abs"
+      ]
+    }
+  ],
+  "plantillas_ejercicios": {
+    "FASE_1_STRENGTH": {
+      "DAY_1_UPPER_STRENGTH": [
+        {
+          "id": "incline_barbell_press_45",
+          "ejercicio": "45° Incline Barbell Press",
+          "series_calentamiento": "2-3",
+          "repeticiones": "6-8",
+          "descanso": "3-5 min",
+          "sustituciones_recomendadas": [
+            "45° Incline DB Press",
+            "45° Incline Machine Press"
+          ],
+          "notas": "1 second pause at the bottom of each rep while maintaining tension on the pecs."
+        },
+        {
+          "id": "cable_crossover_ladder",
+          "ejercicio": "Cable Crossover Ladder",
+          "series_calentamiento": "1-2",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Pec Deck",
+            "Bottom-Half DB Flye"
+          ],
+          "notas": "Do one set with low cable position, one set with medium-height cable position, and one height with a high cable position. If you only have one or two sets, choose the one or two cable positions you prefer."
+        },
+        {
+          "id": "wide_grip_pull_up",
+          "ejercicio": "Wide-Grip Pull-Up",
+          "series_calentamiento": "1-2",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Wide-Grip Lat Pulldown",
+            "Dual-Handle Lat Pulldown"
+          ],
+          "notas": "1.5x shoulder width overhand grip. Slow 2-3 second negative. Feel your lats pulling apart on the way down."
+        },
+        {
+          "id": "high_cable_lateral_raise_f1",
+          "ejercicio": "High-Cable Lateral Raise",
+          "series_calentamiento": "1-2",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "High-Cable Cuffed Lateral Raise",
+            "Lean-In DB Lateral Raise"
+          ],
+          "notas": "Focus on squeezing your lateral delt to move the weight."
+        },
+        {
+          "id": "pendlay_deficit_row",
+          "ejercicio": "Pendlay Deficit Row",
+          "series_calentamiento": "1-2",
+          "repeticiones": "6-8",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Smith Machine Row",
+            "Single-Arm DB Row"
+          ],
+          "notas": "Stand on a bumper plate. Focus on getting a big stretch and touch your stomach/chest on each rep!"
+        },
+        {
+          "id": "overhead_cable_triceps_ext_bar_f1",
+          "ejercicio": "Overhead Cable Triceps Extension (Bar)",
+          "series_calentamiento": "1",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Overhead Cable Triceps Extension (Rope)",
+            "DB Skull Crusher"
+          ],
+          "notas": "Optionally pause for 0.5-1 second in the stretched aspect of each rep."
+        },
+        {
+          "id": "bayesian_cable_curl_f1",
+          "ejercicio": "Bayesian Cable Curl",
+          "series_calentamiento": "1",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Super-Bayesian High Cable Curl",
+            "Incline DB Stretch Curl"
+          ],
+          "notas": "If you have a left-right bicep size imbalance, do these 1 arm at a time, starting with the weaker arm. Take the weaker arm to the listed RPE. Then match the reps with the other arm."
+        }
+      ],
+      "DAY_2_LOWER_STRENGTH": [
+        {
+          "id": "lying_leg_curl_f1",
+          "ejercicio": "Lying Leg Curl",
+          "series_calentamiento": "2",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Leg Curl",
+            "Nordic Ham Curl"
+          ],
+          "notas": "Set the machine so that you get the biggest stretch possible at the bottom. Prevent your butt from popping up as you curl."
+        },
+        {
+          "id": "smith_machine_squat",
+          "ejercicio": "Smith Machine Squat",
+          "series_calentamiento": "2-4",
+          "repeticiones": "6-8",
+          "descanso": "3-5 min",
+          "sustituciones_recomendadas": [
+            "DB Bulgarian Split Squat",
+            "High-Bar Back Squat"
+          ],
+          "notas": "Once you are under the bar, set up your feet as you would a normal squat and then bring them forward ~3-6 inches. This will cause you to lean back into the bar slightly."
+        },
+        {
+          "id": "barbell_rdl",
+          "ejercicio": "Barbell RDL",
+          "series_calentamiento": "2-4",
+          "repeticiones": "6-8",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "DB RDL",
+            "Snatch-Grip RDL"
+          ],
+          "notas": "To keep tension on the hamstrings, stop about 75% of the way to full lockout on each rep (i.e. stay in the bottom 3/4 of the range of motion)."
+        },
+        {
+          "id": "leg_extension_d2_f1",
+          "ejercicio": "Leg Extension",
+          "series_calentamiento": "1-2",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Reverse Nordic",
+            "Sissy Squat"
+          ],
+          "notas": "Set the seat back as far as it will go while still feeling comfortable. Grab the handles as hard as you can. Use a 2-3 second negative."
+        },
+        {
+          "id": "standing_calf_raise_f1",
+          "ejercicio": "Standing Calf Raise",
+          "series_calentamiento": "1-2",
+          "repeticiones": "6-8",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Calf Raise",
+            "Leg Press Calf Press"
+          ],
+          "notas": "1-2 second pause at the bottom of each rep. Instead of just going up onto your toes, think about rolling your ankle back and forth on the balls of your feet."
+        },
+        {
+          "id": "cable_crunch_f1",
+          "ejercicio": "Cable Crunch",
+          "series_calentamiento": "1",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Decline Weighted Crunch",
+            "Machine Crunch"
+          ],
+          "notas": "Round your lower back as you crunch. Maintain a mind-muscle connection with your 6-pack."
+        }
+      ],
+      "DAY_3_BACK_ARMS": [
+        {
+          "id": "neutral_grip_lat_pulldown",
+          "ejercicio": "Neutral-Grip Lat Pulldown",
+          "series_calentamiento": "2-3",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Neutral-Grip Pull-Up",
+            "Dual-Handle Lat Pulldown"
+          ],
+          "notas": "Do these pulldowns with the handle more out in front of you, more like a cross between a pullover and a pulldown. Focus on feeling your lats working."
+        },
+        {
+          "id": "chest_supported_machine_row_f1",
+          "ejercicio": "Chest-Supported Machine Row",
+          "series_calentamiento": "2-3",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Chest-Supported T-Bar Row",
+            "Incline Chest-Supported DB Row"
+          ],
+          "notas": "Flare elbows out at roughly 45° and squeeze your shoulder blades together hard at the top of each rep."
+        },
+        {
+          "id": "neutral_grip_seated_cable_row",
+          "ejercicio": "Neutral-Grip Seated Cable Row",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Helms Row",
+            "Meadows Row"
+          ],
+          "notas": "Focus on squeezing your shoulder blades together, driving your elbows down and back."
+        },
+        {
+          "id": "one_arm_45_cable_rear_delt_flye_f1",
+          "ejercicio": "1-Arm 45° Cable Rear Delt Flye",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Rope Face Pull",
+            "Reverse Pec Deck"
+          ],
+          "notas": "Pause for 1-2 seconds in the squeeze of each rep. Contract the rear delts hard!"
+        },
+        {
+          "id": "machine_shrug_f1",
+          "ejercicio": "Machine Shrug",
+          "series_calentamiento": "2-3",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Cable Paused Shrug-In",
+            "DB Shrug"
+          ],
+          "notas": "Brief pause at the top and bottom of ROM. Think about pulling your shoulders up to your ears!"
+        },
+        {
+          "id": "ez_bar_cable_curl",
+          "ejercicio": "EZ-Bar Cable Curl",
+          "series_calentamiento": "1",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "EZ-Bar Curl",
+            "DB Curl"
+          ],
+          "notas": "Set up the cable at the lowest position. Maintain constant tension on the biceps. Slow, controlled reps!"
+        },
+        {
+          "id": "machine_preacher_curl_f1",
+          "ejercicio": "Machine Preacher Curl",
+          "series_calentamiento": "1",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "EZ-Bar Preacher Curl",
+            "DB Preacher Curl"
+          ],
+          "notas": "Smooth, controlled reps. Mind-muscle connection with the biceps."
+        }
+      ],
+      "DAY_4_CHEST_SHOULDERS": [
+        {
+          "id": "barbell_bench_press",
+          "ejercicio": "Barbell Bench Press",
+          "series_calentamiento": "2-4",
+          "repeticiones": "8-10",
+          "descanso": "3-5 min",
+          "sustituciones_recomendadas": [
+            "Machine Chest Press",
+            "DB Bench Press"
+          ],
+          "notas": "Set up a comfortable arch, quick pause on the chest and explode up on each rep."
+        },
+        {
+          "id": "machine_shoulder_press",
+          "ejercicio": "Machine Shoulder Press",
+          "series_calentamiento": "2-3",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Cable Shoulder Press",
+            "Seated DB Shoulder Press"
+          ],
+          "notas": "Ensure that your elbows break at least 90°. Mind-muscle connection with your delts. Smooth, controlled reps."
+        },
+        {
+          "id": "bottom_half_db_flye",
+          "ejercicio": "Bottom-Half DB Flye",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Bottom-Half Seated Cable Flye",
+            "Low-to-High Cable Crossover"
+          ],
+          "notas": "All reps and sets are to be performed in the bottom half of the ROM. Focus on feeling a deep stretch in your pecs at the bottom."
+        },
+        {
+          "id": "high_cable_lateral_raise_d4_f1",
+          "ejercicio": "High-Cable Lateral Raise",
+          "series_calentamiento": "1",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "High-Cable Cuffed Lateral Raise",
+            "Lean-In DB Lateral Raise"
+          ],
+          "notas": "Focus on squeezing your lateral delt to move the weight."
+        },
+        {
+          "id": "overhead_cable_triceps_ext_bar_d4_f1",
+          "ejercicio": "Overhead Cable Triceps Extension (Bar)",
+          "series_calentamiento": "1",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Overhead Cable Triceps Extension (Rope)",
+            "DB Skull Crusher"
+          ],
+          "notas": "Optionally pause for 0.5-1 second in the stretched aspect of each rep."
+        },
+        {
+          "id": "cable_triceps_kickback_f1",
+          "ejercicio": "Cable Triceps Kickback",
+          "series_calentamiento": "1",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "DB Triceps Kickback",
+            "Bench Dip"
+          ],
+          "notas": "Main thing is that when you're in the full squeeze, your shoulder should be positioned back behind your torso."
+        },
+        {
+          "id": "roman_chair_leg_raise",
+          "ejercicio": "Roman Chair Leg Raise",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-20",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Hanging Leg Raise",
+            "Modified Candlestick"
+          ],
+          "notas": "Allow your lower back to round as you curl your legs up. Just go until you hit the listed RPE with controlled form."
+        }
+      ],
+      "DAY_5_LEGS_ABS": [
+        {
+          "id": "leg_press_f1",
+          "ejercicio": "Leg Press",
+          "series_calentamiento": "2-4",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Smith Machine Static Lunge",
+            "DB Walking Lunge"
+          ],
+          "notas": "Feet lower on the platform for more quad focus. Get as deep as you can without excessive back rounding. Control the negative."
+        },
+        {
+          "id": "seated_leg_curl_f1",
+          "ejercicio": "Seated Leg Curl",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Lying Leg Curl",
+            "Nordic Ham Curl"
+          ],
+          "notas": "Lean forward over the machine to get a maximum stretch in your hamstrings."
+        },
+        {
+          "id": "db_bulgarian_split_squat",
+          "ejercicio": "DB Bulgarian Split Squat",
+          "series_calentamiento": "2-3",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "DB Step-Up",
+            "Goblet Squat"
+          ],
+          "notas": "Lower all the way down until your front thigh is parallel to the ground. Drive through your front heel on the way up."
+        },
+        {
+          "id": "leg_extension_d5_f1",
+          "ejercicio": "Leg Extension",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Reverse Nordic",
+            "Sissy Squat"
+          ],
+          "notas": "Set the seat back as far as it will go while still feeling comfortable. Grab the handles as hard as you can. Use a 2-3 second negative."
+        },
+        {
+          "id": "machine_hip_adduction_f1",
+          "ejercicio": "Machine Hip Adduction",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Cable Hip Adduction",
+            "Copenhagen Hip Adduction"
+          ],
+          "notas": "Mind-muscle connection with your inner thighs. Great for adding thigh mass from the front!"
+        },
+        {
+          "id": "machine_hip_abduction_f1",
+          "ejercicio": "Machine Hip Abduction",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Cable Hip Abduction",
+            "Lateral Band Walk"
+          ],
+          "notas": "If possible, use pads to increase the range of motion on the machine. Lean forward and grab onto the machine rails to stretch glutes."
+        },
+        {
+          "id": "standing_calf_raise_d5_f1",
+          "ejercicio": "Standing Calf Raise",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Calf Raise",
+            "Leg Press Calf Press"
+          ],
+          "notas": "1-2 second pause at the bottom of each rep. Think about rolling your ankle back and forth on the balls of your feet."
+        }
+      ]
+    },
+    "FASE_2_HYPERTROPHY": {
+      "DAY_1_UPPER_HYPERTROPHY": [
+        {
+          "id": "incline_db_press_45_f2",
+          "ejercicio": "45° Incline DB Press",
+          "series_calentamiento": "2-3",
+          "repeticiones": "8-10",
+          "descanso": "3-5 min",
+          "sustituciones_recomendadas": [
+            "45° Incline Barbell Press",
+            "45° Incline Machine Press"
+          ],
+          "notas": "1 second pause at the bottom of each rep while maintaining tension on the pecs."
+        },
+        {
+          "id": "pec_deck_f2",
+          "ejercicio": "Pec Deck",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Cable Crossover Ladder",
+            "Bottom-Half DB Flye"
+          ],
+          "notas": "Focus on bringing your elbows together - not your hands."
+        },
+        {
+          "id": "dual_handle_lat_pulldown_f2",
+          "ejercicio": "Dual-Handle Lat Pulldown",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Wide-Grip Lat Pulldown",
+            "Wide-Grip Pull-Up"
+          ],
+          "notas": "Lean back by ~15° and drive your elbows down as you squeeze your shoulder blades together."
+        },
+        {
+          "id": "high_cable_lateral_raise_f2",
+          "ejercicio": "High-Cable Lateral Raise",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "High-Cable Cuffed Lateral Raise",
+            "Lean-In DB Lateral Raise"
+          ],
+          "notas": "Focus on squeezing your lateral delt to move the weight."
+        },
+        {
+          "id": "smith_machine_row_f2",
+          "ejercicio": "Smith Machine Row",
+          "series_calentamiento": "1-2",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Pendlay Deficit Row",
+            "Single-Arm DB Row"
+          ],
+          "notas": "Focus on squeezing your shoulder blades together, keeping your elbows at a ~45° angle."
+        },
+        {
+          "id": "overhead_cable_triceps_ext_bar_f2",
+          "ejercicio": "Overhead Cable Triceps Extension (Bar)",
+          "series_calentamiento": "1",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Overhead Cable Triceps Extension (Rope)",
+            "DB Skull Crusher"
+          ],
+          "notas": "Optionally pause for 0.5-1 second in the stretched aspect of each rep."
+        },
+        {
+          "id": "bayesian_cable_curl_f2",
+          "ejercicio": "Bayesian Cable Curl",
+          "series_calentamiento": "1",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Super-Bayesian High Cable Curl",
+            "Incline DB Stretch Curl"
+          ],
+          "notas": "If you have a left-right bicep size imbalance, do these 1 arm at a time, starting with the weaker arm."
+        }
+      ],
+      "DAY_2_LOWER_HYPERTROPHY": [
+        {
+          "id": "lying_leg_curl_f2",
+          "ejercicio": "Lying Leg Curl",
+          "series_calentamiento": "2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Leg Curl",
+            "Nordic Ham Curl"
+          ],
+          "notas": "Set the machine so that you get the biggest stretch possible at the bottom. Prevent your butt from popping up as you curl."
+        },
+        {
+          "id": "smith_machine_static_lunge_elevated",
+          "ejercicio": "Smith Machine Static Lunge w/ Elevated Front Foot",
+          "series_calentamiento": "2-4",
+          "repeticiones": "8-10",
+          "descanso": "3-5 min",
+          "sustituciones_recomendadas": [
+            "DB Bulgarian Split Squat",
+            "High-Bar Back Squat"
+          ],
+          "notas": "Elevate your front foot on a small box. Minimize contribution from your back leg."
+        },
+        {
+          "id": "hyperextension_45_f2",
+          "ejercicio": "45° Hyperextension",
+          "series_calentamiento": "2-4",
+          "repeticiones": "8-10",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Glute-Ham Raise",
+            "Cable Pull-Through"
+          ],
+          "notas": "Squeeze your glutes hard at the top of each rep. Slow controlled reps on the way down, followed by an explosive positive."
+        },
+        {
+          "id": "leg_extension_d2_f2",
+          "ejercicio": "Leg Extension",
+          "series_calentamiento": "1-2",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Reverse Nordic",
+            "Sissy Squat"
+          ],
+          "notas": "Set the seat back as far as it will go while still feeling comfortable. Grab handles hard, 2-3 second negative."
+        },
+        {
+          "id": "leg_press_calf_press_f2",
+          "ejercicio": "Leg Press Calf Press",
+          "series_calentamiento": "1-2",
+          "repeticiones": "8-10",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Calf Raise",
+            "Standing Calf Raise"
+          ],
+          "notas": "1-2 second pause at the bottom of each rep. Roll your ankle back and forth on the balls of your feet."
+        },
+        {
+          "id": "machine_crunch_f2",
+          "ejercicio": "Machine Crunch",
+          "series_calentamiento": "1",
+          "repeticiones": "10-12",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Decline Weighted Crunch",
+            "Cable Crunch"
+          ],
+          "notas": "Round your lower back as you crunch. Maintain a mind-muscle connection with your 6-pack."
+        }
+      ],
+      "DAY_3_BACK_ARMS": [
+        {
+          "id": "lean_back_lat_pulldown_f2",
+          "ejercicio": "Lean-Back Lat Pulldown",
+          "series_calentamiento": "2-3",
+          "repeticiones": "10-12",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Lean-Back Machine Pulldown",
+            "Pull-Up"
+          ],
+          "notas": "Initiate the pulldown with a straight up posture. As you pull the bar down, lean back by about 15-30° to get the mid-back involved."
+        },
+        {
+          "id": "chest_supported_t_bar_row_f2",
+          "ejercicio": "Chest-Supported T-Bar Row",
+          "series_calentamiento": "2-3",
+          "repeticiones": "10-12",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Chest-Supported Machine Row",
+            "Incline Chest-Supported DB Row"
+          ],
+          "notas": "Flare elbows out at roughly 45° and squeeze your shoulder blades together hard at the top."
+        },
+        {
+          "id": "dual_handle_elbows_out_cable_row_f2",
+          "ejercicio": "Dual-Handle Elbows-Out Cable Row",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Arm-Out Single-Arm DB Row",
+            "Meadows Row"
+          ],
+          "notas": "Flare your elbows out ~45°. Smooth, controlled reps."
+        },
+        {
+          "id": "one_arm_45_cable_rear_delt_flye_f2",
+          "ejercicio": "1-Arm 45° Cable Rear Delt Flye",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Rope Face Pull",
+            "Reverse Pec Deck"
+          ],
+          "notas": "Pause for 1-2 seconds in the squeeze of each rep. Contract the rear delts hard!"
+        },
+        {
+          "id": "cable_paused_shrug_in_f2",
+          "ejercicio": "Cable Paused Shrug-In",
+          "series_calentamiento": "2-3",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Machine Shrug",
+            "DB Shrug"
+          ],
+          "notas": "Shrug up and in. 1-2 second pause in the squeeze (top), then 1-2 second pause in the stretch (bottom)."
+        },
+        {
+          "id": "cable_rope_hammer_curl_f2",
+          "ejercicio": "Cable Rope Hammer Curl",
+          "series_calentamiento": "1",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "DB Hammer Curl",
+            "Hammer Preacher Curl"
+          ],
+          "notas": "Squeeze the rope hard as you curl the weight up. Smooth, controlled reps."
+        },
+        {
+          "id": "db_concentration_curl_f2",
+          "ejercicio": "DB Concentration Curl",
+          "series_calentamiento": "1",
+          "repeticiones": "15-20",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Concentration Cable Curl",
+            "DB Preacher Curl"
+          ],
+          "notas": "Smooth, controlled reps. Mind-muscle connection with the biceps."
+        }
+      ],
+      "DAY_4_CHEST_SHOULDERS": [
+        {
+          "id": "machine_chest_press_f2",
+          "ejercicio": "Machine Chest Press",
+          "series_calentamiento": "2-4",
+          "repeticiones": "10-12",
+          "descanso": "3-5 min",
+          "sustituciones_recomendadas": [
+            "Barbell Bench Press",
+            "DB Bench Press"
+          ],
+          "notas": "1 second pause at the bottom of each rep while maintaining tension on the pecs."
+        },
+        {
+          "id": "seated_db_shoulder_press_f2",
+          "ejercicio": "Seated DB Shoulder Press",
+          "series_calentamiento": "2-3",
+          "repeticiones": "10-12",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Cable Shoulder Press",
+            "Machine Shoulder Press"
+          ],
+          "notas": "Ensure that your elbows break at least 90°. Mind-muscle connection with your delts."
+        },
+        {
+          "id": "bottom_half_seated_cable_flye_f2",
+          "ejercicio": "Bottom-Half Seated Cable Flye",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Bottom-Half DB Flye",
+            "Low-to-High Cable Crossover"
+          ],
+          "notas": "All reps and sets are to be performed in the bottom half of the ROM. Focus on feeling a deep stretch."
+        },
+        {
+          "id": "high_cable_lateral_raise_d4_f2",
+          "ejercicio": "High-Cable Lateral Raise",
+          "series_calentamiento": "1",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "High-Cable Cuffed Lateral Raise",
+            "Lean-In DB Lateral Raise"
+          ],
+          "notas": "Focus on squeezing your lateral delt to move the weight."
+        },
+        {
+          "id": "ez_bar_skull_crusher_f2",
+          "ejercicio": "EZ-Bar Skull Crusher",
+          "series_calentamiento": "1",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "DB Skull Crusher",
+            "Katana Triceps Extension"
+          ],
+          "notas": "Optionally pause for 0.5-1 second in the stretched aspect of each rep."
+        },
+        {
+          "id": "triceps_pressdown_bar_f2",
+          "ejercicio": "Triceps Pressdown (Bar)",
+          "series_calentamiento": "1",
+          "repeticiones": "15-20",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Triceps Pressdown (Rope)",
+            "DB Triceps Kickback"
+          ],
+          "notas": "Focus on squeezing your triceps to move the weight."
+        },
+        {
+          "id": "ab_wheel_rollout_f2",
+          "ejercicio": "Ab Wheel Rollout",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Swiss Ball Rollout",
+            "Long-Lever Plank"
+          ],
+          "notas": "Use your abs to lower yourself down under control and pull yourself back up."
+        }
+      ],
+      "DAY_5_LEGS_ABS": [
+        {
+          "id": "hack_squat_f2",
+          "ejercicio": "Hack Squat",
+          "series_calentamiento": "2-4",
+          "repeticiones": "10-12",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Leg Press",
+            "DB Walking Lunge"
+          ],
+          "notas": "Use a controlled negative (don't free fall) and then explode on the positive."
+        },
+        {
+          "id": "seated_leg_curl_f2",
+          "ejercicio": "Seated Leg Curl",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Lying Leg Curl",
+            "Nordic Ham Curl"
+          ],
+          "notas": "Lean forward over the machine to get a maximum stretch in your hamstrings."
+        },
+        {
+          "id": "walking_lunge_f2",
+          "ejercicio": "Walking Lunge",
+          "series_calentamiento": "2-3",
+          "repeticiones": "10-12",
+          "descanso": "2-3 min",
+          "sustituciones_recomendadas": [
+            "Smith Machine Static Lunge",
+            "DB Static Lunge"
+          ],
+          "notas": "Take medium strides. Minimize contribution from the back leg."
+        },
+        {
+          "id": "leg_extension_d5_f2",
+          "ejercicio": "Leg Extension",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Reverse Nordic",
+            "Sissy Squat"
+          ],
+          "notas": "Set the seat back as far as it will go while still feeling comfortable. Grab handles hard, 2-3s negative."
+        },
+        {
+          "id": "machine_hip_adduction_f2",
+          "ejercicio": "Machine Hip Adduction",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Cable Hip Adduction",
+            "Copenhagen Hip Adduction"
+          ],
+          "notas": "Mind-muscle connection with your inner thighs. Push them hard!"
+        },
+        {
+          "id": "machine_hip_abduction_f2",
+          "ejercicio": "Machine Hip Abduction",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Cable Hip Abduction",
+            "Lateral Band Walk"
+          ],
+          "notas": "If possible, use pads to increase range of motion. Lean forward to stretch glutes."
+        },
+        {
+          "id": "standing_calf_raise_d5_f2",
+          "ejercicio": "Standing Calf Raise",
+          "series_calentamiento": "1-2",
+          "repeticiones": "12-15",
+          "descanso": "1-2 min",
+          "sustituciones_recomendadas": [
+            "Seated Calf Raise",
+            "Leg Press Calf Press"
+          ],
+          "notas": "1-2 second pause at the bottom of each rep. Roll your ankle back and forth on the balls of your feet."
+        }
+      ]
+    }
+  },
+  "programacion_semanal": [
+    {
+      "semana": 1,
+      "bloque": "Foundation Block",
+      "plantilla_utilizada": "FASE_1_STRENGTH",
+      "rpe_early_set": "~6-7 (o ~7-8 según ejercicio)",
+      "rpe_last_set": "~7-8 (o ~8-9 según ejercicio)",
+      "tecnicas_intensidad": "N/A para todos los ejercicios",
+      "series_trabajo_resumen": "2 series efectivas por ejercicio (1 serie en aislados secundarios como Preacher, Kickback)"
+    },
+    {
+      "semana": "2 - 5",
+      "bloque": "Foundation Block",
+      "plantilla_utilizada": "FASE_1_STRENGTH",
+      "rpe_early_set": "~8-9",
+      "rpe_last_set": 10,
+      "series_trabajo_resumen": "2-3 series efectivas por ejercicio",
+      "tecnicas_intensidad": {
+        "DAY_1": {
+          "incline_barbell_press_45": "Failure",
+          "cable_crossover_ladder": "Failure",
+          "wide_grip_pull_up": "Failure",
+          "high_cable_lateral_raise_f1": "Failure",
+          "pendlay_deficit_row": "Failure + LLPs (Extend set)",
+          "overhead_cable_triceps_ext_bar_f1": "Failure",
+          "bayesian_cable_curl_f1": "Failure"
+        },
+        "DAY_2": {
+          "lying_leg_curl_f1": "Failure + LLPs (Extend set)",
+          "smith_machine_squat": "Failure",
+          "barbell_rdl": "Failure",
+          "leg_extension_d2_f1": "Failure",
+          "standing_calf_raise_f1": "Static Stretch (30s)",
+          "cable_crunch_f1": "Failure"
+        },
+        "DAY_3": {
+          "neutral_grip_lat_pulldown": "Failure",
+          "chest_supported_machine_row_f1": "Failure",
+          "neutral_grip_seated_cable_row": "Failure + LLPs (Extend set)",
+          "one_arm_45_cable_rear_delt_flye_f1": "Myo-reps",
+          "machine_shrug_f1": "Failure",
+          "ez_bar_cable_curl": "Failure",
+          "machine_preacher_curl_f1": "Myo-reps"
+        },
+        "DAY_4": {
+          "barbell_bench_press": "Failure",
+          "machine_shoulder_press": "Failure",
+          "bottom_half_db_flye": "Failure",
+          "high_cable_lateral_raise_d4_f1": "Myo-reps",
+          "overhead_cable_triceps_ext_bar_d4_f1": "Failure",
+          "cable_triceps_kickback_f1": "Myo-reps",
+          "roman_chair_leg_raise": "Failure"
+        },
+        "DAY_5": {
+          "leg_press_f1": "Failure",
+          "seated_leg_curl_f1": "Failure + LLPs (Extend set)",
+          "db_bulgarian_split_squat": "Failure",
+          "leg_extension_d5_f1": "Myo-reps",
+          "machine_hip_adduction_f1": "Failure",
+          "machine_hip_abduction_f1": "Failure",
+          "standing_calf_raise_d5_f1": "Static Stretch (30s)"
+        }
+      }
+    },
+    {
+      "semana": 6,
+      "bloque": "Hypertrophy Block (Deload / Intro)",
+      "plantilla_utilizada": "FASE_2_HYPERTROPHY",
+      "rpe_early_set": "~6-7 (o ~7-8 según ejercicio)",
+      "rpe_last_set": "~7-8 (o ~8-9 según ejercicio)",
+      "tecnicas_intensidad": "N/A para todos los ejercicios",
+      "series_trabajo_resumen": "2 series efectivas por ejercicio"
+    },
+    {
+      "semana": "7 - 8",
+      "bloque": "Hypertrophy Block",
+      "plantilla_utilizada": "FASE_2_HYPERTROPHY",
+      "rpe_early_set": "~8-9",
+      "rpe_last_set": 10,
+      "series_trabajo_resumen": "3 series en ejercicios multiarticulares principales, 2 series en aislados",
+      "tecnicas_intensidad": {
+        "DAY_1": {
+          "incline_db_press_45_f2": "Failure",
+          "pec_deck_f2": "Failure",
+          "dual_handle_lat_pulldown_f2": "Failure",
+          "high_cable_lateral_raise_f2": "Failure",
+          "smith_machine_row_f2": "Failure + LLPs (Extend set)",
+          "overhead_cable_triceps_ext_bar_f2": "Failure",
+          "bayesian_cable_curl_f2": "Failure"
+        },
+        "DAY_2": {
+          "lying_leg_curl_f2": "Failure + LLPs (Extend set)",
+          "smith_machine_static_lunge_elevated": "Failure",
+          "hyperextension_45_f2": "Failure",
+          "leg_extension_d2_f2": "Failure",
+          "leg_press_calf_press_f2": "Static Stretch (30s)",
+          "machine_crunch_f2": "Failure"
+        },
+        "DAY_3": {
+          "lean_back_lat_pulldown_f2": "Failure",
+          "chest_supported_t_bar_row_f2": "Failure",
+          "dual_handle_elbows_out_cable_row_f2": "Failure + LLPs (Extend set)",
+          "one_arm_45_cable_rear_delt_flye_f2": "Myo-reps",
+          "cable_paused_shrug_in_f2": "Failure",
+          "cable_rope_hammer_curl_f2": "Failure",
+          "db_concentration_curl_f2": "Myo-reps"
+        },
+        "DAY_4": {
+          "machine_chest_press_f2": "Failure",
+          "seated_db_shoulder_press_f2": "Failure",
+          "bottom_half_seated_cable_flye_f2": "Failure",
+          "high_cable_lateral_raise_d4_f2": "Myo-reps",
+          "ez_bar_skull_crusher_f2": "Failure",
+          "triceps_pressdown_bar_f2": "Myo-reps",
+          "ab_wheel_rollout_f2": "Failure"
+        },
+        "DAY_5": {
+          "hack_squat_f2": "Failure",
+          "seated_leg_curl_f2": "Failure + LLPs (Extend set)",
+          "walking_lunge_f2": "Failure",
+          "leg_extension_d5_f2": "Myo-reps",
+          "machine_hip_adduction_f2": "Failure",
+          "machine_hip_abduction_f2": "Failure",
+          "standing_calf_raise_d5_f2": "Static Stretch (30s)"
+        }
+      }
+    },
+    {
+      "semana": "9 - 10",
+      "bloque": "Hypertrophy Block (Volumen Progresivo)",
+      "plantilla_utilizada": "FASE_2_HYPERTROPHY",
+      "rpe_early_set": "~8-9",
+      "rpe_last_set": 10,
+      "series_trabajo_resumen": "3 series efectivas en casi todos los ejercicios",
+      "tecnicas_intensidad": "Mismas técnicas de intensificación en la última serie que semanas 7-8"
+    },
+    {
+      "semana": "11 - 12",
+      "bloque": "Hypertrophy Block (Pico de Volumen)",
+      "plantilla_utilizada": "FASE_2_HYPERTROPHY",
+      "rpe_early_set": "~8-9",
+      "rpe_last_set": 10,
+      "series_trabajo_resumen": "4 series efectivas en ejercicios multiarticulares principales, 3 en aislados",
+      "tecnicas_intensidad": "Mismas técnicas de intensificación en la última serie que semanas 7-10"
+    }
+  ]
+}
