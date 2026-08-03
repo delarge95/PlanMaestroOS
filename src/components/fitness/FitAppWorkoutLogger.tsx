@@ -53,14 +53,27 @@ export default function FitAppWorkoutLogger() {
   const setCurrentEnergy = useAppStore((s) => s.setCurrentEnergy);
 
   // Active program store
-  const activeProgramId = useActiveProgramStore((s) => s.programId);
   const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds || [s.programId]);
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
   const currentDayId = useActiveProgramStore((s) => s.currentDayId);
   const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
+  const setWeek = useActiveProgramStore((s) => s.setWeek);
+  const setDay = useActiveProgramStore((s) => s.setDay);
 
-  const officialProgram = getProgramById(activeProgramId);
-  const explorerPrograms = allPrograms.filter((p) => activeProgramIds.includes(p.id));
+  // Programs currently active in tracker
+  const activeTrackerPrograms = allPrograms.filter((p) => activeProgramIds.includes(p.id));
+  const explorerPrograms = activeTrackerPrograms;
+
+  // For the live logger tab, user can pick which active program to train
+  const [activeLoggerProgramId, setActiveLoggerProgramId] = useState<string>(() => activeProgramIds[0] || 'min-max');
+  // Keep it in sync if activeProgramIds changes
+  React.useEffect(() => {
+    if (!activeProgramIds.includes(activeLoggerProgramId)) {
+      setActiveLoggerProgramId(activeProgramIds[0] || 'min-max');
+    }
+  }, [activeProgramIds.join(',')]);
+
+  const officialProgram = getProgramById(activeLoggerProgramId);
   const safeWeekIdx = Math.min(Math.max(currentWeek - 1, 0), (officialProgram.weeks?.length || 1) - 1);
   const activeWeek = officialProgram.weeks?.[safeWeekIdx] || officialProgram.weeks?.[0];
   const activeDay = activeWeek?.days?.find((d) => d.id === currentDayId) || activeWeek?.days?.[0];
@@ -366,112 +379,205 @@ export default function FitAppWorkoutLogger() {
         {/* TAB 1: LOGGER EN VIVO */}
         {activeTab === 'logger' && (
           <>
-            {/* CONTROLS */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-              <div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  {!useCustomRoutine && activeDay ? (activeDay.name || activeDay.title) : DEFAULT_ROUTINES[selectedRoutineIndex]?.title}
-                </h3>
-              </div>
+            {/* HEADER — programa activo + semana + día */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
 
-              <div>
-                {isSessionActive ? (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                    <div style={{ background: 'rgba(48, 209, 88, 0.15)', border: '1px solid rgba(48, 209, 88, 0.3)', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
-                      <span style={{ fontSize: '0.68rem', color: 'var(--color-state-done)', display: 'block', fontWeight: 700 }}>TIEMPO TRANSCURRIDO</span>
-                      <strong style={{ fontSize: '1.1rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-text-primary)' }}>{formatTime(elapsedSeconds)}</strong>
-                    </div>
+              {/* Si no hay programas activos */}
+              {activeTrackerPrograms.length === 0 && (
+                <div style={{ background: 'rgba(255,159,10,0.12)', border: '1px solid rgba(255,159,10,0.3)', borderRadius: '12px', padding: '14px 18px' }}>
+                  <p style={{ margin: 0, fontSize: '0.88rem', color: '#ff9f0a', fontWeight: 600 }}>
+                    ⚠️ No tienes ningún programa activo en el Tracker. Ve a <strong>Rutinas → Catálogo Oficial</strong> y activa un programa con el botón <strong>"+"</strong>.
+                  </p>
+                </div>
+              )}
 
-                    {/* AUDIT-06: Energía percibida post-entrenamiento */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <span style={{ fontSize: '0.65rem', color: 'var(--color-text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>Energía al terminar</span>
-                      <div style={{ display: 'flex', gap: '6px' }}>
-                        {(['high', 'medium', 'low', 'crisis'] as const).map((level) => (
+              {/* Selector de programa activo (si hay más de uno) */}
+              {activeTrackerPrograms.length > 1 && (
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  {activeTrackerPrograms.map((prog) => {
+                    const isSelected = activeLoggerProgramId === prog.id;
+                    const cleanTitle = prog.title.replace(/\s*\([^)]*\)/g, '').trim();
+                    return (
+                      <button
+                        key={prog.id}
+                        type="button"
+                        onClick={() => setActiveLoggerProgramId(prog.id)}
+                        style={{
+                          background: isSelected ? 'rgba(48,209,88,0.2)' : 'rgba(255,255,255,0.05)',
+                          border: `1px solid ${isSelected ? 'rgba(48,209,88,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                          color: isSelected ? '#30d158' : 'rgba(255,255,255,0.55)',
+                          padding: '6px 14px',
+                          borderRadius: '8px',
+                          fontSize: '0.82rem',
+                          fontWeight: isSelected ? 700 : 500,
+                          cursor: 'pointer',
+                          whiteSpace: 'nowrap'
+                        }}
+                      >
+                        {cleanTitle}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Semana + Día del programa seleccionado */}
+              {officialProgram.weeks && officialProgram.weeks.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
+                  {/* Selector de semana */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)', fontWeight: 700, textTransform: 'uppercase' }}>Semana</span>
+                    <div style={{ display: 'flex', gap: '3px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', padding: '3px' }}>
+                      {officialProgram.weeks.map((w) => {
+                        const wNum = w.weekNumber || w.week || 1;
+                        const isSelected = currentWeek === wNum;
+                        const tooltip = w.title || w.block || `Semana ${wNum}`;
+                        return (
                           <button
-                            key={level}
+                            key={wNum}
                             type="button"
-                            onClick={() => setPerceivedEnergy(level)}
+                            title={tooltip}
+                            onClick={() => setWeek(wNum)}
                             style={{
-                              background: perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.06)',
-                              border: `1px solid ${perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.12)'}`,
-                              color: perceivedEnergy === level ? '#fff' : 'var(--color-text-secondary)',
-                              padding: '4px 10px',
-                              borderRadius: '8px',
-                              fontSize: '0.72rem',
-                              fontWeight: 600,
-                              cursor: 'pointer'
+                              background: isSelected ? '#30d158' : 'transparent',
+                              color: isSelected ? '#000' : 'rgba(255,255,255,0.4)',
+                              border: 'none',
+                              padding: '4px 9px',
+                              borderRadius: '6px',
+                              fontSize: '0.78rem',
+                              fontWeight: isSelected ? 700 : 500,
+                              cursor: 'pointer',
+                              whiteSpace: 'nowrap'
                             }}
                           >
-                            {level === 'high' ? 'Alta' : level === 'medium' ? 'Media' : level === 'low' ? 'Baja' : 'Soporte / Bajar ritmo'}
+                            {wNum}{w.isDeload ? 'D' : ''}
                           </button>
-                        ))}
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Selector de día */}
+                  {activeWeek?.days && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)', fontWeight: 700, textTransform: 'uppercase' }}>Día</span>
+                      <div style={{ display: 'flex', gap: '3px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', padding: '3px' }}>
+                        {activeWeek.days.map((day, dIdx) => {
+                          const isSelected = (currentDayId === day.id) || (!currentDayId && dIdx === 0);
+                          const dTitle = day.name || day.title || `Día ${dIdx + 1}`;
+                          return (
+                            <button
+                              key={day.id}
+                              type="button"
+                              title={`Día ${dIdx + 1}: ${dTitle}`}
+                              onClick={() => setDay(day.id)}
+                              style={{
+                                background: isSelected ? 'rgba(255,255,255,0.18)' : 'transparent',
+                                color: isSelected ? '#fff' : 'rgba(255,255,255,0.4)',
+                                border: isSelected ? '1px solid rgba(255,255,255,0.25)' : '1px solid transparent',
+                                padding: '4px 10px',
+                                borderRadius: '6px',
+                                fontSize: '0.78rem',
+                                fontWeight: isSelected ? 700 : 500,
+                                cursor: 'pointer',
+                                whiteSpace: 'nowrap'
+                              }}
+                            >
+                              {dIdx + 1}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
+                  )}
+                </div>
+              )}
 
+              {/* Título del día + controles de sesión */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+                <div>
+                  <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '2px' }}>
+                    {officialProgram.title.replace(/\s*\([^)]*\)/g, '').trim()} · Semana {currentWeek}
+                    {activeWeek?.isDeload ? ' · 🔄 Descarga' : ''}
+                    {activeWeek?.title || activeWeek?.block ? ` · ${activeWeek.title || activeWeek.block}` : ''}
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#fff' }}>
+                    {activeDay?.name || activeDay?.title || 'Sin día activo'}
+                  </h3>
+                </div>
+
+                <div>
+                  {isSessionActive ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                      <div style={{ background: 'rgba(48, 209, 88, 0.15)', border: '1px solid rgba(48, 209, 88, 0.3)', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
+                        <span style={{ fontSize: '0.68rem', color: 'var(--color-state-done)', display: 'block', fontWeight: 700 }}>TIEMPO TRANSCURRIDO</span>
+                        <strong style={{ fontSize: '1.1rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-text-primary)' }}>{formatTime(elapsedSeconds)}</strong>
+                      </div>
+
+                      {/* AUDIT-06: Energía percibida post-entrenamiento */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <span style={{ fontSize: '0.65rem', color: 'var(--color-text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>Energía al terminar</span>
+                        <div style={{ display: 'flex', gap: '6px' }}>
+                          {(['high', 'medium', 'low', 'crisis'] as const).map((level) => (
+                            <button
+                              key={level}
+                              type="button"
+                              onClick={() => setPerceivedEnergy(level)}
+                              style={{
+                                background: perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.06)',
+                                border: `1px solid ${perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.12)'}`,
+                                color: perceivedEnergy === level ? '#fff' : 'var(--color-text-secondary)',
+                                padding: '4px 10px',
+                                borderRadius: '8px',
+                                fontSize: '0.72rem',
+                                fontWeight: 600,
+                                cursor: 'pointer'
+                              }}
+                            >
+                              {level === 'high' ? 'Alta' : level === 'medium' ? 'Media' : level === 'low' ? 'Baja' : 'Soporte / Bajar ritmo'}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={handleFinishWorkout}
+                        style={{
+                          background: 'var(--color-state-done)',
+                          border: 'none',
+                          color: '#000000',
+                          fontWeight: 700,
+                          padding: '10px 20px',
+                          borderRadius: '12px',
+                          cursor: 'pointer',
+                          fontSize: '0.88rem'
+                        }}
+                      >
+                        ✓ Finalizar & Guardar Sesión
+                      </button>
+                    </div>
+                  ) : (
                     <button
                       type="button"
-                      onClick={handleFinishWorkout}
+                      onClick={handleStartWorkout}
+                      disabled={activeTrackerPrograms.length === 0}
                       style={{
-                        background: 'var(--color-state-done)',
+                        background: activeTrackerPrograms.length === 0 ? 'rgba(255,255,255,0.1)' : 'var(--color-state-done)',
                         border: 'none',
-                        color: '#000000',
+                        color: activeTrackerPrograms.length === 0 ? 'rgba(255,255,255,0.3)' : '#000000',
                         fontWeight: 700,
-                        padding: '10px 20px',
+                        padding: '10px 22px',
                         borderRadius: '12px',
-                        cursor: 'pointer',
-                        fontSize: '0.88rem'
+                        cursor: activeTrackerPrograms.length === 0 ? 'not-allowed' : 'pointer',
+                        fontSize: '0.9rem'
                       }}
                     >
-                      ✓ Finalizar & Guardar Sesión
+                      ▶ Iniciar Sesión de Hoy
                     </button>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={handleStartWorkout}
-                    style={{
-                      background: 'var(--color-state-done)',
-                      border: 'none',
-                      color: '#000000',
-                      fontWeight: 700,
-                      padding: '10px 22px',
-                      borderRadius: '12px',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem'
-                    }}
-                  >
-                    ▶ Iniciar Sesión de Hoy
-                  </button>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-
-            {/* ROUTINES SELECTOR */}
-            <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
-              {DEFAULT_ROUTINES.map((rt, idx) => {
-                const isSelected = selectedRoutineIndex === idx;
-                return (
-                  <button
-                    key={idx}
-                    type="button"
-                    disabled={isSessionActive}
-                    onClick={() => setSelectedRoutineIndex(idx)}
-                    style={{
-                      background: isSelected ? 'rgba(48, 209, 88, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                      border: `1px solid ${isSelected ? 'rgba(48, 209, 88, 0.5)' : 'rgba(255, 255, 255, 0.1)'}`,
-                      color: isSelected ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
-                      padding: '8px 16px',
-                      borderRadius: '12px',
-                      fontSize: '0.82rem',
-                      fontWeight: isSelected ? 700 : 500,
-                      cursor: isSessionActive ? 'not-allowed' : 'pointer',
-                      whiteSpace: 'nowrap'
-                    }}
-                  >
-                    {rt.title}
-                  </button>
-                );
-              })}
             </div>
 
             {/* REST TIMER BANNER */}

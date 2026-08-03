@@ -13,6 +13,7 @@ export interface ActiveProgramState {
 
   // Actions
   setActiveProgram: (programId: string, week?: number, dayId?: string) => void;
+  setInspectedProgram: (programId: string) => void;
   toggleActiveProgram: (programId: string) => void;
   isProgramActive: (programId: string) => boolean;
   setWeek: (week: number) => void;
@@ -47,6 +48,14 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
             currentDayId: dayId,
             updatedAt: new Date().toISOString()
           };
+        });
+      },
+
+      // Only changes the inspected/previewed program — does NOT add to activeProgramIds
+      setInspectedProgram: (programId: string) => {
+        set({
+          programId,
+          updatedAt: new Date().toISOString()
         });
       },
 
