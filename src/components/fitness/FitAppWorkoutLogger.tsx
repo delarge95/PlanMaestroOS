@@ -241,19 +241,22 @@ export default function FitAppWorkoutLogger() {
 
         // Find prescription if coming from official program
         const matchingPrescription = activeDay?.exercises.find((p) => {
-          const overrideId = overrides[p.id];
+          const pId = p.id;
+          const overrideId = pId ? overrides[pId] : undefined;
           const effectiveId = overrideId || p.exerciseId;
           return getExerciseDetails(effectiveId).name === name;
         });
 
         const effectiveDetails = findExerciseByName(name);
+        const matchPId = matchingPrescription?.id;
+        const performedId = matchPId ? (overrides[matchPId] || matchingPrescription.exerciseId) : (effectiveDetails?.name || name);
 
         completedExercises.push({
-          prescriptionId: matchingPrescription?.id,
-          prescribedExerciseId: matchingPrescription?.exerciseId || effectiveDetails?.id,
-          performedExerciseId: matchingPrescription ? (overrides[matchingPrescription.id] || matchingPrescription.exerciseId) : effectiveDetails?.id,
+          prescriptionId: matchPId,
+          prescribedExerciseId: matchingPrescription?.exerciseId || effectiveDetails?.name || name,
+          performedExerciseId: performedId,
           name,
-          overrideActive: matchingPrescription ? Boolean(overrides[matchingPrescription.id]) : false,
+          overrideActive: matchPId ? Boolean(overrides[matchPId]) : false,
           completedSets: doneSets.map((s) => ({ weight: s.weight, reps: s.reps, rpe: s.rpe }))
         });
       }
@@ -517,7 +520,28 @@ export default function FitAppWorkoutLogger() {
 
             {/* EXERCISES LIST */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {activeRoutine.exercises.map((exItem, exIdx) => {
+              {(!useCustomRoutine && activeDay
+                ? activeDay.exercises.map((p) => {
+                    const pId = p.id;
+                    const overrideId = pId ? overrides[pId] : undefined;
+                    const effectiveId = overrideId || p.exerciseId;
+                    const details = getExerciseDetails(effectiveId);
+                    const reps = p.targetReps || p.repRange || '6-8';
+                    const restSec = parseInt(p.restPeriod || p.rest || '90', 10) || 90;
+                    return {
+                      name: details.name,
+                      target: `${p.workingSets} series × ${reps} • ${p.rirPerSet?.join(', ') || p.earlySetRpe || 'RIR 1-2'}`,
+                      restSec,
+                      exerciseId: effectiveId
+                    };
+                  })
+                : (DEFAULT_ROUTINES[selectedRoutineIndex]?.exercises || []).map((ex) => ({
+                    name: ex.name,
+                    target: ex.target,
+                    restSec: ex.restSec,
+                    exerciseId: findExerciseByName(ex.name.split('/')[0].trim())?.name || ''
+                  }))
+              ).map((exItem, exIdx) => {
                 const exData = findExerciseByName(exItem.name.split('/')[0].trim());
                 const currentSets = exerciseLogs[exItem.name] || [
                   { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
