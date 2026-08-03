@@ -144,7 +144,8 @@ export default function FitAppWorkoutLogger() {
 
     if (!useCustomRoutine && activeDay) {
       activeDay.exercises.forEach((prescription) => {
-        const overrideId = overrides[prescription.id];
+        const pId = prescription.id;
+        const overrideId = pId ? overrides[pId] : undefined;
         const effectiveId = overrideId || prescription.exerciseId;
         const details = getExerciseDetails(effectiveId);
         const setNumCount = typeof prescription.workingSets === 'number' ? prescription.workingSets : 3;
