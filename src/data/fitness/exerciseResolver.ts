@@ -100,6 +100,9 @@ const ALIAS_MAP: Record<string, string> = {
   'lying reverse db flye': 'Reverse Pec Deck',
   'reverse cable crossover': 'Cable Reverse Flye',
   'reverse pec deck': 'Reverse Pec Deck',
+  'ohp': 'Barbell Overhead Press (OHP) / Military Press',
+  'overhead press': 'Barbell Overhead Press (OHP) / Military Press',
+  'rdl': 'Barbell RDL',
   'barbell rdl': 'Barbell RDL',
   'romanian deadlift': 'Barbell RDL',
   'machine hip thrust': 'Barbell Hip Thrust',
@@ -146,7 +149,6 @@ const ALIAS_MAP: Record<string, string> = {
   'incline db stretch curl': 'DB Incline Curl',
   'seated db press': 'Seated DB Shoulder Press',
   'seated db shoulder press': 'Seated DB Shoulder Press',
-  'overhead press': 'Barbell Overhead Press (OHP) / Military Press',
   'deadlift': 'Conventional Deadlift',
   'barbell bench press': 'Barbell Bench Press',
   'weighted pullup': 'Pull-Up',
@@ -163,43 +165,97 @@ const ALIAS_MAP: Record<string, string> = {
   '45 degree hyperextension': '45° Hyperextension'
 };
 
+export type MatchKind = 'exact' | 'verified-alias' | 'compatible-variant' | 'ambiguous' | 'unresolved';
+
+export interface ExerciseReference {
+  localExerciseId: string;
+  fitAppExerciseId: string | null;
+  matchKind: MatchKind;
+  verified: boolean;
+  verifiedAt?: string;
+  note?: string;
+}
+
 /**
- * Resolves any exercise display name or ID to the canonical exercise key.
+ * Resolves full ExerciseReference metadata for audit & strict UI checks per Audit 05.
  */
-export function resolveExerciseId(nameOrId: string): string {
-  if (!nameOrId) return 'Back Squat';
+export function resolveExerciseReference(nameOrId: string): ExerciseReference {
+  if (!nameOrId) {
+    return {
+      localExerciseId: '',
+      fitAppExerciseId: null,
+      matchKind: 'unresolved',
+      verified: false
+    };
+  }
 
   // 1. Exact match by key in exerciseDatabase
   if (exerciseDatabase && exerciseDatabase[nameOrId]) {
-    return nameOrId;
+    return {
+      localExerciseId: nameOrId,
+      fitAppExerciseId: nameOrId,
+      matchKind: 'exact',
+      verified: true
+    };
   }
 
   // 2. Normalized alias lookup
   const normalized = normalizeName(nameOrId);
   if (ALIAS_MAP[normalized] && exerciseDatabase[ALIAS_MAP[normalized]]) {
-    return ALIAS_MAP[normalized];
+    const resolvedKey = ALIAS_MAP[normalized];
+    return {
+      localExerciseId: nameOrId,
+      fitAppExerciseId: resolvedKey,
+      matchKind: 'verified-alias',
+      verified: true
+    };
   }
 
   // 3. Search exerciseDatabase keys by normalized name
   if (exerciseDatabase) {
     for (const key of Object.keys(exerciseDatabase)) {
       if (normalizeName(key) === normalized) {
-        return key;
+        return {
+          localExerciseId: nameOrId,
+          fitAppExerciseId: key,
+          matchKind: 'exact',
+          verified: true
+        };
       }
     }
   }
 
-  // 4. Substring match fallback
+  // 4. Substring match fallback -> compatible variant
   if (exerciseDatabase) {
     for (const key of Object.keys(exerciseDatabase)) {
       if (normalizeName(key).includes(normalized) || normalized.includes(normalizeName(key))) {
-        return key;
+        return {
+          localExerciseId: nameOrId,
+          fitAppExerciseId: key,
+          matchKind: 'compatible-variant',
+          verified: false,
+          note: 'Variante compatible aproximada'
+        };
       }
     }
   }
 
-  // Return original key or null if not found
-  return nameOrId;
+  // Unresolved
+  return {
+    localExerciseId: nameOrId,
+    fitAppExerciseId: null,
+    matchKind: 'unresolved',
+    verified: false,
+    note: 'Ficha FitApp pendiente'
+  };
+}
+
+/**
+ * Resolves any exercise display name or ID to the canonical exercise key.
+ */
+export function resolveExerciseId(nameOrId: string): string {
+  const ref = resolveExerciseReference(nameOrId);
+  return ref.fitAppExerciseId || nameOrId;
 }
 
 /**
