@@ -3,6 +3,9 @@ import ErrorBoundary from '../ErrorBoundary';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
 import { useAppStore } from '../../store/appStore';
+import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
+import { getProgramById } from '../../data/fitness/programs';
+import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
 import type { EnergyLevel } from '../../data/canonicalDomainModel';
 
 interface LoggedSet {
@@ -13,14 +16,21 @@ interface LoggedSet {
   completed: boolean;
 }
 
-interface CompletedWorkout {
+export interface CompletedWorkout {
   id: string;
   date: string;
+  programId?: string;
+  week?: number;
+  dayId?: string;
   routineTitle: string;
   durationMinutes: number;
   totalVolumeKg: number;
   exercises: {
+    prescriptionId?: string;
+    prescribedExerciseId?: string;
+    performedExerciseId?: string;
     name: string;
+    overrideActive?: boolean;
     completedSets: { weight: number; reps: number; rpe: number }[];
   }[];
 }
@@ -36,70 +46,24 @@ const DEFAULT_ROUTINES = [
       { name: 'Cable Lateral Raise', target: '3 series × 10-15 reps • RPE 9-10', restSec: 90 },
       { name: '1-Arm Cable Overhead Triceps Extension', target: '3 series × 10-12 reps • RPE 9', restSec: 90 }
     ]
-  },
-  {
-    title: 'Día 1 PM: Movilidad Hombro & Anillas (Tarde)',
-    program: 'Calistenia Híbrida Alexander PM (Prehab & Estabilidad)',
-    exercises: [
-      { name: 'Support Hold en Anillas', target: '3 series × 30s sostén • Calidad Técnica', restSec: 60 },
-      { name: 'Scapular Pullups / Dip Shrugs', target: '3 series × 12 reps lentas', restSec: 60 },
-      { name: 'Band Face Pulls / External Rotations', target: '3 series × 15 reps • Prehab', restSec: 60 }
-    ]
-  },
-  {
-    title: 'Día 2 AM: Pierna HSR & Cuádriceps (Rehabilitación Rodilla)',
-    program: 'Protocolo HSR Tempo 3-0-3 & Spanish Squats',
-    exercises: [
-      { name: 'Spanish Squats (Isométrico Rotuliano)', target: '3-5 series × 45s sostén • Sin Dolor', restSec: 90 },
-      { name: 'Box Pistol / Progresión Pistol Squat', target: '3 series × 6-8 reps • Tempo 3-0-3', restSec: 120 },
-      { name: 'Leg Extension (Prensa Cuádriceps)', target: '3 series × 10-12 reps • RPE 8', restSec: 90 },
-      { name: 'Nordic Ham Curl / Lying Leg Curl', target: '3 series × 8-10 reps • RPE 8', restSec: 120 },
-      { name: 'Standing Calf Raise', target: '4 series × 12-15 reps • RPE 9', restSec: 60 }
-    ]
-  },
-  {
-    title: 'Día 2 PM: Movilidad Cadera & Elephant Walks (Tarde)',
-    program: 'Protocolo Movilidad PM (David Thurin & Reeducación Cadera)',
-    exercises: [
-      { name: 'Elephant Walks (Cadena Posterior)', target: '3 series × 30 reps • Alternando', restSec: 60 },
-      { name: '90/90 Hip Switches (Movilidad Cadera)', target: '3 series × 12 reps por lado', restSec: 60 },
-      { name: 'Jefferson Curls (Descompresión Lumbar)', target: '3 series × 10 reps lentas (Peso Ligero)', restSec: 90 },
-      { name: 'Spanish Squats (Regulación Rodilla)', target: '3 series × 45s sostén', restSec: 60 }
-    ]
-  },
-  {
-    title: 'Día 3 AM: Tracción Min-Max & Dorsal (Espalda, Bíceps)',
-    program: 'Min-Max Nippard + Dominadas Lastradas & Archer Rows',
-    exercises: [
-      { name: 'Dominadas Lastradas / Lat Pulldown', target: '3 series × 6-8 reps • RPE 8-9', restSec: 120 },
-      { name: 'Archer Ring Rows / Seated Cable Row', target: '3 series × 8-10 reps • RPE 8-9', restSec: 120 },
-      { name: 'Face Pull (Polea con Cuerda)', target: '3 series × 12-15 reps • RPE 9', restSec: 90 },
-      { name: 'Incline Dumbbell Biceps Curl', target: '3 series × 10-12 reps • RPE 9', restSec: 90 },
-      { name: 'Preacher Hammer Curl', target: '3 series × 10-12 reps • RPE 9', restSec: 90 }
-    ]
-  },
-  {
-    title: 'Día 3 PM: Prehab Muñeca & Codo (Tarde)',
-    program: 'Rehabilitación & Prevención de Epicondilitis FitApp',
-    exercises: [
-      { name: 'Wrist Circles & Finger Extensions', target: '3 series × 20 reps', restSec: 45 },
-      { name: 'Pronador / Supinador con Mancuerna Ligera', target: '3 series × 15 reps', restSec: 60 },
-      { name: 'Nerve Glides (Deslizamiento Nervioso)', target: '3 series × 10 reps suave', restSec: 60 }
-    ]
-  },
-  {
-    title: 'Día 4 AM/PM: Cardio LISS 45m & Estiramientos',
-    program: 'Regulación de Estrés & Capacidad Aeróbica LISS',
-    exercises: [
-      { name: 'Caminata en Inclinación / Bicicleta LISS', target: '35-45 min • Pulsaciones 110-130 BPM', restSec: 0 },
-      { name: 'Estiramientos Estáticos Activos', target: '15 min • Isquios, Psoas, Pectoral', restSec: 30 }
-    ]
   }
 ];
 
 export default function FitAppWorkoutLogger() {
   const setCurrentEnergy = useAppStore((s) => s.setCurrentEnergy);
 
+  // Active program store
+  const activeProgramId = useActiveProgramStore((s) => s.programId);
+  const currentWeek = useActiveProgramStore((s) => s.currentWeek);
+  const currentDayId = useActiveProgramStore((s) => s.currentDayId);
+  const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
+
+  const officialProgram = getProgramById(activeProgramId);
+  const safeWeekIdx = Math.min(Math.max(currentWeek - 1, 0), (officialProgram.weeks?.length || 1) - 1);
+  const activeWeek = officialProgram.weeks?.[safeWeekIdx] || officialProgram.weeks?.[0];
+  const activeDay = activeWeek?.days?.find((d) => d.id === currentDayId) || activeWeek?.days?.[0];
+
+  const [useCustomRoutine, setUseCustomRoutine] = useState(false);
   const [selectedRoutineIndex, setSelectedRoutineIndex] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
@@ -172,20 +136,37 @@ export default function FitAppWorkoutLogger() {
     return () => clearInterval(timerInterval);
   }, [timerActive, timerSeconds]);
 
-  const activeRoutine = DEFAULT_ROUTINES[selectedRoutineIndex];
-
-  // Start active workout
+  // Start active workout from official program or custom routine
   const handleStartWorkout = () => {
     setIsSessionActive(true);
     setSessionStartTime(Date.now());
     const initialLogs: Record<string, LoggedSet[]> = {};
-    activeRoutine.exercises.forEach((ex) => {
-      initialLogs[ex.name] = [
-        { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
-        { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
-        { setNum: 3, weight: 0, reps: 10, rpe: 8, completed: false }
-      ];
-    });
+
+    if (!useCustomRoutine && activeDay) {
+      activeDay.exercises.forEach((prescription) => {
+        const overrideId = overrides[prescription.id];
+        const effectiveId = overrideId || prescription.exerciseId;
+        const details = getExerciseDetails(effectiveId);
+        const setNumCount = typeof prescription.workingSets === 'number' ? prescription.workingSets : 3;
+
+        initialLogs[details.name] = Array.from({ length: setNumCount }, (_, idx) => ({
+          setNum: idx + 1,
+          weight: 0,
+          reps: 10,
+          rpe: 8,
+          completed: false
+        }));
+      });
+    } else {
+      const activeRoutine = DEFAULT_ROUTINES[selectedRoutineIndex];
+      activeRoutine?.exercises.forEach((ex) => {
+        initialLogs[ex.name] = [
+          { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
+          { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
+          { setNum: 3, weight: 0, reps: 10, rpe: 8, completed: false }
+        ];
+      });
+    }
     setExerciseLogs(initialLogs);
   };
 
@@ -257,17 +238,38 @@ export default function FitAppWorkoutLogger() {
         doneSets.forEach((s) => {
           totalVolume += (s.weight || 0) * (s.reps || 0);
         });
+
+        // Find prescription if coming from official program
+        const matchingPrescription = activeDay?.exercises.find((p) => {
+          const overrideId = overrides[p.id];
+          const effectiveId = overrideId || p.exerciseId;
+          return getExerciseDetails(effectiveId).name === name;
+        });
+
+        const effectiveDetails = findExerciseByName(name);
+
         completedExercises.push({
+          prescriptionId: matchingPrescription?.id,
+          prescribedExerciseId: matchingPrescription?.exerciseId || effectiveDetails?.id,
+          performedExerciseId: matchingPrescription ? (overrides[matchingPrescription.id] || matchingPrescription.exerciseId) : effectiveDetails?.id,
           name,
+          overrideActive: matchingPrescription ? Boolean(overrides[matchingPrescription.id]) : false,
           completedSets: doneSets.map((s) => ({ weight: s.weight, reps: s.reps, rpe: s.rpe }))
         });
       }
     });
 
+    const activeTitle = !useCustomRoutine && activeDay
+      ? `${officialProgram.title} — ${activeDay.name || activeDay.title} (Sem ${currentWeek})`
+      : DEFAULT_ROUTINES[selectedRoutineIndex]?.title || 'Sesión de Entrenamiento';
+
     const newWorkout: CompletedWorkout = {
       id: 'w_' + Date.now(),
       date: new Date().toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' }),
-      routineTitle: activeRoutine.title,
+      programId: !useCustomRoutine ? officialProgram.id : undefined,
+      week: !useCustomRoutine ? currentWeek : undefined,
+      dayId: !useCustomRoutine ? activeDay?.id : undefined,
+      routineTitle: activeTitle,
       durationMinutes: Math.max(1, Math.round(elapsedSeconds / 60)),
       totalVolumeKg: totalVolume,
       exercises: completedExercises
@@ -333,7 +335,7 @@ export default function FitAppWorkoutLogger() {
               PROGRAMA ACTIVO DE ENTRENAMIENTO & REHABILITACIÓN
             </span>
             <strong style={{ display: 'block', fontSize: '1rem', color: 'var(--color-text-primary)' }}>
-              {activeRoutine.program}
+              {!useCustomRoutine && officialProgram ? `${officialProgram.title} · Semana ${currentWeek}` : DEFAULT_ROUTINES[selectedRoutineIndex]?.program}
             </strong>
           </div>
 
@@ -376,7 +378,7 @@ export default function FitAppWorkoutLogger() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  {activeRoutine.title}
+                  {!useCustomRoutine && activeDay ? (activeDay.name || activeDay.title) : DEFAULT_ROUTINES[selectedRoutineIndex]?.title}
                 </h3>
               </div>
 
