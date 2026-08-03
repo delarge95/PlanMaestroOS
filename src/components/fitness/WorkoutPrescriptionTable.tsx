@@ -19,6 +19,7 @@ export function WorkoutPrescriptionTable({
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
   const setWeek = useActiveProgramStore((s) => s.setWeek);
   const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
+  const clearOverride = useActiveProgramStore((s) => s.clearExerciseOverride);
 
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
@@ -192,15 +193,39 @@ export function WorkoutPrescriptionTable({
                   {/* EJERCICIO Y NOTAS COMPLETAS */}
                   <td style={{ padding: '12px 14px', verticalAlign: 'top', maxWidth: '280px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      {/* When overrideId exists, show the substituted exercise name, not the original */}
                       <ExerciseLink
                         exerciseId={effectiveExerciseId}
-                        displayName={prescription.displayName || effectiveDetails.name}
+                        displayName={overrideId ? effectiveDetails.name : (prescription.displayName || effectiveDetails.name)}
                         onClickModal={onOpenExerciseModal}
                       />
                       {overrideId && (
-                        <span style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 600 }}>
-                          ✓ Sustituido (Original: {prescription.displayName})
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 600 }}>
+                            ✓ Sustituido
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => clearOverride(pId)}
+                            style={{
+                              background: 'transparent',
+                              border: 'none',
+                              color: 'var(--text-tertiary)',
+                              fontSize: '0.7rem',
+                              fontWeight: 600,
+                              cursor: 'pointer',
+                              padding: '1px 6px',
+                              borderRadius: '4px',
+                              textDecoration: 'underline',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '3px'
+                            }}
+                            title={`Volver a ${prescription.displayName || 'ejercicio original'}`}
+                          >
+                            ↺ Revertir ({prescription.displayName})
+                          </button>
+                        </div>
                       )}
 
                       {/* NOTA OPERATIVA DEL ENTRENADOR (DESPLEGABLE / VISIBLE) */}

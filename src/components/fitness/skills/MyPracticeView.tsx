@@ -18,6 +18,7 @@ export function MyPracticeView({
   onOpenPaths
 }: MyPracticeViewProps) {
   const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
+  const toggleActiveSkill = useSkillStateStore((s) => s.toggleActiveSkill);
 
   // Retrieve all active steps in progress
   const activeSteps = activeStepIds
@@ -135,6 +136,29 @@ export function MyPracticeView({
                 <span>Cambiar ruta</span>
               </Button>
             </div>
+
+            {/* DESACTIVAR HABILIDAD */}
+            <button
+              type="button"
+              onClick={() => toggleActiveSkill(activeStep.id)}
+              style={{
+                background: 'transparent',
+                border: '1px solid rgba(255,59,48,0.35)',
+                color: 'rgba(255,59,48,0.7)',
+                borderRadius: 'var(--radius-sm)',
+                padding: '6px 12px',
+                fontSize: '0.76rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                marginTop: '4px',
+                alignSelf: 'flex-start'
+              }}
+            >
+              ✕ Desactivar esta habilidad
+            </button>
 
             {/* SIGUIENTE PASO OBJETIVO */}
             {nextStep && (

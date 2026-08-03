@@ -4,7 +4,7 @@ import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
 import { useAppStore } from '../../store/appStore';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
-import { getProgramById } from '../../data/fitness/programs';
+import { allPrograms, getProgramById } from '../../data/fitness/programs';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
 import type { EnergyLevel } from '../../data/canonicalDomainModel';
 
@@ -54,21 +54,23 @@ export default function FitAppWorkoutLogger() {
 
   // Active program store
   const activeProgramId = useActiveProgramStore((s) => s.programId);
+  const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds || [s.programId]);
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
   const currentDayId = useActiveProgramStore((s) => s.currentDayId);
   const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
 
   const officialProgram = getProgramById(activeProgramId);
+  const explorerPrograms = allPrograms.filter((p) => activeProgramIds.includes(p.id));
   const safeWeekIdx = Math.min(Math.max(currentWeek - 1, 0), (officialProgram.weeks?.length || 1) - 1);
   const activeWeek = officialProgram.weeks?.[safeWeekIdx] || officialProgram.weeks?.[0];
   const activeDay = activeWeek?.days?.find((d) => d.id === currentDayId) || activeWeek?.days?.[0];
 
-  const [useCustomRoutine, setUseCustomRoutine] = useState(false);
+  const [useCustomRoutine] = useState(false);
   const [selectedRoutineIndex, setSelectedRoutineIndex] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [activeTab, setActiveTab] = useState<'logger' | 'history' | 'calendar' | 'stats'>('logger');
+  const [activeTab, setActiveTab] = useState<'logger' | 'explorer' | 'historial'>('logger');
   const [perceivedEnergy, setPerceivedEnergy] = useState<EnergyLevel>('medium');
 
   // Active workout logs per exercise
@@ -332,47 +334,33 @@ export default function FitAppWorkoutLogger() {
           color: 'var(--color-text-primary)'
         }}
       >
-        {/* TOP PROGRAM IDENTIFIER BANNER */}
-        <div style={{ background: 'rgba(48, 209, 88, 0.12)', border: '1px solid rgba(48, 209, 88, 0.3)', borderRadius: '16px', padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-          <div>
-            <span style={{ fontSize: '0.68rem', fontFamily: '-apple-system, SF Pro Text, sans-serif', color: 'var(--color-state-done)', fontWeight: 700, textTransform: 'uppercase' }}>
-              PROGRAMA ACTIVO DE ENTRENAMIENTO & REHABILITACIÓN
-            </span>
-            <strong style={{ display: 'block', fontSize: '1rem', color: 'var(--color-text-primary)' }}>
-              {!useCustomRoutine && officialProgram ? `${officialProgram.title} · Semana ${currentWeek}` : DEFAULT_ROUTINES[selectedRoutineIndex]?.program}
-            </strong>
-          </div>
-
-          <div style={{ display: 'flex', gap: '6px' }}>
+        {/* DARK PILL TAB BAR - same style as Rutinas section */}
+        <div style={{ display: 'flex', gap: '4px', background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '4px', width: 'fit-content' }}>
+          {([
+            { key: 'logger', label: '⚡ Tracker en Vivo' },
+            { key: 'explorer', label: '📆 Explorar Programa' },
+            { key: 'historial', label: `📊 Historial & Stats (${history.length})` }
+          ] as const).map(({ key, label }) => (
             <button
+              key={key}
               type="button"
-              onClick={() => setActiveTab('logger')}
-              style={{ background: activeTab === 'logger' ? 'var(--color-state-done)' : 'transparent', color: activeTab === 'logger' ? '#000' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
+              onClick={() => setActiveTab(key)}
+              style={{
+                background: activeTab === key ? 'rgba(255,255,255,0.12)' : 'transparent',
+                color: activeTab === key ? 'var(--color-text-primary, #fff)' : 'rgba(255,255,255,0.45)',
+                border: activeTab === key ? '1px solid rgba(255,255,255,0.2)' : '1px solid transparent',
+                padding: '7px 16px',
+                borderRadius: '8px',
+                fontSize: '0.82rem',
+                fontWeight: activeTab === key ? 700 : 500,
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.15s ease'
+              }}
             >
-              ⚡ Tracker en Vivo
+              {label}
             </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('history')}
-              style={{ background: activeTab === 'history' ? 'var(--color-accent-primary)' : 'transparent', color: activeTab === 'history' ? '#fff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
-            >
-              📜 Historial ({history.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('calendar')}
-              style={{ background: activeTab === 'calendar' ? 'var(--color-accent-primary)' : 'transparent', color: activeTab === 'calendar' ? '#fff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
-            >
-              📅 Calendario Mensual
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('stats')}
-              style={{ background: activeTab === 'stats' ? 'var(--color-accent-warning)' : 'transparent', color: activeTab === 'stats' ? '#000' : 'var(--color-text-secondary)', border: 'none', padding: '6px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
-            >
-              📊 Estadísticas
-            </button>
-          </div>
+          ))}
         </div>
 
         {/* TAB 1: LOGGER EN VIVO */}
@@ -624,106 +612,150 @@ export default function FitAppWorkoutLogger() {
           </>
         )}
 
-        {/* TAB 2: HISTORIAL DE SESIONES */}
-        {activeTab === 'history' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-              📜 Historial Completo de Entrenamientos Guardados ({history.length})
-            </h4>
-
-            {history.length === 0 ? (
-              <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>Aún no has completado ninguna sesión registrada.</p>
-            ) : (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '14px' }}>
-                {history.map((h) => (
-                  <div key={h.id} style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
-                        {h.date} • {h.durationMinutes} min
-                      </span>
-                      <button type="button" onClick={() => handleDeleteHistoryItem(h.id)} style={{ background: 'transparent', border: 'none', color: 'var(--color-accent-danger)', fontSize: '0.75rem', cursor: 'pointer', fontWeight: 700 }}>
-                        ✕ Quitar
-                      </button>
-                    </div>
-
-                    <strong style={{ fontSize: '0.92rem', color: 'var(--color-text-primary)' }}>{h.routineTitle}</strong>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>Volumen: <strong>{h.totalVolumeKg} kg</strong> • {h.exercises.length} ejercicios realizados</span>
-                  </div>
-                ))}
-              </div>
+        {/* TAB 2: EXPLORAR PROGRAMA — semanas y días completos de todos los programas activos */}
+        {activeTab === 'explorer' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {explorerPrograms.length === 0 && (
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem' }}>
+                No tienes ningún programa activo. Ve al Catálogo de Rutinas y activa un programa.
+              </p>
             )}
-          </div>
-        )}
-
-        {/* TAB 3: CALENDARIO MENSUAL COMPLETO */}
-        {activeTab === 'calendar' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                📅 Calendario Mensual de Adherencia & Entrenamientos
-              </h4>
-              <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontFamily: 'SF Mono, monospace' }}>
-                Julio 2026 • {history.length} Días Completados
-              </span>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '8px', background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              {['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].map((dayName, dIdx) => (
-                <div key={dIdx} style={{ textAlign: 'center', fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontWeight: 700, fontFamily: 'SF Mono, monospace', paddingBottom: '6px' }}>
-                  {dayName}
+            {explorerPrograms.map((prog) => (
+              <div key={prog.id} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 2px', color: '#fff' }}>
+                    {prog.title.replace(/\s*\([^)]*\)/g, '').trim()}
+                  </h4>
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)' }}>
+                    {prog.durationWeeks} semanas · {prog.split.length} días/sem
+                  </span>
                 </div>
-              ))}
 
-              {Array.from({ length: 31 }, (_, i) => i + 1).map((dayNum) => {
-                return (
-                  <div
-                    key={dayNum}
-                    style={{
-                      background: dayNum === 26 ? 'rgba(48, 209, 88, 0.25)' : dayNum < 26 ? 'rgba(10, 132, 255, 0.12)' : 'rgba(255,255,255,0.04)',
-                      border: `1px solid ${dayNum === 26 ? 'var(--color-state-done)' : 'rgba(255,255,255,0.08)'}`,
-                      borderRadius: '10px',
-                      padding: '10px 6px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: '4px',
-                      minHeight: '60px'
-                    }}
-                  >
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: dayNum === 26 ? 'var(--color-state-done)' : 'var(--color-text-primary)' }}>
-                      {dayNum}
-                    </span>
-                    {dayNum <= 26 && (
-                      <span style={{ fontSize: '0.65rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
-                        ✓ {dayNum % 2 === 1 ? 'AM+PM' : 'AM'}
-                      </span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {prog.weeks.map((week) => {
+                    const wNum = week.weekNumber || week.week || 1;
+                    const wLabel = week.title || week.block || `Semana ${wNum}`;
+                    return (
+                      <details key={wNum} style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px' }}>
+                        <summary style={{ padding: '12px 16px', cursor: 'pointer', fontWeight: 700, fontSize: '0.88rem', color: 'rgba(255,255,255,0.85)', listStyle: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span>Semana {wNum}{week.isDeload ? ' 🔄 Descarga' : ''} — {wLabel}</span>
+                          <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.35)', fontWeight: 500 }}>{week.days?.length || 0} días ▸</span>
+                        </summary>
+
+                        <div style={{ padding: '0 16px 16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                          {week.days?.map((day, dIdx) => {
+                            const dTitle = day.name || day.title || `Día ${dIdx + 1}`;
+                            const historyEntry = history.find((h) => h.programId === prog.id && h.week === wNum && h.dayId === day.id);
+
+                            return (
+                              <details key={day.id} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '10px' }}>
+                                <summary style={{ padding: '10px 14px', cursor: 'pointer', fontWeight: 600, fontSize: '0.82rem', color: 'rgba(255,255,255,0.75)', listStyle: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                  <span>Día {dIdx + 1} · {dTitle}</span>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    {historyEntry && (
+                                      <span style={{ fontSize: '0.68rem', background: 'rgba(48,209,88,0.2)', color: '#30d158', padding: '2px 8px', borderRadius: '999px', fontWeight: 700 }}>
+                                        ✓ Completado · {historyEntry.totalVolumeKg}kg
+                                      </span>
+                                    )}
+                                    <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.3)' }}>{day.exercises?.length || 0} ej. ▸</span>
+                                  </div>
+                                </summary>
+
+                                <div style={{ padding: '0 14px 14px' }}>
+                                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
+                                    <thead>
+                                      <tr style={{ color: 'rgba(255,255,255,0.35)', borderBottom: '1px solid rgba(255,255,255,0.06)', textTransform: 'uppercase', fontSize: '0.66rem' }}>
+                                        <th style={{ padding: '6px 8px', textAlign: 'left' }}>Ejercicio</th>
+                                        <th style={{ padding: '6px 8px', textAlign: 'left' }}>Series × Reps</th>
+                                        <th style={{ padding: '6px 8px', textAlign: 'left' }}>RPE/RIR</th>
+                                        <th style={{ padding: '6px 8px', textAlign: 'left' }}>Descanso</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {day.exercises?.map((ex, eIdx) => {
+                                        const exDetails = getExerciseDetails(ex.exerciseId);
+                                        return (
+                                          <tr key={eIdx} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                                            <td style={{ padding: '8px 8px', color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>
+                                              {ex.displayName || exDetails.name}
+                                            </td>
+                                            <td style={{ padding: '8px 8px', color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>
+                                              {ex.workingSets}×{ex.targetReps || ex.repRange || '—'}
+                                            </td>
+                                            <td style={{ padding: '8px 8px', color: 'rgba(255,255,255,0.5)' }}>
+                                              {ex.earlySetRpe || ex.effort?.early || 'RIR 1'} / {ex.lastSetRpe || ex.effort?.last || 'RIR 0'}
+                                            </td>
+                                            <td style={{ padding: '8px 8px', color: 'rgba(255,255,255,0.4)' }}>
+                                              {ex.restPeriod || ex.rest || '1-2 min'}
+                                            </td>
+                                          </tr>
+                                        );
+                                      })}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </details>
+                            );
+                          })}
+                        </div>
+                      </details>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
-        {/* TAB 4: ESTADÍSTICAS FITAPP */}
-        {activeTab === 'stats' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
-            <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <span style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 700, textTransform: 'uppercase' }}>VOLUMEN TOTAL ACUMULADO</span>
-              <strong style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>{totalVolumeAllTime.toLocaleString()} kg</strong>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Suma de peso × repeticiones registradas</span>
+        {/* TAB 3: HISTORIAL + ESTADÍSTICAS UNIFICADAS */}
+        {activeTab === 'historial' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {/* STATS SUMMARY */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
+              <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <span style={{ fontSize: '0.68rem', color: '#30d158', fontWeight: 700, textTransform: 'uppercase' }}>Volumen Total</span>
+                <strong style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>{totalVolumeAllTime.toLocaleString()} kg</strong>
+                <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Peso × reps registrados</span>
+              </div>
+              <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>Sesiones</span>
+                <strong style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>{totalWorkoutsCount}</strong>
+                <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Entrenamientos completados</span>
+              </div>
+              <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <span style={{ fontSize: '0.68rem', color: '#ffd60a', fontWeight: 700, textTransform: 'uppercase' }}>Tiempo Total</span>
+                <strong style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>{totalMinutesAllTime} min</strong>
+                <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Horas de estímulo efectivo</span>
+              </div>
             </div>
 
-            <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>SESIONES COMPLETADAS</span>
-              <strong style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>{totalWorkoutsCount}</strong>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Entrenamientos registrados en FitApp</span>
-            </div>
-
-            <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-warning)', fontWeight: 700, textTransform: 'uppercase' }}>TIEMPO EN GIMNASIO</span>
-              <strong style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>{totalMinutesAllTime} min</strong>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Horas de estímulo muscular efectivo</span>
+            {/* HISTORIAL LIST */}
+            <div>
+              <h4 style={{ fontSize: '0.96rem', fontWeight: 700, margin: '0 0 12px', color: 'rgba(255,255,255,0.7)' }}>
+                Sesiones Registradas ({history.length})
+              </h4>
+              {history.length === 0 ? (
+                <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.35)' }}>Aún no has completado ninguna sesión registrada. Inicia tu primera sesión en el Tracker.</p>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))', gap: '12px' }}>
+                  {history.map((h) => (
+                    <div key={h.id} style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#30d158', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
+                          {h.date} · {h.durationMinutes} min
+                        </span>
+                        <button type="button" onClick={() => handleDeleteHistoryItem(h.id)} style={{ background: 'transparent', border: 'none', color: '#ff453a', fontSize: '0.72rem', cursor: 'pointer', fontWeight: 700 }}>
+                          ✕ Quitar
+                        </button>
+                      </div>
+                      <strong style={{ fontSize: '0.88rem', color: '#fff' }}>{h.routineTitle}</strong>
+                      <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>
+                        Volumen: <strong style={{ color: '#fff' }}>{h.totalVolumeKg} kg</strong> · {h.exercises.length} ejercicios
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}

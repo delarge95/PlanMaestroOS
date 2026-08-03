@@ -23,10 +23,17 @@ export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
   const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
   const [selectedDomain, setSelectedDomain] = useState<SkillDomain | 'all'>('all');
   const [expandedPathId, setExpandedPathId] = useState<string | null>(null);
+  const [onlyActive, setOnlyActive] = useState(false);
 
-  const filteredPaths = selectedDomain === 'all'
+  const domainFilteredPaths = selectedDomain === 'all'
     ? skillPaths
     : skillPaths.filter((p) => p.domain === selectedDomain);
+
+  const filteredPaths = onlyActive
+    ? domainFilteredPaths.filter((p) =>
+        p.stepIds.some((sId) => activeStepIds.includes(sId))
+      )
+    : domainFilteredPaths;
 
   const togglePath = (pathId: string) => {
     setExpandedPathId((prev) => (prev === pathId ? null : pathId));
@@ -34,8 +41,31 @@ export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-      {/* FILTRO DE DOMINIO LIMPIO CON SCROLLABLE RAIL SUTIL */}
-      <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none' }}>
+      {/* FILTRO DE DOMINIO + TOGGLE SOLO ACTIVAS */}
+      <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          onClick={() => setOnlyActive((v) => !v)}
+          style={{
+            background: onlyActive ? 'var(--color-state-done-soft)' : 'transparent',
+            color: onlyActive ? 'var(--color-state-done)' : 'var(--text-tertiary)',
+            border: onlyActive ? '1px solid var(--color-state-done)' : '1px solid var(--color-border-subtle)',
+            padding: '6px 14px',
+            borderRadius: 'var(--radius-sm)',
+            fontSize: '0.82rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            whiteSpace: 'nowrap',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}
+        >
+          {onlyActive ? '✓ Solo activas' : '⊙ Solo activas'}
+        </button>
+
+        <div style={{ width: '1px', background: 'var(--color-border-subtle)', margin: '2px 4px' }} />
+
         <button
           type="button"
           onClick={() => setSelectedDomain('all')}

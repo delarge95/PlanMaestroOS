@@ -12,21 +12,22 @@ export function ActiveProgramSelector() {
 
   const [hoveredProgramId, setHoveredProgramId] = useState<string | null>(null);
 
-  // Active program to display detailed card for
-  const activeDisplayId = hoveredProgramId || inspectedProgramId;
-  const currentProgram = allPrograms.find((p) => p.id === activeDisplayId) || allPrograms[0];
+  // Inspected program
+  const currentProgram = allPrograms.find((p) => p.id === inspectedProgramId) || allPrograms[0];
   const isCurrentActive = activeProgramIds.includes(currentProgram.id);
+
+  // Hovered program preview if any
+  const hoveredProgram = hoveredProgramId ? allPrograms.find((p) => p.id === hoveredProgramId) : null;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-      {/* 1. BARRA DE PILAS HORIZONTALES (ESTILO IMAGEN 1) CON SCROLL LIMPIO */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none' }}>
+      {/* 1. BARRA ÚNICA DE PILAS HORIZONTALES (CON PREVISUALIZACIÓN AL HOVER Y SELECCIÓN AL CLICK) */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none', position: 'relative' }}>
         {allPrograms.map((program) => {
           const isInspected = inspectedProgramId === program.id;
           const isActiveInTracker = activeProgramIds.includes(program.id);
           const isHovered = hoveredProgramId === program.id;
 
-          // Clean title removing any parenthetical text
           const cleanTitle = program.title.replace(/\s*\([^)]*\)/g, '').trim();
 
           return (
@@ -36,6 +37,7 @@ export function ActiveProgramSelector() {
               onClick={() => setActiveProgram(program.id, 1, program.weeks[0]?.days[0]?.id || '')}
               onMouseEnter={() => setHoveredProgramId(program.id)}
               onMouseLeave={() => setHoveredProgramId(null)}
+              title={`${cleanTitle} (${program.durationWeeks} semanas · ${program.split.length} días/sem)`}
               style={{
                 background: isInspected
                   ? 'var(--color-accent-primary)'
@@ -77,7 +79,7 @@ export function ActiveProgramSelector() {
                     gap: '3px'
                   }}
                 >
-                  <Check size={10} /> ACTIVO
+                  <Check size={10} /> ACTIVO EN HOY
                 </span>
               )}
             </button>
@@ -85,7 +87,7 @@ export function ActiveProgramSelector() {
         })}
       </div>
 
-      {/* 2. TARJETA DE DETALLE EXPANDIDA (ESTILO IMAGEN 2) DEL PROGRAMA SELECCIONADO / HOVERED */}
+      {/* 2. TARJETA ENCABEZADO DE INFORMACIÓN DEL PLAN SELECCIONADO (CON BOTÓN DE ACTIVACIÓN) */}
       <div
         style={{
           background: 'var(--surface)',
@@ -98,23 +100,24 @@ export function ActiveProgramSelector() {
           transition: 'all 0.2s ease'
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-              {currentProgram.durationWeeks} SEMANAS · {currentProgram.split.length} DÍAS/SEM
+              {(hoveredProgram || currentProgram).durationWeeks} SEMANAS · {(hoveredProgram || currentProgram).split.length} DÍAS/SEM
+              {hoveredProgramId && hoveredProgramId !== inspectedProgramId ? ' (Previsualizando al hover)' : ''}
             </span>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 4px', color: 'var(--text)' }}>
-              {currentProgram.title.replace(/\s*\([^)]*\)/g, '').trim()}
+              {(hoveredProgram || currentProgram).title.replace(/\s*\([^)]*\)/g, '').trim()}
             </h3>
             <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0, maxWidth: '800px' }}>
-              <strong>Metodología:</strong> {currentProgram.methodology.join(' · ')}
+              <strong>Metodología:</strong> {(hoveredProgram || currentProgram).methodology.join(' · ')}
             </p>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            {currentProgram.pdfUrl && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            {(hoveredProgram || currentProgram).pdfUrl && (
               <a
-                href={libraryAssetUrl(currentProgram.pdfUrl)}
+                href={libraryAssetUrl((hoveredProgram || currentProgram).pdfUrl!)}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -126,7 +129,7 @@ export function ActiveProgramSelector() {
                   alignItems: 'center',
                   gap: '4px',
                   background: 'rgba(10, 132, 255, 0.1)',
-                  padding: '6px 12px',
+                  padding: '8px 14px',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid rgba(10, 132, 255, 0.25)'
                 }}
@@ -138,11 +141,17 @@ export function ActiveProgramSelector() {
 
             <button
               type="button"
-              onClick={() => toggleActiveProgram(currentProgram.id)}
+              onClick={() => toggleActiveProgram((hoveredProgram || currentProgram).id)}
               style={{
-                background: isCurrentActive ? 'var(--color-state-done-soft)' : 'var(--color-accent-primary)',
-                color: isCurrentActive ? 'var(--color-state-done)' : '#ffffff',
-                border: isCurrentActive ? '1px solid var(--color-state-done)' : 'none',
+                background: activeProgramIds.includes((hoveredProgram || currentProgram).id)
+                  ? 'var(--color-state-done-soft)'
+                  : 'var(--color-accent-primary)',
+                color: activeProgramIds.includes((hoveredProgram || currentProgram).id)
+                  ? 'var(--color-state-done)'
+                  : '#ffffff',
+                border: activeProgramIds.includes((hoveredProgram || currentProgram).id)
+                  ? '1px solid var(--color-state-done)'
+                  : 'none',
                 padding: '8px 18px',
                 borderRadius: 'var(--radius-md)',
                 fontSize: '0.88rem',
@@ -153,13 +162,13 @@ export function ActiveProgramSelector() {
                 gap: '8px'
               }}
             >
-              {isCurrentActive ? (
+              {activeProgramIds.includes((hoveredProgram || currentProgram).id) ? (
                 <>
-                  <Check size={16} /> Programa Activo en Tracker
+                  <Check size={16} /> Activo en Tracker "Hoy" (Clic para quitar)
                 </>
               ) : (
                 <>
-                  <Play size={16} /> Activar Programa
+                  <Play size={16} /> Activar Programa en Tracker "Hoy"
                 </>
               )}
             </button>
