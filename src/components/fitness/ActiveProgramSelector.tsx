@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Check, Dumbbell, ExternalLink, ChevronDown } from 'lucide-react';
+import { Play, Check, ExternalLink } from 'lucide-react';
 import { allPrograms } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { libraryAssetUrl } from '../../lib/library/openDocument';
