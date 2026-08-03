@@ -71,10 +71,7 @@ export function WorkoutPrescriptionTable({
           </a>
         </div>
       )}
-
-      {/* SELECCIÓN DE SEMANA Y DÍA ESTILO APPLE */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-sm)', justifyContent: 'space-between', alignItems: 'center' }}>
-        {/* SEMANAS */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Semana
@@ -83,11 +80,13 @@ export function WorkoutPrescriptionTable({
             {program.weeks.map((w) => {
               const wNum = w.weekNumber || w.week || 1;
               const isSelected = currentWeek === wNum;
+              const tooltip = w.title || w.block ? `Semana ${wNum}: ${w.title || w.block}` : `Semana ${wNum}`;
 
               return (
                 <button
                   key={wNum}
                   type="button"
+                  title={tooltip}
                   onClick={() => setWeek(wNum)}
                   style={{
                     background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
@@ -101,60 +100,68 @@ export function WorkoutPrescriptionTable({
                     whiteSpace: 'nowrap'
                   }}
                 >
-                  {wNum}{w.isDeload ? ' (Deload)' : ''}
+                  {wNum}{w.isDeload ? ' (D)' : ''}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* DÍAS */}
-        <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
-          {activeWeek?.days?.map((day, idx) => {
-            const dTitle = day.name || day.title || `Día ${idx + 1}`;
-            const isSelected = selectedDayIndex === idx;
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
+            Día
+          </span>
+          <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
+            {activeWeek?.days?.map((day, idx) => {
+              const dTitle = day.name || day.title || `Día ${idx + 1}`;
+              const isSelected = selectedDayIndex === idx;
 
-            return (
-              <button
-                key={day.id}
-                type="button"
-                onClick={() => setSelectedDayIndex(idx)}
-                style={{
-                  background: isSelected ? 'var(--color-surface-raised)' : 'transparent',
-                  color: isSelected ? 'var(--text)' : 'var(--text-tertiary)',
-                  border: isSelected ? '1px solid var(--color-border-visible)' : '1px solid transparent',
-                  padding: '6px 12px',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.82rem',
-                  fontWeight: isSelected ? 700 : 500,
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                {dTitle}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={day.id}
+                  type="button"
+                  title={`Día ${idx + 1}: ${dTitle}`}
+                  onClick={() => setSelectedDayIndex(idx)}
+                  style={{
+                    background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
+                    color: isSelected ? '#ffffff' : 'var(--text-tertiary)',
+                    border: 'none',
+                    padding: '6px 12px',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.82rem',
+                    fontWeight: isSelected ? 700 : 500,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {idx + 1}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* NOTA DE LA SEMANA Y BLOQUE */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', background: 'var(--surface-elevated)', border: '1px solid var(--color-border-subtle)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
-        <Info size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
-        <span>{activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayTitle}: {activeWeek?.isDeload ? 'Semana de descarga estratégica. Reducir carga y mantener margen.' : 'Prescripción exacta del PDF.'}</span>
+      <div style={{ margin: '4px 0 2px' }}>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: 'var(--text)', lineHeight: 1.25 }}>
+          {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayTitle}
+        </h3>
+        {activeWeek?.isDeload && (
+          <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-warning)', fontWeight: 600, marginTop: '2px', display: 'inline-block' }}>
+            ⚡ Semana de descarga estratégica (Reducir carga y mantener margen)
+          </span>
+        )}
       </div>
 
-      {/* TABLA DE PRESCRIPCIÓN RESPONSIVA */}
       <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', background: 'var(--surface)' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--font-size-body)' }}>
           <thead>
-            <tr style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid var(--color-border-subtle)' }}>
-              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>EJERCICIO & NOTAS</th>
-              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>CALENTAMIENTO</th>
-              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>SERIES × REPS</th>
-              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>ESFUERZO (RIR/RPE)</th>
-              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>DESCANSO</th>
-              <th style={{ padding: '12px 14px', fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 700 }}>SUSTITUCIONES (PDF)</th>
+            <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-tertiary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>
+              <th style={{ padding: 'var(--space-2)' }}>Ejercicio / Código</th>
+              <th style={{ padding: 'var(--space-2)' }}>Series × Reps</th>
+              <th style={{ padding: 'var(--space-2)' }}>RPE / RIR</th>
+              <th style={{ padding: 'var(--space-2)' }}>Descanso</th>
+              <th style={{ padding: 'var(--space-2)' }}>Sustitución</th>
             </tr>
           </thead>
           <tbody>
@@ -272,46 +279,35 @@ export function WorkoutPrescriptionTable({
                     {rest}
                   </td>
 
-                  {/* ACCIÓN SUSTITUIR Y SUSTITUTOS DEL PDF */}
+                  {/* ACCIÓN SUSTITUIR */}
                   <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <button
-                        type="button"
-                        onClick={() => setSubstitutionTarget({
-                          prescriptionId: pId,
-                          originalId: prescription.exerciseId,
-                          originalName: prescription.displayName,
-                          sourceSubs,
-                          opt1: prescription.substitutionOption1,
-                          opt2: prescription.substitutionOption2
-                        })}
-                        style={{
-                          background: 'var(--surface-elevated)',
-                          border: '1px solid var(--color-border-visible)',
-                          color: 'var(--text)',
-                          padding: '6px 10px',
-                          borderRadius: '6px',
-                          fontSize: '0.78rem',
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          width: 'fit-content'
-                        }}
-                      >
-                        <ArrowLeftRight size={14} /> Sustituir
-                      </button>
-
-                      {/* MOSTRAR SUGESTIONES OFICIALES DEL PROGRAMA SI EXISTEN */}
-                      {(prescription.substitutionOption1 || prescription.substitutionOption2) && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
-                          <span style={{ fontWeight: 700, color: 'var(--color-accent-primary)' }}>Recomendadas:</span>
-                          {prescription.substitutionOption1 && <span>1. {prescription.substitutionOption1}</span>}
-                          {prescription.substitutionOption2 && <span>2. {prescription.substitutionOption2}</span>}
-                        </div>
-                      )}
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSubstitutionTarget({
+                        prescriptionId: pId,
+                        originalId: prescription.exerciseId,
+                        originalName: prescription.displayName,
+                        sourceSubs,
+                        opt1: prescription.substitutionOption1,
+                        opt2: prescription.substitutionOption2
+                      })}
+                      style={{
+                        background: 'var(--surface-elevated)',
+                        border: '1px solid var(--color-border-visible)',
+                        color: 'var(--text)',
+                        padding: '6px 10px',
+                        borderRadius: '6px',
+                        fontSize: '0.78rem',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        width: 'fit-content'
+                      }}
+                    >
+                      <ArrowLeftRight size={14} /> Sustituir
+                    </button>
                   </td>
                 </tr>
               );
