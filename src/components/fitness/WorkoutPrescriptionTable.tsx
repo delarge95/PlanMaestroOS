@@ -303,10 +303,10 @@ export function WorkoutPrescriptionTable({
                         <ArrowLeftRight size={14} /> Sustituir
                       </button>
 
-                      {/* MOSTRAR SUGESTIONES OFICIALES DEL PDF SI EXISTEN */}
+                      {/* MOSTRAR SUGESTIONES OFICIALES DEL PROGRAMA SI EXISTEN */}
                       {(prescription.substitutionOption1 || prescription.substitutionOption2) && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
-                          <span style={{ fontWeight: 700, color: 'var(--color-accent-primary)' }}>⭐ Recomendado en PDF:</span>
+                          <span style={{ fontWeight: 700, color: 'var(--color-accent-primary)' }}>Recomendadas:</span>
                           {prescription.substitutionOption1 && <span>1. {prescription.substitutionOption1}</span>}
                           {prescription.substitutionOption2 && <span>2. {prescription.substitutionOption2}</span>}
                         </div>
