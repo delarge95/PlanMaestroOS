@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeftRight, Info, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeftRight, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import type { TrainingProgram } from '../../data/fitness/programs/types';
 import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
