@@ -3,7 +3,7 @@ import type { TrainingProgram } from './types';
 
 export const powerbuildingProgram: TrainingProgram = {
   id: 'powerbuilding',
-  title: 'Powerbuilding System (Fuerza & Hipertrofia)',
+  title: 'Powerbuilding System',
   source: 'Jeff Nippard (2020)',
   pdfUrl: '/library/fitness/powerbuilding-system.pdf',
   durationWeeks: 8,

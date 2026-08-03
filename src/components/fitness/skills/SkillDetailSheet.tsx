@@ -22,8 +22,8 @@ export function SkillDetailSheet({
   stepId,
   onStartPractice
 }: SkillDetailSheetProps) {
-  const activeStepId = useSkillStateStore((s) => s.activeStepId);
-  const setActiveStep = useSkillStateStore((s) => s.setActiveStep);
+  const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
+  const toggleActiveSkill = useSkillStateStore((s) => s.toggleActiveSkill);
   const pauseSkill = useSkillStateStore((s) => s.pauseSkill);
 
   const [showCriteria, setShowCriteria] = useState(false);
@@ -33,7 +33,7 @@ export function SkillDetailSheet({
   const step = skillSteps.find((s) => s.id === stepId) || skillSteps[0];
   const path = skillPaths.find((p) => p.id === step.pathId);
   const localExercise = skillExercises[step.id];
-  const isActive = activeStepId === step.id;
+  const isActive = activeStepIds.includes(step.id);
 
   const isFitAppVerified = localExercise?.fitApp?.verified && localExercise?.fitApp?.match === 'exact';
   const fitAppId = localExercise?.fitApp?.exerciseId;
@@ -142,26 +142,22 @@ export function SkillDetailSheet({
           </div>
 
           {/* ACCIÓN CAMBIAR A HABILIDAD ACTIVA / PAUSAR */}
-          {!isActive && (
-            <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  setActiveStep(step.id);
-                }}
-              >
-                <Star size={14} /> Establecer como habilidad activa
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => pauseSkill(step.id)}
-              >
-                <PauseCircle size={14} /> Pausar por ahora
-              </Button>
-            </div>
-          )}
+          <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+            <Button
+              variant={isActive ? "secondary" : "ghost"}
+              size="sm"
+              onClick={() => toggleActiveSkill(step.id)}
+            >
+              <Star size={14} /> {isActive ? '✓ Activa en Práctica (Hacer clic para quitar)' : '+ Añadir a habilidades activas'}
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => pauseSkill(step.id)}
+            >
+              <PauseCircle size={14} /> Pausar por ahora
+            </Button>
+          </div>
         </div>
 
         {/* NAVEGACIÓN ENTRE PASOS (ANTERIOR / SIGUIENTE) */}

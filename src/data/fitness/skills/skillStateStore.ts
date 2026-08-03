@@ -5,11 +5,13 @@ import type { SkillStatus, PracticeSessionRecord } from './types';
 
 export interface SkillState {
   activeStepId: string;
+  activeStepIds: string[];
   stepStatuses: Record<string, SkillStatus>;
   practiceSessions: PracticeSessionRecord[];
 
   // Actions
   setActiveStep: (stepId: string) => void;
+  toggleActiveSkill: (stepId: string) => void;
   setStepStatus: (stepId: string, status: SkillStatus) => void;
   addPracticeSession: (session: Omit<PracticeSessionRecord, 'id' | 'timestamp'>) => void;
   pauseSkill: (stepId: string) => void;
@@ -20,6 +22,7 @@ export const useSkillStateStore = create<SkillState>()(
   persist(
     (set, get) => ({
       activeStepId: 'pull-step-1',
+      activeStepIds: ['pull-step-1'],
       stepStatuses: {
         'pull-step-1': 'in-progress',
         'push-step-1': 'available',
@@ -32,13 +35,37 @@ export const useSkillStateStore = create<SkillState>()(
 
       setActiveStep: (stepId: string) => {
         set((state) => {
+          const currentActive = state.activeStepIds || [state.activeStepId || 'pull-step-1'];
+          const nextActive = currentActive.includes(stepId) ? currentActive : [...currentActive, stepId];
+          const updatedStatuses = { ...state.stepStatuses, [stepId]: 'in-progress' as SkillStatus };
+          return { activeStepId: stepId, activeStepIds: nextActive, stepStatuses: updatedStatuses };
+        });
+      },
+
+      toggleActiveSkill: (stepId: string) => {
+        set((state) => {
+          const currentActive = state.activeStepIds || [state.activeStepId || 'pull-step-1'];
+          const isAlreadyActive = currentActive.includes(stepId);
+          let nextActive: string[];
           const updatedStatuses = { ...state.stepStatuses };
-          // Set old active step to available if it was in-progress
-          if (state.activeStepId && updatedStatuses[state.activeStepId] === 'in-progress') {
-            updatedStatuses[state.activeStepId] = 'available';
+
+          if (isAlreadyActive) {
+            nextActive = currentActive.length > 1 ? currentActive.filter((id) => id !== stepId) : currentActive;
+            if (currentActive.length > 1) {
+              updatedStatuses[stepId] = 'available';
+            }
+          } else {
+            nextActive = [...currentActive, stepId];
+            updatedStatuses[stepId] = 'in-progress';
           }
-          updatedStatuses[stepId] = 'in-progress';
-          return { activeStepId: stepId, stepStatuses: updatedStatuses };
+
+          const nextMainActive = nextActive.includes(state.activeStepId) ? state.activeStepId : nextActive[0];
+
+          return {
+            activeStepId: nextMainActive,
+            activeStepIds: nextActive,
+            stepStatuses: updatedStatuses
+          };
         });
       },
 

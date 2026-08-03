@@ -40,7 +40,7 @@ const calisthenicsDaysTemplate = [
 
 export const calisthenicsProgram: TrainingProgram = {
   id: 'calisthenics-skills',
-  title: 'Calistenia & Anillas (Steven Low)',
+  title: 'Calistenia & Anillas',
   source: 'Overcoming_Gravity_Steven_Low.pdf',
   durationWeeks: 8,
   split: ['Tracción & Empuje', 'Pierna & Core', 'Movilidad & Prehab'],

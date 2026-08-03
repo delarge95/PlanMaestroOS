@@ -20,7 +20,7 @@ const DOMAIN_LABELS: Record<SkillDomain, { label: string; icon: string }> = {
 };
 
 export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
-  const activeStepId = useSkillStateStore((s) => s.activeStepId);
+  const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
   const [selectedDomain, setSelectedDomain] = useState<SkillDomain | 'all'>('all');
   const [expandedPathId, setExpandedPathId] = useState<string | null>(null);
 
@@ -135,7 +135,7 @@ export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
                   <ol style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                     {stepsInPath.map((step) => {
                       if (!step) return null;
-                      const isActive = step.id === activeStepId;
+                      const isActive = activeStepIds.includes(step.id);
                       const numStr = String(step.order).padStart(2, '0');
 
                       return (

@@ -3,7 +3,8 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface ActiveProgramState {
-  programId: string;
+  programId: string; // Currently selected/inspected program ID in UI
+  activeProgramIds: string[]; // List of all currently active program IDs
   currentWeek: number;
   currentDayId: string;
   selectedExerciseOverrides: Record<string, string>; // prescriptionId -> substitute exerciseId
@@ -12,6 +13,8 @@ export interface ActiveProgramState {
 
   // Actions
   setActiveProgram: (programId: string, week?: number, dayId?: string) => void;
+  toggleActiveProgram: (programId: string) => void;
+  isProgramActive: (programId: string) => boolean;
   setWeek: (week: number) => void;
   setDay: (dayId: string) => void;
   setExerciseOverride: (prescriptionId: string, overrideExerciseId: string) => void;
@@ -21,8 +24,9 @@ export interface ActiveProgramState {
 
 export const useActiveProgramStore = create<ActiveProgramState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       programId: 'min-max',
+      activeProgramIds: ['min-max'],
       currentWeek: 1,
       currentDayId: 'mm-w1-minmax-d1',
       selectedExerciseOverrides: {},
@@ -30,12 +34,52 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
       updatedAt: new Date().toISOString(),
 
       setActiveProgram: (programId: string, week = 1, dayId = '') => {
-        set({
-          programId,
-          currentWeek: week,
-          currentDayId: dayId,
-          updatedAt: new Date().toISOString()
+        set((state) => {
+          const currentActive = state.activeProgramIds || ['min-max'];
+          const nextActive = currentActive.includes(programId)
+            ? currentActive
+            : [...currentActive, programId];
+
+          return {
+            programId,
+            activeProgramIds: nextActive,
+            currentWeek: week,
+            currentDayId: dayId,
+            updatedAt: new Date().toISOString()
+          };
         });
+      },
+
+      toggleActiveProgram: (programId: string) => {
+        set((state) => {
+          const currentActive = state.activeProgramIds || ['min-max'];
+          const isAlreadyActive = currentActive.includes(programId);
+          let nextActive: string[];
+
+          if (isAlreadyActive) {
+            // Keep at least one active program
+            nextActive = currentActive.length > 1
+              ? currentActive.filter((id) => id !== programId)
+              : currentActive;
+          } else {
+            nextActive = [...currentActive, programId];
+          }
+
+          const nextInspectedProgram = nextActive.includes(state.programId)
+            ? state.programId
+            : nextActive[0];
+
+          return {
+            programId: nextInspectedProgram,
+            activeProgramIds: nextActive,
+            updatedAt: new Date().toISOString()
+          };
+        });
+      },
+
+      isProgramActive: (programId: string) => {
+        const state = get();
+        return (state.activeProgramIds || [state.programId]).includes(programId);
       },
 
       setWeek: (week: number) => {
@@ -76,6 +120,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
       resetProgramState: () => {
         set({
           programId: 'min-max',
+          activeProgramIds: ['min-max'],
           currentWeek: 1,
           currentDayId: 'mm-w1-minmax-d1',
           selectedExerciseOverrides: {},
@@ -88,6 +133,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
       version: 1,
       partialize: (state) => ({
         programId: state.programId,
+        activeProgramIds: state.activeProgramIds,
         currentWeek: state.currentWeek,
         currentDayId: state.currentDayId,
         selectedExerciseOverrides: state.selectedExerciseOverrides,
