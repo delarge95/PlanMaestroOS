@@ -65,17 +65,17 @@ export function ExerciseSubstitutionDrawer({
           )}
         </div>
 
-        {/* 1. SECCIÓN RECOMENDACIONES OFICIALES DEL PDF */}
+        {/* 1. SECCIÓN RECOMENDACIONES DEL PROGRAMA */}
         <div>
           <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}>
-            <Star size={14} /> ⭐ Recomendaciones Oficiales del PDF (Entrenador)
+            <Star size={14} /> Recomendadas por el programa
           </span>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
             {/* OPCIÓN ORIGINAL */}
             <ListRow
               title={originalName}
-              meta="Ejercicio original prescrito por el PDF"
+              meta="Ejercicio original prescrito"
               icon={<ArrowLeftRight size={18} style={{ color: 'var(--color-accent-primary)' }} />}
               active={currentActiveId === originalExerciseId}
               badge={currentActiveId === originalExerciseId ? 'Original Activo' : undefined}
@@ -83,7 +83,7 @@ export function ExerciseSubstitutionDrawer({
               onClick={() => clearOverride(prescriptionId)}
             />
 
-            {/* SUSTITUTOS OFICIALES DEL PDF */}
+            {/* SUSTITUTOS OFICIALES DEL PROGRAMA */}
             {pdfAlternatives.map((alt) => {
               const isSelected = currentActiveId === alt.exerciseId;
               return (
@@ -97,10 +97,10 @@ export function ExerciseSubstitutionDrawer({
                 >
                   <ListRow
                     title={alt.name}
-                    meta={`Recomendación Oficial PDF · ${alt.note || 'Sustitución directa de la rutina'}`}
+                    meta={alt.note || 'Sustitución directa de la rutina'}
                     icon={isSelected ? <Check size={18} style={{ color: 'var(--color-state-done)' }} /> : <Star size={18} style={{ color: '#f59e0b' }} />}
                     active={isSelected}
-                    badge={isSelected ? 'Seleccionado' : '⭐ Recomendado PDF'}
+                    badge={isSelected ? 'Seleccionado' : 'Recomendada'}
                     badgeTone={isSelected ? 'success' : 'warning'}
                     onClick={() => setOverride(prescriptionId, alt.exerciseId)}
                   />
@@ -114,7 +114,7 @@ export function ExerciseSubstitutionDrawer({
         {fitAppAlternatives.length > 0 && (
           <div>
             <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
-              🔄 Alternativas Adicionales Compatibles (Motor FitApp)
+              Alternativas compatibles
             </span>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
@@ -126,7 +126,7 @@ export function ExerciseSubstitutionDrawer({
                   <ListRow
                     key={alt.exerciseId}
                     title={alt.name}
-                    meta={`${reasonLabel} · ${alt.note || ''}`}
+                    meta={`${reasonLabel}${alt.note ? ` · ${alt.note}` : ''}`}
                     icon={isSelected ? <Check size={18} style={{ color: 'var(--color-state-done)' }} /> : <ArrowLeftRight size={18} style={{ color: 'var(--text-tertiary)' }} />}
                     active={isSelected}
                     badge={isSelected ? 'Seleccionado' : undefined}

@@ -215,11 +215,11 @@ export function WorkoutPrescriptionTable({
                               gap: '4px'
                             }}
                           >
-                            <span>{isNoteExpanded ? 'Ocultar nota técnica' : 'Ver nota del PDF'}</span>
+                            <span>Nota</span>
                             {isNoteExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
                           </button>
 
-                          {(isNoteExpanded || prescription.notes.length <= 80) && (
+                          {isNoteExpanded && (
                             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.45, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--color-accent-primary)' }}>
                               {prescription.notes}
                             </p>
