@@ -51,6 +51,28 @@ const SAMPLE_OBSIDIAN_NOTES = [
   }
 ];
 
+// Helper to validate that a URL uses HTTPS and belongs to a whitelisted domain
+const isValidNotionUrl = (urlStr: string): boolean => {
+  try {
+    const url = new URL(urlStr);
+    if (url.protocol !== 'https:') return false;
+
+    const allowedDomains = [
+      'notion.so',
+      'notion.site',
+      'notion.com',
+      'v1.embednotion.com'
+    ];
+
+    // Check if the hostname is exactly one of the allowed domains or ends with .allowed_domain
+    return allowedDomains.some(domain =>
+      url.hostname === domain || url.hostname.endsWith('.' + domain)
+    );
+  } catch (e) {
+    return false;
+  }
+};
+
 export default function SecondBrainInspector({
   defaultNotionUrl = 'https://v1.embednotion.com/embed/plan-maestro'
 }: Props) {
@@ -59,6 +81,7 @@ export default function SecondBrainInspector({
   // Notion state
   const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(defaultNotionUrl);
   const [inputUrl, setInputUrl] = useState<string>('');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   // Obsidian state
   const [selectedNoteIndex, setSelectedNoteIndex] = useState<number>(0);
@@ -67,7 +90,9 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidNotionUrl(savedNotion)) {
+        setNotionEmbedUrl(savedNotion);
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +101,18 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmedUrl = inputUrl.trim();
+    if (!trimmedUrl) return;
+
+    if (!isValidNotionUrl(trimmedUrl)) {
+      setValidationError('Error de seguridad: La URL debe ser HTTPS y pertenecer a un dominio permitido de Notion.');
+      return;
+    }
+
+    setValidationError(null);
+    setNotionEmbedUrl(trimmedUrl);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmedUrl);
     } catch (e) {
       console.error(e);
     }
@@ -242,38 +275,48 @@ export default function SecondBrainInspector({
         {/* 2. DIRECT NOTION LIVE EMBEDDED INSPECTOR */}
         {viewMode === 'notion_embed' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-              <input
-                type="text"
-                placeholder="Pega la URL pública o de Embed de tu página/database de Notion..."
-                value={inputUrl}
-                onChange={(e) => setInputUrl(e.target.value)}
-                style={{
-                  flex: 1,
-                  background: 'rgba(0,0,0,0.5)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  borderRadius: '10px',
-                  padding: '10px 14px',
-                  color: 'var(--color-text-primary)',
-                  fontSize: '0.85rem'
-                }}
-              />
-              <button
-                type="button"
-                onClick={handleSaveNotionUrl}
-                style={{
-                  background: 'var(--color-accent-warning)',
-                  border: 'none',
-                  color: '#000000',
-                  fontWeight: 700,
-                  padding: '10px 18px',
-                  borderRadius: '10px',
-                  fontSize: '0.82rem',
-                  cursor: 'pointer'
-                }}
-              >
-                ✓ Cargar Embed
-              </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <input
+                  type="text"
+                  placeholder="Pega la URL pública o de Embed de tu página/database de Notion..."
+                  value={inputUrl}
+                  onChange={(e) => {
+                    setInputUrl(e.target.value);
+                    if (validationError) setValidationError(null);
+                  }}
+                  style={{
+                    flex: 1,
+                    background: 'rgba(0,0,0,0.5)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '10px',
+                    padding: '10px 14px',
+                    color: 'var(--color-text-primary)',
+                    fontSize: '0.85rem'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={handleSaveNotionUrl}
+                  style={{
+                    background: 'var(--color-accent-warning)',
+                    border: 'none',
+                    color: '#000000',
+                    fontWeight: 700,
+                    padding: '10px 18px',
+                    borderRadius: '10px',
+                    fontSize: '0.82rem',
+                    cursor: 'pointer'
+                  }}
+                >
+                  ✓ Cargar Embed
+                </button>
+              </div>
+              {validationError && (
+                <div style={{ color: 'var(--color-accent-danger)', fontSize: '0.8rem', fontWeight: 600, paddingLeft: '4px' }}>
+                  ⚠️ {validationError}
+                </div>
+              )}
             </div>
 
             {/* EMBEDDED MACOS WINDOW FRAME */}
@@ -296,6 +339,7 @@ export default function SecondBrainInspector({
                 src={notionEmbedUrl}
                 title="Notion Second Brain Live Inspection"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               />
             </div>
           </div>

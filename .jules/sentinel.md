@@ -1,0 +1,4 @@
+## 2026-08-03 - Secure Embedded IFrame Patterns and Validation
+**Vulnerability:** Insecure and un-sandboxed dynamic iframe embeds leading to Cross-Site Scripting (XSS), session hijacking, or phishing vectors via user-controlled URL input.
+**Learning:** When users or system configurations can dynamically supply URLs for embedding (such as Notion second brain embeddings), lack of protocol and domain whitelisting allows malicious redirects or untrusted domains to execute with full privileges inside the application window.
+**Prevention:** Always restrict third-party dynamic embeds to secure protocol validation (HTTPS only), whitelist allowed hostnames strictly (e.g. `notion.so`, `notion.site`, `notion.com`, `v1.embednotion.com`), and apply defensive `sandbox` restrictions (`allow-scripts allow-same-origin allow-popups allow-forms`) on the `<iframe>` element.
