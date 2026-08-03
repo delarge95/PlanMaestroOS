@@ -63,7 +63,7 @@ export function ActiveProgramSelector() {
                     gap: '4px'
                   }}
                 >
-                  Ver PDF Oficial ↗ <ExternalLink size={12} />
+                  Ver PDF ↗ <ExternalLink size={12} />
                 </a>
               )}
             </div>

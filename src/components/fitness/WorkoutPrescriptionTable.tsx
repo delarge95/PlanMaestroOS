@@ -66,7 +66,7 @@ export function WorkoutPrescriptionTable({
               gap: '6px'
             }}
           >
-            <span>Ver PDF Oficial del Programa ({program.title})</span>
+            <span>Ver PDF</span>
             <ExternalLink size={14} aria-hidden="true" />
           </a>
         </div>
@@ -75,32 +75,37 @@ export function WorkoutPrescriptionTable({
       {/* SELECCIÓN DE SEMANA Y DÍA ESTILO APPLE */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-sm)', justifyContent: 'space-between', alignItems: 'center' }}>
         {/* SEMANAS */}
-        <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
-          {program.weeks.map((w) => {
-            const wNum = w.weekNumber || w.week || 1;
-            const isSelected = currentWeek === wNum;
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
+            Semana
+          </span>
+          <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
+            {program.weeks.map((w) => {
+              const wNum = w.weekNumber || w.week || 1;
+              const isSelected = currentWeek === wNum;
 
-            return (
-              <button
-                key={wNum}
-                type="button"
-                onClick={() => setWeek(wNum)}
-                style={{
-                  background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
-                  color: isSelected ? '#ffffff' : 'var(--text-tertiary)',
-                  border: 'none',
-                  padding: '6px 12px',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.82rem',
-                  fontWeight: isSelected ? 700 : 500,
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                Sem {wNum} {w.isDeload ? '(Deload)' : ''}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={wNum}
+                  type="button"
+                  onClick={() => setWeek(wNum)}
+                  style={{
+                    background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
+                    color: isSelected ? '#ffffff' : 'var(--text-tertiary)',
+                    border: 'none',
+                    padding: '6px 10px',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.82rem',
+                    fontWeight: isSelected ? 700 : 500,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {wNum}{w.isDeload ? ' (Deload)' : ''}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* DÍAS */}
