@@ -51,6 +51,28 @@ const SAMPLE_OBSIDIAN_NOTES = [
   }
 ];
 
+// Helper to validate and sanitize dynamic Notion dynamic embeds
+const isValidNotionUrl = (url: string): boolean => {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') {
+      return false;
+    }
+    const domainWhitelist = [
+      'notion.so',
+      'notion.site',
+      'notion.com',
+      'v1.embednotion.com'
+    ];
+    // Check if the hostname matches any whitelisted domain or is a subdomain of it
+    return domainWhitelist.some(domain =>
+      parsed.hostname === domain || parsed.hostname.endsWith('.' + domain)
+    );
+  } catch {
+    return false;
+  }
+};
+
 export default function SecondBrainInspector({
   defaultNotionUrl = 'https://v1.embednotion.com/embed/plan-maestro'
 }: Props) {
@@ -67,7 +89,13 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion) {
+        if (isValidNotionUrl(savedNotion)) {
+          setNotionEmbedUrl(savedNotion);
+        } else {
+          console.warn('Blocked insecure or non-whitelisted Notion URL from localStorage:', savedNotion);
+        }
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +104,17 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+
+    if (!isValidNotionUrl(trimmed)) {
+      alert('Error de Seguridad: La URL de Notion debe usar HTTPS y pertenecer a un dominio permitido (*.notion.so, *.notion.site, *.notion.com, *.v1.embednotion.com).');
+      return;
+    }
+
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -296,6 +331,7 @@ export default function SecondBrainInspector({
                 src={notionEmbedUrl}
                 title="Notion Second Brain Live Inspection"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
               />
             </div>
           </div>
