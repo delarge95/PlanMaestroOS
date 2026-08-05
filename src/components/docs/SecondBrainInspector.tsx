@@ -51,14 +51,41 @@ const SAMPLE_OBSIDIAN_NOTES = [
   }
 ];
 
+// Whitelist of domains allowed for Notion integration
+const ALLOWED_NOTION_DOMAINS = [
+  'notion.so',
+  'notion.site',
+  'notion.com',
+  'v1.embednotion.com'
+];
+
+// Helper to validate and sanitize dynamic embed URLs
+const validateNotionUrl = (urlStr: string): boolean => {
+  try {
+    const parsed = new URL(urlStr);
+    if (parsed.protocol !== 'https:') return false;
+
+    // Check if the domain or any subdomain is in the allowed whitelist
+    const hostname = parsed.hostname.toLowerCase();
+    return ALLOWED_NOTION_DOMAINS.some(domain =>
+      hostname === domain || hostname.endsWith('.' + domain)
+    );
+  } catch (e) {
+    return false;
+  }
+};
+
 export default function SecondBrainInspector({
   defaultNotionUrl = 'https://v1.embednotion.com/embed/plan-maestro'
 }: Props) {
   const [viewMode, setViewMode] = useState<'reinterpreted' | 'notion_embed' | 'obsidian_vault'>('reinterpreted');
 
   // Notion state
-  const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(defaultNotionUrl);
+  const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(
+    validateNotionUrl(defaultNotionUrl) ? defaultNotionUrl : 'https://v1.embednotion.com/embed/plan-maestro'
+  );
   const [inputUrl, setInputUrl] = useState<string>('');
+  const [securityWarning, setSecurityWarning] = useState<string | null>(null);
 
   // Obsidian state
   const [selectedNoteIndex, setSelectedNoteIndex] = useState<number>(0);
@@ -67,7 +94,13 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion) {
+        if (validateNotionUrl(savedNotion)) {
+          setNotionEmbedUrl(savedNotion);
+        } else {
+          setSecurityWarning('La URL de Notion guardada en localStorage no cumple con los requisitos de seguridad (HTTPS + Whitelist).');
+        }
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +109,19 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmedUrl = inputUrl.trim();
+    if (!trimmedUrl) return;
+
+    // Perform Security Validation: HTTPS and domain whitelist
+    if (!validateNotionUrl(trimmedUrl)) {
+      setSecurityWarning('URL No Permitida: Sólo se permiten URLs seguras (HTTPS) de Notion (notion.so, notion.site, notion.com, v1.embednotion.com).');
+      return;
+    }
+
+    setSecurityWarning(null);
+    setNotionEmbedUrl(trimmedUrl);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmedUrl);
     } catch (e) {
       console.error(e);
     }
@@ -276,6 +318,21 @@ export default function SecondBrainInspector({
               </button>
             </div>
 
+            {/* SECURITY WARNING ALERT */}
+            {securityWarning && (
+              <div style={{
+                background: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid rgba(239, 68, 68, 0.4)',
+                borderRadius: '10px',
+                padding: '10px 16px',
+                color: '#fca5a5',
+                fontSize: '0.82rem',
+                fontWeight: 500
+              }}>
+                ⚠️ {securityWarning}
+              </div>
+            )}
+
             {/* EMBEDDED MACOS WINDOW FRAME */}
             <div style={{ background: '#000000', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '18px', overflow: 'hidden', height: '500px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ background: '#1c1c1e', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -295,6 +352,7 @@ export default function SecondBrainInspector({
               <iframe
                 src={notionEmbedUrl}
                 title="Notion Second Brain Live Inspection"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
               />
             </div>
