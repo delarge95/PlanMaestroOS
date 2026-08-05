@@ -15,15 +15,33 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
 
   const [activeTab, setActiveTab] = useState<'technique' | 'muscles' | 'substitutions'>('technique');
 
-  // Extract YouTube video ID if available
+  // Strict YouTube Domain and Protocol validation
+  const validateYoutubeUrl = (urlStr?: string): boolean => {
+    if (!urlStr) return false;
+    try {
+      const parsed = new URL(urlStr);
+      if (parsed.protocol !== 'https:') return false;
+      const hostname = parsed.hostname.toLowerCase();
+      return hostname === 'youtube.com' ||
+             hostname === 'www.youtube.com' ||
+             hostname === 'youtu.be' ||
+             hostname === 'www.youtu.be';
+    } catch (e) {
+      return false;
+    }
+  };
+
+  // Extract YouTube video ID if available & valid
   const getYoutubeEmbedUrl = (url?: string) => {
-    if (!url) return null;
+    if (!url || !validateYoutubeUrl(url)) return null;
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=1` : null;
   };
 
   const embedUrl = getYoutubeEmbedUrl(targetExercise.youtubeLink);
+
+  const isYoutubeLinkValid = validateYoutubeUrl(targetExercise.youtubeLink);
 
   return (
     <div 
@@ -123,12 +141,13 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
             <iframe
               src={embedUrl}
               title={targetExercise.name}
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
               style={{ width: '100%', height: '100%', border: 'none' }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
-        ) : targetExercise.youtubeLink ? (
+        ) : targetExercise.youtubeLink && isYoutubeLinkValid ? (
           <a
             href={targetExercise.youtubeLink}
             target="_blank"
