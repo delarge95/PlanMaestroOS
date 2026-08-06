@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -67,7 +68,9 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidEmbedUrl(savedNotion, 'notion')) {
+        setNotionEmbedUrl(savedNotion);
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +79,18 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+
+    // Validate the input Notion URL against strict whitelist for security
+    if (!isValidEmbedUrl(trimmed, 'notion')) {
+      alert('Error de seguridad: URL de Notion no permitida o inválida. Debe ser HTTPS y pertenecer a los dominios autorizados (notion.so, notion.site, notion.com, v1.embednotion.com).');
+      return;
+    }
+
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -293,9 +304,10 @@ export default function SecondBrainInspector({
               </div>
 
               <iframe
-                src={notionEmbedUrl}
+                src={isValidEmbedUrl(notionEmbedUrl, 'notion') ? notionEmbedUrl : defaultNotionUrl}
                 title="Notion Second Brain Live Inspection"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
               />
             </div>
           </div>
