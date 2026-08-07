@@ -35,4 +35,5 @@ node_modules/
 .npm-cache/
 qa-screenshots/
 *.pdf
+!public/**/*.pdf
 
