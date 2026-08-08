@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -67,7 +68,7 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidEmbedUrl(savedNotion)) setNotionEmbedUrl(savedNotion);
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +77,15 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+    if (!isValidEmbedUrl(trimmed)) {
+      alert('URL no válida. Debe ser una URL HTTPS permitida para Notion (ej. v1.embednotion.com, notion.so, notion.site, notion.com).');
+      return;
+    }
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -292,11 +298,24 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                />
+              ) : (
+                <div style={{ display: 'grid', placeItems: 'center', height: '100%', padding: '40px', textAlign: 'center', color: 'var(--color-accent-danger)' }}>
+                  <div>
+                    <span style={{ fontSize: '2rem', display: 'block', marginBottom: '12px' }}>⚠️</span>
+                    <strong>URL de Notion no válida o no permitida por razones de seguridad.</strong>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', marginTop: '8px' }}>
+                      La URL debe ser HTTPS y pertenecer a un dominio permitido de Notion (ej. v1.embednotion.com, notion.so).
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

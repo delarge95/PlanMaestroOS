@@ -1,0 +1,4 @@
+## 2025-05-18 - Securing Third-Party Dynamic Embeds with Strict Validation and Sandboxing
+**Vulnerability:** Iframes embedding third-party services (like Notion and YouTube) did not have restrictive sandbox attributes and accepted unvalidated URLs, posing a risk of content injection, spoofing, and Cross-Site Scripting (XSS).
+**Learning:** Although dynamic embeds are helpful for user integration and presentation, omitting validation and sandboxing exposes the main application to potential malicious behaviors (like script execution, form submissions, or popups from arbitrary untrusted domains).
+**Prevention:** Always enforce HTTPS protocol, match domain names against a strict whitelist of trusted hosts, and apply the most restrictive `sandbox` permissions necessary for each dynamic iframe to function.

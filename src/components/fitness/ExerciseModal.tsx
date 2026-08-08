@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { ExerciseEntry } from '../../data/exercises';
 
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   exercise?: ExerciseEntry | null;
@@ -23,7 +24,8 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
     return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=1` : null;
   };
 
-  const embedUrl = getYoutubeEmbedUrl(targetExercise.youtubeLink);
+  const rawEmbedUrl = getYoutubeEmbedUrl(targetExercise.youtubeLink);
+  const embedUrl = rawEmbedUrl && isValidEmbedUrl(rawEmbedUrl) ? rawEmbedUrl : null;
 
   return (
     <div 
@@ -126,6 +128,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
               style={{ width: '100%', height: '100%', border: 'none' }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox"
             />
           </div>
         ) : targetExercise.youtubeLink ? (
