@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -77,9 +78,14 @@ export default function SecondBrainInspector({
 
   const handleSaveNotionUrl = () => {
     if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmedUrl = inputUrl.trim();
+    if (!isValidEmbedUrl(trimmedUrl)) {
+      alert('Error de Seguridad: La URL debe ser una dirección HTTPS válida y pertenecer a un de dominio de confianza (Notion o YouTube).');
+      return;
+    }
+    setNotionEmbedUrl(trimmedUrl);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmedUrl);
     } catch (e) {
       console.error(e);
     }
@@ -292,11 +298,32 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
+                />
+              ) : (
+                <div style={{
+                  padding: '24px',
+                  color: 'var(--color-accent-danger)',
+                  background: 'rgba(239, 68, 68, 0.1)',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  flexDirection: 'column',
+                  gap: '12px'
+                }}>
+                  <strong style={{ fontSize: '1.2rem' }}>⚠️ URL de Embed No Segura</strong>
+                  <p style={{ maxWidth: '480px', margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>
+                    La URL especificada no cumple con los criterios de seguridad del sistema. Solo se permiten conexiones HTTPS seguras hacia dominios autorizados de Notion o YouTube.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
