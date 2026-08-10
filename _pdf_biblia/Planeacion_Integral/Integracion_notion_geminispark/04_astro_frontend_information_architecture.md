@@ -85,3 +85,10 @@ No instalar un chat global de primera. Empezar con acciones contextuales:
 - `Explicar progreso` en Fitness.
 
 Cada respuesta debe mostrar fuentes/datos usados, permitir editar y requerir aprobación antes de persistir o ejecutar una acción.
+
+## Estado de Implementación
+- **Contratos Agnósticos de Interfaz**: Definidos en `src/data/contracts/domainContracts.ts` (`TodayDomainView`, `CareerPipelineView`, `UpcomingDomainState` para dominios con estado `próximamente`).
+- **Adaptadores de Presentación**: `src/data/adapters/todayAdapter.ts` consolida métricas locales y snapshots sin acoplar los componentes de UI directamente a la API de Notion.
+- **Acciones Contextuales IA**: Implementado el componente reutilizable `src/components/shared/ContextualAIActionButton.tsx` para `Proponer Top 3`, `Resumir vacante` y `Explicar progreso`, desplegando fuentes utilizadas, editor de borrador y aprobación explícita requerida.
+- **Pantalla Hoy Rediseñada**: `src/components/schedules/TodayTabWorkspace.tsx` responde inmediatamente con el bloque activo, una primera micro-acción de menos de 10 minutos (`[Empezar 10 min]`) y resúmenes de Fitness y Carrera.
+- **Corrección de Hidratación y Navegación**: `NavigationShell.tsx` corregido mediante hidratación `mounted` state para garantizar funcionamiento instantáneo de los botones "Más" y "Modo simple".

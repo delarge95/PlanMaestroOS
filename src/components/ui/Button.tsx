@@ -3,17 +3,9 @@ import React from 'react';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
-interface ButtonProps {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  children: React.ReactNode;
-  disabled?: boolean;
-  type?: 'button' | 'submit';
-  style?: React.CSSProperties;
-  className?: string;
-  title?: string;
-  'aria-label'?: string;
 }
 
 const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
@@ -61,7 +53,7 @@ export function Button({
   style,
   className,
   title,
-  'aria-label': ariaLabel
+  ...props
 }: ButtonProps) {
   return (
     <button
@@ -69,7 +61,6 @@ export function Button({
       onClick={onClick}
       disabled={disabled}
       title={title}
-      aria-label={ariaLabel}
       aria-disabled={disabled}
       className={className}
       style={{
@@ -84,28 +75,32 @@ export function Button({
         transition: 'all 150ms ease',
         fontFamily: 'var(--font-family-system)',
         lineHeight: 1.2,
-        // AUDIT-05: focus-visible outline applied via CSS class .btn-focus
         outline: 'none',
         ...style
       }}
       onMouseDown={(e) => {
         if (!disabled) e.currentTarget.style.transform = 'scale(0.97)';
+        props.onMouseDown?.(e);
       }}
       onMouseUp={(e) => {
         if (!disabled) e.currentTarget.style.transform = 'scale(1)';
+        props.onMouseUp?.(e);
       }}
       onMouseLeave={(e) => {
         if (!disabled) e.currentTarget.style.transform = 'scale(1)';
+        props.onMouseLeave?.(e);
       }}
       onFocus={(e) => {
         if (!disabled) {
           e.currentTarget.style.boxShadow = `${variantStyles[variant].boxShadow ?? ''}, 0 0 0 3px rgba(10, 132, 255, 0.5)`.trim().replace(/^,\s*/, '');
         }
+        props.onFocus?.(e);
       }}
       onBlur={(e) => {
-        // Restore original boxShadow on blur
         e.currentTarget.style.boxShadow = (variantStyles[variant] as React.CSSProperties).boxShadow as string ?? '';
+        props.onBlur?.(e);
       }}
+      {...props}
     >
       {children}
     </button>

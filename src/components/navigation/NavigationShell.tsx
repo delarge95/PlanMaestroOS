@@ -20,6 +20,7 @@ export function NavigationShell({
   breadcrumb,
   children
 }: NavigationShellProps) {
+  const [mounted, setMounted] = useState(false);
   const [isMorePopoverOpen, setIsMorePopoverOpen] = useState(false);
   const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
 
@@ -28,6 +29,12 @@ export function NavigationShell({
 
   const isSimpleMode = useAppStore((s) => s.isSimpleMode);
   const toggleSimpleMode = useAppStore((s) => s.toggleSimpleMode);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const activeSimpleMode = mounted ? isSimpleMode : false;
 
   // Determine active tab among 3 main destinations
   const isNowActive = activeDomain === 'now' || currentPath === '/app' || currentPath === '/app/today';
@@ -115,10 +122,7 @@ export function NavigationShell({
               type="button"
               aria-haspopup="menu"
               aria-expanded={isMorePopoverOpen}
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsMorePopoverOpen((prev) => !prev);
-              }}
+              onClick={() => setIsMorePopoverOpen((prev) => !prev)}
               className={`${styles.navItem} ${isMoreActive ? styles.navItemActive : ''}`}
             >
               <span>Más</span>
@@ -178,18 +182,18 @@ export function NavigationShell({
           <Button
             variant="ghost"
             size="sm"
-            aria-pressed={isSimpleMode}
+            aria-pressed={activeSimpleMode}
             onClick={toggleSimpleMode}
-            aria-label={isSimpleMode ? 'Desactivar Modo Simple' : 'Activar Modo Simple de baja estimulación'}
+            aria-label={activeSimpleMode ? 'Desactivar Modo Simple' : 'Activar Modo Simple de baja estimulación'}
           >
-            <Sprout size={17} aria-hidden="true" style={{ color: isSimpleMode ? 'var(--color-state-done)' : 'var(--text-tertiary)' }} />
+            <Sprout size={17} aria-hidden="true" style={{ color: activeSimpleMode ? 'var(--color-state-done)' : 'var(--text-tertiary)' }} />
             <span>Modo simple</span>
           </Button>
         </div>
       </header>
 
       {/* CONTENIDO PRINCIPAL DE LA PÁGINA */}
-      <main className={`${styles.appMain} ${isSimpleMode ? styles.appMainSimple : ''}`}>
+      <main className={`${styles.appMain} ${activeSimpleMode ? styles.appMainSimple : ''}`}>
         {children}
       </main>
 
@@ -269,8 +273,8 @@ export function NavigationShell({
               title="Modo simple"
               meta="Reducir a 1 columna sin distracciones"
               icon={<Sprout size={18} style={{ color: 'var(--color-state-done)' }} />}
-              badge={isSimpleMode ? 'Activo' : undefined}
-              badgeTone={isSimpleMode ? 'success' : 'default'}
+              badge={activeSimpleMode ? 'Activo' : undefined}
+              badgeTone={activeSimpleMode ? 'success' : 'default'}
               onClick={() => { toggleSimpleMode(); setIsMobileSheetOpen(false); }}
             />
           </div>
