@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "systemName": "Plan Maestro OS Notion Provisions",
+  "initialAreas": [
+    {
+      "externalId": "area_agenda",
+      "Nombre": "Agenda",
+      "Icono": "📅",
+      "Estado": "Activo",
+      "Orden": 1,
+      "DescripcionBreve": "Foco diario, bloques de tiempo y acciones siguientes"
+    },
+    {
+      "externalId": "area_fitness",
+      "Nombre": "Fitness",
+      "Icono": "🏋️",
+      "Estado": "Activo",
+      "Orden": 2,
+      "DescripcionBreve": "Prehab, entrenamiento de fuerza, calistenia y salud articular"
+    },
+    {
+      "externalId": "area_carrera",
+      "Nombre": "Carrera",
+      "Icono": "💼",
+      "Estado": "Activo",
+      "Orden": 3,
+      "DescripcionBreve": "Pipeline de aplicaciones laborales, portafolio y TwinSight X500"
+    },
+    {
+      "externalId": "area_tesis",
+      "Nombre": "Tesis",
+      "Icono": "🎓",
+      "Estado": "Activo",
+      "Orden": 4,
+      "DescripcionBreve": "Avance académico UNAD e investigación"
+    },
+    {
+      "externalId": "area_idiomas",
+      "Nombre": "Idiomas",
+      "Icono": "🗣️",
+      "Estado": "Activo",
+      "Orden": 5,
+      "DescripcionBreve": "Rutina diaria de Alemán A1 e Inglés C1"
+    }
+  ],
+  "databases": [
+    {
+      "databaseKey": "areas",
+      "name": "Areas",
+      "owner": "Alexander Woodcock",
+      "purpose": "Clasificación raíz de todos los dominios operativos del sistema",
+      "mandatoryFields": ["Nombre", "Estado", "Orden"],
+      "activeViewFilter": "Estado == 'Activo'",
+      "archiveViewFilter": "Estado == 'Archivado'",
+      "retentionPolicy": "Permanente",
+      "definitionOfDone": "Área configurada con icono, orden y descripción"
+    },
+    {
+      "databaseKey": "projects",
+      "name": "Projects",
+      "owner": "Alexander Woodcock",
+      "purpose": "Agrupación de entregables y metas de mediano plazo vinculadas a un área",
+      "mandatoryFields": ["Nombre", "AreaId", "Estado", "Prioridad"],
+      "activeViewFilter": "Estado != 'Terminado' && Estado != 'Archivado'",
+      "archiveViewFilter": "Estado == 'Terminado' || Estado == 'Archivado'",
+      "retentionPolicy": "Permanente con archivado anual",
+      "definitionOfDone": "Entregables clave probados y caso de estudio publicado"
+    },
+    {
+      "databaseKey": "tasks",
+      "name": "Tasks",
+      "owner": "Alexander Woodcock",
+      "purpose": "Unidad atómica de acción ejecutable por bloque de tiempo",
+      "mandatoryFields": ["Titulo", "AreaId", "Estado", "Prioridad"],
+      "activeViewFilter": "Estado == 'Bandeja' || Estado == 'Próxima' || Estado == 'En curso' || Estado == 'Esperando'",
+      "archiveViewFilter": "Estado == 'Hecho' || Estado == 'Cancelado'",
+      "retentionPolicy": "Archivado de tareas completadas cada 90 días",
+      "definitionOfDone": "Suficientemente bueno y verificado en la app"
+    },
+    {
+      "databaseKey": "dailyPlan",
+      "name": "Daily plan",
+      "owner": "Alexander Woodcock",
+      "purpose": "Página diaria de orientación con Top 3 y bloques A/B de trabajo profundo",
+      "mandatoryFields": ["Fecha", "CheckInAM", "CierrePM"],
+      "activeViewFilter": "Fecha >= FechaHoy",
+      "archiveViewFilter": "Fecha < FechaHoy",
+      "retentionPolicy": "Permanente (1 página por día)",
+      "definitionOfDone": "Top 3 asignado, bloques A/B ejecutados y Cierre PM registrado"
+    },
+    {
+      "databaseKey": "careerApplications",
+      "name": "Career applications",
+      "owner": "Alexander Woodcock",
+      "purpose": "Pipeline de postulaciones y seguimiento de oportunidades laborales",
+      "mandatoryFields": ["Empresa", "Rol", "Estado", "ConsentimientoEnvio"],
+      "activeViewFilter": "Estado != 'Cerrado' && Estado != 'Rechazado'",
+      "archiveViewFilter": "Estado == 'Cerrado' || Estado == 'Rechazado'",
+      "retentionPolicy": "Permanente para trazabilidad de mercado",
+      "definitionOfDone": "Confirmación de envío registrada y fecha de seguimiento agendada"
+    },
+    {
+      "databaseKey": "careerAssets",
+      "name": "Career assets",
+      "owner": "Alexander Woodcock",
+      "purpose": "Catálogo de versiones de CV, portafolio y entregables de valor",
+      "mandatoryFields": ["Nombre", "Tipo", "Version", "Estado"],
+      "activeViewFilter": "Estado == 'Aprobado' || Estado == 'En revisión'",
+      "archiveViewFilter": "Estado == 'Archivado'",
+      "retentionPolicy": "Permanente",
+      "definitionOfDone": "Asset revisado, URL pública comprobada y aprobado para envío"
+    },
+    {
+      "databaseKey": "fitnessSessions",
+      "name": "Fitness sessions",
+      "owner": "Alexander Woodcock",
+      "purpose": "Resumen acumulado por sesión de entrenamiento (sin sets individuales)",
+      "mandatoryFields": ["Fecha", "Programa", "Completada"],
+      "activeViewFilter": "Fecha >= Hace30Dias",
+      "archiveViewFilter": "Fecha < Hace30Dias",
+      "retentionPolicy": "Permanente",
+      "definitionOfDone": "Sesión registrada en la app local y consolidada en Notion"
+    },
+    {
+      "databaseKey": "fitnessMeasurements",
+      "name": "Fitness measurements",
+      "owner": "Alexander Woodcock",
+      "purpose": "Seguimiento corporal, sueño y prehab diario",
+      "mandatoryFields": ["Fecha", "PrehabCompletado"],
+      "activeViewFilter": "Fecha >= Hace90Dias",
+      "archiveViewFilter": "Fecha < Hace90Dias",
+      "retentionPolicy": "Permanente",
+      "definitionOfDone": "Check-in AM de salud y prehab completado"
+    },
+    {
+      "databaseKey": "fitnessPRSnapshots",
+      "name": "Fitness PR snapshots",
+      "owner": "Alexander Woodcock",
+      "purpose": "Marcas personales alcanzadas y verificadas",
+      "mandatoryFields": ["Fecha", "EjercicioCanonico", "TipoPR", "Valor", "Unidad"],
+      "activeViewFilter": "Verificado == true",
+      "archiveViewFilter": "Verificado == false",
+      "retentionPolicy": "Permanente",
+      "definitionOfDone": "PR superado y registrado en la app con datos de carga/reps"
+    }
+  ]
+}

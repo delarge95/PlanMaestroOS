@@ -138,15 +138,15 @@
   right: 0;
   margin-top: 8px;
   width: 260px;
-  background: var(--surface-elevated);
+  background: var(--surface-elevated, #1c1c1e);
   border: 1px solid var(--color-border-visible);
   border-radius: var(--radius-md);
   padding: var(--space-2);
-  box-shadow: var(--shadow-float);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  z-index: 150;
+  z-index: 999;
   animation: popoverFadeIn 140ms ease-out;
 }
 

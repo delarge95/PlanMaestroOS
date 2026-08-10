@@ -59,3 +59,11 @@ Antes de sincronizar sets individuales, definir volumen esperado, coste API, con
 
 ## Gobernanza
 Cada DB necesita: propietario, finalidad, campos obligatorios, vista operativa, vista archivo, retención y definición de “hecho”. Documentar cambios de schema mediante migración, nunca renombrar/eliminar campos sin adaptador.
+
+## Estado de Implementación
+- **Esquemas TypeScript**: Definidos formalmente en `src/data/notion/schema.ts` para las 9 bases de datos MVP.
+- **Contratos y Encabezados**: Implementados en `src/data/notion/contracts.ts` con `notionPageId`, `externalId` único y campos de gobernanza (`DatabaseGovernanceConfig`).
+- **Mapeadores y Privacidad**: `src/data/notion/mappers.ts` con filtro automático `sanitizeNotesForPublicProjection` que previene filtraciones de salud/terapia.
+- **Manifest Declarativo**: Definido en `src/data/notion/provisioningManifest.json` conteniendo el registro de las 5 áreas iniciales (*Agenda*, *Fitness*, *Carrera*, *Tesis*, *Idiomas*).
+- **Adaptador de Resumen Fitness**: `src/data/fitness/fitnessSyncAdapter.ts` para enviar únicamente métricas resumidas y PRs a Notion sin contaminar la API con interacción de alta frecuencia de sets.
+- **Validador de Gobernanza**: Script `scripts/validateNotionSchema.ts` ejecutable en desarrollo y CI.

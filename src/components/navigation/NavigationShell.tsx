@@ -30,7 +30,7 @@ export function NavigationShell({
   const toggleSimpleMode = useAppStore((s) => s.toggleSimpleMode);
 
   // Determine active tab among 3 main destinations
-  const isNowActive = activeDomain === 'now' || currentPath === '/app' || currentPath === '/app/clinical' || currentPath === '/app/today';
+  const isNowActive = activeDomain === 'now' || currentPath === '/app' || currentPath === '/app/today';
   const isPlanActive = activeDomain === 'plan' || currentPath === '/app/schedules';
   const isMoreActive = !isNowActive && !isPlanActive;
 
@@ -115,7 +115,10 @@ export function NavigationShell({
               type="button"
               aria-haspopup="menu"
               aria-expanded={isMorePopoverOpen}
-              onClick={() => setIsMorePopoverOpen((prev) => !prev)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMorePopoverOpen((prev) => !prev);
+              }}
               className={`${styles.navItem} ${isMoreActive ? styles.navItemActive : ''}`}
             >
               <span>Más</span>
