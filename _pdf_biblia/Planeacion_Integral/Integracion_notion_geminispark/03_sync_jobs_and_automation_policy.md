@@ -72,3 +72,13 @@ No fijar horarios rígidos hasta probar carga real. Comenzar con:
 - ningún job que envíe comunicaciones.
 
 Tras dos semanas de uso, medir utilidad y ajustar horarios/volumen de notificaciones.
+
+## Estado de Implementación
+- **Guardián de Políticas**: Implementado en `src/lib/sync/automationPolicy.ts` con la función `requiresHumanApproval()` para auditar e inhabilitar envíos automáticos de comunicaciones, aplicaciones o modificaciones prescritas sin consentimiento explícito.
+- **Motor de Sync e Idempotencia**: Clase `SyncEngine` implementada en `src/lib/sync/syncEngine.ts` con control de `idempotencyKey`, limitador de tasa Notion (~3 req/s en `RateLimiter`), reintentos con backoff exponencial/jitter y Dead Letter Queue (DLQ).
+- **Jobs MVP**: Definidos en `src/lib/sync/jobDefinitions.ts`:
+  - `runMorningPrepJob`: Propuesta de Top 3 con micro-acciones <10 min (sin reordenar ni cerrar tareas).
+  - `runEveningAssistJob`: Resumen y propuesta de borrador sin tono moralizante.
+  - `runGitHubDigestJob`: Digest de actividad de repos a Notion.
+  - `runCareerDraftJob`: Detección y borrador de aplicaciones laborales.
+- **CLI Runner de Jobs**: `scripts/runSyncJobs.ts` soporta ejecución individual o masiva en modo `--dryRun` o `--live`.
