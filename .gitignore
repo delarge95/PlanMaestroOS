@@ -37,3 +37,10 @@ qa-screenshots/
 *.pdf
 !public/**/*.pdf
 
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+.raw_snapshots/

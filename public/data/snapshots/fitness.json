@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "generatedAt": "2026-08-10T23:09:08.667Z",
+    "schemaVersion": "1.0.0",
+    "environment": "development",
+    "sanitized": true,
+    "source": "local-fallback"
+  },
+  "activePrograms": [
+    "min-max",
+    "powerbuilding-system"
+  ],
+  "completedSessionsCount": 42,
+  "totalVolumeKg": 128500,
+  "lastUpdated": "2026-08-10T23:09:08.667Z"
+}

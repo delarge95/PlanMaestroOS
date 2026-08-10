@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "generatedAt": "2026-08-10T23:09:08.665Z",
+    "schemaVersion": "1.0.0",
+    "environment": "development",
+    "sanitized": true,
+    "source": "local-fallback"
+  },
+  "items": [
+    {
+      "id": "agenda-item-1",
+      "title": "Bloque A: Trabajo Profundo / TwinSight Case Study",
+      "timeBlock": "09:20–11:40",
+      "priority": "top1",
+      "domain": "career",
+      "status": "planned"
+    },
+    {
+      "id": "agenda-item-2",
+      "title": "Bloque B: Rutina de Alemán A1 & Duolingo",
+      "timeBlock": "13:30–14:00",
+      "priority": "top2",
+      "domain": "german",
+      "status": "planned"
+    },
+    {
+      "id": "agenda-item-3",
+      "title": "Bloque C: Sesión Fitness Min-Max & Prehab",
+      "timeBlock": "15:00–16:30",
+      "priority": "top3",
+      "domain": "fitness",
+      "status": "planned"
+    }
+  ]
+}

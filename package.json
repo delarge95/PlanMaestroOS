@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@types/node": "^26.2.0",
     "@types/three": "^0.184.1",
     "impeccable": "^3.5.0",
     "playwright": "^1.60.0",

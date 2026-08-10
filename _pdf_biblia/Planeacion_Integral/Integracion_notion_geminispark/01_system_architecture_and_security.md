@@ -66,10 +66,11 @@ SYNC_SIGNING_SECRET
 - Rotar tokens, registrar acceso y revocar ante exposición.
 - Añadir secret scanning y deny-list de archivos al repositorio.
 
-## Observabilidad
-Cada job debe guardar: `jobId`, origen, entidad, operación, actor, timestamp, resultado, retries y error saneado. No guardar tokens, diagnósticos clínicos ni contenido sensible innecesario.
+## Observabilidad e Implementación de Código
+Cada job guarda `jobId`, origen, entidad, operación, actor, timestamp, resultado, retries y error saneado mediante `src/lib/security/auditLogger.ts`. Se aplica ocultación automática de tokens y patrones sensibles (`sanitizeErrorMessage`).
 
-## Decisiones abiertas
-- Elegir un único worker/host de backend.
-- Elegir proveedor IA y política de retención de datos.
-- Definir si los snapshots serán privados autenticados o solo contendrán datos aptos para ser públicos.
+## Decisiones tomadas y arquitectura implementada
+- **Host de Backend Worker**: **Cloudflare Workers** (acceso mediante `workerClient.ts` y variable `WORKER_API_URL`).
+- **Proveedor IA y Política**: **Google Gemini API** (invocado exclusivamente por el Worker; la IA genera borradores/propuestas y jamás ejecuta escrituras autónomas).
+- **Estrategia de Snapshots**: Proyecciones estáticas saneadas en `public/data/snapshots/*.json` generadas en tiempo de build con `scripts/buildSnapshots.ts` según contratos de `src/data/snapshots/types.ts`.
+- **Límites de Tasa y Debounce**: Implementados en `src/lib/security/syncPolicy.ts` (3 req/seg para Notion API, debounce de 30–120s para webhooks).
