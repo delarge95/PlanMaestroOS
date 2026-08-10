@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import NavigationShell from '../components/navigation/NavigationShell.tsx';
+import styles from '../components/navigation/NavigationShell.module.css';
 
 interface Props {
   title: string;
@@ -29,9 +30,13 @@ const mappedDomain = (activeDomain === 'general' || activeDomain === 'today')
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="app-body">
-    <NavigationShell client:load currentPath={Astro.url.pathname} activeDomain={mappedDomain} breadcrumb={breadcrumb}>
-      <slot />
-    </NavigationShell>
+    <div class={styles.wrapper}>
+      <NavigationShell client:load currentPath={Astro.url.pathname} activeDomain={mappedDomain} breadcrumb={breadcrumb} />
+
+      <main class={styles.appMain} id="app-main">
+        <slot />
+      </main>
+    </div>
 
     <style>
       .app-body {

@@ -11,14 +11,12 @@ export interface NavigationShellProps {
   currentPath?: string;
   activeDomain?: 'now' | 'plan' | 'more' | 'clinical' | 'career' | 'german' | 'fitness' | 'library' | 'master-plan';
   breadcrumb?: string;
-  children: React.ReactNode;
 }
 
 export function NavigationShell({
   currentPath = '/app',
   activeDomain = 'now',
-  breadcrumb,
-  children
+  breadcrumb
 }: NavigationShellProps) {
   const [mounted, setMounted] = useState(false);
   const [isMorePopoverOpen, setIsMorePopoverOpen] = useState(false);
@@ -32,7 +30,10 @@ export function NavigationShell({
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    if (typeof document !== 'undefined') {
+      document.body.classList.toggle('simple-mode-active', isSimpleMode);
+    }
+  }, [isSimpleMode]);
 
   const activeSimpleMode = mounted ? isSimpleMode : false;
 
@@ -80,7 +81,7 @@ export function NavigationShell({
   ];
 
   return (
-    <div className={styles.wrapper}>
+    <>
       {/* HEADER PRINCIPAL COMPACTO */}
       <header className={styles.header}>
         <div className={styles.brandGroup}>
@@ -183,7 +184,12 @@ export function NavigationShell({
             variant="ghost"
             size="sm"
             aria-pressed={activeSimpleMode}
-            onClick={toggleSimpleMode}
+            onClick={() => {
+              toggleSimpleMode();
+              if (typeof document !== 'undefined') {
+                document.body.classList.toggle('simple-mode-active', !useAppStore.getState().isSimpleMode);
+              }
+            }}
             aria-label={activeSimpleMode ? 'Desactivar Modo Simple' : 'Activar Modo Simple de baja estimulación'}
           >
             <Sprout size={17} aria-hidden="true" style={{ color: activeSimpleMode ? 'var(--color-state-done)' : 'var(--text-tertiary)' }} />
@@ -191,11 +197,6 @@ export function NavigationShell({
           </Button>
         </div>
       </header>
-
-      {/* CONTENIDO PRINCIPAL DE LA PÁGINA */}
-      <main className={`${styles.appMain} ${activeSimpleMode ? styles.appMainSimple : ''}`}>
-        {children}
-      </main>
 
       {/* BOTTOM BAR NAVEGACIÓN MÓVIL (< 768px) */}
       <nav className={styles.mobileNav} aria-label="Navegación móvil">
@@ -275,12 +276,18 @@ export function NavigationShell({
               icon={<Sprout size={18} style={{ color: 'var(--color-state-done)' }} />}
               badge={activeSimpleMode ? 'Activo' : undefined}
               badgeTone={activeSimpleMode ? 'success' : 'default'}
-              onClick={() => { toggleSimpleMode(); setIsMobileSheetOpen(false); }}
+              onClick={() => {
+                toggleSimpleMode();
+                if (typeof document !== 'undefined') {
+                  document.body.classList.toggle('simple-mode-active', !useAppStore.getState().isSimpleMode);
+                }
+                setIsMobileSheetOpen(false);
+              }}
             />
           </div>
         </div>
       </Sheet>
-    </div>
+    </>
   );
 }
 
