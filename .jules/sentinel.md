@@ -1,0 +1,6 @@
+# Sentinel Security Journal 🛡️
+
+## 2025-03-03 - Secure Whitelisting and Sandboxing for Third-Party Embeds
+**Vulnerability:** The application featured `<iframe>` elements that directly embedded external, dynamic URLs (such as YouTube videos and user-defined Notion workspaces) without validating their protocol (HTTPS) or restricting their hostnames to trusted third-party providers. Furthermore, the iframes lacked restrictive `sandbox` attributes, leaving them vulnerable to potential XSS, client-side open redirects, clickjacking, and script breakout/leakage.
+**Learning:** Dynamic embeds are powerful but can be easily abused as vectors for untrusted content if hostnames are not tightly restricted. Relying solely on user trust is insufficient; defense-in-depth requires strict URL parsing and protocol enforcement combined with the browser's native sandbox controls to prevent dynamic content from executing outside of its designated scope.
+**Prevention:** Always parse dynamic embed URLs, enforce the `https:` protocol, and matches hostnames against a strict domain whitelist before rendering any iframe. Additionally, configure iframes with highly restrictive `sandbox` permissions (such as `allow-scripts allow-same-origin`) to restrict their capabilities.

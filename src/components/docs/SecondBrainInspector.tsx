@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -292,11 +293,22 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                />
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', padding: '24px', textAlign: 'center', color: 'var(--color-accent-danger)' }}>
+                  <span style={{ fontSize: '2.5rem', marginBottom: '12px' }}>⚠️</span>
+                  <strong style={{ fontSize: '1.1rem', marginBottom: '8px', color: 'var(--color-accent-warning)' }}>URL de Embed Bloqueada por Seguridad</strong>
+                  <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', maxWidth: '400px', margin: 0 }}>
+                    La URL ingresada no cumple con la política de seguridad del sitio (enforce HTTPS y dominios permitidos como notion.so, notion.site, notion.com o v1.embednotion.com).
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
