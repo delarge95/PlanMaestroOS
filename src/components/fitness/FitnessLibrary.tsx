@@ -4,10 +4,11 @@ import SectionNav from '../ui/SectionNav';
 import LibraryCatalog from './LibraryCatalog';
 import LibrarySkills from './LibrarySkills';
 import LibraryDatabase from './LibraryDatabase';
+import LibraryMuscles from './LibraryMuscles';
 import ErrorBoundary from '../ErrorBoundary';
 
 export interface FitnessLibraryProps {
-  subTab?: 'catalog' | 'skills' | 'data';
+  subTab?: 'catalog' | 'skills' | 'data' | 'muscles';
   currentPath?: string;
 }
 
@@ -20,7 +21,7 @@ export default function FitnessLibrary({ subTab = 'catalog', currentPath = '/app
         <SectionNav sectionKey="fitness" currentPath={currentPath} level={2} />
 
         <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-          Rutinas y biblioteca
+          Base de Datos & Biblioteca
         </h1>
 
         {/* NAVEGACIÓN NIVEL 3 */}
@@ -30,6 +31,7 @@ export default function FitnessLibrary({ subTab = 'catalog', currentPath = '/app
         {subTab === 'catalog' && <LibraryCatalog />}
         {subTab === 'skills' && <LibrarySkills />}
         {subTab === 'data' && <LibraryDatabase />}
+        {subTab === 'muscles' && <LibraryMuscles />}
 
       </div>
     </ErrorBoundary>
