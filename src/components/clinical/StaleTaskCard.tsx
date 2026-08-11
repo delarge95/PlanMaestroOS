@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Task } from '../../data/contracts/task';
 import Button from '../ui/Button';
 
@@ -9,13 +9,25 @@ export interface StaleTaskCardProps {
   onDismiss?: () => void;
 }
 
+const DISMISS_KEY = (id: string) => `stale_dismissed_${id}`;
+const today = () => new Date().toISOString().split('T')[0];
+
 export default function StaleTaskCard({ task, onSplit, onMove, onDismiss }: StaleTaskCardProps) {
   const [dismissed, setDismissed] = useState(false);
+
+  // Restore dismiss state: only suppress if dismissed today
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(DISMISS_KEY(task.id));
+      if (stored === today()) setDismissed(true);
+    } catch (_) { /* SSR/privacy mode */ }
+  }, [task.id]);
 
   if (dismissed) return null;
 
   const handleLeave = () => {
     setDismissed(true);
+    try { localStorage.setItem(DISMISS_KEY(task.id), today()); } catch (_) { /* privacy mode */ }
     if (onDismiss) onDismiss();
   };
 
