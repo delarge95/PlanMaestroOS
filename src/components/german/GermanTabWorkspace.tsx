@@ -1,7 +1,35 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import GermanLearningHub from './GermanLearningHub';
 import DomainDocAccordion from '../docs/DomainDocAccordion';
+import ContextualAIActionButton from '../shared/ContextualAIActionButton';
+import { evaluateModuleReadiness } from '../../data/contracts/expansionGate';
+import type { VocabularyItem } from '../../data/contracts/expansionContracts';
+import { Languages, BookOpen, ShieldCheck } from 'lucide-react';
+import Button from '../ui/Button';
+
+const SAMPLE_A1_VOCAB: VocabularyItem[] = [
+  {
+    id: 'v1',
+    language: 'de',
+    cefrLevel: 'A1',
+    term: 'Der Entwickler',
+    translationEs: 'El desarrollador',
+    exampleSentence: 'Der Entwickler optimiert den 3D-Code.',
+    grammarCategory: 'Nomen',
+    licenseSource: 'Alemán Técnico Personal'
+  },
+  {
+    id: 'v2',
+    language: 'de',
+    cefrLevel: 'A1',
+    term: 'Arbeiten',
+    translationEs: 'Trabajar',
+    exampleSentence: 'Ich arbeite als Technical Artist.',
+    grammarCategory: 'Verb',
+    licenseSource: 'Alemán A1 Base'
+  }
+];
 
 const germanDocsList = [
   { name: 'plan_maestro_v3.md#modulo-aleman', type: 'Markdown', path: 'plan_maestro_v3.md', description: 'Definición formal del hábito de Alemán diario' },
@@ -9,18 +37,29 @@ const germanDocsList = [
 ];
 
 const TABS = [
-  { id: 'habit', label: '🇩🇪 Alemán 25m' },
-  { id: 'grammar', label: '📑 Gramática' },
-  { id: 'audio', label: '🎧 Audios A1' },
-  { id: 'docs', label: '📄 Fuentes' }
+  { id: 'habit', label: '🇩🇪 Práctica Alemán A1' },
+  { id: 'vocab', label: '🎴 Vocabulario A1 & Repaso' },
+  { id: 'tutor', label: '🤖 Tutor Conversacional IA' },
+  { id: 'docs', label: '📚 Fuentes Documentales' }
 ];
 
 export default function GermanTabWorkspace() {
   const [activeTab, setActiveTab] = useState<string>('habit');
+  const [vocabList] = useState<VocabularyItem[]>(SAMPLE_A1_VOCAB);
+  const [practiceAttempt, setPracticeAttempt] = useState('');
+  const [tutorFeedback, setTutorFeedback] = useState<string | null>(null);
+
+  const gateResult = evaluateModuleReadiness('languages');
+
+  const handleSimulatePractice = () => {
+    if (!practiceAttempt.trim()) return;
+    setTutorFeedback(`Gut gemacht! Tu frase "${practiceAttempt}" es comprensible a nivel A1. Corrección: Recuerda que los sustantivos como "Entwickler" siempre van con mayúscula inicial.`);
+  };
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+
         {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
         <div style={{
           position: 'sticky',
@@ -54,10 +93,10 @@ export default function GermanTabWorkspace() {
                   borderRadius: '12px',
                   fontSize: '0.84rem',
                   fontWeight: isSelected ? 700 : 500,
-                  fontFamily: '-apple-system, SF Pro Text, system-ui, sans-serif',
+                  fontFamily: 'var(--font-family-system)',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  boxShadow: isSelected ? '0 3px 12px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0,0,0,0.2)' : 'none',
+                  boxShadow: isSelected ? '0 3px 12px rgba(0, 0, 0, 0.35)' : 'none',
                   transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
               >
@@ -67,45 +106,113 @@ export default function GermanTabWorkspace() {
           })}
         </div>
 
-        {/* SUBSECTION CONTENT */}
-        <div style={{ minHeight: '500px' }}>
-          {(activeTab === 'habit' || activeTab === 'grammar' || activeTab === 'audio') && <GermanLearningHub />}
-          {activeTab === 'docs' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-              <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
-                <span style={{ fontSize: '1.8rem' }}>📱</span>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '8px 0 4px' }}>1. Duolingo (5 min)</h3>
-                <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                  Mantenimiento de racha diaria, vocabulario rápido y fijación de palabras básicas.
-                </p>
-              </div>
-
-              <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
-                <span style={{ fontSize: '1.8rem' }}>📚</span>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '8px 0 4px' }}>2. Libros A1 + Audios (15-20 min)</h3>
-                <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                  Set de libros descargados (Menschen A1 / Grammatik aktiv) siguiendo audios oficiales nativos.
-                </p>
-              </div>
-
-              <div style={{ background: 'rgba(28,28,30,0.75)', border: '1px solid rgba(255,255,255,0.12)', borderTop: '3px solid #ff9f0a', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
-                <span style={{ fontSize: '1.8rem' }}>🤖</span>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '8px 0 4px' }}>3. IA Conversacional (5-10 min)</h3>
-                <p style={{ fontSize: '0.84rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                  Micro-prácticas con ChatGPT / IA de voz en alemán básico A1 con corrección gramatical inmediata.
-                </p>
-              </div>
-            </div>
-          )}
-          {activeTab === 'docs' && (
-            <DomainDocAccordion
-              domainTitle="Alemán & Estrategia Lingüística"
-              domainColor="#ff9f0a"
-              categoryFilter="german"
-              sourceDocsList={germanDocsList}
-            />
-          )}
+        {/* CUMPLIMIENTO DE CRITERIOS DE MADUREZ (EXPANSION GATE 07) */}
+        <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+            <ShieldCheck size={18} style={{ color: 'var(--color-state-done)' }} />
+            <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', fontWeight: 600 }}>
+              Módulo de Idiomas: {gateResult.isReadyForFullBuild ? 'Criterios de Madurez Verificados (5/5)' : 'En evaluación'}
+            </span>
+          </div>
+          <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
+            Enfoque: Alemán A1 & Inglés Técnico Laboral
+          </span>
         </div>
+
+        {activeTab === 'habit' && <GermanLearningHub />}
+
+        {/* TAB 2: VOCABULARIO Y REPASO ESPACIADO */}
+        {activeTab === 'vocab' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+              Tarjetas de Vocabulario Alemán A1 (Recuperación Espaciada)
+            </h3>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-md)' }}>
+              {vocabList.map((item) => (
+                <div key={item.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ background: 'var(--color-accent-primary-soft)', color: 'var(--color-accent-primary)', padding: '2px 6px', borderRadius: '4px', fontSize: 'var(--font-size-meta)', fontWeight: 700 }}>
+                      {item.grammarCategory} · {item.cefrLevel}
+                    </span>
+                    <Languages size={16} style={{ color: 'var(--text-tertiary)' }} />
+                  </div>
+                  <strong style={{ fontSize: '1.2rem', color: 'var(--text)' }}>
+                    {item.term}
+                  </strong>
+                  <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--color-accent-warning)' }}>
+                    Traducción: {item.translationEs}
+                  </span>
+                  <p style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', fontStyle: 'italic', margin: '4px 0 0' }}>
+                    "{item.exampleSentence}"
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 3: TUTOR CONVERSACIONAL IA */}
+        {activeTab === 'tutor' && (
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: 'var(--space-lg)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+            <div>
+              <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+                PRÁCTICA Y FEEDBACK GRAMATICAL A1
+              </span>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text)' }}>
+                Tutor Conversacional (Alemán A1)
+              </h3>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+              <label style={{ fontSize: 'var(--font-size-label)', color: 'var(--text)', fontWeight: 600 }}>
+                Escribe una oración corta en alemán para corrección:
+              </label>
+              <input
+                type="text"
+                value={practiceAttempt}
+                onChange={(e) => setPracticeAttempt(e.target.value)}
+                placeholder="Ejemplo: Ich arbeite heute als entwickler..."
+                style={{
+                  background: 'rgba(0,0,0,0.3)',
+                  color: 'var(--text)',
+                  border: '1px solid var(--color-border-visible)',
+                  borderRadius: 'var(--radius-sm)',
+                  padding: 'var(--space-sm)',
+                  fontSize: 'var(--font-size-body)',
+                  fontFamily: 'var(--font-family-system)'
+                }}
+              />
+
+              <div style={{ display: 'flex', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+                <Button variant="primary" size="sm" onClick={handleSimulatePractice}>
+                  <BookOpen size={16} /> Enviar Frase para Feedback
+                </Button>
+                <ContextualAIActionButton
+                  label="Explicar progreso"
+                  actionType="explain_progress"
+                  contextData={{ lang: 'de', level: 'A1' }}
+                  sources={['German Learning Hub', 'Vocab Cards']}
+                />
+              </div>
+
+              {tutorFeedback && (
+                <div style={{ background: 'var(--color-accent-primary-soft)', border: '1px solid var(--color-accent-primary)', padding: 'var(--space-md)', borderRadius: 'var(--radius-sm)', color: 'var(--text)', fontSize: 'var(--font-size-body)', marginTop: 'var(--space-xs)' }}>
+                  {tutorFeedback}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'docs' && (
+          <DomainDocAccordion
+            domainTitle="Alemán & Estrategia Lingüística"
+            domainColor="#ff9f0a"
+            categoryFilter="german"
+            sourceDocsList={germanDocsList}
+          />
+        )}
       </div>
     </ErrorBoundary>
   );

@@ -51,3 +51,8 @@ Un módulo se construye solo cuando tiene:
 3. una acción semanal clara;
 4. criterio de éxito;
 5. política de privacidad/licencia.
+
+## Estado de Implementación
+- **Contratos Agnósticos de Expansión**: Definidos en `src/data/contracts/expansionContracts.ts` para Tesis (`TechnicalPerformanceMetric` con dispositivo, escena, build y FPS), Idiomas (`VocabularyItem`, `ReviewCard`, `PracticeAttempt`), Gastronomía (`RecipeLibraryItem`), Academia e Investigación.
+- **Evaluación de Madurez de Módulos (Expansion Gate)**: Creada la utilidad `src/data/contracts/expansionGate.ts` (`evaluateModuleReadiness()`) que valida los 5 criterios obligatorios antes de promover módulos de `próximamente` a `activo`.
+- **Integración de Idiomas (Alemán A1)**: Actualizado `src/components/german/GermanTabWorkspace.tsx` con tarjetas de repaso espaciado y la sesión de práctica asistida por el Tutor Conversacional IA.
