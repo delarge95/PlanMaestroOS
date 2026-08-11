@@ -1,98 +1,22 @@
+// src/components/fitness/skills/SkillsWorkspace.tsx
 import React, { useState } from 'react';
-import { Target, Compass, History, ShieldAlert } from 'lucide-react';
-import MyPracticeView from './MyPracticeView';
+import { Compass, ShieldAlert } from 'lucide-react';
 import ExplorePathsView from './ExplorePathsView';
-import SkillHistoryView from './SkillHistoryView';
 import SkillDetailSheet from './SkillDetailSheet';
 import PracticeSessionModal from './PracticeSessionModal';
 
 export function SkillsWorkspace() {
-  const [activeTab, setActiveTab] = useState<'practice' | 'paths' | 'history'>('practice');
   const [selectedStepId, setSelectedStepId] = useState<string | null>(null);
   const [practiceModalStepId, setPracticeModalStepId] = useState<string | null>(null);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%', maxWidth: '800px', margin: '0 auto' }}>
-      {/* NAVEGACIÓN PRINCIPAL: SEGMENTED CONTROL (MÁXIMO 3 OPCIONES) */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '4px',
-          background: 'var(--surface)',
-          padding: '4px',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid var(--color-border-subtle)'
-        }}
-      >
-        <button
-          type="button"
-          onClick={() => setActiveTab('practice')}
-          style={{
-            background: activeTab === 'practice' ? 'var(--color-accent-primary)' : 'transparent',
-            color: activeTab === 'practice' ? '#ffffff' : 'var(--text-tertiary)',
-            border: 'none',
-            padding: '10px 14px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.86rem',
-            fontWeight: activeTab === 'practice' ? 700 : 500,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            minHeight: '44px'
-          }}
-        >
-          <Target size={16} />
-          <span>Mi práctica</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('paths')}
-          style={{
-            background: activeTab === 'paths' ? 'var(--color-accent-primary)' : 'transparent',
-            color: activeTab === 'paths' ? '#ffffff' : 'var(--text-tertiary)',
-            border: 'none',
-            padding: '10px 14px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.86rem',
-            fontWeight: activeTab === 'paths' ? 700 : 500,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            minHeight: '44px'
-          }}
-        >
-          <Compass size={16} />
-          <span>Rutas</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('history')}
-          style={{
-            background: activeTab === 'history' ? 'var(--color-accent-primary)' : 'transparent',
-            color: activeTab === 'history' ? '#ffffff' : 'var(--text-tertiary)',
-            border: 'none',
-            padding: '10px 14px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.86rem',
-            fontWeight: activeTab === 'history' ? 700 : 500,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            minHeight: '44px'
-          }}
-        >
-          <History size={16} />
-          <span>Registro</span>
-        </button>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%', maxWidth: '900px', margin: '0 auto' }}>
+      {/* CABECERA DE EXPLORACIÓN DE RUTAS Y HABILIDADES */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingBottom: '4px' }}>
+        <Compass size={20} style={{ color: 'var(--accent, #0a84ff)' }} />
+        <h3 style={{ fontSize: 'var(--fs-step, 1.125rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+          Catálogo de Rutas & Progresiones de Habilidad
+        </h3>
       </div>
 
       {/* AVISO DE TOLERANCIA Y GUARDRAIL DISCRETO */}
@@ -102,35 +26,21 @@ export function SkillsWorkspace() {
           alignItems: 'center',
           gap: '8px',
           background: 'rgba(255, 255, 255, 0.02)',
-          border: '1px solid var(--color-border-subtle)',
+          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
           padding: '8px 12px',
-          borderRadius: 'var(--radius-md)',
-          fontSize: '0.76rem',
-          color: 'var(--text-tertiary)'
+          borderRadius: 'var(--radius-md, 8px)',
+          fontSize: '0.78rem',
+          color: 'var(--text-secondary)'
         }}
       >
-        <ShieldAlert size={14} style={{ color: 'var(--text-secondary)', flexShrink: 0 }} />
-        <span>Detén la práctica ante dolor agudo, lesión o pérdida de fuerza. Consulta atención profesional si persiste.</span>
+        <ShieldAlert size={14} style={{ color: 'var(--text-tertiary)', flexShrink: 0 }} />
+        <span>Detén la práctica ante dolor agudo, molestia articular o pérdida de control biomecánico.</span>
       </div>
 
-      {/* VISTAS DE PESTAÑAS */}
-      {activeTab === 'practice' && (
-        <MyPracticeView
-          onOpenDetail={(stepId) => setSelectedStepId(stepId)}
-          onStartPractice={(stepId) => setPracticeModalStepId(stepId)}
-          onOpenPaths={() => setActiveTab('paths')}
-        />
-      )}
-
-      {activeTab === 'paths' && (
-        <ExplorePathsView
-          onOpenDetail={(stepId) => setSelectedStepId(stepId)}
-        />
-      )}
-
-      {activeTab === 'history' && (
-        <SkillHistoryView />
-      )}
+      {/* CATÁLOGO DE RUTAS Y PASOS */}
+      <ExplorePathsView
+        onOpenDetail={(stepId) => setSelectedStepId(stepId)}
+      />
 
       {/* SHEET DE DETALLE DE HABILIDAD */}
       {selectedStepId && (

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Disclosure from '../ui/Disclosure';
 import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
-import { ArrowLeftRight, ChevronDown, ChevronUp, RefreshCw } from 'lucide-react';
+import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw } from 'lucide-react';
 import { getProgramById } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
@@ -73,30 +73,24 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
     }));
   };
 
-  // Reestablecer todas las modificaciones preserveding weights
-  const handleResetModifications = () => {
-    // Restablecer overrides globales
-    activeDay?.exercises?.forEach((p) => {
-      const pId = p.id || '';
-      if (overrides[pId]) clearOverride(pId);
-    });
-
-    // Restablecer logs inline excepto weights
+  // Reestablecer un solo ejercicio preservando pesos
+  const handleResetSingleExercise = (pId: string, defaultWarmup: number, defaultSets: number, defaultReps: string, defaultEffort: string) => {
+    if (overrides[pId]) {
+      clearOverride(pId);
+    }
     setExerciseLogs((prev) => {
-      const next: Record<string, ExerciseLogState> = {};
-      Object.keys(prev).forEach((key) => {
-        next[key] = {
-          warmupSets: 1,
-          workingSets: 3,
-          repRange: '8-10',
-          effort: 'RIR 2',
-          weights: prev[key].weights // Mantiene intactos los pesos
-        };
-      });
-      return next;
+      const existing = prev[pId];
+      return {
+        ...prev,
+        [pId]: {
+          warmupSets: defaultWarmup,
+          workingSets: defaultSets,
+          repRange: defaultReps,
+          effort: defaultEffort,
+          weights: existing ? existing.weights : Array(defaultSets).fill('')
+        }
+      };
     });
-
-    alert('Configuración y sustituciones reestablecidas. Los pesos ingresados se mantuvieron.');
   };
 
   const toggleNote = (id: string) => {
@@ -107,40 +101,6 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-        <h3 style={{ fontSize: 'var(--fs-step, 1.0625rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-          Rutina del día principal
-        </h3>
-        
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <button
-            type="button"
-            onClick={handleResetModifications}
-            title="Reestablecer modificaciones de prescripción (mantiene pesos)"
-            style={{
-              background: 'transparent',
-              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
-              color: 'var(--text-secondary)',
-              padding: '4px 10px',
-              borderRadius: 'var(--radius-s, 8px)',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}
-          >
-            <RefreshCw size={12} />
-            <span>Reestablecer modificaciones</span>
-          </button>
-
-          <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
-            Semana {currentWeek} · {isRestDay ? 'Día de Descanso' : activeDay?.name || `Día ${safeDayIndex + 1}`}
-          </span>
-        </div>
-      </div>
-
       {isRestDay ? (
         <div style={{
           background: 'var(--surface-1, #0d0d0f)',
@@ -155,8 +115,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
         </div>
       ) : (
         <Disclosure
-          label={`${program.title.replace(/\s*\([^)]*\)/g, '').trim()} — ${activeDay?.name || `Día ${safeDayIndex + 1}`}`}
-          summary={`${activeDay?.exercises?.length || 0} ejercicios prescritos · Clic para expandir/contraer tabla`}
+          label={`Rutina Principal: ${program.title.replace(/\s*\([^)]*\)/g, '').trim()} — ${activeDay?.name || `Día ${safeDayIndex + 1}`}`}
+          summary={`${activeDay?.exercises?.length || 0} ejercicios prescritos · Clic para expandir/contraer`}
         >
           <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', background: 'var(--surface-1, #0d0d0f)', marginTop: '8px' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--fs-body, 0.9rem)' }}>
@@ -187,16 +147,48 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                   const logState = getLogState(pId, warmupCount, workingCount, defaultReps, defaultEffort);
                   const isNoteExpanded = expandedNoteId === pId;
 
+                  // Determinar si la fila tiene alguna modificación respecto a la prescripción original
+                  const isModified = Boolean(
+                    overrideId ||
+                    logState.warmupSets !== warmupCount ||
+                    logState.workingSets !== workingCount ||
+                    logState.repRange !== defaultReps ||
+                    logState.effort !== defaultEffort
+                  );
+
                   return (
                     <tr key={pId} style={{ borderBottom: '1px solid var(--color-border-subtle)', background: pIdx % 2 === 1 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
                       
-                      {/* 1. EJERCICIO Y NOTAS */}
+                      {/* 1. EJERCICIO Y NOTAS CON BOTÓN REESTABLECER SI FUE MODIFICADO */}
                       <td style={{ padding: '12px 14px', verticalAlign: 'top', maxWidth: '240px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                          <ExerciseLink
-                            exerciseId={effectiveExerciseId}
-                            displayName={overrideId ? effectiveDetails.name : (prescription.displayName || effectiveDetails.name)}
-                          />
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <ExerciseLink
+                              exerciseId={effectiveExerciseId}
+                              displayName={overrideId ? effectiveDetails.name : (prescription.displayName || effectiveDetails.name)}
+                            />
+
+                            {/* ICONO SUTIL DE REESTABLECER SI EL EJERCICIO HA SIDO MODIFICADO */}
+                            {isModified && (
+                              <button
+                                type="button"
+                                onClick={() => handleResetSingleExercise(pId, warmupCount, workingCount, defaultReps, defaultEffort)}
+                                title="Reestablecer este ejercicio a su prescripción original"
+                                aria-label="Reestablecer este ejercicio a su prescripción original"
+                                style={{
+                                  background: 'transparent',
+                                  border: 'none',
+                                  color: 'var(--accent, #0a84ff)',
+                                  cursor: 'pointer',
+                                  padding: '2px',
+                                  display: 'inline-flex',
+                                  alignItems: 'center'
+                                }}
+                              >
+                                <RotateCcw size={13} />
+                              </button>
+                            )}
+                          </div>
 
                           {overrideId && (
                             <span style={{ fontSize: '0.72rem', color: 'var(--success, #30d158)', fontWeight: 700 }}>
