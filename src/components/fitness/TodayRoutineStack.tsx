@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Disclosure from '../ui/Disclosure';
 import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
-import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw } from 'lucide-react';
+import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock } from 'lucide-react';
 import { getProgramById } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
@@ -25,6 +25,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
   const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
   const clearOverride = useActiveProgramStore((s) => s.clearExerciseOverride);
+  const postponeDay = useActiveProgramStore((s) => s.postponeDay);
 
   const program = getProgramById(activeProgramId);
   const safeWeekIndex = Math.min(Math.max(currentWeek - 1, 0), (program.weeks?.length || 1) - 1);
@@ -118,7 +119,34 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
           label={`Rutina Principal: ${program.title.replace(/\s*\([^)]*\)/g, '').trim()} — ${activeDay?.name || `Día ${safeDayIndex + 1}`}`}
           summary={`${activeDay?.exercises?.length || 0} ejercicios prescritos · Clic para expandir/contraer`}
         >
-          <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', background: 'var(--surface-1, #0d0d0f)', marginTop: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '6px', paddingBottom: '4px' }}>
+            <button
+              type="button"
+              onClick={() => {
+                postponeDay();
+                alert('Día postergado. La rutina se recorrió 1 día a la derecha (el Sábado ahora incluye el entrenamiento acumulado).');
+              }}
+              title="Postergar este día de entrenamiento (recorre la secuencia 1 día a la derecha)"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                color: 'var(--text-secondary)',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <Clock size={13} />
+              <span>Postergar día</span>
+            </button>
+          </div>
+
+          <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', background: 'var(--surface-1, #0d0d0f)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--fs-body, 0.9rem)' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-secondary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>

@@ -10,6 +10,7 @@ export interface ActiveProgramState {
   selectedExerciseOverrides: Record<string, string>; // prescriptionId -> substitute exerciseId
   startedAt: string;
   updatedAt: string;
+  postponedDays: number;
 
   // Actions
   setActiveProgram: (programId: string, week?: number, dayId?: string) => void;
@@ -20,6 +21,8 @@ export interface ActiveProgramState {
   setDay: (dayId: string) => void;
   setExerciseOverride: (prescriptionId: string, overrideExerciseId: string) => void;
   clearExerciseOverride: (prescriptionId: string) => void;
+  postponeDay: () => void;
+  resetPostponedDays: () => void;
   resetProgramState: () => void;
 }
 
@@ -33,6 +36,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
       selectedExerciseOverrides: {},
       startedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+      postponedDays: 0,
 
       setActiveProgram: (programId: string, week = 1, dayId = '') => {
         set((state) => {
@@ -126,6 +130,20 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
         });
       },
 
+      postponeDay: () => {
+        set((state) => ({
+          postponedDays: (state.postponedDays || 0) + 1,
+          updatedAt: new Date().toISOString()
+        }));
+      },
+
+      resetPostponedDays: () => {
+        set({
+          postponedDays: 0,
+          updatedAt: new Date().toISOString()
+        });
+      },
+
       resetProgramState: () => {
         set({
           programId: 'min-max',
@@ -133,6 +151,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
           currentWeek: 1,
           currentDayId: 'mm-w1-minmax-d1',
           selectedExerciseOverrides: {},
+          postponedDays: 0,
           updatedAt: new Date().toISOString()
         });
       }
@@ -146,6 +165,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
         currentWeek: state.currentWeek,
         currentDayId: state.currentDayId,
         selectedExerciseOverrides: state.selectedExerciseOverrides,
+        postponedDays: state.postponedDays,
         startedAt: state.startedAt
       })
     }

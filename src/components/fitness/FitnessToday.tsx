@@ -59,8 +59,6 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
               <div style={{ paddingTop: '8px' }}>
                 <MyPracticeSummary
                   onOpenPaths={() => { window.location.href = '/app/fitness/library/skills'; }}
-                  onOpenDetail={() => { window.location.href = '/app/fitness/library/skills'; }}
-                  onStartPractice={() => { window.location.href = '/app/fitness/library/skills'; }}
                 />
               </div>
             </Disclosure>

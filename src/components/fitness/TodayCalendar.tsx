@@ -12,6 +12,7 @@ interface TodayCalendarProps {
 export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: TodayCalendarProps) {
   const activeProgramId = useActiveProgramStore((s) => s.programId);
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
+  const postponedDays = useActiveProgramStore((s) => s.postponedDays || 0);
   const setWeek = useActiveProgramStore((s) => s.setWeek);
 
   const program = getProgramById(activeProgramId);
@@ -23,38 +24,52 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
   const weekOffset = (currentWeek - 2) * 7;
   const daysOfWeek = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
+  // Mapeo dinámico teniendo en cuenta semanas pasadas, presente y futuras, más postponedDays
   const scheduleDays = daysOfWeek.map((dayName, idx) => {
     const dayDate = new Date(baseDate);
     dayDate.setDate(baseDate.getDate() + weekOffset + idx);
     const dateFormatted = `${dayDate.getDate()} ${dayDate.toLocaleDateString('es-ES', { month: 'short' })}`;
     const isToday = currentWeek === 2 && idx === 1; // Martes 11 Ago (Semana 2)
 
-    if (idx < 5) {
-      const dayData = activeWeek?.days?.[idx];
-      const cleanName = dayData?.name
-        ? dayData.name.replace(/^Día\s*\d+:\s*/i, '')
-        : `Día ${idx + 1}`;
-
-      return {
-        index: idx,
-        dayName,
-        dateFormatted,
-        isToday,
-        isRest: false,
-        label: cleanName,
-        status: idx < 1 ? 'done' : isToday ? 'today' : 'pending'
-      };
-    } else {
-      return {
-        index: idx,
-        dayName,
-        dateFormatted,
-        isToday,
-        isRest: true,
-        label: 'Descanso',
-        status: 'rest'
-      };
+    // Ajuste de índice por postergación si la postergación ocurrió
+    let workoutDayIdx = idx;
+    if (postponedDays > 0 && idx >= 1) {
+      workoutDayIdx = idx - postponedDays;
     }
+
+    const isPostponedRest = postponedDays > 0 && idx === 1;
+    const hasWorkout = !isPostponedRest && workoutDayIdx >= 0 && workoutDayIdx < (activeWeek?.days?.length || 5);
+
+    let status: 'done' | 'today' | 'pending' | 'rest' = 'pending';
+    if (currentWeek < 2) {
+      status = hasWorkout ? 'done' : 'rest';
+    } else if (currentWeek === 2) {
+      if (idx < 1) status = hasWorkout ? 'done' : 'rest';
+      else if (idx === 1) status = isToday ? 'today' : 'pending';
+      else status = hasWorkout ? 'pending' : 'rest';
+    } else {
+      status = hasWorkout ? 'pending' : 'rest';
+    }
+
+    let label = 'Descanso';
+    if (isPostponedRest) {
+      label = 'Postergado';
+    } else if (hasWorkout) {
+      const dayData = activeWeek?.days?.[workoutDayIdx];
+      label = dayData?.name
+        ? dayData.name.replace(/^Día\s*\d+:\s*/i, '')
+        : `Día ${workoutDayIdx + 1}`;
+    }
+
+    return {
+      index: idx,
+      dayName,
+      dateFormatted,
+      isToday,
+      isRest: !hasWorkout,
+      label,
+      status
+    };
   });
 
   return (

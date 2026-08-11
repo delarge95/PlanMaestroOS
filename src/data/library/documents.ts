@@ -13,99 +13,101 @@ export type LibraryDoc = {
 
 export const libraryDocs: LibraryDoc[] = [
   {
-    id: 'doc-overcoming-gravity',
-    title: 'Overcoming Gravity (2nd Edition) — Steven Low',
-    kind: 'markdown',
-    area: 'fitness',
-    source: 'local',
-    path: '/docs/fitness/overcoming_gravity.md',
-    tags: ['Calistenia', 'Progresiones', 'Fuerza'],
-    description: 'Guía sistemática de calistenia, progresiones de peso corporal y programación de fuerza.'
-  },
-  {
-    id: 'doc-overcoming-tendonitis',
-    title: 'Overcoming Tendonitis — Steven Low',
-    kind: 'markdown',
-    area: 'fitness',
-    source: 'local',
-    path: '/docs/fitness/overcoming_tendonitis.md',
-    tags: ['Rehabilitación', 'Tendones', 'Prehab'],
-    description: 'Protocolos de carga isométrica y excéntrica para el manejo y recuperación de tendinopatías.'
-  },
-  {
-    id: 'doc-nippard-minmax',
-    title: 'The Min-Max Program Guide — Jeff Nippard',
+    id: 'doc-nippard-minmax-pdf',
+    title: 'The Min-Max Program (PDF Oficial) — Jeff Nippard',
     kind: 'pdf',
     area: 'fitness',
     source: 'local',
-    path: '/docs/fitness/nippard_minmax.pdf',
-    tags: ['Powerbuilding', 'Hipertrofia', 'Gimnasio'],
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/The_Min-Max_Program_-_Jeff_Nippard.pdf',
+    tags: ['Jeff Nippard', 'Min-Max', 'Hipertrofia', 'Powerbuilding'],
     description: 'Programa oficial de 12 semanas enfocado en máximo estímulo con volumen mínimo efectivo.'
   },
   {
-    id: 'doc-twinsight-arch',
-    title: 'Arquitectura de Sistema TwinSight MVP',
-    kind: 'markdown',
-    area: 'laboral',
-    source: 'notion',
-    path: '/docs/career/twinsight_architecture.md',
-    tags: ['WebGL', 'Unity', 'Graphics Engine'],
-    description: 'Especificación de arquitectura de renderizado, shaders procedurales e integración WebGL.'
+    id: 'doc-overcoming-gravity-pdf',
+    title: 'Overcoming Gravity (2nd Edition) — Steven Low',
+    kind: 'pdf',
+    area: 'fitness',
+    source: 'local',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/Overcoming Gravity_ A Systematic Approach to Gymnastics and -- Low, Steven -- 2, 2016.pdf',
+    tags: ['Steven Low', 'Calistenia', 'Progresiones', 'Gimnasia'],
+    description: 'Tratado de referencia de 600+ páginas en calistenia, biomecánica y programación de peso corporal.'
   },
   {
-    id: 'doc-german-grammar-a1',
-    title: 'Gramática Alemana A1 — Estructura & Verbos',
-    kind: 'sheet',
-    area: 'idiomas',
-    source: 'drive',
-    path: '/docs/languages/german_a1_cheat_sheet.pdf',
-    tags: ['Alemán', 'Gramática', 'Präsens'],
-    description: 'Resumen en tabla de conjugación verbal en presente y acusativo/dativo.'
+    id: 'doc-overcoming-tendonitis-pdf',
+    title: 'Overcoming Tendonitis — Steven Low',
+    kind: 'pdf',
+    area: 'fitness',
+    source: 'local',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/overcoming-tendonitis-a-systematic-approach-to-the-evidence-based-treatment-of-tendinopathy-4-pdf-free (1).pdf',
+    tags: ['Rehabilitación', 'Tendones', 'HSR', 'Isométricos'],
+    description: 'Guía científica de tratamiento para tendinopatías en hombro, codo, patelar y aquiles.'
+  },
+  {
+    id: 'doc-nippard-glute-pdf',
+    title: 'Glute Hypertrophy Program — Jeff Nippard',
+    kind: 'pdf',
+    area: 'fitness',
+    source: 'local',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/jeffNippardGluteProgram.pdf',
+    tags: ['Jeff Nippard', 'Glúteo', 'Cadena Posterior', 'Especialización'],
+    description: 'Programa especializado en hipertrofia de cadena posterior, hip thrusts y abducción.'
+  },
+  {
+    id: 'doc-powerbuilding-system-pdf',
+    title: 'Powerbuilding System — Jeff Nippard',
+    kind: 'pdf',
+    area: 'fitness',
+    source: 'local',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/PowerbuildingSystem.pdf',
+    tags: ['Powerbuilding', 'Fuerza %1RM', 'Sentadilla/Banca/PM'],
+    description: 'Combinación sistemática de progresión en 1RM + hipertrofia asistida.'
+  },
+  {
+    id: 'doc-bodybuilding-transformation-pdf',
+    title: 'The Bodybuilding Transformation System — Jeff Nippard',
+    kind: 'pdf',
+    area: 'fitness',
+    source: 'local',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/TheBodyBuildingTransformationSystem.pdf',
+    tags: ['Bodybuilding', 'Estética', 'Pico de Forma'],
+    description: 'Sistema completo de transformación física e hipertrofia avanzada.'
+  },
+  {
+    id: 'doc-plan-fitness-alexander',
+    title: 'Plan Fitness Alexander (Calistenia Híbrida & Min-Max)',
+    kind: 'markdown',
+    area: 'fitness',
+    source: 'local',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/plan_fitness.md',
+    tags: ['Plan Maestro', 'Alexander', 'Híbrido', 'Rehab Hombro/Rodilla'],
+    description: 'Documento marco integrador de entrenamiento personal, prevención de lesiones y fases.'
+  },
+  {
+    id: 'doc-minmax-dataset-json',
+    title: 'Min-Max Program Dataset JSON (Estructura de Datos)',
+    kind: 'markdown',
+    area: 'fitness',
+    source: 'local',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/minmaxprogram.json',
+    tags: ['JSON', 'Dataset', 'Rutinas FitApp'],
+    description: 'Estructura JSON procesada de semanas, días y ejercicios del programa Min-Max.'
   }
 ];
 
 import type { LibraryDocument } from './types';
 
-export const fitnessLibraryDocuments: LibraryDocument[] = [
-  {
-    id: 'doc-overcoming-gravity',
-    title: 'Overcoming Gravity (2nd Edition) — Steven Low',
-    category: 'source',
-    domain: 'fitness',
-    mimeType: 'text/markdown',
-    description: 'Guía sistemática de calistenia, progresiones de peso corporal y programación de fuerza.',
-    author: 'Steven Low',
-    year: 2016,
-    tags: ['Calistenia', 'Progresiones', 'Fuerza'],
-    access: 'repo-public',
-    isOpenable: true
-  },
-  {
-    id: 'doc-overcoming-tendonitis',
-    title: 'Overcoming Tendonitis — Steven Low',
-    category: 'source',
-    domain: 'fitness',
-    mimeType: 'text/markdown',
-    description: 'Protocolos de carga isométrica y excéntrica para el manejo y recuperación de tendinopatías.',
-    author: 'Steven Low',
-    year: 2019,
-    tags: ['Rehabilitación', 'Tendones', 'Prehab'],
-    access: 'repo-public',
-    isOpenable: true
-  },
-  {
-    id: 'doc-nippard-minmax',
-    title: 'The Min-Max Program Guide — Jeff Nippard',
-    category: 'plan',
-    domain: 'fitness',
-    mimeType: 'application/pdf',
-    description: 'Programa oficial de 12 semanas enfocado en máximo estímulo con volumen mínimo efectivo.',
-    author: 'Jeff Nippard',
-    year: 2023,
-    tags: ['Powerbuilding', 'Hipertrofia', 'Gimnasio'],
-    access: 'repo-public',
-    isOpenable: true
-  }
-];
+export const fitnessLibraryDocuments: LibraryDocument[] = libraryDocs.map((doc) => ({
+  id: doc.id,
+  title: doc.title,
+  category: doc.kind === 'pdf' ? 'plan' : 'source',
+  domain: 'fitness',
+  mimeType: doc.kind === 'pdf' ? 'application/pdf' : 'text/markdown',
+  description: doc.description || doc.title,
+  author: doc.tags[0] || 'Investigación FitApp',
+  year: 2024,
+  tags: doc.tags,
+  access: 'repo-public',
+  isOpenable: true
+}));
 
 export const allLibraryDocuments = libraryDocs;

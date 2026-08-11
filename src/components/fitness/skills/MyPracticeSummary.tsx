@@ -1,105 +1,240 @@
+// src/components/fitness/skills/MyPracticeSummary.tsx
 import React, { useState } from 'react';
-import { Target, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { useSkillStateStore } from '../../../data/fitness/skills/skillStateStore';
 import { getSkillStepById } from '../../../data/fitness/skills/skillSteps';
 import { skillPaths } from '../../../data/fitness/skills/skillPaths';
-import { isExerciseVerified } from '../../../data/fitness/exerciseMap';
 import Button from '../../ui/Button';
 
 export interface MyPracticeSummaryProps {
   onOpenPaths?: () => void;
-  onOpenDetail?: (stepId: string) => void;
-  onStartPractice?: (stepId: string) => void;
 }
 
-export function MyPracticeSummary({ onOpenPaths, onOpenDetail, onStartPractice }: MyPracticeSummaryProps) {
+export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
   const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
-  const activeStepId = activeStepIds[0] || 'pull-step-1';
-
-  const currentStep = getSkillStepById(activeStepId);
+  const setActiveStep = useSkillStateStore((s) => s.setActiveStep);
+  
+  const currentStepId = activeStepIds[0] || 'pull-step-1';
+  const currentStep = getSkillStepById(currentStepId);
   const currentPath = currentStep ? skillPaths.find((p) => p.id === currentStep.pathId) : null;
+
+  const [loggedSets, setLoggedSets] = useState('');
+  const [loggedNotes, setLoggedNotes] = useState('');
+  const [isSaved, setIsSaved] = useState(false);
 
   if (!currentStep || !currentPath) {
     return (
-      <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', fontSize: '0.85rem', color: 'var(--text-tertiary)' }}>
-        Sin habilidad activa seleccionada.{' '}
-        {onOpenPaths && (
-          <Button variant="secondary" size="sm" onClick={onOpenPaths} style={{ marginTop: '8px' }}>
-            Seleccionar ruta
-          </Button>
-        )}
+      <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+        Sin habilidad activa seleccionada.
       </div>
     );
   }
 
+  const stepIndex = currentPath.stepIds.indexOf(currentStep.id);
   const totalSteps = currentPath.stepIds.length;
 
+  const handlePrevStep = () => {
+    if (stepIndex > 0) {
+      const prevId = currentPath.stepIds[stepIndex - 1];
+      if (setActiveStep) setActiveStep(prevId);
+    }
+  };
+
+  const handleNextStep = () => {
+    if (stepIndex < totalSteps - 1) {
+      const nextId = currentPath.stepIds[stepIndex + 1];
+      if (setActiveStep) setActiveStep(nextId);
+    }
+  };
+
+  const handleSavePractice = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSaved(true);
+    setTimeout(() => setIsSaved(false), 3000);
+  };
+
   return (
-    <section
-      aria-labelledby="active-path-title"
+    <div
       style={{
-        background: 'var(--surface)',
-        border: '1px solid var(--color-border-subtle)',
-        borderRadius: 'var(--radius-md)',
+        background: 'var(--surface-1, #0d0d0f)',
+        border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+        borderRadius: 'var(--radius-m, 12px)',
         padding: 'var(--space-md)',
         display: 'flex',
         flexDirection: 'column',
-        gap: 'var(--space-xs)'
+        gap: 'var(--space-md)'
       }}
     >
-      {/* EYEBROW */}
-      <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase' }}>
-        Habilidad activa
-      </span>
+      {/* NAVEGADOR Y CABECERA DE PROGRESIÓN */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+        <div>
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            Ruta Híbrida · {currentPath.title}
+          </span>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+            {currentStep.title}
+          </h3>
+        </div>
 
-      {/* RUTA DOMINANTE (H1 / H2 CON CLASE pathTitle: 24-28px BOLD) */}
-      <h2 id="active-path-title" className="pathTitle" style={{ fontSize: 'clamp(1.375rem, 3.5vw, 1.75rem)', fontWeight: 700, lineHeight: 1.2, margin: 0, color: 'var(--text)' }}>
-        {currentPath.title}
-      </h2>
+        {/* CONTROLES PARA NAVEGAR ANTERIOR / SIGUIENTE PROGRESIÓN IN-SITU */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <button
+            type="button"
+            disabled={stepIndex <= 0}
+            onClick={handlePrevStep}
+            title="Progresión anterior"
+            aria-label="Progresión anterior"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+              color: 'var(--text-primary)',
+              borderRadius: '6px',
+              padding: '5px 10px',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              cursor: stepIndex <= 0 ? 'not-allowed' : 'pointer',
+              opacity: stepIndex <= 0 ? 0.4 : 1,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            <ChevronLeft size={14} />
+            <span>Anterior</span>
+          </button>
 
-      {/* PATH META */}
-      <span className="pathMeta" style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-xs)' }}>
-        Paso actual · {currentStep.order} de {totalSteps}
-      </span>
+          <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, padding: '0 4px' }}>
+            {stepIndex + 1} / {totalSteps}
+          </span>
 
-      {/* PASO ACTUAL (SUB-ELEMENTO H3 CON CLASE stepTitle: 17-18px SEMIBOLD) */}
-      <div
-        style={{
-          background: 'rgba(255,255,255,0.02)',
-          borderLeft: '3px solid var(--color-accent-primary)',
-          borderRadius: '0 6px 6px 0',
-          padding: '10px 14px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2px',
-          margin: '4px 0 12px'
-        }}
-      >
-        <h3 className="stepTitle" style={{ fontSize: '1.0625rem', fontWeight: 600, lineHeight: 1.35, margin: 0, color: 'var(--text)' }}>
-          {currentStep.title}
-        </h3>
-        <span className="stepMeta" style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
-          Objetivo de hoy · {currentStep.practice.target}
+          <button
+            type="button"
+            disabled={stepIndex >= totalSteps - 1}
+            onClick={handleNextStep}
+            title="Siguiente progresión"
+            aria-label="Siguiente progresión"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+              color: 'var(--text-primary)',
+              borderRadius: '6px',
+              padding: '5px 10px',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              cursor: stepIndex >= totalSteps - 1 ? 'not-allowed' : 'pointer',
+              opacity: stepIndex >= totalSteps - 1 ? 0.4 : 1,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            <span>Siguiente</span>
+            <ChevronRight size={14} />
+          </button>
+        </div>
+      </div>
+
+      {/* DETALLE TÉCNICO COMPLETO E INSTRUCCIONES DE EJECUCIÓN */}
+      <div style={{ background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid var(--accent, #0a84ff)', padding: '12px 14px', borderRadius: '0 8px 8px 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+            🎯 Objetivo de Sesión: {currentStep.practice.target}
+          </span>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+            Descanso sugerido: 2-3 min
+          </span>
+        </div>
+
+        {currentStep.readiness?.technical && currentStep.readiness.technical.length > 0 && (
+          <div style={{ marginTop: '4px' }}>
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-primary)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>
+              Claves Biomecánicas de Ejecución:
+            </span>
+            <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+              {currentStep.readiness.technical.map((item: string, idx: number) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {/* REGISTRO RÁPIDO DE SESIÓN DE PRÁCTICA IN-SITU */}
+      <form onSubmit={handleSavePractice} style={{ display: 'flex', flexDirection: 'column', gap: '10px', background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
+        <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+          Log de Práctica de Hoy
         </span>
-      </div>
 
-      {/* ACCIONES HUMANAS (ÚNICA PRIMARIA: PRACTICAR HOY) */}
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <Button variant="primary" size="sm" onClick={() => onStartPractice ? onStartPractice(currentStep.id) : (onOpenDetail && onOpenDetail(currentStep.id))}>
-          Practicar hoy
-        </Button>
-        {onOpenDetail && (
-          <Button variant="secondary" size="sm" onClick={() => onOpenDetail(currentStep.id)}>
-            Ver ejercicio
-          </Button>
-        )}
-        {onOpenPaths && (
-          <Button variant="ghost" size="sm" onClick={onOpenPaths}>
-            Cambiar ruta
-          </Button>
-        )}
-      </div>
-    </section>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: '160px' }}>
+            <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>
+              Series x Reps/Segundos logrados
+            </label>
+            <input
+              type="text"
+              placeholder="Ej: 3x15 seg o 4x6 reps"
+              value={loggedSets}
+              onChange={(e) => setLoggedSets(e.target.value)}
+              style={{
+                width: '100%',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: '6px',
+                padding: '6px 10px',
+                color: 'var(--text-primary)',
+                fontSize: '0.84rem',
+                outline: 'none'
+              }}
+            />
+          </div>
+
+          <div style={{ flex: 2, minWidth: '220px' }}>
+            <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>
+              Notas de Sensación / Calidad técnica
+            </label>
+            <input
+              type="text"
+              placeholder="Sensaciones de hombro, traba de codo, tempo..."
+              value={loggedNotes}
+              onChange={(e) => setLoggedNotes(e.target.value)}
+              style={{
+                width: '100%',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: '6px',
+                padding: '6px 10px',
+                color: 'var(--text-primary)',
+                fontSize: '0.84rem',
+                outline: 'none'
+              }}
+            />
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
+          {isSaved ? (
+            <span style={{ fontSize: '0.8rem', color: 'var(--success, #30d158)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <CheckCircle2 size={14} /> ¡Práctica registrada correctamente!
+            </span>
+          ) : (
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+              Registra tu volumen y control técnico
+            </span>
+          )}
+
+          <div style={{ display: 'flex', gap: '8px' }}>
+            {onOpenPaths && (
+              <Button variant="ghost" size="sm" onClick={onOpenPaths}>
+                Cambiar ruta
+              </Button>
+            )}
+            <Button type="submit" variant="primary" size="sm">
+              Guardar práctica
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 }
 

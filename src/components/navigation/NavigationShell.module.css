@@ -12,18 +12,18 @@
   position: sticky;
   top: 12px;
   z-index: 90;
-  background: rgba(13, 14, 18, 0.82);
+  background: rgba(13, 14, 18, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--color-border-visible);
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.12));
   border-radius: 999px;
-  padding: 6px 14px;
+  padding: 4px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-md);
-  height: 50px;
-  width: min(720px, calc(100% - 32px));
+  gap: 8px;
+  height: 46px;
+  width: fit-content;
   margin: 0 auto 16px auto;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   box-sizing: border-box;
@@ -54,11 +54,11 @@
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
-  background: var(--surface);
-  padding: 4px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-subtle);
+  gap: 4px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border: none;
 }
 
 .navItem {
