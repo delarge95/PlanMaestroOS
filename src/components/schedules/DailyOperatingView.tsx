@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InertiaRescueModal from '../clinical/InertiaRescueModal';
+import { Calendar, LayoutGrid, BarChart2, Filter } from 'lucide-react';
+import Button from '../ui/Button';
 
 interface DailyBlock {
   id: string;
@@ -32,33 +34,10 @@ const initialDailyBlocks: DailyBlock[] = [
 
 export default function DailyOperatingView() {
   const [blocks, setBlocks] = useState<DailyBlock[]>(() => JSON.parse(JSON.stringify(initialDailyBlocks)));
+  const [planViewMode, setPlanViewMode] = useState<'timeline' | 'canvas' | 'stats'>('timeline');
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [isRescueModalOpen, setIsRescueModalOpen] = useState(false);
   const [selectedBlock, setSelectedBlock] = useState<DailyBlock | null>(null);
-  const [showCompleteFeedback, setShowCompleteFeedback] = useState<boolean>(false);
-  const [latestWorkoutSummary, setLatestWorkoutSummary] = useState<string | null>(null);
-
-  React.useEffect(() => {
-    try {
-      const savedHistory = localStorage.getItem('fitapp_workout_history');
-      if (savedHistory) {
-        const history = JSON.parse(savedHistory);
-        if (Array.isArray(history) && history.length > 0) {
-          const latest = history[0];
-          setLatestWorkoutSummary(`${latest.routineTitle} (${latest.durationMinutes}m · ${latest.totalVolumeKg}kg)`);
-          setBlocks((prev) => prev.map((b) => (
-            b.id === 'b4' ? { ...b, status: 'completed' } : b
-          )));
-        }
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
-  const triggerCompletionFeedback = () => {
-    setShowCompleteFeedback(true);
-    setTimeout(() => setShowCompleteFeedback(false), 1200);
-  };
 
   const toggleStatus = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -66,9 +45,6 @@ export default function DailyOperatingView() {
     setBlocks(prev => prev.map(b => {
       if (b.id !== id) return b;
       const nextStatus = b.status === 'pending' ? 'in_progress' : b.status === 'in_progress' ? 'completed' : 'pending';
-      if (nextStatus === 'completed') {
-        triggerCompletionFeedback();
-      }
       return { ...b, status: nextStatus };
     }));
   };
@@ -90,6 +66,8 @@ export default function DailyOperatingView() {
     setSelectedBlock(null);
   };
 
+  const filteredBlocks = blocks.filter((b) => categoryFilter === 'all' || b.category === categoryFilter);
+
   const getCategoryColor = (cat: string) => {
     switch (cat) {
       case 'clinical': return 'var(--color-accent-primary)';
@@ -109,44 +87,47 @@ export default function DailyOperatingView() {
     }
   };
 
-  const getStatusBtnBg = (status: string) => {
-    switch (status) {
-      case 'completed': return 'var(--color-state-done-soft)';
-      case 'in_progress': return 'var(--color-accent-primary-soft)';
-      case 'skipped': return 'rgba(255,255,255,0.1)';
-      default: return 'var(--color-border-subtle)';
-    }
-  };
-
-  const getStatusBtnColor = (status: string) => {
-    switch (status) {
-      case 'completed': return 'var(--color-state-done)';
-      case 'in_progress': return 'var(--color-accent-primary)';
-      case 'skipped': return 'var(--color-text-secondary)';
-      default: return 'var(--color-text-tertiary)';
-    }
-  };
-
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        {/* HEADER CONTROLS */}
+        
+        {/* VISTA DE PLAN: SELECCIÓN DE MODO & FILTROS DE ETIQUETA PER DOCUMENTO 02 */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
-              CENTRO OPERATIVO DIARIO
+            <span style={{ fontFamily: 'var(--font-family-system)', fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+              VISTA DE PLAN & OPERACIÓN DIARIA
             </span>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
-              Línea Temporal de Hoy • 05:30 – 21:30
+            <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--text)' }}>
+              Línea Temporal de Hoy (05:30 – 21:30)
             </h2>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
-            {latestWorkoutSummary && (
-              <div style={{ background: 'rgba(48, 209, 88, 0.15)', border: '1px solid var(--color-state-done)', color: 'var(--color-state-done)', padding: '6px 12px', borderRadius: '10px', fontSize: '0.72rem', fontWeight: 600 }}>
-                🏋️ {latestWorkoutSummary}
-              </div>
-            )}
+          {/* SELECTOR DE MODOS: CRONOGRAMA, CANVAS, STATS */}
+          <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <Button
+              variant={planViewMode === 'timeline' ? 'primary' : 'ghost'}
+              size="sm"
+              onClick={() => setPlanViewMode('timeline')}
+            >
+              <Calendar size={14} /> Cronograma
+            </Button>
+
+            <Button
+              variant={planViewMode === 'canvas' ? 'primary' : 'ghost'}
+              size="sm"
+              onClick={() => setPlanViewMode('canvas')}
+            >
+              <LayoutGrid size={14} /> Modo Canvas
+            </Button>
+
+            <Button
+              variant={planViewMode === 'stats' ? 'primary' : 'ghost'}
+              size="sm"
+              onClick={() => setPlanViewMode('stats')}
+            >
+              <BarChart2 size={14} /> Tablas Visuales
+            </Button>
+
             <button
               type="button"
               onClick={() => setIsRescueModalOpen(true)}
@@ -154,183 +135,171 @@ export default function DailyOperatingView() {
                 background: 'var(--color-accent-danger-soft)',
                 border: '1px solid var(--color-accent-danger-glow)',
                 color: 'var(--color-accent-danger)',
-                padding: '6px 14px',
-                borderRadius: '10px',
+                padding: '6px 12px',
+                borderRadius: '8px',
                 fontWeight: 700,
                 fontSize: '0.78rem',
                 cursor: 'pointer'
               }}
             >
-              🚨 Rescate "No puedo empezar"
+              🚨 Rescate
             </button>
-
-            <div style={{ background: 'var(--color-state-done-soft)', border: '1px solid var(--color-state-done-glow)', color: 'var(--color-state-done)', padding: '6px 12px', borderRadius: '10px', fontFamily: 'SF Mono, monospace', fontSize: '0.72rem', fontWeight: 700 }}>
-              Hecho: {blocks.filter(b => b.status === 'completed').length} / {blocks.length}
-            </div>
           </div>
         </div>
 
-        {/* DAILY TIMELINE COMPACT BLOCKS */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
-          {blocks.map((b) => {
-            const catColor = getCategoryColor(b.category);
-            const isSelected = selectedBlock?.id === b.id;
+        {/* FILTROS POR ETIQUETA / ÁREA */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <Filter size={15} style={{ color: 'var(--text-tertiary)' }} />
+          <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>Filtrar por etiqueta:</span>
+          {['all', 'fitness', 'career', 'german', 'clinical', 'general'].map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setCategoryFilter(cat)}
+              style={{
+                background: categoryFilter === cat ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.05)',
+                color: categoryFilter === cat ? '#ffffff' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '3px 10px',
+                borderRadius: '6px',
+                fontSize: 'var(--font-size-meta)',
+                fontWeight: categoryFilter === cat ? 700 : 500,
+                cursor: 'pointer'
+              }}
+            >
+              {cat === 'all' ? 'Todas' : cat.toUpperCase()}
+            </button>
+          ))}
+        </div>
 
-            return (
-              <div
-                key={b.id}
-                onClick={() => setSelectedBlock(b)}
-                title={`${b.fullTitle}\n\nRegla: ${b.rule}\nVersión Mínima: ${b.minViableAction}`}
-                style={{
-                  background: getStatusBg(b.status),
-                  border: `1px solid ${isSelected ? 'var(--color-border-visible)' : b.status === 'in_progress' ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
-                  borderLeft: `4px solid ${catColor}`,
-                  borderRadius: '14px',
-                  padding: '12px 14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '10px',
-                  cursor: 'pointer',
-                  transition: 'all 150ms ease',
-                  opacity: b.status === 'skipped' ? 0.5 : 1
-                }}
-              >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', overflow: 'hidden' }}>
-                  <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.7rem', color: catColor, fontWeight: 700 }}>
-                    {b.time}
-                  </span>
-                  <strong style={{ fontSize: '0.9rem', color: b.status === 'completed' ? 'var(--color-text-secondary)' : 'var(--color-text-primary)', textDecoration: b.status === 'completed' || b.status === 'skipped' ? 'line-through' : 'none', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {b.shortTitle}
-                  </strong>
-                </div>
+        {/* MODO 1: CRONOGRAMA DE BLOQUES */}
+        {planViewMode === 'timeline' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
+            {filteredBlocks.map((b) => {
+              const catColor = getCategoryColor(b.category);
+              const isSelected = selectedBlock?.id === b.id;
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  {b.actionUrl && (
-                    <a
-                      href={b.actionUrl}
-                      onClick={(e) => e.stopPropagation()}
-                      style={{
-                        background: 'var(--color-border-subtle)',
-                        border: '1px solid var(--color-border-subtle)',
-                        color: catColor,
-                        padding: '4px 8px',
-                        borderRadius: '6px',
-                        fontSize: '0.72rem',
-                        fontWeight: 700,
-                        textDecoration: 'none'
-                      }}
-                    >
-                      {b.actionLabel}
-                    </a>
-                  )}
+              return (
+                <div
+                  key={b.id}
+                  onClick={() => setSelectedBlock(b)}
+                  style={{
+                    background: getStatusBg(b.status),
+                    border: `1px solid ${isSelected ? 'var(--color-border-visible)' : b.status === 'in_progress' ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
+                    borderLeft: `4px solid ${catColor}`,
+                    borderRadius: '14px',
+                    padding: '12px 14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '10px',
+                    cursor: 'pointer',
+                    opacity: b.status === 'skipped' ? 0.5 : 1
+                  }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', overflow: 'hidden' }}>
+                    <span style={{ fontSize: '0.7rem', color: catColor, fontWeight: 700 }}>
+                      {b.time}
+                    </span>
+                    <strong style={{ fontSize: '0.9rem', color: 'var(--text)', textDecoration: b.status === 'completed' || b.status === 'skipped' ? 'line-through' : 'none' }}>
+                      {b.shortTitle}
+                    </strong>
+                  </div>
 
                   <button
                     type="button"
                     onClick={(e) => toggleStatus(b.id, e)}
                     style={{
-                      fontFamily: 'SF Mono, monospace',
-                      fontSize: '0.68rem',
+                      fontSize: '0.75rem',
                       fontWeight: 700,
-                      padding: '4px 8px',
-                      borderRadius: '999px',
+                      padding: '4px 10px',
+                      borderRadius: '8px',
                       border: 'none',
                       cursor: 'pointer',
-                      background: getStatusBtnBg(b.status),
-                      color: getStatusBtnColor(b.status)
+                      background: b.status === 'completed' ? 'var(--color-state-done-soft)' : 'var(--color-border-subtle)',
+                      color: b.status === 'completed' ? 'var(--color-state-done)' : 'var(--text-tertiary)'
                     }}
                   >
-                    {b.status === 'completed' ? '✓' : b.status === 'in_progress' ? '►' : b.status === 'skipped' ? '⊘' : '○'}
+                    {b.status === 'completed' ? '✓ Listo' : '○ En curso'}
                   </button>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
-        {/* SELECTED BLOCK REORGANIZATION CARD */}
-        {selectedBlock && (
-          <div
-            style={{
-              background: 'var(--color-surface-base)',
-              border: '1px solid var(--color-border-visible)',
-              borderRadius: '18px',
-              padding: '20px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '14px',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.8)' /* rgba(0,0,0,*) sombra — excepción documentada */
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div>
-                <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: getCategoryColor(selectedBlock.category), fontWeight: 700 }}>
-                  DESVÍO & REORGANIZACIÓN SIN CULPA • {selectedBlock.time}
-                </span>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
-                  {selectedBlock.fullTitle}
-                </h4>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setSelectedBlock(null)}
-                style={{ background: 'var(--color-border-subtle)', border: 'none', color: 'var(--color-text-secondary)', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', fontWeight: 700 }}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', padding: '12px', borderRadius: '12px', fontSize: '0.82rem', color: 'var(--color-text-secondary)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div><strong style={{ color: 'var(--color-text-primary)' }}>Regla Original:</strong> {selectedBlock.rule}</div>
-              <div><strong style={{ color: 'var(--color-state-done)' }}>Versión Mínima (2 Min):</strong> {selectedBlock.minViableAction}</div>
-            </div>
-
-            {/* REORGANIZATION BUTTONS */}
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <button
-                type="button"
-                onClick={() => handleSkipWithoutGuilt(selectedBlock.id)}
-                style={{ background: 'var(--color-accent-danger-soft)', border: '1px solid var(--color-accent-danger-glow)', color: 'var(--color-accent-danger)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
-              >
-                🛡️ Saltar Sin Culpa (Cero Deuda)
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleReorganizeRestOfDay(selectedBlock.id)}
-                style={{ background: 'var(--color-accent-primary-soft)', border: '1px solid var(--color-border-visible)', color: 'var(--color-accent-primary)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
-              >
-                🔄 Reorganizar Resto del Día con Margen
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setBlocks(prev => prev.map(b => b.id === selectedBlock.id ? { ...b, status: 'completed' } : b));
-                  setSelectedBlock(null);
+        {/* MODO 2: CANVAS INTERACTIVO (TARJETAS REORGANIZABLES) */}
+        {planViewMode === 'canvas' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-md)' }}>
+            {filteredBlocks.map((b) => (
+              <div
+                key={b.id}
+                style={{
+                  background: 'var(--surface)',
+                  border: '1px solid var(--color-border-visible)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-md)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--space-xs)',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.4)'
                 }}
-                style={{ background: 'var(--color-state-done-soft)', border: '1px solid var(--color-state-done-glow)', color: 'var(--color-state-done)', padding: '8px 14px', borderRadius: '10px', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer' }}
               >
-                ✅ Marcar Completado (Versión Mínima)
-              </button>
+                <span style={{ fontSize: 'var(--font-size-meta)', color: getCategoryColor(b.category), fontWeight: 700 }}>
+                  {b.time} · {b.category.toUpperCase()}
+                </span>
+                <strong style={{ fontSize: '1rem', color: 'var(--text)' }}>
+                  {b.shortTitle}
+                </strong>
+                <p style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', margin: 0 }}>
+                  Regla: {b.rule}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* MODO 3: TABLAS VISUALES & ESTADÍSTICAS */}
+        {planViewMode === 'stats' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-md)' }}>
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
+              <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>ADHERENCIA AL PLAN DIARIO</span>
+              <strong style={{ fontSize: '1.4rem', color: 'var(--color-state-done)', display: 'block', marginTop: '4px' }}>
+                {Math.round((blocks.filter(b => b.status === 'completed').length / blocks.length) * 100)}%
+              </strong>
+            </div>
+
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
+              <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>BLOQUES DE TRABAJO PROFUNDO</span>
+              <strong style={{ fontSize: '1.4rem', color: 'var(--color-accent-primary)', display: 'block', marginTop: '4px' }}>
+                2 Bloques completados hoy
+              </strong>
             </div>
           </div>
         )}
 
-        {/* INERTIA RESCUE MODAL */}
+        {/* TARJETA DE REORGANIZACIÓN */}
+        {selectedBlock && (
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
+            <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+              Reorganizar Bloque: {selectedBlock.fullTitle}
+            </h4>
+            <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+              <Button variant="ghost" size="sm" onClick={() => handleSkipWithoutGuilt(selectedBlock.id)}>
+                Saltar Sin Culpa
+              </Button>
+              <Button variant="secondary" size="sm" onClick={() => handleReorganizeRestOfDay(selectedBlock.id)}>
+                Reorganizar Resto del Día
+              </Button>
+            </div>
+          </div>
+        )}
+
         <InertiaRescueModal
           isOpen={isRescueModalOpen}
           onClose={() => setIsRescueModalOpen(false)}
           currentTaskName="Bloque A: Trabajo Profundo"
         />
-
-        {/* AUDIT-07: COMPLETION FEEDBACK OVERLAY */}
-        {showCompleteFeedback && (
-          <div className="task-complete-feedback">
-            ✓ Listo
-          </div>
-        )}
       </div>
     </ErrorBoundary>
   );

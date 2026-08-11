@@ -4,11 +4,21 @@ import DailyOperatingView from './DailyOperatingView';
 import ClinicalExecutionHub from '../clinical/ClinicalExecutionHub';
 import ContextualAIActionButton from '../shared/ContextualAIActionButton';
 import { getTodayDomainView } from '../../data/adapters/todayAdapter';
-import { Dumbbell, BriefcaseBusiness, Play, CheckCircle2, Clock } from 'lucide-react';
+import {
+  Dumbbell,
+  Play,
+  CheckCircle2,
+  Clock,
+  Zap,
+  HeartPulse,
+  Languages,
+  ChevronRight,
+  Flame
+} from 'lucide-react';
 import Button from '../ui/Button';
 
 const TABS = [
-  { id: 'overview', label: '⚡ Operación Diaria & Top 3' },
+  { id: 'overview', label: '⚡ Hoy & Task Manager' },
   { id: 'timeline', label: '⏱️ Línea Temporal (05:30 – 21:30)' },
   { id: 'checkin', label: '📊 Bio-Feedback & Regulaciones' }
 ];
@@ -17,6 +27,14 @@ export default function TodayTabWorkspace() {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [todayData] = useState(() => getTodayDomainView());
   const [actionDone, setActionDone] = useState(false);
+  const [activeBlockTimer, setActiveBlockTimer] = useState<'A' | 'B' | null>(null);
+
+  const formattedDate = new Date().toLocaleDateString('es-ES', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
 
   return (
     <ErrorBoundary>
@@ -68,13 +86,13 @@ export default function TodayTabWorkspace() {
           })}
         </div>
 
-        {/* TAB 1: VISUALIZACIÓN DE OPERACIÓN DIARIA "HOY" (DOCUMENTO 04) */}
+        {/* OVERVIEW PRINCIPAL DE LA PANTALLA "HOY" PER ROADMAP DOCUMENTO 02 Y 04 */}
         {activeTab === 'overview' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-            
-            {/* HERO CARD: BLOQUE ACTIVO & PRIMERA ACCIÓN PRINCIPAL (10 MIN) */}
+
+            {/* 1. ENCABEZADO MÍNIMO CON FRASE DE CONTEXTO & CTA PRINCIPAL */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(10, 132, 255, 0.12) 0%, rgba(28, 28, 30, 0.95) 100%)',
+              background: 'linear-gradient(135deg, rgba(10, 132, 255, 0.15) 0%, rgba(28, 28, 30, 0.95) 100%)',
               border: '1px solid var(--color-accent-primary)',
               borderRadius: 'var(--radius-lg)',
               padding: 'var(--space-lg)',
@@ -85,26 +103,38 @@ export default function TodayTabWorkspace() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-sm)' }}>
                 <div>
                   <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                    {todayData.activeBlock}
+                    {formattedDate}
                   </span>
-                  <h2 style={{ fontSize: '1.3rem', fontWeight: 800, margin: '4px 0 0', color: 'var(--text)' }}>
-                    Acción Principal Única (Menos de 10 min)
-                  </h2>
+                  <h1 style={{ fontSize: '1.6rem', fontWeight: 800, margin: '4px 0 2px', color: 'var(--text)' }}>
+                    Hoy — Centro de Control Operativo
+                  </h1>
+                  <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text-secondary)' }}>
+                    "Foco en 1 sola micro-acción principal a la vez para minimizar la fatiga cognitiva."
+                  </span>
                 </div>
 
-                {/* BOTÓN IA CONTEXTUAL */}
-                <ContextualAIActionButton
-                  label="Proponer Top 3"
-                  actionType="propose_top3"
-                  contextData={{ block: todayData.activeBlock }}
-                  sources={['Notion Tasks DB 3', 'Daily Plan DB 4']}
-                  onApprovedExecution={(proposedText) => {
-                    console.log('Top 3 aprobado:', proposedText);
-                  }}
-                />
+                <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+                  <Button
+                    variant="primary"
+                    size="md"
+                    onClick={() => setActiveBlockTimer('A')}
+                  >
+                    <Zap size={18} />
+                    <span>Empezar Bloque A (Foco)</span>
+                  </Button>
+                  <ContextualAIActionButton
+                    label="Proponer Top 3"
+                    actionType="propose_top3"
+                    contextData={{ date: formattedDate }}
+                    sources={['Notion Tasks DB 3', 'Daily Plan DB 4']}
+                    onApprovedExecution={(proposedText) => {
+                      console.log('Top 3 Aprobado:', proposedText);
+                    }}
+                  />
+                </div>
               </div>
 
-              {/* MICRO-ACCIÓN DE 10 MINUTOS */}
+              {/* MICRO-ACCION DE 10 MINUTOS DE BLOQUE A */}
               <div style={{
                 background: 'var(--surface)',
                 border: '1px solid var(--color-border-visible)',
@@ -123,7 +153,7 @@ export default function TodayTabWorkspace() {
                       {todayData.primaryAction10Min.title}
                     </strong>
                     <span style={{ fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)' }}>
-                      Área: {todayData.primaryAction10Min.targetArea} · Duración: {todayData.primaryAction10Min.estimatedMinutes} min
+                      Área: {todayData.primaryAction10Min.targetArea} · Micro-compromiso: {todayData.primaryAction10Min.estimatedMinutes} min
                     </span>
                   </div>
                 </div>
@@ -148,43 +178,174 @@ export default function TodayTabWorkspace() {
               </div>
             </div>
 
-            {/* RESUMEN DE OTROS DOMINIOS (FITNESS & CARRERA) */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-md)' }}>
-              
-              {/* FITNESS RESUMIDO */}
-              <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
-                  <Dumbbell size={18} style={{ color: 'var(--color-accent-primary)' }} />
-                  <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 700, color: 'var(--text)' }}>
-                    Fitness · Día Activo
-                  </span>
+            {/* 2. SECCIÓN TOP 3 (MÁXIMO 3 TAREAS SIMULTÁNEAS PER REGLA UX TDAH) */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Flame size={18} style={{ color: 'var(--color-accent-warning)' }} />
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+                    Top 3 Tareas Clave del Día (Máximo 3 en foco)
+                  </h3>
                 </div>
-                <strong style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
-                  {todayData.fitnessSummary.activeRoutineTitle}
-                </strong>
-                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
-                  Próxima sesión: {todayData.fitnessSummary.nextWorkoutDayTitle}
-                </span>
+                <Button variant="ghost" size="sm" onClick={() => setActiveTab('timeline')}>
+                  <span>Ver más tareas</span>
+                  <ChevronRight size={16} />
+                </Button>
               </div>
 
-              {/* CARRERA RESUMIDA */}
-              <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
-                  <BriefcaseBusiness size={18} style={{ color: 'var(--color-accent-warning)' }} />
-                  <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 700, color: 'var(--text)' }}>
-                    Carrera · Aplicaciones Activas
-                  </span>
-                </div>
-                <strong style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
-                  {todayData.careerSummary.pendingFollowUpsCount} seguimiento pendiente
-                </strong>
-                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
-                  {todayData.careerSummary.activeApplicationsCount} candidaturas activas registradas en Notion DB 5
-                </span>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-sm)' }}>
+                {todayData.top3Tasks.map((task) => (
+                  <div
+                    key={task.id}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px solid var(--color-border-visible)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: 'var(--space-sm) var(--space-md)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px'
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{
+                        background: 'var(--color-accent-primary-soft)',
+                        color: 'var(--color-accent-primary)',
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        fontSize: 'var(--font-size-meta)',
+                        fontWeight: 700
+                      }}>
+                        {task.area}
+                      </span>
+                      <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
+                        Prioridad: {task.priority}
+                      </span>
+                    </div>
+
+                    <strong style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', marginTop: '2px' }}>
+                      {task.title}
+                    </strong>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* LÍNEA TEMPORAL COMPLETA */}
+            {/* 3. BLOQUES A / B (FOCO PROFUNDO VS PRODUCCIÓN) */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-md)' }}>
+              
+              {/* BLOQUE A: FOCO PROFUNDO */}
+              <div style={{
+                background: 'var(--surface)',
+                border: `1px solid ${activeBlockTimer === 'A' ? 'var(--color-accent-primary)' : 'var(--color-border-visible)'}`,
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--space-md)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--space-xs)'
+              }}>
+                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+                  Bloque A · Foco Profundo (Tesis / Portafolio)
+                </span>
+                <strong style={{ fontSize: '1.05rem', color: 'var(--text)' }}>
+                  Sustentación TwinSight X500 & Repaso CAD WebGL
+                </strong>
+                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+                  Duración estimada: 90 min · Energía: Alta
+                </span>
+                <div style={{ marginTop: 'auto', paddingTop: 'var(--space-xs)' }}>
+                  <Button variant="secondary" size="sm" onClick={() => setActiveBlockTimer('A')}>
+                    <Play size={14} /> Empezar 10 min Bloque A
+                  </Button>
+                </div>
+              </div>
+
+              {/* BLOQUE B: PRODUCCIÓN / SALIDA */}
+              <div style={{
+                background: 'var(--surface)',
+                border: `1px solid ${activeBlockTimer === 'B' ? 'var(--color-accent-warning)' : 'var(--color-border-visible)'}`,
+                borderRadius: 'var(--radius-md)',
+                padding: 'var(--space-md)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--space-xs)'
+              }}>
+                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-warning)', fontWeight: 700, textTransform: 'uppercase' }}>
+                  Bloque B · Producción / Salida (Empleo & Cursos)
+                </span>
+                <strong style={{ fontSize: '1.05rem', color: 'var(--text)' }}>
+                  Seguimiento a Vacante Studio X & Cursos Alemán
+                </strong>
+                <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+                  Duración estimada: 45 min · Energía: Media
+                </span>
+                <div style={{ marginTop: 'auto', paddingTop: 'var(--space-xs)' }}>
+                  <Button variant="secondary" size="sm" onClick={() => setActiveBlockTimer('B')}>
+                    <Play size={14} /> Empezar 10 min Bloque B
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* 4. FILAS CONDENSADAS POR ÁREA (FITNESS + CLÍNICO + IDIOMAS) */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--text)' }}>
+                Estado Condensado por Áreas Operativas
+              </h3>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-sm)' }}>
+                
+                {/* FILA FITNESS */}
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Dumbbell size={16} style={{ color: 'var(--color-accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 700, color: 'var(--text)' }}>
+                      Fitness
+                    </span>
+                  </div>
+                  <strong style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
+                    {todayData.fitnessSummary.activeRoutineTitle}
+                  </strong>
+                  <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+                    Próxima sesión: {todayData.fitnessSummary.nextWorkoutDayTitle}
+                  </span>
+                </div>
+
+                {/* FILA CLÍNICO */}
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <HeartPulse size={16} style={{ color: 'var(--color-accent-danger)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 700, color: 'var(--text)' }}>
+                      Clínico TDAH / Regulación
+                    </span>
+                  </div>
+                  <strong style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
+                    Pausa de respiración diaphragmatic (3 min)
+                  </strong>
+                  <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+                    Ayuda rápida: "¿Bloqueado? Regla de 5 pasos simples"
+                  </span>
+                </div>
+
+                {/* FILA IDIOMAS */}
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Languages size={16} style={{ color: 'var(--color-accent-warning)' }} />
+                    <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 700, color: 'var(--text)' }}>
+                      Idiomas (Alemán A1)
+                    </span>
+                  </div>
+                  <strong style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
+                    Lección diaria 25m (Der Entwickler)
+                  </strong>
+                  <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+                    Práctica speaking corta disponible
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* LÍNEA TEMPORAL OPERATIVA COMPLETA DEL DÍA */}
             <DailyOperatingView />
           </div>
         )}

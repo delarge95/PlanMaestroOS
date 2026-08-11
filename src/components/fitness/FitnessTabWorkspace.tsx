@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dumbbell, BookOpen, BarChart3, LibraryBig, Target, Database, Wrench } from 'lucide-react';
+import { Dumbbell, BookOpen, BarChart3, LibraryBig, Target, Database, Wrench, ShieldAlert } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import FitAppWorkoutLogger from './FitAppWorkoutLogger';
 import FitAppRoutinesCatalog from './FitAppRoutinesCatalog';
@@ -14,10 +14,48 @@ import styles from './FitnessTabWorkspace.module.css';
 export default function FitnessTabWorkspace() {
   const [activeMainTab, setActiveMainTab] = useState<'today' | 'routines' | 'progress' | 'library'>('today');
   const [routinesSubTab, setRoutinesSubTab] = useState<'catalog' | 'skills' | 'database' | 'custom'>('catalog');
+  const [showPrehabAlert, setShowPrehabAlert] = useState(true);
 
   return (
     <ErrorBoundary>
       <div className={styles.wrapper}>
+        
+        {/* AVISO CONDICIONAL PREHAB (VISIBLE SOLO SI HAY ZONA AFECTADA REGISTRADA) */}
+        {showPrehabAlert && activeMainTab === 'today' && (
+          <div style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--color-accent-warning)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-sm) var(--space-md)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 'var(--space-sm)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+              <ShieldAlert size={18} style={{ color: 'var(--color-accent-warning)' }} />
+              <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', fontWeight: 600 }}>
+                Prehab Activo: Protocolo de Isométricos Spanish Squats recomendado antes de la sesión.
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowPrehabAlert(false)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--text-tertiary)',
+                cursor: 'pointer',
+                fontSize: 'var(--font-size-meta)',
+                fontWeight: 600
+              }}
+            >
+              Entendido ✕
+            </button>
+          </div>
+        )}
+
         {/* NAVEGACIÓN PRINCIPAL DE 4 DESTINOS (HOY | RUTINAS | PROGRESO | BIBLIOTECA) */}
         <div className={styles.tabList} role="tablist" aria-label="Secciones de Fitness">
           <button

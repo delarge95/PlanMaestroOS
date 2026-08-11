@@ -3,6 +3,7 @@
 import type { TodayDomainView, CareerPipelineView } from '../contracts/domainContracts';
 import { useActiveProgramStore } from '../fitness/activeProgramStore';
 import { getProgramById } from '../fitness/programs';
+import type { NotionTaskPropertyMap, NotionDailyPlanPropertyMap } from '../notion/schema';
 
 /**
  * Genera la vista consolidada para la pantalla "Hoy", abstrayendo orígenes de datos.
@@ -53,6 +54,26 @@ export function getTodayDomainView(): TodayDomainView {
       activeApplicationsCount: 3,
       nextFollowUpDate: new Date().toISOString().split('T')[0]
     }
+  };
+}
+
+/**
+ * Mapea propiedades de Notion DB 3 (Tasks) y DB 4 (DailyPlan) a la vista de la pantalla Hoy.
+ */
+export function mapNotionTasksToTodayView(
+  tasks: NotionTaskPropertyMap[],
+  dailyPlan?: NotionDailyPlanPropertyMap
+): Partial<TodayDomainView> {
+  const top3 = tasks.slice(0, 3).map((t, index) => ({
+    id: `notion_task_${index}`,
+    title: t.Titulo || 'Tarea sin título',
+    area: t.AreaId || 'General',
+    priority: t.Prioridad || 'Media'
+  }));
+
+  return {
+    activeBlock: dailyPlan?.BloqueA || 'Bloque A · Trabajo Profundo',
+    top3Tasks: top3
   };
 }
 
