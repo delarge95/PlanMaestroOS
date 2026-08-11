@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Disclosure from '../ui/Disclosure';
 import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
-import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock } from 'lucide-react';
+import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock, ExternalLink } from 'lucide-react';
 import { getProgramById } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
@@ -26,6 +26,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
   const clearOverride = useActiveProgramStore((s) => s.clearExerciseOverride);
   const postponeDay = useActiveProgramStore((s) => s.postponeDay);
+  const postponedDays = useActiveProgramStore((s) => s.postponedDays || 0);
+  const resetPostponedDays = useActiveProgramStore((s) => s.resetPostponedDays);
 
   const program = getProgramById(activeProgramId);
   const safeWeekIndex = Math.min(Math.max(currentWeek - 1, 0), (program.weeks?.length || 1) - 1);
@@ -35,6 +37,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const activeDay = activeWeek?.days?.[safeDayIndex] || activeWeek?.days?.[0];
 
   const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
+  const [effortMode, setEffortMode] = useState<'RIR' | 'RPE'>('RIR');
   const [substitutionTarget, setSubstitutionTarget] = useState<{
     prescriptionId: string;
     originalId: string;
@@ -119,31 +122,76 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
           label={`Rutina Principal: ${program.title.replace(/\s*\([^)]*\)/g, '').trim()} — ${activeDay?.name || `Día ${safeDayIndex + 1}`}`}
           summary={`${activeDay?.exercises?.length || 0} ejercicios prescritos · Clic para expandir/contraer`}
         >
-          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '6px', paddingBottom: '4px' }}>
-            <button
-              type="button"
-              onClick={() => {
-                postponeDay();
-                alert('Día postergado. La rutina se recorrió 1 día a la derecha (el Sábado ahora incluye el entrenamiento acumulado).');
-              }}
-              title="Postergar este día de entrenamiento (recorre la secuencia 1 día a la derecha)"
+          {/* BARRA DE HERRAMIENTAS Y ACCIONES DE POSTERGACIÓN */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', paddingTop: '6px', paddingBottom: '8px' }}>
+            {/* LINK DIRECTO A LA BASE DE DATOS DE RUTINAS */}
+            <a
+              href={`/app/fitness/library/catalog?routine=${encodeURIComponent(program.id)}`}
+              title="Ver detalle completo de la rutina en la Base de Datos"
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
-                color: 'var(--text-secondary)',
-                padding: '4px 10px',
-                borderRadius: '6px',
                 fontSize: '0.78rem',
-                fontWeight: 600,
-                cursor: 'pointer',
+                fontWeight: 700,
+                color: 'var(--accent, #0a84ff)',
+                textDecoration: 'none',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '4px'
               }}
             >
-              <Clock size={13} />
-              <span>Postergar día</span>
-            </button>
+              <span>Ver rutina en Base de Datos</span>
+              <ExternalLink size={12} />
+            </a>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {/* BOTÓN DESHACER POSTERGACIÓN SI EXISTEN DÍAS POSTERGADOS */}
+              {postponedDays > 0 && (
+                <button
+                  type="button"
+                  onClick={resetPostponedDays}
+                  title="Restablecer días postergados a 0"
+                  style={{
+                    background: 'rgba(255,69,58,0.15)',
+                    border: '1px solid var(--danger, #ff453a)',
+                    color: 'var(--danger, #ff453a)',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}
+                >
+                  <RotateCcw size={12} />
+                  <span>Deshacer postergación ({postponedDays})</span>
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  postponeDay();
+                }}
+                title="Postergar este día de entrenamiento (recorre la secuencia 1 día a la derecha)"
+                style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                  color: 'var(--text-secondary)',
+                  padding: '4px 10px',
+                  borderRadius: '6px',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Clock size={13} />
+                <span>Postergar día</span>
+              </button>
+            </div>
           </div>
 
           <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', background: 'var(--surface-1, #0d0d0f)' }}>
@@ -154,7 +202,45 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                   <th style={{ padding: '10px 12px' }}>Series Aprox</th>
                   <th style={{ padding: '10px 12px' }}>Series × Reps</th>
                   <th style={{ padding: '10px 12px' }}>Pesos por Serie (kg)</th>
-                  <th style={{ padding: '10px 12px' }}>RPE / RIR</th>
+                  
+                  {/* CABECERA MINIMALISTA RIR / RPE CON CONMUTADOR */}
+                  <th style={{ padding: '10px 12px' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'rgba(0,0,0,0.4)', padding: '2px', borderRadius: '6px', border: '1px solid var(--color-border-subtle)' }}>
+                      <button
+                        type="button"
+                        onClick={() => setEffortMode('RIR')}
+                        style={{
+                          background: effortMode === 'RIR' ? 'var(--accent, #0a84ff)' : 'transparent',
+                          color: effortMode === 'RIR' ? '#ffffff' : 'var(--text-secondary)',
+                          border: 'none',
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          fontSize: '0.72rem',
+                          fontWeight: 700,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        RIR
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setEffortMode('RPE')}
+                        style={{
+                          background: effortMode === 'RPE' ? 'var(--accent, #0a84ff)' : 'transparent',
+                          color: effortMode === 'RPE' ? '#ffffff' : 'var(--text-secondary)',
+                          border: 'none',
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          fontSize: '0.72rem',
+                          fontWeight: 700,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        RPE
+                      </button>
+                    </div>
+                  </th>
+
                   <th style={{ padding: '10px 12px' }}>Descanso</th>
                   <th style={{ padding: '10px 12px' }}>Sustitución</th>
                 </tr>
@@ -175,7 +261,6 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                   const logState = getLogState(pId, warmupCount, workingCount, defaultReps, defaultEffort);
                   const isNoteExpanded = expandedNoteId === pId;
 
-                  // Determinar si la fila tiene alguna modificación respecto a la prescripción original
                   const isModified = Boolean(
                     overrideId ||
                     logState.warmupSets !== warmupCount ||
@@ -183,6 +268,9 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                     logState.repRange !== defaultReps ||
                     logState.effort !== defaultEffort
                   );
+
+                  // Formatear RIR o RPE por cada serie en formato minimalista (solo número)
+                  const rirPerSet = prescription.rirPerSet || [];
 
                   return (
                     <tr key={pId} style={{ borderBottom: '1px solid var(--color-border-subtle)', background: pIdx % 2 === 1 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
@@ -196,7 +284,6 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                               displayName={overrideId ? effectiveDetails.name : (prescription.displayName || effectiveDetails.name)}
                             />
 
-                            {/* ICONO SUTIL DE REESTABLECER SI EL EJERCICIO HA SIDO MODIFICADO */}
                             {isModified && (
                               <button
                                 type="button"
@@ -247,7 +334,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                         </div>
                       </td>
 
-                      {/* 2. SERIES APROX (EDITABLE INLINE AL CLIC) */}
+                      {/* 2. SERIES APROX */}
                       <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
                         <span
                           onClick={() => {
@@ -261,7 +348,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                         </span>
                       </td>
 
-                      {/* 3. SERIES X REPS (EDITABLE INLINE AL CLIC) */}
+                      {/* 3. SERIES X REPS */}
                       <td style={{ padding: '12px 14px', verticalAlign: 'top', fontWeight: 700 }}>
                         <span
                           onClick={() => {
@@ -314,26 +401,40 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                         </div>
                       </td>
 
-                      {/* 5. RPE / RIR (EDITABLE INLINE AL CLIC) */}
+                      {/* 5. VALORES MINIMALISTAS RIR / RPE POR SERIE */}
                       <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
-                        <span
-                          onClick={() => {
-                            const newEffort = prompt('RPE / RIR objetivo:', logState.effort);
-                            if (newEffort) updateField(pId, 'effort', newEffort, logState);
-                          }}
-                          title="Clic para editar RPE/RIR"
-                          style={{
-                            cursor: 'pointer',
-                            background: 'var(--surface-elevated, rgba(255,255,255,0.05))',
-                            border: '1px solid var(--color-border-visible)',
-                            padding: '2px 6px',
-                            borderRadius: '4px',
-                            fontSize: '0.78rem',
-                            fontWeight: 600
-                          }}
-                        >
-                          {logState.effort}
-                        </span>
+                        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                          {Array.from({ length: logState.workingSets }).map((_, sIdx) => {
+                            const rawVal = rirPerSet[sIdx] || logState.effort;
+                            // Extraer únicamente el número o limpiar el prefijo "RIR"
+                            const numOnly = rawVal.replace(/^RIR\s*/i, '').replace(/^RPE\s*/i, '').trim();
+
+                            // Si se conmuta a RPE y numOnly es un número RIR (ej: 2), se muestra 10 - RIR (o el valor numérico directo)
+                            let displayVal = numOnly;
+                            if (effortMode === 'RPE' && !isNaN(Number(numOnly))) {
+                              displayVal = String(10 - Number(numOnly));
+                            }
+
+                            return (
+                              <span
+                                key={sIdx}
+                                title={`S${sIdx + 1}: ${effortMode} ${displayVal}`}
+                                style={{
+                                  background: 'rgba(255,255,255,0.04)',
+                                  border: '1px solid var(--color-border-subtle)',
+                                  borderRadius: '4px',
+                                  padding: '2px 6px',
+                                  fontSize: '0.75rem',
+                                  fontWeight: 700,
+                                  color: 'var(--text-primary)',
+                                  fontFamily: 'SF Mono, monospace'
+                                }}
+                              >
+                                S{sIdx + 1}: {displayVal}
+                              </span>
+                            );
+                          })}
+                        </div>
                       </td>
 
                       {/* 6. DESCANSO */}

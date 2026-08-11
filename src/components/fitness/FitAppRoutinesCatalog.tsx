@@ -1,5 +1,5 @@
 // src/components/fitness/FitAppRoutinesCatalog.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import WorkoutPrescriptionTable from './WorkoutPrescriptionTable';
 import ActiveProgramSelector from './ActiveProgramSelector';
@@ -13,8 +13,20 @@ export default function FitAppRoutinesCatalog() {
   const activeProgramId = useActiveProgramStore((s) => s.programId);
   const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds || [s.programId]);
   const toggleActiveProgram = useActiveProgramStore((s) => s.toggleActiveProgram);
+  const setInspectedProgram = useActiveProgramStore((s) => s.setInspectedProgram);
 
   const [exerciseModalId, setExerciseModalId] = useState<string | null>(null);
+
+  // Leer parámetro ?routine=ID de la URL al cargar
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const routineParam = params.get('routine');
+      if (routineParam && getProgramById(routineParam)) {
+        setInspectedProgram(routineParam);
+      }
+    }
+  }, [setInspectedProgram]);
 
   const currentProgram = getProgramById(activeProgramId);
   const cleanTitle = currentProgram.title.replace(/\s*\([^)]*\)/g, '').trim();
@@ -78,78 +90,84 @@ export default function FitAppRoutinesCatalog() {
               </p>
             </div>
 
-            {/* ACCIONES DEL PROGRAMA: BOTÓN PDF Y TOGGLE SWITCH SUTIL DE ACTIVACIÓN EN HOY */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* A NIVEL DE LA DURACIÓN: MUESTRA EL SWITCH Y BOTÓN DE PDF */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+              {/* SWITCH SUTIL DE ACTIVADO/DESACTIVADO EN HOY */}
+              <div
+                onClick={() => toggleActiveProgram(currentProgram.id)}
+                title={isActiveInTracker ? 'Activo en "Hoy" - Clic para desactivar' : 'Inactivo - Clic para activar en "Hoy"'}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '20px',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))'
+                }}
+              >
+                <div
+                  style={{
+                    width: '32px',
+                    height: '18px',
+                    borderRadius: '10px',
+                    background: isActiveInTracker ? 'var(--success, #30d158)' : 'rgba(255,255,255,0.2)',
+                    position: 'relative',
+                    transition: 'background 150ms ease'
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '14px',
+                      height: '14px',
+                      borderRadius: '50%',
+                      background: '#ffffff',
+                      position: 'absolute',
+                      top: '2px',
+                      left: isActiveInTracker ? '16px' : '2px',
+                      transition: 'left 150ms ease'
+                    }}
+                  />
+                </div>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isActiveInTracker ? 'var(--success, #30d158)' : 'var(--text-secondary)' }}>
+                  {isActiveInTracker ? 'Activo en Hoy' : 'Inactivo'}
+                </span>
+              </div>
+
+              {/* BOTÓN DOCUMENTO PDF OFICIAL DE LA RUTINA */}
               {currentProgram.pdfUrl && (
                 <a
                   href={libraryAssetUrl(currentProgram.pdfUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-                    color: 'var(--text-primary)',
-                    padding: '6px 12px',
-                    borderRadius: 'var(--radius-s, 8px)',
-                    fontSize: 'var(--fs-meta, 0.82rem)',
-                    fontWeight: 600,
-                    textDecoration: 'none',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    transition: 'all 150ms ease'
+                    padding: '6px 12px',
+                    borderRadius: '6px',
+                    background: 'var(--accent, #0a84ff)',
+                    color: '#ffffff',
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    textDecoration: 'none'
                   }}
                 >
-                  <span>Ver PDF</span>
-                  <ExternalLink size={14} aria-hidden="true" />
+                  <ExternalLink size={13} />
+                  <span>Ver PDF Oficial</span>
                 </a>
               )}
-
-              {/* TOGGLE SWITCH DE ACTIVACIÓN (VERDE SI ACTIVO, GRIS SI INACTIVO, TOOLTIP EN HOVER) */}
-              <button
-                type="button"
-                onClick={() => toggleActiveProgram(currentProgram.id)}
-                aria-label={isActiveInTracker ? "Activo en 'Hoy' - Quitar" : "Activar en 'Hoy'"}
-                title={isActiveInTracker ? "Activo en 'Hoy' - Quitar" : "Activar en 'Hoy'"}
-                style={{
-                  position: 'relative',
-                  width: '42px',
-                  height: '24px',
-                  borderRadius: '999px',
-                  background: isActiveInTracker ? 'var(--success, #30d158)' : 'rgba(255,255,255,0.15)',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '2px',
-                  transition: 'background-color 200ms ease',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  outline: 'none'
-                }}
-              >
-                <span
-                  style={{
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    background: '#ffffff',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
-                    transform: isActiveInTracker ? 'translateX(18px)' : 'translateX(0px)',
-                    transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1)'
-                  }}
-                />
-              </button>
             </div>
           </div>
 
-          {/* TABLA DE PRESCRIPCIÓN DEL PROGRAMA */}
+          {/* TABLA UNIFICADA DE PRESCRIPCIÓN Y DETALLE DE DÍAS DE LA RUTINA */}
           <WorkoutPrescriptionTable
             program={currentProgram}
-            onOpenExerciseModal={(id) => setExerciseModalId(id)}
-            hideHeaderPdf={true}
           />
         </div>
 
-        {/* MODAL DE FICHA TÉCNICA FITAPP */}
+        {/* MODAL DE DETALLE DE EJERCICIO */}
         {exerciseModalId && (
           <ExerciseModal
             exerciseId={exerciseModalId}

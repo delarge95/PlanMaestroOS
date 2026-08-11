@@ -1,5 +1,5 @@
 // src/components/fitness/LibraryMuscles.tsx
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Search, ChevronDown, ChevronUp, Dumbbell, Activity } from 'lucide-react';
 import { muscleGroupsDatabase, specificMusclesDatabase, type MuscleGroupCategory } from '../../data/fitness/muscleData';
 
@@ -12,6 +12,27 @@ export default function LibraryMuscles() {
   
   const groupRefs = useRef<Map<string, HTMLElement | null>>(new Map());
   const specificMuscleRefs = useRef<Map<string, HTMLElement | null>>(new Map());
+
+  // Leer parámetro ?muscle= de la URL al cargar
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const muscleParam = params.get('muscle');
+      if (muscleParam) {
+        setSearchTerm(muscleParam);
+        // Abrir automáticamente todos los grupos que coincidan
+        const matchingGroupNames = Object.values(muscleGroupsDatabase)
+          .filter((g) =>
+            g.name.toLowerCase().includes(muscleParam.toLowerCase()) ||
+            g.specificMuscles.some((m) => m.toLowerCase().includes(muscleParam.toLowerCase()))
+          )
+          .map((g) => g.name);
+        if (matchingGroupNames.length > 0) {
+          setOpenGroups(matchingGroupNames);
+        }
+      }
+    }
+  }, []);
 
   const filteredGroups = useMemo(() => {
     const lowerSearchTerm = searchTerm.toLowerCase();
@@ -43,6 +64,12 @@ export default function LibraryMuscles() {
     setOpenGroups((prev) =>
       isOpen ? [...new Set([...prev, groupName])] : prev.filter((name) => name !== groupName)
     );
+  };
+
+  const handleExerciseClick = (exName: string) => {
+    if (typeof window !== 'undefined') {
+      window.location.href = `/app/fitness/library/data?search=${encodeURIComponent(exName)}`;
+    }
   };
 
   const renderDetail = (label: string, content: string | string[]) => (
@@ -229,7 +256,7 @@ export default function LibraryMuscles() {
                                 <button
                                   key={ex}
                                   type="button"
-                                  onClick={() => { window.location.href = `/app/fitness/library/data?search=${encodeURIComponent(ex)}`; }}
+                                  onClick={() => handleExerciseClick(ex)}
                                   style={{
                                     background: 'rgba(255,255,255,0.04)',
                                     border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',

@@ -341,22 +341,25 @@ export function WorkoutPrescriptionTable({
                   <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
                       {rirSets.length > 0 ? (
-                        rirSets.map((rirVal, rIdx) => (
-                          <span
-                            key={rIdx}
-                            style={{
-                              background: 'var(--surface-elevated)',
-                              border: '1px solid var(--color-border-visible)',
-                              padding: '2px 6px',
-                              borderRadius: '4px',
-                              fontSize: '0.76rem',
-                              fontWeight: 600,
-                              color: rirVal === '0' || rirVal.includes('Fallo') ? '#ff453a' : 'var(--text)'
-                            }}
-                          >
-                            S{rIdx + 1}: RIR {rirVal}
-                          </span>
-                        ))
+                        rirSets.map((rirVal, rIdx) => {
+                          const cleanRir = String(rirVal).replace(/^RIR\s*/i, '').trim();
+                          return (
+                            <span
+                              key={rIdx}
+                              style={{
+                                background: 'var(--surface-elevated)',
+                                border: '1px solid var(--color-border-visible)',
+                                padding: '2px 6px',
+                                borderRadius: '4px',
+                                fontSize: '0.76rem',
+                                fontWeight: 600,
+                                color: cleanRir === '0' || cleanRir.includes('Fallo') ? '#ff453a' : 'var(--text)'
+                              }}
+                            >
+                              S{rIdx + 1}: RIR {cleanRir}
+                            </span>
+                          );
+                        })
                       ) : (
                         <span style={{ background: 'var(--surface-elevated)', border: '1px solid var(--color-border-visible)', padding: '2px 6px', borderRadius: '4px', fontSize: '0.76rem', fontWeight: 600 }}>
                           S1: {earlyEffort} / S2+: {lastEffort}

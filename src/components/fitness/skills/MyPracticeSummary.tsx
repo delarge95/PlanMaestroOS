@@ -19,6 +19,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
   const currentPath = currentStep ? skillPaths.find((p) => p.id === currentStep.pathId) : null;
 
   const [loggedSets, setLoggedSets] = useState('');
+  const [loggedRepsOrSecs, setLoggedRepsOrSecs] = useState('');
   const [loggedNotes, setLoggedNotes] = useState('');
   const [isSaved, setIsSaved] = useState(false);
 
@@ -36,14 +37,14 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
   const handlePrevStep = () => {
     if (stepIndex > 0) {
       const prevId = currentPath.stepIds[stepIndex - 1];
-      if (setActiveStep) setActiveStep(prevId);
+      setActiveStep(prevId);
     }
   };
 
   const handleNextStep = () => {
     if (stepIndex < totalSteps - 1) {
       const nextId = currentPath.stepIds[stepIndex + 1];
-      if (setActiveStep) setActiveStep(nextId);
+      setActiveStep(nextId);
     }
   };
 
@@ -159,20 +160,23 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
         )}
       </div>
 
-      {/* REGISTRO RÁPIDO DE SESIÓN DE PRÁCTICA IN-SITU */}
+      {/* REGISTRO RÁPIDO DE SESIÓN DE PRÁCTICA IN-SITU CON 3 CAMPOS LIMPIOS */}
       <form onSubmit={handleSavePractice} style={{ display: 'flex', flexDirection: 'column', gap: '10px', background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
         <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)' }}>
           Log de Práctica de Hoy
         </span>
 
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: '160px' }}>
-            <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>
-              Series x Reps/Segundos logrados
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '10px' }}>
+          {/* CAMPO 1: NÚMERO DE SERIES */}
+          <div>
+            <label style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+              Número de Series
             </label>
             <input
-              type="text"
-              placeholder="Ej: 3x15 seg o 4x6 reps"
+              type="number"
+              min="1"
+              max="20"
+              placeholder="Ej: 3"
               value={loggedSets}
               onChange={(e) => setLoggedSets(e.target.value)}
               style={{
@@ -188,13 +192,37 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
             />
           </div>
 
-          <div style={{ flex: 2, minWidth: '220px' }}>
-            <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>
-              Notas de Sensación / Calidad técnica
+          {/* CAMPO 2: SEGUNDOS O REPETICIONES */}
+          <div>
+            <label style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+              Segundos o Repeticiones
             </label>
             <input
               type="text"
-              placeholder="Sensaciones de hombro, traba de codo, tempo..."
+              placeholder="Ej: 15 seg o 8 reps"
+              value={loggedRepsOrSecs}
+              onChange={(e) => setLoggedRepsOrSecs(e.target.value)}
+              style={{
+                width: '100%',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: '6px',
+                padding: '6px 10px',
+                color: 'var(--text-primary)',
+                fontSize: '0.84rem',
+                outline: 'none'
+              }}
+            />
+          </div>
+
+          {/* CAMPO 3: NOTAS DE CONTROL TÉCNICO */}
+          <div>
+            <label style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+              Notas Técnicas
+            </label>
+            <input
+              type="text"
+              placeholder="Sensación, bloqueo, tempo..."
               value={loggedNotes}
               onChange={(e) => setLoggedNotes(e.target.value)}
               style={{

@@ -1,5 +1,5 @@
 // src/components/fitness/LibraryDatabase.tsx
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import StatusBadge from '../ui/StatusBadge';
 import ExerciseModal from './ExerciseModal';
 import { Search, CheckCircle, ChevronRight, Check, ArrowUpDown } from 'lucide-react';
@@ -58,6 +58,18 @@ export default function LibraryDatabase() {
   const [selectedExerciseName, setSelectedExerciseName] = useState<string | null>(null);
   const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
 
+  // Leer parámetro ?search= de la URL al cargar
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const searchParam = params.get('search');
+      if (searchParam) {
+        setSearchTerm(searchParam);
+        setSelectedExerciseName(searchParam);
+      }
+    }
+  }, []);
+
   const handleCategoryToggle = (category: ExerciseCategory) => {
     setSelectedCategories((prev) =>
       prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
@@ -86,6 +98,12 @@ export default function LibraryDatabase() {
     setSelectedCategories([]);
     setSelectedMuscles([]);
     setSortOption('alpha-asc');
+  };
+
+  const handleMuscleClick = (mName: string) => {
+    if (typeof window !== 'undefined') {
+      window.location.href = `/app/fitness/library/muscles?muscle=${encodeURIComponent(mName)}`;
+    }
   };
 
   // Mapeo dinámico de ejercicios filtrados y agrupados
@@ -390,8 +408,22 @@ export default function LibraryDatabase() {
                       <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>Strength Muscles:</span>
                       <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                         {(exInfo?.muscles?.strength || []).map((m) => (
-                          <span key={m} style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.04)', border: '1px solid var(--color-border-subtle)', padding: '2px 6px', borderRadius: '4px', color: 'var(--text-primary)' }}>
-                            {m}
+                          <span
+                            key={m}
+                            onClick={() => handleMuscleClick(m)}
+                            title={`Ver detalle de ${m} en Músculos`}
+                            style={{
+                              fontSize: '0.75rem',
+                              background: 'rgba(10,132,255,0.1)',
+                              border: '1px solid var(--accent, #0a84ff)',
+                              padding: '2px 6px',
+                              borderRadius: '4px',
+                              color: 'var(--accent, #0a84ff)',
+                              cursor: 'pointer',
+                              fontWeight: 600
+                            }}
+                          >
+                            {m} ↗
                           </span>
                         ))}
                       </div>
