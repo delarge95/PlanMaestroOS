@@ -1,0 +1,28 @@
+name: daily-jobs
+on:
+  schedule:
+    - cron: '0 14 * * *'   # ~09:00 America/Bogota (UTC-5)
+    - cron: '0 2 * * *'    # ~21:00 America/Bogota
+  workflow_dispatch: {}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: morning plan
+        if: github.event.schedule == '0 14 * * *' || github.event_name == 'workflow_dispatch'
+        run: npx tsx worker/src/jobs/morningPlan.ts
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          AI_PROVIDER_KEY: ${{ secrets.AI_PROVIDER_KEY }}
+      - name: evening review
+        if: github.event.schedule == '0 2 * * *' || github.event_name == 'workflow_dispatch'
+        run: npx tsx worker/src/jobs/eveningReview.ts
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          AI_PROVIDER_KEY: ${{ secrets.AI_PROVIDER_KEY }}

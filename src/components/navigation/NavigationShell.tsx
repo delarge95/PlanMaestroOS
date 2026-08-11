@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Sun, Dumbbell, HeartPulse, Briefcase, Languages, Utensils, MoreHorizontal, Sprout } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Sun, Dumbbell, Briefcase, Languages, HeartPulse, ChefHat, MoreHorizontal, Sprout, X } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import { withBase } from '../../utils/url';
+import { NAV_ITEMS } from '../shell/navItems';
 import Sheet from '../ui/Sheet';
 import ListRow from '../ui/ListRow';
 import Button from '../ui/Button';
+import NotionSyncStatus from '../common/NotionSyncStatus';
 import styles from './NavigationShell.module.css';
 
 export interface NavigationShellProps {
@@ -13,30 +15,14 @@ export interface NavigationShellProps {
   breadcrumb?: string;
 }
 
-export interface NavItemConfig {
-  href: string;
-  label: string;
-  iconName: string;
-  disabled?: boolean;
-}
-
-export const NAV_ITEMS: NavItemConfig[] = [
-  { href: '/app/today', label: 'Hoy', iconName: 'sun' },
-  { href: '/app/fitness', label: 'Fitness', iconName: 'dumbbell' },
-  { href: '/app/clinical', label: 'Clínico', iconName: 'heart-pulse', disabled: true },
-  { href: '/app/career', label: 'Laboral', iconName: 'briefcase', disabled: true },
-  { href: '/app/languages', label: 'Idiomas', iconName: 'languages', disabled: true },
-  { href: '/app/gastronomy', label: 'Gastronomía', iconName: 'utensils', disabled: true },
-  { href: '/app/more', label: 'Más', iconName: 'more-horizontal', disabled: true },
-];
-
 export function NavigationShell({
   currentPath = '/app/today',
-  activeDomain = 'today',
   breadcrumb
 }: NavigationShellProps) {
   const [mounted, setMounted] = useState(false);
   const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
+  const [isDesktopMoreOpen, setIsDesktopMoreOpen] = useState(false);
+  const moreButtonRef = useRef<HTMLButtonElement>(null);
 
   const isSimpleMode = useAppStore((s) => s.isSimpleMode);
   const toggleSimpleMode = useAppStore((s) => s.toggleSimpleMode);
@@ -48,16 +34,32 @@ export function NavigationShell({
     }
   }, [isSimpleMode]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (isDesktopMoreOpen) {
+          setIsDesktopMoreOpen(false);
+          moreButtonRef.current?.focus();
+        }
+        if (isMobileSheetOpen) {
+          setIsMobileSheetOpen(false);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isDesktopMoreOpen, isMobileSheetOpen]);
+
   const activeSimpleMode = mounted ? isSimpleMode : false;
 
   const renderIcon = (name: string, size = 18) => {
     switch (name) {
       case 'sun': return <Sun size={size} />;
       case 'dumbbell': return <Dumbbell size={size} />;
-      case 'heart-pulse': return <HeartPulse size={size} />;
       case 'briefcase': return <Briefcase size={size} />;
       case 'languages': return <Languages size={size} />;
-      case 'utensils': return <Utensils size={size} />;
+      case 'heart-pulse': return <HeartPulse size={size} />;
+      case 'chef-hat': return <ChefHat size={size} />;
       default: return <MoreHorizontal size={size} />;
     }
   };
@@ -69,6 +71,11 @@ export function NavigationShell({
     return currentPath.startsWith(href);
   };
 
+  const primaryItems = NAV_ITEMS.filter((i) => i.section === 'primary');
+  const moreItems = NAV_ITEMS.filter((i) => i.section === 'more');
+
+  const isMoreActive = moreItems.some((i) => isPathActive(i.href));
+
   return (
     <>
       <header className={styles.header}>
@@ -79,39 +86,82 @@ export function NavigationShell({
           </a>
 
           {breadcrumb && <span className={styles.breadcrumbText}>{breadcrumb}</span>}
+          <NotionSyncStatus status="offline_local" lastHoursAgo={1} />
         </div>
 
-        {/* NAV ESCRITORIO CON ARRAY DATA DE NAV_ITEMS */}
+        {/* NAV ESCRITORIO CON MÁXIMO 4 ITEMS + MÁS DROPDOWN PER FIX 01 */}
         <nav className={styles.desktopNav} aria-label="Navegación principal">
-          {NAV_ITEMS.map((item) => {
+          {primaryItems.map((item) => {
             const active = isPathActive(item.href);
-
-            if (item.disabled) {
-              return (
-                <span
-                  key={item.href}
-                  className={`${styles.navItem} ${styles.navItemDisabled}`}
-                  title="Próximamente"
-                  style={{ opacity: 0.4, cursor: 'not-allowed', display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem' }}
-                >
-                  {renderIcon(item.iconName, 15)}
-                  <span>{item.label}</span>
-                  <span style={{ fontSize: '0.65rem', background: 'rgba(255,255,255,0.06)', padding: '1px 5px', borderRadius: '4px' }}>Próximamente</span>
-                </span>
-              );
-            }
-
             return (
               <a
                 key={item.href}
                 href={withBase(item.href)}
                 className={`${styles.navItem} ${active ? styles.navItemActive : ''}`}
               >
-                {renderIcon(item.iconName, 16)}
+                {renderIcon(item.icon, 16)}
                 <span>{item.label}</span>
               </a>
             );
           })}
+
+          <div style={{ position: 'relative' }}>
+            <button
+              ref={moreButtonRef}
+              type="button"
+              onClick={() => setIsDesktopMoreOpen(!isDesktopMoreOpen)}
+              className={`${styles.navItem} ${isMoreActive ? styles.navItemActive : ''}`}
+              aria-expanded={isDesktopMoreOpen}
+              aria-haspopup="true"
+            >
+              <MoreHorizontal size={16} />
+              <span>Más</span>
+            </button>
+
+            {isDesktopMoreOpen && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  right: 0,
+                  marginTop: '8px',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--color-border-visible)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '6px',
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+                  zIndex: 9999,
+                  minWidth: '160px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px'
+                }}
+              >
+                {moreItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={withBase(item.href)}
+                    onClick={() => setIsDesktopMoreOpen(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 12px',
+                      borderRadius: '6px',
+                      color: isPathActive(item.href) ? 'var(--color-accent-primary)' : 'var(--text)',
+                      background: isPathActive(item.href) ? 'var(--color-accent-primary-soft)' : 'transparent',
+                      textDecoration: 'none',
+                      fontSize: '0.82rem',
+                      fontWeight: 600
+                    }}
+                  >
+                    {renderIcon(item.icon, 16)}
+                    <span>{item.label}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         </nav>
 
         <div className={styles.desktopRight}>
@@ -132,28 +182,23 @@ export function NavigationShell({
         </div>
       </header>
 
-      {/* MOBILE BAR (MÁXIMO 4 ITEMS + MÁS) */}
+      {/* MOBILE BAR (MÁXIMO 4 ITEMS + MÁS SHEET PER FIX 01) */}
       <nav className={styles.mobileNav} aria-label="Navegación móvil">
-        <a
-          href={withBase('/app/today')}
-          className={`${styles.mobileNavItem} ${isPathActive('/app/today') ? styles.mobileNavItemActive : ''}`}
-        >
-          <Sun size={20} />
-          <span>Hoy</span>
-        </a>
-
-        <a
-          href={withBase('/app/fitness')}
-          className={`${styles.mobileNavItem} ${isPathActive('/app/fitness') ? styles.mobileNavItemActive : ''}`}
-        >
-          <Dumbbell size={20} />
-          <span>Fitness</span>
-        </a>
+        {primaryItems.map((item) => (
+          <a
+            key={item.href}
+            href={withBase(item.href)}
+            className={`${styles.mobileNavItem} ${isPathActive(item.href) ? styles.mobileNavItemActive : ''}`}
+          >
+            {renderIcon(item.icon, 20)}
+            <span>{item.label}</span>
+          </a>
+        ))}
 
         <button
           type="button"
           onClick={() => setIsMobileSheetOpen(true)}
-          className={styles.mobileNavItem}
+          className={`${styles.mobileNavItem} ${isMoreActive ? styles.mobileNavItemActive : ''}`}
         >
           <MoreHorizontal size={20} />
           <span>Más</span>
@@ -163,24 +208,26 @@ export function NavigationShell({
       <Sheet
         isOpen={isMobileSheetOpen}
         onClose={() => setIsMobileSheetOpen(false)}
-        title="Navegación"
+        title="Más"
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          {NAV_ITEMS.map((item) => (
+          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>
+            Secciones
+          </span>
+          {moreItems.map((item) => (
             <ListRow
               key={item.href}
               title={item.label}
-              badge={item.disabled ? 'Próximamente' : undefined}
-              icon={renderIcon(item.iconName, 18)}
-              disabled={item.disabled}
+              icon={renderIcon(item.icon, 18)}
               onClick={() => {
-                if (!item.disabled) {
-                  window.location.href = withBase(item.href);
-                }
+                window.location.href = withBase(item.href);
               }}
               active={isPathActive(item.href)}
             />
           ))}
+          <Button variant="ghost" size="sm" onClick={() => setIsMobileSheetOpen(false)}>
+            <X size={16} /> Cerrar
+          </Button>
         </div>
       </Sheet>
     </>

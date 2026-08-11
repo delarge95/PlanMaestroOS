@@ -12,6 +12,10 @@ export interface JobApplication {
   updatedAtIso: string;
 }
 
+export function validateSingleNextAction(app: JobApplication): boolean {
+  return typeof app.singleNextAction === 'string' && app.singleNextAction.trim().length > 0;
+}
+
 export const initialApplications: JobApplication[] = [
   {
     id: 'app-1',

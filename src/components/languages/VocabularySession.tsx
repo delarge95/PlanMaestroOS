@@ -10,7 +10,9 @@ export interface VocabularySessionProps {
 }
 
 export default function VocabularySession({ language = 'de' }: VocabularySessionProps) {
-  const [items, setItems] = useState<VocabularyItem[]>(initialVocabulary);
+  const [items, setItems] = useState<VocabularyItem[]>(() =>
+    initialVocabulary.filter((item) => item.language === language || (!item.language && language === 'de'))
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
 

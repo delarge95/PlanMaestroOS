@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-08-11T03:13:24.886Z",
+  "schemaVersion": 1,
+  "data": [
+    {
+      "externalId": "task-1",
+      "title": "Revisar propuesta de arquitectura",
+      "status": "todo",
+      "area": "general",
+      "syncStatus": "synced"
+    },
+    {
+      "externalId": "task-2",
+      "title": "Completar sesión de movilidad de rodilla",
+      "status": "todo",
+      "area": "salud",
+      "syncStatus": "synced"
+    }
+  ]
+}

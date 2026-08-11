@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
-import { Languages, Flame, BookOpen, MessageSquare } from 'lucide-react';
+import { Languages, Flame, MessageSquare } from 'lucide-react';
 
 export default function LanguageToday() {
   const [streakDays] = useState(12);

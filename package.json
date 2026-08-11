@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro check && astro build",
-    "preview": "astro preview --host 127.0.0.1"
+    "preview": "astro preview --host 127.0.0.1",
+    "validate:fitness": "npx tsx scripts/validateFitness.ts",
+    "test": "npx vitest run",
+    "ci": "npm run validate:fitness && npm run test && npx astro check"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.1",
@@ -30,6 +33,7 @@
     "@types/three": "^0.184.1",
     "impeccable": "^3.5.0",
     "playwright": "^1.60.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
   }
 }

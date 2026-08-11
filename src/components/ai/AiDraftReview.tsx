@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import type { AiResponse } from '../../lib/ai/client';
+import type { AiDraftResponse } from '../../lib/ai/requestAiAction';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
-import { CheckCircle2, Edit3, Trash2, Database } from 'lucide-react';
+import { CheckCircle2, Edit3, Trash2, Database, AlertCircle } from 'lucide-react';
 
 export interface AiDraftReviewProps {
-  draft: AiResponse;
+  draft: AiDraftResponse;
   onApprove: (finalText: string) => void;
   onDiscard: () => void;
 }
 
 export default function AiDraftReview({ draft, onApprove, onDiscard }: AiDraftReviewProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedText, setEditedText] = useState(draft.text);
+  const [editedText, setEditedText] = useState(draft.content);
 
   return (
     <ErrorBoundary>
@@ -31,7 +31,7 @@ export default function AiDraftReview({ draft, onApprove, onDiscard }: AiDraftRe
             Borrador generado por IA
           </span>
           <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)' }}>
-            Pendiente de aprobación humana
+            {draft.betaNotice || 'Beta — respuestas sin verificación de fuentes'}
           </span>
         </div>
 

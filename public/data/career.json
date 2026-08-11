@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-08-11T03:13:24.886Z",
+  "schemaVersion": 1,
+  "data": [
+    {
+      "externalId": "app-1",
+      "companyName": "Epic Games",
+      "roleTitle": "Technical Artist",
+      "stage": "Entrevista",
+      "singleNextAction": "Confirmar entrevista técnica",
+      "syncStatus": "synced"
+    }
+  ]
+}
