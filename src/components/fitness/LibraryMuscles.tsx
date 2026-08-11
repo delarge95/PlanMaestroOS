@@ -1,7 +1,7 @@
 // src/components/fitness/LibraryMuscles.tsx
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Search, ChevronDown, ChevronUp, Dumbbell, Activity } from 'lucide-react';
-import { muscleGroupsDatabase, specificMusclesDatabase, type MuscleGroupCategory } from '../../data/fitness/muscleData';
+import { muscleGroupsDatabase, specificMusclesDatabase, findMuscleTarget, type MuscleGroupCategory } from '../../data/fitness/muscleData';
 
 const MUSCLE_CATEGORIES: MuscleGroupCategory[] = ['Legs', 'Back', 'Chest', 'Shoulders', 'Arms', 'Core', 'Thorax'];
 
@@ -13,22 +13,37 @@ export default function LibraryMuscles() {
   const groupRefs = useRef<Map<string, HTMLElement | null>>(new Map());
   const specificMuscleRefs = useRef<Map<string, HTMLElement | null>>(new Map());
 
-  // Leer parámetro ?muscle= de la URL al cargar
+  // Leer parámetro ?muscle= de la URL al cargar y resolver inteligentemente mediante findMuscleTarget
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const muscleParam = params.get('muscle');
       if (muscleParam) {
         setSearchTerm(muscleParam);
-        // Abrir automáticamente todos los grupos que coincidan
-        const matchingGroupNames = Object.values(muscleGroupsDatabase)
-          .filter((g) =>
-            g.name.toLowerCase().includes(muscleParam.toLowerCase()) ||
-            g.specificMuscles.some((m) => m.toLowerCase().includes(muscleParam.toLowerCase()))
-          )
-          .map((g) => g.name);
-        if (matchingGroupNames.length > 0) {
-          setOpenGroups(matchingGroupNames);
+
+        const target = findMuscleTarget(muscleParam);
+        if (target && target.group) {
+          setOpenGroups((prev) => [...new Set([...prev, target.group])]);
+
+          // Scroll suave hacia la sección o músculo resuelto
+          setTimeout(() => {
+            if (target.specific && specificMuscleRefs.current.has(target.specific)) {
+              specificMuscleRefs.current.get(target.specific)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else if (groupRefs.current.has(target.group)) {
+              groupRefs.current.get(target.group)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 200);
+        } else {
+          // Fallback a coincidencia de texto estándar si no hay target directo
+          const matchingGroupNames = Object.values(muscleGroupsDatabase)
+            .filter((g) =>
+              g.name.toLowerCase().includes(muscleParam.toLowerCase()) ||
+              g.specificMuscles.some((m) => m.toLowerCase().includes(muscleParam.toLowerCase()))
+            )
+            .map((g) => g.name);
+          if (matchingGroupNames.length > 0) {
+            setOpenGroups(matchingGroupNames);
+          }
         }
       }
     }
@@ -42,11 +57,25 @@ export default function LibraryMuscles() {
         return false;
       }
       if (searchTerm) {
+        // Usar resolvedor anatómico para verificar pertenencia
+        const target = findMuscleTarget(searchTerm);
+        if (target && target.group === group.name) return true;
+
         const groupNameMatch = group.name.toLowerCase().includes(lowerSearchTerm);
         if (groupNameMatch) return true;
-        const specificMuscleMatch = group.specificMuscles.some((muscleKey) =>
-          specificMusclesDatabase[muscleKey]?.name.toLowerCase().includes(lowerSearchTerm)
-        );
+
+        const categoryMatch = group.category.toLowerCase().includes(lowerSearchTerm);
+        if (categoryMatch) return true;
+
+        const specificMuscleMatch = group.specificMuscles.some((muscleKey) => {
+          const spec = specificMusclesDatabase[muscleKey];
+          if (!spec) return false;
+          return (
+            spec.name.toLowerCase().includes(lowerSearchTerm) ||
+            spec.functions.some((f) => f.toLowerCase().includes(lowerSearchTerm)) ||
+            spec.mainExercises.some((ex) => ex.toLowerCase().includes(lowerSearchTerm))
+          );
+        });
         if (specificMuscleMatch) return true;
         return false;
       }
@@ -116,7 +145,7 @@ export default function LibraryMuscles() {
           <div style={{ position: 'relative', minWidth: '240px', flex: 1, maxWidth: '360px' }}>
             <input
               type="text"
-              placeholder="Buscar región muscular o músculo específico..."
+              placeholder="Buscar músculo en inglés/español..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{

@@ -1,6 +1,6 @@
+// src/components/fitness/ExerciseModal.tsx
 import React, { useState } from 'react';
 import type { ExerciseEntry } from '../../data/exercises';
-
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
 
 interface Props {
@@ -24,6 +24,12 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
   };
 
   const embedUrl = getYoutubeEmbedUrl(targetExercise.youtubeLink);
+
+  const handleMuscleClick = (mName: string) => {
+    if (typeof window !== 'undefined') {
+      window.location.href = `/app/fitness/library/muscles?muscle=${encodeURIComponent(mName)}`;
+    }
+  };
 
   return (
     <div 
@@ -226,8 +232,22 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
                 </strong>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                   {targetExercise.muscles.strength.map((m, idx) => (
-                    <span key={idx} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#6ee7b7', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', border: '1px solid rgba(16,185,129,0.3)' }}>
-                      {m}
+                    <span
+                      key={idx}
+                      onClick={() => handleMuscleClick(m)}
+                      title={`Ver anatomía de ${m} en Base de Datos de Músculos`}
+                      style={{
+                        background: 'rgba(16, 185, 129, 0.15)',
+                        color: '#6ee7b7',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '0.8rem',
+                        border: '1px solid rgba(16,185,129,0.3)',
+                        cursor: 'pointer',
+                        fontWeight: 600
+                      }}
+                    >
+                      {m} ↗
                     </span>
                   ))}
                 </div>
@@ -240,8 +260,22 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
                   </strong>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                     {targetExercise.muscles.stability.map((m, idx) => (
-                      <span key={idx} style={{ background: 'rgba(119, 231, 255, 0.12)', color: 'var(--color-accent-primary)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', border: '1px solid rgba(119,231,255,0.25)' }}>
-                        {m}
+                      <span
+                        key={idx}
+                        onClick={() => handleMuscleClick(m)}
+                        title={`Ver anatomía de ${m} en Base de Datos de Músculos`}
+                        style={{
+                          background: 'rgba(119, 231, 255, 0.12)',
+                          color: 'var(--color-accent-primary)',
+                          padding: '4px 10px',
+                          borderRadius: '6px',
+                          fontSize: '0.8rem',
+                          border: '1px solid rgba(119,231,255,0.25)',
+                          cursor: 'pointer',
+                          fontWeight: 600
+                        }}
+                      >
+                        {m} ↗
                       </span>
                     ))}
                   </div>

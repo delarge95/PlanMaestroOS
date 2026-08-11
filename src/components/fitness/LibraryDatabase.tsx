@@ -55,7 +55,6 @@ export default function LibraryDatabase() {
   const [sortOption, setSortOption] = useState<SortOption>('alpha-asc');
   const [selectedCategories, setSelectedCategories] = useState<ExerciseCategory[]>([]);
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([]);
-  const [selectedExerciseName, setSelectedExerciseName] = useState<string | null>(null);
   const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
 
   // Leer parámetro ?search= de la URL al cargar
@@ -65,7 +64,7 @@ export default function LibraryDatabase() {
       const searchParam = params.get('search');
       if (searchParam) {
         setSearchTerm(searchParam);
-        setSelectedExerciseName(searchParam);
+        setModalExerciseId(searchParam);
       }
     }
   }, []);
@@ -98,12 +97,6 @@ export default function LibraryDatabase() {
     setSelectedCategories([]);
     setSelectedMuscles([]);
     setSortOption('alpha-asc');
-  };
-
-  const handleMuscleClick = (mName: string) => {
-    if (typeof window !== 'undefined') {
-      window.location.href = `/app/fitness/library/muscles?muscle=${encodeURIComponent(mName)}`;
-    }
   };
 
   // Mapeo dinámico de ejercicios filtrados y agrupados
@@ -348,99 +341,41 @@ export default function LibraryDatabase() {
         )}
       </div>
 
-      {/* RENDERIZADO DE RESULTADOS: FLAT LIST VS GROUPED VIEW */}
+      {/* RENDERIZADO DE RESULTADOS: FLAT LIST VS GROUPED VIEW (AMBOS ABREN EXERCISEMODAL) */}
       {!isGroupedView ? (
         /* FLAT LIST */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           {filteredFlatList.map((name) => {
             const exInfo = exerciseDatabase[name];
             const ref = resolveExerciseReference(name);
-            const isExpanded = selectedExerciseName === name;
 
             return (
               <div
                 key={name}
+                onClick={() => setModalExerciseId(name)}
                 style={{
                   background: 'var(--surface-1, #0d0d0f)',
                   border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
                   borderRadius: 'var(--radius-m, 12px)',
-                  overflow: 'hidden'
+                  padding: '12px 14px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  transition: 'background 120ms ease'
                 }}
               >
-                <div
-                  onClick={() => setSelectedExerciseName(isExpanded ? null : name)}
-                  style={{
-                    padding: '12px 14px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    background: isExpanded ? 'rgba(255,255,255,0.03)' : 'transparent'
-                  }}
-                >
-                  <div>
-                    <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)', display: 'block' }}>{name}</strong>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
-                      {(exInfo?.muscles?.strength || []).join(', ')}
-                    </span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <StatusBadge label={ref.verified ? 'Verificado' : 'Local'} variant={ref.verified ? 'success' : 'neutral'} icon={ref.verified ? <CheckCircle size={10} /> : undefined} />
-                    <ChevronRight size={14} style={{ color: 'var(--text-tertiary)', transform: isExpanded ? 'rotate(90deg)' : 'none', transition: 'transform 120ms ease' }} />
-                  </div>
+                <div>
+                  <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)', display: 'block' }}>{name}</strong>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
+                    {(exInfo?.muscles?.strength || []).join(', ')}
+                  </span>
                 </div>
 
-                {isExpanded && (
-                  <div style={{ padding: '14px', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', background: 'rgba(0,0,0,0.3)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: '0.72rem', background: 'rgba(255,255,255,0.06)', color: 'var(--text-secondary)', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
-                        Category: {exInfo?.category || 'Gym'}
-                      </span>
-                      {exInfo?.subcategory && (
-                        <span style={{ fontSize: '0.72rem', background: 'rgba(10,132,255,0.15)', color: 'var(--accent, #0a84ff)', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
-                          Subcategory: {exInfo.subcategory}
-                        </span>
-                      )}
-                    </div>
-
-                    <div>
-                      <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>Strength Muscles:</span>
-                      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-                        {(exInfo?.muscles?.strength || []).map((m) => (
-                          <span
-                            key={m}
-                            onClick={() => handleMuscleClick(m)}
-                            title={`Ver detalle de ${m} en Músculos`}
-                            style={{
-                              fontSize: '0.75rem',
-                              background: 'rgba(10,132,255,0.1)',
-                              border: '1px solid var(--accent, #0a84ff)',
-                              padding: '2px 6px',
-                              borderRadius: '4px',
-                              color: 'var(--accent, #0a84ff)',
-                              cursor: 'pointer',
-                              fontWeight: 600
-                            }}
-                          >
-                            {m} ↗
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {exInfo?.techniquePoints && exInfo.techniquePoints.length > 0 && (
-                      <div>
-                        <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>Technique Points:</span>
-                        <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                          {exInfo.techniquePoints.map((tp, idx) => (
-                            <li key={idx}>{tp}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <StatusBadge label={ref.verified ? 'Verificado' : 'Local'} variant={ref.verified ? 'success' : 'neutral'} icon={ref.verified ? <CheckCircle size={10} /> : undefined} />
+                  <ChevronRight size={14} style={{ color: 'var(--text-tertiary)' }} />
+                </div>
               </div>
             );
           })}
@@ -453,7 +388,7 @@ export default function LibraryDatabase() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', paddingBottom: '8px' }}>
                 <strong style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>{groupName}</strong>
                 <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.06)', color: 'var(--text-secondary)', padding: '2px 8px', borderRadius: '12px', fontWeight: 600 }}>
-                  {exercises.length} exercises
+                  {exercises.length} ejercicios
                 </span>
               </div>
 
@@ -483,7 +418,7 @@ export default function LibraryDatabase() {
         </div>
       )}
 
-      {/* MODAL DE FICHA TÉCNICA FITAPP */}
+      {/* MODAL UNIFICADO DE FICHA TÉCNICA FITAPP (VÍDEO, HIPERVÍNCULOS MUSCULARES Y SUSTITUCIONES) */}
       {modalExerciseId && (
         <ExerciseModal
           exerciseId={modalExerciseId}
