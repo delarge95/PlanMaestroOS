@@ -13,13 +13,13 @@ export const SECTION_NAV: Record<string, NavItemConfig[]> = {
   ],
   fitness: [
     { href: '/app/fitness', label: 'Hoy', end: true },
-    { href: '/app/fitness/library', label: 'Rutinas y biblioteca' },
-    { href: '/app/fitness/progress', label: 'Progreso y cargas' },
+    { href: '/app/fitness/library', label: 'Base de datos' },
+    { href: '/app/fitness/progress', label: 'Progreso' },
   ],
   'fitness.library': [
-    { href: '/app/fitness/library/catalog', label: 'Catálogo de rutinas' },
-    { href: '/app/fitness/library/skills', label: 'Habilidades y progresiones' },
-    { href: '/app/fitness/library/data', label: 'Base de datos y biblioteca' },
+    { href: '/app/fitness/library/catalog', label: 'Rutinas' },
+    { href: '/app/fitness/library/skills', label: 'Progresiones' },
+    { href: '/app/fitness/library/data', label: 'Ejercicios' },
   ],
   career: [
     { href: '/app/career', label: 'Hoy', end: true },
