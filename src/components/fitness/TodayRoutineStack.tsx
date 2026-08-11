@@ -120,80 +120,72 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
       ) : (
         <Disclosure
           label={`Rutina Principal: ${program.title.replace(/\s*\([^)]*\)/g, '').trim()} — ${activeDay?.name || `Día ${safeDayIndex + 1}`}`}
-          summary={`${activeDay?.exercises?.length || 0} ejercicios prescritos · Clic para expandir/contraer`}
-        >
-          {/* BARRA DE HERRAMIENTAS Y ACCIONES DE POSTERGACIÓN */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', paddingTop: '6px', paddingBottom: '8px' }}>
-            {/* LINK DIRECTO A LA BASE DE DATOS DE RUTINAS */}
-            <a
-              href={`/app/fitness/library/catalog?routine=${encodeURIComponent(program.id)}`}
-              title="Ver detalle completo de la rutina en la Base de Datos"
-              style={{
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                color: 'var(--accent, #0a84ff)',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
-              <span>Ver rutina en Base de Datos</span>
-              <ExternalLink size={12} />
-            </a>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              {/* BOTÓN DESHACER POSTERGACIÓN SI EXISTEN DÍAS POSTERGADOS */}
+          summary={`${activeDay?.exercises?.length || 0} ejercicios`}
+          actions={
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              {/* DESHACER POSTERGACIÓN SI EXISTEN DÍAS POSTERGADOS */}
               {postponedDays > 0 && (
                 <button
                   type="button"
                   onClick={resetPostponedDays}
-                  title="Restablecer días postergados a 0"
+                  title={`Restablecer días postergados (${postponedDays})`}
                   style={{
                     background: 'rgba(255,69,58,0.15)',
                     border: '1px solid var(--danger, #ff453a)',
                     color: 'var(--danger, #ff453a)',
-                    padding: '4px 10px',
+                    padding: '4px',
                     borderRadius: '6px',
-                    fontSize: '0.78rem',
-                    fontWeight: 700,
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '4px'
+                    justifyContent: 'center'
                   }}
                 >
-                  <RotateCcw size={12} />
-                  <span>Deshacer postergación ({postponedDays})</span>
+                  <RotateCcw size={14} />
                 </button>
               )}
 
+              {/* POSTERGAR DÍA */}
               <button
                 type="button"
-                onClick={() => {
-                  postponeDay();
-                }}
-                title="Postergar este día de entrenamiento (recorre la secuencia 1 día a la derecha)"
+                onClick={postponeDay}
+                title="Postergar día de entrenamiento (+1 día)"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
                   color: 'var(--text-secondary)',
-                  padding: '4px 10px',
+                  padding: '4px',
                   borderRadius: '6px',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
                   cursor: 'pointer',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  justifyContent: 'center'
                 }}
               >
-                <Clock size={13} />
-                <span>Postergar día</span>
+                <Clock size={14} />
               </button>
-            </div>
-          </div>
 
+              {/* LINK DIRECTO A LA BASE DE DATOS DE RUTINAS */}
+              <a
+                href={`/app/fitness/library/catalog?routine=${encodeURIComponent(program.id)}`}
+                title="Ver rutina en Base de Datos"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+                  color: 'var(--accent, #0a84ff)',
+                  padding: '4px',
+                  borderRadius: '6px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textDecoration: 'none'
+                }}
+              >
+                <ExternalLink size={14} />
+              </a>
+            </div>
+          }
+        >
           <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', background: 'var(--surface-1, #0d0d0f)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--fs-body, 0.9rem)' }}>
               <thead>
@@ -406,10 +398,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                         <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                           {Array.from({ length: logState.workingSets }).map((_, sIdx) => {
                             const rawVal = rirPerSet[sIdx] || logState.effort;
-                            // Extraer únicamente el número o limpiar el prefijo "RIR"
                             const numOnly = rawVal.replace(/^RIR\s*/i, '').replace(/^RPE\s*/i, '').trim();
 
-                            // Si se conmuta a RPE y numOnly es un número RIR (ej: 2), se muestra 10 - RIR (o el valor numérico directo)
                             let displayVal = numOnly;
                             if (effortMode === 'RPE' && !isNaN(Number(numOnly))) {
                               displayVal = String(10 - Number(numOnly));

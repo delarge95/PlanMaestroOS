@@ -6,6 +6,7 @@ export interface DisclosureProps {
   defaultOpen?: boolean;
   children: React.ReactNode;
   icon?: React.ReactNode;
+  actions?: React.ReactNode;
 }
 
 export function Disclosure({
@@ -13,7 +14,8 @@ export function Disclosure({
   summary,
   defaultOpen = false,
   children,
-  icon
+  icon,
+  actions
 }: DisclosureProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const contentId = useId();
@@ -56,9 +58,13 @@ export function Disclosure({
           <span>{label}</span>
           {summary && <span style={{ color: 'var(--text-tertiary)', fontSize: 'var(--font-size-meta)' }}>({summary})</span>}
         </div>
-        <span style={{ fontSize: '0.75rem', transition: 'transform 180ms ease', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-          ▼
-        </span>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+          {actions && <div onClick={(e) => e.stopPropagation()}>{actions}</div>}
+          <span style={{ fontSize: '0.75rem', transition: 'transform 180ms ease', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+            ▼
+          </span>
+        </div>
       </button>
 
       {isOpen && (

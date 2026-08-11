@@ -67,27 +67,28 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
         gap: 'var(--space-md)'
       }}
     >
-      {/* BARRA DE ENLACE A BASE DE DATOS DE PROGRESIONES */}
+      {/* BARRA SUPERIOR CON ICONO MINIMALISTA A LA DERECHA */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
           Habilidad en Práctica Activa
         </span>
 
         <a
-          href="/app/fitness/library/progressions"
+          href="/app/fitness/library/skills"
           title="Ver árbol completo de progresiones en la Base de Datos"
           style={{
-            fontSize: '0.78rem',
-            fontWeight: 700,
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
             color: 'var(--accent, #0a84ff)',
-            textDecoration: 'none',
+            padding: '4px',
+            borderRadius: '6px',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '4px'
+            justifyContent: 'center',
+            textDecoration: 'none'
           }}
         >
-          <span>Ver en Base de datos</span>
-          <ExternalLink size={12} />
+          <ExternalLink size={14} />
         </a>
       </div>
 
