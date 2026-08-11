@@ -4,6 +4,7 @@ import SectionNav from '../ui/SectionNav';
 import PrehabBlock from './PrehabBlock';
 import TodayRoutineStack from './TodayRoutineStack';
 import TodayCalendar from './TodayCalendar';
+import MyPracticeSummary from './skills/MyPracticeSummary';
 import ErrorBoundary from '../ErrorBoundary';
 
 export interface FitnessTodayProps {
@@ -11,8 +12,8 @@ export interface FitnessTodayProps {
 }
 
 export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTodayProps) {
-  // Simulación de zona afectada para mostrar el bloque de prehab
-  const [hasPainZone, setHasPainZone] = useState(true);
+  const [hasPainZone] = useState(true);
+  const [selectedDayIndex, setSelectedDayIndex] = useState(1); // Martes por defecto (Día 2 Lower 1)
 
   return (
     <ErrorBoundary>
@@ -29,10 +30,20 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
         {hasPainZone && <PrehabBlock />}
 
         {/* 2. CRONOGRAMA INTERACTIVO */}
-        <TodayCalendar />
+        <TodayCalendar
+          selectedDayIndex={selectedDayIndex}
+          onSelectDayIndex={(idx) => setSelectedDayIndex(idx)}
+        />
 
-        {/* 3. RUTINA DEL DÍA PRINCIPAL */}
-        <TodayRoutineStack />
+        {/* 3. PROGRESIÓN / HABILIDAD ACTIVA */}
+        <MyPracticeSummary
+          onOpenPaths={() => { window.location.href = '/app/fitness/library/skills'; }}
+          onOpenDetail={() => { window.location.href = '/app/fitness/library/skills'; }}
+          onStartPractice={() => { window.location.href = '/app/fitness/library/skills'; }}
+        />
+
+        {/* 4. RUTINA DEL DÍA PRINCIPAL (SINCRONIZADA CON EL DÍA SELECCIONADO EN EL CRONOGRAMA) */}
+        <TodayRoutineStack selectedDayIndex={selectedDayIndex} />
 
       </div>
     </ErrorBoundary>

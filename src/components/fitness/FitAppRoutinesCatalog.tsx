@@ -7,8 +7,7 @@ import { getProgramById } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { libraryAssetUrl } from '../../lib/library/openDocument';
 import ExerciseModal from './ExerciseModal';
-import Button from '../ui/Button';
-import { Plus, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 export default function FitAppRoutinesCatalog() {
   const activeProgramId = useActiveProgramStore((s) => s.programId);
@@ -21,34 +20,15 @@ export default function FitAppRoutinesCatalog() {
   const cleanTitle = currentProgram.title.replace(/\s*\([^)]*\)/g, '').trim();
   const isActiveInTracker = activeProgramIds.includes(currentProgram.id);
 
-  const handleAddRoutine = () => {
-    alert('Añadir nueva rutina personalizada');
-  };
-
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', color: 'var(--text-primary)' }}>
         
-        {/* CABECERA DE LA SECCIÓN: TÍTULO Y BOTÓN SUTIL '+' DE AÑADIR NUEVA RUTINA */}
+        {/* CABECERA DE LA SECCIÓN */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h2 style={{ fontSize: 'var(--fs-step, 1.125rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
             Catálogo Oficial de Programas
           </h2>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleAddRoutine}
-            title="Añadir nueva rutina"
-            aria-label="Añadir nueva rutina"
-            style={{
-              padding: '6px',
-              borderRadius: 'var(--radius-s, 8px)',
-              color: 'var(--text-secondary)'
-            }}
-          >
-            <Plus size={18} />
-          </Button>
         </div>
 
         {/* CÁPSULAS HORIZONTALES LIMPIAS */}
