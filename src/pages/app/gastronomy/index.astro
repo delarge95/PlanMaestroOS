@@ -1,0 +1,50 @@
+---
+import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
+import Button from '../../../components/ui/Button.tsx';
+import { Utensils, BookOpen, Calendar, Bookmark } from 'lucide-react';
+---
+
+<PlanMaestroLayout title="Gastronomía - Resumen" activeDomain="gastronomy">
+  <div style="display: flex; flex-direction: column; gap: var(--space-md); max-width: 850px; margin: 0 auto; width: 100%;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: var(--space-xs);">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <Utensils size={22} style={{ color: 'var(--color-accent-primary)' }} />
+        <div>
+          <h1 style="font-size: 1.4rem; font-weight: 800; margin: 0; color: var(--text);">
+            Gastronomía
+          </h1>
+          <span style="font-size: 0.78rem; color: var(--text-tertiary);">
+            Planificación nutricional, biblioteca & pipeline de guardados
+          </span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <a href="/app/gastronomy/library" style="text-decoration: none;">
+          <Button variant="secondary" size="sm"><BookOpen size={15} /> Biblioteca</Button>
+        </a>
+        <a href="/app/gastronomy/plans" style="text-decoration: none;">
+          <Button variant="secondary" size="sm"><Calendar size={15} /> Planes</Button>
+        </a>
+        <a href="/app/gastronomy/saved" style="text-decoration: none;">
+          <Button variant="secondary" size="sm"><Bookmark size={15} /> Ver más tarde</Button>
+        </a>
+      </div>
+    </div>
+
+    {/* RESUMEN RÁPIDO */}
+    <div style="background: var(--surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: var(--space-md); display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 0.7rem; color: var(--color-accent-primary); font-weight: 700; text-transform: uppercase;">
+        Plan Nutricional Activo
+      </span>
+      <strong style="font-size: 1.1rem; color: var(--text);">
+        Dieta de Mantenimiento / Hipertrofia Moderada (2,400 kcal)
+      </strong>
+      <span style="font-size: 0.8rem; color: var(--text-tertiary);">
+        Pollo salteado post-gym programado para hoy a las 13:00.
+      </span>
+    </div>
+
+  </div>
+</PlanMaestroLayout>

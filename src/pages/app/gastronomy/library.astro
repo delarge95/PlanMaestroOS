@@ -1,0 +1,71 @@
+---
+import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
+import RecipeCard from '../../../components/gastronomy/RecipeCard.tsx';
+import { initialRecipes } from '../../../data/gastronomy/recipes.ts';
+import { initialBooks } from '../../../data/gastronomy/books.ts';
+import { initialChefs } from '../../../data/gastronomy/chefs.ts';
+import Button from '../../../components/ui/Button.tsx';
+---
+
+<PlanMaestroLayout title="Gastronomía - Biblioteca" activeDomain="gastronomy">
+  <div style="display: flex; flex-direction: column; gap: var(--space-md); max-width: 850px; margin: 0 auto; width: 100%;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: var(--space-xs);">
+      <div>
+        <h1 style="font-size: 1.4rem; font-weight: 800; margin: 0; color: var(--text);">
+          Biblioteca
+        </h1>
+        <span style="font-size: 0.78rem; color: var(--text-tertiary);">
+          Recetas, libros y chefs de referencia gastronómica
+        </span>
+      </div>
+
+      <a href="/app/gastronomy" style="text-decoration: none;">
+        <Button variant="ghost" size="sm">Volver a Resumen</Button>
+      </a>
+    </div>
+
+    {/* SUBSECCIÓN RECETAS */}
+    <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+      <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0; color: var(--text);">Recetas</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-sm);">
+        {initialRecipes.map((r) => (
+          <RecipeCard client:load recipe={r} onSelect={(selected) => console.log(selected)} />
+        ))}
+      </div>
+    </div>
+
+    {/* SUBSECCIÓN LIBROS */}
+    <div style="display: flex; flex-direction: column; gap: var(--space-xs); padding-top: var(--space-sm);">
+      <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0; color: var(--text);">Libros</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        {initialBooks.map((b) => (
+          <div style="background: var(--surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: 12px;">
+            <strong style="fontSize: 0.9rem; color: var(--text);">{b.title}</strong> — <span style="font-size: 0.8rem; color: var(--text-tertiary);">{b.author}</span>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 4px 0 0;">{b.summary}</p>
+            <span style="font-size: 0.75rem; color: var(--color-accent-primary); font-style: italic; display: block; margin-top: 4px;">Notas: {b.myNotes}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* SUBSECCIÓN CHEFS */}
+    <div style="display: flex; flex-direction: column; gap: var(--space-xs); padding-top: var(--space-sm);">
+      <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0; color: var(--text);">Chefs</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        {initialChefs.map((c) => (
+          <div style="background: var(--surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong style="fontSize: 0.9rem; color: var(--text);">{c.name}</strong>
+              <span style="font-size: 0.78rem; color: var(--text-tertiary); display: block;">{c.specialty}</span>
+            </div>
+            <a href={c.url} target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+              <Button variant="secondary" size="sm">Canal / Enlace</Button>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</PlanMaestroLayout>
