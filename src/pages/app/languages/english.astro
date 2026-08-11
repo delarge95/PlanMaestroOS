@@ -1,0 +1,62 @@
+---
+import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
+import LessonView from '../../../components/languages/LessonView.tsx';
+import SpeakingPractice from '../../../components/languages/SpeakingPractice.tsx';
+import { englishCourse } from '../../../data/languages/englishCourse.ts';
+import Button from '../../../components/ui/Button.tsx';
+---
+
+<PlanMaestroLayout title="Inglés Profesional" activeDomain="languages">
+  <div style="display: flex; flex-direction: column; gap: var(--space-md); max-width: 850px; margin: 0 auto; width: 100%;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: var(--space-xs);">
+      <div>
+        <h1 style="font-size: 1.4rem; font-weight: 800; margin: 0; color: var(--text);">
+          🇬🇧 Inglés Profesional
+        </h1>
+        <span style="font-size: 0.78rem; color: var(--text-tertiary);">
+          Tracks Empresarial & Técnico + Simulación de Entrevista
+        </span>
+      </div>
+
+      <a href="/app/languages" style="text-decoration: none;">
+        <Button variant="ghost" size="sm">Volver a Idiomas</Button>
+      </a>
+    </div>
+
+    {/* TRACKS DE INGLÉS */}
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-sm);">
+      <div style="background: var(--surface); border: 1px solid var(--color-accent-primary-soft); border-radius: var(--radius-md); padding: var(--space-md);">
+        <span style="font-size: 0.7rem; color: var(--color-accent-primary); font-weight: 700; text-transform: uppercase;">
+          Track Empresarial
+        </span>
+        <strong style="font-size: 0.95rem; color: var(--text); display: block; margin-top: 2px;">
+          Entrevistas & Pitch Profesional
+        </strong>
+      </div>
+
+      <div style="background: var(--surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: var(--space-md);">
+        <span style="font-size: 0.7rem; color: var(--text-tertiary); font-weight: 700; text-transform: uppercase;">
+          Track Técnico
+        </span>
+        <strong style="font-size: 0.95rem; color: var(--text); display: block; margin-top: 2px;">
+          3D, Shaders & AI Terminology
+        </strong>
+      </div>
+    </div>
+
+    {/* LECCIÓN DE TEORÍA */}
+    {englishCourse.units[0]?.lessons[0] && (
+      <LessonView client:load lesson={englishCourse.units[0].lessons[0]} />
+    )}
+
+    {/* SIMULACIÓN DE ENTREVISTA / SPEAKING */}
+    <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+      <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">
+        Simulación de entrevista
+      </span>
+      <SpeakingPractice client:load language="en" />
+    </div>
+
+  </div>
+</PlanMaestroLayout>
