@@ -1,0 +1,8 @@
+---
+import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
+import ClinicalToday from '../../../components/clinical/ClinicalToday.tsx';
+---
+
+<PlanMaestroLayout title="Clínico - Hoy" activeDomain="clinical">
+  <ClinicalToday client:load />
+</PlanMaestroLayout>

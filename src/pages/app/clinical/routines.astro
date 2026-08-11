@@ -1,0 +1,8 @@
+---
+import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
+import ClinicalRoutineList from '../../../components/clinical/ClinicalRoutineList.tsx';
+---
+
+<PlanMaestroLayout title="Clínico - Rutinas" activeDomain="clinical">
+  <ClinicalRoutineList client:load />
+</PlanMaestroLayout>
