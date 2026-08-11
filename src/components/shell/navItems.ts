@@ -3,7 +3,7 @@
 export type NavItem = {
   href: string;
   label: string;
-  icon: 'sun' | 'dumbbell' | 'briefcase' | 'languages' | 'heart-pulse' | 'chef-hat';
+  icon: 'sun' | 'dumbbell' | 'briefcase' | 'languages' | 'heart-pulse' | 'chef-hat' | 'book';
   section: 'primary' | 'more';
 };
 
@@ -13,5 +13,6 @@ export const NAV_ITEMS: NavItem[] = [
   { href: '/app/career',     label: 'Laboral',    icon: 'briefcase',  section: 'primary' },
   { href: '/app/languages',  label: 'Idiomas',    icon: 'languages',  section: 'primary' },
   { href: '/app/clinical',   label: 'Clínico',    icon: 'heart-pulse',section: 'more' },
-  { href: '/app/gastronomy', label: 'Gastronomía',icon: 'chef-hat',   section: 'more' }
+  { href: '/app/gastronomy', label: 'Gastronomía',icon: 'chef-hat',   section: 'more' },
+  { href: '/app/library',    label: 'Biblioteca', icon: 'book',       section: 'more' }
 ];

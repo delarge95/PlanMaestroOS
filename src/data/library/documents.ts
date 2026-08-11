@@ -1,124 +1,111 @@
-// src/data/library/documents.ts - Unified Catalog of Library Documents
+// src/data/library/documents.ts
+
+export type LibraryDoc = {
+  id: string;
+  title: string;
+  kind: 'pdf' | 'markdown' | 'sheet';
+  area: 'fitness' | 'laboral' | 'idiomas' | 'clinico' | 'gastronomia' | 'general';
+  source: 'local' | 'drive' | 'notion';
+  path: string;
+  tags: string[];
+  description?: string;
+};
+
+export const libraryDocs: LibraryDoc[] = [
+  {
+    id: 'doc-overcoming-gravity',
+    title: 'Overcoming Gravity (2nd Edition) — Steven Low',
+    kind: 'markdown',
+    area: 'fitness',
+    source: 'local',
+    path: '/docs/fitness/overcoming_gravity.md',
+    tags: ['Calistenia', 'Progresiones', 'Fuerza'],
+    description: 'Guía sistemática de calistenia, progresiones de peso corporal y programación de fuerza.'
+  },
+  {
+    id: 'doc-overcoming-tendonitis',
+    title: 'Overcoming Tendonitis — Steven Low',
+    kind: 'markdown',
+    area: 'fitness',
+    source: 'local',
+    path: '/docs/fitness/overcoming_tendonitis.md',
+    tags: ['Rehabilitación', 'Tendones', 'Prehab'],
+    description: 'Protocolos de carga isométrica y excéntrica para el manejo y recuperación de tendinopatías.'
+  },
+  {
+    id: 'doc-nippard-minmax',
+    title: 'The Min-Max Program Guide — Jeff Nippard',
+    kind: 'pdf',
+    area: 'fitness',
+    source: 'local',
+    path: '/docs/fitness/nippard_minmax.pdf',
+    tags: ['Powerbuilding', 'Hipertrofia', 'Gimnasio'],
+    description: 'Programa oficial de 12 semanas enfocado en máximo estímulo con volumen mínimo efectivo.'
+  },
+  {
+    id: 'doc-twinsight-arch',
+    title: 'Arquitectura de Sistema TwinSight MVP',
+    kind: 'markdown',
+    area: 'laboral',
+    source: 'notion',
+    path: '/docs/career/twinsight_architecture.md',
+    tags: ['WebGL', 'Unity', 'Graphics Engine'],
+    description: 'Especificación de arquitectura de renderizado, shaders procedurales e integración WebGL.'
+  },
+  {
+    id: 'doc-german-grammar-a1',
+    title: 'Gramática Alemana A1 — Estructura & Verbos',
+    kind: 'sheet',
+    area: 'idiomas',
+    source: 'drive',
+    path: '/docs/languages/german_a1_cheat_sheet.pdf',
+    tags: ['Alemán', 'Gramática', 'Präsens'],
+    description: 'Resumen en tabla de conjugación verbal en presente y acusativo/dativo.'
+  }
+];
+
 import type { LibraryDocument } from './types';
 
-export const allLibraryDocuments: LibraryDocument[] = [
-  // FITNESS FUENTES
+export const fitnessLibraryDocuments: LibraryDocument[] = [
   {
-    id: 'overcoming-gravity-2',
-    title: 'Overcoming Gravity — 2nd Edition',
+    id: 'doc-overcoming-gravity',
+    title: 'Overcoming Gravity (2nd Edition) — Steven Low',
     category: 'source',
     domain: 'fitness',
-    mimeType: 'application/pdf',
-    description: 'Manual técnico de calistenia, física del ejercicio y progresiones por Steven Low.',
+    mimeType: 'text/markdown',
+    description: 'Guía sistemática de calistenia, progresiones de peso corporal y programación de fuerza.',
     author: 'Steven Low',
     year: 2016,
-    tags: ['Calistenia', 'Progresiones', 'Anillas', 'Fuerza'],
+    tags: ['Calistenia', 'Progresiones', 'Fuerza'],
     access: 'repo-public',
-    openUrl: '/library/fitness/overcoming-gravity-2nd-ed.pdf',
     isOpenable: true
   },
   {
-    id: 'overcoming-tendonitis',
-    title: 'Overcoming Tendonitis',
+    id: 'doc-overcoming-tendonitis',
+    title: 'Overcoming Tendonitis — Steven Low',
     category: 'source',
     domain: 'fitness',
-    mimeType: 'application/pdf',
-    description: 'Educación sobre gestión de carga, tolerancia al ejercicio y progresión.',
+    mimeType: 'text/markdown',
+    description: 'Protocolos de carga isométrica y excéntrica para el manejo y recuperación de tendinopatías.',
     author: 'Steven Low',
     year: 2019,
-    tags: ['Prehab', 'Tolerancia', 'Tendón', 'Gestión de Carga'],
+    tags: ['Rehabilitación', 'Tendones', 'Prehab'],
     access: 'repo-public',
-    openUrl: '/library/fitness/overcoming-tendonitis.pdf',
     isOpenable: true
   },
   {
-    id: 'the-min-max-program',
-    title: 'The Min-Max Program',
-    category: 'source',
-    domain: 'fitness',
-    mimeType: 'application/pdf',
-    description: 'Programa Nippard 12 semanas bajo volumen alta intensidad (PDF oficial).',
-    author: 'Jeff Nippard',
-    year: 2024,
-    tags: ['Min-Max', 'Hipertrofia', 'Nippard', 'RIR 0-1'],
-    access: 'repo-public',
-    openUrl: '/library/fitness/the-min-max-program.pdf',
-    isOpenable: true
-  },
-  {
-    id: 'powerbuilding-system',
-    title: 'Powerbuilding System',
-    category: 'source',
-    domain: 'fitness',
-    mimeType: 'application/pdf',
-    description: 'Programa oficial de fuerza en básicos y desarrollo muscular por Jeff Nippard.',
-    author: 'Jeff Nippard',
-    year: 2023,
-    tags: ['Powerbuilding', 'Squat', 'Bench', 'Deadlift'],
-    access: 'repo-public',
-    openUrl: '/library/fitness/powerbuilding-system.pdf',
-    isOpenable: true
-  },
-  {
-    id: 'bodybuilding-transformation-system',
-    title: 'The Bodybuilding Transformation System',
-    category: 'source',
-    domain: 'fitness',
-    mimeType: 'application/pdf',
-    description: 'Sistema completo de hipertrofia muscular y periodización por Jeff Nippard.',
-    author: 'Jeff Nippard',
-    year: 2023,
-    tags: ['Bodybuilding', 'Hipertrofia', 'Nippard', 'PPL'],
-    access: 'repo-public',
-    openUrl: '/library/fitness/bodybuilding-transformation-system.pdf',
-    isOpenable: true
-  },
-  {
-    id: 'glute-hypertrophy-program',
-    title: 'Glute Hypertrophy Program',
-    category: 'source',
-    domain: 'fitness',
-    mimeType: 'application/pdf',
-    description: 'Especialización en cadena posterior y desarrollo de glúteo por Jeff Nippard.',
-    author: 'Jeff Nippard',
-    year: 2023,
-    tags: ['Glute', 'Hip Thrust', 'Hipertrofia', 'Cadena Posterior'],
-    access: 'repo-public',
-    openUrl: '/library/fitness/glute-hypertrophy-program.pdf',
-    isOpenable: true
-  },
-
-  // PLAN MAESTRO DOCUMENTOS
-  {
-    id: 'plan-maestro-v3',
-    title: 'Plan Maestro OS — Blueprint v3',
-    category: 'plan',
-    domain: 'general',
-    mimeType: 'text/markdown',
-    description: 'Definición operativa de hábitos, arquitectura ejecutiva y rutinas de reentrada.',
-    author: 'Alexander',
-    year: 2026,
-    tags: ['Plan Maestro', 'Estrategia', 'Blueprint'],
-    access: 'repo-public',
-    openUrl: '/app/master-plan',
-    isOpenable: true
-  },
-  {
-    id: 'plan-fitness-hybrid',
-    title: 'Plan Fitness Híbrido & Rehabilitación',
+    id: 'doc-nippard-minmax',
+    title: 'The Min-Max Program Guide — Jeff Nippard',
     category: 'plan',
     domain: 'fitness',
-    mimeType: 'text/markdown',
-    description: 'Estrategia personal de fuerza, calistenia y salud musculotendinosa.',
-    author: 'Alexander',
-    year: 2026,
-    tags: ['Plan Fitness', 'Salud Articular', 'Calistenia'],
+    mimeType: 'application/pdf',
+    description: 'Programa oficial de 12 semanas enfocado en máximo estímulo con volumen mínimo efectivo.',
+    author: 'Jeff Nippard',
+    year: 2023,
+    tags: ['Powerbuilding', 'Hipertrofia', 'Gimnasio'],
     access: 'repo-public',
-    openUrl: '/app/fitness',
     isOpenable: true
   }
 ];
 
-export const fitnessLibraryDocuments: LibraryDocument[] = allLibraryDocuments.filter(
-  (doc) => doc.domain === 'fitness'
-);
+export const allLibraryDocuments = libraryDocs;

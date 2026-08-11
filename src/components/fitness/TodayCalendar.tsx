@@ -1,6 +1,5 @@
 // src/components/fitness/TodayCalendar.tsx
 import React from 'react';
-import StatusBadge from '../ui/StatusBadge';
 import { Calendar, CheckCircle2, Flame, Trophy } from 'lucide-react';
 
 export default function TodayCalendar() {

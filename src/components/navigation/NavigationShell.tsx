@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sun, Dumbbell, Briefcase, Languages, HeartPulse, ChefHat, MoreHorizontal, X } from 'lucide-react';
+import { Sun, Dumbbell, Briefcase, Languages, HeartPulse, ChefHat, BookOpen, MoreHorizontal, X } from 'lucide-react';
 import { withBase } from '../../utils/url';
 import { NAV_ITEMS } from '../shell/navItems';
 import Sheet from '../ui/Sheet';
@@ -46,6 +46,7 @@ export function NavigationShell({
       case 'languages': return <Languages size={size} />;
       case 'heart-pulse': return <HeartPulse size={size} />;
       case 'chef-hat': return <ChefHat size={size} />;
+      case 'book': return <BookOpen size={size} />;
       default: return <MoreHorizontal size={size} />;
     }
   };
@@ -65,15 +66,7 @@ export function NavigationShell({
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.brandGroup}>
-          <a href={withBase('/app/today')} className={styles.brandLink}>
-            <Sun size={20} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
-            <span>Plan Maestro OS</span>
-          </a>
-
-          {breadcrumb && <span className={styles.breadcrumbText}>{breadcrumb}</span>}
-          <NotionSyncStatus status="offline_local" lastHoursAgo={1} />
-        </div>
+        <NotionSyncStatus status="offline_local" lastHoursAgo={1} />
 
         {/* NAV ESCRITORIO CON MÁXIMO 4 ITEMS + MÁS DROPDOWN PER FIX 01 */}
         <nav className={styles.desktopNav} aria-label="Navegación principal">

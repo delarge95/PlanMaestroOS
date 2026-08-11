@@ -8,7 +8,7 @@ import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
 import CustomRoutineBuilder from './CustomRoutineBuilder';
 import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
 import TendonLoadMonitor from './TendonLoadMonitor';
-import LibraryPage from '../library/LibraryPage';
+import LibraryHome from '../library/LibraryHome';
 import styles from './FitnessTabWorkspace.module.css';
 
 export interface FitnessTabWorkspaceProps {
@@ -158,7 +158,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
             </div>
           )}
 
-          {activeMainTab === 'library' && <LibraryPage initialDomain="fitness" />}
+          {activeMainTab === 'library' && <LibraryHome />}
         </div>
       </div>
     </ErrorBoundary>

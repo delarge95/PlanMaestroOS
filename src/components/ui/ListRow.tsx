@@ -3,6 +3,7 @@ import React from 'react';
 export interface ListRowProps {
   title: string;
   meta?: string;
+  subtitle?: string;
   icon?: React.ReactNode;
   badge?: string;
   badgeTone?: 'default' | 'accent' | 'success' | 'warning' | 'danger';
@@ -25,6 +26,7 @@ const badgeStyles = {
 export function ListRow({
   title,
   meta,
+  subtitle,
   icon,
   badge,
   badgeTone = 'default',
@@ -35,6 +37,7 @@ export function ListRow({
   disabled = false,
   style
 }: ListRowProps) {
+  const displayMeta = meta || subtitle;
   const isClickable = Boolean(onClick) && !disabled;
 
   return (
@@ -74,9 +77,9 @@ export function ListRow({
           <strong style={{ fontSize: 'var(--font-size-body)', fontWeight: 600, color: 'var(--text)', display: 'block', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
             {title}
           </strong>
-          {meta && (
+          {displayMeta && (
             <span style={{ fontSize: 'var(--font-size-label)', color: active ? 'var(--color-accent-primary)' : 'var(--text-secondary)', display: 'block' }}>
-              {meta}
+              {displayMeta}
             </span>
           )}
         </div>

@@ -7,6 +7,10 @@ export interface NavItemConfig {
 }
 
 export const SECTION_NAV: Record<string, NavItemConfig[]> = {
+  today: [
+    { href: '/app/today', label: 'Hoy', end: true },
+    { href: '/app/today/plan', label: 'Plan' },
+  ],
   fitness: [
     { href: '/app/fitness', label: 'Hoy', end: true },
     { href: '/app/fitness/library', label: 'Rutinas y biblioteca' },

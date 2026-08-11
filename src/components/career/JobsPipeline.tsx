@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SectionNav from '../ui/SectionNav';
 import { initialApplications, type JobApplication, type PipelineStage } from '../../data/career/applications';
 import JobsSchedule from './JobsSchedule';
 import CompanyDatabase from './CompanyDatabase';
@@ -7,7 +8,11 @@ import Button from '../ui/Button';
 
 const STAGES: PipelineStage[] = ['Frío', 'Tibio', 'Caliente', 'Aplicado', 'Seguimiento', 'Entrevista', 'Cerrado'];
 
-export default function JobsPipeline() {
+export interface JobsPipelineProps {
+  currentPath?: string;
+}
+
+export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsPipelineProps) {
   const [applications, setApplications] = useState<JobApplication[]>(initialApplications);
   const [activeTab, setActiveTab] = useState<'pipeline' | 'schedule' | 'companies'>('pipeline');
 
@@ -21,10 +26,13 @@ export default function JobsPipeline() {
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
         
-        {/* NAVEGACIÓN Y PESTAÑAS */}
+        {/* NAVEGACIÓN NIVEL 2 */}
+        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
+
+        {/* CABECERA DE EMPLEO */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-xs)', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
-            Empleo
+          <h2 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+            Empleo & Pipeline
           </h2>
 
           <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '3px', borderRadius: '10px', border: '1px solid var(--color-border-subtle)' }}>

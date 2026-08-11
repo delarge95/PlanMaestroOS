@@ -1,54 +1,55 @@
+// src/components/common/NotionSyncStatus.tsx
 import React from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { WifiOff, RefreshCw, CheckCircle2, Clock } from 'lucide-react';
 
 export interface NotionSyncStatusProps {
-  status: 'offline_local' | 'synced' | 'syncing' | 'pending';
+  status?: 'offline_local' | 'synced' | 'syncing' | 'pending';
   lastHoursAgo?: number;
 }
 
-export default function NotionSyncStatus({ status = 'offline_local', lastHoursAgo = 2 }: NotionSyncStatusProps) {
+export default function NotionSyncStatus({ status = 'offline_local', lastHoursAgo = 1 }: NotionSyncStatusProps) {
+  const getLabel = () => {
+    switch (status) {
+      case 'offline_local':
+        return `Sin conexión a Notion — mostrando datos locales. Actualizado hace ${lastHoursAgo}h`;
+      case 'syncing':
+        return 'Sincronizando con Notion...';
+      case 'pending':
+        return 'Cambio local guardado, pendiente de sincronizar con Notion';
+      case 'synced':
+        return `Sincronizado con Notion. Actualizado hace ${lastHoursAgo}h`;
+      default:
+        return 'Estado de sincronización Notion';
+    }
+  };
+
+  const label = getLabel();
+
   return (
     <ErrorBoundary>
-      <div style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '6px',
-        fontSize: '0.72rem',
-        padding: '3px 8px',
-        borderRadius: '12px',
-        background: status === 'offline_local' ? 'rgba(255,149,0,0.1)' : 'rgba(255,255,255,0.03)',
-        border: `1px solid ${status === 'offline_local' ? 'rgba(255,149,0,0.3)' : 'var(--color-border-subtle)'}`,
-        color: status === 'offline_local' ? 'var(--color-accent-warning)' : 'var(--text-tertiary)'
-      }}>
-        {status === 'offline_local' && (
-          <>
-            <WifiOff size={12} />
-            <span>Sin conexión a Notion — mostrando datos locales · Actualizado hace {lastHoursAgo}h</span>
-          </>
-        )}
-
-        {status === 'syncing' && (
-          <>
-            <RefreshCw size={12} className="spin" />
-            <span>Sincronizando…</span>
-          </>
-        )}
-
-        {status === 'pending' && (
-          <>
-            <Clock size={12} />
-            <span>Cambio guardado, pendiente de sincronizar</span>
-          </>
-        )}
-
-        {status === 'synced' && (
-          <>
-            <CheckCircle2 size={12} style={{ color: 'var(--color-state-done)' }} />
-            <span>Sincronizado con Notion</span>
-          </>
-        )}
-      </div>
+      <button
+        type="button"
+        aria-label={label}
+        title={label}
+        style={{
+          background: 'transparent',
+          border: 'none',
+          color: status === 'offline_local' ? 'var(--warning, #ff9f0a)' : 'var(--text-secondary, #98989d)',
+          padding: '4px',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          transition: 'opacity 150ms ease'
+        }}
+      >
+        {status === 'offline_local' && <WifiOff size={18} />}
+        {status === 'syncing' && <RefreshCw size={18} style={{ animation: 'spin 1s linear infinite' }} />}
+        {status === 'pending' && <Clock size={18} />}
+        {status === 'synced' && <CheckCircle2 size={18} style={{ color: 'var(--success, #30d158)' }} />}
+      </button>
     </ErrorBoundary>
   );
 }

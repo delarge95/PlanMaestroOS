@@ -1,6 +1,6 @@
 import React from 'react';
-import LibraryPage from '../library/LibraryPage';
+import LibraryHome from '../library/LibraryHome';
 
 export default function LibraryTabWorkspace() {
-  return <LibraryPage />;
+  return <LibraryHome />;
 }

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import SectionNav from '../ui/SectionNav';
 import { initialCareerGoals, type CareerGoal } from '../../data/career/goals';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
 import { Calendar, Columns, ArrowRight, MoreVertical } from 'lucide-react';
 
-export default function RoadmapBoard() {
+export interface RoadmapBoardProps {
+  currentPath?: string;
+}
+
+export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: RoadmapBoardProps) {
   const [viewMode, setViewMode] = useState<'board' | 'calendar'>('board');
   const [goals, setGoals] = useState<CareerGoal[]>(initialCareerGoals);
   const [showAllShort, setShowAllShort] = useState(false);
@@ -123,9 +128,12 @@ export default function RoadmapBoard() {
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
+        {/* NAVEGACIÓN NIVEL 2 */}
+        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
+
         {/* VISTA Y CONTROLES */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+          <h2 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
             Roadmap Profesional
           </h2>
 
