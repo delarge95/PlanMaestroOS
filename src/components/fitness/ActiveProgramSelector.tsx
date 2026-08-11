@@ -1,5 +1,5 @@
 // src/components/fitness/ActiveProgramSelector.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Check } from 'lucide-react';
 import { allPrograms } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
@@ -9,14 +9,66 @@ export function ActiveProgramSelector() {
   const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds || [s.programId]);
   const setInspectedProgram = useActiveProgramStore((s) => s.setInspectedProgram);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    if (val === 'add_new') {
+      alert('Añadir nueva rutina personalizada o importar programa');
+    } else {
+      setInspectedProgram(val);
+    }
+  };
+
+  if (isMobile) {
+    return (
+      <div style={{ width: '100%' }}>
+        <select
+          value={inspectedProgramId}
+          onChange={handleSelectChange}
+          aria-label="Seleccionar programa de rutina"
+          style={{
+            width: '100%',
+            background: 'var(--surface-1, #0d0d0f)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+            borderRadius: 'var(--radius-m, 12px)',
+            padding: '10px 14px',
+            fontSize: 'var(--fs-body, 0.9375rem)',
+            fontWeight: 600,
+            outline: 'none',
+            cursor: 'pointer'
+          }}
+        >
+          {allPrograms.map((program) => {
+            const isActive = activeProgramIds.includes(program.id);
+            const cleanTitle = program.title.replace(/\s*\([^)]*\)/g, '').trim();
+            return (
+              <option key={program.id} value={program.id}>
+                {cleanTitle} {isActive ? '(HOY)' : ''}
+              </option>
+            );
+          })}
+          <option value="add_new">+ Añadir nueva rutina...</option>
+        </select>
+      </div>
+    );
+  }
+
   return (
     <div style={{
       display: 'flex',
       alignItems: 'center',
+      flexWrap: 'wrap',
       gap: '8px',
-      overflowX: 'auto',
-      paddingBottom: '4px',
-      scrollbarWidth: 'none'
+      width: '100%'
     }}>
       {allPrograms.map((program) => {
         const isInspected = inspectedProgramId === program.id;
@@ -49,8 +101,7 @@ export function ActiveProgramSelector() {
               alignItems: 'center',
               gap: '8px',
               transition: 'all 150ms var(--ease-standard, ease)',
-              boxShadow: isInspected ? '0 4px 14px rgba(10, 132, 255, 0.25)' : 'none',
-              flexShrink: 0
+              boxShadow: isInspected ? '0 4px 14px rgba(10, 132, 255, 0.25)' : 'none'
             }}
           >
             <span>{cleanTitle}</span>
@@ -92,8 +143,7 @@ export function ActiveProgramSelector() {
           display: 'inline-flex',
           alignItems: 'center',
           gap: '6px',
-          transition: 'all 150ms ease',
-          flexShrink: 0
+          transition: 'all 150ms ease'
         }}
       >
         <Plus size={16} />

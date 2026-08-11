@@ -25,13 +25,13 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
           Hoy en Fitness
         </h1>
 
-        {/* BLOQUE 1: CRONOGRAMA & CALENDARIO (PER FIX 3.1) */}
-        <TodayCalendar />
-
-        {/* BLOQUE 2: PREHAB (solo si hay molestia activa) */}
+        {/* 1. CUADRO DE PREHAB */}
         {hasPainZone && <PrehabBlock />}
 
-        {/* BLOQUE 3: STACK DE RUTINAS DEL DÍA */}
+        {/* 2. CRONOGRAMA INTERACTIVO */}
+        <TodayCalendar />
+
+        {/* 3. RUTINA DEL DÍA PRINCIPAL */}
         <TodayRoutineStack />
 
       </div>

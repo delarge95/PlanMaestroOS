@@ -74,79 +74,81 @@ export function WorkoutPrescriptionTable({
           </a>
         </div>
       )}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-sm)', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      {/* SELECTORES DE SEMANA Y DÍA (RESPONSIVE: SELECT EN MÓVIL, BOTONES EN PC) */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+        {/* FILA SEMANA */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Semana
           </span>
-          <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
-            {program.weeks.map((w) => {
-              const wNum = w.weekNumber || w.week || 1;
-              const isSelected = currentWeek === wNum;
-              const tooltip = w.title || w.block ? `Semana ${wNum}: ${w.title || w.block}` : `Semana ${wNum}`;
 
-              return (
-                <button
-                  key={wNum}
-                  type="button"
-                  title={tooltip}
-                  onClick={() => setWeek(wNum)}
-                  style={{
-                    background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
-                    color: isSelected ? '#ffffff' : 'var(--text-tertiary)',
-                    border: 'none',
-                    padding: '6px 10px',
-                    borderRadius: 'var(--radius-sm)',
-                    fontSize: '0.82rem',
-                    fontWeight: isSelected ? 700 : 500,
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  {wNum}{w.isDeload ? ' (D)' : ''}
-                </button>
-              );
-            })}
+          {/* VISTA MÓVIL: SELECT */}
+          <div style={{ display: 'block', width: '100%', maxWidth: '220px' }}>
+            <select
+              value={currentWeek}
+              onChange={(e) => setWeek(Number(e.target.value))}
+              aria-label="Seleccionar semana"
+              style={{
+                width: '100%',
+                background: 'var(--surface-elevated, #16181d)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 'var(--radius-s)',
+                padding: '6px 10px',
+                fontSize: '0.82rem',
+                fontWeight: 600
+              }}
+            >
+              {program.weeks.map((w) => {
+                const wNum = w.weekNumber || w.week || 1;
+                return (
+                  <option key={wNum} value={wNum}>
+                    Semana {wNum} {w.isDeload ? '(Descarga)' : ''}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* FILA DÍA */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Día
           </span>
-          <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
-            {activeWeek?.days?.map((day, idx) => {
-              const dTitle = day.name || day.title || `Día ${idx + 1}`;
-              const isSelected = selectedDayIndex === idx;
 
-              return (
-                <button
-                  key={day.id}
-                  type="button"
-                  title={`Día ${idx + 1}: ${dTitle}`}
-                  onClick={() => setSelectedDayIndex(idx)}
-                  style={{
-                    background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
-                    color: isSelected ? '#ffffff' : 'var(--text-tertiary)',
-                    border: 'none',
-                    padding: '6px 12px',
-                    borderRadius: 'var(--radius-sm)',
-                    fontSize: '0.82rem',
-                    fontWeight: isSelected ? 700 : 500,
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  {idx + 1}
-                </button>
-              );
-            })}
+          {/* VISTA MÓVIL: SELECT */}
+          <div style={{ display: 'block', width: '100%', maxWidth: '220px' }}>
+            <select
+              value={selectedDayIndex}
+              onChange={(e) => setSelectedDayIndex(Number(e.target.value))}
+              aria-label="Seleccionar día de rutina"
+              style={{
+                width: '100%',
+                background: 'var(--surface-elevated, #16181d)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 'var(--radius-s)',
+                padding: '6px 10px',
+                fontSize: '0.82rem',
+                fontWeight: 600
+              }}
+            >
+              {activeWeek?.days?.map((day, idx) => {
+                const dTitle = day.name || day.title || `Día ${idx + 1}`;
+                return (
+                  <option key={day.id || idx} value={idx}>
+                    Día {idx + 1}: {dTitle}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
       </div>
 
       <div style={{ margin: '4px 0 2px' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: 'var(--text)', lineHeight: 1.25 }}>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', lineHeight: 1.25 }}>
           {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayTitle}
         </h3>
         {activeWeek?.isDeload && (
@@ -161,6 +163,7 @@ export function WorkoutPrescriptionTable({
           <thead>
             <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-tertiary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>
               <th style={{ padding: 'var(--space-2)' }}>Ejercicio / Código</th>
+              <th style={{ padding: 'var(--space-2)' }}>Series Aprox</th>
               <th style={{ padding: 'var(--space-2)' }}>Series × Reps</th>
               <th style={{ padding: 'var(--space-2)' }}>RPE / RIR</th>
               <th style={{ padding: 'var(--space-2)' }}>Descanso</th>
@@ -263,9 +266,9 @@ export function WorkoutPrescriptionTable({
                     </div>
                   </td>
 
-                  {/* CALENTAMIENTO */}
+                  {/* SERIES APROX (CALENTAMIENTO) PER FEEDBACK */}
                   <td style={{ padding: '12px 14px', verticalAlign: 'top', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>
-                    {prescription.warmupSets} series
+                    {prescription.warmupSets || 0} series
                   </td>
 
                   {/* SERIES X REPS */}
