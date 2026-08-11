@@ -52,3 +52,8 @@ Evitar métricas moralizantes como “productividad” o rankings; la métrica d
 - Se puede completar una aplicación desde prospecto hasta seguimiento sin perder versiones de activos.
 - Los borradores IA no se confunden con documentos enviados.
 - Toda comunicación externa requiere aprobación humana explícita.
+
+## Estado de Implementación
+- **Contratos de Pipeline y Solicitudes IA**: Definidos en `src/data/career/careerContracts.ts` (`CareerPipelineStage` en 8 estadios, `singleNextAction` único y `AiRequestContract` con `approvalRequired: true`).
+- **Servicio y Adaptador de Carrera**: `src/data/career/careerServiceAdapter.ts` gestiona transiciones de candidaturas, vinculación de evidencias de repositorios GitHub (`PlanMaestroOS`) y borradores aislados.
+- **Workspace de Carrera Rediseñado**: `src/components/career/CareerTabWorkspace.tsx` proporciona las 4 vistas clave (Pipeline, Detalle & Encaje, Activos & Evidencias GitHub y Borradores IA) junto con métricas accionables no moralizantes.
