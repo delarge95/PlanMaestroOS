@@ -11,8 +11,12 @@ import TendonLoadMonitor from './TendonLoadMonitor';
 import LibraryPage from '../library/LibraryPage';
 import styles from './FitnessTabWorkspace.module.css';
 
-export default function FitnessTabWorkspace() {
-  const [activeMainTab, setActiveMainTab] = useState<'today' | 'routines' | 'progress' | 'library'>('today');
+export interface FitnessTabWorkspaceProps {
+  initialTab?: 'today' | 'routines' | 'progress' | 'library';
+}
+
+export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTabWorkspaceProps) {
+  const [activeMainTab, setActiveMainTab] = useState<'today' | 'routines' | 'progress' | 'library'>(initialTab);
   const [routinesSubTab, setRoutinesSubTab] = useState<'catalog' | 'skills' | 'database' | 'custom'>('catalog');
   const [showPrehabAlert, setShowPrehabAlert] = useState(true);
 
@@ -20,7 +24,7 @@ export default function FitnessTabWorkspace() {
     <ErrorBoundary>
       <div className={styles.wrapper}>
         
-        {/* AVISO CONDICIONAL PREHAB (VISIBLE SOLO SI HAY ZONA AFECTADA REGISTRADA) */}
+        {/* PREHAB CONDICIONAL (SI HAY MOLESTIA/ZONA AFECTADA REGISTRADA, APARECE PRIMERO PER D1) */}
         {showPrehabAlert && activeMainTab === 'today' && (
           <div style={{
             background: 'var(--surface)',
@@ -35,7 +39,7 @@ export default function FitnessTabWorkspace() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
               <ShieldAlert size={18} style={{ color: 'var(--color-accent-warning)' }} />
               <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', fontWeight: 600 }}>
-                Prehab Activo: Protocolo de Isométricos Spanish Squats recomendado antes de la sesión.
+                Prehab Activo: Protocolo Isométricos Spanish Squats (Rodillas) antes de la sesión.
               </span>
             </div>
 
@@ -56,7 +60,7 @@ export default function FitnessTabWorkspace() {
           </div>
         )}
 
-        {/* NAVEGACIÓN PRINCIPAL DE 4 DESTINOS (HOY | RUTINAS | PROGRESO | BIBLIOTECA) */}
+        {/* NAVEGACIÓN PRINCIPAL (HOY | RUTINAS | PROGRESO | BIBLIOTECA) */}
         <div className={styles.tabList} role="tablist" aria-label="Secciones de Fitness">
           <button
             type="button"
@@ -105,10 +109,8 @@ export default function FitnessTabWorkspace() {
 
         {/* CONTENIDO DE LOS DESTINOS */}
         <div className={styles.tabPanel}>
-          {/* HOY -> TRACKER ACTIVO EN VIVO */}
           {activeMainTab === 'today' && <FitAppWorkoutLogger />}
 
-          {/* RUTINAS -> CATÁLOGO + HABILIDADES + SUB-VISTAS SECUNDARIAS */}
           {activeMainTab === 'routines' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
               <div className={styles.subSectionNav}>
@@ -149,7 +151,6 @@ export default function FitnessTabWorkspace() {
             </div>
           )}
 
-          {/* PROGRESO -> ANALÍTICA + MONITOR DE CARGA ARTICULAR */}
           {activeMainTab === 'progress' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
               <TendonLoadMonitor />
@@ -157,7 +158,6 @@ export default function FitnessTabWorkspace() {
             </div>
           )}
 
-          {/* BIBLIOTECA -> VISOR DE BIBLIOTECA FILTRADO A FITNESS */}
           {activeMainTab === 'library' && <LibraryPage initialDomain="fitness" />}
         </div>
       </div>

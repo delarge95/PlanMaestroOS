@@ -67,7 +67,7 @@ export default function DailyOperatingView() {
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
 
-        {/* TOOLBAR SUPERIOR: CONTROLES DE VISTA Y MODO RESCATE */}
+        {/* CONTROLES DE VISTA */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -77,7 +77,6 @@ export default function DailyOperatingView() {
           paddingBottom: 'var(--space-xs)',
           borderBottom: '1px solid var(--color-border-subtle)'
         }}>
-          {/* VISTAS: CRONOGRAMA | KANBAN | METRICAS */}
           <div style={{ display: 'flex', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '12px', border: '1px solid var(--color-border-subtle)' }}>
             <button
               type="button"
@@ -140,12 +139,10 @@ export default function DailyOperatingView() {
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <Button variant="ghost" size="sm" onClick={() => setIsRescueOpen(true)}>
-              <AlertCircle size={15} style={{ color: 'var(--color-accent-warning)' }} />
-              <span>Ayuda Bloqueo</span>
-            </Button>
-          </div>
+          <Button variant="ghost" size="sm" onClick={() => setIsRescueOpen(true)}>
+            <AlertCircle size={15} style={{ color: 'var(--color-accent-warning)' }} />
+            <span>Ayuda Bloqueo</span>
+          </Button>
         </div>
 
         {/* FILTRO DE ETIQUETAS POR CATEGORÍA */}
@@ -172,7 +169,7 @@ export default function DailyOperatingView() {
           ))}
         </div>
 
-        {/* MODO 1: LÍNEA TEMPORAL CLEAN */}
+        {/* LÍNEA TEMPORAL */}
         {viewMode === 'timeline' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {filtered.map((b) => {
@@ -256,7 +253,7 @@ export default function DailyOperatingView() {
                         cursor: 'pointer'
                       }}
                     >
-                      {isDone ? '✓ Hecho' : isInProgress ? '► En curso' : 'Pendiente'}
+                      {isDone ? 'Hecho' : isInProgress ? 'En curso' : 'Por hacer'}
                     </button>
                   </div>
                 </div>
@@ -265,14 +262,12 @@ export default function DailyOperatingView() {
           </div>
         )}
 
-        {/* MODO 2: TABLERO KANBAN LIMPIO (3 COLUMNAS) */}
+        {/* TABLERO KANBAN */}
         {viewMode === 'kanban' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--space-md)' }}>
-            
-            {/* COLUMNA 1: POR HACER */}
             <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                Por Hacer ({filtered.filter(b => b.status === 'pending').length})
+                Por hacer ({filtered.filter(b => b.status === 'pending').length})
               </span>
 
               {filtered.filter(b => b.status === 'pending').map((b) => (
@@ -280,7 +275,7 @@ export default function DailyOperatingView() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
                     <button type="button" onClick={() => moveStatus(b.id, 'in_progress')} style={{ background: 'transparent', border: 'none', color: 'var(--color-accent-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 600 }}>
-                      Iniciar →
+                      Empezar 10 min
                     </button>
                   </div>
                   <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{b.shortTitle}</strong>
@@ -288,10 +283,9 @@ export default function DailyOperatingView() {
               ))}
             </div>
 
-            {/* COLUMNA 2: EN CURSO */}
             <div style={{ background: 'rgba(10, 132, 255, 0.03)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                En Curso ({filtered.filter(b => b.status === 'in_progress').length})
+                En curso ({filtered.filter(b => b.status === 'in_progress').length})
               </span>
 
               {filtered.filter(b => b.status === 'in_progress').map((b) => (
@@ -299,7 +293,7 @@ export default function DailyOperatingView() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
                     <button type="button" onClick={() => moveStatus(b.id, 'completed')} style={{ background: 'var(--color-state-done-soft)', border: 'none', color: 'var(--color-state-done)', padding: '2px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}>
-                      Completar ✓
+                      Hecho
                     </button>
                   </div>
                   <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{b.shortTitle}</strong>
@@ -307,10 +301,9 @@ export default function DailyOperatingView() {
               ))}
             </div>
 
-            {/* COLUMNA 3: COMPLETADO */}
             <div style={{ background: 'rgba(48, 209, 88, 0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-state-done)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                Completado ({filtered.filter(b => b.status === 'completed').length})
+                Hecho ({filtered.filter(b => b.status === 'completed').length})
               </span>
 
               {filtered.filter(b => b.status === 'completed').map((b) => (
@@ -320,22 +313,21 @@ export default function DailyOperatingView() {
                 </div>
               ))}
             </div>
-
           </div>
         )}
 
-        {/* MODO 3: RESUMEN DE MÉTRICAS */}
+        {/* RESUMEN */}
         {viewMode === 'stats' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-md)' }}>
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Completado Hoy</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Completado hoy</span>
               <strong style={{ fontSize: '1.5rem', color: 'var(--color-state-done)', display: 'block', marginTop: '4px' }}>
                 {Math.round((blocks.filter(b => b.status === 'completed').length / blocks.length) * 100)}%
               </strong>
             </div>
 
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Enfocado En</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Enfocado en</span>
               <strong style={{ fontSize: '1.1rem', color: 'var(--color-accent-primary)', display: 'block', marginTop: '4px' }}>
                 TwinSight MVP & Sustentación
               </strong>

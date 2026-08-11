@@ -1,0 +1,8 @@
+---
+import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
+import FitnessTabWorkspace from '../../../components/fitness/FitnessTabWorkspace.tsx';
+---
+
+<PlanMaestroLayout title="Fitness" activeDomain="fitness">
+  <FitnessTabWorkspace client:load initialTab="today" />
+</PlanMaestroLayout>

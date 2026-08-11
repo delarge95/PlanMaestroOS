@@ -10,6 +10,7 @@ export interface ListRowProps {
   action?: React.ReactNode;
   active?: boolean;
   done?: boolean;
+  disabled?: boolean;
   style?: React.CSSProperties;
 }
 
@@ -31,15 +32,16 @@ export function ListRow({
   action,
   active = false,
   done = false,
+  disabled = false,
   style
 }: ListRowProps) {
-  const isClickable = Boolean(onClick);
+  const isClickable = Boolean(onClick) && !disabled;
 
   return (
     <div
       role={isClickable ? 'button' : undefined}
       tabIndex={isClickable ? 0 : undefined}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       onKeyDown={isClickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick!(); } } : undefined}
       style={{
         width: '100%',
@@ -52,7 +54,8 @@ export function ListRow({
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 'var(--space-md)',
-        cursor: isClickable ? 'pointer' : 'default',
+        cursor: isClickable ? 'pointer' : disabled ? 'not-allowed' : 'default',
+        opacity: disabled ? 0.45 : 1,
         transition: 'all 150ms var(--ease-standard)',
         outline: 'none',
         boxSizing: 'border-box',

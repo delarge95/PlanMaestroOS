@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Zap, Calendar, ChevronDown, HeartPulse, BriefcaseBusiness, Languages, Dumbbell, LibraryBig, Sprout } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sun, Dumbbell, HeartPulse, Briefcase, Languages, Utensils, MoreHorizontal, Sprout } from 'lucide-react';
 import { useAppStore } from '../../store/appStore';
 import { withBase } from '../../utils/url';
 import Sheet from '../ui/Sheet';
@@ -9,21 +9,34 @@ import styles from './NavigationShell.module.css';
 
 export interface NavigationShellProps {
   currentPath?: string;
-  activeDomain?: 'now' | 'plan' | 'more' | 'clinical' | 'career' | 'german' | 'fitness' | 'library' | 'master-plan';
+  activeDomain?: string;
   breadcrumb?: string;
 }
 
+export interface NavItemConfig {
+  href: string;
+  label: string;
+  iconName: string;
+  disabled?: boolean;
+}
+
+export const NAV_ITEMS: NavItemConfig[] = [
+  { href: '/app/today', label: 'Hoy', iconName: 'sun' },
+  { href: '/app/fitness', label: 'Fitness', iconName: 'dumbbell' },
+  { href: '/app/clinical', label: 'Clínico', iconName: 'heart-pulse', disabled: true },
+  { href: '/app/career', label: 'Laboral', iconName: 'briefcase', disabled: true },
+  { href: '/app/languages', label: 'Idiomas', iconName: 'languages', disabled: true },
+  { href: '/app/gastronomy', label: 'Gastronomía', iconName: 'utensils', disabled: true },
+  { href: '/app/more', label: 'Más', iconName: 'more-horizontal', disabled: true },
+];
+
 export function NavigationShell({
-  currentPath = '/app',
-  activeDomain = 'now',
+  currentPath = '/app/today',
+  activeDomain = 'today',
   breadcrumb
 }: NavigationShellProps) {
   const [mounted, setMounted] = useState(false);
-  const [isMorePopoverOpen, setIsMorePopoverOpen] = useState(false);
   const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
-
-  const moreButtonRef = useRef<HTMLButtonElement>(null);
-  const popoverRef = useRef<HTMLDivElement>(null);
 
   const isSimpleMode = useAppStore((s) => s.isSimpleMode);
   const toggleSimpleMode = useAppStore((s) => s.toggleSimpleMode);
@@ -37,148 +50,70 @@ export function NavigationShell({
 
   const activeSimpleMode = mounted ? isSimpleMode : false;
 
-  // Determine active tab among 3 main destinations
-  const isNowActive = activeDomain === 'now' || currentPath === '/app' || currentPath === '/app/today';
-  const isPlanActive = activeDomain === 'plan' || currentPath === '/app/schedules';
-  const isMoreActive = !isNowActive && !isPlanActive;
+  const renderIcon = (name: string, size = 18) => {
+    switch (name) {
+      case 'sun': return <Sun size={size} />;
+      case 'dumbbell': return <Dumbbell size={size} />;
+      case 'heart-pulse': return <HeartPulse size={size} />;
+      case 'briefcase': return <Briefcase size={size} />;
+      case 'languages': return <Languages size={size} />;
+      case 'utensils': return <Utensils size={size} />;
+      default: return <MoreHorizontal size={size} />;
+    }
+  };
 
-  // Close desktop popover on click outside or Escape
-  useEffect(() => {
-    if (!isMorePopoverOpen) return;
-
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        popoverRef.current &&
-        !popoverRef.current.contains(e.target as Node) &&
-        moreButtonRef.current &&
-        !moreButtonRef.current.contains(e.target as Node)
-      ) {
-        setIsMorePopoverOpen(false);
-      }
-    };
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsMorePopoverOpen(false);
-        moreButtonRef.current?.focus();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isMorePopoverOpen]);
-
-  const workAreas = [
-    { href: '/app/clinical', label: 'Clínica', icon: HeartPulse },
-    { href: '/app/career', label: 'Carrera', icon: BriefcaseBusiness },
-    { href: '/app/german', label: 'Idioma', icon: Languages },
-    { href: '/app/fitness', label: 'Fitness', icon: Dumbbell },
-  ];
+  const isPathActive = (href: string) => {
+    if (href === '/app/today' && (currentPath === '/app' || currentPath === '/app/' || currentPath === '/app/today')) {
+      return true;
+    }
+    return currentPath.startsWith(href);
+  };
 
   return (
     <>
-      {/* HEADER PRINCIPAL COMPACTO */}
       <header className={styles.header}>
         <div className={styles.brandGroup}>
-          <a href={withBase('/app')} className={styles.brandLink}>
-            <Zap size={20} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
+          <a href={withBase('/app/today')} className={styles.brandLink}>
+            <Sun size={20} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
             <span>Plan Maestro OS</span>
           </a>
 
-          {breadcrumb ? (
-            <span className={styles.breadcrumbText}>{breadcrumb}</span>
-          ) : isMoreActive ? (
-            <span className={styles.breadcrumbText}>
-              Más / {activeDomain.toUpperCase()}
-            </span>
-          ) : null}
+          {breadcrumb && <span className={styles.breadcrumbText}>{breadcrumb}</span>}
         </div>
 
-        {/* NAVEGACIÓN PRINCIPAL ESCRITORIO (3 DESTINOS) - >= 768px */}
+        {/* NAV ESCRITORIO CON ARRAY DATA DE NAV_ITEMS */}
         <nav className={styles.desktopNav} aria-label="Navegación principal">
-          <a
-            href={withBase('/app')}
-            className={`${styles.navItem} ${isNowActive ? styles.navItemActive : ''}`}
-          >
-            <Zap size={16} aria-hidden="true" />
-            <span>Ahora</span>
-          </a>
+          {NAV_ITEMS.map((item) => {
+            const active = isPathActive(item.href);
 
-          <a
-            href={withBase('/app/schedules')}
-            className={`${styles.navItem} ${isPlanActive ? styles.navItemActive : ''}`}
-          >
-            <Calendar size={16} aria-hidden="true" />
-            <span>Plan</span>
-          </a>
+            if (item.disabled) {
+              return (
+                <span
+                  key={item.href}
+                  className={`${styles.navItem} ${styles.navItemDisabled}`}
+                  title="Próximamente"
+                  style={{ opacity: 0.4, cursor: 'not-allowed', display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem' }}
+                >
+                  {renderIcon(item.iconName, 15)}
+                  <span>{item.label}</span>
+                  <span style={{ fontSize: '0.65rem', background: 'rgba(255,255,255,0.06)', padding: '1px 5px', borderRadius: '4px' }}>Próximamente</span>
+                </span>
+              );
+            }
 
-          <div style={{ position: 'relative', display: 'inline-block' }}>
-            <button
-              ref={moreButtonRef}
-              type="button"
-              aria-haspopup="menu"
-              aria-expanded={isMorePopoverOpen}
-              onClick={() => setIsMorePopoverOpen((prev) => !prev)}
-              className={`${styles.navItem} ${isMoreActive ? styles.navItemActive : ''}`}
-            >
-              <span>Más</span>
-              <ChevronDown
-                size={14}
-                aria-hidden="true"
-                style={{
-                  transition: 'transform 150ms ease',
-                  transform: isMorePopoverOpen ? 'rotate(180deg)' : 'rotate(0deg)'
-                }}
-              />
-            </button>
-
-            {/* DESKTOP POPOVER MENU PARA "MÁS" */}
-            {isMorePopoverOpen && (
-              <div ref={popoverRef} role="menu" className={styles.morePopover}>
-                <div>
-                  <span className={styles.popoverGroupLabel}>Áreas</span>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    {workAreas.map((area) => {
-                      const Icon = area.icon;
-                      return (
-                        <a
-                          key={area.href}
-                          href={withBase(area.href)}
-                          role="menuitem"
-                          className={styles.popoverItem}
-                          onClick={() => setIsMorePopoverOpen(false)}
-                        >
-                          <Icon size={16} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
-                          <span>{area.label}</span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: '6px' }}>
-                  <span className={styles.popoverGroupLabel}>Recursos</span>
-                  <a
-                    href={withBase('/app/library')}
-                    role="menuitem"
-                    className={styles.popoverItem}
-                    onClick={() => setIsMorePopoverOpen(false)}
-                  >
-                    <LibraryBig size={16} style={{ color: 'var(--color-accent-warning)' }} aria-hidden="true" />
-                    <span>Biblioteca</span>
-                  </a>
-                </div>
-              </div>
-            )}
-          </div>
+            return (
+              <a
+                key={item.href}
+                href={withBase(item.href)}
+                className={`${styles.navItem} ${active ? styles.navItemActive : ''}`}
+              >
+                {renderIcon(item.iconName, 16)}
+                <span>{item.label}</span>
+              </a>
+            );
+          })}
         </nav>
 
-        {/* MODO SIMPLE TOGGLE ACCESIBLE ESCRITORIO (>= 768px) */}
         <div className={styles.desktopRight}>
           <Button
             variant="ghost"
@@ -190,101 +125,62 @@ export function NavigationShell({
                 document.body.classList.toggle('simple-mode-active', !useAppStore.getState().isSimpleMode);
               }
             }}
-            aria-label={activeSimpleMode ? 'Desactivar Modo Simple' : 'Activar Modo Simple de baja estimulación'}
           >
-            <Sprout size={17} aria-hidden="true" style={{ color: activeSimpleMode ? 'var(--color-state-done)' : 'var(--text-tertiary)' }} />
+            <Sprout size={17} style={{ color: activeSimpleMode ? 'var(--color-state-done)' : 'var(--text-tertiary)' }} />
             <span>Modo simple</span>
           </Button>
         </div>
       </header>
 
-      {/* BOTTOM BAR NAVEGACIÓN MÓVIL (< 768px) */}
+      {/* MOBILE BAR (MÁXIMO 4 ITEMS + MÁS) */}
       <nav className={styles.mobileNav} aria-label="Navegación móvil">
         <a
-          href={withBase('/app')}
-          className={`${styles.mobileNavItem} ${isNowActive ? styles.mobileNavItemActive : ''}`}
+          href={withBase('/app/today')}
+          className={`${styles.mobileNavItem} ${isPathActive('/app/today') ? styles.mobileNavItemActive : ''}`}
         >
-          <Zap size={20} aria-hidden="true" />
-          <span style={{ fontSize: 'var(--font-size-meta)', fontWeight: isNowActive ? 700 : 500 }}>Ahora</span>
+          <Sun size={20} />
+          <span>Hoy</span>
         </a>
 
         <a
-          href={withBase('/app/schedules')}
-          className={`${styles.mobileNavItem} ${isPlanActive ? styles.mobileNavItemActive : ''}`}
+          href={withBase('/app/fitness')}
+          className={`${styles.mobileNavItem} ${isPathActive('/app/fitness') ? styles.mobileNavItemActive : ''}`}
         >
-          <Calendar size={20} aria-hidden="true" />
-          <span style={{ fontSize: 'var(--font-size-meta)', fontWeight: isPlanActive ? 700 : 500 }}>Plan</span>
+          <Dumbbell size={20} />
+          <span>Fitness</span>
         </a>
 
         <button
           type="button"
           onClick={() => setIsMobileSheetOpen(true)}
-          className={`${styles.mobileNavItem} ${isMoreActive ? styles.mobileNavItemActive : ''}`}
+          className={styles.mobileNavItem}
         >
-          <ChevronDown size={20} aria-hidden="true" />
-          <span style={{ fontSize: 'var(--font-size-meta)', fontWeight: isMoreActive ? 700 : 500 }}>Más</span>
+          <MoreHorizontal size={20} />
+          <span>Más</span>
         </button>
       </nav>
 
-      {/* SHEET NAVEGACIÓN MÓVIL (< 768px) */}
       <Sheet
         isOpen={isMobileSheetOpen}
         onClose={() => setIsMobileSheetOpen(false)}
         title="Navegación"
-        description="Selecciona un área o activa Modo simple"
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          {/* ÁREAS */}
-          <div>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
-              Áreas
-            </span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              {workAreas.map((area) => {
-                const Icon = area.icon;
-                return (
-                  <ListRow
-                    key={area.href}
-                    title={area.label}
-                    icon={<Icon size={18} style={{ color: 'var(--color-accent-primary)' }} />}
-                    onClick={() => { window.location.href = withBase(area.href); }}
-                    active={currentPath === area.href}
-                  />
-                );
-              })}
-            </div>
-          </div>
-
-          {/* BIBLIOTECA */}
-          <div>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: 'var(--space-2)' }}>
-              Recursos
-            </span>
+          {NAV_ITEMS.map((item) => (
             <ListRow
-              title="Biblioteca"
-              icon={<LibraryBig size={18} style={{ color: 'var(--color-accent-warning)' }} />}
-              onClick={() => { window.location.href = withBase('/app/library'); }}
-              active={currentPath === '/app/library'}
-            />
-          </div>
-
-          {/* MÓVIL: MODO SIMPLE INTEGRADO DENTRO DEL SHEET */}
-          <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-md)' }}>
-            <ListRow
-              title="Modo simple"
-              meta="Reducir a 1 columna sin distracciones"
-              icon={<Sprout size={18} style={{ color: 'var(--color-state-done)' }} />}
-              badge={activeSimpleMode ? 'Activo' : undefined}
-              badgeTone={activeSimpleMode ? 'success' : 'default'}
+              key={item.href}
+              title={item.label}
+              badge={item.disabled ? 'Próximamente' : undefined}
+              icon={renderIcon(item.iconName, 18)}
+              disabled={item.disabled}
               onClick={() => {
-                toggleSimpleMode();
-                if (typeof document !== 'undefined') {
-                  document.body.classList.toggle('simple-mode-active', !useAppStore.getState().isSimpleMode);
+                if (!item.disabled) {
+                  window.location.href = withBase(item.href);
                 }
-                setIsMobileSheetOpen(false);
               }}
+              active={isPathActive(item.href)}
             />
-          </div>
+          ))}
         </div>
       </Sheet>
     </>
