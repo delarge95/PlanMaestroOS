@@ -773,3 +773,7 @@ export const skillSteps: SkillStep[] = [
     source: { documentId: 'overcoming-gravity-2', pageRefs: [95], verified: true }
   }
 ];
+
+export function getSkillStepById(id: string): SkillStep | undefined {
+  return skillSteps.find((s) => s.id === id);
+}
