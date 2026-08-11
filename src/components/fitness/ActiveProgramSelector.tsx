@@ -152,6 +152,32 @@ export function ActiveProgramSelector() {
             </div>
           );
         })}
+
+        {/* CUADRO / BOTÓN CON "+" PARA AÑADIR OTRA RUTINA EN LA LISTA HORIZONTAL */}
+        <button
+          type="button"
+          onClick={() => alert('Añadir nueva rutina personalizada o importar programa')}
+          title="Añadir nueva rutina"
+          style={{
+            background: 'rgba(255,255,255,0.03)',
+            color: 'var(--color-accent-primary)',
+            border: '1px dashed var(--color-accent-primary)',
+            padding: '9px 16px',
+            borderRadius: 'var(--radius-md)',
+            fontSize: '0.88rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            whiteSpace: 'nowrap',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            transition: 'all 0.15s ease',
+            flexShrink: 0
+          }}
+        >
+          <Plus size={16} />
+          <span>Añadir rutina</span>
+        </button>
       </div>
 
       {/* 2. TARJETA DE DETALLES DEL PROGRAMA SELECCIONADO / PREVISUALIZANDO */}
