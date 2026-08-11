@@ -44,3 +44,7 @@ qa-screenshots/
 *.pem
 *.key
 .raw_snapshots/
+
+scratch_*.txt
+scratch_*.log
+
