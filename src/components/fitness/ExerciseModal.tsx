@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { ExerciseEntry } from '../../data/exercises';
-
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   exercise?: ExerciseEntry | null;
@@ -118,7 +118,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
         </div>
 
         {/* YOUTUBE EMBED OR DIRECT LINK */}
-        {embedUrl ? (
+        {embedUrl && isValidEmbedUrl(embedUrl) ? (
           <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: '#000', aspectRatio: '16/9' }}>
             <iframe
               src={embedUrl}
@@ -126,6 +126,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
               style={{ width: '100%', height: '100%', border: 'none' }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              sandbox="allow-scripts allow-same-origin allow-presentation"
             />
           </div>
         ) : targetExercise.youtubeLink ? (

@@ -1,0 +1,6 @@
+# Sentinel Security Journal
+
+## 2025-03-02 - Unvalidated Third-Party Dynamic Embeds and User-Controlled Iframe Sources
+**Vulnerability:** The application allowed embedding arbitrary third-party URLs inside iframes without domain verification, HTTPS enforcement, or `sandbox` protection. Specifically, in `SecondBrainInspector.tsx`, the `notionEmbedUrl` state (which can be updated via user inputs and is persisted in `localStorage`) was directly passed to an iframe src. In `ExerciseModal.tsx`, YouTube URLs were converted and rendered inside an iframe without validation or `sandbox` constraints.
+**Learning:** Embedding unvalidated dynamic links in iframes exposes the application and its users to client-side vulnerabilities, phishing, open redirections, or content hijacking. Without `sandbox` restrictions, a malicious or compromised framed document can execute arbitrary JavaScript in our origin, access local storage/cookies, or redirect the parent window.
+**Prevention:** Enforce HTTPS on all embedded URLs. Use a centralized `isValidEmbedUrl` validation helper to match embedded URLs against a strict whitelist of trusted domains (e.g., `notion.so`, `notion.site`, `notion.com`, `v1.embednotion.com`, `youtube.com`, `youtu.be`). Always apply restrictive, least-privilege `sandbox` attributes (such as `allow-scripts allow-same-origin`) to iframe elements.
