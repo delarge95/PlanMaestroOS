@@ -1,0 +1,8 @@
+---
+import PlanMaestroLayout from '../../../../layouts/PlanMaestroLayout.astro';
+import FitnessLibrary from '../../../../components/fitness/FitnessLibrary.tsx';
+---
+
+<PlanMaestroLayout title="Fitness - Habilidades y Progresiones" activeDomain="fitness">
+  <FitnessLibrary client:load subTab="skills" currentPath="/app/fitness/library/skills" />
+</PlanMaestroLayout>

@@ -18,11 +18,15 @@ export async function requestAiAction(
   sourcesUsed?: string[]
 ): Promise<AiDraftResponse> {
   const workerUrl = (import.meta as any).env?.PUBLIC_WORKER_URL || 'http://localhost:8787';
+  const secretKey = (import.meta as any).env?.PUBLIC_WORKER_SECRET_KEY || 'pm-local-secret-key';
 
   try {
     const res = await fetch(`${workerUrl}/ai/action`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-pm-key': secretKey
+      },
       body: JSON.stringify({ action, payload, sourcesUsed })
     });
 

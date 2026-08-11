@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import SectionNav from '../ui/SectionNav';
 import UnblockPanel from './UnblockPanel';
 import { initialClinicalTasks } from '../../data/clinical/clinicalTasks';
 import type { Task } from '../../data/contracts/task';
 import Button from '../ui/Button';
-import { HeartPulse, Check, BookOpen, FileText } from 'lucide-react';
+import { HeartPulse } from 'lucide-react';
 
-export default function ClinicalToday() {
+export interface ClinicalTodayProps {
+  currentPath?: string;
+}
+
+export default function ClinicalToday({ currentPath = '/app/clinical' }: ClinicalTodayProps) {
   const [tasks, setTasks] = useState<Task[]>(initialClinicalTasks.slice(0, 3));
 
   const toggleTaskDone = (id: string) => {
@@ -17,39 +22,20 @@ export default function ClinicalToday() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', maxWidth: '850px', margin: '0 auto', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
 
-        {/* ENCABEZADO DE SECCIÓN CLÍNICO */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingBottom: 'var(--space-xs)',
-          borderBottom: '1px solid var(--color-border-subtle)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <HeartPulse size={22} style={{ color: '#ff6b6b' }} />
-            <div>
-              <h1 style={{ fontSize: '1.4rem', fontWeight: 800, margin: 0, color: 'var(--text)' }}>
-                Clínico
-              </h1>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
-                Apoyo a la ejecución, regulación somática & CBT
-              </span>
-            </div>
-          </div>
+        {/* NAVEGACIÓN NIVEL 2 */}
+        <SectionNav sectionKey="clinical" currentPath={currentPath} level={2} />
 
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <a href="/app/clinical/routines" style={{ textDecoration: 'none' }}>
-              <Button variant="secondary" size="sm">
-                <BookOpen size={15} /> Rutinas
-              </Button>
-            </a>
-            <a href="/app/clinical/protocols" style={{ textDecoration: 'none' }}>
-              <Button variant="secondary" size="sm">
-                <FileText size={15} /> Protocolos
-              </Button>
-            </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <HeartPulse size={22} style={{ color: 'var(--color-accent-danger, #ff453a)' }} />
+          <div>
+            <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+              Clínico
+            </h1>
+            <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
+              Apoyo a la ejecución, regulación somática & CBT
+            </span>
           </div>
         </div>
 

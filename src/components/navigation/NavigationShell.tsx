@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sun, Dumbbell, Briefcase, Languages, HeartPulse, ChefHat, MoreHorizontal, Sprout, X } from 'lucide-react';
-import { useAppStore } from '../../store/appStore';
+import { Sun, Dumbbell, Briefcase, Languages, HeartPulse, ChefHat, MoreHorizontal, X } from 'lucide-react';
 import { withBase } from '../../utils/url';
 import { NAV_ITEMS } from '../shell/navItems';
 import Sheet from '../ui/Sheet';
@@ -19,20 +18,9 @@ export function NavigationShell({
   currentPath = '/app/today',
   breadcrumb
 }: NavigationShellProps) {
-  const [mounted, setMounted] = useState(false);
   const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
   const [isDesktopMoreOpen, setIsDesktopMoreOpen] = useState(false);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
-
-  const isSimpleMode = useAppStore((s) => s.isSimpleMode);
-  const toggleSimpleMode = useAppStore((s) => s.toggleSimpleMode);
-
-  useEffect(() => {
-    setMounted(true);
-    if (typeof document !== 'undefined') {
-      document.body.classList.toggle('simple-mode-active', isSimpleMode);
-    }
-  }, [isSimpleMode]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -49,8 +37,6 @@ export function NavigationShell({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isDesktopMoreOpen, isMobileSheetOpen]);
-
-  const activeSimpleMode = mounted ? isSimpleMode : false;
 
   const renderIcon = (name: string, size = 18) => {
     switch (name) {
@@ -165,20 +151,7 @@ export function NavigationShell({
         </nav>
 
         <div className={styles.desktopRight}>
-          <Button
-            variant="ghost"
-            size="sm"
-            aria-pressed={activeSimpleMode}
-            onClick={() => {
-              toggleSimpleMode();
-              if (typeof document !== 'undefined') {
-                document.body.classList.toggle('simple-mode-active', !useAppStore.getState().isSimpleMode);
-              }
-            }}
-          >
-            <Sprout size={17} style={{ color: activeSimpleMode ? 'var(--color-state-done)' : 'var(--text-tertiary)' }} />
-            <span>Modo simple</span>
-          </Button>
+          {/* Reservado para acciones globales si fuera necesario */}
         </div>
       </header>
 

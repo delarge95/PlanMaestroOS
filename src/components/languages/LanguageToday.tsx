@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import SectionNav from '../ui/SectionNav';
 import Button from '../ui/Button';
-import { Languages, Flame, MessageSquare } from 'lucide-react';
+import { Languages, Flame } from 'lucide-react';
 
-export default function LanguageToday() {
+export interface LanguageTodayProps {
+  currentPath?: string;
+}
+
+export default function LanguageToday({ currentPath = '/app/languages' }: LanguageTodayProps) {
   const [streakDays] = useState(12);
-  const [enableEnglish, setEnableEnglish] = useState(true);
+  const [enableEnglish] = useState(true);
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', maxWidth: '850px', margin: '0 auto', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
+
+        {/* NAVEGACIÓN NIVEL 2 */}
+        <SectionNav sectionKey="languages" currentPath={currentPath} level={2} />
 
         {/* CABECERA PRESCRIPTIVA DE IDIOMAS */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingBottom: 'var(--space-xs)',
-          borderBottom: '1px solid var(--color-border-subtle)'
+          paddingBottom: 'var(--space-xs)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Languages size={22} style={{ color: 'var(--color-accent-primary)' }} />
             <div>
-              <h1 style={{ fontSize: '1.4rem', fontWeight: 800, margin: 0, color: 'var(--text)' }}>
+              <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
                 Idiomas
               </h1>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+              <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
                 Práctica diaria de Alemán e Inglés profesional
               </span>
             </div>
@@ -35,20 +42,6 @@ export default function LanguageToday() {
             <Flame size={15} style={{ color: 'var(--color-accent-warning)' }} />
             <span>Racha: {streakDays} días</span>
           </div>
-        </div>
-
-        {/* NAVEGACIÓN A ALEMÁN E INGLÉS */}
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <a href="/app/languages/german" style={{ textDecoration: 'none' }}>
-            <Button variant="secondary" size="sm">
-              🇩🇪 Alemán
-            </Button>
-          </a>
-          <a href="/app/languages/english" style={{ textDecoration: 'none' }}>
-            <Button variant="secondary" size="sm">
-              🇬🇧 Inglés
-            </Button>
-          </a>
         </div>
 
         {/* BLOQUE ALEMÁN HOY */}

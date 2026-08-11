@@ -1,9 +1,14 @@
 import React from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import SectionNav from '../ui/SectionNav';
 import Button from '../ui/Button';
-import { Briefcase, ArrowRight, Layers, Award, BookOpen, Newspaper } from 'lucide-react';
+import { Briefcase, ArrowRight } from 'lucide-react';
 
-export default function CareerToday() {
+export interface CareerTodayProps {
+  currentPath?: string;
+}
+
+export default function CareerToday({ currentPath = '/app/career' }: CareerTodayProps) {
   const nextAction = 'Completar documentación de arquitectura TwinSight MVP';
   const applicationsThisWeekCount = 4;
   const pendingFollowups = [
@@ -14,23 +19,25 @@ export default function CareerToday() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', maxWidth: '850px', margin: '0 auto', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
+
+        {/* NAVEGACIÓN NIVEL 2 */}
+        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
 
         {/* CABECERA PRESCRIPTIVA DE SECCIÓN LABORAL */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingBottom: 'var(--space-xs)',
-          borderBottom: '1px solid var(--color-border-subtle)'
+          paddingBottom: 'var(--space-xs)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Briefcase size={22} style={{ color: 'var(--color-accent-primary)' }} />
             <div>
-              <h1 style={{ fontSize: '1.4rem', fontWeight: 800, margin: 0, color: 'var(--text)' }}>
+              <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
                 Laboral
               </h1>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+              <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
                 Gestión de carrera, portafolio & pipeline de empleo
               </span>
             </div>
@@ -40,25 +47,6 @@ export default function CareerToday() {
             <Button variant="primary" size="sm">
               <ArrowRight size={15} /> Abrir pipeline
             </Button>
-          </a>
-        </div>
-
-        {/* NAVEGACIÓN A SUBVISTAS LABORALES */}
-        <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px' }}>
-          <a href="/app/career/roadmap" style={{ textDecoration: 'none' }}>
-            <Button variant="secondary" size="sm"><Layers size={14} /> Roadmap</Button>
-          </a>
-          <a href="/app/career/portfolio" style={{ textDecoration: 'none' }}>
-            <Button variant="secondary" size="sm"><Award size={14} /> Portafolio y CV</Button>
-          </a>
-          <a href="/app/career/projects" style={{ textDecoration: 'none' }}>
-            <Button variant="secondary" size="sm"><Briefcase size={14} /> Proyectos</Button>
-          </a>
-          <a href="/app/career/learning" style={{ textDecoration: 'none' }}>
-            <Button variant="secondary" size="sm"><BookOpen size={14} /> Cursos</Button>
-          </a>
-          <a href="/app/career/news" style={{ textDecoration: 'none' }}>
-            <Button variant="secondary" size="sm"><Newspaper size={14} /> Noticias</Button>
           </a>
         </div>
 

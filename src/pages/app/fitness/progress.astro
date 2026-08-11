@@ -1,8 +1,8 @@
 ---
 import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
-import FitnessTabWorkspace from '../../../components/fitness/FitnessTabWorkspace.tsx';
+import FitnessProgress from '../../../components/fitness/FitnessProgress.tsx';
 ---
 
-<PlanMaestroLayout title="Fitness - Progreso" activeDomain="fitness">
-  <FitnessTabWorkspace client:load initialTab="progress" />
+<PlanMaestroLayout title="Fitness - Progreso y Cargas" activeDomain="fitness">
+  <FitnessProgress client:load currentPath="/app/fitness/progress" />
 </PlanMaestroLayout>
