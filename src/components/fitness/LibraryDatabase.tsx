@@ -1,10 +1,8 @@
 // src/components/fitness/LibraryDatabase.tsx
 import React, { useState, useMemo, useEffect } from 'react';
-import StatusBadge from '../ui/StatusBadge';
 import ExerciseModal from './ExerciseModal';
-import { Search, CheckCircle, ChevronRight, Check, ArrowUpDown } from 'lucide-react';
+import { Search, ChevronRight, ChevronDown, Check, ArrowUpDown, ExternalLink } from 'lucide-react';
 import { exerciseDatabase } from '../../data/exercises';
-import { resolveExerciseReference } from '../../data/fitness/exerciseResolver';
 
 type ExerciseCategory =
   | 'Free Weights'
@@ -56,6 +54,7 @@ export default function LibraryDatabase() {
   const [selectedCategories, setSelectedCategories] = useState<ExerciseCategory[]>([]);
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([]);
   const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
+  const [expandedInlineIds, setExpandedInlineIds] = useState<string[]>([]);
 
   // Leer parámetro ?search= de la URL al cargar
   useEffect(() => {
@@ -92,11 +91,25 @@ export default function LibraryDatabase() {
     setSortOption(options[(currentIndex + 1) % options.length]);
   };
 
+  const toggleInlineExpand = (name: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpandedInlineIds((prev) =>
+      prev.includes(name) ? prev.filter((id) => id !== name) : [...prev, name]
+    );
+  };
+
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedCategories([]);
     setSelectedMuscles([]);
     setSortOption('alpha-asc');
+  };
+
+  const handleMuscleClick = (mName: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (typeof window !== 'undefined') {
+      window.location.href = `/app/fitness/library/muscles?muscle=${encodeURIComponent(mName)}`;
+    }
   };
 
   // Mapeo dinámico de ejercicios filtrados y agrupados
@@ -146,6 +159,81 @@ export default function LibraryDatabase() {
   }, [searchTerm, selectedCategories, selectedMuscles, sortOption]);
 
   const activeFiltersCount = selectedCategories.length + selectedMuscles.length + (searchTerm ? 1 : 0);
+
+  const renderInlinePreview = (name: string) => {
+    const exInfo = exerciseDatabase[name];
+    if (!exInfo) return null;
+
+    return (
+      <div style={{ padding: '10px 14px', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', background: 'rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+          <strong style={{ fontSize: '0.74rem', color: 'var(--accent, #0a84ff)', textTransform: 'uppercase', alignSelf: 'center' }}>
+            Fuerza:
+          </strong>
+          {exInfo.muscles.strength.map((m, idx) => (
+            <span
+              key={idx}
+              onClick={(e) => handleMuscleClick(m, e)}
+              title={`Ver anatomía de ${m} en Base de Datos de Músculos`}
+              style={{
+                background: 'rgba(16, 185, 129, 0.15)',
+                color: '#6ee7b7',
+                padding: '2px 8px',
+                borderRadius: '4px',
+                fontSize: '0.76rem',
+                border: '1px solid rgba(16,185,129,0.3)',
+                cursor: 'pointer',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '2px'
+              }}
+            >
+              <span>{m}</span>
+              <ExternalLink size={10} />
+            </span>
+          ))}
+        </div>
+
+        {exInfo.muscles.stability && exInfo.muscles.stability.length > 0 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            <strong style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', textTransform: 'uppercase', alignSelf: 'center' }}>
+              Estabilidad:
+            </strong>
+            {exInfo.muscles.stability.map((m, idx) => (
+              <span
+                key={idx}
+                onClick={(e) => handleMuscleClick(m, e)}
+                title={`Ver anatomía de ${m} en Base de Datos de Músculos`}
+                style={{
+                  background: 'rgba(119, 231, 255, 0.12)',
+                  color: 'var(--color-accent-primary)',
+                  padding: '2px 8px',
+                  borderRadius: '4px',
+                  fontSize: '0.76rem',
+                  border: '1px solid rgba(119,231,255,0.25)',
+                  cursor: 'pointer',
+                  fontWeight: 600,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '2px'
+                }}
+              >
+                <span>{m}</span>
+                <ExternalLink size={10} />
+              </span>
+            ))}
+          </div>
+        )}
+
+        {exInfo.techniquePoints && exInfo.techniquePoints.length > 0 && (
+          <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+            💡 <strong>Técnica clave:</strong> {exInfo.techniquePoints[0]}
+          </p>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
@@ -341,41 +429,64 @@ export default function LibraryDatabase() {
         )}
       </div>
 
-      {/* RENDERIZADO DE RESULTADOS: FLAT LIST VS GROUPED VIEW (AMBOS ABREN EXERCISEMODAL) */}
+      {/* RENDERIZADO DE RESULTADOS: FLAT LIST VS GROUPED VIEW */}
       {!isGroupedView ? (
         /* FLAT LIST */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           {filteredFlatList.map((name) => {
             const exInfo = exerciseDatabase[name];
-            const ref = resolveExerciseReference(name);
+            const isInlineExpanded = expandedInlineIds.includes(name);
 
             return (
               <div
                 key={name}
-                onClick={() => setModalExerciseId(name)}
                 style={{
                   background: 'var(--surface-1, #0d0d0f)',
                   border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
                   borderRadius: 'var(--radius-m, 12px)',
-                  padding: '12px 14px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  transition: 'background 120ms ease'
+                  overflow: 'hidden'
                 }}
               >
-                <div>
-                  <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)', display: 'block' }}>{name}</strong>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
-                    {(exInfo?.muscles?.strength || []).join(', ')}
-                  </span>
+                {/* FILA DE EJERCICIO: CLIC EN BLOQUE APERTURA MODAL, CLIC EN FLECHA DESPLIEGUE INLINE */}
+                <div
+                  onClick={() => setModalExerciseId(name)}
+                  style={{
+                    padding: '12px 14px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    transition: 'background 120ms ease'
+                  }}
+                >
+                  <div>
+                    <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)', display: 'block' }}>{name}</strong>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
+                      {(exInfo?.muscles?.strength || []).join(', ')}
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={(e) => toggleInlineExpand(name, e)}
+                    title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar músculos y técnica'}
+                    style={{
+                      background: 'rgba(255,255,255,0.04)',
+                      border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                      color: 'var(--text-secondary)',
+                      padding: '4px',
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    {isInlineExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                  </button>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <StatusBadge label={ref.verified ? 'Verificado' : 'Local'} variant={ref.verified ? 'success' : 'neutral'} icon={ref.verified ? <CheckCircle size={10} /> : undefined} />
-                  <ChevronRight size={14} style={{ color: 'var(--text-tertiary)' }} />
-                </div>
+                {isInlineExpanded && renderInlinePreview(name)}
               </div>
             );
           })}
@@ -392,26 +503,56 @@ export default function LibraryDatabase() {
                 </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '6px' }}>
-                {exercises.map((name) => (
-                  <div
-                    key={name}
-                    onClick={() => setModalExerciseId(name)}
-                    style={{
-                      background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))',
-                      borderRadius: '6px',
-                      padding: '8px 10px',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-primary)' }}>{name}</span>
-                    <ChevronRight size={13} style={{ color: 'var(--text-tertiary)' }} />
-                  </div>
-                ))}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                {exercises.map((name) => {
+                  const isInlineExpanded = expandedInlineIds.includes(name);
+
+                  return (
+                    <div
+                      key={name}
+                      style={{
+                        background: 'rgba(255,255,255,0.02)',
+                        border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))',
+                        borderRadius: '6px',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      <div
+                        onClick={() => setModalExerciseId(name)}
+                        style={{
+                          padding: '8px 10px',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-primary)' }}>{name}</span>
+
+                        <button
+                          type="button"
+                          onClick={(e) => toggleInlineExpand(name, e)}
+                          title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar músculos y técnica'}
+                          style={{
+                            background: 'rgba(255,255,255,0.04)',
+                            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                            color: 'var(--text-secondary)',
+                            padding: '3px',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          {isInlineExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                        </button>
+                      </div>
+
+                      {isInlineExpanded && renderInlinePreview(name)}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ))}

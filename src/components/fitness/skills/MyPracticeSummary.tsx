@@ -1,6 +1,6 @@
 // src/components/fitness/skills/MyPracticeSummary.tsx
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle2, ExternalLink } from 'lucide-react';
 import { useSkillStateStore } from '../../../data/fitness/skills/skillStateStore';
 import { getSkillStepById } from '../../../data/fitness/skills/skillSteps';
 import { skillPaths } from '../../../data/fitness/skills/skillPaths';
@@ -12,9 +12,10 @@ export interface MyPracticeSummaryProps {
 
 export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
   const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
-  const setActiveStep = useSkillStateStore((s) => s.setActiveStep);
+  const activeStepId = useSkillStateStore((s) => s.activeStepId || 'pull-step-1');
+  const changeActiveStepForPath = useSkillStateStore((s) => s.changeActiveStepForPath);
   
-  const currentStepId = activeStepIds[0] || 'pull-step-1';
+  const currentStepId = activeStepIds[0] || activeStepId || 'pull-step-1';
   const currentStep = getSkillStepById(currentStepId);
   const currentPath = currentStep ? skillPaths.find((p) => p.id === currentStep.pathId) : null;
 
@@ -37,14 +38,14 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
   const handlePrevStep = () => {
     if (stepIndex > 0) {
       const prevId = currentPath.stepIds[stepIndex - 1];
-      setActiveStep(prevId);
+      changeActiveStepForPath(currentStep.id, prevId);
     }
   };
 
   const handleNextStep = () => {
     if (stepIndex < totalSteps - 1) {
       const nextId = currentPath.stepIds[stepIndex + 1];
-      setActiveStep(nextId);
+      changeActiveStepForPath(currentStep.id, nextId);
     }
   };
 
@@ -66,10 +67,34 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
         gap: 'var(--space-md)'
       }}
     >
+      {/* BARRA DE ENLACE A BASE DE DATOS DE PROGRESIONES */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          Habilidad en Práctica Activa
+        </span>
+
+        <a
+          href="/app/fitness/library/progressions"
+          title="Ver árbol completo de progresiones en la Base de Datos"
+          style={{
+            fontSize: '0.78rem',
+            fontWeight: 700,
+            color: 'var(--accent, #0a84ff)',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px'
+          }}
+        >
+          <span>Ver en Base de datos</span>
+          <ExternalLink size={12} />
+        </a>
+      </div>
+
       {/* NAVEGADOR Y CABECERA DE PROGRESIÓN */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
             Ruta Híbrida · {currentPath.title}
           </span>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>

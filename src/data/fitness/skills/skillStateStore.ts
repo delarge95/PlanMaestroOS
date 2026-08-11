@@ -11,6 +11,7 @@ export interface SkillState {
 
   // Actions
   setActiveStep: (stepId: string) => void;
+  changeActiveStepForPath: (oldStepId: string, newStepId: string) => void;
   toggleActiveSkill: (stepId: string) => void;
   setStepStatus: (stepId: string, status: SkillStatus) => void;
   addPracticeSession: (session: Omit<PracticeSessionRecord, 'id' | 'timestamp'>) => void;
@@ -39,6 +40,22 @@ export const useSkillStateStore = create<SkillState>()(
           const nextActive = currentActive.includes(stepId) ? currentActive : [...currentActive, stepId];
           const updatedStatuses = { ...state.stepStatuses, [stepId]: 'in-progress' as SkillStatus };
           return { activeStepId: stepId, activeStepIds: nextActive, stepStatuses: updatedStatuses };
+        });
+      },
+
+      changeActiveStepForPath: (oldStepId: string, newStepId: string) => {
+        set((state) => {
+          const currentActive = state.activeStepIds || [state.activeStepId || 'pull-step-1'];
+          const nextActive = currentActive.map((id) => (id === oldStepId ? newStepId : id));
+          if (!nextActive.includes(newStepId)) {
+            nextActive.push(newStepId);
+          }
+          const updatedStatuses = { ...state.stepStatuses, [newStepId]: 'in-progress' as SkillStatus };
+          return {
+            activeStepId: newStepId,
+            activeStepIds: nextActive,
+            stepStatuses: updatedStatuses
+          };
         });
       },
 
