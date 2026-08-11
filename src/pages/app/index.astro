@@ -1,8 +1,8 @@
 ---
 import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
-import HomeClinicalDashboard from '../../components/clinical/HomeClinicalDashboard.tsx';
+import TodayTabWorkspace from '../../components/schedules/TodayTabWorkspace.tsx';
 ---
 
-<PlanMaestroLayout title="Ahora" activeDomain="now">
-  <HomeClinicalDashboard client:load />
+<PlanMaestroLayout title="Ahora - Centro de Control Operativo" activeDomain="now">
+  <TodayTabWorkspace client:load />
 </PlanMaestroLayout>

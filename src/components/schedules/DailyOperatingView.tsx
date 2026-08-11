@@ -1,170 +1,170 @@
 import React, { useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import InertiaRescueModal from '../clinical/InertiaRescueModal';
-import { Calendar, LayoutGrid, BarChart2, Filter } from 'lucide-react';
+import { Calendar, Columns, BarChart3, AlertCircle } from 'lucide-react';
 import Button from '../ui/Button';
 
-interface DailyBlock {
+export interface DailyBlock {
   id: string;
   time: string;
   shortTitle: string;
   fullTitle: string;
   category: 'clinical' | 'fitness' | 'career' | 'german' | 'general';
-  rule: string;
-  minViableAction: string;
   status: 'pending' | 'in_progress' | 'completed' | 'skipped';
   actionUrl?: string;
   actionLabel?: string;
 }
 
 const initialDailyBlocks: DailyBlock[] = [
-  { id: 'b1', time: '05:30 - 06:00', shortTitle: '🌅 Despertar 05:30', fullTitle: 'Despertar 05:30 & Salida al Gimnasio', category: 'general', rule: 'Ropa lista desde anoche. Cero celular recreativo.', minViableAction: 'Ponerse los zapatos sin pensar.', status: 'completed' },
-  { id: 'b2', time: '06:20 - 06:40', shortTitle: '💪 Prehab AM', fullTitle: 'Prehab AM: Muñecas, Nerve Glides & Spanish Squats', category: 'fitness', rule: 'Spanish Squats 3-5x45s sugeridos para rodillas.', minViableAction: '1 serie isométrica de 30s en pared.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Guía Prehab' },
-  { id: 'b3', time: '06:40 - 06:55', shortTitle: '🤸 Skill Work', fullTitle: 'Skill Work Técnico: Wall Handstand & Support Hold', category: 'fitness', rule: 'Wall Handstand (30-45s) y Support Hold en anillas.', minViableAction: '1 aguante de 20s en pared.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Skills FitApp' },
-  { id: 'b4', time: '06:55 - 07:40', shortTitle: '🏋️ Min-Max AM', fullTitle: 'Bloque Min-Max AM Adaptado (Jeff Nippard)', category: 'fitness', rule: '1-2 series a RIR 1-2. Anillas en empujes/fondos.', minViableAction: '1 serie efectiva al fallo técnico.', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Logger Gym' },
-  { id: 'b5', time: '09:00 - 09:20', shortTitle: '📝 Agenda TDAH', fullTitle: 'Planeación Diaria TDAH (Agenda Única)', category: 'clinical', rule: 'Elegir máximo 3 tareas escritas para hoy.', minViableAction: 'Escribir 1 sola prioridad en papel.', status: 'completed', actionUrl: '/app/clinical', actionLabel: 'Bio-Feedback' },
-  { id: 'b6', time: '09:20 - 11:40', shortTitle: '🧠 TwinSight MVP', fullTitle: 'Bloque A: Trabajo Profundo (Tesis / TwinSight)', category: 'career', rule: 'Celular fuera del cuarto. Tarea 10 min + Versión Mala.', minViableAction: 'Escribir 1 borrador feo durante 10 min.', status: 'in_progress', actionUrl: '/app/career', actionLabel: 'TwinSight' },
-  { id: 'b7', time: '12:00 - 13:30', shortTitle: '🥗 Almuerzo', fullTitle: 'Almuerzo & Descanso Digestivo (1h 30m)', category: 'general', rule: 'Cocinar, comer y descanso sin trabajo.', minViableAction: 'Servir comida y descansar 20m.', status: 'pending' },
-  { id: 'b8', time: '13:30 - 14:00', shortTitle: '🇩🇪 Alemán 25m', fullTitle: 'Estudio Diario de Alemán A1', category: 'german', rule: '5 min Duolingo + 20 min Libros/Audios A1 + IA.', minViableAction: '1 lección de 3 min en Duolingo.', status: 'pending', actionUrl: '/app/german', actionLabel: 'Alemán A1' },
-  { id: 'b9', time: '14:00 - 14:40', shortTitle: '🎯 Sustentación CBT', fullTitle: 'Sustentación CBT (Exposición Graduada)', category: 'clinical', rule: 'Guion de 3 ideas. Max 10 min rumiación post-evento.', minViableAction: 'Leer el guion de 3 puntos en voz alta.', status: 'pending', actionUrl: '/app/clinical', actionLabel: 'Exposición' },
-  { id: 'b10', time: '14:45 - 16:45', shortTitle: '💻 TwinSight Case', fullTitle: 'Bloque B: Producción MVP (TwinSight Case / GitHub)', category: 'career', rule: 'Cerrar activo público con criterios de terminado.', minViableAction: 'Hacer 1 commit en GitHub.', status: 'pending', actionUrl: '/app/career', actionLabel: 'GitHub' },
-  { id: 'b11', time: '17:15 - 18:30', shortTitle: '🤸 Movilidad PM', fullTitle: 'PM Físico: Movilidad Cadera & Elephant Walks', category: 'fitness', rule: 'Elephant Walks 3x20, 90/90 switches, Rutina Thurin.', minViableAction: '10 Elephant Walks.', status: 'pending', actionUrl: '/app/fitness', actionLabel: 'Movilidad' },
-  { id: 'b12', time: '21:00 - 21:30', shortTitle: '🌙 Sueño CBT-I', fullTitle: 'Rutina Cierre & Higiene de Sueño', category: 'general', rule: 'Pantalla fuera de cama a las 21:00. Audio relajante.', minViableAction: 'Apagar pantalla a las 21:00.', status: 'pending', actionUrl: '/app/clinical', actionLabel: 'Sueño CBT-I' }
+  { id: 'b1', time: '05:30', shortTitle: 'Despertar & Salida Gym', fullTitle: 'Despertar 05:30 & Salida al Gimnasio', category: 'general', status: 'completed' },
+  { id: 'b2', time: '06:20', shortTitle: 'Prehab AM & Isométricos', fullTitle: 'Prehab AM: Spanish Squats & Muñecas', category: 'fitness', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Fitness' },
+  { id: 'b3', time: '06:40', shortTitle: 'Skill Work Técnico', fullTitle: 'Handstand & Support Hold', category: 'fitness', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Skills' },
+  { id: 'b4', time: '06:55', shortTitle: 'Sesión Min-Max Gym', fullTitle: 'Entrenamiento Min-Max Hypertrophy', category: 'fitness', status: 'completed', actionUrl: '/app/fitness', actionLabel: 'Logger' },
+  { id: 'b5', time: '09:00', shortTitle: 'Planeación TDAH', fullTitle: 'Agenda & Selección de Foco', category: 'clinical', status: 'completed' },
+  { id: 'b6', time: '09:20', shortTitle: 'Bloque A: TwinSight MVP', fullTitle: 'Trabajo Profundo TwinSight X500', category: 'career', status: 'in_progress', actionUrl: '/app/career', actionLabel: 'TwinSight' },
+  { id: 'b7', time: '12:00', shortTitle: 'Almuerzo & Descanso', fullTitle: 'Almuerzo & Pausa Digestiva', category: 'general', status: 'pending' },
+  { id: 'b8', time: '13:30', shortTitle: 'Alemán A1 (25 min)', fullTitle: 'Práctica & Vocabulario Alemán', category: 'german', status: 'pending', actionUrl: '/app/german', actionLabel: 'Alemán' },
+  { id: 'b9', time: '14:00', shortTitle: 'Exposición CBT', fullTitle: 'Sustentación & Regulación', category: 'clinical', status: 'pending' },
+  { id: 'b10', time: '14:45', shortTitle: 'Bloque B: Producción', fullTitle: 'Caso de Estudio & GitHub Commit', category: 'career', status: 'pending', actionUrl: '/app/career', actionLabel: 'GitHub' },
+  { id: 'b11', time: '17:15', shortTitle: 'Movilidad PM', fullTitle: 'Elephant Walks & Cadera', category: 'fitness', status: 'pending' },
+  { id: 'b12', time: '21:00', shortTitle: 'Higiene de Sueño CBT-I', fullTitle: 'Cierre Diálogo & Descanso', category: 'general', status: 'pending' }
 ];
 
 export default function DailyOperatingView() {
-  const [blocks, setBlocks] = useState<DailyBlock[]>(() => JSON.parse(JSON.stringify(initialDailyBlocks)));
-  const [planViewMode, setPlanViewMode] = useState<'timeline' | 'canvas' | 'stats'>('timeline');
-  const [categoryFilter, setCategoryFilter] = useState<string>('all');
-  const [isRescueModalOpen, setIsRescueModalOpen] = useState(false);
-  const [selectedBlock, setSelectedBlock] = useState<DailyBlock | null>(null);
+  const [blocks, setBlocks] = useState<DailyBlock[]>(initialDailyBlocks);
+  const [viewMode, setViewMode] = useState<'timeline' | 'kanban' | 'stats'>('timeline');
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [isRescueOpen, setIsRescueOpen] = useState(false);
 
   const toggleStatus = (id: string, e: React.MouseEvent) => {
-    e.preventDefault();
     e.stopPropagation();
-    setBlocks(prev => prev.map(b => {
-      if (b.id !== id) return b;
-      const nextStatus = b.status === 'pending' ? 'in_progress' : b.status === 'in_progress' ? 'completed' : 'pending';
-      return { ...b, status: nextStatus };
-    }));
+    setBlocks((prev) =>
+      prev.map((b) => {
+        if (b.id !== id) return b;
+        const next = b.status === 'pending' ? 'in_progress' : b.status === 'in_progress' ? 'completed' : 'pending';
+        return { ...b, status: next };
+      })
+    );
   };
 
-  const handleSkipWithoutGuilt = (id: string) => {
-    setBlocks(prev => prev.map(b => b.id === id ? { ...b, status: 'skipped' } : b));
-    setSelectedBlock(null);
+  const moveStatus = (id: string, targetStatus: 'pending' | 'in_progress' | 'completed') => {
+    setBlocks((prev) => prev.map((b) => (b.id === id ? { ...b, status: targetStatus } : b)));
   };
 
-  const handleReorganizeRestOfDay = (fromId: string) => {
-    let found = false;
-    setBlocks(prev => prev.map(b => {
-      if (b.id === fromId) found = true;
-      if (found && b.status === 'pending') {
-        return { ...b, rule: `[Ajustado] ${b.rule}` };
-      }
-      return b;
-    }));
-    setSelectedBlock(null);
-  };
+  const filtered = blocks.filter((b) => activeCategory === 'all' || b.category === activeCategory);
 
-  const filteredBlocks = blocks.filter((b) => categoryFilter === 'all' || b.category === categoryFilter);
-
-  const getCategoryColor = (cat: string) => {
+  const getCategoryBadgeColor = (cat: string) => {
     switch (cat) {
-      case 'clinical': return 'var(--color-accent-primary)';
       case 'fitness': return 'var(--color-state-done)';
       case 'career': return 'var(--color-accent-primary)';
       case 'german': return 'var(--color-accent-warning)';
-      default: return 'var(--color-accent-primary)';
-    }
-  };
-
-  const getStatusBg = (status: string) => {
-    switch (status) {
-      case 'completed': return 'var(--color-state-done-soft)';
-      case 'in_progress': return 'var(--color-accent-primary-glow)';
-      case 'skipped': return 'rgba(255,255,255,0.03)';
-      default: return 'var(--color-surface-base)';
+      case 'clinical': return '#ff6b6b';
+      default: return 'var(--text-tertiary)';
     }
   };
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        
-        {/* VISTA DE PLAN: SELECCIÓN DE MODO & FILTROS DE ETIQUETA PER DOCUMENTO 02 */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-          <div>
-            <span style={{ fontFamily: 'var(--font-family-system)', fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
-              VISTA DE PLAN & OPERACIÓN DIARIA
-            </span>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--text)' }}>
-              Línea Temporal de Hoy (05:30 – 21:30)
-            </h2>
-          </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
 
-          {/* SELECTOR DE MODOS: CRONOGRAMA, CANVAS, STATS */}
-          <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
-            <Button
-              variant={planViewMode === 'timeline' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setPlanViewMode('timeline')}
+        {/* TOOLBAR SUPERIOR: CONTROLES DE VISTA Y MODO RESCATE */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 'var(--space-xs)',
+          paddingBottom: 'var(--space-xs)',
+          borderBottom: '1px solid var(--color-border-subtle)'
+        }}>
+          {/* VISTAS: CRONOGRAMA | KANBAN | METRICAS */}
+          <div style={{ display: 'flex', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '12px', border: '1px solid var(--color-border-subtle)' }}>
+            <button
+              type="button"
+              onClick={() => setViewMode('timeline')}
+              style={{
+                background: viewMode === 'timeline' ? 'var(--color-accent-primary-soft)' : 'transparent',
+                color: viewMode === 'timeline' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '6px 14px',
+                borderRadius: '8px',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
             >
-              <Calendar size={14} /> Cronograma
-            </Button>
-
-            <Button
-              variant={planViewMode === 'canvas' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setPlanViewMode('canvas')}
-            >
-              <LayoutGrid size={14} /> Modo Canvas
-            </Button>
-
-            <Button
-              variant={planViewMode === 'stats' ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setPlanViewMode('stats')}
-            >
-              <BarChart2 size={14} /> Tablas Visuales
-            </Button>
+              <Calendar size={15} /> Línea Temporal
+            </button>
 
             <button
               type="button"
-              onClick={() => setIsRescueModalOpen(true)}
+              onClick={() => setViewMode('kanban')}
               style={{
-                background: 'var(--color-accent-danger-soft)',
-                border: '1px solid var(--color-accent-danger-glow)',
-                color: 'var(--color-accent-danger)',
-                padding: '6px 12px',
+                background: viewMode === 'kanban' ? 'var(--color-accent-primary-soft)' : 'transparent',
+                color: viewMode === 'kanban' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '6px 14px',
                 borderRadius: '8px',
-                fontWeight: 700,
-                fontSize: '0.78rem',
-                cursor: 'pointer'
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
               }}
             >
-              🚨 Rescate
+              <Columns size={15} /> Tablero Kanban
             </button>
+
+            <button
+              type="button"
+              onClick={() => setViewMode('stats')}
+              style={{
+                background: viewMode === 'stats' ? 'var(--color-accent-primary-soft)' : 'transparent',
+                color: viewMode === 'stats' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '6px 14px',
+                borderRadius: '8px',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <BarChart3 size={15} /> Resumen
+            </button>
+          </div>
+
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <Button variant="ghost" size="sm" onClick={() => setIsRescueOpen(true)}>
+              <AlertCircle size={15} style={{ color: 'var(--color-accent-warning)' }} />
+              <span>Ayuda Bloqueo</span>
+            </Button>
           </div>
         </div>
 
-        {/* FILTROS POR ETIQUETA / ÁREA */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <Filter size={15} style={{ color: 'var(--text-tertiary)' }} />
-          <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>Filtrar por etiqueta:</span>
+        {/* FILTRO DE ETIQUETAS POR CATEGORÍA */}
+        <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px' }}>
           {['all', 'fitness', 'career', 'german', 'clinical', 'general'].map((cat) => (
             <button
               key={cat}
               type="button"
-              onClick={() => setCategoryFilter(cat)}
+              onClick={() => setActiveCategory(cat)}
               style={{
-                background: categoryFilter === cat ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.05)',
-                color: categoryFilter === cat ? '#ffffff' : 'var(--text-secondary)',
+                background: activeCategory === cat ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.04)',
+                color: activeCategory === cat ? '#000000' : 'var(--text-secondary)',
                 border: 'none',
-                padding: '3px 10px',
-                borderRadius: '6px',
-                fontSize: 'var(--font-size-meta)',
-                fontWeight: categoryFilter === cat ? 700 : 500,
-                cursor: 'pointer'
+                padding: '4px 12px',
+                borderRadius: '20px',
+                fontSize: '0.75rem',
+                fontWeight: activeCategory === cat ? 700 : 500,
+                cursor: 'pointer',
+                whiteSpace: 'nowrap'
               }}
             >
               {cat === 'all' ? 'Todas' : cat.toUpperCase()}
@@ -172,132 +172,180 @@ export default function DailyOperatingView() {
           ))}
         </div>
 
-        {/* MODO 1: CRONOGRAMA DE BLOQUES */}
-        {planViewMode === 'timeline' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '12px' }}>
-            {filteredBlocks.map((b) => {
-              const catColor = getCategoryColor(b.category);
-              const isSelected = selectedBlock?.id === b.id;
+        {/* MODO 1: LÍNEA TEMPORAL CLEAN */}
+        {viewMode === 'timeline' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {filtered.map((b) => {
+              const isDone = b.status === 'completed';
+              const isInProgress = b.status === 'in_progress';
 
               return (
                 <div
                   key={b.id}
-                  onClick={() => setSelectedBlock(b)}
                   style={{
-                    background: getStatusBg(b.status),
-                    border: `1px solid ${isSelected ? 'var(--color-border-visible)' : b.status === 'in_progress' ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
-                    borderLeft: `4px solid ${catColor}`,
-                    borderRadius: '14px',
-                    padding: '12px 14px',
+                    background: isInProgress
+                      ? 'rgba(10, 132, 255, 0.08)'
+                      : isDone
+                      ? 'rgba(48, 209, 88, 0.04)'
+                      : 'var(--surface)',
+                    border: `1px solid ${isInProgress ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
+                    borderRadius: 'var(--radius-md)',
+                    padding: '12px 16px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    gap: '10px',
-                    cursor: 'pointer',
-                    opacity: b.status === 'skipped' ? 0.5 : 1
+                    gap: '12px',
+                    opacity: isDone ? 0.65 : 1,
+                    transition: 'all 150ms ease'
                   }}
                 >
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', overflow: 'hidden' }}>
-                    <span style={{ fontSize: '0.7rem', color: catColor, fontWeight: 700 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
+                    <span style={{
+                      fontFamily: 'monospace',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      color: getCategoryBadgeColor(b.category),
+                      width: '46px',
+                      flexShrink: 0
+                    }}>
                       {b.time}
                     </span>
-                    <strong style={{ fontSize: '0.9rem', color: 'var(--text)', textDecoration: b.status === 'completed' || b.status === 'skipped' ? 'line-through' : 'none' }}>
+
+                    <span style={{
+                      fontSize: '0.9rem',
+                      fontWeight: isInProgress ? 700 : 500,
+                      color: 'var(--text)',
+                      textDecoration: isDone ? 'line-through' : 'none',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis'
+                    }}>
                       {b.shortTitle}
-                    </strong>
+                    </span>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={(e) => toggleStatus(b.id, e)}
-                    style={{
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      padding: '4px 10px',
-                      borderRadius: '8px',
-                      border: 'none',
-                      cursor: 'pointer',
-                      background: b.status === 'completed' ? 'var(--color-state-done-soft)' : 'var(--color-border-subtle)',
-                      color: b.status === 'completed' ? 'var(--color-state-done)' : 'var(--text-tertiary)'
-                    }}
-                  >
-                    {b.status === 'completed' ? '✓ Listo' : '○ En curso'}
-                  </button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {b.actionUrl && (
+                      <a
+                        href={b.actionUrl}
+                        style={{
+                          fontSize: '0.72rem',
+                          color: 'var(--color-accent-primary)',
+                          textDecoration: 'none',
+                          fontWeight: 600,
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          background: 'var(--color-accent-primary-soft)'
+                        }}
+                      >
+                        {b.actionLabel}
+                      </a>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={(e) => toggleStatus(b.id, e)}
+                      style={{
+                        background: isDone ? 'var(--color-state-done-soft)' : isInProgress ? 'var(--color-accent-primary-soft)' : 'rgba(255,255,255,0.06)',
+                        color: isDone ? 'var(--color-state-done)' : isInProgress ? 'var(--color-accent-primary)' : 'var(--text-tertiary)',
+                        border: 'none',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {isDone ? '✓ Hecho' : isInProgress ? '► En curso' : 'Pendiente'}
+                    </button>
+                  </div>
                 </div>
               );
             })}
           </div>
         )}
 
-        {/* MODO 2: CANVAS INTERACTIVO (TARJETAS REORGANIZABLES) */}
-        {planViewMode === 'canvas' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-md)' }}>
-            {filteredBlocks.map((b) => (
-              <div
-                key={b.id}
-                style={{
-                  background: 'var(--surface)',
-                  border: '1px solid var(--color-border-visible)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: 'var(--space-md)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-xs)',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.4)'
-                }}
-              >
-                <span style={{ fontSize: 'var(--font-size-meta)', color: getCategoryColor(b.category), fontWeight: 700 }}>
-                  {b.time} · {b.category.toUpperCase()}
-                </span>
-                <strong style={{ fontSize: '1rem', color: 'var(--text)' }}>
-                  {b.shortTitle}
-                </strong>
-                <p style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', margin: 0 }}>
-                  Regla: {b.rule}
-                </p>
-              </div>
-            ))}
+        {/* MODO 2: TABLERO KANBAN LIMPIO (3 COLUMNAS) */}
+        {viewMode === 'kanban' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--space-md)' }}>
+            
+            {/* COLUMNA 1: POR HACER */}
+            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Por Hacer ({filtered.filter(b => b.status === 'pending').length})
+              </span>
+
+              {filtered.filter(b => b.status === 'pending').map((b) => (
+                <div key={b.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
+                    <button type="button" onClick={() => moveStatus(b.id, 'in_progress')} style={{ background: 'transparent', border: 'none', color: 'var(--color-accent-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 600 }}>
+                      Iniciar →
+                    </button>
+                  </div>
+                  <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{b.shortTitle}</strong>
+                </div>
+              ))}
+            </div>
+
+            {/* COLUMNA 2: EN CURSO */}
+            <div style={{ background: 'rgba(10, 132, 255, 0.03)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                En Curso ({filtered.filter(b => b.status === 'in_progress').length})
+              </span>
+
+              {filtered.filter(b => b.status === 'in_progress').map((b) => (
+                <div key={b.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-accent-primary)', borderRadius: 'var(--radius-md)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
+                    <button type="button" onClick={() => moveStatus(b.id, 'completed')} style={{ background: 'var(--color-state-done-soft)', border: 'none', color: 'var(--color-state-done)', padding: '2px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}>
+                      Completar ✓
+                    </button>
+                  </div>
+                  <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{b.shortTitle}</strong>
+                </div>
+              ))}
+            </div>
+
+            {/* COLUMNA 3: COMPLETADO */}
+            <div style={{ background: 'rgba(48, 209, 88, 0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-state-done)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Completado ({filtered.filter(b => b.status === 'completed').length})
+              </span>
+
+              {filtered.filter(b => b.status === 'completed').map((b) => (
+                <div key={b.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px', opacity: 0.7 }}>
+                  <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
+                  <strong style={{ fontSize: '0.88rem', color: 'var(--text)', textDecoration: 'line-through' }}>{b.shortTitle}</strong>
+                </div>
+              ))}
+            </div>
+
           </div>
         )}
 
-        {/* MODO 3: TABLAS VISUALES & ESTADÍSTICAS */}
-        {planViewMode === 'stats' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-md)' }}>
+        {/* MODO 3: RESUMEN DE MÉTRICAS */}
+        {viewMode === 'stats' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-md)' }}>
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-              <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>ADHERENCIA AL PLAN DIARIO</span>
-              <strong style={{ fontSize: '1.4rem', color: 'var(--color-state-done)', display: 'block', marginTop: '4px' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Completado Hoy</span>
+              <strong style={{ fontSize: '1.5rem', color: 'var(--color-state-done)', display: 'block', marginTop: '4px' }}>
                 {Math.round((blocks.filter(b => b.status === 'completed').length / blocks.length) * 100)}%
               </strong>
             </div>
 
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-              <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>BLOQUES DE TRABAJO PROFUNDO</span>
-              <strong style={{ fontSize: '1.4rem', color: 'var(--color-accent-primary)', display: 'block', marginTop: '4px' }}>
-                2 Bloques completados hoy
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Enfocado En</span>
+              <strong style={{ fontSize: '1.1rem', color: 'var(--color-accent-primary)', display: 'block', marginTop: '4px' }}>
+                TwinSight MVP & Sustentación
               </strong>
             </div>
           </div>
         )}
 
-        {/* TARJETA DE REORGANIZACIÓN */}
-        {selectedBlock && (
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
-              Reorganizar Bloque: {selectedBlock.fullTitle}
-            </h4>
-            <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
-              <Button variant="ghost" size="sm" onClick={() => handleSkipWithoutGuilt(selectedBlock.id)}>
-                Saltar Sin Culpa
-              </Button>
-              <Button variant="secondary" size="sm" onClick={() => handleReorganizeRestOfDay(selectedBlock.id)}>
-                Reorganizar Resto del Día
-              </Button>
-            </div>
-          </div>
-        )}
-
         <InertiaRescueModal
-          isOpen={isRescueModalOpen}
-          onClose={() => setIsRescueModalOpen(false)}
+          isOpen={isRescueOpen}
+          onClose={() => setIsRescueOpen(false)}
           currentTaskName="Bloque A: Trabajo Profundo"
         />
       </div>
