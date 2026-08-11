@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -76,10 +77,15 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmedUrl = inputUrl.trim();
+    if (!trimmedUrl) return;
+    if (!isValidEmbedUrl(trimmedUrl)) {
+      alert('URL no válida o no autorizada. Debe usar HTTPS y pertenecer a un dominio permitido (notion.so, notion.site, notion.com, v1.embednotion.com).');
+      return;
+    }
+    setNotionEmbedUrl(trimmedUrl);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmedUrl);
     } catch (e) {
       console.error(e);
     }
@@ -292,11 +298,24 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                />
+              ) : (
+                <div style={{ display: 'grid', placeItems: 'center', height: '100%', color: 'var(--color-accent-danger)', background: '#121212', padding: '20px', textAlign: 'center' }}>
+                  <div>
+                    <span style={{ fontSize: '2rem' }}>⚠️</span>
+                    <h4 style={{ margin: '10px 0 5px' }}>Bloqueado por Política de Seguridad</h4>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: 0 }}>
+                      La URL configurada no es segura o no pertenece a un dominio permitido.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
