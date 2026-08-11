@@ -10,11 +10,13 @@ import { libraryAssetUrl } from '../../lib/library/openDocument';
 export interface WorkoutPrescriptionTableProps {
   program: TrainingProgram;
   onOpenExerciseModal?: (exerciseId: string) => void;
+  hideHeaderPdf?: boolean;
 }
 
 export function WorkoutPrescriptionTable({
   program,
-  onOpenExerciseModal
+  onOpenExerciseModal,
+  hideHeaderPdf = false
 }: WorkoutPrescriptionTableProps) {
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
   const setWeek = useActiveProgramStore((s) => s.setWeek);
@@ -47,7 +49,7 @@ export function WorkoutPrescriptionTable({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
       {/* BOTÓN APERTURA PDF FUENTE OFICIAL */}
-      {program.pdfUrl && (
+      {!hideHeaderPdf && program.pdfUrl && (
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <a
             href={libraryAssetUrl(program.pdfUrl)}
