@@ -45,3 +45,8 @@ El sistema puede registrar síntomas subjetivos y ofrecer opciones de pausar/red
 - Un PR conserva ejercicio canónico y variante.
 - Una sustitución conserva prescrito, ejecutado y motivo.
 - La app sigue operativa si Notion/API no está disponible.
+
+## Estado de Implementación
+- **Persistencia Local Offline (Local-First)**: Implementado `src/data/fitness/fitnessStorageAdapter.ts` para guardar sesiones completadas, sustituciones de ejercicios (prescrito, ejecutado, motivo) y récords personales (PRs) de forma 100% offline sin dependencia de red durante el entrenamiento.
+- **Puente de Sincronización a Notion**: Creado `src/data/fitness/fitnessSessionSyncBridge.ts` para consolidar y transmitir el resumen de la sesión a Notion (DB 7 `FitnessSessions`, DB 8 `FitnessMeasurements`, DB 9 `FitnessPRSnapshots`) únicamente al finalizar el entrenamiento y con llaves de idempotencia anti-duplicados.
+- **Privacidad de Métricas en Hoy**: Configurado `src/data/adapters/todayAdapter.ts` y `domainContracts.ts` para restringir la vista en la pantalla "Hoy" únicamente a la rutina activa, última sesión y PR reciente, sin exponer peso corporal, grasa ni dolor.

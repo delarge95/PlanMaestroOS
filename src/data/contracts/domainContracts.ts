@@ -26,6 +26,8 @@ export interface TodayDomainView {
     activeRoutineTitle: string;
     sessionCompletedToday: boolean;
     nextWorkoutDayTitle?: string;
+    recentPR?: { exercise: string; value: string };
+    prehabPending?: boolean;
   };
   careerSummary: {
     pendingFollowUpsCount: number;

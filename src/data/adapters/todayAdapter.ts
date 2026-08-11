@@ -45,7 +45,8 @@ export function getTodayDomainView(): TodayDomainView {
     fitnessSummary: {
       activeRoutineTitle: currentProgram ? currentProgram.title.replace(/\s*\([^)]*\)/g, '').trim() : 'MinMax Hypertrophy',
       sessionCompletedToday: false,
-      nextWorkoutDayTitle: 'Día 1: Upper 1 (Fuerza)'
+      nextWorkoutDayTitle: 'Día 1: Upper 1 (Fuerza)',
+      recentPR: { exercise: 'Prensa Inclinada', value: '+5 kg (PR MaxWeight)' }
     },
     careerSummary: {
       pendingFollowUpsCount: 1,
