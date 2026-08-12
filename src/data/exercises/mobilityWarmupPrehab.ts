@@ -1,6 +1,6 @@
 import type { ExerciseInfo } from '../types';
 
-export const mobilityWarmupPrehabExercises: { [key: string]: ExerciseInfo } = {
+export const mobilityWarmupPrehabExercises: Record<string, ExerciseInfo> = {
   "Arch Holds": {
     image: "",
     category: "Mobility, Warm-up & Prehab",
@@ -45,27 +45,18 @@ export const mobilityWarmupPrehabExercises: { [key: string]: ExerciseInfo } = {
     substitutions: ["Wall Slide (bodyweight)", "Foam Roller Wall Slide"]
   },
   "Burpees": {
-    image: "",
-    category: "Mobility, Warm-up & Prehab",
-    subcategory: "Full Body Conditioning",
-    attachments: [],
+    image: "https://i.vimeocdn.com/video/1701636353-98f23232dc11043b5de5050224d5e3b57f0209bd962b937ed59a063113197a59-d_1920x1080",
+    subcategory: "Bodyweight",
     muscles: {
-      strength: ["Quadriceps", "Glutes", "Pectorals", "Deltoids", "Triceps"],
-      stability: ["Core"],
-      mobility: [
-        { muscle: "Hip", level: "Moderate", description: "Requires quick flexion to bring feet towards hands." },
-        { muscle: "Ankle", level: "Moderate", description: "Requires dorsiflexion for the squat portion." }
-      ]
+      strength: ["Full Body"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Full Body", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal burpees (no jump, no push up)"}]
     },
-    techniquePoints: [
-      "Start standing, then drop into a squat position with your hands on the floor.",
-      "Kick your feet back to a push-up position and perform one push-up.",
-      "Immediately return your feet to the squat position.",
-      "Jump up explosively from the squat position.",
-      "It's a full-body metabolic conditioning exercise."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=dZgVxmf6jkA",
-    substitutions: ["Squat Thrusts", "Jumping Jacks", "Kettlebell Swings"]
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Burpees.", "Execute concentric phase with intent, driving force through your Full Body.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Mobility, Warm-up & Prehab",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/847809403/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=058aa57ab970dc830714784304868d0aa0c9d4e654fda1c3d5893e1b69b18f81",
+    secondaryVideoLink: "https://www.youtube.com/watch?v=dZgVxmf6jkA",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
   },
   "Cat/Cow": {
     image: "",
@@ -261,26 +252,18 @@ export const mobilityWarmupPrehabExercises: { [key: string]: ExerciseInfo } = {
     substitutions: ["Dead Hang", "Skin the Cat"]
   },
   "Jumping jacks": {
-    image: "",
-    category: "Mobility, Warm-up & Prehab",
-    subcategory: "Cardio & Full Body Warm-up",
-    attachments: [],
+    image: "https://i.vimeocdn.com/video/1783127903-172b9c53cb47b0aedc47ef6ec84f5192e7290a72af3f6c0879182a54e77c2a26-d_1920x1080",
+    subcategory: "Bodyweight",
     muscles: {
-      strength: [],
-      stability: [],
-      mobility: [
-        { muscle: "Shoulder", level: "Low", description: "Involves shoulder abduction and adduction." },
-        { muscle: "Hip", level: "Low", description: "Involves hip abduction and adduction." }
-      ]
+      strength: ["Full Body"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Full Body", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Jumping Jacks"}]
     },
-    techniquePoints: [
-      "Start standing with feet together and hands at your sides.",
-      "Simultaneously jump your feet out to the sides while raising your arms overhead.",
-      "Jump back to the starting position.",
-      "Maintain a light, rhythmic pace to elevate heart rate and warm up the joints."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=GOhV5lwc17U",
-    substitutions: ["Jumping Rope", "Light Jogging", "Burpees"]
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Jumping jacks.", "Execute concentric phase with intent, driving force through your Full Body.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Mobility, Warm-up & Prehab",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/903166029/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=bafbda58c7a762f84b70e42177d67b2ec0e59b6ac109b6b2be06eb6b860b0bf6",
+    secondaryVideoLink: "https://www.youtube.com/watch?v=GOhV5lwc17U",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
   },
   "Jumping rope": {
     image: "",
@@ -455,25 +438,18 @@ export const mobilityWarmupPrehabExercises: { [key: string]: ExerciseInfo } = {
     substitutions: ["Median Nerve Glide", "Ulnar Nerve Glide"]
   },
   "Reverse Plank": {
-    image: "",
-    category: "Mobility, Warm-up & Prehab",
-    subcategory: "Core & Posterior Chain Activation",
-    attachments: [],
+    image: "https://i.vimeocdn.com/video/1838748982-8863e5f09aa62d57eb7c0d1449f9b36c15e1606e70383dc43f8ab3138ca710df-d_1920x1080",
+    subcategory: "Bodyweight",
     muscles: {
-      strength: ["Glutes", "Hamstrings", "Erector Spinae"],
-      stability: ["Core", "Shoulder Girdle"],
-      mobility: [
-        { muscle: "Shoulder", level: "Moderate", description: "Requires good shoulder extension and opens up the chest." }
-      ]
+      strength: ["Erector Spinae", "Posterior Deltoid", "Rectus Abdominis"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Erector Spinae", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Reverse Plank"}]
     },
-    techniquePoints: [
-      "Sit on the floor with legs straight out and hands on the floor behind you, fingers pointing towards your feet.",
-      "Press into your hands and heels to lift your hips off the floor.",
-      "Form a straight line from your head to your heels, squeezing your glutes and keeping your core tight.",
-      "Avoid letting your hips sag. Hold the position for time."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=ZNAxdJ6Bt00",
-    substitutions: ["Glute Bridge", "Arch Holds"]
+    techniquePoints: ["Set up on forearms/hands and toes, forming a straight line from head to heels.", "Squeeze glutes, pull belly button inward, and tuck pelvis into posterior pelvic tilt.", "Hold position statically while taking short, controlled breaths."],
+    category: "Mobility, Warm-up & Prehab",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/937966258/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=3ee6d6777bc3fa27f4374c7d1f09921d321043c38b4f8dbf5787d4619ba59db3",
+    secondaryVideoLink: "https://www.youtube.com/watch?v=ZNAxdJ6Bt00",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
   },
   "Rice bucket exercises": {
     image: "",
@@ -834,5 +810,57 @@ export const mobilityWarmupPrehabExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=wRSk1_C6yOM",
     substitutions: ["Wrist Flexion/Extension Stretches"]
-  }
+  },
+  "Figure 4 Stretch": {
+    image: "https://i.vimeocdn.com/video/923200307-d32955db3fa3dc9636a90138ec2d78bea486d30c9ba3213df4f246ad72200f1c-d_1920x1080",
+    subcategory: "Dynamic Mobility",
+    muscles: {
+      strength: ["Full Body"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Full Body", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Figure 4 Stretch"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Figure 4 Stretch.", "Execute concentric phase with intent, driving force through your Full Body.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Mobility, Warm-up & Prehab",
+    youtubeLink: "https://player.vimeo.com/external/437613620.sd.mp4?s=6bdc8e046fbd24954edbdb69c266b82621c1c2db&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Shoulder Stretch": {
+    image: "https://i.vimeocdn.com/video/923200688-b3c96bddf368862f8fe15ad1f49944030b076c03512c005de0e07e480f2d51b8-d_1920x1080",
+    subcategory: "Dynamic Mobility",
+    muscles: {
+      strength: ["Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Shoulder Stretch"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Shoulder Stretch.", "Execute concentric phase with intent, driving force through your Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Mobility, Warm-up & Prehab",
+    youtubeLink: "https://player.vimeo.com/external/437613805.sd.mp4?s=5f74f8611df4c42bb0ffa77d20795e80c9662366&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Standing Quad Stretch": {
+    image: "https://i.vimeocdn.com/video/923200765-5e24f97c9e6f7a83f54d77fc7366f712b880be723acfbeb44e2d0b45dbc76050-d_1920x1080",
+    subcategory: "Dynamic Mobility",
+    muscles: {
+      strength: ["Quadriceps Femoris"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Standing Quad Stretch"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Standing Quad Stretch.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Mobility, Warm-up & Prehab",
+    youtubeLink: "https://player.vimeo.com/external/437613839.sd.mp4?s=9c936f3ba47deb87501b134042d217b43baecc52&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Tricep Stretch": {
+    image: "https://i.vimeocdn.com/video/923200873-9a3d9cf5650a9916e9f0076ea771717145aef4d4c15bffc2ab5c555a10650d2f-d_1920x1080",
+    subcategory: "Dynamic Mobility",
+    muscles: {
+      strength: ["Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Tricep Stretch"}]
+    },
+    techniquePoints: ["Keep upper arms stationary throughout the entire rep.", "Extend forearms until elbows lock out fully, isolating your Triceps Brachii Group.", "Control eccentric phase to feel a deep stretch in the triceps muscle belly."],
+    category: "Mobility, Warm-up & Prehab",
+    youtubeLink: "https://player.vimeo.com/external/437613922.sd.mp4?s=9e525b16098004904d314375847d955bdeb94766&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
 };

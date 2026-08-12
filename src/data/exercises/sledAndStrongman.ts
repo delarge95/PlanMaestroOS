@@ -1,6 +1,68 @@
 import type { ExerciseInfo } from '../types';
 
-export const sledAndStrongmanExercises: { [key: string]: ExerciseInfo } = {
+export const sledAndStrongmanExercises: Record<string, ExerciseInfo> = {
+  "Farmer's Walks": {
+    image: "",
+    category: "Sled & Strongman",
+    subcategory: "Transporte Cargado",
+    attachments: ["Farmer's Walk Handles", "Dumbbells", "Kettlebells"],
+    muscles: {
+      strength: ["Forearms (Grip)", "Trapezius", "Core", "Glutes"],
+      stability: ["Entire body", "Shoulders", "Lats"],
+      mobility: [
+        { muscle: "Ankles", level: "Low", description: "Requires basic walking mechanics under load." }
+      ]
+    },
+    techniquePoints: [
+      "Pick up heavy dumbbells, kettlebells, or farmer's walk handles with a neutral grip.",
+      "Walk for a set distance or time, keeping an upright, 'proud' posture.",
+      "Brace your core and keep your shoulders pulled back and down.",
+      "Take short, quick steps to maintain momentum and balance."
+    ],
+    youtubeLink: "",
+    substitutions: ["Yoke Walk", "Sandbag and Barrel Lifts/Carries"]
+  },
+  "Sled Pull": {
+    image: "",
+    category: "Sled & Strongman",
+    subcategory: "Tracción de Trineo",
+    attachments: ["Sled", "Rope"],
+    muscles: {
+      strength: ["Lats", "Biceps", "Forearms (Grip)", "Glutes", "Hamstrings"],
+      stability: ["Core", "Erector Spinae"],
+      mobility: [
+        { muscle: "Hips", level: "Low", description: "Requires a stable, hinged position." }
+      ]
+    },
+    techniquePoints: [
+      "Use a long rope to pull a sled towards you, hand over hand.",
+      "Can be done seated (isolating upper body) or standing in a hinged position (engaging posterior chain).",
+      "This is a great upper body and posterior chain conditioner and grip builder."
+    ],
+    youtubeLink: "",
+    substitutions: ["Seated Cable Row", "Rope Climb"]
+  },
+  "Sled Push": {
+    image: "",
+    category: "Sled & Strongman",
+    subcategory: "Empuje de Trineo",
+    attachments: ["Sled"],
+    muscles: {
+      strength: ["Quadriceps", "Glutes", "Calves", "Core"],
+      stability: ["Shoulders", "Chest"],
+      mobility: [
+        { muscle: "Ankles", level: "Moderate", description: "Requires good dorsiflexion for a forward lean." }
+      ]
+    },
+    techniquePoints: [
+      "Load a sled and push it for a set distance.",
+      "Keep your arms straight or bent, and maintain a strong forward lean.",
+      "Drive with your legs, taking powerful steps.",
+      "An excellent conditioning tool that's low-impact and concentric-focused."
+    ],
+    youtubeLink: "https://www.youtube.com/watch?v=PnMeRNVts9s",
+    substitutions: ["Prowler Push", "Forward Drag"]
+  },
   "Alligator/Crocodile Crawl": {
     image: "",
     category: "Sled & Strongman",
@@ -89,27 +151,6 @@ export const sledAndStrongmanExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "",
     substitutions: ["Burpees", "Sled Push"]
-  },
-  "Farmer's Walks": {
-    image: "",
-    category: "Sled & Strongman",
-    subcategory: "Transporte Cargado",
-    attachments: ["Farmer's Walk Handles", "Dumbbells", "Kettlebells"],
-    muscles: {
-      strength: ["Forearms (Grip)", "Trapezius", "Core", "Glutes"],
-      stability: ["Entire body", "Shoulders", "Lats"],
-      mobility: [
-        { muscle: "Ankles", level: "Low", description: "Requires basic walking mechanics under load." }
-      ]
-    },
-    techniquePoints: [
-      "Pick up heavy dumbbells, kettlebells, or farmer's walk handles with a neutral grip.",
-      "Walk for a set distance or time, keeping an upright, 'proud' posture.",
-      "Brace your core and keep your shoulders pulled back and down.",
-      "Take short, quick steps to maintain momentum and balance."
-    ],
-    youtubeLink: "",
-    substitutions: ["Yoke Walk", "Sandbag and Barrel Lifts/Carries"]
   },
   "Forward Drag": {
     image: "",
@@ -347,47 +388,6 @@ export const sledAndStrongmanExercises: { [key: string]: ExerciseInfo } = {
     youtubeLink: "",
     substitutions: ["Battle Ropes", "Burpee to Sled Push"]
   },
-  "Sled Pull": {
-    image: "",
-    category: "Sled & Strongman",
-    subcategory: "Tracción de Trineo",
-    attachments: ["Sled", "Rope"],
-    muscles: {
-      strength: ["Lats", "Biceps", "Forearms (Grip)", "Glutes", "Hamstrings"],
-      stability: ["Core", "Erector Spinae"],
-      mobility: [
-        { muscle: "Hips", level: "Low", description: "Requires a stable, hinged position." }
-      ]
-    },
-    techniquePoints: [
-      "Use a long rope to pull a sled towards you, hand over hand.",
-      "Can be done seated (isolating upper body) or standing in a hinged position (engaging posterior chain).",
-      "This is a great upper body and posterior chain conditioner and grip builder."
-    ],
-    youtubeLink: "",
-    substitutions: ["Seated Cable Row", "Rope Climb"]
-  },
-  "Sled Push": {
-    image: "",
-    category: "Sled & Strongman",
-    subcategory: "Empuje de Trineo",
-    attachments: ["Sled"],
-    muscles: {
-      strength: ["Quadriceps", "Glutes", "Calves", "Core"],
-      stability: ["Shoulders", "Chest"],
-      mobility: [
-        { muscle: "Ankles", level: "Moderate", description: "Requires good dorsiflexion for a forward lean." }
-      ]
-    },
-    techniquePoints: [
-      "Load a sled and push it for a set distance.",
-      "Keep your arms straight or bent, and maintain a strong forward lean.",
-      "Drive with your legs, taking powerful steps.",
-      "An excellent conditioning tool that's low-impact and concentric-focused."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=PnMeRNVts9s",
-    substitutions: ["Prowler Push", "Forward Drag"]
-  },
   "Tire Flip": {
     image: "",
     category: "Sled & Strongman",
@@ -432,5 +432,5 @@ export const sledAndStrongmanExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=zRsFkNPxaMM",
     substitutions: ["Heavy Barbell Walk", "Farmer's Walks"]
-  }
+  },
 };

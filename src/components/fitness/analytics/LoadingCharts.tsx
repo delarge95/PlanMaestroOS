@@ -98,7 +98,7 @@ export default function LoadingCharts() {
       </div>
 
       {/* TABLA DE CARGAS Y DISCOS POR LADO */}
-      <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: '10px', maxHeight: '420px' }}>
+      <div style={{ border: '1px solid var(--color-border-subtle)', borderRadius: '10px' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.84rem' }}>
           <thead style={{ position: 'sticky', top: 0, background: '#141820', zIndex: 10, borderBottom: '1px solid var(--color-border-subtle)', textTransform: 'uppercase', fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
             <tr>

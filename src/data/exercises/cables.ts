@@ -1,6 +1,6 @@
 import type { ExerciseInfo } from '../types';
 
-export const cablesExercises: { [key: string]: ExerciseInfo } = {
+export const cablesExercises: Record<string, ExerciseInfo> = {
   "1-Arm 45° Cable Rear Delt Flye": {
     image: "",
     category: "Cables",
@@ -1176,5 +1176,44 @@ export const cablesExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=ek-UELpEsLI",
     substitutions: ["Dual-Cable Triceps Press", "Triceps Pressdown (Bar)"]
-  }
+  },
+  "Close-Grip Lat Pulldown": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Cable Attachment",
+    muscles: {
+      strength: ["Dorsales"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Adjust thigh pad tightly to secure lower body in seat.", "Grip bar overhand or neutral, lean back slightly (10-15 degrees), and pull bar down to upper chest.", "Drive elbows toward hip pockets, squeeze lats at bottom, and control return to full overhead stretch."],
+    category: "Cables",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Close-Grip%20Lat%20Pulldown",
+    substitutions: ["Close-Grip Pull-Up", "1-Arm Cable Pulldown"]
+  },
+  "Neutral-Grip Lat Pulldown": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Cable Attachment",
+    muscles: {
+      strength: ["Dorsales"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Adjust thigh pad tightly to secure lower body in seat.", "Grip bar overhand or neutral, lean back slightly (10-15 degrees), and pull bar down to upper chest.", "Drive elbows toward hip pockets, squeeze lats at bottom, and control return to full overhead stretch."],
+    category: "Cables",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Neutral-Grip%20Lat%20Pulldown",
+    substitutions: ["Neutral-Grip Pull-Up", "Dual-Handle Lat Pulldown"]
+  },
+  "Dual-Handle Lat Pulldown": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Cable Attachment",
+    muscles: {
+      strength: ["Dorsales"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Adjust thigh pad tightly to secure lower body in seat.", "Grip bar overhand or neutral, lean back slightly (10-15 degrees), and pull bar down to upper chest.", "Drive elbows toward hip pockets, squeeze lats at bottom, and control return to full overhead stretch."],
+    category: "Cables",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Dual-Handle%20Lat%20Pulldown",
+    substitutions: ["Wide-Grip Lat Pulldown", "Wide-Grip Pull-Up"]
+  },
 };

@@ -1,6 +1,6 @@
 import type { ExerciseInfo } from '../types';
 
-export const machinesExercises: { [key: string]: ExerciseInfo } = {
+export const machinesExercises: Record<string, ExerciseInfo> = {
   "45° Incline Machine Press": {
     image: "",
     category: "Machines",
@@ -1207,5 +1207,57 @@ export const machinesExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=d9j-vgbFReg",
     substitutions: ["Hanging Leg Raise", "Captain's Chair Leg Raise", "Ab Wheel Rollout"]
-  }
+  },
+  "Smith Machine Lunge": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Machine",
+    muscles: {
+      strength: ["Cu\u00e1driceps"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Grip the bar underhand (palms facing you) shoulder-width apart.", "Initiate the pull by depressing your shoulder blades and driving elbows straight down toward your ribs.", "Pull until your chin clears the bar, squeezing your biceps and lower lats hard at the top position."],
+    category: "Machines",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Smith%20Machine%20Lunge",
+    substitutions: ["DB Lunge", "Barbell Lunge"]
+  },
+  "1-Arm Reverse Pec Deck": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Machine",
+    muscles: {
+      strength: ["Deltoides posterior"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting 1-Arm Reverse Pec Deck.", "Execute concentric phase with intent, driving force through your Deltoides posterior.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Machines",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+1-Arm%20Reverse%20Pec%20Deck",
+    substitutions: ["Lying Reverse DB Flye", "Reverse Cable Crossover"]
+  },
+  "Machine Hip Thrust": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Machine",
+    muscles: {
+      strength: ["Gl\u00fateos"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Grip the bar underhand (palms facing you) shoulder-width apart.", "Initiate the pull by depressing your shoulder blades and driving elbows straight down toward your ribs.", "Pull until your chin clears the bar, squeezing your biceps and lower lats hard at the top position."],
+    category: "Machines",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Machine%20Hip%20Thrust",
+    substitutions: ["Barbell Hip Thrust", "45\u00b0 Hyperextension"]
+  },
+  "Smith Machine Static Lunge w/ Elevated Front Foot": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Machine",
+    muscles: {
+      strength: ["Cu\u00e1driceps"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Grip the bar underhand (palms facing you) shoulder-width apart.", "Initiate the pull by depressing your shoulder blades and driving elbows straight down toward your ribs.", "Pull until your chin clears the bar, squeezing your biceps and lower lats hard at the top position."],
+    category: "Machines",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Smith%20Machine%20Static%20Lunge%20w/%20Elevated%20Front%20Foot",
+    substitutions: ["DB Bulgarian Split Squat", "High-Bar Back Squat"]
+  },
 };

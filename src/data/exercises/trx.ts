@@ -1,6 +1,6 @@
 import type { ExerciseInfo } from '../types';
 
-export const trxExercises: { [key: string]: ExerciseInfo } = {
+export const trxExercises: Record<string, ExerciseInfo> = {
   "TRX Abducted Lunge": {
     image: "",
     category: "TRX",
@@ -1133,5 +1133,5 @@ export const trxExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=RWQYQarfDzk",
     substitutions: ["TRX Triceps Extension", "EZ-Bar Skull Crusher"]
-  }
+  },
 };

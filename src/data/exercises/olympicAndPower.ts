@@ -1,6 +1,31 @@
 import type { ExerciseInfo } from '../types';
 
-export const olympicAndPowerExercises: { [key: string]: ExerciseInfo } = {
+export const olympicAndPowerExercises: Record<string, ExerciseInfo> = {
+  "Overhead Squat": {
+    image: "",
+    category: "Olympic & Power",
+    subcategory: "Squat Variation",
+    attachments: ["Barbell", "Weight Plates"],
+    muscles: {
+      strength: ["Quadriceps", "Glutes", "Deltoids", "Upper Back", "Triceps"],
+      stability: ["Core", "Entire Shoulder Girdle", "Erector Spinae", "Lats"],
+      mobility: [
+        { muscle: "Ankle", level: "High", description: "Requires excellent dorsiflexion to keep an upright torso." },
+        { muscle: "Hip", level: "High", description: "Requires deep hip flexion." },
+        { muscle: "Shoulder", level: "High", description: "Requires elite-level shoulder flexion, external rotation, and stability." },
+        { muscle: "Thoracic Spine", level: "High", description: "Crucial for maintaining an upright posture and preventing the bar from falling forward." }
+      ]
+    },
+    techniquePoints: [
+      "Hold a barbell overhead with a wide snatch grip and locked-out arms.",
+      "Actively push up on the bar and pull it apart to engage your upper back and shoulders.",
+      "Descend into a full squat while keeping the bar stable and directly over your mid-foot.",
+      "Maintain an upright torso and keep your heels on the ground.",
+      "This is a diagnostic tool for mobility as much as it is a strength exercise."
+    ],
+    youtubeLink: "https://www.youtube.com/watch?v=RD_vUnqwqqI",
+    substitutions: ["Snatch Balance", "Front Squat", "Goblet Squat (for posture)"]
+  },
   "Block Clean": {
     image: "",
     category: "Olympic & Power",
@@ -251,31 +276,6 @@ export const olympicAndPowerExercises: { [key: string]: ExerciseInfo } = {
     youtubeLink: "https://www.youtube.com/watch?v=vO5JVdcY1jg",
     substitutions: ["Muscle Clean", "Snatch High Pull"]
   },
-  "Overhead Squat": {
-    image: "",
-    category: "Olympic & Power",
-    subcategory: "Squat Variation",
-    attachments: ["Barbell", "Weight Plates"],
-    muscles: {
-      strength: ["Quadriceps", "Glutes", "Deltoids", "Upper Back", "Triceps"],
-      stability: ["Core", "Entire Shoulder Girdle", "Erector Spinae", "Lats"],
-      mobility: [
-        { muscle: "Ankle", level: "High", description: "Requires excellent dorsiflexion to keep an upright torso." },
-        { muscle: "Hip", level: "High", description: "Requires deep hip flexion." },
-        { muscle: "Shoulder", level: "High", description: "Requires elite-level shoulder flexion, external rotation, and stability." },
-        { muscle: "Thoracic Spine", level: "High", description: "Crucial for maintaining an upright posture and preventing the bar from falling forward." }
-      ]
-    },
-    techniquePoints: [
-      "Hold a barbell overhead with a wide snatch grip and locked-out arms.",
-      "Actively push up on the bar and pull it apart to engage your upper back and shoulders.",
-      "Descend into a full squat while keeping the bar stable and directly over your mid-foot.",
-      "Maintain an upright torso and keep your heels on the ground.",
-      "This is a diagnostic tool for mobility as much as it is a strength exercise."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=RD_vUnqwqqI",
-    substitutions: ["Snatch Balance", "Front Squat", "Goblet Squat (for posture)"]
-  },
   "Power Clean": {
     image: "",
     category: "Olympic & Power",
@@ -459,5 +459,5 @@ export const olympicAndPowerExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=iFc4l24llpw",
     substitutions: ["Split Jerk", "Snatch Balance", "Overhead Squat"]
-  }
+  },
 };

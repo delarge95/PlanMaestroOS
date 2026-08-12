@@ -218,25 +218,75 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
           </select>
 
           {filterType === 'exercise' && (
-            <select
-              value={exerciseFilter}
-              onChange={(e) => setExerciseFilter(e.target.value)}
-              style={{
-                background: 'rgba(0,0,0,0.5)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--color-border-subtle)',
-                borderRadius: '6px',
-                padding: '4px 8px',
-                fontSize: '0.78rem',
-                outline: 'none',
-                maxWidth: '200px'
-              }}
-            >
-              <option value="">-- Seleccionar --</option>
-              {exerciseOptions.map((ex) => (
-                <option key={ex} value={ex}>{ex}</option>
-              ))}
-            </select>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <input
+                type="text"
+                placeholder="Buscar ejercicio..."
+                value={exerciseFilter}
+                onChange={(e) => setExerciseFilter(e.target.value)}
+                style={{
+                  background: 'rgba(0,0,0,0.5)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--color-border-subtle)',
+                  borderRadius: '6px',
+                  padding: '4px 8px',
+                  fontSize: '0.78rem',
+                  outline: 'none',
+                  minWidth: '180px'
+                }}
+              />
+              {exerciseFilter && (
+                <button
+                  type="button"
+                  onClick={() => setExerciseFilter('')}
+                  style={{
+                    position: 'absolute', right: '6px', top: '50%', transform: 'translateY(-50%)',
+                    background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '0.75rem'
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+              
+              {/* MENÚ DE AUTOCOMPLETADO INTERACTIVO */}
+              {exerciseFilter.length > 0 && !exerciseOptions.includes(exerciseFilter) && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    maxHeight: '180px',
+                    overflowY: 'auto',
+                    background: '#141820',
+                    border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.15))',
+                    borderRadius: '6px',
+                    zIndex: 100,
+                    marginTop: '4px',
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.5)'
+                  }}
+                >
+                  {exerciseOptions
+                    .filter((ex) => ex.toLowerCase().includes(exerciseFilter.toLowerCase()))
+                    .slice(0, 15)
+                    .map((ex) => (
+                      <div
+                        key={ex}
+                        onClick={() => setExerciseFilter(ex)}
+                        style={{
+                          padding: '6px 10px',
+                          fontSize: '0.78rem',
+                          color: 'var(--text-primary)',
+                          cursor: 'pointer',
+                          borderBottom: '1px solid rgba(255,255,255,0.03)'
+                        }}
+                      >
+                        {ex}
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
           )}
 
           {filterType === 'muscleGroup' && (

@@ -1,44 +1,26 @@
 import type { ExerciseInfo } from '../types';
 
-export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
-  "Incline DB Y-Raise": {
-    image: "",
-    category: "Free Weights",
-    subcategory: "Shoulders (Lateral & Rear Delts)",
-    attachments: ["Dumbbells", "Incline Bench"],
-    muscles: {
-      strength: ["Lateral Deltoids", "Lower Trapezius", "Rear Deltoids"],
-      stability: ["Scapular Stabilizers"],
-      mobility: []
-    },
-    techniquePoints: [
-      "Siéntate boca abajo en un banco inclinado a 30° apoyando el pecho.",
-      "Eleva las mancuernas hacia los lados y arriba formando una 'Y' con el torso.",
-      "Pausa de 1 segundo en la cima manteniendo tensión constante."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=0j3e070E3gY",
-    substitutions: ["Cable Y-Raise", "Standing DB Lateral Raise"]
-  },
-  "3\" Block Pull": {
+export const freeWeightsExercises: Record<string, ExerciseInfo> = {
+  "Block Pull": {
     image: "",
     category: "Free Weights",
     subcategory: "Deadlift Variation",
     attachments: ["Barbell", "Weight Plates", "Blocks"],
     muscles: {
-      strength: ["Glutes", "Hamstrings", "Erector Spinae", "Lats", "Trapezius"],
+      strength: ["Erector Spinae", "Glutes", "Lats", "Trapezius"],
       stability: ["Core", "Entire Posterior Chain"],
       mobility: [
-        { muscle: "Hips", level: "Moderate", description: "Requires slightly more hip mobility than a higher block pull, but less than a deadlift from the floor." }
+        { muscle: "Hips", level: "Low", description: "Reduced hip mobility requirement compared to a conventional deadlift, focusing on lockout strength." }
       ]
     },
     techniquePoints: [
-      "Set up a barbell on blocks or plates so it is elevated 3 inches off the floor (roughly mid-shin).",
-      "Perform a deadlift from this elevated position, maintaining a tight back and neutral spine.",
-      "This variation shortens the range of motion, focusing on building strength from below the knee to lockout.",
-      "Drive your hips through powerfully to finish the lift."
+      "Set a barbell on blocks so it's 5 inches off the ground (just below the knee).",
+      "Set up like a conventional deadlift with a flat back and engaged lats.",
+      "Focus on driving the hips forward and squeezing the glutes powerfully to lock out.",
+      "This variation is designed to overload the top portion of the deadlift."
     ],
     youtubeLink: "https://youtu.be/qOH1ZqkW-hw",
-    substitutions: ["5\" Block Pull", "Rack Pull (Below Knee)", "Deficit Deadlift"]
+    substitutions: ["3\" Block Pull", "Rack Pull (Below Knee)", "Sumo Block Pull"]
   },
   "45° Incline Barbell Press": {
     image: "",
@@ -62,27 +44,6 @@ export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=jPLdzuHckI8",
     substitutions: ["Dumbbell Incline Press", "Smith Machine Incline Press", "Low-to-High Cable Crossover"]
-  },
-  "5\" Block Pull": {
-    image: "",
-    category: "Free Weights",
-    subcategory: "Deadlift Variation",
-    attachments: ["Barbell", "Weight Plates", "Blocks"],
-    muscles: {
-      strength: ["Erector Spinae", "Glutes", "Lats", "Trapezius"],
-      stability: ["Core", "Entire Posterior Chain"],
-      mobility: [
-        { muscle: "Hips", level: "Low", description: "Reduced hip mobility requirement compared to a conventional deadlift, focusing on lockout strength." }
-      ]
-    },
-    techniquePoints: [
-      "Set a barbell on blocks so it's 5 inches off the ground (just below the knee).",
-      "Set up like a conventional deadlift with a flat back and engaged lats.",
-      "Focus on driving the hips forward and squeezing the glutes powerfully to lock out.",
-      "This variation is designed to overload the top portion of the deadlift."
-    ],
-    youtubeLink: "https://youtu.be/qOH1ZqkW-hw",
-    substitutions: ["3\" Block Pull", "Rack Pull (Below Knee)", "Sumo Block Pull"]
   },
   "Anderson Squat": {
     image: "",
@@ -1589,8 +1550,7 @@ export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=dAg1Kaevqj0",
     substitutions: ["Dumbbell Shrug", "Barbell Shrug"]
-  }
-  ,
+  },
   "Deadlift": {
     image: "",
     category: "Free Weights",
@@ -1988,24 +1948,6 @@ export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
     youtubeLink: "https://www.youtube.com/watch?v=YSx5FRCB_2U",
     substitutions: ["Neck Banded RDL", "Cable Pull-Through"]
   },
-  "Farmer's Walks": {
-    image: "",
-    category: "Free Weights",
-    subcategory: "Carry & Grip",
-    attachments: ["Dumbbell", "Trap Bar", "Farmer Handles"],
-    muscles: {
-      strength: ["Forearms (Grip)", "Trapezius", "Glutes", "Quadriceps"],
-      stability: ["Core", "Erector Spinae", "Scapular Stabilizers"],
-      mobility: []
-    },
-    techniquePoints: [
-      "Sujeta cargas pesadas a ambos lados, postura alta y core firme.",
-      "Camina con pasos cortos y controlados sin balanceo excesivo.",
-      "Respira con control manteniendo caja torácica apilada sobre pelvis."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=RAqf6Kp4B8g",
-    substitutions: ["Trap Bar Deadlift (Hold)", "Plate Pinch Hold"]
-  },
   "Unilateral Dumbbell RDL": {
     image: "",
     category: "Free Weights",
@@ -2115,8 +2057,7 @@ export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=D7KaRcUTQeE",
     substitutions: ["DB Reverse Lunge", "DB Walking Lunge", "Barbell Lunge"]
-  }
-  ,
+  },
   "Cuffed Behind-The-Back Lateral Raise": {
     image: "",
     category: "Free Weights",
@@ -2405,27 +2346,6 @@ export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
     youtubeLink: "https://www.youtube.com/watch?v=6swIESmGxZc",
     substitutions: ["One-Arm Row", "Arm-Out Single-Arm DB Row"]
   },
-  "Overhead Squat": {
-    image: "",
-    category: "Free Weights",
-    subcategory: "Squat Overhead",
-    attachments: ["Barbell", "Weight Plates"],
-    muscles: {
-      strength: ["Quadriceps", "Glutes"],
-      stability: ["Core", "Shoulder", "Upper Back"],
-      mobility: [
-        { muscle: "Shoulder", level: "High", description: "Elevada demanda de movilidad de hombro y estabilidad escapular." },
-        { muscle: "Ankles", level: "High", description: "Buena dorsiflexión para mantener torso erguido en sentadilla profunda." }
-      ]
-    },
-    techniquePoints: [
-      "Con la barra por encima de la cabeza en agarre ancho, desciende en sentadilla profunda.",
-      "Activa core y aprieta la barra hacia arriba para estabilidad.",
-      "Mantén rodillas alineadas con pies y talones firmes."
-    ],
-    youtubeLink: "https://www.youtube.com/watch?v=9Y6N0LQ3H4E",
-    substitutions: ["Front Squat", "Snatch-Grip Deadlift"]
-  },
   "Pause Barbell Bench Press": {
     image: "",
     category: "Free Weights",
@@ -2679,5 +2599,2748 @@ export const freeWeightsExercises: { [key: string]: ExerciseInfo } = {
     ],
     youtubeLink: "https://www.youtube.com/watch?v=dui_tlG3pZ8",
     substitutions: ["Pause Bridge", "Hip Thrust"]
-  }
+  },
+  "Alternate Leg Twist - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/754882354-dde1f2107fd4585e2d549a7a3f13bc22827b064a946e17e9b2cd2c24b2d69c9b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Alternate Leg Twist - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Alternate Leg Twist - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Obliques.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178385267.sd.mp4?s=f0810393d1fbeb83e587454cdfbf1e2aaafc833f&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Alternating Leg Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698396185-dc08b22870964d5a50b7fbe914c0efc8821fa4e57bbe5eb863654755bb3700a2-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Alternating Leg Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733572/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=184211a9e00653e0d909df1207b7cd214128828ef498f57ffa16df9e24f76593",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Anterior Raises Alternating - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753641563-495ca4f32a915c99b74deaacb658b5adaec2c7c163642d7bd8fab58d2322e8b5-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Anterior Raises Alternating - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342394.sd.mp4?s=828e87bf0fb8ebdc7e134f51f22973b2d3030c8e&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Anterior Raises - Barbell": {
+    image: "https://i.vimeocdn.com/video/753641476-cc64ea05c5e7fdeebe401d3e109c5227b88831897ef95efec62e673a0c3a04ab-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Anterior Raises - Barbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/185543845.sd.mp4?s=4df96fc94d82f93447be31cf9d27ed4466a3a98c&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Anterior Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1343840162-3b4ae1fea81ca002543466b0acf131790f623bf5ec7114d6614d5f765cb34fc6-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Anterior Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/663948448.sd.mp4?s=fca2ac5d2b18aa3f7bba46869bb65a2c65ae6465&profile_id=164&oauth_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Anterior Raises Inclined Bench - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753641618-06b2375a7634b109a5b0c8cbba65802603dbab1a5c0cf65d97e49c92d4c6bacf-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Anterior Raises Inclined Bench - Dumbbell"}]
+    },
+    techniquePoints: ["Set bench to 30-45 degrees, plant feet firmly on the floor, and pull shoulder blades together and down.", "Unrack the weight and lower it under control to your upper chest near the clavicles.", "Press the weight up and slightly backward over your shoulders, squeezing upper pecs at the top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342405.sd.mp4?s=7ffbba7876815b74f3aa46afa8a3f9d753290ba0&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Back And Forth Lunges - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698406790-a7aab29156d4fd19ae7a03faa5cb35572fbc4ba4745497500a37ce06592d034e-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Back And Forth Lunges - Dumbbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845740492/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=31cfb5ecb428ca341111b55b6a7a3a1f7779492a9b01c5a646d015648fc5249c",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "BACK EXTENSION ROWS": {
+    image: "https://i.vimeocdn.com/video/1732879677-d04552c0fe8e2cea1ecd3ef5c2cc17a138ce11b38076c2eff884d8c2c915c15a-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Deltoid Group", "Posterior Deltoid", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal BACK EXTENSION ROWS"}]
+    },
+    techniquePoints: ["Maintain a braced, neutral spine position throughout the movement.", "Drive elbows back to pull weight toward lower ribs, contracting your Trapezius & Rhomboids, Deltoid Group, Posterior Deltoid, Erector Spinae.", "Control the eccentric return to full stretch without allowing shoulders to round forward passively."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/870709331/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=16812829d262e35620e175d97360e32653022273ee4e4df645b851eb6df77ac0",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Barbell Curls - Shoulder Width": {
+    image: "https://i.vimeocdn.com/video/753642763-82641e69921b4a84d0213b5ac49e5518ec15a86affacacda24b850cb93e4688c-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Barbell Curls - Shoulder Width"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your Biceps Brachii, Forearm Group.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175434187.sd.mp4?s=1be745096f3f8a5ce9def2f06df3be98ac51afd2&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Barbell Curls - Shoulder Width - Reverse Grip": {
+    image: "https://i.vimeocdn.com/video/753642825-ec015584893dbf4f2db0b7d92a458cc2de02e29a573988806c420d036de110b4-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Barbell Curls - Shoulder Width - Reverse Grip"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your Biceps Brachii, Forearm Group.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175434152.sd.mp4?s=9808c23b4997bb5acfbc26859eb6e24aeaaf9a10&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Behind Back Rows - Barbell": {
+    image: "https://i.vimeocdn.com/video/753647191-9927648be186729a14cf3066ae2a37bb0792168ed17504516731894d7f32ed87-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Behind Back Rows - Barbell"}]
+    },
+    techniquePoints: ["Hinge at hips to a 45-degree angle (or parallel to floor for Pendlay), keeping spine neutral and knees slightly bent.", "Grip bar slightly wider than shoulder-width and pull bar to your lower ribcage/belly button.", "Squeeze shoulder blades together at top contraction, then lower under full control without rounding lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178385850.sd.mp4?s=965f04ef530a89910619c41f9ae982ccac9c9f6c&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Behind Back Shrugs - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1798847756-40a40d740968892a8407f885183f0e62ebae7fbeb6d0d1736ecc4a1c71349d5c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Behind Back Shrugs - Dumbbell"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/913175823/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=44dae7c03d40448585e7bc600dede788b605741cf41988b1d7a5a3c58392215a",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bench Press Alternating - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753654302-eb816a9b71779b6bc1c96bd2834c92bf90668dfd98c13617cc229ac3d3832b02-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bench Press Alternating - Dumbbell"}]
+    },
+    techniquePoints: ["Lie flat on the bench with dumbbells stacked directly over your chest and wrist joint.", "Lower weights down and slightly outward until you feel a deep stretch across your chest.", "Press upward in a slight arc, bringing dumbbells together over your chest without clacking."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175230218.sd.mp4?s=fd904d587d6a5ac9c61965e3c83949b38453e1ed&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bench Press - Barbell": {
+    image: "https://i.vimeocdn.com/video/753653938-402ff93d71e247d2014ba192b19ecdb975331c39364340e5ba5caee47caf9588-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bench Press - Barbell"}]
+    },
+    techniquePoints: ["Lie on bench with 5 points of contact (head, shoulders, glutes, left foot, right foot) and arch upper back.", "Lower bar with elbows angled 45-70 degrees relative to torso until touching sternum.", "Press explosively back up over your shoulder joints, driving through your Pectoralis Major, Triceps Brachii Group, Deltoid Group."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175434747.sd.mp4?s=e5e152b3c698a5018d7270b1a6580479cb2fdee7&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bench Press Close Grip - Barbell": {
+    image: "https://i.vimeocdn.com/video/754833291-9cd109ecf84c6e5e2c98496ebdcd3f592ff44700b9a1a2585f658c56dec9d32e-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bench Press Close Grip - Barbell"}]
+    },
+    techniquePoints: ["Lie on bench with 5 points of contact (head, shoulders, glutes, left foot, right foot) and arch upper back.", "Lower bar with elbows angled 45-70 degrees relative to torso until touching sternum.", "Press explosively back up over your shoulder joints, driving through your Pectoralis Major, Triceps Brachii Group."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175434793.sd.mp4?s=06795b9eda5162f3cfcdeddd2ad07270dbd13cfa&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bench Press Close Neutral Grip - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/756123597-404307fa8612def81440017605e82cf65d32fd34a322ca573cfddd764c285953-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bench Press Close Neutral Grip - Dumbbell"}]
+    },
+    techniquePoints: ["Lie flat on the bench with dumbbells stacked directly over your chest and wrist joint.", "Lower weights down and slightly outward until you feel a deep stretch across your chest.", "Press upward in a slight arc, bringing dumbbells together over your chest without clacking."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314543841.sd.mp4?s=5a65b8c284b2cc3d2cf728fb1f758b4894584af2&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bench Press - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753654016-19c8c7dc9284913a8a3baf2187309007e7a59a2142183b26253f7a08c7108a7b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bench Press - Dumbbell"}]
+    },
+    techniquePoints: ["Lie flat on the bench with dumbbells stacked directly over your chest and wrist joint.", "Lower weights down and slightly outward until you feel a deep stretch across your chest.", "Press upward in a slight arc, bringing dumbbells together over your chest without clacking."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175434806.sd.mp4?s=1bc3f4f1d1ba7004ebd0564e95e6af5d4cc202de&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bench Press Incline Neutral Grip - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/756122990-b648845521f66a7e0f9ddb9417cd3b7f67ac4b1a77cec60f1136d20901282ab4-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bench Press Incline Neutral Grip - Dumbbell"}]
+    },
+    techniquePoints: ["Set bench to 30-45 degrees, plant feet firmly on the floor, and pull shoulder blades together and down.", "Unrack the weight and lower it under control to your upper chest near the clavicles.", "Press the weight up and slightly backward over your shoulders, squeezing upper pecs at the top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314543950.sd.mp4?s=fed047562f63e1f9f7235c1d426d34c98f3fd311&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bench Press Neutral Grip - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/756123147-57c090ffa689dea42754b6f8178104d84dfb464fa3da828a1c893464b8be6b5a-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bench Press Neutral Grip - Dumbbell"}]
+    },
+    techniquePoints: ["Lie flat on the bench with dumbbells stacked directly over your chest and wrist joint.", "Lower weights down and slightly outward until you feel a deep stretch across your chest.", "Press upward in a slight arc, bringing dumbbells together over your chest without clacking."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314544065.sd.mp4?s=5ff2fbbf51f05748ba8268501cedcce21d05558e&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bent Over Dumbbell Shrugs": {
+    image: "https://i.vimeocdn.com/video/1798847748-7ced9bf2c3ae760728444ca7f3daae841cb421813ba7e9e7d5eca8bc0d7f7ffa-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Latissimus Dorsi & Teres Major", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bent Over Dumbbell Shrugs"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/913175781/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=41a9d4c5cb78d65e17f47c8137c71666e3a8b132051166c755eee219293f339b",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bent Over Row Deadlift - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1798871598-c32fa7b86cb4ebad8df84eb8b77e76b8dd8d531092d82b46eebeaa1ce8134b18-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Quadriceps Femoris", "Gluteal Region", "Hamstring Group", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bent Over Row Deadlift - Dumbbell"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/913175867/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=8d65daa8846f90849167724dfdacfc50e8338456fa92fe7f7e664cdbda20cdb5",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bent Over Rows - Barbell": {
+    image: "https://i.vimeocdn.com/video/753655131-a5135b8973bf166d0eb0831f82f681f90537b2cde2e9f865e45200e2851d92b4-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Biceps Brachii", "Erector Spinae", "Latissimus Dorsi & Teres Major"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bent Over Rows - Barbell"}]
+    },
+    techniquePoints: ["Hinge at hips to a 45-degree angle (or parallel to floor for Pendlay), keeping spine neutral and knees slightly bent.", "Grip bar slightly wider than shoulder-width and pull bar to your lower ribcage/belly button.", "Squeeze shoulder blades together at top contraction, then lower under full control without rounding lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/184093162.sd.mp4?s=a268e3eafffd96f6876668e01a2e358c2a2c3f59&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bent Over Rows Supinated Grip - Barbell": {
+    image: "https://i.vimeocdn.com/video/756123278-294840414faa0b4d85b35a832aa72cf9740dc7f20ae6b26c1fd3bb10cbeaf27f-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Biceps Brachii", "Latissimus Dorsi & Teres Major", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bent Over Rows Supinated Grip - Barbell"}]
+    },
+    techniquePoints: ["Hinge at hips to a 45-degree angle (or parallel to floor for Pendlay), keeping spine neutral and knees slightly bent.", "Grip bar slightly wider than shoulder-width and pull bar to your lower ribcage/belly button.", "Squeeze shoulder blades together at top contraction, then lower under full control without rounding lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314544202.sd.mp4?s=6d0110564461695e8443ca772c38470e062b65e1&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "BICEP CURL 21's": {
+    image: "https://i.vimeocdn.com/video/887681841-e2a6a550035e0357a2bcad8ee20eaf021a52e7779ad8f4a83013554e267977d5-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal BICEP CURL 21's"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your Biceps Brachii, Forearm Group.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/414560192.sd.mp4?s=3b4413150059e8f6be9f3d40d72a4cbd8983f357&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bicep Curl + Hammer Curl": {
+    image: "https://i.vimeocdn.com/video/1698396275-3ddcb698d647786b5f98ee66cae137361e700a91df2d3a7264e201d02f21ab80-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bicep Curl + Hammer Curl"}]
+    },
+    techniquePoints: ["Hold dumbbells with a neutral grip (palms facing each other) at your sides.", "Curl weight upward while keeping elbows pinned close to your torso.", "Squeeze brachialis and forearm at top, then lower slowly to full arm lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733602/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=1b655d71c831ed09ad4657341b601599fe42ca234363351d4d32c64deb808e59",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Boat Hold - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1714316376-27717a41b8d41997a06c908b5851bef1bccb4493cdb3e3ff4c5b25c0706f1a8b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Boat Hold - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Boat Hold - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Obliques, Anterior Deltoid.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/857235920/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=a0ea5dcabea8199eb837232593c1ff64dbde2141f7ca85aee59240bd913be04d",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bulgarian Goblet Split Squats - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753655222-ed6c3781e088b515d34c1e2802c7340cd746bec996539b8c3803dcd187ff58a6-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bulgarian Goblet Split Squats - Dumbbell"}]
+    },
+    techniquePoints: ["Hold dumbbell or kettlebell vertically against upper chest.", "Sit hips down between ankles, pushing knees outward in line with toes.", "Press up through heels/midfoot to stand up straight."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178687375.sd.mp4?s=46a55337810e57d0e3c049e73f22b25dc437e57c&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bulgarian Split Squats - Barbell": {
+    image: "https://i.vimeocdn.com/video/753655288-a1a2ba785bfb30c14c80d5ccab96c9b2f04b663cac7fd9ab5c6fa75f1f0877a8-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bulgarian Split Squats - Barbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Hamstring Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178686098.sd.mp4?s=08cdcd491f52cbe9415ad91b85add6211e6eb138&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Bulgarian Split Squats - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753656063-7a410e6c337ba26313500d0bbdadbca32412953e5b61b9d67aa430ce214a79c8-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Bulgarian Split Squats - Dumbbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Hamstring Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178686174.sd.mp4?s=4879ad365d047adc294aae435c35275858d0c4ec&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Calf Raises - Barbell": {
+    image: "https://i.vimeocdn.com/video/753656137-b3953859af395658dc38c31de30253d438f14675ffa0f8fdcbf3e9e73f2ee88b-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Calf Raises - Barbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178687381.sd.mp4?s=c9521da2fc58949b8091234218149405023bcaa2&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Calf Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753656212-8a62646ac524b3e04f02de99b34b120731226cb0f796e8daf18d0cf9cc278abb-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Calf Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178687767.sd.mp4?s=2cd528cf5b09c0badc908710c480b26ff6f7e440&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Chair Crunches - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/754881499-e24a4f58d22ea32de803986bd9ed7a3e171b7503c720ca394f005782694197c5-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Chair Crunches - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178386414.sd.mp4?s=ec31755a6b727f948f8ce82b9a732d3deb3d3e10&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Chair Sit Ups - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1701243792-989992c72d7065810ffc7e6ce1eddd1d4f41b813ec7ec7bf83bd39b271d8d61b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Chair Sit Ups - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/847799812/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=7fcb991abf27d9addc922836223f7326b63d793cbc442cd86e79e4a902767402",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Clean & Press - Barbell": {
+    image: "https://i.vimeocdn.com/video/753657077-dcda55ad03d55b8a31852d114b70ed632c9cc4b17187d341963aa1abf2236996-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Quadriceps Femoris", "Forearm Group", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Clean & Press - Barbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Clean & Press - Barbell.", "Execute concentric phase with intent, driving force through your Deltoid Group, Quadriceps Femoris, Forearm Group, Gluteal Region.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178386430.sd.mp4?s=4386f59e47a5f2c47aff0d51d0f63b83726502df&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Close Calf Raises Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698406818-e5d1c65c6b716e57577a0602f609777d8c0ea8a83e8a4ca5bb7e3c184928c450-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Close Calf Raises Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845740515/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=462f0f66debf29f84399f26fe7ec646c99075afff43d826b9fd8c43e66f35829",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Crab Walks Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1696537622-3249f7560f53c51301b3eae5214ee1a795fa418bbe01a51bc1050061efccb9e6-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Crab Walks Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/844414831/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=1a4776f7c5932d7e493cb18b023d689fec0a0a7c63b10555dc3a8754b7419aa8",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Curl and Press Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1639135297-c3e7729cd719813d13820a1a180b2662c9e219e1bf05714215c96d0b349f111f-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Deltoid Group", "Triceps Brachii Group", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Curl and Press Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Curl and Press Dumbbell.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Deltoid Group, Triceps Brachii Group, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/811024795/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=51ad3b7faeb3cdafb54992c939db49b6a29b268a850f4773e599152854be3308",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Curls Close Reverse Grip - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753657909-2ad5fbb7e053fab2685ff75a7ea31af5f46d6cd47f3d7e87e05aadacd8e9ef3b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Curls Close Reverse Grip - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Curls Close Reverse Grip - Dumbbell.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175706067.sd.mp4?s=c890386ab38ca124ef0535b29e221abdabf8695f&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Curls - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1788970415-7b53920e15bee147b2dda9fbedb29a6705064b42803410764ebaed14c7fa6331-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Curls - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Curls - Dumbbell.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906917859/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=e06b633c6d59892885154744750d3facf0d1cd970db4eec2dcc4c84ed8ad8224",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Curls Wide Reverse Grip - Barbell": {
+    image: "https://i.vimeocdn.com/video/753657202-c9d71c2a3c57305fbe9af601b9ba5f8129ba2421b538acacac72c8e1c08171e9-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Curls Wide Reverse Grip - Barbell"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your Biceps Brachii, Forearm Group.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175433536.sd.mp4?s=2053f287be62a43d14d1e192dce448d168d2d262&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Curtsy Lunges - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1440725332-44829830d41076bafe0e7a25233b4dadd74a085e5e789a9c14a5548af1de4697-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Curtsy Lunges - Dumbbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/714817992/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=874b905f06f4c2f078671dcee878f05f19ea2b23b5864846676f660d4942cbde",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "DB Lateral Raises": {
+    image: "https://i.vimeocdn.com/video/847694603-1139ef531bbce875d9d13b84df8777c2c2cceb7265c9ff5ccb91110e384e8f79-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal DB Lateral Raises"}]
+    },
+    techniquePoints: ["Stand upright with dumbbells at sides, elbows slightly soft (10-15 degree bend).", "Raise arms out to sides until hands reach shoulder height, leading with elbows.", "Control lowering phase over 2 seconds to keep continuous tension on lateral deltoids."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539193.sd.mp4?s=714c897bd50e6739f9d1f5dcc09e2fc22db07757&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Deadlift - Barbell": {
+    image: "https://i.vimeocdn.com/video/754830380-86e16ae1394f5ea1ce0de567bf5a8553a52626a4ab65a0885bf38e2dca1fe919-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Quadriceps Femoris", "Hamstring Group", "Erector Spinae", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Deadlift - Barbell"}]
+    },
+    techniquePoints: ["Set feet hip-width apart under bar, hinge at hips and grip bar just outside legs.", "Pull slack out of bar, flatten back, and drive floor away using quad and hip extension.", "Lock out hips at top by squeezing glutes, then lower bar in a controlled hinge."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/184093164.sd.mp4?s=926c68eef5388d22d03e558d3fcebf2f701e1f7a&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Deadlift - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1696537416-091514af13b1b476d39b574dc67c514eaa65e1ca58867b6e0607d7d0022f9415-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Quadriceps Femoris", "Gluteal Region", "Hamstring Group", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Deadlift - Dumbbell"}]
+    },
+    techniquePoints: ["Set feet hip-width apart under bar, hinge at hips and grip bar just outside legs.", "Pull slack out of bar, flatten back, and drive floor away using quad and hip extension.", "Lock out hips at top by squeezing glutes, then lower bar in a controlled hinge."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/844414840/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=d8b31593a347e18f7473e185c8558f94e561c188625f7f5f2edf9f68e20d7e7b",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dead Lift Stiff Legged - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753657812-c717f546fdc9879911a8ae4c544b47e01c33056f8dd393db22678956c988a38d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dead Lift Stiff Legged - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dead Lift Stiff Legged - Dumbbell.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris, Gluteal Region, Hamstring Group, Erector Spinae.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178687966.sd.mp4?s=d504e7f22807d991dcba479651bde8daa57391dd&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Bent Over Rows": {
+    image: "https://i.vimeocdn.com/video/1698396230-abf86c75b85ee02616f27838442e966c6d353070c6ec8d5390121122a1aa4bb7-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Latissimus Dorsi & Teres Major", "Erector Spinae", "Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Bent Over Rows"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733591/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=410096b54189d6eae7c62d22a9c99ae3d764157abc74049966c08d5861ffd31c",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Curls Alternating": {
+    image: "https://i.vimeocdn.com/video/753658099-f8b57b9be51efbe1c724ba6843748c4ad3a77b825d88d39c103e67fa7cfd7ad1-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Curls Alternating"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Curls Alternating.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175439350.sd.mp4?s=a38c59b11c11bc43e6dc7a73e26ce8d490d7cef3&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Curls - Close Grip": {
+    image: "https://i.vimeocdn.com/video/753657869-88d041d5efdbd8fc6f97fec9ec77194d80aa183806e853940693f2e2eaecf709-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Curls - Close Grip"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Curls - Close Grip.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175706046.sd.mp4?s=2ab9e842568fdd68f2856c4373ea47bce7bddcf7&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Curls Negative": {
+    image: "https://i.vimeocdn.com/video/754832031-c50a2b240b9cac13a5f03c3316da295e349c995cf22fb24a0ffd12c69f20cb71-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Curls Negative"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Curls Negative.", "Execute concentric phase with intent, driving force through your Biceps Brachii.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175439366.sd.mp4?s=19b89f64da842de541d023230e2a90b61fc4ba15&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Curls Seated": {
+    image: "https://i.vimeocdn.com/video/753658431-1bcea7da80a2873679f74dde6e9c34be5bf2c73af81f96840df91c9376f3a947-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Curls Seated"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Curls Seated.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175439374.sd.mp4?s=172297ea77c2bb2f7ed905e9a4991ac487c4ceb7&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Curls Seated Alternating": {
+    image: "https://i.vimeocdn.com/video/753658395-aecb3df8fbb9cf4380f4c62701748de3ad38feba54406225ec342deac261e904-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Curls Seated Alternating"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Curls Seated Alternating.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175439383.sd.mp4?s=81b34f20135ba055b5816cb83e4603d935bf88a5&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Flies - Straight Arm": {
+    image: "https://i.vimeocdn.com/video/753855762-c8a9ad5e6f991e250797c34f988ddd536e84936f722550fcb09c2c4bdfb4628d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Deltoid Group", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Flies - Straight Arm"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Flies - Straight Arm.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Deltoid Group, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175435515.sd.mp4?s=f0949c4950f1e8d6a15788293baa96d02fde0b3c&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Fly's": {
+    image: "https://i.vimeocdn.com/video/753653812-d0c13cfa5f2764b8c6d6f1ad4abaa71135e415b3527df56f42fa6faf6cc21723-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Fly's"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Fly's.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175435506.sd.mp4?s=106f458b5370dc9058d694eea6f655191586fec6&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Hex Press": {
+    image: "https://i.vimeocdn.com/video/1013946956-f093347a4e2e8ed35b38a60829532a291ab3f7b78b7f1d582b51494dcfb80717-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Hex Press"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Hex Press.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/490174501.sd.mp4?s=361af895145d55ebd18c67516950dd670efd4e67&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Hold - Straight Arm": {
+    image: "https://i.vimeocdn.com/video/753861071-5ca1e51aeefedf24d3786132f80fb4ff1b0f86d8e5c91caa26ed6be5a9d416e4-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Hold - Straight Arm"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Hold - Straight Arm.", "Execute concentric phase with intent, driving force through your Deltoid Group, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175436555.sd.mp4?s=4b2dbc212fa1483efe9549bdf25104bc02fed546&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Press - Alternating Incline": {
+    image: "https://i.vimeocdn.com/video/754833275-880f02f1160b46cdab74d7d436e635d83c758b414867488b798c73d286f70c0e-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Press - Alternating Incline"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Press - Alternating Incline.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175436577.sd.mp4?s=215d376bac4fa5f6f4b8010c7c3c89430138109e&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Press - Incline Close Grip": {
+    image: "https://i.vimeocdn.com/video/754833778-df46650c4863239fb1f87829cbaa78714145d62a6749b51593142eaed1796c02-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Press - Incline Close Grip"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Press - Incline Close Grip.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178375643.sd.mp4?s=f3eb2aff27d8a80d62f8f4d2e9d3d93f983b5968&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Press - Incline Neutral Grip": {
+    image: "https://i.vimeocdn.com/video/754832854-84007e61e7c9d8aad4c66354e1d106ddc4ddbe12eb5fd10d673527be829d568a-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Press - Incline Neutral Grip"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Press - Incline Neutral Grip.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175436591.sd.mp4?s=a0b727fa52535744063d134b7474d48bef02c47b&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Press - Neutral Grip": {
+    image: "https://i.vimeocdn.com/video/754832743-b534f9d1a5996a5bea6de08131c1e39724391dcbd526c85c9e0d07c7444cb0d8-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Press - Neutral Grip"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Press - Neutral Grip.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175438039.sd.mp4?s=76e09626fcce8f071a1daf5c37d605f1cf3eea33&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Pumps - Straight Arm": {
+    image: "https://i.vimeocdn.com/video/754885913-0491a11a7a67268802ed18f401d36b045dd1518de6c4405386db61eaba4a40bd-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Pumps - Straight Arm"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Pumps - Straight Arm.", "Execute concentric phase with intent, driving force through your Deltoid Group, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175438048.sd.mp4?s=1345a18cbed3f4042821eac73ded7731febc3970&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Rear Delt Flies + Ski's": {
+    image: "https://i.vimeocdn.com/video/1054116724-fec1b918aa05c661d06553a6f80cfb1b87707e9d578fd21f736830a9d485944d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Rear Delt Flies + Ski's"}]
+    },
+    techniquePoints: ["Hinge forward at hips (or use chest-supported bench) with arms hanging down.", "Raise weights out to sides in a wide arc, leading with elbows and squeezing rear deltoids.", "Lower weights under control without swinging torso."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/509252398.sd.mp4?s=2384587f1cf081f445eae654a05bed036c2d3a59&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Shoulder Press (Neutral Grip)": {
+    image: "https://i.vimeocdn.com/video/1205765987-c7bd8e1c025099687f91cea5343ff57427c68322fc003b3b82a8c3a7b1bc8fe7-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Shoulder Press (Neutral Grip)"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/582592308.sd.mp4?s=ce7369b608cee04a0041b5a6dd07ff2ffdb9745e&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Shrugs": {
+    image: "https://i.vimeocdn.com/video/1698406846-f37e38ab17695b7ecb866fffbae01c67a380803086488f63295d4a4fe204a484-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Shrugs"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845740551/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=2dc268a270e4640e02e0d2d3e1895c8d36943eb1d6aa93661788649e3625ccc0",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Ski's": {
+    image: "https://i.vimeocdn.com/video/1798873436-fdfc8e94047bc4a97a1dd711e71a0dcb702ef1af688aa985b626d0237cab1ccb-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Triceps Brachii Group", "Deltoid Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Ski's"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Ski's.", "Execute concentric phase with intent, driving force through your Trapezius & Rhomboids, Triceps Brachii Group, Deltoid Group, Posterior Deltoid.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/913176088/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=34cb64530a33038ec01c880fdfec0f53ba28acc00dd3f6e6487aeeb231b0b6d0",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Squats + Lunge": {
+    image: "https://i.vimeocdn.com/video/1701243736-883cf7da972fa1636ab002ffa649d2396b5da34db7a4fed221e25c73e5aa8066-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Calf Group", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Squats + Lunge"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region, Calf Group, Hamstring Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/847799800/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=f2d814e6ceb7feef6ade6cd3d358946c7c1bc751eecf3ff34f56335439015c8b",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Standing Front Crunch": {
+    image: "https://i.vimeocdn.com/video/754830401-d13b04be9d6ebde3312ef77fbac3d89d63b87ea671891a22bad34548082ac5fa-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Standing Front Crunch"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/185543843.sd.mp4?s=de8818762006d7f5ab355c6bccf33d5ee95cd9da&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Dumbbell Swings": {
+    image: "https://i.vimeocdn.com/video/1702196837-f938200a25ccc135ab4f960bde6ead030fb274672b92ffad0c59d45505637b4b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Deltoid Group", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Dumbbell Swings"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dumbbell Swings.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris, Deltoid Group, Gluteal Region.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/848510454/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=3b7b61105dc8d1c59ebd1870d8bb23e288ec1c1acd9c92e8d8418c763b178d93",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Elevated Side Squats - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1156110856-05babcb71db20218410e6089ce56c25da00930f43df10014c74e9277cb07454f-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Elevated Side Squats - Dumbbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region, Hamstring Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/559373166.sd.mp4?s=d8b8425b78327b9b79b5187035c1c6f3f73fe8be&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Farmer Walks - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753863427-b28ce573487a92b73f5c741404ca8666ebb5e60ee9b2927311fc5534e930762c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Forearm Group", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Farmer Walks - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Farmer Walks - Dumbbell.", "Execute concentric phase with intent, driving force through your Deltoid Group, Forearm Group, Trapezius & Rhomboids.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178678133.sd.mp4?s=9ac5d7dfd1e887fe618a92e4f50e0299aac83627&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Floor Dumbbell Press": {
+    image: "https://i.vimeocdn.com/video/847694981-5b9519f84e71c58fdc1522a5ef59bc5ad68230f46962fbd33192084b7ff7514c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Floor Dumbbell Press"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Floor Dumbbell Press.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539470.sd.mp4?s=46ea57c4c61461baab30cfbc684221dea6501368&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "FOREARM DB TWISTS": {
+    image: "https://i.vimeocdn.com/video/887683188-8afd70408892e8a5dadc1c7e20dae368e1e49776b4d86f400e074bdf49b130be-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Forearm Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal FOREARM DB TWISTS"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting FOREARM DB TWISTS.", "Execute concentric phase with intent, driving force through your Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/414561052.sd.mp4?s=d954a3943b71de63c9befb170ca1b2c539bf4ce2&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Frontal Crunch - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753865777-b1e2268f2eb3f1dc36f5443f2b8b2d00e13e747d42162174dae244e64a212976-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Frontal Crunch - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178678596.sd.mp4?s=7990802083e44567562033654500f3c43c04ff52&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Frontal + Lateral Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698396302-41f008075c6f92f607beba8d84fc8cea92d8ccd82ff55c5598b11cad73cea94c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Frontal + Lateral Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Stand upright with dumbbells at sides, elbows slightly soft (10-15 degree bend).", "Raise arms out to sides until hands reach shoulder height, leading with elbows.", "Control lowering phase over 2 seconds to keep continuous tension on lateral deltoids."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733657/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=3e3f742c8a1f214d6c01f175f83d5137f27d92aa7d5bc7591546eddec79544f0",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Frontal Raises - Barbell": {
+    image: "https://i.vimeocdn.com/video/754880924-a22bbc81244fa3688712cc31b7e7c642aa4abea0a45ee383e551df5ce2d85bbf-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Frontal Raises - Barbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178678603.sd.mp4?s=e05ae36e7eebf3803743a285b59ab63bcf2e8535&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Front Shrugs - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753863520-d53bc4ad2237e7dc3255b7126ced8a60cd6e465c896d8bcc8b9029bfe5b59066-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Front Shrugs - Dumbbell"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178678151.sd.mp4?s=1d6038b2a9cafcb669877f2cb86964bc59006e4f&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Glute Bridge Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1696537520-6f5b7ee453bd0aa9077d756acb573f56f1ed9cbbbec0c4d3800eb062ca3b74f5-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Glute Bridge Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Glute Bridge Dumbbell.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris, Gluteal Region.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/844414893/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=5f1287ce9a2c79d45352a7cff335b0d5881fc9418db5c252ecc4df91f4c5dbc3",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Goblet Squat - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1788970698-de34c806bce80bdf6de17e66f84d84f4afcdea51fd6f06f61924372130d02dc3-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Goblet Squat - Dumbbell"}]
+    },
+    techniquePoints: ["Hold dumbbell or kettlebell vertically against upper chest.", "Sit hips down between ankles, pushing knees outward in line with toes.", "Press up through heels/midfoot to stand up straight."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906918043/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=d6b0253a819053c103f9e8ebfd95d0555e851099a177a416eec77c311e62a14c",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Half Lateral to Frontal Raises": {
+    image: "https://i.vimeocdn.com/video/1787597471-fc6658e69498c392b1e9141632d86599e77373a02ae4e4879a14de6773b832a8-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Half Lateral to Frontal Raises"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906025253/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=a49f8803ed15267dbaecdb9e24ed61c775acf9fbf3553afa50ec00f14934992e",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Hammer Curls - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1788970760-0b698ae649e774e1fb28376106a7366c8d13340e9492cfac968bc385fc297cad-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Hammer Curls - Dumbbell"}]
+    },
+    techniquePoints: ["Hold dumbbells with a neutral grip (palms facing each other) at your sides.", "Curl weight upward while keeping elbows pinned close to your torso.", "Squeeze brachialis and forearm at top, then lower slowly to full arm lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906918059/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=249c59f109f8024e890ec8178d453433b84bf5533c7e07a607115f803cfb3102",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Hammer Curls to Military Press - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/790284391-982ec4437cbd453e8be04269b9eb75036799679dd3ac95b21716a24c41cfbd81-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Deltoid Group", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Hammer Curls to Military Press - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/341620863.sd.mp4?s=99c28eef9d85ddeabd77d86244877b0b8fe6a7a8&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline Bench Press - Barbell": {
+    image: "https://i.vimeocdn.com/video/753866504-90e229bd33330d8d95eb7e4241dd15eea70bde9fdf76132c10adb3ff65a96f9a-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline Bench Press - Barbell"}]
+    },
+    techniquePoints: ["Set bench to 30-45 degrees, plant feet firmly on the floor, and pull shoulder blades together and down.", "Unrack the weight and lower it under control to your upper chest near the clavicles.", "Press the weight up and slightly backward over your shoulders, squeezing upper pecs at the top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175435471.sd.mp4?s=f8e85187c99d8f3ae6f19376a1e209e77a4e961e&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline Bench Press Close Grip - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/756123619-d8821a631426d8007ba4b08502e8fd55f581832e3a6b0808818d1af5d26cb94b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline Bench Press Close Grip - Dumbbell"}]
+    },
+    techniquePoints: ["Set bench to 30-45 degrees, plant feet firmly on the floor, and pull shoulder blades together and down.", "Unrack the weight and lower it under control to your upper chest near the clavicles.", "Press the weight up and slightly backward over your shoulders, squeezing upper pecs at the top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314544456.sd.mp4?s=b6c78a9c707ed2b126a11b8554fa6773fc777755&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline Bench Press - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/756123540-b9c35fbede38330a491b47629b3c81f948e20f8bf4df5179a961b13353f37607-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline Bench Press - Dumbbell"}]
+    },
+    techniquePoints: ["Set bench to 30-45 degrees, plant feet firmly on the floor, and pull shoulder blades together and down.", "Unrack the weight and lower it under control to your upper chest near the clavicles.", "Press the weight up and slightly backward over your shoulders, squeezing upper pecs at the top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314544379.sd.mp4?s=c32f1c46074fdc778d1144d6c3216b4b7f8b30b6&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline DB Rows": {
+    image: "https://i.vimeocdn.com/video/847694904-3dd420ae4020e6f9485b8bd59e68d3b601ab7c2642621a00772d7e8f0dd74eb7-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Biceps Brachii", "Posterior Deltoid", "Latissimus Dorsi & Teres Major"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline DB Rows"}]
+    },
+    techniquePoints: ["Maintain a braced, neutral spine position throughout the movement.", "Drive elbows back to pull weight toward lower ribs, contracting your Trapezius & Rhomboids, Biceps Brachii, Posterior Deltoid, Latissimus Dorsi & Teres Major.", "Control the eccentric return to full stretch without allowing shoulders to round forward passively."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539412.sd.mp4?s=78b688ef5d06f559ad7fecf1e3cc54ead3b4c424&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline DB Ski's": {
+    image: "https://i.vimeocdn.com/video/975929464-f22199e38631444f992e75d6568fe825fb72b6a3e8d3feba80676f3f02b0d5dc-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Deltoid Group", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline DB Ski's"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Incline DB Ski's.", "Execute concentric phase with intent, driving force through your Trapezius & Rhomboids, Deltoid Group, Triceps Brachii Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/468666752.sd.mp4?s=a6428c5647a56ef0949b5d038fff8b21aff3e400&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline Dumbbell Curls": {
+    image: "https://i.vimeocdn.com/video/847694854-9f9d1ceb1fbcbf663a4a2626904a567cc702559f4ec16f81cda89ba96e11f1b1-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline Dumbbell Curls"}]
+    },
+    techniquePoints: ["Lie back on incline bench (45-60 degrees) with arms hanging straight down behind your torso.", "Curl dumbbells up without swinging shoulders forward, feeling intense stretch in long head of bicep.", "Squeeze hard at peak contraction, then lower under 2-3 second control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539386.sd.mp4?s=0696afb9bcc53af55f6cc398e3dd324b91c1a3ed&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline Dumbbell Fly's": {
+    image: "https://i.vimeocdn.com/video/753863475-4a69ce9c5fd115fb93fc233cbf0b18a9f4590c7343f1d9b03289ffdc6578ed42-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline Dumbbell Fly's"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Incline Dumbbell Fly's.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175706091.sd.mp4?s=c47e3e212930470d599f6cdf30a00c60ab1bf544&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Incline Dumbbell Hex Press": {
+    image: "https://i.vimeocdn.com/video/1013947512-2e9c8dccc78244aacfa728d052100d00ef8edb3c9acda31523331978b451fdb0-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Incline Dumbbell Hex Press"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Incline Dumbbell Hex Press.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/490174652.sd.mp4?s=9bb52623f5588585a167002082b4895223a0f0ce&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Inside Shrugs - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753867404-ffd3c53352048ac456538ea5b7e54fb9b5fbcd674349e0b909fe6085cdde4084-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Inside Shrugs - Dumbbell"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178678948.sd.mp4?s=11ec106e1346219e9197ca854bb0ed3984a79296&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Isolated db Press": {
+    image: "https://i.vimeocdn.com/video/847694894-c13e6245c03b74c5c1a82a167cf8b757f43fa252ec0b0a3c4f0f6258929c8bdb-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Isolated db Press"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Isolated db Press.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539361.sd.mp4?s=b8212a13c9994f74968b2ef5e0d8fb32d8adc6aa&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Isolated Incline db Press": {
+    image: "https://i.vimeocdn.com/video/847694832-16709b942d36e3f5ca227a63208138715a00d10338404fcb97a55f7d49394c33-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Isolated Incline db Press"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Isolated Incline db Press.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539344.sd.mp4?s=b3be89ce5b0b6fd8ec99a47d41befb2cd4e60cc6&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Isometric Bicep Curls - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/790284528-15c85bb85fe26e9b4d909d5582663a263732fb76ce0e5bae4a0b6e750e3ac3fa-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Isometric Bicep Curls - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your Biceps Brachii.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/341620947.sd.mp4?s=ef69230f8881b252e9e4cefdbabef75bd98dcf40&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Jack Knife - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1714325362-ab0535c099fd48c9d669e13e2863dbb6e73d366b7ec54681c039a04be0289a5c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Jack Knife - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Jack Knife - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Obliques.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/857235954/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=0c702518d965cbb9e0415d8a178eefb6600f98dcc28cff9d46f147090036094e",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Jack Knife Single Leg - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753867503-52c970f96c090df33967b48626bdd855b46e0a0c032511d48fd58bfaf999f27d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Jack Knife Single Leg - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Jack Knife Single Leg - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Obliques.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178679913.sd.mp4?s=46f4a34962ffab3c576399261781b802185530f7&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Jump Squats Dumbbells": {
+    image: "https://i.vimeocdn.com/video/1696537466-50ae36cb7688bb57606c9840f04cac4bfc06a83174e473074c9488e8290ddf57-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Jump Squats Dumbbells"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region, Calf Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/844414912/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=650d596f9eb0588d275c3653da9df12233ac83cd34d02fb35c0ae3e63c981abf",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Jump Squats - Dumbbells": {
+    image: "https://i.vimeocdn.com/video/1696974657-2fbac5901721d97cd2640d68d6d8d05fae2ec2c1dd589be02566e46552d71bb5-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Jump Squats - Dumbbells "}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region, Calf Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/844414912/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=650d596f9eb0588d275c3653da9df12233ac83cd34d02fb35c0ae3e63c981abf",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Lateral Raises Bent Arm - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753870316-89780874aabe3978fbda9b18fbe10d34f8787e3f6bb646f371b65a19e7d71240-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Lateral Raises Bent Arm - Dumbbell"}]
+    },
+    techniquePoints: ["Stand upright with dumbbells at sides, elbows slightly soft (10-15 degree bend).", "Raise arms out to sides until hands reach shoulder height, leading with elbows.", "Control lowering phase over 2 seconds to keep continuous tension on lateral deltoids."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178680386.sd.mp4?s=a21f59a8cbca0ec8649336b6a6d4f7ecd5fbc656&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Lateral Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1701243822-db9a40cb69dfebc05e1b802dabf11d2aa28147aad3ad8a791a65f5cdbfb84333-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Lateral Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Stand upright with dumbbells at sides, elbows slightly soft (10-15 degree bend).", "Raise arms out to sides until hands reach shoulder height, leading with elbows.", "Control lowering phase over 2 seconds to keep continuous tension on lateral deltoids."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/847799841/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=8f55cc27450a477955e7483749102a309936928287811d2586333f32e51eae2b",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Laying Cross Sit Ups Crunches - Weighted": {
+    image: "https://i.vimeocdn.com/video/1789222969-9aa03a6b61981623fc2918faafc89f15c672fc649b403f59125b6af6fc747fb2-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Laying Cross Sit Ups Crunches - Weighted"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/907051730/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=621483ebda926265392343072e36f0f1e77bc1fe53af60e3e669a0c978578c24",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Laying DB Leg Raises": {
+    image: "https://i.vimeocdn.com/video/1043227526-41c52f62fd11e49e630634456a6bab15d724fc5b9cd08355f20efdd0ebf08a33-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Laying DB Leg Raises"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/504151444.sd.mp4?s=1b1fa1032d8664672b1746d6926759da5a520fc7&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Laying Single Arm Cross Over Tricep Extension - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753874042-786909dee62a1335123f9aeced35a04deec8249043cd06ef220c371d6df85f47-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Laying Single Arm Cross Over Tricep Extension - Dumbbell"}]
+    },
+    techniquePoints: ["Keep upper arms stationary throughout the entire rep.", "Extend forearms until elbows lock out fully, isolating your Triceps Brachii Group.", "Control eccentric phase to feel a deep stretch in the triceps muscle belly."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/184082890.sd.mp4?s=b9aca642e8fa23fc0b77343cb0bd15cbcdc0fdcf&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Laying Single Arm Tricep Extension - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753874714-f8b79ac7e8ff89d86d9ed4a6b66bcd53a5bed64c63533ff530ba2e354c0741a8-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Laying Single Arm Tricep Extension - Dumbbell"}]
+    },
+    techniquePoints: ["Keep upper arms stationary throughout the entire rep.", "Extend forearms until elbows lock out fully, isolating your Triceps Brachii Group.", "Control eccentric phase to feel a deep stretch in the triceps muscle belly."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/184082891.sd.mp4?s=51748c467a30a1f54d0e63a6ef1367efa29fbae6&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Laying Sit Up Crunches - Weighted": {
+    image: "https://i.vimeocdn.com/video/1789990775-16fec828eac1869df8b4ad6498316eefbc22e84a0b5e5ea47a447c4f98fe0767-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Laying Sit Up Crunches - Weighted"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/907052442/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=d58d3f992857653f85189bb532c102165da59cc36235b5c35ed62da16e4f707f",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Laying Straight Arm Flies - with Dumbells": {
+    image: "https://i.vimeocdn.com/video/616542391-5ce79d84d1aa86e634adae31a0a7a06dfe8808e3d96a08c226da66080f689b49-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Forearm Group", "Pectoralis Major"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Laying Straight Arm Flies - with Dumbells"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Laying Straight Arm Flies - with Dumbells.", "Execute concentric phase with intent, driving force through your Deltoid Group, Forearm Group, Pectoralis Major.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/202492622.sd.mp4?s=64498fa1556a56430114b073689d087548cd7279&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Laying Twisting Sit Ups Crunches - Weighted": {
+    image: "https://i.vimeocdn.com/video/1789992987-9f9c920ede82c6161d37aadcff80db425d4c7708b0dc4e4c695997e19032555c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Laying Twisting Sit Ups Crunches - Weighted "}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/907051673/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=b635e70417c6777b9ccd31dffac48de76ffc61b0f44f7464ec5386741102a12e",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Lunges - Barbell": {
+    image: "https://i.vimeocdn.com/video/756123752-ec511ed2f2116d900823cba3710ac6a6524165969ad9081afa039299bfa07696-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Lunges - Barbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314544517.sd.mp4?s=8b58a603462d28982679ba33e32930f5fbf4e843&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Lunges - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1699760916-d1de9ecaefc6bfca1b843d18ce443e0d0f08cd0a8725b564463f45f7dc73af52-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Lunges - Dumbbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733670/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=18c5a846371a058f1d570e087c02e403306b5e39d86dd646823372b95cbb3779",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Military Press - Barbell": {
+    image: "https://i.vimeocdn.com/video/1732879831-5b9e5ce7064f08b1478dca3c6085a8aa5fb8f755c93da1d5b82b538889493420-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Military Press - Barbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/870709548/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=3aa9af026a923241bf952a99587e7aec6425ee7e2c5d6cf454afdae0a44af359",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Military Press Sitting - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753875095-ba8a6a5726072a9dbd5f9b5d91632f13b81302ea093a6617eb509a19f59c4758-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Military Press Sitting - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178680755.sd.mp4?s=8e6e9e309e1654047054f816a505f887401f643b&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Military Press Standing - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753875153-fab6d74bc921898cd21ec96b5b96b95c5a61f338dfb3036cefdf596b7f152fe0-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Military Press Standing - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342496.sd.mp4?s=b42dc861a1d8c509824d6d6d0b2ea45ce88de2f3&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Negative Preacher Curls": {
+    image: "https://i.vimeocdn.com/video/1341706897-7de683646445d8f1b224b57f0cbc23924df6e2b343dee1b2e9434d4d2288f45a-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Negative Preacher Curls"}]
+    },
+    techniquePoints: ["Position triceps flat against preacher bench pad with armpits resting on top edge.", "Curl bar or dumbbell up toward shoulders, maintaining tricep contact on pad throughout.", "Lower weight slowly until elbows are almost fully extended to maximize lower bicep stretch."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/663045434.sd.mp4?s=d2de6672d959dbff5f59700410036d99fd891c65&profile_id=164&oauth_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Overhead Carries - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1205765712-ab1decf9b754d9eeeb4a499e23a4a30890dac6b881a4eba888da40e4a691c2f7-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Overhead Carries - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/582592342.sd.mp4?s=60a9549ca19d1f97ac204b0bd7b08910b1944aba&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Overhead Extension - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753883903-093046ad3fe7d051868dc0f02ce3199f681a7a07a67f9b506e6d640644634ab5-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Overhead Extension - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175249960.sd.mp4?s=5511e7858a5f7a0ad34dd3fb6ec8a81c103d6847&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Overhead Extension Single Arm - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/754830877-6124fe908cf95579772ba10269bbfa578a76d5111d7fc8ad24471ad2903a15cf-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Overhead Extension Single Arm - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/184082892.sd.mp4?s=9dc30ebe4a84e1b8a1ef50d3def269905618604d&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "OVERHEAD FARMER WALKS": {
+    image: "https://i.vimeocdn.com/video/1734818527-6b6c1235ea25f8805beaeca60cf21b9edf5f596859a726ab2f7153b65f473064-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal OVERHEAD FARMER WALKS"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/872041067/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=2e3e525be2d0ddf0c1ba2cfe09e5172e30232efab09c74b1987d5954039a20ef",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Overhead Lunge - Barbell": {
+    image: "https://i.vimeocdn.com/video/753883984-ecad912f8b004226bf30fde9fd00057669600fd14a0d53542b697b2c1e9e3c47-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Overhead Lunge - Barbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178688853.sd.mp4?s=2cd7d07c09669f7c27dad27436f6982ff0dccc1e&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Overhead Lying Leg Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1468794559-f28c5f82f3f0eec800c2a067be538340793b20682d08d6a6789c24e29e18d07e-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Overhead Lying Leg Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/729804334/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=e19ac907f3942755f9992fcb1233d5b1cc9dbb06be791b8203d7146be89ee7ec",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Overhead Tricep Extension - Barbell": {
+    image: "https://i.vimeocdn.com/video/753884069-e1e704cc2e92c2a161f1eaa6b9e99cde73f8796a98070ade23be8f90670b960f-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Overhead Tricep Extension - Barbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178385001.sd.mp4?s=e0a22ee422aeb7521e60529dd20587923ed12d34&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Overhead Tricep Extension - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1788970977-06a431851d5f26eeddd56794b4a498f21d031b7d15bb11f287c8588634ab560e-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Overhead Tricep Extension - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906918184/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=bb90e0f6a7ee28d993c1a5e80c2cc6c53cf7bf677028bbae5cb1b5600e211a3a",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Parallel Rows - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753884139-4f6b5894539cebffa9c0e71876a0e9d136a260ec5ff3c1f67f741553201fd1ba-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids", "Latissimus Dorsi & Teres Major", "Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Parallel Rows - Dumbbell"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178681199.sd.mp4?s=095c6c2aa879b272b0c7135894d43bf0078e50e0&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Pendlay Rows - Barbell": {
+    image: "https://i.vimeocdn.com/video/753885084-0fa875824f02194c0958296d94ca4fef4fae90ae7f1cce3176e74330cce156b4-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Biceps Brachii", "Latissimus Dorsi & Teres Major", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Pendlay Rows - Barbell"}]
+    },
+    techniquePoints: ["Hinge at hips to a 45-degree angle (or parallel to floor for Pendlay), keeping spine neutral and knees slightly bent.", "Grip bar slightly wider than shoulder-width and pull bar to your lower ribcage/belly button.", "Squeeze shoulder blades together at top contraction, then lower under full control without rounding lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178381812.sd.mp4?s=69d935ffcee558f798e99504b6c04883679d4508&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Pendlay Rows - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753885137-80c1791200dea2ba5a08967ac7ec933fdb38b3196b1ed43a6fd4a91ecc64ff24-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Biceps Brachii", "Erector Spinae", "Latissimus Dorsi & Teres Major"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Pendlay Rows - Dumbbell"}]
+    },
+    techniquePoints: ["Hinge at hips to a 45-degree angle (or parallel to floor for Pendlay), keeping spine neutral and knees slightly bent.", "Grip bar slightly wider than shoulder-width and pull bar to your lower ribcage/belly button.", "Squeeze shoulder blades together at top contraction, then lower under full control without rounding lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178382259.sd.mp4?s=dd3b898b9b95d8536f525d63425cab9184d2bb16&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Planche Press - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/754886287-fd2c5252cac746efc181ef52ba7eb8720bc8a80536afb382521419f0d1b52e54-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Forearm Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Planche Press - Dumbbell"}]
+    },
+    techniquePoints: ["Place hands on floor or parallettes, leaning shoulders forward into maximum scapular protraction.", "Lift legs off the floor into a horizontal hold parallel to the ground with straight elbows.", "Flex core, lower back, and glutes hard to hold a solid straight-body alignment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178381836.sd.mp4?s=079c32c20604556ff08946b9b0722eb0770d934a&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Plate Raises": {
+    image: "https://i.vimeocdn.com/video/847694724-d02bce923a0b591f50cc1e263a08fac02efb1dab99d1cf2cd3917578037929c4-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Plate Raises"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539286.sd.mp4?s=759c2787297f709199a230c7cdc01bf94cc771de&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Plate Twists": {
+    image: "https://i.vimeocdn.com/video/847694721-3444b2f35fc3d1554db520980a2113ace4a2eb6c1134e0f061b1eed40eccebef-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Plate Twists"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Plate Twists.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Obliques.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/385539262.sd.mp4?s=345df299e71961456122f6375c5c8425a8719061&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Pronated Curls": {
+    image: "https://i.vimeocdn.com/video/753657909-2ad5fbb7e053fab2685ff75a7ea31af5f46d6cd47f3d7e87e05aadacd8e9ef3b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Pronated Curls "}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Pronated Curls.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/175706067.sd.mp4?s=c890386ab38ca124ef0535b29e221abdabf8695f&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Pronated Curls 21s": {
+    image: "https://i.vimeocdn.com/video/1411135559-261cbfb665d4303a58b59ea3bccb9d511bf4f4d41eedd9ee097b5c37840bd1b2-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Pronated Curls 21s"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Pronated Curls 21s.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/697770830/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=e25ae48ad0b78f81bf82f635cde7af4d4f15b1b96dfb06c4e0051746b6857917",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Pronated Curls (Back Against the Wall)": {
+    image: "https://i.vimeocdn.com/video/1411135558-70f1d9476dfd86bd1c7ceef10a25ccc919b2609047fe77bfb6808abb14a63500-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Pronated Curls (Back Against the Wall)"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Pronated Curls (Back Against the Wall).", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/697770820/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=a464c6bc127d8070cdeee6794c227118b3131e58037aa4f5a41dc916ef857afc",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "PSEUDO BENCH PRESS": {
+    image: "https://i.vimeocdn.com/video/1732879844-d6966ccaa0b68d36959a11ab6efd5bb6f3cc33a02bebb34a0c9d5a0185a24b53-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Pectoralis Major", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal PSEUDO BENCH PRESS"}]
+    },
+    techniquePoints: ["Lie on bench with 5 points of contact (head, shoulders, glutes, left foot, right foot) and arch upper back.", "Lower bar with elbows angled 45-70 degrees relative to torso until touching sternum.", "Press explosively back up over your shoulder joints, driving through your Deltoid Group, Pectoralis Major, Anterior Deltoid."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/870709433/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=434ef99d6ac14ee37f4aa93c34240a85ae514e3655c9cd67517f9499202c1950",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Push up Deadlift (Dumbbell)": {
+    image: "https://i.vimeocdn.com/video/1701243787-9f7e9a6ed8866d79ba4bfc8c407523dbb09aeea5ab63f07c3295bb297a6a8b8a-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Push up Deadlift (Dumbbell)"}]
+    },
+    techniquePoints: ["Set up with hands slightly wider than shoulder-width, forming a solid plank from shoulders to ankles.", "Lower your chest under control until elbows reach 90 degrees, keeping them angled 45 degrees from your torso.", "Press through your palms to lock out, fully engaging your Trapezius & Rhomboids, Pectoralis Major, Triceps Brachii Group, Deltoid Group and protracting scapulae at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/847799809/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=a764d0a73bd5bccfeb87515c7eece148e2f84d8ef4a2e9976779854b98906cbc",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Rear Delt Fly - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1787595490-636d5f718fe70217e4dffaca513b5062200922a0eae88c2577a8be4a5e7f88a2-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Posterior Deltoid", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Rear Delt Fly - Dumbbell"}]
+    },
+    techniquePoints: ["Hinge forward at hips (or use chest-supported bench) with arms hanging down.", "Raise weights out to sides in a wide arc, leading with elbows and squeezing rear deltoids.", "Lower weights under control without swinging torso."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906023266/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=7f8c54917eff2dd28ee5dac2f4d56297f150b78a7ec4a110356dbc86a9e55864",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Rear Delt Fly - Inclined Bench": {
+    image: "https://i.vimeocdn.com/video/753885258-c9b90d7215afa981256a3080d052f69d4e2ac592f496e29bcbccf7b567cc1663-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Rear Delt Fly - Inclined Bench"}]
+    },
+    techniquePoints: ["Set bench to 30-45 degrees, plant feet firmly on the floor, and pull shoulder blades together and down.", "Unrack the weight and lower it under control to your upper chest near the clavicles.", "Press the weight up and slightly backward over your shoulders, squeezing upper pecs at the top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178681558.sd.mp4?s=a9fc2ead54a519d6c2d344908b077d4aa790d0b5&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Renegade Rows - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1798860722-9ac530accde6b85aa155c6590df2bb430a1e9431ddeab8a10f612b0bc8ea92f2-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Pectoralis Major", "Triceps Brachii Group", "Latissimus Dorsi & Teres Major", "Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Renegade Rows - Dumbbell"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/913175991/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=55cda6692134ac1f5a5566909a82d68e98065ad74cefb36519a0b47f4a608419",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Reverse Flies - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698396412-85577ec5276ee91990bf82f32fa7e6bf7602e2a1562f37b487866b13027815d1-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Deltoid Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Reverse Flies - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Reverse Flies - Dumbbell.", "Execute concentric phase with intent, driving force through your Trapezius & Rhomboids, Deltoid Group, Posterior Deltoid.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733684/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=a0be01d7c4e090e23728656b9c3d7a7abb1c7834ec56f1d1b839d67fe0d8de7e",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "REVERSE LEG EXTENSIONS + DUMBBELL": {
+    image: "https://i.vimeocdn.com/video/1732879971-d9f27597498c89ae3b12b4d1b06fbe141949c15cb8f00c1fcddea8550210c551-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Quadriceps Femoris", "Gluteal Region", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal REVERSE LEG EXTENSIONS + DUMBBELL"}]
+    },
+    techniquePoints: ["Keep upper arms stationary throughout the entire rep.", "Extend forearms until elbows lock out fully, isolating your Trapezius & Rhomboids, Quadriceps Femoris, Gluteal Region, Erector Spinae.", "Control eccentric phase to feel a deep stretch in the triceps muscle belly."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/870709466/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=00924d4c940be438ab51222cd1620f7d90480962f4d2c0e24bb9926847f6f5d4",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Reverse Lunge - Barbell": {
+    image: "https://i.vimeocdn.com/video/753886622-8f3c2a655e0a7e4723dd1496ec6533c5240dd9a61aad1df9bbd980228b8840e2-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Reverse Lunge - Barbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178689155.sd.mp4?s=46c5262cccbb3a419a75c8bf398877cc8723d8d2&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Romanian Dead Lift - Barbell": {
+    image: "https://i.vimeocdn.com/video/753886690-46c0fd266b8fe3025bd9f626cd258d1dbda502bd122d5ca73b4a76fda87dfa75-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Romanian Dead Lift - Barbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Romanian Dead Lift - Barbell.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris, Gluteal Region, Hamstring Group, Erector Spinae.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178689157.sd.mp4?s=d06294c8ba551a33d5109b0dd5df150fe75aacb6&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Rotating Kickbacks - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753886760-27c9a32da7c662a271bca0f3fe1dee7bd3e8d2dd87af3bc1b442ccf8f9b7476d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Rotating Kickbacks - Dumbbell"}]
+    },
+    techniquePoints: ["Keep upper arms stationary throughout the entire rep.", "Extend forearms until elbows lock out fully, isolating your Triceps Brachii Group, Posterior Deltoid.", "Control eccentric phase to feel a deep stretch in the triceps muscle belly."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342562.sd.mp4?s=fc2bf70326cff449b21cfe2a4b2275b918add16b&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Rotating Kick Backs - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753886760-27c9a32da7c662a271bca0f3fe1dee7bd3e8d2dd87af3bc1b442ccf8f9b7476d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Rotating Kick Backs - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Rotating Kick Backs - Dumbbell.", "Execute concentric phase with intent, driving force through your Triceps Brachii Group, Posterior Deltoid.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342562.sd.mp4?s=fc2bf70326cff449b21cfe2a4b2275b918add16b&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Rows Single Arm - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753886840-1c1faffe1901a37561270e9a6bd57ed5ab8e9f97d66ae34b5ad2e310c72d5477-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Biceps Brachii", "Posterior Deltoid", "Latissimus Dorsi & Teres Major"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Rows Single Arm - Dumbbell"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342490.sd.mp4?s=f37657f8a878af69667d21a098721cec68b270a0&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Russian Twist - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1714314618-3bacd7afc3aa8aa3385818c8ae207d0edc190d647c0fdd1fc5f8d4124fab96a9-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Russian Twist - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Russian Twist - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Obliques.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/857236001/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=2493a354ad388b6a1c30577c8701830c8a747df0cf34007cfae316f58fd999c9",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Seated Alternating Knee Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1468794717-825d8cc4620e9efb34bfa3dcdff1081f483ac3bce89d3ea0ca5892ef89cbcfb1-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Seated Alternating Knee Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/729804406/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=a24987ba42c183ea5053920e33015a2216051f9577164090bd8abebb1d92b905",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Seated Arnold Press": {
+    image: "https://i.vimeocdn.com/video/1787605279-d841639daba2d375225dfff6293f5d26e47b46747588fc9405c91c3892c055e0-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Seated Arnold Press"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906031009/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=8a1be4dd9de186d5a784043ab45c011bb064da30a1e89685a9a554ed9a89d3a0",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Seated In and Out - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1468796932-7bbf8e4e30f5e9482cb7ff87211a221dd0112291878b7955ed9e428fb0c5dde0-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Seated In and Out - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Seated In and Out - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/729805529/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=44d10e4d9da5a399e9149a04cd69bdf9eb08a45ffc490e1994238b0372e9cdcc",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Shoulder Press - Behind Head - Barbell": {
+    image: "https://i.vimeocdn.com/video/753887859-7e662c59083c9af84718a781e861fe9d0fa199596405bb1531c15f524eef1b58-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Shoulder Press - Behind Head - Barbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178682181.sd.mp4?s=b58c805693e366c914d97ccfd85f160f9ce9c0a1&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Shoulder Shrugs - Barbell": {
+    image: "https://i.vimeocdn.com/video/753887927-3e9da76c7619cec31082ddd965d5729bce3d515f8977f5b8e358464aa2df0cd0-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Shoulder Shrugs - Barbell"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178682189.sd.mp4?s=9bb5c0e96d9d671dc34e7f1a2dbf67f0af308dbb&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Shoulder Shrugs - Behind the Back Barbell": {
+    image: "https://i.vimeocdn.com/video/753887976-4d84241bd87df3aee6ff82d9478fc8202346928de1025315b28bf3f902b76665-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Shoulder Shrugs - Behind the Back Barbell"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178682567.sd.mp4?s=95ad75dd61ddf88803ff6988023ae7a4488b04fc&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Side Boat Hold - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1714277507-17466de99fe5509310c7f221e22ce825f11bd02ded95513232d1b1e12d1d874c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Side Boat Hold - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Side Boat Hold - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/857236024/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=729fb24f942306d202dbe2d92c1d8452ed4e3b527774ccebce1deb3b54531720",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Side Plank Hold - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1468794767-7bda9c64100851b3a15fbf4a5d9bb7701d821db1a155e8f826be459179e77bc4-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Side Plank Hold - Dumbbell"}]
+    },
+    techniquePoints: ["Set up on forearms/hands and toes, forming a straight line from head to heels.", "Squeeze glutes, pull belly button inward, and tuck pelvis into posterior pelvic tilt.", "Hold position statically while taking short, controlled breaths."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/729804373/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=4b38846054d3f6d1ad7b574d69a7752b093de48c7cc6d62528e1dd737db03db4",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Arm Bent Over Curls": {
+    image: "https://i.vimeocdn.com/video/1411135571-fa4d6606795f10959bf71fecbe2d856c1ac2906a4d429cc28b23252fc3e6b637-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Trapezius & Rhomboids", "Latissimus Dorsi & Teres Major", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Arm Bent Over Curls"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Single Arm Bent Over Curls.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Trapezius & Rhomboids, Latissimus Dorsi & Teres Major, Posterior Deltoid.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/697770854/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=6e47f6f5fd7d8aa55adaf166e983c3316b77fddfdab4460557919f52b25d155d",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Arm Bent Over Rear Delt Flys - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1398911729-a4119d01d956fb2d6f965019818d83db425a1922958d5ecc21ff2b43af226a55-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Posterior Deltoid", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Arm Bent Over Rear Delt Flys - Dumbbell"}]
+    },
+    techniquePoints: ["Hinge forward at hips (or use chest-supported bench) with arms hanging down.", "Raise weights out to sides in a wide arc, leading with elbows and squeezing rear deltoids.", "Lower weights under control without swinging torso."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/690952218/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=6a471dec5678f9f939657a37a1978126faaa4ca32c7a172d2ae235297c7be611",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Arm Chair Sit Ups - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/756124031-8cdab5ab02c2ab0f6f3e5f00cefd217e31e626a900f48961e11298c12ae06a37-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Arm Chair Sit Ups - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314544731.sd.mp4?s=b153b47830fd589e112a533a08f920529c40ebbc&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Arm Dumbbell Swings": {
+    image: "https://i.vimeocdn.com/video/1156110899-f3de115385f60d57f1b20eb838c0a316c65331a6633a8d1e91ac0d0bff1707c7-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Deltoid Group", "Quadriceps Femoris"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Arm Dumbbell Swings"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Single Arm Dumbbell Swings.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Deltoid Group, Quadriceps Femoris.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/559373197.sd.mp4?s=569819ba90d559fa57d821793e07edd497b74d5f&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Arm Tricep Kick Back": {
+    image: "https://i.vimeocdn.com/video/1787618759-c4de6a697ecedc77cad9ebb8d700782e0cf69355c9301481c02f2714cfcb1136-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Arm Tricep Kick Back"}]
+    },
+    techniquePoints: ["Keep upper arms stationary throughout the entire rep.", "Extend forearms until elbows lock out fully, isolating your Triceps Brachii Group, Posterior Deltoid.", "Control eccentric phase to feel a deep stretch in the triceps muscle belly."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906038444/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=bf59c47796aa5f365aee1b8605072d9a7feb909c5a22dc205d4310e2c4e3fb5c",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Arm Twisting Bent Over Row DB": {
+    image: "https://i.vimeocdn.com/video/1799088808-29ff62f47608f200feb8bab4ed881aa8c2b0496d2ab259b0fed418a081c9fa23-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Trapezius & Rhomboids", "Latissimus Dorsi & Teres Major", "Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Trapezius & Rhomboids", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Arm Twisting Bent Over Row DB"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/913176127/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=0e61042d94e89792fcbf40d86175b050f63b574c6afc98449af457cf4d323f7c",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Arm Upright Row - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1398912088-fe92dccd2d5e60888ecec6aff54fd0a29bcb254206afea0a6bda486407129e8c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids", "Latissimus Dorsi & Teres Major", "Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Arm Upright Row - Dumbbell"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/690952299/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=091a19dd22b2015526f91ea62f2412c2ec21f99a1a212d9a79b2efe2bd738019",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Single Leg Romanian Deadlift - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698396400-01530ebf8603cbd77d8ecda7c0757d207f69c38eaa3f03af321dc7d6387e75fe-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group", "Erector Spinae"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Single Leg Romanian Deadlift - Dumbbell"}]
+    },
+    techniquePoints: ["Stand tall with weight held in front, knees soft but static.", "Push hips far backward while lowering weight along thighs, feeling deep hamstring stretch.", "Drive hips forward to return to standing position without arching lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733702/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=6e6bead9d43fb603e3ffa9230f482392ecf25419b5605cc1e310b37665f15d57",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Sit Ups - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698396388-38bfb3e35b02b4d05bbe570aaeb714e0cb3922d6b0c7430b8351cf7229fcd685-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Sit Ups - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733711/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=df30b81c745e3796d39df0e832119f57a3a7aa373cbfb12bbab5c0ec237d72bb",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Skull Crusher - Barbell": {
+    image: "https://i.vimeocdn.com/video/753904740-9a6af4fdcdcce619539fb3ed318335bdb3588083c6c173cb8991f9fe21b4c31c-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Triceps Brachii Group", "Latissimus Dorsi & Teres Major", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Skull Crusher - Barbell"}]
+    },
+    techniquePoints: ["Lie on flat bench holding bar or dumbbells directly above shoulders.", "Hinge at elbows to lower weight toward forehead or behind head while upper arms stay vertical.", "Extend elbows back to starting lockout position, squeezing lateral and long tricep heads."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178382788.sd.mp4?s=2577c2900a803718769001a2c6e2e45feeceb77f&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Skull Crusher Neutral Grip - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1787612046-ff56123c84110854a4e193cfb44d18c625dcba18a815ce9e86dfbdd1235e9c36-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Skull Crusher Neutral Grip - Dumbbell"}]
+    },
+    techniquePoints: ["Lie on flat bench holding bar or dumbbells directly above shoulders.", "Hinge at elbows to lower weight toward forehead or behind head while upper arms stay vertical.", "Extend elbows back to starting lockout position, squeezing lateral and long tricep heads."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906035970/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=587b66469cf852096808267467fe196459eefcef0acacea17025a88f4a439c45",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Spreads - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753904893-710dd2876b4bc6b47045425395c6d6561b92abfe81086a7accf72f7b3abe9e05-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid", "Trapezius & Rhomboids"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Spreads - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Spreads - Dumbbell.", "Execute concentric phase with intent, driving force through your Deltoid Group, Anterior Deltoid, Trapezius & Rhomboids.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178677283.sd.mp4?s=b879cc366a1ab263e9b216ef93623883e0df7130&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Squat + Calf Raise Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1696537370-bb54993c1a3516e98c3ee64f755fba11a41277a6986158116318b619a008d1f5-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Calf Group", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Squat + Calf Raise Dumbbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Calf Group, Gluteal Region and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/844414804/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=4ee8319e911d4145f2ce1282d1f426ccf88ba3288ad2405557493fe769c5f9f4",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Squat Lunge Dumbbells": {
+    image: "https://i.vimeocdn.com/video/1701662767-944e67574a9fc5ce53492355e199bcb3ebbf08e70fa8d81b802458de6f50d58e-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Squat Lunge Dumbbells"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region, Hamstring Group, Calf Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/847811790/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=7dca960c425d4b8f0a671b8cf7ca34403b142d0e95fa78fd97a2aa2c72d3f516",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Squat Open & Close - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/943590922-f0f43abe2a90b292ab5102574b0f0a0dc25d3b7f87a9492e2db342d10afa14f9-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Squat Open & Close - Dumbbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region, Calf Group and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/449781768.sd.mp4?s=3ba01960392a7bc114ac083b132db1eb4e393123&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Squats - Barbell": {
+    image: "https://i.vimeocdn.com/video/753904939-edd0b92a7a02a4b4c1c6194e69848c55dfb024023a0e3b506a28e029c0e1f8da-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Squats - Barbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178685653.sd.mp4?s=84fef63d27dd25d4452b3b5e67377dc122b33206&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Squats - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/754885094-4293b2adbfa7d686e6cf974d69270342d72b8f4e9e6ae1cab679ba79f12aae18-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Squats - Dumbbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178689582.sd.mp4?s=28802a8161a47359fdaf36dc13342a3cc0d48bb9&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Staggered Romanian Deadlifts": {
+    image: "https://i.vimeocdn.com/video/1702197232-6f46d3a4272b0b9e5bdaa308920e940f59329c52a35e70590631f258b02cde43-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Staggered Romanian Deadlifts"}]
+    },
+    techniquePoints: ["Stand tall with weight held in front, knees soft but static.", "Push hips far backward while lowering weight along thighs, feeling deep hamstring stretch.", "Drive hips forward to return to standing position without arching lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/848510757/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=bf122eebc2f649daa0673bffa218a07c5c53039360013a312b016ea563dcbaf2",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Standing Close and Wide Shoulder Press - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1343840184-9aea6820c7bd5a6b33bd47a1b4fb4ff6452f7d939af08f3b958aefb3e07054ff-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Standing Close and Wide Shoulder Press - Dumbbell"}]
+    },
+    techniquePoints: ["Stand or sit upright with feet shoulder-width apart and core braced tightly.", "Unrack or hold weight at collarbone level with elbows stacked directly under your wrists.", "Press weight vertically overhead, pushing head slightly forward at lockout to lock bar directly over shoulders."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/663948457.sd.mp4?s=2990e33b48e13b8acc345d1d83fd94018d647457&profile_id=164&oauth_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Standing Side Crunch - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753905839-a95fa2cce2677536f32a8b7df8a76d33873d7b7b462b4ab1cb472c2bcb091e21-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Standing Side Crunch - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178682928.sd.mp4?s=0908607f255032a8a4fc3d5e532c7317a69b0810&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Step Ups - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753905908-f2b10f79377d68f132cdcc3ccf35ad0a8bc7fab376c786711cdeb06534634aa0-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Step Ups - Dumbbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342597.sd.mp4?s=eac887db966d7c26299c90a660a5b94c51ef7eff&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "STRAIGHT ARM FRONTAL RAISES + HOLD Barbell": {
+    image: "https://i.vimeocdn.com/video/1732879885-b890aa2487cfd08b0b995782ff105e60946fe1093d8175e5216dc75a8758fb23-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid", "Rectus Abdominis"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal STRAIGHT ARM FRONTAL RAISES + HOLD Barbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/870709566/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=67897e1c43d288cfdc09c83d7b66a49238f709899946cafa12e3ff8aa65ea8c4",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Straight Arm Hold (Variation 2) - with Dumbbells": {
+    image: "https://i.vimeocdn.com/video/1214102602-5f77c835262cdd38c0b42bd9a01ee8c438d7028dd2236a2e41e4302a386eb7ad-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Forearm Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Straight Arm Hold (Variation 2) - with Dumbbells"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Straight Arm Hold (Variation 2) - with Dumbbells.", "Execute concentric phase with intent, driving force through your Deltoid Group, Forearm Group, Anterior Deltoid.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/586833165.sd.mp4?s=d7ca428c16b4976a8a50f16411d98506c9e662ae&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Straight Arm Hold - with Dumbbells": {
+    image: "https://i.vimeocdn.com/video/1214103116-2c568a87d2a4e7578bffea3e7d9f4ce5af25532bb9099c72c5439c2d90ad3af2-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Forearm Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Straight Arm Hold - with Dumbbells"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Straight Arm Hold - with Dumbbells.", "Execute concentric phase with intent, driving force through your Deltoid Group, Forearm Group, Anterior Deltoid.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/586833310.sd.mp4?s=1faff5c99e2408c13dd7331cb98ec72135b9ee78&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Straight Arm Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1214103032-0b745088e8dbdb62917505cd1567e8fe32f8bb77f88922cfcd35dc155853402c-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Straight Arm Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/586833450.sd.mp4?s=96e17c1a6d2bfc0dddd8d8c11c19aa017b2421c2&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Sumo Dead Lift - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753905979-c40af4528547e532649e0dbdc5ae41f18fe6a95915d74c0b24c86d934f8eec3e-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Sumo Dead Lift - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Sumo Dead Lift - Dumbbell.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris, Gluteal Region.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178690057.sd.mp4?s=679f14fdfd4eba2800b49cae6124fc241a0e9373&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Sumo Squats - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1106503513-2acb81590b7c33d485474d2c9396f2bcf38a3ddfd0a44efc54a27edd965ccf5f-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Sumo Squats - Dumbbell"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Quadriceps Femoris, Gluteal Region and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/534557492.sd.mp4?s=9a1c3dc6fbb890392ec054a64f0031bb1320e149&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Supinated Bicep Curls": {
+    image: "https://i.vimeocdn.com/video/981486071-128edaf3b540f615f2874e95dbc59bc8524fe9a879bec0b67c4b945f90d17a07-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Supinated Bicep Curls"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your Biceps Brachii, Forearm Group.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/471778538.sd.mp4?s=936063e19b4a045a0bb5cffa6c3d1e3f9d98d0fe&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Supinated Curls (Back Against the Wall)": {
+    image: "https://i.vimeocdn.com/video/1411138151-2707df7c51aef63c9f4dc383092bdf152dd24bc6aefa3d94938c56a6cd44c10d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Supinated Curls (Back Against the Wall)"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Supinated Curls (Back Against the Wall).", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/697770872/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=2c7ae85b0964d6625a45ae8af5d70c83e4e2f0968b1bb74fcd8403b6bd642743",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Supinated to Pronated Curls": {
+    image: "https://i.vimeocdn.com/video/1787621286-058a9416ca201ce59f1c7707e9564038613a06e68b3bd726d534d40025bd62f7-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Supinated to Pronated Curls"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Supinated to Pronated Curls.", "Execute concentric phase with intent, driving force through your Biceps Brachii, Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/906042476/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=82eb2cc292f94f5e1c4c0139281d11901ca4f028f2cffbfc9451b9e91c5fd7b5",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Supinated Twisting Dumbell Press": {
+    image: "https://i.vimeocdn.com/video/1422791353-8eea792514179e08412079fcbe2d2ed40dba8d33e61177ae7847375e765546ba-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Supinated Twisting Dumbell Press"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Supinated Twisting Dumbell Press.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/704601830/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=d9b31e0f999717af70322163ff24cbfeeec192888834e9a5e782c3dcfa9193ac",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Switching Lunges Dumbbells": {
+    image: "https://i.vimeocdn.com/video/1696537415-6286a74661a54f423b079c4f6d502946ecad148f55dbca9ffad8f92eab895c13-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Gluteal Region", "Hamstring Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Switching Lunges Dumbbells"}]
+    },
+    techniquePoints: ["Grip the bar underhand (palms facing you) shoulder-width apart.", "Initiate the pull by depressing your shoulder blades and driving elbows straight down toward your ribs.", "Pull until your chin clears the bar, squeezing your biceps and lower lats hard at the top position."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/844414858/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=46aabe35b83f47ed75e0d18f810b7268bdbd48876e3a4b518fd7329e3d5c2a43",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Tap Lateral Raises - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1732879946-626d3c6bcdb70eabb21c70e1f347a03ac034a5d40c140dffdc037651295a3e7b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Tap Lateral Raises - Dumbbell"}]
+    },
+    techniquePoints: ["Stand upright with dumbbells at sides, elbows slightly soft (10-15 degree bend).", "Raise arms out to sides until hands reach shoulder height, leading with elbows.", "Control lowering phase over 2 seconds to keep continuous tension on lateral deltoids."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/870709374/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=b0d2c5c54a297f2b04d6cb0be6288700d7be49e8b00bb7131c6f7ef4be3a031d",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Thrusters - Barbell": {
+    image: "https://i.vimeocdn.com/video/753906035-5183745dbf1a2fa15e664758760c43cbc9ff01fb8812dcac75d780cb065676c3-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Deltoid Group", "Gluteal Region", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Thrusters - Barbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Thrusters - Barbell.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris, Deltoid Group, Gluteal Region, Triceps Brachii Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178682938.sd.mp4?s=784f1a1e303a4c67905e7e300b79cb8e19034cb0&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Thrusters - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698396428-ee8689a14f5b956ec1aa93c2eb2a3b6667aa84911958a32f03dd68f60e033643-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Deltoid Group", "Gluteal Region", "Triceps Brachii Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Thrusters - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Thrusters - Dumbbell.", "Execute concentric phase with intent, driving force through your Quadriceps Femoris, Deltoid Group, Gluteal Region, Triceps Brachii Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845733722/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=f1e185f89e5d2827473a05b799f09d6ccdb2013e3bc1f49d9a71eed8099815fa",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Toe Touches - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1135518181-c3157c6f260999422f2f5b04620cad2e98ab592fc590652dc92cccbec7dfaacd-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Toe Touches - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Toe Touches - Dumbbell.", "Execute concentric phase with intent, driving force through your Rectus Abdominis, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/548462431.sd.mp4?s=0b726f374cfda7ef5c4c9bc8d853701bcb40a4fd&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Tricep Kick Backs - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1701243839-d4fcb19745cf505a0a6b79a75b250ffce90fe68021e5aacf5b8e1c13e6d9963d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Triceps Brachii Group", "Posterior Deltoid"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Triceps Brachii Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Tricep Kick Backs - Dumbbell"}]
+    },
+    techniquePoints: ["Keep upper arms stationary throughout the entire rep.", "Extend forearms until elbows lock out fully, isolating your Triceps Brachii Group, Posterior Deltoid.", "Control eccentric phase to feel a deep stretch in the triceps muscle belly."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/847799846/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=f5beae104d8cfc4513864783cf895195ab48eb7b05620bda99ac4f287771e3bd",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Twisting Dumbbell Press": {
+    image: "https://i.vimeocdn.com/video/1422791454-181526e0c222efb2be82afd58a649207f02aaeab2d92195222aba9c56c107ffb-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Pectoralis Major", "Triceps Brachii Group", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Pectoralis Major", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Twisting Dumbbell Press"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Twisting Dumbbell Press.", "Execute concentric phase with intent, driving force through your Pectoralis Major, Triceps Brachii Group, Deltoid Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/704601884/rendition/360p?loc=external&oauth2_token_id=1299073511&signature=bc0bc2c1112e4407819b7dfbc658307c2d405ab225ecf3042ee5ceb0f9434619",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Twisting Hammer Curls - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1787593005-be7bfed5913830351bc57fb884f8b48ec3de115d285c2e8dff3628b289bc3e0a-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Twisting Hammer Curls - Dumbbell"}]
+    },
+    techniquePoints: ["Hold dumbbells with a neutral grip (palms facing each other) at your sides.", "Curl weight upward while keeping elbows pinned close to your torso.", "Squeeze brachialis and forearm at top, then lower slowly to full arm lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/905845868/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=2c87b6c3ad004a24b7f56c5a1d0424931620334940d4934ca3480431f6904be8",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Twisting Sit Up - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1714326463-f2b51181795ae8b0523079701ac71a443b85e7a6f1d4b3f3d43f8870b208bf50-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Rectus Abdominis", "Obliques", "Deltoid Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Rectus Abdominis", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Twisting Sit Up - Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/857236041/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=f10deb36e57f6b67196a8b180d308dbc7ea5f74d9867b1ffd1332db9470bf64b",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Upright Rows - Barbell": {
+    image: "https://i.vimeocdn.com/video/753907093-7d679afb10408529975e7fee67b0fb0763573d27c4e94cebc80bdeb5469425f4-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Upright Rows - Barbell"}]
+    },
+    techniquePoints: ["Hinge at hips to a 45-degree angle (or parallel to floor for Pendlay), keeping spine neutral and knees slightly bent.", "Grip bar slightly wider than shoulder-width and pull bar to your lower ribcage/belly button.", "Squeeze shoulder blades together at top contraction, then lower under full control without rounding lower back."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178684149.sd.mp4?s=d0f1ba2cb94c2d047734f90ee21bf7a60aed1972&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Upright Rows - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753907150-5ff698650a59cc0bc7fd8d37bbe41bd630cc8f71c125608d8c08e2c3f8d4a72d-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Trapezius & Rhomboids", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Upright Rows - Dumbbell"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/178684184.sd.mp4?s=31f2513e77836e5c32c1aa50f9721cff7ff5effb&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Upright Rows to Forward Extension - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753907203-8a2eee3fdf1af2785d94c03b161aa37a31cd0c8b57e896ef829689b6ca07d4da-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Deltoid Group", "Anterior Deltoid", "Trapezius & Rhomboids", "Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Deltoid Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Upright Rows to Forward Extension - Dumbbell"}]
+    },
+    techniquePoints: ["Support one knee and hand on bench (or hinge standing) with working arm hanging extended.", "Pull dumbbell toward hip crease, leading with your elbow rather than your wrist.", "Contract lats and rhomboids hard at peak position before stretching down to starting extension."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/182342605.sd.mp4?s=9360023c6353bb704cbb4fc6ae90cb14210d573d&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Walking Lunges - Barbell": {
+    image: "https://i.vimeocdn.com/video/756124135-099b24b121e87487407d2dd18bc77a459ca1665cddec9359c93d1efc577f90e1-d_1920x1080",
+    subcategory: "Barbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Walking Lunges - Barbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/314544789.sd.mp4?s=ac094f587e41aa3aea40781a3e3380d66b4c3d38&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Walking Lunges - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/753907262-dd2b65da9b567d077b1ca30c13bc2b2533d6c11ff71a546b36356a6cf9898230-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Hamstring Group", "Gluteal Region"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Walking Lunges - Dumbbell"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/185543839.sd.mp4?s=63d1dcb305a11291b3f68c9e975ee1160af6928c&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Wall Assisted Dumbbell Curls": {
+    image: "https://i.vimeocdn.com/video/1593281827-6b0b8f239e8385fa7772c529eeccdf853a09875c9ed5d10b271f65d252f75e40-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Biceps Brachii"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Biceps Brachii", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Wall Assisted Dumbbell Curls"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Wall Assisted Dumbbell Curls.", "Execute concentric phase with intent, driving force through your Biceps Brachii.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/791667096/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=6e9b861d96e39d5bc060bbec8de8cc783d4a98f02c08fba7d48faaf03c60f277",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Wide Calf Raises Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1698406832-db2a232989b0344ac0ab7348fdea92a1304cfe2bf2f09403a58dc65dfc161065-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Quadriceps Femoris", "Calf Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Quadriceps Femoris", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Wide Calf Raises Dumbbell"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/845740524/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=e1a2fdfcf158cf1931134e1a6445cfcab41fa50f6e41426f0e20455e3919af74",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Wrist Curls (Pronated Grip) - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/1787319747-a651afef5b6da507cf8c994b925a6047fac1dcb097ab09da0deab90810c6db0a-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Forearm Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Wrist Curls (Pronated Grip) - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Wrist Curls (Pronated Grip) - Dumbbell.", "Execute concentric phase with intent, driving force through your Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/progressive_redirect/playback/905840388/rendition/360p/file.mp4?loc=external&oauth2_token_id=1299073511&signature=d55bfbb2006cf1dab674bda6130b25b4260497e9ccc86e0b9a476d9b5629bee9",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Wrist Curls (Supinated Grip) - Dumbbell": {
+    image: "https://i.vimeocdn.com/video/790284540-0cee1fce3c059da5437139a5b82b75b5ab22714beca464c3197e4ce7883a336b-d_1920x1080",
+    subcategory: "Dumbbell",
+    muscles: {
+      strength: ["Forearm Group"],
+      stability: ["Scapular & Thoracic Muscles", "Core", "Erector Spinae"],
+      mobility: [{"muscle": "Forearm Group", "level": "Moderate", "description": "Requires adequate shoulder, hip and spinal mobility for optimal Wrist Curls (Supinated Grip) - Dumbbell"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Wrist Curls (Supinated Grip) - Dumbbell.", "Execute concentric phase with intent, driving force through your Forearm Group.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://player.vimeo.com/external/341620989.sd.mp4?s=6132f820e5a2404b871771fc05aadcd2e88d650c&profile_id=164&oauth2_token_id=1299073511",
+    substitutions: ["Push-Up", "Pull-Up", "Dips"]
+  },
+  "Barbell Incline Press": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Dumbbell / Barbell",
+    muscles: {
+      strength: ["Pecho"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Barbell Incline Press.", "Execute concentric phase with intent, driving force through your Pecho.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Barbell%20Incline%20Press",
+    substitutions: ["Smith Machine Incline Press", "DB Incline Press"]
+  },
+  "Incline DB Y-Raise": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Dumbbell / Barbell",
+    muscles: {
+      strength: ["Deltoides lateral"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Engage core before initiating movement, tucking pelvis to flatten lower back against floor/bench.", "Contract rectus abdominis / obliques sharply during concentric phase, exhaling completely.", "Control return under tension without allowing lower back to hyperextend."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Incline%20DB%20Y-Raise",
+    substitutions: ["Cable Y-Raise", "Machine Lateral Raise"]
+  },
+  "Kelso Shrug": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "General Strength",
+    muscles: {
+      strength: ["Espalda media"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Hold weight at arm's length with shoulders depressed.", "Elevate shoulders straight up toward ears without bending elbows or rolling shoulders.", "Hold peak contraction at top for 1 second, then lower under control."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Kelso%20Shrug",
+    substitutions: ["Seated Cable Kelso Shrug", "Incline DB Kelso Shrug"]
+  },
+  "Dragon Flag": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "General Strength",
+    muscles: {
+      strength: ["Abdominales"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Lie on bench gripping top of bench behind head.", "Drive legs and torso up into a vertical line, supporting weight on upper back.", "Lower entire body slowly as a rigid plank until just above bench, then pull back up."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Dragon%20Flag",
+    substitutions: ["Bent-Knee Dragon Flag", "Lying Leg Raise"]
+  },
+  "Squat (Your Choice)": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "General Strength",
+    muscles: {
+      strength: ["Cu\u00e1driceps"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Set feet shoulder-width apart with toes turned slightly out.", "Brace core, descend by bending hips and knees simultaneously until thighs reach parallel or below.", "Drive through mid-foot to stand up, engaging your Cu\u00e1driceps and locking glutes at top."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Squat%20%28Your%20Choice%29",
+    substitutions: ["Barbell Back Squat", "Barbell Front Squat", "Pendulum Squat", "Hack Squat", "Belt Squat", "Smith Machine Squat"]
+  },
+  "Chest-Supported T-Bar Row": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "General Strength",
+    muscles: {
+      strength: ["Espalda media"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Maintain a braced, neutral spine position throughout the movement.", "Drive elbows back to pull weight toward lower ribs, contracting your Espalda media.", "Control the eccentric return to full stretch without allowing shoulders to round forward passively."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Chest-Supported%20T-Bar%20Row",
+    substitutions: ["Chest-Supported Machine Row", "Chest-Supported DB Row"]
+  },
+  "Modified Zottman Curl": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "General Strength",
+    muscles: {
+      strength: ["B\u00edceps"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Modified Zottman Curl.", "Execute concentric phase with intent, driving force through your B\u00edceps.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Modified%20Zottman%20Curl",
+    substitutions: ["DB Hammer Curl", "Preacher Hammer Curl"]
+  },
+  "DB Wrist Curl / DB Wrist Extension": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Dumbbell / Barbell",
+    muscles: {
+      strength: ["Antebrazos"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your Antebrazos.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+DB%20Wrist%20Curl%20DB%20Wrist%20Extension",
+    substitutions: ["Cable Wrist Curl", "Cable Wrist Extension"]
+  },
+  "Alternating DB Curl": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Dumbbell / Barbell",
+    muscles: {
+      strength: ["B\u00edceps"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your B\u00edceps.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Alternating%20DB%20Curl",
+    substitutions: ["Barbell Curl", "EZ-Bar Curl"]
+  },
+  "Dead Hang (optional)": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "General Strength",
+    muscles: {
+      strength: ["Antebrazos"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting Dead Hang (optional).", "Execute concentric phase with intent, driving force through your Antebrazos.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Dead%20Hang%20%28optional%29",
+    substitutions: ["Dumbbell Press", "Barbell Row"]
+  },
+  "EZ-Bar Cable Curl": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Dumbbell / Barbell",
+    muscles: {
+      strength: ["B\u00edceps"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Stand or sit with chest up, shoulders back, and elbows fixed at your torso sides.", "Supinate wrists and curl weight upward, focusing tension on your B\u00edceps.", "Avoid using hip momentum; lower weight under control to full elbow lockout."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+EZ-Bar%20Cable%20Curl",
+    substitutions: ["EZ-Bar Curl", "DB Curl"]
+  },
+  "45° Incline DB Press": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "Dumbbell / Barbell",
+    muscles: {
+      strength: ["Pecho superior"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Establish a stable base and brace your core to protect your spine before starting 45\u00b0 Incline DB Press.", "Execute concentric phase with intent, driving force through your Pecho superior.", "Maintain controlled tempo on eccentric phase to maximize muscle fiber recruitment."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+45%20Incline%20DB%20Press",
+    substitutions: ["45\u00b0 Incline Barbell Press", "45\u00b0 Incline Machine Press"]
+  },
+  "Walking Lunge": {
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd",
+    subcategory: "General Strength",
+    muscles: {
+      strength: ["Cu\u00e1driceps"],
+      stability: ["Scapular & Thoracic Muscles", "Core"],
+      mobility: [{"muscle": "General", "level": "Low", "description": "Standard ROM for lifting"}]
+    },
+    techniquePoints: ["Take a generous step forward/backward, keeping hips square and torso upright.", "Lower back knee toward floor until front thigh is parallel to ground and knee tracks over toe.", "Drive off front foot to return to starting position, keeping core braced."],
+    category: "Free Weights",
+    youtubeLink: "https://www.youtube.com/results?search_query=Jeff+Nippard+Walking%20Lunge",
+    substitutions: ["Smith Machine Static Lunge", "DB Static Lunge"]
+  },
 };
