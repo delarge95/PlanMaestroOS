@@ -19,6 +19,8 @@ export function CalisthenicsProgressions({
   const [sourceFilter, setSourceFilter] = useState<'all' | 'heria' | 'og'>('all');
   const [expandedGroupIds, setExpandedGroupIds] = useState<string[]>(['core-compression']);
   const [expandedExerciseNames, setExpandedExerciseNames] = useState<string[]>([]);
+  const [expandedIntroVideoIds, setExpandedIntroVideoIds] = useState<string[]>([]);
+  const [expandedReqIds, setExpandedReqIds] = useState<string[]>([]);
 
   const toggleGroup = (groupId: string) => {
     setExpandedGroupIds((prev) =>
@@ -29,6 +31,18 @@ export function CalisthenicsProgressions({
   const toggleExercise = (exName: string) => {
     setExpandedExerciseNames((prev) =>
       prev.includes(exName) ? prev.filter((n) => n !== exName) : [...prev, exName]
+    );
+  };
+
+  const toggleIntroVideo = (groupId: string) => {
+    setExpandedIntroVideoIds((prev) =>
+      prev.includes(groupId) ? prev.filter((id) => id !== groupId) : [...prev, groupId]
+    );
+  };
+
+  const toggleReq = (reqKey: string) => {
+    setExpandedReqIds((prev) =>
+      prev.includes(reqKey) ? prev.filter((k) => k !== reqKey) : [...prev, reqKey]
     );
   };
 
@@ -213,33 +227,105 @@ export function CalisthenicsProgressions({
                     {group.introduction}
                   </p>
 
-                  {/* INTRO VIDEO PLAYER INLINE */}
+                  {/* INTRO VIDEO PLAYER COLAPSABLE */}
                   {group.introVideo && (
-                    <div style={{ background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0a84ff' }}>
+                    <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                      <button
+                        type="button"
+                        onClick={() => toggleIntroVideo(group.id)}
+                        style={{
+                          width: '100%',
+                          background: 'transparent',
+                          border: 'none',
+                          padding: '10px 14px',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0a84ff', display: 'flex', alignItems: 'center', gap: '6px' }}>
                           🎬 Video Introductorio de la Técnica
                         </span>
-                      </div>
-                      <YouTubePlayer youtubeLink={group.introVideo} exerciseName={`${group.title} Intro`} />
+                        <span style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.5)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          {expandedIntroVideoIds.includes(group.id) ? 'Ocultar Video ▲' : 'Ver Video ▼'}
+                        </span>
+                      </button>
+                      {expandedIntroVideoIds.includes(group.id) && (
+                        <div style={{ padding: '0 12px 12px 12px' }}>
+                          <YouTubePlayer youtubeLink={group.introVideo} exerciseName={`${group.title} Intro`} />
+                        </div>
+                      )}
                     </div>
                   )}
 
-                  {/* REQUERIMIENTOS PREVIOS */}
+                  {/* REQUERIMIENTOS PREVIOS INTERACTIVOS */}
                   {group.requirements && group.requirements.length > 0 && (
                     <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '12px 14px' }}>
                       <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#30d158', display: 'block', marginBottom: '8px' }}>
-                        📋 Requerimientos Previos Recomendados ({group.requirements.length})
+                        📋 Requerimientos Previos Recomendados ({group.requirements.length}) — Toca un ejercicio para ver video/técnica
                       </span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        {group.requirements.map((req: any, idx: number) => (
-                          <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '8px 12px', borderRadius: '8px', fontSize: '0.82rem' }}>
-                            <span style={{ fontWeight: 600, color: '#ffffff' }}>{req.exerciseName}</span>
-                            <span style={{ color: '#30d158', fontWeight: 700, fontSize: '0.78rem' }}>
-                              {req.repeatFormatted || `${req.repeat} ${req.repeatType}`}
-                            </span>
-                          </div>
-                        ))}
+                        {group.requirements.map((req: any, idx: number) => {
+                          const reqKey = `${group.id}-req-${idx}`;
+                          const isReqExpanded = expandedReqIds.includes(reqKey);
+
+                          return (
+                            <div
+                              key={reqKey}
+                              style={{
+                                background: 'rgba(255,255,255,0.03)',
+                                border: '1px solid rgba(255,255,255,0.06)',
+                                borderRadius: '8px',
+                                overflow: 'hidden'
+                              }}
+                            >
+                              <button
+                                type="button"
+                                onClick={() => toggleReq(reqKey)}
+                                style={{
+                                  width: '100%',
+                                  background: 'transparent',
+                                  border: 'none',
+                                  padding: '8px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                  cursor: 'pointer',
+                                  fontSize: '0.82rem'
+                                }}
+                              >
+                                <span style={{ fontWeight: 600, color: '#ffffff' }}>{req.exerciseName}</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                  <span style={{ color: '#30d158', fontWeight: 700, fontSize: '0.78rem' }}>
+                                    {req.repeatFormatted || `${req.repeat} ${req.repeatType}`}
+                                  </span>
+                                  <ChevronRight
+                                    size={14}
+                                    style={{
+                                      color: 'rgba(255,255,255,0.4)',
+                                      transform: isReqExpanded ? 'rotate(90deg)' : 'none',
+                                      transition: 'transform 150ms ease'
+                                    }}
+                                  />
+                                </div>
+                              </button>
+
+                              {/* DETALLE Y VIDEO DEL REQUERIMIENTO */}
+                              {isReqExpanded && (
+                                <div style={{ padding: '10px 12px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                  {req.videoUrl ? (
+                                    <YouTubePlayer youtubeLink={req.videoUrl} exerciseName={req.exerciseName} />
+                                  ) : (
+                                    <span style={{ fontSize: '0.76rem', color: 'rgba(255,255,255,0.5)', fontStyle: 'italic' }}>
+                                      Sin video demo adjunto para este requerimiento.
+                                    </span>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   )}

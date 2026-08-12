@@ -20,6 +20,8 @@ export default function FitAppRoutinesCatalog() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>('all');
   const [selectedTierFilter, setSelectedTierFilter] = useState<string>('all');
+  const [collapsedTierIds, setCollapsedTierIds] = useState<string[]>([]);
+  const [collapsedSubgroupKeys, setCollapsedSubgroupKeys] = useState<string[]>([]);
   const [exerciseModalId, setExerciseModalId] = useState<string | null>(null);
 
   // Leer parámetro ?routine=ID de la URL al cargar
@@ -37,6 +39,18 @@ export default function FitAppRoutinesCatalog() {
   const rawTitle = currentProgram.title || currentProgram.name || 'Programa';
   const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, '').trim();
   const isActiveInTracker = activeProgramIds.includes(currentProgram.id);
+
+  const toggleTierCollapse = (tierId: string) => {
+    setCollapsedTierIds((prev) =>
+      prev.includes(tierId) ? prev.filter((id) => id !== tierId) : [...prev, tierId]
+    );
+  };
+
+  const toggleSubgroupCollapse = (key: string) => {
+    setCollapsedSubgroupKeys((prev) =>
+      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+    );
+  };
 
   // Filtrado de programas
   const isFilteredSearchActive = Boolean(
@@ -88,6 +102,7 @@ export default function FitAppRoutinesCatalog() {
     return { multiWeek, weekly, daily };
   }, []);
 
+  // Renderizado de tarjeta de programa compacto
   const renderProgramCard = (p: TrainingProgram) => {
     const isSelected = p.id === currentProgram.id;
     const isActiveInHoy = activeProgramIds.includes(p.id);
@@ -102,46 +117,35 @@ export default function FitAppRoutinesCatalog() {
           border: isSelected
             ? '1.5px solid var(--accent, #0a84ff)'
             : '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-          borderRadius: '14px',
-          padding: '14px 16px',
+          borderRadius: '12px',
+          padding: '10px 12px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          gap: '10px',
+          gap: '8px',
           cursor: 'pointer',
           transition: 'all 150ms ease',
-          boxShadow: isSelected ? '0 0 16px rgba(10,132,255,0.2)' : 'none'
+          boxShadow: isSelected ? '0 0 12px rgba(10,132,255,0.2)' : 'none'
         }}
       >
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-            <span
-              style={{
-                fontSize: '0.68rem',
-                fontWeight: 800,
-                color: p.authorCategory?.includes('Heria') ? '#ff9f0a' : p.authorCategory?.includes('Nippard') ? '#0a84ff' : '#30d158',
-                textTransform: 'uppercase',
-                letterSpacing: '0.4px'
-              }}
-            >
-              {p.authorCategory || p.source}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
+            <span style={{ fontSize: '0.74rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)' }}>
+              {p.durationWeeks} {p.durationWeeks === 1 ? 'sem' : 'sems'} · {p.weeks?.[0]?.days?.length || p.split?.length || 1} d/s
             </span>
             {isActiveInHoy && (
-              <span style={{ fontSize: '0.66rem', background: 'rgba(48,209,88,0.2)', color: '#30d158', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.64rem', background: 'rgba(48,209,88,0.2)', color: '#30d158', padding: '1px 5px', borderRadius: '4px', fontWeight: 700 }}>
                 HOY
               </span>
             )}
           </div>
-          <h4 style={{ fontSize: '0.95rem', fontWeight: 800, margin: '0 0 4px', color: '#ffffff', lineHeight: 1.3 }}>
+          <h4 style={{ fontSize: '0.88rem', fontWeight: 700, margin: 0, color: '#ffffff', lineHeight: 1.3 }}>
             {title}
           </h4>
-          <span style={{ fontSize: '0.76rem', color: 'rgba(255,255,255,0.5)' }}>
-            {p.durationWeeks} {p.durationWeeks === 1 ? 'semana' : 'semanas'} · {p.weeks?.[0]?.days?.length || p.split?.length || 1} días/sem
-          </span>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <span style={{ fontSize: '0.72rem', background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.7)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <span style={{ fontSize: '0.7rem', background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.7)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
             {p.discipline || 'Calistenia'}
           </span>
           <button
@@ -155,74 +159,105 @@ export default function FitAppRoutinesCatalog() {
               color: '#ffffff',
               border: 'none',
               borderRadius: '6px',
-              padding: '4px 10px',
-              fontSize: '0.74rem',
+              padding: '3px 8px',
+              fontSize: '0.72rem',
               fontWeight: 700,
               cursor: 'pointer'
             }}
           >
-            {isSelected ? 'Inspeccionando' : 'Ver Rutina'}
+            {isSelected ? 'Ver' : 'Seleccionar'}
           </button>
         </div>
       </div>
     );
   };
 
-  const renderTierGroup = (title: string, icon: React.ReactNode, programs: TrainingProgram[], badge: string) => {
+  const renderTierGroup = (tierId: string, title: string, icon: React.ReactNode, programs: TrainingProgram[], badge: string) => {
     if (programs.length === 0) return null;
+
+    const isTierCollapsed = collapsedTierIds.includes(tierId);
 
     const heriaPrograms = programs.filter((p) => p.authorCategory?.includes('Heria'));
     const nippardPrograms = programs.filter((p) => p.authorCategory?.includes('Nippard'));
     const planMaestroPrograms = programs.filter((p) => p.authorCategory?.includes('PlanMaestro') || (!p.authorCategory?.includes('Heria') && !p.authorCategory?.includes('Nippard')));
 
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-        {/* ENCABEZADO DE TIER */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
-          <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {icon}
-            <span>{title}</span>
-          </h3>
-          <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', padding: '2px 8px', borderRadius: '999px', fontWeight: 600 }}>
-            {programs.length} {badge}
-          </span>
+    const renderSubgroup = (subKey: string, subTitle: string, color: string, subPrograms: TrainingProgram[]) => {
+      if (subPrograms.length === 0) return null;
+      const fullSubKey = `${tierId}-${subKey}`;
+      const isSubCollapsed = collapsedSubgroupKeys.includes(fullSubKey);
+
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <button
+            type="button"
+            onClick={() => toggleSubgroupCollapse(fullSubKey)}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              padding: '4px 0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              cursor: 'pointer',
+              width: '100%',
+              textAlign: 'left'
+            }}
+          >
+            <span style={{ fontSize: '0.76rem', fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              {subTitle} ({subPrograms.length})
+            </span>
+            <ChevronRightIcon size={14} style={{ color: 'rgba(255,255,255,0.4)', transform: isSubCollapsed ? 'none' : 'rotate(90deg)', transition: 'transform 150ms ease' }} />
+          </button>
+
+          {!isSubCollapsed && (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: '10px' }}>
+              {subPrograms.map(renderProgramCard)}
+            </div>
+          )}
         </div>
+      );
+    };
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {/* ENCABEZADO COLAPSABLE DE TIER */}
+        <button
+          type="button"
+          onClick={() => toggleTierCollapse(tierId)}
+          style={{
+            width: '100%',
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '12px',
+            padding: '10px 14px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            cursor: 'pointer'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {icon}
+            <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+              {title}
+            </h3>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', padding: '2px 8px', borderRadius: '999px', fontWeight: 600 }}>
+              {programs.length} {badge}
+            </span>
+            <ChevronRightIcon size={16} style={{ color: 'rgba(255,255,255,0.4)', transform: isTierCollapsed ? 'none' : 'rotate(90deg)', transition: 'transform 150ms ease' }} />
+          </div>
+        </button>
 
         {/* SUBGRUPOS POR AUTOR / ORIGEN */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {heriaPrograms.length > 0 && (
-            <div>
-              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: '#ff9f0a', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                🔥 Chris Heria / Thenx ({heriaPrograms.length})
-              </span>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
-                {heriaPrograms.map(renderProgramCard)}
-              </div>
-            </div>
-          )}
-
-          {nippardPrograms.length > 0 && (
-            <div>
-              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: '#0a84ff', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                🧠 Jeff Nippard / Ciencia & Hipertrofia ({nippardPrograms.length})
-              </span>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
-                {nippardPrograms.map(renderProgramCard)}
-              </div>
-            </div>
-          )}
-
-          {planMaestroPrograms.length > 0 && (
-            <div>
-              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: '#30d158', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                📖 PlanMaestro OS ({planMaestroPrograms.length})
-              </span>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
-                {planMaestroPrograms.map(renderProgramCard)}
-              </div>
-            </div>
-          )}
-        </div>
+        {!isTierCollapsed && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingLeft: '8px' }}>
+            {renderSubgroup('heria', '🔥 Chris Heria / Thenx', '#ff9f0a', heriaPrograms)}
+            {renderSubgroup('nippard', '🧠 Jeff Nippard / Ciencia & Hipertrofia', '#0a84ff', nippardPrograms)}
+            {renderSubgroup('planmaestro', '📖 PlanMaestro OS', '#30d158', planMaestroPrograms)}
+          </div>
+        )}
       </div>
     );
   };
@@ -299,91 +334,103 @@ export default function FitAppRoutinesCatalog() {
             </button>
           </div>
 
-          {/* PANEL EXPANDIBLE DE FILTROS */}
+          {/* PANEL EXPANDIBLE DE FILTROS CON BOTONES PILLS (HIGH CONTRAST) */}
           {isFilterExpanded && (
             <div
               style={{
                 paddingTop: '12px',
                 borderTop: '1px solid rgba(255,255,255,0.08)',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                display: 'flex',
+                flexDirection: 'column',
                 gap: '12px',
                 fontSize: '0.82rem'
               }}
             >
               {/* FILTRO DE AUTOR */}
-              <div>
-                <span style={{ display: 'block', color: 'rgba(255,255,255,0.5)', fontWeight: 600, marginBottom: '6px' }}>
-                  Autor / Metodología:
-                </span>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  style={{
-                    width: '100%',
-                    background: 'rgba(255,255,255,0.04)',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '8px',
-                    padding: '6px 10px',
-                    fontSize: '0.82rem'
-                  }}
-                >
-                  <option value="all">Todas las metodologías</option>
-                  <option value="heria">🔥 Chris Heria / Thenx</option>
-                  <option value="nippard">🧠 Jeff Nippard / Hipertrofia</option>
-                  <option value="planmaestro">📖 PlanMaestro OS</option>
-                </select>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Metodología:</span>
+                {[
+                  { key: 'all', label: 'Todas' },
+                  { key: 'heria', label: '🔥 Chris Heria / Thenx' },
+                  { key: 'nippard', label: '🧠 Jeff Nippard' },
+                  { key: 'planmaestro', label: '📖 PlanMaestro' }
+                ].map((item) => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    onClick={() => setSelectedCategory(item.key)}
+                    style={{
+                      background: selectedCategory === item.key ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.06)',
+                      color: selectedCategory === item.key ? '#ffffff' : 'rgba(255,255,255,0.7)',
+                      border: 'none',
+                      padding: '4px 10px',
+                      borderRadius: '999px',
+                      fontSize: '0.76rem',
+                      fontWeight: selectedCategory === item.key ? 700 : 500,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </div>
 
-              {/* FILTRO DE TIER / DURACIÓN */}
-              <div>
-                <span style={{ display: 'block', color: 'rgba(255,255,255,0.5)', fontWeight: 600, marginBottom: '6px' }}>
-                  Duración / Estructura:
-                </span>
-                <select
-                  value={selectedTierFilter}
-                  onChange={(e) => setSelectedTierFilter(e.target.value)}
-                  style={{
-                    width: '100%',
-                    background: 'rgba(255,255,255,0.04)',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '8px',
-                    padding: '6px 10px',
-                    fontSize: '0.82rem'
-                  }}
-                >
-                  <option value="all">Todos los formatos</option>
-                  <option value="program">📚 Programas (2+ semanas)</option>
-                  <option value="week">🗓️ Semanales (1 semana)</option>
-                  <option value="day">⚡ Diarios (1 día)</option>
-                </select>
+              {/* FILTRO DE TIER / FORMATO */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Estructura:</span>
+                {[
+                  { key: 'all', label: 'Todos' },
+                  { key: 'program', label: '📚 Programas' },
+                  { key: 'week', label: '🗓️ Semanales' },
+                  { key: 'day', label: '⚡ Diarios' }
+                ].map((item) => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    onClick={() => setSelectedTierFilter(item.key)}
+                    style={{
+                      background: selectedTierFilter === item.key ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.06)',
+                      color: selectedTierFilter === item.key ? '#ffffff' : 'rgba(255,255,255,0.7)',
+                      border: 'none',
+                      padding: '4px 10px',
+                      borderRadius: '999px',
+                      fontSize: '0.76rem',
+                      fontWeight: selectedTierFilter === item.key ? 700 : 500,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </div>
 
               {/* FILTRO DE DISCIPLINA */}
-              <div>
-                <span style={{ display: 'block', color: 'rgba(255,255,255,0.5)', fontWeight: 600, marginBottom: '6px' }}>
-                  Disciplina Principal:
-                </span>
-                <select
-                  value={selectedDiscipline}
-                  onChange={(e) => setSelectedDiscipline(e.target.value)}
-                  style={{
-                    width: '100%',
-                    background: 'rgba(255,255,255,0.04)',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '8px',
-                    padding: '6px 10px',
-                    fontSize: '0.82rem'
-                  }}
-                >
-                  <option value="all">Todas las disciplinas</option>
-                  <option value="Calistenia">Calistenia</option>
-                  <option value="Hipertrofia / Bodybuilding">Hipertrofia / Bodybuilding</option>
-                  <option value="Powerbuilding">Powerbuilding</option>
-                </select>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Disciplina:</span>
+                {[
+                  { key: 'all', label: 'Todas' },
+                  { key: 'Calistenia', label: 'Calistenia' },
+                  { key: 'Hipertrofia / Bodybuilding', label: 'Bodybuilding' },
+                  { key: 'Powerbuilding', label: 'Powerbuilding' }
+                ].map((item) => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    onClick={() => setSelectedDiscipline(item.key)}
+                    style={{
+                      background: selectedDiscipline === item.key ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.06)',
+                      color: selectedDiscipline === item.key ? '#ffffff' : 'rgba(255,255,255,0.7)',
+                      border: 'none',
+                      padding: '4px 10px',
+                      borderRadius: '999px',
+                      fontSize: '0.76rem',
+                      fontWeight: selectedDiscipline === item.key ? 700 : 500,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </div>
             </div>
           )}
@@ -398,7 +445,7 @@ export default function FitAppRoutinesCatalog() {
             padding: '20px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '24px',
+            gap: '20px',
             boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}
         >
@@ -421,15 +468,16 @@ export default function FitAppRoutinesCatalog() {
                   Limpiar Filtros
                 </button>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: '10px' }}>
                 {filteredPrograms.map(renderProgramCard)}
               </div>
             </div>
           ) : (
             <>
-              {/* TIER 1: PROGRAMAS MULTI-SEMANA (2+ SEMANAS) */}
+              {/* TIER 1: PROGRAMAS (2+ SEMANAS) */}
               {renderTierGroup(
-                'Programas Multi-Semana (2+ semanas)',
+                'program',
+                'Programas',
                 <BookOpen size={18} style={{ color: '#0a84ff' }} />,
                 tierPrograms.multiWeek,
                 'programas'
@@ -437,6 +485,7 @@ export default function FitAppRoutinesCatalog() {
 
               {/* TIER 2: PLANES SEMANALES (1 SEMANA) */}
               {renderTierGroup(
+                'week',
                 'Planes Semanales (1 semana)',
                 <Calendar size={18} style={{ color: '#ff9f0a' }} />,
                 tierPrograms.weekly,
@@ -445,6 +494,7 @@ export default function FitAppRoutinesCatalog() {
 
               {/* TIER 3: RUTINAS DIARIAS / MASTER WORKOUTS (1 DÍA) */}
               {renderTierGroup(
+                'day',
                 'Rutinas Diarias / Master Workouts (1 día)',
                 <Award size={18} style={{ color: '#30d158' }} />,
                 tierPrograms.daily,
@@ -582,5 +632,23 @@ export default function FitAppRoutinesCatalog() {
         )}
       </div>
     </ErrorBoundary>
+  );
+}
+
+function ChevronRightIcon({ size = 16, style }: { size?: number; style?: React.CSSProperties }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={style}
+    >
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
   );
 }

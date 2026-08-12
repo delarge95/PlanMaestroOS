@@ -4,7 +4,6 @@ import { minMaxProgram } from './minMax';
 import { powerbuildingProgram } from './powerbuilding';
 import { bodybuildingTransformationProgram } from './bodybuildingTransformation';
 import { gluteHypertrophyProgram } from './gluteHypertrophy';
-import { calisthenicsProgram } from './calisthenics';
 import { thenxPrograms } from './thenxPrograms';
 import { thenxMasterRoutines } from './thenxMasterRoutines';
 
@@ -13,7 +12,6 @@ export { minMaxProgram } from './minMax';
 export { powerbuildingProgram } from './powerbuilding';
 export { bodybuildingTransformationProgram } from './bodybuildingTransformation';
 export { gluteHypertrophyProgram } from './gluteHypertrophy';
-export { calisthenicsProgram } from './calisthenics';
 export { calisthenicsSkillTree } from './calisthenicsPaths';
 export { thenxPrograms } from './thenxPrograms';
 export { thenxMasterRoutines } from './thenxMasterRoutines';
@@ -143,7 +141,6 @@ const rawPrograms = [
   powerbuildingProgram,
   bodybuildingTransformationProgram,
   gluteHypertrophyProgram,
-  calisthenicsProgram,
   ...thenxPrograms,
   ...thenxMasterRoutines
 ];

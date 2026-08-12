@@ -2,25 +2,12 @@
 import React, { useState } from 'react';
 import CalisthenicsProgressions from './skills/CalisthenicsProgressions';
 import ThenxGuideDatabase from './ThenxGuideDatabase';
-import { Search, Compass, BookOpen, Check } from 'lucide-react';
-import type { SkillDomain } from '../../data/fitness/skills/types';
+import { Search, Compass, BookOpen } from 'lucide-react';
 import thenxGuidesData from '../../data/fitness/thenx_technique_guides.json';
-
-const DOMAIN_FILTERS: { key: SkillDomain | 'all'; label: string }[] = [
-  { key: 'all', label: 'Todas las Rutas' },
-  { key: 'pull', label: 'Tracción' },
-  { key: 'push', label: 'Empuje' },
-  { key: 'core', label: 'Core & Compresión' },
-  { key: 'legs', label: 'Pierna Unilateral' },
-  { key: 'support', label: 'Soporte & Anillas' },
-  { key: 'mobility', label: 'Movilidad & Capacidad' }
-];
 
 export default function LibrarySkills() {
   const [activeSubView, setActiveSubView] = useState<'progressions' | 'thenx'>('progressions');
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDomain, setSelectedDomain] = useState<SkillDomain | 'all'>('all');
-  const [onlyActive, setOnlyActive] = useState(false);
   const [selectedGuideId, setSelectedGuideId] = useState<string>(thenxGuidesData[0]?.id || '53');
 
   return (
@@ -121,97 +108,44 @@ export default function LibrarySkills() {
           </div>
         </div>
 
-        {/* FILA 2: FILTROS DE CATEGORÍA O SELECCIÓN DE GUÍAS */}
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '2px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', maxWidth: '100%', alignItems: 'center' }}>
-          {activeSubView === 'progressions' ? (
-            <>
-              <button
-                type="button"
-                onClick={() => setOnlyActive((v) => !v)}
-                style={{
-                  background: onlyActive ? 'rgba(48,209,88,0.15)' : 'rgba(255,255,255,0.03)',
-                  color: onlyActive ? '#30d158' : 'rgba(255,255,255,0.55)',
-                  border: onlyActive ? '1px solid rgba(48,209,88,0.4)' : '1px solid rgba(255,255,255,0.06)',
-                  borderRadius: '999px',
-                  padding: '5px 12px',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px'
-                }}
-              >
-                {onlyActive ? <Check size={12} /> : null}
-                <span>Solo activas hoy</span>
-              </button>
-
-              <div style={{ width: '1px', height: '16px', background: 'rgba(255,255,255,0.08)', margin: '0 2px' }} />
-
-              {DOMAIN_FILTERS.map((df) => {
-                const isSelected = selectedDomain === df.key;
-                return (
-                  <button
-                    key={df.key}
-                    type="button"
-                    onClick={() => setSelectedDomain(df.key)}
-                    style={{
-                      background: isSelected ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.03)',
-                      color: isSelected ? '#ffffff' : 'rgba(255,255,255,0.55)',
-                      border: 'none',
-                      borderRadius: '999px',
-                      padding: '5px 12px',
-                      fontSize: '0.78rem',
-                      fontWeight: isSelected ? 600 : 500,
-                      cursor: 'pointer',
-                      transition: 'all 150ms ease'
-                    }}
-                  >
-                    {df.label}
-                  </button>
-                );
-              })}
-            </>
-          ) : (
-            <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '2px', scrollbarWidth: 'none' }}>
-              {thenxGuidesData.map((g: any) => {
-                const isSelected = g.id === selectedGuideId;
-                return (
-                  <button
-                    key={g.id}
-                    type="button"
-                    onClick={() => setSelectedGuideId(g.id)}
-                    style={{
-                      background: isSelected ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.03)',
-                      color: isSelected ? '#ffffff' : 'rgba(255,255,255,0.55)',
-                      border: 'none',
-                      borderRadius: '999px',
-                      padding: '5px 12px',
-                      fontSize: '0.78rem',
-                      fontWeight: isSelected ? 600 : 500,
-                      cursor: 'pointer',
-                      whiteSpace: 'nowrap',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}
-                  >
-                    <BookOpen size={12} />
-                    <span>{g.title}</span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
+        {/* FILA 2: SELECCIÓN DE GUÍAS THENX (SOLO EN MODO THENX) */}
+        {activeSubView === 'thenx' && (
+          <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '2px', scrollbarWidth: 'none' }}>
+            {thenxGuidesData.map((g: any) => {
+              const isSelected = g.id === selectedGuideId;
+              return (
+                <button
+                  key={g.id}
+                  type="button"
+                  onClick={() => setSelectedGuideId(g.id)}
+                  style={{
+                    background: isSelected ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.03)',
+                    color: isSelected ? '#ffffff' : 'rgba(255,255,255,0.55)',
+                    border: 'none',
+                    borderRadius: '999px',
+                    padding: '5px 12px',
+                    fontSize: '0.78rem',
+                    fontWeight: isSelected ? 600 : 500,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}
+                >
+                  <BookOpen size={12} />
+                  <span>{g.title}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* BLOQUE 2: CONTENIDO DE PROGRESIONES & GUÍAS */}
       <div>
         {activeSubView === 'progressions' ? (
           <CalisthenicsProgressions
-            selectedDomain={selectedDomain}
-            onlyActive={onlyActive}
             searchTerm={searchTerm}
           />
         ) : (
