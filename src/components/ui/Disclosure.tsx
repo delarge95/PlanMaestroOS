@@ -20,13 +20,22 @@ export function Disclosure({
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const contentId = useId();
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setIsOpen((prev) => !prev);
+    }
+  };
+
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-      <button
-        type="button"
+      <div
+        role="button"
+        tabIndex={0}
         aria-expanded={isOpen}
         aria-controls={contentId}
         onClick={() => setIsOpen((prev) => !prev)}
+        onKeyDown={handleKeyDown}
         style={{
           width: '100%',
           minHeight: '44px',
@@ -44,7 +53,8 @@ export function Disclosure({
           alignItems: 'center',
           gap: 'var(--space-sm)',
           transition: 'all 150ms var(--ease-standard)',
-          outline: 'none'
+          outline: 'none',
+          userSelect: 'none'
         }}
         onFocus={(e) => {
           e.currentTarget.style.boxShadow = '0 0 0 3px var(--focus)';
@@ -65,7 +75,7 @@ export function Disclosure({
             ▼
           </span>
         </div>
-      </button>
+      </div>
 
       {isOpen && (
         <div
