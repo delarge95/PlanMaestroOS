@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import type { ExerciseEntry } from '../../data/exercises';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
+import { YouTubePlayer } from '../ui/YouTubePlayer';
 
 interface Props {
   exercise?: ExerciseEntry | null;
@@ -14,21 +15,9 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
   if (!targetExercise) return null;
 
   const [activeTab, setActiveTab] = useState<'technique' | 'muscles' | 'mobility' | 'substitutions'>('technique');
-  const [selectedVideoOption, setSelectedVideoOption] = useState<'option1' | 'option2'>('option1');
 
-  // Extract YouTube video ID if available
-  const getYoutubeEmbedUrl = (url?: string) => {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=1` : null;
-  };
-
-  const videoUrl1 = targetExercise.youtubeLink || (targetExercise as any).videoOption1;
-  const videoUrl2 = (targetExercise as any).videoOption2 || (targetExercise as any).videoUrl2;
-
-  const activeVideoUrl = selectedVideoOption === 'option1' ? videoUrl1 : (videoUrl2 || videoUrl1);
-  const embedUrl = getYoutubeEmbedUrl(activeVideoUrl);
+  const videoUrl1 = targetExercise.youtubeLink || (targetExercise as any).videoOption1 || (targetExercise as any).videoUrl;
+  const videoUrl2 = (targetExercise as any).secondaryVideoLink || (targetExercise as any).videoOption2 || (targetExercise as any).videoUrl2;
 
   const mobilityList: string[] = (targetExercise as any).mobilityRequirements || (targetExercise as any).mobility || [
     'Dorsiflexión adecuada de tobillo para profundidad biomecánica',
@@ -134,78 +123,16 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
           </button>
         </div>
 
-        {/* SELECTOR MULTI-VÍDEO (OPCIÓN 1 / OPCIÓN 2) */}
-        {videoUrl2 && (
-          <div style={{ display: 'flex', gap: '6px', background: 'rgba(0,0,0,0.4)', padding: '4px', borderRadius: '10px', width: 'fit-content', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <button
-              type="button"
-              onClick={() => setSelectedVideoOption('option1')}
-              style={{
-                background: selectedVideoOption === 'option1' ? 'var(--color-state-done)' : 'transparent',
-                color: selectedVideoOption === 'option1' ? '#ffffff' : 'var(--color-text-secondary)',
-                border: 'none',
-                padding: '4px 12px',
-                borderRadius: '6px',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                cursor: 'pointer'
-              }}
-            >
-              Vídeo Opción 1
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedVideoOption('option2')}
-              style={{
-                background: selectedVideoOption === 'option2' ? 'var(--color-state-done)' : 'transparent',
-                color: selectedVideoOption === 'option2' ? '#ffffff' : 'var(--color-text-secondary)',
-                border: 'none',
-                padding: '4px 12px',
-                borderRadius: '6px',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                cursor: 'pointer'
-              }}
-            >
-              Vídeo Opción 2
-            </button>
-          </div>
-        )}
-
-        {/* YOUTUBE EMBED OR DIRECT LINK */}
-        {embedUrl ? (
-          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: '#000', aspectRatio: '16/9' }}>
-            <iframe
-              src={embedUrl}
-              title={targetExercise.name}
-              style={{ width: '100%', height: '100%', border: 'none' }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
+        {/* INLINE REPRODUCTOR INCRUSTADO UNIVERSAL (VIMEO, YOUTUBE, MP4) */}
+        {(videoUrl1 || videoUrl2) && (
+          <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <YouTubePlayer
+              youtubeLink={videoUrl1}
+              secondaryVideoLink={videoUrl2}
+              exerciseName={targetExercise.name}
             />
           </div>
-        ) : activeVideoUrl ? (
-          <a
-            href={activeVideoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              padding: '16px',
-              background: 'rgba(239, 68, 68, 0.12)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
-              borderRadius: '16px',
-              color: 'var(--color-accent-danger)',
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              fontWeight: 700,
-              fontSize: '0.9rem'
-            }}
-          >
-            <span>▶</span> Ver Video de Técnica en YouTube ({selectedVideoOption === 'option1' ? 'Opción 1' : 'Opción 2'}) ↗
-          </a>
-        ) : null}
+        )}
 
         {/* TABS CON SECCIÓN DE REQUISITOS DE MOVILIDAD */}
         <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '10px', flexWrap: 'wrap' }}>

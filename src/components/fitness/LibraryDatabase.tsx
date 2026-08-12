@@ -2,7 +2,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import ExerciseModal from './ExerciseModal';
 import { Search, ChevronRight, ChevronDown, Check, ArrowUpDown, ExternalLink, ChevronsUpDown } from 'lucide-react';
-import { exerciseDatabase } from '../../data/exercises';
+import { exerciseDatabase, exerciseGroups } from '../../data/exercises';
+import { YouTubePlayer } from '../ui/YouTubePlayer';
 
 type ExerciseCategory =
   | 'Free Weights'
@@ -56,8 +57,24 @@ export default function LibraryDatabase() {
   const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
   const [expandedInlineIds, setExpandedInlineIds] = useState<string[]>([]);
   
-  // Estado para acordeón por grupos en modo grouped (INICIAN SIN DESPLEGAR)
+  // Estado para acordeón por grupos de movimiento FitApp (INICIAN SIN DESPLEGAR)
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+
+  // Construir mapa inverso de Ejercicio -> Grupo de Movimiento FitApp
+  const reverseGroupMap = useMemo(() => {
+    const reverseMap = new Map<string, string>();
+    if (exerciseGroups) {
+      for (const groupName in exerciseGroups) {
+        const exList = (exerciseGroups as any)[groupName];
+        if (Array.isArray(exList)) {
+          exList.forEach((exName: string) => {
+            reverseMap.set(exName, groupName);
+          });
+        }
+      }
+    }
+    return reverseMap;
+  }, []);
 
   // Leer parámetro ?search= de la URL al cargar
   useEffect(() => {
@@ -143,17 +160,26 @@ export default function LibraryDatabase() {
       });
   }, [searchTerm, selectedCategories, selectedMuscles, sortOption]);
 
-  // Agrupamiento por categorías / grupos principales
+  // Agrupamiento por los 31 GRUPOS DE MOVIMIENTO FITAPP (Pull-Up, Push-Up, Core, Dip, Squat, Planche, etc.)
   const groupedExercises = useMemo(() => {
     const map: Record<string, string[]> = {};
+
     filteredFlatList.forEach((name) => {
-      const ex = exerciseDatabase[name];
-      const cat = ex.category || 'Otros';
-      if (!map[cat]) map[cat] = [];
-      map[cat].push(name);
+      const movementGroup = reverseGroupMap.get(name) || 'Otros / Variaciones Generales';
+      if (!map[movementGroup]) map[movementGroup] = [];
+      map[movementGroup].push(name);
     });
-    return map;
-  }, [filteredFlatList]);
+
+    // Ordenar grupos alfabéticamente
+    const sortedMap: Record<string, string[]> = {};
+    Object.keys(map)
+      .sort((a, b) => a.localeCompare(b))
+      .forEach((key) => {
+        sortedMap[key] = map[key];
+      });
+
+    return sortedMap;
+  }, [filteredFlatList, reverseGroupMap]);
 
   // Verificar si todos los grupos actuales están expandidos
   const allGroupKeys = Object.keys(groupedExercises);
@@ -177,10 +203,13 @@ export default function LibraryDatabase() {
 
   const activeFiltersCount = selectedCategories.length + selectedMuscles.length + (searchTerm ? 1 : 0);
 
-  // Previsualización desplegable inline (músculos e hipervínculos + requisitos de movilidad)
+  // Previsualización desplegable inline con VIDEO INCRUSTADO UNIVERSAL + Músculos & Movilidad
   const renderInlinePreview = (name: string) => {
     const exInfo = exerciseDatabase[name];
     if (!exInfo) return null;
+
+    const videoUrl1 = exInfo.youtubeLink || (exInfo as any).videoOption1 || (exInfo as any).videoUrl;
+    const videoUrl2 = (exInfo as any).secondaryVideoLink || (exInfo as any).videoOption2 || (exInfo as any).videoUrl2;
 
     const mobilityList = (exInfo as any).mobilityRequirements || (exInfo as any).mobility || [
       'Dorsiflexión de tobillo & movilidad de cadera',
@@ -188,7 +217,19 @@ export default function LibraryDatabase() {
     ];
 
     return (
-      <div style={{ padding: '12px 14px', background: 'rgba(0,0,0,0.4)', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div style={{ padding: '14px 16px', background: 'rgba(0,0,0,0.4)', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        
+        {/* VIDEO DEMOSTRATIVO INCRUSTADO NATIVO */}
+        {(videoUrl1 || videoUrl2) && (
+          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <YouTubePlayer
+              youtubeLink={videoUrl1}
+              secondaryVideoLink={videoUrl2}
+              exerciseName={name}
+            />
+          </div>
+        )}
+
         <div>
           <strong style={{ fontSize: '0.74rem', color: 'var(--success, #30d158)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
             Fuerza Primaria (Clic para ver en Músculos):
@@ -254,7 +295,7 @@ export default function LibraryDatabase() {
           <div style={{ position: 'relative', flex: 1 }}>
             <input
               type="text"
-              placeholder="Search exercises..."
+              placeholder="Buscar por ejercicio (Pull Up, Push Up, Squat, Planche) o músculo..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
@@ -299,7 +340,7 @@ export default function LibraryDatabase() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-              View Mode
+              Modo de Visualización
             </span>
             <div style={{ display: 'inline-flex', gap: '4px', background: 'rgba(0,0,0,0.3)', padding: '3px', borderRadius: '8px', width: 'fit-content', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
               <button
@@ -316,7 +357,7 @@ export default function LibraryDatabase() {
                   cursor: 'pointer'
                 }}
               >
-                Grouped
+                📁 Grupos de Movimiento FitApp ({Object.keys(groupedExercises).length})
               </button>
               <button
                 type="button"
@@ -332,7 +373,7 @@ export default function LibraryDatabase() {
                   cursor: 'pointer'
                 }}
               >
-                Flat List
+                📋 Lista Plana ({filteredFlatList.length})
               </button>
             </div>
           </div>
@@ -365,7 +406,7 @@ export default function LibraryDatabase() {
         {/* FILTROS POR CATEGORÍAS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-            Category
+            Filtrar Equipamiento / Categoría
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {CATEGORY_FILTERS.map((cat) => {
@@ -400,7 +441,7 @@ export default function LibraryDatabase() {
         {/* FILTROS POR GRUPOS MUSCULARES */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-            Muscle Group
+            Filtrar por Músculo Principal
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {Object.keys(MUSCLE_GROUP_MAP).map((group) => {
@@ -447,7 +488,7 @@ export default function LibraryDatabase() {
                 cursor: 'pointer'
               }}
             >
-              Clear All Filters ({activeFiltersCount})
+              Limpiar Todos los Filtros ({activeFiltersCount})
             </button>
           </div>
         )}
@@ -491,7 +532,7 @@ export default function LibraryDatabase() {
                   <button
                     type="button"
                     onClick={(e) => toggleInlineExpand(name, e)}
-                    title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar músculos y técnica'}
+                    title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar video y técnica'}
                     style={{
                       background: 'rgba(255,255,255,0.04)',
                       border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
@@ -514,7 +555,7 @@ export default function LibraryDatabase() {
           })}
         </div>
       ) : (
-        /* GROUPED VIEW CON ACORDEÓN REPLEGABLE POR DEFECTO */
+        /* GROUPED VIEW POR 31 GRUPOS DE MOVIMIENTO FITAPP */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {Object.entries(groupedExercises).map(([groupName, exercises]) => {
             const isGroupExpanded = Boolean(expandedGroups[groupName]);
@@ -522,11 +563,11 @@ export default function LibraryDatabase() {
             return (
               <div key={groupName} style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', overflow: 'hidden' }}>
                 
-                {/* CABECERA INTERACTIVA DEL GRUPO */}
+                {/* CABECERA INTERACTIVA DEL GRUPO DE MOVIMIENTO */}
                 <div
                   onClick={() => toggleGroupExpand(groupName)}
                   style={{
-                    padding: '14px',
+                    padding: '14px 18px',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -535,17 +576,19 @@ export default function LibraryDatabase() {
                     userSelect: 'none'
                   }}
                 >
-                  <strong style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>{groupName}</strong>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <strong style={{ fontSize: '1.05rem', color: '#0a84ff', fontWeight: 800 }}>{groupName}</strong>
+                  </div>
                   
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.06)', color: 'var(--text-secondary)', padding: '2px 8px', borderRadius: '12px', fontWeight: 600 }}>
-                      {exercises.length} ejercicios
+                    <span style={{ fontSize: '0.78rem', background: 'rgba(10,132,255,0.15)', color: '#0a84ff', border: '1px solid rgba(10,132,255,0.3)', padding: '3px 10px', borderRadius: '999px', fontWeight: 700 }}>
+                      {exercises.length} variations
                     </span>
                     {isGroupExpanded ? <ChevronDown size={18} style={{ color: 'var(--text-secondary)' }} /> : <ChevronRight size={18} style={{ color: 'var(--text-secondary)' }} />}
                   </div>
                 </div>
 
-                {/* CONTENIDO DESPLEGABLE DEL GRUPO */}
+                {/* CONTENIDO DESPLEGABLE CON LAS VARIACIONES DEL GRUPO */}
                 {isGroupExpanded && (
                   <div style={{ padding: '12px', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     {exercises.map((name) => {
@@ -557,38 +600,40 @@ export default function LibraryDatabase() {
                           style={{
                             background: 'rgba(255,255,255,0.02)',
                             border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))',
-                            borderRadius: '6px',
+                            borderRadius: '8px',
                             overflow: 'hidden'
                           }}
                         >
                           <div
                             onClick={() => setModalExerciseId(name)}
                             style={{
-                              padding: '8px 10px',
+                              padding: '10px 14px',
                               display: 'flex',
                               justifyContent: 'space-between',
                               alignItems: 'center',
                               cursor: 'pointer'
                             }}
                           >
-                            <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-primary)' }}>{name}</span>
+                            <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)' }}>{name}</span>
 
                             <button
                               type="button"
                               onClick={(e) => toggleInlineExpand(name, e)}
-                              title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar músculos y técnica'}
+                              title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar video y técnica'}
                               style={{
                                 background: 'rgba(255,255,255,0.04)',
                                 border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
                                 color: 'var(--text-secondary)',
-                                padding: '3px',
-                                borderRadius: '4px',
+                                padding: '4px 8px',
+                                borderRadius: '6px',
                                 cursor: 'pointer',
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                justifyContent: 'center'
+                                gap: '4px',
+                                fontSize: '0.74rem'
                               }}
                             >
+                              <span>🎬 Video</span>
                               {isInlineExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                             </button>
                           </div>
@@ -605,7 +650,7 @@ export default function LibraryDatabase() {
         </div>
       )}
 
-      {/* MODAL UNIFICADO DE FICHA TÉCNICA FITAPP (VÍDEO, REQUISITOS DE MOVILIDAD Y SUSTITUCIONES) */}
+      {/* MODAL UNIFICADO DE FICHA TÉCNICA FITAPP (VÍDEO INCRUSTADO, REQUISITOS DE MOVILIDAD Y SUSTITUCIONES) */}
       {modalExerciseId && (
         <ExerciseModal
           exerciseId={modalExerciseId}

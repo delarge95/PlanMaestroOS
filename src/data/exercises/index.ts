@@ -45,6 +45,7 @@ export const allExercisesMap: ExerciseMap = {
 };
 
 export const exerciseDatabase = allExercisesMap;
+export { exerciseGroups } from './exerciseData';
 
 export const allExercisesList: ExerciseEntry[] = Object.entries(allExercisesMap).map(([name, info]) => ({
   name,
