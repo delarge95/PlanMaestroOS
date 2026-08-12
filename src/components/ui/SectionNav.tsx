@@ -46,9 +46,11 @@ export default function SectionNav({
           margin: isLevel3 ? '0 0 var(--space-4) 0' : '0 0 var(--space-3) 0',
           borderBottom: isLevel3 ? '1px solid rgba(255, 255, 255, 0.06)' : 'none',
           overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
-          width: 'fit-content'
+          width: 'fit-content',
+          maxWidth: '100%'
         }}
       >
         {items.map((item) => {

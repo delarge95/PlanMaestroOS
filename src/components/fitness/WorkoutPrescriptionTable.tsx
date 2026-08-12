@@ -40,7 +40,9 @@ export function WorkoutPrescriptionTable({
   const activeWeek = program.weeks?.[safeWeekIndex] || program.weeks?.[0];
   const weekNum = activeWeek?.weekNumber || activeWeek?.week || 1;
   const activeDay = activeWeek?.days?.[selectedDayIndex] || activeWeek?.days?.[0];
-  const dayTitle = activeDay?.name || activeDay?.title || 'Día 1';
+  const rawDayTitle = activeDay?.name || activeDay?.title || `Día ${selectedDayIndex + 1}`;
+  const cleanDayFocus = rawDayTitle.replace(/^Día\s*\d+[\s:\-–]*/i, '').trim();
+  const dayDisplayTitle = `Día ${selectedDayIndex + 1}${cleanDayFocus ? `: ${cleanDayFocus}` : ''}`;
 
   const toggleNote = (id: string) => {
     setExpandedNoteId((prev) => (prev === id ? null : id));
@@ -167,10 +169,12 @@ export function WorkoutPrescriptionTable({
               }}
             >
               {activeWeek?.days?.map((day, idx) => {
-                const dTitle = day.name || day.title || `Día ${idx + 1}`;
+                const rawName = day.name || day.title || `Día ${idx + 1}`;
+                const focus = rawName.replace(/^Día\s*\d+[\s:\-–]*/i, '').trim();
+                const optLabel = focus ? `Día ${idx + 1}: ${focus}` : `Día ${idx + 1}`;
                 return (
                   <option key={day.id || idx} value={idx}>
-                    Día {idx + 1}: {dTitle}
+                    {optLabel}
                   </option>
                 );
               })}
@@ -178,7 +182,8 @@ export function WorkoutPrescriptionTable({
           ) : (
             <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface-elevated, #16181d)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
               {activeWeek?.days?.map((day, idx) => {
-                const dTitle = day.name || day.title || `Día ${idx + 1}`;
+                const rawName = day.name || day.title || `Día ${idx + 1}`;
+                const focus = rawName.replace(/^Día\s*\d+[\s:\-–]*/i, '').trim();
                 const isSelected = selectedDayIndex === idx;
 
                 return (
@@ -186,7 +191,7 @@ export function WorkoutPrescriptionTable({
                     key={day.id || idx}
                     type="button"
                     onClick={() => setSelectedDayIndex(idx)}
-                    title={`Día ${idx + 1}: ${dTitle}`}
+                    title={`Día ${idx + 1}${focus ? ': ' + focus : ''}`}
                     style={{
                       background: isSelected ? 'var(--color-accent-primary, #0a84ff)' : 'transparent',
                       color: isSelected ? '#ffffff' : 'var(--text-secondary)',
@@ -210,7 +215,7 @@ export function WorkoutPrescriptionTable({
 
       <div style={{ margin: '4px 0 2px' }}>
         <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', lineHeight: 1.25 }}>
-          {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayTitle}
+          {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayDisplayTitle}
         </h3>
         {activeWeek?.isDeload && (
           <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-warning)', fontWeight: 600, marginTop: '2px', display: 'inline-block' }}>

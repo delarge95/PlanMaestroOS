@@ -122,7 +122,7 @@ export default function LibrarySkills() {
         </div>
 
         {/* FILA 2: FILTROS DE CATEGORÍA O SELECCIÓN DE GUÍAS */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '2px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', maxWidth: '100%', alignItems: 'center' }}>
           {activeSubView === 'progressions' ? (
             <>
               <button
