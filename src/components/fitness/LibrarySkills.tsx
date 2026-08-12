@@ -10,7 +10,6 @@ export default function LibrarySkills() {
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
         <CalisthenicsProgressions
-          searchTerm={searchTerm}
           onSearchTermChange={setSearchTerm}
         />
       </div>

@@ -1,35 +1,34 @@
 // src/components/fitness/skills/CalisthenicsProgressions.tsx
 import React, { useMemo, useState } from 'react';
 import { calisthenicsProgressions } from '../../../data/fitness/progressionsData';
-import YouTubePlayer from '../../ui/YouTubePlayer';
+import { exerciseDatabase } from '../../../data/exercises';
+import { YouTubePlayer } from '../../ui/YouTubePlayer';
+import ExerciseModal from '../ExerciseModal';
 import { Search, ChevronRight } from 'lucide-react';
-import type { ProgressionExercise } from '../../../data/fitness/skills/types';
 
-export interface CalisthenicsProgressionsProps {
-  searchTerm?: string;
+interface CalisthenicsProgressionsProps {
   onSearchTermChange?: (term: string) => void;
-  onOpenDetail?: (exerciseName: string) => void;
-  onSelectRoutine?: (routineId: string) => void;
 }
 
-export function CalisthenicsProgressions({
-  searchTerm: externalSearchTerm,
-  onSearchTermChange
-}: CalisthenicsProgressionsProps) {
-  const [internalSearchTerm, setInternalSearchTerm] = useState('');
-  const searchTerm = externalSearchTerm !== undefined ? externalSearchTerm : internalSearchTerm;
+export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsProgressionsProps) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [methodologyFilter, setMethodologyFilter] = useState<'all' | 'heria' | 'og'>('all');
+  const [patternFilter, setPatternFilter] = useState<string>('all');
+  const [levelFilter, setLevelFilter] = useState<string>('all');
 
-  const handleSearchChange = (term: string) => {
-    setInternalSearchTerm(term);
-    if (onSearchTermChange) onSearchTermChange(term);
-  };
-
-  const [sourceFilter, setSourceFilter] = useState<'all' | 'heria' | 'og'>('all');
-  const [domainFilter, setDomainFilter] = useState<string>('all');
-  const [expandedGroupIds, setExpandedGroupIds] = useState<string[]>(['core-compression']);
+  // Accordeón y colapsables
+  const [expandedGroupIds, setExpandedGroupIds] = useState<string[]>([]);
   const [expandedExerciseNames, setExpandedExerciseNames] = useState<string[]>([]);
-  const [expandedIntroVideoIds, setExpandedIntroVideoIds] = useState<string[]>([]);
   const [expandedReqIds, setExpandedReqIds] = useState<string[]>([]);
+  const [expandedIntroVideoIds, setExpandedIntroVideoIds] = useState<string[]>([]);
+
+  // Modal para requerimientos y ejercicios
+  const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
+
+  const handleSearchChange = (val: string) => {
+    setSearchTerm(val);
+    if (onSearchTermChange) onSearchTermChange(val);
+  };
 
   const toggleGroup = (groupId: string) => {
     setExpandedGroupIds((prev) =>
@@ -37,15 +36,9 @@ export function CalisthenicsProgressions({
     );
   };
 
-  const toggleExercise = (exName: string) => {
+  const toggleExercise = (name: string) => {
     setExpandedExerciseNames((prev) =>
-      prev.includes(exName) ? prev.filter((n) => n !== exName) : [...prev, exName]
-    );
-  };
-
-  const toggleIntroVideo = (groupId: string) => {
-    setExpandedIntroVideoIds((prev) =>
-      prev.includes(groupId) ? prev.filter((id) => id !== groupId) : [...prev, groupId]
+      prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]
     );
   };
 
@@ -55,63 +48,80 @@ export function CalisthenicsProgressions({
     );
   };
 
-  const isHeriaExercise = (ex: ProgressionExercise, groupId: string): boolean => {
-    if (['8', '9', '10', '11', '12', '13', '14'].some((id) => groupId.startsWith(id))) return true;
-    if (ex.videoUrl && (ex.videoUrl.includes('vimeo.com') || ex.videoUrl.includes('youtube.com'))) return true;
-    if (ex.technique?.some((t: string) => t.toLowerCase().includes('chris heria') || t.toLowerCase().includes('thenx'))) return true;
-    return false;
+  const toggleIntroVideo = (groupId: string) => {
+    setExpandedIntroVideoIds((prev) =>
+      prev.includes(groupId) ? prev.filter((id) => id !== groupId) : [...prev, groupId]
+    );
   };
 
-  const isOgExercise = (ex: ProgressionExercise, groupId: string): boolean => {
-    if (['core-compression', 'back-lever', 'pistol-squat'].includes(groupId)) return true;
-    if (!ex.videoUrl) return true;
-    const ogKeywords = [
-      'frog stand', 'tuck planche', 'advanced tuck', 'straddle planche', 'full planche',
-      'german hang', 'skin the cat', 'tuck back lever', 'tuck front lever', 'single leg front lever',
-      'wall handstand', 'freestanding handstand', 'kipping muscle'
-    ];
-    return ogKeywords.some((kw) => ex.name.toLowerCase().includes(kw));
-  };
-
+  // Filtrado reactivo de progresiones
   const filteredProgressions = useMemo(() => {
-    const lowerSearch = searchTerm.toLowerCase();
+    return calisthenicsProgressions.filter((group) => {
+      // 1. Filtro por término de búsqueda
+      if (searchTerm) {
+        const q = searchTerm.toLowerCase().trim();
+        const matchesTitle = group.title.toLowerCase().includes(q);
+        const matchesIntro = group.introduction?.toLowerCase().includes(q);
+        const matchesEx = group.exercises.some(
+          (ex: any) =>
+            ex.name.toLowerCase().includes(q) ||
+            ex.purpose?.toLowerCase().includes(q) ||
+            ex.primaryMuscles?.some((m: string) => m.toLowerCase().includes(q))
+        );
+        if (!matchesTitle && !matchesIntro && !matchesEx) return false;
+      }
 
-    return calisthenicsProgressions
-      .map((group) => {
-        // 1. Filtro por Dominio / Patrón
-        if (domainFilter !== 'all') {
-          if (domainFilter === 'pull' && !['front-lever', 'back-lever', 'muscle-up'].includes(group.id)) return null;
-          if (domainFilter === 'push' && !['planche', 'handstand-pushup', 'dips'].includes(group.id)) return null;
-          if (domainFilter === 'core' && !['core-compression', 'l-sit-v-sit', 'dragon-flag'].includes(group.id)) return null;
-          if (domainFilter === 'legs' && !['pistol-squat', 'shrimp-squat'].includes(group.id)) return null;
-          if (domainFilter === 'rings' && !['rings-support', 'iron-cross'].includes(group.id)) return null;
-        }
+      // 2. Filtro por Metodología
+      if (methodologyFilter === 'heria') {
+        const isHeria = Boolean(group.introVideo || group.masterWorkout || group.requirements);
+        if (!isHeria) return false;
+      } else if (methodologyFilter === 'og') {
+        const isOg = Boolean(group.exercises && group.exercises.some((e: any) => e.level));
+        if (!isOg) return false;
+      }
 
-        let exercises = group.exercises;
+      // 3. Filtro por Patrón de Movimiento
+      if (patternFilter !== 'all') {
+        const titleLower = group.title.toLowerCase();
+        if (patternFilter === 'pull' && !titleLower.includes('pulling') && !titleLower.includes('back lever') && !titleLower.includes('front lever') && !titleLower.includes('muscle-up')) return false;
+        if (patternFilter === 'push' && !titleLower.includes('pushing') && !titleLower.includes('planche') && !titleLower.includes('dip') && !titleLower.includes('handstand')) return false;
+        if (patternFilter === 'core' && !titleLower.includes('core') && !titleLower.includes('compression') && !titleLower.includes('l-sit')) return false;
+        if (patternFilter === 'rings' && !titleLower.includes('ring') && !titleLower.includes('anillas')) return false;
+      }
 
-        if (sourceFilter === 'heria') {
-          exercises = exercises.filter((ex: ProgressionExercise) => isHeriaExercise(ex, group.id));
-        } else if (sourceFilter === 'og') {
-          exercises = exercises.filter((ex: ProgressionExercise) => isOgExercise(ex, group.id));
-        }
+      // 4. Filtro por Nivel
+      if (levelFilter !== 'all') {
+        const targetLevel = parseInt(levelFilter, 10);
+        const hasLevel = group.exercises.some((ex: any) => ex.level === targetLevel);
+        if (!hasLevel) return false;
+      }
 
-        if (searchTerm && !group.title.toLowerCase().includes(lowerSearch)) {
-          exercises = exercises.filter(
-            (ex: ProgressionExercise) =>
-              ex.name.toLowerCase().includes(lowerSearch) ||
-              ex.purpose?.toLowerCase().includes(lowerSearch)
-          );
-        }
+      return true;
+    });
+  }, [searchTerm, methodologyFilter, patternFilter, levelFilter]);
 
-        return { ...group, exercises };
-      })
-      .filter((group): group is typeof calisthenicsProgressions[0] => group !== null && group.exercises.length > 0);
-  }, [searchTerm, sourceFilter, domainFilter]);
+  const patternOptions = [
+    { key: 'all', label: 'Todos los Patrones' },
+    { key: 'pull', label: 'Tracción / Pull' },
+    { key: 'push', label: 'Empuje / Push' },
+    { key: 'core', label: 'Core & Compresión' },
+    { key: 'rings', label: 'Anillas & Soporte' }
+  ];
+
+  const levelOptions = [
+    { key: 'all', label: 'Todos los Niveles' },
+    { key: '1', label: 'Level 1 (Básico)' },
+    { key: '2', label: 'Level 2' },
+    { key: '3', label: 'Level 3' },
+    { key: '4', label: 'Level 4' },
+    { key: '5', label: 'Level 5 (Avanzado)' },
+    { key: '7', label: 'Level 7 (Elite)' }
+  ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
       
-      {/* BLOQUE UNIFICADO: BÚSQUEDA + FILTROS INTERACTIVOS */}
+      {/* BLOQUE DE BÚSQUEDA & FILTROS UNIFICADOS */}
       <div
         style={{
           background: 'var(--surface-1, #0d0d0f)',
@@ -120,112 +130,136 @@ export function CalisthenicsProgressions({
           padding: '16px 20px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '12px',
+          gap: 'var(--space-sm)',
           boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}
       >
-        {/* BUSCADOR PRINCIPAL */}
+        {/* BARRA DE BÚSQUEDA */}
         <div style={{ position: 'relative', width: '100%' }}>
-          <Search
-            size={16}
-            style={{
-              position: 'absolute',
-              left: '12px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: 'rgba(255,255,255,0.4)'
-            }}
-          />
           <input
             type="text"
+            placeholder="Buscar por habilidad (L-Sit, Front Lever, Planche, Muscle Up)..."
             value={searchTerm}
             onChange={(e) => handleSearchChange(e.target.value)}
-            placeholder="Buscar por ejercicio (Planche, Muscle Up, Front Lever) o requisito..."
             style={{
               width: '100%',
-              padding: '9px 12px 9px 36px',
-              borderRadius: '10px',
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: '#ffffff',
+              background: 'rgba(0,0,0,0.4)',
+              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+              borderRadius: '8px',
+              padding: '8px 12px 8px 32px',
+              color: 'var(--text-primary)',
               fontSize: '0.86rem',
-              outline: 'none',
-              boxSizing: 'border-box'
+              outline: 'none'
+            }}
+          />
+          <Search
+            size={15}
+            style={{
+              position: 'absolute',
+              left: '10px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'var(--text-tertiary)'
             }}
           />
         </div>
 
-        {/* PILLS DE FILTROS INTEGRADOS (METODOLOGÍA + PATRÓN DE MOVIMIENTO) */}
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '2px', scrollbarWidth: 'none', alignItems: 'center', flexWrap: 'wrap' }}>
-          
-          {/* GRUPO 1: METODOLOGÍA */}
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '2px', borderRadius: '999px' }}>
-            {[
-              { key: 'all', label: '🌐 Todas' },
-              { key: 'heria', label: '🔥 Chris Heria' },
-              { key: 'og', label: '📖 Overcoming Gravity' }
-            ].map((sf) => (
+        {/* BOTONES PILLS: METODOLOGÍA */}
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginRight: '4px' }}>
+            Metodología:
+          </span>
+          {[
+            { key: 'all', label: '🌐 Todas' },
+            { key: 'heria', label: '🔥 Chris Heria / ThenX' },
+            { key: 'og', label: '📖 Overcoming Gravity' }
+          ].map((m) => {
+            const isSelected = methodologyFilter === m.key;
+            return (
               <button
-                key={sf.key}
+                key={m.key}
                 type="button"
-                onClick={() => setSourceFilter(sf.key as any)}
+                onClick={() => setMethodologyFilter(m.key as any)}
                 style={{
-                  background: sourceFilter === sf.key ? 'var(--accent, #0a84ff)' : 'transparent',
-                  color: sourceFilter === sf.key ? '#ffffff' : 'rgba(255,255,255,0.6)',
-                  border: 'none',
-                  padding: '4px 10px',
-                  borderRadius: '999px',
+                  background: isSelected ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.04)',
+                  color: isSelected ? '#ffffff' : 'var(--text-primary)',
+                  border: isSelected ? '1px solid var(--accent, #0a84ff)' : '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '20px',
+                  padding: '4px 12px',
                   fontSize: '0.76rem',
-                  fontWeight: sourceFilter === sf.key ? 700 : 500,
+                  fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer'
                 }}
               >
-                {sf.label}
+                {m.label}
               </button>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          <div style={{ width: '1px', height: '16px', background: 'rgba(255,255,255,0.08)', margin: '0 2px' }} />
-
-          {/* GRUPO 2: PATRÓN / DOMINIO DE CALISTENIA */}
-          {[
-            { key: 'all', label: 'Todos los Patrones' },
-            { key: 'pull', label: 'Tracción / Pull' },
-            { key: 'push', label: 'Empuje / Push' },
-            { key: 'core', label: 'Core & Compresión' },
-            { key: 'legs', label: 'Pierna / Unilateral' },
-            { key: 'rings', label: 'Anillas & Soporte' }
-          ].map((df) => {
-            const isSelected = domainFilter === df.key;
+        {/* BOTONES PILLS: PATRÓN DE MOVIMIENTO */}
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginRight: '4px' }}>
+            Patrón:
+          </span>
+          {patternOptions.map((po) => {
+            const isSelected = patternFilter === po.key;
             return (
               <button
-                key={df.key}
+                key={po.key}
                 type="button"
-                onClick={() => setDomainFilter(df.key)}
+                onClick={() => setPatternFilter(po.key)}
                 style={{
-                  background: isSelected ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.04)',
-                  color: isSelected ? '#ffffff' : 'rgba(255,255,255,0.6)',
-                  border: 'none',
-                  borderRadius: '999px',
+                  background: isSelected ? 'var(--success, #30d158)' : 'rgba(255,255,255,0.03)',
+                  color: isSelected ? '#000000' : 'var(--text-primary)',
+                  border: isSelected ? '1px solid var(--success, #30d158)' : '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '20px',
                   padding: '4px 10px',
                   fontSize: '0.76rem',
                   fontWeight: isSelected ? 700 : 500,
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap'
+                  cursor: 'pointer'
                 }}
               >
-                {df.label}
+                {po.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* BOTONES PILLS: NIVEL */}
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginRight: '4px' }}>
+            Nivel:
+          </span>
+          {levelOptions.map((lo) => {
+            const isSelected = levelFilter === lo.key;
+            return (
+              <button
+                key={lo.key}
+                type="button"
+                onClick={() => setLevelFilter(lo.key)}
+                style={{
+                  background: isSelected ? '#ff9f0a' : 'rgba(255,255,255,0.03)',
+                  color: isSelected ? '#000000' : 'var(--text-primary)',
+                  border: isSelected ? '1px solid #ff9f0a' : '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '20px',
+                  padding: '4px 10px',
+                  fontSize: '0.76rem',
+                  fontWeight: isSelected ? 700 : 500,
+                  cursor: 'pointer'
+                }}
+              >
+                {lo.label}
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* LISTA DE GRUPOS DE PROGRESIÓN (15 HABILIDADES) */}
+      {/* LISTA DE GRUPOS DE PROGRESIÓN */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
         {filteredProgressions.map((group) => {
           const isGroupExpanded = expandedGroupIds.includes(group.id) || filteredProgressions.length === 1;
-          let currentPhase: string | undefined = undefined;
 
           return (
             <div
@@ -255,7 +289,7 @@ export function CalisthenicsProgressions({
                 }}
               >
                 <div>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: '#30d158' }}>
                     {group.title}
                   </h3>
                   <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', marginTop: '2px', display: 'block' }}>
@@ -318,11 +352,11 @@ export function CalisthenicsProgressions({
                     </div>
                   )}
 
-                  {/* REQUERIMIENTOS PREVIOS INTERACTIVOS */}
+                  {/* REQUERIMIENTOS PREVIOS INTERACTIVOS CON APERTURA DE MODAL */}
                   {group.requirements && group.requirements.length > 0 && (
                     <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '12px 14px' }}>
                       <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#30d158', display: 'block', marginBottom: '8px' }}>
-                        📋 Requerimientos Previos Recomendados ({group.requirements.length}) — Toca un ejercicio para ver video/técnica
+                        📋 Requerimientos Previos Recomendados ({group.requirements.length}) — Toca un ejercicio para ver video/ficha técnica
                       </span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         {group.requirements.map((req: any, idx: number) => {
@@ -372,14 +406,32 @@ export function CalisthenicsProgressions({
 
                               {/* DETALLE Y VIDEO DEL REQUERIMIENTO */}
                               {isReqExpanded && (
-                                <div style={{ padding: '10px 12px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                  {req.videoUrl ? (
-                                    <YouTubePlayer youtubeLink={req.videoUrl} exerciseName={req.exerciseName} />
+                                <div style={{ padding: '10px 12px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                  {req.exerciseVideoUrl ? (
+                                    <YouTubePlayer youtubeLink={req.exerciseVideoUrl} exerciseName={req.exerciseName} />
                                   ) : (
                                     <span style={{ fontSize: '0.76rem', color: 'rgba(255,255,255,0.5)', fontStyle: 'italic' }}>
-                                      Sin video demo adjunto para este requerimiento.
+                                      Sin video directo adjunto.
                                     </span>
                                   )}
+                                  
+                                  <button
+                                    type="button"
+                                    onClick={() => setModalExerciseId(req.exerciseName)}
+                                    style={{
+                                      background: 'rgba(10,132,255,0.15)',
+                                      color: '#0a84ff',
+                                      border: '1px solid rgba(10,132,255,0.3)',
+                                      borderRadius: '6px',
+                                      padding: '6px 12px',
+                                      fontSize: '0.78rem',
+                                      fontWeight: 700,
+                                      cursor: 'pointer',
+                                      width: 'fit-content'
+                                    }}
+                                  >
+                                    🔍 Ver Ficha Técnica Completa de {req.exerciseName} ↗
+                                  </button>
                                 </div>
                               )}
                             </div>
@@ -389,121 +441,214 @@ export function CalisthenicsProgressions({
                     </div>
                   )}
 
-                  {/* LISTA DE EJERCICIOS Y FASES */}
+                  {/* LISTA DE EJERCICIOS DE LA PROGRESIÓN (ESTILO FITAPP CAPTURAS 1, 2 Y 3) */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {group.exercises.map((ex: any) => {
                       const isExExpanded = expandedExerciseNames.includes(ex.name);
-                      const showPhaseHeader = ex.phaseName && ex.phaseName !== currentPhase;
-                      if (ex.phaseName) currentPhase = ex.phaseName;
+
+                      // Resolver datos y video desde exerciseDatabase si no vienen en la progresión
+                      const dbEx = exerciseDatabase[ex.name];
+                      const videoUrl = ex.videoUrl || dbEx?.youtubeLink || (dbEx as any)?.videoOption1 || (dbEx as any)?.videoUrl;
+                      const primaryMuscles = (ex.primaryMuscles && ex.primaryMuscles.length > 0) ? ex.primaryMuscles : (dbEx?.muscles?.strength || []);
+                      const stabilizers = (ex.stabilizers && ex.stabilizers.length > 0) ? ex.stabilizers : (dbEx?.muscles?.stability || []);
+                      const mobility = (ex.mobility && ex.mobility.length > 0) ? ex.mobility : ((dbEx as any)?.mobilityRequirements || (dbEx as any)?.mobility || []);
+                      const technique = (ex.technique && ex.technique.length > 0) ? ex.technique : (dbEx?.techniquePoints || []);
+                      const purpose = ex.purpose || dbEx?.subcategory || '';
+                      const precautions = ex.precautions || [];
 
                       return (
-                        <React.Fragment key={ex.name}>
-                          {showPhaseHeader && (
-                            <div style={{ paddingTop: '12px', paddingBottom: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: '#ff9f0a', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                📌 {ex.phaseName}
-                              </span>
-                            </div>
-                          )}
-
-                          <div
+                        <div
+                          key={ex.name}
+                          style={{
+                            background: 'rgba(255,255,255,0.02)',
+                            border: '1px solid rgba(255,255,255,0.06)',
+                            borderRadius: '12px',
+                            overflow: 'hidden'
+                          }}
+                        >
+                          {/* FILA DEL PASO DE PROGRESIÓN (CAPTURA 1 FITAPP) */}
+                          <button
+                            type="button"
+                            onClick={() => toggleExercise(ex.name)}
                             style={{
-                              background: 'rgba(255,255,255,0.02)',
-                              border: '1px solid rgba(255,255,255,0.06)',
-                              borderRadius: '12px',
-                              overflow: 'hidden'
+                              width: '100%',
+                              background: 'transparent',
+                              border: 'none',
+                              padding: '12px 16px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              cursor: 'pointer',
+                              textAlign: 'left'
                             }}
                           >
-                            <button
-                              type="button"
-                              onClick={() => toggleExercise(ex.name)}
-                              style={{
-                                width: '100%',
-                                background: 'transparent',
-                                border: 'none',
-                                padding: '12px 14px',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                cursor: 'pointer',
-                                textAlign: 'left'
-                              }}
-                            >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <span
-                                  style={{
-                                    width: '24px',
-                                    height: '24px',
-                                    borderRadius: '50%',
-                                    background: 'rgba(10,132,255,0.15)',
-                                    color: '#0a84ff',
-                                    fontSize: '0.75rem',
-                                    fontWeight: 800,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                  }}
-                                >
-                                  {ex.level}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                              <h4 style={{ fontSize: '0.94rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                                {ex.name}
+                              </h4>
+                              {videoUrl && (
+                                <span style={{ fontSize: '0.68rem', background: 'rgba(10,132,255,0.2)', color: '#0a84ff', border: '1px solid rgba(10,132,255,0.4)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
+                                  🎬 Video
                                 </span>
+                              )}
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                              {ex.level && (
+                                <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', padding: '2px 10px', borderRadius: '12px', fontWeight: 600 }}>
+                                  Level {ex.level}
+                                </span>
+                              )}
+                              <ChevronRight
+                                size={16}
+                                style={{
+                                  color: 'rgba(255,255,255,0.4)',
+                                  transform: isExExpanded ? 'rotate(90deg)' : 'none',
+                                  transition: 'transform 150ms ease'
+                                }}
+                              />
+                            </div>
+                          </button>
+
+                          {/* FICHA TÉCNICA DETALLADA FITAPP (CAPTURAS 2 Y 3) */}
+                          {isExExpanded && (
+                            <div style={{ padding: '16px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.25)', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                              
+                              {/* 1. REPRODUCTOR DE VIDEO NATIVO (CAPTURA 2) */}
+                              {videoUrl ? (
+                                <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                  <YouTubePlayer youtubeLink={videoUrl} exerciseName={ex.name} />
+                                </div>
+                              ) : (
+                                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>
+                                  Sin video demo asignado.
+                                </span>
+                              )}
+
+                              {/* 2. REQUISITOS PREVIOS Y DESBLOQUEOS (CAPTURA 3) */}
+                              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', fontSize: '0.84rem' }}>
                                 <div>
-                                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
-                                    {ex.name}
-                                  </h4>
-                                  <span style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.45)' }}>
-                                    Meta: {ex.target}
-                                  </span>
+                                  <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Prerequisites: </strong>
+                                  <span style={{ color: '#ffffff', fontWeight: 600 }}>{ex.prerequisites || 'None'}</span>
+                                </div>
+                                <div>
+                                  <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Unlocks: </strong>
+                                  <span style={{ color: '#0a84ff', fontWeight: 600 }}>{ex.unlocks || 'Next Level'}</span>
                                 </div>
                               </div>
 
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                {ex.videoUrl && (
-                                  <span style={{ fontSize: '0.68rem', background: 'rgba(48,209,88,0.15)', color: '#30d158', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
-                                    VIDEO
-                                  </span>
-                                )}
-                                <ChevronRight
-                                  size={16}
-                                  style={{
-                                    color: 'rgba(255,255,255,0.4)',
-                                    transform: isExExpanded ? 'rotate(90deg)' : 'none',
-                                    transition: 'transform 150ms ease'
-                                  }}
-                                />
-                              </div>
-                            </button>
+                              {/* 3. TÉCNICA & FORMA */}
+                              {technique.length > 0 && (
+                                <div>
+                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '4px' }}>
+                                    Technique & Form
+                                  </strong>
+                                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>
+                                    {technique.map((t: string, tIdx: number) => (
+                                      <li key={tIdx}>{t}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
 
-                            {/* CONTENIDO DESPLEGABLE DEL EJERCICIO */}
-                            {isExExpanded && (
-                              <div style={{ padding: '14px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.15)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                {ex.purpose && (
+                              {/* 4. MÚSCULOS PRIMARIOS (FUERZA) */}
+                              {primaryMuscles.length > 0 && (
+                                <div>
+                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '6px' }}>
+                                    Primary Muscles (Strength)
+                                  </strong>
+                                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                    {primaryMuscles.map((m: string, mIdx: number) => (
+                                      <span
+                                        key={mIdx}
+                                        onClick={() => setModalExerciseId(ex.name)}
+                                        style={{
+                                          background: 'rgba(10,132,255,0.15)',
+                                          border: '1px solid rgba(10,132,255,0.3)',
+                                          color: '#77e7ff',
+                                          padding: '3px 10px',
+                                          borderRadius: '6px',
+                                          fontSize: '0.78rem',
+                                          fontWeight: 600,
+                                          cursor: 'pointer'
+                                        }}
+                                      >
+                                        {m}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* 5. ESTABILIZADORES CLAVE */}
+                              {stabilizers.length > 0 && (
+                                <div>
+                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '6px' }}>
+                                    Key Stabilizers (Balance)
+                                  </strong>
+                                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                    {stabilizers.map((m: string, mIdx: number) => (
+                                      <span
+                                        key={mIdx}
+                                        style={{
+                                          background: 'rgba(255,255,255,0.06)',
+                                          border: '1px solid rgba(255,255,255,0.12)',
+                                          color: 'rgba(255,255,255,0.8)',
+                                          padding: '3px 10px',
+                                          borderRadius: '6px',
+                                          fontSize: '0.78rem',
+                                          fontWeight: 500
+                                        }}
+                                      >
+                                        {m}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* 6. REQUISITOS DE MOVILIDAD */}
+                              {mobility.length > 0 && (
+                                <div>
+                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '4px' }}>
+                                    Mobility Requirements
+                                  </strong>
+                                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>
+                                    {mobility.map((mob: string, mobIdx: number) => (
+                                      <li key={mobIdx}>{mob}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+
+                              {/* 7. PRECAUCIONES */}
+                              {precautions.length > 0 && (
+                                <div>
+                                  <strong style={{ fontSize: '0.84rem', color: '#ff453a', display: 'block', marginBottom: '4px' }}>
+                                    Precautions
+                                  </strong>
+                                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#ff453a', lineHeight: 1.5 }}>
+                                    {precautions.map((prec: string, precIdx: number) => (
+                                      <li key={precIdx}>{prec}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+
+                              {/* 8. PROPÓSITO FUNCIONAL */}
+                              {purpose && (
+                                <div>
+                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '2px' }}>
+                                    Functional Purpose
+                                  </strong>
                                   <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.4 }}>
-                                    <strong>Propósito:</strong> {ex.purpose}
+                                    {purpose}
                                   </p>
-                                )}
-
-                                {ex.technique && ex.technique.length > 0 && (
-                                  <div>
-                                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0a84ff', display: 'block', marginBottom: '4px' }}>
-                                      Puntos Clave de Técnica:
-                                    </span>
-                                    <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.65)' }}>
-                                      {ex.technique.map((t: string, tIdx: number) => (
-                                        <li key={tIdx}>{t}</li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                )}
-
-                                {ex.videoUrl && (
-                                  <div style={{ marginTop: '4px' }}>
-                                    <YouTubePlayer youtubeLink={ex.videoUrl} exerciseName={ex.name} />
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        </React.Fragment>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
                       );
                     })}
                   </div>
@@ -513,6 +658,16 @@ export function CalisthenicsProgressions({
           );
         })}
       </div>
+
+      {/* MODAL DE FICHA TÉCNICA REUTILIZABLE PARA REQUERIMIENTOS Y EJERCICIOS */}
+      {modalExerciseId && (
+        <ExerciseModal
+          exerciseId={modalExerciseId}
+          onClose={() => setModalExerciseId(null)}
+        />
+      )}
     </div>
   );
 }
+
+export default CalisthenicsProgressions;

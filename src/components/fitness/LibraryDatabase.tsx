@@ -56,7 +56,8 @@ export default function LibraryDatabase() {
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([]);
   const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
   const [expandedInlineIds, setExpandedInlineIds] = useState<string[]>([]);
-  
+  const [collapsedVideoIds, setCollapsedVideoIds] = useState<string[]>([]);
+
   // Estado para acordeón por grupos de movimiento FitApp (INICIAN SIN DESPLEGAR)
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
 
@@ -118,6 +119,13 @@ export default function LibraryDatabase() {
     );
   };
 
+  const toggleInlineVideo = (name: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCollapsedVideoIds((prev) =>
+      prev.includes(name) ? prev.filter((id) => id !== name) : [...prev, name]
+    );
+  };
+
   const toggleGroupExpand = (groupName: string) => {
     setExpandedGroups((prev) => ({
       ...prev,
@@ -160,7 +168,7 @@ export default function LibraryDatabase() {
       });
   }, [searchTerm, selectedCategories, selectedMuscles, sortOption]);
 
-  // Agrupamiento por los 31 GRUPOS DE MOVIMIENTO FITAPP (Pull-Up, Push-Up, Core, Dip, Squat, Planche, etc.)
+  // Agrupamiento por los 31 GRUPOS DE MOVIMIENTO FITAPP
   const groupedExercises = useMemo(() => {
     const map: Record<string, string[]> = {};
 
@@ -170,7 +178,6 @@ export default function LibraryDatabase() {
       map[movementGroup].push(name);
     });
 
-    // Ordenar grupos alfabéticamente
     const sortedMap: Record<string, string[]> = {};
     Object.keys(map)
       .sort((a, b) => a.localeCompare(b))
@@ -203,7 +210,7 @@ export default function LibraryDatabase() {
 
   const activeFiltersCount = selectedCategories.length + selectedMuscles.length + (searchTerm ? 1 : 0);
 
-  // Previsualización desplegable inline con VIDEO INCRUSTADO UNIVERSAL + Músculos & Movilidad
+  // PREVISUALIZACIÓN COMPLETA INLINE (CAPTURAS FITAPP 4 Y 5)
   const renderInlinePreview = (name: string) => {
     const exInfo = exerciseDatabase[name];
     if (!exInfo) return null;
@@ -216,23 +223,55 @@ export default function LibraryDatabase() {
       'Estabilidad del core & rotación externa de hombro'
     ];
 
+    const isVideoCollapsed = collapsedVideoIds.includes(name);
+
     return (
-      <div style={{ padding: '14px 16px', background: 'rgba(0,0,0,0.4)', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div style={{ padding: '16px', background: 'rgba(0,0,0,0.35)', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', display: 'flex', flexDirection: 'column', gap: '14px' }}>
         
-        {/* VIDEO DEMOSTRATIVO INCRUSTADO NATIVO */}
+        {/* REPRODUCTOR DE VIDEO INCRUSTADO CON CONTROL DE TAMAÑO / OCULTAR */}
         {(videoUrl1 || videoUrl2) && (
-          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <YouTubePlayer
-              youtubeLink={videoUrl1}
-              secondaryVideoLink={videoUrl2}
-              exerciseName={name}
-            />
+          <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', background: 'rgba(0,0,0,0.3)' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0a84ff' }}>
+                🎬 Reproducción en Video
+              </span>
+              <button
+                type="button"
+                onClick={(e) => toggleInlineVideo(name, e)}
+                style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '0.74rem', cursor: 'pointer' }}
+              >
+                {isVideoCollapsed ? 'Mostrar Video ▼' : 'Replegar Video ▲'}
+              </button>
+            </div>
+
+            {!isVideoCollapsed && (
+              <div style={{ padding: '0 8px 8px 8px' }}>
+                <YouTubePlayer
+                  youtubeLink={videoUrl1}
+                  secondaryVideoLink={videoUrl2}
+                  exerciseName={name}
+                />
+              </div>
+            )}
           </div>
         )}
 
+        {/* ETIQUETAS DE CATEGORÍA Y SUBCATEGORÍA */}
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.7rem', fontWeight: 700, background: 'rgba(16,185,129,0.15)', color: '#6ee7b7', border: '1px solid rgba(16,185,129,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
+            {exInfo.category}
+          </span>
+          {exInfo.subcategory && (
+            <span style={{ fontSize: '0.7rem', fontWeight: 700, background: 'rgba(10,132,255,0.15)', color: '#77e7ff', border: '1px solid rgba(10,132,255,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
+              {exInfo.subcategory}
+            </span>
+          )}
+        </div>
+
+        {/* FUERZA PRIMARIA */}
         <div>
-          <strong style={{ fontSize: '0.74rem', color: 'var(--success, #30d158)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
-            Fuerza Primaria (Clic para ver en Músculos):
+          <strong style={{ fontSize: '0.78rem', color: 'var(--success, #30d158)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+            Strength Muscles (Músculos de Fuerza Primaria):
           </strong>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {exInfo.muscles.strength.map((m) => (
@@ -244,9 +283,9 @@ export default function LibraryDatabase() {
                   background: 'rgba(48,209,88,0.15)',
                   border: '1px solid var(--success, #30d158)',
                   color: '#6ee7b7',
-                  padding: '2px 8px',
+                  padding: '3px 10px',
                   borderRadius: '6px',
-                  fontSize: '0.75rem',
+                  fontSize: '0.78rem',
                   fontWeight: 600,
                   cursor: 'pointer',
                   display: 'inline-flex',
@@ -261,17 +300,81 @@ export default function LibraryDatabase() {
           </div>
         </div>
 
+        {/* ESTABILIZADORES CLAVE */}
+        {exInfo.muscles.stability && exInfo.muscles.stability.length > 0 && (
+          <div>
+            <strong style={{ fontSize: '0.78rem', color: 'var(--accent, #0a84ff)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+              Stability Muscles (Sinergia & Estabilización):
+            </strong>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {exInfo.muscles.stability.map((m) => (
+                <span
+                  key={m}
+                  onClick={(e) => handleMuscleClick(m, e)}
+                  style={{
+                    background: 'rgba(119,231,255,0.12)',
+                    border: '1px solid rgba(119,231,255,0.25)',
+                    color: '#77e7ff',
+                    padding: '3px 10px',
+                    borderRadius: '6px',
+                    fontSize: '0.78rem',
+                    fontWeight: 600,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {m}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* REQUISITOS DE MOVILIDAD */}
         <div>
-          <strong style={{ fontSize: '0.74rem', color: 'var(--accent, #0a84ff)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
-            Requisitos de Movilidad & Articulaciones:
+          <strong style={{ fontSize: '0.78rem', color: 'var(--text-primary)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+            Mobility Requirements (Movilidad & ROM):
           </strong>
-          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
             {mobilityList.map((mob: string, idx: number) => (
               <li key={idx}>{mob}</li>
             ))}
           </ul>
         </div>
+
+        {/* PUNTOS DE TÉCNICA */}
+        {exInfo.techniquePoints && exInfo.techniquePoints.length > 0 && (
+          <div>
+            <strong style={{ fontSize: '0.78rem', color: '#ff9f0a', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+              Technique Points (Claves de Forma):
+            </strong>
+            <ol style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+              {exInfo.techniquePoints.map((pt, idx) => (
+                <li key={idx}>{pt}</li>
+              ))}
+            </ol>
+          </div>
+        )}
+
+        {/* SUSTITUCIONES */}
+        {exInfo.substitutions && exInfo.substitutions.length > 0 && (
+          <div>
+            <strong style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+              Suggested Substitutions (Sustituciones Recomendadas):
+            </strong>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {exInfo.substitutions.map((sub) => (
+                <button
+                  key={sub}
+                  type="button"
+                  onClick={() => setModalExerciseId(sub)}
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-primary)', padding: '2px 8px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}
+                >
+                  {sub}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     );
   };
@@ -295,7 +398,7 @@ export default function LibraryDatabase() {
           <div style={{ position: 'relative', flex: 1 }}>
             <input
               type="text"
-              placeholder="Buscar por ejercicio (Pull Up, Push Up, Squat, Planche) o músculo..."
+              placeholder="Buscar por ejercicio o músculo..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
@@ -336,13 +439,13 @@ export default function LibraryDatabase() {
           </button>
         </div>
 
-        {/* MODOS DE VISTA: GROUPED VS FLAT LIST + BOTÓN EXPANDIR/CONTRAER TODOS */}
+        {/* MODOS DE VISTA: GRUPOS VS LISTA (RENOVADO ESTILO FITAPP MINIMALISTA) */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-              Modo de Visualización
+              Modo de Visualización:
             </span>
-            <div style={{ display: 'inline-flex', gap: '4px', background: 'rgba(0,0,0,0.3)', padding: '3px', borderRadius: '8px', width: 'fit-content', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
+            <div style={{ display: 'inline-flex', gap: '4px', background: 'rgba(0,0,0,0.3)', padding: '3px', borderRadius: '8px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
               <button
                 type="button"
                 onClick={() => setIsGroupedView(true)}
@@ -350,14 +453,14 @@ export default function LibraryDatabase() {
                   background: isGroupedView ? 'var(--accent, #0a84ff)' : 'transparent',
                   color: isGroupedView ? '#ffffff' : 'var(--text-secondary)',
                   border: 'none',
-                  padding: '4px 12px',
+                  padding: '4px 14px',
                   borderRadius: '6px',
                   fontSize: '0.78rem',
                   fontWeight: isGroupedView ? 700 : 500,
                   cursor: 'pointer'
                 }}
               >
-                📁 Grupos de Movimiento FitApp ({Object.keys(groupedExercises).length})
+                Grupos
               </button>
               <button
                 type="button"
@@ -366,19 +469,19 @@ export default function LibraryDatabase() {
                   background: !isGroupedView ? 'var(--accent, #0a84ff)' : 'transparent',
                   color: !isGroupedView ? '#ffffff' : 'var(--text-secondary)',
                   border: 'none',
-                  padding: '4px 12px',
+                  padding: '4px 14px',
                   borderRadius: '6px',
                   fontSize: '0.78rem',
                   fontWeight: !isGroupedView ? 700 : 500,
                   cursor: 'pointer'
                 }}
               >
-                📋 Lista Plana ({filteredFlatList.length})
+                Lista
               </button>
             </div>
           </div>
 
-          {/* BOTÓN SUPERIOR PARA EXPANDIR O CONTRAER TODOS LOS GRUPOS (SOLO EN MODO GROUPED) */}
+          {/* BOTÓN SUPERIOR PARA EXPANDIR O CONTRAER TODOS LOS GRUPOS */}
           {isGroupedView && (
             <button
               type="button"
@@ -398,7 +501,7 @@ export default function LibraryDatabase() {
               }}
             >
               <ChevronsUpDown size={14} />
-              <span>{isAllGroupsExpanded ? 'Contraer Todos los Grupos' : 'Expandir Todos los Grupos'}</span>
+              <span>{isAllGroupsExpanded ? 'Contraer Todos' : 'Expandir Todos'}</span>
             </button>
           )}
         </div>
@@ -406,7 +509,7 @@ export default function LibraryDatabase() {
         {/* FILTROS POR CATEGORÍAS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-            Filtrar Equipamiento / Categoría
+            Equipamiento / Categoría
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {CATEGORY_FILTERS.map((cat) => {
@@ -441,7 +544,7 @@ export default function LibraryDatabase() {
         {/* FILTROS POR GRUPOS MUSCULARES */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-            Filtrar por Músculo Principal
+            Músculo Principal
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {Object.keys(MUSCLE_GROUP_MAP).map((group) => {
@@ -494,7 +597,7 @@ export default function LibraryDatabase() {
         )}
       </div>
 
-      {/* RENDERIZADO DE RESULTADOS: FLAT LIST VS GROUPED VIEW */}
+      {/* RENDERIZADO DE RESULTADOS */}
       {!isGroupedView ? (
         /* FLAT LIST */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -512,10 +615,11 @@ export default function LibraryDatabase() {
                   overflow: 'hidden'
                 }}
               >
+                {/* FILA DE EJERCICIO ESTILO FITAPP CAPTURAS 4 Y 5 */}
                 <div
                   onClick={() => setModalExerciseId(name)}
                   style={{
-                    padding: '12px 14px',
+                    padding: '12px 16px',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -529,23 +633,27 @@ export default function LibraryDatabase() {
                     </span>
                   </div>
 
+                  {/* PÍLDORA UNIFICADA VIDEO > (CAPTURA FITAPP 4 Y 5) */}
                   <button
                     type="button"
                     onClick={(e) => toggleInlineExpand(name, e)}
-                    title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar video y técnica'}
+                    title={isInlineExpanded ? 'Contraer ficha' : 'Ver video y ficha técnica'}
                     style={{
                       background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
-                      color: 'var(--text-secondary)',
-                      padding: '4px',
-                      borderRadius: '6px',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      color: 'rgba(255,255,255,0.85)',
+                      padding: '4px 12px',
+                      borderRadius: '8px',
                       cursor: 'pointer',
                       display: 'inline-flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      gap: '6px',
+                      fontSize: '0.78rem',
+                      fontWeight: 600
                     }}
                   >
-                    {isInlineExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                    <span>🎬 Video</span>
+                    {isInlineExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                   </button>
                 </div>
 
@@ -555,7 +663,7 @@ export default function LibraryDatabase() {
           })}
         </div>
       ) : (
-        /* GROUPED VIEW POR 31 GRUPOS DE MOVIMIENTO FITAPP */
+        /* GROUPED VIEW */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {Object.entries(groupedExercises).map(([groupName, exercises]) => {
             const isGroupExpanded = Boolean(expandedGroups[groupName]);
@@ -563,7 +671,7 @@ export default function LibraryDatabase() {
             return (
               <div key={groupName} style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', overflow: 'hidden' }}>
                 
-                {/* CABECERA INTERACTIVA DEL GRUPO DE MOVIMIENTO */}
+                {/* CABECERA DEL GRUPO */}
                 <div
                   onClick={() => toggleGroupExpand(groupName)}
                   style={{
@@ -588,7 +696,7 @@ export default function LibraryDatabase() {
                   </div>
                 </div>
 
-                {/* CONTENIDO DESPLEGABLE CON LAS VARIACIONES DEL GRUPO */}
+                {/* CONTENIDO DESPLEGABLE CON FILAS FITAPP (CAPTURAS 4 Y 5) */}
                 {isGroupExpanded && (
                   <div style={{ padding: '12px', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     {exercises.map((name) => {
@@ -616,21 +724,23 @@ export default function LibraryDatabase() {
                           >
                             <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)' }}>{name}</span>
 
+                            {/* PÍLDORA UNIFICADA VIDEO > (CAPTURAS FITAPP 4 Y 5) */}
                             <button
                               type="button"
                               onClick={(e) => toggleInlineExpand(name, e)}
-                              title={isInlineExpanded ? 'Contraer previsualización' : 'Previsualizar video y técnica'}
+                              title={isInlineExpanded ? 'Contraer ficha' : 'Ver video y ficha técnica'}
                               style={{
                                 background: 'rgba(255,255,255,0.04)',
-                                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
-                                color: 'var(--text-secondary)',
-                                padding: '4px 8px',
-                                borderRadius: '6px',
+                                border: '1px solid rgba(255,255,255,0.12)',
+                                color: 'rgba(255,255,255,0.85)',
+                                padding: '4px 12px',
+                                borderRadius: '8px',
                                 cursor: 'pointer',
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                gap: '4px',
-                                fontSize: '0.74rem'
+                                gap: '6px',
+                                fontSize: '0.78rem',
+                                fontWeight: 600
                               }}
                             >
                               <span>🎬 Video</span>
@@ -650,7 +760,7 @@ export default function LibraryDatabase() {
         </div>
       )}
 
-      {/* MODAL UNIFICADO DE FICHA TÉCNICA FITAPP (VÍDEO INCRUSTADO, REQUISITOS DE MOVILIDAD Y SUSTITUCIONES) */}
+      {/* MODAL UNIFICADO DE FICHA TÉCNICA FITAPP */}
       {modalExerciseId && (
         <ExerciseModal
           exerciseId={modalExerciseId}
