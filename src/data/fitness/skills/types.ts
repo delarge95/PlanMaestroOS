@@ -72,3 +72,30 @@ export type PracticeSessionRecord = {
   qualityScore: 'excelente' | 'buena' | 'regular' | 'deficiente';
   notes?: string;
 };
+
+export type ProgressionExercise = {
+  name: string;
+  level: number;
+  prerequisites?: string | null;
+  unlocks?: string | null;
+  technique?: string[];
+  primaryMuscles?: string[];
+  stabilizers?: string[];
+  mobility?: string[];
+  weightedVariation?: string | null;
+  precautions?: string[];
+  purpose?: string;
+  videoUrl?: string;
+  secondaryVideoUrl?: string;
+  phaseName?: string;
+};
+
+export type ProgressionGroup = {
+  id: string;
+  title: string;
+  introduction: string;
+  introVideo?: string;
+  requirements?: any[];
+  masterWorkout?: any;
+  exercises: ProgressionExercise[];
+};

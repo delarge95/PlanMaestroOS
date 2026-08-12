@@ -29,7 +29,8 @@ export default function FitAppRoutinesCatalog() {
   }, [setInspectedProgram]);
 
   const currentProgram = getProgramById(activeProgramId);
-  const cleanTitle = currentProgram.title.replace(/\s*\([^)]*\)/g, '').trim();
+  const rawTitle = currentProgram.title || currentProgram.name || 'Programa';
+  const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, '').trim();
   const isActiveInTracker = activeProgramIds.includes(currentProgram.id);
 
   return (

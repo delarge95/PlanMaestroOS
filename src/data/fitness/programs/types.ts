@@ -39,23 +39,50 @@ export type WorkoutDay = {
 };
 
 export type ProgramWeek = {
+  id?: string;
+  name?: string;
   week?: number;
   weekNumber?: number;
   block?: string;
   title?: string;
   isIntro?: boolean;
   isDeload?: boolean;
-  days: WorkoutDay[];
+  notes?: string;
+  days?: WorkoutDay[];
+  schedule?: any[];
+};
+
+export type WorkoutProgram = {
+  id: string;
+  name?: string;
+  title?: string;
+  type?: string;
+  category?: string;
+  source?: string;
+  pdfUrl?: string;
+  programGuideUrl?: string;
+  durationWeeks?: number;
+  split?: string[];
+  methodology?: string[];
+  equipment?: string[];
+  weeks?: any[];
+  schedule?: any[];
+  optionalDay?: any;
 };
 
 export type TrainingProgram = {
   id: string;
   title: string;
+  name?: string;
+  type?: 'program' | 'week' | 'day';
+  category?: string;
   source: string;
   pdfUrl?: string;
+  programGuideUrl?: string;
   durationWeeks: number;
   split: string[];
   methodology: string[];
   equipment: string[];
   weeks: ProgramWeek[];
+  optionalDay?: any;
 };

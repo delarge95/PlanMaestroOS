@@ -1,6 +1,6 @@
 // src/components/fitness/LibrarySkills.tsx
 import React, { useState } from 'react';
-import SkillsWorkspace from './skills/SkillsWorkspace';
+import CalisthenicsProgressions from './skills/CalisthenicsProgressions';
 import ThenxGuideDatabase from './ThenxGuideDatabase';
 import { Search, Compass, BookOpen, Check } from 'lucide-react';
 import type { SkillDomain } from '../../data/fitness/skills/types';
@@ -209,11 +209,10 @@ export default function LibrarySkills() {
       {/* BLOQUE 2: CONTENIDO DE PROGRESIONES & GUÍAS */}
       <div>
         {activeSubView === 'progressions' ? (
-          <SkillsWorkspace
+          <CalisthenicsProgressions
             selectedDomain={selectedDomain}
             onlyActive={onlyActive}
             searchTerm={searchTerm}
-            hideInternalFilters={true}
           />
         ) : (
           <ThenxGuideDatabase

@@ -49,7 +49,8 @@ export function ActiveProgramSelector() {
         >
           {allPrograms.map((program) => {
             const isActive = activeProgramIds.includes(program.id);
-            const cleanTitle = program.title.replace(/\s*\([^)]*\)/g, '').trim();
+            const rawTitle = program.title || program.name || 'Programa';
+            const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, '').trim();
             return (
               <option key={program.id} value={program.id}>
                 {cleanTitle} {isActive ? '(HOY)' : ''}
@@ -73,7 +74,8 @@ export function ActiveProgramSelector() {
       {allPrograms.map((program) => {
         const isInspected = inspectedProgramId === program.id;
         const isActive = activeProgramIds.includes(program.id);
-        const cleanTitle = program.title.replace(/\s*\([^)]*\)/g, '').trim();
+        const rawTitle = program.title || program.name || 'Programa';
+        const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, '').trim();
 
         return (
           <button
