@@ -5,11 +5,10 @@ import LibraryCatalog from './LibraryCatalog';
 import LibrarySkills from './LibrarySkills';
 import LibraryDatabase from './LibraryDatabase';
 import LibraryMuscles from './LibraryMuscles';
-import ThenxGuideDatabase from './ThenxGuideDatabase';
 import ErrorBoundary from '../ErrorBoundary';
 
 export interface FitnessLibraryProps {
-  subTab?: 'catalog' | 'skills' | 'data' | 'muscles' | 'thenx';
+  subTab?: 'catalog' | 'skills' | 'data' | 'muscles';
   currentPath?: string;
 }
 
@@ -34,7 +33,6 @@ export default function FitnessLibrary({ subTab = 'catalog', currentPath = '/app
         {subTab === 'skills' && <LibrarySkills />}
         {subTab === 'data' && <LibraryDatabase />}
         {subTab === 'muscles' && <LibraryMuscles />}
-        {subTab === 'thenx' && <ThenxGuideDatabase />}
 
       </div>
     </ErrorBoundary>

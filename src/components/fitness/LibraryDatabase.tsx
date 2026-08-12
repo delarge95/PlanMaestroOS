@@ -237,8 +237,17 @@ export default function LibraryDatabase() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-      {/* BARRA SUPERIOR DE BÚSQUEDA Y FILTROS */}
-      <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+      {/* BLOQUE 1: FILTROS & BÚSQUEDA DE EJERCICIOS */}
+      <div style={{
+        background: 'var(--surface-1, #0d0d0f)',
+        border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+        borderRadius: '16px',
+        padding: '16px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--space-sm)',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
+      }}>
         
         {/* BUSCADOR DE EJERCICIOS + BOTÓN DE ORDENAMIENTO (A-Z) */}
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>

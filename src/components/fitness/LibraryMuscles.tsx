@@ -120,16 +120,17 @@ export default function LibraryMuscles() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-      {/* PANEL DE FILTROS & BÚSQUEDA ANATÓMICA */}
+      {/* BLOQUE 1: FILTROS & BÚSQUEDA ANATÓMICA */}
       <div
         style={{
           background: 'var(--surface-1, #0d0d0f)',
           border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-          borderRadius: 'var(--radius-m, 12px)',
-          padding: 'var(--space-md)',
+          borderRadius: '16px',
+          padding: '16px 20px',
           display: 'flex',
           flexDirection: 'column',
-          gap: 'var(--space-md)'
+          gap: 'var(--space-md)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>

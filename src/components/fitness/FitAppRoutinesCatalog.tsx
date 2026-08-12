@@ -34,19 +34,32 @@ export default function FitAppRoutinesCatalog() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', color: 'var(--text-primary)' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
-        {/* CABECERA DE LA SECCIÓN */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h2 style={{ fontSize: 'var(--fs-step, 1.125rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-            Catálogo Oficial de Programas
-          </h2>
+        {/* BLOQUE 1: FILTROS & BÚSQUEDA / SELECCIÓN DE RUTINAS */}
+        <div
+          style={{
+            background: 'var(--surface-1, #0d0d0f)',
+            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+            borderRadius: '16px',
+            padding: '16px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '14px',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+              Catálogo Oficial & Selección de Programas
+            </span>
+          </div>
+
+          {/* CÁPSULAS HORIZONTALES LIMPIAS DE PROGRAMAS */}
+          <ActiveProgramSelector />
         </div>
 
-        {/* CÁPSULAS HORIZONTALES LIMPIAS */}
-        <ActiveProgramSelector />
-
-        {/* RECUADRO UNIFICADO: METADATOS DEL PROGRAMA + TABLA DE PRESCRIPCIÓN Y EJERCICIOS */}
+        {/* BLOQUE 2: DETALLE DEL PROGRAMA INSPECCIONADO & TABLA DE PRESCRIPCIÓN */}
         <div
           style={{
             background: 'var(--surface-1, #0d0d0f)',
