@@ -1,5 +1,5 @@
 // src/components/fitness/skills/SkillsWorkspace.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Compass, ShieldAlert } from 'lucide-react';
 import ExplorePathsView from './ExplorePathsView';
 import SkillDetailSheet from './SkillDetailSheet';
@@ -8,6 +8,17 @@ import PracticeSessionModal from './PracticeSessionModal';
 export function SkillsWorkspace() {
   const [selectedStepId, setSelectedStepId] = useState<string | null>(null);
   const [practiceModalStepId, setPracticeModalStepId] = useState<string | null>(null);
+
+  // Leer parámetro ?step= o ?skill= de la URL al cargar
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const stepParam = params.get('step') || params.get('skill');
+      if (stepParam) {
+        setSelectedStepId(stepParam);
+      }
+    }
+  }, []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%', maxWidth: '900px', margin: '0 auto' }}>
