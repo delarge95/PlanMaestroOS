@@ -13,7 +13,8 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
   const targetExercise = exercise || (exerciseId ? getExerciseDetails(exerciseId) : null);
   if (!targetExercise) return null;
 
-  const [activeTab, setActiveTab] = useState<'technique' | 'muscles' | 'substitutions'>('technique');
+  const [activeTab, setActiveTab] = useState<'technique' | 'muscles' | 'mobility' | 'substitutions'>('technique');
+  const [selectedVideoOption, setSelectedVideoOption] = useState<'option1' | 'option2'>('option1');
 
   // Extract YouTube video ID if available
   const getYoutubeEmbedUrl = (url?: string) => {
@@ -23,7 +24,17 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
     return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=1` : null;
   };
 
-  const embedUrl = getYoutubeEmbedUrl(targetExercise.youtubeLink);
+  const videoUrl1 = targetExercise.youtubeLink || (targetExercise as any).videoOption1;
+  const videoUrl2 = (targetExercise as any).videoOption2 || (targetExercise as any).videoUrl2;
+
+  const activeVideoUrl = selectedVideoOption === 'option1' ? videoUrl1 : (videoUrl2 || videoUrl1);
+  const embedUrl = getYoutubeEmbedUrl(activeVideoUrl);
+
+  const mobilityList: string[] = (targetExercise as any).mobilityRequirements || (targetExercise as any).mobility || [
+    'Dorsiflexión adecuada de tobillo para profundidad biomecánica',
+    'Extensión torácica & control neuromuscular de escápulas',
+    'Flexibilidad de isquiotibiales & compresión activa de cadera'
+  ];
 
   const handleMuscleClick = (mName: string) => {
     if (typeof window !== 'undefined') {
@@ -123,6 +134,44 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
           </button>
         </div>
 
+        {/* SELECTOR MULTI-VÍDEO (OPCIÓN 1 / OPCIÓN 2) */}
+        {videoUrl2 && (
+          <div style={{ display: 'flex', gap: '6px', background: 'rgba(0,0,0,0.4)', padding: '4px', borderRadius: '10px', width: 'fit-content', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <button
+              type="button"
+              onClick={() => setSelectedVideoOption('option1')}
+              style={{
+                background: selectedVideoOption === 'option1' ? 'var(--color-state-done)' : 'transparent',
+                color: selectedVideoOption === 'option1' ? '#ffffff' : 'var(--color-text-secondary)',
+                border: 'none',
+                padding: '4px 12px',
+                borderRadius: '6px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              Vídeo Opción 1
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedVideoOption('option2')}
+              style={{
+                background: selectedVideoOption === 'option2' ? 'var(--color-state-done)' : 'transparent',
+                color: selectedVideoOption === 'option2' ? '#ffffff' : 'var(--color-text-secondary)',
+                border: 'none',
+                padding: '4px 12px',
+                borderRadius: '6px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              Vídeo Opción 2
+            </button>
+          </div>
+        )}
+
         {/* YOUTUBE EMBED OR DIRECT LINK */}
         {embedUrl ? (
           <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: '#000', aspectRatio: '16/9' }}>
@@ -134,9 +183,9 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
               allowFullScreen
             />
           </div>
-        ) : targetExercise.youtubeLink ? (
+        ) : activeVideoUrl ? (
           <a
-            href={targetExercise.youtubeLink}
+            href={activeVideoUrl}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -154,12 +203,12 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
               fontSize: '0.9rem'
             }}
           >
-            <span>▶</span> Ver Video de Técnica en YouTube ↗
+            <span>▶</span> Ver Video de Técnica en YouTube ({selectedVideoOption === 'option1' ? 'Opción 1' : 'Opción 2'}) ↗
           </a>
         ) : null}
 
-        {/* TABS */}
-        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '10px' }}>
+        {/* TABS CON SECCIÓN DE REQUISITOS DE MOVILIDAD */}
+        <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '10px', flexWrap: 'wrap' }}>
           <button
             type="button"
             onClick={() => setActiveTab('technique')}
@@ -176,6 +225,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
           >
             Puntos de Técnica ({targetExercise.techniquePoints.length})
           </button>
+
           <button
             type="button"
             onClick={() => setActiveTab('muscles')}
@@ -192,6 +242,24 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
           >
             Músculos Solicitados
           </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('mobility')}
+            style={{
+              background: activeTab === 'mobility' ? 'rgba(10, 132, 255, 0.2)' : 'transparent',
+              border: 'none',
+              color: activeTab === 'mobility' ? 'var(--accent, #0a84ff)' : 'var(--color-text-secondary)',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: '0.85rem'
+            }}
+          >
+            Requisitos de Movilidad
+          </button>
+
           {targetExercise.substitutions && targetExercise.substitutions.length > 0 && (
             <button
               type="button"
@@ -256,7 +324,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
               {targetExercise.muscles.stability && targetExercise.muscles.stability.length > 0 && (
                 <div>
                   <strong style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
-                    Estabilidad / Sostén:
+                    Estabilización & Sinergia:
                   </strong>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                     {targetExercise.muscles.stability.map((m, idx) => (
@@ -266,7 +334,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
                         title={`Ver anatomía de ${m} en Base de Datos de Músculos`}
                         style={{
                           background: 'rgba(119, 231, 255, 0.12)',
-                          color: 'var(--color-accent-primary)',
+                          color: '#77e7ff',
                           padding: '4px 10px',
                           borderRadius: '6px',
                           fontSize: '0.8rem',
@@ -284,12 +352,27 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
             </div>
           )}
 
-          {activeTab === 'substitutions' && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {targetExercise.substitutions?.map((sub, idx) => (
-                <span key={idx} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.85rem', color: 'var(--color-text-primary)' }}>
-                  🔄 {sub}
-                </span>
+          {activeTab === 'mobility' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase' }}>
+                Requisitos Articulares & Rango de Movimiento (ROM):
+              </span>
+              <ul style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {mobilityList.map((mob, idx) => (
+                  <li key={idx} style={{ fontSize: '0.88rem', color: '#e2e8f0', lineHeight: 1.5 }}>
+                    {mob}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {activeTab === 'substitutions' && targetExercise.substitutions && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {targetExercise.substitutions.map((subName, idx) => (
+                <div key={idx} style={{ background: 'rgba(255,255,255,0.03)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)', fontSize: '0.86rem', color: 'var(--color-text-primary)' }}>
+                  {subName}
+                </div>
               ))}
             </div>
           )}

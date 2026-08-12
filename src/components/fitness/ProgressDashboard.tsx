@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { calculateMuscleVolumeFromLogs, type SessionLog } from '../../lib/fitness/volumeStats';
-import LoadGuide from './LoadGuide';
-import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
-import Button from '../ui/Button';
-import { History, BarChart2, Dumbbell, Calendar, CheckCircle2 } from 'lucide-react';
+import AnalyticsChart from './analytics/AnalyticsChart';
+import ProgramAnalytics from './analytics/ProgramAnalytics';
+import LoadingCharts from './analytics/LoadingCharts';
+import ExerciseGuide from './analytics/ExerciseGuide';
+import { History, BarChart2, Dumbbell, Calendar, CheckCircle2, Target, BookOpen } from 'lucide-react';
 
 export default function ProgressDashboard() {
-  const [activeTab, setActiveTab] = useState<'analytics' | 'history' | 'load'>('analytics');
+  const [activeTab, setActiveTab] = useState<'analytics' | 'program' | 'loading' | 'guide' | 'history'>('analytics');
   const [sessions, setSessions] = useState<SessionLog[]>([]);
 
   useEffect(() => {
@@ -32,18 +33,18 @@ export default function ProgressDashboard() {
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
-        {/* NAVEGACIÓN NIVEL 3: ANALÍTICA | HISTORIAL | GUÍA DE CARGAS */}
+        {/* NAVEGACIÓN NIVEL 3: RIVAL FITAPP-FREE COMPLETO */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-              Módulo de Analítica & Rendimiento
+              Módulo de Analítica & Rendimiento Integrado
             </span>
             <h2 style={{ fontSize: '1.375rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
               Progreso & Cargas de Entrenamiento
             </h2>
           </div>
 
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '10px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))' }}>
+          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '10px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))', flexWrap: 'wrap' }}>
             <button
               type="button"
               onClick={() => setActiveTab('analytics')}
@@ -51,18 +52,81 @@ export default function ProgressDashboard() {
                 background: activeTab === 'analytics' ? 'var(--accent, #0a84ff)' : 'transparent',
                 color: activeTab === 'analytics' ? '#ffffff' : 'var(--text-secondary)',
                 border: 'none',
-                padding: '6px 14px',
+                padding: '6px 12px',
                 borderRadius: '7px',
-                fontSize: '0.8rem',
+                fontSize: '0.78rem',
                 fontWeight: activeTab === 'analytics' ? 700 : 500,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '5px'
               }}
             >
               <BarChart2 size={14} />
-              <span>Analítica & Tendencias</span>
+              <span>Rendimiento Global</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('program')}
+              style={{
+                background: activeTab === 'program' ? 'var(--accent, #0a84ff)' : 'transparent',
+                color: activeTab === 'program' ? '#ffffff' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: '7px',
+                fontSize: '0.78rem',
+                fontWeight: activeTab === 'program' ? 700 : 500,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px'
+              }}
+            >
+              <Target size={14} />
+              <span>Programa Activo</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('loading')}
+              style={{
+                background: activeTab === 'loading' ? 'var(--accent, #0a84ff)' : 'transparent',
+                color: activeTab === 'loading' ? '#ffffff' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: '7px',
+                fontSize: '0.78rem',
+                fontWeight: activeTab === 'loading' ? 700 : 500,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px'
+              }}
+            >
+              <Dumbbell size={14} />
+              <span>Tabla Universal Cargas</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('guide')}
+              style={{
+                background: activeTab === 'guide' ? 'var(--accent, #0a84ff)' : 'transparent',
+                color: activeTab === 'guide' ? '#ffffff' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: '7px',
+                fontSize: '0.78rem',
+                fontWeight: activeTab === 'guide' ? 700 : 500,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px'
+              }}
+            >
+              <BookOpen size={14} />
+              <span>Guía por Ejercicio</span>
             </button>
 
             <button
@@ -72,49 +136,28 @@ export default function ProgressDashboard() {
                 background: activeTab === 'history' ? 'var(--accent, #0a84ff)' : 'transparent',
                 color: activeTab === 'history' ? '#ffffff' : 'var(--text-secondary)',
                 border: 'none',
-                padding: '6px 14px',
+                padding: '6px 12px',
                 borderRadius: '7px',
-                fontSize: '0.8rem',
+                fontSize: '0.78rem',
                 fontWeight: activeTab === 'history' ? 700 : 500,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '5px'
               }}
             >
               <History size={14} />
               <span>Historial</span>
             </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('load')}
-              style={{
-                background: activeTab === 'load' ? 'var(--accent, #0a84ff)' : 'transparent',
-                color: activeTab === 'load' ? '#ffffff' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 14px',
-                borderRadius: '7px',
-                fontSize: '0.8rem',
-                fontWeight: activeTab === 'load' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              <Dumbbell size={14} />
-              <span>Guía de cargas & Discos</span>
-            </button>
           </div>
         </div>
 
-        {/* 1. PESTAÑA: ANALÍTICA & TENDENCIAS SVG */}
+        {/* 1. SUB-PESTAÑA: RENDIMIENTO GLOBAL & TENDENCIAS SVG */}
         {activeTab === 'analytics' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-            <FitAppAnalyticsDashboard />
+            <AnalyticsChart />
 
-            {/* RESUMEN DE VOLUMEN ACUMULADO */}
+            {/* RESUMEN DE VOLUMEN ACUMULADO POR GRUPO MUSCULAR */}
             <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
                 Volumen Acumulado por Grupo Muscular (Histórico)
@@ -138,7 +181,16 @@ export default function ProgressDashboard() {
           </div>
         )}
 
-        {/* 2. PESTAÑA: HISTORIAL COMPLETO */}
+        {/* 2. SUB-PESTAÑA: ANALÍTICA DEL PROGRAMA ACTIVO */}
+        {activeTab === 'program' && <ProgramAnalytics />}
+
+        {/* 3. SUB-PESTAÑA: TABLA UNIVERSAL DE CARGAS */}
+        {activeTab === 'loading' && <LoadingCharts />}
+
+        {/* 4. SUB-PESTAÑA: GUÍA POR EJERCICIO Y ZONAS 1RM */}
+        {activeTab === 'guide' && <ExerciseGuide />}
+
+        {/* 5. SUB-PESTAÑA: HISTORIAL COMPLETO */}
         {activeTab === 'history' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
             {totalSessions === 0 ? (
@@ -177,9 +229,6 @@ export default function ProgressDashboard() {
             )}
           </div>
         )}
-
-        {/* 3. PESTAÑA: GUÍA DE CARGAS & CALCULADORA DE DISCOS */}
-        {activeTab === 'load' && <LoadGuide />}
       </div>
     </ErrorBoundary>
   );
