@@ -41,6 +41,22 @@ export interface WorkoutLog {
   sets?: WorkoutSet[];
 }
 
+export interface SpecificMuscle {
+  name?: string;
+  description?: string;
+  subMuscles?: string[];
+  exercises?: string[];
+  [key: string]: any;
+}
+
+export interface MuscleGroupInfo {
+  name?: string;
+  latinName?: string;
+  function?: string;
+  muscles?: { [key: string]: SpecificMuscle };
+  [key: string]: any;
+}
+
 export interface WorkoutProgram {
   id: string;
   title: string;

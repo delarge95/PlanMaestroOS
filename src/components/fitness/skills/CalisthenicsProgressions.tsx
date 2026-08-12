@@ -2,21 +2,30 @@
 import React, { useMemo, useState } from 'react';
 import { calisthenicsProgressions } from '../../../data/fitness/progressionsData';
 import YouTubePlayer from '../../ui/YouTubePlayer';
-import { ChevronRight, Award } from 'lucide-react';
-import type { SkillDomain, ProgressionExercise } from '../../../data/fitness/skills/types';
+import { Search, ChevronRight } from 'lucide-react';
+import type { ProgressionExercise } from '../../../data/fitness/skills/types';
 
 export interface CalisthenicsProgressionsProps {
-  selectedDomain?: SkillDomain | 'all';
-  onlyActive?: boolean;
   searchTerm?: string;
+  onSearchTermChange?: (term: string) => void;
   onOpenDetail?: (exerciseName: string) => void;
   onSelectRoutine?: (routineId: string) => void;
 }
 
 export function CalisthenicsProgressions({
-  searchTerm = ''
+  searchTerm: externalSearchTerm,
+  onSearchTermChange
 }: CalisthenicsProgressionsProps) {
+  const [internalSearchTerm, setInternalSearchTerm] = useState('');
+  const searchTerm = externalSearchTerm !== undefined ? externalSearchTerm : internalSearchTerm;
+
+  const handleSearchChange = (term: string) => {
+    setInternalSearchTerm(term);
+    if (onSearchTermChange) onSearchTermChange(term);
+  };
+
   const [sourceFilter, setSourceFilter] = useState<'all' | 'heria' | 'og'>('all');
+  const [domainFilter, setDomainFilter] = useState<string>('all');
   const [expandedGroupIds, setExpandedGroupIds] = useState<string[]>(['core-compression']);
   const [expandedExerciseNames, setExpandedExerciseNames] = useState<string[]>([]);
   const [expandedIntroVideoIds, setExpandedIntroVideoIds] = useState<string[]>([]);
@@ -69,6 +78,15 @@ export function CalisthenicsProgressions({
 
     return calisthenicsProgressions
       .map((group) => {
+        // 1. Filtro por Dominio / Patrón
+        if (domainFilter !== 'all') {
+          if (domainFilter === 'pull' && !['front-lever', 'back-lever', 'muscle-up'].includes(group.id)) return null;
+          if (domainFilter === 'push' && !['planche', 'handstand-pushup', 'dips'].includes(group.id)) return null;
+          if (domainFilter === 'core' && !['core-compression', 'l-sit-v-sit', 'dragon-flag'].includes(group.id)) return null;
+          if (domainFilter === 'legs' && !['pistol-squat', 'shrimp-squat'].includes(group.id)) return null;
+          if (domainFilter === 'rings' && !['rings-support', 'iron-cross'].includes(group.id)) return null;
+        }
+
         let exercises = group.exercises;
 
         if (sourceFilter === 'heria') {
@@ -87,78 +105,119 @@ export function CalisthenicsProgressions({
 
         return { ...group, exercises };
       })
-      .filter((group) => group.exercises.length > 0);
-  }, [searchTerm, sourceFilter]);
+      .filter((group): group is typeof calisthenicsProgressions[0] => group !== null && group.exercises.length > 0);
+  }, [searchTerm, sourceFilter, domainFilter]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
       
-      {/* CONMUTADOR DE FUENTE (TODOS | CHRIS HERIA | OVERCOMING GRAVITY) */}
+      {/* BLOQUE UNIFICADO: BÚSQUEDA + FILTROS INTERACTIVOS */}
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '10px',
           background: 'var(--surface-1, #0d0d0f)',
           border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-          borderRadius: '14px',
-          padding: '12px 16px'
+          borderRadius: '16px',
+          padding: '16px 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}
       >
-        <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
-          Filtrar metodología de progresión:
-        </span>
-        <div style={{ display: 'flex', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '3px', borderRadius: '999px' }}>
-          <button
-            type="button"
-            onClick={() => setSourceFilter('all')}
+        {/* BUSCADOR PRINCIPAL */}
+        <div style={{ position: 'relative', width: '100%' }}>
+          <Search
+            size={16}
             style={{
-              background: sourceFilter === 'all' ? 'rgba(255,255,255,0.14)' : 'transparent',
-              color: sourceFilter === 'all' ? '#ffffff' : 'rgba(255,255,255,0.55)',
-              border: 'none',
-              padding: '5px 12px',
-              borderRadius: '999px',
-              fontSize: '0.78rem',
-              fontWeight: sourceFilter === 'all' ? 600 : 500,
-              cursor: 'pointer'
+              position: 'absolute',
+              left: '12px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'rgba(255,255,255,0.4)'
             }}
-          >
-            🌐 Todos ({calisthenicsProgressions.reduce((acc, g) => acc + g.exercises.length, 0)})
-          </button>
-          <button
-            type="button"
-            onClick={() => setSourceFilter('heria')}
+          />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => handleSearchChange(e.target.value)}
+            placeholder="Buscar por ejercicio (Planche, Muscle Up, Front Lever) o requisito..."
             style={{
-              background: sourceFilter === 'heria' ? 'rgba(255,159,10,0.2)' : 'transparent',
-              color: sourceFilter === 'heria' ? '#ff9f0a' : 'rgba(255,255,255,0.55)',
-              border: sourceFilter === 'heria' ? '1px solid rgba(255,159,10,0.4)' : 'none',
-              padding: '5px 12px',
-              borderRadius: '999px',
-              fontSize: '0.78rem',
-              fontWeight: sourceFilter === 'heria' ? 600 : 500,
-              cursor: 'pointer'
+              width: '100%',
+              padding: '9px 12px 9px 36px',
+              borderRadius: '10px',
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              color: '#ffffff',
+              fontSize: '0.86rem',
+              outline: 'none',
+              boxSizing: 'border-box'
             }}
-          >
-            🔥 Chris Heria / Thenx
-          </button>
-          <button
-            type="button"
-            onClick={() => setSourceFilter('og')}
-            style={{
-              background: sourceFilter === 'og' ? 'rgba(10,132,255,0.2)' : 'transparent',
-              color: sourceFilter === 'og' ? '#0a84ff' : 'rgba(255,255,255,0.55)',
-              border: sourceFilter === 'og' ? '1px solid rgba(10,132,255,0.4)' : 'none',
-              padding: '5px 12px',
-              borderRadius: '999px',
-              fontSize: '0.78rem',
-              fontWeight: sourceFilter === 'og' ? 600 : 500,
-              cursor: 'pointer'
-            }}
-          >
-            📖 Overcoming Gravity
-          </button>
+          />
+        </div>
+
+        {/* PILLS DE FILTROS INTEGRADOS (METODOLOGÍA + PATRÓN DE MOVIMIENTO) */}
+        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '2px', scrollbarWidth: 'none', alignItems: 'center', flexWrap: 'wrap' }}>
+          
+          {/* GRUPO 1: METODOLOGÍA */}
+          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '2px', borderRadius: '999px' }}>
+            {[
+              { key: 'all', label: '🌐 Todas' },
+              { key: 'heria', label: '🔥 Chris Heria' },
+              { key: 'og', label: '📖 Overcoming Gravity' }
+            ].map((sf) => (
+              <button
+                key={sf.key}
+                type="button"
+                onClick={() => setSourceFilter(sf.key as any)}
+                style={{
+                  background: sourceFilter === sf.key ? 'var(--accent, #0a84ff)' : 'transparent',
+                  color: sourceFilter === sf.key ? '#ffffff' : 'rgba(255,255,255,0.6)',
+                  border: 'none',
+                  padding: '4px 10px',
+                  borderRadius: '999px',
+                  fontSize: '0.76rem',
+                  fontWeight: sourceFilter === sf.key ? 700 : 500,
+                  cursor: 'pointer'
+                }}
+              >
+                {sf.label}
+              </button>
+            ))}
+          </div>
+
+          <div style={{ width: '1px', height: '16px', background: 'rgba(255,255,255,0.08)', margin: '0 2px' }} />
+
+          {/* GRUPO 2: PATRÓN / DOMINIO DE CALISTENIA */}
+          {[
+            { key: 'all', label: 'Todos los Patrones' },
+            { key: 'pull', label: 'Tracción / Pull' },
+            { key: 'push', label: 'Empuje / Push' },
+            { key: 'core', label: 'Core & Compresión' },
+            { key: 'legs', label: 'Pierna / Unilateral' },
+            { key: 'rings', label: 'Anillas & Soporte' }
+          ].map((df) => {
+            const isSelected = domainFilter === df.key;
+            return (
+              <button
+                key={df.key}
+                type="button"
+                onClick={() => setDomainFilter(df.key)}
+                style={{
+                  background: isSelected ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.04)',
+                  color: isSelected ? '#ffffff' : 'rgba(255,255,255,0.6)',
+                  border: 'none',
+                  borderRadius: '999px',
+                  padding: '4px 10px',
+                  fontSize: '0.76rem',
+                  fontWeight: isSelected ? 700 : 500,
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {df.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -370,20 +429,39 @@ export function CalisthenicsProgressions({
                                 textAlign: 'left'
                               }}
                             >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#ffffff' }}>
-                                  {ex.name}
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <span
+                                  style={{
+                                    width: '24px',
+                                    height: '24px',
+                                    borderRadius: '50%',
+                                    background: 'rgba(10,132,255,0.15)',
+                                    color: '#0a84ff',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 800,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                  }}
+                                >
+                                  {ex.level}
                                 </span>
+                                <div>
+                                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                                    {ex.name}
+                                  </h4>
+                                  <span style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.45)' }}>
+                                    Meta: {ex.target}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 {ex.videoUrl && (
-                                  <span style={{ fontSize: '0.68rem', background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', padding: '2px 6px', borderRadius: '999px' }}>
-                                    ▶ Video
+                                  <span style={{ fontSize: '0.68rem', background: 'rgba(48,209,88,0.15)', color: '#30d158', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
+                                    VIDEO
                                   </span>
                                 )}
-                              </div>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <span style={{ fontSize: '0.74rem', background: 'rgba(10,132,255,0.15)', color: '#0a84ff', padding: '2px 8px', borderRadius: '999px', fontWeight: 700 }}>
-                                  Nivel {ex.level}
-                                </span>
                                 <ChevronRight
                                   size={16}
                                   style={{
@@ -395,56 +473,32 @@ export function CalisthenicsProgressions({
                               </div>
                             </button>
 
-                            {/* DETALLE EXPANDIDO DEL EJERCICIO */}
+                            {/* CONTENIDO DESPLEGABLE DEL EJERCICIO */}
                             {isExExpanded && (
-                              <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '14px', display: 'flex', flexDirection: 'column', gap: '12px', background: 'rgba(0,0,0,0.2)' }}>
-                                {ex.videoUrl && (
-                                  <YouTubePlayer youtubeLink={ex.videoUrl} secondaryVideoLink={ex.secondaryVideoUrl} exerciseName={ex.name} />
+                              <div style={{ padding: '14px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.15)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                {ex.purpose && (
+                                  <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.4 }}>
+                                    <strong>Propósito:</strong> {ex.purpose}
+                                  </p>
                                 )}
-
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px', fontSize: '0.82rem' }}>
-                                  <div>
-                                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>Prerequisitos: </span>
-                                    <span style={{ color: '#ffffff' }}>{ex.prerequisites || 'Ninguno'}</span>
-                                  </div>
-                                  <div>
-                                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>Desbloquea: </span>
-                                    <span style={{ color: '#0a84ff', fontWeight: 600 }}>{ex.unlocks || 'N/A'}</span>
-                                  </div>
-                                </div>
 
                                 {ex.technique && ex.technique.length > 0 && (
                                   <div>
                                     <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0a84ff', display: 'block', marginBottom: '4px' }}>
-                                      Técnica & Ejecución
+                                      Puntos Clave de Técnica:
                                     </span>
-                                    <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>
-                                      {ex.technique.map((point: string, pIdx: number) => (
-                                        <li key={pIdx}>{point}</li>
+                                    <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8rem', color: 'rgba(255,255,255,0.65)' }}>
+                                      {ex.technique.map((t: string, tIdx: number) => (
+                                        <li key={tIdx}>{t}</li>
                                       ))}
                                     </ul>
                                   </div>
                                 )}
 
-                                {ex.primaryMuscles && ex.primaryMuscles.length > 0 && (
-                                  <div>
-                                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#30d158', display: 'block', marginBottom: '4px' }}>
-                                      Músculos Principales (Fuerza)
-                                    </span>
-                                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                                      {ex.primaryMuscles.map((m: string) => (
-                                        <span key={m} style={{ background: 'rgba(48,209,88,0.12)', color: '#30d158', padding: '2px 8px', borderRadius: '6px', fontSize: '0.74rem', fontWeight: 600 }}>
-                                          {m}
-                                        </span>
-                                      ))}
-                                    </div>
+                                {ex.videoUrl && (
+                                  <div style={{ marginTop: '4px' }}>
+                                    <YouTubePlayer youtubeLink={ex.videoUrl} exerciseName={ex.name} />
                                   </div>
-                                )}
-
-                                {ex.purpose && (
-                                  <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', margin: 0, fontStyle: 'italic' }}>
-                                    🎯 {ex.purpose}
-                                  </p>
                                 )}
                               </div>
                             )}
@@ -453,52 +507,6 @@ export function CalisthenicsProgressions({
                       );
                     })}
                   </div>
-
-                  {/* MASTER WORKOUT BANNER */}
-                  {group.masterWorkout && (
-                    <div
-                      style={{
-                        marginTop: '8px',
-                        background: 'linear-gradient(135deg, rgba(255,159,10,0.12), rgba(255,255,255,0.02))',
-                        border: '1px solid rgba(255,159,10,0.3)',
-                        borderRadius: '12px',
-                        padding: '14px',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        flexWrap: 'wrap',
-                        gap: '10px'
-                      }}
-                    >
-                      <div>
-                        <h4 style={{ fontSize: '0.88rem', fontWeight: 800, margin: 0, color: '#ff9f0a', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <Award size={16} />
-                          {group.masterWorkout.name}
-                        </h4>
-                        <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.6)', marginTop: '2px', display: 'block' }}>
-                          {group.masterWorkout.exercises.length} ejercicios de entrenamiento guiado
-                        </span>
-                      </div>
-                      <a
-                        href="/app/fitness/library/routines"
-                        style={{
-                          background: 'var(--accent, #0a84ff)',
-                          color: '#ffffff',
-                          textDecoration: 'none',
-                          padding: '6px 14px',
-                          borderRadius: '8px',
-                          fontSize: '0.78rem',
-                          fontWeight: 700,
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '4px'
-                        }}
-                      >
-                        <span>Ver Rutina Master</span>
-                        <ChevronRight size={14} />
-                      </a>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -508,5 +516,3 @@ export function CalisthenicsProgressions({
     </div>
   );
 }
-
-export default CalisthenicsProgressions;
