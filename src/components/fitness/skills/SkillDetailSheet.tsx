@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, ExternalLink, ArrowRight, ArrowLeft, PauseCircle, ChevronDown, ChevronUp, ShieldAlert, Star, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Play, ExternalLink, ArrowRight, ArrowLeft, PauseCircle, ChevronDown, ChevronUp, Star, AlertTriangle } from 'lucide-react';
 import Sheet from '../../ui/Sheet';
 import Button from '../../ui/Button';
 import ListRow from '../../ui/ListRow';
@@ -14,20 +14,21 @@ export interface SkillDetailSheetProps {
   onClose: () => void;
   stepId: string;
   onStartPractice: (stepId: string) => void;
+  onSelectStep?: (nextStepId: string) => void;
 }
 
 export function SkillDetailSheet({
   isOpen,
   onClose,
   stepId,
-  onStartPractice
+  onStartPractice,
+  onSelectStep
 }: SkillDetailSheetProps) {
   const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
   const toggleActiveSkill = useSkillStateStore((s) => s.toggleActiveSkill);
   const pauseSkill = useSkillStateStore((s) => s.pauseSkill);
 
   const [showCriteria, setShowCriteria] = useState(false);
-  const [showPrep, setShowPrep] = useState(false);
   const [fitAppModalId, setFitAppModalId] = useState<string | null>(null);
 
   const step = skillSteps.find((s) => s.id === stepId) || skillSteps[0];
@@ -82,7 +83,7 @@ export function SkillDetailSheet({
             </div>
           )}
 
-          {/* BOTONES Y ENLACE DE FITAPP VERIFICADO ESTRICTO (DESACTIVADO SI IS_FITAPP_VERIFIED IS FALSE) */}
+          {/* BOTONES Y ENLACE DE FITAPP VERIFICADO ESTRICTO */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '4px' }}>
             {/* CTA PRACTICAR HOY */}
             <button
@@ -160,7 +161,7 @@ export function SkillDetailSheet({
           </div>
         </div>
 
-        {/* NAVEGACIÓN ENTRE PASOS (ANTERIOR / SIGUIENTE) */}
+        {/* NAVEGACIÓN ENTRE PASOS (ANTERIOR / SIGUIENTE) DENTRO DE LA BASE DE DATOS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Escala de Progresión
@@ -171,7 +172,9 @@ export function SkillDetailSheet({
               meta={`Regresión Nivel ${prevStep.order}`}
               icon={<ArrowLeft size={16} style={{ color: 'var(--text-tertiary)' }} />}
               onClick={() => {
-                onClose();
+                if (onSelectStep && prevStep) {
+                  onSelectStep(prevStep.id);
+                }
               }}
             />
           )}
@@ -181,7 +184,9 @@ export function SkillDetailSheet({
               meta={`Progresión Nivel ${nextStep.order}`}
               icon={<ArrowRight size={16} style={{ color: 'var(--color-accent-primary)' }} />}
               onClick={() => {
-                onClose();
+                if (onSelectStep && nextStep) {
+                  onSelectStep(nextStep.id);
+                }
               }}
             />
           )}

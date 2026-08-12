@@ -59,6 +59,7 @@ export function SkillsWorkspace() {
           isOpen={Boolean(selectedStepId)}
           onClose={() => setSelectedStepId(null)}
           stepId={selectedStepId}
+          onSelectStep={(nextId) => setSelectedStepId(nextId)}
           onStartPractice={(stepId) => {
             setSelectedStepId(null);
             setPracticeModalStepId(stepId);

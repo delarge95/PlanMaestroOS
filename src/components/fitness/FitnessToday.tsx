@@ -7,6 +7,7 @@ import TodayCalendar from './TodayCalendar';
 import MyPracticeSummary from './skills/MyPracticeSummary';
 import Disclosure from '../ui/Disclosure';
 import ErrorBoundary from '../ErrorBoundary';
+import { ExternalLink } from 'lucide-react';
 import { useSkillStateStore } from '../../data/fitness/skills/skillStateStore';
 import { getSkillStepById } from '../../data/fitness/skills/skillSteps';
 import { skillPaths } from '../../data/fitness/skills/skillPaths';
@@ -44,23 +45,40 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
           onSelectDayIndex={(idx) => setSelectedDayIndex(idx)}
         />
 
-        {/* 3. LISTA UNIFICADA DE ACTIVIDADES DE HOY (MISMA PRIORIDAD) */}
+        {/* 3. LISTA UNIFICADA DE ACTIVIDADES DE HOY (MISMA PRIORIDAD Y ESTRUCTURA) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
           <h3 style={{ fontSize: 'var(--fs-step, 1.0625rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
             Sesiones & Actividades del Día
           </h3>
 
-          {/* ACTIVIDAD 1: HABILIDAD ACTIVA (MI PRÁCTICA) COMO DESPLEGABLE */}
+          {/* ACTIVIDAD 1: HABILIDAD ACTIVA (MI PRÁCTICA) COMO UNICO DESPLEGABLE CON ICONO EXTERNAL LINK */}
           {activeSkillPath && currentStep && (
             <Disclosure
               label={`Habilidad Activa: ${activeSkillPath.title}`}
-              summary={`Paso ${currentStep.order} de ${activeSkillPath.stepIds.length}: ${currentStep.title} · Objetivo: ${currentStep.practice.target}`}
+              summary={`Paso ${currentStep.order} de ${activeSkillPath.stepIds.length}: ${currentStep.title}`}
+              actions={
+                <a
+                  href={`/app/fitness/library/skills?step=${encodeURIComponent(currentStep.id)}`}
+                  title="Ver detalle completo de esta progresión en la Base de Datos"
+                  style={{
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+                    color: 'var(--accent, #0a84ff)',
+                    padding: '4px',
+                    borderRadius: '6px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <ExternalLink size={14} />
+                </a>
+              }
             >
-              <div style={{ paddingTop: '8px' }}>
-                <MyPracticeSummary
-                  onOpenPaths={() => { window.location.href = '/app/fitness/library/skills'; }}
-                />
-              </div>
+              <MyPracticeSummary
+                onOpenPaths={() => { window.location.href = `/app/fitness/library/skills?step=${encodeURIComponent(currentStep.id)}`; }}
+              />
             </Disclosure>
           )}
 
