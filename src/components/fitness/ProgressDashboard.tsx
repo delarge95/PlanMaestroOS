@@ -80,54 +80,6 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
           Progreso & Analítica de Cargas
         </h1>
 
-        {/* BARRA DESTACADA DE OVERALL PERFORMANCE & PROGRESS */}
-        <div style={{
-          background: 'linear-gradient(135deg, rgba(10,132,255,0.12), rgba(48,209,88,0.12))',
-          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
-          borderRadius: '16px',
-          padding: '18px 22px',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '16px',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(10,132,255,0.2)', display: 'grid', placeItems: 'center', color: 'var(--accent, #0a84ff)' }}>
-              <TrendingUp size={22} />
-            </div>
-            <div>
-              <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Overall Progress</span>
-              <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
-                {totalSessions > 0 ? `${totalSessions} Sesiones Registradas` : 'Listo para iniciar'}
-              </strong>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(48,209,88,0.2)', display: 'grid', placeItems: 'center', color: 'var(--success, #30d158)' }}>
-              <Award size={22} />
-            </div>
-            <div>
-              <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Volumen Total Acumulado</span>
-              <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
-                {totalVolumeKg > 0 ? `${totalVolumeKg.toLocaleString()} kg` : '0 kg'}
-              </strong>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(255,159,10,0.2)', display: 'grid', placeItems: 'center', color: '#ff9f0a' }}>
-              <Zap size={22} />
-            </div>
-            <div>
-              <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia de Trabajo</span>
-              <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
-                {totalSessions > 0 ? `${Math.min(100, Math.round((totalSessions / (totalSessions + 1)) * 100))}%` : '100%'}
-              </strong>
-            </div>
-          </div>
-        </div>
-
         {/* NAVEGACIÓN NIVEL 3: SUB-PESTAÑAS DE PROGRESO (APPLE CLEAN TAB BAR) */}
         <div style={{
           display: 'flex',
@@ -252,6 +204,54 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
         {/* 1. SUB-PESTAÑA: RENDIMIENTO GLOBAL & TENDENCIAS SVG */}
         {activeTab === 'analytics' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+            {/* BARRA DESTACADA DE OVERALL PERFORMANCE & PROGRESS */}
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(10,132,255,0.12), rgba(48,209,88,0.12))',
+              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+              borderRadius: '16px',
+              padding: '18px 22px',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '16px',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(10,132,255,0.2)', display: 'grid', placeItems: 'center', color: 'var(--accent, #0a84ff)' }}>
+                  <TrendingUp size={22} />
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Overall Progress</span>
+                  <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
+                    {totalSessions > 0 ? `${totalSessions} Sesiones Registradas` : 'Listo para iniciar'}
+                  </strong>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(48,209,88,0.2)', display: 'grid', placeItems: 'center', color: 'var(--success, #30d158)' }}>
+                  <Award size={22} />
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Volumen Total Acumulado</span>
+                  <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
+                    {totalVolumeKg > 0 ? `${totalVolumeKg.toLocaleString()} kg` : '0 kg'}
+                  </strong>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(255,159,10,0.2)', display: 'grid', placeItems: 'center', color: '#ff9f0a' }}>
+                  <Zap size={22} />
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia de Trabajo</span>
+                  <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
+                    {totalSessions > 0 ? `${Math.min(100, Math.round((totalSessions / (totalSessions + 1)) * 100))}%` : '100%'}
+                  </strong>
+                </div>
+              </div>
+            </div>
+
             <AnalyticsChart flatLog={flatLog} />
 
             {/* RESUMEN DE VOLUMEN ACUMULADO POR GRUPO MUSCULAR */}
