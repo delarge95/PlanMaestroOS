@@ -470,6 +470,72 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
               </tbody>
             </table>
           </div>
+
+          {/* BOTÓN PROMINENTE DE FINALIZACIÓN DE SESIÓN */}
+          <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
+            <button
+              type="button"
+              onClick={() => {
+                try {
+                  const nowIso = new Date().toISOString();
+                  const routineTitle = `${program.title} - ${activeDay?.name || 'Sesión del Día'}`;
+                  
+                  let totalVolKg = 0;
+                  const exercisesLogged = (activeDay?.exercises || []).map((pres: any) => {
+                    const pId = pres.id || pres.exerciseId;
+                    const logSt = exerciseLogs[pId];
+                    const exName = pres.displayName || pres.name || pres.exerciseId;
+                    const wList = logSt?.weights || [];
+                    const reps = Number(logSt?.repRange?.split('-')[0]) || 8;
+
+                    wList.forEach((w: string) => {
+                      const wNum = Number(w) || 0;
+                      totalVolKg += wNum * reps;
+                    });
+
+                    return {
+                      name: exName,
+                      sets: wList.length || 3,
+                      weights: wList
+                    };
+                  });
+
+                  const newSession = {
+                    sessionId: `session_${Date.now()}`,
+                    dateIso: nowIso,
+                    routineTitle,
+                    durationMinutes: 45,
+                    totalVolumeKg: Math.round(totalVolKg),
+                    exercises: exercisesLogged
+                  };
+
+                  const existingHist = JSON.parse(localStorage.getItem('fitapp_workout_history') || '[]');
+                  const updatedHist = [newSession, ...existingHist];
+                  localStorage.setItem('fitapp_workout_history', JSON.stringify(updatedHist));
+
+                  alert('🎉 ¡Sesión de entrenamiento completada y guardada con éxito en la sección de Progreso!');
+                } catch (e) {
+                  console.error(e);
+                }
+              }}
+              style={{
+                background: 'linear-gradient(135deg, var(--success, #30d158), #28a745)',
+                color: '#ffffff',
+                border: 'none',
+                padding: '12px 24px',
+                borderRadius: '10px',
+                fontSize: '0.94rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                boxShadow: '0 4px 14px rgba(48,209,88,0.3)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              🎉 Finalizar & Guardar Sesión en Progreso
+            </button>
+          </div>
         </Disclosure>
       )}
 

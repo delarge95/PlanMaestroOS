@@ -21,6 +21,7 @@ export const SECTION_NAV: Record<string, NavItemConfig[]> = {
     { href: '/app/fitness/library/skills', label: 'Progresiones' },
     { href: '/app/fitness/library/data', label: 'Ejercicios' },
     { href: '/app/fitness/library/muscles', label: 'Músculos' },
+    { href: '/app/fitness/library/thenx', label: 'Guías Thenx' },
   ],
   career: [
     { href: '/app/career', label: 'Hoy', end: true },

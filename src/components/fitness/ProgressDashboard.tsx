@@ -1,12 +1,13 @@
 // src/components/fitness/ProgressDashboard.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { calculateMuscleVolumeFromLogs, type SessionLog } from '../../lib/fitness/volumeStats';
+import { type FlatLogEntry } from '../../lib/fitness/analyticsUtils';
 import AnalyticsChart from './analytics/AnalyticsChart';
 import ProgramAnalytics from './analytics/ProgramAnalytics';
 import LoadingCharts from './analytics/LoadingCharts';
 import ExerciseGuide from './analytics/ExerciseGuide';
-import { History, BarChart2, Dumbbell, Calendar, CheckCircle2, Target, BookOpen } from 'lucide-react';
+import { History, BarChart2, Dumbbell, Target, BookOpen, CheckCircle2, TrendingUp, Award, Zap } from 'lucide-react';
 
 export default function ProgressDashboard() {
   const [activeTab, setActiveTab] = useState<'analytics' | 'program' | 'loading' | 'guide' | 'history'>('analytics');
@@ -26,14 +27,96 @@ export default function ProgressDashboard() {
     }
   }, []);
 
+  // Transformar sesiones guardadas en un FlatLogEntry[] plano para alimentarlo en AnalyticsChart
+  const flatLog: FlatLogEntry[] = useMemo(() => {
+    const list: FlatLogEntry[] = [];
+    sessions.forEach((s: any, sIdx: number) => {
+      const weekId = `Semana ${Math.floor(sIdx / 5) + 1}`;
+      const dayId = `Día ${(sIdx % 5) + 1}`;
+
+      if (Array.isArray(s.exercises)) {
+        s.exercises.forEach((ex: any) => {
+          const exName = ex.name || 'Ejercicio';
+          const weights = Array.isArray(ex.weights) ? ex.weights : [60, 60, 60];
+          weights.forEach((w: any) => {
+            const wNum = Number(w) || 0;
+            if (wNum > 0) {
+              list.push({
+                weekId,
+                dayId,
+                exName,
+                timestamp: s.dateIso,
+                weight: wNum,
+                reps: 8
+              });
+            }
+          });
+        });
+      }
+    });
+    return list;
+  }, [sessions]);
+
   const totalSessions = sessions.length;
+  const totalVolumeKg = useMemo(() => {
+    return sessions.reduce((acc, s: any) => acc + (s.totalVolumeKg || 0), 0);
+  }, [sessions]);
+
   const muscleVolume = calculateMuscleVolumeFromLogs(sessions);
 
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
-        {/* NAVEGACIÓN NIVEL 3: RIVAL FITAPP-FREE COMPLETO */}
+        {/* BARRA DESTACADA DE OVERALL PERFORMANCE & PROGRESS */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(10,132,255,0.12), rgba(48,209,88,0.12))',
+          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+          borderRadius: '16px',
+          padding: '18px 22px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(10,132,255,0.2)', display: 'grid', placeItems: 'center', color: 'var(--accent, #0a84ff)' }}>
+              <TrendingUp size={22} />
+            </div>
+            <div>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Overall Progress</span>
+              <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
+                {totalSessions > 0 ? `${totalSessions} Sesiones Registradas` : 'Listo para iniciar'}
+              </strong>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(48,209,88,0.2)', display: 'grid', placeItems: 'center', color: 'var(--success, #30d158)' }}>
+              <Award size={22} />
+            </div>
+            <div>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Volumen Total Acumulado</span>
+              <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
+                {totalVolumeKg > 0 ? `${totalVolumeKg.toLocaleString()} kg` : '0 kg'}
+              </strong>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(255,159,10,0.2)', display: 'grid', placeItems: 'center', color: '#ff9f0a' }}>
+              <Zap size={22} />
+            </div>
+            <div>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia de Trabajo</span>
+              <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
+                {totalSessions > 0 ? `${Math.min(100, Math.round((totalSessions / (totalSessions + 1)) * 100))}%` : '100%'}
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        {/* NAVEGACIÓN NIVEL 3: SUB-PESTAÑAS DE PROGRESO */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
@@ -147,7 +230,7 @@ export default function ProgressDashboard() {
               }}
             >
               <History size={14} />
-              <span>Historial</span>
+              <span>Historial ({totalSessions})</span>
             </button>
           </div>
         </div>
@@ -155,7 +238,7 @@ export default function ProgressDashboard() {
         {/* 1. SUB-PESTAÑA: RENDIMIENTO GLOBAL & TENDENCIAS SVG */}
         {activeTab === 'analytics' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-            <AnalyticsChart />
+            <AnalyticsChart flatLog={flatLog} />
 
             {/* RESUMEN DE VOLUMEN ACUMULADO POR GRUPO MUSCULAR */}
             <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -165,7 +248,7 @@ export default function ProgressDashboard() {
 
               {muscleVolume.length === 0 ? (
                 <span style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)' }}>
-                  Completa tus primeras sesiones para visualizar el desglose automático por grupo muscular.
+                  Completa tus primeras sesiones en la pestaña Hoy para visualizar el desglose por grupo muscular.
                 </span>
               ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '10px' }}>
@@ -195,12 +278,12 @@ export default function ProgressDashboard() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
             {totalSessions === 0 ? (
               <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-lg)', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                <Calendar size={24} style={{ color: 'var(--text-tertiary)', marginBottom: '8px' }} />
+                <History size={24} style={{ color: 'var(--text-tertiary)', marginBottom: '8px' }} />
                 <h4 style={{ margin: '0 0 4px', color: 'var(--text-primary)' }}>Sin sesiones registradas aún</h4>
-                <p style={{ margin: 0, fontSize: '0.85rem' }}>Las rutinas completadas en el Logger de Hoy se guardarán automáticamente aquí.</p>
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>Las rutinas completadas en Hoy se guardarán automáticamente aquí.</p>
               </div>
             ) : (
-              sessions.map((s, idx) => (
+              sessions.map((s: any, idx: number) => (
                 <div
                   key={s.sessionId || idx}
                   style={{
@@ -210,20 +293,28 @@ export default function ProgressDashboard() {
                     padding: '14px 16px',
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: '10px'
                   }}
                 >
                   <div>
-                    <strong style={{ fontSize: '0.94rem', color: 'var(--text-primary)' }}>
+                    <strong style={{ fontSize: '0.94rem', color: 'var(--text-primary)', display: 'block' }}>
                       {s.routineTitle || 'Sesión de Entrenamiento'}
                     </strong>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'block', marginTop: '2px' }}>
-                      {s.dateIso || 'Fecha reciente'} · Duración: {s.durationMinutes || 45} min
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
+                      {s.dateIso ? new Date(s.dateIso).toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'Fecha reciente'} · Duración: {s.durationMinutes || 45} min
                     </span>
                   </div>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--success, #30d158)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    <CheckCircle2 size={14} /> Completada
-                  </span>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--accent, #0a84ff)' }}>
+                      {s.totalVolumeKg ? `${s.totalVolumeKg} kg` : ''}
+                    </span>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--success, #30d158)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <CheckCircle2 size={14} /> Completada
+                    </span>
+                  </div>
                 </div>
               ))
             )}
