@@ -74,23 +74,17 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
           Gestión de Carrera & Empleo
         </h1>
 
-        {/* APPLE SEGMENTED CONTROL BAR (STICKY LEVEL 3 - TOP 116px) */}
+        {/* APPLE SEGMENTED CONTROL BAR (CLEAN & UNENCUMBERED) */}
         <div style={{
-          position: 'sticky',
-          top: '116px',
-          zIndex: 90,
           display: 'flex',
           alignItems: 'center',
-          gap: '4px',
-          background: 'rgba(13, 14, 18, 0.92)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          padding: '6px',
-          borderRadius: '12px',
-          border: '1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08))',
-          boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
+          gap: '6px',
+          paddingBottom: '6px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
           overflowX: 'auto',
-          maxWidth: '100%'
+          maxWidth: '100%',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
         }}>
           {TABS.map((tab) => {
             const isSelected = activeTab === tab.id;
@@ -100,18 +94,17 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  background: isSelected ? 'var(--color-text-primary)' : 'transparent',
-                  color: isSelected ? '#000000' : 'var(--color-text-tertiary)',
+                  background: isSelected ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
+                  color: isSelected ? '#ffffff' : 'rgba(255, 255, 255, 0.55)',
                   border: 'none',
-                  padding: '8px 18px',
-                  borderRadius: '12px',
+                  padding: '6px 14px',
+                  borderRadius: '999px',
                   fontSize: '0.84rem',
-                  fontWeight: isSelected ? 700 : 500,
+                  fontWeight: isSelected ? 600 : 500,
                   fontFamily: 'var(--font-family-system)',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  boxShadow: isSelected ? '0 3px 12px rgba(0, 0, 0, 0.35)' : 'none',
-                  transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
+                  transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
               >
                 {tab.label}

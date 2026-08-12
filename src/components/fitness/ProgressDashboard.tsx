@@ -128,38 +128,32 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
           </div>
         </div>
 
-        {/* NAVEGACIÓN NIVEL 3 (SUBMENÚ 2: STICKY 116px - SUB-PESTAÑAS DE PROGRESO) */}
+        {/* NAVEGACIÓN NIVEL 3: SUB-PESTAÑAS DE PROGRESO (APPLE CLEAN TAB BAR) */}
         <div style={{
-          position: 'sticky',
-          top: '116px',
-          zIndex: 90,
-          background: 'rgba(13, 14, 18, 0.92)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-          borderRadius: '12px',
-          padding: '6px',
           display: 'flex',
-          gap: '4px',
-          flexWrap: 'wrap',
-          boxShadow: '0 6px 20px rgba(0,0,0,0.3)'
+          gap: '6px',
+          paddingBottom: '6px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
         }}>
           <button
             type="button"
             onClick={() => setActiveTab('analytics')}
             style={{
               background: activeTab === 'analytics' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'analytics' ? '#ffffff' : 'var(--text-secondary)',
-              border: activeTab === 'analytics' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              color: activeTab === 'analytics' ? '#ffffff' : 'rgba(255,255,255,0.55)',
+              border: 'none',
               padding: '6px 14px',
-              borderRadius: '8px',
-              fontSize: '0.82rem',
-              fontWeight: activeTab === 'analytics' ? 700 : 500,
+              borderRadius: '999px',
+              fontSize: '0.84rem',
+              fontWeight: activeTab === 'analytics' ? 600 : 500,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              transition: 'all 150ms ease'
+              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
             <BarChart2 size={14} />
@@ -171,17 +165,17 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
             onClick={() => setActiveTab('program')}
             style={{
               background: activeTab === 'program' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'program' ? '#ffffff' : 'var(--text-secondary)',
-              border: activeTab === 'program' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              color: activeTab === 'program' ? '#ffffff' : 'rgba(255,255,255,0.55)',
+              border: 'none',
               padding: '6px 14px',
-              borderRadius: '8px',
-              fontSize: '0.82rem',
-              fontWeight: activeTab === 'program' ? 700 : 500,
+              borderRadius: '999px',
+              fontSize: '0.84rem',
+              fontWeight: activeTab === 'program' ? 600 : 500,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              transition: 'all 150ms ease'
+              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
             <Target size={14} />
@@ -193,17 +187,17 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
             onClick={() => setActiveTab('loading')}
             style={{
               background: activeTab === 'loading' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'loading' ? '#ffffff' : 'var(--text-secondary)',
-              border: activeTab === 'loading' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              color: activeTab === 'loading' ? '#ffffff' : 'rgba(255,255,255,0.55)',
+              border: 'none',
               padding: '6px 14px',
-              borderRadius: '8px',
-              fontSize: '0.82rem',
-              fontWeight: activeTab === 'loading' ? 700 : 500,
+              borderRadius: '999px',
+              fontSize: '0.84rem',
+              fontWeight: activeTab === 'loading' ? 600 : 500,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              transition: 'all 150ms ease'
+              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
             <Dumbbell size={14} />
@@ -215,17 +209,17 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
             onClick={() => setActiveTab('guide')}
             style={{
               background: activeTab === 'guide' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'guide' ? '#ffffff' : 'var(--text-secondary)',
-              border: activeTab === 'guide' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              color: activeTab === 'guide' ? '#ffffff' : 'rgba(255,255,255,0.55)',
+              border: 'none',
               padding: '6px 14px',
-              borderRadius: '8px',
-              fontSize: '0.82rem',
-              fontWeight: activeTab === 'guide' ? 700 : 500,
+              borderRadius: '999px',
+              fontSize: '0.84rem',
+              fontWeight: activeTab === 'guide' ? 600 : 500,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              transition: 'all 150ms ease'
+              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
             <BookOpen size={14} />
@@ -237,14 +231,17 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
             onClick={() => setActiveTab('history')}
             style={{
               background: activeTab === 'history' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'history' ? '#ffffff' : 'var(--text-secondary)',
-              border: activeTab === 'history' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              color: activeTab === 'history' ? '#ffffff' : 'rgba(255,255,255,0.55)',
+              border: 'none',
               padding: '6px 14px',
-              borderRadius: '8px',
-              fontSize: '0.82rem',
-              fontWeight: activeTab === 'history' ? 700 : 500,
+              borderRadius: '999px',
+              fontSize: '0.84rem',
+              fontWeight: activeTab === 'history' ? 600 : 500,
               cursor: 'pointer',
-              transition: 'all 150ms ease'
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
             <History size={14} />

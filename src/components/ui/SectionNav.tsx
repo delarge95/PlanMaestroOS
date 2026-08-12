@@ -37,25 +37,18 @@ export default function SectionNav({
       <nav
         aria-label={isLevel3 ? 'Navegación de subsección' : 'Navegación de sección'}
         style={{
-          position: 'sticky',
-          top: isLevel3 ? '116px' : '62px',
-          zIndex: isLevel3 ? 90 : 95,
           display: 'flex',
           alignItems: 'center',
-          gap: '4px',
-          background: 'rgba(13, 14, 18, 0.92)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          border: isLevel3
-            ? '1px solid var(--separator, rgba(255,255,255,0.08))'
-            : '1px solid var(--separator, rgba(255,255,255,0.14))',
-          borderRadius: 'var(--radius-m, 12px)',
-          padding: '4px',
+          gap: isLevel3 ? '6px' : '3px',
+          background: isLevel3 ? 'transparent' : 'rgba(255, 255, 255, 0.04)',
+          borderRadius: isLevel3 ? '0' : '999px',
+          padding: isLevel3 ? '0 0 4px 0' : '3px 4px',
           margin: isLevel3 ? '0 0 var(--space-4) 0' : '0 0 var(--space-3) 0',
+          borderBottom: isLevel3 ? '1px solid rgba(255, 255, 255, 0.06)' : 'none',
           overflowX: 'auto',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
-          boxShadow: isLevel3 ? '0 6px 20px rgba(0,0,0,0.3)' : '0 8px 24px rgba(0,0,0,0.4)'
+          width: 'fit-content'
         }}
       >
         {items.map((item) => {
@@ -68,24 +61,23 @@ export default function SectionNav({
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                padding: isLevel3 ? '5px 12px' : '6px 14px',
-                borderRadius: 'var(--radius-s, 8px)',
-                fontSize: isLevel3 ? 'var(--fs-meta, 0.8125rem)' : 'var(--fs-body, 0.90rem)',
-                fontWeight: active ? 700 : 500,
+                padding: isLevel3 ? '6px 12px' : '6px 16px',
+                borderRadius: '999px',
+                fontSize: isLevel3 ? '0.84rem' : '0.86rem',
+                fontWeight: active ? 600 : 500,
                 color: active
-                  ? 'var(--text-primary, #ffffff)'
-                  : 'var(--text-secondary, rgba(255,255,255,0.6))',
+                  ? '#ffffff'
+                  : 'rgba(255, 255, 255, 0.55)',
                 background: active
                   ? isLevel3
-                    ? 'rgba(255,255,255,0.12)'
-                    : 'var(--surface-2, #1c1c1e)'
+                    ? 'rgba(255, 255, 255, 0.12)'
+                    : 'rgba(255, 255, 255, 0.14)'
                   : 'transparent',
-                border: active
-                  ? '1px solid var(--separator, rgba(255,255,255,0.16))'
-                  : '1px solid transparent',
+                border: 'none',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
-                transition: 'all 150ms ease'
+                transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+                letterSpacing: '-0.01em'
               }}
             >
               {item.label}
