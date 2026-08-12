@@ -1,4 +1,3 @@
-// src/components/fitness/ProgressDashboard.tsx
 import React, { useState, useEffect, useMemo } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { calculateMuscleVolumeFromLogs, type SessionLog } from '../../lib/fitness/volumeStats';
@@ -8,8 +7,13 @@ import ProgramAnalytics from './analytics/ProgramAnalytics';
 import LoadingCharts from './analytics/LoadingCharts';
 import ExerciseGuide from './analytics/ExerciseGuide';
 import { History, BarChart2, Dumbbell, Target, BookOpen, CheckCircle2, TrendingUp, Award, Zap } from 'lucide-react';
+import SectionNav from '../ui/SectionNav';
 
-export default function ProgressDashboard() {
+export interface ProgressDashboardProps {
+  currentPath?: string;
+}
+
+export default function ProgressDashboard({ currentPath = '/app/fitness/progress' }: ProgressDashboardProps) {
   const [activeTab, setActiveTab] = useState<'analytics' | 'program' | 'loading' | 'guide' | 'history'>('analytics');
   const [sessions, setSessions] = useState<SessionLog[]>([]);
 
@@ -68,6 +72,14 @@ export default function ProgressDashboard() {
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
+        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
+        <SectionNav sectionKey="fitness" currentPath={currentPath} level={2} />
+
+        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
+        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '4px 0 12px 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+          Progreso & Analítica de Cargas
+        </h1>
+
         {/* BARRA DESTACADA DE OVERALL PERFORMANCE & PROGRESS */}
         <div style={{
           background: 'linear-gradient(135deg, rgba(10,132,255,0.12), rgba(48,209,88,0.12))',
@@ -116,123 +128,128 @@ export default function ProgressDashboard() {
           </div>
         </div>
 
-        {/* NAVEGACIÓN NIVEL 3: SUB-PESTAÑAS DE PROGRESO */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-          <div>
-            <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-              Módulo de Analítica & Rendimiento Integrado
-            </span>
-            <h2 style={{ fontSize: '1.375rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
-              Progreso & Cargas de Entrenamiento
-            </h2>
-          </div>
+        {/* NAVEGACIÓN NIVEL 3 (SUBMENÚ 2: STICKY 116px - SUB-PESTAÑAS DE PROGRESO) */}
+        <div style={{
+          position: 'sticky',
+          top: '116px',
+          zIndex: 90,
+          background: 'rgba(13, 14, 18, 0.92)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+          borderRadius: '12px',
+          padding: '6px',
+          display: 'flex',
+          gap: '4px',
+          flexWrap: 'wrap',
+          boxShadow: '0 6px 20px rgba(0,0,0,0.3)'
+        }}>
+          <button
+            type="button"
+            onClick={() => setActiveTab('analytics')}
+            style={{
+              background: activeTab === 'analytics' ? 'rgba(255,255,255,0.12)' : 'transparent',
+              color: activeTab === 'analytics' ? '#ffffff' : 'var(--text-secondary)',
+              border: activeTab === 'analytics' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              fontSize: '0.82rem',
+              fontWeight: activeTab === 'analytics' ? 700 : 500,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 150ms ease'
+            }}
+          >
+            <BarChart2 size={14} />
+            <span>Rendimiento Global</span>
+          </button>
 
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '10px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))', flexWrap: 'wrap' }}>
-            <button
-              type="button"
-              onClick={() => setActiveTab('analytics')}
-              style={{
-                background: activeTab === 'analytics' ? 'var(--accent, #0a84ff)' : 'transparent',
-                color: activeTab === 'analytics' ? '#ffffff' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'analytics' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px'
-              }}
-            >
-              <BarChart2 size={14} />
-              <span>Rendimiento Global</span>
-            </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('program')}
+            style={{
+              background: activeTab === 'program' ? 'rgba(255,255,255,0.12)' : 'transparent',
+              color: activeTab === 'program' ? '#ffffff' : 'var(--text-secondary)',
+              border: activeTab === 'program' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              fontSize: '0.82rem',
+              fontWeight: activeTab === 'program' ? 700 : 500,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 150ms ease'
+            }}
+          >
+            <Target size={14} />
+            <span>Programa Activo</span>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('program')}
-              style={{
-                background: activeTab === 'program' ? 'var(--accent, #0a84ff)' : 'transparent',
-                color: activeTab === 'program' ? '#ffffff' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'program' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px'
-              }}
-            >
-              <Target size={14} />
-              <span>Programa Activo</span>
-            </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('loading')}
+            style={{
+              background: activeTab === 'loading' ? 'rgba(255,255,255,0.12)' : 'transparent',
+              color: activeTab === 'loading' ? '#ffffff' : 'var(--text-secondary)',
+              border: activeTab === 'loading' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              fontSize: '0.82rem',
+              fontWeight: activeTab === 'loading' ? 700 : 500,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 150ms ease'
+            }}
+          >
+            <Dumbbell size={14} />
+            <span>Tabla Universal Cargas</span>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('loading')}
-              style={{
-                background: activeTab === 'loading' ? 'var(--accent, #0a84ff)' : 'transparent',
-                color: activeTab === 'loading' ? '#ffffff' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'loading' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px'
-              }}
-            >
-              <Dumbbell size={14} />
-              <span>Tabla Universal Cargas</span>
-            </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('guide')}
+            style={{
+              background: activeTab === 'guide' ? 'rgba(255,255,255,0.12)' : 'transparent',
+              color: activeTab === 'guide' ? '#ffffff' : 'var(--text-secondary)',
+              border: activeTab === 'guide' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              fontSize: '0.82rem',
+              fontWeight: activeTab === 'guide' ? 700 : 500,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 150ms ease'
+            }}
+          >
+            <BookOpen size={14} />
+            <span>Guía por Ejercicio</span>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('guide')}
-              style={{
-                background: activeTab === 'guide' ? 'var(--accent, #0a84ff)' : 'transparent',
-                color: activeTab === 'guide' ? '#ffffff' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'guide' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px'
-              }}
-            >
-              <BookOpen size={14} />
-              <span>Guía por Ejercicio</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('history')}
-              style={{
-                background: activeTab === 'history' ? 'var(--accent, #0a84ff)' : 'transparent',
-                color: activeTab === 'history' ? '#ffffff' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'history' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px'
-              }}
-            >
-              <History size={14} />
-              <span>Historial ({totalSessions})</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setActiveTab('history')}
+            style={{
+              background: activeTab === 'history' ? 'rgba(255,255,255,0.12)' : 'transparent',
+              color: activeTab === 'history' ? '#ffffff' : 'var(--text-secondary)',
+              border: activeTab === 'history' ? '1px solid rgba(255,255,255,0.16)' : '1px solid transparent',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              fontSize: '0.82rem',
+              fontWeight: activeTab === 'history' ? 700 : 500,
+              cursor: 'pointer',
+              transition: 'all 150ms ease'
+            }}
+          >
+            <History size={14} />
+            <span>Historial ({totalSessions})</span>
+          </button>
         </div>
 
         {/* 1. SUB-PESTAÑA: RENDIMIENTO GLOBAL & TENDENCIAS SVG */}

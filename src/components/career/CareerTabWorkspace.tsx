@@ -12,6 +12,7 @@ import {
 import type { CareerPipelineStage } from '../../data/career/careerContracts';
 import { CheckCircle2, ShieldAlert, ExternalLink, Calendar } from 'lucide-react';
 import Button from '../ui/Button';
+import SectionNav from '../ui/SectionNav';
 
 const PIPELINE_STAGES: CareerPipelineStage[] = [
   'Prospecto',
@@ -40,10 +41,14 @@ const TABS = [
   { id: 'docs', label: '📚 Fuentes Documentales' }
 ];
 
-export default function CareerTabWorkspace() {
+export interface CareerTabWorkspaceProps {
+  currentPath?: string;
+}
+
+export default function CareerTabWorkspace({ currentPath = '/app/career' }: CareerTabWorkspaceProps) {
   const [activeTab, setActiveTab] = useState<string>('pipeline');
   const [applications, setApplications] = useState(() => getCareerApplications());
-  const [selectedAppId, setSelectedAppId] = useState<string>('app_studio_x');
+  const [selectedAppId] = useState<string>('app_studio_x');
   const [assets] = useState(() => getPortfolioAssets());
   const [aiDrafts] = useState(() => getCareerAIDrafts());
   const [githubEvidence] = useState(() => getGitHubEvidence());
@@ -61,21 +66,29 @@ export default function CareerTabWorkspace() {
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
 
-        {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
+        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
+        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
+
+        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
+        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '4px 0 12px 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+          Gestión de Carrera & Empleo
+        </h1>
+
+        {/* APPLE SEGMENTED CONTROL BAR (STICKY LEVEL 3 - TOP 116px) */}
         <div style={{
           position: 'sticky',
-          top: '68px',
-          zIndex: 85,
+          top: '116px',
+          zIndex: 90,
           display: 'flex',
           alignItems: 'center',
           gap: '4px',
-          background: 'rgba(28, 28, 30, 0.85)',
-          backdropFilter: 'blur(30px) saturate(190%)',
-          WebkitBackdropFilter: 'blur(30px) saturate(190%)',
+          background: 'rgba(13, 14, 18, 0.92)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
           padding: '6px',
-          borderRadius: '18px',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255,255,255,0.1) inset',
+          borderRadius: '12px',
+          border: '1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.08))',
+          boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
           overflowX: 'auto',
           maxWidth: '100%'
         }}>
