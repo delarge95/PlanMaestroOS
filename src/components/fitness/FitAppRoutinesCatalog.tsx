@@ -1,13 +1,13 @@
 // src/components/fitness/FitAppRoutinesCatalog.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import WorkoutPrescriptionTable from './WorkoutPrescriptionTable';
-import ActiveProgramSelector from './ActiveProgramSelector';
-import { getProgramById } from '../../data/fitness/programs';
+import { allPrograms, getProgramById } from '../../data/fitness/programs';
+import type { TrainingProgram } from '../../data/fitness/programs/types';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { libraryAssetUrl } from '../../lib/library/openDocument';
 import ExerciseModal from './ExerciseModal';
-import { ExternalLink } from 'lucide-react';
+import { Search, Filter, ChevronDown, ChevronUp, ExternalLink, Calendar, Award, BookOpen } from 'lucide-react';
 
 export default function FitAppRoutinesCatalog() {
   const activeProgramId = useActiveProgramStore((s) => s.programId);
@@ -15,6 +15,11 @@ export default function FitAppRoutinesCatalog() {
   const toggleActiveProgram = useActiveProgramStore((s) => s.toggleActiveProgram);
   const setInspectedProgram = useActiveProgramStore((s) => s.setInspectedProgram);
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isFilterExpanded, setIsFilterExpanded] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedDiscipline, setSelectedDiscipline] = useState<string>('all');
+  const [selectedTierFilter, setSelectedTierFilter] = useState<string>('all');
   const [exerciseModalId, setExerciseModalId] = useState<string | null>(null);
 
   // Leer parámetro ?routine=ID de la URL al cargar
@@ -33,11 +38,200 @@ export default function FitAppRoutinesCatalog() {
   const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, '').trim();
   const isActiveInTracker = activeProgramIds.includes(currentProgram.id);
 
+  // Filtrado de programas
+  const isFilteredSearchActive = Boolean(
+    searchTerm.trim() !== '' ||
+    selectedCategory !== 'all' ||
+    selectedDiscipline !== 'all' ||
+    selectedTierFilter !== 'all'
+  );
+
+  const filteredPrograms = useMemo(() => {
+    const lowerSearch = searchTerm.toLowerCase();
+
+    return allPrograms.filter((p) => {
+      // 1. Buscador por texto
+      if (searchTerm) {
+        const matchesTitle = (p.title || p.name || '').toLowerCase().includes(lowerSearch);
+        const matchesAuthor = (p.authorCategory || p.source || '').toLowerCase().includes(lowerSearch);
+        const matchesDiscipline = (p.discipline || '').toLowerCase().includes(lowerSearch);
+        if (!matchesTitle && !matchesAuthor && !matchesDiscipline) return false;
+      }
+
+      // 2. Filtro de Categoría/Autor
+      if (selectedCategory !== 'all') {
+        if (selectedCategory === 'heria' && !p.authorCategory?.includes('Heria')) return false;
+        if (selectedCategory === 'nippard' && !p.authorCategory?.includes('Nippard')) return false;
+        if (selectedCategory === 'planmaestro' && !p.authorCategory?.includes('PlanMaestro')) return false;
+      }
+
+      // 3. Filtro de Disciplina
+      if (selectedDiscipline !== 'all' && p.discipline !== selectedDiscipline) {
+        return false;
+      }
+
+      // 4. Filtro de Tier
+      if (selectedTierFilter !== 'all' && p.programTier !== selectedTierFilter) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [searchTerm, selectedCategory, selectedDiscipline, selectedTierFilter]);
+
+  // Clasificación por Tiers para vista por defecto
+  const tierPrograms = useMemo(() => {
+    const multiWeek = allPrograms.filter((p) => p.programTier === 'program');
+    const weekly = allPrograms.filter((p) => p.programTier === 'week');
+    const daily = allPrograms.filter((p) => p.programTier === 'day');
+
+    return { multiWeek, weekly, daily };
+  }, []);
+
+  const renderProgramCard = (p: TrainingProgram) => {
+    const isSelected = p.id === currentProgram.id;
+    const isActiveInHoy = activeProgramIds.includes(p.id);
+    const title = (p.title || p.name || 'Rutina').replace(/\s*\([^)]*\)/g, '').trim();
+
+    return (
+      <div
+        key={p.id}
+        onClick={() => setInspectedProgram(p.id)}
+        style={{
+          background: isSelected ? 'rgba(10,132,255,0.12)' : 'rgba(255,255,255,0.03)',
+          border: isSelected
+            ? '1.5px solid var(--accent, #0a84ff)'
+            : '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+          borderRadius: '14px',
+          padding: '14px 16px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: '10px',
+          cursor: 'pointer',
+          transition: 'all 150ms ease',
+          boxShadow: isSelected ? '0 0 16px rgba(10,132,255,0.2)' : 'none'
+        }}
+      >
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+            <span
+              style={{
+                fontSize: '0.68rem',
+                fontWeight: 800,
+                color: p.authorCategory?.includes('Heria') ? '#ff9f0a' : p.authorCategory?.includes('Nippard') ? '#0a84ff' : '#30d158',
+                textTransform: 'uppercase',
+                letterSpacing: '0.4px'
+              }}
+            >
+              {p.authorCategory || p.source}
+            </span>
+            {isActiveInHoy && (
+              <span style={{ fontSize: '0.66rem', background: 'rgba(48,209,88,0.2)', color: '#30d158', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                HOY
+              </span>
+            )}
+          </div>
+          <h4 style={{ fontSize: '0.95rem', fontWeight: 800, margin: '0 0 4px', color: '#ffffff', lineHeight: 1.3 }}>
+            {title}
+          </h4>
+          <span style={{ fontSize: '0.76rem', color: 'rgba(255,255,255,0.5)' }}>
+            {p.durationWeeks} {p.durationWeeks === 1 ? 'semana' : 'semanas'} · {p.weeks?.[0]?.days?.length || p.split?.length || 1} días/sem
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <span style={{ fontSize: '0.72rem', background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.7)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
+            {p.discipline || 'Calistenia'}
+          </span>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setInspectedProgram(p.id);
+            }}
+            style={{
+              background: isSelected ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.08)',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '4px 10px',
+              fontSize: '0.74rem',
+              fontWeight: 700,
+              cursor: 'pointer'
+            }}
+          >
+            {isSelected ? 'Inspeccionando' : 'Ver Rutina'}
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const renderTierGroup = (title: string, icon: React.ReactNode, programs: TrainingProgram[], badge: string) => {
+    if (programs.length === 0) return null;
+
+    const heriaPrograms = programs.filter((p) => p.authorCategory?.includes('Heria'));
+    const nippardPrograms = programs.filter((p) => p.authorCategory?.includes('Nippard'));
+    const planMaestroPrograms = programs.filter((p) => p.authorCategory?.includes('PlanMaestro') || (!p.authorCategory?.includes('Heria') && !p.authorCategory?.includes('Nippard')));
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        {/* ENCABEZADO DE TIER */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '8px' }}>
+          <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {icon}
+            <span>{title}</span>
+          </h3>
+          <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', padding: '2px 8px', borderRadius: '999px', fontWeight: 600 }}>
+            {programs.length} {badge}
+          </span>
+        </div>
+
+        {/* SUBGRUPOS POR AUTOR / ORIGEN */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {heriaPrograms.length > 0 && (
+            <div>
+              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: '#ff9f0a', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                🔥 Chris Heria / Thenx ({heriaPrograms.length})
+              </span>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
+                {heriaPrograms.map(renderProgramCard)}
+              </div>
+            </div>
+          )}
+
+          {nippardPrograms.length > 0 && (
+            <div>
+              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: '#0a84ff', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                🧠 Jeff Nippard / Ciencia & Hipertrofia ({nippardPrograms.length})
+              </span>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
+                {nippardPrograms.map(renderProgramCard)}
+              </div>
+            </div>
+          )}
+
+          {planMaestroPrograms.length > 0 && (
+            <div>
+              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: '#30d158', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                📖 PlanMaestro OS ({planMaestroPrograms.length})
+              </span>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
+                {planMaestroPrograms.map(renderProgramCard)}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
-        {/* BLOQUE 1: FILTROS & BÚSQUEDA / SELECCIÓN DE RUTINAS */}
+        {/* BLOQUE 1: BARRA DE BÚSQUEDA Y FILTROS COLAPSABLE */}
         <div
           style={{
             background: 'var(--surface-1, #0d0d0f)',
@@ -50,17 +244,217 @@ export default function FitAppRoutinesCatalog() {
             boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
-              Catálogo Oficial & Selección de Programas
-            </span>
+          {/* FILA SUPERIOR: INPUT DE BÚSQUEDA + BOTÓN DE FILTROS AVANZADOS */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <div style={{ position: 'relative', flex: 1, minWidth: '240px' }}>
+              <Search
+                size={16}
+                style={{
+                  position: 'absolute',
+                  left: '12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: 'rgba(255,255,255,0.4)'
+                }}
+              />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Buscar programas, rutinas, autor (Chris Heria, Nippard) o disciplina..."
+                style={{
+                  width: '100%',
+                  padding: '9px 12px 9px 36px',
+                  borderRadius: '10px',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  color: '#ffffff',
+                  fontSize: '0.86rem',
+                  outline: 'none',
+                  boxSizing: 'border-box'
+                }}
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsFilterExpanded(!isFilterExpanded)}
+              style={{
+                background: isFilterExpanded || isFilteredSearchActive ? 'rgba(10,132,255,0.15)' : 'rgba(255,255,255,0.04)',
+                color: isFilterExpanded || isFilteredSearchActive ? '#0a84ff' : 'rgba(255,255,255,0.7)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '10px',
+                padding: '9px 14px',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <Filter size={14} />
+              <span>Filtros Avanzados</span>
+              {isFilterExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            </button>
           </div>
 
-          {/* CÁPSULAS HORIZONTALES LIMPIAS DE PROGRAMAS */}
-          <ActiveProgramSelector />
+          {/* PANEL EXPANDIBLE DE FILTROS */}
+          {isFilterExpanded && (
+            <div
+              style={{
+                paddingTop: '12px',
+                borderTop: '1px solid rgba(255,255,255,0.08)',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '12px',
+                fontSize: '0.82rem'
+              }}
+            >
+              {/* FILTRO DE AUTOR */}
+              <div>
+                <span style={{ display: 'block', color: 'rgba(255,255,255,0.5)', fontWeight: 600, marginBottom: '6px' }}>
+                  Autor / Metodología:
+                </span>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  style={{
+                    width: '100%',
+                    background: 'rgba(255,255,255,0.04)',
+                    color: '#ffffff',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: '8px',
+                    padding: '6px 10px',
+                    fontSize: '0.82rem'
+                  }}
+                >
+                  <option value="all">Todas las metodologías</option>
+                  <option value="heria">🔥 Chris Heria / Thenx</option>
+                  <option value="nippard">🧠 Jeff Nippard / Hipertrofia</option>
+                  <option value="planmaestro">📖 PlanMaestro OS</option>
+                </select>
+              </div>
+
+              {/* FILTRO DE TIER / DURACIÓN */}
+              <div>
+                <span style={{ display: 'block', color: 'rgba(255,255,255,0.5)', fontWeight: 600, marginBottom: '6px' }}>
+                  Duración / Estructura:
+                </span>
+                <select
+                  value={selectedTierFilter}
+                  onChange={(e) => setSelectedTierFilter(e.target.value)}
+                  style={{
+                    width: '100%',
+                    background: 'rgba(255,255,255,0.04)',
+                    color: '#ffffff',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: '8px',
+                    padding: '6px 10px',
+                    fontSize: '0.82rem'
+                  }}
+                >
+                  <option value="all">Todos los formatos</option>
+                  <option value="program">📚 Programas (2+ semanas)</option>
+                  <option value="week">🗓️ Semanales (1 semana)</option>
+                  <option value="day">⚡ Diarios (1 día)</option>
+                </select>
+              </div>
+
+              {/* FILTRO DE DISCIPLINA */}
+              <div>
+                <span style={{ display: 'block', color: 'rgba(255,255,255,0.5)', fontWeight: 600, marginBottom: '6px' }}>
+                  Disciplina Principal:
+                </span>
+                <select
+                  value={selectedDiscipline}
+                  onChange={(e) => setSelectedDiscipline(e.target.value)}
+                  style={{
+                    width: '100%',
+                    background: 'rgba(255,255,255,0.04)',
+                    color: '#ffffff',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: '8px',
+                    padding: '6px 10px',
+                    fontSize: '0.82rem'
+                  }}
+                >
+                  <option value="all">Todas las disciplinas</option>
+                  <option value="Calistenia">Calistenia</option>
+                  <option value="Hipertrofia / Bodybuilding">Hipertrofia / Bodybuilding</option>
+                  <option value="Powerbuilding">Powerbuilding</option>
+                </select>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* BLOQUE 2: DETALLE DEL PROGRAMA INSPECCIONADO & TABLA DE PRESCRIPCIÓN */}
+        {/* BLOQUE 2: VISTA DEL CATÁLOGO (POR TIERS O RESULTADOS DE BÚSQUEDA) */}
+        <div
+          style={{
+            background: 'var(--surface-1, #0d0d0f)',
+            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+            borderRadius: '16px',
+            padding: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '24px',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
+          }}
+        >
+          {isFilteredSearchActive ? (
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                <span style={{ fontSize: '0.86rem', fontWeight: 700, color: '#0a84ff' }}>
+                  Resultados Filtrados ({filteredPrograms.length} rutinas)
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm('');
+                    setSelectedCategory('all');
+                    setSelectedDiscipline('all');
+                    setSelectedTierFilter('all');
+                  }}
+                  style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', cursor: 'pointer' }}
+                >
+                  Limpiar Filtros
+                </button>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '12px' }}>
+                {filteredPrograms.map(renderProgramCard)}
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* TIER 1: PROGRAMAS MULTI-SEMANA (2+ SEMANAS) */}
+              {renderTierGroup(
+                'Programas Multi-Semana (2+ semanas)',
+                <BookOpen size={18} style={{ color: '#0a84ff' }} />,
+                tierPrograms.multiWeek,
+                'programas'
+              )}
+
+              {/* TIER 2: PLANES SEMANALES (1 SEMANA) */}
+              {renderTierGroup(
+                'Planes Semanales (1 semana)',
+                <Calendar size={18} style={{ color: '#ff9f0a' }} />,
+                tierPrograms.weekly,
+                'planes'
+              )}
+
+              {/* TIER 3: RUTINAS DIARIAS / MASTER WORKOUTS (1 DÍA) */}
+              {renderTierGroup(
+                'Rutinas Diarias / Master Workouts (1 día)',
+                <Award size={18} style={{ color: '#30d158' }} />,
+                tierPrograms.daily,
+                'master workouts'
+              )}
+            </>
+          )}
+        </div>
+
+        {/* BLOQUE 3: DETALLE DEL PROGRAMA INSPECCIONADO & TABLA DE PRESCRIPCIÓN */}
         <div
           style={{
             background: 'var(--surface-1, #0d0d0f)',
@@ -94,7 +488,7 @@ export default function FitAppRoutinesCatalog() {
                   letterSpacing: '0.5px'
                 }}
               >
-                {currentProgram.durationWeeks} SEMANAS · {currentProgram.split.length} DÍAS/SEM
+                {currentProgram.durationWeeks} {currentProgram.durationWeeks === 1 ? 'SEMANA' : 'SEMANAS'} · {currentProgram.weeks?.[0]?.days?.length || currentProgram.split?.length || 1} DÍAS/SEM
               </span>
               <h3 style={{ fontSize: 'var(--fs-page, 1.25rem)', fontWeight: 800, margin: '2px 0 4px', color: 'var(--text-primary)' }}>
                 {cleanTitle}
@@ -104,9 +498,8 @@ export default function FitAppRoutinesCatalog() {
               </p>
             </div>
 
-            {/* A NIVEL DE LA DURACIÓN: MUESTRA EL SWITCH Y BOTÓN DE PDF */}
+            {/* SWITCH ACTIVADO/DESACTIVADO Y BOTÓN DE PDF */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-              {/* SWITCH SUTIL DE ACTIVADO/DESACTIVADO EN HOY */}
               <div
                 onClick={() => toggleActiveProgram(currentProgram.id)}
                 title={isActiveInTracker ? 'Activo en "Hoy" - Clic para desactivar' : 'Inactivo - Clic para activar en "Hoy"'}
@@ -149,7 +542,6 @@ export default function FitAppRoutinesCatalog() {
                 </span>
               </div>
 
-              {/* BOTÓN DOCUMENTO PDF OFICIAL DE LA RUTINA */}
               {currentProgram.pdfUrl && (
                 <a
                   href={libraryAssetUrl(currentProgram.pdfUrl)}

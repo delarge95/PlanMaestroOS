@@ -75,7 +75,10 @@ export type TrainingProgram = {
   title: string;
   name?: string;
   type?: 'program' | 'week' | 'day';
+  programTier?: 'program' | 'week' | 'day';
   category?: string;
+  authorCategory?: string;
+  discipline?: string;
   source: string;
   pdfUrl?: string;
   programGuideUrl?: string;

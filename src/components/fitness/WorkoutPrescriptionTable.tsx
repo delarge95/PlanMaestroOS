@@ -108,8 +108,8 @@ export function WorkoutPrescriptionTable({
                 fontWeight: 600
               }}
             >
-              {program.weeks.map((w) => {
-                const wNum = w.weekNumber || w.week || 1;
+              {program.weeks.map((w, idx) => {
+                const wNum = w.weekNumber || w.week || (idx + 1);
                 return (
                   <option key={wNum} value={wNum}>
                     Semana {wNum} {w.isDeload ? '(Descarga)' : ''}
@@ -119,12 +119,12 @@ export function WorkoutPrescriptionTable({
             </select>
           ) : (
             <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '4px', background: 'var(--surface-elevated, #16181d)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border-subtle)' }}>
-              {program.weeks.map((w) => {
-                const wNum = w.weekNumber || w.week || 1;
+              {program.weeks.map((w, idx) => {
+                const wNum = w.weekNumber || w.week || (idx + 1);
                 const isSelected = currentWeek === wNum;
                 return (
                   <button
-                    key={wNum}
+                    key={`${wNum}-${idx}`}
                     type="button"
                     onClick={() => setWeek(wNum)}
                     style={{
