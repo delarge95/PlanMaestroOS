@@ -6,12 +6,8 @@ import { skillSteps } from '../../../data/fitness/skills/skillSteps';
 import { useSkillStateStore } from '../../../data/fitness/skills/skillStateStore';
 import ListRow from '../../ui/ListRow';
 
-export interface ExplorePathsViewProps {
-  onOpenDetail: (stepId: string) => void;
-}
-
 const DOMAIN_LABELS: Record<SkillDomain, { label: string; icon: string }> = {
-  pull: { label: 'Tracción', icon: '🧗' },
+  pull: { label: 'Tracción', icon: '攀' },
   push: { label: 'Empuje', icon: '💪' },
   core: { label: 'Core & Compresión', icon: '🧘' },
   legs: { label: 'Pierna Unilateral', icon: '🦵' },
@@ -19,21 +15,50 @@ const DOMAIN_LABELS: Record<SkillDomain, { label: string; icon: string }> = {
   mobility: { label: 'Movilidad & Capacidad', icon: '🦴' }
 };
 
-export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
+export interface ExplorePathsViewProps {
+  onOpenDetail: (stepId: string) => void;
+  selectedDomain?: SkillDomain | 'all';
+  onlyActive?: boolean;
+  searchTerm?: string;
+  hideInternalFilters?: boolean;
+}
+
+export function ExplorePathsView({
+  onOpenDetail,
+  selectedDomain: externalDomain,
+  onlyActive: externalOnlyActive,
+  searchTerm: externalSearchTerm = '',
+  hideInternalFilters = false
+}: ExplorePathsViewProps) {
   const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
-  const [selectedDomain, setSelectedDomain] = useState<SkillDomain | 'all'>('all');
+  const [internalDomain, setInternalDomain] = useState<SkillDomain | 'all'>('all');
   const [expandedPathId, setExpandedPathId] = useState<string | null>(null);
-  const [onlyActive, setOnlyActive] = useState(false);
+  const [internalOnlyActive, setInternalOnlyActive] = useState(false);
+
+  const selectedDomain = externalDomain ?? internalDomain;
+  const onlyActive = externalOnlyActive ?? internalOnlyActive;
 
   const domainFilteredPaths = selectedDomain === 'all'
     ? skillPaths
     : skillPaths.filter((p) => p.domain === selectedDomain);
 
-  const filteredPaths = onlyActive
+  let filteredPaths = onlyActive
     ? domainFilteredPaths.filter((p) =>
         p.stepIds.some((sId) => activeStepIds.includes(sId))
       )
     : domainFilteredPaths;
+
+  if (externalSearchTerm.trim()) {
+    const term = externalSearchTerm.toLowerCase();
+    filteredPaths = filteredPaths.filter((p) => {
+      const matchTitle = p.title.toLowerCase().includes(term);
+      const matchSteps = p.stepIds.some((id) => {
+        const s = skillSteps.find((st) => st.id === id);
+        return s?.title.toLowerCase().includes(term);
+      });
+      return matchTitle || matchSteps;
+    });
+  }
 
   const togglePath = (pathId: string) => {
     setExpandedPathId((prev) => (prev === pathId ? null : pathId));
@@ -41,57 +66,39 @@ export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-      {/* FILTRO DE DOMINIO + TOGGLE SOLO ACTIVAS */}
-      <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none', flexWrap: 'wrap' }}>
-        <button
-          type="button"
-          onClick={() => setOnlyActive((v) => !v)}
-          style={{
-            background: onlyActive ? 'var(--color-state-done-soft)' : 'transparent',
-            color: onlyActive ? 'var(--color-state-done)' : 'var(--text-tertiary)',
-            border: onlyActive ? '1px solid var(--color-state-done)' : '1px solid var(--color-border-subtle)',
-            padding: '6px 14px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.82rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            whiteSpace: 'nowrap',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px'
-          }}
-        >
-          {onlyActive ? '✓ Solo activas' : '⊙ Solo activas'}
-        </button>
-
-        <div style={{ width: '1px', background: 'var(--color-border-subtle)', margin: '2px 4px' }} />
-
-        <button
-          type="button"
-          onClick={() => setSelectedDomain('all')}
-          style={{
-            background: selectedDomain === 'all' ? 'var(--color-surface-raised)' : 'transparent',
-            color: selectedDomain === 'all' ? 'var(--text)' : 'var(--text-tertiary)',
-            border: selectedDomain === 'all' ? '1px solid var(--color-border-visible)' : '1px solid transparent',
-            padding: '6px 14px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.82rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            whiteSpace: 'nowrap'
-          }}
-        >
-          Todas las Rutas
-        </button>
-        {(Object.keys(DOMAIN_LABELS) as SkillDomain[]).map((dom) => (
+      {/* FILTRO DE DOMINIO INTERNO (OCULTO CUANDO VIENE DESDE BLOQUE 1 DE LIBRARYSKILLS) */}
+      {!hideInternalFilters && (
+        <div style={{ display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '4px', scrollbarWidth: 'none', flexWrap: 'wrap' }}>
           <button
-            key={dom}
             type="button"
-            onClick={() => setSelectedDomain(dom)}
+            onClick={() => setInternalOnlyActive((v) => !v)}
             style={{
-              background: selectedDomain === dom ? 'var(--color-surface-raised)' : 'transparent',
-              color: selectedDomain === dom ? 'var(--text)' : 'var(--text-tertiary)',
-              border: selectedDomain === dom ? '1px solid var(--color-border-visible)' : '1px solid transparent',
+              background: onlyActive ? 'var(--color-state-done-soft)' : 'transparent',
+              color: onlyActive ? 'var(--color-state-done)' : 'var(--text-tertiary)',
+              border: onlyActive ? '1px solid var(--color-state-done)' : '1px solid var(--color-border-subtle)',
+              padding: '6px 14px',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '0.82rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            {onlyActive ? '✓ Solo activas' : '⊙ Solo activas'}
+          </button>
+
+          <div style={{ width: '1px', background: 'var(--color-border-subtle)', margin: '2px 4px' }} />
+
+          <button
+            type="button"
+            onClick={() => setInternalDomain('all')}
+            style={{
+              background: selectedDomain === 'all' ? 'var(--color-surface-raised)' : 'transparent',
+              color: selectedDomain === 'all' ? 'var(--text)' : 'var(--text-tertiary)',
+              border: selectedDomain === 'all' ? '1px solid var(--color-border-visible)' : '1px solid transparent',
               padding: '6px 14px',
               borderRadius: 'var(--radius-sm)',
               fontSize: '0.82rem',
@@ -100,12 +107,32 @@ export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
               whiteSpace: 'nowrap'
             }}
           >
-            {DOMAIN_LABELS[dom].label}
+            Todas las Rutas
           </button>
-        ))}
-      </div>
+          {(Object.keys(DOMAIN_LABELS) as SkillDomain[]).map((dom) => (
+            <button
+              key={dom}
+              type="button"
+              onClick={() => setInternalDomain(dom)}
+              style={{
+                background: selectedDomain === dom ? 'var(--color-surface-raised)' : 'transparent',
+                color: selectedDomain === dom ? 'var(--text)' : 'var(--text-tertiary)',
+                border: selectedDomain === dom ? '1px solid var(--color-border-visible)' : '1px solid transparent',
+                padding: '6px 14px',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              {DOMAIN_LABELS[dom].label}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* LISTA DE RUTAS ORGANIZADAS DE 1 COLUMNA CON TÍTULO DOMINANTE (22-24PX) */}
+      {/* LISTA DE RUTAS ORGANIZADAS DE 1 COLUMNA CON ESTILO APPLE HIG */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
         {filteredPaths.map((path) => {
           const isExpanded = expandedPathId === path.id || filteredPaths.length === 1;
@@ -119,10 +146,11 @@ export function ExplorePathsView({ onOpenDetail }: ExplorePathsViewProps) {
             <div
               key={path.id}
               style={{
-                background: 'var(--surface)',
-                border: '1px solid var(--color-border-subtle)',
-                borderRadius: 'var(--radius-md)',
-                overflow: 'hidden'
+                background: 'var(--surface-1, #0d0d0f)',
+                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+                borderRadius: '14px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
               }}
             >
               {/* CABECERA DE LA RUTA */}

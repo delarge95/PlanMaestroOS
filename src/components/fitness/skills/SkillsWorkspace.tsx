@@ -1,11 +1,25 @@
 // src/components/fitness/skills/SkillsWorkspace.tsx
 import React, { useState, useEffect } from 'react';
-import { Compass, ShieldAlert } from 'lucide-react';
+import { ShieldAlert } from 'lucide-react';
 import ExplorePathsView from './ExplorePathsView';
 import SkillDetailSheet from './SkillDetailSheet';
 import PracticeSessionModal from './PracticeSessionModal';
 
-export function SkillsWorkspace() {
+import type { SkillDomain } from '../../../data/fitness/skills/types';
+
+export interface SkillsWorkspaceProps {
+  selectedDomain?: SkillDomain | 'all';
+  onlyActive?: boolean;
+  searchTerm?: string;
+  hideInternalFilters?: boolean;
+}
+
+export function SkillsWorkspace({
+  selectedDomain,
+  onlyActive,
+  searchTerm,
+  hideInternalFilters = true
+}: SkillsWorkspaceProps) {
   const [selectedStepId, setSelectedStepId] = useState<string | null>(null);
   const [practiceModalStepId, setPracticeModalStepId] = useState<string | null>(null);
 
@@ -21,15 +35,7 @@ export function SkillsWorkspace() {
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%', maxWidth: '900px', margin: '0 auto' }}>
-      {/* CABECERA DE EXPLORACIÓN DE RUTAS Y HABILIDADES */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingBottom: '4px' }}>
-        <Compass size={20} style={{ color: 'var(--accent, #0a84ff)' }} />
-        <h3 style={{ fontSize: 'var(--fs-step, 1.125rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-          Catálogo de Rutas & Progresiones de Habilidad
-        </h3>
-      </div>
-
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
       {/* AVISO DE TOLERANCIA Y GUARDRAIL DISCRETO */}
       <div
         style={{
@@ -39,7 +45,7 @@ export function SkillsWorkspace() {
           background: 'rgba(255, 255, 255, 0.02)',
           border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
           padding: '8px 12px',
-          borderRadius: 'var(--radius-md, 8px)',
+          borderRadius: '10px',
           fontSize: '0.78rem',
           color: 'var(--text-secondary)'
         }}
@@ -51,6 +57,10 @@ export function SkillsWorkspace() {
       {/* CATÁLOGO DE RUTAS Y PASOS */}
       <ExplorePathsView
         onOpenDetail={(stepId) => setSelectedStepId(stepId)}
+        selectedDomain={selectedDomain}
+        onlyActive={onlyActive}
+        searchTerm={searchTerm}
+        hideInternalFilters={hideInternalFilters}
       />
 
       {/* SHEET DE DETALLE DE HABILIDAD */}
