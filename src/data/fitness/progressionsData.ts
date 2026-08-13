@@ -324,7 +324,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
-    "source": "heria",
+    "source": "both",
     "id": "front-lever",
     "title": "3.0 Straight-Arm Pulling Strength: The Front Lever Progression",
     "introduction": "The Front Lever is a classic calisthenics skill that serves as a definitive test of elite pulling strength. Its primary demand is on the lats to perform shoulder extension while maintaining scapular retraction and depression in a horizontal position.",
@@ -513,6 +513,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     "exercises": [
       {
         "name": "Straight Arm Pull Down",
+        "source": "heria",
         "level": 1,
         "prerequisites": null,
         "unlocks": "Tuck Front Lever",
@@ -541,6 +542,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Tuck Front Lever",
+        "source": "both",
         "level": 2,
         "prerequisites": "Straight Arm Pull Down",
         "unlocks": "Advanced Tuck Front Lever",
@@ -570,6 +572,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Advanced Tuck Front Lever",
+        "source": "og",
         "level": 3,
         "prerequisites": "Tuck Front Lever",
         "unlocks": "Single Leg Front Lever",
@@ -598,6 +601,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Single Leg Front Lever",
+        "source": "heria",
         "level": 4,
         "prerequisites": "Advanced Tuck Front Lever",
         "unlocks": "Straddle Front Lever",
@@ -627,6 +631,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Straddle Front Lever",
+        "source": "og",
         "level": 5,
         "prerequisites": "Single Leg Front Lever",
         "unlocks": "Full Front Lever",
@@ -655,6 +660,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Full Front Lever",
+        "source": "both",
         "level": 7,
         "prerequisites": "Straddle Front Lever",
         "unlocks": "Front Lever Pulls",
@@ -686,7 +692,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
-    "source": "heria",
+    "source": "both",
     "id": "planche",
     "title": "4.0 Straight-Arm Pushing Strength: The Planche Progression",
     "introduction": "The Planche stands as a pinnacle of straight-arm pushing strength and total body control. This comprehensive progression blends the Overcoming Gravity methodology with Chris Heria's complete 21-step Planche guide, organized into 6 logical phases from foundational conditioning to Full Planche Mastery.",
@@ -1031,6 +1037,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     "exercises": [
       {
         "name": "Straight Arm Hold",
+        "source": "heria",
         "level": 1,
         "phaseName": "Phase 1: Foundational Straight-Arm Conditioning",
         "prerequisites": null,
@@ -1060,6 +1067,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Dumbbells Lateral Raises",
+        "source": "heria",
         "level": 2,
         "phaseName": "Phase 1: Foundational Straight-Arm Conditioning",
         "prerequisites": "Straight Arm Hold",
@@ -1089,6 +1097,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Straight Arm Flies",
+        "source": "heria",
         "level": 3,
         "phaseName": "Phase 1: Foundational Straight-Arm Conditioning",
         "prerequisites": "Dumbbells Lateral Raises",
@@ -1118,6 +1127,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Straight Arm Press",
+        "source": "heria",
         "level": 4,
         "phaseName": "Phase 1: Foundational Straight-Arm Conditioning",
         "prerequisites": "Straight Arm Flies",
@@ -1147,6 +1157,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Frog Stand",
+        "source": "og",
         "level": 5,
         "phaseName": "Phase 2: Planche Leans & Foundation",
         "prerequisites": "Straight Arm Press",
@@ -1175,6 +1186,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Planche Lean",
+        "source": "heria",
         "level": 6,
         "phaseName": "Phase 2: Planche Leans & Foundation",
         "prerequisites": "Frog Stand",
@@ -1204,6 +1216,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "L-Sit + Tuck L-Sit + Tuck Planche Combo",
+        "source": "heria",
         "level": 7,
         "phaseName": "Phase 3: Tuck Planche Development",
         "prerequisites": "Planche Lean",
@@ -1234,6 +1247,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Tuck Planche Pumps",
+        "source": "heria",
         "level": 8,
         "phaseName": "Phase 3: Tuck Planche Development",
         "prerequisites": "L-Sit + Tuck L-Sit + Tuck Planche Combo",
@@ -1264,6 +1278,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Tuck Planche",
+        "source": "both",
         "level": 9,
         "phaseName": "Phase 3: Tuck Planche Development",
         "prerequisites": "Tuck Planche Pumps",
@@ -1294,6 +1309,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Advanced Tuck Planche",
+        "source": "og",
         "level": 10,
         "phaseName": "Phase 4: Advanced Tuck & Ring Variations",
         "prerequisites": "Tuck Planche",
@@ -1324,6 +1340,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "L-sit to Straddle Planche",
+        "source": "heria",
         "level": 11,
         "phaseName": "Phase 4: Advanced Tuck & Ring Variations",
         "prerequisites": "Advanced Tuck Planche",
@@ -1354,6 +1371,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Straight Arm Ring Hold",
+        "source": "heria",
         "level": 12,
         "phaseName": "Phase 4: Advanced Tuck & Ring Variations",
         "prerequisites": "L-sit to Straddle Planche",
@@ -1385,6 +1403,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Straight Arm Ring Tap",
+        "source": "heria",
         "level": 13,
         "phaseName": "Phase 4: Advanced Tuck & Ring Variations",
         "prerequisites": "Straight Arm Ring Hold",
@@ -1415,6 +1434,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Tuck Planche Hold on Rings",
+        "source": "heria",
         "level": 14,
         "phaseName": "Phase 4: Advanced Tuck & Ring Variations",
         "prerequisites": "Straight Arm Ring Tap",
@@ -1447,6 +1467,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Straddle Planche",
+        "source": "both",
         "level": 15,
         "phaseName": "Phase 5: Straddle Planche",
         "prerequisites": "Tuck Planche Hold on Rings",
@@ -1477,6 +1498,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "L-sit to Full Planche",
+        "source": "heria",
         "level": 16,
         "phaseName": "Phase 6: Full Planche Mastery",
         "prerequisites": "Straddle Planche",
@@ -1508,6 +1530,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Full Planche Lean Hold",
+        "source": "heria",
         "level": 17,
         "phaseName": "Phase 6: Full Planche Mastery",
         "prerequisites": "L-sit to Full Planche",
@@ -1538,6 +1561,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Full Planche Pumps",
+        "source": "heria",
         "level": 18,
         "phaseName": "Phase 6: Full Planche Mastery",
         "prerequisites": "Full Planche Lean Hold",
@@ -1570,6 +1594,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Full Planche Lean Raises",
+        "source": "heria",
         "level": 19,
         "phaseName": "Phase 6: Full Planche Mastery",
         "prerequisites": "Full Planche Pumps",
@@ -1600,6 +1625,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Full Planche",
+        "source": "both",
         "level": 20,
         "phaseName": "Phase 6: Full Planche Mastery",
         "prerequisites": "Full Planche Lean Raises",
@@ -1634,7 +1660,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
-    "source": "heria",
+    "source": "both",
     "id": "hspu",
     "title": "5.0 Vertical Pushing Power: The Handstand & HSPU Progression",
     "introduction": "The Handstand & HSPU progression is the primary pathway for developing raw overhead pressing strength, shoulder stability, and inverted balance control. Blended from Overcoming Gravity levels and the Chris Heria Handstand Technique Guide.",
@@ -1847,6 +1873,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     "exercises": [
       {
         "name": "Wall Handstand",
+        "source": "both",
         "level": 1,
         "phaseName": "Phase 1: Balance & Inversion",
         "prerequisites": null,
@@ -1875,6 +1902,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Freestanding Handstand Hold",
+        "source": "both",
         "level": 2,
         "phaseName": "Phase 1: Balance & Inversion",
         "prerequisites": "Wall Handstand",
@@ -1903,6 +1931,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Wall Headstand Pushup Eccentric",
+        "source": "og",
         "level": 3,
         "phaseName": "Phase 2: Vertical Pressing Power",
         "prerequisites": "Freestanding Handstand Hold",
@@ -1931,6 +1960,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Wall Handstand Pushup",
+        "source": "both",
         "level": 4,
         "phaseName": "Phase 2: Vertical Pressing Power",
         "prerequisites": "Wall Headstand Pushup Eccentric",
@@ -1960,6 +1990,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Freestanding Headstand Pushup",
+        "source": "og",
         "level": 5,
         "phaseName": "Phase 2: Vertical Pressing Power",
         "prerequisites": "Wall Handstand Pushup",
@@ -1989,6 +2020,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Freestanding Handstand Pushup (Full ROM)",
+        "source": "og",
         "level": 6,
         "phaseName": "Phase 2: Vertical Pressing Power",
         "prerequisites": "Freestanding Headstand Pushup",
@@ -2018,6 +2050,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Rings Freestanding Handstand Pushup",
+        "source": "og",
         "level": 7,
         "phaseName": "Phase 2: Vertical Pressing Power",
         "prerequisites": "Freestanding Handstand Pushup (Full ROM)",
@@ -2048,6 +2081,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Handstand Press",
+        "source": "heria",
         "level": 8,
         "phaseName": "Phase 3: Press to Handstand",
         "prerequisites": "Freestanding Handstand Hold",
@@ -2077,6 +2111,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Straight Arm Press To Handstand",
+        "source": "heria",
         "level": 9,
         "phaseName": "Phase 3: Press to Handstand",
         "prerequisites": "Handstand Press",
@@ -2107,7 +2142,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
-    "source": "heria",
+    "source": "both",
     "id": "muscle-up",
     "title": "6.0 Multi-Plane Strength: The Muscle-Up Progression",
     "introduction": "The Muscle-Up is the fundamental transitional movement in calisthenics, requiring explosive pulling power, transition agility, and overhead pushing strength. This progression blends Overcoming Gravity levels with Chris Heria's complete Muscle-Up Technique Guide.",
@@ -2332,6 +2367,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     "exercises": [
       {
         "name": "Magic Button",
+        "source": "heria",
         "level": 1,
         "prerequisites": null,
         "unlocks": "L-Sit Pull Back",
@@ -2361,6 +2397,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "L-Sit Pull Back",
+        "source": "heria",
         "level": 2,
         "prerequisites": "Magic Button",
         "unlocks": "Muscle-Up Negatives",
@@ -2390,6 +2427,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Muscle-Up Negatives",
+        "source": "og",
         "level": 3,
         "prerequisites": "L-Sit Pull Back",
         "unlocks": "Kipping Muscle-Ups",
@@ -2419,6 +2457,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Kipping Muscle-Ups",
+        "source": "heria",
         "level": 4,
         "prerequisites": "Muscle-Up Negatives",
         "unlocks": "Muscle Up",
@@ -2448,6 +2487,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Muscle Up",
+        "source": "both",
         "level": 5,
         "prerequisites": "Kipping Muscle-Ups",
         "unlocks": "Lay Over The Bar",
@@ -2477,6 +2517,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Lay Over The Bar",
+        "source": "heria",
         "level": 6,
         "prerequisites": "Muscle Up",
         "unlocks": "Strict Bar Muscle-Ups",
@@ -2506,6 +2547,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       },
       {
         "name": "Strict Bar Muscle-Ups",
+        "source": "both",
         "level": 7,
         "prerequisites": "Lay Over The Bar",
         "unlocks": "One Arm Muscle Up Progressions",

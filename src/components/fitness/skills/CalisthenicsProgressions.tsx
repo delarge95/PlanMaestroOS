@@ -26,7 +26,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
   const [levelFilter, setLevelFilter] = useState<string>('all');
 
   // Active progression store listener state
-  const [activeState, setActiveState] = useState(getActiveProgressionState());
+  const [, setActiveState] = useState(getActiveProgressionState());
   useEffect(() => {
     return subscribeActiveProgressionState(setActiveState);
   }, []);
@@ -91,48 +91,67 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
     return findExerciseMatches(name, 3);
   };
 
-  // Reactive filtering of progression groups
+  // Reactive filtering of progression groups and exercises
   const filteredProgressions = useMemo(() => {
-    return calisthenicsProgressions.filter((group) => {
-      // 1. Search term filter
-      if (searchTerm) {
-        const q = searchTerm.toLowerCase().trim();
-        const matchesTitle = group.title.toLowerCase().includes(q);
-        const matchesIntro = group.introduction?.toLowerCase().includes(q);
-        const matchesEx = group.exercises.some(
-          (ex: any) =>
-            ex.name.toLowerCase().includes(q) ||
-            ex.purpose?.toLowerCase().includes(q) ||
-            ex.primaryMuscles?.some((m: string) => m.toLowerCase().includes(q))
-        );
-        if (!matchesTitle && !matchesIntro && !matchesEx) return false;
-      }
+    return calisthenicsProgressions
+      .map((group) => {
+        // 1. Methodology group-level filter
+        if (methodologyFilter === 'heria') {
+          if (group.source !== 'heria' && group.source !== 'both') return null;
+        } else if (methodologyFilter === 'og') {
+          if (group.source !== 'overcoming-gravity' && group.source !== 'both') return null;
+        }
 
-      // 2. Real methodology filter using group.source
-      if (methodologyFilter === 'heria') {
-        if (group.source !== 'heria') return false;
-      } else if (methodologyFilter === 'og') {
-        if (group.source !== 'overcoming-gravity') return false;
-      }
+        // 2. Exercise-level source filtering inside groups
+        let visibleExercises = group.exercises;
+        if (methodologyFilter === 'heria') {
+          visibleExercises = group.exercises.filter(
+            (ex: any) => ex.source === 'heria' || ex.source === 'both' || (!ex.source && group.source === 'heria')
+          );
+        } else if (methodologyFilter === 'og') {
+          visibleExercises = group.exercises.filter(
+            (ex: any) => ex.source === 'og' || ex.source === 'both' || (!ex.source && group.source === 'overcoming-gravity')
+          );
+        }
 
-      // 3. Movement pattern filter
-      if (patternFilter !== 'all') {
-        const titleLower = group.title.toLowerCase();
-        if (patternFilter === 'pull' && !titleLower.includes('pulling') && !titleLower.includes('back lever') && !titleLower.includes('front lever') && !titleLower.includes('muscle-up')) return false;
-        if (patternFilter === 'push' && !titleLower.includes('pushing') && !titleLower.includes('planche') && !titleLower.includes('dip') && !titleLower.includes('handstand')) return false;
-        if (patternFilter === 'core' && !titleLower.includes('core') && !titleLower.includes('compression') && !titleLower.includes('l-sit')) return false;
-        if (patternFilter === 'rings' && !titleLower.includes('ring') && !titleLower.includes('anillas')) return false;
-      }
+        if (visibleExercises.length === 0) return null;
 
-      // 4. Level filter
-      if (levelFilter !== 'all') {
-        const targetLevel = parseInt(levelFilter, 10);
-        const hasLevel = group.exercises.some((ex: any) => ex.level === targetLevel);
-        if (!hasLevel) return false;
-      }
+        // 3. Search term filter
+        if (searchTerm) {
+          const q = searchTerm.toLowerCase().trim();
+          const matchesTitle = group.title.toLowerCase().includes(q);
+          const matchesIntro = group.introduction?.toLowerCase().includes(q);
+          const matchesEx = visibleExercises.some(
+            (ex: any) =>
+              ex.name.toLowerCase().includes(q) ||
+              ex.purpose?.toLowerCase().includes(q) ||
+              ex.primaryMuscles?.some((m: string) => m.toLowerCase().includes(q))
+          );
+          if (!matchesTitle && !matchesIntro && !matchesEx) return null;
+        }
 
-      return true;
-    });
+        // 4. Movement pattern filter
+        if (patternFilter !== 'all') {
+          const titleLower = group.title.toLowerCase();
+          if (patternFilter === 'pull' && !titleLower.includes('pulling') && !titleLower.includes('back lever') && !titleLower.includes('front lever') && !titleLower.includes('muscle-up') && !titleLower.includes('one arm pull')) return null;
+          if (patternFilter === 'push' && !titleLower.includes('pushing') && !titleLower.includes('planche') && !titleLower.includes('dip') && !titleLower.includes('handstand') && !titleLower.includes('one arm push')) return null;
+          if (patternFilter === 'core' && !titleLower.includes('core') && !titleLower.includes('compression') && !titleLower.includes('l-sit') && !titleLower.includes('dragon flag') && !titleLower.includes('toes to bar')) return null;
+          if (patternFilter === 'rings' && !titleLower.includes('ring') && !titleLower.includes('anillas')) return null;
+        }
+
+        // 5. Level filter
+        if (levelFilter !== 'all') {
+          const targetLevel = parseInt(levelFilter, 10);
+          const hasLevel = visibleExercises.some((ex: any) => ex.level === targetLevel);
+          if (!hasLevel) return null;
+        }
+
+        return {
+          ...group,
+          exercises: visibleExercises
+        };
+      })
+      .filter(Boolean) as typeof calisthenicsProgressions;
   }, [searchTerm, methodologyFilter, patternFilter, levelFilter]);
 
   const patternOptions = [
@@ -758,6 +777,22 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                       </span>
                                     ))}
                                   </div>
+                                </div>
+                              )}
+
+                              {/* MOBILITY & ROM REQUIREMENTS */}
+                              {mobility.length > 0 && (
+                                <div>
+                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '6px' }}>
+                                    Mobility & ROM Requirements
+                                  </strong>
+                                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>
+                                    {mobility.map((mob: any, mobIdx: number) => (
+                                      <li key={mobIdx}>
+                                        {typeof mob === 'string' ? mob : `${mob.muscle || mob.area || 'Joint ROM'}: ${mob.description || mob.level || ''}`}
+                                      </li>
+                                    ))}
+                                  </ul>
                                 </div>
                               )}
                             </div>

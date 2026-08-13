@@ -73,9 +73,12 @@ export type PracticeSessionRecord = {
   notes?: string;
 };
 
+export type ExerciseSource = 'og' | 'heria' | 'both';
+
 export type ProgressionExercise = {
   name: string;
   level: number;
+  source?: ExerciseSource;
   prerequisites?: string | null;
   unlocks?: string | null;
   technique?: string[];
@@ -90,7 +93,7 @@ export type ProgressionExercise = {
   phaseName?: string;
 };
 
-export type ProgressionSource = 'heria' | 'overcoming-gravity' | 'general';
+export type ProgressionSource = 'heria' | 'overcoming-gravity' | 'both';
 
 export type ProgressionGroup = {
   id: string;
