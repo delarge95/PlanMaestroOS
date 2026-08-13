@@ -60,8 +60,7 @@ const MUSCLE_SYNONYMS: Record<string, string> = {
   'wrist flexors': 'forearms',
   'brachioradialis': 'forearms',
   // Rhomboids
-  'rhomboids': 'rhomboids',
-  'trapezius & rhomboids': 'rhomboids',
+  'rhomboids': 'rhomboids'
 };
 
 function normalizeMuscle(muscle: string): string {
