@@ -8,16 +8,19 @@ export interface YouTubePlayerProps {
   exerciseName: string;
   className?: string;
   autoPlay?: boolean;
+  defaultCollapsed?: boolean;
 }
 
 export function YouTubePlayer({
   youtubeLink,
   secondaryVideoLink,
   exerciseName,
-  autoPlay = false
+  autoPlay = false,
+  defaultCollapsed = false
 }: YouTubePlayerProps) {
   const [selectedVideo, setSelectedVideo] = useState<'primary' | 'secondary'>('primary');
   const [useDirectMp4Mode, setUseDirectMp4Mode] = useState<boolean>(false);
+  const [isPlayerVisible, setIsPlayerVisible] = useState<boolean>(!defaultCollapsed);
 
   const activeLink = selectedVideo === 'primary' 
     ? (youtubeLink || secondaryVideoLink) 
@@ -261,41 +264,66 @@ export function YouTubePlayer({
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={handleOpenNewTab}
-          style={{
-            background: 'transparent',
-            color: 'var(--accent, #0a84ff)',
-            border: 'none',
-            fontSize: '0.74rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '4px'
-          }}
-          title="Abrir video en nueva pestaña"
-        >
-          <span>Abrir pestaña</span>
-          <ExternalLink size={12} />
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button
+            type="button"
+            onClick={() => setIsPlayerVisible(v => !v)}
+            style={{
+              background: 'transparent',
+              color: isPlayerVisible ? 'rgba(255,255,255,0.5)' : 'var(--accent, #0a84ff)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '6px',
+              fontSize: '0.72rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              padding: '3px 8px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+            title={isPlayerVisible ? 'Ocultar video' : 'Mostrar video'}
+          >
+            {isPlayerVisible ? 'Ocultar ▲' : 'Ver Video ▼'}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleOpenNewTab}
+            style={{
+              background: 'transparent',
+              color: 'var(--accent, #0a84ff)',
+              border: 'none',
+              fontSize: '0.74rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+            title="Abrir video en nueva pestaña"
+          >
+            <span>Abrir pestaña</span>
+            <ExternalLink size={12} />
+          </button>
+        </div>
       </div>
 
-      {/* CONTENEDOR DEL REPRODUCTOR */}
-      <div
-        style={{
-          width: '100%',
-          aspectRatio: '16/9',
-          borderRadius: '0 0 10px 10px',
-          overflow: 'hidden',
-          background: '#000000',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
-          position: 'relative'
-        }}
-      >
-        {renderPlayerContent()}
-      </div>
+      {/* CONTENEDOR DEL REPRODUCTOR - COLAPSABLE */}
+      {isPlayerVisible && (
+        <div
+          style={{
+            width: '100%',
+            aspectRatio: '16/9',
+            borderRadius: '0 0 10px 10px',
+            overflow: 'hidden',
+            background: '#000000',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+            position: 'relative'
+          }}
+        >
+          {renderPlayerContent()}
+        </div>
+      )}
     </div>
   );
 }

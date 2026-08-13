@@ -90,9 +90,12 @@ export type ProgressionExercise = {
   phaseName?: string;
 };
 
+export type ProgressionSource = 'heria' | 'overcoming-gravity' | 'general';
+
 export type ProgressionGroup = {
   id: string;
   title: string;
+  source?: ProgressionSource;
   introduction: string;
   introVideo?: string;
   requirements?: any[];

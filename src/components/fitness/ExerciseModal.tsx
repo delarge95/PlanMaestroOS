@@ -1,8 +1,10 @@
 // src/components/fitness/ExerciseModal.tsx
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import type { ExerciseEntry } from '../../data/exercises';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
+import { exerciseDatabase } from '../../data/exercises';
 import { YouTubePlayer } from '../ui/YouTubePlayer';
+import { findSimilarExercises } from '../../lib/fitness/muscleMatchEngine';
 
 interface Props {
   exercise?: ExerciseEntry | null;
@@ -15,6 +17,8 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
   if (!targetExercise) return null;
 
   const [activeTab, setActiveTab] = useState<'technique' | 'muscles' | 'mobility' | 'substitutions'>('technique');
+  const [showStaticSubs, setShowStaticSubs] = useState(false);
+  const [selectedSubModal, setSelectedSubModal] = useState<string | null>(null);
 
   const videoUrl1 = targetExercise.youtubeLink || (targetExercise as any).videoOption1 || (targetExercise as any).videoUrl;
   const videoUrl2 = (targetExercise as any).secondaryVideoLink || (targetExercise as any).videoOption2 || (targetExercise as any).videoUrl2;
@@ -25,11 +29,30 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
     'Flexibilidad de isquiotibiales & compresión activa de cadera'
   ];
 
+  // Dynamic muscle-similarity substitutions (memoized for performance)
+  const dynamicSubstitutions = useMemo(() => {
+    return findSimilarExercises(
+      targetExercise.name,
+      targetExercise.muscles.strength || [],
+      targetExercise.muscles.stability || [],
+      exerciseDatabase,
+      6,
+      0.25
+    );
+  }, [targetExercise.name, targetExercise.muscles.strength, targetExercise.muscles.stability]);
+
   const handleMuscleClick = (mName: string) => {
     if (typeof window !== 'undefined') {
       window.location.href = `/app/fitness/library/muscles?muscle=${encodeURIComponent(mName)}`;
     }
   };
+
+  // Score bar fill color
+  function scoreColor(score: number): string {
+    if (score >= 0.7) return '#30d158'; // green
+    if (score >= 0.45) return '#ff9f0a'; // orange
+    return '#0a84ff'; // blue
+  }
 
   return (
     <div 
@@ -123,7 +146,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
           </button>
         </div>
 
-        {/* INLINE REPRODUCTOR INCRUSTADO UNIVERSAL (VIMEO, YOUTUBE, MP4) */}
+        {/* INLINE REPRODUCTOR */}
         {(videoUrl1 || videoUrl2) && (
           <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
             <YouTubePlayer
@@ -134,7 +157,7 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
           </div>
         )}
 
-        {/* TABS CON SECCIÓN DE REQUISITOS DE MOVILIDAD */}
+        {/* TABS */}
         <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '10px', flexWrap: 'wrap' }}>
           <button
             type="button"
@@ -187,24 +210,22 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
             Requisitos de Movilidad
           </button>
 
-          {targetExercise.substitutions && targetExercise.substitutions.length > 0 && (
-            <button
-              type="button"
-              onClick={() => setActiveTab('substitutions')}
-              style={{
-                background: activeTab === 'substitutions' ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
-                border: 'none',
-                color: activeTab === 'substitutions' ? 'var(--color-accent-warning)' : 'var(--color-text-secondary)',
-                padding: '6px 14px',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: 600,
-                fontSize: '0.85rem'
-              }}
-            >
-              Sustituciones ({targetExercise.substitutions.length})
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setActiveTab('substitutions')}
+            style={{
+              background: activeTab === 'substitutions' ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
+              border: 'none',
+              color: activeTab === 'substitutions' ? 'var(--color-accent-warning, #ff9f0a)' : 'var(--color-text-secondary)',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: 600,
+              fontSize: '0.85rem'
+            }}
+          >
+            Sustituciones ({dynamicSubstitutions.length})
+          </button>
         </div>
 
         {/* TAB CONTENT */}
@@ -294,17 +315,124 @@ export default function ExerciseModal({ exercise, exerciseId, onClose }: Props) 
             </div>
           )}
 
-          {activeTab === 'substitutions' && targetExercise.substitutions && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {targetExercise.substitutions.map((subName, idx) => (
-                <div key={idx} style={{ background: 'rgba(255,255,255,0.03)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)', fontSize: '0.86rem', color: 'var(--color-text-primary)' }}>
-                  {subName}
+          {activeTab === 'substitutions' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+                Ordenadas por similitud muscular real — comparten los mismos músculos primarios y de estabilización.
+              </p>
+
+              {/* DYNAMIC MUSCLE-SIMILARITY SUBSTITUTIONS */}
+              {dynamicSubstitutions.length > 0 ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {dynamicSubstitutions.map((sub, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        background: 'rgba(255,255,255,0.03)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        borderRadius: '10px',
+                        padding: '10px 14px',
+                        cursor: 'pointer',
+                        transition: 'background 150ms ease'
+                      }}
+                      onClick={() => setSelectedSubModal(sub.name)}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                        <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#ffffff' }}>{sub.name}</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: scoreColor(sub.score) }}>
+                          {Math.round(sub.score * 100)}% similitud
+                        </span>
+                      </div>
+
+                      {/* Score bar */}
+                      <div style={{ height: '3px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', marginBottom: '6px' }}>
+                        <div style={{
+                          height: '100%',
+                          width: `${Math.round(sub.score * 100)}%`,
+                          background: scoreColor(sub.score),
+                          borderRadius: '999px',
+                          transition: 'width 300ms ease'
+                        }} />
+                      </div>
+
+                      {/* Shared muscles */}
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                        {sub.sharedStrength.map(m => (
+                          <span key={m} style={{ fontSize: '0.7rem', background: 'rgba(48,209,88,0.12)', color: '#6ee7b7', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(48,209,88,0.2)' }}>
+                            💪 {m}
+                          </span>
+                        ))}
+                        {sub.sharedStability.slice(0, 3).map(m => (
+                          <span key={m} style={{ fontSize: '0.7rem', background: 'rgba(119,231,255,0.08)', color: '#77e7ff', padding: '2px 6px', borderRadius: '4px' }}>
+                            🔵 {m}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                <p style={{ fontSize: '0.86rem', color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>
+                  No se encontraron sustituciones con similitud muscular significativa.
+                </p>
+              )}
+
+              {/* AUTHOR'S STATIC SUBSTITUTIONS — collapsible secondary section */}
+              {targetExercise.substitutions && targetExercise.substitutions.length > 0 && (
+                <div style={{ marginTop: '8px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '8px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setShowStaticSubs(v => !v)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'rgba(255,255,255,0.45)',
+                      fontSize: '0.76rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: 0
+                    }}
+                  >
+                    {showStaticSubs ? '▲' : '▼'} Sugerencias del Autor ({targetExercise.substitutions.length})
+                  </button>
+
+                  {showStaticSubs && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }}>
+                      {targetExercise.substitutions.map((subName, idx) => (
+                        <span
+                          key={idx}
+                          onClick={() => setSelectedSubModal(subName)}
+                          style={{
+                            background: 'rgba(255,255,255,0.04)',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                            color: 'rgba(255,255,255,0.7)',
+                            padding: '4px 10px',
+                            borderRadius: '6px',
+                            fontSize: '0.78rem',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          {subName}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>
       </div>
+
+      {/* NESTED MODAL FOR SUBSTITUTION EXERCISE */}
+      {selectedSubModal && (
+        <ExerciseModal
+          exerciseId={selectedSubModal}
+          onClose={() => setSelectedSubModal(null)}
+        />
+      )}
     </div>
   );
 }

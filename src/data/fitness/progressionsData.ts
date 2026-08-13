@@ -2,6 +2,7 @@ import type { ProgressionGroup } from './skills/types';
 
 export const calisthenicsProgressions: ProgressionGroup[] = [
   {
+    "source": "overcoming-gravity",
     "id": "core-compression",
     "title": "1.0 Foundational Core & Compression: The L-Sit to Manna Progression",
     "introduction": "The L-Sit progression is a critical pillar of any comprehensive calisthenics program, essential for developing the immense core and hip flexor strength required for advanced skills. Far beyond simple abdominal work, these exercises cultivate the active compression, scapular control, and straight-arm strength that underpin every advanced calisthenics skill.",
@@ -148,6 +149,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "overcoming-gravity",
     "id": "back-lever",
     "title": "2.0 Straight-Arm Pulling Strength: The Back Lever Progression",
     "introduction": "The Back Lever progression serves two critical strategic functions: developing foundational straight-arm pulling strength and conditioning the biceps and elbow connective tissues against high tensile loads. This progression directly prepares the athlete for the Front Lever, Planche, and advanced rings work.",
@@ -322,6 +324,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "front-lever",
     "title": "3.0 Straight-Arm Pulling Strength: The Front Lever Progression",
     "introduction": "The Front Lever is a classic calisthenics skill that serves as a definitive test of elite pulling strength. Its primary demand is on the lats to perform shoulder extension while maintaining scapular retraction and depression in a horizontal position.",
@@ -377,7 +380,8 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       }
     ],
     "masterWorkout": {
-      "id": "mw-68",
+    "source": "heria",
+    "id": "mw-68",
       "name": "Front Lever - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://player.vimeo.com/video/336884390",
@@ -682,6 +686,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "planche",
     "title": "4.0 Straight-Arm Pushing Strength: The Planche Progression",
     "introduction": "The Planche stands as a pinnacle of straight-arm pushing strength and total body control. This comprehensive progression blends the Overcoming Gravity methodology with Chris Heria's complete 21-step Planche guide, organized into 6 logical phases from foundational conditioning to Full Planche Mastery.",
@@ -749,7 +754,8 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       }
     ],
     "masterWorkout": {
-      "id": "mw-74",
+    "source": "heria",
+    "id": "mw-74",
       "name": "Full Planche - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://player.vimeo.com/video/202566763",
@@ -1628,6 +1634,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "hspu",
     "title": "5.0 Vertical Pushing Power: The Handstand & HSPU Progression",
     "introduction": "The Handstand & HSPU progression is the primary pathway for developing raw overhead pressing strength, shoulder stability, and inverted balance control. Blended from Overcoming Gravity levels and the Chris Heria Handstand Technique Guide.",
@@ -1683,7 +1690,8 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       }
     ],
     "masterWorkout": {
-      "id": "mw-53",
+    "source": "heria",
+    "id": "mw-53",
       "name": "Handstand - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://player.vimeo.com/video/313516248",
@@ -2099,6 +2107,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "muscle-up",
     "title": "6.0 Multi-Plane Strength: The Muscle-Up Progression",
     "introduction": "The Muscle-Up is the fundamental transitional movement in calisthenics, requiring explosive pulling power, transition agility, and overhead pushing strength. This progression blends Overcoming Gravity levels with Chris Heria's complete Muscle-Up Technique Guide.",
@@ -2190,7 +2199,8 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       }
     ],
     "masterWorkout": {
-      "id": "mw-55",
+    "source": "heria",
+    "id": "mw-55",
       "name": "Muscle Up - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://player.vimeo.com/video/336851734",
@@ -2527,6 +2537,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "overcoming-gravity",
     "id": "pistol-squat",
     "title": "7.0 Foundational Leg Strength: The Pistol Squat Progression",
     "introduction": "The Pistol Squat is the preeminent bodyweight exercise for developing high levels of unilateral leg strength, balance, and mobility simultaneously.",
@@ -2615,13 +2626,15 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "94-8.0 Advanced Isometrics",
     "title": "8.0 Advanced Isometrics: How to 90 Degree Hold",
     "introduction": "Progressive technique guide for mastering How to 90 Degree Hold.",
     "introVideo": "https://vimeo.com/837339294",
     "requirements": [],
     "masterWorkout": {
-      "id": "mw-94",
+    "source": "heria",
+    "id": "mw-94",
       "name": "How to 90 Degree Hold - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://vimeo.com/837339294",
@@ -2962,13 +2975,15 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "97-9.0 Core Compression & Levers",
     "title": "9.0 Core Compression & Levers: How To Dragon Flag",
     "introduction": "Progressive technique guide for mastering How To Dragon Flag.",
     "introVideo": "https://vimeo.com/844397617",
     "requirements": [],
     "masterWorkout": {
-      "id": "mw-97",
+    "source": "heria",
+    "id": "mw-97",
       "name": "How To Dragon Flag - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://vimeo.com/844397617",
@@ -3227,13 +3242,15 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "132-10.0 Unilateral Pulling Strength",
     "title": "10.0 Unilateral Pulling Strength: How To One Arm Pull Up",
     "introduction": "Progressive technique guide for mastering How To One Arm Pull Up.",
     "introVideo": "https://vimeo.com/851629847",
     "requirements": [],
     "masterWorkout": {
-      "id": "mw-132",
+    "source": "heria",
+    "id": "mw-132",
       "name": "How To One Arm Pull Up - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://vimeo.com/851629847",
@@ -3574,6 +3591,7 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "57-11.0 Lateral Chain Strength",
     "title": "11.0 Lateral Chain Strength: Human Flag",
     "introduction": "Welcome to the \"Human Flag Technique\" guide. Make sure you have completed all the requirements comfortably, with perfect form before beginning this guide. \n\nIf you are unable to complete a specific day/step successfully, repeat the previous day/steps until you can progress successfully.",
@@ -3641,7 +3659,8 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
       }
     ],
     "masterWorkout": {
-      "id": "mw-57",
+    "source": "heria",
+    "id": "mw-57",
       "name": "Human Flag - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://player.vimeo.com/video/313514758",
@@ -3960,13 +3979,15 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "96-12.0 Unilateral Pushing Strength",
     "title": "12.0 Unilateral Pushing Strength: How To One Arm Push Up",
     "introduction": "Progressive technique guide for mastering How To One Arm Push Up.",
     "introVideo": "https://vimeo.com/844299673",
     "requirements": [],
     "masterWorkout": {
-      "id": "mw-96",
+    "source": "heria",
+    "id": "mw-96",
       "name": "How To One Arm Push Up - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://vimeo.com/844299673",
@@ -4184,13 +4205,15 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "133-13.0 Active Core & Flexibility",
     "title": "13.0 Active Core & Flexibility: How To Toes To Bar",
     "introduction": "Progressive technique guide for mastering How To Toes To Bar.",
     "introVideo": "https://vimeo.com/852998600",
     "requirements": [],
     "masterWorkout": {
-      "id": "mw-133",
+    "source": "heria",
+    "id": "mw-133",
       "name": "How To Toes To Bar - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://vimeo.com/852998600",
@@ -4531,13 +4554,15 @@ export const calisthenicsProgressions: ProgressionGroup[] = [
     ]
   },
   {
+    "source": "heria",
     "id": "131-14.0 Bar Transitions",
     "title": "14.0 Bar Transitions: How To Pull Over",
     "introduction": "Progressive technique guide for mastering How To Pull Over.",
     "introVideo": "https://vimeo.com/850130684",
     "requirements": [],
     "masterWorkout": {
-      "id": "mw-131",
+    "source": "heria",
+    "id": "mw-131",
       "name": "How To Pull Over - Master Workout",
       "workoutStyle": "Rounds",
       "introVideo": "https://vimeo.com/850130684",

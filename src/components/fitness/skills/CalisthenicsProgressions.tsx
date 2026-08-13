@@ -1,10 +1,19 @@
 // src/components/fitness/skills/CalisthenicsProgressions.tsx
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { calisthenicsProgressions } from '../../../data/fitness/progressionsData';
-import { exerciseDatabase } from '../../../data/exercises';
+import { exerciseDatabase, findExerciseMatches, type ExerciseEntry } from '../../../data/exercises';
+import { PROGRESSION_ALIASES } from '../../../data/fitness/progressionAliases';
 import { YouTubePlayer } from '../../ui/YouTubePlayer';
 import ExerciseModal from '../ExerciseModal';
 import { Search, ChevronRight } from 'lucide-react';
+import {
+  getActiveProgressionState,
+  subscribeActiveProgressionState,
+  toggleActiveProgression,
+  isProgressionActive,
+  getProgressionStepIndex,
+  setProgressionStepIndex
+} from '../../../data/fitness/activeProgressionStore';
 
 interface CalisthenicsProgressionsProps {
   onSearchTermChange?: (term: string) => void;
@@ -16,13 +25,22 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
   const [patternFilter, setPatternFilter] = useState<string>('all');
   const [levelFilter, setLevelFilter] = useState<string>('all');
 
-  // Accordeón y colapsables
+  // Active progression store listener state
+  const [activeState, setActiveState] = useState(getActiveProgressionState());
+  useEffect(() => {
+    return subscribeActiveProgressionState(setActiveState);
+  }, []);
+
+  // Accordions and collapsibles
   const [expandedGroupIds, setExpandedGroupIds] = useState<string[]>([]);
   const [expandedExerciseNames, setExpandedExerciseNames] = useState<string[]>([]);
   const [expandedReqIds, setExpandedReqIds] = useState<string[]>([]);
   const [expandedIntroVideoIds, setExpandedIntroVideoIds] = useState<string[]>([]);
 
-  // Modal para requerimientos y ejercicios
+  // Variant selection map for exercises with multiple DB candidate matches: exerciseName -> candidateIndex
+  const [selectedVariantIdx, setSelectedVariantIdx] = useState<Record<string, number>>({});
+
+  // Modal for requirements & exercises
   const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
 
   const handleSearchChange = (val: string) => {
@@ -54,10 +72,29 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
     );
   };
 
-  // Filtrado reactivo de progresiones
+  // Helper to resolve exercise candidates from aliases + fuzzy matching
+  const resolveProgressionCandidates = (name: string): ExerciseEntry[] => {
+    const aliasNames = PROGRESSION_ALIASES[name];
+    if (aliasNames && aliasNames.length > 0) {
+      const candidates: ExerciseEntry[] = [];
+      for (const aName of aliasNames) {
+        const matches = findExerciseMatches(aName, 1);
+        if (matches.length > 0) {
+          candidates.push(matches[0]);
+        } else if (exerciseDatabase[aName]) {
+          candidates.push({ name: aName, discipline: exerciseDatabase[aName].category || 'Calisthenics', ...exerciseDatabase[aName] });
+        }
+      }
+      if (candidates.length > 0) return candidates;
+    }
+
+    return findExerciseMatches(name, 3);
+  };
+
+  // Reactive filtering of progression groups
   const filteredProgressions = useMemo(() => {
     return calisthenicsProgressions.filter((group) => {
-      // 1. Filtro por término de búsqueda
+      // 1. Search term filter
       if (searchTerm) {
         const q = searchTerm.toLowerCase().trim();
         const matchesTitle = group.title.toLowerCase().includes(q);
@@ -71,16 +108,14 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
         if (!matchesTitle && !matchesIntro && !matchesEx) return false;
       }
 
-      // 2. Filtro por Metodología
+      // 2. Real methodology filter using group.source
       if (methodologyFilter === 'heria') {
-        const isHeria = Boolean(group.introVideo || group.masterWorkout || group.requirements);
-        if (!isHeria) return false;
+        if (group.source !== 'heria') return false;
       } else if (methodologyFilter === 'og') {
-        const isOg = Boolean(group.exercises && group.exercises.some((e: any) => e.level));
-        if (!isOg) return false;
+        if (group.source !== 'overcoming-gravity') return false;
       }
 
-      // 3. Filtro por Patrón de Movimiento
+      // 3. Movement pattern filter
       if (patternFilter !== 'all') {
         const titleLower = group.title.toLowerCase();
         if (patternFilter === 'pull' && !titleLower.includes('pulling') && !titleLower.includes('back lever') && !titleLower.includes('front lever') && !titleLower.includes('muscle-up')) return false;
@@ -89,7 +124,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
         if (patternFilter === 'rings' && !titleLower.includes('ring') && !titleLower.includes('anillas')) return false;
       }
 
-      // 4. Filtro por Nivel
+      // 4. Level filter
       if (levelFilter !== 'all') {
         const targetLevel = parseInt(levelFilter, 10);
         const hasLevel = group.exercises.some((ex: any) => ex.level === targetLevel);
@@ -121,7 +156,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
       
-      {/* BLOQUE DE BÚSQUEDA & FILTROS UNIFICADOS */}
+      {/* SEARCH AND FILTERS PANEL */}
       <div
         style={{
           background: 'var(--surface-1, #0d0d0f)',
@@ -134,7 +169,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
           boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
         }}
       >
-        {/* BARRA DE BÚSQUEDA */}
+        {/* SEARCH INPUT */}
         <div style={{ position: 'relative', width: '100%' }}>
           <input
             type="text"
@@ -164,7 +199,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
           />
         </div>
 
-        {/* BOTONES PILLS: METODOLOGÍA */}
+        {/* METODOLOGÍA FILTER PILLS */}
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginRight: '4px' }}>
             Metodología:
@@ -197,7 +232,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
           })}
         </div>
 
-        {/* BOTONES PILLS: PATRÓN DE MOVIMIENTO */}
+        {/* PATRÓN FILTER PILLS */}
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginRight: '4px' }}>
             Patrón:
@@ -226,7 +261,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
           })}
         </div>
 
-        {/* BOTONES PILLS: NIVEL */}
+        {/* NIVEL FILTER PILLS */}
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
           <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', marginRight: '4px' }}>
             Nivel:
@@ -256,29 +291,30 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
         </div>
       </div>
 
-      {/* LISTA DE GRUPOS DE PROGRESIÓN */}
+      {/* PROGRESSION GROUPS LIST */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
         {filteredProgressions.map((group) => {
           const isGroupExpanded = expandedGroupIds.includes(group.id) || filteredProgressions.length === 1;
+          const isActive = isProgressionActive(group.id);
+          const currentStep = getProgressionStepIndex(group.id);
 
           return (
             <div
               key={group.id}
               style={{
                 background: 'var(--surface-1, #0d0d0f)',
-                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+                border: isActive ? '1px solid rgba(48, 209, 88, 0.4)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
                 borderRadius: '16px',
                 overflow: 'hidden',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
+                boxShadow: isActive ? '0 0 20px rgba(48, 209, 88, 0.15)' : '0 4px 16px rgba(0,0,0,0.2)'
               }}
             >
-              {/* CABECERA DEL GRUPO DE PROGRESIÓN */}
-              <button
-                type="button"
+              {/* GROUP HEADER */}
+              <div
                 onClick={() => toggleGroup(group.id)}
                 style={{
                   width: '100%',
-                  background: 'transparent',
+                  background: isActive ? 'rgba(48, 209, 88, 0.04)' : 'transparent',
                   border: 'none',
                   padding: '16px 20px',
                   display: 'flex',
@@ -289,17 +325,58 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                 }}
               >
                 <div>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: '#30d158' }}>
-                    {group.title}
-                  </h3>
-                  <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', marginTop: '2px', display: 'block' }}>
-                    {group.exercises.length} pasos ordenados por nivel
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                    <h3 style={{ fontSize: '1.15rem', fontWeight: 800, margin: 0, color: isActive ? '#30d158' : '#ffffff' }}>
+                      {group.title}
+                    </h3>
+                    <span style={{
+                      fontSize: '0.68rem',
+                      background: group.source === 'heria' ? 'rgba(255, 159, 10, 0.15)' : 'rgba(10, 132, 255, 0.15)',
+                      color: group.source === 'heria' ? '#ff9f0a' : '#0a84ff',
+                      border: group.source === 'heria' ? '1px solid rgba(255, 159, 10, 0.3)' : '1px solid rgba(10, 132, 255, 0.3)',
+                      padding: '2px 8px',
+                      borderRadius: '12px',
+                      fontWeight: 700
+                    }}>
+                      {group.source === 'heria' ? '🔥 Chris Heria' : '📖 Overcoming Gravity'}
+                    </span>
+                  </div>
+
+                  <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', marginTop: '4px', display: 'block' }}>
+                    {group.exercises.length} pasos • Paso actual en Hoy: <strong style={{ color: '#30d158' }}>{group.exercises[currentStep]?.name || 'N/A'}</strong>
                   </span>
                 </div>
+
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {/* ACTIVATION TOGGLE BUTTON */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleActiveProgression(group.id);
+                    }}
+                    style={{
+                      background: isActive ? 'rgba(48, 209, 88, 0.2)' : 'rgba(255, 255, 255, 0.06)',
+                      color: isActive ? '#30d158' : 'rgba(255, 255, 255, 0.7)',
+                      border: isActive ? '1px solid #30d158' : '1px solid rgba(255, 255, 255, 0.12)',
+                      borderRadius: '20px',
+                      padding: '6px 14px',
+                      fontSize: '0.76rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      boxShadow: isActive ? '0 0 10px rgba(48, 209, 88, 0.3)' : 'none'
+                    }}
+                    title={isActive ? 'Desactivar esta progresión' : 'Activar progresión para recordar en Hoy'}
+                  >
+                    {isActive ? '✓ Progresión Activa' : '▶ Activar en Hoy'}
+                  </button>
+
                   {group.introVideo && (
                     <span style={{ fontSize: '0.72rem', background: 'rgba(10,132,255,0.15)', color: '#0a84ff', padding: '3px 8px', borderRadius: '999px', fontWeight: 600 }}>
-                      🎬 Intro Video
+                      🎬 Intro
                     </span>
                   )}
                   <ChevronRight
@@ -311,16 +388,16 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                     }}
                   />
                 </div>
-              </button>
+              </div>
 
-              {/* CONTENIDO EXPANDIDO DEL GRUPO */}
+              {/* EXPANDED GROUP CONTENT */}
               {isGroupExpanded && (
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <p style={{ fontSize: '0.86rem', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.5, fontStyle: 'italic' }}>
                     {group.introduction}
                   </p>
 
-                  {/* INTRO VIDEO PLAYER COLAPSABLE */}
+                  {/* INTRO VIDEO PLAYER */}
                   {group.introVideo && (
                     <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}>
                       <button
@@ -352,11 +429,11 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                     </div>
                   )}
 
-                  {/* REQUERIMIENTOS PREVIOS INTERACTIVOS CON APERTURA DE MODAL */}
+                  {/* INTERACTIVE REQUIREMENTS */}
                   {group.requirements && group.requirements.length > 0 && (
                     <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '12px 14px' }}>
                       <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#30d158', display: 'block', marginBottom: '8px' }}>
-                        📋 Requerimientos Previos Recomendados ({group.requirements.length}) — Toca un ejercicio para ver video/ficha técnica
+                        📋 Requerimientos Previos Recomendados ({group.requirements.length})
                       </span>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         {group.requirements.map((req: any, idx: number) => {
@@ -404,7 +481,6 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                 </div>
                               </button>
 
-                              {/* DETALLE Y VIDEO DEL REQUERIMIENTO */}
                               {isReqExpanded && (
                                 <div style={{ padding: '10px 12px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                   {req.exerciseVideoUrl ? (
@@ -441,32 +517,36 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                     </div>
                   )}
 
-                  {/* LISTA DE EJERCICIOS DE LA PROGRESIÓN (ESTILO FITAPP CAPTURAS 1, 2 Y 3) */}
+                  {/* PROGRESSION EXERCISES LIST WITH FUZZY LINKING & CANDIDATE SELECTOR */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    {group.exercises.map((ex: any) => {
+                    {group.exercises.map((ex: any, exIdx: number) => {
                       const isExExpanded = expandedExerciseNames.includes(ex.name);
+                      const isCurrentStepIndex = currentStep === exIdx;
 
-                      // Resolver datos y video desde exerciseDatabase si no vienen en la progresión
-                      const dbEx = exerciseDatabase[ex.name];
+                      // Resolve candidates using fuzzy matching & aliases
+                      const candidates = resolveProgressionCandidates(ex.name);
+                      const activeVariantIndex = selectedVariantIdx[ex.name] ?? 0;
+                      const dbEx = candidates[activeVariantIndex] || candidates[0] || null;
+
+                      // Data fallback resolution
                       const videoUrl = ex.videoUrl || dbEx?.youtubeLink || (dbEx as any)?.videoOption1 || (dbEx as any)?.videoUrl;
+                      const secondaryVideoUrl = ex.secondaryVideoUrl || (dbEx as any)?.secondaryVideoLink || (dbEx as any)?.videoOption2 || (dbEx as any)?.videoUrl2;
                       const primaryMuscles = (ex.primaryMuscles && ex.primaryMuscles.length > 0) ? ex.primaryMuscles : (dbEx?.muscles?.strength || []);
                       const stabilizers = (ex.stabilizers && ex.stabilizers.length > 0) ? ex.stabilizers : (dbEx?.muscles?.stability || []);
                       const mobility = (ex.mobility && ex.mobility.length > 0) ? ex.mobility : ((dbEx as any)?.mobilityRequirements || (dbEx as any)?.mobility || []);
                       const technique = (ex.technique && ex.technique.length > 0) ? ex.technique : (dbEx?.techniquePoints || []);
-                      const purpose = ex.purpose || dbEx?.subcategory || '';
-                      const precautions = ex.precautions || [];
 
                       return (
                         <div
                           key={ex.name}
                           style={{
-                            background: 'rgba(255,255,255,0.02)',
-                            border: '1px solid rgba(255,255,255,0.06)',
+                            background: isCurrentStepIndex ? 'rgba(48, 209, 88, 0.05)' : 'rgba(255,255,255,0.02)',
+                            border: isCurrentStepIndex ? '1px solid rgba(48, 209, 88, 0.3)' : '1px solid rgba(255,255,255,0.06)',
                             borderRadius: '12px',
                             overflow: 'hidden'
                           }}
                         >
-                          {/* FILA DEL PASO DE PROGRESIÓN (CAPTURA 1 FITAPP) */}
+                          {/* ROW HEADER */}
                           <button
                             type="button"
                             onClick={() => toggleExercise(ex.name)}
@@ -482,10 +562,17 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                               textAlign: 'left'
                             }}
                           >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                               <h4 style={{ fontSize: '0.94rem', fontWeight: 700, margin: 0, color: '#ffffff' }}>
                                 {ex.name}
                               </h4>
+
+                              {isCurrentStepIndex && (
+                                <span style={{ fontSize: '0.68rem', background: '#30d158', color: '#000000', padding: '2px 8px', borderRadius: '12px', fontWeight: 800 }}>
+                                  🎯 En Trabajo (Paso {exIdx + 1})
+                                </span>
+                              )}
+
                               {videoUrl && (
                                 <span style={{ fontSize: '0.68rem', background: 'rgba(10,132,255,0.2)', color: '#0a84ff', border: '1px solid rgba(10,132,255,0.4)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
                                   🎬 Video
@@ -510,14 +597,81 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                             </div>
                           </button>
 
-                          {/* FICHA TÉCNICA DETALLADA FITAPP (CAPTURAS 2 Y 3) */}
+                          {/* EXPANDED TECHNICAL CARD */}
                           {isExExpanded && (
                             <div style={{ padding: '16px', borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.25)', display: 'flex', flexDirection: 'column', gap: '14px' }}>
                               
-                              {/* 1. REPRODUCTOR DE VIDEO NATIVO (CAPTURA 2) */}
+                              {/* CANDIDATE SELECTOR (If multiple DB candidates found, e.g. Wall Handstand) */}
+                              {candidates.length > 1 && (
+                                <div style={{ background: 'rgba(10, 132, 255, 0.08)', border: '1px solid rgba(10, 132, 255, 0.2)', borderRadius: '10px', padding: '8px 12px' }}>
+                                  <span style={{ fontSize: '0.74rem', color: '#0a84ff', fontWeight: 700, display: 'block', marginBottom: '6px' }}>
+                                    🔗 Ejercicios vinculados encontrados en la Base de Datos ({candidates.length}):
+                                  </span>
+                                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                                    {candidates.map((cand, candIdx) => (
+                                      <button
+                                        key={cand.name}
+                                        type="button"
+                                        onClick={() => setSelectedVariantIdx(prev => ({ ...prev, [ex.name]: candIdx }))}
+                                        style={{
+                                          background: activeVariantIndex === candIdx ? '#0a84ff' : 'rgba(255,255,255,0.06)',
+                                          color: activeVariantIndex === candIdx ? '#ffffff' : 'rgba(255,255,255,0.8)',
+                                          border: 'none',
+                                          borderRadius: '6px',
+                                          padding: '4px 10px',
+                                          fontSize: '0.75rem',
+                                          fontWeight: activeVariantIndex === candIdx ? 700 : 500,
+                                          cursor: 'pointer'
+                                        }}
+                                      >
+                                        {cand.name}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* MARK CURRENT STEP BUTTON */}
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+                                <button
+                                  type="button"
+                                  onClick={() => setProgressionStepIndex(group.id, exIdx)}
+                                  style={{
+                                    background: isCurrentStepIndex ? 'rgba(48,209,88,0.2)' : 'rgba(255,255,255,0.06)',
+                                    color: isCurrentStepIndex ? '#30d158' : 'rgba(255,255,255,0.8)',
+                                    border: isCurrentStepIndex ? '1px solid #30d158' : '1px solid rgba(255,255,255,0.12)',
+                                    borderRadius: '8px',
+                                    padding: '6px 14px',
+                                    fontSize: '0.78rem',
+                                    fontWeight: 700,
+                                    cursor: 'pointer'
+                                  }}
+                                >
+                                  {isCurrentStepIndex ? '🎯 Marcat en Hoy (Paso Actual)' : `📌 Establecer Paso ${exIdx + 1} como Objetivo en Hoy`}
+                                </button>
+
+                                {dbEx && (
+                                  <button
+                                    type="button"
+                                    onClick={() => setModalExerciseId(dbEx.name)}
+                                    style={{
+                                      background: 'transparent',
+                                      color: '#0a84ff',
+                                      border: 'none',
+                                      fontSize: '0.78rem',
+                                      fontWeight: 700,
+                                      cursor: 'pointer'
+                                    }}
+                                  >
+                                    Ver Ficha BD Completa ↗
+                                  </button>
+                                )}
+                              </div>
+
+                              {/* VIDEO PLAYER */}
                               {videoUrl ? (
                                 <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
-                                  <YouTubePlayer youtubeLink={videoUrl} exerciseName={ex.name} />
+                                  <YouTubePlayer youtubeLink={videoUrl} secondaryVideoLink={secondaryVideoUrl} exerciseName={dbEx?.name || ex.name} />
                                 </div>
                               ) : (
                                 <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>
@@ -525,7 +679,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                 </span>
                               )}
 
-                              {/* 2. REQUISITOS PREVIOS Y DESBLOQUEOS (CAPTURA 3) */}
+                              {/* PREREQUISITES & UNLOCKS */}
                               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', fontSize: '0.84rem' }}>
                                 <div>
                                   <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Prerequisites: </strong>
@@ -537,7 +691,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                 </div>
                               </div>
 
-                              {/* 3. TÉCNICA & FORMA */}
+                              {/* TECHNIQUE & FORM */}
                               {technique.length > 0 && (
                                 <div>
                                   <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '4px' }}>
@@ -551,7 +705,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                 </div>
                               )}
 
-                              {/* 4. MÚSCULOS PRIMARIOS (FUERZA) */}
+                              {/* PRIMARY MUSCLES */}
                               {primaryMuscles.length > 0 && (
                                 <div>
                                   <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '6px' }}>
@@ -561,7 +715,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                     {primaryMuscles.map((m: string, mIdx: number) => (
                                       <span
                                         key={mIdx}
-                                        onClick={() => setModalExerciseId(ex.name)}
+                                        onClick={() => setModalExerciseId(dbEx?.name || ex.name)}
                                         style={{
                                           background: 'rgba(10,132,255,0.15)',
                                           border: '1px solid rgba(10,132,255,0.3)',
@@ -580,7 +734,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                 </div>
                               )}
 
-                              {/* 5. ESTABILIZADORES CLAVE */}
+                              {/* KEY STABILIZERS */}
                               {stabilizers.length > 0 && (
                                 <div>
                                   <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '6px' }}>
@@ -606,46 +760,6 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
                                   </div>
                                 </div>
                               )}
-
-                              {/* 6. REQUISITOS DE MOVILIDAD */}
-                              {mobility.length > 0 && (
-                                <div>
-                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '4px' }}>
-                                    Mobility Requirements
-                                  </strong>
-                                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>
-                                    {mobility.map((mob: string, mobIdx: number) => (
-                                      <li key={mobIdx}>{mob}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-
-                              {/* 7. PRECAUCIONES */}
-                              {precautions.length > 0 && (
-                                <div>
-                                  <strong style={{ fontSize: '0.84rem', color: '#ff453a', display: 'block', marginBottom: '4px' }}>
-                                    Precautions
-                                  </strong>
-                                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#ff453a', lineHeight: 1.5 }}>
-                                    {precautions.map((prec: string, precIdx: number) => (
-                                      <li key={precIdx}>{prec}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-
-                              {/* 8. PROPÓSITO FUNCIONAL */}
-                              {purpose && (
-                                <div>
-                                  <strong style={{ fontSize: '0.84rem', color: '#ffffff', display: 'block', marginBottom: '2px' }}>
-                                    Functional Purpose
-                                  </strong>
-                                  <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', margin: 0, lineHeight: 1.4 }}>
-                                    {purpose}
-                                  </p>
-                                </div>
-                              )}
                             </div>
                           )}
                         </div>
@@ -659,7 +773,7 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
         })}
       </div>
 
-      {/* MODAL DE FICHA TÉCNICA REUTILIZABLE PARA REQUERIMIENTOS Y EJERCICIOS */}
+      {/* EXERCISE MODAL FOR REQUIREMENTS OR DETAILS */}
       {modalExerciseId && (
         <ExerciseModal
           exerciseId={modalExerciseId}
@@ -669,5 +783,3 @@ export function CalisthenicsProgressions({ onSearchTermChange }: CalisthenicsPro
     </div>
   );
 }
-
-export default CalisthenicsProgressions;

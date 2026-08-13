@@ -11,6 +11,7 @@ import { ExternalLink } from 'lucide-react';
 import { useSkillStateStore } from '../../data/fitness/skills/skillStateStore';
 import { getSkillStepById } from '../../data/fitness/skills/skillSteps';
 import { skillPaths } from '../../data/fitness/skills/skillPaths';
+import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
 
 export interface FitnessTodayProps {
   currentPath?: string;
@@ -45,6 +46,9 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
           selectedDayIndex={selectedDayIndex}
           onSelectDayIndex={(idx) => setSelectedDayIndex(idx)}
         />
+
+        {/* 2.5 PROGRESIÓN ACTIVA EN TRABAJO (SISTEMA DE CARDS CAROUSEL Y RECORDARE EN HOY) */}
+        <ActiveProgressionsTodayCard />
 
         {/* 3. LISTA UNIFICADA DE ACTIVIDADES DE HOY (MISMA PRIORIDAD Y ESTRUCTURA) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
