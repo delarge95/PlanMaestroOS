@@ -1,0 +1,4 @@
+## 2025-05-15 - Dynamic Embed Validation & Sandbox Isolation
+**Vulnerability:** Dynamic iframe components (such as Notion inspectors, YouTube players, and Thenx guides) loaded third-party URLs directly from data fields or client inputs without proper security sanitization. This introduced potential XSS injection vectors if malicious URLs were provided.
+**Learning:** Rendering arbitrary URLs inside iframes without domain whitelist enforcement or sandbox restrictions bypasses origin isolation, allowing unvalidated third-party scripts to execute.
+**Prevention:** Always parse, validate, and whitelist protocols (HTTPS) and domains before rendering embedding URLs. Additionally, enforce strict `sandbox="allow-scripts allow-same-origin allow-popups allow-forms"` attributes on iframes to prevent unauthorized actions.
