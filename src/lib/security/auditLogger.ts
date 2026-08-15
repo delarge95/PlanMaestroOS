@@ -16,10 +16,10 @@ export interface AuditLogEntry {
  * Palabras clave sensibles que deben eliminarse de cualquier mensaje de error o entrada de log
  */
 const SENSITIVE_PATTERNS = [
-  /secret_[a-zA-Z0-9_\-]+/gi,
-  /bearer\s+[a-zA-Z0-9_\-\.]+/gi,
-  /notion_[a-zA-Z0-9_\-]+/gi,
-  /ghp_[a-zA-Z0-9_\-]+/gi,
+  /(notion_|ntn_|secret_)[a-zA-Z0-9_\-]+/gi,
+  /(bearer|basic)\s+[a-zA-Z0-9_\-\.\+\/=]+/gi,
+  /(gh[pousr]_|github_pat_)[a-zA-Z0-9_\-]+/gi,
+  /sk-(proj-)?[a-zA-Z0-9_\-]+/gi, // OpenAI API keys
   /AIzaSy[a-zA-Z0-9_\-]+/gi, // Gemini API keys
 ];
 
