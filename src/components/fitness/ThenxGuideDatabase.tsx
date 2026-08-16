@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import thenxGuidesData from '../../data/fitness/thenx_technique_guides.json';
 import { BookOpen, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
 
 export interface ThenxGuideDatabaseProps {
   selectedGuideId?: string;
@@ -123,13 +124,14 @@ export default function ThenxGuideDatabase({
           </div>
 
           {/* VÍDEO INTRODUCTORIO DE LA GUÍA */}
-          {introEmbedUrl && (
+          {introEmbedUrl && isValidEmbedUrl(introEmbedUrl) && (
             <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border-subtle)', background: '#000', aspectRatio: '16/9' }}>
               <iframe
                 src={introEmbedUrl}
                 title={selectedGuide.title}
                 style={{ width: '100%', height: '100%', border: 'none' }}
                 allow="autoplay; fullscreen; picture-in-picture"
+                sandbox="allow-scripts allow-same-origin allow-popups"
                 allowFullScreen
               />
             </div>
