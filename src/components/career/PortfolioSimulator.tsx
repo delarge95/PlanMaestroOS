@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
 import { initialPortfolioProjects, type PortfolioProjectItem } from '../../data/career/portfolioProjects';
+import {
+  pendingPortfolioAssetCount,
+  pendingPortfolioAssets,
+  type PortfolioAssetPlatform
+} from '../../data/career/portfolioChecklist';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
-import { AlertCircle, Copy, Check, Palette, Share2, Code2, Globe } from 'lucide-react';
+import { AlertCircle, Copy, Check, Palette, Share2, Code2, Globe, ListChecks } from 'lucide-react';
+
+const PLATFORM_LABEL: Record<PortfolioAssetPlatform, string> = {
+  artstation: 'ArtStation',
+  github: 'GitHub',
+  linkedin: 'LinkedIn',
+  web: 'Web'
+};
 
 export default function PortfolioSimulator() {
   const [activeTab, setActiveTab] = useState<'artstation' | 'linkedin' | 'github' | 'web'>('artstation');
@@ -54,6 +66,31 @@ export default function PortfolioSimulator() {
             {copied ? <Check size={14} /> : <Copy size={14} />}
             <span>Exportar checklist</span>
           </Button>
+        </div>
+
+        {/* CUENTA DE ASSETS PENDIENTES (doc-33 sprint) */}
+        <div style={{
+          background: 'rgba(255,255,255,0.02)',
+          border: '1px solid var(--color-border-subtle)',
+          borderRadius: 'var(--radius-md)',
+          padding: '10px 14px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          flexWrap: 'wrap'
+        }}>
+          <ListChecks size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
+          <strong style={{ fontSize: '0.82rem', color: 'var(--text)' }}>
+            Assets pendientes (doc-33): {pendingPortfolioAssetCount}
+          </strong>
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+            {(['artstation', 'github', 'linkedin', 'web'] as PortfolioAssetPlatform[])
+              .map(
+                (platform) =>
+                  `${PLATFORM_LABEL[platform]}: ${pendingPortfolioAssets.filter((item) => item.platform === platform).length}`
+              )
+              .join(' · ')}
+          </span>
         </div>
 
         {/* NAVEGACIÓN DE 4 PESTAÑAS (ArtStation, LinkedIn, GitHub, Web) */}
