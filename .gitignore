@@ -57,3 +57,6 @@ check_out.txt
 # 3D asset archives (GLBs are committed individually)
 _pdf_biblia/Planeacion_Integral/3D assets/3dFiles.tar
 _pdf_biblia/Planeacion_Integral/3D assets/3dFiles.zip
+
+# Agent worktrees (one per parallel agent)
+.worktrees/

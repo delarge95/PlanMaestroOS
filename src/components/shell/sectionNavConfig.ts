@@ -34,6 +34,7 @@ export const SECTION_NAV: Record<string, NavItemConfig[]> = {
   clinical: [
     { href: '/app/clinical', label: 'Hoy', end: true },
     { href: '/app/clinical/protocols', label: 'Protocolos' },
+    { href: '/app/clinical/routines', label: 'Rutinas' },
     { href: '/app/clinical/unblock', label: 'Desbloqueo' },
   ],
   languages: [
@@ -43,7 +44,8 @@ export const SECTION_NAV: Record<string, NavItemConfig[]> = {
   ],
   gastronomy: [
     { href: '/app/gastronomy', label: 'Hoy', end: true },
-    { href: '/app/gastronomy/recipes', label: 'Recetas' },
-    { href: '/app/gastronomy/queue', label: 'Ver más tarde' },
+    { href: '/app/gastronomy/library', label: 'Recetas' },
+    { href: '/app/gastronomy/plans', label: 'Planes' },
+    { href: '/app/gastronomy/saved', label: 'Guardadas' },
   ],
 };
