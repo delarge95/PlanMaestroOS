@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, MoreHorizontal, RotateCcw } from 'lucide-react';
+import { Clock, MoreHorizontal, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import Menu from '../ui/Menu';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
@@ -84,6 +84,8 @@ export default function FitAppWorkoutLogger() {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [activeTab, setActiveTab] = useState<'logger' | 'explorer' | 'historial'>('logger');
   const [perceivedEnergy, setPerceivedEnergy] = useState<EnergyLevel>('medium');
+  // B3: header compacto colapsable (una línea con resumen; expansión bajo demanda)
+  const [isHeaderExpanded, setIsHeaderExpanded] = useState(false);
 
   // Active workout logs per exercise
   const [exerciseLogs, setExerciseLogs] = useState<Record<string, LoggedSet[]>>({});
@@ -376,8 +378,7 @@ export default function FitAppWorkoutLogger() {
                   Hoy es {calendarCtx.todayWeekdayName.toLowerCase()} {formatDateShort(calendarCtx.today)}
                 </span>
                 <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)' }}>
-                  · Toca: <strong style={{ color: 'var(--color-state-done)' }}>{dueDayLabel}</strong>
-                  {calendarCtx.todayWorkoutDayIndex ? ` (día ${calendarCtx.todayWorkoutDayIndex} del grid L-V)` : ''}
+                  · {officialProgram.title.replace(/\s*\([^)]*\)/g, '').trim()} · Sem {currentWeek} · Toca: <strong style={{ color: 'var(--color-state-done)' }}>{dueDayLabel}</strong> · Energía: {perceivedEnergy === 'high' ? 'Alta' : perceivedEnergy === 'low' ? 'Baja' : perceivedEnergy === 'crisis' ? 'Soporte' : 'Media'}
                 </span>
                 {postponedDays > 0 && (
                   <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff9f0a', background: 'rgba(255,159,10,0.12)', border: '1px solid rgba(255,159,10,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
@@ -386,7 +387,32 @@ export default function FitAppWorkoutLogger() {
                 )}
 
                 {/* B2: POSTERGAR (una vez por día real) + menú secundario ⋯ con restablecer */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto', flexWrap: 'wrap' }}>
+                  {/* B3: acción primaria SIEMPRE a un clic */}
+                  {isSessionActive ? (
+                    <>
+                      <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-state-done)', background: 'rgba(48,209,88,0.12)', border: '1px solid rgba(48,209,88,0.3)', padding: '4px 10px', borderRadius: '8px' }}>
+                        ⏱ {formatTime(elapsedSeconds)}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleFinishWorkout}
+                        style={{ background: 'var(--color-state-done)', border: 'none', color: '#000', fontWeight: 700, padding: '6px 14px', borderRadius: '10px', cursor: 'pointer', fontSize: '0.8rem' }}
+                      >
+                        ✓ Finalizar
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleStartWorkout}
+                      disabled={activeTrackerPrograms.length === 0}
+                      title="Abrir la sesión de hoy con sus ejercicios"
+                      style={{ background: activeTrackerPrograms.length === 0 ? 'rgba(255,255,255,0.1)' : 'var(--color-state-done)', border: 'none', color: activeTrackerPrograms.length === 0 ? 'rgba(255,255,255,0.3)' : '#000', fontWeight: 700, padding: '6px 14px', borderRadius: '10px', cursor: activeTrackerPrograms.length === 0 ? 'not-allowed' : 'pointer', fontSize: '0.8rem' }}
+                    >
+                      ▶ Iniciar
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={postponeDayAction}
@@ -429,11 +455,35 @@ export default function FitAppWorkoutLogger() {
                       }
                     ]}
                   />
+
+                  {/* B3: toggle de expansión del header */}
+                  <button
+                    type="button"
+                    onClick={() => setIsHeaderExpanded((v) => !v)}
+                    aria-expanded={isHeaderExpanded}
+                    title={isHeaderExpanded ? 'Colapsar resumen del día' : 'Ver semana/día, programa y bloque del plan'}
+                    style={{
+                      background: 'rgba(255,255,255,0.06)',
+                      border: '1px solid rgba(255,255,255,0.14)',
+                      color: 'var(--color-text-secondary)',
+                      padding: '5px 10px',
+                      borderRadius: '8px',
+                      fontSize: '0.76rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    {isHeaderExpanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                    {isHeaderExpanded ? 'Menos' : 'Detalle'}
+                  </button>
                 </div>
               </div>
 
-              {/* Si no hay programas activos */}
-              {activeTrackerPrograms.length === 0 && (
+              {/* B3: secciones plegadas — se abren bajo demanda con el toggle */}
+              {isHeaderExpanded && activeTrackerPrograms.length === 0 && (
                 <div style={{ background: 'rgba(255,159,10,0.12)', border: '1px solid rgba(255,159,10,0.3)', borderRadius: '12px', padding: '14px 18px' }}>
                   <p style={{ margin: 0, fontSize: '0.88rem', color: '#ff9f0a', fontWeight: 600 }}>
                     ⚠️ No tienes ningún programa activo en el Tracker. Ve a <strong>Rutinas → Catálogo Oficial</strong> y activa un programa con el botón <strong>"+"</strong>.
@@ -441,8 +491,7 @@ export default function FitAppWorkoutLogger() {
                 </div>
               )}
 
-              {/* Selector de programa activo (si hay más de uno) */}
-              {activeTrackerPrograms.length > 1 && (
+              {isHeaderExpanded && activeTrackerPrograms.length > 1 && (
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                   {activeTrackerPrograms.map((prog) => {
                     const isSelected = activeLoggerProgramId === prog.id;
@@ -471,8 +520,7 @@ export default function FitAppWorkoutLogger() {
                 </div>
               )}
 
-              {/* Semana + Día del programa seleccionado */}
-              {officialProgram.weeks && officialProgram.weeks.length > 0 && (
+              {isHeaderExpanded && officialProgram.weeks && officialProgram.weeks.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
                   {/* Selector de semana */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -543,8 +591,8 @@ export default function FitAppWorkoutLogger() {
                 </div>
               )}
 
-              {/* Título del día + controles de sesión */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+              {/* B3: título completo solo al expandir; controles de sesión SIEMPRE visibles */}
+              {isHeaderExpanded && (
                 <div>
                   <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '2px' }}>
                     {officialProgram.title.replace(/\s*\([^)]*\)/g, '').trim()} · Semana {currentWeek}
@@ -555,6 +603,7 @@ export default function FitAppWorkoutLogger() {
                     {activeDay?.name || activeDay?.title || 'Sin día activo'}
                   </h3>
                 </div>
+              )}
 
                 <div>
                   {isSessionActive ? (
@@ -683,6 +732,80 @@ export default function FitAppWorkoutLogger() {
                 : []
               ).map((exItem, exIdx) => {
                 const exData = findExerciseByName(exItem.name.split('/')[0].trim());
+
+                // B3: lista COMPACTA de la sesión del día (visible por defecto, sin tablas).
+                // Las tablas de registro aparecen al Iniciar la sesión.
+                if (!isSessionActive) {
+                  return (
+                    <div
+                      key={exItem.name}
+                      style={{
+                        background: 'rgba(0, 0, 0, 0.35)',
+                        border: '1px solid rgba(255, 255, 255, 0.07)',
+                        borderRadius: '12px',
+                        padding: '10px 14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        flexWrap: 'wrap'
+                      }}
+                    >
+                      <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.66rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
+                        #{exIdx + 1}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => exData && setModalExercise(exData)}
+                        disabled={!exData}
+                        title={exData ? `Ver ficha y video de ${exItem.name}` : 'Ejercicio sin ficha en la base de datos'}
+                        style={{
+                          background: 'transparent',
+                          border: 'none',
+                          padding: 0,
+                          color: 'var(--color-text-primary)',
+                          fontSize: '0.92rem',
+                          fontWeight: 700,
+                          cursor: exData ? 'pointer' : 'default',
+                          textAlign: 'left',
+                          textDecoration: exData ? 'underline' : 'none',
+                          textDecorationColor: 'rgba(255,255,255,0.25)'
+                        }}
+                      >
+                        {exItem.name}
+                      </button>
+                      <span style={{ fontSize: '0.74rem', color: 'var(--color-text-secondary)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '6px' }}>
+                        {exItem.target}
+                      </span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--color-text-tertiary)', whiteSpace: 'nowrap' }}>
+                        ⏱ {exItem.restSec}s
+                      </span>
+                      {exData && (
+                        <button
+                          type="button"
+                          onClick={() => setModalExercise(exData)}
+                          title={`Video de ${exItem.name}`}
+                          style={{
+                            marginLeft: 'auto',
+                            background: 'rgba(48, 209, 88, 0.12)',
+                            border: '1px solid rgba(48, 209, 88, 0.3)',
+                            color: 'var(--color-state-done)',
+                            padding: '4px 10px',
+                            borderRadius: '8px',
+                            fontSize: '0.72rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px'
+                          }}
+                        >
+                          ▶ Video
+                        </button>
+                      )}
+                    </div>
+                  );
+                }
+
                 const currentSets = exerciseLogs[exItem.name] || [
                   { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
                   { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
@@ -690,7 +813,7 @@ export default function FitAppWorkoutLogger() {
                 ];
 
                 return (
-                  <div key={exIdx} style={{ background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  <div key={exItem.name} style={{ background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '16px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
