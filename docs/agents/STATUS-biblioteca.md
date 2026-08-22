@@ -18,9 +18,9 @@
 | Archivos identificados en inventario | 297 | PyMuPDF + epub OPF + docx core.xml + MD5 |
 | Renombrados canónicos (D:\Downloads) | 81 | 0 fallos; formato `Autor-Titulo_Edicion.ext` |
 | Duplicados archivados (`_duplicados/`) | 21 + 3 repo | Libros 14 · Papers 1 · Absurdos 3 · JN 1 · raíz 2 · investigacion 3 (commiteados) |
-| Extracciones consolidadas | 1 | `low-overcoming-gravity-2ed.md` (6 partes, 1574 líneas, 83 KB) |
-| Chats exportados preservados | 43 | en `biblioteca/_chat-exports/` (evidencia + mapeo fuente↔chat) |
-| Commits de la sesión | 5 | ver `git log agent/biblioteca` |
+| Extracciones consolidadas | 43 | `biblioteca/extracciones/`: 32 por sourceId + 1 OG preexistente + 8 lotes multi-fuente + 2 chats de diseño (~4,8 M chars) |
+| Chats exportados preservados | 43 | en `biblioteca/_chat-exports/` (evidencia + mapeo fuente↔chat); 42 con respuestas recuperadas |
+| Commits de la sesión | 7 | ver `git log agent/biblioteca` |
 | `npx astro check` | **0 errores** / 0 warnings | 319 archivos |
 
 ## Ubicaciones inventariadas
@@ -32,7 +32,7 @@
 
 ## Hallazgos clave
 
-1. **Los 43 exports de chat NO contienen las respuestas del modelo** (contenido del asistente vacío): solo prompts + PDF adjunto + nombres de archivo. La extracción "en-chat" existe únicamente en la UI del chat original. → Bloque B del MANIFEST §18 con el orden de re-extracción/recuperación.
+1. ~~Los 43 exports de chat NO contenían las respuestas~~ → **CORREGIDO en segunda pasada** (revisión solicitada por el usuario, acertada): las respuestas SÍ están en los exports, en el campo `chat.messages[*].content_list[*].content`; el campo `content` legado viene vacío y ese fue el origen del diagnóstico erróneo inicial. Recuperadas 42/43 (4,8 M chars → `extracciones/`). Único chat sin respuesta: 1787414852273 (web app). Bonus: el chat 1787414859303 contiene **fichas JSON de músculos/nervios/articulaciones (~294 K chars)** — insumo directo para el grafo de AG-ANATOM.
 2. `Overcoming_Gravity_-_Steven_Low_1.pdf` **no** es la 1ª ed.: es un escaneo alterno (976 p) de la 2ª ed. Archivado en `D:\Downloads\_duplicados\`.
 3. `The Physiology of Yoga PDF.pdf` es un **resumen Bookey**, no el libro original de McGonigle (el original no está en la biblioteca).
 4. La extracción de OG 2ª ed **sí existía** fuera del repo (`OG2E_extraccion_parte1..6.md` en la raíz de Downloads): consolidada en `biblioteca/extracciones/low-overcoming-gravity-2ed.md`.
@@ -42,14 +42,14 @@
 
 ## Pendientes / dudas para el usuario
 
-1. **Recuperar extracciones en-chat** (la incidencia nº1): opción A — re-exportar los chats desde la UI de Qwen/Open WebUI **con las respuestas incluidas** y guardarlos en `biblioteca/_chat-exports/` (AG-BIB los normaliza); opción B — re-ejecutar por Gemini siguiendo el orden del MANIFEST §18.
-2. **Renombrado post-merge en `investigacion\`** (checkout principal): aplicar los 7 nombres propuestos (OG 2ª ed, tendonitis, Min-Max, TBTS, Glute, Powerbuilding). Los docx ya están commiteados.
-3. **Años por confirmar** al extraer: Prabowo (~2025), Ricci (2021), Lenetsky (~2017), James BJJ (~2014), Nippard body-recomp/fundamentals (s/f).
-4. **Salud sexual** (4 libros + 8 papers): no hay agente dueño en el plan (¿AG-CLIN con gate? ¿nuevo agente?). Decidir antes de construir RAG de ese dominio.
-5. **Physiology of Yoga**: ¿conseguir el libro original (McGonigle & Moses) para sustituir el resumen Bookey?
-6. **Colecciones JN/RP**: registradas como datasets colectivos (§10). Si algún agente necesita entradas por programa individual, abrir ticket para granular.
-7. **Carpeta `Papers absurdos`**: se conserva intacta (solo dups movidos). Si se quiere limpiar algún día, decisión del usuario — AG-BIB no borra.
+1. **Renombrado post-merge en `investigacion\`** (checkout principal): aplicar los 7 nombres propuestos (OG 2ª ed, tendonitis, Min-Max, TBTS, Glute, Powerbuilding). Los docx ya están commiteados.
+2. **Años por confirmar** al extraer: Prabowo (~2025), Ricci (2021), Lenetsky (~2017), James BJJ (~2014), Nippard body-recomp/fundamentals (s/f).
+3. **Salud sexual** (4 libros + 8 papers): no hay agente dueño en el plan (¿AG-CLIN con gate? ¿nuevo agente?). Decidir antes de construir RAG de ese dominio.
+4. **Physiology of Yoga**: ¿conseguir el libro original (McGonigle & Moses) para sustituir el resumen Bookey?
+5. **Colecciones JN/RP**: registradas como datasets colectivos (§10). Si algún agente necesita entradas por programa individual, abrir ticket para granular.
+6. **Carpeta `Papers absurdos`**: se conserva intacta (solo dups movidos). Si se quiere limpiar algún día, decisión del usuario — AG-BIB no borra.
+7. **Calidad de las extracciones recuperadas**: son rondas crudas del asistente (algunas fuentes tienen 2–4 rondas: extracción inicial + auditoría + complemento). Antes de ingestar al RAG v4, AG-FIT/AG-ANATOM/AG-NUTRI deben quedarse con la ronda final/completa de cada fuente y validar contra el PDF (la auditoría de cada chat ya marca ⚠️ huecos visuales).
 
 ## Próximo paso recomendado
 
-Arrancar la cola Gemini del MANIFEST §18-Bloque A (#1 `grays-anatomy-students-4ed`, #2 `norkin-joint-structure-6ed` con el atajo del txt) mientras el usuario decide cómo recuperar las extracciones de los chats (§18-Bloque B).
+La cola Gemini se reduce al **Bloque A** del MANIFEST §18 (empezando por `grays-anatomy-students-4ed` y `norkin-joint-structure-6ed`). En paralelo, AG-FIT ya puede ingestar las extracciones recuperadas de hipertrofia/rehab/tendinopatías (Nippard, Israetel, Horschig, Low) al `rag/fitness.json`.

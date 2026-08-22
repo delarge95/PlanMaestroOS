@@ -26,7 +26,7 @@
 ## Estados de extracción
 
 - `ok` — extracción consolidada en `biblioteca/extracciones/<sourceId>.md`
-- `en-chat` — fuente enviada a un chat de extracción (ver § chats). ⚠️ Los exports actuales NO contienen las respuestas del modelo (ver incidencia en §Extras): tratar como "extraída pero no recuperable del export"; el contenido vive solo en la UI del chat original.
+- `ok (chat)` — extracción recuperada de los exports de chat y consolidada en `biblioteca/extracciones/<sourceId>.md` (fuente única) o en un archivo de lote `chat-<id>-*.md` (varias fuentes por chat)
 - `pendiente-gemini` — pendiente de extracción (ver lista priorizada al final)
 - `no-aplica` — datasets/docs internos que se referencian tal cual
 
@@ -40,27 +40,27 @@
 | `moore-clinically-oriented-6ed` | libro | Clinically Oriented Anatomy | Moore, Dalley, Agur | 6ª ed. | anatomía | expert-book | `L:F:Moore-ClinicallyOrientedAnatomy_6ed.pdf` | pendiente-gemini | 1168 p; escaneado SIN capa de texto → Gemini/OCR obligatorio |
 | `macintosh-skeletal-muscle-2ed` | libro | Skeletal Muscle: Form and Function | MacIntosh, Gardiner, McComas | 2ª ed. 2006 | fisiología muscular | expert-book | `L:F:MacIntosh-SkeletalMuscleFormAndFunction_2ed_2006.pdf` | pendiente-gemini | 434 p; sin capa de texto en primeras páginas |
 | `enoka-neuromechanics-4ed` | libro | Neuromechanics of Human Movement | Roger M. Enoka | 4ª ed. 2008 | control motor | expert-book | `L:F:Enoka-NeuromechanicsOfHumanMovement_4ed_2008.pdf` | pendiente-gemini | 568 p; capa de texto OK (calidad irregular de escaneo) |
-| `norkin-joint-structure-6ed` | libro | Joint Structure and Function: A Comprehensive Analysis | Levangie & Norkin | 6ª ed. 2019 | kinesiología/articulaciones | expert-book | `L:Norkin-JointStructureAndFunction_6ed_2019.pdf` | en-chat | 1756 p + atajo de texto `..._textolayer.txt` (usarlo como base) |
+| `norkin-joint-structure-6ed` | libro | Joint Structure and Function: A Comprehensive Analysis | Levangie & Norkin | 6ª ed. 2019 | kinesiología/articulaciones | expert-book | `L:Norkin-JointStructureAndFunction_6ed_2019.pdf` | ok (chat) | 1756 p + atajo de texto `..._textolayer.txt` (usarlo como base) |
 
 ## 2. Libros — nutrición
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `bibliotex-sport-nutrition-2022` | libro | Sport Nutrition (volumen editado) | varios (3G E-learning/Bibliotex) | 2022 | nutrición | expert-book | `L:F:Bibliotex-SportNutrition_2022.pdf` | en-chat | 358 p; compilación de capítulos CC; referencia principal AG-NUTRI. Dup doble-compresión en `L:D:` |
-| `maughan-nutrition-in-sport` | libro | Nutrition in Sport (IOC Encyclopaedia of Sports Medicine Vol. VII) | Maughan (ed.) | 2000 | nutrición | expert-book | `L:Maughan-NutritionInSport_IOC_2000.pdf` | en-chat | 698 p; enciclopédico |
+| `bibliotex-sport-nutrition-2022` | libro | Sport Nutrition (volumen editado) | varios (3G E-learning/Bibliotex) | 2022 | nutrición | expert-book | `L:F:Bibliotex-SportNutrition_2022.pdf` | ok (chat) | 358 p; compilación de capítulos CC; referencia principal AG-NUTRI. Dup doble-compresión en `L:D:` |
+| `maughan-nutrition-in-sport` | libro | Nutrition in Sport (IOC Encyclopaedia of Sports Medicine Vol. VII) | Maughan (ed.) | 2000 | nutrición | expert-book | `L:Maughan-NutritionInSport_IOC_2000.pdf` | ok (chat) | 698 p; enciclopédico |
 | `rp-renaissance-kitchen` | libro | The Renaissance Kitchen | Renaissance Periodization | s/f | nutrición/recetas | expert-book | `RP:RP-TheRenaissanceKitchen.pdf` | pendiente-gemini | puente con gastronomía (macros) |
 
 ## 3. Libros — fuerza / hipertrofia / prescripción
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `haff-essentials-strength-4ed` | libro | Essentials of Strength Training and Conditioning (NSCA) | Haff & Triplett (eds.) | 4ª ed. 2016 | fuerza/condicionamiento | expert-book | `L:Haff-EssentialsOfStrengthTrainingAndConditioning_4ed.pdf` | en-chat | 752 p + `..._textolayer.txt` (solo portada; PDF con capa de texto) |
-| `acsm-exercise-testing-prescription-10ed` | libro | ACSM's Guidelines for Exercise Testing and Prescription | ACSM (Riebe, ed.) | 10ª ed. 2018 | fisiología/prescripción | expert-book | `L:ACSM-ExerciseTestingAndPrescription_10ed_2018.pdf` | en-chat | 651 p |
-| `nippard-muscle-ladder-2024` | libro | The Muscle Ladder: Get Jacked Using Science | Jeff Nippard | 2024 | hipertrofia | expert-book | `JN:Nippard-MuscleLadder_2024.pdf` | en-chat | 664 p. Dup comprimido en `JN:_duplicados\` |
+| `haff-essentials-strength-4ed` | libro | Essentials of Strength Training and Conditioning (NSCA) | Haff & Triplett (eds.) | 4ª ed. 2016 | fuerza/condicionamiento | expert-book | `L:Haff-EssentialsOfStrengthTrainingAndConditioning_4ed.pdf` | ok (chat) | 752 p + `..._textolayer.txt` (solo portada; PDF con capa de texto) |
+| `acsm-exercise-testing-prescription-10ed` | libro | ACSM's Guidelines for Exercise Testing and Prescription | ACSM (Riebe, ed.) | 10ª ed. 2018 | fisiología/prescripción | expert-book | `L:ACSM-ExerciseTestingAndPrescription_10ed_2018.pdf` | ok (chat) | 651 p |
+| `nippard-muscle-ladder-2024` | libro | The Muscle Ladder: Get Jacked Using Science | Jeff Nippard | 2024 | hipertrofia | expert-book | `JN:Nippard-MuscleLadder_2024.pdf` | ok (chat) | 664 p. Dup comprimido en `JN:_duplicados\` |
 | `nippard-body-recomposition` | libro | The Ultimate Guide to Body Recomposition | Nippard & Barakat | ~2019 | recomposición corporal | expert-book | `JN:Nippard-UltimateGuideToBodyRecomposition.pdf` | pendiente-gemini | 268 p |
 | `nippard-fundamentals-hypertrophy` | libro-programa | Fundamentals Hypertrophy Program | Jeff Nippard | s/f | hipertrofia | expert-book | `JN:Nippard-FundamentalsHypertrophyProgram.pdf` | pendiente-gemini | 97 p |
-| `israetel-scientific-principles-hypertrophy` | libro | Scientific Principles of Hypertrophy Training | Israetel et al. (RP) | s/f | hipertrofia | expert-book | `RP:Israetel-ScientificPrinciplesOfHypertrophyTraining.pdf` | en-chat | |
-| `israetel-scientific-principles-strength` | libro | Scientific Principles of Strength Training | Israetel et al. (RP) | s/f | fuerza | expert-book | `RP:Israetel-ScientificPrinciplesOfStrengthTraining.pdf` | en-chat | |
+| `israetel-scientific-principles-hypertrophy` | libro | Scientific Principles of Hypertrophy Training | Israetel et al. (RP) | s/f | hipertrofia | expert-book | `RP:Israetel-ScientificPrinciplesOfHypertrophyTraining.pdf` | ok (chat) | |
+| `israetel-scientific-principles-strength` | libro | Scientific Principles of Strength Training | Israetel et al. (RP) | s/f | fuerza | expert-book | `RP:Israetel-ScientificPrinciplesOfStrengthTraining.pdf` | ok (chat) | |
 | `inda-fuerza-female-strength` | libro | FUERZA: A Female Guide to Strength and Physique | Marisa Inda | 2018 | fuerza (mujeres) | expert-book | `RP:Inda-FUERZA-FemaleGuideStrengthPhysique.pdf` | pendiente-gemini | |
 
 ## 4. Libros — calistenia / postura / rehab (método Low + Squat University)
@@ -68,52 +68,52 @@
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
 | `low-overcoming-gravity-2ed` | libro | Overcoming Gravity: A Systematic Approach to Gymnastics and Bodyweight Strength | Steven Low | 2ª ed. 2016 | calistenia | expert-book | `INV:Overcoming Gravity_ A Systematic Approach to Gymnastics and -- Low, Steven -- 2, 2016.pdf` → propuesto `Low-OvercomingGravity_2ed_2016.pdf` | **ok** | 600 p. Extracción consolidada (6 partes, `D:\Downloads\OG2E_extraccion_parte*.md`) en `biblioteca/extracciones/low-overcoming-gravity-2ed.md`. Copias alternas 976 p en `DL:_duplicados\` |
-| `low-overcoming-poor-posture` | libro | Overcoming Poor Posture | Low & Ilano | 2017 | postura | expert-book | `L:Low-OvercomingPoorPosture_2017.pdf` | en-chat | 140 p |
-| `low-overcoming-tendonitis-2019` | libro | Overcoming Tendonitis | Low & Skretch | 2019 | tendinopatías | expert-book | `INV:overcoming-tendonitis-...-(1).pdf` → propuesto `Low-OvercomingTendonitis_2019.pdf` | en-chat | 203 p. Autoridad en rehab tendinosa (AG-FIT F2). Dup byte-idéntico archivado en `L:D:` |
-| `horschig-squat-bible` | libro | The Squat Bible | Horschig, Sonthana, Cooper | s/f | sentadilla/fuerza | expert-book | `L:Horschig-SquatBible.pdf` | en-chat | 141 p |
-| `horschig-rebuilding-milo-2021` | libro | Rebuilding Milo: The Lifter's Guide to Fixing Common Injuries | Horschig & Sonthana | 2021 | rehab levantadores | expert-book | `L:Horschig-RebuildingMilo_2021.pdf` | en-chat | 585 p |
-| `wilson-exercise-therapy-msk` | libro | Exercise Therapy in the Management of Musculoskeletal Disorders | Wilson, Gormley, Hussey (eds.) | s/f | fisioterapia | expert-book | `L:Wilson-ExerciseTherapyMusculoskeletalDisorders.pdf` | en-chat | 280 p |
+| `low-overcoming-poor-posture` | libro | Overcoming Poor Posture | Low & Ilano | 2017 | postura | expert-book | `L:Low-OvercomingPoorPosture_2017.pdf` | ok (chat) | 140 p |
+| `low-overcoming-tendonitis-2019` | libro | Overcoming Tendonitis | Low & Skretch | 2019 | tendinopatías | expert-book | `INV:overcoming-tendonitis-...-(1).pdf` → propuesto `Low-OvercomingTendonitis_2019.pdf` | ok (chat) | 203 p. Autoridad en rehab tendinosa (AG-FIT F2). Dup byte-idéntico archivado en `L:D:` |
+| `horschig-squat-bible` | libro | The Squat Bible | Horschig, Sonthana, Cooper | s/f | sentadilla/fuerza | expert-book | `L:Horschig-SquatBible.pdf` | ok (chat) | 141 p |
+| `horschig-rebuilding-milo-2021` | libro | Rebuilding Milo: The Lifter's Guide to Fixing Common Injuries | Horschig & Sonthana | 2021 | rehab levantadores | expert-book | `L:Horschig-RebuildingMilo_2021.pdf` | ok (chat) | 585 p |
+| `wilson-exercise-therapy-msk` | libro | Exercise Therapy in the Management of Musculoskeletal Disorders | Wilson, Gormley, Hussey (eds.) | s/f | fisioterapia | expert-book | `L:Wilson-ExerciseTherapyMusculoskeletalDisorders.pdf` | ok (chat) | 280 p |
 
 ## 5. Libros — running / ciclismo / resistencia
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `bangsbo-running-science` | libro | Running & Science — in an Interdisciplinary Perspective | Bangsbo & Larsen (eds.) | s/f | running | expert-book | `L:Bangsbo-RunningScience_Interdisciplinary.pdf` | en-chat | 178 p |
+| `bangsbo-running-science` | libro | Running & Science — in an Interdisciplinary Perspective | Bangsbo & Larsen (eds.) | s/f | running | expert-book | `L:Bangsbo-RunningScience_Interdisciplinary.pdf` | ok (chat) | 178 p |
 | `daniels-running-formula-4ed` | libro | Daniels' Running Formula | Jack Daniels | 4ª ed. | running | expert-book | `L:Daniels-DanielsRunningFormula_4ed.epub` | pendiente-gemini | solo epub |
-| `vandijk-secret-of-running` | libro | The Secret of Running | van Dijk & van Megen | s/f | running (potencia) | expert-book | `L:VanDijk-TheSecretOfRunning.pdf` | en-chat | 478 p. Dup comprimido en `L:D:` |
-| `allen-power-meter-3ed` | libro | Training and Racing with a Power Meter | Allen, Coggan, McGregor | 3ª ed. 2019 | ciclismo (potencia) | expert-book | `L:Allen-TrainingAndRacingWithAPowerMeter_3ed_2019.pdf` | en-chat | 498 p. Dups epub+comprimido en `L:D:` |
-| `wilkins-cycling-physiology-2021` | libro | Cycling Physiology & Training Science | Wilkins & Bell | 2021 | ciclismo | expert-book | `L:Wilkins-CyclingPhysiologyAndTrainingScience_2021.pdf` | en-chat | 283 p |
+| `vandijk-secret-of-running` | libro | The Secret of Running | van Dijk & van Megen | s/f | running (potencia) | expert-book | `L:VanDijk-TheSecretOfRunning.pdf` | ok (chat) | 478 p. Dup comprimido en `L:D:` |
+| `allen-power-meter-3ed` | libro | Training and Racing with a Power Meter | Allen, Coggan, McGregor | 3ª ed. 2019 | ciclismo (potencia) | expert-book | `L:Allen-TrainingAndRacingWithAPowerMeter_3ed_2019.pdf` | ok (chat) | 498 p. Dups epub+comprimido en `L:D:` |
+| `wilkins-cycling-physiology-2021` | libro | Cycling Physiology & Training Science | Wilkins & Bell | 2021 | ciclismo | expert-book | `L:Wilkins-CyclingPhysiologyAndTrainingScience_2021.pdf` | ok (chat) | 283 p |
 
 ## 6. Libros — yoga / flexibilidad / danza / fisiología general
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `mitchell-yoga-biomechanics` | libro | Yoga Biomechanics: Stretching Redefined | Jules Mitchell | s/f | yoga/biomecánica | expert-book | `L:Mitchell-YogaBiomechanics-StretchingRedefined.pdf` | en-chat | 325 p |
+| `mitchell-yoga-biomechanics` | libro | Yoga Biomechanics: Stretching Redefined | Jules Mitchell | s/f | yoga/biomecánica | expert-book | `L:Mitchell-YogaBiomechanics-StretchingRedefined.pdf` | ok (chat) | 325 p |
 | `bookey-physiology-of-yoga-resumen` | doc | The Physiology of Yoga — RESUMEN (Bookey) | Bookey (sobre McGonigle & Moses) | s/f | yoga/fisiología | expert-book | `L:Bookey-PhysiologyOfYoga_Resumen.pdf` | pendiente-gemini | ⚠️ NO es el libro original: es un resumen tipo Bookey (116 p). El original no está en la biblioteca |
 | `blahnik-full-body-flexibility-2ed` | libro | Full-Body Flexibility | Jay Blahnik | 2ª ed. | flexibilidad | expert-book | `L:Blahnik-FullBodyFlexibility_2ed.pdf` | pendiente-gemini | 272 p |
-| `macintosh-open-textbook-exphys` | libro | Open Textbook of Exercise Physiology | MacIntosh et al. (ed.) | s/f | fisiología del ejercicio | expert-book | `L:MacIntosh-OpenTextbookOfExercisePhysiology.pdf` | en-chat | 317 p; secundaria AG-ANATOM |
-| `clippinger-dance-anatomy-kinesiology-2ed` | libro | Dance Anatomy and Kinesiology | Karen Sue Clippinger | 2ª ed. | danza/kinesiología | expert-book | `L:Clippinger-DanceAnatomyAndKinesiology_2ed.pdf` | en-chat | 546 p |
-| `haas-dance-anatomy-2ed` | libro | Dance Anatomy | Jacqui Greene Haas | 2ª ed. | danza | expert-book | `L:Haas-DanceAnatomy_2ed.pdf` | en-chat | 272 p |
-| `howse-dance-technique-3ed` | libro | Dance Technique and Injury Prevention | Justin Howse | 3ª ed. | danza/lesiones | expert-book | `L:Howse-DanceTechniqueAndInjuryPrevention_3ed.pdf` | en-chat | 232 p. 2 dups comprimidos en `L:D:` |
-| `lott-biomechanics-of-dance` | libro | Biomechanics of Dance: Applications of Classical Mechanics | Melanie Lott | 2021 | danza/biomecánica | expert-book | `L:Lott-BiomechanicsOfDance_2021.pdf` | en-chat | 411 p |
+| `macintosh-open-textbook-exphys` | libro | Open Textbook of Exercise Physiology | MacIntosh et al. (ed.) | s/f | fisiología del ejercicio | expert-book | `L:MacIntosh-OpenTextbookOfExercisePhysiology.pdf` | ok (chat) | 317 p; secundaria AG-ANATOM |
+| `clippinger-dance-anatomy-kinesiology-2ed` | libro | Dance Anatomy and Kinesiology | Karen Sue Clippinger | 2ª ed. | danza/kinesiología | expert-book | `L:Clippinger-DanceAnatomyAndKinesiology_2ed.pdf` | ok (chat) | 546 p |
+| `haas-dance-anatomy-2ed` | libro | Dance Anatomy | Jacqui Greene Haas | 2ª ed. | danza | expert-book | `L:Haas-DanceAnatomy_2ed.pdf` | ok (chat) | 272 p |
+| `howse-dance-technique-3ed` | libro | Dance Technique and Injury Prevention | Justin Howse | 3ª ed. | danza/lesiones | expert-book | `L:Howse-DanceTechniqueAndInjuryPrevention_3ed.pdf` | ok (chat) | 232 p. 2 dups comprimidos en `L:D:` |
+| `lott-biomechanics-of-dance` | libro | Biomechanics of Dance: Applications of Classical Mechanics | Melanie Lott | 2021 | danza/biomecánica | expert-book | `L:Lott-BiomechanicsOfDance_2021.pdf` | ok (chat) | 411 p |
 
 ## 7. Libros — artes marciales / combate
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `delp-muay-thai-2013` | libro | Muay Thai Training Exercises: The Ultimate Guide | Christoph Delp | 2013 | muay thai | expert-book | `L:Delp-MuayThaiTrainingExercises_2013.pdf` | en-chat | 414 p + `..._textolayer.txt` |
-| `dias-training-conditioning-mma` | libro | Training and Conditioning for MMA: Programming of Champions | Dias, Oliveira, Brauer Jr. | s/f | MMA | expert-book | `L:Dias-TrainingAndConditioningForMMA_ProgrammingOfChampions.pdf` | en-chat | 433 p. Dup comprimido en `L:D:` |
+| `delp-muay-thai-2013` | libro | Muay Thai Training Exercises: The Ultimate Guide | Christoph Delp | 2013 | muay thai | expert-book | `L:Delp-MuayThaiTrainingExercises_2013.pdf` | ok (chat) | 414 p + `..._textolayer.txt` |
+| `dias-training-conditioning-mma` | libro | Training and Conditioning for MMA: Programming of Champions | Dias, Oliveira, Brauer Jr. | s/f | MMA | expert-book | `L:Dias-TrainingAndConditioningForMMA_ProgrammingOfChampions.pdf` | ok (chat) | 433 p. Dup comprimido en `L:D:` |
 | `tomlinson-evolution-martial-arts` | libro | The Evolution of Martial Arts in Combat Sports | Stuart Tomlinson | s/f | MA de combate | expert-book | `L:Tomlinson-EvolutionOfMartialArtsInCombatSports.pdf` | pendiente-gemini | 296 p |
-| `wilson-boxing-science-intro` | doc | Boxing Science: Introduction to Strength and Conditioning | Wilson & Ruddock | s/f | boxeo | expert-book | `L:Wilson-BoxingScience-IntroStrengthConditioning.pdf` | en-chat | eBook 20 p |
+| `wilson-boxing-science-intro` | doc | Boxing Science: Introduction to Strength and Conditioning | Wilson & Ruddock | s/f | boxeo | expert-book | `L:Wilson-BoxingScience-IntroStrengthConditioning.pdf` | ok (chat) | eBook 20 p |
 
 ## 8. Libros — salud sexual (dominio secundario deliberado)
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `metz-coping-pe-2003` | libro | Coping with Premature Ejaculation | Metz & McCarthy | 2003 | salud sexual | expert-book | `L:Metz-CopingWithPrematureEjaculation_2003.pdf` | en-chat | 186 p |
-| `kaleb-kegel-men-2019` | libro | Kegel Exercise for Men | Vincent Kaleb | 2019 | salud sexual | expert-book | `L:Kaleb-KegelExerciseForMen_2019.pdf` | en-chat | 19 p. Dup epub en `L:D:` |
-| `zilbergeld-new-male-sexuality-1992` | libro | The New Male Sexuality | Bernie Zilbergeld | 1992 (rev.) | salud sexual | expert-book | `L:Zilbergeld-TheNewMaleSexuality_1992_rev.pdf` | en-chat | 506 p. Dup epub en `L:D:` |
-| `wuh-sexual-fitness-2002` | libro | Sexual Fitness: 7 Essential Elements | Wuh & Fox | 2002 | salud sexual | expert-book | `L:Wuh-SexualFitness_2002.pdf` | en-chat | 360 p |
+| `metz-coping-pe-2003` | libro | Coping with Premature Ejaculation | Metz & McCarthy | 2003 | salud sexual | expert-book | `L:Metz-CopingWithPrematureEjaculation_2003.pdf` | ok (chat) | 186 p |
+| `kaleb-kegel-men-2019` | libro | Kegel Exercise for Men | Vincent Kaleb | 2019 | salud sexual | expert-book | `L:Kaleb-KegelExerciseForMen_2019.pdf` | ok (chat) | 19 p. Dup epub en `L:D:` |
+| `zilbergeld-new-male-sexuality-1992` | libro | The New Male Sexuality | Bernie Zilbergeld | 1992 (rev.) | salud sexual | expert-book | `L:Zilbergeld-TheNewMaleSexuality_1992_rev.pdf` | ok (chat) | 506 p. Dup epub en `L:D:` |
+| `wuh-sexual-fitness-2002` | libro | Sexual Fitness: 7 Essential Elements | Wuh & Fox | 2002 | salud sexual | expert-book | `L:Wuh-SexualFitness_2002.pdf` | ok (chat) | 360 p |
 
 ## 9. Programas Nippard (fuentes de fitness en el repo)
 
@@ -149,31 +149,31 @@
 | `doc-plan-maestro-v2-v3` | doc | Plan maestro v2/v3 | interno | 2025-07-23 | plan | internal-doc | `REPO:...investigacion/plan_maestro_v2.md`, `plan_maestro_v3.md` | no-aplica | |
 | `plan-accion-tdah-ansiedad` | doc | Plan de acción profesional TDAH/ansiedad social | clínico | 2026-05-01 | clínico | internal-doc | `REPO:...investigacion/plan_accion_tdah_ansiedad_social-1.pdf` | no-aplica | territorio AG-CLIN |
 | `reporte-clinico-neurodesarrollo` | doc | Reporte clínico neurodesarrollo + ansiedad | clínico | 2026-05-01 | clínico | internal-doc | `REPO:...investigacion/reporte_clinico_neurodesarrollo_ansiedad.pdf` | no-aplica | territorio AG-CLIN |
-| `doc-notas-scbjj` | doc | Notas Strength & Conditioning para BJJ | usuario | s/f | BJJ | internal-doc | `P:doc-notas-strength-conditioning-bjj.txt` | en-chat | adjuntado al chat 1787415076155 |
+| `doc-notas-scbjj` | doc | Notas Strength & Conditioning para BJJ | usuario | s/f | BJJ | internal-doc | `P:doc-notas-strength-conditioning-bjj.txt` | ok (chat) | adjuntado al chat 1787415076155 |
 
 ## 12. Papers — relevantes (combate / fuerza)
 
 | sourceId | tipo | título | autor | año | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `paper-ruddock-2021-hiit-conditioning-combat` | paper | High-Intensity Conditioning for Combat Athletes: Practical Recommendations | Fixter, Ruddock, James, et al. (Appl. Sci.) | 2021 | combate/condicionamiento | observacional (revisión) | `P:paper-ruddock-2021-hiit-conditioning-combat.pdf` | en-chat | 15 p |
-| `paper-james-bjj-evidence-based-training-plan` | paper | An Evidence-Based Training Plan for Brazilian Jiu-Jitsu | Lachlan P. James (Strength Cond. J.) | ~2014 | BJJ | observacional (revisión) | `P:paper-james-bjj-evidence-based-training-plan.pdf` | en-chat | 9 p |
-| `paper-kostikiadis-2018-mma-specific-sc-training` | paper | Short-Term Sport-Specific S&C Training in Well-Trained MMA Athletes | Kostikiadis et al. (JSSM 17:348) | 2018 | MMA | rct (controlado 2 grupos, n=17) | `P:paper-kostikiadis-2018-mma-specific-sc-training.pdf` | en-chat | 11 p |
-| `paper-lenetsky-punching-forces-combat` | paper | Assessment and Contributors of Punching Forces in Combat Sports Athletes | Lenetsky, Harris, Cohen (Strength Cond. J.) | ~2017 | combate | observacional (revisión) | `P:paper-lenetsky-punching-forces-combat.pdf` | en-chat | 7 p |
-| `paper-prabowo-combat-physical-conditioning` | paper | Physical condition preparation of combat sport athletes for fighting simulation: coach perspectives | Trisnar Adi Prabowo (Pedagogy of Health) | ~2025 | combate | observacional (cualitativo) | `P:paper-prabowo-combat-physical-conditioning.pdf` | en-chat | 11 p |
-| `paper-ricci-2021-issn-weight-cut-mma` | paper | ISSN Position Stand: nutrition and weight cut strategies for MMA/combat | Ricci et al. (JISSN) | 2021 | nutrición combate | observacional (position stand/consenso) | `P:paper-ricci-2021-issn-weight-cut-mma.pdf` | en-chat | 55 p (versión larga) |
+| `paper-ruddock-2021-hiit-conditioning-combat` | paper | High-Intensity Conditioning for Combat Athletes: Practical Recommendations | Fixter, Ruddock, James, et al. (Appl. Sci.) | 2021 | combate/condicionamiento | observacional (revisión) | `P:paper-ruddock-2021-hiit-conditioning-combat.pdf` | ok (chat) | 15 p |
+| `paper-james-bjj-evidence-based-training-plan` | paper | An Evidence-Based Training Plan for Brazilian Jiu-Jitsu | Lachlan P. James (Strength Cond. J.) | ~2014 | BJJ | observacional (revisión) | `P:paper-james-bjj-evidence-based-training-plan.pdf` | ok (chat) | 9 p |
+| `paper-kostikiadis-2018-mma-specific-sc-training` | paper | Short-Term Sport-Specific S&C Training in Well-Trained MMA Athletes | Kostikiadis et al. (JSSM 17:348) | 2018 | MMA | rct (controlado 2 grupos, n=17) | `P:paper-kostikiadis-2018-mma-specific-sc-training.pdf` | ok (chat) | 11 p |
+| `paper-lenetsky-punching-forces-combat` | paper | Assessment and Contributors of Punching Forces in Combat Sports Athletes | Lenetsky, Harris, Cohen (Strength Cond. J.) | ~2017 | combate | observacional (revisión) | `P:paper-lenetsky-punching-forces-combat.pdf` | ok (chat) | 7 p |
+| `paper-prabowo-combat-physical-conditioning` | paper | Physical condition preparation of combat sport athletes for fighting simulation: coach perspectives | Trisnar Adi Prabowo (Pedagogy of Health) | ~2025 | combate | observacional (cualitativo) | `P:paper-prabowo-combat-physical-conditioning.pdf` | ok (chat) | 11 p |
+| `paper-ricci-2021-issn-weight-cut-mma` | paper | ISSN Position Stand: nutrition and weight cut strategies for MMA/combat | Ricci et al. (JISSN) | 2021 | nutrición combate | observacional (position stand/consenso) | `P:paper-ricci-2021-issn-weight-cut-mma.pdf` | ok (chat) | 55 p (versión larga) |
 
 ## 13. Papers — relevantes (nutrición / danza / salud sexual)
 
 | sourceId | tipo | título | autor | año | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `paper-aragon-2017-issn-diets-body-composition` | paper | ISSN Position Stand: Diets and Body Composition | Aragon, Schoenfeld, Wildman, et al. (JISSN) | 2017 | nutrición | observacional (position stand; sintetiza MA/RCT) | `P:paper-aragon-2017-issn-diets-body-composition.pdf` | en-chat | 19 p; clave para AG-NUTRI |
-| `paper-russell-2013-preventing-dance-injuries` | paper | Preventing Dance Injuries: Current Perspectives | Russell (OAJSM 4:199) | 2013 | danza/lesiones | observacional (revisión) | `P:paper-russell-2013-preventing-dance-injuries.pdf` | en-chat | 12 p |
-| `paper-cooper-2015-pe-behavioral-therapies` | paper | Behavioral Therapies for Management of PE: A Systematic Review | Cooper, Martyn-St James, Kaltenthaler, et al. (Sexual Medicine) | 2015 | salud sexual | meta-analysis (SR) | `P:paper-cooper-2015-pe-behavioral-therapies.pdf` | en-chat | 15 p; dup con espacios en nombre archivado en `P:D:` |
-| `paper-raveendran-2021-pe-narrative-review` | paper | Premature Ejaculation — Current Concepts in Management: Narrative Review | Raveendran & Agarwal (Int J Reprod BioMed 19:5) | 2021 | salud sexual | observacional (revisión narrativa) | `P:paper-raveendran-2021-pe-narrative-review.pdf` | en-chat | 18 p; el chat lo tituló "tendinitis de codo" por error |
-| `paper-pearce-2015-sexual-dysfunction-prostate-surveillance` | paper | Longitudinal Predictors of Sexual Dysfunction in Men on Active Surveillance for Prostate Cancer | Pearce et al. (Sexual Medicine) | 2015 | salud sexual | observacional (longitudinal) | `P:paper-pearce-2015-sexual-dysfunction-prostate-surveillance.pdf` | en-chat | 9 p |
-| `paper-pastuszak-2015-testosterone-preparations` | paper | Comparison of Testosterone Gels, Injections, and Pellets | Pastuszak et al. (Sexual Medicine) | 2015 | salud sexual | observacional (retrospectivo) | `P:paper-pastuszak-2015-testosterone-preparations.pdf` | en-chat | 9 p |
-| `paper-helmer-2015-veterans-sexual-health` | paper | Sexual Health and Function of Recent Male Combat Veterans | Helmer et al. (Sexual Medicine) | 2015 | salud sexual | observacional (cualitativo) | `P:paper-helmer-2015-veterans-sexual-health.pdf` | en-chat | 10 p |
-| `paper-veale-2015-bdd-sexual-functioning` | paper | Sexual Functioning and Behavior of Men with BDD vs Men Anxious about Penis Size | Veale et al. (Sexual Medicine) | 2015 | salud sexual | observacional (caso-control) | `P:paper-veale-2015-bdd-sexual-functioning.pdf` | en-chat | 9 p |
+| `paper-aragon-2017-issn-diets-body-composition` | paper | ISSN Position Stand: Diets and Body Composition | Aragon, Schoenfeld, Wildman, et al. (JISSN) | 2017 | nutrición | observacional (position stand; sintetiza MA/RCT) | `P:paper-aragon-2017-issn-diets-body-composition.pdf` | ok (chat) | 19 p; clave para AG-NUTRI |
+| `paper-russell-2013-preventing-dance-injuries` | paper | Preventing Dance Injuries: Current Perspectives | Russell (OAJSM 4:199) | 2013 | danza/lesiones | observacional (revisión) | `P:paper-russell-2013-preventing-dance-injuries.pdf` | ok (chat) | 12 p |
+| `paper-cooper-2015-pe-behavioral-therapies` | paper | Behavioral Therapies for Management of PE: A Systematic Review | Cooper, Martyn-St James, Kaltenthaler, et al. (Sexual Medicine) | 2015 | salud sexual | meta-analysis (SR) | `P:paper-cooper-2015-pe-behavioral-therapies.pdf` | ok (chat) | 15 p; dup con espacios en nombre archivado en `P:D:` |
+| `paper-raveendran-2021-pe-narrative-review` | paper | Premature Ejaculation — Current Concepts in Management: Narrative Review | Raveendran & Agarwal (Int J Reprod BioMed 19:5) | 2021 | salud sexual | observacional (revisión narrativa) | `P:paper-raveendran-2021-pe-narrative-review.pdf` | ok (chat) | 18 p; el chat lo tituló "tendinitis de codo" por error |
+| `paper-pearce-2015-sexual-dysfunction-prostate-surveillance` | paper | Longitudinal Predictors of Sexual Dysfunction in Men on Active Surveillance for Prostate Cancer | Pearce et al. (Sexual Medicine) | 2015 | salud sexual | observacional (longitudinal) | `P:paper-pearce-2015-sexual-dysfunction-prostate-surveillance.pdf` | ok (chat) | 9 p |
+| `paper-pastuszak-2015-testosterone-preparations` | paper | Comparison of Testosterone Gels, Injections, and Pellets | Pastuszak et al. (Sexual Medicine) | 2015 | salud sexual | observacional (retrospectivo) | `P:paper-pastuszak-2015-testosterone-preparations.pdf` | ok (chat) | 9 p |
+| `paper-helmer-2015-veterans-sexual-health` | paper | Sexual Health and Function of Recent Male Combat Veterans | Helmer et al. (Sexual Medicine) | 2015 | salud sexual | observacional (cualitativo) | `P:paper-helmer-2015-veterans-sexual-health.pdf` | ok (chat) | 10 p |
+| `paper-veale-2015-bdd-sexual-functioning` | paper | Sexual Functioning and Behavior of Men with BDD vs Men Anxious about Penis Size | Veale et al. (Sexual Medicine) | 2015 | salud sexual | observacional (caso-control) | `P:paper-veale-2015-bdd-sexual-functioning.pdf` | ok (chat) | 9 p |
 
 ## 14. Papers — descartados (se conservan, no se extraen)
 
@@ -193,8 +193,8 @@
 
 ## 16. Chats de extracción (mapeo fuente ↔ chat)
 
-> Exports originales en `E:\Laboral\_pdf_biblia\Planeacion_Integral\chats_extraccion_libros\` (43 JSON, Open WebUI/Qwen). Copia de trabajo en `biblioteca/_chat-exports/` de esta rama.
-> ⚠️ **Incidencia importante:** los 43 exports traen los mensajes del usuario (plantilla de extracción + PDF adjunto) pero las **respuestas del asistente están vacías** — el contenido extraído NO viaja en estos JSON. Las extracciones "en-chat" existen solo en la UI del chat original. Ver §Extras para el protocolo de recuperación.
+> Exports originales en `E:\Laboral\_pdf_biblia\Planeacion_Integral\chats_extraccion_libros\` (43 JSON, Qwen/Open WebUI). Copia de trabajo en `biblioteca/_chat-exports/` de esta rama.
+> ✅ Las respuestas del asistente **sí viajan en los exports**, en `chat.messages[*].content_list[*].content` (el campo `content` legado está vacío — no confundir). Recuperadas y consolidadas en `biblioteca/extracciones/` (4,8 M chars en 42 archivos). Un único chat sin respuestas recuperables: 1787414852273 (web app, sin fuente de biblioteca).
 
 | chat-export | fuente(s) adjunta(s) | sourceId(s) |
 |---|---|---|
@@ -244,11 +244,16 @@
 
 ## 17. Extracciones consolidadas (`biblioteca/extracciones/`)
 
-| archivo | sourceId | origen | estado |
-|---|---|---|---|
-| `low-overcoming-gravity-2ed.md` | `low-overcoming-gravity-2ed` | consolidación de `D:\Downloads\OG2E_extraccion_parte1..6*.md` (6 partes válidas; dup de parte3 archivado sin copiar) | ok |
+> 43 archivos, ~4,8 M chars. Estructura de cada archivo: cabecera de procedencia (sourceId, chat de origen) + rondas de respuesta del asistente en orden cronológico (el propio chat ya aplicó la plantilla §0).
 
-> Protocolo para normalizar nuevas extracciones: la salida del chat (respuesta del modelo) se guarda en crudo en `biblioteca/_chat-exports/<chat-export>.json` o `.md`, y de ahí se consolida a `biblioteca/extracciones/<sourceId>.md` aplicando la plantilla §0 de `docs/agents/PROMPTS_INICIALES.md` SIN inventar contenido faltante (marcar ⚠️ huecos).
+| grupo | archivos | origen |
+|---|---|---|
+| Extracción por libro (32) | `<sourceId>.md` p. ej. `norkin-joint-structure-6ed.md`, `acsm-exercise-testing-prescription-10ed.md`, `low-overcoming-tendonitis-2019.md`, `maughan-nutrition-in-sport.md`, `haff-essentials-strength-4ed.md`… | 1 chat → 1 fuente |
+| Consolidación preexistente (1) | `low-overcoming-gravity-2ed.md` | 6 partes md de `D:\Downloads\OG2E_extraccion_parte*.md` |
+| Lotes multi-fuente (8) | `chat-1787414858987-og-sistema-fitapp.md`, `chat-1787414884878-papers-salud-sexual-lote1.md`, `chat-1787414894461-papers-salud-sexual-lote2.md`, `chat-1787414900269-papers-pe-cooper-lote3.md`, `chat-1787414900440-papers-combate-lote1.md`, `chat-1787415068653-papers-combate-lote2.md`, `chat-1787415076155-papers-bjj-mma.md`, `chat-1787415076229-papers-nutricion-danza.md` | 1 chat → varias fuentes (papers agrupados) |
+| Chats de diseño/planificación (2) | `chat-1787414859303-atlas-anatomico-fichas.md` (fichas JSON de músculos/nervios/articulaciones — insumo directo AG-ANATOM), `chat-1787415094594-plan-integracion-fitapp.md` | sin fuente de biblioteca, contenido preservado |
+
+> Protocolo para normalizar nuevas extracciones: guardar el export en crudo en `biblioteca/_chat-exports/` y consolidar las respuestas a `biblioteca/extracciones/<sourceId>.md` aplicando la plantilla §0 de `docs/agents/PROMPTS_INICIALES.md` SIN inventar contenido faltante (marcar ⚠️ huecos).
 
 ## 18. Cola de extracción con Gemini (priorizada)
 
@@ -275,29 +280,13 @@
 | 14 | `nippard-powerbuilding-4x` | AG-FIT | Manual completo (baja prioridad: programa, no libro de conocimiento) | ~3 | 115 p |
 | 15 | `nippard-glute-hypertrophy-program` | AG-FIT | FAQ + rutina (baja prioridad) | ~2 | 36 p |
 
-### Bloque B — `en-chat` SIN respuesta en los exports (re-extracción recomendada en este orden)
+### Bloque B — ~~`en-chat` SIN respuesta~~ ✅ RESUELTO (2026-08-22, segunda pasada)
 
-> Motivo: §16/Extras — los 43 exports traen prompts+adjuntos pero respuestas vacías. Si el usuario recupera las respuestas desde la UI del chat original, estas fuentes pasan a `ok` sin re-ejecutar. Orden por valor para los agentes:
-
-1. `norkin-joint-structure-6ed` (txt ya adjuntado — buscar la respuesta del chat 1787415101528 primero)
-2. `bibliotex-sport-nutrition-2022` y `maughan-nutrition-in-sport` (AG-NUTRI: son SU base; chats 1787415057262 / 1787415035759)
-3. `haff-essentials-strength-4ed` (cap. nutrición + biomecánica; chat 1787415057183)
-4. `low-overcoming-tendonitis-2019` (autoridad rehab tendinosa AG-FIT; chat 1787415101723)
-5. `horschig-rebuilding-milo-2021` (rehab por zona; chat 1787415126946)
-6. `acsm-exercise-testing-prescription-10ed` (prescripción/FITT; chat 1787414908330)
-7. `israetel-scientific-principles-hypertrophy` + `israetel-scientific-principles-strength` (hipertrofia/fuerza AG-FIT)
-8. `nippard-muscle-ladder-2024` (hipertrofia moderna; chat 1787415112509)
-9. Papers combate/nutrición: `paper-aragon-2017-issn-diets-body-composition`, `paper-ricci-2021-issn-weight-cut-mma`, `paper-kostikiadis-2018-mma-specific-sc-training`, `paper-ruddock-2021-hiit-conditioning-combat`, `paper-james-bjj-evidence-based-training-plan`, `paper-lenetsky-punching-forces-combat`, `paper-prabowo-combat-physical-conditioning`
-10. Rehab/fisio: `wilson-exercise-therapy-msk`, `low-overcoming-poor-posture`, `horschig-squat-bible`
-11. Danza/movilidad: `clippinger-dance-anatomy-kinesiology-2ed`, `howse-dance-technique-3ed`, `lott-biomechanics-of-dance`, `haas-dance-anatomy-2ed`, `mitchell-yoga-biomechanics`, `paper-russell-2013-preventing-dance-injuries`
-12. Cardio: `allen-power-meter-3ed`, `vandijk-secret-of-running`, `bangsbo-running-science`, `wilkins-cycling-physiology-2021`
-13. Combate (libros): `dias-training-conditioning-mma`, `delp-muay-thai-2013`, `wilson-boxing-science-intro`
-14. Fisiología general: `macintosh-open-textbook-exphys`
-15. Salud sexual (dominio secundario, sin agente asignado): `metz-coping-pe-2003`, `zilbergeld-new-male-sexuality-1992`, `wuh-sexual-fitness-2002`, `kaleb-kegel-men-2019`, `paper-cooper-2015-pe-behavioral-therapies`, `paper-raveendran-2021-pe-narrative-review`, `paper-pearce-2015…`, `paper-pastuszak-2015…`, `paper-helmer-2015…`, `paper-veale-2015…`
+> Las respuestas SÍ estaban en los exports (campo `chat.messages[*].content_list[*].content`; el `content` legado venía vacío y llevó al diagnóstico erróneo inicial). Todas las fuentes marcadas `ok (chat)` están recuperadas en `biblioteca/extracciones/`. La cola pendiente queda reducida al Bloque A.
 
 ## Extras e incidencias
 
-1. **Exports de chat sin respuestas** (ver §16): re-exportar desde la UI del chat original CON las respuestas, o re-ejecutar la extracción con Gemini (lista priorizada abajo). Hasta entonces, ningún `en-chat` debe considerarse recuperado.
+1. **Exports de chat — RESUELTO en segunda pasada** (ver §16): las respuestas viven en `chat.messages[*].content_list[*].content`. Recuperadas 42/43 chats con contenido (4,8 M chars → `biblioteca/extracciones/`). El único chat sin respuestas es 1787414852273 (tema web app, sin fuente de biblioteca). Nota técnica para futuras importaciones: ignorar el campo `content`/`reasoning_content` legado (vacío) y leer `content_list`.
 2. **Renombrado INV pendiente**: aplicar en `E:\Laboral\…\investigacion\` los nombres propuestos en §4/§9 tras el merge (los PDF están fuera de git por `*.pdf` en `.gitignore`; ya commiteado el renombrado de los docx trackeados a `_duplicados/`).
 3. **Duplicados archivados** (nunca borrados): `L:D:` 14 archivos, `P:D:` 1, `PA:_duplicados` 3, `JN:_duplicados` 1, `DL:_duplicados` 2 (escaneo alterno 976 p de OG 2ª ed), `INV:_duplicados` 3 (commiteados). Dups internos de colecciones JN/RP documentados en §10 sin mover.
 4. **Overcoming Gravity "1"** (`Overcoming_Gravity_-_Steven_Low_1.pdf`): pese al nombre, es la **2ª edición** (escaneo alterno de 976 p) → archivado como dup de `low-overcoming-gravity-2ed`.
