@@ -1,6 +1,8 @@
 ---
+import CTAButton from "@components/CTAButton.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { focusVariants } from "@data/focusVariants";
 import { projects } from "@data/projects";
 ---
 
@@ -21,6 +23,23 @@ import { projects } from "@data/projects";
   <section class="section-shell">
     <div class="project-grid">
       {projects.map((project, index) => <ProjectCard project={project} featured={index < 2} />)}
+    </div>
+  </section>
+
+  <section class="section-shell">
+    <div class="section-intro">
+      <div>
+        <p class="eyebrow">Focus routes</p>
+        <h2>Same work, sorted per application path.</h2>
+      </div>
+      <p>
+        Each route reorders these projects for a specific role family. The facts stay consistent.
+      </p>
+    </div>
+    <div class="hero-actions">
+      {focusVariants.map((variant) => (
+        <CTAButton href={`/focus/${variant.slug}`} label={variant.label} variant="ghost" />
+      ))}
     </div>
   </section>
 </BaseLayout>
