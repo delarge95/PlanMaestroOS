@@ -35,20 +35,6 @@ export interface CompletedWorkout {
   }[];
 }
 
-const DEFAULT_ROUTINES = [
-  {
-    title: 'Día 1 AM: Empuje Min-Max (Pecho, Hombro, Tríceps)',
-    program: 'Min-Max Nippard + Calistenia Anillas (Fase AM)',
-    exercises: [
-      { name: 'Pseudo Planche Pushups / Fondos en Anillas', target: '3 series × 6-10 reps • RPE 8-9', restSec: 120 },
-      { name: 'Incline Dumbbell Press', target: '3 series × 6-10 reps • RPE 8-9', restSec: 120 },
-      { name: 'Pike Pushups / Shoulder Press', target: '3 series × 6-8 reps • RPE 8-9', restSec: 120 },
-      { name: 'Cable Lateral Raise', target: '3 series × 10-15 reps • RPE 9-10', restSec: 90 },
-      { name: '1-Arm Cable Overhead Triceps Extension', target: '3 series × 10-12 reps • RPE 9', restSec: 90 }
-    ]
-  }
-];
-
 export default function FitAppWorkoutLogger() {
   const setCurrentEnergy = useAppStore((s) => s.setCurrentEnergy);
 
@@ -78,8 +64,6 @@ export default function FitAppWorkoutLogger() {
   const activeWeek = officialProgram.weeks?.[safeWeekIdx] || officialProgram.weeks?.[0];
   const activeDay = activeWeek?.days?.find((d) => d.id === currentDayId) || activeWeek?.days?.[0];
 
-  const [useCustomRoutine] = useState(false);
-  const [selectedRoutineIndex, setSelectedRoutineIndex] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
@@ -157,7 +141,7 @@ export default function FitAppWorkoutLogger() {
     setSessionStartTime(Date.now());
     const initialLogs: Record<string, LoggedSet[]> = {};
 
-    if (!useCustomRoutine && activeDay) {
+    if (activeDay) {
       activeDay.exercises.forEach((prescription) => {
         const pId = prescription.id;
         const overrideId = pId ? overrides[pId] : undefined;
@@ -172,15 +156,6 @@ export default function FitAppWorkoutLogger() {
           rpe: 8,
           completed: false
         }));
-      });
-    } else {
-      const activeRoutine = DEFAULT_ROUTINES[selectedRoutineIndex];
-      activeRoutine?.exercises.forEach((ex) => {
-        initialLogs[ex.name] = [
-          { setNum: 1, weight: 0, reps: 10, rpe: 8, completed: false },
-          { setNum: 2, weight: 0, reps: 10, rpe: 8, completed: false },
-          { setNum: 3, weight: 0, reps: 10, rpe: 8, completed: false }
-        ];
       });
     }
     setExerciseLogs(initialLogs);
@@ -278,16 +253,16 @@ export default function FitAppWorkoutLogger() {
       }
     });
 
-    const activeTitle = !useCustomRoutine && activeDay
+    const activeTitle = activeDay
       ? `${officialProgram.title} — ${activeDay.name || activeDay.title} (Sem ${currentWeek})`
-      : DEFAULT_ROUTINES[selectedRoutineIndex]?.title || 'Sesión de Entrenamiento';
+      : 'Sesión de Entrenamiento';
 
     const newWorkout: CompletedWorkout = {
       id: 'w_' + Date.now(),
       date: new Date().toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' }),
-      programId: !useCustomRoutine ? officialProgram.id : undefined,
-      week: !useCustomRoutine ? currentWeek : undefined,
-      dayId: !useCustomRoutine ? activeDay?.id : undefined,
+      programId: officialProgram.id,
+      week: currentWeek,
+      dayId: activeDay?.id,
       routineTitle: activeTitle,
       durationMinutes: Math.max(1, Math.round(elapsedSeconds / 60)),
       totalVolumeKg: totalVolume,
@@ -615,7 +590,7 @@ export default function FitAppWorkoutLogger() {
 
             {/* EXERCISES LIST */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {(!useCustomRoutine && activeDay
+              {(activeDay
                 ? activeDay.exercises.map((p) => {
                     const pId = p.id;
                     const overrideId = pId ? overrides[pId] : undefined;
@@ -630,12 +605,7 @@ export default function FitAppWorkoutLogger() {
                       exerciseId: effectiveId
                     };
                   })
-                : (DEFAULT_ROUTINES[selectedRoutineIndex]?.exercises || []).map((ex) => ({
-                    name: ex.name,
-                    target: ex.target,
-                    restSec: ex.restSec,
-                    exerciseId: findExerciseByName(ex.name.split('/')[0].trim())?.name || ''
-                  }))
+                : []
               ).map((exItem, exIdx) => {
                 const exData = findExerciseByName(exItem.name.split('/')[0].trim());
                 const currentSets = exerciseLogs[exItem.name] || [

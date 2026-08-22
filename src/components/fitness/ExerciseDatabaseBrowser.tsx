@@ -125,9 +125,9 @@ export default function ExerciseDatabaseBrowser() {
 
         {/* LISTADO */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px', maxHeight: '520px', overflowY: 'auto', paddingRight: '4px' }}>
-          {filteredList.map((ex, idx) => (
+          {filteredList.map((ex) => (
             <div
-              key={idx}
+              key={ex.name}
               onClick={() => setActiveExercise(ex)}
               style={{
                 background: 'var(--surface-2)',

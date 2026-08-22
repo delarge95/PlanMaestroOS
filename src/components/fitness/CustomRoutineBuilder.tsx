@@ -234,9 +234,9 @@ export default function CustomRoutineBuilder() {
                     }}
                   />
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '200px', overflowY: 'auto' }}>
-                    {searchResults.map((ex, idx) => (
+                    {searchResults.map((ex) => (
                       <div
-                        key={idx}
+                        key={ex.name}
                         onClick={() => handleAddExercise(ex)}
                         style={{
                           background: 'rgba(255,255,255,0.04)',
