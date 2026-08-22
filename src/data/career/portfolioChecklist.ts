@@ -270,3 +270,539 @@ export const portfolioAssetsByPlatform = (platform: PortfolioAssetPlatform) =>
   pendingPortfolioAssets.filter((item) => item.platform === platform);
 
 export const pendingPortfolioAssetCount = pendingPortfolioAssets.length;
+
+// ── ArtStation breakdown structure (doc 29C) ────────────────────────────────
+// Paraphrased structure for the simulated ArtStation tab. Rule (PLAN_MULTIAGENTE
+// §3.7 Fase 2a): imitate STRUCTURE, never exact branding; the simulator always
+// shows a simulation notice. No invented metrics — numbers below are quoted
+// verbatim from doc 29C §8.6 (which itself cites the TwinSight evaluation).
+
+export type BreakdownSectionKind =
+  | "cover"
+  | "video"
+  | "summary"
+  | "role"
+  | "final-renders"
+  | "features"
+  | "pipeline"
+  | "before-after"
+  | "wireframe"
+  | "visual-modes"
+  | "interaction"
+  | "ui"
+  | "metrics"
+  | "reference"
+  | "sculpt-stages"
+  | "uv"
+  | "textures"
+  | "material"
+  | "groom"
+  | "lighting"
+  | "limitations"
+  | "software"
+  | "links"
+  | "lessons";
+
+export interface ArtStationBreakdownSection {
+  id: string;
+  order: number;
+  title: string;
+  kind: BreakdownSectionKind;
+  requirement: "required" | "recommended" | "optional";
+  /** Paraphrased guidance from doc 29C. */
+  guidance: string;
+  /** Citation of the doc-29C section that defines this block. */
+  source: string;
+}
+
+export interface ArtStationBreakdownSpec {
+  id: "twinsight-x500" | "blender-portrait";
+  title: string;
+  /** How this asset is positioned in the portfolio strategy. */
+  positioning: string;
+  sections: ArtStationBreakdownSection[];
+  /** Only tools actually used in the final pipeline (doc 29C §12 rule). */
+  software: string[];
+  tags: string[];
+  source: string;
+}
+
+export const artstationBreakdownSpecs: ArtStationBreakdownSpec[] = [
+  {
+    id: "twinsight-x500",
+    title: "TwinSight X500 — Technical Visualization (Unity WebGL)",
+    positioning:
+      "Proyecto insignia: la pieza principal del perfil. El breakdown debe mostrar proceso técnico, no solo renders finales.",
+    source: "doc-29C §2, §8, §19.1",
+    sections: [
+      {
+        id: "ts-cover",
+        order: 1,
+        title: "Cover image",
+        kind: "cover",
+        requirement: "required",
+        guidance:
+          "Dron completo con UI técnica visible, vista explosionada con etiquetas o grid de modos visuales. Debe leerse a tamaño thumbnail.",
+        source: "doc-29C §8.1"
+      },
+      {
+        id: "ts-video",
+        order: 2,
+        title: "Vídeo de 30–60 s incrustado arriba",
+        kind: "video",
+        requirement: "required",
+        guidance:
+          "Cerca del inicio, sin intro larga; captions grabadas y foco en features (export específico ArtStation del plan de vídeo 21).",
+        source: "doc-29C §7.1, §20.2"
+      },
+      {
+        id: "ts-summary",
+        order: 3,
+        title: "Resumen en 1–2 frases",
+        kind: "summary",
+        requirement: "required",
+        guidance:
+          "Qué es TwinSight y qué hace, sin abrir con metodología académica (eso va al final). Copy recomendado en doc-29C §17.1.",
+        source: "doc-29C §8.2, §17.1"
+      },
+      {
+        id: "ts-role",
+        order: 4,
+        title: "Role / contribución",
+        kind: "role",
+        requirement: "required",
+        guidance:
+          "Real-time 3D, integración Unity WebGL, sistemas C#, UI técnica, modos visuales, workflow Blender y evaluación. Si se menciona IA: apoyo en implementación, decisiones y ownership propios.",
+        source: "doc-29C §8.3"
+      },
+      {
+        id: "ts-final",
+        order: 5,
+        title: "Screenshots finales",
+        kind: "final-renders",
+        requirement: "required",
+        guidance:
+          "Hero viewer, selección de componente, explosionado y sección como imágenes Required del set (doc-29C §10.1).",
+        source: "doc-29C §7.1, §10.1"
+      },
+      {
+        id: "ts-features",
+        order: 6,
+        title: "Feature breakdown (cards)",
+        kind: "features",
+        requirement: "required",
+        guidance:
+          "Cards concisas: selección de componentes, exploded view, cross-section, modos visuales, UI técnica, WebGL, evaluación SUS/NASA-TLX.",
+        source: "doc-29C §8.4"
+      },
+      {
+        id: "ts-pipeline",
+        order: 7,
+        title: "Pipeline CAD → realtime (milestone notes)",
+        kind: "pipeline",
+        requirement: "required",
+        guidance:
+          "Notas por hito: CAD source → conversión/tessellación → cleanup Blender → low-poly → UV/bake/materiales → import Unity → deploy WebGL. Incluir sistema modular de fasteners y limitaciones.",
+        source: "doc-29C §8.5"
+      },
+      {
+        id: "ts-before-after",
+        order: 8,
+        title: "Optimización before/after",
+        kind: "before-after",
+        requirement: "required",
+        guidance:
+          "Comparación de conteo de triángulos (rutas CAD 6.5M+ → 95.617 optimizados) y de wireframes alto/bajo. Es la señal técnica más fuerte del proyecto.",
+        source: "doc-29C §8.5, §8.6"
+      },
+      {
+        id: "ts-wireframe",
+        order: 9,
+        title: "Wireframe comparison",
+        kind: "wireframe",
+        requirement: "required",
+        guidance:
+          "Imagen dedicada al wireframe (señal de credibilidad real-time esperada en breakdowns).",
+        source: "doc-29C §10.1"
+      },
+      {
+        id: "ts-metrics",
+        order: 10,
+        title: "Optimization metrics card",
+        kind: "metrics",
+        requirement: "required",
+        guidance:
+          "Card con métricas citadas: 95.617 tris, 6.5M+ fuente, 12 participantes, SUS 91.88, NASA-TLX 8.69 vs 19.89, 96 registros. Contexto: evaluación formativa académica, no benchmark de producción.",
+        source: "doc-29C §8.6"
+      },
+      {
+        id: "ts-visual-modes",
+        order: 11,
+        title: "Visual modes breakdown",
+        kind: "visual-modes",
+        requirement: "required",
+        guidance:
+          "Grid de modos: realistic, X-ray, ghosted, blueprint, wireframe, solid y thermal-style. Wording obligatorio: thermal-style es modo visual cualitativo, no simulación física.",
+        source: "doc-29C §8.7"
+      },
+      {
+        id: "ts-interaction",
+        order: 12,
+        title: "Unity interaction systems",
+        kind: "interaction",
+        requirement: "required",
+        guidance:
+          "Sección compacta: selección/highlight, cámara, estado explosionado, clipping, switching de modos, bottom-sheet, panel de metadatos. Capturas opcionales de hierarchy/inspector/Shader Graph. Código detallado → GitHub, no ArtStation.",
+        source: "doc-29C §8.8"
+      },
+      {
+        id: "ts-ui",
+        order: 13,
+        title: "UI / paneles técnicos",
+        kind: "ui",
+        requirement: "required",
+        guidance:
+          "Close-up del panel técnico con metadatos de pieza visible durante la inspección.",
+        source: "doc-29C §7.1, §10.1"
+      },
+      {
+        id: "ts-limitations",
+        order: 14,
+        title: "Limitaciones",
+        kind: "limitations",
+        requirement: "required",
+        guidance:
+          "Prototipo académico, no digital twin desplegado: sin IoT en vivo, ni mantenimiento predictivo, ni WebAR, ni monitoring. Wording en doc-29C §17.3.",
+        source: "doc-29C §7.1, §17.3"
+      },
+      {
+        id: "ts-software",
+        order: 15,
+        title: "Tools used (software del asset)",
+        kind: "software",
+        requirement: "required",
+        guidance:
+          "Lista limpia de solo las herramientas realmente usadas en el pipeline final. No inflar la lista.",
+        source: "doc-29C §12.1"
+      },
+      {
+        id: "ts-links",
+        order: 16,
+        title: "Links",
+        kind: "links",
+        requirement: "required",
+        guidance:
+          "Demo en vivo, GitHub, case study y demo video (placeholders explícitos hasta que existan las URLs reales).",
+        source: "doc-29C §17.4"
+      }
+    ],
+    software: ["Unity", "C#", "Unity WebGL", "URP", "UI Toolkit", "Shader Graph", "Blender", "GitHub"],
+    tags: [
+      "Unity",
+      "Unity WebGL",
+      "Technical Art",
+      "Real-Time 3D",
+      "Technical Visualization",
+      "CAD Optimization",
+      "Drone",
+      "Interactive 3D",
+      "CSharp",
+      "URP",
+      "Blender",
+      "Digital Twin",
+      "Simulation"
+    ]
+  },
+  {
+    id: "blender-portrait",
+    title: "Blender Portrait — Character Art Breakdown",
+    positioning:
+      "Secundario: evidencia de apoyo de fundamentos 3D (anatomía, materiales, grooming). Nunca presentarlo como prueba principal para roles Unity WebGL.",
+    source: "doc-29C §9.1, §9.4, §19.1",
+    sections: [
+      {
+        id: "pt-cover",
+        order: 1,
+        title: "Cover render",
+        kind: "cover",
+        requirement: "required",
+        guidance:
+          "Render final suficientemente fuerte para ser la portada del post.",
+        source: "doc-29C §7.2, §15.2"
+      },
+      {
+        id: "pt-turntable",
+        order: 2,
+        title: "Turntable / secuencia",
+        kind: "video",
+        requirement: "recommended",
+        guidance:
+          "Vídeo turntable o secuencia de imágenes que pruebe el volumen 3D.",
+        source: "doc-29C §7.2, §10.2"
+      },
+      {
+        id: "pt-summary",
+        order: 3,
+        title: "Resumen corto",
+        kind: "summary",
+        requirement: "required",
+        guidance:
+          "Estudio de retrato realista en Blender: anatomía facial, lookdev de piel, grooming, iluminación y presentación técnica. Copy en doc-29C §18.1.",
+        source: "doc-29C §18.1"
+      },
+      {
+        id: "pt-reference",
+        order: 4,
+        title: "Reference board",
+        kind: "reference",
+        requirement: "required",
+        guidance:
+          "Board de referencias o explicación breve de las usadas.",
+        source: "doc-29C §9.2"
+      },
+      {
+        id: "pt-sculpt",
+        order: 5,
+        title: "Sculpt stages (milestone notes)",
+        kind: "sculpt-stages",
+        requirement: "required",
+        guidance:
+          "Notas por hito: blockout → mid → escultura final. El proceso es la señal técnica.",
+        source: "doc-29C §7.2, §9.2"
+      },
+      {
+        id: "pt-topology",
+        order: 6,
+        title: "Topology",
+        kind: "wireframe",
+        requirement: "required",
+        guidance:
+          "Face loops limpias (párpados, boca) para deformación; overlay wireframe Required.",
+        source: "doc-29C §9.2, §10.2"
+      },
+      {
+        id: "pt-uv",
+        order: 7,
+        title: "UVs",
+        kind: "uv",
+        requirement: "required",
+        guidance: "Layout y densidad de texels del unwrap.",
+        source: "doc-29C §9.2"
+      },
+      {
+        id: "pt-textures",
+        order: 8,
+        title: "Texture maps",
+        kind: "textures",
+        requirement: "required",
+        guidance: "Mapas de textura mostrados (albedo, roughness, SSS, displacement).",
+        source: "doc-29C §6.2, §9.2"
+      },
+      {
+        id: "pt-material",
+        order: 9,
+        title: "Skin shader / material setup",
+        kind: "material",
+        requirement: "required",
+        guidance:
+          "Setup del material de piel + material de iris/córnea de los ojos.",
+        source: "doc-29C §9.2"
+      },
+      {
+        id: "pt-groom",
+        order: 10,
+        title: "Grooming",
+        kind: "groom",
+        requirement: "required",
+        guidance: "Cejas, barba, pestañas y guías de pelo.",
+        source: "doc-29C §9.2"
+      },
+      {
+        id: "pt-lighting",
+        order: 11,
+        title: "Lighting",
+        kind: "lighting",
+        requirement: "recommended",
+        guidance: "Diagrama del setup de iluminación (key/fill/rim, HDRI, cámara).",
+        source: "doc-29C §6.2"
+      },
+      {
+        id: "pt-final",
+        order: 12,
+        title: "Final renders",
+        kind: "final-renders",
+        requirement: "required",
+        guidance: "2–4 imágenes más fuertes: frontal, close-up, perfil.",
+        source: "doc-29C §9.2, §10.2"
+      },
+      {
+        id: "pt-realtime",
+        order: 13,
+        title: "Nota real-time (si aplica)",
+        kind: "limitations",
+        requirement: "optional",
+        guidance:
+          "Adaptación game-ready como camino opcional — valiosa si se hace.",
+        source: "doc-29C §7.2, §9.3"
+      },
+      {
+        id: "pt-software",
+        order: 14,
+        title: "Tools used (software del asset)",
+        kind: "software",
+        requirement: "required",
+        guidance: "Solo herramientas realmente usadas en este asset.",
+        source: "doc-29C §12.2"
+      },
+      {
+        id: "pt-lessons",
+        order: 15,
+        title: "Lessons learned",
+        kind: "lessons",
+        requirement: "recommended",
+        guidance: "Cierre breve con aprendizajes técnicos del estudio.",
+        source: "doc-29C §7.2"
+      }
+    ],
+    software: ["Blender", "Cycles / Eevee Next", "Substance 3D Painter", "Photoshop / Krita"],
+    tags: [
+      "Blender",
+      "Character Art",
+      "Portrait",
+      "Realistic Character",
+      "Topology",
+      "Grooming",
+      "Skin Shader",
+      "Lookdev",
+      "3D Art",
+      "Technical Art"
+    ]
+  }
+];
+
+// ── ArtStation profile publication checklist (doc 28E) ─────────────────────
+// Profile-level setup checklist (the 28E areas: skills, software, availability,
+// links, hero artwork, plus headline/summary/NoAI). Paraphrased; copy-pasteable
+// source texts live in doc 28E itself, not duplicated verbatim here.
+
+export type ArtStationChecklistArea =
+  | "headline"
+  | "skills"
+  | "software"
+  | "availability"
+  | "links"
+  | "hero-artwork"
+  | "noai";
+
+export interface ArtStationProfileChecklistItem {
+  id: string;
+  area: ArtStationChecklistArea;
+  title: string;
+  detail: string;
+  source: string;
+}
+
+export const artstationProfileChecklist: ArtStationProfileChecklistItem[] = [
+  {
+    id: "as-headline",
+    area: "headline",
+    title: "Titular profesional",
+    detail:
+      "Una de las 5 opciones de doc-28E §1 (eje: Unity Technical Artist / Real-Time 3D / CAD-to-WebGL). Elegir una y mantenerla coherente con LinkedIn y CV.",
+    source: "doc-28E §1"
+  },
+  {
+    id: "as-summary",
+    area: "headline",
+    title: "Resumen profesional (About)",
+    detail:
+      "Resumen EN de doc-28E §2: estudiante de Multimedia Engineering con coursework avanzado de Electronic Engineering, foco Unity WebGL y optimización CAD, proyecto insignia TwinSight.",
+    source: "doc-28E §2"
+  },
+  {
+    id: "as-skills",
+    area: "skills",
+    title: "Lista de skills (sección Resume)",
+    detail:
+      "13 skills de doc-28E §2 (Technical Art Unity, CAD-to-Realtime, Unity WebGL, decimation/retopology, hard-surface Blender, Shader Graph, UI Toolkit, SUS/NASA-TLX…).",
+    source: "doc-28E §2"
+  },
+  {
+    id: "as-skills-tags",
+    area: "skills",
+    title: "Tags estratégicos (Job Preferences)",
+    detail:
+      "Tags recruiter-facing: Technical Art, Pipeline, Hard Surface, Props and assets, Vehicles, Rendering, UI/UX, Generalist. Industrias top 5: Games, Software Development, AR/VR, Asset creation, Product Design. Medio: Real time + Digital 3D.",
+    source: "doc-28E §3"
+  },
+  {
+    id: "as-software",
+    area: "software",
+    title: "Software expertise con niveles",
+    detail:
+      "Advanced: Unity (URP/WebGL/C#/UI Toolkit/Shader Graph), Blender. Intermediate: Substance 3D Painter, Photoshop, Marmoset Toolbag. Foundational: Python, LangGraph/LangChain, web stack.",
+    source: "doc-28E §2"
+  },
+  {
+    id: "as-software-checkboxes",
+    area: "software",
+    title: "Checkboxes de software del perfil",
+    detail: "Marcar: Blender, Unity, Substance 3D Painter, Photoshop, Marmoset Toolbag.",
+    source: "doc-28E §3"
+  },
+  {
+    id: "as-availability",
+    area: "availability",
+    title: "Ubicación y disponibilidad remota",
+    detail:
+      "Location: Pasto, Nariño, Colombia (UTC-5). About: open to fully remote or contractor roles worldwide, con horas solapadas para equipos US/EU. Job Digest: Weekly.",
+    source: "doc-28E §4"
+  },
+  {
+    id: "as-links-linkedin",
+    area: "links",
+    title: "Link LinkedIn (condicionado)",
+    detail: "Enlazar cuando coincida con el summary/headline de ArtStation.",
+    source: "doc-28E §5"
+  },
+  {
+    id: "as-links-github",
+    area: "links",
+    title: "Link GitHub (condicionado)",
+    detail: "Enlazar tras limpiar el repo TwinSight y añadir disclaimers de prototipo.",
+    source: "doc-28E §5"
+  },
+  {
+    id: "as-links-portfolio",
+    area: "links",
+    title: "Link portfolio personal (condicionado)",
+    detail: "Enlazar cuando 1–2 case studies estén completamente escritos.",
+    source: "doc-28E §5"
+  },
+  {
+    id: "as-hero-artwork",
+    area: "hero-artwork",
+    title: "Hero artwork del perfil",
+    detail:
+      "El artwork destacado debe ser el breakdown TwinSight (proyecto insignia) con cover legible a tamaño thumbnail — no un render genérico. Orden ArtStation: 1) TwinSight breakdown 2) portrait breakdown.",
+    source: "doc-29C §8.1, §15.1, §19.2"
+  },
+  {
+    id: "as-noai",
+    area: "noai",
+    title: "NoAI tagging en ambos proyectos",
+    detail:
+      "Activar el checkbox NoAI nativo en TwinSight y en el retrato; hashtags #NoAI #NoAIArt + línea de disclaimer en la descripción (doc-28E §6). Sin evidencia de impacto negativo en ranking.",
+    source: "doc-28E §6"
+  }
+];
+
+export const artstationChecklistAreas: { area: ArtStationChecklistArea; label: string }[] = [
+  { area: "headline", label: "Titular y resumen" },
+  { area: "skills", label: "Skills y tags" },
+  { area: "software", label: "Software" },
+  { area: "availability", label: "Disponibilidad" },
+  { area: "links", label: "Links" },
+  { area: "hero-artwork", label: "Hero artwork" },
+  { area: "noai", label: "NoAI" }
+];
