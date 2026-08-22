@@ -24,6 +24,11 @@ import type {
   AnatomyStructure,
   BodyZone,
   MuscleEntry,
+  TendonEntry,
+  NerveEntry,
+  JointEntry,
+  BoneEntry,
+  LigamentEntry,
   StructureKind,
 } from '../../../data/fitness/anatomy/types';
 
@@ -214,8 +219,8 @@ export default function LibraryMuscles({ initialStructure }: Props) {
                       </span>
                     )}
                   </span>
-                  <span style={{ fontSize: '0.62rem', color: 'var(--text-tertiary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 150 }}>
-                    {BODY_ZONE_LABELS_ES[s.zone]}
+                  <span style={{ fontSize: '0.62rem', color: 'var(--text-tertiary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 170 }}>
+                    {subtitleFor(s) || BODY_ZONE_LABELS_ES[s.zone]}
                   </span>
                 </button>
               );
@@ -250,6 +255,18 @@ const KIND_LABELS: Record<StructureKind, string> = {
   joint: 'Articulación', nerve: 'Nervio', bone: 'Hueso',
 };
 
+/** subtítulo orientativo por tipo para las filas de la lista */
+function subtitleFor(s: AnatomyStructure): string {
+  switch (s.kind) {
+    case 'muscle': return (s as MuscleEntry).actionTags.map((t) => MUSCLE_ACTION_LABELS_ES[t] ?? t).slice(0, 3).join(' · ');
+    case 'joint': return (s as JointEntry).jointType;
+    case 'nerve': return (s as NerveEntry).entrapmentSite;
+    case 'tendon': return (s as TendonEntry).injuries;
+    case 'bone': return (s as BoneEntry).note ?? '';
+    default: return '';
+  }
+}
+
 function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure; onClose: () => void }) {
   const [open, setOpen] = useState(true);
   const row = (label: string, value?: string | string[]) => {
@@ -263,6 +280,9 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
       </div>
     );
   };
+  /** resuelve ids de estructuras relacionadas a nombres legibles */
+  const namesOf = (ids?: string[]): string[] =>
+    (ids ?? []).map((id) => getStructureById(id)?.nameEs ?? id);
   return (
     <div style={{ ...cardStyle, borderColor: 'rgba(53,208,255,0.35)', padding: 0, overflow: 'hidden' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '12px 14px 4px' }}>
@@ -284,11 +304,45 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
         <div style={{ padding: '0 14px 12px', display: 'flex', flexDirection: 'column', gap: 9 }}>
           {row('Zonas', s.zones?.map((z) => BODY_ZONE_LABELS_ES[z]))}
           {row('Sinónimos', s.synonyms)}
-          {s.kind === 'muscle' && (row('Origen', (s as MuscleEntry).origin) ?? null)}
-          {s.kind === 'muscle' && (row('Inserción', (s as MuscleEntry).insertion) ?? null)}
-          {s.kind === 'muscle' && (row('Inervación', (s as MuscleEntry).innervation) ?? null)}
-          {s.kind === 'muscle' && (row('Acción', (s as MuscleEntry).action) ?? null)}
-          {s.kind === 'muscle' && (row('Rol biomecánico', (s as MuscleEntry).biomechanicalRole) ?? null)}
+          {/* MÚSCULO */}
+          {s.kind === 'muscle' && row('Origen', (s as MuscleEntry).origin)}
+          {s.kind === 'muscle' && row('Inserción', (s as MuscleEntry).insertion)}
+          {s.kind === 'muscle' && row('Inervación', (s as MuscleEntry).innervation)}
+          {s.kind === 'muscle' && row('Acción', (s as MuscleEntry).action)}
+          {s.kind === 'muscle' && row('Rol biomecánico', (s as MuscleEntry).biomechanicalRole)}
+          {s.kind === 'muscle' && row('Ejercicios citados', (s as MuscleEntry).trainingExercises)}
+          {s.kind === 'muscle' && row('Riesgo con', (s as MuscleEntry).riskExercises)}
+          {s.kind === 'muscle' && row('Sinergistas', namesOf((s as MuscleEntry).synergists))}
+          {s.kind === 'muscle' && row('Antagonistas', namesOf((s as MuscleEntry).antagonists))}
+          {/* TENDÓN */}
+          {s.kind === 'tendon' && row('Inserción', (s as TendonEntry).insertion)}
+          {s.kind === 'tendon' && row('Músculos que lo forman', namesOf((s as TendonEntry).muscles))}
+          {s.kind === 'tendon' && row('Lesiones típicas', (s as TendonEntry).injuries)}
+          {s.kind === 'tendon' && row('Rehabilitación', (s as TendonEntry).rehab)}
+          {s.kind === 'tendon' && row('Factores de riesgo', (s as TendonEntry).risks)}
+          {/* LIGAMENTO */}
+          {s.kind === 'ligament' && row('Estabiliza', namesOf([(s as LigamentEntry).jointId ?? '']))}
+          {s.kind === 'ligament' && row('Nota', (s as LigamentEntry).note)}
+          {/* ARTICULACIÓN (ROM por eje) */}
+          {s.kind === 'joint' && row('Tipo articular', (s as JointEntry).jointType)}
+          {s.kind === 'joint' && row('Huesos', (s as JointEntry).bones)}
+          {s.kind === 'joint' && row('Movimientos / ROM por eje', (s as JointEntry).movements)}
+          {s.kind === 'joint' && (s as JointEntry).romNote && row('ROM numérico (estado)', (s as JointEntry).romNote)}
+          {s.kind === 'joint' && row('Estabilizadores', (s as JointEntry).stabilizers)}
+          {s.kind === 'joint' && row('Lesiones', (s as JointEntry).lesions)}
+          {s.kind === 'joint' && row('Riesgo bajo carga', (s as JointEntry).riskyUnderLoad)}
+          {s.kind === 'joint' && row('Rehabilitación', (s as JointEntry).rehab)}
+          {s.kind === 'joint' && row('Relacionadas', namesOf((s as JointEntry).relatedStructures))}
+          {/* NERVIO (trayecto + vulnerabilidad) */}
+          {s.kind === 'nerve' && row('Inerva / trayecto', (s as NerveEntry).innervates)}
+          {s.kind === 'nerve' && row('Vulnerabilidad (atrapamiento)', (s as NerveEntry).entrapmentSite)}
+          {s.kind === 'nerve' && row('Síntomas de afectación', (s as NerveEntry).symptoms)}
+          {s.kind === 'nerve' && row('Contexto de lesión', (s as NerveEntry).lesionContext)}
+          {s.kind === 'nerve' && row('Rehabilitación', (s as NerveEntry).rehab)}
+          {s.kind === 'nerve' && row('Factores de riesgo', (s as NerveEntry).risks)}
+          {s.kind === 'nerve' && row('Relacionadas', namesOf((s as NerveEntry).relatedStructures))}
+          {/* HUESO */}
+          {s.kind === 'bone' && row('Nota funcional', (s as BoneEntry).note)}
         </div>
       )}
     </div>
