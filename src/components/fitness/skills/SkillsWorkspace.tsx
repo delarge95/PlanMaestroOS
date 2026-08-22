@@ -22,6 +22,8 @@ export function SkillsWorkspace({
 }: SkillsWorkspaceProps) {
   const [selectedStepId, setSelectedStepId] = useState<string | null>(null);
   const [practiceModalStepId, setPracticeModalStepId] = useState<string | null>(null);
+  // B4: deep-link ?path= → ruta enfocada/expandida
+  const [focusPathId, setFocusPathId] = useState<string | null>(null);
 
   // Leer parámetro ?step= o ?skill= de la URL al cargar
   useEffect(() => {
@@ -30,6 +32,10 @@ export function SkillsWorkspace({
       const stepParam = params.get('step') || params.get('skill');
       if (stepParam) {
         setSelectedStepId(stepParam);
+      }
+      const pathParam = params.get('path');
+      if (pathParam) {
+        setFocusPathId(pathParam);
       }
     }
   }, []);
@@ -61,6 +67,7 @@ export function SkillsWorkspace({
         onlyActive={onlyActive}
         searchTerm={searchTerm}
         hideInternalFilters={hideInternalFilters}
+        focusPathId={focusPathId}
       />
 
       {/* SHEET DE DETALLE DE HABILIDAD */}
