@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sun, Dumbbell, Briefcase, Languages, HeartPulse, ChefHat, BookOpen, MoreHorizontal, X } from 'lucide-react';
+import { Sun, Dumbbell, Briefcase, Languages, HeartPulse, ChefHat, BookOpen, Calendar, MoreHorizontal, X } from 'lucide-react';
 import { withBase } from '../../utils/url';
 import { NAV_ITEMS } from '../shell/navItems';
 import Sheet from '../ui/Sheet';
@@ -47,6 +47,7 @@ export function NavigationShell({
       case 'heart-pulse': return <HeartPulse size={size} />;
       case 'chef-hat': return <ChefHat size={size} />;
       case 'book': return <BookOpen size={size} />;
+      case 'calendar': return <Calendar size={size} />;
       default: return <MoreHorizontal size={size} />;
     }
   };
