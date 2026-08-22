@@ -250,6 +250,51 @@
 
 > Protocolo para normalizar nuevas extracciones: la salida del chat (respuesta del modelo) se guarda en crudo en `biblioteca/_chat-exports/<chat-export>.json` o `.md`, y de ahí se consolida a `biblioteca/extracciones/<sourceId>.md` aplicando la plantilla §0 de `docs/agents/PROMPTS_INICIALES.md` SIN inventar contenido faltante (marcar ⚠️ huecos).
 
+## 18. Cola de extracción con Gemini (priorizada)
+
+> Cada extracción se ejecuta sección por sección con el sub-prompt §0 de `docs/agents/PROMPTS_INICIALES.md` (una sección o rango de páginas por llamada; primero TOC → `00-indice.md`; al final `99-resumen.md` con matriz de cobertura). Salida: `biblioteca/extracciones/<sourceId>.md` (o `rag/<domain>/extracciones/` cuando el agente de dominio la ejecute).
+> Estimación de secciones = nº de llamadas Gemini aproximado (sub-rangos de 15–30 p para bíblias gráficas).
+
+### Bloque A — `pendiente-gemini` puro (orden de prioridad de los agentes)
+
+| # | sourceId | agente | capítulos objetivo | secciones est. | notas |
+|---|---|---|---|---|---|
+| 1 | `grays-anatomy-students-4ed` | AG-ANATOM | Regiones: espalda → tórax (pectoral) → abdomen/core → pelvis/cadera → miembro inferior (cadera, rodilla, tobillo/pie) → miembro superior (hombro, codo, muñeca/mano) → cuello/cervical → neuroanatomía de extremidades (nervios periféricos) | ~24 | 1234 p, texto extraíble; primer TOC completo |
+| 2 | `norkin-joint-structure-6ed` | AG-ANATOM | Caps. por articulación: hombro, codo/antebrazo, muñeca/mano, cadera, rodilla, tobillo/pie, columna cervical, columna torácica/lumbar, marcha + caps. 1–3 (kinesiología general, movimiento articular, músculo) | ~12 | 1756 p. **Atajo:** capa de texto `..._textolayer.txt` ya en disco — usarla como base y validar contra PDF |
+| 3 | `macintosh-skeletal-muscle-2ed` | AG-ANATOM | Tipos de fibra y unidades motoras, mecanismo contráctil, tipos de activación, fatiga, plasticidad/adaptación, daño y reparación, músculo en ejercicio y envejecimiento | ~10 | 434 p; sin capa de texto en portada (verificar interior) |
+| 4 | `enoka-neuromechanics-4ed` | AG-ANATOM | Control motor (espinal + supraspinal), reflejos y aferencias, descarga de unidad motora, fuerza y activación neural, adaptación al entrenamiento, fatiga central, propiocepción | ~10 | 568 p |
+| 5 | `moore-clinically-oriented-6ed` | AG-ANATOM | Solo regiones ya cubiertas por Gray's pero con foco clínico: hombro, codo/muñeca, columna, cadera, rodilla, tobillo/pie (secs. azul clínico) | ~8 | 1168 p; **escaneado sin capa de texto** → Gemini con imágenes de página (más lento) |
+| 6 | `rp-renaissance-kitchen` | AG-NUTRI/GASTRO | Macros por receta, principios de cocinado para composición corporal | ~4 | puente gastronomía |
+| 7 | `blahnik-full-body-flexibility-2ed` | AG-FIT | Los 3 ciclos de flexibilidad, progresiones por grupo, rutinas sample | ~6 | 272 p |
+| 8 | `bookey-physiology-of-yoga-resumen` | AG-FIT | Mitos vs ciencia por sistema (muscular, respiratorio, cardiovascular) | ~3 | ⚠️ resumen Bookey, no el original; limitar expectativas |
+| 9 | `nippard-body-recomposition` | AG-FIT | Todos: dieta recomp, proteína/sueño/entreno, setup de macros | ~6 | 268 p |
+| 10 | `nippard-fundamentals-hypertrophy` | AG-FIT | Volumen, frecuencia, progresión, técnica por patrón | ~5 | 97 p |
+| 11 | `inda-fuerza-female-strength` | AG-FIT | Programación femenina, ciclo menstrual, fuerza/estética | ~5 | |
+| 12 | `daniels-running-formula-4ed` | AG-FIT | Sistema VDOT, zonas, planes 1500m→maratón | ~6 | solo epub |
+| 13 | `tomlinson-evolution-martial-arts` | AG-FIT | Historia/transferencia a combate, S&C por disciplina | ~5 | 296 p |
+| 14 | `nippard-powerbuilding-4x` | AG-FIT | Manual completo (baja prioridad: programa, no libro de conocimiento) | ~3 | 115 p |
+| 15 | `nippard-glute-hypertrophy-program` | AG-FIT | FAQ + rutina (baja prioridad) | ~2 | 36 p |
+
+### Bloque B — `en-chat` SIN respuesta en los exports (re-extracción recomendada en este orden)
+
+> Motivo: §16/Extras — los 43 exports traen prompts+adjuntos pero respuestas vacías. Si el usuario recupera las respuestas desde la UI del chat original, estas fuentes pasan a `ok` sin re-ejecutar. Orden por valor para los agentes:
+
+1. `norkin-joint-structure-6ed` (txt ya adjuntado — buscar la respuesta del chat 1787415101528 primero)
+2. `bibliotex-sport-nutrition-2022` y `maughan-nutrition-in-sport` (AG-NUTRI: son SU base; chats 1787415057262 / 1787415035759)
+3. `haff-essentials-strength-4ed` (cap. nutrición + biomecánica; chat 1787415057183)
+4. `low-overcoming-tendonitis-2019` (autoridad rehab tendinosa AG-FIT; chat 1787415101723)
+5. `horschig-rebuilding-milo-2021` (rehab por zona; chat 1787415126946)
+6. `acsm-exercise-testing-prescription-10ed` (prescripción/FITT; chat 1787414908330)
+7. `israetel-scientific-principles-hypertrophy` + `israetel-scientific-principles-strength` (hipertrofia/fuerza AG-FIT)
+8. `nippard-muscle-ladder-2024` (hipertrofia moderna; chat 1787415112509)
+9. Papers combate/nutrición: `paper-aragon-2017-issn-diets-body-composition`, `paper-ricci-2021-issn-weight-cut-mma`, `paper-kostikiadis-2018-mma-specific-sc-training`, `paper-ruddock-2021-hiit-conditioning-combat`, `paper-james-bjj-evidence-based-training-plan`, `paper-lenetsky-punching-forces-combat`, `paper-prabowo-combat-physical-conditioning`
+10. Rehab/fisio: `wilson-exercise-therapy-msk`, `low-overcoming-poor-posture`, `horschig-squat-bible`
+11. Danza/movilidad: `clippinger-dance-anatomy-kinesiology-2ed`, `howse-dance-technique-3ed`, `lott-biomechanics-of-dance`, `haas-dance-anatomy-2ed`, `mitchell-yoga-biomechanics`, `paper-russell-2013-preventing-dance-injuries`
+12. Cardio: `allen-power-meter-3ed`, `vandijk-secret-of-running`, `bangsbo-running-science`, `wilkins-cycling-physiology-2021`
+13. Combate (libros): `dias-training-conditioning-mma`, `delp-muay-thai-2013`, `wilson-boxing-science-intro`
+14. Fisiología general: `macintosh-open-textbook-exphys`
+15. Salud sexual (dominio secundario, sin agente asignado): `metz-coping-pe-2003`, `zilbergeld-new-male-sexuality-1992`, `wuh-sexual-fitness-2002`, `kaleb-kegel-men-2019`, `paper-cooper-2015-pe-behavioral-therapies`, `paper-raveendran-2021-pe-narrative-review`, `paper-pearce-2015…`, `paper-pastuszak-2015…`, `paper-helmer-2015…`, `paper-veale-2015…`
+
 ## Extras e incidencias
 
 1. **Exports de chat sin respuestas** (ver §16): re-exportar desde la UI del chat original CON las respuestas, o re-ejecutar la extracción con Gemini (lista priorizada abajo). Hasta entonces, ningún `en-chat` debe considerarse recuperado.
