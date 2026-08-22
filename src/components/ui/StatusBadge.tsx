@@ -12,27 +12,27 @@ export default function StatusBadge({ label, variant = 'neutral', icon }: Status
     switch (variant) {
       case 'active':
         return {
-          bg: 'var(--color-accent-primary-soft, rgba(10,132,255,0.12))',
-          color: 'var(--accent, #0a84ff)',
-          border: '1px solid var(--color-accent-primary-glow, rgba(10,132,255,0.25))'
+          bg: 'var(--surface-2)',
+          color: 'var(--text-primary)',
+          border: '1px solid var(--color-border-visible)'
         };
       case 'success':
         return {
-          bg: 'var(--color-state-done-soft, rgba(48,209,88,0.12))',
-          color: 'var(--success, #30d158)',
-          border: '1px solid var(--color-state-done-glow, rgba(48,209,88,0.25))'
+          bg: 'var(--success-soft)',
+          color: 'var(--success)',
+          border: '1px solid rgba(48, 209, 88, 0.25)'
         };
       case 'warning':
         return {
-          bg: 'var(--color-accent-warning-soft, rgba(255,159,10,0.12))',
-          color: 'var(--warning, #ff9f0a)',
-          border: '1px solid var(--color-accent-warning-glow, rgba(255,159,10,0.25))'
+          bg: 'var(--warning-soft)',
+          color: 'var(--warning)',
+          border: '1px solid rgba(255, 159, 10, 0.25)'
         };
       default:
         return {
-          bg: 'rgba(255,255,255,0.05)',
-          color: 'var(--text-secondary, #98989d)',
-          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))'
+          bg: 'var(--glass)',
+          color: 'var(--text-secondary)',
+          border: '1px solid var(--color-border-subtle)'
         };
     }
   };

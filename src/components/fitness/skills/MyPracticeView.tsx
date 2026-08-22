@@ -17,7 +17,7 @@ export function MyPracticeView({
   onStartPractice,
   onOpenPaths
 }: MyPracticeViewProps) {
-  const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
+  const activeStepIds = useSkillStateStore((s) => s.activeStepIds);
   const toggleActiveSkill = useSkillStateStore((s) => s.toggleActiveSkill);
 
   // Retrieve all active steps in progress

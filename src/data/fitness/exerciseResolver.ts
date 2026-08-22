@@ -8,7 +8,9 @@ function normalizeName(name?: string): string {
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9\s]/g, '')
-    .replace(/\s+/g, ' ');
+    .replace(/\s+/g, ' ')
+    // Strip set labels like "A1:", "B2." used in Nippard program texts
+    .replace(/^[a-z]\d+\s+/, '');
 }
 
 // Built-in alias map mapping common exercise display names to exact keys in exerciseDatabase
@@ -162,7 +164,24 @@ const ALIAS_MAP: Record<string, string> = {
   'back extension': '45° Hyperextension',
   '45 hyperextension': '45° Hyperextension',
   'hyperextension 45': '45° Hyperextension',
-  '45 degree hyperextension': '45° Hyperextension'
+  '45 degree hyperextension': '45° Hyperextension',
+  // Nippard powerbuilding / glute-hypertrophy display names
+  'banded lateral walk or hip abduction': 'Band Lateral Walk',
+  'upright row': 'Upright Rows - Barbell',
+  'barbbell curl': 'Barbell Curl',
+  'squat walkout do not squat': 'Back Squat',
+  'leg raise variation abs': 'Hanging Knee Raises',
+  'crunch variation abs': 'Bodyweight Crunch',
+  'seated dumbbell press': 'DB Seated Shoulder Press',
+  'close grip seated cable row': 'Neutral-Grip Seated Cable Row',
+  'lean away cable lateral raise': 'Lean-Away Lateral Raise',
+  '1arm dumbbell row': 'Single Arm Dumbbell Row',
+  'incline dumbbell chest press': 'Dumbbell Incline Press',
+  'banded lateral raise': 'Dumbbell Lateral Raise',
+  'banded squat bouncer': 'Bodyweight Squat',
+  'swiss ball triple threat': 'Swiss Ball Crunch',
+  'banded sumo walk': 'Sumo Walks',
+  'banded side lying clams': 'Side-Lying Clam'
 };
 
 export type MatchKind = 'exact' | 'verified-alias' | 'compatible-variant' | 'ambiguous' | 'unresolved';

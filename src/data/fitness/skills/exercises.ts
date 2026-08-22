@@ -42,7 +42,7 @@ export const skillExercises: Record<string, SkillExercise> = {
     ],
     equipment: ['Barra', 'Anillas'],
     fitApp: {
-      exerciseId: 'Active Hang',
+      exerciseId: 'Hanging Scapula Retraction + Depression',
       verified: true,
       verifiedAt: '2026-07-29',
       match: 'exact'
@@ -234,6 +234,6 @@ export const skillExercises: Record<string, SkillExercise> = {
     instructions: ['Carga peso suavemente en flexión y extensión de muñeca.'],
     commonErrors: ['Carga excesiva brusca'],
     equipment: ['Suelo'],
-    fitApp: { exerciseId: 'Active Hang', verified: true, match: 'exact' }
+    fitApp: { exerciseId: 'Hanging Scapula Retraction + Depression', verified: true, match: 'exact' }
   }
 };

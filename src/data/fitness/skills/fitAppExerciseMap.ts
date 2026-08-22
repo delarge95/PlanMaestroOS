@@ -13,7 +13,7 @@ export type VerifiedExerciseLink = {
 export const verifiedExerciseMap: Record<string, VerifiedExerciseLink> = {
   'pull-step-1': {
     skillExerciseId: 'pull-step-1',
-    fitAppExerciseId: 'Active Hang',
+    fitAppExerciseId: 'Hanging Scapula Retraction + Depression',
     fitAppTitle: 'Active Hang (Colgado Activo & Control Escapular)',
     videoUrl: 'https://www.youtube.com/watch?v=132Xg12mG60',
     verified: true,

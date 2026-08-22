@@ -1,4 +1,5 @@
 import React, { useState, useId } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 export interface DisclosureProps {
   label: string;
@@ -71,8 +72,8 @@ export function Disclosure({
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
           {actions && <div onClick={(e) => e.stopPropagation()}>{actions}</div>}
-          <span style={{ fontSize: '0.75rem', transition: 'transform 180ms ease', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-            ▼
+          <span style={{ display: 'inline-flex', color: 'var(--text-tertiary)' }}>
+            <ChevronDown size={16} aria-hidden="true" style={{ transition: 'transform 180ms var(--ease-standard)', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           </span>
         </div>
       </div>

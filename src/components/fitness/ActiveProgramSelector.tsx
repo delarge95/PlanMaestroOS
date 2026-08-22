@@ -6,7 +6,7 @@ import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 
 export function ActiveProgramSelector() {
   const inspectedProgramId = useActiveProgramStore((s) => s.programId);
-  const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds || [s.programId]);
+  const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds);
   const setInspectedProgram = useActiveProgramStore((s) => s.setInspectedProgram);
 
   const [isMobile, setIsMobile] = useState(false);

@@ -11,7 +11,7 @@ export interface MyPracticeSummaryProps {
 }
 
 export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
-  const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
+  const activeStepIds = useSkillStateStore((s) => s.activeStepIds);
   const activeStepId = useSkillStateStore((s) => s.activeStepId || 'pull-step-1');
   const changeActiveStepForPath = useSkillStateStore((s) => s.changeActiveStepForPath);
   
@@ -127,7 +127,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
       </div>
 
       {/* DETALLE TÉCNICO COMPLETO E INSTRUCCIONES DE EJECUCIÓN */}
-      <div style={{ background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid var(--accent, #0a84ff)', padding: '12px 14px', borderRadius: '0 8px 8px 0', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))', padding: '12px 14px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-primary)' }}>
             🎯 Objetivo de Sesión: {currentStep.practice.target}

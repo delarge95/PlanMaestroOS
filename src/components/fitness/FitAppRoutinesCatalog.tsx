@@ -8,10 +8,12 @@ import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { libraryAssetUrl } from '../../lib/library/openDocument';
 import ExerciseModal from './ExerciseModal';
 import { Search, Filter, ChevronDown, ChevronUp, ExternalLink, Calendar, Award, BookOpen } from 'lucide-react';
+import useIsMobile from '../ui/useIsMobile';
 
 export default function FitAppRoutinesCatalog() {
+  const isMobile = useIsMobile();
   const activeProgramId = useActiveProgramStore((s) => s.programId);
-  const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds || [s.programId]);
+  const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds);
   const toggleActiveProgram = useActiveProgramStore((s) => s.toggleActiveProgram);
   const setInspectedProgram = useActiveProgramStore((s) => s.setInspectedProgram);
 
@@ -35,7 +37,7 @@ export default function FitAppRoutinesCatalog() {
     }
   }, [setInspectedProgram]);
 
-  const currentProgram = getProgramById(activeProgramId);
+  const currentProgram = getProgramById(activeProgramId) ?? allPrograms[0];
   const rawTitle = currentProgram.title || currentProgram.name || 'Programa';
   const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, '').trim();
   const isActiveInTracker = activeProgramIds.includes(currentProgram.id);
@@ -253,9 +255,9 @@ export default function FitAppRoutinesCatalog() {
         {/* SUBGRUPOS POR AUTOR / ORIGEN */}
         {!isTierCollapsed && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingLeft: '8px' }}>
-            {renderSubgroup('heria', '🔥 Chris Heria / Thenx', '#ff9f0a', heriaPrograms)}
-            {renderSubgroup('nippard', '🧠 Jeff Nippard / Ciencia & Hipertrofia', '#0a84ff', nippardPrograms)}
-            {renderSubgroup('planmaestro', '📖 PlanMaestro OS', '#30d158', planMaestroPrograms)}
+            {renderSubgroup('heria', 'Chris Heria / Thenx', '#ff9f0a', heriaPrograms)}
+            {renderSubgroup('nippard', 'Jeff Nippard', '#9fb2ff', nippardPrograms)}
+            {renderSubgroup('planmaestro', 'PlanMaestro OS', '#9fdfa8', planMaestroPrograms)}
           </div>
         )}
       </div>
@@ -346,92 +348,136 @@ export default function FitAppRoutinesCatalog() {
                 fontSize: '0.82rem'
               }}
             >
-              {/* FILTRO DE AUTOR */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Metodología:</span>
-                {[
-                  { key: 'all', label: 'Todas' },
-                  { key: 'heria', label: '🔥 Chris Heria / Thenx' },
-                  { key: 'nippard', label: '🧠 Jeff Nippard' },
-                  { key: 'planmaestro', label: '📖 PlanMaestro' }
-                ].map((item) => (
-                  <button
-                    key={item.key}
-                    type="button"
-                    onClick={() => setSelectedCategory(item.key)}
-                    style={{
-                      background: selectedCategory === item.key ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.06)',
-                      color: selectedCategory === item.key ? '#ffffff' : 'rgba(255,255,255,0.7)',
-                      border: 'none',
-                      padding: '4px 10px',
-                      borderRadius: '999px',
-                      fontSize: '0.76rem',
-                      fontWeight: selectedCategory === item.key ? 700 : 500,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+              {/* FILTROS: desktop botones, móvil desplegables */}
+              {isMobile ? (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '10px' }}>
+                  <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
+                    <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 600 }}>Metodología</span>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      style={{ minHeight: '44px', borderRadius: '10px', border: '1px solid var(--color-border-visible)', background: 'var(--surface-2)', color: 'var(--text-primary)', padding: '10px 12px' }}
+                    >
+                      <option value="all">Todas</option>
+                      <option value="heria">Chris Heria / Thenx</option>
+                      <option value="nippard">Jeff Nippard</option>
+                      <option value="planmaestro">PlanMaestro</option>
+                    </select>
+                  </label>
+                  <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
+                    <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 600 }}>Estructura</span>
+                    <select
+                      value={selectedTierFilter}
+                      onChange={(e) => setSelectedTierFilter(e.target.value)}
+                      style={{ minHeight: '44px', borderRadius: '10px', border: '1px solid var(--color-border-visible)', background: 'var(--surface-2)', color: 'var(--text-primary)', padding: '10px 12px' }}
+                    >
+                      <option value="all">Todos</option>
+                      <option value="program">Programas</option>
+                      <option value="week">Semanales</option>
+                      <option value="day">Diarios</option>
+                    </select>
+                  </label>
+                  <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
+                    <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 600 }}>Disciplina</span>
+                    <select
+                      value={selectedDiscipline}
+                      onChange={(e) => setSelectedDiscipline(e.target.value)}
+                      style={{ minHeight: '44px', borderRadius: '10px', border: '1px solid var(--color-border-visible)', background: 'var(--surface-2)', color: 'var(--text-primary)', padding: '10px 12px' }}
+                    >
+                      <option value="all">Todas</option>
+                      <option value="Calistenia">Calistenia</option>
+                      <option value="Hipertrofia / Bodybuilding">Bodybuilding</option>
+                      <option value="Powerbuilding">Powerbuilding</option>
+                    </select>
+                  </label>
+                </div>
+              ) : (
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Metodología:</span>
+                    {[
+                      { key: 'all', label: 'Todas' },
+                      { key: 'heria', label: 'Chris Heria / Thenx' },
+                      { key: 'nippard', label: 'Jeff Nippard' },
+                      { key: 'planmaestro', label: 'PlanMaestro' }
+                    ].map((item) => (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => setSelectedCategory(item.key)}
+                        style={{
+                          background: selectedCategory === item.key ? 'var(--text-primary)' : 'rgba(255,255,255,0.06)',
+                          color: selectedCategory === item.key ? '#000000' : 'rgba(255,255,255,0.7)',
+                          border: 'none',
+                          padding: '4px 10px',
+                          borderRadius: '999px',
+                          fontSize: '0.76rem',
+                          fontWeight: selectedCategory === item.key ? 700 : 500,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
 
-              {/* FILTRO DE TIER / FORMATO */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Estructura:</span>
-                {[
-                  { key: 'all', label: 'Todos' },
-                  { key: 'program', label: '📚 Programas' },
-                  { key: 'week', label: '🗓️ Semanales' },
-                  { key: 'day', label: '⚡ Diarios' }
-                ].map((item) => (
-                  <button
-                    key={item.key}
-                    type="button"
-                    onClick={() => setSelectedTierFilter(item.key)}
-                    style={{
-                      background: selectedTierFilter === item.key ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.06)',
-                      color: selectedTierFilter === item.key ? '#ffffff' : 'rgba(255,255,255,0.7)',
-                      border: 'none',
-                      padding: '4px 10px',
-                      borderRadius: '999px',
-                      fontSize: '0.76rem',
-                      fontWeight: selectedTierFilter === item.key ? 700 : 500,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Estructura:</span>
+                    {[
+                      { key: 'all', label: 'Todos' },
+                      { key: 'program', label: 'Programas' },
+                      { key: 'week', label: 'Semanales' },
+                      { key: 'day', label: 'Diarios' }
+                    ].map((item) => (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => setSelectedTierFilter(item.key)}
+                        style={{
+                          background: selectedTierFilter === item.key ? 'var(--text-primary)' : 'rgba(255,255,255,0.06)',
+                          color: selectedTierFilter === item.key ? '#000000' : 'rgba(255,255,255,0.7)',
+                          border: 'none',
+                          padding: '4px 10px',
+                          borderRadius: '999px',
+                          fontSize: '0.76rem',
+                          fontWeight: selectedTierFilter === item.key ? 700 : 500,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
 
-              {/* FILTRO DE DISCIPLINA */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Disciplina:</span>
-                {[
-                  { key: 'all', label: 'Todas' },
-                  { key: 'Calistenia', label: 'Calistenia' },
-                  { key: 'Hipertrofia / Bodybuilding', label: 'Bodybuilding' },
-                  { key: 'Powerbuilding', label: 'Powerbuilding' }
-                ].map((item) => (
-                  <button
-                    key={item.key}
-                    type="button"
-                    onClick={() => setSelectedDiscipline(item.key)}
-                    style={{
-                      background: selectedDiscipline === item.key ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.06)',
-                      color: selectedDiscipline === item.key ? '#ffffff' : 'rgba(255,255,255,0.7)',
-                      border: 'none',
-                      padding: '4px 10px',
-                      borderRadius: '999px',
-                      fontSize: '0.76rem',
-                      fontWeight: selectedDiscipline === item.key ? 700 : 500,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Disciplina:</span>
+                    {[
+                      { key: 'all', label: 'Todas' },
+                      { key: 'Calistenia', label: 'Calistenia' },
+                      { key: 'Hipertrofia / Bodybuilding', label: 'Bodybuilding' },
+                      { key: 'Powerbuilding', label: 'Powerbuilding' }
+                    ].map((item) => (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => setSelectedDiscipline(item.key)}
+                        style={{
+                          background: selectedDiscipline === item.key ? 'var(--text-primary)' : 'rgba(255,255,255,0.06)',
+                          color: selectedDiscipline === item.key ? '#000000' : 'rgba(255,255,255,0.7)',
+                          border: 'none',
+                          padding: '4px 10px',
+                          borderRadius: '999px',
+                          fontSize: '0.76rem',
+                          fontWeight: selectedDiscipline === item.key ? 700 : 500,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

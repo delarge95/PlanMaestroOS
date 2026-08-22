@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import IconButton from './IconButton';
+import { X } from 'lucide-react';
 
 export interface SheetProps {
   isOpen: boolean;
@@ -94,7 +95,7 @@ export function Sheet({
           </div>
 
           <IconButton label="Cerrar" onClick={onClose} size="sm">
-            ✕
+            <X size={16} aria-hidden="true" />
           </IconButton>
         </div>
 

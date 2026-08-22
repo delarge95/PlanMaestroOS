@@ -537,10 +537,12 @@ export default function ExerciseModal({
                         <div
                           style={{
                             height: "100%",
-                            width: `${Math.round(sub.score * 100)}%`,
+                            width: "100%",
                             background: scoreColor(sub.score),
                             borderRadius: "999px",
-                            transition: "width 300ms ease",
+                            transformOrigin: "left center",
+                            transform: `scaleX(${Math.max(0, Math.min(1, sub.score))})`,
+                            transition: "transform 300ms ease",
                           }}
                         />
                       </div>

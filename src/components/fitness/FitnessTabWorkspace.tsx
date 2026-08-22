@@ -10,12 +10,14 @@ import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
 import TendonLoadMonitor from './TendonLoadMonitor';
 import LibraryHome from '../library/LibraryHome';
 import styles from './FitnessTabWorkspace.module.css';
+import useIsMobile from '../ui/useIsMobile';
 
 export interface FitnessTabWorkspaceProps {
   initialTab?: 'today' | 'routines' | 'progress' | 'library';
 }
 
 export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTabWorkspaceProps) {
+  const isMobile = useIsMobile();
   const [activeMainTab, setActiveMainTab] = useState<'today' | 'routines' | 'progress' | 'library'>(initialTab);
   const [routinesSubTab, setRoutinesSubTab] = useState<'catalog' | 'skills' | 'database' | 'custom'>('catalog');
   const [showPrehabAlert, setShowPrehabAlert] = useState(true);
@@ -39,7 +41,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
               <ShieldAlert size={18} style={{ color: 'var(--color-accent-warning)' }} />
               <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', fontWeight: 600 }}>
-                Prehab Activo: Protocolo Isométricos Spanish Squats (Rodillas) antes de la sesión.
+                Prehab activo: Isométricos Spanish Squats antes de la sesión.
               </span>
             </div>
 
@@ -55,57 +57,84 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
                 fontWeight: 600
               }}
             >
-              Entendido ✕
+              Cerrar
             </button>
           </div>
         )}
 
-        {/* NAVEGACIÓN PRINCIPAL (HOY | RUTINAS | PROGRESO | BIBLIOTECA) */}
-        <div className={styles.tabList} role="tablist" aria-label="Secciones de Fitness">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeMainTab === 'today'}
-            className={`${styles.tabButton} ${activeMainTab === 'today' ? styles.tabButtonActive : ''}`}
-            onClick={() => setActiveMainTab('today')}
-          >
-            <Dumbbell size={18} aria-hidden="true" />
-            <span>Hoy</span>
-          </button>
+        {/* NAVEGACIÓN PRINCIPAL: desktop botones, móvil desplegable */}
+        {isMobile ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <label htmlFor="fitness-main-tab" style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
+              Sección
+            </label>
+            <select
+              id="fitness-main-tab"
+              value={activeMainTab}
+              onChange={(e) => setActiveMainTab(e.target.value as 'today' | 'routines' | 'progress' | 'library')}
+              style={{
+                minHeight: '44px',
+                borderRadius: 'var(--radius-m)',
+                border: '1px solid var(--color-border-visible)',
+                background: 'var(--surface-1)',
+                color: 'var(--text-primary)',
+                padding: '10px 12px',
+                fontSize: 'var(--fs-body)'
+              }}
+            >
+              <option value="today">Hoy</option>
+              <option value="routines">Rutinas</option>
+              <option value="progress">Progreso</option>
+              <option value="library">Biblioteca</option>
+            </select>
+          </div>
+        ) : (
+          <div className={styles.tabList} role="tablist" aria-label="Secciones de Fitness">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeMainTab === 'today'}
+              className={`${styles.tabButton} ${activeMainTab === 'today' ? styles.tabButtonActive : ''}`}
+              onClick={() => setActiveMainTab('today')}
+            >
+              <Dumbbell size={18} aria-hidden="true" />
+              <span>Hoy</span>
+            </button>
 
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeMainTab === 'routines'}
-            className={`${styles.tabButton} ${activeMainTab === 'routines' ? styles.tabButtonActive : ''}`}
-            onClick={() => setActiveMainTab('routines')}
-          >
-            <BookOpen size={18} aria-hidden="true" />
-            <span>Rutinas</span>
-          </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeMainTab === 'routines'}
+              className={`${styles.tabButton} ${activeMainTab === 'routines' ? styles.tabButtonActive : ''}`}
+              onClick={() => setActiveMainTab('routines')}
+            >
+              <BookOpen size={18} aria-hidden="true" />
+              <span>Rutinas</span>
+            </button>
 
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeMainTab === 'progress'}
-            className={`${styles.tabButton} ${activeMainTab === 'progress' ? styles.tabButtonActive : ''}`}
-            onClick={() => setActiveMainTab('progress')}
-          >
-            <BarChart3 size={18} aria-hidden="true" />
-            <span>Progreso</span>
-          </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeMainTab === 'progress'}
+              className={`${styles.tabButton} ${activeMainTab === 'progress' ? styles.tabButtonActive : ''}`}
+              onClick={() => setActiveMainTab('progress')}
+            >
+              <BarChart3 size={18} aria-hidden="true" />
+              <span>Progreso</span>
+            </button>
 
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeMainTab === 'library'}
-            className={`${styles.tabButton} ${activeMainTab === 'library' ? styles.tabButtonActive : ''}`}
-            onClick={() => setActiveMainTab('library')}
-          >
-            <LibraryBig size={18} aria-hidden="true" />
-            <span>Biblioteca</span>
-          </button>
-        </div>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeMainTab === 'library'}
+              className={`${styles.tabButton} ${activeMainTab === 'library' ? styles.tabButtonActive : ''}`}
+              onClick={() => setActiveMainTab('library')}
+            >
+              <LibraryBig size={18} aria-hidden="true" />
+              <span>Biblioteca</span>
+            </button>
+          </div>
+        )}
 
         {/* CONTENIDO DE LOS DESTINOS */}
         <div className={styles.tabPanel}>
@@ -113,36 +142,63 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
 
           {activeMainTab === 'routines' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-              <div className={styles.subSectionNav}>
-                <button
-                  type="button"
-                  className={`${styles.subSectionButton} ${routinesSubTab === 'catalog' ? styles.subSectionButtonActive : ''}`}
-                  onClick={() => setRoutinesSubTab('catalog')}
-                >
-                  <BookOpen size={15} /> Catálogo Oficial
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.subSectionButton} ${routinesSubTab === 'skills' ? styles.subSectionButtonActive : ''}`}
-                  onClick={() => setRoutinesSubTab('skills')}
-                >
-                  <Target size={15} /> Habilidades
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.subSectionButton} ${routinesSubTab === 'database' ? styles.subSectionButtonActive : ''}`}
-                  onClick={() => setRoutinesSubTab('database')}
-                >
-                  <Database size={15} /> Base de Ejercicios
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.subSectionButton} ${routinesSubTab === 'custom' ? styles.subSectionButtonActive : ''}`}
-                  onClick={() => setRoutinesSubTab('custom')}
-                >
-                  <Wrench size={15} /> Creador
-                </button>
-              </div>
+              {isMobile ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label htmlFor="fitness-routines-tab" style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
+                    Vista
+                  </label>
+                  <select
+                    id="fitness-routines-tab"
+                    value={routinesSubTab}
+                    onChange={(e) => setRoutinesSubTab(e.target.value as 'catalog' | 'skills' | 'database' | 'custom')}
+                    style={{
+                      minHeight: '44px',
+                      borderRadius: 'var(--radius-m)',
+                      border: '1px solid var(--color-border-visible)',
+                      background: 'var(--surface-1)',
+                      color: 'var(--text-primary)',
+                      padding: '10px 12px',
+                      fontSize: 'var(--fs-body)'
+                    }}
+                  >
+                    <option value="catalog">Catálogo</option>
+                    <option value="skills">Habilidades</option>
+                    <option value="database">Ejercicios</option>
+                    <option value="custom">Creador</option>
+                  </select>
+                </div>
+              ) : (
+                <div className={styles.subSectionNav}>
+                  <button
+                    type="button"
+                    className={`${styles.subSectionButton} ${routinesSubTab === 'catalog' ? styles.subSectionButtonActive : ''}`}
+                    onClick={() => setRoutinesSubTab('catalog')}
+                  >
+                    <BookOpen size={15} /> Catálogo
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.subSectionButton} ${routinesSubTab === 'skills' ? styles.subSectionButtonActive : ''}`}
+                    onClick={() => setRoutinesSubTab('skills')}
+                  >
+                    <Target size={15} /> Habilidades
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.subSectionButton} ${routinesSubTab === 'database' ? styles.subSectionButtonActive : ''}`}
+                    onClick={() => setRoutinesSubTab('database')}
+                  >
+                    <Database size={15} /> Ejercicios
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.subSectionButton} ${routinesSubTab === 'custom' ? styles.subSectionButtonActive : ''}`}
+                    onClick={() => setRoutinesSubTab('custom')}
+                  >
+                    <Wrench size={15} /> Creador
+                  </button>
+                </div>
+              )}
 
               {routinesSubTab === 'catalog' && <FitAppRoutinesCatalog />}
               {routinesSubTab === 'skills' && <SkillsWorkspace />}

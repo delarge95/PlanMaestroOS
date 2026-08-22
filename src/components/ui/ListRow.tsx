@@ -16,7 +16,7 @@ export interface ListRowProps {
 }
 
 const badgeStyles = {
-  default: { color: 'var(--text-tertiary)', background: 'rgba(255,255,255,0.06)' },
+  default: { color: 'var(--text-tertiary)', background: 'var(--glass)' },
   accent: { color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)' },
   success: { color: 'var(--color-state-done)', background: 'var(--color-state-done-soft)' },
   warning: { color: 'var(--color-accent-warning)', background: 'var(--color-accent-warning-soft)' },
@@ -50,9 +50,9 @@ export function ListRow({
         width: '100%',
         minHeight: '48px',
         padding: 'var(--space-sm) var(--space-md)',
-        borderRadius: 'var(--radius-md)',
-        background: done ? 'var(--color-state-done-soft)' : active ? 'var(--color-accent-primary-soft)' : 'rgba(0, 0, 0, 0.3)',
-        border: `1px solid ${active ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
+        borderRadius: 'var(--radius-m)',
+        background: done ? 'var(--color-state-done-soft)' : active ? 'var(--surface-2)' : 'var(--surface-1)',
+        border: `1px solid ${done ? 'var(--color-state-done-glow)' : active ? 'var(--color-border-visible)' : 'var(--color-border-subtle)'}`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -78,7 +78,7 @@ export function ListRow({
             {title}
           </strong>
           {displayMeta && (
-            <span style={{ fontSize: 'var(--font-size-label)', color: active ? 'var(--color-accent-primary)' : 'var(--text-secondary)', display: 'block' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: active ? 'var(--text-primary)' : 'var(--text-secondary)', display: 'block' }}>
               {displayMeta}
             </span>
           )}

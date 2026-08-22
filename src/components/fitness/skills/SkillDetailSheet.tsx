@@ -24,7 +24,7 @@ export function SkillDetailSheet({
   onStartPractice,
   onSelectStep
 }: SkillDetailSheetProps) {
-  const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
+  const activeStepIds = useSkillStateStore((s) => s.activeStepIds);
   const toggleActiveSkill = useSkillStateStore((s) => s.toggleActiveSkill);
   const pauseSkill = useSkillStateStore((s) => s.pauseSkill);
 

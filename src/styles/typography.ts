@@ -1,37 +1,41 @@
-// src/styles/typography.ts - 5-Role Typography System per Clinical Design 02
+// src/styles/typography.ts - Escala tipográfica canon (monocromo, sistema)
+// 6 niveles fijos: eyebrow → meta → body → step → section → display.
+// Referencia unicamente los tokens canon de src/styles/tokens.css.
 export const typo = {
   display: {
-    fontSize: 'var(--font-size-display)',
+    fontSize: 'var(--fs-display)',
     fontWeight: 700,
-    lineHeight: 1.3,
+    lineHeight: 1.15,
     fontFamily: 'var(--font-family-system)',
+    letterSpacing: '-0.02em',
   },
   title: {
-    fontSize: 'var(--font-size-title)',
+    fontSize: 'var(--fs-section)',
     fontWeight: 650,
-    lineHeight: 1.35,
+    lineHeight: 1.3,
     fontFamily: 'var(--font-family-system)',
+    letterSpacing: '-0.01em',
   },
   body: {
-    fontSize: 'var(--font-size-body)',
+    fontSize: 'var(--fs-body)',
     fontWeight: 400,
     lineHeight: 1.5,
     fontFamily: 'var(--font-family-system)',
   },
   label: {
-    fontSize: 'var(--font-size-label)',
+    fontSize: 'var(--fs-meta)',
     fontWeight: 550,
     lineHeight: 1.4,
     fontFamily: 'var(--font-family-system)',
   },
   meta: {
-    fontSize: 'var(--font-size-meta)',
+    fontSize: 'var(--fs-eyebrow)',
     fontWeight: 450,
     lineHeight: 1.3,
     fontFamily: 'var(--font-family-system)',
   },
   micro: {
-    fontSize: 'var(--font-size-meta)',
+    fontSize: 'var(--fs-eyebrow)',
     fontWeight: 600,
     lineHeight: 1.2,
     fontFamily: 'var(--font-family-system)',

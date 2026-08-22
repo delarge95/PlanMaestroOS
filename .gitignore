@@ -48,3 +48,12 @@ qa-screenshots/
 scratch_*.txt
 scratch_*.log
 
+
+# Foreign experiments and tool noise (not part of Plan Maestro OS)
+deepseek-harness/
+.kilo/
+check_out.txt
+
+# 3D asset archives (GLBs are committed individually)
+_pdf_biblia/Planeacion_Integral/3D assets/3dFiles.tar
+_pdf_biblia/Planeacion_Integral/3D assets/3dFiles.zip

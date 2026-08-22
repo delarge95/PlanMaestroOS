@@ -53,7 +53,7 @@ export default function FitAppWorkoutLogger() {
   const setCurrentEnergy = useAppStore((s) => s.setCurrentEnergy);
 
   // Active program store
-  const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds || [s.programId]);
+  const activeProgramIds = useActiveProgramStore((s) => s.activeProgramIds);
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
   const currentDayId = useActiveProgramStore((s) => s.currentDayId);
   const overrides = useActiveProgramStore((s) => s.selectedExerciseOverrides);
@@ -73,7 +73,7 @@ export default function FitAppWorkoutLogger() {
     }
   }, [activeProgramIds.join(',')]);
 
-  const officialProgram = getProgramById(activeLoggerProgramId);
+  const officialProgram = getProgramById(activeLoggerProgramId) ?? allPrograms[0];
   const safeWeekIdx = Math.min(Math.max(currentWeek - 1, 0), (officialProgram.weeks?.length || 1) - 1);
   const activeWeek = officialProgram.weeks?.[safeWeekIdx] || officialProgram.weeks?.[0];
   const activeDay = activeWeek?.days?.find((d) => d.id === currentDayId) || activeWeek?.days?.[0];

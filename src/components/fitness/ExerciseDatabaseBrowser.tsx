@@ -2,8 +2,11 @@
 import { EXERCISE_CATEGORIES, filterExercises, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
 import ErrorBoundary from '../ErrorBoundary';
+import useIsMobile from '../ui/useIsMobile';
+import { Search, PlayCircle } from 'lucide-react';
 
 export default function ExerciseDatabaseBrowser() {
+  const isMobile = useIsMobile();
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activeExercise, setActiveExercise] = useState<ExerciseEntry | null>(null);
@@ -15,31 +18,37 @@ export default function ExerciseDatabaseBrowser() {
   return (
     <ErrorBoundary>
       <div style={{
-        background: 'rgba(10, 15, 20, 0.65)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: '24px',
-        padding: '24px',
+        background: 'var(--surface-1)',
+        border: '1px solid var(--color-border-subtle)',
+        borderRadius: 'var(--radius-l)',
+        padding: 'var(--space-5)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '20px',
-        marginTop: '32px',
-        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
+        gap: 'var(--space-4)',
+        marginTop: 'var(--space-5)'
       }}>
-        {/* HEADER */}
+        {/* HEADER + BUSCADOR */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 700, letterSpacing: '0.05em' }}>
-              BIBLIOTECA INTERACTIVA FITAPP-FREE
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              Biblioteca
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
-              Base de Datos Completa de Ejercicios ({filteredList.length})
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+              Ejercicios ({filteredList.length})
             </h3>
           </div>
 
-          {/* SEARCH INPUT */}
           <div style={{ position: 'relative', width: '100%', maxWidth: '320px' }}>
+            <Search
+              size={15}
+              style={{
+                position: 'absolute',
+                left: '12px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: 'var(--text-tertiary)'
+              }}
+            />
             <input
               type="text"
               placeholder="Buscar ejercicio o músculo..."
@@ -47,60 +56,83 @@ export default function ExerciseDatabaseBrowser() {
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
                 width: '100%',
-                background: 'rgba(0, 0, 0, 0.4)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: '12px',
+                background: 'var(--surface-2)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 'var(--radius-m)',
                 padding: '10px 14px 10px 36px',
-                color: 'var(--color-text-primary)',
-                fontSize: '0.85rem',
+                color: 'var(--text-primary)',
+                fontSize: 'var(--fs-body)',
                 outline: 'none',
                 transition: 'all 150ms ease'
               }}
             />
-            <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-tertiary)', fontSize: '0.85rem' }}>
-              🔍
-            </span>
           </div>
         </div>
 
-        {/* CATEGORY CHIPS */}
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '6px' }}>
-          {EXERCISE_CATEGORIES.map((cat) => {
-            const isSelected = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                style={{
-                  background: isSelected ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                  border: `1px solid ${isSelected ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255, 255, 255, 0.08)'}`,
-                  color: isSelected ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
-                  padding: '6px 14px',
-                  borderRadius: '999px',
-                  fontSize: '0.78rem',
-                  fontWeight: isSelected ? 700 : 500,
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  transition: 'all 150ms ease'
-                }}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
+        {/* FILTRO: desktop chips, móvil select */}
+        {isMobile ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <label htmlFor="exercise-category" style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
+              Categoría
+            </label>
+            <select
+              id="exercise-category"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              style={{
+                minHeight: '44px',
+                borderRadius: 'var(--radius-m)',
+                border: '1px solid var(--color-border-visible)',
+                background: 'var(--surface-2)',
+                color: 'var(--text-primary)',
+                padding: '10px 12px',
+                fontSize: 'var(--fs-body)'
+              }}
+            >
+              {EXERCISE_CATEGORIES.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '6px' }}>
+            {EXERCISE_CATEGORIES.map((cat) => {
+              const isSelected = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat)}
+                  style={{
+                    background: isSelected ? 'var(--text-primary)' : 'var(--surface-2)',
+                    border: `1px solid ${isSelected ? 'var(--text-primary)' : 'var(--color-border-subtle)'}`,
+                    color: isSelected ? '#000000' : 'var(--text-secondary)',
+                    padding: '6px 14px',
+                    borderRadius: '999px',
+                    fontSize: 'var(--fs-meta)',
+                    fontWeight: isSelected ? 700 : 500,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    transition: 'all 150ms ease'
+                  }}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
-        {/* GRID OF EXERCISES */}
+        {/* LISTADO */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px', maxHeight: '520px', overflowY: 'auto', paddingRight: '4px' }}>
           {filteredList.map((ex, idx) => (
             <div
               key={idx}
               onClick={() => setActiveExercise(ex)}
               style={{
-                background: 'rgba(0, 0, 0, 0.35)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '16px',
+                background: 'var(--surface-2)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 'var(--radius-l)',
                 padding: '16px',
                 cursor: 'pointer',
                 transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)',
@@ -110,32 +142,33 @@ export default function ExerciseDatabaseBrowser() {
                 gap: '12px'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                e.currentTarget.style.borderColor = 'var(--color-border-visible)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.background = 'rgba(16, 185, 129, 0.06)';
+                e.currentTarget.style.background = 'var(--surface-1-hover)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.background = 'rgba(0, 0, 0, 0.35)';
+                e.currentTarget.style.background = 'var(--surface-2)';
               }}
             >
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.65rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>
                     {ex.category}
                   </span>
                   {ex.youtubeLink && (
-                    <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-danger)', background: 'rgba(239, 68, 68, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>
-                      ▶ Video
+                    <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', background: 'var(--glass)', padding: '2px 6px', borderRadius: '6px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                      <PlayCircle size={12} />
+                      Video
                     </span>
                   )}
                 </div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0 0 6px', color: 'var(--color-text-primary)', lineHeight: 1.3 }}>
+                <h4 style={{ fontSize: 'var(--fs-step)', fontWeight: 700, margin: '0 0 6px', color: 'var(--text-primary)', lineHeight: 1.3 }}>
                   {ex.name}
                 </h4>
                 {ex.subcategory && (
-                  <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)' }}>
+                  <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
                     {ex.subcategory}
                   </span>
                 )}
@@ -143,7 +176,7 @@ export default function ExerciseDatabaseBrowser() {
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
                 {ex.muscles.strength.slice(0, 3).map((m, mIdx) => (
-                  <span key={mIdx} style={{ fontSize: '0.68rem', color: 'var(--color-text-secondary)', background: 'rgba(255,255,255,0.05)', padding: '2px 6px', borderRadius: '4px' }}>
+                  <span key={mIdx} style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', background: 'var(--glass)', padding: '2px 6px', borderRadius: '6px' }}>
                     {m}
                   </span>
                 ))}

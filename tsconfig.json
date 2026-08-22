@@ -16,6 +16,9 @@
     "portfolio_web",
     "worker/node_modules",
     "worker/dist",
-    "scripts/node_modules"
+    "scripts/node_modules",
+    "deepseek-harness",
+    "_pdf_biblia",
+    ".kilo"
   ]
 }

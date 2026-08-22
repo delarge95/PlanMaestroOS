@@ -30,7 +30,7 @@ export function ExplorePathsView({
   searchTerm: externalSearchTerm = '',
   hideInternalFilters = false
 }: ExplorePathsViewProps) {
-  const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
+  const activeStepIds = useSkillStateStore((s) => s.activeStepIds);
   const [internalDomain, setInternalDomain] = useState<SkillDomain | 'all'>('all');
   const [expandedPathId, setExpandedPathId] = useState<string | null>(null);
   const [internalOnlyActive, setInternalOnlyActive] = useState(false);

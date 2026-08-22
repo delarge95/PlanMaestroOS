@@ -9,38 +9,39 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
+  // Primary = acción destacada. Monocromo: blanco sobre negro (sin acento azul).
   primary: {
-    background: 'var(--color-accent-primary)',
-    color: '#ffffff',
+    background: 'var(--text-primary)',
+    color: '#000000',
     border: 'none',
     fontWeight: 600,
-    boxShadow: '0 3px 12px var(--color-accent-primary-soft)'
+    boxShadow: 'none'
   },
   secondary: {
-    background: 'transparent',
-    color: 'var(--color-text-primary)',
+    background: 'var(--surface-2)',
+    color: 'var(--text-primary)',
     border: '1px solid var(--color-border-visible)',
     fontWeight: 500
   },
   ghost: {
     background: 'transparent',
-    color: 'var(--color-text-secondary)',
+    color: 'var(--text-secondary)',
     border: 'none',
     fontWeight: 500
   },
   danger: {
-    background: 'var(--color-accent-danger-soft)',
-    color: 'var(--color-accent-danger)',
-    border: '1px solid var(--color-accent-danger-glow)',
+    background: 'var(--danger-soft)',
+    color: 'var(--danger)',
+    border: '1px solid var(--danger-soft)',
     fontWeight: 600
   }
 };
 
 // AUDIT-05: Consistent tap targets — sm min 36px, md min 44px, lg min 52px
 const sizeStyles: Record<ButtonSize, React.CSSProperties> = {
-  sm: { padding: '6px 14px', fontSize: 'var(--font-size-label)', borderRadius: '8px', minHeight: '36px', minWidth: '36px' },
-  md: { padding: '10px 18px', fontSize: 'var(--font-size-body)', borderRadius: '12px', minHeight: '44px', minWidth: '44px' },
-  lg: { padding: '14px 24px', fontSize: 'var(--font-size-body)', borderRadius: '14px', minHeight: '52px', minWidth: '52px' }
+  sm: { padding: '6px 14px', fontSize: 'var(--fs-meta)', borderRadius: 'var(--radius-m)', minHeight: '36px', minWidth: '36px' },
+  md: { padding: '10px 18px', fontSize: 'var(--fs-body)', borderRadius: 'var(--radius-m)', minHeight: '44px', minWidth: '44px' },
+  lg: { padding: '14px 24px', fontSize: 'var(--fs-body)', borderRadius: 'var(--radius-l)', minHeight: '52px', minWidth: '52px' }
 };
 
 export function Button({
@@ -92,7 +93,7 @@ export function Button({
       }}
       onFocus={(e) => {
         if (!disabled) {
-          e.currentTarget.style.boxShadow = `${variantStyles[variant].boxShadow ?? ''}, 0 0 0 3px rgba(10, 132, 255, 0.5)`.trim().replace(/^,\s*/, '');
+          e.currentTarget.style.boxShadow = `${variantStyles[variant].boxShadow ?? ''}, 0 0 0 3px var(--focus-ring)`.trim().replace(/^,\s*/, '');
         }
         props.onFocus?.(e);
       }}

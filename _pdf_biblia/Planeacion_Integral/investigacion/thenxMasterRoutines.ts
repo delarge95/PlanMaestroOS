@@ -1,4 +1,4 @@
-import type { WorkoutProgram } from './types';
+import type { WorkoutProgram } from '../../src/data/types';
 
 /**
  * Thenx / Chris Heria Technique Guide Master Workouts.
@@ -23,7 +23,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Handstand - Master Workout",
             "exercises": [
               {
-                "id": "Pike Hold",
+                "id": "tg-53-req-1",
                 "name": "Pike Hold",
                 "warmupSets": "",
                 "sets": [
@@ -39,7 +39,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Elevated Pike Hold",
+                "id": "tg-53-req-2",
                 "name": "Elevated Pike Hold",
                 "warmupSets": "",
                 "sets": [
@@ -55,7 +55,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Elevated Pike Push Up",
+                "id": "tg-53-req-3",
                 "name": "Elevated Pike Push Up",
                 "warmupSets": "",
                 "sets": [
@@ -71,7 +71,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Wall Walks",
+                "id": "tg-53-req-4",
                 "name": "Wall Walks",
                 "warmupSets": "",
                 "sets": [
@@ -87,7 +87,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Kick Ups",
+                "id": "tg-53-prog-5",
                 "name": "Handstand Kick Ups",
                 "warmupSets": "",
                 "sets": [
@@ -103,7 +103,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Finger Press",
+                "id": "tg-53-prog-6",
                 "name": "Handstand Finger Press",
                 "warmupSets": "",
                 "sets": [
@@ -119,7 +119,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Finger Balance",
+                "id": "tg-53-prog-7",
                 "name": "Handstand Finger Balance",
                 "warmupSets": "",
                 "sets": [
@@ -135,7 +135,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Dismount",
+                "id": "tg-53-prog-8",
                 "name": "Dismount",
                 "warmupSets": "",
                 "sets": [
@@ -151,7 +151,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Kick Ups (Parallettes)",
+                "id": "tg-53-prog-9",
                 "name": "Handstand Kick Ups (Parallettes)",
                 "warmupSets": "",
                 "sets": [
@@ -167,7 +167,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Hold Facing the Wall",
+                "id": "tg-53-prog-10",
                 "name": "Handstand Balancing - Part 1",
                 "warmupSets": "",
                 "sets": [
@@ -183,7 +183,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Hold Against the Wall",
+                "id": "tg-53-prog-11",
                 "name": "Handstand Balancing - Part 2",
                 "warmupSets": "",
                 "sets": [
@@ -199,7 +199,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Dismount",
+                "id": "tg-53-prog-12",
                 "name": "Dismount",
                 "warmupSets": "",
                 "sets": [
@@ -244,7 +244,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Pullover - Master Workout",
             "exercises": [
               {
-                "id": "Hanging On The Bar",
+                "id": "tg-56-req-1",
                 "name": "Hanging On The Bar",
                 "warmupSets": "",
                 "sets": [
@@ -260,7 +260,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Pull Ups",
+                "id": "tg-56-req-2",
                 "name": "Pull Ups",
                 "warmupSets": "",
                 "sets": [
@@ -276,7 +276,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Hanging Leg Raises",
+                "id": "tg-56-req-3",
                 "name": "Hanging Leg Raises",
                 "warmupSets": "",
                 "sets": [
@@ -292,7 +292,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Hanging L-Sit Hold",
+                "id": "tg-56-req-4",
                 "name": "Hanging L-Sit Hold",
                 "warmupSets": "",
                 "sets": [
@@ -308,7 +308,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Toes to Bar",
+                "id": "tg-56-prog-5",
                 "name": "Toes to Bar",
                 "warmupSets": "",
                 "sets": [
@@ -324,7 +324,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Upside Down Deadlift",
+                "id": "tg-56-prog-6",
                 "name": "Upside Down Deadlift",
                 "warmupSets": "",
                 "sets": [
@@ -340,7 +340,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Upside Down Deadlift Pull Up",
+                "id": "tg-56-prog-7",
                 "name": "Upside Down Deadlift Pull Up",
                 "warmupSets": "",
                 "sets": [
@@ -356,7 +356,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Pull Over",
+                "id": "tg-56-prog-8",
                 "name": "Pull Over",
                 "warmupSets": "",
                 "sets": [
@@ -401,7 +401,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Handstand Press - Master Workout",
             "exercises": [
               {
-                "id": "Handstand Hold",
+                "id": "tg-54-req-1",
                 "name": "Handstand Hold",
                 "warmupSets": "",
                 "sets": [
@@ -417,7 +417,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Kick Ups",
+                "id": "tg-54-req-2",
                 "name": "Handstand Kick Ups",
                 "warmupSets": "",
                 "sets": [
@@ -433,7 +433,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Explosive Push Ups",
+                "id": "tg-54-req-3",
                 "name": "Explosive Push Ups",
                 "warmupSets": "",
                 "sets": [
@@ -449,7 +449,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Push Ups (Against the Wall)",
+                "id": "tg-54-prog-4",
                 "name": "Handstand Push Ups (Against the Wall)",
                 "warmupSets": "",
                 "sets": [
@@ -465,7 +465,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Negative Push Up (Against the Wall)",
+                "id": "tg-54-prog-5",
                 "name": "HANDSTAND NEGATIVES",
                 "warmupSets": "",
                 "sets": [
@@ -481,7 +481,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Tuck Handstand Pumps",
+                "id": "tg-54-prog-6",
                 "name": "TUCK HANDSTAND PUMPS",
                 "warmupSets": "",
                 "sets": [
@@ -497,7 +497,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Press",
+                "id": "tg-54-prog-7",
                 "name": "HANDSTAND PRESS",
                 "warmupSets": "",
                 "sets": [
@@ -542,7 +542,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "How to 90 Degree Hold - Master Workout",
             "exercises": [
               {
-                "id": "PUSH UP HOLD",
+                "id": "tg-94-prog-1",
                 "name": "PUSH UP HOLD ",
                 "warmupSets": "",
                 "sets": [
@@ -558,7 +558,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Reverse Leg Raises",
+                "id": "tg-94-prog-2",
                 "name": "REVERSE LEG RAISES ",
                 "warmupSets": "",
                 "sets": [
@@ -574,7 +574,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Planche Push Ups",
+                "id": "tg-94-prog-3",
                 "name": "Step 3 - Pseudo Planche Push Ups",
                 "warmupSets": "",
                 "sets": [
@@ -583,14 +583,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 837339333"
+                    "notes": "Vimeo: https://player.vimeo.com/video/837339333"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "PSEUDO PLANCHE PUSH UP HOLD",
+                "id": "tg-94-prog-4",
                 "name": "Step 4 - Pseudo Planche Push Up Hold",
                 "warmupSets": "",
                 "sets": [
@@ -599,14 +599,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 837339457"
+                    "notes": "Vimeo: https://player.vimeo.com/video/837339457"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "90 DEGREE HOLD",
+                "id": "tg-94-prog-5",
                 "name": "Step 5 - 90 Degree Hold Toe Taps",
                 "warmupSets": "",
                 "sets": [
@@ -615,14 +615,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 837339410"
+                    "notes": "Vimeo: https://player.vimeo.com/video/837339410"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "90 DEGREE LEAN + RAISE",
+                "id": "tg-94-prog-6",
                 "name": "Step 6 - 90 Degree Lean + Raise",
                 "warmupSets": "",
                 "sets": [
@@ -631,14 +631,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 837339503"
+                    "notes": "Vimeo: https://player.vimeo.com/video/837339503"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "90 DEGREE HOLD",
+                "id": "tg-94-prog-7",
                 "name": "Step 7 - 90 Degree Hold ",
                 "warmupSets": "",
                 "sets": [
@@ -647,14 +647,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 837679192"
+                    "notes": "Vimeo: https://player.vimeo.com/video/837679192"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "90 DEGREE HOLD",
+                "id": "tg-94-prog-8",
                 "name": "90 Degree Hold Outro",
                 "warmupSets": "",
                 "sets": [
@@ -663,7 +663,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 837679125"
+                    "notes": "Vimeo: https://player.vimeo.com/video/837679125"
                   }
                 ],
                 "rest": "60s rest",
@@ -699,7 +699,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Straight Arm Press To Handstand - Master Workout",
             "exercises": [
               {
-                "id": "Handstand Hold",
+                "id": "tg-60-req-1",
                 "name": "Handstand Hold",
                 "warmupSets": "",
                 "sets": [
@@ -715,7 +715,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "L-Sit Hold",
+                "id": "tg-60-req-2",
                 "name": "L-Sit Hold",
                 "warmupSets": "",
                 "sets": [
@@ -731,7 +731,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Push Ups (On Parallettes)",
+                "id": "tg-60-req-3",
                 "name": "Handstand Push Ups (On Parallettes)",
                 "warmupSets": "",
                 "sets": [
@@ -747,7 +747,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Arm Plank Lean",
+                "id": "tg-60-req-4",
                 "name": "Straight Arm Plank Lean",
                 "warmupSets": "",
                 "sets": [
@@ -763,7 +763,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Leg Handstand Negative",
+                "id": "tg-60-prog-5",
                 "name": "Straight Leg Handstand Negative",
                 "warmupSets": "",
                 "sets": [
@@ -779,7 +779,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Pike Walks Across",
+                "id": "tg-60-prog-6",
                 "name": "Pike Walks Across",
                 "warmupSets": "",
                 "sets": [
@@ -795,7 +795,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Tuck Handstand Hold",
+                "id": "tg-60-prog-7",
                 "name": "Tuck Handstand Hold",
                 "warmupSets": "",
                 "sets": [
@@ -811,7 +811,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Elevated Pike Press Pumps",
+                "id": "tg-60-prog-8",
                 "name": "Elevated Pike Press Pumps",
                 "warmupSets": "",
                 "sets": [
@@ -856,7 +856,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "How To Toes To Bar - Master Workout",
             "exercises": [
               {
-                "id": "Hanging Scapula Retractions",
+                "id": "tg-133-prog-1",
                 "name": "Hanging Scapula Retractions",
                 "warmupSets": "",
                 "sets": [
@@ -872,7 +872,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Hanging Knee Raises",
+                "id": "tg-133-prog-2",
                 "name": "Step 2 - Hanging Knee Raises",
                 "warmupSets": "",
                 "sets": [
@@ -881,14 +881,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 852998337"
+                    "notes": "Vimeo: https://player.vimeo.com/video/852998337"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "L-Sit",
+                "id": "tg-133-prog-3",
                 "name": "Step 3 - Hanging Tuck L-Sit",
                 "warmupSets": "",
                 "sets": [
@@ -897,14 +897,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 852998371"
+                    "notes": "Vimeo: https://player.vimeo.com/video/852998371"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Hanging High Knee Raises",
+                "id": "tg-133-prog-4",
                 "name": "Step 4 - Hanging High Knee Raises",
                 "warmupSets": "",
                 "sets": [
@@ -913,14 +913,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 852998401"
+                    "notes": "Vimeo: https://player.vimeo.com/video/852998401"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Hanging Leg Raise",
+                "id": "tg-133-prog-5",
                 "name": "Step 5 - Hanging Leg Raises",
                 "warmupSets": "",
                 "sets": [
@@ -929,14 +929,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 852998436"
+                    "notes": "Vimeo: https://player.vimeo.com/video/852998436"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "L-Sit",
+                "id": "tg-133-prog-6",
                 "name": "Step 6 - Hanging L-Sit Hold",
                 "warmupSets": "",
                 "sets": [
@@ -945,14 +945,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 852998477"
+                    "notes": "Vimeo: https://player.vimeo.com/video/852998477"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Toes to Bar",
+                "id": "tg-133-prog-7",
                 "name": "Step 7 - Tuck Toes to Bar",
                 "warmupSets": "",
                 "sets": [
@@ -961,14 +961,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 852998515"
+                    "notes": "Vimeo: https://player.vimeo.com/video/852998515"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Toes to Bar",
+                "id": "tg-133-prog-8",
                 "name": "Step 8 - Toes to Bar",
                 "warmupSets": "",
                 "sets": [
@@ -977,7 +977,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 852998572"
+                    "notes": "Vimeo: https://player.vimeo.com/video/852998572"
                   }
                 ],
                 "rest": "60s rest",
@@ -1013,7 +1013,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "How to Handstand Press - Master Workout",
             "exercises": [
               {
-                "id": "(Negative Handstand Press Against The Wall)",
+                "id": "tg-95-prog-1",
                 "name": "(Negative Handstand Press Against The Wall)",
                 "warmupSets": "",
                 "sets": [
@@ -1029,7 +1029,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Handstand Press",
+                "id": "tg-95-prog-2",
                 "name": "Step 2 - Tucked Handstand Press Pumps",
                 "warmupSets": "",
                 "sets": [
@@ -1038,14 +1038,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 840250679"
+                    "notes": "Vimeo: https://player.vimeo.com/video/840250679"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Handstand Press",
+                "id": "tg-95-prog-3",
                 "name": "Step 3 -  Handstand Press Against The Wall",
                 "warmupSets": "",
                 "sets": [
@@ -1054,14 +1054,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 840250773"
+                    "notes": "Vimeo: https://player.vimeo.com/video/840250773"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Handstand Press",
+                "id": "tg-95-prog-4",
                 "name": "Step 4 - Handstand Press ",
                 "warmupSets": "",
                 "sets": [
@@ -1070,14 +1070,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 840250862"
+                    "notes": "Vimeo: https://player.vimeo.com/video/840250862"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Handstand Press",
+                "id": "tg-95-prog-5",
                 "name": "Handstand Press Outro",
                 "warmupSets": "",
                 "sets": [
@@ -1086,7 +1086,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 840250841"
+                    "notes": "Vimeo: https://player.vimeo.com/video/840250841"
                   }
                 ],
                 "rest": "60s rest",
@@ -1122,7 +1122,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "How To Pull Over - Master Workout",
             "exercises": [
               {
-                "id": "Hanging Scapula Retractions",
+                "id": "tg-131-prog-1",
                 "name": "Hanging Scapula Retractions",
                 "warmupSets": "",
                 "sets": [
@@ -1138,7 +1138,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Arm + Leg Raise",
+                "id": "tg-131-prog-2",
                 "name": "Step 2 - Hanging Bent Arm Leg Raises",
                 "warmupSets": "",
                 "sets": [
@@ -1147,14 +1147,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 850130477"
+                    "notes": "Vimeo: https://player.vimeo.com/video/850130477"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Toes to Bar",
+                "id": "tg-131-prog-3",
                 "name": "Step 3 - Toes to Bar",
                 "warmupSets": "",
                 "sets": [
@@ -1163,14 +1163,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 850130508"
+                    "notes": "Vimeo: https://player.vimeo.com/video/850130508"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Upside Down Deadlift",
+                "id": "tg-131-prog-4",
                 "name": "Step 4 - Upside Down Deadlift",
                 "warmupSets": "",
                 "sets": [
@@ -1179,14 +1179,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 850130565"
+                    "notes": "Vimeo: https://player.vimeo.com/video/850130565"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Inverted Row Pull Ups",
+                "id": "tg-131-prog-5",
                 "name": "Step 5 - Inverted Row Pull Ups",
                 "warmupSets": "",
                 "sets": [
@@ -1195,14 +1195,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 850130606"
+                    "notes": "Vimeo: https://player.vimeo.com/video/850130606"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Pull Over",
+                "id": "tg-131-prog-6",
                 "name": "Step 6 - Pull Over",
                 "warmupSets": "",
                 "sets": [
@@ -1211,14 +1211,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 850130645"
+                    "notes": "Vimeo: https://player.vimeo.com/video/850130645"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Pull Over",
+                "id": "tg-131-prog-7",
                 "name": "Pull Over - Outro",
                 "warmupSets": "",
                 "sets": [
@@ -1227,7 +1227,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 850130732"
+                    "notes": "Vimeo: https://player.vimeo.com/video/850130732"
                   }
                 ],
                 "rest": "60s rest",
@@ -1263,7 +1263,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "How To Dragon Flag - Master Workout",
             "exercises": [
               {
-                "id": "Dragon Flag Hip Raises",
+                "id": "tg-97-prog-1",
                 "name": "Dragon Flag Hip Raises",
                 "warmupSets": "",
                 "sets": [
@@ -1279,7 +1279,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Dragon Flag Hold",
+                "id": "tg-97-prog-2",
                 "name": "Step 2 - High Dragon Flag Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1288,14 +1288,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844397579"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844397579"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Dragon Flag Negative",
+                "id": "tg-97-prog-3",
                 "name": "Step 3 - Half Lay Dragon Flag Negative",
                 "warmupSets": "",
                 "sets": [
@@ -1304,14 +1304,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844397527"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844397527"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Dragon Flag Negative",
+                "id": "tg-97-prog-4",
                 "name": "Step 4 - Single Leg Dragon Flag & Dragon Flag Negative",
                 "warmupSets": "",
                 "sets": [
@@ -1320,14 +1320,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844397495"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844397495"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Dragon Flag Hold",
+                "id": "tg-97-prog-5",
                 "name": "Step 5 - Dragon Flag Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1336,14 +1336,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844397640"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844397640"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Dragon Flag",
+                "id": "tg-97-prog-6",
                 "name": "Dragon flag - Outro ",
                 "warmupSets": "",
                 "sets": [
@@ -1352,7 +1352,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844397657"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844397657"
                   }
                 ],
                 "rest": "60s rest",
@@ -1388,7 +1388,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Muscle Up - Master Workout",
             "exercises": [
               {
-                "id": "Pull Ups",
+                "id": "tg-55-req-1",
                 "name": "Pull Ups",
                 "warmupSets": "",
                 "sets": [
@@ -1404,7 +1404,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Hanging L-Sit Hold",
+                "id": "tg-55-req-2",
                 "name": "Hanging L-Sit Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1420,7 +1420,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Bar Dips",
+                "id": "tg-55-req-3",
                 "name": "Straight Bar Dips",
                 "warmupSets": "",
                 "sets": [
@@ -1436,7 +1436,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Toes to Bar",
+                "id": "tg-55-req-4",
                 "name": "Toes to Bar",
                 "warmupSets": "",
                 "sets": [
@@ -1452,7 +1452,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Hanging Leg Raises",
+                "id": "tg-55-req-5",
                 "name": "Hanging Leg Raises",
                 "warmupSets": "",
                 "sets": [
@@ -1468,7 +1468,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Negative Muscle Up",
+                "id": "tg-55-req-6",
                 "name": "Negative Muscle Up",
                 "warmupSets": "",
                 "sets": [
@@ -1484,7 +1484,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Jumping Muscle Ups",
+                "id": "tg-55-req-7",
                 "name": "Jumping Muscle Ups",
                 "warmupSets": "",
                 "sets": [
@@ -1500,7 +1500,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Magic Button",
+                "id": "tg-55-prog-8",
                 "name": "Magic Button",
                 "warmupSets": "",
                 "sets": [
@@ -1516,7 +1516,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "L-Sit Pull Back",
+                "id": "tg-55-prog-9",
                 "name": "L-SIT PULL BACK",
                 "warmupSets": "",
                 "sets": [
@@ -1532,7 +1532,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Lay Over the Bar",
+                "id": "tg-55-prog-10",
                 "name": "LAY OVER THE BAR",
                 "warmupSets": "",
                 "sets": [
@@ -1577,7 +1577,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Front Lever - Master Workout",
             "exercises": [
               {
-                "id": "Hanging L-Sit Hold",
+                "id": "tg-68-req-1",
                 "name": "Hanging L-Sit Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1593,7 +1593,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Hanging High Knee Raises",
+                "id": "tg-68-req-2",
                 "name": "Hanging High Knee Raises",
                 "warmupSets": "",
                 "sets": [
@@ -1609,7 +1609,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "L-Sit Pull Ups",
+                "id": "tg-68-req-3",
                 "name": "L-Sit Pull Ups",
                 "warmupSets": "",
                 "sets": [
@@ -1625,7 +1625,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Upside Down Deadlift",
+                "id": "tg-68-req-4",
                 "name": "Upside Down Deadlift",
                 "warmupSets": "",
                 "sets": [
@@ -1641,7 +1641,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Tuck Front Lever Hold",
+                "id": "tg-68-prog-5",
                 "name": "Tuck Front Lever Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1657,7 +1657,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Single Leg Front Lever Negatives",
+                "id": "tg-68-prog-6",
                 "name": "Single Leg Front Lever Negatives",
                 "warmupSets": "",
                 "sets": [
@@ -1673,7 +1673,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Negative Front Lever",
+                "id": "tg-68-prog-7",
                 "name": "Negative Front Lever",
                 "warmupSets": "",
                 "sets": [
@@ -1689,7 +1689,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Front Lever Raises",
+                "id": "tg-68-prog-8",
                 "name": "Front Lever Raises",
                 "warmupSets": "",
                 "sets": [
@@ -1705,7 +1705,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Ice Cream Makers",
+                "id": "tg-68-prog-9",
                 "name": "Ice Cream Makers",
                 "warmupSets": "",
                 "sets": [
@@ -1721,7 +1721,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Front Lever Hold",
+                "id": "tg-68-prog-10",
                 "name": "Front Lever Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1766,7 +1766,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "How To One Arm Pull Up - Master Workout",
             "exercises": [
               {
-                "id": "Single Arm Scapula Shrugs",
+                "id": "tg-132-prog-1",
                 "name": "Single Arm Scapula Shrugs",
                 "warmupSets": "",
                 "sets": [
@@ -1782,7 +1782,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "One Arm Pull Up",
+                "id": "tg-132-prog-2",
                 "name": "Step 2 - Switching One Arm Pull Up Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1791,14 +1791,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 851628627"
+                    "notes": "Vimeo: https://player.vimeo.com/video/851628627"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Jumping One Arm Pull Ups",
+                "id": "tg-132-prog-3",
                 "name": "Step 3 - Jumping One Arm Pull Ups",
                 "warmupSets": "",
                 "sets": [
@@ -1807,14 +1807,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 851628797"
+                    "notes": "Vimeo: https://player.vimeo.com/video/851628797"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Pull Up One Arm Negative",
+                "id": "tg-132-prog-4",
                 "name": "Step 4 - Pull Up One Arm Negative",
                 "warmupSets": "",
                 "sets": [
@@ -1823,14 +1823,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 851629045"
+                    "notes": "Vimeo: https://player.vimeo.com/video/851629045"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Jumping One Arm Negative Pull Up",
+                "id": "tg-132-prog-5",
                 "name": "Step 5 - Jumping One Arm Negative Pull Up",
                 "warmupSets": "",
                 "sets": [
@@ -1839,14 +1839,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 851629314"
+                    "notes": "Vimeo: https://player.vimeo.com/video/851629314"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "One Arm Pull Up",
+                "id": "tg-132-prog-6",
                 "name": "Step 6 - Assisted One Arm Pull Ups",
                 "warmupSets": "",
                 "sets": [
@@ -1855,14 +1855,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 851629609"
+                    "notes": "Vimeo: https://player.vimeo.com/video/851629609"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "One Arm Pull Up",
+                "id": "tg-132-prog-7",
                 "name": "Step 7 - One Arm Pull Up",
                 "warmupSets": "",
                 "sets": [
@@ -1871,14 +1871,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 851629747"
+                    "notes": "Vimeo: https://player.vimeo.com/video/851629747"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "One Arm Pull Up",
+                "id": "tg-132-prog-8",
                 "name": "One Arm Pull Up - Outro",
                 "warmupSets": "",
                 "sets": [
@@ -1887,7 +1887,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 851629983"
+                    "notes": "Vimeo: https://player.vimeo.com/video/851629983"
                   }
                 ],
                 "rest": "60s rest",
@@ -1923,7 +1923,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Human Flag - Master Workout",
             "exercises": [
               {
-                "id": "Hanging L-Sit Hold",
+                "id": "tg-57-req-1",
                 "name": "Hanging L-Sit Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1939,7 +1939,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "L-Sit Pull Ups",
+                "id": "tg-57-req-2",
                 "name": "L-Sit Pull Ups",
                 "warmupSets": "",
                 "sets": [
@@ -1955,7 +1955,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Windshield Wipers",
+                "id": "tg-57-req-3",
                 "name": "Windshield Wipers",
                 "warmupSets": "",
                 "sets": [
@@ -1971,7 +1971,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Plank Side Hold",
+                "id": "tg-57-req-4",
                 "name": "Plank Side Hold",
                 "warmupSets": "",
                 "sets": [
@@ -1987,7 +1987,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Bar Dips",
+                "id": "tg-57-req-5",
                 "name": "Straight Bar Dips",
                 "warmupSets": "",
                 "sets": [
@@ -2003,7 +2003,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Flag Hold Plank",
+                "id": "tg-57-prog-6",
                 "name": "Flag Hold Plank",
                 "warmupSets": "",
                 "sets": [
@@ -2019,7 +2019,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Flag Bounce",
+                "id": "tg-57-prog-7",
                 "name": "Flag Bounce",
                 "warmupSets": "",
                 "sets": [
@@ -2035,7 +2035,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Flag Bounce + Closed Legs",
+                "id": "tg-57-prog-8",
                 "name": "FLAG BOUNCE + CLOSED LEGS",
                 "warmupSets": "",
                 "sets": [
@@ -2051,7 +2051,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Human Flag Negatives",
+                "id": "tg-57-prog-9",
                 "name": "FLAG NEGATIVES",
                 "warmupSets": "",
                 "sets": [
@@ -2067,7 +2067,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Dragon Flag Raises",
+                "id": "tg-57-prog-10",
                 "name": "FLAG RAISE",
                 "warmupSets": "",
                 "sets": [
@@ -2083,7 +2083,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Flag Bounce",
+                "id": "tg-57-prog-11",
                 "name": "FP THE FLAG",
                 "warmupSets": "",
                 "sets": [
@@ -2128,7 +2128,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "How To One Arm Push Up - Master Workout",
             "exercises": [
               {
-                "id": "Elevated One Arm Push",
+                "id": "tg-96-prog-1",
                 "name": "Elevated One Arm Push",
                 "warmupSets": "",
                 "sets": [
@@ -2144,7 +2144,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Assisted One Arm Push Up",
+                "id": "tg-96-prog-2",
                 "name": "Step 2 - Assisted One Arm Push Up (Elevated Surface)",
                 "warmupSets": "",
                 "sets": [
@@ -2153,14 +2153,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844299753"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844299753"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "Assisted One Arm Push Up",
+                "id": "tg-96-prog-3",
                 "name": "Step 3 - Assisted One Arm Push Up",
                 "warmupSets": "",
                 "sets": [
@@ -2169,14 +2169,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844299987"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844299987"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "One Arm Push Up",
+                "id": "tg-96-prog-4",
                 "name": "Step 4 - One Arm Push Ups",
                 "warmupSets": "",
                 "sets": [
@@ -2185,14 +2185,14 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844300158"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844300158"
                   }
                 ],
                 "rest": "60s rest",
                 "isOptional": false
               },
               {
-                "id": "One Arm Push Up",
+                "id": "tg-96-prog-5",
                 "name": "One Arm Push Up - Outro",
                 "warmupSets": "",
                 "sets": [
@@ -2201,7 +2201,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                     "reps": "30s hold",
                     "percent1RM": "",
                     "rpe": "",
-                    "notes": "Vimeo: 844300270"
+                    "notes": "Vimeo: https://player.vimeo.com/video/844300270"
                   }
                 ],
                 "rest": "60s rest",
@@ -2237,7 +2237,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
             "name": "Full Planche - Master Workout",
             "exercises": [
               {
-                "id": "Dips",
+                "id": "tg-74-req-1",
                 "name": "Dips",
                 "warmupSets": "",
                 "sets": [
@@ -2253,7 +2253,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Bar Dips",
+                "id": "tg-74-req-2",
                 "name": "Straight Bar Dips",
                 "warmupSets": "",
                 "sets": [
@@ -2269,7 +2269,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Push Ups",
+                "id": "tg-74-req-3",
                 "name": "Push Ups",
                 "warmupSets": "",
                 "sets": [
@@ -2285,7 +2285,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "L-Sit Hold",
+                "id": "tg-74-req-4",
                 "name": "L-Sit Hold",
                 "warmupSets": "",
                 "sets": [
@@ -2301,7 +2301,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Wall Plank",
+                "id": "tg-74-req-5",
                 "name": "Wall Plank",
                 "warmupSets": "",
                 "sets": [
@@ -2317,7 +2317,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Arm Hold (Variation 2) - with Dumbbells",
+                "id": "tg-74-prog-6",
                 "name": "Straight Arm Hold",
                 "warmupSets": "",
                 "sets": [
@@ -2333,7 +2333,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Dumbbell Lateral Raise",
+                "id": "tg-74-prog-7",
                 "name": "Dumbbells Lateral Raises",
                 "warmupSets": "",
                 "sets": [
@@ -2349,7 +2349,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Laying Straight Arm Flies - with Dumbells",
+                "id": "tg-74-prog-8",
                 "name": "Straight Arm Flies",
                 "warmupSets": "",
                 "sets": [
@@ -2365,7 +2365,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Arm Press - on Dip Bars",
+                "id": "tg-74-prog-9",
                 "name": "Straight Arm Press",
                 "warmupSets": "",
                 "sets": [
@@ -2381,7 +2381,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Arm Ring Hold",
+                "id": "tg-74-prog-10",
                 "name": "Straight Arm Strength Workout",
                 "warmupSets": "",
                 "sets": [
@@ -2397,7 +2397,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Elevated Planche Leans - Rings",
+                "id": "tg-74-prog-11",
                 "name": "Planche Lean ",
                 "warmupSets": "",
                 "sets": [
@@ -2413,7 +2413,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "L-Sit",
+                "id": "tg-74-prog-12",
                 "name": "L-Sit + Tuck L-Sit + Tuck Planche",
                 "warmupSets": "",
                 "sets": [
@@ -2429,7 +2429,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Tuck Planche",
+                "id": "tg-74-prog-13",
                 "name": "Tuck Planche Pumps",
                 "warmupSets": "",
                 "sets": [
@@ -2445,7 +2445,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Tuck Planche Hold",
+                "id": "tg-74-prog-14",
                 "name": "Tuck Planche Hold",
                 "warmupSets": "",
                 "sets": [
@@ -2461,7 +2461,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Tuck Planche",
+                "id": "tg-74-prog-15",
                 "name": "Tuck Planche Workout",
                 "warmupSets": "",
                 "sets": [
@@ -2477,7 +2477,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "L-Sit",
+                "id": "tg-74-prog-16",
                 "name": "L-sit to Straddle Planche",
                 "warmupSets": "",
                 "sets": [
@@ -2493,7 +2493,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Arm Ring Hold",
+                "id": "tg-74-prog-17",
                 "name": "Straight Arm Ring Hold",
                 "warmupSets": "",
                 "sets": [
@@ -2509,7 +2509,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straight Arm Ring Taps",
+                "id": "tg-74-prog-18",
                 "name": "Straight Arm Ring Tap",
                 "warmupSets": "",
                 "sets": [
@@ -2525,7 +2525,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Tuck Planche Hold - on Rings",
+                "id": "tg-74-prog-19",
                 "name": "Tuck Planche Hold on Rings",
                 "warmupSets": "",
                 "sets": [
@@ -2541,7 +2541,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Straddle Planche",
+                "id": "tg-74-prog-20",
                 "name": "Straddle Planche Workout",
                 "warmupSets": "",
                 "sets": [
@@ -2557,7 +2557,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Full Planche",
+                "id": "tg-74-prog-21",
                 "name": "L-sit to Full Planche",
                 "warmupSets": "",
                 "sets": [
@@ -2573,7 +2573,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Full Planche",
+                "id": "tg-74-prog-22",
                 "name": "Full Planche Lean Hold",
                 "warmupSets": "",
                 "sets": [
@@ -2589,7 +2589,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Full Planche",
+                "id": "tg-74-prog-23",
                 "name": "Full Planche Pumps",
                 "warmupSets": "",
                 "sets": [
@@ -2605,7 +2605,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Full Planche",
+                "id": "tg-74-prog-24",
                 "name": "Full Planche Lean Raises",
                 "warmupSets": "",
                 "sets": [
@@ -2621,7 +2621,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Full Planche",
+                "id": "tg-74-prog-25",
                 "name": "Full Planche Hold",
                 "warmupSets": "",
                 "sets": [
@@ -2637,7 +2637,7 @@ export const thenxMasterRoutines: WorkoutProgram[] =
                 "isOptional": false
               },
               {
-                "id": "Full Planche",
+                "id": "tg-74-prog-26",
                 "name": "Full Planche Workout",
                 "warmupSets": "",
                 "sets": [

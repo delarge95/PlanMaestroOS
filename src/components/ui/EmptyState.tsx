@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import { Coffee } from 'lucide-react';
 
 export interface EmptyStateProps {
   title: string;
@@ -14,16 +15,16 @@ export function EmptyState({
   description,
   actionLabel,
   onAction,
-  icon = '☕'
+  icon = <Coffee size={28} />
 }: EmptyStateProps) {
   return (
     <div
       style={{
         width: '100%',
         padding: 'var(--space-6) var(--space-4)',
-        borderRadius: 'var(--radius-lg)',
-        background: 'var(--surface)',
-        border: '1px border var(--color-border-subtle)',
+        borderRadius: 'var(--radius-l)',
+        background: 'var(--surface-1)',
+        border: '1px solid var(--color-border-subtle)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -32,7 +33,7 @@ export function EmptyState({
         gap: 'var(--space-sm)'
       }}
     >
-      <span style={{ fontSize: '2rem', marginBottom: 'var(--space-xs)' }}>{icon}</span>
+      <span style={{ color: 'var(--text-tertiary)', display: 'inline-flex', marginBottom: 'var(--space-xs)' }}>{icon}</span>
       <h3 style={{ fontSize: 'var(--font-size-title)', fontWeight: 650, margin: 0, color: 'var(--text)' }}>
         {title}
       </h3>

@@ -21,7 +21,7 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
   const [hasPainZone] = useState(true);
   const [selectedDayIndex, setSelectedDayIndex] = useState(1); // Martes por defecto (Día 2 Lower 1)
 
-  const activeStepIds = useSkillStateStore((s) => s.activeStepIds || [s.activeStepId || 'pull-step-1']);
+  const activeStepIds = useSkillStateStore((s) => s.activeStepIds);
   const activeStepId = activeStepIds[0] || 'pull-step-1';
   const currentStep = getSkillStepById(activeStepId);
   const activeSkillPath = currentStep ? skillPaths.find((p) => p.id === currentStep.pathId) : null;

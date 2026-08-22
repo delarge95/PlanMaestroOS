@@ -62,7 +62,7 @@ const workoutRoutines: Record<number, { dayTitle: string; exercises: RoutineItem
 };
 
 export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOpenExerciseModal }: Props) {
-  const routineIndex = workoutDayIndex || (dayName === 'Lunes' ? 1 : dayName === 'Martes' ? 2 : dayName === 'Miércoles' ? 3 : dayName === 'Jueves' ? 4 : dayName === 'Viernes' ? 5 : 1);
+  const routineIndex = workoutDayIndex ?? (dayName === 'Lunes' ? 1 : dayName === 'Martes' ? 2 : dayName === 'Miércoles' ? 3 : dayName === 'Jueves' ? 4 : dayName === 'Viernes' ? 5 : 1);
   const currentRoutine = workoutRoutines[routineIndex] || workoutRoutines[1];
 
   // Tracker state saved in localStorage
@@ -139,7 +139,16 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
           {currentRoutine.dayTitle}
         </h4>
         <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
-          <div style={{ width: `${progressPct}%`, height: '100%', background: 'linear-gradient(90deg, #10b981, #77e7ff)', transition: 'width 250ms ease' }} />
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(90deg, #10b981, #77e7ff)',
+              transformOrigin: 'left center',
+              transform: `scaleX(${Math.max(0, Math.min(1, progressPct / 100))})`,
+              transition: 'transform 250ms ease'
+            }}
+          />
         </div>
       </div>
 
