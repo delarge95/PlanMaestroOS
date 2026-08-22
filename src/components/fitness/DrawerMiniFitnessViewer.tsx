@@ -1,5 +1,21 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿// src/components/fitness/DrawerMiniFitnessViewer.tsx
+// A3 (AG-FIT): consume la fuente única src/data/exercises/fitappRoutineDataset.ts.
+//
+// DESVIACIONES DOCUMENTADAS entre las copias históricas de la rutina Min-Max:
+// 1. ESTE archivo tenía una copia embebida (`workoutRoutines`) con 3-5 ejercicios
+//    por día y "reason" corto — copia editorial antigua, YA NO CANÓNICA. Eliminada.
+// 2. src/data/fitness/programs/minMax.ts es la copia de TRACKER (prescripciones
+//    con id, sustituciones y validadores). Se mantiene: alimenta activeProgramStore
+//    y el logger. Diferencia menor vs dataset: nombres exactos de ejercicio y
+//    desglose de sustituciones (substitutionOption1/2) en vez de (subOption1/2).
+// 3. CANÓNICA para visualización compacta: fitappRoutineDataset.ts (week 1
+//    PDF-accurate, 12 semanas generadas con bloques/deloads).
+//    - El "reason" de la copia vieja se reemplaza por las `notes` del dataset.
+//    - El ejercicio mostrado como principal es la sustitución calisténica
+//      (calisthenicsSub) cuando existe; el original queda como subtítulo.
+import React, { useState, useEffect } from 'react';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
+import { minMaxWeeks } from '../../data/exercises/fitappRoutineDataset';
 
 interface Props {
   dayName: string;
@@ -7,63 +23,20 @@ interface Props {
   onOpenExerciseModal: (exercise: ExerciseEntry) => void;
 }
 
-interface RoutineItem {
-  name: string;
-  calisthenics_substitution: string;
-  reason: string;
-  sets: number;
-  rir: string;
-}
-
-const workoutRoutines: Record<number, { dayTitle: string; exercises: RoutineItem[] }> = {
-  1: {
-    dayTitle: "Day 1: Upper 1 (Empuje & Pecho)",
-    exercises: [
-      { name: "Barbell Bench Press / DB Incline Press", calisthenics_substitution: "Pseudo Planche Pushups", reason: "Abducción y rotación natural de escápula/hombro izq.", sets: 2, rir: "1-2" },
-      { name: "Cable Flye", calisthenics_substitution: "Ring Chest Flyes", reason: "Tensión constante en pectoral mayor con peso corporal.", sets: 2, rir: "1-2" },
-      { name: "Machine Lateral Raise", calisthenics_substitution: "Ring Lateral Leans", reason: "Aislamiento de deltoides lateral sin carga axial.", sets: 2, rir: "1-2" },
-      { name: "1-Arm Cable Overhead Triceps Extension", calisthenics_substitution: "Bench Dip", reason: "Cabeza larga del tríceps protegiendo el codo.", sets: 2, rir: "1-2" }
-    ]
-  },
-  2: {
-    dayTitle: "Day 2: Lower 1 (Cuádriceps & Tendón Rotuliano)",
-    exercises: [
-      { name: "Nordic Ham Curl / Lying Leg Curl", calisthenics_substitution: "Asian squat", reason: "Fuerza excéntrica en isquiotibiales.", sets: 2, rir: "1-2" },
-      { name: "Leg Press / Barbell Lunge", calisthenics_substitution: "Box pistol", reason: "Fuerza unilateral sin compresión lumbar.", sets: 2, rir: "1-2" },
-      { name: "Leg Extension", calisthenics_substitution: "Bodyweight Squat", reason: "Anestesia tendinosa rotuliana HSR (3-0-3).", sets: 2, rir: "1-2" },
-      { name: "Donkey Calf Raise / Seated Calf Raise", calisthenics_substitution: "Bodyweight Hip Thrust", reason: "Complejo gemelo-sóleo rango completo.", sets: 2, rir: "1-2" }
-    ]
-  },
-  3: {
-    dayTitle: "Day 3: Upper 2 (Tracción & Espalda)",
-    exercises: [
-      { name: "Lat Pulldown / 1-Arm Cable Pulldown", calisthenics_substitution: "Chin-Up", reason: "Tirón vertical de máxima sobrecarga.", sets: 2, rir: "1-2" },
-      { name: "Seated Cable Row / T-Bar Row", calisthenics_substitution: "Archer Ring Rows", reason: "Tirón horizontal unilateral romboides/deltoides pos.", sets: 2, rir: "1-2" },
-      { name: "Cable Shrug-In", calisthenics_substitution: "Compression Work", reason: "Estabilidad trapecio superior y cuello.", sets: 2, rir: "1-2" }
-    ]
-  },
-  4: {
-    dayTitle: "Day 4: Lower 2 (Cadena Posterior & Bisagra)",
-    exercises: [
-      { name: "Hack Squat / Leg Extension", calisthenics_substitution: "Bodyweight Squat", reason: "Rehabilitación tendinopatía HSR.", sets: 2, rir: "1-2" },
-      { name: "Romanian Deadlift / Cable Deadlift", calisthenics_substitution: "Bodyweight Round-Back 45° Hyperextension", reason: "Bisagra pura unipedal glúteos e isquios.", sets: 2, rir: "1-2" },
-      { name: "45° Hyperextension", calisthenics_substitution: "Back Extension", reason: "Flexibilidad activa y descompresión lumbar.", sets: 2, rir: "1-2" }
-    ]
-  },
-  5: {
-    dayTitle: "Day 5: Arms + Delts (Brazo & Hombro)",
-    exercises: [
-      { name: "Standing DB Curl / Incline DB Curl", calisthenics_substitution: "Chin-Up", reason: "Flexión de codo con estiramiento en bíceps.", sets: 2, rir: "1-2" },
-      { name: "Skull Crusher / Triceps Cable Pushdown", calisthenics_substitution: "Close-Grip Pushup", reason: "Sobrecarga en tríceps con alineación neutra.", sets: 2, rir: "1-2" },
-      { name: "Preacher Hammer Curl", calisthenics_substitution: "Chin-Up", reason: "Aislamiento braquial anterior.", sets: 2, rir: "1-2" },
-      { name: "Close Grip Dip", calisthenics_substitution: "Assisted Floor Dip", reason: "Empuje vertical en suspensión para manguito.", sets: 2, rir: "1-2" }
-    ]
-  }
-};
-
 export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOpenExerciseModal }: Props) {
   const routineIndex = workoutDayIndex ?? (dayName === 'Lunes' ? 1 : dayName === 'Martes' ? 2 : dayName === 'Miércoles' ? 3 : dayName === 'Jueves' ? 4 : dayName === 'Viernes' ? 5 : 1);
-  const currentRoutine = workoutRoutines[routineIndex] || workoutRoutines[1];
+
+  // Semana 1 del dataset (12 semanas comparten estructura; la mini-ventana
+  // muestra la plantilla base — la semana específica vive en el tracker).
+  const currentRoutine = minMaxWeeks[0]?.days[routineIndex - 1] ?? minMaxWeeks[0]?.days[0];
+
+  const fallbackExercise: ExerciseEntry = {
+    name: 'Ejercicio',
+    category: 'Calisthenics',
+    discipline: 'Calisthenics',
+    techniquePoints: ['Mantener la técnica controlada con tempo 3-0-3.', 'Respiración diafragmática constante.'],
+    muscles: { strength: ['Músculos Objetivos'] }
+  };
 
   // Tracker state saved in localStorage
   const storageKey = `fitapp_log_day_${routineIndex}`;
@@ -93,23 +66,23 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
     }
   };
 
-  const totalSets = currentRoutine.exercises.reduce((acc, curr) => acc + curr.sets, 0);
+  if (!currentRoutine) return null;
+
+  const exerciseList = currentRoutine.exercises.map((ex) => ({
+    name: ex.name,
+    primary: ex.calisthenicsSub || ex.name,
+    reason: ex.notes,
+    sets: typeof ex.sets === 'number' ? ex.sets : parseInt(String(ex.sets), 10) || 2,
+    rir: ex.rirOrRpe
+  }));
+
+  const totalSets = exerciseList.reduce((acc, curr) => acc + curr.sets, 0);
   const doneSetsCount = Object.values(completedSets).filter(Boolean).length;
   const progressPct = totalSets > 0 ? Math.round((doneSetsCount / totalSets) * 100) : 0;
 
   const handleExerciseClick = (exName: string) => {
-    const found = findExerciseByName(exName);
-    if (found) {
-      onOpenExerciseModal(found);
-    } else {
-      onOpenExerciseModal({
-        name: exName,
-        category: 'Calisthenics',
-        discipline: 'Calisthenics',
-        techniquePoints: ['Mantener la técnica controlada con tempo 3-0-3.', 'Respiración diafragmática constante.'],
-        muscles: { strength: ['Músculos Objetivos'] }
-      });
-    }
+    const found = findExerciseByName(exName.split('/')[0].trim());
+    onOpenExerciseModal(found ?? { ...fallbackExercise, name: exName });
   };
 
   return (
@@ -136,7 +109,7 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
           </span>
         </div>
         <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--color-text-primary)' }}>
-          {currentRoutine.dayTitle}
+          {currentRoutine.dayName}
         </h4>
         <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
           <div
@@ -154,9 +127,9 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
 
       {/* EXERCISE LIST WITH TRACKER */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {currentRoutine.exercises.map((ex, exIdx) => (
+        {exerciseList.map((ex, exIdx) => (
           <div
-            key={exIdx}
+            key={`${ex.name}-${exIdx}`}
             style={{
               background: 'rgba(0, 0, 0, 0.4)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -172,7 +145,7 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
               <div>
                 <button
                   type="button"
-                  onClick={() => handleExerciseClick(ex.calisthenics_substitution)}
+                  onClick={() => handleExerciseClick(ex.primary)}
                   style={{
                     background: 'none',
                     border: 'none',
@@ -187,27 +160,29 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                     gap: '6px'
                   }}
                 >
-                  <span>⚡ {ex.calisthenics_substitution}</span>
+                  <span>⚡ {ex.primary}</span>
                   <span style={{ fontSize: '0.7rem', color: 'var(--color-accent-danger)', background: 'rgba(239,68,68,0.15)', padding: '2px 6px', borderRadius: '4px' }}>
                     ▶ FitApp Video
                   </span>
                 </button>
-                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>
-                  Original: {ex.name}
-                </span>
+                {ex.primary !== ex.name && (
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>
+                    Original: {ex.name}
+                  </span>
+                )}
               </div>
               <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', background: 'rgba(119,231,255,0.1)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
-                RIR {ex.rir}
+                {ex.rir}
               </span>
             </div>
 
-            {/* REASON CUE */}
+            {/* REASON CUE (dataset notes) */}
             <span style={{ fontSize: '0.78rem', color: 'var(--color-text-tertiary)', lineHeight: 1.35 }}>
               💡 {ex.reason}
             </span>
 
             {/* SETS CHECKBOXES (FITAPP STYLE) */}
-            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px' }}>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontWeight: 600 }}>Series:</span>
               {Array.from({ length: ex.sets }).map((_, setIdx) => {
                 const isChecked = !!completedSets[`${exIdx}-${setIdx}`];
