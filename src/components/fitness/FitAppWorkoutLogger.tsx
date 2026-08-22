@@ -95,8 +95,24 @@ export default function FitAppWorkoutLogger() {
   const [timerActive, setTimerActive] = useState(false);
   const [initialTimerSec, setInitialTimerSec] = useState(90);
 
-  // Modal exercise view
+  // Modal exercise view (B5: autoPlay al abrir desde el botón ▶ de la lista)
   const [modalExercise, setModalExercise] = useState<ExerciseEntry | null>(null);
+  const [modalExerciseId, setModalExerciseId] = useState<string | null>(null);
+  const [modalAutoPlay, setModalAutoPlay] = useState(false);
+
+  // B5: abre la ficha sin salir del flujo; withAutoplay=true arranca el video
+  // (play directo). Si no hay ficha exacta, se abre por id/nombre y el
+  // ExerciseModal resuelve alias + fallback (siempre con video visible).
+  const openExerciseSheet = (entry: ExerciseEntry | null, nameFallback: string, withAutoplay: boolean) => {
+    setModalAutoPlay(withAutoplay);
+    if (entry) {
+      setModalExerciseId(null);
+      setModalExercise(entry);
+    } else {
+      setModalExercise(null);
+      setModalExerciseId(nameFallback);
+    }
+  };
 
   // History log
   const [history, setHistory] = useState<CompletedWorkout[]>([]);
@@ -592,6 +608,7 @@ export default function FitAppWorkoutLogger() {
               )}
 
               {/* B3: título completo solo al expandir; controles de sesión SIEMPRE visibles */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               {isHeaderExpanded && (
                 <div>
                   <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.4)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '2px' }}>
@@ -755,9 +772,8 @@ export default function FitAppWorkoutLogger() {
                       </span>
                       <button
                         type="button"
-                        onClick={() => exData && setModalExercise(exData)}
-                        disabled={!exData}
-                        title={exData ? `Ver ficha y video de ${exItem.name}` : 'Ejercicio sin ficha en la base de datos'}
+                        onClick={() => openExerciseSheet(exData, exItem.name, false)}
+                        title={`Ver ficha y video de ${exItem.name}`}
                         style={{
                           background: 'transparent',
                           border: 'none',
@@ -765,9 +781,9 @@ export default function FitAppWorkoutLogger() {
                           color: 'var(--color-text-primary)',
                           fontSize: '0.92rem',
                           fontWeight: 700,
-                          cursor: exData ? 'pointer' : 'default',
+                          cursor: 'pointer',
                           textAlign: 'left',
-                          textDecoration: exData ? 'underline' : 'none',
+                          textDecoration: 'underline',
                           textDecorationColor: 'rgba(255,255,255,0.25)'
                         }}
                       >
@@ -779,29 +795,28 @@ export default function FitAppWorkoutLogger() {
                       <span style={{ fontSize: '0.72rem', color: 'var(--color-text-tertiary)', whiteSpace: 'nowrap' }}>
                         ⏱ {exItem.restSec}s
                       </span>
-                      {exData && (
-                        <button
-                          type="button"
-                          onClick={() => setModalExercise(exData)}
-                          title={`Video de ${exItem.name}`}
-                          style={{
-                            marginLeft: 'auto',
-                            background: 'rgba(48, 209, 88, 0.12)',
-                            border: '1px solid rgba(48, 209, 88, 0.3)',
-                            color: 'var(--color-state-done)',
-                            padding: '4px 10px',
-                            borderRadius: '8px',
-                            fontSize: '0.72rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '5px'
-                          }}
-                        >
-                          ▶ Video
-                        </button>
-                      )}
+                      {/* B5: botón PLAY DIRECTO — abre la ficha con el video reproduciendo */}
+                      <button
+                        type="button"
+                        onClick={() => openExerciseSheet(exData, exItem.name, true)}
+                        title={`Reproducir video de ${exItem.name}`}
+                        style={{
+                          marginLeft: 'auto',
+                          background: 'rgba(48, 209, 88, 0.12)',
+                          border: '1px solid rgba(48, 209, 88, 0.3)',
+                          color: 'var(--color-state-done)',
+                          padding: '4px 10px',
+                          borderRadius: '8px',
+                          fontSize: '0.72rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '5px'
+                        }}
+                      >
+                        ▶ Video
+                      </button>
                     </div>
                   );
                 }
@@ -829,11 +844,16 @@ export default function FitAppWorkoutLogger() {
                         </h4>
                       </div>
 
-                      {exData && (
-                        <button type="button" onClick={() => setModalExercise(exData)} style={{ background: 'rgba(48, 209, 88, 0.12)', border: '1px solid rgba(48, 209, 88, 0.3)', color: 'var(--color-state-done)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
-                          ▶ Ver Guía FitApp & Video
-                        </button>
-                      )}
+                      {/* B5: video también aquí, con play directo */}
+                      <button
+                        type="button"
+                        onClick={() => openExerciseSheet(exData, exItem.name, true)}
+                        disabled={!exData}
+                        title={exData ? `Reproducir video de ${exItem.name}` : 'Ejercicio sin ficha en la base de datos'}
+                        style={{ background: exData ? 'rgba(48, 209, 88, 0.12)' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(48, 209, 88, 0.3)', color: exData ? 'var(--color-state-done)' : 'var(--color-text-tertiary)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: exData ? 'pointer' : 'default' }}
+                      >
+                        ▶ Ver Guía FitApp & Video
+                      </button>
                     </div>
 
                     <div style={{ overflowX: 'auto' }}>
@@ -1034,8 +1054,17 @@ export default function FitAppWorkoutLogger() {
           </div>
         )}
 
-        {/* EXERCISE MODAL */}
-        <ExerciseModal exercise={modalExercise} onClose={() => setModalExercise(null)} />
+        {/* EXERCISE MODAL — B5: video visible siempre + autoplay desde ▶ Video */}
+        <ExerciseModal
+          exercise={modalExercise}
+          exerciseId={modalExerciseId}
+          autoPlayVideo={modalAutoPlay}
+          onClose={() => {
+            setModalExercise(null);
+            setModalExerciseId(null);
+            setModalAutoPlay(false);
+          }}
+        />
       </div>
     </ErrorBoundary>
   );
