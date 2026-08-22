@@ -54,8 +54,24 @@ const attentionCount = (slug: string) =>
           </button>
         ))}
       </div>
-      <button type="button" class="cv-print-button" data-cv-print>
-        Print / export PDF (A4)
+      <!--
+        CV -> PDF v1 (mandate: TAREAS_USUARIO / AG-PORT).
+        Decision: no client-side PDF library (jsPDF/puppeteer) for v1. The button calls
+        window.print() with a dedicated print stylesheet (the is:global @media print block
+        below: A4 page, site chrome stripped, citations hidden). Every modern browser's
+        print dialog offers "Save as PDF", so this is an acceptable v1 export path with
+        zero bundle cost and pixel-true typography. Before printing we set document.title
+        to the variant's fileName so the suggested PDF file is correctly named.
+        Revisit (v2): true file download via headless render if distribution needs an
+        attachable file without user interaction.
+      -->
+      <button
+        type="button"
+        class="cv-print-button"
+        data-cv-print
+        title="Opens the print dialog — choose 'Save as PDF' to download"
+      >
+        Descargar PDF (A4)
       </button>
     </div>
 
@@ -63,6 +79,7 @@ const attentionCount = (slug: string) =>
       <article
         class="cv-doc"
         data-cv-panel={cv.variant.slug}
+        data-cv-filename={cv.variant.fileName}
         id={`cv-panel-${cv.variant.slug}`}
         role="tabpanel"
         aria-labelledby={`cv-tab-${cv.variant.slug}`}
@@ -638,7 +655,21 @@ const attentionCount = (slug: string) =>
       tab.addEventListener("click", () => activate(tab.dataset.cvTab ?? ""));
     }
 
-    printButton?.addEventListener("click", () => window.print());
+    // CV -> PDF v1: window.print() + dedicated print stylesheet. Setting the title
+    // makes the browser suggest the variant's fileName for the saved PDF.
+    if (printButton) {
+      const originalTitle = document.title;
+      printButton.addEventListener("click", () => {
+        const activePanel = panels.find((panel) => !panel.hidden);
+        const fileName = activePanel?.dataset.cvFilename;
+        if (fileName) document.title = fileName;
+        window.print();
+      });
+      window.addEventListener("afterprint", () => {
+        document.title = workbench.dataset.cvPageTitle ?? document.title;
+      });
+      workbench.dataset.cvPageTitle = originalTitle;
+    }
 
     activate(tabs[0]?.dataset.cvTab ?? "");
   }
