@@ -1,15 +1,26 @@
 // src/components/fitness/TodayCalendar.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getProgramById } from '../../data/fitness/programs';
 
 interface TodayCalendarProps {
-  selectedDayIndex: number;
-  onSelectDayIndex: (index: number) => void;
+  selectedDayIndex?: number;
+  onSelectDayIndex?: (index: number) => void;
 }
 
 export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: TodayCalendarProps) {
+  const [internalDayIndex, setInternalDayIndex] = useState<number>(() => {
+    // Día real del sistema (0 = Lunes … 6 = Domingo); L-V son días de entreno (grid semanal)
+    const jsDay = new Date().getDay();
+    return jsDay === 0 ? 6 : jsDay - 1;
+  });
+  const effectiveDayIndex = selectedDayIndex ?? internalDayIndex;
+  const handleSelectDay = (idx: number) => {
+    setInternalDayIndex(idx);
+    onSelectDayIndex?.(idx);
+  };
+
   const activeProgramId = useActiveProgramStore((s) => s.programId);
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
   const postponedDays = useActiveProgramStore((s) => s.postponedDays || 0);
@@ -142,13 +153,13 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
       {/* DÍAS CON FECHAS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px' }}>
         {scheduleDays.map((sd) => {
-          const isSelected = selectedDayIndex === sd.index;
+          const isSelected = effectiveDayIndex === sd.index;
 
           return (
             <button
               key={sd.dayName}
               type="button"
-              onClick={() => onSelectDayIndex(sd.index)}
+              onClick={() => handleSelectDay(sd.index)}
               style={{
                 display: 'flex',
                 flexDirection: 'column',

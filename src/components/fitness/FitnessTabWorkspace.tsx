@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dumbbell, BookOpen, BarChart3, LibraryBig, Target, Database, Wrench, ShieldAlert } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import FitAppWorkoutLogger from './FitAppWorkoutLogger';
@@ -8,19 +8,47 @@ import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
 import CustomRoutineBuilder from './CustomRoutineBuilder';
 import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
 import TendonLoadMonitor from './TendonLoadMonitor';
+import TodayCalendar from './TodayCalendar';
+import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
 import LibraryHome from '../library/LibraryHome';
 import styles from './FitnessTabWorkspace.module.css';
 import useIsMobile from '../ui/useIsMobile';
 
+export type FitnessMainTab = 'today' | 'routines' | 'progress' | 'library';
+
 export interface FitnessTabWorkspaceProps {
-  initialTab?: 'today' | 'routines' | 'progress' | 'library';
+  initialTab?: FitnessMainTab;
+}
+
+const VALID_TABS: FitnessMainTab[] = ['today', 'routines', 'progress', 'library'];
+
+function resolveInitialTab(fallback: FitnessMainTab): FitnessMainTab {
+  if (typeof window === 'undefined') return fallback;
+  const param = new URLSearchParams(window.location.search).get('tab');
+  return VALID_TABS.includes(param as FitnessMainTab) ? (param as FitnessMainTab) : fallback;
 }
 
 export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTabWorkspaceProps) {
   const isMobile = useIsMobile();
-  const [activeMainTab, setActiveMainTab] = useState<'today' | 'routines' | 'progress' | 'library'>(initialTab);
+  const [activeMainTab, setActiveMainTab] = useState<FitnessMainTab>(() => resolveInitialTab(initialTab));
   const [routinesSubTab, setRoutinesSubTab] = useState<'catalog' | 'skills' | 'database' | 'custom'>('catalog');
   const [showPrehabAlert, setShowPrehabAlert] = useState(true);
+
+  // Sincroniza el tab cuando cambia el parámetro ?tab= de la URL (redirecciones / links)
+  useEffect(() => {
+    const onPopState = () => setActiveMainTab(resolveInitialTab(initialTab));
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, [initialTab]);
+
+  const goToTab = (tab: FitnessMainTab) => {
+    setActiveMainTab(tab);
+    if (typeof window !== 'undefined' && window.history?.replaceState) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', tab);
+      window.history.replaceState({}, '', url.toString());
+    }
+  };
 
   return (
     <ErrorBoundary>
@@ -71,7 +99,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
             <select
               id="fitness-main-tab"
               value={activeMainTab}
-              onChange={(e) => setActiveMainTab(e.target.value as 'today' | 'routines' | 'progress' | 'library')}
+              onChange={(e) => goToTab(e.target.value as FitnessMainTab)}
               style={{
                 minHeight: '44px',
                 borderRadius: 'var(--radius-m)',
@@ -95,7 +123,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
               role="tab"
               aria-selected={activeMainTab === 'today'}
               className={`${styles.tabButton} ${activeMainTab === 'today' ? styles.tabButtonActive : ''}`}
-              onClick={() => setActiveMainTab('today')}
+              onClick={() => goToTab('today')}
             >
               <Dumbbell size={18} aria-hidden="true" />
               <span>Hoy</span>
@@ -106,7 +134,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
               role="tab"
               aria-selected={activeMainTab === 'routines'}
               className={`${styles.tabButton} ${activeMainTab === 'routines' ? styles.tabButtonActive : ''}`}
-              onClick={() => setActiveMainTab('routines')}
+              onClick={() => goToTab('routines')}
             >
               <BookOpen size={18} aria-hidden="true" />
               <span>Rutinas</span>
@@ -117,7 +145,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
               role="tab"
               aria-selected={activeMainTab === 'progress'}
               className={`${styles.tabButton} ${activeMainTab === 'progress' ? styles.tabButtonActive : ''}`}
-              onClick={() => setActiveMainTab('progress')}
+              onClick={() => goToTab('progress')}
             >
               <BarChart3 size={18} aria-hidden="true" />
               <span>Progreso</span>
@@ -128,7 +156,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
               role="tab"
               aria-selected={activeMainTab === 'library'}
               className={`${styles.tabButton} ${activeMainTab === 'library' ? styles.tabButtonActive : ''}`}
-              onClick={() => setActiveMainTab('library')}
+              onClick={() => goToTab('library')}
             >
               <LibraryBig size={18} aria-hidden="true" />
               <span>Biblioteca</span>
@@ -138,7 +166,15 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
 
         {/* CONTENIDO DE LOS DESTINOS */}
         <div className={styles.tabPanel}>
-          {activeMainTab === 'today' && <FitAppWorkoutLogger />}
+          {activeMainTab === 'today' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+              {/* CRONOGRAMA SEMANAL (fecha real del sistema, sincronizado con el programa activo) */}
+              <TodayCalendar selectedDayIndex={undefined} onSelectDayIndex={undefined} />
+              {/* PROGRESIÓN ACTIVA EN TRABAJO */}
+              <ActiveProgressionsTodayCard />
+              <FitAppWorkoutLogger />
+            </div>
+          )}
 
           {activeMainTab === 'routines' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>

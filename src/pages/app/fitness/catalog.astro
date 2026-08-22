@@ -1,8 +1,16 @@
 ---
-import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
-import FitnessTabWorkspace from '../../../components/fitness/FitnessTabWorkspace.tsx';
+// A1 (AG-FIT): alias redirigido al explorador de rutinas del workspace oficial.
+// El sitio es estático (output: 'static'), por lo que la redirección se hace
+// con meta-refresh + link visible (patrón sin JS).
 ---
-
-<PlanMaestroLayout title="Fitness - Catálogo de Rutinas" activeDomain="fitness">
-  <FitnessTabWorkspace client:load initialTab="routines" />
-</PlanMaestroLayout>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/app/fitness?tab=routines" />
+    <title>Rutinas — Redirigiendo…</title>
+  </head>
+  <body style="background:#0d0d0f;color:#fff;font-family:system-ui;padding:40px;text-align:center;">
+    <p>El catálogo de rutinas vive ahora en el workspace de fitness…</p>
+    <p><a style="color:#0a84ff" href="/app/fitness?tab=routines">Ir a Rutinas</a></p>
+  </body>
+</html>
