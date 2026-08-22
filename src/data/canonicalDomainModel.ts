@@ -116,7 +116,7 @@ export const DEFAULT_CANONICAL_ENTITIES: CanonicalEntity[] = [
     tags: ['#min-max', '#nippard', '#anillas', '#hsr'],
     originDocuments: [
       { title: 'plan_fitness.md', filename: 'plan_fitness.md', path: 'investigacion/plan_fitness.md' },
-      { title: 'The Min-Max Program', filename: 'The_Min-Max_Program.pdf', path: 'investigacion/The_Min-Max_Program.pdf' }
+      { title: 'The Min-Max Program', filename: 'Nippard-MinMaxProgram.pdf', path: 'investigacion/Nippard-MinMaxProgram.pdf' }
     ],
     rationale: 'Estimulo hipertrófico y fuerza con bajo volumen y alta intención protegiendo hombro/codo izquierdo.',
     whyThisExists: 'Salud física, regulación dopaminérgica y prevención de recaídas articulares.',
