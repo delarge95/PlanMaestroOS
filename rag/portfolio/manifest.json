@@ -1,0 +1,65 @@
+{
+  "domain": "portfolio",
+  "sources": [
+    {
+      "id": "doc-20",
+      "title": "20_portfolio_copy_and_site_structure (copy y estructura del sitio público)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["portfolio-site", "copy"], "priority": 1 }
+    },
+    {
+      "id": "doc-08b",
+      "title": "08B_twinsight_case_study_final_structure (estructura final del case study TwinSight)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["case-study", "twinsight"], "priority": 1 }
+    },
+    {
+      "id": "doc-17",
+      "title": "17_cv_base_and_role_variants (CV base ATS + variantes por familia de rol)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["cv", "positioning"], "priority": 1 }
+    },
+    {
+      "id": "doc-19b",
+      "title": "19B_github_readme_twinsight_final (README final del repo TwinSight)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["readme", "github"], "priority": 1 }
+    },
+    {
+      "id": "doc-28e",
+      "title": "28E_artstation_profile_optimization_strategy (estrategia de perfil ArtStation)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["artstation", "profile"], "priority": 1 }
+    },
+    {
+      "id": "doc-29c",
+      "title": "29C_artstation_breakdown_benchmark (benchmark de estructura de breakdowns)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["artstation", "breakdown"], "priority": 1 }
+    }
+  ]
+}
