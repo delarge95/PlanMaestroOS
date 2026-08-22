@@ -13,6 +13,7 @@ import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
 import LibraryHome from '../library/LibraryHome';
 import styles from './FitnessTabWorkspace.module.css';
 import useIsMobile from '../ui/useIsMobile';
+import { usePrehabStateStore, getActivePrehabProtocols, isBannerDismissedToday } from '../../data/fitness/prehabStateStore';
 
 export type FitnessMainTab = 'today' | 'routines' | 'progress' | 'library';
 
@@ -32,7 +33,14 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
   const isMobile = useIsMobile();
   const [activeMainTab, setActiveMainTab] = useState<FitnessMainTab>(() => resolveInitialTab(initialTab));
   const [routinesSubTab, setRoutinesSubTab] = useState<'catalog' | 'skills' | 'database' | 'custom'>('catalog');
-  const [showPrehabAlert, setShowPrehabAlert] = useState(true);
+
+  // A5: banner de prehab DERIVADO de estado persistido (fitapp-prehab-state-v1),
+  // copy desde prehabProtocols; cierre persistido por día (no flag local).
+  const prehabZones = usePrehabStateStore((s2) => s2.activeZoneIds);
+  const prehabDismissedOn = usePrehabStateStore((s2) => s2.bannerDismissedOn);
+  const dismissPrehabBanner = usePrehabStateStore((s2) => s2.dismissBannerToday);
+  const activePrehabProtocols = getActivePrehabProtocols(prehabZones);
+  const showPrehabAlert = activePrehabProtocols.length > 0 && !isBannerDismissedToday(prehabDismissedOn);
 
   // Sincroniza el tab cuando cambia el parámetro ?tab= de la URL (redirecciones / links)
   useEffect(() => {
@@ -69,13 +77,15 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
               <ShieldAlert size={18} style={{ color: 'var(--color-accent-warning)' }} />
               <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', fontWeight: 600 }}>
-                Prehab activo: Isométricos Spanish Squats antes de la sesión.
+                {activePrehabProtocols.length === 1
+                  ? `Prehab activo (${activePrehabProtocols[0].zoneTitle}): ${activePrehabProtocols[0].protocolTitle} antes de la sesión — ${activePrehabProtocols[0].recommendedDose}.`
+                  : `Prehab activo: ${activePrehabProtocols.map((pr) => `${pr.zoneTitle} → ${pr.protocolTitle}`).join(' · ')}`}
               </span>
             </div>
 
             <button
               type="button"
-              onClick={() => setShowPrehabAlert(false)}
+              onClick={dismissPrehabBanner}
               style={{
                 background: 'transparent',
                 border: 'none',
