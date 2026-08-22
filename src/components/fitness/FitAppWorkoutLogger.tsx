@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Clock, MoreHorizontal, RotateCcw } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
+import Menu from '../ui/Menu';
 import { findExerciseByName, type ExerciseEntry } from '../../data/exercises';
 import ExerciseModal from './ExerciseModal';
 import { useAppStore } from '../../store/appStore';
@@ -68,6 +70,11 @@ export default function FitAppWorkoutLogger() {
   // B1: calendario real — día de programa que TOCA hoy según startedAt y postergaciones
   const startedAt = useActiveProgramStore((s2) => s2.startedAt);
   const postponedDays = useActiveProgramStore((s2) => s2.postponedDays || 0);
+  // B2: postergar una vez por día real; restablecer SOLO en menú secundario con confirmación
+  const lastPostponedOn = useActiveProgramStore((s2) => s2.lastPostponedOn);
+  const postponeDayAction = useActiveProgramStore((s2) => s2.postponeDay);
+  const resetPostponedDaysAction = useActiveProgramStore((s2) => s2.resetPostponedDays);
+  const postponedToday = lastPostponedOn === new Date().toISOString().slice(0, 10);
   const calendarCtx = buildProgramCalendar({ startedAt, postponedDays }, officialProgram.durationWeeks);
   const dueDay = calendarCtx.derivedDayIndex !== undefined ? activeWeek?.days?.[calendarCtx.derivedDayIndex] : undefined;
   const dueDayLabel = dueDay?.name || (calendarCtx.todayWorkoutDayIndex ? workoutDayLabel(calendarCtx.todayWorkoutDayIndex) : (calendarCtx.todayWeekdayIndex === 5 ? 'LISS (cardio suave)' : 'Descanso total'));
@@ -377,6 +384,52 @@ export default function FitAppWorkoutLogger() {
                     Plan corrido {postponedDays} {postponedDays === 1 ? 'día' : 'días'}
                   </span>
                 )}
+
+                {/* B2: POSTERGAR (una vez por día real) + menú secundario ⋯ con restablecer */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
+                  <button
+                    type="button"
+                    onClick={postponeDayAction}
+                    disabled={postponedToday}
+                    title={postponedToday ? 'Ya postergaste hoy: el plan ya está corrido, mañana retoma donde toca' : 'Correr el plan un día entero (persistido): lo que tocaba hoy pasa a mañana'}
+                    style={{
+                      background: postponedToday ? 'rgba(255,159,10,0.12)' : 'rgba(255,255,255,0.06)',
+                      border: postponedToday ? '1px solid rgba(255,159,10,0.4)' : '1px solid rgba(255,255,255,0.14)',
+                      color: postponedToday ? '#ff9f0a' : 'var(--color-text-secondary)',
+                      padding: '5px 12px',
+                      borderRadius: '8px',
+                      fontSize: '0.76rem',
+                      fontWeight: 700,
+                      cursor: postponedToday ? 'default' : 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    <Clock size={13} />
+                    {postponedToday ? `Plan corrido ${postponedDays} ${postponedDays === 1 ? 'día' : 'días'}` : 'Postergar día'}
+                  </button>
+
+                  <Menu
+                    triggerLabel="Más acciones del día"
+                    triggerIcon={<MoreHorizontal size={16} />}
+                    items={[
+                      {
+                        id: 'reset-postponed',
+                        label: `Restablecer plan (quitar ${postponedDays} ${postponedDays === 1 ? 'postergación' : 'postergaciones'})`,
+                        icon: <RotateCcw size={13} />,
+                        tone: 'danger',
+                        disabled: postponedDays === 0,
+                        onClick: () => {
+                          const ok = window.confirm(
+                            `Esto devuelve el plan a su calendario original (elimina ${postponedDays} ${postponedDays === 1 ? 'día corrido' : 'días corridos'}). Los días ya completados no cambian. ¿Continuar?`
+                          );
+                          if (ok) resetPostponedDaysAction();
+                        }
+                      }
+                    ]}
+                  />
+                </div>
               </div>
 
               {/* Si no hay programas activos */}
