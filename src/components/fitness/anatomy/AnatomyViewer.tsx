@@ -303,7 +303,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         }
         lastHover = hit;
         const mat = hit ? (hit as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined : undefined;
-        if (mat?.emissive) {
+        if (hit && mat?.emissive) {
           lastHoverEmissive = mat.emissive.clone();
           lastHoverIntensity = mat.emissiveIntensity;
           if (!originalsRef.current.has(hit)) {
@@ -331,9 +331,11 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     const dom = renderer.domElement;
     dom.addEventListener('pointermove', onMove);
     dom.addEventListener('pointerdown', onClick);
-    disposablesRef.current.push(() => {
-      dom.removeEventListener('pointermove', onMove);
-      dom.removeEventListener('pointerdown', onClick);
+    disposablesRef.current.push({
+      dispose: () => {
+        dom.removeEventListener('pointermove', onMove);
+        dom.removeEventListener('pointerdown', onClick);
+      },
     });
 
     const loop = () => {
