@@ -154,7 +154,7 @@ describe('validateRagDocument', () => {
   it('rechaza ids duplicados y locators vacíos', () => {
     const dup = validateRagDocument({
       ...validDoc,
-      chunks: [validDoc.chunks[0]!, { ...validDoc.chunks[0]!, id: 'otro' }],
+      chunks: [validDoc.chunks[0]!, { ...validDoc.chunks[0]! }],
     });
     expect(dup.ok).toBe(false);
 
