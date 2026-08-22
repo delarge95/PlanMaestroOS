@@ -7,6 +7,7 @@ import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { allPrograms, getProgramById } from '../../data/fitness/programs';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
 import type { EnergyLevel } from '../../data/canonicalDomainModel';
+import { buildProgramCalendar, workoutDayLabel, formatDateShort } from '../../lib/fitness/programCalendar';
 
 interface LoggedSet {
   setNum: number;
@@ -63,6 +64,13 @@ export default function FitAppWorkoutLogger() {
   const safeWeekIdx = Math.min(Math.max(currentWeek - 1, 0), (officialProgram.weeks?.length || 1) - 1);
   const activeWeek = officialProgram.weeks?.[safeWeekIdx] || officialProgram.weeks?.[0];
   const activeDay = activeWeek?.days?.find((d) => d.id === currentDayId) || activeWeek?.days?.[0];
+
+  // B1: calendario real — día de programa que TOCA hoy según startedAt y postergaciones
+  const startedAt = useActiveProgramStore((s2) => s2.startedAt);
+  const postponedDays = useActiveProgramStore((s2) => s2.postponedDays || 0);
+  const calendarCtx = buildProgramCalendar({ startedAt, postponedDays }, officialProgram.durationWeeks);
+  const dueDay = calendarCtx.derivedDayIndex !== undefined ? activeWeek?.days?.[calendarCtx.derivedDayIndex] : undefined;
+  const dueDayLabel = dueDay?.name || (calendarCtx.todayWorkoutDayIndex ? workoutDayLabel(calendarCtx.todayWorkoutDayIndex) : (calendarCtx.todayWeekdayIndex === 5 ? 'LISS (cardio suave)' : 'Descanso total'));
 
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
@@ -354,8 +362,22 @@ export default function FitAppWorkoutLogger() {
         {/* TAB 1: LOGGER EN VIVO */}
         {activeTab === 'logger' && (
           <>
-            {/* HEADER — programa activo + semana + día */}
+            {/* HEADER — B1: hoy real + día de programa que toca */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '0.95rem', fontWeight: 800, color: '#fff' }}>
+                  Hoy es {calendarCtx.todayWeekdayName.toLowerCase()} {formatDateShort(calendarCtx.today)}
+                </span>
+                <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)' }}>
+                  · Toca: <strong style={{ color: 'var(--color-state-done)' }}>{dueDayLabel}</strong>
+                  {calendarCtx.todayWorkoutDayIndex ? ` (día ${calendarCtx.todayWorkoutDayIndex} del grid L-V)` : ''}
+                </span>
+                {postponedDays > 0 && (
+                  <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff9f0a', background: 'rgba(255,159,10,0.12)', border: '1px solid rgba(255,159,10,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
+                    Plan corrido {postponedDays} {postponedDays === 1 ? 'día' : 'días'}
+                  </span>
+                )}
+              </div>
 
               {/* Si no hay programas activos */}
               {activeTrackerPrograms.length === 0 && (
