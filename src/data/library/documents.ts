@@ -18,7 +18,7 @@ export const libraryDocs: LibraryDoc[] = [
     kind: 'pdf',
     area: 'fitness',
     source: 'local',
-    path: '/_pdf_biblia/Planeacion_Integral/investigacion/The_Min-Max_Program_-_Jeff_Nippard.pdf',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/Nippard-MinMaxProgram.pdf',
     tags: ['Jeff Nippard', 'Min-Max', 'Hipertrofia', 'Powerbuilding'],
     description: 'Programa oficial de 12 semanas enfocado en máximo estímulo con volumen mínimo efectivo.'
   },
@@ -28,7 +28,7 @@ export const libraryDocs: LibraryDoc[] = [
     kind: 'pdf',
     area: 'fitness',
     source: 'local',
-    path: '/_pdf_biblia/Planeacion_Integral/investigacion/Overcoming Gravity_ A Systematic Approach to Gymnastics and -- Low, Steven -- 2, 2016.pdf',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/Low-OvercomingGravity_2ed_2016.pdf',
     tags: ['Steven Low', 'Calistenia', 'Progresiones', 'Gimnasia'],
     description: 'Tratado de referencia de 600+ páginas en calistenia, biomecánica y programación de peso corporal.'
   },
@@ -48,7 +48,7 @@ export const libraryDocs: LibraryDoc[] = [
     kind: 'pdf',
     area: 'fitness',
     source: 'local',
-    path: '/_pdf_biblia/Planeacion_Integral/investigacion/jeffNippardGluteProgram.pdf',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/Nippard-GluteHypertrophyProgram.pdf',
     tags: ['Jeff Nippard', 'Glúteo', 'Cadena Posterior', 'Especialización'],
     description: 'Programa especializado en hipertrofia de cadena posterior, hip thrusts y abducción.'
   },
@@ -58,7 +58,7 @@ export const libraryDocs: LibraryDoc[] = [
     kind: 'pdf',
     area: 'fitness',
     source: 'local',
-    path: '/_pdf_biblia/Planeacion_Integral/investigacion/PowerbuildingSystem.pdf',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/Nippard-PowerbuildingSystem_4x_2020.pdf',
     tags: ['Powerbuilding', 'Fuerza %1RM', 'Sentadilla/Banca/PM'],
     description: 'Combinación sistemática de progresión en 1RM + hipertrofia asistida.'
   },
@@ -68,7 +68,7 @@ export const libraryDocs: LibraryDoc[] = [
     kind: 'pdf',
     area: 'fitness',
     source: 'local',
-    path: '/_pdf_biblia/Planeacion_Integral/investigacion/TheBodyBuildingTransformationSystem.pdf',
+    path: '/_pdf_biblia/Planeacion_Integral/investigacion/Nippard-BodybuildingTransformationSystem_InterAdv.pdf',
     tags: ['Bodybuilding', 'Estética', 'Pico de Forma'],
     description: 'Sistema completo de transformación física e hipertrofia avanzada.'
   },

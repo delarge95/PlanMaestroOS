@@ -10,9 +10,9 @@
  * ('rct', no 'rtc' como aparece por error en el ejemplo del plan).
  */
 
-/** Dominios conocidos (el plan §4 + 'core' para docs de arquitectura). */
+/** Dominios conocidos (el plan §4 + 'core' para docs de arquitectura + 'cardio' añadido por mandato de usuario). */
 export const RAG_DOMAINS = [
-  'fitness', 'anatomy', 'nutrition', 'career', 'german', 'english',
+  'fitness', 'anatomy', 'nutrition', 'cardio', 'career', 'german', 'english',
   'clinical', 'portfolio', 'gastronomy', 'core',
 ] as const;
 
