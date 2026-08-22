@@ -36,7 +36,7 @@ interface MinimalIDBDatabase {
 }
 
 interface MinimalIDBFactory {
-  open(name: string, version?: number): IDBRequest<IDBDatabase>;
+  open(name: string, version?: number): IDBOpenDBRequest;
 }
 
 function reqAsPromise<T>(request: IDBRequest<T>): Promise<T> {
@@ -70,7 +70,7 @@ export async function openKvDb(factory?: MinimalIDBFactory): Promise<{
       db.createObjectStore(STORE);
     }
   };
-  const db = await reqAsPromise(openRequest);
+  const db = (await reqAsPromise(openRequest)) as unknown as MinimalIDBDatabase;
   return { db };
 }
 

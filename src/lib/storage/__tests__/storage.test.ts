@@ -8,7 +8,7 @@ import { migrateLocalStorage } from '../migrateLocalStorage';
 
 // ————————————————————— Fake IndexedDB —————————————————————
 
-class FakeRequest<T> implements IDBRequest<T> {
+class FakeRequest<T> {
   result!: T;
   error: DOMException | null = null;
   onsuccess: ((this: IDBRequest<T>, ev: Event) => unknown) | null = null;
@@ -25,26 +25,26 @@ class FakeRequest<T> implements IDBRequest<T> {
   }
 }
 
-class FakeObjectStore implements IDBObjectStore {
+class FakeObjectStore {
   constructor(private data: Map<string, unknown>) {}
-  get(key: IDBValidKey): IDBRequest<any> {
+  get(key: IDBValidKey): any {
     return new FakeRequest(this.data.get(String(key)));
   }
-  put(value: any, key?: IDBValidKey): IDBRequest<IDBValidKey> {
+  put(value: any, key?: IDBValidKey): any {
     this.data.set(String(key), value);
     return new FakeRequest(key as IDBValidKey);
   }
-  delete(key: IDBValidKey): IDBRequest<undefined> {
+  delete(key: IDBValidKey): any {
     this.data.delete(String(key));
     return new FakeRequest(undefined);
   }
-  getAllKeys(): IDBRequest<IDBValidKey[]> {
+  getAllKeys(): any {
     return new FakeRequest([...this.data.keys()]);
   }
-  getAll(): IDBRequest<any[]> {
+  getAll(): any {
     return new FakeRequest([...this.data.values()]);
   }
-  clear(): IDBRequest<undefined> {
+  clear(): any {
     this.data.clear();
     return new FakeRequest(undefined);
   }
@@ -53,7 +53,7 @@ class FakeObjectStore implements IDBObjectStore {
   createIndex(): never { throw new Error('not implemented'); }
   deleteIndex(): never { throw new Error('not implemented'); }
   openCursor(): never { throw new Error('not implemented'); }
-  count(): IDBRequest<number> { return new FakeRequest(this.data.size); }
+  count(): any { return new FakeRequest(this.data.size); }
   keyPath: any = null;
   indexNames: any = [];
   name: any = 'kv';
@@ -61,7 +61,7 @@ class FakeObjectStore implements IDBObjectStore {
   autoIncrement: any = false;
 }
 
-class FakeTransaction implements IDBTransaction {
+class FakeTransaction {
   oncomplete: ((this: IDBTransaction, ev: Event) => unknown) | null = null;
   onerror: ((this: IDBTransaction, ev: Event) => unknown) | null = null;
   onabort: ((this: IDBTransaction, ev: Event) => unknown) | null = null;
@@ -75,22 +75,22 @@ class FakeTransaction implements IDBTransaction {
     this.objectStoreNames = { contains: () => true };
     queueMicrotask(() => this.oncomplete?.call(this as any, {} as Event));
   }
-  objectStore(): IDBObjectStore {
+  objectStore(): any {
     return new FakeObjectStore(this.data);
   }
   abort(): void {}
   commit(): void {}
 }
 
-class FakeDB implements IDBDatabase {
+class FakeDB {
   private stores = new Set<string>();
   constructor(private data: Map<string, unknown>, public name: string, public version: number) {}
   objectStoreNames = { contains: (n: string) => this.stores.has(n) } as unknown as DOMStringList;
-  createObjectStore(name: string): IDBObjectStore {
+  createObjectStore(name: string): any {
     this.stores.add(name);
     return new FakeObjectStore(this.data);
   }
-  transaction(storeName: string, mode: IDBTransactionMode): IDBTransaction {
+  transaction(storeName: string, mode: IDBTransactionMode): any {
     if (!this.stores.has(storeName)) throw new Error(`store "${storeName}" no existe`);
     return new FakeTransaction(this.data, this, mode);
   }
@@ -106,7 +106,7 @@ class FakeDB implements IDBDatabase {
 }
 
 /** Request manual (para open): se resuelve explícitamente, no auto-fire. */
-class ManualRequest<T> implements IDBRequest<T> {
+class ManualRequest<T> {
   result!: T;
   error: DOMException | null = null;
   onsuccess: ((this: IDBRequest<T>, ev: Event) => unknown) | null = null;
@@ -128,7 +128,7 @@ class ManualRequest<T> implements IDBRequest<T> {
 class FakeFactory {
   private db: FakeDB | null = null;
   private data = new Map<string, unknown>();
-  open(name: string, version?: number): IDBRequest<IDBDatabase> {
+  open(name: string, version?: number): any {
     const request = new ManualRequest<IDBDatabase>();
     if (this.db === null) {
       const db = new FakeDB(this.data, name, version ?? 1);
