@@ -97,6 +97,15 @@ export const twinsightBullets: Record<string, CvBullet> = {
   baseAi: {
     text: "Used AI as an implementation and debugging assistant while retaining responsibility for architecture, integration, validation, technical judgment, and final ownership."
   },
+  /**
+   * Structure-scale bullet from the benchmark (doc 28B §6.4/§9.3). The 28/30/257
+   * counts are documented thesis-context metrics (doc 28B §4.3 "usable current
+   * metrics"); FPS/SUS/NASA-TLX stay pending and never appear without verification.
+   */
+  scaleStructure: {
+    text: "Structured the model into 28 canonical research parts, 30 scene nodes, and 257 technical elements prepared for interactive inspection.",
+    source: "doc-28B §6.4, §9.3"
+  },
   v1Runtime: {
     text: "Built runtime interaction systems in Unity/C# for component selection, exploded views, cross-section/clipping, visual modes, and technical information panels.",
     source: "doc-17 §4"

@@ -1,0 +1,646 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { cvPendingConfirmations } from "@data/cv/cvBase";
+import { composeAllCvs, evaluateCvBenchmark } from "@data/cv/cvCompose";
+import { cvVariants } from "@data/cv/cvVariants";
+import type { CvComposed } from "@data/cv/types";
+
+// Composed in doc 17 §17 production-priority order (P1 first).
+const composed: CvComposed[] = composeAllCvs(cvVariants);
+const checksBySlug = new Map(
+  composed.map((cv) => [cv.variant.slug, evaluateCvBenchmark(cv)])
+);
+const attentionCount = (slug: string) =>
+  (checksBySlug.get(slug) ?? []).filter((check) => check.status === "attention").length;
+---
+
+<BaseLayout
+  title="CV"
+  description="Role-variant CVs for Alexander Woodcock Salomon: Real-Time 3D, Technical Visualization, Unity WebGL, Technical Artist and Tools routes. Printable A4 export per variant."
+>
+  <section class="page-shell case-hero">
+    <div class="case-hero-copy">
+      <p class="eyebrow">Curriculum Vitae / {cvVariants.length} role variants / doc 17 + doc 28B</p>
+      <h1>One base CV, five role variants.</h1>
+      <p class="hero-copy">
+        Each variant re-orders the same verified facts for a different target role — headline,
+        summary, project bullets and skill emphasis follow doc 17 §4–§8, structure and benchmark
+        rules follow doc 28B. Export is A4-printable per variant; pending placeholders stay visible
+        until confirmed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-shell cv-workbench" data-cv-workbench>
+    <div class="cv-toolbar" role="group" aria-label="CV variant selector">
+      <div class="cv-variant-switcher" role="tablist" aria-label="CV variants">
+        {composed.map((cv, index) => (
+          <button
+            type="button"
+            role="tab"
+            class="cv-variant-tab"
+            data-cv-tab={cv.variant.slug}
+            id={`cv-tab-${cv.variant.slug}`}
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`cv-panel-${cv.variant.slug}`}
+          >
+            <span class="cv-tab-label">{cv.variant.label}</span>
+            <span class="cv-tab-meta">
+              P{cv.variant.producePriority}
+              {attentionCount(cv.variant.slug) > 0
+                ? ` · ${attentionCount(cv.variant.slug)} pending`
+                : " · ready"}
+            </span>
+          </button>
+        ))}
+      </div>
+      <button type="button" class="cv-print-button" data-cv-print>
+        Print / export PDF (A4)
+      </button>
+    </div>
+
+    {composed.map((cv, index) => (
+      <article
+        class="cv-doc"
+        data-cv-panel={cv.variant.slug}
+        id={`cv-panel-${cv.variant.slug}`}
+        role="tabpanel"
+        aria-labelledby={`cv-tab-${cv.variant.slug}`}
+        hidden={index !== 0}
+      >
+        <script
+          is:inline
+          type="application/json"
+          data-cv-checks={cv.variant.slug}
+          set:html={JSON.stringify(
+            (checksBySlug.get(cv.variant.slug) ?? []).map((check) => ({
+              rule: check.rule,
+              detail: check.detail,
+              status: check.status,
+              source: check.source
+            }))
+          )}
+        />
+        <header class="cv-doc-header">
+          <h2 class="cv-name">{cv.name}</h2>
+          <p class="cv-headline">{cv.variant.headline}</p>
+          <p class="cv-location">{cv.locationLine}</p>
+          <ul class="cv-contacts">
+            {cv.contacts.map((contact) => (
+              <li class={contact.isPlaceholder ? "cv-placeholder-value" : ""}>
+                <span class="cv-contact-label">{contact.label}</span>
+                <span class="cv-contact-value">{contact.value}</span>
+              </li>
+            ))}
+          </ul>
+        </header>
+
+        <section class="cv-section">
+          <h3>Summary</h3>
+          <p>{cv.variant.summary}</p>
+          <p class="cv-cite">{cv.variant.sources.join("; ")}</p>
+        </section>
+
+        <section class="cv-section">
+          <h3>Core Technical Stack</h3>
+          <ul class="cv-stack">
+            {cv.coreStack.map((line) => <li>{line}</li>)}
+          </ul>
+          <p class="cv-cite">doc-28B §6.3</p>
+        </section>
+
+        {cv.sections.map((section) => (
+          <section class="cv-section">
+            <h3>{section.title}</h3>
+            {section.projects?.map((project) => (
+              <div class="cv-project">
+                <p class="cv-project-title">{project.title}</p>
+                <p class="cv-project-meta">{project.meta}</p>
+                <ul>
+                  {project.bullets.map((bullet) => (
+                    <li>
+                      {bullet.text}
+                      {bullet.verify && (
+                        <span class="cv-verify-flag" title={bullet.source}>[verify]</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            {section.experience?.map((block) => (
+              <div class="cv-project">
+                <p class="cv-project-title">{block.title}</p>
+                <p class="cv-project-meta">{block.meta}</p>
+                <ul>
+                  {block.bullets.map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              </div>
+            ))}
+            {section.skills && (
+              <dl class="cv-skills">
+                {section.skills.map((group) => (
+                  <div class="cv-skill-group">
+                    <dt>{group.name}</dt>
+                    <dd>{group.items}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            {section.education?.map((block) => (
+              <div class="cv-project">
+                <p class="cv-project-title">{block.title}</p>
+                <p class="cv-project-meta">{block.meta}</p>
+                <ul>
+                  {block.bullets.map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              </div>
+            ))}
+            {section.items && (
+              <ul class="cv-plain-list">
+                {section.items.map((item) => <li>{item}</li>)}
+              </ul>
+            )}
+            <p class="cv-cite">{section.source}</p>
+          </section>
+        ))}
+
+        <footer class="cv-doc-footer cv-cite">
+          Variant file name: {cv.variant.fileName} · Targets:
+          {cv.variant.targets.slice(0, 3).join(", ")}
+        </footer>
+      </article>
+    ))}
+
+    <div class="cv-side-panel">
+      <section class="cv-benchmark" data-cv-benchmark hidden>
+        <p class="eyebrow">Benchmark 28B</p>
+        <h3>Quality checks for <span data-cv-benchmark-variant></span></h3>
+        <ul class="cv-check-list" data-cv-check-list></ul>
+        <p class="cv-cite">
+          Checks evaluated in code (src/data/cv/cvCompose.ts) against doc 28B §4, §6, §8, §9.
+        </p>
+      </section>
+
+      <section class="cv-pending">
+        <p class="eyebrow">Pending confirmations — doc 17 §2, §18</p>
+        <h3>Before any PDF export</h3>
+        <ul class="dense-list">
+          {cvPendingConfirmations.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="cv-cite">
+          Placeholders never ship: values in brackets block export (doc 28B §9.4).
+        </p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cv-workbench {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cv-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cv-variant-switcher {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 4px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .cv-variant-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .cv-variant-tab.is-active {
+    background: var(--color-accent-primary);
+    color: #000;
+  }
+
+  .cv-tab-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .cv-tab-meta {
+    font-size: 0.66rem;
+    opacity: 0.75;
+  }
+
+  .cv-print-button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--color-accent-primary);
+    background: var(--color-accent-primary);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  /* The A4 sheet: white document on the dark site, plain paper in print. */
+  .cv-doc {
+    align-self: center;
+    width: min(820px, 100%);
+    background: #fdfdfc;
+    color: #16181d;
+    border-radius: 6px;
+    padding: 44px 52px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .cv-doc[hidden] {
+    display: none;
+  }
+
+  .cv-doc-header {
+    border-bottom: 2px solid #16181d;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .cv-name {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .cv-headline {
+    margin: 2px 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .cv-location {
+    margin: 0 0 8px;
+    font-size: 0.78rem;
+    color: #454b57;
+  }
+
+  .cv-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.74rem;
+  }
+
+  .cv-contact-label {
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  .cv-placeholder-value .cv-contact-value {
+    color: #8a6d00;
+  }
+
+  .cv-section {
+    margin-bottom: 12px;
+  }
+
+  .cv-section h3 {
+    margin: 0 0 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #2b3040;
+    border-bottom: 1px solid #d4d7e0;
+    padding-bottom: 3px;
+  }
+
+  .cv-section p {
+    margin: 0 0 6px;
+  }
+
+  .cv-section ul {
+    margin: 0 0 6px;
+    padding-left: 18px;
+  }
+
+  .cv-section li {
+    margin-bottom: 3px;
+  }
+
+  .cv-stack {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cv-stack li {
+    font-weight: 600;
+  }
+
+  .cv-project-title {
+    margin: 8px 0 0;
+    font-weight: 700;
+    font-size: 0.88rem;
+  }
+
+  .cv-project-meta {
+    margin: 0 0 4px;
+    font-size: 0.74rem;
+    color: #454b57;
+    font-style: italic;
+  }
+
+  .cv-skills {
+    margin: 0;
+  }
+
+  .cv-skill-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .cv-skill-group dt {
+    flex: 0 0 190px;
+    font-weight: 700;
+    font-size: 0.76rem;
+  }
+
+  .cv-skill-group dd {
+    margin: 0;
+  }
+
+  .cv-plain-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .cv-verify-flag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 4px;
+    border: 1px solid #b8860b;
+    border-radius: 4px;
+    color: #8a6d00;
+    font-size: 0.62rem;
+    font-weight: 700;
+  }
+
+  /* Provenance citations: visible while drafting, never printed. */
+  .cv-cite {
+    margin: 4px 0 0;
+    font-size: 0.64rem;
+    color: #7c8392;
+    font-style: italic;
+  }
+
+  .cv-doc-footer {
+    margin-top: 14px;
+    padding-top: 8px;
+    border-top: 1px solid #d4d7e0;
+  }
+
+  .cv-side-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .cv-benchmark,
+  .cv-pending {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .cv-benchmark h3,
+  .cv-pending h3 {
+    margin: 4px 0 10px;
+    font-size: 1rem;
+  }
+
+  .cv-check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cv-check-list li {
+    display: flex;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--color-border-subtle);
+    font-size: 0.78rem;
+  }
+
+  .cv-check-list li:last-child {
+    border-bottom: none;
+  }
+
+  .cv-check-mark {
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  .cv-check-mark.is-applied {
+    color: #3fb950;
+  }
+
+  .cv-check-mark.is-attention {
+    color: #d29922;
+  }
+
+  .cv-check-rule {
+    font-weight: 700;
+  }
+
+  .cv-check-detail {
+    display: block;
+    color: var(--text-tertiary);
+    font-size: 0.72rem;
+    margin-top: 2px;
+  }
+
+  .cv-check-source {
+    display: block;
+    color: var(--text-tertiary);
+    font-size: 0.64rem;
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .cv-doc {
+      padding: 24px 20px;
+    }
+
+    .cv-skill-group {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+</style>
+
+<style is:global>
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    body {
+      background: #fff !important;
+    }
+
+    .site-header,
+    .site-footer,
+    .scroll-progress,
+    .cv-toolbar,
+    .cv-side-panel,
+    .cv-cite,
+    .cv-verify-flag {
+      display: none !important;
+    }
+
+    main {
+      padding: 0 !important;
+    }
+
+    .cv-workbench {
+      gap: 0;
+    }
+
+    .cv-doc {
+      width: 100%;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
+      font-size: 10.5pt;
+    }
+
+    .cv-doc[hidden] {
+      display: none;
+    }
+
+    .cv-section h3 {
+      color: #000;
+    }
+  }
+</style>
+
+<script>
+  const workbench = document.querySelector<HTMLElement>("[data-cv-workbench]");
+  if (workbench) {
+    const tabs = Array.from(
+      workbench.querySelectorAll<HTMLButtonElement>("[data-cv-tab]")
+    );
+    const panels = Array.from(
+      workbench.querySelectorAll<HTMLElement>("[data-cv-panel]")
+    );
+    const printButton = workbench.querySelector<HTMLButtonElement>("[data-cv-print]");
+    const benchmark = workbench.querySelector<HTMLElement>("[data-cv-benchmark]");
+    const benchmarkVariant =
+      workbench.querySelector<HTMLElement>("[data-cv-benchmark-variant]");
+    const checkList = workbench.querySelector<HTMLElement>("[data-cv-check-list]");
+
+    // Benchmark checks are pre-rendered per panel as JSON so the selector stays
+    // a pure UI concern (evaluation itself lives in src/data/cv/cvCompose.ts).
+    const checksBySlug = new Map<string, Array<{
+      rule: string;
+      detail: string;
+      status: string;
+      source: string;
+    }>>();
+
+    const renderChecks = (slug: string) => {
+      if (!benchmark || !benchmarkVariant || !checkList) return;
+      const checks = checksBySlug.get(slug) ?? [];
+      const label =
+        panels.find((panel) => panel.dataset.cvPanel === slug)?.querySelector(".cv-headline")
+          ?.textContent ?? slug;
+      benchmarkVariant.textContent = label ?? slug;
+      checkList.replaceChildren(
+        ...checks.map((check) => {
+          const li = document.createElement("li");
+          const mark = document.createElement("span");
+          mark.className = `cv-check-mark is-${check.status}`;
+          mark.textContent = check.status === "applied" ? "\u2713" : "!";
+          const body = document.createElement("span");
+          const rule = document.createElement("span");
+          rule.className = "cv-check-rule";
+          rule.textContent = check.rule;
+          const detail = document.createElement("span");
+          detail.className = "cv-check-detail";
+          detail.textContent = check.detail;
+          const source = document.createElement("span");
+          source.className = "cv-check-source";
+          source.textContent = check.source;
+          body.append(rule, detail, source);
+          li.append(mark, body);
+          return li;
+        })
+      );
+      benchmark.hidden = false;
+    };
+
+    const activate = (slug: string) => {
+      for (const tab of tabs) {
+        const active = tab.dataset.cvTab === slug;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+      }
+      for (const panel of panels) {
+        panel.hidden = panel.dataset.cvPanel !== slug;
+      }
+      renderChecks(slug);
+    };
+
+    // Collect the checks embedded by the server for each panel.
+    for (const panel of panels) {
+      const slug = panel.dataset.cvPanel ?? "";
+      const embedded = panel.querySelector<HTMLScriptElement>(
+        `script[type="application/json"][data-cv-checks]`
+      );
+      if (embedded) {
+        try {
+          checksBySlug.set(slug, JSON.parse(embedded.textContent ?? "[]"));
+        } catch {
+          checksBySlug.set(slug, []);
+        }
+      }
+    }
+
+    for (const tab of tabs) {
+      tab.addEventListener("click", () => activate(tab.dataset.cvTab ?? ""));
+    }
+
+    printButton?.addEventListener("click", () => window.print());
+
+    activate(tabs[0]?.dataset.cvTab ?? "");
+  }
+</script>
+
