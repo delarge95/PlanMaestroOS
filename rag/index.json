@@ -1,0 +1,15 @@
+{
+  "version": "4.0.0",
+  "domains": {
+    "nutrition": {
+      "version": "4.0.0",
+      "sources": 3,
+      "chunks": 15
+    },
+    "portfolio": {
+      "version": "4.0.0",
+      "sources": 6,
+      "chunks": 36
+    }
+  }
+}
