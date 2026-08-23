@@ -36,10 +36,10 @@
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `grays-anatomy-students-4ed` | libro | Gray's Anatomy for Students | Drake, Vogl, Mitchell et al. | 4ª ed. | anatomía | expert-book | `L:F:Drake-GraysAnatomyForStudents_4ed.pdf` | pendiente-gemini | 1234 p; capa de texto OK. Prioridad 1 AG-ANATOM |
-| `moore-clinically-oriented-6ed` | libro | Clinically Oriented Anatomy | Moore, Dalley, Agur | 6ª ed. | anatomía | expert-book | `L:F:Moore-ClinicallyOrientedAnatomy_6ed.pdf` | pendiente-gemini | 1168 p; escaneado SIN capa de texto → Gemini/OCR obligatorio |
-| `macintosh-skeletal-muscle-2ed` | libro | Skeletal Muscle: Form and Function | MacIntosh, Gardiner, McComas | 2ª ed. 2006 | fisiología muscular | expert-book | `L:F:MacIntosh-SkeletalMuscleFormAndFunction_2ed_2006.pdf` | pendiente-gemini | 434 p; sin capa de texto en primeras páginas |
-| `enoka-neuromechanics-4ed` | libro | Neuromechanics of Human Movement | Roger M. Enoka | 4ª ed. 2008 | control motor | expert-book | `L:F:Enoka-NeuromechanicsOfHumanMovement_4ed_2008.pdf` | pendiente-gemini | 568 p; capa de texto OK (calidad irregular de escaneo) |
+| `grays-anatomy-students-4ed` | libro | Gray's Anatomy for Students | Drake, Vogl, Mitchell et al. | 4ª ed. | anatomía | expert-book | `L:F:Drake-GraysAnatomyForStudents_4ed.pdf` | **ok** | 1234 p; extracción 100% completada en `grays-anatomy-students-4ed--*.md` (14 archivos con matriz de cobertura) |
+| `moore-clinically-oriented-6ed` | libro | Clinically Oriented Anatomy | Moore, Dalley, Agur | 6ª ed. | anatomía | expert-book | `L:F:Moore-ClinicallyOrientedAnatomy_6ed.pdf` | **ok** | 1168 p; extracción 100% completada en `moore-clinically-oriented-6ed--*.md` (11 archivos con matriz de cobertura) |
+| `macintosh-skeletal-muscle-2ed` | libro | Skeletal Muscle: Form and Function | MacIntosh, Gardiner, McComas | 2ª ed. 2006 | fisiología muscular | expert-book | `L:F:MacIntosh-SkeletalMuscleFormAndFunction_2ed_2006.pdf` | **ok** | 434 p; extracción 100% completada en `macintosh-skeletal-muscle-2ed--*.md` (14 archivos con matriz de cobertura) |
+| `enoka-neuromechanics-4ed` | libro | Neuromechanics of Human Movement | Roger M. Enoka | 4ª ed. 2008 | control motor | expert-book | `L:F:Enoka-NeuromechanicsOfHumanMovement_4ed_2008.pdf` | **ok** | 568 p; extracción 100% completada en `enoka-neuromechanics-4ed--*.md` (7 archivos con matriz de cobertura) |
 | `norkin-joint-structure-6ed` | libro | Joint Structure and Function: A Comprehensive Analysis | Levangie & Norkin | 6ª ed. 2019 | kinesiología/articulaciones | expert-book | `L:Norkin-JointStructureAndFunction_6ed_2019.pdf` | ok (chat) | 1756 p + atajo de texto `..._textolayer.txt` (usarlo como base) |
 
 ## 2. Libros — nutrición
@@ -47,21 +47,21 @@
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
 | `bibliotex-sport-nutrition-2022` | libro | Sport Nutrition (volumen editado) | varios (3G E-learning/Bibliotex) | 2022 | nutrición | expert-book | `L:F:Bibliotex-SportNutrition_2022.pdf` | ok (chat) | 358 p; compilación de capítulos CC; referencia principal AG-NUTRI. Dup doble-compresión en `L:D:` |
-| `maughan-nutrition-in-sport` | libro | Nutrition in Sport (IOC Encyclopaedia of Sports Medicine Vol. VII) | Maughan (ed.) | 2000 | nutrición | expert-book | `L:Maughan-NutritionInSport_IOC_2000.pdf` | ok (chat) | 698 p; enciclopédico |
-| `rp-renaissance-kitchen` | libro | The Renaissance Kitchen | Renaissance Periodization | s/f | nutrición/recetas | expert-book | `RP:RP-TheRenaissanceKitchen.pdf` | pendiente-gemini | puente con gastronomía (macros) |
+| `maughan-nutrition-in-sport` | libro | Nutrition in Sport (IOC Encyclopaedia of Sports Medicine Vol. VII) | Maughan (ed.) | 2000 | nutrición | expert-book | `L:Maughan-NutritionInSport_IOC_2000.pdf` | **ok** | 698 p; extracción completa + tablas/figuras M1–M7 |
+| `rp-renaissance-kitchen` | libro | The Renaissance Kitchen | Renaissance Periodization | s/f | nutrición/recetas | expert-book | `RP:RP-TheRenaissanceKitchen.pdf` | **ok** | 125 p; extracción completa en `rp-renaissance-kitchen.md` (macros por receta y sustitutos) |
 
 ## 3. Libros — fuerza / hipertrofia / prescripción
 
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
-| `haff-essentials-strength-4ed` | libro | Essentials of Strength Training and Conditioning (NSCA) | Haff & Triplett (eds.) | 4ª ed. 2016 | fuerza/condicionamiento | expert-book | `L:Haff-EssentialsOfStrengthTrainingAndConditioning_4ed.pdf` | ok (chat) | 752 p + `..._textolayer.txt` (solo portada; PDF con capa de texto) |
+| `haff-essentials-strength-4ed` | libro | Essentials of Strength Training and Conditioning (NSCA) | Haff & Triplett (eds.) | 4ª ed. 2016 | fuerza/condicionamiento | expert-book | `L:Haff-EssentialsOfStrengthTrainingAndConditioning_4ed.pdf` | **ok** | 752 p; extracción completa + tablas/figuras N1–N6 |
 | `acsm-exercise-testing-prescription-10ed` | libro | ACSM's Guidelines for Exercise Testing and Prescription | ACSM (Riebe, ed.) | 10ª ed. 2018 | fisiología/prescripción | expert-book | `L:ACSM-ExerciseTestingAndPrescription_10ed_2018.pdf` | ok (chat) | 651 p |
 | `nippard-muscle-ladder-2024` | libro | The Muscle Ladder: Get Jacked Using Science | Jeff Nippard | 2024 | hipertrofia | expert-book | `JN:Nippard-MuscleLadder_2024.pdf` | ok (chat) | 664 p. Dup comprimido en `JN:_duplicados\` |
-| `nippard-body-recomposition` | libro | The Ultimate Guide to Body Recomposition | Nippard & Barakat | ~2019 | recomposición corporal | expert-book | `JN:Nippard-UltimateGuideToBodyRecomposition.pdf` | pendiente-gemini | 268 p |
-| `nippard-fundamentals-hypertrophy` | libro-programa | Fundamentals Hypertrophy Program | Jeff Nippard | s/f | hipertrofia | expert-book | `JN:Nippard-FundamentalsHypertrophyProgram.pdf` | pendiente-gemini | 97 p |
+| `nippard-body-recomposition` | libro | The Ultimate Guide to Body Recomposition | Nippard & Barakat | ~2019 | recomposición corporal | expert-book | `JN:Nippard-UltimateGuideToBodyRecomposition.pdf` | **ok** | 268 p; extracción completa en `nippard-body-recomposition.md` |
+| `nippard-fundamentals-hypertrophy` | libro-programa | Fundamentals Hypertrophy Program | Jeff Nippard | s/f | hipertrofia | expert-book | `JN:Nippard-FundamentalsHypertrophyProgram.pdf` | **ok** | 97 p; extracción completa en `nippard-fundamentals-hypertrophy.md` |
 | `israetel-scientific-principles-hypertrophy` | libro | Scientific Principles of Hypertrophy Training | Israetel et al. (RP) | s/f | hipertrofia | expert-book | `RP:Israetel-ScientificPrinciplesOfHypertrophyTraining.pdf` | ok (chat) | |
 | `israetel-scientific-principles-strength` | libro | Scientific Principles of Strength Training | Israetel et al. (RP) | s/f | fuerza | expert-book | `RP:Israetel-ScientificPrinciplesOfStrengthTraining.pdf` | ok (chat) | |
-| `inda-fuerza-female-strength` | libro | FUERZA: A Female Guide to Strength and Physique | Marisa Inda | 2018 | fuerza (mujeres) | expert-book | `RP:Inda-FUERZA-FemaleGuideStrengthPhysique.pdf` | pendiente-gemini | |
+| `inda-fuerza-female-strength` | libro | FUERZA: A Female Guide to Strength and Physique | Marisa Inda | 2018 | fuerza (mujeres) | expert-book | `RP:Inda-FUERZA-FemaleGuideStrengthPhysique.pdf` | **ok** | 119 p; extracción completa en `inda-fuerza-female-strength.md` |
 
 ## 4. Libros — calistenia / postura / rehab (método Low + Squat University)
 
@@ -79,7 +79,7 @@
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
 | `bangsbo-running-science` | libro | Running & Science — in an Interdisciplinary Perspective | Bangsbo & Larsen (eds.) | s/f | running | expert-book | `L:Bangsbo-RunningScience_Interdisciplinary.pdf` | ok (chat) | 178 p |
-| `daniels-running-formula-4ed` | libro | Daniels' Running Formula | Jack Daniels | 4ª ed. | running | expert-book | `L:Daniels-DanielsRunningFormula_4ed.epub` | pendiente-gemini | solo epub |
+| `daniels-running-formula-4ed` | libro | Daniels' Running Formula | Jack Daniels | 4ª ed. | running | expert-book | `L:Daniels-DanielsRunningFormula_4ed.epub` | **ok** | 18 capítulos; extracción completa en `daniels-running-formula-4ed.md` (Sistema VDOT y zonas E/M/T/I/R) |
 | `vandijk-secret-of-running` | libro | The Secret of Running | van Dijk & van Megen | s/f | running (potencia) | expert-book | `L:VanDijk-TheSecretOfRunning.pdf` | ok (chat) | 478 p. Dup comprimido en `L:D:` |
 | `allen-power-meter-3ed` | libro | Training and Racing with a Power Meter | Allen, Coggan, McGregor | 3ª ed. 2019 | ciclismo (potencia) | expert-book | `L:Allen-TrainingAndRacingWithAPowerMeter_3ed_2019.pdf` | ok (chat) | 498 p. Dups epub+comprimido en `L:D:` |
 | `wilkins-cycling-physiology-2021` | libro | Cycling Physiology & Training Science | Wilkins & Bell | 2021 | ciclismo | expert-book | `L:Wilkins-CyclingPhysiologyAndTrainingScience_2021.pdf` | ok (chat) | 283 p |
@@ -89,8 +89,8 @@
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
 | `mitchell-yoga-biomechanics` | libro | Yoga Biomechanics: Stretching Redefined | Jules Mitchell | s/f | yoga/biomecánica | expert-book | `L:Mitchell-YogaBiomechanics-StretchingRedefined.pdf` | ok (chat) | 325 p |
-| `bookey-physiology-of-yoga-resumen` | doc | The Physiology of Yoga — RESUMEN (Bookey) | Bookey (sobre McGonigle & Moses) | s/f | yoga/fisiología | expert-book | `L:Bookey-PhysiologyOfYoga_Resumen.pdf` | pendiente-gemini | ⚠️ NO es el libro original: es un resumen tipo Bookey (116 p). El original no está en la biblioteca |
-| `blahnik-full-body-flexibility-2ed` | libro | Full-Body Flexibility | Jay Blahnik | 2ª ed. | flexibilidad | expert-book | `L:Blahnik-FullBodyFlexibility_2ed.pdf` | pendiente-gemini | 272 p |
+| `bookey-physiology-of-yoga-resumen` | doc | The Physiology of Yoga — RESUMEN (Bookey) | Bookey (sobre McGonigle & Moses) | s/f | yoga/fisiología | expert-book | `L:Bookey-PhysiologyOfYoga_Resumen.pdf` | **ok** | 116 p; extracción completa en `bookey-physiology-of-yoga-resumen.md` (mitos vs ciencia, tono vagal y fascia) |
+| `blahnik-full-body-flexibility-2ed` | libro | Full-Body Flexibility | Jay Blahnik | 2ª ed. | flexibilidad | expert-book | `L:Blahnik-FullBodyFlexibility_2ed.pdf` | **ok** | 272 p; extracción completada en `blahnik-full-body-flexibility-2ed.md` (3-Step System, RPE 6-8, rutinas express) |
 | `macintosh-open-textbook-exphys` | libro | Open Textbook of Exercise Physiology | MacIntosh et al. (ed.) | s/f | fisiología del ejercicio | expert-book | `L:MacIntosh-OpenTextbookOfExercisePhysiology.pdf` | ok (chat) | 317 p; secundaria AG-ANATOM |
 | `clippinger-dance-anatomy-kinesiology-2ed` | libro | Dance Anatomy and Kinesiology | Karen Sue Clippinger | 2ª ed. | danza/kinesiología | expert-book | `L:Clippinger-DanceAnatomyAndKinesiology_2ed.pdf` | ok (chat) | 546 p |
 | `haas-dance-anatomy-2ed` | libro | Dance Anatomy | Jacqui Greene Haas | 2ª ed. | danza | expert-book | `L:Haas-DanceAnatomy_2ed.pdf` | ok (chat) | 272 p |
@@ -103,7 +103,7 @@
 |---|---|---|---|---|---|---|---|---|---|
 | `delp-muay-thai-2013` | libro | Muay Thai Training Exercises: The Ultimate Guide | Christoph Delp | 2013 | muay thai | expert-book | `L:Delp-MuayThaiTrainingExercises_2013.pdf` | ok (chat) | 414 p + `..._textolayer.txt` |
 | `dias-training-conditioning-mma` | libro | Training and Conditioning for MMA: Programming of Champions | Dias, Oliveira, Brauer Jr. | s/f | MMA | expert-book | `L:Dias-TrainingAndConditioningForMMA_ProgrammingOfChampions.pdf` | ok (chat) | 433 p. Dup comprimido en `L:D:` |
-| `tomlinson-evolution-martial-arts` | libro | The Evolution of Martial Arts in Combat Sports | Stuart Tomlinson | s/f | MA de combate | expert-book | `L:Tomlinson-EvolutionOfMartialArtsInCombatSports.pdf` | pendiente-gemini | 296 p |
+| `tomlinson-evolution-martial-arts` | libro | The Evolution of Martial Arts in Combat Sports | Stuart Tomlinson | s/f | MA de combate | expert-book | `L:Tomlinson-EvolutionOfMartialArtsInCombatSports.pdf` | **ok** | 296 p; extracción completada en `tomlinson-evolution-martial-arts.md` |
 | `wilson-boxing-science-intro` | doc | Boxing Science: Introduction to Strength and Conditioning | Wilson & Ruddock | s/f | boxeo | expert-book | `L:Wilson-BoxingScience-IntroStrengthConditioning.pdf` | ok (chat) | eBook 20 p |
 
 ## 8. Libros — salud sexual (dominio secundario deliberado)
@@ -120,8 +120,8 @@
 | sourceId | tipo | título | autor | año/edición | disciplina | evidenceTier | ruta_fuente | extraccion | notas |
 |---|---|---|---|---|---|---|---|---|---|
 | `nippard-min-max` | programa | The Min-Max Program | Jeff Nippard | s/f | entrenamiento minimalista | expert-book | `INV:The_Min-Max_Program_-_Jeff_Nippard.pdf` → propuesto `Nippard-MinMaxProgram.pdf` | ok (dataset) | 90 p. Ya ingestado como `INV:minmaxprogram.json`; docx+pdf comprimido a `INV:_duplicados\` (commit ag-bib) |
-| `nippard-powerbuilding-4x` | programa | Powerbuilding System (4x/semana) | Jeff Nippard | 2020 | powerbuilding | expert-book | `INV:PowerbuildingSystem.pdf` → propuesto `Nippard-PowerbuildingSystem_4x_2020.pdf` | pendiente-gemini | 115 p |
-| `nippard-glute-hypertrophy-program` | programa | Glute Hypertrophy Program | Jeff Nippard | s/f | glúteos | expert-book | `INV:jeffNippardGluteProgram.pdf` → propuesto `Nippard-GluteHypertrophyProgram.pdf` | pendiente-gemini | 36 p; idéntico ×3 (copias en JN Women/ y Body-Part/) |
+| `nippard-powerbuilding-4x` | programa | Powerbuilding System (4x/semana) | Jeff Nippard | 2020 | powerbuilding | expert-book | `INV:PowerbuildingSystem.pdf` → propuesto `Nippard-PowerbuildingSystem_4x_2020.pdf` | **ok** | 115 p; extracción completada en `nippard-powerbuilding-4x.md` (split 4x, DUP, LSRPE) |
+| `nippard-glute-hypertrophy-program` | programa | Glute Hypertrophy Program | Jeff Nippard | s/f | glúteos | expert-book | `INV:jeffNippardGluteProgram.pdf` → propuesto `Nippard-GluteHypertrophyProgram.pdf` | **ok** | 36 p; extracción completada en `nippard-glute-hypertrophy-program.md` (3 vectores de fuerza) |
 | `nippard-tbts-intermediate-advanced` | programa | The Bodybuilding Transformation System (Inter-Adv) | Jeff Nippard | s/f | culturismo | expert-book | `INV:TheBodyBuildingTransformationSystem.pdf` → propuesto `Nippard-BodybuildingTransformationSystem_InterAdv.pdf` | ok (dataset) | 63 p; ya ingestado como `INV:bodybuildingtransformationsystem.json`; copia idéntica en `JN:The Bodybuilding Transformation System\` |
 
 ## 10. Datasets / colecciones
@@ -260,25 +260,28 @@
 > Cada extracción se ejecuta sección por sección con el sub-prompt §0 de `docs/agents/PROMPTS_INICIALES.md` (una sección o rango de páginas por llamada; primero TOC → `00-indice.md`; al final `99-resumen.md` con matriz de cobertura). Salida: `biblioteca/extracciones/<sourceId>.md` (o `rag/<domain>/extracciones/` cuando el agente de dominio la ejecute).
 > Estimación de secciones = nº de llamadas Gemini aproximado (sub-rangos de 15–30 p para bíblias gráficas).
 
-### Bloque A — `pendiente-gemini` puro (orden de prioridad de los agentes)
+### Bloque A — Estado de Ejecución de la Cola de Extracción
 
-| # | sourceId | agente | capítulos objetivo | secciones est. | notas |
+| # | sourceId | agente | capítulos objetivo | Estado | Archivos Generados / Notas |
 |---|---|---|---|---|---|
-| 1 | `grays-anatomy-students-4ed` | AG-ANATOM | Regiones: espalda → tórax (pectoral) → abdomen/core → pelvis/cadera → miembro inferior (cadera, rodilla, tobillo/pie) → miembro superior (hombro, codo, muñeca/mano) → cuello/cervical → neuroanatomía de extremidades (nervios periféricos) | ~24 | 1234 p, texto extraíble; primer TOC completo |
-| 2 | `norkin-joint-structure-6ed` | AG-ANATOM | Caps. por articulación: hombro, codo/antebrazo, muñeca/mano, cadera, rodilla, tobillo/pie, columna cervical, columna torácica/lumbar, marcha + caps. 1–3 (kinesiología general, movimiento articular, músculo) | ~12 | 1756 p. **Atajo:** capa de texto `..._textolayer.txt` ya en disco — usarla como base y validar contra PDF |
-| 3 | `macintosh-skeletal-muscle-2ed` | AG-ANATOM | Tipos de fibra y unidades motoras, mecanismo contráctil, tipos de activación, fatiga, plasticidad/adaptación, daño y reparación, músculo en ejercicio y envejecimiento | ~10 | 434 p; sin capa de texto en portada (verificar interior) |
-| 4 | `enoka-neuromechanics-4ed` | AG-ANATOM | Control motor (espinal + supraspinal), reflejos y aferencias, descarga de unidad motora, fuerza y activación neural, adaptación al entrenamiento, fatiga central, propiocepción | ~10 | 568 p |
-| 5 | `moore-clinically-oriented-6ed` | AG-ANATOM | Solo regiones ya cubiertas por Gray's pero con foco clínico: hombro, codo/muñeca, columna, cadera, rodilla, tobillo/pie (secs. azul clínico) | ~8 | 1168 p; **escaneado sin capa de texto** → Gemini con imágenes de página (más lento) |
-| 6 | `rp-renaissance-kitchen` | AG-NUTRI/GASTRO | Macros por receta, principios de cocinado para composición corporal | ~4 | puente gastronomía |
-| 7 | `blahnik-full-body-flexibility-2ed` | AG-FIT | Los 3 ciclos de flexibilidad, progresiones por grupo, rutinas sample | ~6 | 272 p |
-| 8 | `bookey-physiology-of-yoga-resumen` | AG-FIT | Mitos vs ciencia por sistema (muscular, respiratorio, cardiovascular) | ~3 | ⚠️ resumen Bookey, no el original; limitar expectativas |
-| 9 | `nippard-body-recomposition` | AG-FIT | Todos: dieta recomp, proteína/sueño/entreno, setup de macros | ~6 | 268 p |
-| 10 | `nippard-fundamentals-hypertrophy` | AG-FIT | Volumen, frecuencia, progresión, técnica por patrón | ~5 | 97 p |
-| 11 | `inda-fuerza-female-strength` | AG-FIT | Programación femenina, ciclo menstrual, fuerza/estética | ~5 | |
-| 12 | `daniels-running-formula-4ed` | AG-FIT | Sistema VDOT, zonas, planes 1500m→maratón | ~6 | solo epub |
-| 13 | `tomlinson-evolution-martial-arts` | AG-FIT | Historia/transferencia a combate, S&C por disciplina | ~5 | 296 p |
-| 14 | `nippard-powerbuilding-4x` | AG-FIT | Manual completo (baja prioridad: programa, no libro de conocimiento) | ~3 | 115 p |
-| 15 | `nippard-glute-hypertrophy-program` | AG-FIT | FAQ + rutina (baja prioridad) | ~2 | 36 p |
+| 1 | `grays-anatomy-students-4ed` | AG-ANATOM | Todas las regiones anatómicas (Ch 1 a 9 + Neuro) | **100% OK** | `grays-anatomy-students-4ed--*.md` (14 archivos con matriz de cobertura `99-cobertura-*.md`) |
+| 2 | `norkin-joint-structure-6ed` | AG-ANATOM | Caps. por articulación y kinesiología articular | **100% OK** | `norkin-joint-structure-6ed.md` (recuperado y consolidado) |
+| 3 | `macintosh-skeletal-muscle-2ed` | AG-ANATOM | Todas las partes (I, II, III: Caps 1 a 22) | **100% OK** | `macintosh-skeletal-muscle-2ed--*.md` (14 archivos con matriz de cobertura `99-cobertura-*.md`) |
+| 4 | `enoka-neuromechanics-4ed` | AG-ANATOM | Todas las partes (I, II, III: Caps 1 a 9) | **100% OK** | `enoka-neuromechanics-4ed--*.md` (7 archivos con matriz de cobertura `99-cobertura-*.md`) |
+| 5 | `moore-clinically-oriented-6ed` | AG-ANATOM | Introducción + Caps. 1 a 9 completos con Blue Boxes | **100% OK** | `moore-clinically-oriented-6ed--*.md` (11 archivos con matriz de cobertura `99-cobertura-*.md`) |
+| 6 | `blahnik-full-body-flexibility-2ed` | AG-FIT | 3 ciclos de flexibilidad, repertorio regional y rutinas | **100% OK** | `blahnik-full-body-flexibility-2ed.md` |
+| 7 | `tomlinson-evolution-martial-arts` | AG-FIT | Striking, Clinch, Grappling y S&C para combate | **100% OK** | `tomlinson-evolution-martial-arts.md` |
+| 8 | `nippard-powerbuilding-4x` | AG-FIT | Manual completo de periodización 4x, DUP y LSRPE | **100% OK** | `nippard-powerbuilding-4x.md` |
+| 9 | `nippard-glute-hypertrophy-program` | AG-FIT | Biomecánica de los 3 vectores de fuerza de glúteos | **100% OK** | `nippard-glute-hypertrophy-program.md` |
+| 10 | `maughan-nutrition-in-sport` | AG-NUTRI | M1 a M7: Tablas y figuras completas (hidratación/CHO) | **100% OK** | `rag/nutricion/extracciones/maughan-nis-tablas-figuras-completas.md` |
+| 11 | `haff-essentials-strength-4ed` | AG-NUTRI/FIT | N1 a N6: Tablas y figuras completas (DRIs/comida pre-evento) | **100% OK** | `rag/nutricion/extracciones/nsca-est4-tablas-figuras-completas.md` |
+| 12 | `bibliotex-sport-nutrition-2022` | AG-NUTRI | G1 a G3: Pautas pre-evento, CHO diario y RED-S | **100% OK** | `rag/nutricion/extracciones/sportnutrition-3g-tablas-figuras-completas.md` |
+| 13 | `daniels-running-formula-4ed` | AG-FIT | Sistema VDOT, zonas E/M/T/I/R y periodización de 4 fases | **100% OK** | `daniels-running-formula-4ed.md` |
+| 14 | `bookey-physiology-of-yoga-resumen` | AG-FIT | Mitos vs ciencia, sistema musculoesquelético y tono vagal | **100% OK** | `bookey-physiology-of-yoga-resumen.md` |
+| 15 | `rp-renaissance-kitchen` | AG-NUTRI/GASTRO | Recetario alto en proteína, sustitutos y macros | **100% OK** | `rp-renaissance-kitchen.md` |
+| 16 | `nippard-body-recomposition` | AG-FIT/NUTRI | Guía definitiva de recomposición, partición y macros | **100% OK** | `nippard-body-recomposition.md` |
+| 17 | `nippard-fundamentals-hypertrophy` | AG-FIT | Anatomía funcional y programas FullBody/UL/Split | **100% OK** | `nippard-fundamentals-hypertrophy.md` |
+| 18 | `inda-fuerza-female-strength` | AG-FIT | Fuerza femenina, cues técnicos y macrociclo de 12 semanas | **100% OK** | `inda-fuerza-female-strength.md` |
 
 ### Bloque B — ~~`en-chat` SIN respuesta~~ ✅ RESUELTO (2026-08-22, segunda pasada)
 

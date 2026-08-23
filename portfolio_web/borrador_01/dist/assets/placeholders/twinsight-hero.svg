@@ -1,0 +1,46 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">TwinSight X500 technical visualization placeholder</title>
+  <desc id="desc">A browser-style Unity WebGL technical viewer mockup with drone assembly, UI panels and inspection overlays.</desc>
+  <rect width="1600" height="1000" fill="#0A0B0D"/>
+  <rect x="80" y="80" width="1440" height="840" rx="26" fill="#111317" stroke="#2C3139" stroke-width="2"/>
+  <rect x="80" y="80" width="1440" height="64" rx="26" fill="#171A20"/>
+  <circle cx="126" cy="112" r="9" fill="#FB6F62"/>
+  <circle cx="158" cy="112" r="9" fill="#F5C04C"/>
+  <circle cx="190" cy="112" r="9" fill="#69D99A"/>
+  <text x="256" y="119" fill="#9097A3" font-family="Inter, Arial, sans-serif" font-size="18">TwinSight X500 - Unity WebGL technical visualization</text>
+  <g opacity="0.34">
+    <path d="M294 235H1290M294 335H1290M294 435H1290M294 535H1290M294 635H1290M294 735H1290" stroke="#29313D" stroke-width="1"/>
+    <path d="M394 185V790M494 185V790M594 185V790M694 185V790M794 185V790M894 185V790M994 185V790M1094 185V790M1194 185V790" stroke="#29313D" stroke-width="1"/>
+  </g>
+  <g transform="translate(380 210)">
+    <line x1="420" y1="282" x2="170" y2="142" stroke="#8AE6FF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="420" y1="282" x2="670" y2="142" stroke="#8AE6FF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="420" y1="282" x2="190" y2="452" stroke="#8AE6FF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="420" y1="282" x2="660" y2="454" stroke="#8AE6FF" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="420" cy="282" rx="128" ry="74" fill="#18232E" stroke="#DDE8F4" stroke-width="4"/>
+    <rect x="345" y="240" width="150" height="82" rx="18" fill="#22313E" stroke="#DDE8F4" stroke-width="3"/>
+    <circle cx="170" cy="142" r="70" fill="#101D27" stroke="#69D99A" stroke-width="4"/>
+    <circle cx="670" cy="142" r="70" fill="#101D27" stroke="#69D99A" stroke-width="4"/>
+    <circle cx="190" cy="452" r="70" fill="#101D27" stroke="#69D99A" stroke-width="4"/>
+    <circle cx="660" cy="454" r="70" fill="#101D27" stroke="#69D99A" stroke-width="4"/>
+    <path d="M112 142H228M170 84V200M612 142H728M670 84V200M132 452H248M190 394V510M602 454H718M660 396V512" stroke="#69D99A" stroke-width="3"/>
+    <path d="M376 208L470 356" stroke="#F5C04C" stroke-width="3" stroke-dasharray="12 10"/>
+    <path d="M330 386C390 416 468 413 522 376" stroke="#FB6F62" stroke-width="3" stroke-dasharray="9 12"/>
+  </g>
+  <rect x="1132" y="188" width="300" height="500" rx="18" fill="#171B21" stroke="#303946" stroke-width="2"/>
+  <text x="1160" y="232" fill="#EDF4FA" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="26">Inspection Panel</text>
+  <text x="1160" y="270" fill="#9097A3" font-family="Inter, Arial, sans-serif" font-size="17">Selected component</text>
+  <rect x="1160" y="298" width="228" height="10" rx="5" fill="#69D99A"/>
+  <rect x="1160" y="336" width="190" height="10" rx="5" fill="#3D4653"/>
+  <rect x="1160" y="366" width="240" height="10" rx="5" fill="#3D4653"/>
+  <rect x="1160" y="396" width="156" height="10" rx="5" fill="#3D4653"/>
+  <rect x="1160" y="456" width="104" height="42" rx="21" fill="#22313E" stroke="#8AE6FF"/>
+  <text x="1186" y="483" fill="#8AE6FF" font-family="Inter, Arial, sans-serif" font-size="15">X-Ray</text>
+  <rect x="1276" y="456" width="104" height="42" rx="21" fill="#1B221E" stroke="#69D99A"/>
+  <text x="1298" y="483" fill="#69D99A" font-family="Inter, Arial, sans-serif" font-size="15">Explode</text>
+  <text x="1160" y="556" fill="#9097A3" font-family="Inter, Arial, sans-serif" font-size="15">Runtime states</text>
+  <path d="M1160 590H1390M1160 626H1348M1160 662H1372" stroke="#4C5665" stroke-width="8" stroke-linecap="round"/>
+  <rect x="188" y="758" width="402" height="82" rx="16" fill="#171B21" stroke="#303946"/>
+  <text x="220" y="792" fill="#EDF4FA" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">WebGL-ready geometry</text>
+  <text x="220" y="823" fill="#9097A3" font-family="Inter, Arial, sans-serif" font-size="16">Replace with final TwinSight screenshot</text>
+</svg>

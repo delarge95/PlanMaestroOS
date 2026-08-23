@@ -1,0 +1,38 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#0B0D10"/>
+  <text x="54" y="72" fill="#EEF6FA" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700">Visual Modes Grid</text>
+  <text x="54" y="112" fill="#96A0AD" font-family="Inter, Arial, sans-serif" font-size="20">Placeholder for TwinSight mode captures</text>
+  <g transform="translate(54 156)">
+    <g>
+      <rect width="330" height="160" rx="14" fill="#17202A" stroke="#344052"/>
+      <text x="24" y="42" fill="#EEF6FA" font-family="Inter, Arial" font-size="24" font-weight="700">Realistic</text>
+      <circle cx="220" cy="92" r="40" fill="#D8D2C8"/>
+    </g>
+    <g transform="translate(382 0)">
+      <rect width="330" height="160" rx="14" fill="#111C27" stroke="#344052"/>
+      <text x="24" y="42" fill="#EEF6FA" font-family="Inter, Arial" font-size="24" font-weight="700">X-Ray</text>
+      <circle cx="220" cy="92" r="40" fill="#8AE6FF" opacity="0.42" stroke="#8AE6FF" stroke-width="4"/>
+    </g>
+    <g transform="translate(764 0)">
+      <rect width="330" height="160" rx="14" fill="#171E1C" stroke="#344052"/>
+      <text x="24" y="42" fill="#EEF6FA" font-family="Inter, Arial" font-size="24" font-weight="700">Ghosted</text>
+      <circle cx="220" cy="92" r="40" fill="#69D99A" opacity="0.35"/>
+    </g>
+    <g transform="translate(0 202)">
+      <rect width="330" height="160" rx="14" fill="#0C1B2E" stroke="#344052"/>
+      <text x="24" y="42" fill="#EEF6FA" font-family="Inter, Arial" font-size="24" font-weight="700">Blueprint</text>
+      <path d="M172 92H268M220 44V140" stroke="#73B7FF" stroke-width="4"/>
+    </g>
+    <g transform="translate(382 202)">
+      <rect width="330" height="160" rx="14" fill="#131519" stroke="#344052"/>
+      <text x="24" y="42" fill="#EEF6FA" font-family="Inter, Arial" font-size="24" font-weight="700">Wireframe</text>
+      <path d="M184 54L260 92L184 130L184 54ZM184 54L220 92L184 130M220 92H260" stroke="#C6E8F6" stroke-width="3"/>
+    </g>
+    <g transform="translate(764 202)">
+      <rect width="330" height="160" rx="14" fill="#201514" stroke="#344052"/>
+      <text x="24" y="42" fill="#EEF6FA" font-family="Inter, Arial" font-size="24" font-weight="700">Thermal-style</text>
+      <circle cx="220" cy="92" r="42" fill="#FB6F62"/>
+      <circle cx="220" cy="92" r="25" fill="#F5C04C"/>
+    </g>
+  </g>
+</svg>
