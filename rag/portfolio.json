@@ -1,0 +1,788 @@
+{
+  "domain": "portfolio",
+  "version": "4.0.0",
+  "sources": [
+    {
+      "id": "doc-20",
+      "title": "20_portfolio_copy_and_site_structure (copy y estructura del sitio público)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio-site",
+          "copy"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "doc-08b",
+      "title": "08B_twinsight_case_study_final_structure (estructura final del case study TwinSight)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "case-study",
+          "twinsight"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "doc-17",
+      "title": "17_cv_base_and_role_variants (CV base ATS + variantes por familia de rol)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "cv",
+          "positioning"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "doc-19b",
+      "title": "19B_github_readme_twinsight_final (README final del repo TwinSight)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "readme",
+          "github"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "doc-28e",
+      "title": "28E_artstation_profile_optimization_strategy (estrategia de perfil ArtStation)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "artstation",
+          "profile"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "doc-29c",
+      "title": "29C_artstation_breakdown_benchmark (benchmark de estructura de breakdowns)",
+      "author": "Plan Maestro OS — investigación laboral",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "artstation",
+          "breakdown"
+        ],
+        "priority": 1
+      }
+    }
+  ],
+  "chunks": [
+    {
+      "id": "doc08b-posicionamiento",
+      "sourceId": "doc-08b",
+      "topic": "case-study-copy",
+      "tags": [
+        "posicionamiento",
+        "framing",
+        "twinsight"
+      ],
+      "locator": {
+        "section": "§1"
+      },
+      "summary": "Posicionamiento final del proyecto: identidad primaria \"TwinSight X500 — Unity WebGL Technical Visualization for Drone Assembly Inspection\". Framing profesional a reutilizar en portafolio, LinkedIn, GitHub y ArtStation: prototipo técnico de visualización en Unity WebGL para inspección de ensamblaje de dron, que transforma assets derivados de CAD en un visor 3D optimizado para navegador con interacción a nivel de componente, vista explosionada, cross-section, modos visuales y evaluación formativa de usabilidad/carga. Keywords alineadas al rol: Unity, C#, WebGL, Real-Time 3D, Technical Visualization, CAD-to-Realtime, URP, UI Toolkit, Shader Graph, Blender, Exploded View, Clipping, SUS, NASA-TLX, Think-Aloud.",
+      "entities": [
+        "project:twinsight-x500",
+        "platform:web"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc08b-que-debe-probar",
+      "sourceId": "doc-08b",
+      "topic": "case-study-copy",
+      "tags": [
+        "prueba",
+        "credibilidad",
+        "competencias"
+      ],
+      "locator": {
+        "section": "§1.5"
+      },
+      "summary": "Áreas de prueba que TwinSight debe comunicar: desarrollo real-time 3D (aplicación Unity interactiva en navegador); technical art (modos visuales, optimización, restricciones de render); CAD-to-realtime (datos CAD pesados convertidos a asset runtime optimizado); visualización técnica (comprensión de ensamblaje, inspección, relaciones espaciales); UI/UX (paneles técnicos, bottom-sheet, lógica mobile-first); evaluación (SUS, NASA-TLX, Think-Aloud); y madurez de portafolio (case study claro, vídeo, métricas, limitaciones, links).",
+      "entities": [
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc08b-orden-pagina",
+      "sourceId": "doc-08b",
+      "topic": "case-study-structure",
+      "tags": [
+        "estructura",
+        "pagina",
+        "orden"
+      ],
+      "locator": {
+        "section": "§2"
+      },
+      "summary": "Orden recomendado de la página del case study: 01 Hero, 02 propuesta de valor corta, 03 vídeo demo, 04 Problem, 05 Solution, 06 Key features, 07 Technical pipeline, 08 CAD-to-realtime optimization, 09 Unity WebGL architecture, 10 Interaction systems, 11 Visual modes, 12 Evaluation results, 13 Role and contribution, 14 disclosure de workflow asistido por IA, 15 Constraints y limitaciones, 16 galería de capturas, 17 Links, 18 Next steps. Lógica recruiter-first: la primera pantalla debe responder qué es, qué rol respalda, qué tecnologías usa, qué puede hacer el usuario y por qué es creíble — nunca empezar con metodología académica.",
+      "entities": [
+        "project:twinsight-x500",
+        "page:work"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc08b-secciones-hero-video",
+      "sourceId": "doc-08b",
+      "topic": "case-study-structure",
+      "tags": [
+        "hero",
+        "video",
+        "demo"
+      ],
+      "locator": {
+        "section": "§3, §4"
+      },
+      "summary": "Hero del case study: título \"TwinSight X500\", subtítulo \"Unity WebGL technical visualization for drone assembly inspection\", párrafo hero + bloque de metadatos (rol, stack, estado) y CTAs (demo y GitHub). El vídeo demo va colocado temprano en la página (primario cerca del hero, con caption); vídeo secundario técnico opcional más abajo.",
+      "entities": [
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc08b-metrics-safe",
+      "sourceId": "doc-08b",
+      "topic": "metrics",
+      "tags": [
+        "metricas",
+        "lenguaje-seguro",
+        "claims"
+      ],
+      "locator": {
+        "section": "§9.3, §9.4"
+      },
+      "summary": "Métricas de la card de optimización: geometría optimizada 95.617 triángulos; rutas CAD fuente 6.5M+; 28 partes canónicas de investigación; 30 nodos/anclas de escena; 257 elementos técnicos; 12 participantes; 96 registros tarea-condición. Lenguaje seguro obligatorio: \"Reduced CAD-derived source routes exceeding 6.5M triangles into a 95,617-triangle optimized model for browser-based real-time inspection\" — NO \"optimized by 98.5% and proved production scalability\" (el primero es factual, el segundo sobre-claim). Visuales requeridos: captura fuente high-poly, modelo optimizado, comparación wireframe, card de métricas y prueba WebGL en navegador (recomendadas: cleanup Blender y profiler).",
+      "entities": [
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc08b-checklist-calidad",
+      "sourceId": "doc-08b",
+      "topic": "claim-safety",
+      "tags": [
+        "checklist",
+        "publicacion",
+        "claims"
+      ],
+      "locator": {
+        "section": "§23"
+      },
+      "summary": "Checklists de calidad antes de publicar el case study. Contenido: título alineado al rol, primer párrafo entendible por reclutadores, stack visible, vídeo embebido, problema y solución claros, features mostradas visualmente, optimización CAD explicada, métricas incluidas, rol declarado, IA revelada si aplica, limitaciones incluidas, links funcionando. Visual: hero fuerte, UI legible, grid de modos visuales claro, capturas consistentes, sin artefactos de debug ni materiales sin terminar, captions concisos, diagramas legibles, thumbnail de vídeo claro. Claim-safety: no reclamar despliegue de producción, ni digital twin completo, ni IoT en vivo, ni simulación térmica real, ni causalidad exagerada de la evaluación, ni experiencia senior industrial, ni ocultar el estado de prototipo.",
+      "entities": [
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc08b-artstation-readme",
+      "sourceId": "doc-08b",
+      "topic": "case-study-structure",
+      "tags": [
+        "artstation",
+        "readme",
+        "integracion"
+      ],
+      "locator": {
+        "section": "§19, §20"
+      },
+      "summary": "Integraciones del case study: el README del repo incluye bloque Demo y Highlights reutilizando las mismas métricas y copy; la publicación ArtStation usa el mismo título/subtítulo con descripción corta y orden de post dedicado (breakdown técnico), y tags alineados; la integración LinkedIn usa el título del item Featured con descripción y post de lanzamiento. Notas de defensa en entrevista: explicación de 30 s y de 2 min, respuesta sobre asistencia de IA (soporte de implementación; arquitectura, integración, validación y decisiones propias) y sobre si es digital twin (no: prototipo académico sin IoT en vivo).",
+      "entities": [
+        "platform:artstation",
+        "platform:github",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc17-identidad",
+      "sourceId": "doc-17",
+      "topic": "cv-positioning",
+      "tags": [
+        "identidad",
+        "posicionamiento",
+        "cv"
+      ],
+      "locator": {
+        "section": "§1"
+      },
+      "summary": "Identidad central del CV: \"Real-Time 3D Developer / Unity Technical Artist\", versión extendida \"focused on interactive technical visualization, CAD-to-realtime optimization, and Unity WebGL deployment\". Familias objetivo con CV separado: 1) Real-Time 3D / Unity Developer, 2) Technical Visualization / Digital Twin / Simulation, 3) Unity WebGL / Interactive 3D, 4) Unity Technical Artist, 5) Tools / Python Automation. Regla: nunca un único CV genérico — mismos hechos reorganizados, claims consistentes.",
+      "entities": [
+        "platform:web"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc17-claims-prohibidos",
+      "sourceId": "doc-17",
+      "topic": "cv-positioning",
+      "tags": [
+        "claims",
+        "disciplina",
+        "honestidad"
+      ],
+      "locator": {
+        "section": "§1"
+      },
+      "summary": "Claims prohibidos: Senior Technical Artist; autorización de trabajo EU ahora; residencia alemana ahora; pasaporte portugués ya emitido; certificación Unity no obtenida; certificados Rebelway/CG Cookie/Alive sin certificado; Production AI Engineer; desarrollador de plataforma AI empresarial; producto Unity comercialmente lanzado (si no es cierto); full-stack specialist como identidad primaria.",
+      "entities": [],
+      "rules": []
+    },
+    {
+      "id": "doc17-base-ats",
+      "sourceId": "doc-17",
+      "topic": "cv-base",
+      "tags": [
+        "ats",
+        "una-pagina",
+        "estructura"
+      ],
+      "locator": {
+        "section": "§3"
+      },
+      "summary": "CV base ATS-friendly de una página: header (nombre, rol, ubicación + abierto a remoto, email/teléfono, LinkedIn/GitHub/Portfolio/ArtStation), resumen profesional (identidad + background Multimedia Engineering con coursework avanzado de Electronic Engineering + TwinSight como proyecto insignia), skills técnicos por bloques (Unity; Real-Time 3D; 3D Tools; Programming & Tooling; Design & Evaluation; Foundations), proyectos seleccionados con bullets, experiencia, educación, cursos, idiomas y disponibilidad/autorización de trabajo.",
+      "entities": [
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc17-bullets-twinsight",
+      "sourceId": "doc-17",
+      "topic": "cv-bullets",
+      "tags": [
+        "bullets",
+        "twinsight",
+        "logros"
+      ],
+      "locator": {
+        "section": "§3"
+      },
+      "summary": "Bullets base de TwinSight para el CV: visor 3D interactivo Unity WebGL para inspección del ensamblaje del Holybro X500 V2; sistemas runtime de selección de componentes, exploded view, cross-section/clipping, modos visuales y paneles de información; workflow CAD-to-realtime con cleanup/optimización/retopología/UVs en Blender; geometría optimizada de 6.5M+ a ~95.617 triángulos [verificar número final]; experiencia de inspección browser-accessible con foco en claridad técnica y restricciones mobile/web; evaluación con SUS, NASA-TLX Raw y Think-Aloud [verificar métricas finales]; IA como asistente de implementación/debugging conservando arquitectura, validación y ownership propios.",
+      "entities": [
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc17-variantes",
+      "sourceId": "doc-17",
+      "topic": "cv-variants",
+      "tags": [
+        "variantes",
+        "roles",
+        "keywords"
+      ],
+      "locator": {
+        "section": "§4–§8"
+      },
+      "summary": "Las variantes de CV reordenan énfasis y keywords según la familia de rol: Real-Time 3D/Unity Developer (énfasis Unity/C#/WebGL/URP y runtime), Technical Visualization/Digital Twin/Simulation (énfasis CAD-to-realtime, visualización de ensamblaje, evaluación), Unity WebGL/Interactive 3D (énfasis despliegue browser, restricciones web, UI Toolkit, con bullet web/fullstack opcional), Unity Technical Artist (énfasis modos visuales, optimización, Shader Graph + bullets del retrato Blender como apoyo), y Tools/Python Automation (énfasis ARA/tooling). Cada variante define header title, summary, skills emphasis, bullets adaptados de TwinSight/ARA y best keywords.",
+      "entities": [
+        "project:twinsight-x500",
+        "project:ara-framework",
+        "project:blender-portrait"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc17-confirmaciones",
+      "sourceId": "doc-17",
+      "topic": "cv-base",
+      "tags": [
+        "placeholders",
+        "verificacion",
+        "datos"
+      ],
+      "locator": {
+        "section": "§2"
+      },
+      "summary": "Campos que aún requieren confirmación del usuario antes del PDF final: email profesional, teléfono/WhatsApp, línea de ubicación exacta, URL del portafolio, fecha de defensa de tesis, fecha esperada de graduación UNAD, fechas de proyectos freelance, nombres de clientes (público/privado), verificación de métricas finales de TwinSight y URL pública del demo WebGL. Los placeholders deben permanecer explícitos hasta confirmarse.",
+      "entities": [],
+      "rules": []
+    },
+    {
+      "id": "doc19b-proposito",
+      "sourceId": "doc-19b",
+      "topic": "readme-copy",
+      "tags": [
+        "readme",
+        "github",
+        "objetivos"
+      ],
+      "locator": {
+        "section": "§1, §2"
+      },
+      "summary": "Propósito del README final del repo TwinSight (WebGL-Thesis-Proposal): soportar el posicionamiento de Real-Time 3D Developer / Unity Technical Artist con evidencia en Unity, C#, WebGL, URP, UI Toolkit, Blender, CAD-to-Realtime y Technical Visualization. Debe ser conciso para reclutadores y estructurado para revisores técnicos. Objetivos: explicar el proyecto en <10 s, mostrar prueba visual inmediatamente, dar links de demo/vídeo/portafolio, clarificar el stack, explicar problema y solución, mostrar features clave, documentar la optimización CAD-to-realtime, presentar métricas de evaluación, declarar limitaciones con honestidad y clarificar el workflow asistido por IA.",
+      "entities": [
+        "platform:github",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc19b-skeleton",
+      "sourceId": "doc-19b",
+      "topic": "readme-structure",
+      "tags": [
+        "estructura",
+        "readme",
+        "secciones"
+      ],
+      "locator": {
+        "section": "§3"
+      },
+      "summary": "Esqueleto final del README: título TwinSight X500; Overview; Demo; Highlights; Screenshots; Technical Stack; Problem; Solution; Key Features; Technical Pipeline; CAD-to-Realtime Optimization; Unity WebGL Architecture; Evaluation; My Role; AI-Assisted Workflow; Limitations; Roadmap; Repository Structure; Setup/Running Locally; Links; License/Credits. El orden está pensado para que la prueba visual y el valor lleguen antes que el detalle técnico.",
+      "entities": [
+        "platform:github",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc19b-que-evitar",
+      "sourceId": "doc-19b",
+      "topic": "readme-copy",
+      "tags": [
+        "anti-patrones",
+        "readme"
+      ],
+      "locator": {
+        "section": "§2.2"
+      },
+      "summary": "Lo que el README no debe hacer: convertirse en una tesis académica con abstract y metodología larga; esconder las capturas de vídeo/imagen bajo párrafos de texto; sobre-claim (producción, digital twin completo, IoT); omitir limitaciones; o duplicar todo el contenido del case study del portafolio — el README resume y enlaza.",
+      "entities": [
+        "platform:github"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-objetivo",
+      "sourceId": "doc-20",
+      "topic": "objetivo",
+      "tags": [
+        "portafolio",
+        "objetivo",
+        "reclutador"
+      ],
+      "locator": {
+        "section": "§1"
+      },
+      "summary": "Objetivo primario del portafolio: que un reclutador o revisor técnico entienda en menos de 60 segundos qué hace el candidato, cuál es su proyecto más fuerte (TwinSight X500), por qué es relevante para empleos reales, qué tecnologías puede defender, cómo contactarlo y si está disponible para trabajo remoto. Objetivo secundario: dar profundidad suficiente al revisor técnico (implementación Unity/C#, despliegue WebGL, flujo CAD-to-realtime, optimización en Blender, sistemas de interacción, UI técnica, método de evaluación, limitaciones y disclosure de desarrollo asistido por IA).",
+      "entities": [
+        "page:home",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-no-hacer",
+      "sourceId": "doc-20",
+      "topic": "objetivo",
+      "tags": [
+        "portafolio",
+        "anti-patrones",
+        "posicionamiento"
+      ],
+      "locator": {
+        "section": "§1"
+      },
+      "summary": "Lo que el portafolio NO debe hacer: parecer un portafolio genérico de artista 3D; liderar con FitApp, AI News o repos viejos; sobre-enfatizar full-stack; presentar ARA como proyecto principal; esconder TwinSight tras muchas páginas; usar lenguaje vago de \"creative technologist\" sin prueba técnica; depender de párrafos largos; obligar a descargar archivos; dejar que el visitante adivine el rol objetivo.",
+      "entities": [
+        "project:ara-framework",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-estructura-mvp",
+      "sourceId": "doc-20",
+      "topic": "site-structure",
+      "tags": [
+        "estructura",
+        "mvp",
+        "navegacion"
+      ],
+      "locator": {
+        "section": "§2, §3"
+      },
+      "summary": "Estructura MVP del sitio: Home / Work (TwinSight X500, ARA Framework, Blender Portrait Technical Study) / About / Contact. La versión completa añade AI News Aggregator (opcional) y una sección de Technical Notes. Navegación superior recomendada: Work, TwinSight, About, Contact, GitHub, LinkedIn (o versión compacta Projects/About/Contact). Regla dura: TwinSight debe ser accesible en un clic desde la homepage. No incluir inicialmente: FitApp-Free, freelance web viejo, proyectos full-stack débiles, repos sin terminar, blog personal no técnico o diseño gráfico ajeno a la carrera.",
+      "entities": [
+        "page:home",
+        "page:work",
+        "page:about",
+        "page:contact",
+        "project:twinsight-x500",
+        "project:ara-framework",
+        "project:blender-portrait"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-hero",
+      "sourceId": "doc-20",
+      "topic": "home-copy",
+      "tags": [
+        "hero",
+        "headline",
+        "cta"
+      ],
+      "locator": {
+        "section": "§4"
+      },
+      "summary": "Hero de la home: headline recomendada \"Real-Time 3D Developer / Unity Technical Artist\"; subheadline \"I build interactive technical visualization systems with Unity, WebGL, C#, Blender and CAD-to-realtime optimization.\"; línea de apoyo de ubicación/remoto (\"Based in Colombia. Available for remote contractor/B2B roles.\"); CTA primario \"View TwinSight X500\", secundario \"View GitHub\" y opcional \"Download CV\" solo si el CV es final. Visual del hero: captura de TwinSight con overlay de wireframe sutil, fondo oscuro/neutral, sin arte genérico de IA ni visuales de fantasía/juego salvo aplicación a game art.",
+      "entities": [
+        "page:home",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-home-drafts",
+      "sourceId": "doc-20",
+      "topic": "home-copy",
+      "tags": [
+        "copy",
+        "home",
+        "versiones"
+      ],
+      "locator": {
+        "section": "§5, §25"
+      },
+      "summary": "Draft final de copy de home (usar como primera implementación): rol + subheadline + párrafo que presenta TwinSight X500 como proyecto insignia (prototipo Unity WebGL para inspección del ensamblaje del dron Holybro X500 V2: selección de componentes, exploded views, cross-section, modos visuales y paneles técnicos) + línea de foco en sistemas real-time que hacen la información técnica más fácil de inspeccionar y comunicar + ubicación y disponibilidad remota. Existe versión corta y una más orientada a reclutador en el mismo doc.",
+      "entities": [
+        "page:home",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-orden-cards",
+      "sourceId": "doc-20",
+      "topic": "project-cards",
+      "tags": [
+        "orden",
+        "tarjetas",
+        "work"
+      ],
+      "locator": {
+        "section": "§6"
+      },
+      "summary": "Sección de proyectos destacados: título \"Selected Work\", línea de intro sobre real-time 3D/visualización técnica/Unity WebGL/automatización, y orden de cards: 1) TwinSight X500, 2) ARA Framework, 3) Blender Portrait Technical Study, 4) AI News Aggregator solo si es funcional. Plantilla de card: nombre, descripción de una frase, tags, link primario y secundario.",
+      "entities": [
+        "page:work",
+        "project:twinsight-x500",
+        "project:ara-framework",
+        "project:blender-portrait",
+        "project:ai-news-aggregator"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-consistencia",
+      "sourceId": "doc-20",
+      "topic": "consistency",
+      "tags": [
+        "terminos",
+        "consistencia",
+        "cv",
+        "linkedin"
+      ],
+      "locator": {
+        "section": "§18"
+      },
+      "summary": "Reglas de consistencia de copy entre portafolio, CV, LinkedIn y GitHub. Términos preferidos: Real-Time 3D, Unity WebGL, Technical Visualization, CAD-to-Realtime, Interactive 3D, Technical UI, Runtime Interaction Systems, Asset Optimization, Blender-based preparation. Evitar: multimedia, creative, generalist, full-stack, AI expert, game developer, graphic design. Wording de tesis: \"Thesis project completed, pending defense\" (nunca \"currently starting\"). Wording de IA: workflows asistidos por IA como soporte de implementación/debugging/investigación/documentación — nunca \"AI built this project\".",
+      "entities": [
+        "platform:github",
+        "platform:linkedin",
+        "platform:web"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-seo",
+      "sourceId": "doc-20",
+      "topic": "seo-keywords",
+      "tags": [
+        "seo",
+        "keywords",
+        "reclutador"
+      ],
+      "locator": {
+        "section": "§19"
+      },
+      "summary": "Keywords SEO/reclutador: núcleo (Unity Developer, Unity Technical Artist, Real-Time 3D Developer, Unity WebGL Developer, Technical Visualization Developer, Interactive 3D Developer, CAD-to-Realtime, Digital Twin Visualization, Simulation Visualization, 3D Optimization, Blender, C#, WebGL, Technical UI) y secundarias (Python Automation, LLM Workflows, Research Automation, Shader Graph, URP, UI Toolkit, XR, AR/VR, Product Visualization, Assembly Visualization). Usarlas de forma natural en headings, tags y descripciones, sin keyword stuffing.",
+      "entities": [
+        "page:home"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-mvp-aceptacion",
+      "sourceId": "doc-20",
+      "topic": "aceptacion",
+      "tags": [
+        "mvp",
+        "criterios",
+        "checklist"
+      ],
+      "locator": {
+        "section": "§21, §24"
+      },
+      "summary": "Criterios de aceptación del MVP: la home declara el rol claramente; TwinSight aparece primero; el case study es legible; existen al menos 6 capturas de TwinSight; los links de GitHub y LinkedIn funcionan; el email de contacto funciona; sin claims falsos; sin estado de tesis desactualizado; layout móvil aceptable; carga razonablemente rápida; link de CV funcional si se incluye. NO se exige para MVP: animaciones perfectas, blog, todos los proyectos completos, CMS, scroll effects avanzados, bilingüe perfecto, hero 3D embebido o múltiples case studies. Checklist final antes de compartir: sin typos, inglés limpio, métricas de TwinSight verificadas, links e imágenes funcionando, GitHub decente, ARA sin sobre-claim, disclosure de IA y disclaimer de assets presentes, y el sitio comunica el rol objetivo en 5 segundos.",
+      "entities": [
+        "page:home",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc20-visual-direction",
+      "sourceId": "doc-20",
+      "topic": "site-structure",
+      "tags": [
+        "visual",
+        "estilo",
+        "direccion"
+      ],
+      "locator": {
+        "section": "§16"
+      },
+      "summary": "Dirección visual: estilo recomendado oscuro/técnico/limpio, tipografía clara, acentos de color funcionales; evitar desorden, visuales genéricos de IA y fondos animados que dañen legibilidad. El portafolio debe sentirse como una herramienta de ingeniería pulida, no como una galería artística genérica. La recomendación de plataforma es la opción más rápida que permita case study, cards, capturas, vídeo embebido, links y diseño legible: no gastar semanas en el stack tecnológico, el contenido importa más que el framework.",
+      "entities": [
+        "page:home"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc28e-headline-resumen",
+      "sourceId": "doc-28e",
+      "topic": "artstation-profile",
+      "tags": [
+        "perfil",
+        "headline",
+        "resumen",
+        "skills"
+      ],
+      "locator": {
+        "section": "§1, §2"
+      },
+      "summary": "Perfil ArtStation: 5 opciones de titular profesional alineadas al eje Unity Technical Artist / Real-Time 3D Developer / CAD-to-WebGL Visualization. La sección Resume incluye un resumen profesional EN (estudiante de Multimedia Engineering con coursework avanzado de Electronic Engineering, especialización en visualización 3D real-time Unity y optimización CAD-to-WebGL, proyecto insignia TwinSight X500 con optimización de 6.5M+ a 95.617 triángulos y evaluación SUS/NASA-TLX), lista de 13 skills y la entrada de experiencia de producción para TwinSight (rol, tools y key contributions con las mismas métricas). Experiencia como coursework/thesis: UNAD (tesis completada, pendiente defensa) y UNAL (~8 semestres de Electronic Engineering, wording \"completed advanced coursework\" sin reclamar el título).",
+      "entities": [
+        "platform:artstation",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc28e-software",
+      "sourceId": "doc-28e",
+      "topic": "artstation-profile",
+      "tags": [
+        "software",
+        "niveles",
+        "stack"
+      ],
+      "locator": {
+        "section": "§2"
+      },
+      "summary": "Software expertise con niveles: Advanced — Unity (URP, WebGL, C#, UI Toolkit, Shader Graph) y Blender (hard-surface, UVs, cleanup/optimización CAD); Intermediate — Substance 3D Painter, Photoshop, Marmoset Toolbag; Foundational/in progress — Python (tooling), LangGraph/LangChain (multi-agent research), web stack básico. Checkboxes de software del perfil: Blender, Unity, Substance 3D Painter, Photoshop, Marmoset Toolbag.",
+      "entities": [
+        "platform:artstation"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc28e-preferencias",
+      "sourceId": "doc-28e",
+      "topic": "artstation-profile",
+      "tags": [
+        "industria",
+        "tags",
+        "medio",
+        "disponibilidad"
+      ],
+      "locator": {
+        "section": "§3, §4"
+      },
+      "summary": "Job Preferences: industrias top 5 (Games, Software Development, AR/VR, Asset creation, Product Design); medio (Real time + Digital 3D); tags estratégicos para reclutadores (Technical Art, Pipeline, Hard Surface, Props and assets, Vehicles, Environment Design, Rendering, Lighting Art, UI/UX, ArchViz, Generalist). Ubicación y disponibilidad: \"Pasto, Nariño, Colombia (UTC-5)\" y phrasing remoto en About (open to fully remote or contractor roles worldwide, overlapping hours US/EU). Job Digest en Weekly para evitar fatiga.",
+      "entities": [
+        "platform:artstation"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc28e-links-freelance",
+      "sourceId": "doc-28e",
+      "topic": "artstation-profile",
+      "tags": [
+        "links",
+        "social",
+        "freelance"
+      ],
+      "locator": {
+        "section": "§5"
+      },
+      "summary": "Perfiles sociales con condiciones: LinkedIn cuando coincida con el summary/headline de ArtStation; GitHub tras limpiar el repo TwinSight y añadir disclaimers de prototipo; portfolio personal cuando 1–2 case studies estén completos. Freelance: priorizar ArtStation Jobs, LinkedIn applications y outreach directo; marketplaces (Upwork/Fiverr) solo más tarde con nicho muy específico para no diluir el posicionamiento.",
+      "entities": [
+        "platform:linkedin",
+        "platform:github",
+        "platform:web",
+        "platform:artstation"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc28e-noai",
+      "sourceId": "doc-28e",
+      "topic": "artstation-profile",
+      "tags": [
+        "noai",
+        "proteccion",
+        "visibilidad"
+      ],
+      "locator": {
+        "section": "§6"
+      },
+      "summary": "Estrategia NoAI: activar el checkbox \"NoAI\" nativo en TwinSight X500 y en el retrato Blender; hashtags #NoAI #NoAIArt (+ Unity/WebGL/TechnicalArt/CADOptimization para TwinSight; Blender/3DArt/CharacterArt para el retrato) y línea corta de disclaimer en la descripción sobre protección de contenido. No hay evidencia documentada de que NoAI reduzca el ranking en búsqueda interna, job matching o filtros de reclutadores: la descubribilidad depende de presentación, tags y fuerza del portafolio.",
+      "entities": [
+        "platform:artstation",
+        "project:twinsight-x500",
+        "project:blender-portrait"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc29c-taxonomia",
+      "sourceId": "doc-29c",
+      "topic": "artstation-breakdown",
+      "tags": [
+        "taxonomia",
+        "tipos",
+        "breakdown"
+      ],
+      "locator": {
+        "section": "§6"
+      },
+      "summary": "Taxonomía de breakdowns técnicos con encaje para TwinSight: optimization (antes/después de geometría, budgets — muy alto), pipeline (CAD → Blender → Unity → WebGL — muy alto), interaction (selección, UI, cámara, estados — muy alto), visual-mode (X-ray, ghosted, blueprint, thermal — muy alto), UX evaluation (SUS, NASA-TLX, Think-Aloud — muy alto), shader/tool/profiling (alto). Para el retrato Blender: sculpt, topology, UV, skin material, groom (alto); lighting/render (medio-alto); conversión real-time (alto si se hace). El retrato se posiciona como evidencia de apoyo de fundamentos 3D, nunca como prueba principal para roles Unity WebGL.",
+      "entities": [
+        "project:twinsight-x500",
+        "project:blender-portrait"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc29c-post-twinsight",
+      "sourceId": "doc-29c",
+      "topic": "artstation-breakdown",
+      "tags": [
+        "estructura",
+        "post",
+        "twinsight"
+      ],
+      "locator": {
+        "section": "§7.1, §8"
+      },
+      "summary": "Estructura ideal del post ArtStation de TwinSight: 01 cover image (dron con UI técnica, explosionado con etiquetas, cross-section con panel o grid de modos — legible a thumbnail), 02 vídeo 30–60 s incrustado arriba, 03 resumen de una frase, 04 rol/contribución, 05 capturas finales, 06 feature breakdown, 07 pipeline CAD-to-realtime (CAD source → conversión/tessellación → cleanup Blender → low-poly → UV/bake → Unity → WebGL, con before/after de triángulos, wireframes, fasteners modulares y limitaciones), 08 métricas de optimización (95.617 tris desde 6.5M+; 12 participantes; SUS 91.88; NASA-TLX 8.69 vs 19.89; 96 registros — evaluación formativa académica), 09 grid de modos visuales (thermal-style = cualitativo, no simulación física), 10 sistemas Unity (selección, cámara, exploded, clipping, modos, bottom-sheet, metadata), 11 UI/paneles, 12 resultados de evaluación, 13 tools, 14 limitaciones, 15 links.",
+      "entities": [
+        "platform:artstation",
+        "project:twinsight-x500"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc29c-post-retrato",
+      "sourceId": "doc-29c",
+      "topic": "artstation-breakdown",
+      "tags": [
+        "estructura",
+        "post",
+        "retrato"
+      ],
+      "locator": {
+        "section": "§7.2, §9"
+      },
+      "summary": "Estructura ideal del post del retrato Blender: cover render, turntable/turno de vídeo, resumen corto, reference board, sculpt stages (blockout → mid → final), topology (face loops para deformación), UVs (layout y densidad), texture maps, skin shader/material + ojos, grooming (cejas, barba, pestañas, guías), lighting setup, final renders (2–4 imágenes), nota real-time opcional, tools y lessons learned. Sección \"technical focus\" recomendada: decisiones de topología, layering de materiales, setup de groom, optimización de render, organización de texturas y posible camino de conversión real-time.",
+      "entities": [
+        "platform:artstation",
+        "project:blender-portrait"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc29c-checklists",
+      "sourceId": "doc-29c",
+      "topic": "artstation-checklist",
+      "tags": [
+        "checklist",
+        "publicacion",
+        "errores"
+      ],
+      "locator": {
+        "section": "§15, §16"
+      },
+      "summary": "Checklist de publicación ArtStation. TwinSight: cover legible a thumbnail, vídeo <90 s cerca del inicio, proyecto explicado en 2 frases, rol claro, Unity WebGL/selección/explosionado/cross-section/modos visuales/optimización CAD/métricas visibles, limitaciones declaradas, links de GitHub/portafolio/demo añadidos, tags añadidos. Retrato: render final fuerte de cover, turntable o secuencia, referencias, etapas de escultura, topology, UVs, texture maps, groom si aplica, lighting, tools y contribución técnica clara. Errores comunes: solo renders finales, sin wireframes, sin métricas, intro académica larga, demasiado texto, sin role statement, uso de IA poco claro, links rotos, sobre-claim de digital twin, ocultar restricciones WebGL.",
+      "entities": [
+        "platform:artstation",
+        "project:twinsight-x500",
+        "project:blender-portrait"
+      ],
+      "rules": []
+    },
+    {
+      "id": "doc29c-tools-tags",
+      "sourceId": "doc-29c",
+      "topic": "artstation-breakdown",
+      "tags": [
+        "tools",
+        "tags",
+        "orden"
+      ],
+      "locator": {
+        "section": "§12, §13, §19"
+      },
+      "summary": "Tools por asset (solo las realmente usadas): TwinSight — Unity, C#, Unity WebGL, URP, UI Toolkit, Shader Graph, Blender, GitHub (Marmoset/RizomUV solo si se usaron en el pipeline final); retrato — Blender, Cycles/Eevee Next, Substance 3D Painter, RizomUV/UV tools de Blender, Marmoset Toolbag, Photoshop/Krita. Tags: TwinSight (Unity, Unity WebGL, Technical Art, Real-Time 3D, Technical Visualization, CAD Optimization, Drone, Interactive 3D, CSharp, URP, Blender, Digital Twin con cautela, Simulation); retrato (Blender, Character Art, Portrait, Realistic Character, Topology, Grooming, Skin Shader, Lookdev, 3D Art, Technical Art). Orden ArtStation: 1) breakdown TwinSight, 2) breakdown del retrato, 3) estudios de shader/modos si se separan. Regla de plataforma: TwinSight es el insignia, el retrato secundario, y ArtStation debe mostrar proceso, no solo beauty shots.",
+      "entities": [
+        "platform:artstation",
+        "project:twinsight-x500",
+        "project:blender-portrait"
+      ],
+      "rules": []
+    }
+  ]
+}

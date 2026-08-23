@@ -12,7 +12,16 @@
       "edition": "4th",
       "type": "book",
       "evidenceTier": "expert-book",
-      "authority": { "domains": ["protein", "energy", "peri-workout", "supplements", "hydration"], "priority": 1 }
+      "authority": {
+        "domains": [
+          "protein",
+          "energy",
+          "peri-workout",
+          "supplements",
+          "hydration"
+        ],
+        "priority": 1
+      }
     },
     {
       "id": "maughan-nis-2000",
@@ -22,7 +31,17 @@
       "edition": "1st",
       "type": "book",
       "evidenceTier": "expert-book",
-      "authority": { "domains": ["hydration", "electrolytes", "carbohydrates", "creatine", "caffeine", "energy"], "priority": 2 }
+      "authority": {
+        "domains": [
+          "hydration",
+          "electrolytes",
+          "carbohydrates",
+          "creatine",
+          "caffeine",
+          "energy"
+        ],
+        "priority": 2
+      }
     },
     {
       "id": "sportnutrition-3g-2022",
@@ -32,145 +51,3153 @@
       "edition": "e-book 2022",
       "type": "book",
       "evidenceTier": "expert-book",
-      "authority": { "domains": ["protein-distribution"], "priority": 3 }
+      "authority": {
+        "domains": [
+          "protein-distribution"
+        ],
+        "priority": 3
+      }
     }
   ],
   "rules": [
-    { "id": "nutri-nsca-protein-general", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["general-fitness"], "statement": "Adultos en programa general de fitness: 0.8-1.0 g/kg/dia.", "values": { "min": 0.8, "max": 1.0 }, "unit": "g/kg/dia", "conditions": { "population": "general-fitness" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 183 } },
-    { "id": "nutri-nsca-protein-endurance", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["endurance"], "statement": "Atletas de resistencia con calorias suficientes: 1.0-1.6 g/kg/dia.", "values": { "min": 1.0, "max": 1.6 }, "unit": "g/kg/dia", "conditions": { "population": "endurance" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 183 } },
-    { "id": "nutri-nsca-protein-strength", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["strength"], "statement": "Atletas de fuerza: 1.4-1.7 g/kg/dia.", "values": { "min": 1.4, "max": 1.7 }, "unit": "g/kg/dia", "conditions": { "population": "strength" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 183 } },
-    { "id": "nutri-nsca-protein-combined", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["mixed"], "statement": "Fuerza + resistencia o sprint con calorias adecuadas: 1.4-1.7 g/kg/dia.", "values": { "min": 1.4, "max": 1.7 }, "unit": "g/kg/dia", "conditions": { "population": "combined" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 183 } },
-    { "id": "nutri-nsca-protein-deficit", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["deficit", "cut"], "statement": "En dieta hipocalorica para preservar musculo: 1.8-2.7 g/kg/dia (~2.3-3.1 g/kg MCM).", "values": { "min": 1.8, "max": 2.7 }, "unit": "g/kg/dia", "conditions": { "population": "reduced-calorie" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 190 } },
-    { "id": "nutri-nsca-protein-renal-safe", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["safety"], "statement": "Ingestas hasta 2.8 g/kg/dia no deterioraron funcion renal en registro de 7 dias.", "values": { "max": 2.8 }, "unit": "g/kg/dia", "conditions": { "population": "healthy" }, "confidence": "explicit", "evidenceTier": "observational", "locator": { "chapter": 9, "page": 184 } },
-    { "id": "nutri-nsca-protein-excess-caveat", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["safety"], "statement": "Ingestas consistentemente muy altas no se recomiendan: desplazan CHO/grasas y sus micronutrientes.", "values": null, "conditions": { "population": "any" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 184 } },
-    { "id": "nutri-nsca-protein-post-young", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["post-workout", "leucine"], "statement": "Post-fuerza (jovenes): 20-25 g de proteina rapida rica en leucina (2-3 g leucina, ~8.5-10 g EAA).", "values": { "min": 20, "max": 25 }, "unit": "g", "conditions": { "phase": "post", "age": "<50" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-protein-post-older", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["post-workout", "masters"], "statement": "Post-fuerza (adultos mayores): >=40 g para maximizar sintesis proteica.", "values": { "min": 40 }, "unit": "g", "conditions": { "phase": "post", "age": "50+" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-protein-post-range", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["post-workout"], "statement": "Tras resistencia, 20-48 g probados beneficiosos para estimular sintesis aguda.", "values": { "min": 20, "max": 48 }, "unit": "g", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 184 } },
-    { "id": "nutri-nsca-protein-meal-20-30", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["distribution"], "statement": "Comidas con >=20-30 g de proteina alta en leucina en adultos.", "values": { "min": 20, "max": 30 }, "unit": "g/comida", "conditions": { "population": "adult" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-protein-window-fasted", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["window"], "statement": "Ejercicio en ayunas: proteina dentro de 30 min; en estado alimentado la ventana post es considerablemente mayor.", "values": { "max": 30 }, "unit": "min", "conditions": { "phase": "post", "fed": false }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-protein-sensitivity-48h", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["window"], "statement": "La sensibilidad muscular a aminoacidos permanece elevada hasta 48 h post-sesion (decreciente).", "values": { "max": 48 }, "unit": "h", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 9, "page": 183 } },
-    { "id": "nutri-nsca-protein-delay-3h", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["endurance"], "statement": "Retrasar la proteina 3 h tras ejercicio de resistencia atenúa su efecto anabolico.", "values": { "min": 3 }, "unit": "h", "conditions": { "phase": "post", "mode": "endurance" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 211 } },
-    { "id": "nutri-nsca-protein-endurance-min", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["endurance"], "statement": "Post-resistencia aerobica: al menos 10 g de proteina dentro de las 3 h.", "values": { "min": 10 }, "unit": "g", "conditions": { "phase": "post", "mode": "endurance" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-bulk-surplus", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["bulk", "surplus"], "statement": "Ganancia de peso: ~+500 kcal/dia (guia general ajustable).", "values": { "value": 500 }, "unit": "kcal/dia", "conditions": { "goal": "surplus" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 217 } },
-    { "id": "nutri-nsca-bulk-protein", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["bulk", "protein"], "statement": "Ganancia de masa magra: 1.5-2.0 g/kg/dia de proteina.", "values": { "min": 1.5, "max": 2.0 }, "unit": "g/kg/dia", "conditions": { "goal": "surplus" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 217 } },
-    { "id": "nutri-nsca-bulk-overfeeding", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["bulk"], "statement": "Overfeeding 8 semanas: dieta normal (15%) o alta (25%) en proteina almaceno ~45% del exceso como masa magra vs 95% grasa con 5%.", "values": { "value": 45 }, "unit": "% exceso como masa magra", "conditions": { "goal": "surplus" }, "confidence": "explicit", "evidenceTier": "rct", "locator": { "chapter": 10, "page": 217 } },
-    { "id": "nutri-nsca-cut-deficit", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["cut", "deficit"], "statement": "Perdida de grasa preservando musculo: deficit moderado ~500 kcal/dia.", "values": { "value": 500 }, "unit": "kcal/dia", "conditions": { "goal": "deficit" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 218 } },
-    { "id": "nutri-nsca-cut-adherence", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["cut"], "statement": "Predictor principal de exito: adherencia; no existe dieta ideal universal (low-carb ~ low-fat en deficit isocalorico).", "values": null, "conditions": { "goal": "deficit" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 218 } },
-    { "id": "nutri-nsca-kcal-kg-table", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["maintenance", "calculator"], "statement": "Necesidades estimadas: varon 38/41/50 kcal/kg (actividad ligera/moderada/intensa); mujer 35/37/44 kcal/kg.", "values": { "male": { "light": 38, "moderate": 41, "heavy": 50 }, "female": { "light": 35, "moderate": 37, "heavy": 44 } }, "unit": "kcal/kg/dia", "conditions": { "goal": "maintenance" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 217 } },
-    { "id": "nutri-nsca-record-method", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["method"], "statement": "Alternativa: registro dietetico de >=3 dias representativos con peso estable estima el requerimiento.", "values": { "min": 3 }, "unit": "dias", "conditions": { "method": "food-record" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 217 } },
-    { "id": "nutri-nsca-pre-4h", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["pre-workout"], "statement": "Comida >=4 h antes: 1-4 g CHO/kg + 0.15-0.25 g proteina/kg.", "values": { "choMin": 1, "choMax": 4, "proteinMin": 0.15, "proteinMax": 0.25 }, "unit": "g/kg", "conditions": { "phase": "pre", "hoursBefore": 4 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 203 } },
-    { "id": "nutri-nsca-pre-2h", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["pre-workout"], "statement": "Comida 2 h antes: ~1 g CHO/kg.", "values": { "value": 1 }, "unit": "g/kg", "conditions": { "phase": "pre", "hoursBefore": 2 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 203 } },
-    { "id": "nutri-nsca-pre-1h-liquid", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["pre-workout"], "statement": "1 h antes: preferir CHO liquido/gels (vaciamiento gastrico mas rapido que solido).", "values": null, "conditions": { "phase": "pre", "hoursBefore": 1 }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 204 } },
-    { "id": "nutri-nsca-pre-usg", "sourceId": "nsca-est-4ed", "topic": "hydration", "tags": ["pre-workout", "marker"], "statement": "Prehidratar horas antes; objetivo USG (gravedad especifica de orina) <1.020.", "values": { "max": 1.02 }, "unit": "USG", "conditions": { "phase": "pre" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 203 } },
-    { "id": "nutri-nsca-during-cho", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["during", "carbs"], "statement": "30-90 g CHO/h con multiples tipos (glucosa+fructosa/sacarosa/maltodextrina) en resistencia prolongada.", "values": { "min": 30, "max": 90 }, "unit": "g/h", "conditions": { "phase": "during", "durationMin": 60 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 209 } },
-    { "id": "nutri-nsca-during-studied-range", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["during", "carbs"], "statement": "Rango estudiado completo: 28-144 g CHO/h (cifras altas en ciclismo).", "values": { "min": 28, "max": 144 }, "unit": "g/h", "conditions": { "phase": "during" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 208 } },
-    { "id": "nutri-nsca-during-cap", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["during", "mechanism"], "statement": "Oxidacion exogena maxima ~1.0-1.1 g/min con un solo transportador; mezclas la superan.", "values": { "min": 1.0, "max": 1.1 }, "unit": "g/min", "conditions": { "phase": "during", "choType": "single" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 208 } },
-    { "id": "nutri-nsca-during-fructose", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["during", "fructose"], "statement": "Fructosa/galactosa/amilosa se oxidan 25-50% mas lento que glucosa/sacarosa/maltodextrinas.", "values": { "min": 25, "max": 50 }, "unit": "% mas lento", "conditions": { "phase": "during" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 208 } },
-    { "id": "nutri-nsca-during-drink-electrolytes", "sourceId": "nsca-est-4ed", "topic": "hydration", "tags": ["during", "electrolytes"], "statement": "Bebida deportiva en calor: Na 460-690 mg/L (20-30 mEq), K 78-195 mg/L (2-5 mEq), CHO 5-10%.", "values": { "naMin": 460, "naMax": 690, "kMin": 78, "kMax": 195, "choPctMin": 5, "choPctMax": 10 }, "unit": "mg/L, %", "conditions": { "phase": "during", "heat": true }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 204 } },
-    { "id": "nutri-nsca-during-team-fluids", "sourceId": "nsca-est-4ed", "topic": "hydration", "tags": ["during", "team-sports"], "statement": "Deportes con pausas (tenis): 200-400 ml por cambio de lado, parte de bebida deportiva.", "values": { "min": 200, "max": 400 }, "unit": "ml", "conditions": { "phase": "during", "sport": "racket" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 209 } },
-    { "id": "nutri-nsca-during-mouth-rinse", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["during", "cns"], "statement": "Enjuague bucal con CHO mejora 2-3% el rendimiento de ~1 h (via SNC), sin ingerir.", "values": { "min": 2, "max": 3 }, "unit": "% mejora", "conditions": { "phase": "during", "durationMin": 60 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 208 } },
-    { "id": "nutri-nsca-post-cho-30min", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["post-workout", "carbs"], "statement": "~1.5 g CHO/kg dentro de los primeros 30 min post-ejercicio.", "values": { "value": 1.5 }, "unit": "g/kg", "conditions": { "phase": "post", "withinMin": 30 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-post-glycogen-rate", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["post-workout", "glycogen"], "statement": "Resintesis maxima: 1.0-1.85 g CHO/kg/h inmediato y cada 15-60 min hasta 5 h.", "values": { "min": 1.0, "max": 1.85 }, "unit": "g/kg/h", "conditions": { "phase": "post", "recoveryLessThanH": 24 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 210 } },
-    { "id": "nutri-nsca-post-cho-sparing", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["post-workout", "protein-sparing"], "statement": "30-100 g de CHO post-ejercicio con dano muscular reducen la proteolisis.", "values": { "min": 30, "max": 100 }, "unit": "g", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 212 } },
-    { "id": "nutri-nsca-post-wait-2h", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["post-workout", "flexibility"], "statement": "Si hay >24 h hasta la proxima sesion, esperar hasta 2 h para comer CHO no reduce la resintesis a 24 h.", "values": { "max": 2 }, "unit": "h", "conditions": { "phase": "post", "recoveryGreaterThanH": 24 }, "confidence": "explicit", "evidenceTier": "rct", "locator": { "chapter": 10, "page": 210 } },
-    { "id": "nutri-nsca-post-sodium-foods", "sourceId": "nsca-est-4ed", "topic": "hydration", "tags": ["post-workout", "recovery"], "statement": "Rehidratar con comidas con sodio o sal anadida retiene el fluido; individualizar midiendo peso pre/post.", "values": null, "conditions": { "phase": "post" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 210 } },
-    { "id": "nutri-nsca-post-1.5-study", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["post-workout", "strength"], "statement": "Tras series de rodilla (deplecion al 71%): 1.5 g CHO/kg inmediato + a la 1 h restauro 91% del glucogeno en 6 h (vs 75% solo agua).", "values": { "value": 1.5 }, "unit": "g/kg x2", "conditions": { "phase": "post", "mode": "strength" }, "confidence": "explicit", "evidenceTier": "rct", "locator": { "chapter": 10, "page": 212 } },
-    { "id": "nutri-nsca-strength-cho-daily", "sourceId": "nsca-est-4ed", "topic": "carbohydrates", "tags": ["strength"], "statement": "Fuerza/velocidad: 5-6 g CHO/kg/dia; CHO pre/durante mantiene fuerza y minimiza proteolisis.", "values": { "min": 5, "max": 6 }, "unit": "g/kg/dia", "conditions": { "population": "strength" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-cho-endurance-daily", "sourceId": "nsca-est-4ed", "topic": "carbohydrates", "tags": ["endurance"], "statement": "Atletas de resistencia: 8-10 g CHO/kg/dia, especialmente entrenando 90+ min por sesion.", "values": { "min": 8, "max": 10 }, "unit": "g/kg/dia", "conditions": { "population": "endurance", "sessionMin": 90 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-strength-post-high-gi", "sourceId": "nsca-est-4ed", "topic": "carbohydrates", "tags": ["strength", "gi"], "statement": "CHO de indice glucemico alto inmediato post-competencia de fuerza si se vuelve a competir <24 h.", "values": null, "conditions": { "population": "strength", "recompeteWithinH": 24 }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 215 } },
-    { "id": "nutri-nsca-creatine-protocol", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine"], "statement": "Carga 20-25 g/dia x 5 dias (o 0.3 g/kg/dia), mantenimiento 2 g/dia (0.03 g/kg/dia).", "values": { "loadMin": 20, "loadMax": 25, "loadDays": 5, "maintenance": 2 }, "unit": "g/dia", "conditions": { "supplement": "creatine-monohydrate" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 243 } },
-    { "id": "nutri-nsca-creatine-no-load", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine"], "statement": "Sin carga: 3 g/dia alcanza similar concentracion muscular en ~30 dias.", "values": { "value": 3 }, "unit": "g/dia", "conditions": { "supplement": "creatine-monohydrate", "protocol": "no-load" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 243 } },
-    { "id": "nutri-nsca-creatine-washout", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine"], "statement": "Al suspender, la creatina muscular vuelve a basal en ~4 semanas.", "values": { "value": 4 }, "unit": "semanas", "conditions": { "supplement": "creatine-monohydrate", "phase": "washout" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 243 } },
-    { "id": "nutri-nsca-creatine-muscle-increase", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine"], "statement": "Aumenta la creatina muscular ~20%; saturacion a 150-160 mmol/kg peso seco.", "values": { "value": 20 }, "unit": "% aumento", "conditions": { "supplement": "creatine-monohydrate" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 243 } },
-    { "id": "nutri-nsca-creatine-strength-gains", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine", "strength"], "statement": "Ganancias de fuerza 2-3x mayores vs placebo en entrenados (banca/sentadilla/power clean).", "values": { "min": 2, "max": 3 }, "unit": "x vs placebo", "conditions": { "supplement": "creatine-monohydrate", "population": "trained" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 243 } },
-    { "id": "nutri-nsca-creatine-bm-gain", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine", "body-mass"], "statement": "Suplementacion en entrenamiento: +0.5-2 kg de masa (magra/agua intracelular) en semanas-meses.", "values": { "min": 0.5, "max": 2 }, "unit": "kg", "conditions": { "supplement": "creatine-monohydrate" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 244 } },
-    { "id": "nutri-nsca-creatine-explosive", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine", "sprint"], "statement": "Sprint/salto de esfuerzo unico: sin mejora consistente con carga de 5 dias; mejoras con 28-84 dias de uso.", "values": { "loadDays": 5, "chronicDaysMin": 28, "chronicDaysMax": 84 }, "unit": "dias", "conditions": { "supplement": "creatine-monohydrate", "outcome": "single-effort" }, "confidence": "inferred", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 244 } },
-    { "id": "nutri-nsca-creatine-safety", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine", "safety"], "statement": "Segura y relativamente barata; eficacia en entrenados y no entrenados (maxima fuerza, potencia, masa magra).", "values": null, "conditions": { "supplement": "creatine-monohydrate" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 243 } },
-    { "id": "nutri-nsca-caffeine-protocol", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["caffeine"], "statement": "3-9 mg/kg ~60 min antes o durante ejercicio prolongado; sin beneficio adicional >=9 mg/kg.", "values": { "min": 3, "max": 9 }, "unit": "mg/kg", "conditions": { "supplement": "caffeine", "timing": "60min-pre" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 245 } },
-    { "id": "nutri-nsca-caffeine-risk", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["caffeine", "safety"], "statement": "Riesgo de efectos adversos (ansiedad, GI, insomnio, temblor, arritmias) aumenta >9 mg/kg.", "values": { "min": 9 }, "unit": "mg/kg", "conditions": { "supplement": "caffeine", "safety": true }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 245 } },
-    { "id": "nutri-nsca-caffeine-no-diuresis", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["caffeine", "hydration"], "statement": "La literatura no respalda diuresis por cafeina durante el ejercicio ni dano del balance hidrico.", "values": null, "conditions": { "supplement": "caffeine", "phase": "during" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 245 } },
-    { "id": "nutri-nsca-caffeine-lethal", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["caffeine", "safety"], "statement": "Dosis letal tipicamente >5 g (~42 cafes de 120 mg).", "values": { "min": 5 }, "unit": "g", "conditions": { "supplement": "caffeine", "safety": true }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 245 } },
-    { "id": "nutri-nsca-caffeine-tablet", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["caffeine"], "statement": "El beneficio ergogenico parece mayor con cafeina anhidra (tableta) que con cafe.", "values": null, "conditions": { "supplement": "caffeine" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 244 } },
-    { "id": "nutri-nsca-caffeine-energy-drinks", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["caffeine", "energy-drinks"], "statement": "Bebidas energeticas ~2 mg/kg: por debajo del rango ergogenico documentado (3-9).", "values": { "value": 2 }, "unit": "mg/kg", "conditions": { "supplement": "caffeine", "form": "energy-drink" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 245 } },
-    { "id": "nutri-nsca-bicarbonate", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["bicarbonate"], "statement": "Bicarbonato sodico 0.3 g/kg antes de eventos de 1-7 min; efectos GI adversos frecuentes.", "values": { "value": 0.3 }, "unit": "g/kg", "conditions": { "supplement": "sodium-bicarbonate", "eventMin": "1-7" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 247 } },
-    { "id": "nutri-nsca-citrate", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["citrate"], "statement": "Citrato sodico 0.4-0.6 g/kg con potencial ergogenico similar al bicarbonato.", "values": { "min": 0.4, "max": 0.6 }, "unit": "g/kg", "conditions": { "supplement": "sodium-citrate" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 248 } },
-    { "id": "nutri-nsca-hmb", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["hmb"], "statement": "HMB 1.5-3 g/dia: menor perdida de masa magra en regimenes restrictivos de novicios; poco efecto en entrenados.", "values": { "min": 1.5, "max": 3 }, "unit": "g/dia", "conditions": { "supplement": "hmb" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 246 } },
-    { "id": "nutri-nsca-arginine", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["arginine"], "statement": "Arginina ~6 g sin mejora clara de rendimiento; dosis >13 g causan malestar GI.", "values": { "dose": 6, "giThreshold": 13 }, "unit": "g", "conditions": { "supplement": "arginine" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 11, "page": 246 } },
-    { "id": "nutri-mau-protein-strength", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["strength"], "statement": "Ingesta optima de proteina en fuerza puede llegar a 1.7-1.8 g/kg/dia (varones; datos femeninos limitados).", "values": { "min": 1.7, "max": 1.8 }, "unit": "g/kg/dia", "conditions": { "population": "strength" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 144 } },
-    { "id": "nutri-mau-protein-endurance", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["endurance"], "statement": "Ingesta optima en resistencia: ~1.2-1.4 g/kg/dia.", "values": { "min": 1.2, "max": 1.4 }, "unit": "g/kg/dia", "conditions": { "population": "endurance" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 144 } },
-    { "id": "nutri-mau-protein-rda-insufficient", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["rda"], "statement": "La RDA (0.8 g/kg/dia en la mayoria de paises) es inadecuada para personas fisicamente activas.", "values": { "value": 0.8 }, "unit": "g/kg/dia", "conditions": { "population": "active" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 144 } },
-    { "id": "nutri-mau-protein-food-sufficient", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["supplement-unnecessary"], "statement": "1.2-1.8 g/kg/dia se alcanzan con dieta si la energia es adecuada (ej. 5000 kcal con 10% proteina ~ 1.8 g/kg en 70 kg).", "values": { "min": 1.2, "max": 1.8 }, "unit": "g/kg/dia", "conditions": { "energyAdequate": true }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 145 } },
-    { "id": "nutri-mau-protein-studied-range", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["safety"], "statement": "Estudios de balance nitrogenado con ingesta de 1.0-2.7 g/kg/dia sin dano.", "values": { "min": 1.0, "max": 2.7 }, "unit": "g/kg/dia", "conditions": { "population": "trained-males" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 133 } },
-    { "id": "nutri-mau-protein-high-no-benefit", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["safety"], "statement": "Poca evidencia de que >1.3-1.4 g/kg/dia mejore el rendimiento muscular (datos en varones, 4-8 semanas).", "values": { "min": 1.3, "max": 1.4 }, "unit": "g/kg/dia", "conditions": { "population": "strength" }, "confidence": "inferred", "evidenceTier": "expert-book", "locator": { "chapter": 10, "page": 144 } },
-    { "id": "nutri-mau-cho-daily-recovery", "sourceId": "maughan-nis-2000", "topic": "carbohydrates", "tags": ["daily", "recovery"], "statement": "Recuperacion diaria de glucogeno / carga: 7-10 g CHO/kg/dia.", "values": { "min": 7, "max": 10 }, "unit": "g/kg/dia", "conditions": { "population": "endurance" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 5, "page": 81 } },
-    { "id": "nutri-mau-cho-post-early", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["post-workout"], "statement": ">=1 g CHO/kg dentro de los 30 min post-sesion para recuperacion temprana.", "values": { "min": 1 }, "unit": "g/kg", "conditions": { "phase": "post", "withinMin": 30 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 5, "page": 81 } },
-    { "id": "nutri-mau-cho-pre-event", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["pre-workout"], "statement": "Comida rica en CHO 1-4 g/kg en las 1-4 h previas a sesion prolongada.", "values": { "min": 1, "max": 4 }, "unit": "g/kg", "conditions": { "phase": "pre", "hoursBefore": "1-4" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 5, "page": 81 } },
-    { "id": "nutri-mau-cho-during", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["during"], "statement": "30-60 g CHO/h durante ejercicio moderado-alto prolongado (2000; ver conflicto con NSCA 2016: 30-90).", "values": { "min": 30, "max": 60 }, "unit": "g/h", "conditions": { "phase": "during" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 5, "page": 81 } },
-    { "id": "nutri-mau-cho-oxidation-cap", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["during", "mechanism"], "statement": "Oxidacion exogena pico ~1.0-1.3 g/min.", "values": { "min": 1.0, "max": 1.3 }, "unit": "g/min", "conditions": { "phase": "during" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 8, "page": 115 } },
-    { "id": "nutri-mau-cho-drink-concentration", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["during", "sports-drink"], "statement": "Concentracion optima de CHO en bebida durante ejercicio: 2-8%; >6-8% no aumenta oxidacion y empeora GI/fluido.", "values": { "min": 2, "max": 8 }, "unit": "% CHO", "conditions": { "phase": "during" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 8, "page": 115 } },
-    { "id": "nutri-mau-cho-post-intervals", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["post-workout", "glycogen"], "statement": "Suplemento CHO inmediato y cada 2 h: 0.7-1.4 g/kg maximiza resintesis (0.35 g/kg la reduce a la mitad).", "values": { "min": 0.7, "max": 1.4 }, "unit": "g/kg cada 2h", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 7, "page": 104 } },
-    { "id": "nutri-mau-cho-post-plateau", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["post-workout", "glycogen"], "statement": "Meseta de resintesis ~5.5-5.7 mmol/g/h con suplementos >=1-1.5 g/kg.", "values": { "min": 5.5, "max": 5.7 }, "unit": "mmol/g/h", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 7, "page": 104 } },
-    { "id": "nutri-mau-cho-delay-halves", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["post-workout", "timing"], "statement": "Retrasar el CHO 2 h reduce la tasa de resintesis ~50% (insulinorresistencia muscular).", "values": { "value": 50 }, "unit": "% reduccion", "conditions": { "phase": "post", "delay": "2h" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 7, "page": 103 } },
-    { "id": "nutri-mau-cho-cap-600g", "sourceId": "maughan-nis-2000", "topic": "carbohydrates", "tags": ["daily"], "statement": ">600 g CHO/dia no aporta beneficio adicional de almacenamiento en 24 h.", "values": { "max": 600 }, "unit": "g/dia", "conditions": { "window": "24h" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 7, "page": 101 } },
-    { "id": "nutri-mau-cho-gi-high", "sourceId": "maughan-nis-2000", "topic": "carbohydrates", "tags": ["gi", "recovery"], "statement": "Con 10 g/kg/dia en 24 h: CHO de IG alto sintetiza mas glucogeno (106 vs 71.5 mmol/g).", "values": { "hi": 106, "lo": 71.5 }, "unit": "mmol/g", "conditions": { "window": "24h" }, "confidence": "explicit", "evidenceTier": "rct", "locator": { "chapter": 7, "page": 103 } },
-    { "id": "nutri-mau-cho-modified-loading", "sourceId": "maughan-nis-2000", "topic": "carbohydrates", "tags": ["loading"], "statement": "Carga modificada (taper 6 dias + 50% CHO 3 dias + 70% CHO 3 dias) igual de efectiva que la clasica.", "values": { "choPct": 70, "days": 3 }, "unit": "% energia", "conditions": { "goal": "carb-load" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 7, "page": 101 } },
-    { "id": "nutri-mau-cho-gkg-over-percent", "sourceId": "maughan-nis-2000", "topic": "carbohydrates", "tags": ["daily"], "statement": "Prescribir CHO en g/kg, no en % de energia: con ingestas altas 50-60% basta; 65-70% solo con ingestas bajas.", "values": null, "conditions": { "population": "any" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 5, "page": 82 } },
-    { "id": "nutri-mau-hyd-1pct-temp", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["dehydration", "threshold"], "statement": "Un deficit de agua del 1% del peso corporal ya eleva la temperatura central durante el ejercicio.", "values": { "value": 1 }, "unit": "% peso corporal", "conditions": { "phase": "during" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 16, "page": 220 } },
-    { "id": "nutri-mau-hyd-1-2pct-capacity", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["dehydration", "performance"], "statement": "Deficits marginales de 1-2% reducen la capacidad de ejercicio progresivo sin alterar VO2max.", "values": { "min": 1, "max": 2 }, "unit": "% peso corporal", "conditions": { "phase": "during" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 16, "page": 219 } },
-    { "id": "nutri-mau-hyd-2-4pct-vo2max", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["dehydration", "performance"], "statement": "Deficits de 2-4% reducen marcadamente la potencia aerobica maxima, sobre todo en calor.", "values": { "min": 2, "max": 4 }, "unit": "% peso corporal", "conditions": { "phase": "during", "heat": true }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 16, "page": 219 } },
-    { "id": "nutri-mau-hyd-2pct-running", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["dehydration", "performance"], "statement": "2% de perdida (−11% volumen plasmatico): ~5% peor rendimiento en 5000-10000 m.", "values": { "bwl": 2, "performanceLoss": 5 }, "unit": "%", "conditions": { "mode": "running" }, "confidence": "inferred", "evidenceTier": "expert-book", "locator": { "chapter": 16, "page": 220 } },
-    { "id": "nutri-mau-hyd-baseline-daily", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["daily"], "statement": "Requerimiento hidrico diario basal ~2.5 L (piel ~600 ml, orina >=800 ml, respiracion ~200 ml).", "values": { "value": 2.5 }, "unit": "L/dia", "conditions": { "phase": "rest" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 17, "page": 226 } },
-    { "id": "nutri-mau-hyd-during-600-1200", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["during", "fluid-rate"], "statement": "30-60 g CHO/h se alcanzan con bebida deportiva a 600-1200 ml/h, aportando ademas fluido y reduciendo efectos de la deshidratacion.", "values": { "min": 600, "max": 1200 }, "unit": "ml/h", "conditions": { "phase": "during", "durationMin": 60 }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 8, "page": 115 } },
-    { "id": "nutri-mau-hyd-marathon-intervals", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["during", "running"], "statement": "Maraton: 100-200 ml cada 2-3 km (1400-4200 ml totales); ~2 L/h intolerable; 300 ml/h insuficiente salvo frio.", "values": { "min": 100, "max": 200 }, "unit": "ml cada 2-3 km", "conditions": { "phase": "during", "mode": "running" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 17, "page": 234 } },
-    { "id": "nutri-mau-hyd-post-150pct", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["post-workout", "rehydration"], "statement": "Rehidratacion: volumen >=150% de la perdida de sudor (1 L por kg perdido no cubre la diuresis obligatoria).", "values": { "min": 150 }, "unit": "% del deficit", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 17, "page": 237 } },
-    { "id": "nutri-mau-hyd-post-na-50", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["post-workout", "electrolytes"], "statement": "Bebida de rehidratacion: sodio similar al sudor (típico Na ~50 mmol/L, K ~5 mmol/L) para retener el fluido.", "values": { "na": 50, "k": 5 }, "unit": "mmol/L", "conditions": { "phase": "post", "withoutFood": true }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 19, "page": 263 } },
-    { "id": "nutri-mau-hyd-sports-drinks-na", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["post-workout", "electrolytes"], "statement": "Las bebidas deportivas (10-30 mmol Na/L) son insuficientes para rehidratar rapido sin comida; SRO OMS 60-90 mmol/L.", "values": { "min": 10, "max": 30 }, "unit": "mmol/L", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 19, "page": 263 } },
-    { "id": "nutri-mau-hyd-food-sufficient", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["post-workout"], "statement": "Si se come alimento solido junto al agua, la comida repone los electrolitos y el agua sola basta.", "values": null, "conditions": { "phase": "post", "withFood": true }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 19, "page": 263 } },
-    { "id": "nutri-mau-hyd-sweat-variability", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["sweat", "individualization"], "statement": "La composicion del sudor varia mucho entre individuos y en el tiempo: pautas de electrolitos individualizadas.", "values": null, "conditions": { "population": "any" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 17, "page": 228 } },
-    { "id": "nutri-mau-creatine-loading", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["creatine"], "statement": "Carga 20 g/dia (4x5 g) durante 5-6 dias, luego 2 g/dia de mantenimiento; aumenta creatina muscular ~20%.", "values": { "load": 20, "days": 6, "maintenance": 2 }, "unit": "g/dia", "conditions": { "supplement": "creatine-monohydrate" }, "confidence": "explicit", "evidenceTier": "rct", "locator": { "chapter": 27, "page": 369 } },
-    { "id": "nutri-mau-creatine-slow-route", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["creatine"], "statement": "Sin carga: 3 g/dia alcanza niveles similares en ~28-30 dias.", "values": { "value": 3 }, "unit": "g/dia", "conditions": { "supplement": "creatine-monohydrate", "protocol": "no-load" }, "confidence": "explicit", "evidenceTier": "rct", "locator": { "chapter": 27, "page": 370 } },
-    { "id": "nutri-mau-creatine-cho-synergy", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["creatine", "carbs"], "statement": "La co-ingesta de CHO (~370 g/dia) o CHO+proteina potencia el almacenamiento de creatina via insulina.", "values": { "cho": 370 }, "unit": "g/dia", "conditions": { "supplement": "creatine-monohydrate" }, "confidence": "explicit", "evidenceTier": "rct", "locator": { "chapter": 27, "page": 370 } },
-    { "id": "nutri-mau-creatine-pool", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["creatine"], "statement": "Pool corporal total ~120 g, 95% en musculo.", "values": { "total": 120, "musclePct": 95 }, "unit": "g", "conditions": { "context": "physiology" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 27, "page": 367 } },
-    { "id": "nutri-mau-creatine-safety", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["creatine", "safety"], "statement": "Sin efectos adversos serios en protocolos estandar; posible malestar GI con dosis unicas altas.", "values": null, "conditions": { "supplement": "creatine-monohydrate" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 27, "page": 371 } },
-    { "id": "nutri-mau-caffeine-range", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["caffeine"], "statement": "Dosis ergogenicas estudiadas 3-13 mg/kg; beneficio desde 3, deterioro en algunos atletas a 9+.", "values": { "min": 3, "max": 13 }, "unit": "mg/kg", "conditions": { "supplement": "caffeine" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 28, "page": 380 } },
-    { "id": "nutri-mau-caffeine-adverse-9", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["caffeine", "safety"], "statement": "Efectos adversos mas prevalentes a 9-13 mg/kg y asociados a peor rendimiento en algunos.", "values": { "min": 9, "max": 13 }, "unit": "mg/kg", "conditions": { "supplement": "caffeine", "safety": true }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 28, "page": 380 } },
-    { "id": "nutri-mau-caffeine-timing", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["caffeine", "timing"], "statement": "Ingestion ~60 min antes del ejercicio o durante el mismo (protocolos de los estudios citados).", "values": { "value": 60 }, "unit": "min pre", "conditions": { "supplement": "caffeine" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 28, "page": 381 } },
-    { "id": "nutri-mau-caffeine-flat-6", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["caffeine"], "statement": "Sin beneficio adicional >6 mg/kg en la mayoria de comparaciones de dosis.", "values": { "min": 6 }, "unit": "mg/kg", "conditions": { "supplement": "caffeine" }, "confidence": "inferred", "evidenceTier": "expert-book", "locator": { "chapter": 28, "page": 380 } },
-    { "id": "nutri-mau-ergogenic-classification", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["classification"], "statement": "Solo una minoria de ayudas ergogenicas tiene evidencia solida (macronutrientes, agua/electrolitos, cafeina, creatina entre las eficaces).", "values": null, "conditions": { "population": "any" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 26, "page": 356 } },
-    { "id": "nutri-mau-tef-macro", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["tef"], "statement": "Termogenesis de alimentos: proteina 20-30%, CHO 5-10%, grasa 3-5% de su energia.", "values": { "proteinMin": 20, "proteinMax": 30, "choMin": 5, "choMax": 10, "fatMin": 3, "fatMax": 5 }, "unit": "%", "conditions": { "context": "rest" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 35, "page": 475 } },
-    { "id": "nutri-mau-deficit-not-restrictive", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["deficit", "safety"], "statement": "El programa de perdida no puede ser demasiado restrictivo: riesgo de lesion, perdida de masa magra, bajo rendimiento y abandono.", "values": null, "conditions": { "goal": "deficit" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 35, "page": 469 } },
-    { "id": "nutri-mau-tca-redflag", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["deficit", "red-flag"], "statement": "Presion por apariencia/rendimiento puede llevar a perdida desesperada de peso y TCA: derivar a profesional.", "values": null, "conditions": { "goal": "deficit", "redFlag": "eating-disorder" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 35, "page": 469 } },
-    { "id": "nutri-mau-epoc", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["epoc"], "statement": "EPOC ~5-10% sobre basal tras ejercicio (ejemplo citado: +15% durante 12 h tras 90 min al 75% VO2max).", "values": { "min": 5, "max": 15 }, "unit": "%", "conditions": { "intensity": "high" }, "confidence": "inferred", "evidenceTier": "expert-book", "locator": { "chapter": 35, "page": 474 } },
-    { "id": "nutri-mau-tea-athletes", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["expenditure"], "statement": "Atletas gastan 1000-2000 kcal extra en entrenamiento (vs 10-15% del gasto en sedentarios).", "values": { "min": 1000, "max": 2000 }, "unit": "kcal/dia", "conditions": { "population": "athlete" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 35, "page": 472 } },
-    { "id": "nutri-mau-strength-energy", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["strength"], "statement": "Entrenamiento duro de fuerza: 3500-5500 kcal/dia varones; 3000-4500 kcal mujeres.", "values": { "maleMin": 3500, "maleMax": 5500, "femaleMin": 3000, "femaleMax": 4500 }, "unit": "kcal/dia", "conditions": { "population": "strength" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 47, "page": 624 } },
-    { "id": "nutri-mau-strength-protein", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["strength"], "statement": "Proteina en entrenamiento duro (recomendacion rusa citada): 1.4-2.0 g/kg/dia.", "values": { "min": 1.4, "max": 2.0 }, "unit": "g/kg/dia", "conditions": { "population": "strength" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 47, "page": 624 } },
-    { "id": "nutri-mau-strength-cho", "sourceId": "maughan-nis-2000", "topic": "carbohydrates", "tags": ["strength"], "statement": "CHO diario en potencia: 8-10 g/kg; grasa 1.7-2.4 g/kg.", "values": { "choMin": 8, "choMax": 10, "fatMin": 1.7, "fatMax": 2.4 }, "unit": "g/kg/dia", "conditions": { "population": "strength" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 47, "page": 624 } },
-    { "id": "nutri-mau-strength-split", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["strength"], "statement": "Siguiendo los g/kg anteriores: ~15-16% proteina / 25-26% grasa / 58-60% CHO de la energia.", "values": { "choMin": 58, "choMax": 60 }, "unit": "% energia", "conditions": { "population": "strength" }, "confidence": "inferred", "evidenceTier": "expert-book", "locator": { "chapter": 47, "page": 624 } },
-    { "id": "nutri-3g-protein-distribution", "sourceId": "sportnutrition-3g-2022", "topic": "protein-timing", "tags": ["distribution"], "statement": "Distribuir proteina de calidad a lo largo del dia cada 3-5 h y tras sesiones clave.", "values": { "min": 3, "max": 5 }, "unit": "h", "conditions": { "population": "athlete" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 4, "page": 151 } },
-    { "id": "nutri-3g-protein-window", "sourceId": "sportnutrition-3g-2022", "topic": "protein-timing", "tags": ["post-workout"], "statement": "Ventana post-entreno recomendada: entre 30 min y 2 h.", "values": { "min": 0.5, "max": 2 }, "unit": "h", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 4, "page": 151 } },
-    { "id": "nutri-3g-protein-total", "sourceId": "sportnutrition-3g-2022", "topic": "protein", "tags": ["total"], "statement": "Rango total proteico deportivo: 1.2-2.0 g/kg/dia.", "values": { "min": 1.2, "max": 2.0 }, "unit": "g/kg/dia", "conditions": { "population": "athlete" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 4, "page": 150 } },
-    { "id": "nutri-3g-protein-seniors", "sourceId": "sportnutrition-3g-2022", "topic": "protein", "tags": ["masters"], "statement": "Mayores sin entrenamiento: 1.0-1.3 g/kg/dia.", "values": { "min": 1.0, "max": 1.3 }, "unit": "g/kg/dia", "conditions": { "age": "65+" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 4, "page": 169 } },
-    { "id": "nutri-3g-absorption-rate", "sourceId": "sportnutrition-3g-2022", "topic": "protein", "tags": ["physiology"], "statement": "El tracto digestivo absorbe ~10 g de aminoacidos por hora; una comida normal se absorbe completa en horas.", "values": { "value": 10 }, "unit": "g AA/h", "conditions": { "context": "physiology" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 4, "page": 165 } },
-    { "id": "nutri-3g-leucine-2.5", "sourceId": "sportnutrition-3g-2022", "topic": "protein-timing", "tags": ["leucine"], "statement": "Estudio citado: EAA con 2.5 g de leucina post-ejercicio mejora la sintesis proteica.", "values": { "value": 2.5 }, "unit": "g leucina", "conditions": { "phase": "post" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 4, "page": 168 } },
-    { "id": "nutri-3g-cho-general", "sourceId": "sportnutrition-3g-2022", "topic": "carbohydrates", "tags": ["general"], "statement": "Poblacion general: 45-65% de la energia como CHO (225-325 g en 2000 kcal).", "values": { "min": 45, "max": 65 }, "unit": "% energia", "conditions": { "population": "general" }, "confidence": "explicit", "evidenceTier": "expert-book", "locator": { "chapter": 2, "page": 60 } },
-    { "id": "nutri-3g-cut-monitor-protein", "sourceId": "sportnutrition-3g-2022", "topic": "energy", "tags": ["deficit"], "statement": "En deficit: vigilar cantidad, calidad y timing de proteina; evitar restriccion energetica severa.", "values": null, "conditions": { "goal": "deficit" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 6, "page": 286 } },
-    { "id": "nutri-3g-cut-timing", "sourceId": "sportnutrition-3g-2022", "topic": "energy", "tags": ["deficit", "timing"], "statement": "En deficit: distribuir comidas/snacks a lo largo del dia y alrededor del ejercicio.", "values": null, "conditions": { "goal": "deficit" }, "confidence": "qualitative", "evidenceTier": "expert-book", "locator": { "chapter": 6, "page": 289 } }
+    {
+      "id": "nutri-nsca-protein-general",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "general-fitness"
+      ],
+      "statement": "Adultos en programa general de fitness: 0.8-1.0 g/kg/dia.",
+      "values": {
+        "min": 0.8,
+        "max": 1
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "general-fitness"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 183
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-endurance",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "endurance"
+      ],
+      "statement": "Atletas de resistencia con calorias suficientes: 1.0-1.6 g/kg/dia.",
+      "values": {
+        "min": 1,
+        "max": 1.6
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "endurance"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 183
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-strength",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "strength"
+      ],
+      "statement": "Atletas de fuerza: 1.4-1.7 g/kg/dia.",
+      "values": {
+        "min": 1.4,
+        "max": 1.7
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 183
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-combined",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "mixed"
+      ],
+      "statement": "Fuerza + resistencia o sprint con calorias adecuadas: 1.4-1.7 g/kg/dia.",
+      "values": {
+        "min": 1.4,
+        "max": 1.7
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "combined"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 183
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-deficit",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "deficit",
+        "cut"
+      ],
+      "statement": "En dieta hipocalorica para preservar musculo: 1.8-2.7 g/kg/dia (~2.3-3.1 g/kg MCM).",
+      "values": {
+        "min": 1.8,
+        "max": 2.7
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "reduced-calorie"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 190
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-renal-safe",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "safety"
+      ],
+      "statement": "Ingestas hasta 2.8 g/kg/dia no deterioraron funcion renal en registro de 7 dias.",
+      "values": {
+        "max": 2.8
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "healthy"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "observational",
+      "locator": {
+        "chapter": 9,
+        "page": 184
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-excess-caveat",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "safety"
+      ],
+      "statement": "Ingestas consistentemente muy altas no se recomiendan: desplazan CHO/grasas y sus micronutrientes.",
+      "values": null,
+      "conditions": {
+        "population": "any"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 184
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-post-young",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "post-workout",
+        "leucine"
+      ],
+      "statement": "Post-fuerza (jovenes): 20-25 g de proteina rapida rica en leucina (2-3 g leucina, ~8.5-10 g EAA).",
+      "values": {
+        "min": 20,
+        "max": 25
+      },
+      "unit": "g",
+      "conditions": {
+        "phase": "post",
+        "age": "<50"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-post-older",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "post-workout",
+        "masters"
+      ],
+      "statement": "Post-fuerza (adultos mayores): >=40 g para maximizar sintesis proteica.",
+      "values": {
+        "min": 40
+      },
+      "unit": "g",
+      "conditions": {
+        "phase": "post",
+        "age": "50+"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-post-range",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "post-workout"
+      ],
+      "statement": "Tras resistencia, 20-48 g probados beneficiosos para estimular sintesis aguda.",
+      "values": {
+        "min": 20,
+        "max": 48
+      },
+      "unit": "g",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 184
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-meal-20-30",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "distribution"
+      ],
+      "statement": "Comidas con >=20-30 g de proteina alta en leucina en adultos.",
+      "values": {
+        "min": 20,
+        "max": 30
+      },
+      "unit": "g/comida",
+      "conditions": {
+        "population": "adult"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-window-fasted",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "window"
+      ],
+      "statement": "Ejercicio en ayunas: proteina dentro de 30 min; en estado alimentado la ventana post es considerablemente mayor.",
+      "values": {
+        "max": 30
+      },
+      "unit": "min",
+      "conditions": {
+        "phase": "post",
+        "fed": false
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-sensitivity-48h",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "window"
+      ],
+      "statement": "La sensibilidad muscular a aminoacidos permanece elevada hasta 48 h post-sesion (decreciente).",
+      "values": {
+        "max": 48
+      },
+      "unit": "h",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 9,
+        "page": 183
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-delay-3h",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "endurance"
+      ],
+      "statement": "Retrasar la proteina 3 h tras ejercicio de resistencia atenúa su efecto anabolico.",
+      "values": {
+        "min": 3
+      },
+      "unit": "h",
+      "conditions": {
+        "phase": "post",
+        "mode": "endurance"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 211
+      }
+    },
+    {
+      "id": "nutri-nsca-protein-endurance-min",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "endurance"
+      ],
+      "statement": "Post-resistencia aerobica: al menos 10 g de proteina dentro de las 3 h.",
+      "values": {
+        "min": 10
+      },
+      "unit": "g",
+      "conditions": {
+        "phase": "post",
+        "mode": "endurance"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-bulk-surplus",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "bulk",
+        "surplus"
+      ],
+      "statement": "Ganancia de peso: ~+500 kcal/dia (guia general ajustable).",
+      "values": {
+        "value": 500
+      },
+      "unit": "kcal/dia",
+      "conditions": {
+        "goal": "surplus"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 217
+      }
+    },
+    {
+      "id": "nutri-nsca-bulk-protein",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "bulk",
+        "protein"
+      ],
+      "statement": "Ganancia de masa magra: 1.5-2.0 g/kg/dia de proteina.",
+      "values": {
+        "min": 1.5,
+        "max": 2
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "goal": "surplus"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 217
+      }
+    },
+    {
+      "id": "nutri-nsca-bulk-overfeeding",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "bulk"
+      ],
+      "statement": "Overfeeding 8 semanas: dieta normal (15%) o alta (25%) en proteina almaceno ~45% del exceso como masa magra vs 95% grasa con 5%.",
+      "values": {
+        "value": 45
+      },
+      "unit": "% exceso como masa magra",
+      "conditions": {
+        "goal": "surplus"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "rct",
+      "locator": {
+        "chapter": 10,
+        "page": 217
+      }
+    },
+    {
+      "id": "nutri-nsca-cut-deficit",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "cut",
+        "deficit"
+      ],
+      "statement": "Perdida de grasa preservando musculo: deficit moderado ~500 kcal/dia.",
+      "values": {
+        "value": 500
+      },
+      "unit": "kcal/dia",
+      "conditions": {
+        "goal": "deficit"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 218
+      }
+    },
+    {
+      "id": "nutri-nsca-cut-adherence",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "cut"
+      ],
+      "statement": "Predictor principal de exito: adherencia; no existe dieta ideal universal (low-carb ~ low-fat en deficit isocalorico).",
+      "values": null,
+      "conditions": {
+        "goal": "deficit"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 218
+      }
+    },
+    {
+      "id": "nutri-nsca-kcal-kg-table",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "maintenance",
+        "calculator"
+      ],
+      "statement": "Necesidades estimadas: varon 38/41/50 kcal/kg (actividad ligera/moderada/intensa); mujer 35/37/44 kcal/kg.",
+      "values": {
+        "male": {
+          "light": 38,
+          "moderate": 41,
+          "heavy": 50
+        },
+        "female": {
+          "light": 35,
+          "moderate": 37,
+          "heavy": 44
+        }
+      },
+      "unit": "kcal/kg/dia",
+      "conditions": {
+        "goal": "maintenance"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 217
+      }
+    },
+    {
+      "id": "nutri-nsca-record-method",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "method"
+      ],
+      "statement": "Alternativa: registro dietetico de >=3 dias representativos con peso estable estima el requerimiento.",
+      "values": {
+        "min": 3
+      },
+      "unit": "dias",
+      "conditions": {
+        "method": "food-record"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 217
+      }
+    },
+    {
+      "id": "nutri-nsca-pre-4h",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "pre-workout"
+      ],
+      "statement": "Comida >=4 h antes: 1-4 g CHO/kg + 0.15-0.25 g proteina/kg.",
+      "values": {
+        "choMin": 1,
+        "choMax": 4,
+        "proteinMin": 0.15,
+        "proteinMax": 0.25
+      },
+      "unit": "g/kg",
+      "conditions": {
+        "phase": "pre",
+        "hoursBefore": 4
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 203
+      }
+    },
+    {
+      "id": "nutri-nsca-pre-2h",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "pre-workout"
+      ],
+      "statement": "Comida 2 h antes: ~1 g CHO/kg.",
+      "values": {
+        "value": 1
+      },
+      "unit": "g/kg",
+      "conditions": {
+        "phase": "pre",
+        "hoursBefore": 2
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 203
+      }
+    },
+    {
+      "id": "nutri-nsca-pre-1h-liquid",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "pre-workout"
+      ],
+      "statement": "1 h antes: preferir CHO liquido/gels (vaciamiento gastrico mas rapido que solido).",
+      "values": null,
+      "conditions": {
+        "phase": "pre",
+        "hoursBefore": 1
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 204
+      }
+    },
+    {
+      "id": "nutri-nsca-pre-usg",
+      "sourceId": "nsca-est-4ed",
+      "topic": "hydration",
+      "tags": [
+        "pre-workout",
+        "marker"
+      ],
+      "statement": "Prehidratar horas antes; objetivo USG (gravedad especifica de orina) <1.020.",
+      "values": {
+        "max": 1.02
+      },
+      "unit": "USG",
+      "conditions": {
+        "phase": "pre"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 203
+      }
+    },
+    {
+      "id": "nutri-nsca-during-cho",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "during",
+        "carbs"
+      ],
+      "statement": "30-90 g CHO/h con multiples tipos (glucosa+fructosa/sacarosa/maltodextrina) en resistencia prolongada.",
+      "values": {
+        "min": 30,
+        "max": 90
+      },
+      "unit": "g/h",
+      "conditions": {
+        "phase": "during",
+        "durationMin": 60
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 209
+      }
+    },
+    {
+      "id": "nutri-nsca-during-studied-range",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "during",
+        "carbs"
+      ],
+      "statement": "Rango estudiado completo: 28-144 g CHO/h (cifras altas en ciclismo).",
+      "values": {
+        "min": 28,
+        "max": 144
+      },
+      "unit": "g/h",
+      "conditions": {
+        "phase": "during"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 208
+      }
+    },
+    {
+      "id": "nutri-nsca-during-cap",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "during",
+        "mechanism"
+      ],
+      "statement": "Oxidacion exogena maxima ~1.0-1.1 g/min con un solo transportador; mezclas la superan.",
+      "values": {
+        "min": 1,
+        "max": 1.1
+      },
+      "unit": "g/min",
+      "conditions": {
+        "phase": "during",
+        "choType": "single"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 208
+      }
+    },
+    {
+      "id": "nutri-nsca-during-fructose",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "during",
+        "fructose"
+      ],
+      "statement": "Fructosa/galactosa/amilosa se oxidan 25-50% mas lento que glucosa/sacarosa/maltodextrinas.",
+      "values": {
+        "min": 25,
+        "max": 50
+      },
+      "unit": "% mas lento",
+      "conditions": {
+        "phase": "during"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 208
+      }
+    },
+    {
+      "id": "nutri-nsca-during-drink-electrolytes",
+      "sourceId": "nsca-est-4ed",
+      "topic": "hydration",
+      "tags": [
+        "during",
+        "electrolytes"
+      ],
+      "statement": "Bebida deportiva en calor: Na 460-690 mg/L (20-30 mEq), K 78-195 mg/L (2-5 mEq), CHO 5-10%.",
+      "values": {
+        "naMin": 460,
+        "naMax": 690,
+        "kMin": 78,
+        "kMax": 195,
+        "choPctMin": 5,
+        "choPctMax": 10
+      },
+      "unit": "mg/L, %",
+      "conditions": {
+        "phase": "during",
+        "heat": true
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 204
+      }
+    },
+    {
+      "id": "nutri-nsca-during-team-fluids",
+      "sourceId": "nsca-est-4ed",
+      "topic": "hydration",
+      "tags": [
+        "during",
+        "team-sports"
+      ],
+      "statement": "Deportes con pausas (tenis): 200-400 ml por cambio de lado, parte de bebida deportiva.",
+      "values": {
+        "min": 200,
+        "max": 400
+      },
+      "unit": "ml",
+      "conditions": {
+        "phase": "during",
+        "sport": "racket"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 209
+      }
+    },
+    {
+      "id": "nutri-nsca-during-mouth-rinse",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "during",
+        "cns"
+      ],
+      "statement": "Enjuague bucal con CHO mejora 2-3% el rendimiento de ~1 h (via SNC), sin ingerir.",
+      "values": {
+        "min": 2,
+        "max": 3
+      },
+      "unit": "% mejora",
+      "conditions": {
+        "phase": "during",
+        "durationMin": 60
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 208
+      }
+    },
+    {
+      "id": "nutri-nsca-post-cho-30min",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "carbs"
+      ],
+      "statement": "~1.5 g CHO/kg dentro de los primeros 30 min post-ejercicio.",
+      "values": {
+        "value": 1.5
+      },
+      "unit": "g/kg",
+      "conditions": {
+        "phase": "post",
+        "withinMin": 30
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-post-glycogen-rate",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "glycogen"
+      ],
+      "statement": "Resintesis maxima: 1.0-1.85 g CHO/kg/h inmediato y cada 15-60 min hasta 5 h.",
+      "values": {
+        "min": 1,
+        "max": 1.85
+      },
+      "unit": "g/kg/h",
+      "conditions": {
+        "phase": "post",
+        "recoveryLessThanH": 24
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 210
+      }
+    },
+    {
+      "id": "nutri-nsca-post-cho-sparing",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "protein-sparing"
+      ],
+      "statement": "30-100 g de CHO post-ejercicio con dano muscular reducen la proteolisis.",
+      "values": {
+        "min": 30,
+        "max": 100
+      },
+      "unit": "g",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 212
+      }
+    },
+    {
+      "id": "nutri-nsca-post-wait-2h",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "flexibility"
+      ],
+      "statement": "Si hay >24 h hasta la proxima sesion, esperar hasta 2 h para comer CHO no reduce la resintesis a 24 h.",
+      "values": {
+        "max": 2
+      },
+      "unit": "h",
+      "conditions": {
+        "phase": "post",
+        "recoveryGreaterThanH": 24
+      },
+      "confidence": "explicit",
+      "evidenceTier": "rct",
+      "locator": {
+        "chapter": 10,
+        "page": 210
+      }
+    },
+    {
+      "id": "nutri-nsca-post-sodium-foods",
+      "sourceId": "nsca-est-4ed",
+      "topic": "hydration",
+      "tags": [
+        "post-workout",
+        "recovery"
+      ],
+      "statement": "Rehidratar con comidas con sodio o sal anadida retiene el fluido; individualizar midiendo peso pre/post.",
+      "values": null,
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 210
+      }
+    },
+    {
+      "id": "nutri-nsca-post-1.5-study",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "strength"
+      ],
+      "statement": "Tras series de rodilla (deplecion al 71%): 1.5 g CHO/kg inmediato + a la 1 h restauro 91% del glucogeno en 6 h (vs 75% solo agua).",
+      "values": {
+        "value": 1.5
+      },
+      "unit": "g/kg x2",
+      "conditions": {
+        "phase": "post",
+        "mode": "strength"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "rct",
+      "locator": {
+        "chapter": 10,
+        "page": 212
+      }
+    },
+    {
+      "id": "nutri-nsca-strength-cho-daily",
+      "sourceId": "nsca-est-4ed",
+      "topic": "carbohydrates",
+      "tags": [
+        "strength"
+      ],
+      "statement": "Fuerza/velocidad: 5-6 g CHO/kg/dia; CHO pre/durante mantiene fuerza y minimiza proteolisis.",
+      "values": {
+        "min": 5,
+        "max": 6
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-cho-endurance-daily",
+      "sourceId": "nsca-est-4ed",
+      "topic": "carbohydrates",
+      "tags": [
+        "endurance"
+      ],
+      "statement": "Atletas de resistencia: 8-10 g CHO/kg/dia, especialmente entrenando 90+ min por sesion.",
+      "values": {
+        "min": 8,
+        "max": 10
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "endurance",
+        "sessionMin": 90
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-strength-post-high-gi",
+      "sourceId": "nsca-est-4ed",
+      "topic": "carbohydrates",
+      "tags": [
+        "strength",
+        "gi"
+      ],
+      "statement": "CHO de indice glucemico alto inmediato post-competencia de fuerza si se vuelve a competir <24 h.",
+      "values": null,
+      "conditions": {
+        "population": "strength",
+        "recompeteWithinH": 24
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-protocol",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine"
+      ],
+      "statement": "Carga 20-25 g/dia x 5 dias (o 0.3 g/kg/dia), mantenimiento 2 g/dia (0.03 g/kg/dia).",
+      "values": {
+        "loadMin": 20,
+        "loadMax": 25,
+        "loadDays": 5,
+        "maintenance": 2
+      },
+      "unit": "g/dia",
+      "conditions": {
+        "supplement": "creatine-monohydrate"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 243
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-no-load",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine"
+      ],
+      "statement": "Sin carga: 3 g/dia alcanza similar concentracion muscular en ~30 dias.",
+      "values": {
+        "value": 3
+      },
+      "unit": "g/dia",
+      "conditions": {
+        "supplement": "creatine-monohydrate",
+        "protocol": "no-load"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 243
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-washout",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine"
+      ],
+      "statement": "Al suspender, la creatina muscular vuelve a basal en ~4 semanas.",
+      "values": {
+        "value": 4
+      },
+      "unit": "semanas",
+      "conditions": {
+        "supplement": "creatine-monohydrate",
+        "phase": "washout"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 243
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-muscle-increase",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine"
+      ],
+      "statement": "Aumenta la creatina muscular ~20%; saturacion a 150-160 mmol/kg peso seco.",
+      "values": {
+        "value": 20
+      },
+      "unit": "% aumento",
+      "conditions": {
+        "supplement": "creatine-monohydrate"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 243
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-strength-gains",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "strength"
+      ],
+      "statement": "Ganancias de fuerza 2-3x mayores vs placebo en entrenados (banca/sentadilla/power clean).",
+      "values": {
+        "min": 2,
+        "max": 3
+      },
+      "unit": "x vs placebo",
+      "conditions": {
+        "supplement": "creatine-monohydrate",
+        "population": "trained"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 243
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-bm-gain",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "body-mass"
+      ],
+      "statement": "Suplementacion en entrenamiento: +0.5-2 kg de masa (magra/agua intracelular) en semanas-meses.",
+      "values": {
+        "min": 0.5,
+        "max": 2
+      },
+      "unit": "kg",
+      "conditions": {
+        "supplement": "creatine-monohydrate"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 244
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-explosive",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "sprint"
+      ],
+      "statement": "Sprint/salto de esfuerzo unico: sin mejora consistente con carga de 5 dias; mejoras con 28-84 dias de uso.",
+      "values": {
+        "loadDays": 5,
+        "chronicDaysMin": 28,
+        "chronicDaysMax": 84
+      },
+      "unit": "dias",
+      "conditions": {
+        "supplement": "creatine-monohydrate",
+        "outcome": "single-effort"
+      },
+      "confidence": "inferred",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 244
+      }
+    },
+    {
+      "id": "nutri-nsca-creatine-safety",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "safety"
+      ],
+      "statement": "Segura y relativamente barata; eficacia en entrenados y no entrenados (maxima fuerza, potencia, masa magra).",
+      "values": null,
+      "conditions": {
+        "supplement": "creatine-monohydrate"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 243
+      }
+    },
+    {
+      "id": "nutri-nsca-caffeine-protocol",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "caffeine"
+      ],
+      "statement": "3-9 mg/kg ~60 min antes o durante ejercicio prolongado; sin beneficio adicional >=9 mg/kg.",
+      "values": {
+        "min": 3,
+        "max": 9
+      },
+      "unit": "mg/kg",
+      "conditions": {
+        "supplement": "caffeine",
+        "timing": "60min-pre"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 245
+      }
+    },
+    {
+      "id": "nutri-nsca-caffeine-risk",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "caffeine",
+        "safety"
+      ],
+      "statement": "Riesgo de efectos adversos (ansiedad, GI, insomnio, temblor, arritmias) aumenta >9 mg/kg.",
+      "values": {
+        "min": 9
+      },
+      "unit": "mg/kg",
+      "conditions": {
+        "supplement": "caffeine",
+        "safety": true
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 245
+      }
+    },
+    {
+      "id": "nutri-nsca-caffeine-no-diuresis",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "caffeine",
+        "hydration"
+      ],
+      "statement": "La literatura no respalda diuresis por cafeina durante el ejercicio ni dano del balance hidrico.",
+      "values": null,
+      "conditions": {
+        "supplement": "caffeine",
+        "phase": "during"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 245
+      }
+    },
+    {
+      "id": "nutri-nsca-caffeine-lethal",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "caffeine",
+        "safety"
+      ],
+      "statement": "Dosis letal tipicamente >5 g (~42 cafes de 120 mg).",
+      "values": {
+        "min": 5
+      },
+      "unit": "g",
+      "conditions": {
+        "supplement": "caffeine",
+        "safety": true
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 245
+      }
+    },
+    {
+      "id": "nutri-nsca-caffeine-tablet",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "caffeine"
+      ],
+      "statement": "El beneficio ergogenico parece mayor con cafeina anhidra (tableta) que con cafe.",
+      "values": null,
+      "conditions": {
+        "supplement": "caffeine"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 244
+      }
+    },
+    {
+      "id": "nutri-nsca-caffeine-energy-drinks",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "caffeine",
+        "energy-drinks"
+      ],
+      "statement": "Bebidas energeticas ~2 mg/kg: por debajo del rango ergogenico documentado (3-9).",
+      "values": {
+        "value": 2
+      },
+      "unit": "mg/kg",
+      "conditions": {
+        "supplement": "caffeine",
+        "form": "energy-drink"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 245
+      }
+    },
+    {
+      "id": "nutri-nsca-bicarbonate",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "bicarbonate"
+      ],
+      "statement": "Bicarbonato sodico 0.3 g/kg antes de eventos de 1-7 min; efectos GI adversos frecuentes.",
+      "values": {
+        "value": 0.3
+      },
+      "unit": "g/kg",
+      "conditions": {
+        "supplement": "sodium-bicarbonate",
+        "eventMin": "1-7"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 247
+      }
+    },
+    {
+      "id": "nutri-nsca-citrate",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "citrate"
+      ],
+      "statement": "Citrato sodico 0.4-0.6 g/kg con potencial ergogenico similar al bicarbonato.",
+      "values": {
+        "min": 0.4,
+        "max": 0.6
+      },
+      "unit": "g/kg",
+      "conditions": {
+        "supplement": "sodium-citrate"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 248
+      }
+    },
+    {
+      "id": "nutri-nsca-hmb",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "hmb"
+      ],
+      "statement": "HMB 1.5-3 g/dia: menor perdida de masa magra en regimenes restrictivos de novicios; poco efecto en entrenados.",
+      "values": {
+        "min": 1.5,
+        "max": 3
+      },
+      "unit": "g/dia",
+      "conditions": {
+        "supplement": "hmb"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 246
+      }
+    },
+    {
+      "id": "nutri-nsca-arginine",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "arginine"
+      ],
+      "statement": "Arginina ~6 g sin mejora clara de rendimiento; dosis >13 g causan malestar GI.",
+      "values": {
+        "dose": 6,
+        "giThreshold": 13
+      },
+      "unit": "g",
+      "conditions": {
+        "supplement": "arginine"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 11,
+        "page": 246
+      }
+    },
+    {
+      "id": "nutri-mau-protein-strength",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "strength"
+      ],
+      "statement": "Ingesta optima de proteina en fuerza puede llegar a 1.7-1.8 g/kg/dia (varones; datos femeninos limitados).",
+      "values": {
+        "min": 1.7,
+        "max": 1.8
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 144
+      }
+    },
+    {
+      "id": "nutri-mau-protein-endurance",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "endurance"
+      ],
+      "statement": "Ingesta optima en resistencia: ~1.2-1.4 g/kg/dia.",
+      "values": {
+        "min": 1.2,
+        "max": 1.4
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "endurance"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 144
+      }
+    },
+    {
+      "id": "nutri-mau-protein-rda-insufficient",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "rda"
+      ],
+      "statement": "La RDA (0.8 g/kg/dia en la mayoria de paises) es inadecuada para personas fisicamente activas.",
+      "values": {
+        "value": 0.8
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "active"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 144
+      }
+    },
+    {
+      "id": "nutri-mau-protein-food-sufficient",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "supplement-unnecessary"
+      ],
+      "statement": "1.2-1.8 g/kg/dia se alcanzan con dieta si la energia es adecuada (ej. 5000 kcal con 10% proteina ~ 1.8 g/kg en 70 kg).",
+      "values": {
+        "min": 1.2,
+        "max": 1.8
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "energyAdequate": true
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 145
+      }
+    },
+    {
+      "id": "nutri-mau-protein-studied-range",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "safety"
+      ],
+      "statement": "Estudios de balance nitrogenado con ingesta de 1.0-2.7 g/kg/dia sin dano.",
+      "values": {
+        "min": 1,
+        "max": 2.7
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "trained-males"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 133
+      }
+    },
+    {
+      "id": "nutri-mau-protein-high-no-benefit",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "safety"
+      ],
+      "statement": "Poca evidencia de que >1.3-1.4 g/kg/dia mejore el rendimiento muscular (datos en varones, 4-8 semanas).",
+      "values": {
+        "min": 1.3,
+        "max": 1.4
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "inferred",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 10,
+        "page": 144
+      }
+    },
+    {
+      "id": "nutri-mau-cho-daily-recovery",
+      "sourceId": "maughan-nis-2000",
+      "topic": "carbohydrates",
+      "tags": [
+        "daily",
+        "recovery"
+      ],
+      "statement": "Recuperacion diaria de glucogeno / carga: 7-10 g CHO/kg/dia.",
+      "values": {
+        "min": 7,
+        "max": 10
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "endurance"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 5,
+        "page": 81
+      }
+    },
+    {
+      "id": "nutri-mau-cho-post-early",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout"
+      ],
+      "statement": ">=1 g CHO/kg dentro de los 30 min post-sesion para recuperacion temprana.",
+      "values": {
+        "min": 1
+      },
+      "unit": "g/kg",
+      "conditions": {
+        "phase": "post",
+        "withinMin": 30
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 5,
+        "page": 81
+      }
+    },
+    {
+      "id": "nutri-mau-cho-pre-event",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "pre-workout"
+      ],
+      "statement": "Comida rica en CHO 1-4 g/kg en las 1-4 h previas a sesion prolongada.",
+      "values": {
+        "min": 1,
+        "max": 4
+      },
+      "unit": "g/kg",
+      "conditions": {
+        "phase": "pre",
+        "hoursBefore": "1-4"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 5,
+        "page": 81
+      }
+    },
+    {
+      "id": "nutri-mau-cho-during",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "during"
+      ],
+      "statement": "30-60 g CHO/h durante ejercicio moderado-alto prolongado (2000; ver conflicto con NSCA 2016: 30-90).",
+      "values": {
+        "min": 30,
+        "max": 60
+      },
+      "unit": "g/h",
+      "conditions": {
+        "phase": "during"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 5,
+        "page": 81
+      }
+    },
+    {
+      "id": "nutri-mau-cho-oxidation-cap",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "during",
+        "mechanism"
+      ],
+      "statement": "Oxidacion exogena pico ~1.0-1.3 g/min.",
+      "values": {
+        "min": 1,
+        "max": 1.3
+      },
+      "unit": "g/min",
+      "conditions": {
+        "phase": "during"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 8,
+        "page": 115
+      }
+    },
+    {
+      "id": "nutri-mau-cho-drink-concentration",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "during",
+        "sports-drink"
+      ],
+      "statement": "Concentracion optima de CHO en bebida durante ejercicio: 2-8%; >6-8% no aumenta oxidacion y empeora GI/fluido.",
+      "values": {
+        "min": 2,
+        "max": 8
+      },
+      "unit": "% CHO",
+      "conditions": {
+        "phase": "during"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 8,
+        "page": 115
+      }
+    },
+    {
+      "id": "nutri-mau-cho-post-intervals",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "glycogen"
+      ],
+      "statement": "Suplemento CHO inmediato y cada 2 h: 0.7-1.4 g/kg maximiza resintesis (0.35 g/kg la reduce a la mitad).",
+      "values": {
+        "min": 0.7,
+        "max": 1.4
+      },
+      "unit": "g/kg cada 2h",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 7,
+        "page": 104
+      }
+    },
+    {
+      "id": "nutri-mau-cho-post-plateau",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "glycogen"
+      ],
+      "statement": "Meseta de resintesis ~5.5-5.7 mmol/g/h con suplementos >=1-1.5 g/kg.",
+      "values": {
+        "min": 5.5,
+        "max": 5.7
+      },
+      "unit": "mmol/g/h",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 7,
+        "page": 104
+      }
+    },
+    {
+      "id": "nutri-mau-cho-delay-halves",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "post-workout",
+        "timing"
+      ],
+      "statement": "Retrasar el CHO 2 h reduce la tasa de resintesis ~50% (insulinorresistencia muscular).",
+      "values": {
+        "value": 50
+      },
+      "unit": "% reduccion",
+      "conditions": {
+        "phase": "post",
+        "delay": "2h"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 7,
+        "page": 103
+      }
+    },
+    {
+      "id": "nutri-mau-cho-cap-600g",
+      "sourceId": "maughan-nis-2000",
+      "topic": "carbohydrates",
+      "tags": [
+        "daily"
+      ],
+      "statement": ">600 g CHO/dia no aporta beneficio adicional de almacenamiento en 24 h.",
+      "values": {
+        "max": 600
+      },
+      "unit": "g/dia",
+      "conditions": {
+        "window": "24h"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 7,
+        "page": 101
+      }
+    },
+    {
+      "id": "nutri-mau-cho-gi-high",
+      "sourceId": "maughan-nis-2000",
+      "topic": "carbohydrates",
+      "tags": [
+        "gi",
+        "recovery"
+      ],
+      "statement": "Con 10 g/kg/dia en 24 h: CHO de IG alto sintetiza mas glucogeno (106 vs 71.5 mmol/g).",
+      "values": {
+        "hi": 106,
+        "lo": 71.5
+      },
+      "unit": "mmol/g",
+      "conditions": {
+        "window": "24h"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "rct",
+      "locator": {
+        "chapter": 7,
+        "page": 103
+      }
+    },
+    {
+      "id": "nutri-mau-cho-modified-loading",
+      "sourceId": "maughan-nis-2000",
+      "topic": "carbohydrates",
+      "tags": [
+        "loading"
+      ],
+      "statement": "Carga modificada (taper 6 dias + 50% CHO 3 dias + 70% CHO 3 dias) igual de efectiva que la clasica.",
+      "values": {
+        "choPct": 70,
+        "days": 3
+      },
+      "unit": "% energia",
+      "conditions": {
+        "goal": "carb-load"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 7,
+        "page": 101
+      }
+    },
+    {
+      "id": "nutri-mau-cho-gkg-over-percent",
+      "sourceId": "maughan-nis-2000",
+      "topic": "carbohydrates",
+      "tags": [
+        "daily"
+      ],
+      "statement": "Prescribir CHO en g/kg, no en % de energia: con ingestas altas 50-60% basta; 65-70% solo con ingestas bajas.",
+      "values": null,
+      "conditions": {
+        "population": "any"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 5,
+        "page": 82
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-1pct-temp",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "dehydration",
+        "threshold"
+      ],
+      "statement": "Un deficit de agua del 1% del peso corporal ya eleva la temperatura central durante el ejercicio.",
+      "values": {
+        "value": 1
+      },
+      "unit": "% peso corporal",
+      "conditions": {
+        "phase": "during"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 16,
+        "page": 220
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-1-2pct-capacity",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "dehydration",
+        "performance"
+      ],
+      "statement": "Deficits marginales de 1-2% reducen la capacidad de ejercicio progresivo sin alterar VO2max.",
+      "values": {
+        "min": 1,
+        "max": 2
+      },
+      "unit": "% peso corporal",
+      "conditions": {
+        "phase": "during"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 16,
+        "page": 219
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-2-4pct-vo2max",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "dehydration",
+        "performance"
+      ],
+      "statement": "Deficits de 2-4% reducen marcadamente la potencia aerobica maxima, sobre todo en calor.",
+      "values": {
+        "min": 2,
+        "max": 4
+      },
+      "unit": "% peso corporal",
+      "conditions": {
+        "phase": "during",
+        "heat": true
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 16,
+        "page": 219
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-2pct-running",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "dehydration",
+        "performance"
+      ],
+      "statement": "2% de perdida (−11% volumen plasmatico): ~5% peor rendimiento en 5000-10000 m.",
+      "values": {
+        "bwl": 2,
+        "performanceLoss": 5
+      },
+      "unit": "%",
+      "conditions": {
+        "mode": "running"
+      },
+      "confidence": "inferred",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 16,
+        "page": 220
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-baseline-daily",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "daily"
+      ],
+      "statement": "Requerimiento hidrico diario basal ~2.5 L (piel ~600 ml, orina >=800 ml, respiracion ~200 ml).",
+      "values": {
+        "value": 2.5
+      },
+      "unit": "L/dia",
+      "conditions": {
+        "phase": "rest"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 17,
+        "page": 226
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-during-600-1200",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "during",
+        "fluid-rate"
+      ],
+      "statement": "30-60 g CHO/h se alcanzan con bebida deportiva a 600-1200 ml/h, aportando ademas fluido y reduciendo efectos de la deshidratacion.",
+      "values": {
+        "min": 600,
+        "max": 1200
+      },
+      "unit": "ml/h",
+      "conditions": {
+        "phase": "during",
+        "durationMin": 60
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 8,
+        "page": 115
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-marathon-intervals",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "during",
+        "running"
+      ],
+      "statement": "Maraton: 100-200 ml cada 2-3 km (1400-4200 ml totales); ~2 L/h intolerable; 300 ml/h insuficiente salvo frio.",
+      "values": {
+        "min": 100,
+        "max": 200
+      },
+      "unit": "ml cada 2-3 km",
+      "conditions": {
+        "phase": "during",
+        "mode": "running"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 17,
+        "page": 234
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-post-150pct",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "post-workout",
+        "rehydration"
+      ],
+      "statement": "Rehidratacion: volumen >=150% de la perdida de sudor (1 L por kg perdido no cubre la diuresis obligatoria).",
+      "values": {
+        "min": 150
+      },
+      "unit": "% del deficit",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 17,
+        "page": 237
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-post-na-50",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "post-workout",
+        "electrolytes"
+      ],
+      "statement": "Bebida de rehidratacion: sodio similar al sudor (típico Na ~50 mmol/L, K ~5 mmol/L) para retener el fluido.",
+      "values": {
+        "na": 50,
+        "k": 5
+      },
+      "unit": "mmol/L",
+      "conditions": {
+        "phase": "post",
+        "withoutFood": true
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 19,
+        "page": 263
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-sports-drinks-na",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "post-workout",
+        "electrolytes"
+      ],
+      "statement": "Las bebidas deportivas (10-30 mmol Na/L) son insuficientes para rehidratar rapido sin comida; SRO OMS 60-90 mmol/L.",
+      "values": {
+        "min": 10,
+        "max": 30
+      },
+      "unit": "mmol/L",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 19,
+        "page": 263
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-food-sufficient",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "post-workout"
+      ],
+      "statement": "Si se come alimento solido junto al agua, la comida repone los electrolitos y el agua sola basta.",
+      "values": null,
+      "conditions": {
+        "phase": "post",
+        "withFood": true
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 19,
+        "page": 263
+      }
+    },
+    {
+      "id": "nutri-mau-hyd-sweat-variability",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "sweat",
+        "individualization"
+      ],
+      "statement": "La composicion del sudor varia mucho entre individuos y en el tiempo: pautas de electrolitos individualizadas.",
+      "values": null,
+      "conditions": {
+        "population": "any"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 17,
+        "page": 228
+      }
+    },
+    {
+      "id": "nutri-mau-creatine-loading",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "creatine"
+      ],
+      "statement": "Carga 20 g/dia (4x5 g) durante 5-6 dias, luego 2 g/dia de mantenimiento; aumenta creatina muscular ~20%.",
+      "values": {
+        "load": 20,
+        "days": 6,
+        "maintenance": 2
+      },
+      "unit": "g/dia",
+      "conditions": {
+        "supplement": "creatine-monohydrate"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "rct",
+      "locator": {
+        "chapter": 27,
+        "page": 369
+      }
+    },
+    {
+      "id": "nutri-mau-creatine-slow-route",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "creatine"
+      ],
+      "statement": "Sin carga: 3 g/dia alcanza niveles similares en ~28-30 dias.",
+      "values": {
+        "value": 3
+      },
+      "unit": "g/dia",
+      "conditions": {
+        "supplement": "creatine-monohydrate",
+        "protocol": "no-load"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "rct",
+      "locator": {
+        "chapter": 27,
+        "page": 370
+      }
+    },
+    {
+      "id": "nutri-mau-creatine-cho-synergy",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "carbs"
+      ],
+      "statement": "La co-ingesta de CHO (~370 g/dia) o CHO+proteina potencia el almacenamiento de creatina via insulina.",
+      "values": {
+        "cho": 370
+      },
+      "unit": "g/dia",
+      "conditions": {
+        "supplement": "creatine-monohydrate"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "rct",
+      "locator": {
+        "chapter": 27,
+        "page": 370
+      }
+    },
+    {
+      "id": "nutri-mau-creatine-pool",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "creatine"
+      ],
+      "statement": "Pool corporal total ~120 g, 95% en musculo.",
+      "values": {
+        "total": 120,
+        "musclePct": 95
+      },
+      "unit": "g",
+      "conditions": {
+        "context": "physiology"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 27,
+        "page": 367
+      }
+    },
+    {
+      "id": "nutri-mau-creatine-safety",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "safety"
+      ],
+      "statement": "Sin efectos adversos serios en protocolos estandar; posible malestar GI con dosis unicas altas.",
+      "values": null,
+      "conditions": {
+        "supplement": "creatine-monohydrate"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 27,
+        "page": 371
+      }
+    },
+    {
+      "id": "nutri-mau-caffeine-range",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "caffeine"
+      ],
+      "statement": "Dosis ergogenicas estudiadas 3-13 mg/kg; beneficio desde 3, deterioro en algunos atletas a 9+.",
+      "values": {
+        "min": 3,
+        "max": 13
+      },
+      "unit": "mg/kg",
+      "conditions": {
+        "supplement": "caffeine"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 28,
+        "page": 380
+      }
+    },
+    {
+      "id": "nutri-mau-caffeine-adverse-9",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "caffeine",
+        "safety"
+      ],
+      "statement": "Efectos adversos mas prevalentes a 9-13 mg/kg y asociados a peor rendimiento en algunos.",
+      "values": {
+        "min": 9,
+        "max": 13
+      },
+      "unit": "mg/kg",
+      "conditions": {
+        "supplement": "caffeine",
+        "safety": true
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 28,
+        "page": 380
+      }
+    },
+    {
+      "id": "nutri-mau-caffeine-timing",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "caffeine",
+        "timing"
+      ],
+      "statement": "Ingestion ~60 min antes del ejercicio o durante el mismo (protocolos de los estudios citados).",
+      "values": {
+        "value": 60
+      },
+      "unit": "min pre",
+      "conditions": {
+        "supplement": "caffeine"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 28,
+        "page": 381
+      }
+    },
+    {
+      "id": "nutri-mau-caffeine-flat-6",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "caffeine"
+      ],
+      "statement": "Sin beneficio adicional >6 mg/kg en la mayoria de comparaciones de dosis.",
+      "values": {
+        "min": 6
+      },
+      "unit": "mg/kg",
+      "conditions": {
+        "supplement": "caffeine"
+      },
+      "confidence": "inferred",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 28,
+        "page": 380
+      }
+    },
+    {
+      "id": "nutri-mau-ergogenic-classification",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "classification"
+      ],
+      "statement": "Solo una minoria de ayudas ergogenicas tiene evidencia solida (macronutrientes, agua/electrolitos, cafeina, creatina entre las eficaces).",
+      "values": null,
+      "conditions": {
+        "population": "any"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 26,
+        "page": 356
+      }
+    },
+    {
+      "id": "nutri-mau-tef-macro",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "tef"
+      ],
+      "statement": "Termogenesis de alimentos: proteina 20-30%, CHO 5-10%, grasa 3-5% de su energia.",
+      "values": {
+        "proteinMin": 20,
+        "proteinMax": 30,
+        "choMin": 5,
+        "choMax": 10,
+        "fatMin": 3,
+        "fatMax": 5
+      },
+      "unit": "%",
+      "conditions": {
+        "context": "rest"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 35,
+        "page": 475
+      }
+    },
+    {
+      "id": "nutri-mau-deficit-not-restrictive",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "deficit",
+        "safety"
+      ],
+      "statement": "El programa de perdida no puede ser demasiado restrictivo: riesgo de lesion, perdida de masa magra, bajo rendimiento y abandono.",
+      "values": null,
+      "conditions": {
+        "goal": "deficit"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 35,
+        "page": 469
+      }
+    },
+    {
+      "id": "nutri-mau-tca-redflag",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "deficit",
+        "red-flag"
+      ],
+      "statement": "Presion por apariencia/rendimiento puede llevar a perdida desesperada de peso y TCA: derivar a profesional.",
+      "values": null,
+      "conditions": {
+        "goal": "deficit",
+        "redFlag": "eating-disorder"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 35,
+        "page": 469
+      }
+    },
+    {
+      "id": "nutri-mau-epoc",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "epoc"
+      ],
+      "statement": "EPOC ~5-10% sobre basal tras ejercicio (ejemplo citado: +15% durante 12 h tras 90 min al 75% VO2max).",
+      "values": {
+        "min": 5,
+        "max": 15
+      },
+      "unit": "%",
+      "conditions": {
+        "intensity": "high"
+      },
+      "confidence": "inferred",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 35,
+        "page": 474
+      }
+    },
+    {
+      "id": "nutri-mau-tea-athletes",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "expenditure"
+      ],
+      "statement": "Atletas gastan 1000-2000 kcal extra en entrenamiento (vs 10-15% del gasto en sedentarios).",
+      "values": {
+        "min": 1000,
+        "max": 2000
+      },
+      "unit": "kcal/dia",
+      "conditions": {
+        "population": "athlete"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 35,
+        "page": 472
+      }
+    },
+    {
+      "id": "nutri-mau-strength-energy",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "strength"
+      ],
+      "statement": "Entrenamiento duro de fuerza: 3500-5500 kcal/dia varones; 3000-4500 kcal mujeres.",
+      "values": {
+        "maleMin": 3500,
+        "maleMax": 5500,
+        "femaleMin": 3000,
+        "femaleMax": 4500
+      },
+      "unit": "kcal/dia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 47,
+        "page": 624
+      }
+    },
+    {
+      "id": "nutri-mau-strength-protein",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "strength"
+      ],
+      "statement": "Proteina en entrenamiento duro (recomendacion rusa citada): 1.4-2.0 g/kg/dia.",
+      "values": {
+        "min": 1.4,
+        "max": 2
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 47,
+        "page": 624
+      }
+    },
+    {
+      "id": "nutri-mau-strength-cho",
+      "sourceId": "maughan-nis-2000",
+      "topic": "carbohydrates",
+      "tags": [
+        "strength"
+      ],
+      "statement": "CHO diario en potencia: 8-10 g/kg; grasa 1.7-2.4 g/kg.",
+      "values": {
+        "choMin": 8,
+        "choMax": 10,
+        "fatMin": 1.7,
+        "fatMax": 2.4
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 47,
+        "page": 624
+      }
+    },
+    {
+      "id": "nutri-mau-strength-split",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "strength"
+      ],
+      "statement": "Siguiendo los g/kg anteriores: ~15-16% proteina / 25-26% grasa / 58-60% CHO de la energia.",
+      "values": {
+        "choMin": 58,
+        "choMax": 60
+      },
+      "unit": "% energia",
+      "conditions": {
+        "population": "strength"
+      },
+      "confidence": "inferred",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 47,
+        "page": 624
+      }
+    },
+    {
+      "id": "nutri-3g-protein-distribution",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "protein-timing",
+      "tags": [
+        "distribution"
+      ],
+      "statement": "Distribuir proteina de calidad a lo largo del dia cada 3-5 h y tras sesiones clave.",
+      "values": {
+        "min": 3,
+        "max": 5
+      },
+      "unit": "h",
+      "conditions": {
+        "population": "athlete"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 4,
+        "page": 151
+      }
+    },
+    {
+      "id": "nutri-3g-protein-window",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "protein-timing",
+      "tags": [
+        "post-workout"
+      ],
+      "statement": "Ventana post-entreno recomendada: entre 30 min y 2 h.",
+      "values": {
+        "min": 0.5,
+        "max": 2
+      },
+      "unit": "h",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 4,
+        "page": 151
+      }
+    },
+    {
+      "id": "nutri-3g-protein-total",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "protein",
+      "tags": [
+        "total"
+      ],
+      "statement": "Rango total proteico deportivo: 1.2-2.0 g/kg/dia.",
+      "values": {
+        "min": 1.2,
+        "max": 2
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "population": "athlete"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 4,
+        "page": 150
+      }
+    },
+    {
+      "id": "nutri-3g-protein-seniors",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "protein",
+      "tags": [
+        "masters"
+      ],
+      "statement": "Mayores sin entrenamiento: 1.0-1.3 g/kg/dia.",
+      "values": {
+        "min": 1,
+        "max": 1.3
+      },
+      "unit": "g/kg/dia",
+      "conditions": {
+        "age": "65+"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 4,
+        "page": 169
+      }
+    },
+    {
+      "id": "nutri-3g-absorption-rate",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "protein",
+      "tags": [
+        "physiology"
+      ],
+      "statement": "El tracto digestivo absorbe ~10 g de aminoacidos por hora; una comida normal se absorbe completa en horas.",
+      "values": {
+        "value": 10
+      },
+      "unit": "g AA/h",
+      "conditions": {
+        "context": "physiology"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 4,
+        "page": 165
+      }
+    },
+    {
+      "id": "nutri-3g-leucine-2.5",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "protein-timing",
+      "tags": [
+        "leucine"
+      ],
+      "statement": "Estudio citado: EAA con 2.5 g de leucina post-ejercicio mejora la sintesis proteica.",
+      "values": {
+        "value": 2.5
+      },
+      "unit": "g leucina",
+      "conditions": {
+        "phase": "post"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 4,
+        "page": 168
+      }
+    },
+    {
+      "id": "nutri-3g-cho-general",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "carbohydrates",
+      "tags": [
+        "general"
+      ],
+      "statement": "Poblacion general: 45-65% de la energia como CHO (225-325 g en 2000 kcal).",
+      "values": {
+        "min": 45,
+        "max": 65
+      },
+      "unit": "% energia",
+      "conditions": {
+        "population": "general"
+      },
+      "confidence": "explicit",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 2,
+        "page": 60
+      }
+    },
+    {
+      "id": "nutri-3g-cut-monitor-protein",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "energy",
+      "tags": [
+        "deficit"
+      ],
+      "statement": "En deficit: vigilar cantidad, calidad y timing de proteina; evitar restriccion energetica severa.",
+      "values": null,
+      "conditions": {
+        "goal": "deficit"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 6,
+        "page": 286
+      }
+    },
+    {
+      "id": "nutri-3g-cut-timing",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "energy",
+      "tags": [
+        "deficit",
+        "timing"
+      ],
+      "statement": "En deficit: distribuir comidas/snacks a lo largo del dia y alrededor del ejercicio.",
+      "values": null,
+      "conditions": {
+        "goal": "deficit"
+      },
+      "confidence": "qualitative",
+      "evidenceTier": "expert-book",
+      "locator": {
+        "chapter": 6,
+        "page": 289
+      }
+    }
   ],
   "chunks": [
-    { "id": "nsca-est4-ch9-protein", "sourceId": "nsca-est-4ed", "topic": "protein", "tags": ["protein", "rda", "safety"], "locator": { "chapter": 9, "page": 183 }, "summary": "Recomendaciones NSCA de proteina por poblacion (fitness general 0.8-1.0, resistencia 1.0-1.6, fuerza 1.4-1.7, deficit 1.8-2.7) mas seguridad renal hasta 2.8 g/kg y encuadre de timing.", "rules": ["nutri-nsca-protein-general", "nutri-nsca-protein-endurance", "nutri-nsca-protein-strength", "nutri-nsca-protein-combined", "nutri-nsca-protein-deficit", "nutri-nsca-protein-renal-safe", "nutri-nsca-protein-excess-caveat", "nutri-nsca-protein-post-range", "nutri-nsca-protein-sensitivity-48h"] },
-    { "id": "nsca-est4-ch10-protein-timing", "sourceId": "nsca-est-4ed", "topic": "protein-timing", "tags": ["timing", "post-workout", "leucine"], "locator": { "chapter": 10, "page": 215 }, "summary": "Dosis post-entreno por edad (20-25 g jovenes con 2-3 g leucina; 40+ mayores), minimo por comida 20-30 g, ventanas segun estado alimentado y regla de retraso 3 h en resistencia.", "rules": ["nutri-nsca-protein-post-young", "nutri-nsca-protein-post-older", "nutri-nsca-protein-meal-20-30", "nutri-nsca-protein-window-fasted", "nutri-nsca-protein-delay-3h", "nutri-nsca-protein-endurance-min"] },
-    { "id": "nsca-est4-ch10-energy-goals", "sourceId": "nsca-est-4ed", "topic": "energy", "tags": ["bulk", "cut", "maintenance"], "locator": { "chapter": 10, "page": 217 }, "summary": "Energia por objetivo: +500 kcal y 1.5-2.0 g/kg proteina para ganancia; deficit ~500 kcal y 1.8-2.7 g/kg para perdida; tabla kcal/kg por nivel de actividad (38/41/50 varon; 35/37/44 mujer).", "rules": ["nutri-nsca-bulk-surplus", "nutri-nsca-bulk-protein", "nutri-nsca-bulk-overfeeding", "nutri-nsca-cut-deficit", "nutri-nsca-cut-adherence", "nutri-nsca-kcal-kg-table", "nutri-nsca-record-method"] },
-    { "id": "nsca-est4-ch10-peri-workout", "sourceId": "nsca-est-4ed", "topic": "peri-workout", "tags": ["pre-workout", "during", "post-workout"], "locator": { "chapter": 10, "page": 203 }, "summary": "Estrategias peri-competencia NSCA: comida pre 1-4 g/kg (4h) o 1 g/kg (2h), liquidos a 1h; durante 30-90 g/h multi-CHO, electrolitos en calor, enjuague bucal; post 1.5 g/kg en 30 min, resintesis 1.0-1.85 g/kg/h.", "rules": ["nutri-nsca-pre-4h", "nutri-nsca-pre-2h", "nutri-nsca-pre-1h-liquid", "nutri-nsca-during-cho", "nutri-nsca-during-studied-range", "nutri-nsca-during-cap", "nutri-nsca-during-fructose", "nutri-nsca-during-mouth-rinse", "nutri-nsca-post-cho-30min", "nutri-nsca-post-glycogen-rate", "nutri-nsca-post-cho-sparing", "nutri-nsca-post-wait-2h", "nutri-nsca-post-1.5-study"] },
-    { "id": "nsca-est4-ch10-hydration", "sourceId": "nsca-est-4ed", "topic": "hydration", "tags": ["hydration", "electrolytes"], "locator": { "chapter": 10, "page": 204 }, "summary": "Hidratacion NSCA: prehidratacion con USG <1.020, bebida deportiva en calor (Na 460-690 mg/L, K 78-195 mg/L, CHO 5-10%), fluidos por cambio de lado en deportes con pausas, sodio con comidas en recuperacion.", "rules": ["nutri-nsca-pre-usg", "nutri-nsca-during-drink-electrolytes", "nutri-nsca-during-team-fluids", "nutri-nsca-post-sodium-foods"] },
-    { "id": "nsca-est4-ch10-strength-cho", "sourceId": "nsca-est-4ed", "topic": "carbohydrates", "tags": ["strength", "daily"], "locator": { "chapter": 10, "page": 215 }, "summary": "CHO para fuerza/velocidad: 5-6 g/kg/dia, IG alto post-competencia si se recompite <24 h; resistencia 8-10 g/kg con sesiones de 90+ min.", "rules": ["nutri-nsca-strength-cho-daily", "nutri-nsca-strength-post-high-gi", "nutri-nsca-cho-endurance-daily"] },
-    { "id": "nsca-est4-ch11-supplements", "sourceId": "nsca-est-4ed", "topic": "supplements", "tags": ["creatine", "caffeine", "hmb", "bicarbonate"], "locator": { "chapter": 11, "page": 243 }, "summary": "Sustancias ergogenicas NSCA con dosis: creatina (carga 20-25 g/d x5d, mant. 2 g/d), cafeina (3-9 mg/kg 60 min pre), bicarbonato 0.3 g/kg, citratos 0.4-0.6 g/kg, HMB 1.5-3 g/d, arginina ineficaz.", "rules": ["nutri-nsca-creatine-protocol", "nutri-nsca-creatine-no-load", "nutri-nsca-creatine-washout", "nutri-nsca-creatine-muscle-increase", "nutri-nsca-creatine-strength-gains", "nutri-nsca-creatine-bm-gain", "nutri-nsca-creatine-explosive", "nutri-nsca-creatine-safety", "nutri-nsca-caffeine-protocol", "nutri-nsca-caffeine-risk", "nutri-nsca-caffeine-no-diuresis", "nutri-nsca-caffeine-lethal", "nutri-nsca-caffeine-tablet", "nutri-nsca-caffeine-energy-drinks", "nutri-nsca-bicarbonate", "nutri-nsca-citrate", "nutri-nsca-hmb", "nutri-nsca-arginine"] },
-    { "id": "maughan-ch10-protein", "sourceId": "maughan-nis-2000", "topic": "protein", "tags": ["protein", "nitrogen-balance"], "locator": { "chapter": 10, "page": 133 }, "summary": "Metabolismo proteico en ejercicio (Lemon): optimo 1.7-1.8 g/kg fuerza y 1.2-1.4 resistencia, RDA insuficiente, la dieta cubre 1.2-1.8 si hay energia suficiente.", "rules": ["nutri-mau-protein-strength", "nutri-mau-protein-endurance", "nutri-mau-protein-rda-insufficient", "nutri-mau-protein-food-sufficient", "nutri-mau-protein-studied-range", "nutri-mau-protein-high-no-benefit"] },
-    { "id": "maughan-ch5-8-carbs", "sourceId": "maughan-nis-2000", "topic": "carbohydrates", "tags": ["carbs", "guidelines"], "locator": { "chapter": 5, "page": 73 }, "summary": "Cuatro pautas CHO de Burke: 7-10 g/kg/dia recuperacion, >=1 g/kg en 30 min post, 1-4 g/kg pre-evento, 30-60 g/h durante; preferir g/kg sobre % energia; concentracion de bebida 2-8%.", "rules": ["nutri-mau-cho-daily-recovery", "nutri-mau-cho-post-early", "nutri-mau-cho-pre-event", "nutri-mau-cho-during", "nutri-mau-cho-drink-concentration", "nutri-mau-cho-gkg-over-percent"] },
-    { "id": "maughan-ch7-glycogen", "sourceId": "maughan-nis-2000", "topic": "peri-workout", "tags": ["glycogen", "recovery"], "locator": { "chapter": 7, "page": 97 }, "summary": "Optimizacion de glucogeno (Ivy): suplemento inmediato cada 2 h 0.7-1.4 g/kg, meseta >=1-1.5 g/kg, retraso 2 h reduce 50%, techo 600 g/dia, IG alto mejor a 24 h, carga modificada 70%.", "rules": ["nutri-mau-cho-post-intervals", "nutri-mau-cho-post-plateau", "nutri-mau-cho-delay-halves", "nutri-mau-cho-cap-600g", "nutri-mau-cho-gi-high", "nutri-mau-cho-modified-loading", "nutri-mau-cho-oxidation-cap"] },
-    { "id": "maughan-ch15-19-hydration", "sourceId": "maughan-nis-2000", "topic": "hydration", "tags": ["hydration", "dehydration", "electrolytes"], "locator": { "chapter": 15, "page": 203 }, "summary": "Hidratacion IOC: umbrales de deficit (1% temperatura, 1-2% capacidad, 2-4% VO2max), bebida 2-8% CHO, rehidratacion 150% del deficit con sodio ~50 mmol/L, agua sola suficiente con comida.", "rules": ["nutri-mau-hyd-1pct-temp", "nutri-mau-hyd-1-2pct-capacity", "nutri-mau-hyd-2-4pct-vo2max", "nutri-mau-hyd-2pct-running", "nutri-mau-hyd-baseline-daily", "nutri-mau-hyd-during-600-1200", "nutri-mau-hyd-marathon-intervals", "nutri-mau-hyd-post-150pct", "nutri-mau-hyd-post-na-50", "nutri-mau-hyd-sports-drinks-na", "nutri-mau-hyd-food-sufficient", "nutri-mau-hyd-sweat-variability"] },
-    { "id": "maughan-ch26-28-supplements", "sourceId": "maughan-nis-2000", "topic": "supplements", "tags": ["creatine", "caffeine", "ergogenic-aids"], "locator": { "chapter": 26, "page": 356 }, "summary": "Ergogenicos IOC: creatina carga 20 g/d x5-6d + 2 g/d (o 3 g/d lento) con sinergia CHO; cafeina 3-13 mg/kg con riesgo >9; clasificacion de eficacia de ayudas.", "rules": ["nutri-mau-creatine-loading", "nutri-mau-creatine-slow-route", "nutri-mau-creatine-cho-synergy", "nutri-mau-creatine-pool", "nutri-mau-creatine-safety", "nutri-mau-caffeine-range", "nutri-mau-caffeine-adverse-9", "nutri-mau-caffeine-timing", "nutri-mau-caffeine-flat-6", "nutri-mau-ergogenic-classification"] },
-    { "id": "maughan-ch35-energy", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["energy", "deficit", "tef"], "locator": { "chapter": 35, "page": 469 }, "summary": "Atleta con sobrepeso (Manore): deficit no restrictivo, TEF por macro, EPOC, gasto de entrenamiento 1000-2000 kcal; red flag TCA.", "rules": ["nutri-mau-tef-macro", "nutri-mau-deficit-not-restrictive", "nutri-mau-tca-redflag", "nutri-mau-epoc", "nutri-mau-tea-athletes"] },
-    { "id": "maughan-ch47-strength", "sourceId": "maughan-nis-2000", "topic": "energy", "tags": ["strength", "weightlifting"], "locator": { "chapter": 47, "page": 621 }, "summary": "Halterofilia/potencia (Rogozkin): 3500-5500 kcal varones, proteina 1.4-2.0 g/kg, CHO 8-10 g/kg, grasa 1.7-2.4 g/kg (~58-60% CHO).", "rules": ["nutri-mau-strength-energy", "nutri-mau-strength-protein", "nutri-mau-strength-cho", "nutri-mau-strength-split"] },
-    { "id": "3g-ch2-6-selected", "sourceId": "sportnutrition-3g-2022", "topic": "protein-timing", "tags": ["distribution", "general"], "locator": { "chapter": 4, "page": 150 }, "summary": "Temas selectos S1: proteina 1.2-2.0 g/kg, distribucion cada 3-5 h, ventana 30 min-2 h, absorcion ~10 g AA/h, leucina 2.5 g; CHO general 45-65%; en deficit vigilar proteina y timing.", "rules": ["nutri-3g-protein-distribution", "nutri-3g-protein-window", "nutri-3g-protein-total", "nutri-3g-protein-seniors", "nutri-3g-absorption-rate", "nutri-3g-leucine-2.5", "nutri-3g-cho-general", "nutri-3g-cut-monitor-protein", "nutri-3g-cut-timing"] }
+    {
+      "id": "nsca-est4-ch9-protein",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein",
+      "tags": [
+        "protein",
+        "rda",
+        "safety"
+      ],
+      "locator": {
+        "chapter": 9,
+        "page": 183
+      },
+      "summary": "Recomendaciones NSCA de proteina por poblacion (fitness general 0.8-1.0, resistencia 1.0-1.6, fuerza 1.4-1.7, deficit 1.8-2.7) mas seguridad renal hasta 2.8 g/kg y encuadre de timing.",
+      "rules": [
+        "nutri-nsca-protein-general",
+        "nutri-nsca-protein-endurance",
+        "nutri-nsca-protein-strength",
+        "nutri-nsca-protein-combined",
+        "nutri-nsca-protein-deficit",
+        "nutri-nsca-protein-renal-safe",
+        "nutri-nsca-protein-excess-caveat",
+        "nutri-nsca-protein-post-range",
+        "nutri-nsca-protein-sensitivity-48h"
+      ],
+      "entities": []
+    },
+    {
+      "id": "nsca-est4-ch10-protein-timing",
+      "sourceId": "nsca-est-4ed",
+      "topic": "protein-timing",
+      "tags": [
+        "timing",
+        "post-workout",
+        "leucine"
+      ],
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      },
+      "summary": "Dosis post-entreno por edad (20-25 g jovenes con 2-3 g leucina; 40+ mayores), minimo por comida 20-30 g, ventanas segun estado alimentado y regla de retraso 3 h en resistencia.",
+      "rules": [
+        "nutri-nsca-protein-post-young",
+        "nutri-nsca-protein-post-older",
+        "nutri-nsca-protein-meal-20-30",
+        "nutri-nsca-protein-window-fasted",
+        "nutri-nsca-protein-delay-3h",
+        "nutri-nsca-protein-endurance-min"
+      ],
+      "entities": []
+    },
+    {
+      "id": "nsca-est4-ch10-energy-goals",
+      "sourceId": "nsca-est-4ed",
+      "topic": "energy",
+      "tags": [
+        "bulk",
+        "cut",
+        "maintenance"
+      ],
+      "locator": {
+        "chapter": 10,
+        "page": 217
+      },
+      "summary": "Energia por objetivo: +500 kcal y 1.5-2.0 g/kg proteina para ganancia; deficit ~500 kcal y 1.8-2.7 g/kg para perdida; tabla kcal/kg por nivel de actividad (38/41/50 varon; 35/37/44 mujer).",
+      "rules": [
+        "nutri-nsca-bulk-surplus",
+        "nutri-nsca-bulk-protein",
+        "nutri-nsca-bulk-overfeeding",
+        "nutri-nsca-cut-deficit",
+        "nutri-nsca-cut-adherence",
+        "nutri-nsca-kcal-kg-table",
+        "nutri-nsca-record-method"
+      ],
+      "entities": []
+    },
+    {
+      "id": "nsca-est4-ch10-peri-workout",
+      "sourceId": "nsca-est-4ed",
+      "topic": "peri-workout",
+      "tags": [
+        "pre-workout",
+        "during",
+        "post-workout"
+      ],
+      "locator": {
+        "chapter": 10,
+        "page": 203
+      },
+      "summary": "Estrategias peri-competencia NSCA: comida pre 1-4 g/kg (4h) o 1 g/kg (2h), liquidos a 1h; durante 30-90 g/h multi-CHO, electrolitos en calor, enjuague bucal; post 1.5 g/kg en 30 min, resintesis 1.0-1.85 g/kg/h.",
+      "rules": [
+        "nutri-nsca-pre-4h",
+        "nutri-nsca-pre-2h",
+        "nutri-nsca-pre-1h-liquid",
+        "nutri-nsca-during-cho",
+        "nutri-nsca-during-studied-range",
+        "nutri-nsca-during-cap",
+        "nutri-nsca-during-fructose",
+        "nutri-nsca-during-mouth-rinse",
+        "nutri-nsca-post-cho-30min",
+        "nutri-nsca-post-glycogen-rate",
+        "nutri-nsca-post-cho-sparing",
+        "nutri-nsca-post-wait-2h",
+        "nutri-nsca-post-1.5-study"
+      ],
+      "entities": []
+    },
+    {
+      "id": "nsca-est4-ch10-hydration",
+      "sourceId": "nsca-est-4ed",
+      "topic": "hydration",
+      "tags": [
+        "hydration",
+        "electrolytes"
+      ],
+      "locator": {
+        "chapter": 10,
+        "page": 204
+      },
+      "summary": "Hidratacion NSCA: prehidratacion con USG <1.020, bebida deportiva en calor (Na 460-690 mg/L, K 78-195 mg/L, CHO 5-10%), fluidos por cambio de lado en deportes con pausas, sodio con comidas en recuperacion.",
+      "rules": [
+        "nutri-nsca-pre-usg",
+        "nutri-nsca-during-drink-electrolytes",
+        "nutri-nsca-during-team-fluids",
+        "nutri-nsca-post-sodium-foods"
+      ],
+      "entities": []
+    },
+    {
+      "id": "nsca-est4-ch10-strength-cho",
+      "sourceId": "nsca-est-4ed",
+      "topic": "carbohydrates",
+      "tags": [
+        "strength",
+        "daily"
+      ],
+      "locator": {
+        "chapter": 10,
+        "page": 215
+      },
+      "summary": "CHO para fuerza/velocidad: 5-6 g/kg/dia, IG alto post-competencia si se recompite <24 h; resistencia 8-10 g/kg con sesiones de 90+ min.",
+      "rules": [
+        "nutri-nsca-strength-cho-daily",
+        "nutri-nsca-strength-post-high-gi",
+        "nutri-nsca-cho-endurance-daily"
+      ],
+      "entities": []
+    },
+    {
+      "id": "nsca-est4-ch11-supplements",
+      "sourceId": "nsca-est-4ed",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "caffeine",
+        "hmb",
+        "bicarbonate"
+      ],
+      "locator": {
+        "chapter": 11,
+        "page": 243
+      },
+      "summary": "Sustancias ergogenicas NSCA con dosis: creatina (carga 20-25 g/d x5d, mant. 2 g/d), cafeina (3-9 mg/kg 60 min pre), bicarbonato 0.3 g/kg, citratos 0.4-0.6 g/kg, HMB 1.5-3 g/d, arginina ineficaz.",
+      "rules": [
+        "nutri-nsca-creatine-protocol",
+        "nutri-nsca-creatine-no-load",
+        "nutri-nsca-creatine-washout",
+        "nutri-nsca-creatine-muscle-increase",
+        "nutri-nsca-creatine-strength-gains",
+        "nutri-nsca-creatine-bm-gain",
+        "nutri-nsca-creatine-explosive",
+        "nutri-nsca-creatine-safety",
+        "nutri-nsca-caffeine-protocol",
+        "nutri-nsca-caffeine-risk",
+        "nutri-nsca-caffeine-no-diuresis",
+        "nutri-nsca-caffeine-lethal",
+        "nutri-nsca-caffeine-tablet",
+        "nutri-nsca-caffeine-energy-drinks",
+        "nutri-nsca-bicarbonate",
+        "nutri-nsca-citrate",
+        "nutri-nsca-hmb",
+        "nutri-nsca-arginine"
+      ],
+      "entities": []
+    },
+    {
+      "id": "maughan-ch10-protein",
+      "sourceId": "maughan-nis-2000",
+      "topic": "protein",
+      "tags": [
+        "protein",
+        "nitrogen-balance"
+      ],
+      "locator": {
+        "chapter": 10,
+        "page": 133
+      },
+      "summary": "Metabolismo proteico en ejercicio (Lemon): optimo 1.7-1.8 g/kg fuerza y 1.2-1.4 resistencia, RDA insuficiente, la dieta cubre 1.2-1.8 si hay energia suficiente.",
+      "rules": [
+        "nutri-mau-protein-strength",
+        "nutri-mau-protein-endurance",
+        "nutri-mau-protein-rda-insufficient",
+        "nutri-mau-protein-food-sufficient",
+        "nutri-mau-protein-studied-range",
+        "nutri-mau-protein-high-no-benefit"
+      ],
+      "entities": []
+    },
+    {
+      "id": "maughan-ch5-8-carbs",
+      "sourceId": "maughan-nis-2000",
+      "topic": "carbohydrates",
+      "tags": [
+        "carbs",
+        "guidelines"
+      ],
+      "locator": {
+        "chapter": 5,
+        "page": 73
+      },
+      "summary": "Cuatro pautas CHO de Burke: 7-10 g/kg/dia recuperacion, >=1 g/kg en 30 min post, 1-4 g/kg pre-evento, 30-60 g/h durante; preferir g/kg sobre % energia; concentracion de bebida 2-8%.",
+      "rules": [
+        "nutri-mau-cho-daily-recovery",
+        "nutri-mau-cho-post-early",
+        "nutri-mau-cho-pre-event",
+        "nutri-mau-cho-during",
+        "nutri-mau-cho-drink-concentration",
+        "nutri-mau-cho-gkg-over-percent"
+      ],
+      "entities": []
+    },
+    {
+      "id": "maughan-ch7-glycogen",
+      "sourceId": "maughan-nis-2000",
+      "topic": "peri-workout",
+      "tags": [
+        "glycogen",
+        "recovery"
+      ],
+      "locator": {
+        "chapter": 7,
+        "page": 97
+      },
+      "summary": "Optimizacion de glucogeno (Ivy): suplemento inmediato cada 2 h 0.7-1.4 g/kg, meseta >=1-1.5 g/kg, retraso 2 h reduce 50%, techo 600 g/dia, IG alto mejor a 24 h, carga modificada 70%.",
+      "rules": [
+        "nutri-mau-cho-post-intervals",
+        "nutri-mau-cho-post-plateau",
+        "nutri-mau-cho-delay-halves",
+        "nutri-mau-cho-cap-600g",
+        "nutri-mau-cho-gi-high",
+        "nutri-mau-cho-modified-loading",
+        "nutri-mau-cho-oxidation-cap"
+      ],
+      "entities": []
+    },
+    {
+      "id": "maughan-ch15-19-hydration",
+      "sourceId": "maughan-nis-2000",
+      "topic": "hydration",
+      "tags": [
+        "hydration",
+        "dehydration",
+        "electrolytes"
+      ],
+      "locator": {
+        "chapter": 15,
+        "page": 203
+      },
+      "summary": "Hidratacion IOC: umbrales de deficit (1% temperatura, 1-2% capacidad, 2-4% VO2max), bebida 2-8% CHO, rehidratacion 150% del deficit con sodio ~50 mmol/L, agua sola suficiente con comida.",
+      "rules": [
+        "nutri-mau-hyd-1pct-temp",
+        "nutri-mau-hyd-1-2pct-capacity",
+        "nutri-mau-hyd-2-4pct-vo2max",
+        "nutri-mau-hyd-2pct-running",
+        "nutri-mau-hyd-baseline-daily",
+        "nutri-mau-hyd-during-600-1200",
+        "nutri-mau-hyd-marathon-intervals",
+        "nutri-mau-hyd-post-150pct",
+        "nutri-mau-hyd-post-na-50",
+        "nutri-mau-hyd-sports-drinks-na",
+        "nutri-mau-hyd-food-sufficient",
+        "nutri-mau-hyd-sweat-variability"
+      ],
+      "entities": []
+    },
+    {
+      "id": "maughan-ch26-28-supplements",
+      "sourceId": "maughan-nis-2000",
+      "topic": "supplements",
+      "tags": [
+        "creatine",
+        "caffeine",
+        "ergogenic-aids"
+      ],
+      "locator": {
+        "chapter": 26,
+        "page": 356
+      },
+      "summary": "Ergogenicos IOC: creatina carga 20 g/d x5-6d + 2 g/d (o 3 g/d lento) con sinergia CHO; cafeina 3-13 mg/kg con riesgo >9; clasificacion de eficacia de ayudas.",
+      "rules": [
+        "nutri-mau-creatine-loading",
+        "nutri-mau-creatine-slow-route",
+        "nutri-mau-creatine-cho-synergy",
+        "nutri-mau-creatine-pool",
+        "nutri-mau-creatine-safety",
+        "nutri-mau-caffeine-range",
+        "nutri-mau-caffeine-adverse-9",
+        "nutri-mau-caffeine-timing",
+        "nutri-mau-caffeine-flat-6",
+        "nutri-mau-ergogenic-classification"
+      ],
+      "entities": []
+    },
+    {
+      "id": "maughan-ch35-energy",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "energy",
+        "deficit",
+        "tef"
+      ],
+      "locator": {
+        "chapter": 35,
+        "page": 469
+      },
+      "summary": "Atleta con sobrepeso (Manore): deficit no restrictivo, TEF por macro, EPOC, gasto de entrenamiento 1000-2000 kcal; red flag TCA.",
+      "rules": [
+        "nutri-mau-tef-macro",
+        "nutri-mau-deficit-not-restrictive",
+        "nutri-mau-tca-redflag",
+        "nutri-mau-epoc",
+        "nutri-mau-tea-athletes"
+      ],
+      "entities": []
+    },
+    {
+      "id": "maughan-ch47-strength",
+      "sourceId": "maughan-nis-2000",
+      "topic": "energy",
+      "tags": [
+        "strength",
+        "weightlifting"
+      ],
+      "locator": {
+        "chapter": 47,
+        "page": 621
+      },
+      "summary": "Halterofilia/potencia (Rogozkin): 3500-5500 kcal varones, proteina 1.4-2.0 g/kg, CHO 8-10 g/kg, grasa 1.7-2.4 g/kg (~58-60% CHO).",
+      "rules": [
+        "nutri-mau-strength-energy",
+        "nutri-mau-strength-protein",
+        "nutri-mau-strength-cho",
+        "nutri-mau-strength-split"
+      ],
+      "entities": []
+    },
+    {
+      "id": "3g-ch2-6-selected",
+      "sourceId": "sportnutrition-3g-2022",
+      "topic": "protein-timing",
+      "tags": [
+        "distribution",
+        "general"
+      ],
+      "locator": {
+        "chapter": 4,
+        "page": 150
+      },
+      "summary": "Temas selectos S1: proteina 1.2-2.0 g/kg, distribucion cada 3-5 h, ventana 30 min-2 h, absorcion ~10 g AA/h, leucina 2.5 g; CHO general 45-65%; en deficit vigilar proteina y timing.",
+      "rules": [
+        "nutri-3g-protein-distribution",
+        "nutri-3g-protein-window",
+        "nutri-3g-protein-total",
+        "nutri-3g-protein-seniors",
+        "nutri-3g-absorption-rate",
+        "nutri-3g-leucine-2.5",
+        "nutri-3g-cho-general",
+        "nutri-3g-cut-monitor-protein",
+        "nutri-3g-cut-timing"
+      ],
+      "entities": []
+    }
   ]
 }
