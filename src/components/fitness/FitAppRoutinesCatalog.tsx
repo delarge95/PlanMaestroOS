@@ -8,8 +8,9 @@ import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { libraryAssetUrl } from '../../lib/library/openDocument';
 import ExerciseModal from './ExerciseModal';
 import { Sheet } from '../ui/Sheet';
-import { Search, Filter, ChevronDown, ChevronUp, ExternalLink, Calendar, Award, BookOpen } from 'lucide-react';
+import { Search, Filter, ChevronDown, ChevronUp, ExternalLink, Calendar, Award, BookOpen, Target } from 'lucide-react';
 import useIsMobile from '../ui/useIsMobile';
+import { isThenxMasterRoutineId } from '../../data/fitness/progressionPathLinks';
 
 // B6: filtros persistentes (autor/disciplina/tier) — sobreviven desmonte y recarga.
 const CATALOG_FILTERS_KEY = 'fitapp_catalog_filters_v1';
@@ -75,11 +76,13 @@ export default function FitAppRoutinesCatalog() {
   };
 
   // Leer parámetro ?routine=ID de la URL al cargar
+  // B7: getProgramById SIEMPRE devuelve algo (fallback al primero), así que la
+  // validez se comprueba contra allPrograms para no abrir min-max por error.
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const routineParam = params.get('routine');
-      if (routineParam && getProgramById(routineParam)) {
+      if (routineParam && allPrograms.some((p) => p.id === routineParam)) {
         setInspectedProgram(routineParam);
         setIsDetailSheetOpen(true);
       }
@@ -675,6 +678,30 @@ export default function FitAppRoutinesCatalog() {
               >
                 <ExternalLink size={13} />
                 <span>Ver PDF Oficial</span>
+              </a>
+            )}
+
+            {/* B7: las rutinas master de THENX tienen progresión asociada en Habilidades */}
+            {isThenxMasterRoutineId(currentProgram.id) && (
+              <a
+                href="/app/fitness/skills"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  background: 'rgba(10,132,255,0.12)',
+                  border: '1px solid rgba(10,132,255,0.35)',
+                  color: 'var(--accent, #0a84ff)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  textDecoration: 'none'
+                }}
+                title="Ver la progresión paso a paso y la guía técnica de esta habilidad"
+              >
+                <Target size={13} />
+                <span>Progresión en Habilidades</span>
               </a>
             )}
           </div>

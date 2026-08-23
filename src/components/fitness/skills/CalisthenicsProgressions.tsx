@@ -10,7 +10,7 @@ import { PROGRESSION_ALIASES } from "../../../data/fitness/progressionAliases";
 import { YouTubePlayer } from "../../ui/YouTubePlayer";
 import ExerciseModal from "../ExerciseModal";
 import { getShortTitle, groupByPhase } from "./progressionDisplay";
-import { Search, ChevronRight, PlayCircle, Check, Flag } from "lucide-react";
+import { Search, ChevronRight, PlayCircle, Check, Flag, Dumbbell, ExternalLink } from "lucide-react";
 import {
   getActiveProgressionState,
   subscribeActiveProgressionState,
@@ -19,6 +19,8 @@ import {
   getProgressionStepIndex,
   setProgressionStepIndex,
 } from "../../../data/fitness/activeProgressionStore";
+import { useActiveProgramStore } from "../../../data/fitness/activeProgramStore";
+import { progressionGroupToRoutine, routineCatalogUrl } from "../../../data/fitness/progressionPathLinks";
 
 interface CalisthenicsProgressionsProps {
   onSearchTermChange?: (term: string) => void;
@@ -39,6 +41,9 @@ export function CalisthenicsProgressions({
   useEffect(() => {
     return subscribeActiveProgressionState(setActiveState);
   }, []);
+
+  // B7: rutinas tg-master activas (para reflejar el estado del botón "Activar rutina")
+  const activeRoutineIds = useActiveProgramStore((s) => s.activeProgramIds);
 
   // Accordions and collapsibles
   const [expandedGroupIds, setExpandedGroupIds] = useState<string[]>([]);
@@ -386,6 +391,11 @@ export function CalisthenicsProgressions({
           const currentStep = getProgressionStepIndex(group.id);
           const shortTitle = getShortTitle(group);
           const phaseGroups = groupByPhase(group.exercises);
+          // B7: rutina tg-master del catálogo asociada a esta progresión (si existe)
+          const routineLink = progressionGroupToRoutine(group.id, group.title);
+          const isRoutineActive = routineLink
+            ? activeRoutineIds.includes(routineLink.routineId)
+            : false;
 
           return (
             <div
@@ -552,6 +562,100 @@ export function CalisthenicsProgressions({
                   />
                 </div>
               </div>
+
+              {/* B7: RUTINA MASTER ASOCIADA (activar en Hoy + ver detalle en catálogo) */}
+              {routineLink && (
+                <div
+                  style={{
+                    borderTop: "1px solid var(--color-border-subtle)",
+                    background: "rgba(10,132,255,0.04)",
+                    padding: "9px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "10px",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "0.76rem",
+                      color: "var(--text-secondary)",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      minWidth: 0,
+                    }}
+                    title="Rutina master de THENX asociada a esta progresión"
+                  >
+                    <Dumbbell size={13} style={{ color: "var(--accent)", flexShrink: 0 }} />
+                    <strong style={{ color: "var(--text)", fontWeight: 600 }}>
+                      {routineLink.label}
+                    </strong>
+                  </span>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        useActiveProgramStore
+                          .getState()
+                          .toggleActiveProgram(routineLink.routineId)
+                      }
+                      style={{
+                        background: isRoutineActive
+                          ? "rgba(48,209,88,0.12)"
+                          : "rgba(10,132,255,0.15)",
+                        color: isRoutineActive
+                          ? "var(--success, #30d158)"
+                          : "var(--accent)",
+                        border: isRoutineActive
+                          ? "1px solid rgba(48,209,88,0.5)"
+                          : "1px solid rgba(10,132,255,0.5)",
+                        borderRadius: "16px",
+                        padding: "4px 11px",
+                        fontSize: "0.72rem",
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                      title={
+                        isRoutineActive
+                          ? "Rutina activa en Hoy — clic para desactivar"
+                          : "Activar esta rutina en Hoy"
+                      }
+                    >
+                      {isRoutineActive ? (
+                        <>
+                          <Check size={12} /> En Hoy
+                        </>
+                      ) : (
+                        "Activar rutina"
+                      )}
+                    </button>
+                    <a
+                      href={routineCatalogUrl(routineLink.routineId)}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "4px",
+                        fontSize: "0.72rem",
+                        fontWeight: 600,
+                        color: "var(--accent)",
+                        textDecoration: "none",
+                        border: "1px solid var(--color-border-subtle)",
+                        borderRadius: "16px",
+                        padding: "4px 11px",
+                        background: "rgba(255,255,255,0.03)",
+                      }}
+                      title="Ver detalle de la rutina en el catálogo"
+                    >
+                      Ver detalle <ExternalLink size={11} />
+                    </a>
+                  </span>
+                </div>
+              )}
 
               {/* EXPANDED GROUP CONTENT */}
               {isGroupExpanded && (
