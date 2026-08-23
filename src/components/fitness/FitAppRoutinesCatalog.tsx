@@ -7,8 +7,36 @@ import type { TrainingProgram } from '../../data/fitness/programs/types';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { libraryAssetUrl } from '../../lib/library/openDocument';
 import ExerciseModal from './ExerciseModal';
+import { Sheet } from '../ui/Sheet';
 import { Search, Filter, ChevronDown, ChevronUp, ExternalLink, Calendar, Award, BookOpen } from 'lucide-react';
 import useIsMobile from '../ui/useIsMobile';
+
+// B6: filtros persistentes (autor/disciplina/tier) — sobreviven desmonte y recarga.
+const CATALOG_FILTERS_KEY = 'fitapp_catalog_filters_v1';
+
+interface CatalogFilters {
+  category: string;
+  discipline: string;
+  tier: string;
+}
+
+const DEFAULT_FILTERS: CatalogFilters = { category: 'all', discipline: 'all', tier: 'all' };
+
+function loadCatalogFilters(): CatalogFilters {
+  if (typeof window === 'undefined') return DEFAULT_FILTERS;
+  try {
+    const raw = window.localStorage.getItem(CATALOG_FILTERS_KEY);
+    if (!raw) return DEFAULT_FILTERS;
+    const parsed = JSON.parse(raw) as Partial<CatalogFilters>;
+    return {
+      category: typeof parsed.category === 'string' ? parsed.category : 'all',
+      discipline: typeof parsed.discipline === 'string' ? parsed.discipline : 'all',
+      tier: typeof parsed.tier === 'string' ? parsed.tier : 'all'
+    };
+  } catch {
+    return DEFAULT_FILTERS;
+  }
+}
 
 export default function FitAppRoutinesCatalog() {
   const isMobile = useIsMobile();
@@ -19,12 +47,32 @@ export default function FitAppRoutinesCatalog() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedDiscipline, setSelectedDiscipline] = useState<string>('all');
-  const [selectedTierFilter, setSelectedTierFilter] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => loadCatalogFilters().category);
+  const [selectedDiscipline, setSelectedDiscipline] = useState<string>(() => loadCatalogFilters().discipline);
+  const [selectedTierFilter, setSelectedTierFilter] = useState<string>(() => loadCatalogFilters().tier);
+
+  // B6: persistir filtros (autor/disciplina/tier) en cada cambio
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(
+        CATALOG_FILTERS_KEY,
+        JSON.stringify({ category: selectedCategory, discipline: selectedDiscipline, tier: selectedTierFilter } satisfies CatalogFilters)
+      );
+    } catch {
+      // localStorage no disponible (modo privado): los filtros siguen funcionando en memoria
+    }
+  }, [selectedCategory, selectedDiscipline, selectedTierFilter]);
   const [collapsedTierIds, setCollapsedTierIds] = useState<string[]>([]);
   const [collapsedSubgroupKeys, setCollapsedSubgroupKeys] = useState<string[]>([]);
   const [exerciseModalId, setExerciseModalId] = useState<string | null>(null);
+  // B6: el detalle del programa abre en un Sheet lateral/inferior sobre la lista,
+  // no como bloque debajo de todo el catálogo (scroll horrible).
+  const [isDetailSheetOpen, setIsDetailSheetOpen] = useState(false);
+
+  const openProgramDetail = (programId: string) => {
+    setInspectedProgram(programId);
+    setIsDetailSheetOpen(true);
+  };
 
   // Leer parámetro ?routine=ID de la URL al cargar
   useEffect(() => {
@@ -33,6 +81,7 @@ export default function FitAppRoutinesCatalog() {
       const routineParam = params.get('routine');
       if (routineParam && getProgramById(routineParam)) {
         setInspectedProgram(routineParam);
+        setIsDetailSheetOpen(true);
       }
     }
   }, [setInspectedProgram]);
@@ -113,7 +162,7 @@ export default function FitAppRoutinesCatalog() {
     return (
       <div
         key={p.id}
-        onClick={() => setInspectedProgram(p.id)}
+        onClick={() => openProgramDetail(p.id)}
         style={{
           background: isSelected ? 'rgba(10,132,255,0.12)' : 'rgba(255,255,255,0.03)',
           border: isSelected
@@ -144,6 +193,10 @@ export default function FitAppRoutinesCatalog() {
           <h4 style={{ fontSize: '0.88rem', fontWeight: 700, margin: 0, color: '#ffffff', lineHeight: 1.3 }}>
             {title}
           </h4>
+          {/* B6: autor visible en la tarjeta compacta */}
+          <span style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.45)', fontWeight: 600 }}>
+            {p.authorCategory || p.source || 'PlanMaestro OS'}
+          </span>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
@@ -154,7 +207,7 @@ export default function FitAppRoutinesCatalog() {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              setInspectedProgram(p.id);
+              openProgramDetail(p.id);
             }}
             style={{
               background: isSelected ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.08)',
@@ -550,124 +603,89 @@ export default function FitAppRoutinesCatalog() {
           )}
         </div>
 
-        {/* BLOQUE 3: DETALLE DEL PROGRAMA INSPECCIONADO & TABLA DE PRESCRIPCIÓN */}
-        <div
-          style={{
-            background: 'var(--surface-1, #0d0d0f)',
-            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-            borderRadius: 'var(--radius-m, 12px)',
-            padding: 'var(--space-md)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--space-md)'
-          }}
+        {/* B6: DETALLE DEL PROGRAMA EN SHEET (sobre la lista, sin scroll horizontal del catálogo) */}
+        <Sheet
+          isOpen={isDetailSheetOpen}
+          onClose={() => setIsDetailSheetOpen(false)}
+          title={cleanTitle}
+          description={`${currentProgram.durationWeeks} ${currentProgram.durationWeeks === 1 ? 'semana' : 'semanas'} · ${currentProgram.weeks?.[0]?.days?.length || currentProgram.split?.length || 1} días/sem · ${currentProgram.methodology.join(' · ')}`}
+          maxWidth={isMobile ? '100%' : '860px'}
         >
-          {/* CABECERA UNIFICADA DEL PROGRAMA INSPECCIONADO */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              flexWrap: 'wrap',
-              gap: '12px',
-              paddingBottom: '12px',
-              borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))'
-            }}
-          >
-            <div style={{ flex: 1, minWidth: '240px' }}>
-              <span
-                style={{
-                  fontSize: 'var(--fs-eyebrow, 0.72rem)',
-                  color: 'var(--accent, #0a84ff)',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px'
-                }}
-              >
-                {currentProgram.durationWeeks} {currentProgram.durationWeeks === 1 ? 'SEMANA' : 'SEMANAS'} · {currentProgram.weeks?.[0]?.days?.length || currentProgram.split?.length || 1} DÍAS/SEM
-              </span>
-              <h3 style={{ fontSize: 'var(--fs-page, 1.25rem)', fontWeight: 800, margin: '2px 0 4px', color: 'var(--text-primary)' }}>
-                {cleanTitle}
-              </h3>
-              <p style={{ fontSize: 'var(--fs-meta, 0.84rem)', color: 'var(--text-secondary)', margin: 0 }}>
-                <strong>Metodología:</strong> {currentProgram.methodology.join(' · ')}
-              </p>
-            </div>
-
-            {/* SWITCH ACTIVADO/DESACTIVADO Y BOTÓN DE PDF */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          {/* SWITCH ACTIVADO/DESACTIVADO Y BOTÓN DE PDF */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', paddingBottom: '12px', borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
+            <div
+              onClick={() => toggleActiveProgram(currentProgram.id)}
+              title={isActiveInTracker ? 'Activo en "Hoy" - Clic para desactivar' : 'Inactivo - Clic para activar en "Hoy"'}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                cursor: 'pointer',
+                padding: '4px 8px',
+                borderRadius: '20px',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))'
+              }}
+            >
               <div
-                onClick={() => toggleActiveProgram(currentProgram.id)}
-                title={isActiveInTracker ? 'Activo en "Hoy" - Clic para desactivar' : 'Inactivo - Clic para activar en "Hoy"'}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  cursor: 'pointer',
-                  padding: '4px 8px',
-                  borderRadius: '20px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))'
+                  width: '32px',
+                  height: '18px',
+                  borderRadius: '10px',
+                  background: isActiveInTracker ? 'var(--success, #30d158)' : 'rgba(255,255,255,0.2)',
+                  position: 'relative',
+                  transition: 'background 150ms ease'
                 }}
               >
                 <div
                   style={{
-                    width: '32px',
-                    height: '18px',
-                    borderRadius: '10px',
-                    background: isActiveInTracker ? 'var(--success, #30d158)' : 'rgba(255,255,255,0.2)',
-                    position: 'relative',
-                    transition: 'background 150ms ease'
+                    width: '14px',
+                    height: '14px',
+                    borderRadius: '50%',
+                    background: '#ffffff',
+                    position: 'absolute',
+                    top: '2px',
+                    left: isActiveInTracker ? '16px' : '2px',
+                    transition: 'left 150ms ease'
                   }}
-                >
-                  <div
-                    style={{
-                      width: '14px',
-                      height: '14px',
-                      borderRadius: '50%',
-                      background: '#ffffff',
-                      position: 'absolute',
-                      top: '2px',
-                      left: isActiveInTracker ? '16px' : '2px',
-                      transition: 'left 150ms ease'
-                    }}
-                  />
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isActiveInTracker ? 'var(--success, #30d158)' : 'var(--text-secondary)' }}>
-                  {isActiveInTracker ? 'Activo en Hoy' : 'Inactivo'}
-                </span>
+                />
               </div>
-
-              {currentProgram.pdfUrl && (
-                <a
-                  href={libraryAssetUrl(currentProgram.pdfUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '6px 12px',
-                    borderRadius: '6px',
-                    background: 'var(--accent, #0a84ff)',
-                    color: '#ffffff',
-                    fontSize: '0.78rem',
-                    fontWeight: 700,
-                    textDecoration: 'none'
-                  }}
-                >
-                  <ExternalLink size={13} />
-                  <span>Ver PDF Oficial</span>
-                </a>
-              )}
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isActiveInTracker ? 'var(--success, #30d158)' : 'var(--text-secondary)' }}>
+                {isActiveInTracker ? 'Activo en Hoy' : 'Inactivo'}
+              </span>
             </div>
+
+            {currentProgram.pdfUrl && (
+              <a
+                href={libraryAssetUrl(currentProgram.pdfUrl)}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  background: 'var(--accent, #0a84ff)',
+                  color: '#ffffff',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  textDecoration: 'none'
+                }}
+              >
+                <ExternalLink size={13} />
+                <span>Ver PDF Oficial</span>
+              </a>
+            )}
           </div>
 
           {/* TABLA UNIFICADA DE PRESCRIPCIÓN Y DETALLE DE DÍAS DE LA RUTINA */}
-          <WorkoutPrescriptionTable
-            program={currentProgram}
-          />
-        </div>
+          <div style={{ overflowY: 'auto', minHeight: 0 }}>
+            <WorkoutPrescriptionTable
+              program={currentProgram}
+            />
+          </div>
+        </Sheet>
 
         {/* MODAL DE DETALLE DE EJERCICIO */}
         {exerciseModalId && (
