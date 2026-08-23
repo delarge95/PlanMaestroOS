@@ -50,8 +50,10 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
             const reps = Number(set?.reps) || 0;
             if (weight > 0 && reps > 0) {
               list.push({
-                weekId: '',
-                dayId: '',
+                // La fecha display del logger ("vie 22 ago") es la etiqueta real
+                // de sesión; sirve de bucket honesto para el gráfico.
+                weekId: s.date || 'Sesión',
+                dayId: s.date || 'Sesión',
                 exName: ex.name || 'Ejercicio',
                 timestamp: s.date || '',
                 weight,
