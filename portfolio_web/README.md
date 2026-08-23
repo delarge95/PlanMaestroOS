@@ -2,7 +2,18 @@
 
 This folder is reserved for the future public portfolio web implementation.
 
-Current status: planning/bridge only. No web app is implemented in this phase.
+Current status: planning/bridge only. The live portfolio is the Astro site at the repo root (`src/pages/*.astro` with `BaseLayout.astro`). Nothing in this folder is built or deployed.
+
+## Decision: `borrador_01` archived (2026-08-22, AG-PORT)
+
+`borrador_01/` was an early draft copy of the portfolio with a nesting bug
+(`src/src/` and `public/public/` duplicated paths) and no unique content beyond
+the live site. It was moved to `_attic/borrador_01/` (git mv, history
+preserved) to remove the duplication risk.
+
+- The live site of record: `src/pages/`, `src/components/`, `src/data/{projects,links,focusVariants}.ts`.
+- `_attic/` is dead storage: do not build, import or edit it. Delete it entirely once the live site is confirmed complete.
+- Rationale recorded in `docs/agents/STATUS-portfolio.md` (AG-PORT, Fase 0 higiene).
 
 ## Source of truth
 
