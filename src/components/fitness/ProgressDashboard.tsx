@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
-import { calculateMuscleVolumeFromLogs, type SessionLog } from '../../lib/fitness/volumeStats';
+import {
+  calculateMuscleVolumeFromLogs,
+  loggedWorkoutToSessionLog,
+  type SessionLog,
+  type LoggedWorkout
+} from '../../lib/fitness/volumeStats';
 import { type FlatLogEntry } from '../../lib/fitness/analyticsUtils';
+import { startOfWeek, parseEsShortDate } from '../../lib/fitness/programCalendar';
 import AnalyticsChart from './analytics/AnalyticsChart';
 import ProgramAnalytics from './analytics/ProgramAnalytics';
 import LoadingCharts from './analytics/LoadingCharts';
@@ -15,7 +21,7 @@ export interface ProgressDashboardProps {
 
 export default function ProgressDashboard({ currentPath = '/app/fitness/progress' }: ProgressDashboardProps) {
   const [activeTab, setActiveTab] = useState<'analytics' | 'program' | 'loading' | 'guide' | 'history'>('analytics');
-  const [sessions, setSessions] = useState<SessionLog[]>([]);
+  const [sessions, setSessions] = useState<LoggedWorkout[]>([]);
 
   useEffect(() => {
     try {
@@ -31,27 +37,25 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
     }
   }, []);
 
-  // Transformar sesiones guardadas en un FlatLogEntry[] plano para alimentarlo en AnalyticsChart
+  // B8: flatLog SOLO desde series reales loggeadas (exercises[].completedSets).
+  // Antes se fabricaban pesos por defecto (60kg × 8 reps) — eliminado.
   const flatLog: FlatLogEntry[] = useMemo(() => {
     const list: FlatLogEntry[] = [];
-    sessions.forEach((s: any, sIdx: number) => {
-      const weekId = `Semana ${Math.floor(sIdx / 5) + 1}`;
-      const dayId = `Día ${(sIdx % 5) + 1}`;
-
+    sessions.forEach((s: any) => {
       if (Array.isArray(s.exercises)) {
         s.exercises.forEach((ex: any) => {
-          const exName = ex.name || 'Ejercicio';
-          const weights = Array.isArray(ex.weights) ? ex.weights : [60, 60, 60];
-          weights.forEach((w: any) => {
-            const wNum = Number(w) || 0;
-            if (wNum > 0) {
+          const sets = Array.isArray(ex.completedSets) ? ex.completedSets : [];
+          sets.forEach((set: any) => {
+            const weight = Number(set?.weight) || 0;
+            const reps = Number(set?.reps) || 0;
+            if (weight > 0 && reps > 0) {
               list.push({
-                weekId,
-                dayId,
-                exName,
-                timestamp: s.dateIso,
-                weight: wNum,
-                reps: 8
+                weekId: '',
+                dayId: '',
+                exName: ex.name || 'Ejercicio',
+                timestamp: s.date || '',
+                weight,
+                reps
               });
             }
           });
@@ -66,7 +70,30 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
     return sessions.reduce((acc, s: any) => acc + (s.totalVolumeKg || 0), 0);
   }, [sessions]);
 
-  const muscleVolume = calculateMuscleVolumeFromLogs(sessions);
+  // B8: volumen muscular desde el historial real vía adaptador (sin inventar grupos)
+  const muscleVolume = useMemo(
+    () => calculateMuscleVolumeFromLogs(sessions.map((w) => loggedWorkoutToSessionLog(w))),
+    [sessions]
+  );
+
+  // B8: adherencia REAL = sesiones completadas esta semana real / 5 días de entreno.
+  // El logger guarda fecha display es-ES ("vie 22 ago"): se parsea y se casa con
+  // los 7 días de la semana real actual. Lo que no se puede datar NO cuenta
+  // (antes aquí había un % decorativo inventado).
+  const sessionsThisWeek = useMemo(() => {
+    const monday = startOfWeek(new Date());
+    const weekDates = Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(monday);
+      d.setDate(d.getDate() + i);
+      return { day: d.getDate(), month: d.getMonth() };
+    });
+    return sessions.filter((s: any) => {
+      const parsed = parseEsShortDate(s.date);
+      if (!parsed) return false;
+      return weekDates.some((wd) => wd.day === parsed.day && wd.month === parsed.monthIdx);
+    }).length;
+  }, [sessions]);
+  const adherenceReal = `${sessionsThisWeek}/5`;
 
   return (
     <ErrorBoundary>
@@ -244,9 +271,9 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                   <Zap size={22} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia de Trabajo</span>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia Semanal (real)</span>
                   <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
-                    {totalSessions > 0 ? `${Math.min(100, Math.round((totalSessions / (totalSessions + 1)) * 100))}%` : '100%'}
+                    {totalSessions > 0 ? `${adherenceReal} sesiones` : 'Pendiente: logger'}
                   </strong>
                 </div>
               </div>

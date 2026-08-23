@@ -58,6 +58,23 @@ export function formatDateLong(date: Date): string {
   return date.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
+/**
+ * B8: parsea la fecha display es-ES que guarda el logger en el historial
+ * (p.ej. "vie 22 ago") a {day, monthIdx}. null si no se puede parsear:
+ * nunca se inventa una fecha.
+ */
+const ES_MONTH_PREFIXES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+export function parseEsShortDate(dateStr?: string): { day: number; monthIdx: number } | null {
+  if (!dateStr) return null;
+  const m = /(\d{1,2})\s+([a-záéíóúñ]+)/i.exec(dateStr.toLowerCase());
+  if (!m) return null;
+  const day = Number(m[1]);
+  const monthIdx = ES_MONTH_PREFIXES.findIndex((tok) => m[2].startsWith(tok));
+  if (!day || monthIdx < 0) return null;
+  return { day, monthIdx };
+}
+
 export interface ProgramCalendarInput {
   /** ISO (o Date) de arranque del programa (activeProgramStore.startedAt). */
   startedAt: string | Date | null | undefined;

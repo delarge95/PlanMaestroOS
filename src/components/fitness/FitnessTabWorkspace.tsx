@@ -6,7 +6,7 @@ import FitAppRoutinesCatalog from './FitAppRoutinesCatalog';
 import SkillsWorkspace from './skills/SkillsWorkspace';
 import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
 import CustomRoutineBuilder from './CustomRoutineBuilder';
-import FitAppAnalyticsDashboard from './FitAppAnalyticsDashboard';
+import RealProgressSections from './analytics/RealProgressSections';
 import TendonLoadMonitor from './TendonLoadMonitor';
 import TodayCalendar from './TodayCalendar';
 import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
@@ -253,10 +253,12 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
             </div>
           )}
 
+          {/* B8: progreso REAL (programas activos / semana / histórico / récords).
+              Sustituye al dashboard maqueta con métricas inventadas (94%, 101%…). */}
           {activeMainTab === 'progress' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+              <RealProgressSections />
               <TendonLoadMonitor />
-              <FitAppAnalyticsDashboard />
             </div>
           )}
 
