@@ -1,6 +1,11 @@
 {
   "version": "4.0.0",
   "domains": {
+    "anatomy": {
+      "version": "4.0.0",
+      "sources": 1,
+      "chunks": 32
+    },
     "nutrition": {
       "version": "4.0.0",
       "sources": 3,

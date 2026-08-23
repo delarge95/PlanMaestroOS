@@ -1,0 +1,763 @@
+{
+  "domain": "anatomy",
+  "version": "4.0.0",
+  "sources": [
+    {
+      "id": "norkin-joint-structure-6ed",
+      "title": "Joint Structure and Function: A Comprehensive Analysis (Levangie & Norkin)",
+      "author": "Pamela K. Levangie; Cynthia C. Norkin; Michael D. Lewek",
+      "year": 2019,
+      "edition": "6ª (F.A. Davis, 2019)",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "kinesiology",
+          "joint-structure",
+          "anatomy"
+        ],
+        "priority": 1
+      }
+    }
+  ],
+  "chunks": [
+    {
+      "id": "njs6-hip-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "cadera",
+        "acetabulo",
+        "labrum",
+        "enartrosis"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint"
+      },
+      "summary": "Cadera: enartrosis (cabeza femoral ~2/3 de esfera en el acetábulo formado por ilion, isquion y pubis — el pubis aporta 1/5). La superficie lunada (cartílago en herradura) distribuye el estrés de contacto; la apertura acetabular mira 50° hacia abajo y está antevertida ~20° (algo mayor en mujeres). El labrum acetabular (fibrocartílago en cuña, análogo al menisco de rodilla) sella la articulación, aumenta profundidad y estabilidad y resiste traslación de la cabeza; el ligamento transverso acetabular completa el anillo por debajo. Displasia acetabular (acetábulo somero) reduce cobertura de la cabeza → inestabilidad y sobrecarga del reborde superior; coxa profunda/protrusio son coberturas excesivas. Congruencia máxima en flexión + abducción + rotación lateral; la congruencia es mayor con carga que sin ella.",
+      "entities": [
+        "joint:hip",
+        "bone:acetabulum",
+        "bone:femur",
+        "ligament:labrum-hip",
+        "ligament:transverse-acetabular"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-femur",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "cadera",
+        "femur",
+        "angulo-inclinacion",
+        "anteversion",
+        "coxa"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint — Structure of the Femur"
+      },
+      "summary": "Angulaciones del fémur proximal: ángulo de inclinación cuello-diáfisis ~125° (rango normal 110-144°). Coxa valga (mayor ángulo) acerca la línea de carga al eje diafisario y REDUCE el momento de flexión del cuello (más estrés articular por menos superficie de contacto); coxa vara (menor ángulo) hunde más la cabeza en el acetábulo (más estabilidad) pero aumenta el brazo de palanca del cuello. Ángulo de torsión: anteversión femoral >15-20° (anteversión patológica) → el sujeto rota medialmente el fémur para centrar la cabeza: rotadores mediales acortados, rotación lateral limitada, y rodillas/pies que miran hacia dentro; retroversión (<15-20°): rotación medial limitada, y se asocia a desgarros labrales sintomáticos. Anteversión y coxa valga suelen coexistir (p. ej., displasia).",
+      "entities": [
+        "bone:femur"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-capsula",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "cadera",
+        "capsula",
+        "iliofemoral",
+        "pubofemoral",
+        "ischiofemoral",
+        "ligamentum-teres"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint — Capsule and Ligaments"
+      },
+      "summary": "A diferencia del hombro, la cápsula de cadera es un contribuyente sustancial a la estabilidad: estructura fibrosa densa con fibras longitudinales y oblicuas y tres engrosamientos capsuloligamentosos — iliofemoral (en Y, el más fuerte, limita extensión y rotación), pubofemoral (limita extensión y abducción) e ischiofemoral (limita rotación medial y extensión). Juntos resisten la distracción de la cabeza fuera del acetábulo; el efecto neto es que la EXTENSIÓN de cadera tensa la cápsula (posición de cierre). El ligamento redondo (ligamentum teres) es intraarticular pero extrasinovial, del escotadura acetabular a la fóvea; su papel mecánico es limitado (más relevante como portador vascular en el niño).",
+      "entities": [
+        "ligament:iliofemoral",
+        "ligament:pubofemoral",
+        "ligament:ischiofemoral",
+        "ligament:teres"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-musculos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "cadera",
+        "flexores",
+        "extensores",
+        "abductores",
+        "gluteos",
+        "hamstrings"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint — Muscle Function"
+      },
+      "summary": "Flexores primarios: iliopsoas (con recto femoral, sartorio y TFL); secundarios pectíneo, aductores y grácil (según posición). Extensores: glúteo mayor (monoarticular) + isquiotibiales biarticulares (bíceps femoral largo, semitendinoso, semimembranoso), asistidos por fibras posteriores de glúteo medio/aductor mayor. Abductores: glúteo medio y menor — el \"manguito rotador de la cadera\" (medio ~ supraespinoso, menor ~ subescapular); abducen el fémur en cadena abierta y, más importante, estabilizan la pelvis en apoyo unipodal. Rotadores laterales: seis cortos (obturador int/ext, géminos sup/inf, cuadrado femoral, piramidal). NO hay músculos con función PRIMARIA de rotación medial: los rotadores mediales más constantes son las porciones anteriores de glúteo medio/medio y el TFL.",
+      "entities": [
+        "muscle:iliopsoas",
+        "muscle:gluteus-maximus",
+        "muscle:gluteus-medius",
+        "muscle:gluteus-minimus",
+        "muscle:hamstrings",
+        "muscle:tfl"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-fuerzas",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "cadera",
+        "apoyo-unipodal",
+        "fuerza-articular",
+        "trendelenburg",
+        "baston"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Hip Joint Forces and Muscle Function in Stance"
+      },
+      "summary": "Fuerzas en bipedestación: en apoyo bipedal la línea de gravedad cae justo por detrás del eje flexo-extensor de cadera → momento extensor externo controlado por tensión pasiva capsular (con algo de iliopsoas intermitente). En APOYO UNIPODAL el peso suprayacente (HAT + miembro no cargado) crea un momento ADUCTOR con brazo ~10 cm que los abductores (brazo ~5 cm) deben igualar con el DOBLE de fuerza: la compresión articular resultante ≈ 3 veces el peso del cuerpo (ejemplo del libro: persona de 825 N → ~2.060 N en la cadera de apoyo). De ahí: perder 1 N de peso reduce ~3 N la fuerza articular; inclinar el tronco hacia el lado afectado (marcha de glúteo medio o antálgica) acerca la línea de gravedad al eje y reduce ~50% la compresión; el bastón CONTRALATERAL reduce aún más la demanda de los abductores (el dorsal ancho opuesto aporta contramomento).",
+      "entities": [
+        "muscle:gluteus-medius",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "cadera",
+        "fractura-cuello",
+        "trocanter",
+        "artrosis",
+        "displasia"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint / Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica de cadera: el peso que pasa por la cabeza femoral comprime medialmente al cuello → momento de flexión sobre el cuello femoral (tracción superior, compresión inferior); el hueso resiste peor la tracción y el cuerpo la contrarresta con actividad muscular (compresión) y con los sistemas trabeculares del cuello — falla → fractura (típica en osteoporosis con caída). Dolor en la ingle provocado por flexión + rotación medial pasivas sugiere daño labral anterosuperior y/o cambios artróticos. El síndrome de dolor del gran trocánter es queja común en mujeres de mediana edad (4:1) y en artrosis (borde lateral de cadera). La displasia detectada en lactancia se trata con posicionamiento en rana (arnés de Pavlik/Frejka) para centrar la cabeza en el acetábulo.",
+      "entities": [
+        "bone:femoral-neck",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "vertebra",
+        "disco-intervertebral",
+        "articulacion"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Structure and Function of the Vertebral Column"
+      },
+      "summary": "La columna tiene 33 vértebras (7 cervicales, 12 torácicas, 5 lumbares, 5 sacras fusionadas, 4 coccígeas) con curvas alternas lordosis/cifosis que aumentan resistencia y absorben carga. La unidad funcional es el segmento móvil (dos vértebras + disco + ligamentos). Hay dos tipos de articulación: intervertebrales (sínfisis con disco intercalado) y cigapofisiarias o facetarias (sinoviales entre apófisis articulares). Los movimientos intervertebrales incluyen deslizamiento, distracción, compresión e inclinación; el CANTIDAD de movimiento la determina sobre todo el tamaño del disco y la DIRECCIÓN la orientación de las facetas.",
+      "entities": [
+        "joint:interbody",
+        "joint:zygapophyseal",
+        "bone:vertebra"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-disco",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "disco-intervertebral",
+        "annulus",
+        "nucleus",
+        "nutricion"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Structure and Function of the Vertebral Column — Intervertebral Disc"
+      },
+      "summary": "El disco intervertebral: el anillo fibroso (~60% agua; colágeno tipo I y II en láminas) envuelve el núcleo pulposo gelatinoso. El disco está inervado solo en el tercio-mitad externa del anillo (nervios vertebrales y sinuvertebrales). NO recibe riego arterial directo: se nutre por difusión a través de las placas terminales, impulsada por los ciclos de carga (importante para entender degeneración con carga estática prolongada). Bajo compresión sostenida exhibe creep (deformación dependiente del tiempo): pérdida de altura, mayor abombamiento y más flexibilidad — base de la variación diurna de estatura.",
+      "entities": [
+        "joint:interbody"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-ligamentos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "columna",
+        "ligamentos",
+        "ALL",
+        "PLL",
+        "ligamentum-flavum"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Ligaments and Joint Capsules"
+      },
+      "summary": "Seis ligamentos principales: longitudinal anterior (ALL, sacro→C2, limita extensión), longitudinal posterior (PLL, C2→sacro, limita flexión), ligamento amarillo (elástico, lámina-lámina, se tensa en flexión; su hipertrofia con edad/espondilosis puede invadir el canal y comprimir médula en extensión), interespinoso (resiste flexión), supraespinoso (cordón fuerte entre ápices espinosos, se tensa en flexión; puede terminar en L3-L4) e intertransverso (resiste flexión lateral contralateral). Dato clínico: el PLL es estrecho en la región lumbar, factor de la alta incidencia de herniaciones discales posterolaterales.",
+      "entities": [
+        "ligament:all",
+        "ligament:pll",
+        "ligament:flavum",
+        "ligament:supraspinous"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-cervical",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "cervical",
+        "atlas",
+        "axis",
+        "rom",
+        "acoplamiento"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Regional Structure and Function — Cervical Region"
+      },
+      "summary": "Región cervical: la más móvil. Craneovertebral: el atlas (C1, sin cuerpo ni apófisis espinosa) acuna el occipital; el axis (C2) transmite la carga cabeza+atlas y aporta el proceso dens para la rotación. Ligamento atlantal transverso (muy fuerte, retiene el dens; el dens suele fracturarse antes de que el ligamento se rompa; limita flexión craneovertebral) y ligamentos alares (limitan rotación atlantoaxial). ROM: atlantooccipital ~15° flexión/extensión (nodding) y ~3° flexión lateral/rotación; atlantoaxial ~45° de rotación por lado (~50% de toda la rotación cervical). En cervical inferior (C3-C7) las articulaciones intervertebrales son en silla por los procesos unciformes; flexión lateral y rotación son movimientos ACOPLADOS ipsilaterales; las facetas orientadas ~45° entre plano transverso y frontal.",
+      "entities": [
+        "joint:c0-c1",
+        "joint:c1-c2",
+        "ligament:transverse-atlantal",
+        "ligament:alar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-toracica-lumbar",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "toracica",
+        "lumbar",
+        "rom",
+        "iliolumbar"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Regional Structure and Function — Thoracic and Lumbar Regions"
+      },
+      "summary": "Torácica: estable y poco móvil — caja costilla, espinosas solapadas (T5-T8), cápsulas tensas, facetas ~20° del plano frontal (favorecen rotación y flexión lateral, restringen flexión/extensión, sobre todo T1-T6). Lumbar: cuerpos masivos para compresión, facetas predominantemente sagitales (favorecen flexión/extensión, poca rotación), mayor flexión en L4-L5/L5-S1. El ángulo lumbosacro (inclinación de S1) aumenta la lordosis y el cizallamiento anterior sobre L5; los ligamentos iliolumbares (L5→ilíaco) estabilizan L5 y resisten cizallamiento, flexión lateral y rotación. La fascia toracolumbar con la fascia abdominal forma un \"aro\" que añade rigidez lumbopélvica, tensable por contracción muscular.",
+      "entities": [
+        "joint:l5-s1",
+        "ligament:iliolumbar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-cargas",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "columna",
+        "compresion",
+        "torsion",
+        "cizallamiento",
+        "creep"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Kinetics"
+      },
+      "summary": "Cargas sobre la columna: compresión axial (gravedad + reacción del suelo + músculo + carga externa) resistida sobre todo por discos y cuerpos; el núcleo pulposo genera presión interna MAYOR que la carga aplicada (presión de hinchazón) y transmite al anillo tensiones circunferenciales. La flexión comprime estructuras anteriores y tensa posteriores; la extensión al revés. En torsión el anillo lumbar es la estructura más eficaz pero el riesgo de rotura de fibras sube al combinar torsión con flexión y compresión. El cizallamiento anterior lumbar lo resisten a partes iguales cigapofisis y disco; sostenido en el tiempo produce creep. Con pérdida de altura discal por creep la carga se desplaza del núcleo al anillo (sobre todo posterior), favoreciendo el prolapso y reduciendo nutrición del disco.",
+      "entities": [
+        "joint:interbody"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-complejo",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "hombro",
+        "complejo",
+        "esternoclavicular",
+        "acromioclavicular",
+        "glenohumeral"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Introduction"
+      },
+      "summary": "El complejo del hombro enlaza el miembro superior al tronco con clavícula, escápula y húmero unidos por tres articulaciones interdependientes: esternoclavicular (SC, única unión ósea directa con el esqueleto axial), acromioclavicular (AC) y glenohumeral (GH), más la articulación escapulotorácica (falsa articulación: la escápula desliza sobre el tórax sin tejido articular). La contradicción movilidad-vs-estabilidad se resuelve con estabilización dinámica (fuerzas musculares activas), no con constreñimiento pasivo. En combinación con el tronco puede aportar hasta ~180° de elevación al miembro superior.",
+      "entities": [
+        "joint:sc",
+        "joint:ac",
+        "joint:gh",
+        "joint:scapulothoracic",
+        "bone:clavicle",
+        "bone:scapula",
+        "bone:humerus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-sc-ac",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "hombro",
+        "esternoclavicular",
+        "acromioclavicular",
+        "coracoclavicular",
+        "disco"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Shoulder Complex Joints and Structures"
+      },
+      "summary": "SC: disco fibrocartilaginoso que divide la articulación en dos compartimentos y disipa carga; tres unidades funcionales (elevación/depresión lateral al disco, protracción/retracción medial, y rotación). Se sostiene por ligamentos esternoclaviculares anterior/posterior, costoclavicular (bilaminar, eje del movimiento) e interclavicular. AC: sinovial plana incongruente con 3 rotaciones + 3 traslaciones; su función principal es permitir la rotación escapular 3D durante el movimiento del brazo; cápsula débil reforzada por ligamentos AC superiores/inferiores y sobre todo por el coracoclavicular (conoide: freno primario de traslación inferior del acromion; trapezoide: de traslación posterior), que transfiere fuerzas del brazo hacia la clavícula y la SC estable.",
+      "entities": [
+        "joint:sc",
+        "joint:ac",
+        "ligament:coracoclavicular",
+        "ligament:costoclavicular"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-gh-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "hombro",
+        "glenohumeral",
+        "labrum",
+        "retroversion",
+        "capsula"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Shoulder Complex Joints and Structures — Glenohumeral Joint"
+      },
+      "summary": "GH: esférica (rótula) con 3 grados de rotación y 3 de traslación; cabeza humeral (1/3-1/2 de esfera, mayor superficie que la glenoidea) sobre fosa glenoidea somera. El labrum glenoideo aumenta la profundidad/congruencia ~50% y resiste traslación de la cabeza; sirve de inserción a cápsula y ligamentos. La retroversión humeral normal centra la cabeza hacia la glena dada la posición escapular en rotación interna. La cápsula es laxa y grande: tensa superiormente y floja anterior/inferior con el brazo en reposo; el paquete ligamentario capsular estabiliza sobre todo con el brazo elevado >90°; posición de máximo empaquetado (close-packed): abducción + rotación lateral.",
+      "entities": [
+        "joint:gh",
+        "ligament:labrum-glenoid"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-manguito",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "hombro",
+        "manguito-rotador",
+        "supraspinatus",
+        "estabilidad",
+        "par-de-fuerzas"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Shoulder Joint Function"
+      },
+      "summary": "Manguito rotador (supraespinoso, infraespinoso, redondo menor y subescapular): sus tendones se funden con la cápsula GH reforzándola. Los tres \"ITS\" (infraespinoso, redondo menor, subescapular) comprimen la cabeza humeral contra la glena y además tiran de ella caudalmente — esa traslación inferior es tan o más importante que la compresión para centrar la cabeza (contrarresta el deslizamiento superior del deltoides). Deltoides + ITS forman casi un par de fuerzas perfecto que rota la cabeza con mínima traslación. El supraespinoso es peculiar: componente translatorio SUPERIOR y participación continua en la elevación; teóricamente puede abducir el brazo por sí solo en casi todo el rango (el deltoides no puede sin luxar). Su tendón está bajo tensión la mayor parte del día despierto — clave en su patología.",
+      "entities": [
+        "muscle:supraspinatus",
+        "muscle:infraspinatus",
+        "muscle:teres-minor",
+        "muscle:subscapularis",
+        "muscle:deltoid"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-ritmo",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "hombro",
+        "ritmo-escapulohumeral",
+        "elevacion",
+        "escápula",
+        "disquinesia"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Integrated Function of the Shoulder Complex"
+      },
+      "summary": "Elevación total del brazo: 150-180° = 100-120° de flexión / 90-120° de abducción en GH + 50-60° de rotación superior escapular (la regla \"2:1\" GH:escápula es una simplificación útil: los segmentos se mueven concomitantemente, no secuencialmente). La rotación superior escapular nace de elevación y rotación posterior clavicular en SC (~mitad) + rotación superior en AC (~mitad); la clavícula además se retrae 20-30° en SC. Reposo escapular: rotación interna 35-45° del plano coronal, inclinación anterior 10-15°, entre costillas 2-7 a ~5 cm de la línea media. Rotadores superiores escapulares: trapecio medio/inferior + serrato anterior. Disquinesia escapular: winging (borde medial fuera del tórax = debilidad de serrato/romboides) e inclinación anterior excesiva (pectoral menor acortado) — se asocian a dolor de hombro.",
+      "entities": [
+        "joint:scapulothoracic",
+        "muscle:serratus-anterior",
+        "muscle:trapezius"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "hombro",
+        "luxacion",
+        "pinzamiento",
+        "inestabilidad"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica del hombro: la GH es la articulación que más se luxa de todo el cuerpo (la dirección más frecuente es anterior, dada la laxitud capsular anteroinferior y la orientación de la glena). El diagnóstico más común de dolor disfuncional es el \"pinzamiento\" (impingement), dividido en subacromial (atrapamiento del manguito bajo el arco coracoacromial) e interno (entre cabeza humeral y glena). En hipermovilidad/laxitud capsular anterior el manguito debe compensar dinámicamente, con síntomas que empeoran a final del día o con uso repetitivo. Con la edad hay menos cambios degenerativos que en las grandes articulaciones del miembro inferior (menos carga ponderal en el miembro superior).",
+      "entities": [
+        "joint:gh"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "rodilla",
+        "tibiofemoral",
+        "valgo",
+        "malalineacion"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function"
+      },
+      "summary": "Rodilla tibiofemoral: dos compartimentos (medial y lateral) incongruentes — cóndilos femorales convexos sobre platillos tibiales casi planos (el medial más largo anteroposterior; platillos inclinados 7-10° hacia atrás). El eje anatómico fémur-tibia forma un valgo fisiológico ~185°: genu valgo (más ángulo) sobrecarga el compartimento lateral; genu varo el medial — la desalineación frontal se asocia fuertemente a incidencia y progresión de artrosis de rodilla (se mide como eje mecánico/línea de carga). La cápsula única envuelve tibiofemoral + patelofemoral; el refuerzo anterior es el retináculo extensor.",
+      "entities": [
+        "joint:tibiofemoral",
+        "bone:femur",
+        "bone:tibia"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-meniscos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "rodilla",
+        "meniscos",
+        "carga",
+        "vascularizacion"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Menisci"
+      },
+      "summary": "Los meniscos convierten los platillos planos en cavidades cóncavas para los cóndilos: aumentan congruencia y área de contacto (reduciendo estrés), transmiten y distribuyen el 50-70% de la carga compresiva de la rodilla y estabilizan. El medial es en C con más anclajes ligamentosos/capsulares (menos móvil → más lesiones); el lateral casi circular y más móvil. Cuernos anterior/posterior firmemente anclados a tibia; ligamento transverso los une por delante; conexiones con patela (patelomeniscales) y con cruzados. Vascularización solo periférica (los cuernos y el tercio externo vascularizado se innervan con nociceptores y mecanorreceptores; la porción central es avascular y aneural) → la capacidad de curación depende de la zona lesional (\"zona roja\" periférica cura; central no) y de la edad.",
+      "entities": [
+        "joint:tibiofemoral",
+        "structure:meniscus-medial",
+        "structure:meniscus-lateral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-ligamentos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "rodilla",
+        "MCL",
+        "LCL",
+        "ACL",
+        "PCL",
+        "cruzados"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Capsule and Ligaments"
+      },
+      "summary": "Colaterales: el medial (MCL) tiene porción superficial (epicóndilo femoral medial → tibia, se fusiona con la fascia del vasto medial y sartorio) y profunda (fusionada a cápsula y menisco medial); limita valgo y rotación. El lateral (LCL) es más laxo y NO se une al menisco lateral (fibras van al fémur-tibia-peroné). Los cruzados (ACL/PCL) se cruzan dentro de la intercondílea: guían la cinemática (rodar+deslizar) — en flexión con carga, el cóndilo rueda atrás y el ACL tenso \"obliga\" al deslizamiento anterior del fémur; el ACL resiste sobre todo la traslación ANTERIOR de la tibia (y la rotación en flexión), el PCL la posterior. Estabilizan también la rotación de la tibia (\"rotary stabilization\"). En extensión completa: ligamentos tensos + tubérculos encajados + meniscos interpuestos → rotación axial bloqueada; la rotación axial es libre con la rodilla flexionada.",
+      "entities": [
+        "ligament:mcl",
+        "ligament:lcl",
+        "ligament:acl",
+        "ligament:pcl"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-cinematica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "rodilla",
+        "rom",
+        "rotacion-automatica",
+        "screw-home",
+        "flexion"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Joint Function"
+      },
+      "summary": "Cinemática: flexo-extensión con rotación obligatoria acompañante. En los últimos grados de extensión hay rotación lateral AUTOMÁTICA (terminal) de la tibia, no muscular — \"mecanismo de enroscado\" (screw home): la superficie articular medial mayor hace que el compartimento medial ruede más. ROM frontal mínimo pero real: ~8° en extensión completa y ~13° con 20° de flexión (más = insuficiencia ligamentosa). En carga, la flexión combina rueda posterior + deslizamiento anterior del fémur sobre tibia (los meniscos migran atrás por su forma de cuña). La patela se desplaza distalmente con la flexión y su contacto femoral migra de inferior a superior/lateral.",
+      "entities": [
+        "joint:tibiofemoral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-musculos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "rodilla",
+        "cuadriceps",
+        "isquiotibiales",
+        "patela",
+        "cizallamiento"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Muscle Function"
+      },
+      "summary": "Músculos: el cuádriceps extiende (la patela actúa como polea que aumenta el brazo de palanca del cuádriceps, sobre todo cerca de la extensión; su efecto decrece en flexión profunda) pero genera cizallamiento ANTERIOR de la tibia proporcional al ángulo de flexión (relevante tras lesión de ACL). Los isquiotibiales flexionan (y rotan) y aumentan su brazo de palanca extensora de cadera al flexionar la rodilla. En ejercicios con carga el cuádriceps debe generar más par cuanta más flexión (crece el brazo de momento del peso corporal) — por eso la profundidad del squat escala el estrés. Estudio citado (Beynnon, strain in vivo del ACL): tensiones similares entre ejercicios con y sin carga ponderal → dudar de la premisa \"weightbearing es inherentemente más seguro\"; individualizar la rehabilitación.",
+      "entities": [
+        "muscle:quadriceps",
+        "muscle:hamstrings",
+        "bone:patella"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-patelofemoral",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "rodilla",
+        "patelofemoral",
+        "compresion",
+        "Q-angle",
+        "banda-iliotibial"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Patellofemoral Joint"
+      },
+      "summary": "Patelofemoral: el área de contacto patela-fémur es mínima en extensión completa y crece con la flexión; la fuerza de compresión patelofemoral crece con el ángulo de flexión y la actividad del cuádriceps — al andar (~20° de flexión máxima en apoyo) es ~25-50% del peso corporal; sube mucho con sentadilla profunda/escaleras. El estrés es MAYOR en ejercicios cargados SIN apoyo ponderal con rodilla cerca de extensión, y en ejercicios CON apoyo cuando la flexión supera ~50°. El valgo fisiológico + el ángulo Q generan tracción lateral de la patela (mayor en mujeres por pelvis más ancha/anteversión, en debate); el retináculo medial (ligamento patelofemoral medial) y el deslizamiento medial normal contrarrestan; la banda ilirotibial tensa tira lateralmente de la patela en flexión y limita su desplazamiento medial → estrés del facet lateral.",
+      "entities": [
+        "joint:patellofemoral",
+        "bone:patella"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "rodilla",
+        "lesion-meniscal",
+        "artrosis",
+        "ACL"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica: saltos, pivotes, cambios de dirección y carga cíclica repetida elevan el riesgo de lesión (meniscos, cruzados). El daño meniscal previo + pinzamiento articular predisponen a desalineación estática (varo) que sobrecarga el compartimento medial y acelera artrosis. En lesiones meniscales, la localización (periférica vascularizada vs central) y la edad determinan opciones de tratamiento (reparación vs resección). Las plicas sinoviales (esp. medial) pueden dar dolor con movimientos que cambian su orientación. La decisión de ejercicios tras lesión de ACL/PCL/patelofemoral debe basarse en la tensión real por ejercicio y ángulo, no en la dicotomía con/sin carga.",
+      "entities": [
+        "joint:tibiofemoral",
+        "ligament:acl",
+        "structure:meniscus-medial"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-talocrural",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "tobillo",
+        "talocrural",
+        "mortaja",
+        "talo",
+        "rom"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Ankle Joint"
+      },
+      "summary": "Tobillo (talocrural): sinovial en bisagra entre la mortaja (plafond tibial + maleolos tibial/fibular, que se extiende más distal en el lateral) y el cuerpo del astrágalo (trócula con surco central; carilla lateral/fibular mayor que la medial). El tróculo astragalino es MÁS ANCHO delante → en dorsiflexión el astrágalo encaja firme en la mortaja (más estabilidad; por eso los esguinces graves en inversión ocurren en flexión plantar). ROM de referencia: ~20° dorsiflexión / ~50° flexión plantar (gran variabilidad individual y por técnica). El eje pasa por los maleolos → algo oblicuo: la dorsiflexión va acompañada de abducción del pie y la flexión plantar de aducción. Los ligamentos tibiofibulares (distales) + membrana interósea mantienen la mortaja: cierta movilidad fibular es necesaria para que el astrágalo rote del todo en dorsiflexión — una lesión sindesmótica altera toda la articulación.",
+      "entities": [
+        "joint:talocrural",
+        "bone:talus",
+        "bone:tibia",
+        "bone:fibula"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-ligamentos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "tobillo",
+        "ligamento-deloideo",
+        "ATFL",
+        "CFL",
+        "esguince"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Ligaments"
+      },
+      "summary": "Ligamentos del tobillo: la cápsula es fina (más aún adelante/detrás) → la estabilidad depende de los ligamentos. MEDIAL: ligamento colateral medial o deltoideo, en abanico (capas superficial/profunda del maleolo tibial a navicular, astrágalo y calcáneo) — tan fuerte que una fuerza extrema suele AVULSIONAR el maleolo tibial antes de romperlo. LATERAL (LCL, tres bandas): talofibular anterior (ATFL, la más débil y la más lesionada: se estresa en flexión plantar + aducción + inversión; su rotura da inestabilidad anterolateral), calcaneofibular (CFL, casi vertical, se estresa en dorsiflexión + inversión) y talofibular posterior (PTFL, raramente aislado, solo en luxaciones graves). Tests clínicos: cajón anterior (ATFL) y tilitastragalino/bostezo (CFL), con diagnóstico imperfecto — valorar en varias posiciones.",
+      "entities": [
+        "ligament:deltoid",
+        "ligament:atfl",
+        "ligament:cfl",
+        "ligament:ptfl"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-subtalar",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "tobillo",
+        "subtalar",
+        "pronacion",
+        "supination",
+        "eje"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Subtalar Joint"
+      },
+      "summary": "Subtalar (talocalcánea): tres articulaciones planas entre astrágalo y calcáneo (la posterior recibe ~75% de la fuerza transmitida). Eje oblicuo: inclinado ~42° hacia arriba-adelante del plano transverso y ~16° medial del eje anteroposterior (Manter; gran variabilidad). Por eso prona/supina son movimientos COMPUESTOS: pronación = eversión + dorsiflexión + abducción del calcáneo; supinación = inversión + flexión plantar + aducción. Articulación congruente y con fuerte soporte ligamentoso (seno del tarso, ligamento interóseo talocalcáneo, cerquillo cervical): rara vez se luxa. El astrágalo recibe todo el peso que baja de la pierna y lo reparte hacia calcáneo y antepié — \"eslabón\" mecánico entre mortaja y pie.",
+      "entities": [
+        "joint:subtalar",
+        "bone:talus",
+        "bone:calcaneus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-transverso",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "pie",
+        "transverso-tarsiano",
+        "chopart",
+        "ligamento-resorte",
+        "mediopie"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Transverse Tarsal Joint"
+      },
+      "summary": "Transverso tarsiano (midtarsal/Chopart): talonavicular + calcaneocuboid en una línea que transeca el pie. La \"cavidad\" para la cabeza astragalina la forman navicular (delante), deltoideo (medial), bifurcado (lateral) y el ligamento resorte o plantar calcaneonavicular (abajo, del sustentaculum tali al navicular: sostiene la cabeza del astrágalo y el arco medial; su fallo → pie plano). El mediopie es móvil cuando el retropié está pronado (las superficies talonavicular y calcaneocuboid quedan paralelas) y rígido cuando está supinado — el pie alterna amortiguador (pronado en apoyo) y palanca rígida (supinado en propulsión), y el astrágalo dirige ambos por sus linkage.",
+      "entities": [
+        "joint:talonavicular",
+        "joint:calcaneocuboid",
+        "ligament:spring"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-bovedas",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "pie",
+        "bovedas",
+        "aponeurosis-plantar",
+        "fascitis",
+        "windlass"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Plantar Arches"
+      },
+      "summary": "Bóvedas del pie: longitudinal medial (alta), longitudinal lateral (baja) y transversa (cuñas mediales del mediopie; 2º metatarsiano retranqueado en la clave). Soporte pasivo: forma ósea (huesos en cuña, inclinación calcáneo/1er metatarsiano), ligamento resorte, ligamentos plantares y APONEUROSIS PLANTAR (fascia plantar) del tubérculo medial del calcáneo a las placas plantares de los dedos. Mecanismo windlass: la extensión metatarsofalángica tensa la aponeurosis alrededor de las cabezas metatarsianas y ELEVA el arco (supina el pie) — así el talón al elevarse convierte el pie en palanca rígida. Soporte activo dinámico: tibial posterior (el mayor tras el tríceps; inserta en navicular y arco medial), tibial anterior, peroneo largo y flexores largos. Fascitis plantar: dolor en el tubérculo medial del calcáneo, que empeora con la extensión de dedos (tensión de la fascia). En bipedestación tranquila el retropié carga ~el doble de presión que el antepié.",
+      "entities": [
+        "structure:plantar-arch",
+        "structure:plantar-aponeurosis",
+        "ligament:spring"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-musculos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "tobillo",
+        "gastrocnemio",
+        "soleo",
+        "tibial-posterior",
+        "peroneos"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Muscles of the Ankle and Foot"
+      },
+      "summary": "Músculos por compartimento: el POSTERIOR pasa por detrás del eje del tobillo → todos plantarflexores (gastrocnemio + soleus = tríceps sural, principales; plantaris, tibial posterior y flexores largos aportan solo ~5% de la fuerza plantarflexora pero sostienen el arco). El tríceps sural controla EXCÉNTRICAMENTE la dorsiflexión cargada (frenando la tibia en apoyo) y supina el retropié cargado para rigidizar el pie en el despegue; su acortamiento limita la dorsiflexión (más aún el gastrocnemio, biarticular, con rodilla extendida). ANTERIOR (por delante del eje): dorsiflexores — tibial anterior, extensores largos. LATERAL: peroneos (largo/corto) evertores y estabilizadores del arco (el peroneo largo tensa el arco transverso al insertar en la base del 1er metatarsiano). El tibial posterior pasa tras el maleolo medial e inserta en navicular + arco: principal soporte dinámico del arco (su insuficiencia → pie plano adquirido).",
+      "entities": [
+        "muscle:gastrocnemius",
+        "muscle:soleus",
+        "muscle:tibialis-posterior",
+        "muscle:tibialis-anterior",
+        "muscle:peroneus-longus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "pie",
+        "hallux-valgus",
+        "esguince-tobillo",
+        "metatarsal-break"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Function / Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica y función: el \"metatarsal break\" es el eje oblicuo por las cabezas 2ª-5ª alrededor del cual se extienden las MTF cuando el talón se eleva — la elevación del talón exige contracción plantarflexora Y que el retropié pueda supinarse (si no, no hay despegue eficaz). Hallux valgus: desviación lateral del 1er dedo con MTF comprometida — reduce ROM del 1er MTP, subluxa lateralmente los flexores y concentra carga en los metatarsianos centrales. El esguince de tobillo más típico es la lesión del ATFL en flexión plantar + inversión; los esguinces recidivantes con \"sensación de inestabilidad\" deben evaluarse combinando pruebas y posiciones. Pie cavo (supinado, arco alto) vs pie pronado: alteran la distribución de presión y el riesgo de lesiones (más esguinces/estrés lateral en cavo).",
+      "entities": [
+        "joint:mtp-1",
+        "joint:talocrural",
+        "ligament:atfl"
+      ],
+      "rules": []
+    }
+  ]
+}
