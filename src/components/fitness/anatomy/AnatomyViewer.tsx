@@ -51,6 +51,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const originalsRef = useRef<Map<THREE.Object3D, { emissive?: THREE.Color; intensity?: number; color?: THREE.Color }>>(new Map());
   // refs espejo para handlers estables del loop de escena
   const stoppedRef = useRef(false);
+  const staticModeRef = useRef(false);
   const loadingRef = useRef(true);
   const modelKeyRef = useRef(initialModel ?? 'overview-skeleton');
   const structuresForModelRef = useRef<AnatomyStructure[]>([]);
@@ -145,8 +146,23 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       model.file,
       (gltf) => {
         if (cancelled || !modelRootRef.current) return;
-        // limpiar modelo anterior
+        // limpiar modelo anterior (liberar VRAM: geometrías, materiales y texturas)
         const root = modelRootRef.current;
+        root.traverse((o) => {
+          const m = o as THREE.Mesh;
+          if (!m.isMesh) return;
+          m.geometry?.dispose();
+          const mats = Array.isArray(m.material) ? m.material : [m.material];
+          for (const mat of mats) {
+            const std = mat as THREE.MeshStandardMaterial | null;
+            if (!std) continue;
+            for (const key of Object.keys(std) as Array<keyof THREE.MeshStandardMaterial>) {
+              const tex = std[key] as unknown as THREE.Texture | undefined;
+              if (tex && (tex as THREE.Texture).isTexture) tex.dispose();
+            }
+            std.dispose();
+          }
+        });
         while (root.children.length) {
           const child = root.children[0];
           root.remove(child);
@@ -271,6 +287,10 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     let lastHover: THREE.Object3D | null = null;
     let lastHoverEmissive: THREE.Color | null = null;
     let lastHoverIntensity = 0;
+    // tap vs drag (seleccionar solo si el puntero no se movió al soltar)
+    let downX = 0;
+    let downY = 0;
+    let moved = false;
 
     const pickAt = (cx: number, cy: number): THREE.Object3D | null => {
       const rect = renderer.domElement.getBoundingClientRect();
@@ -314,10 +334,19 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           lastHoverEmissive = null;
           lastHoverIntensity = 0;
         }
+        // en modo estático (reduced motion) no hay loop: pintar el hover a mano
+        if (staticModeRef.current) renderer.render(scene, camera);
       }
+    };
+    const onDown = (e: PointerEvent) => {
+      downX = e.clientX;
+      downY = e.clientY;
+      moved = false;
     };
     const onClick = (e: PointerEvent) => {
       if (loadingRef.current) return;
+      // tap vs drag: solo seleccionar si el puntero no se movió (>6px = rotación)
+      if (moved || Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
       const hit = pickAt(e.clientX, e.clientY);
       if (!hit) return;
       // seleccionar estructura del grafo cuyo mapping incluya esta pieza (si existe)
@@ -327,30 +356,25 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       if (match) setSelectedId(match.id);
       setHoverName(hit.name);
     };
+    const onDrag = (e: PointerEvent) => {
+      if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) moved = true;
+    };
 
     const dom = renderer.domElement;
     dom.addEventListener('pointermove', onMove);
-    dom.addEventListener('pointerdown', onClick);
+    dom.addEventListener('pointerdown', onDown);
+    dom.addEventListener('pointermove', onDrag);
+    dom.addEventListener('pointerup', onClick);
     disposablesRef.current.push({
       dispose: () => {
         dom.removeEventListener('pointermove', onMove);
-        dom.removeEventListener('pointerdown', onClick);
+        dom.removeEventListener('pointerdown', onDown);
+        dom.removeEventListener('pointermove', onDrag);
+        dom.removeEventListener('pointerup', onClick);
       },
     });
 
-    const loop = () => {
-      controls.update();
-      renderer.render(scene, camera);
-      if (!stoppedRef.current) rafRef.current = requestAnimationFrame(loop);
-    };
-
-    if (reducedMotion) {
-      // una sola pasada estática; OrbitControls deshabilitado
-      controls.enabled = false;
-      renderer.render(scene, camera);
-    } else {
-      loop();
-    }
+    // (el loop de render lo posee el efecto de reduced-motion, que reacciona al cambio)
 
     return () => {
       stoppedRef.current = true;
@@ -368,6 +392,40 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // ── loop de render: reactivo a prefers-reduced-motion ──────────────────────
+  // (el estado puede llegar DESPUÉS del montaje: arrancar/parar el RAF aquí,
+  //  no en el efecto de escena que solo corre una vez)
+  useEffect(() => {
+    const renderer = rendererRef.current;
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const ctrl = controlsRef.current;
+    if (!renderer || !scene || !camera || !ctrl) return;
+    staticModeRef.current = reducedMotion;
+    if (reducedMotion) {
+      // una sola pasada estática; OrbitControls deshabilitado
+      stoppedRef.current = true;
+      cancelAnimationFrame(rafRef.current);
+      ctrl.enabled = false;
+      ctrl.enableDamping = false;
+      renderer.render(scene, camera);
+      return () => {};
+    }
+    stoppedRef.current = false;
+    ctrl.enabled = true;
+    ctrl.enableDamping = true;
+    const loop = () => {
+      ctrl.update();
+      renderer.render(scene, camera);
+      if (!stoppedRef.current) rafRef.current = requestAnimationFrame(loop);
+    };
+    loop();
+    return () => {
+      stoppedRef.current = true;
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [reducedMotion]);
 
   // sincronizar refs espejo (los handlers del canvas leen de aquí)
   loadingRef.current = loading;
