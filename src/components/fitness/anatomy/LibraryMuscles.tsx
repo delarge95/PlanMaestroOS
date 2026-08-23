@@ -18,6 +18,8 @@ import {
   getBones,
   getMusclesByAction,
   getStructureById,
+  findExercisesForMuscle,
+  anatomyViewerUrl,
   anatomyGraphStats,
 } from '../../../data/fitness/anatomyGraph';
 import type {
@@ -283,6 +285,7 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
   /** resuelve ids de estructuras relacionadas a nombres legibles */
   const namesOf = (ids?: string[]): string[] =>
     (ids ?? []).map((id) => getStructureById(id)?.nameEs ?? id);
+  const viewerUrl = anatomyViewerUrl(s);
   return (
     <div style={{ ...cardStyle, borderColor: 'rgba(53,208,255,0.35)', padding: 0, overflow: 'hidden' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '12px 14px 4px' }}>
@@ -343,8 +346,62 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
           {s.kind === 'nerve' && row('Relacionadas', namesOf((s as NerveEntry).relatedStructures))}
           {/* HUESO */}
           {s.kind === 'bone' && row('Nota funcional', (s as BoneEntry).note)}
+
+          {/* EJERCICIOS QUE LA CARGAN (exerciseDatabase READ) */}
+          <ExercisesThatLoad structure={s} />
+
+          {/* FUENTE CITADA */}
+          <div>
+            <span style={kickerStyle}>Fuente</span>
+            {s.sourceRefs.map((r, i) => (
+              <p key={i} style={{ margin: 0, fontSize: '0.72rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
+                {r.locator ? `${r.sourceId} · ${r.locator}` : r.sourceId}
+                {r.pending && (
+                  <span style={{ marginLeft: 6, color: '#e8b26a', fontWeight: 700 }} title="Verificación capítulo/página contra la biblioteca pendiente (plan Gemini)">
+                    verificación pendiente
+                  </span>
+                )}
+                {r.note ? ` — ${r.note}` : ''}
+              </p>
+            ))}
+          </div>
+
+          {/* VER EN 3D */}
+          {viewerUrl && (
+            <a href={viewerUrl} style={{ ...primaryBtnStyle, textDecoration: 'none' }}>
+              <Rotate3d size={14} /> Ver en 3D
+            </a>
+          )}
         </div>
       )}
+    </div>
+  );
+}
+
+// ── Ejercicios que cargan la estructura (READ exerciseDatabase de AG-FIT) ─────
+
+function ExercisesThatLoad({ structure }: { structure: AnatomyStructure }) {
+  const exercises = useMemo(() => findExercisesForMuscle(structure, 10), [structure]);
+  if (!exercises.length) return null;
+  return (
+    <div>
+      <span style={kickerStyle}>Ejercicios que la cargan ({exercises.length})</span>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 3 }}>
+        {exercises.map((e) => (
+          <span
+            key={e.name}
+            title={e.strength ? 'Carga de fuerza' : 'Carga de estabilidad'}
+            style={{
+              fontSize: '0.7rem', padding: '3px 8px', borderRadius: 10, cursor: 'default',
+              background: e.strength ? 'rgba(53,208,255,0.1)' : 'rgba(255,255,255,0.04)',
+              border: `1px solid ${e.strength ? 'rgba(53,208,255,0.35)' : 'var(--color-border-subtle, rgba(255,255,255,0.1))'}`,
+              color: e.strength ? '#7fdcff' : 'var(--text-secondary)',
+            }}
+          >
+            {e.name}{e.strength ? ' · fuerza' : ' · estabilidad'}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -389,4 +446,10 @@ const ghostBtnStyle: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
   background: 'rgba(255,255,255,0.04)', border: 'none', color: 'var(--text-secondary)',
   borderRadius: 8, padding: 5, cursor: 'pointer',
+};
+
+const primaryBtnStyle: React.CSSProperties = {
+  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+  background: 'rgba(53,208,255,0.14)', border: '1px solid rgba(53,208,255,0.5)', color: '#7fdcff',
+  borderRadius: 10, padding: '8px 14px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700,
 };
