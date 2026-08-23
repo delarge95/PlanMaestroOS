@@ -1,0 +1,15 @@
+{
+  "domain": "anatomy",
+  "sources": [
+    {
+      "id": "norkin-joint-structure-6ed",
+      "title": "Joint Structure and Function: A Comprehensive Analysis (Levangie & Norkin)",
+      "author": "Pamela K. Levangie; Cynthia C. Norkin; Michael D. Lewek",
+      "year": 2019,
+      "edition": "6ª (F.A. Davis, 2019)",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["kinesiology", "joint-structure", "anatomy"], "priority": 1 }
+    }
+  ]
+}
