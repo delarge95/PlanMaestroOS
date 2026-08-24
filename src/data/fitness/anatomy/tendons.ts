@@ -429,7 +429,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendines Mm. Flexorum Digitorum"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"upper-limb":["Flexor_digitorum_profundusr"]},
+  modelMeshes: {"upper-limb":["Flexor_digitorum_profundusr"],"hand":["Flexor_digitorum_profundus"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -619,7 +619,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendines Mm. Abductoris Pollicis Longi et Extensoris Pollicis Brevis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"upper-limb":["Abductor_pollicis_longus_tendon_sheath","Extensor_pollicis_brevis_tendon_sheath"]},
+  modelMeshes: {"upper-limb":["Abductor_pollicis_longus_tendon_sheath","Extensor_pollicis_brevis_tendon_sheath"],"hand":["Abductor_pollicis_longus_tendon_sheath","Extensor_pollicis_brevis_tendon_sheath"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"},
     {"sourceId":"TODO-cita","note":"Ficha truncada en el export del chat (TEN-020): campos finales reconstruidos parcialmente — completar con Gray's 4th ed."}

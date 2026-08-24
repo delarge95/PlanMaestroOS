@@ -91,7 +91,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio cubiti"
   ],
   zone: `arm`,
-  modelMeshes: {},
+  modelMeshes: {"hand":["Radius","Ulna"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -126,7 +126,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio radiocarpea"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {},
+  modelMeshes: {"hand":["Lunate_bone","Radius","Scaphoid","Ulna"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -196,7 +196,7 @@ export const JOINTS: JointEntry[] = [
     "Vertebrae lumbales"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Lumbar_vertebra_(L1)","Lumbar_vertebra_(L2)","Lumbar_vertebra_(L3)","Lumbar_vertebra_(L4)","Lumbar_vertebra_(L5)","Sacrum"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -236,7 +236,7 @@ export const JOINTS: JointEntry[] = [
   zones: [
     "spine"
   ],
-  modelMeshes: {"lower-limb":["Hip_boner","Sacrum"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -272,7 +272,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio coxae"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Femurr","Hip_boner"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -310,7 +310,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio genus"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Femurr","Patellar","Tibiar"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -351,7 +351,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio talocruralis"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Fibular","Talusr","Tibiar"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -386,7 +386,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio talocalcanea"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Calcaneusr","Navicular_boner","Talusr"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -457,7 +457,7 @@ export const JOINTS: JointEntry[] = [
     "Articulationes manus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {},
+  modelMeshes: {"hand":["Capitate","Hamate","Trapezium"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -528,7 +528,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio patellofemoralis"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Femurr","Patellar"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -568,7 +568,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio radioulnaris proximalis"
   ],
   zone: `arm`,
-  modelMeshes: {},
+  modelMeshes: {"hand":["Radius","Ulna"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -605,7 +605,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio radioulnaris distalis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {},
+  modelMeshes: {"hand":["Radius","Ulna"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -646,7 +646,7 @@ export const JOINTS: JointEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Fibular","Tibiar"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

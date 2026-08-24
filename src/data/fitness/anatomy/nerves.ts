@@ -17,7 +17,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus medianus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"upper-limb":["Lateral_root_of_median_nerver","Medial_root_of_median_nerver","Median_nerve_Common_palmar_digital_nerve_of_the_thumb","Median_nerve_Common_palmar_digital_nerves","Median_nerve_Palmar_br","Median_nerve_Proper_palmar_digital_nerves","Median_nerve_Proper_palmar_digital_nerves_of_the_thumb","Median_nerve_Recurrent_br","Median_nerver"]},
+  modelMeshes: {"upper-limb":["Lateral_root_of_median_nerver","Medial_root_of_median_nerver","Median_nerve_Common_palmar_digital_nerve_of_the_thumb","Median_nerve_Common_palmar_digital_nerves","Median_nerve_Palmar_br","Median_nerve_Proper_palmar_digital_nerves","Median_nerve_Proper_palmar_digital_nerves_of_the_thumb","Median_nerve_Recurrent_br","Median_nerver"],"hand":["Median_nerve","Median_nerve_Common_palmar_digital_nerve_of_the_thumb","Median_nerve_Common_palmar_digital_nerves","Median_nerve_Palmar_br","Median_nerve_Proper_palmar_digital_nerves","Median_nerve_Proper_palmar_digital_nerves_of_the_thumb","Median_nerve_Recurrent_br"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -55,7 +55,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "forearm-hand"
   ],
-  modelMeshes: {"upper-limb":["Ulnar_nerve_Communicating_br","Ulnar_nerve_Deep_br","Ulnar_nerve_Dorsal_cutaneous_br","Ulnar_nerve_Palmar_cutaneous_br","Ulnar_nerve_Superficial_br_Common_palmar_digital_n","Ulnar_nerve_Superficial_br_Proper_palmar_digital_nn","Ulnar_nerver"]},
+  modelMeshes: {"upper-limb":["Ulnar_nerve_Communicating_br","Ulnar_nerve_Deep_br","Ulnar_nerve_Dorsal_cutaneous_br","Ulnar_nerve_Palmar_cutaneous_br","Ulnar_nerve_Superficial_br_Common_palmar_digital_n","Ulnar_nerve_Superficial_br_Proper_palmar_digital_nn","Ulnar_nerver"],"hand":["Ulnar_nerve","Ulnar_nerve_Communicating_br","Ulnar_nerve_Deep_br","Ulnar_nerve_Dorsal_cutaneous_br","Ulnar_nerve_Palmar_cutaneous_br","Ulnar_nerve_Superficial_br_Common_palmar_digital_n","Ulnar_nerve_Superficial_br_Proper_palmar_digital_nn"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -93,7 +93,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "forearm-hand"
   ],
-  modelMeshes: {"upper-limb":["Radial_nerve_(deep_branch)r","Radial_nerve_(dorsal_digital_nn)r","Radial_nerve_(inferior_lateral_brachial_cutaneous_n)r","Radial_nerve_(posterior_antebrachial_cutaneous_n)r","Radial_nerve_(posterior_brachial_cutaneous_n)r","Radial_nerve_(posterior_interosseus_n)r","Radial_nerve_(superficial_br)r","Radial_nerver"]},
+  modelMeshes: {"upper-limb":["Radial_nerve_(deep_branch)r","Radial_nerve_(dorsal_digital_nn)r","Radial_nerve_(inferior_lateral_brachial_cutaneous_n)r","Radial_nerve_(posterior_antebrachial_cutaneous_n)r","Radial_nerve_(posterior_brachial_cutaneous_n)r","Radial_nerve_(posterior_interosseus_n)r","Radial_nerve_(superficial_br)r","Radial_nerver"],"hand":["Radial_nerve_Dorsal_digital_nn","Radial_nerve_Superficial_br"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
