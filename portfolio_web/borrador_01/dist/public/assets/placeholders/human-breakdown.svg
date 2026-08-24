@@ -1,0 +1,50 @@
+<svg width="1400" height="820" viewBox="0 0 1400 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="820" fill="#0E0D0C"/>
+  <text x="70" y="88" fill="#F5F1EA" font-family="Inter, Arial" font-size="44" font-weight="700">Human Pipeline Breakdown</text>
+  <text x="70" y="128" fill="#A8A19A" font-family="Inter, Arial" font-size="20">Slots for final render, clay, topology, UVs, material, groom and lighting captures.</text>
+  <g transform="translate(70 190)" font-family="Inter, Arial">
+    <g>
+      <rect width="280" height="210" rx="14" fill="#1A1715" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">Final Render</text>
+      <ellipse cx="188" cy="126" rx="54" ry="72" fill="#C99576"/>
+    </g>
+    <g transform="translate(316 0)">
+      <rect width="280" height="210" rx="14" fill="#191817" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">Clay</text>
+      <ellipse cx="188" cy="126" rx="54" ry="72" fill="#B9B2A8"/>
+    </g>
+    <g transform="translate(632 0)">
+      <rect width="280" height="210" rx="14" fill="#15181B" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">Topology</text>
+      <path d="M136 78H232M136 110H232M136 142H232M152 62V170M184 62V170M216 62V170" stroke="#8AE6FF" stroke-width="3"/>
+    </g>
+    <g transform="translate(948 0)">
+      <rect width="280" height="210" rx="14" fill="#171516" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">UV Layout</text>
+      <path d="M126 82L214 72L234 152L144 170Z" stroke="#E7D7A7" stroke-width="4" fill="none"/>
+    </g>
+    <g transform="translate(0 248)">
+      <rect width="280" height="210" rx="14" fill="#1A1715" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">Skin Material</text>
+      <circle cx="122" cy="126" r="30" fill="#C99576"/>
+      <circle cx="188" cy="126" r="30" fill="#E2B995"/>
+      <circle cx="254" cy="126" r="30" fill="#7A4D3C"/>
+    </g>
+    <g transform="translate(316 248)">
+      <rect width="280" height="210" rx="14" fill="#1A1715" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">Groom</text>
+      <path d="M98 134C142 82 204 82 246 134M98 166C142 114 204 114 246 166" stroke="#D7C091" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(632 248)">
+      <rect width="280" height="210" rx="14" fill="#1A1715" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">Lighting</text>
+      <circle cx="184" cy="126" r="58" stroke="#F5C04C" stroke-width="4" opacity="0.62"/>
+      <circle cx="184" cy="126" r="20" fill="#F5C04C"/>
+    </g>
+    <g transform="translate(948 248)">
+      <rect width="280" height="210" rx="14" fill="#1A1715" stroke="#3B3530"/>
+      <text x="28" y="48" fill="#F5F1EA" font-size="26" font-weight="700">Lessons</text>
+      <path d="M96 100H238M96 132H214M96 164H246" stroke="#A8A19A" stroke-width="8" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

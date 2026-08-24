@@ -1,0 +1,1 @@
+{ "domain": "cardio", "sources": [ { "id": "daniels-running-formula-4ed", "title": "Daniels' Running Formula", "author": "Jack Daniels", "year": 2022, "edition": "4th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["cardio", "running"], "priority": 1 } } ] }

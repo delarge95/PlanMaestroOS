@@ -1,0 +1,4477 @@
+=== PAGE 1154 ===
+Neuroanatomy
+e2
+Introduction
+Neuroanatomy and neuroscience are fields of science that 
+seek to explain embryonic development, structural organiza­
+tion, and physiological function of the nervous system. Both 
+fields work together to help identify the simple to the most 
+complex questions of human sensory, motor, behavioral, 
+and higher cognitive functions. The focus of this chapter is 
+to introduce the basic structures and functions of the 
+individual and systemic components of the human nervous 
+system.
+
+=== PAGE 1155 ===
+e3
+9 
+Part I: Nervous System Overview  •  Development
+Part I: Nervous system 
+overview
+Organization of the human nervous system is structurally 
+divided into the central nervous system (CNS) and peripheral 
+nervous system (PNS) (eFig. 9.1). Components of the CNS 
+are the brain and spinal cord, which are enclosed within the 
+cranial cavity and vertebral column of the axial skeleton. 
+Peripheral nervous system structures include cranial nerves, 
+spinal nerves, autonomic nerves, and the enteric nervous 
+system.
+DEVELOPMENT
+During the third week of development the outermost layer 
+of the embryo—the ectoderm—thickens to form a neural 
+plate (eFig. 9.2A). This plate develops a longitudinally 
+running neural groove, which deepens so that it is flanked 
+on either side by neural folds (eFig. 9.2B). These folds further 
+develop and eventually fuse during a process called neurula­
+tion to form a long tubelike structure called the neural tube 
+with an inner lumen called the neural canal (eFig. 9.3). Fusion 
+of the tube starts at the midpoint and extends cranially and 
+caudally so that the tube is fully formed by the fourth week. 
+Continued proliferation of the cells at the cephalic end cause 
+Brain
+Spinal
+cord
+Peripheral nervous
+system (PNS)
+Central nervous
+system (CNS)
+Cranial
+nerve
+Spinal
+nerve
+eFig. 9.1  Central nervous system (CNS) and peripheral nervous system (PNS). (From Drake R. Gray’s Anatomy for Students. 3rd ed., Fig. 1.33. 
+Philadelphia: Elsevier; 2015).
+
+=== PAGE 1156 ===
+Neuroanatomy
+e4
+the neural tube to dilate and form the three primary brain 
+vesicles (eFig. 9.4): the prosencephalon (forebrain), mesen­
+cephalon (midbrain), and rhombencephalon (hindbrain), 
+which later give rise to the structures of the brain. Caudally, 
+the neural tube lengthens and narrows to form the spinal 
+cord. The neural canal forms the cavities of the ventricular 
+system in the brain and central canal of the spinal cord 
+(eTable 9.1). The peripheral nervous system consists of 
+cranial nerves, spinal nerves, spinal ganglia, the enteric 
+system, and autonomic ganglia. The peripheral nervous 
+system is formed by nerve fibers that extend out of the central 
+nervous system and by neurons and their fibers that develop 
+from migratory neural crest cells (eFig. 9.4A). Like the neural 
+tube, neural crest cells originate from surface ectoderm and 
+initially lie on each side of the developing CNS.
+TERMS OF ORIENTATION
+Several terms are used to identify the orientation and location 
+of neural structures. The orientation nomenclature is quite 
+simple in organisms such as fish and reptiles, which have 
+a linear nervous system. For these animals, ventral (Latin 
+for “belly”) is oriented toward the ground, dorsal (Latin for 
+“back”) toward the sky, rostral (Latin for “beak”) toward 
+the snout, and caudal (Latin for “tail) toward the tail (eFig. 
+9.5). Because humans are bipedal and maintain an erect 
+Ectoderm
+Mesoderm
+Endoderm
+Neural fold
+Neural canal
+Sulcus limitans
+eFig. 9.3  Scanning electron micrograph of the just-closing neural 
+tube of a chick embryo, fractured at about the level of the future 
+midbrain. (From Nolte J. The Human Brain. 7th ed., Fig. 2-2. 
+Philadelphia: Elsevier; 2016; from the cover photograph 
+accompanying Schoenwolf GC, Smith JL. Development 109:243, 
+1990.)
+eTable 9.1  Derivatives of vesicles of the neural tube
+Primary vesicle
+Secondary 
+vesicle
+Neural 
+derivatives
+Cavity
+Prosencephalon 
+(forebrain)
+Telencephalon
+Diencephalon
+Cerebral 
+hemispheres
+Thalamus, 
+hypothalamus, 
+retina, other 
+structures
+Lateral 
+ventricles
+Third 
+ventricle
+Mesencephalon
+Mesencephalon
+Midbrain
+Cerebral 
+aqueduct
+Rhombencephalon 
+(hindbrain)
+Metencephalon
+Myelencephalon
+Pons, 
+cerebellum
+Medulla
+Part of fourth 
+ventricle
+Part of fourth 
+ventricle, part 
+of central 
+canal
+From Vanderah TW. Nolte’s the Human Brain. 7th ed., Table 2.1. Philadelphia: 
+Elsevier; 2016.
+A
+B
+Endoderm
+Notochordal
+plate
+Ectoderm
+Ectoderm
+Mesoderm
+Mesoderm
+Notochord
+Endoderm
+Neural
+plate and
+groove
+Future
+neural
+crest
+Neural
+groove
+Neural
+fold 
+Future
+neural
+crest
+18 days
+20 days
+eFig. 9.2.  Formation of the neural groove from the neural plate (A) near the 18th day of development and (B) 2 days later. (From Nolte J. The 
+Human Brain. 7th ed., Fig. 2-1. Philadelphia: Elsevier; 2016; from Arey LB. Developmental Anatomy. 4th ed. Philadelphia, PA: W. B. Saunders; 
+1941.)
+
+=== PAGE 1157 ===
+e5
+9 
+Part I: Nervous System Overview  •  Cellular Components
+posture, the nervous system makes an obligatory bend of 
+80 to 90 degrees at the midbrain–diencephalic junction. 
+Because of this, directional references such as ventral, dorsal, 
+rostral, and caudal have different meanings along different 
+locations of the CNS structures (eFig. 9.6A). An additional 
+set of terms that remain constant in their reference to orienta­
+tion of nervous system structures are anterior, posterior, 
+superior, and inferior.
+When studied through imaging or in histopathology, the 
+nervous system is observed in sections cut from one of three 
+different planes: a coronal plane, which divides the nervous 
+system into anterior and posterior parts; the sagittal plane, 
+which is oriented at a right angle to the coronal plane and 
+divides the nervous system into left and right parts; and a 
+horizontal (also referred to as axial or transverse) plane, which 
+divides the nervous system into superior and inferior parts 
+(eFig. 9.6). Note that a sagittal plane passing through the 
+midline may also be referred to as a midsagittal section, 
+whereas a section taken just lateral to the midline is referred 
+to as a parasagittal section.
+CELLULAR COMPONENTS
+Nerve cells (neurons) and glial cells are the primary cellular 
+components of the nervous system. Neurochemical signaling 
+is predominantly carried out through a complex series of 
+physiological connections between adjoining neurons. Glial 
+cells participate in a constellation of functions that are vital 
+for proper brain function. Their historically appreciated 
+contribution to neuronal function has expanded to include 
+recognition of their role in regulating the content of the 
+extracellular space and regulation of neurotransmitters at 
+the synaptic junction.
+Neurons consist of a cell body (or soma), which contains 
+the cell nucleus, short processes called dendrites for receiving 
+input from other neurons, and long processes called axons, 
+which conduct signals away from the cell body (eTable 9.2). 
+Depending on their location, neuronal morphology can be 
+quite variable. The majority of mammalian neurons are 
+multipolar, indicating that there are several dendrites from 
+one end and a single axon that branches extensively at its 
+terminus (eFig. 9.7). Some additional neuronal types are 
+bipolar, unipolar, and pseudounipolar (eFig. 9.8).
+To prevent the loss of linear signal propagation, glial 
+cells form a phospholipid-based layer of insulation called 
+the myelin sheath along the length of the axon (eFig. 9.7). 
+The myelin sheath is formed by oligodendrocytes in the CNS 
+and Schwann cells in the PNS. Interspersed between the 
+segments of myelin are exposed segments of the axon called 
+nodes of Ranvier, which have a large population of voltage-
+gated ion channels. Presence of the ion channels facilitates 
+A
+B
+C
+Ectoderm
+Notochord
+Endoderm
+Neural
+tube
+Neural
+crest
+21 days
+22 days
+24 days
+Somite
+Prosencephalon
+Mesencephalon
+Rhombencephalon
+Spinal cord
+eFig. 9.4  Closure of the neural tube during week 4. A. On day 21, the neural folds begin fusing at the cervical spinal cord level. B. Fusion of 
+the tube continues both rostrally and caudally. C. By the ≈24 day, the rostral end has closed; however, the caudal end will not close for another 
+2 to 3 days. (From Nolte J. The Human Brain. 7th ed., Fig. 2-3. Philadelphia: Elsevier; 2016; from Arey LB. Developmental Anatomy. 4th ed. 
+Philadelphia, PA: W. B. Saunders; 1941.)
+Dorsal
+Ventral
+eFig. 9.5  Directional terms used to reference different parts of the 
+CNS. (From Nolte J. The Human Brain. 6th ed., Fig. 3-1A. 
+Philadelphia: Elsevier; 2009
+
+=== PAGE 1158 ===
+Neuroanatomy
+e6
+eTable 9.2  Parts of a typical neuron
+Part
+Description
+Major organelles
+Primary functions
+Dendrites
+Tapered extensions of cell body
+Cytoskeleton, mitochondria
+Collect information from 
+other neurons
+Soma (cell body)
+May have one, two, or many processes; 
+typically one axon, many dendrites
+Nucleus, Golgi apparatus, Nissl 
+substance, cytoskeleton, mitochondria
+Synthesize macromolecules, 
+integrate electrical signalsa
+Axon
+Single, cylindrical; may be many centimeters 
+long; may be myelinated or unmyelinated
+Cytoskeleton, mitochondria, transport 
+vesicles
+Conduct information to 
+other neurons
+Axon terminals 
+(synaptic endings)
+Vesicle-filled apposition to part of another 
+neuron; most are axodendritic or 
+axosomatic, but other configurations occur
+Synaptic vesicles, mitochondria
+Transmit information to 
+other neurons
+aAs discussed in Chapter 7 of Nolte, the final integration of electrical signals (i.e., conversion of synaptic potentials to trains of action potentials) typically occurs at the 
+beginning of the axon.
+From Vanderah TW. Nolte’s the Human Brain. 7th ed., Table 1.1. Philadelphia: Elsevier; 2016.
+Thalamus
+Corpus callosum
+Interventricular foramen
+Hypothalamus
+Anterior
+Posterior
+Pineal gland
+Superior and
+inferior colliculi
+Cerebral aqueduct
+Cerebellum
+Pons
+Fourth ventricle
+Medulla
+Midbrain
+Infundibulum
+Ventral
+Dorsal
+eFig. 9.6  Planes of section for the central nervous system. (Modified from Crossman A. Neuroanatomy. 5th ed., Fig. 1.15A. Philadelphia: 
+Elsevier; 2015.)
+
+=== PAGE 1159 ===
+e7
+9 
+Part I: Nervous System Overview  •  Nervous System Functional Organization
+rapid conduction of the action potential (a transient voltage 
+change in the axonal membrane) from node to node in a 
+process called saltatory conduction (eFig. 9.7).
+NERVOUS SYSTEM FUNCTIONAL ORGANIZATION
+Functionally, the nervous system is organized into a somatic 
+nervous system and visceral nervous system. The somatic 
+nervous system consists of nerves that carry conscious 
+Dendrite
+Axon
+Synapse
+Myelin
+sheath
+Node of
+Ranvier
+eFig. 9.7  Schematic of a typical neuron. Synaptic input is predominantly received by the dendrites, and the electrical signal is propagated 
+down the axon to synaptic endings. The pink covering on the axon represents the myelin sheath. (From Nolte J. The Human Brain. 7th ed., Fig. 
+1-3. Philadelphia: Elsevier; 2016.)
+sensation from peripheral regions back to the CNS and nerves 
+that exit the CNS to innervate voluntary (skeletal) muscles. 
+In contrast, the visceral nervous system consists of nerves 
+that carry sensory information into and motor (autonomic) 
+innervation out of the CNS to regulate homeostatic functions. 
+Further discussion of the somatic and visceral nervous 
+systems will be presented within the context of the subse­
+quent “Spinal Cord” section.
+
+=== PAGE 1160 ===
+Neuroanatomy
+e8
+A
+B
+C
+D
+E
+F
+G
+(Actual size)
+eFig. 9.8  Drawings of multipolar (A–E), bipolar (F), and unipolar (G) neurons stained with the Golgi method. Green arrows indicate dendrites, 
+and blue arrows indicate axons. All of the neurons are drawn to the same scale to show the different size ranges and shapes of the various 
+neurons. A. Purkinje cell found in the cerebellar cortex; B. granule cell found in the cerebellar cortex; C. projection neuron of the inferior olivary 
+nucleus; D. motor neuron from the spinal cord motor; E. pyramidal neuron in the cerebral cortex; F. olfactory sensory receptor neurons; G. 
+spinal root ganglion cells. The small inset represents the actual size of a pyramidal neuron. (From Nolte J. The Human Brain. 7th ed., Fig. 1-4. 
+Philadelphia: Elsevier; 2016. Modified from Ramón y Cajal S. Histologie du système nerveux de l’homme et des vertébrés, Paris: Maloine;1909, 
+1911.)
+
+=== PAGE 1161 ===
+e9
+9 
+Part II: Brain  •  Cerebral Hemispheres
+Part II: Brain
+CEREBRAL HEMISPHERES
+Externally, the outer surface of the brain, or cerebral cortex, 
+is composed of six layers of cell bodies referred to as gray 
+matter. Internally, the myelinated axonal processes of these 
+cells extend into the cerebral hemispheres. Because of the 
+whitish appearance of these large bundles of myelinated 
+axons, they are referred to as white matter. In the brain, 
+gray matter is predominantly located on the cortical surface 
+and the white matter runs deep inside the cerebral hemi­
+spheres; the opposite is true for the spinal cord, where the 
+white matter is superficial to the gray matter. Topographically, 
+Temporal lobe
+Lateral sulcus
+Frontal lobe
+Occipital lobe
+Parietal lobe
+Central sulcus
+Temporal lobe
+Occipital lobe
+Parietal lobe
+Parieto-
+occipital
+sulcus
+Central sulcus
+Frontal lobe
+A
+B
+eFig. 9.9  Four lobes of the brain, right hemisphere. (A) Lateral surface and (B) medial surface. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 
+7th ed., Fig. 2.1. Philadelphia: Elsevier; 2016.)
+the surface of the cerebral hemispheres has a series of eleva­
+tions called gyri and infoldings referred to as sulci, both of 
+which significantly increase the surface area of the brain.
+Structurally, each cerebral hemisphere is divided into four 
+major anatomical lobes: frontal, parietal, occipital, and 
+temporal (eFig. 9.9A). The frontal lobes are located anteriorly 
+and are separated from the more posterior parietal lobe by 
+the central sulcus (sulcus of Rolando) (eFig. 9.9A). Laterally, 
+the frontal lobe is separated from the temporal lobe by the 
+lateral sulcus (fissure of Sylvius). Although there is no specific 
+demarcation between the parietal and occipital lobe laterally, 
+along the medial aspect of the hemispheres the two lobes 
+are separated by the parieto-occipital sulcus (eFig. 9.9B). 
+Along the midline, the cerebral hemispheres are separated 
+
+=== PAGE 1162 ===
+Neuroanatomy
+e10
+from one another by the longitudinal fissure (interhemi­
+spheric fissure, sagittal fissure). Concealing a small area of 
+cortex called the insula laterally are portions of the frontal, 
+parietal, and temporal lobes collectively referred to as the 
+operculum (Latin for “lid”) (eFig. 9.10). The insula represents 
+fusion of the telencephalon and diencephalon and can be 
+seen by gently prying open the lateral sulcus.
+The path to and from the cerebral cortex is achieved 
+through various white matter pathways coursing through 
+the spinal cord, brainstem, and cerebral hemispheres. 
+Beneath the gray matter of the cortical surface is an expan­
+sion of white matter referred to as the corona radiata. This 
+white matter pathway condenses to form the internal capsule, 
+a V-shaped structure when viewed in horizontal sections 
+that contains axons traversing to and from various cortical 
+and deep nuclear structures (eFig. 9.11). The internal capsule 
+is divided into three parts based on connections to different 
+Head of caudate nucleus
+Putamen
+Globus pallidus
+Thalamus
+Splenium of corpus callosum
+Rostrum of corpus callosum
+Anterior limb of internal capsule
+Insula
+Extreme capsule
+External capsule
+Claustrum
+Posterior limb of
+internal capsule
+Retrolenticular part of
+internal capsule
+Tail of caudate nucleus
+Genu of internal
+eFig. 9.11  Horizontal section of the brain exposing the internal capsule. (Modified from Crossman A. Neuroanatomy. 5th ed., Fig. 13.14. 
+Philadelphia: Elsevier; 2015.)
+Parietal operculum
+Temporal operculum
+Insula
+Frontal operculum
+eFig. 9.10  Insular cortex visualized with retraction of the opercula. 
+(From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 2.3. 
+Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1163 ===
+e11
+9 
+Part II: Brain  •  Ventricular System
+Precuneus
+Lingual gyrus
+Parietooccipital sulcus
+Cuneus
+Calcarine
+sulcus
+Parahippocampal gyrus
+Uncus
+Anterior commissure
+Middle frontal
+gyrus
+Thalamus
+Septum
+pellucidum
+Subcallosal
+area
+Splenium
+Paracentral lobule
+Corpus callosum
+Cingulate gyrus
+Genu
+Fornix
+Body
+Central sulcus
+eFig. 9.12  Medial view of the corpus callosum in the right cerebral hemisphere. From rostral to caudal: rostrum, genu, body, and splenium. 
+(From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 2.2B. Philadelphia: Elsevier; 2016.)
+parts of the cortex and underlying structures. The most 
+anterior portion of this white matter pathway is the anterior 
+limb, which is bounded medially by the head of the caudate 
+and laterally by the globus pallidus and putamen. The 
+anterior limb transitions into the genu (Latin for “knee”) 
+at the level of the interventricular foramen (of Monro) and 
+completes its course as the posterior limb, situated lateral 
+to the thalamus and medial to the globus pallidus and 
+putamen. In addition to this more vertical stream of axonal 
+connections is the horizontally running corpus callosum. 
+The corpus callosum (eFig. 9.12) is formed by myelinated 
+axons horizontally linking the two cerebral hemispheres to 
+one another, and it is divided into a rostrum, genu, body, 
+and splenium (eFig. 9.12).
+VENTRICULAR SYSTEM
+The ventricular system is derived from the inner lumen 
+of the developing neural tube. As the brain continues to 
+grow, the caverns and canals of the ventricular system adapt 
+to the shape of the cerebral hemispheres, diencephalon, pons, 
+medulla, and cerebellum, which form the surrounding walls 
+
+=== PAGE 1164 ===
+Neuroanatomy
+e12
+Prosencephalon (Pro)
+Mesencephalon (Mes)
+Rhombencephalon 
+(Rhom)
+Telencephalon (Telen)
+ and lateral ventricle (LV)
+Diencephalon (Dien) and 
+third ventricle (ThrV)
+Mesencephalon (Mes) and
+ cerebral aqueduct (CA)
+Cerebellum (Cbl) and pons 
+Fourth ventricle (FV)
+Myelencephalon (medulla oblongata)
+Spinal cord
+Telen
+Spinal cord and 
+central canal
+Mes
+Rhom
+Pro
+ Medulla
+Telen
+ Medulla
+Pons 
+Pons 
+Dien
+A
+B
+D
+E
+F
+FV
+CA
+FV
+Cbl
+CA
+Mes
+ThrV
+IF
+LV
+FV
+Cbl
+CA
+LV
+IF
+Interventricular foramen (IF)
+C
+Mes
+eFig. 9.13  Development of the caverns and canals of the ventricular system as the cerebral hemispheres continue to grow. Dorsal views (A–C) 
+correlate with lateral views (D–F) at 5 weeks (D), 6 weeks (E), and 8.5 weeks (E, F) of gestation. Dashed lines outline the ventricles. (From 
+Haines D, Mihailoff G. Fundamental Neuroscience for Basic and Clinical Applications. 5th ed., Fig. 6-1A–C. Philadelphia: Elsevier; 2013.)
+(eFig. 9.13). Inferior and lateral to the corpus callosum are 
+two large, fluid-filled cavities that represent the beginning of 
+the ventricular system. These most rostral cavities are the 
+two C-shaped lateral ventricles, located within the cerebral 
+hemispheres (eFig. 9.14). As the lateral ventricles extend 
+through all of the lobes of the cerebral hemispheres, they 
+are divided into five named parts. In the frontal lobe is the 
+anterior (frontal) horn, which transitions into the body 
+within the frontal and parietal lobes (eFig. 9.15). Project­
+ing into the occipital lobe is the posterior (occipital) horn 
+(eFig. 9.15). A final horn extends inferiorly and anteriorly 
+as the inferior (temporal) horn in the temporal lobe (eFig. 
+9.15). Near the splenium of the corpus callosum, the body, 
+posterior, and inferior horns come together at the atrium/
+trigone of the lateral ventricles (eFig. 9.15). Lining most of 
+the ventricles is the choroid plexus (eFig. 9.16), a series of 
+
+=== PAGE 1165 ===
+e13
+9 
+Part II: Brain  •  Ventricular System
+Cerebral aqueduct
+Fourth ventricle 
+Choroid plexus
+Cisterna magna
+Third ventricle
+Interventricular foramen
+Septum pellucidum
+Stria medullares thalami
+Fornix
+Hypothalamus
+Thalamus
+Corpus callosum
+eFig. 9.14  Sagittal section of the brain exposing the ventricular system within the cerebral hemisphere. (From Crossman A. Neuroanatomy. 5th 
+ed., Fig. 6.2. Philadelphia: Elsevier; 2015.)
+Anterior horn of 
+lateral ventricle
+Atrium
+Posterior horn of
+lateral ventricle
+Posterior horn of 
+lateral ventricle
+Inferior horn of 
+lateral ventricle
+Body of 
+lateral ventricle
+Body of 
+lateral ventricle
+Interventricular 
+foramen
+Third ventricle
+Cerebral aqueduct
+Fourth ventricle
+Lateral recess of 
+fourth ventricle
+(and foramen of Luschka)
+A
+B
+eFig. 9.15  Components of the ventricular system represented by a resin cast. (A) Lateral view; (B) posterior view. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 6.1. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1166 ===
+Neuroanatomy
+e14
+modified ependymal cells responsible for producing 0.5 L 
+of cerebrospinal fluid (CSF) a day in adults.
+From the lateral ventricles, CSF flows through the inter­
+ventricular foramen (of Monro) to the slitlike third ventricle, 
+which is surrounded by the thalamus and hypothalamus 
+(eFig. 9.15). The third ventricle communicates with the 
+fourth ventricle via the cerebral aqueduct (aqueduct of 
+Sylvius), which courses through the midbrain (eFig. 9.15). 
+Surrounded by the pons and medulla anteriorly and the 
+cerebellum posteriorly, the fourth ventricle sends CSF out 
+of the ventricular system and into the subarachnoid space 
+via the lateral foramina of Luschka and midline foramen 
+of Magendie (eFig. 9.15).
+MENINGES
+Within the bony encasement of the skull and vertebral 
+column, the CNS is surrounded by three concentric, con­
+nective tissue coverings called meninges (from Greek word 
+meninx for “membrane”), which act to support and stabilize 
+the brain and spinal cord. The focus of this section will be 
+on the cranial meninges. The spinal meninges, which have 
+a slightly different configuration, will be discussed in the 
+“Spinal Cord” section.
+The outermost covering is the dura (Latin for “hard”) 
+mater (Latin for “mother”), a tough, fibrous sheet composed 
+of two layers. The outer periosteal layer is adherent to the 
+skull, and the inner meningeal layer lies against the underly­
+ing arachnoid mater (eFig. 9.17). Although these two layers 
+are closely adherent to one another, they do separate in 
+some regions to form dural venous sinuses, which receive 
+cerebral venous drainage (eFig. 9.18). The anatomy of the 
+venous sinuses will be discussed in the “Cerebral Vasculature” 
+section. Two potential spaces exist as the epidural (extradural) 
+space, superficial to the periosteal layer, and subdural space, 
+deep to the meningeal dural layer. These spaces can become 
+filled with blood during vascular trauma (eTable 9.3). Within 
+the cranial cavity, the meningeal layer of dura mater folds in 
+on itself in several areas to form dural reflections, or septa. 
+These reflections are known as the falx (Latin for “sickle”) 
+cerebri between the cerebral hemispheres, as the tentorium 
+cerebelli between the cerebral hemispheres and cerebellum, 
+Corpus callosum
+Interventricular foramen
+Thalamus
+Choroid plexus
+Anterior horn of lateral ventricle
+Head of caudate nucleus
+eFig. 9.16  Superior dissection of the cerebral hemispheres exposing the corpus callosum and lateral ventricles. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 6.6. Philadelphia: Elsevier; 2015.)
+eTable 9.3  Spaces in the cranial meninges
+Space
+Location
+Epidural
+Potential space between dura and calvaria
+Subdural
+Potential space in the innermost dural layer, 
+near the dura–arachnoid interface
+Subarachnoid
+Normally present, CSF-filled space; enlarged 
+in cisterns
+CSF, cerebrospinal fluid.
+From Vanderah TW. Nolte’s the Human Brain. 7th ed., Table 4.1. Philadelphia: 
+Elsevier; 2016.
+
+=== PAGE 1167 ===
+e15
+9 
+Part II: Brain  •  Meninges
+Intracranial venous structure
+(superior sagittal sinus)
+Outer periosteal layer of dura mater
+Inner meningeal layer of dura mater
+Arachnoid mater
+Pia mater
+Dural partition (falx cerebri)
+Skull
+Dura mater
+Subarachnoid space
+eFig. 9.17  Coronal view of the brain and cranial meninges. Note the separation of the inner meningeal and outer periosteal layers of the dura 
+mater to form the dural sinuses. (From Drake RL et al: Gray’s Anatomy for Students. 3rd ed., Fig. 8.31A. Philadelphia: Elsevier; 2015.)
+Inferior sagittal sinus
+Cavernous sinus
+Cerebral vein
+Optic nerve
+Crista galli
+Olfactory bulb
+Pituitary stalk
+Diaphragma sellae
+Sphenoparietal
+sinus
+Superior petrosal sinus
+Cerebellum
+Great cerebral vein
+Tentorium cerebelli
+Confluence
+of sinuses
+Straight sinus
+Superior sagittal sinus
+Midbrain
+eFig. 9.18  Venous sinuses within the dura mater. Note the presence of the midbrain within the tentorial notch. (From Mtui E. Fitzgerald’s 
+Clinical Neuroanatomy. 7th ed., Fig. 4-1. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1168 ===
+Neuroanatomy
+e16
+Cerebral vein
+Diploe
+Superior sagittal sinus
+Sagittal suture
+Epicranial aponeurosis
+Scalp vessels
+Skin
+Emissary vein
+Periosteum
+Dura mater
+Pia mater
+Arachnoid
+mater
+Endosteum
+Meningeal
+vessels
+Falx cerebri
+Calloso-
+marginal 
+artery
+Cerebral
+cortex
+eFig. 9.19  Coronal section of the cranial meninges: dura mater, arachnoid mater, and pia mater. (From Mtui E. Fitzgerald’s Clinical 
+Neuroanatomy. 7th ed., Fig. 4-5A. Philadelphia: Elsevier; 2016.)
+and as the falx cerebelli between the cerebellar hemispheres 
+(eFig. 9.17). A smaller reflection, the diaphragm sellae, covers 
+the pituitary fossa and underlying pituitary gland.
+Deep to the dura mater is the arachnoid (from the Greek 
+word arachne meaning “spider’s web”) mater. The outer layer 
+of the arachnoid mater is composed of several layers of 
+flattened cells that lie adjacent to the meningeal layer of 
+the dura mater (eFig. 9.19). Strands of connective tissue 
+extend from this outer layer to form arachnoid trabeculae, 
+which connect internally to the pia mater (eFig. 9.19). The 
+pia mater forms a thin, veil-like layer that closely follows 
+the gyri and sulci on the surface of the brain. The pia and 
+arachnoid matter are separated by a subarachnoid space 
+that contains CSF and the major blood vessels supplying 
+the brain.
+CEREBRAL VASCULATURE
+Vascular supply to the brain is divided into the anterior 
+circulation arising from the internal carotid arteries and 
+posterior circulation from the vertebral arteries (eFig. 9.20). 
+The internal carotid arteries arise from the branching of 
+the common carotid arteries at the level of the fourth cervical 
+vertebra. Bilaterally the arteries course through the neck 
+to enter the middle cranial fossa through the carotid canal. 
+The arteries then make a series of turns to pass through 
+the petrous portion of the temporal bone and cavernous 
+sinus before entering the subarachnoid space just lateral to 
+the optic chiasm. Upon exiting the cavernous sinus, the 
+internal carotid artery gives rise to the ophthalmic artery 
+and then continues superiorly to give off the posterior 
+communicating artery and anterior choroidal arteries before 
+terminating as the anterior and middle cerebral arteries 
+(eFig. 9.21).
+The two anterior cerebral arteries anastomose proximally 
+via the anterior communicating artery, anterior to the optic 
+chiasm (eFig. 9.22). Distal to this connection, the anterior 
+cerebral artery (ACA) courses along the medial aspect of 
+the cerebral hemisphere within the longitudinal fissure and 
+follows the superior border of the corpus callosum to the 
+
+=== PAGE 1169 ===
+e17
+9 
+Part II: Brain  •  Cerebral Vasculature
+Anterior cerebral
+artery
+Cut end of internal
+carotid artery
+Optic nerve
+Posterior communicating
+artery
+Pontine arteries
+Posterior inferior
+cerebellar artery
+Hypoglossal
+nerve roots
+Middle cerebral artery
+Posterior cerebral
+artery
+Oculomotor nerve
+Superior cerebellar
+artery
+Basilar artery
+Trigeminal nerve
+Anterior inferior 
+cerebellar artery
+Vertebral artery
+Anterior spinal artery
+eFig. 9.20  Arteries on the inferior surface of the brain injected with red resin. (From Crossman A. Neuroanatomy. 5th ed., Fig. 7.3. Philadelphia: 
+Elsevier; 2015.)
+
+=== PAGE 1170 ===
+Neuroanatomy
+e18
+Callosal artery
+ACA
+ICA
+PCA
+Lateral branch (PCA)
+Orbitofrontal artery (ACA)
+Frontobasal  (MCA)
+Anterior temporal artery
+Posterior temporal artery
+Medial branch (PCA)
+Occipitotemporal artery
+Calcarine artery
+eFig. 9.21  Vascular supply to the brain from the internal carotid arteries and vertebrobasilar system. (From Mtui E. Fitzgerald’s Clinical 
+Neuroanatomy. 7th ed., Fig. 5.5. Philadelphia: Elsevier; 2016.)
+Anterior communicating artery
+Anteromedial arteries
+Anterior perforated substance
+Posterior perforated substance
+Optic chiasm
+Pituitary stalk
+Posterolateral central arteries
+(including thalamogeniculate artery)
+Posteromedial central arteries
+(including thalamoperforating artery)
+Interpeduncular fossa
+(floor of hypothalamus)
+Basilar artery
+PCA
+Choroid plexus of temporal lobe
+ACA
+Medial striate artery
+Anterolateral central arteries
+(lateral striate)
+MCA
+ICA
+Internal capsular branches of 
+anterior choroidal artery
+Posterior communicating artery
+eFig. 9.22  Inferior/ventral view of the brain exposing the circle of Willis, which is completed by the anterior and posterior communicating 
+arteries. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 5.1A. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1171 ===
+e19
+9 
+Part II: Brain  •  Cerebral Vasculature
+anterior portion of the parietal lobe. Along its course two 
+large branches arise: the callosomarginal artery, which 
+follows the cingulate sulcus, and the pericallosal artery, 
+which is immediately adjacent to the corpus callosum (eFig. 
+9.23). Given its course and branches, the ACA perfuses most 
+of the medial aspect of the brain from the frontal lobe to 
+the anterior portion of the parietal lobe.
+Branching laterally from the internal carotid artery, the 
+middle cerebral artery (MCA) penetrates the lateral fissure 
+and gives off the lenticulostriate striate arteries (eFig. 9.24) 
+before bifurcating into superior and inferior divisions, which 
+loop extensively along the insula and frontal operculum 
+before emerging on the lateral convexity of the cerebrum. 
+The superior division perfuses the cortex above the lateral 
+fissure, including the lateral frontal lobe and a small portion 
+of the anterior parietal lobe (eFig. 9.21). The inferior divi­
+sion perfuses the cortex below the lateral fissure, including 
+the temporal lobe and the anterolateral portion of the 
+parietal lobe.
+The posterior cerebral cortex receives vascular supply 
+from the vertebral-basilar system of arteries. This system 
+begins with the vertebral arteries bilaterally, which arise 
+from the subclavian arteries and ascend through the foramen 
+transversarium of the cervical vertebrae in the neck. After 
+entering the foramen magnum at the level of the ponto­
+medullary junction, the arteries join to form the basilar 
+artery, which courses along the midline of the ventral 
+brainstem (eFig. 9.20). At the level of the midbrain, the 
+basilar artery gives rise to the posterior cerebral artery (PCA), 
+which turns posteriorly and gives rise to branches that perfuse 
+Callosal branches
+Callosomarginal artery
+Polar frontal artery
+Orbitofrontal artery
+PCA
+Lateral branch
+Medial branch
+Temporal branches
+Occipitotemporal artery
+Parietooccipital artery
+Callosal branch
+Pericallosal artery
+Calcarine artery
+ACA
+eFig. 9.23  Branches and territories of the anterior and posterior cerebral arteries on the medial right hemisphere. (From Mtui E. Fitzgerald’s 
+Clinical Neuroanatomy. 7th ed., Fig. 5.2. Philadelphia: Elsevier; 2016.)
+Lateral striate arteries
+Lateral striate arteries
+Anterior cerebral artery
+Middle cerebral
+artery
+Middle cerebral
+artery
+Posterior cerebral
+artery
+Anterior choroidal artery
+Anterior choroidal
+artery
+Thalamic branches of 
+posterior cerebral artery
+eFig. 9.24  Distribution pattern of the perforating branches from 
+the anterior, middle, and posterior cerebral arteries. (From Mtui E. 
+Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 5.4. Philadelphia: 
+Elsevier; 2016.)
+
+=== PAGE 1172 ===
+Neuroanatomy
+e20
+the inferior and medial temporal and occipital lobes. Also 
+at the PCA, a connecting artery, the posterior communicating 
+artery, branches off and connects to the internal carotid 
+artery (eFig. 9.22).
+VENOUS DRAINAGE
+Venous drainage of the cerebral hemispheres follows a system 
+of deep veins, superficial veins, and dural venous sinuses 
+before reaching the internal jugular vein. Before reaching 
+the internal jugular veins, the superficial and deep veins 
+connect to the dural sinuses located between the periosteal 
+and meningeal layers of the dura. None of the vessels in 
+this network have valves present in their lumen.
+Running along the superior edge of the falx cerebri is 
+the superior sagittal sinus. The superior sagittal sinus 
+continues posteriorly to drain into the transverse sinuses 
+bilaterally (eFig. 9.25A). Each transverse sinus turns 
+inferiorly to form the sigmoid sinus, which exits the jugular 
+foramen to become the internal jugular vein. Along the 
+inferior margin of the falx cerebri is the inferior sagittal 
+sinus (eFig. 9.25B). Posteriorly, the inferior sagittal sinus 
+joins the great vein of Galen to form the straight sinus. The 
+point where the straight sinus, superior sagittal sinus, and 
+occipital sinus join is known as the confluence of the sinuses 
+(eFig. 9.25B). The confluence of sinuses is drained by the 
+transverse sinuses. Located on either side of the hypophysial 
+fossa is a plexus of veins referred to as the cavernous sinus 
+(eFig. 9.26). In addition to receiving drainage from the other 
+sinuses, the cavernous sinus also receives the ophthalmic 
+veins. The cavernous sinus is drained by the superior petrosal 
+sinus into the transverse sinus and inferior petrosal sinuses 
+into the internal jugular vein.
+Venous drainage from the superficial veins is primarily 
+received by the superior sagittal sinus and cavernous sinus. 
+Although the pattern of superficial veins coursing through 
+the subarachnoid space from the cerebral cortex is quite 
+variable, three veins appear to be fairly constant. Positioned 
+in parallel to the lateral fissure is the superficial middle 
+cerebral vein, which drains into the cavernous sinus from 
+the temporal lobe (eFig. 9.25A). Connecting to the superficial 
+middle cerebral vein perpendicularly is the superior anas­
+tomotic vein (of Trolard) (eFig. 9.25A). This vein courses 
+superiorly across the parietal lobe to drain into the superior 
+sagittal sinus. Also connecting to the superficial middle 
+cerebral vein perpendicularly is the inferior anastomotic 
+vein (of Labbé) (eFig. 9.25A). The inferior anastomotic vein 
+passes inferiorly along the temporal lobe to drain into the 
+transverse sinus.
+Superior
+anastomotic vein
+Superior sagittal sinus
+Confluence of the
+sinuses
+Transverse sinus
+Sigmoid sinus
+Internal jugular vein
+Inferior anastomotic vein
+Superficial middle
+cerebral vein
+Superior sagittal sinus
+Inferior sagittal sinus
+Great cerebral
+vein
+Straight sinus
+Confluence of
+the sinuses
+A
+B
+eFig. 9.25  Venous branches of the brain. A. Lateral view. B. Sagittal view. (Modified from Crossman A. Neuroanatomy. 5th ed., Fig. 7.9A. 
+Philadelphia: Elsevier; 2015.)
+Pituitary gland
+Sphenoidal
+air sinus
+Oculomotor nerve
+Trochlear nerve
+Cavernous sinus
+Internal carotid
+artery
+Dura mater
+Maxillary nerve
+Ophthalmic nerve
+Abducent nerve
+eFig. 9.26  Coronal section of the cavernous sinus. (From Crossman 
+A. Neuroanatomy. 5th ed., Fig. 7.11. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1173 ===
+e21
+9 
+Part II: Brain  •  Venous Drainage
+In contrast to the superficial veins, deep veins are more 
+constant in their organization. Most of the deep veins even­
+tually drain into the great cerebral vein (of Galen) before 
+entering the dural venous sinuses (eFig. 9.27). Traveling 
+adjacent to the ACA and MCA are the anterior cerebral vein 
+and deep middle cerebral vein. These deep veins join to form 
+the basal vein (of Rosenthal), which continues around the 
+lateral aspect of the midbrain. Formed at the interventricular 
+foramen by the joining of the septal and thalamostriate 
+veins bilaterally are the internal cerebral veins (eFig. 9.27). 
+Posterior to the midbrain, the internal cerebral veins and 
+basal veins join to form the great cerebral vein (of Galen) 
+(eFig. 9.27). From here the great cerebral vein joins the 
+inferior sagittal sinus to form the straight sinus.
+Caudate nucleus
+Thalamostriate vein
+Thalamus
+Internal cerebral vein
+Anterior horn of
+lateral ventricle
+Choroidal vein
+Choroid plexus
+Third ventricle
+Great cerebral vein
+eFig. 9.27  Superior view of the brain with the corpus callosum removed to reveal the deep cerebral veins. (From Crossman A. Neuroanatomy. 
+5th ed., Fig. 7.8. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1174 ===
+Neuroanatomy
+e22
+Cerebral aqueduct
+Habenula
+Fornix
+Interventricular
+foramen
+Anterior
+commissure
+Optic chiasm
+Pineal gland
+Hypothalamic sulcus
+Mammillary body
+Optic nerve
+Hypothalamus
+Thalamus
+Stria medullaris thalami
+Fornix
+Massa intermedia
+eFig. 9.28  Sagittal view of the right hemisphere showing the diencephalon and its relationship to surrounding structures. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 12.12. Philadelphia: Elsevier; 2015.)
+Part III: Thalamus
+The thalamus (Greek for “inner chamber”) is a large, egg-
+shaped mass of gray matter derived from the diencephalon 
+of the developing brain (see eTable 9.1). The most significant 
+role of the thalamus is as a synaptic relay for pathways 
+projecting to the cerebral cortex. However, the thalamus 
+also acts as a gatekeeper to prevent or enhance informa­
+tion transfer, depending on the behavioral state. Sensory, 
+motor, limbic, and modulatory signals from behavioral and 
+arousal circuits all have synaptic relays within the thalamic 
+nuclei.
+Because of its location deep within the brain, the thalamus 
+is neighbored by several structures and also portions of the 
+ventricular system. Anteriorly, the thalamus extends forward 
+to contact the interventricular foramen, which connects 
+the lateral and third ventricles (eFig. 9.28). Together, the 
+thalamic nuclear masses and the ventrally located hypo­
+thalamus comprise the lateral walls of the third ventricle. 
+Immediately lateral to the thalamus is the posterior limb of 
+the internal capsule (eFig. 9.29). Related to the dorsal aspect 
+of the thalamus is the body of the lateral ventricle, and 
+extending caudally is the midbrain portion of the brainstem 
+(eFig. 9.28). Across the midline of the third ventricle, the 
+two thalamic masses are interconnected by the interthalamic 
+adhesion.
+Based on their relationship to the internal medullary 
+lamina, a Y-shaped band of myelinated axons coursing 
+rostrocaudally through the thalamus, the thalamic nuclei 
+are classified into four groups: (1) anterior, (2) medial, (3) 
+lateral, and (4) intralaminar (eFig. 9.30). In addition to this 
+structural categorization, the nuclei are divided into three 
+major functional classes: (1) relay, (2) intralaminar, and (3) 
+reticular. As mentioned earlier, most of the thalamus is 
+composed of relay nuclei, which have reciprocal excitatory 
+connections with the cortex. Relay nuclei are further 
+subdivided into specific and nonspecific based on their projec­
+tions to specific areas of the primary sensory and motor 
+cortex or more diffuse cortical projections. The majority of 
+specific relay nuclei reside in the lateral thalamus—in fact, 
+all sensory modalities, with the exception of olfaction, have 
+relays in the lateral thalamus before reaching their primary 
+cortical target. Details of specific and nonspecific nuclei and 
+their cortical connections can be reviewed in eTable 9.4.
+Intralaminar nuclei reside within the internal medullary 
+lamina and have numerous reciprocal projections, primarily 
+with the basal ganglia and reticular formation (eFig. 9.30).
+There are two major functional regions of the intralaminar 
+nuclei: rostral and caudal. The rostral intralaminar nuclei have 
+reciprocal connections with the basal ganglia and also relay 
+input from the ascending reticular activating system. Caudal 
+intralaminar nuclei, which include the large centromedian 
+nucleus, are predominantly involved in basal ganglia circuitry.
+
+=== PAGE 1175 ===
+e23
+9 
+Part III: Thalamus
+A
+B
+Third ventricle
+Fornix
+Globus pallidus
+Hypothalamus
+Reticular nucleus
+Ventral lateral nucleus
+Optic tract
+Stria terminalis
+Internal capsule
+Mediodorsal nucleus
+Stria medullaris
+Caudate nucleus
+Internal medullary lamina
+Anterior nuclear group
+Ventral anterior nucleus
+Zona incerta
+Subthalamic nucleus
+Pons
+A
+B
+eFig. 9.29  A and B. Coronal sections of the brain at different locations through the diencephalon. Sections are stained with Luxol fast blue to 
+highlight myelinated axons. (From Crossman A. Neuroanatomy. 5th ed., Fig. 12.3. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1176 ===
+Neuroanatomy
+e24
+GABAergic neurons of the reticular nucleus, allows it to 
+regulate thalamic activity quite effectively.
+Vascular supply to the thalamus arises from penetrating 
+branches from the ACA, anterior choroidal artery branching 
+from the internal carotid, lenticulostriate arteries of the 
+middle cerebral artery and thalamoperforator arteries from 
+the posterior cerebral arteries.
+The reticular nucleus of the thalamus is a thin, sheet-
+like structure along the lateral aspect of the thalamus just 
+medial to the posterior limb of the internal capsule (eFig. 
+9.30). Unlike the rest of the thalamic nuclei, the reticular 
+nucleus does not send projections to the cerebral cortex, but 
+rather receives input from other thalamic nuclei and the 
+cortex, which project back to the thalamus. Functionally, 
+this organization of inputs and outputs, along with the 
+Reticular nucleus
+Anterior nuclear group
+Lateral nuclear group
+Medial nuclear group
+Medial nuclear group
+Internal medullary lamina
+Internal medullary lamina
+Intralaminar nuclear group
+Lateral nuclear group
+A
+B
+eFig. 9.30  Left thalamus viewed anterolaterally (A) in coronal section (B), outlining the primary nuclear groups. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 12.5A and B. Philadelphia: Elsevier; 2015.)
+eTable 9.4  Thalamic nuclei and their connections
+Type
+Nucleus
+Afferents
+Efferents
+Specific (or relay)
+Anterior
+Mammillary bodies Hippocampus
+Cingulate cortex
+Ventral anterior (VA)
+Substantia nigra (pars reticulata)
+Prefrontal cortex
+Ventral lateral (VL)
+VL, anterior part
+VL, posterior part
+Globus pallidus (internal segment)
+Cerebellar nuclei
+Supplementary motor area
+Premotor and motor cortex
+Ventral posterior (VP)
+Ventral posterolateral (VPL)
+Somatic afferents from trunk and limbs
+Somatic sensory cortex
+Ventral posteromedial (VPM)
+Somatic afferents from the head region
+Somatic sensory cortex
+Medial geniculate body
+Brachium of the inferior colliculus
+Primary auditory cortex
+Lateral geniculate body
+Optic tract
+Primary visual cortex
+Association
+Lateral dorsal (LD)
+Hippocampus
+Cingulate cortex
+Dorsomedial (DM)
+Prefrontal cortex, olfactory and limbic
+Prefrontal cortex
+Lateral posterior (LP)/pulvinar
+Superior colliculus, primary visual, 
+auditory, and somatosensory cortex
+Posterior parietal and lateral 
+temporal association cortex
+Nonspecific
+Intralaminar (centromedian, 
+parafascicular, others)
+Reticular formation, basal ganglia, 
+limbic system
+Cerebral cortex, corpus striatum
+Reticular
+Thalamus and cortex
+Thalamus
+From Mtui E. Fitzgerald’s Clinical Neuroanatomy and Neuroscience. 7th ed., Table 27.1. Philadelphia: Elsevier; 2017.
+
+=== PAGE 1177 ===
+e25
+9 
+Part IV: Brainstem  •  External Midbrain
+Pineal gland
+CN IV
+CN V
+CN IX
+CN X
+CN XI
+Vertebral artery
+First cervical nerve
+Second denticulate ligament
+First denticulate ligament
+Posterior inferior cerebellar artery
+Dorsal root ganglion (C3)
+Fourth cervical nerve
+Dura mater
+Ligamentum flavum
+Arachnoid
+Dorsal root filaments (C2)
+Posterior spinal artery
+First cervical vertebra (atlas)
+Sigmoid sinus
+Tentorium cerebelli
+CNs VII and VIII
+eFig. 9.31  Posterior orientation of the brainstem as it transitions into the spinal cord. (From Nolte J. The Human Brain. 7th ed., Fig. 11-1. 
+Philadelphia: Elsevier; 2016; from Mettler FA. Neuroanatomy. 2nd ed. St. Louis, MO: Mosby; 1948.)
+Part IV: Brainstem
+OVERVIEW
+The brainstem is a stalklike structure within the posterior 
+cranial fossa of the skull connecting the forebrain and spinal 
+cord (eFig. 9.31). From rostral to caudal, the brainstem 
+consists of the midbrain, pons, and medulla oblongata. 
+Broadly speaking, the brainstem has three main functions: 
+(1) it is a conduit for tracts ascending and descending through 
+the CNS; (2) it houses cranial nerve nuclei III to XII (note 
+that the CNXI is in the cervical spinal cord); and (3) it is 
+the location for reflex centers related to respiration, cardio­
+vascular function, and regulation of consciousness. 
+Externally, each portion of the brainstem has a distinct 
+appearance and structural features that define its many 
+functional roles.
+EXTERNAL MIDBRAIN
+Approximately 2 cm in length, the midbrain connects the 
+forebrain to the pons caudally and the cerebellum posteriorly 
+
+=== PAGE 1178 ===
+Neuroanatomy
+e26
+on the posterior surface are the superior and inferior colliculi 
+(eFig. 9.32A). Between the inferior colliculi, cranial nerve 
+IV, the trochlear nerve, emerges, crosses the midline, and 
+wraps around the lateral aspect of the midbrain (eFig. 
+9.32A). Laterally, the superior brachium and inferior bra­
+chium can be seen as they project in an anterolateral 
+direction from the superior and inferior colliculi.
+(eFig. 9.32A). Along the midline of the anterior surface 
+there is a deep depression, the interpeduncular fossa, which 
+has several perforations on its surface where small vessels 
+perforate through the floor of the fossa. On either side of 
+the interpeduncular fossa are the crus cerebri (eFig. 9.32B). 
+Projecting medially from the crus is cranial nerve III, the 
+oculomotor nerve (eFig. 9.33A). The most prominent features 
+B
+Mammillary body
+Crus cerebri
+Middle cerebellar peduncle
+Olive
+Pyramid
+Decussation of pyramids
+Anterior median fissure
+Midbrain
+Pons
+Medulla
+Midbrain
+Pons
+Medulla
+Thalamus
+Superior colliculus
+Inferior colliculus
+Trochlear nerve
+Superior cerebellar peduncle
+Middle cerebellar peduncle
+Inferior cerebellar peduncle
+Floor of fourth ventricle
+Lateral recess and aperture of fourth ventricle
+Cuneate tubercle
+Gracile tubercle
+Fasciculus cuneatus
+Fasciculus gracilis
+A
+eFig. 9.32  Posterior view of the brainstem. (From Crossman A. Neuroanatomy. 5th ed., Fig. 9.1. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1179 ===
+e27
+9 
+Part IV: Brainstem  •  External Pons
+V, the motor and sensory root of the trigeminal nerve, 
+emerges (eFig. 9.33B). At the junction of the pons and 
+medulla, from medial to lateral, cranial nerves VI (abdu­
+cent), VII (facial), and VIII (vestibulocochlear) emerge 
+(eFig. 9.33C). The posterior surface of the pons faces the 
+cerebellum and forms the floor of the fourth ventricle 
+(eFig. 9.32A). Along the midline of the posterior surface 
+is a prominent bump, the facial colliculus, which rep­
+resents the relationship between the facial nerve fibers 
+as they wind around the nucleus of the abducent nerve 
+(eFig. 9.33C).
+EXTERNAL PONS
+Caudal to the midbrain, the pons is approximately 2.5 cm 
+in length and connects the midbrain to the medulla (eFig. 
+9.32B). The midline of the anterior surface has a shallow 
+groove, the basilar groove, where the basilar artery resides 
+along its course (eFig. 9.32B). On either side of the basilar 
+groove, the pons has a prominent convex shape as a result 
+of the vast number of fibers bridging through the pons to 
+the cerebellum through the middle cerebellar peduncle. 
+Along the anterolateral surface of the pons, cranial nerve 
+Olfactory bulb
+Optic nerve
+Mammillary body
+Oculomotor nerve
+Pons
+A
+B
+C
+D
+Trigeminal nerve
+Oculomotor nerve
+Optic nerve
+Pons
+Medulla
+Trochlear nerve
+Trochlear nerve
+Abducens nerve
+Pons
+Trigeminal nerve
+Facial nerve
+Vestibulocochlear 
+nerve
+Glossopharyngeal 
+nerve
+Pyramid
+Cranial root of 
+accessory nerve
+Rootlets of 
+glossopharyngeal 
+and vagus nerves
+Rootlets of
+hypoglossal nerve
+Pons
+Vestibulocochlear 
+nerve
+Spinal root of 
+accessory nerve
+Pyramid
+Olive
+eFig. 9.33  Posterior or dorsal (A) aspect of the brainstem after the cerebellum and cerebrum were removed. Anterior or ventral (B) aspect of 
+the brainstem after the cerebellum and cerebrum were removed. C. Ventral brainstem with cranial nerves emerging from the pons and medulla 
+highlighted. D. Ventral brainstem emphasizing cranial nerves emerging from the lateral aspect of the pons and medulla. (From Crossman A. 
+Neuroanatomy. 5th ed., Figs. 9.1, 9.3, 10.9, and 10.11. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1180 ===
+Neuroanatomy
+e28
+BRAINSTEM INTERNAL FEATURES
+Internal structures of the brainstem can be identified by 
+their general location in the tectum (Latin for “roof”), 
+tegmentum (Latin for “covering”), or basis (eFig. 9.34). To 
+identify the structures present in each level of the brainstem, 
+it is best to view serial sections stained for myelin. This way, 
+nuclear groups and myelinated axons can be more easily 
+distinguished from one another.
+INTERNAL MIDBRAIN
+The tectum is the most obvious landmark of the midbrain, 
+as it consists of the prominent superior colliculi, inferior 
+colliculi, and underlying cerebral aqueduct. Given the short 
+length of the midbrain, stained serial sections typically 
+include either the superior colliculi, which are located 
+rostrally, or the inferior colliculi, which are caudal. In addition 
+to the superior colliculi, within a rostral section of the 
+midbrain prominent nuclei such as the oculomotor nuclei, 
+Edinger–Westphal nuclei, red nuclei, mesencephalic nuclei 
+of cranial nerve V, and substantia nigra can be seen (eFig. 
+9.35). In caudal sections of the midbrain the inferior col­
+liculus, trochlear nucleus, mesencephalic nuclei of cranial 
+nerve V, and substantia nigra are present (eFig. 9.36).
+INTERNAL PONS
+Sections from the rostral pons are significant for pontine 
+nuclei and multiple transversely oriented pontocerebellar 
+EXTERNAL MEDULLA OBLONGATA
+The medulla is the longest portion of the brainstem, measur­
+ing approximately 3 cm in length (eFig. 9.32A). At the rostral 
+connection of the medulla to the pons, it has a broad conical 
+shape that tapers caudally before connecting with the spinal 
+cord at the level of the foramen magnum. Along the midline 
+of the anterior surface is the anterior median fissure, which 
+continues on to the anterior surface of the spinal cord (eFig. 
+9.33B). Lateral to the fissure are the medullary pyramids 
+composed of motor fibers descending from the cerebral cortex 
+(eFig. 9.33B). Continuing caudally, the pyramids eventually 
+give way to the decussation of the pyramids where the 
+majority of motor fibers decussate to the opposing side. 
+Lateral to the pyramids are the olives, which represent the 
+underlying inferior olivary nuclei. It is at the junction of 
+the pyramid and the olive that the rootlets of cranial nerve 
+XII, the hypoglossal nerve, emerge (eFig. 9.33D). Oriented 
+posterior to the olives are the inferior cerebellar peduncles, 
+which form a connection between the cerebellum and 
+medulla (eFig. 9.33D). At the junction of the olive and 
+inferior cerebellar peduncles from rostral to caudal, rootlets 
+of cranial nerves IX (glossopharyngeal), X (vagus), and XI 
+(spinal accessory) emerge. Like the pons, the posterior surface 
+of the medulla forms the floor of the fourth ventricle (eFig. 
+9.32A). Coursing down the midline of the posterior medulla 
+is the posterior median sulcus, which continues into the 
+spinal cord. On either side of the sulcus are the gracile and 
+cuneate tubercles, formed by the underlying gracile nucleus 
+and cuneate nuclei (eFig. 9.32A).
+Pyramid
+A
+B
+C
+Inferior olivary nucleus
+Basal pons
+Cerebral peduncle
+Tectum
+Tegmentum
+Tegmentum
+eFig. 9.34  Brainstem cross-sections: rostral medulla (A), rostral pons (B), and rostral midbrain (C). Whereas the tegmentum is present at all 
+levels of the brainstem, the tectum can only be seen in the midbrain. (From Nolte J. The Human Brain. 7th ed., Fig. 11-5. Philadelphia: Elsevier; 
+2016.)
+
+=== PAGE 1181 ===
+e29
+9 
+Part IV: Brainstem  •  Internal Pons
+Superior colliculus
+Periaqueductal grey
+Cerebral aqueduct
+Oculomotor nucleus
+Brachium of inferior colliculus
+Spinal lemniscus
+Medial lemniscus
+Ventral tegmental area
+Red nucleus
+Substantia nigra
+Fibres of
+oculomotor nerve
+Temporopontine fibres
+Corticobulbar and
+corticospinal fibres
+Frontopontine fibres
+Trigeminal lemniscus
+Crus cerebri
+Medial longitudinal fasciculus
+Edinger–Westphal nucleus
+eFig. 9.35  Rostral midbrain. Transverse section of the rostral midbrain at the location of the superior colliculus. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 9.13. Philadelphia: Elsevier; 2015.)
+Inferior colliculus
+Cerebral aqueduct
+Periaqueductal grey
+Lateral lemniscus
+Medial longitudinal fasciculus
+Spinal lemniscus
+Medial lemniscus
+Decussation of superior
+cerebellar peduncle
+Corticobulbar and
+corticospinal fibres
+Pontocerebellar fibres
+eFig. 9.36  Pontine–mesencephalic junction. Transverse section at the location of the pontine–mesencephalic junction. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 9.11. Philadelphia: Elsevier; 2015.)
+fibers en route to the contralateral cerebellum. Interspersed 
+among these horizontally running axon are longitudinally 
+running corticospinal fibers (eFig. 9.37). Dorsal to this col­
+lection of fiber bundles, the medial lemniscus is oriented 
+horizontally, forming a borderlike structure between the basal 
+and tegmental portion of the pons (eFig. 9.37). At the lateral 
+edge of the medial lemniscus, the spinothalamic tract can be 
+seen, because it neighbors the superior cerebellar peduncle 
+(eFig. 9.37). Near the midline, the medial longitudinal 
+fasciculus resides just ventral to the periaqueductal gray 
+matter.
+At mid-pontine levels the superior cerbellar peduncles form 
+the lateral walls of the expanding fourth ventricle (eFig. 9.38). 
+Also at this level, the prominent middle cerebellar peduncles 
+can also be seen, along with the motor nucleus and principal 
+sensory nucleus of cranial nerve V, the trigeminal nerve.
+In the caudal aspect of the pons, the abducent nucleus 
+can be appreciated just lateral to the medial longitudinal 
+
+=== PAGE 1182 ===
+Neuroanatomy
+e30
+Superior cerebellar peduncle
+Middle cerebellar peduncle
+Fourth ventricle
+Medial longitudinal fasciculus
+Trigeminal nerve
+Medial lemniscus
+Pontocerebellar fibres
+Trapezoid body
+Pontine nuclei
+Corticospinal fibres
+Reticular formation
+eFig. 9.38  Mid-pons. Transverse section of the mid-pons at the location of the trigeminal nerve. (From Crossman A. Neuroanatomy. 5th ed., 
+Fig. 9.9. Philadelphia: Elsevier; 2015.)
+Lateral lemniscus
+Central canal
+Central grey
+Superior cerebellar peduncle
+Spinothalamic tract
+Medial lemniscus
+Corticobulbar and
+corticospinal fibres
+Medial longitudinal fasciculus
+Locus coeruleus
+Pontine nuclei
+eFig. 9.37  Rostral pons. Transverse section of the rostral pons. (From Crossman A. Neuroanatomy. 5th ed., Fig. 9.10. Philadelphia: Elsevier; 
+2015.)
+fasciculus (eFig. 9.39). Also present at this level is the medial 
+vestibular nucleus in addition to the anterior and posterior 
+cochlear nuclei.
+INTERNAL MEDULLA OBLONGATA
+From rostral to caudal the internal structures of the medulla 
+will be briefly described from three levels: (1) level of the 
+inferior olivary nucleus, (2) decussation of the internal 
+arcuate fibers, and (3) decussation of the pyramids. Nuclei 
+visible in a transverse section at the level of the inferior 
+olivary nucleus include those associated with cranial nerves 
+VIII (vestibulocochlear), IX (glossopharyngeal), X (vagus), 
+XI (spinal accessory), and XII (hypoglossal) (eFig. 9.40). At 
+this level, the medial lemniscus maintains a vertical position 
+immediately adjacent to the midline. Dorsal to the medial 
+lemniscus are the medial longitudinal fasciculus and 
+hypoglossal nucleus. A large distinguishing structure at this 
+rostral level is the laterally oriented inferior cerebellar 
+peduncle, which connects to the cerebellum posteriorly.
+Continuing caudally at the level of the internal arcuate 
+fibers, the dorsal aspect of the medulla is populated by the 
+gracile nucleus medially, followed by the cuneate and spinal 
+trigeminal nucleus laterally. Ventral to the cuneate and 
+gracile nuclei, their neuronal axons can be seen decussat­
+ing as internal arcuate fibers to form the medial lemniscus 
+near the midline of the medulla. Lateral to the internal 
+arcuate fibers and ventral to the spinal trigeminal tract, the 
+
+=== PAGE 1183 ===
+e31
+9 
+Part IV: Brainstem  •  Vascular Supply to the Brainstem
+the vertebrobasilar system of arteries. As mentioned in the 
+“Cerebral Vasculature” section, the vertebrobasilar system 
+begins with the vertebral arteries bilaterally, which arise 
+from the subclavian arteries and ascend through the foramen 
+transversaria of cervical vertebrae C6 to C2 in the neck. At 
+the pontomedullary junction, the vertebral arteries fuse to 
+form the single basilar artery. The basilar artery continues 
+rostrally and terminates as the paired posterior cerebral 
+arteries at the pontomesencephalic junction.
+Before merging and forming the basilar artery, each 
+vertebral artery gives rise to a posterior inferior cerebellar 
+artery (PICA) and posterior spinal artery and contributes 
+to the formation of the anterior spinal artery (eFig. 9.42). 
+The PICA perfuses the lateral aspect of the medulla and the 
+spinocerebellar and anterolateral tracts can be seen along 
+the perimeter of the medulla (eFig. 9.41).
+Before transitioning into the spinal cord, the pyramidal 
+decussation can be observed along the midline of the caudal 
+medulla (eFig. 9.36). Dorsal to these decussating fibers, the 
+gracile and cuneate nuclei begin to emerge as their fasciculi 
+continue rostrally. Note that the spinal accessory nucleus 
+(CN XI) is located in the cervical spinal cord and not the 
+medulla.
+VASCULAR SUPPLY TO THE BRAINSTEM
+Vascular supply to the brainstem, and other structures in 
+the posterior cranial fossa, is provided by branches off of 
+Cerebellum
+Dentate nucleus
+Choroid plexus
+Fourth ventricle
+Middle cerebellar peduncle
+Abducens nucleus
+Medial longitudinal fasciculus
+Medial lemniscus
+Pontocerebellar fibres
+Pontine nuclei
+Corticospinal fibres
+eFig. 9.39  Caudal pons. Transverse section of the caudal pons. (From Crossman A. Neuroanatomy. 5th ed., Fig. 9.8. Philadelphia: Elsevier; 
+2015.)
+Fourth ventricle
+Hypoglossal nucleus
+Dorsal motor nucleus
+of vagus
+Solitary tract
+Medial vestibular nucleus
+Inferior vestibular nucleus
+Lateral vestibular nucleus
+   Inferior cerebellar
+ peduncle
+Hypoglossal nerve fibres
+Inferior olivary nucleus
+Pyramid
+Medial lemniscus
+Nucleus raphé magnus
+Reticular formation
+Nucleus solitarius
+(nucleus of solitary tract)
+Medial longitudinal fasciculus
+eFig. 9.40  Rostral medulla. Transverse section of the rostral medulla at the location of the inferior olivary nucleus. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 9.7. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1184 ===
+Neuroanatomy
+e32
+Fasciculus gracilis
+Nucleus gracilis
+Fasciculus cuneatus
+Nucleus cuneatus
+Spinal tract of trigeminal
+Nucleus of spinal tract of trigeminal
+Spinocerebellar tracts
+Pyramid
+Central grey
+Internal arcuate fibres
+Decussation of internal arcuate fibres
+Medial lemniscus
+eFig. 9.41  Mid-medulla. Transverse section of the mid-medulla at the location of the internal arcuate fiber decussation. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 9.6. Philadelphia: Elsevier; 2015.)
+Anterior cerebral artery
+Anterior communicating artery
+Optic nerve
+Internal carotid artery
+Middle cerebral artery
+Posterior communicating artery
+Oculomotor nerve
+Trochlear nerve
+Infundibulum
+Posterior cerebral artery
+Superior cerebellar artery
+Optic tract
+Basilar artery
+Trigeminal nerve
+Anterior inferior cerebellar artery
+Vertebral artery
+Posterior inferior cerebellar artery
+Anterior spinal artery
+Pons
+Cerebral peduncle
+Medulla
+Mammillary body
+Optic chiasm
+eFig. 9.42  Circle of Willis. Arterial branches on the inferior surface of the brain, which form the circle of Willis. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 7.2. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1185 ===
+e33
+9 
+Part IV: Brainstem  •  Vascular Supply to the Brainstem
+Just before the midbrain, the superior cerebellar arteries 
+branch off of the basilar artery and supply the superior 
+cerebellar peduncles and caudal aspect of the dorsal midbrain 
+before reaching the superior portion of the cerebellar 
+hemispheres. Paramedian branches from the basilar artery 
+supply the medial aspect of the midbrain (eFig. 9.43C). The 
+final branches emerging from the top of the basilar artery 
+are the PCAs, which perfuse the lateral aspect of the midbrain 
+before reaching the thalamus, medial occipital, and inferior 
+temporal lobes (eFig. 9.43C and D).
+inferior portion of the cerebellum. The medial and anterior 
+portions of the medulla receive vascular supply from the 
+paramedian branches off of the vertebral and anterior spinal 
+arteries.
+At the level of the caudal pons, the anterior inferior 
+cerebellar artery (AICA) branches off of the basilar artery 
+and perfuses the lateral portion of the caudal pons (eFig. 
+9.43A). Rostral levels of the lateral pons are perfused by 
+circumferential branches of the basilar artery (eFig. 9.43A 
+and B). Medial portions of the pons are perfused by para­
+median branches off of the basilar artery as it continues 
+rostrally toward the midbrain.
+Area supplied by:
+Vertebral a. 
+Anterior spinal a.
+ 
+Posterior spinal a.
+ 
+Posterior inferior cerebellar a.
+Basilar a. 
+Anterior inferior cerebellar a.
+ 
+Superior cerebellar a.
+Posterior cerebral a. 
+Posterior communicating a.
+A
+B
+C
+D
+eFig. 9.43  Distribution pattern of arterial supply to the brainstem. (From Nolte J. The Human Brain. 7th ed., Fig. 11-30C–F. Philadelphia: 
+Elsevier; 2016.)
+
+=== PAGE 1186 ===
+Neuroanatomy
+e34
+column to the LI and LII vertebral level in an adult (eFig. 
+9.44). Numerous ascending and descending axonal tracts 
+course through the spinal cord and connect with the brain 
+to convey sensory (afferent) and motor (efferent) information 
+for facilitation of movement, reflexes, sensory input, and 
+feedback mechanisms.
+Part V: Spinal cord
+OVERVIEW
+The spinal cord is continuous with the medulla oblongata 
+near the foramen magnum at the base of the skull. Cylindri­
+cal in shape, it occupies the vertebral canal of the vertebral 
+Cervical
+nerves
+Thoracic
+nerves
+Lumbar
+nerves
+Sacral
+nerves
+Coccygeal
+nerve
+C1
+C2
+C3
+C4
+C5
+C6
+C7
+C8
+T1
+T2
+T3
+T4
+T5
+T6
+T7
+T8
+T9
+T10
+T11
+T12
+L1
+L2
+L3
+L4
+L5
+S1
+S2
+S3
+S4
+S5
+Cervical
+enlargement
+Lumbar
+enlargement
+eFig. 9.44  Relationship of the vertebral column to spinal cord segments and spinal nerves. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.3. 
+Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1187 ===
+e35
+9 
+Part V: Spinal Cord  •  Spinal Meninges
+SPINAL MENINGES
+Like the brain, the spinal cord is surrounded by three con­
+centric meninges: the dura mater, arachnoid mater, and 
+pia mater. The spinal dura mater is continuous with the 
+inner meningeal layer of the cranial dura mater and extends 
+Denticulate ligament
+Dorsal roots of spinal 
+nerves
+Lumbar enlargement
+Epidural space
+Filum terminale
+Dura mater
+Termination of the 
+subarachnoid 
+space at S2
+Conus medullaris
+Termination of the 
+spinal cord at L1
+Cauda equina
+Subarachnoid space
+eFig. 9.45  Dorsal aspect of the spinal cord caudal to T9–T10. The dura/
+arachnoid mater has been cut longitudinally and reflected to reveal the 
+spinal cord and nerve roots, including the cauda equina, within the 
+subarachnoid space. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.4. 
+Philadelphia: Elsevier; 2015.)
+inferiorly to the posterior surface of the vertebral body of S2 
+(eFig. 9.45). It is separated from the bony vertebral canal 
+by the epidural/extradural space (eFig. 9.45). In addition, 
+unlike in the cranial cavity, the underlying arachnoid mater 
+is not tightly adherent to the dura mater, and instead has a 
+theoretical plane or potential space called the subdural space.
+
+=== PAGE 1188 ===
+Neuroanatomy
+e36
+The innermost pia mater is a highly vascular layer 
+that is adherent to the surface of the spinal cord. Midway 
+between the anterior and posterior roots the pia mater 
+forms a flat continuous sheet, the denticulate ligament 
+(eFig. 9.46B). At the posterior and anterior rootlets, 
+sleevelike projections from the denticulate ligament 
+extend out through the arachnoid mater to attach onto 
+the dura mater. These delicate attachments anchor and 
+position the spinal cord within the central area of the 
+subarachnoid space.
+Although the arachnoid mater of the spinal cord has a 
+less adherent relationship with the dura mater than in the 
+cranial cavity, the overall structure of the arachnoid mater 
+is the same (eFig. 9.46A). The subarachnoid space created 
+by the loose relationship of the arachnoid and underlying 
+pia mater extends inferiorly to the level of the SII vertebra 
+(eFig. 9.45). Given that the spinal cord terminates near the 
+LI–LII vertebrae, this lower termination point of the sub­
+arachnoid space creates a safe and enlarged space for 
+accessing CSF in the clinical setting (eFig. 9.45).
+T4
+T4 SG
+T4 dorsal root
+T4 ventral root
+Dura mater
+T5
+T6 PRs
+T6 ARs
+T6
+Pia mater
+and spinal blood vessels
+Arachnoid
+trabeculae
+Arachnoid
+Dura mater
+Arachnoid
+Ventral roots:
+C2
+C3
+C4
+C5
+C6
+Denticulate
+ligament
+Denticulate
+ligament
+Dura mater
+Intracranial
+dura
+Spinal dura
+Arachnoid
+Subarachnoid space
+Epidural space
+Pia mater
+Denticulate
+ligament
+C
+B
+A
+D
+eFig. 9.46  Spinal meninges of the spinal cord within the vertebral canal. Denticulate ligaments extend from the pia mater and penetrate 
+through the arachnoid mater to anchor the spinal cord to the dural sheath. (From Nolte J. The Human Brain, 7th ed., Fig. 4-13A and B. From A 
+and B modified from Nolte J. Elsevier’s Integrated Neuroscience. Philadelphia: Mosby/Elsevier; 2007.)
+
+=== PAGE 1189 ===
+e37
+9 
+Part V: Spinal Cord  •  Internal Features
+extends from L2 to S3 and innervates the lower extremities 
+(eFig. 9.44).
+INTERNAL FEATURES
+A cross-section of the spinal cord reveals an inner H-shaped 
+gray matter consisting of neuronal cell bodies and an outer 
+white matter composed of myelinated neuronal axons. The 
+ventral or anterior horns of gray matter contain cell bodies 
+of motor neurons, whereas the dorsal or posterior horns 
+contain cell bodies receiving sensory information (eFig. 9.47). 
+An enlargement of the lateral portion of the gray matter, 
+termed the intermediolateral cell column, can be seen in the 
+T1 to L2 region of the spinal cord (eFig. 9.49). This region 
+enlarges to accommodate the preganglionic cell bodies of 
+the sympathetic nervous system. To further define the diverse 
+cytoarchitecture of the gray matter, it is divided into 10 
+EXTERNAL FEATURES
+The anterior and posterior surfaces of the spinal cord have 
+several longitudinally running fissures and sulci. Along the 
+midline on the anterior surface of the spinal cord is a deep 
+separation, the anterior median fissure (eFig. 9.47). Poste­
+riorly the spinal cord has a shallower separation, the posterior 
+median sulcus, which is flanked on either side by a postero­
+lateral sulcus (eFig. 9.47). Emerging from the spinal cord 
+are a series of rootlets, which coalesce to form anterior and 
+posterior roots at the corresponding cord segment (eFig. 
+9.48). These anterior and posterior roots converge to form 
+31 pairs of spinal nerves, which extend the length of the 
+spinal cord (eFig. 9.44). Along the length of the spinal cord 
+two regions are enlarged to accommodate the numerous 
+neurons innervating the upper and lower extremities. The 
+cervical enlargement extends from C5 to T1 and innervates 
+the upper extremities, whereas the lumbar enlargement 
+LF
+AF
+PH
+IG
+AH
+Posterior
+intermediate
+sulcus
+Posterolateral
+sulcus
+Lissauer’s
+tract
+Anterior white
+fissure
+PF
+commissure
+Anterior median 
+* *
+eFig. 9.47  Spinal cord cross-section at the eighth cervical segment. AF, anterior funiculus; AH, anterior horn; IG, intermediate gray matter; LF, 
+lateral funiculus; PF, posterior funiculus; PH, posterior horn; asterisks indicate the substantia gelatinosa. (From Nolte J. The Human Brain. 7th 
+ed., Fig. 10-7A. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1190 ===
+Neuroanatomy
+e38
+1
+12
+11
+10
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+9
+5
+6
+7
+8
+4
+1
+2
+3
+4
+5
+6
+7
+8
+1
+2
+3
+C8
+T1
+T2
+T3
+T4
+T5
+T6
+T7
+T8
+T9
+T10
+T11
+T12
+L1
+L2
+L3
+L4
+L5
+S1
+S2
+S3
+S4
+S5
+Co
+C7
+C6
+C5
+C4
+Cervical enlargement
+(of spinal cord)
+C2
+C3
+C1
+Lumbosacral enlargement
+(of spinal cord)
+Cauda equina
+Pedicles of vertebrae
+Spinal ganglion
+eFig. 9.48  Posterior view of the spinal cord within the vertebral canal. Posterior roots can be seen merging into the spinal nerve. The posterior 
+root and anterior root (not seen) both contribute to the spinal nerve. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.4. Philadelphia: Elsevier; 
+2015.)
+
+=== PAGE 1191 ===
+e39
+9 
+Part V: Spinal Cord  •  Internal Features
+C3
+C5
+C8
+T5
+T10
+L2
+L5
+S4
+SG
+SG
+Actual
+size
+Actual
+size
+SG
+SG
+DR
+DR
+DR
+DR
+L
+L
+L
+L
+C
+L
+L
+L
+C
+C
+L
+IL 
+IL 
+FG
+FC
+FC
+FC
+FG
+FG
+FG
+FG
+FG
+FG
+FG
+eFig. 9.49  Spinal cord cross sections taken from the cervical, thoracic, lumbar, and sacral levels. Note the change in shape of the anterior and 
+posterior horns at the various levels. DR, dorsal root; FG, fasciculus gracilis; FC, fasciculus cuneatus; L, Lissauer’s tract; SG, substantia gelatinosa; 
+C, Clarke’s nucleus; IL, intermediolateral cell column. (From Nolte J. The Human Brain. 6th ed., Fig. 10.8, Elsevier, Philadelphia, 2009.)
+
+=== PAGE 1192 ===
+Neuroanatomy
+e40
+axons conveying sensory information (eFig. 9.47). The lateral 
+funiculus has a mixture of axons conveying both sensory 
+and motor information.
+ASCENDING TRACTS IN THE SPINAL CORD
+Sensory information entering the CNS from peripheral 
+sensory receptors is conducted through a series of neurons 
+that synapse with targets in the spinal cord, cerebral cortex, 
+and other brain structures. The sensory modalities carried 
+in these pathways include pain, temperature, tactile, and 
+proprioceptive input. Conscious perception of sensory input 
+is transmitted through neuronal pathways, which reach 
+the primary somatosensory region of the cerebral cortex. 
+In addition to conscious sensory input, there is subconscious 
+sensory input, which is transmitted to other structures such 
+as the cerebellum. For simplicity, in this section we will review 
+the sensory pathways that reach conscious perception and 
+discuss the pathways conveying subconscious sensory input 
+in the section on cerebellum.
+Two somatosensory pathways ascend within the spinal 
+cord to reach the cortex: (1) the anterolateral pathways, 
+which convey sensations of pain, temperature, and crude 
+touch; and (2) the posterior column–medial lemniscal 
+pathway, which conveys sensations of discriminative or 
+fine touch, vibration, and conscious proprioception (eFig. 
+9.51). Both of these pathways transmit information through 
+zones known as Rexed’s laminae (eFig. 9.50). These will be 
+referred to as they relate to later discussions of the ascending 
+and descending tracts within the spinal cord.
+The anterior funiculus of the white matter consists of 
+motor axons, whereas the posterior funiculus consists of 
+Clark’s column
+Medial
+Nucleus
+proprius
+Interomedial
+lateral 
+nucleus
+Motor nuclei
+lateral
+Substantia
+gelatinosa
+Lissauer’s tract
+I
+II
+III
+IV
+V
+VI
+VII
+VIII
+IX
+X
+eFig. 9.50  Rexed’s laminae. Cytoarchitecture of the spinal cord 
+gray matter. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th 
+ed., Fig. 15.3. Philadelphia: Elsevier; 2016.)
+Ascending tracts
+Descending tracts
+Fasciculus gracilis
+Fasciculus cuneatus
+Dorsal spinocerebellar tract
+Ventral spinocerebellar tract
+Spinothalamic tract
+Fasciculus proprius
+Lissauer's tract
+Lateral corticospinal tract
+Rubrospinal tract
+Medullary reticulospinal tract
+Lateral vestibulospinal tract
+Pontine reticulospinal tract
+Tectospinal tract
+Ventral corticospinal tract
+Medial longitudinal fasciculus
+Lissauer's tract
+eFig. 9.51  Tracts in the spinal cord. Both ascending and descending tracts in the spinal cord are present bilaterally. For ease of viewing, the 
+ascending tracts are displayed on the left and descending tracts are shown on the right side. Note that Lissauer’s tract and the fasciculus 
+proprius have both ascending and descending fibers. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.15. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1193 ===
+e41
+9 
+Part V: Spinal Cord  •  Ascending Tracts in the Spinal Cord
+forming the spinothalamic tract is located in a spinal ganglion 
+(eFig. 9.52). Axons then enter the spinal cord through the 
+posterior root to reach the posterior horn. From here, axons 
+have two courses: some synapse immediately on second-order 
+neurons in the posterior horn gray matter (lamina I and 
+V), and others have axonal collaterals that ascend or descend 
+one to two spinal cord segments in the posterolateral tract 
+of Lissauer before synapsing with the second-order neurons 
+in the gray matter (eFig. 9.51). Axons of the second-order 
+a series of three neurons. We will review the anterolateral 
+pathway first.
+Anterolateral pathways
+The anterolateral pathways are composed of three tracts: 
+the spinothalamic, spinoreticular, and spinomesencephalic 
+tract. Separate aspects of pain are conveyed through the 
+spinothalamic tract, so we will follow the course of those 
+neurons first. The first-order neuronal cell body of axons 
+Cerebral hemisphere
+Midbrain
+Pons
+Medulla
+Cervical cord
+Lumbar cord
+Third-order neurones
+Second-order neurones
+First-order neurones
+Internal capsule
+Thalamus
+Red nucleus
+Crus cerebri
+Spinal lemniscus
+Middle cerebellar
+peduncle
+Pyramid
+Ventral white
+commissure
+Spinothalamic tract
+Fascicles of
+corticospinal fibres
+Sensory cortex
+Upper limb
+Sensory cortex
+Lower limb
+eFig. 9.52  Anterolateral/spinothalamic tract. The somatosensory pathways conveying modalities of pain, temperature, and crude touch. (From 
+Crossman A. Neuroanatomy. 5th ed., Fig. 8.17. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1194 ===
+Neuroanatomy
+e42
+of these systems are composed of an upper motor neuron 
+with cell bodies located in the cerebral cortex or brainstem 
+and a lower motor neuron with cell bodies located in the 
+spinal cord gray matter. We will begin by exploring the tracts 
+of the lateral motor system first.
+Lateral motor systems
+Tracts of the lateral motor system include the lateral cor­
+ticospinal tract and rubrospinal tract. Both are located in 
+the lateral column of the spinal cord white matter and 
+synapse on lower motor neuronal cell bodies in the lateral 
+aspect of the anterior horn gray matter.
+Clinically, the most important tract is the lateral corti­
+cospinal tract, because it is responsible for controlling 
+movement of the upper and lower extremities. Cell bodies 
+of upper motor neurons forming this tract are located in 
+the primary motor cortex (eFig. 9.54). Axons of these upper 
+motor neurons converge in the corona radiata and descend 
+through the posterior limb of the internal capsule to reach 
+the crus cerebri of the midbrain. These axons continue 
+through the anterior aspect of the pons as small bundles 
+to accommodate the transverse pontocerebellar fibers, which 
+are also present in this location. Once the fibers reach the 
+medulla, they are again grouped together and form a large 
+swelling known as the pyramid (eFig. 9.54). At the caudal 
+medulla, before transitioning into the spinal cord, most of 
+the axons decussate over to the contralateral side to form 
+the lateral corticospinal tract (eFig. 9.54). The remaining 
+axons will stay ipsilateral and form the anterior corticospinal 
+tract, a tract included in the medial motor systems.
+After decussating and forming the lateral corticospinal 
+tract, the axons descend through the spinal cord to synapse 
+on the cell bodies of lower motor neurons in the lateral 
+portion of the anterior horn gray matter. Axons of these 
+lower motor neurons then exit the spinal cord through the 
+anterior root (eFig. 9.54).
+The other lateral motor system pathway is the rubrospinal 
+tract (eFig. 9.55). Cell bodies of upper motor neurons in 
+this pathway begin in the red nucleus of the midbrain. After 
+leaving the red nucleus, the axons cross the midline as the 
+ventral tegmental decussation and descend as the rubrospinal 
+tract through the brainstem and lateral column of the spinal 
+cord white matter (eFig. 9.55). These axons only descend 
+to cervical regions of the spinal cord, and axons synapse 
+with interneurons in the anterior horn gray matter to 
+facilitate flexor muscle activity and inhibit extensor muscle 
+activity of the upper limb.
+Medial motor systems
+Tracts of the medial motor system regulate axial or truncal 
+muscles involved in maintaining posture, balance, automatic 
+gait-related movements, and orientating movements of the 
+neurons then cross obliquely over two to three spinal cord 
+segments within the anterior commissure of the spinal cord 
+to join the anterolateral tract on the contralateral side (eFig. 
+9.52). These second-order axons ascend through the CNS 
+to reach the third-order neuronal cell bodies in the ventral 
+posterior lateral nucleus of the thalamus (eFig. 9.52). Axons 
+from the third-order neurons then project through the 
+posterior limb of the internal capsule to reach the primary 
+somatosensory cortex (eFig. 9.52).
+The spinoreticular and spinomesencephalic tracts have 
+a similar beginning as the spinothalamic tract. The principal 
+difference is the target structure of the second-order axons. 
+Rather than project to the thalamus as the spinothalamic 
+tract does, the spinoreticular tract projects to the reticular 
+formation in the brainstem to convey the emotional and 
+arousal aspects of pain (eFig. 9.52), and the spinomesen­
+cephalic tract projects to the periaqueductal gray matter 
+and superior colliculi in the midbrain for the central modula­
+tion of pain (eFig. 9.52).
+Posterior column–medial lemniscal pathway
+First-order neuronal cells bodies of the posterior column–
+medial lemniscal pathway are located in a spinal ganglion 
+(eFig. 9.53). Axons then enter the spinal cord through the 
+posterior root to reach either the gracile fasciculus (gracile 
+means “thin”), which carries information from the lower 
+limb and trunk, or the cuneate fasciculus (cuneate means 
+“wedge-shaped”), which carries information from the upper 
+limb and neck. These first-order axons then ascend ipsilater­
+ally to the caudal medulla and synapse with the second-order 
+neuronal cell bodies within the nucleus gracilis and nucleus 
+cuneatus (eFig. 9.53). Axons of these second-order neurons 
+then cross over as the internal arcuate fibers to form the 
+medial lemniscus in the contralateral medulla (eFig. 9.53). 
+These second-order axons ascend through the brainstem 
+to reach the third-order neuronal cell bodies in the ventral 
+posterior lateral nucleus of the thalamus (eFig. 9.53). Axons 
+from the third-order neurons then project through the 
+posterior limb of the internal capsule to reach the primary 
+somatosensory cortex (eFig. 9.53).
+DESCENDING TRACTS IN THE SPINAL CORD
+Descending tracts through the spinal cord are involved in 
+voluntary movements; postural movements; and coordination 
+of head, neck, and eye movements. These pathways originate 
+from the cerebral cortex and brainstem and are influenced 
+by sensory input and feedback circuitry from the cerebellum 
+and basal ganglia. Structures that influence regulation of 
+motor planning and voluntary control will be discussed in 
+subsequent sections. In this section we will review the tracts 
+of the medial and lateral motor systems. The tracts in each 
+
+=== PAGE 1195 ===
+e43
+9 
+Part V: Spinal Cord  •  Descending Tracts in the Spinal Cord
+Fasciculus gracilis
+Cerebral hemisphere
+Midbrain
+Pons
+Medulla
+Cervical cord
+Lumbar cord
+Medial lemniscus
+Pyramid
+Fasciculus cuneatus
+Internal arcuate fibres
+Nucleus cuneatus
+Nucleus gracilis
+Medial lemniscus
+Middle cerebellar peduncle
+Crus cerebri
+Red nucleus
+Medial lemniscus
+Thalamus
+Internal capsule
+Sensory cortex
+Upper limb
+Sensory cortex
+Lower limb
+Third-order neurones
+Second-order neurones
+First-order neurones
+eFig. 9.53  Posterior column–medial lemniscal pathway/dorsal columns. The somatosensory pathways conveying modalities of conscious 
+proprioception, vibration, and discriminative touch. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.16. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1196 ===
+Neuroanatomy
+e44
+Posterior limb of
+internal capsule
+Crus cerebri
+Fascicles of corticospinal fibres
+Pyramid
+Decussation of the pyramids
+Lateral corticospinal tract
+Ventral corticospinal tract*
+Cerebral hemisphere
+Midbrain
+Pons
+Medulla
+Cervical cord
+Lumbar cord
+Middle cerebellar peduncle
+eFig. 9.54  Lateral and anterior corticospinal tracts. *Note that the ventral corticospinal tract (VCT) projects bilaterally. For further explanation, 
+please review eTables 9.5 and 9.6. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.20. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1197 ===
+e45
+9 
+Part V: Spinal Cord  •  Descending Tracts in the Spinal Cord
+of these lower motor neurons then exit the spinal cord 
+through the anterior root.
+Tectospinal tract axons arise from cell bodies located in 
+the superior colliculus of the dorsal midbrain (eFig. 9.56). 
+These axons decussate in the dorsal tegmental decussation 
+shortly after leaving the nucleus to form the tectospinal 
+tract along the midline of the brainstem. The tectospinal 
+tract continues through the brainstem near the medial 
+longitudinal fasciculus and into cervical regions of the spinal 
+cord near the anterior median fissure. Within the cervical 
+spinal cord, axons project bilaterally to synapse on cell bodies 
+of interneurons in the anterior horn gray matter. As the 
+superior colliculus receives visual input, it is believed that 
+the tectospinal tract modulates reflex postural movements 
+in response to visual stimuli.
+head and neck. Unlike the lateral motor system, the tracts 
+in this system primarily project bilaterally on interneurons 
+within the spinal cord. This makes it difficult to test each 
+tract individually in the clinical system. We will briefly review 
+the four tracts of the medial motor system beginning with 
+the anterior corticospinal tract.
+The anterior corticospinal tract is formed by the remaining 
+descending upper motor neurons that did not decussate in 
+the caudal medulla to form the lateral corticospinal tract. 
+These upper motor neurons, which remain ipsilateral to 
+form the anterior corticospinal tract, descend through the 
+medial aspect of the anterior spinal cord to the level of the 
+upper thoracic region (eFig. 9.54). These axons project 
+bilaterally to synapse on cell bodies of lower motor neurons 
+in the medial portion of the anterior horn gray matter. Axons 
+Midbrain
+Pons
+Medulla
+Cervical cord
+Red nucleus
+Ventral tegmental decussation
+Substantia nigra
+Crus cerebri
+Middle cerebellar peduncle
+Pyramid
+eFig. 9.55  Rubrospinal tract. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.21. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1198 ===
+Neuroanatomy
+e46
+an example, the change in head position induced during 
+tripping initiates extension of the upper limb and/or lower 
+limb to prevent oneself from falling forward.
+Reticulospinal tract axons arise from the reticular forma­
+tion in the pons and medulla. The axons of the pontine and 
+medullary reticulospinal tracts descend ipsilaterally through 
+the length of the spinal cord in the anterior white matter 
+and synapse with interneurons in the anterior horn gray 
+matter. They are believed to function in regulating voluntary 
+movements in reflex activity and autonomic outflow (eTables 
+9.5 and 9.6).
+Vestibulospinal tract axons arise from vestibular nuclei 
+located in the pons and medulla. The medial vestibular 
+nucleus gives rise to the medial vestibulospinal tract, which 
+projects bilaterally to thoracic regions of the spinal cord, 
+and the lateral vestibular nucleus gives rise to the lateral 
+vestibulospinal tract, which descends ipsilaterally through 
+the entire length of the spinal cord to synapse on interneu­
+rons in the anterior horn gray matter (eFig. 9.57). Given 
+that the vestibular nuclei receive sensory input from the 
+inner ear and cerebellum, this tract facilitates activity of 
+extensor/antigravity muscles and inhibits activity of flexor 
+muscles to maintain balance and an upright posture. As 
+Midbrain
+Pons
+Medulla
+Cervical cord
+Superior colliculus
+Red nucleus
+Periaqueductal grey
+Dorsal tegmental decussation
+Substantia nigra
+Crus cerebri
+Middle cerebellar peduncle
+Pyramid
+eFig. 9.56  Tectospinal tract. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.22. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1199 ===
+e47
+9 
+Part V: Spinal Cord  •  Descending Tracts in the Spinal Cord
+Pons
+Medulla (rostral)
+Medulla (caudal)
+Cervical cord
+Lumbar cord
+Lateral vestibular nucleus
+Middle cerebellar peduncle
+Medial vestibular nucleus
+Inferior cerebellar peduncle
+Medial longitudinal fasciculus
+Pyramid
+Inferior olivary nucleus
+Medial lemniscus
+eFig. 9.57  Medial and lateral vestibulospinal tracts. (From Crossman A. Neuroanatomy. 5th ed., Fig. 8.23. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1200 ===
+Neuroanatomy
+e48
+VASCULAR SUPPLY TO THE SPINAL CORD
+Vascular perfusions to the spinal cord are supplied by three 
+longitudinally running vessels and several segmental 
+branches. The longitudinally running vessels are the anterior 
+spinal artery and two posterior spinal arteries. The posterior 
+spinal arteries originate in the cranial cavity as branches 
+of either the vertebral artery or PICA. These arteries descend 
+along the length of the posterior spinal cord on the pos­
+terolateral sulcus. The single anterior spinal artery originates 
+within the cranial cavity from the union of two contributing 
+branches from the vertebral arteries. The anterior spinal 
+eTable 9.6  Medial motor systems
+Tract
+Site of origin
+Site of decussation (where 
+relevant)
+Levels of termination
+Function
+Anterior 
+corticospinal tract
+Primary motor cortex and 
+supplementary motor area
+–
+Cervical and upper 
+thoracic cord
+Control of bilateral axial and 
+girdle muscles
+Vestibulospinal 
+tracts (VSTs)a
+Medial VST: medial and inferior 
+vestibular nuclei; lateral VST: 
+lateral vestibular nucleus
+–
+Medial VST: cervical and 
+upper thoracic cord; 
+lateral VST: entire cord
+Medial VST: positioning of head 
+and neck; lateral VT: balance
+Reticulospinal tracts
+Pontine and medullary reticular 
+formation
+–
+Entire cord
+Automatic posture and 
+gait-related movements
+Tectospinal tract
+Superior colliculus
+Dorsal tegmental 
+decussation, in the midbrain
+Cervical cord
+Coordination of head and eye 
+movement (uncertain in humans)
+aDespite their names, both medial and lateral vestibulospinal tracts are medial motor systems.
+(From Blumenfeld H. Neuroanatomy Through Clinical Cases. 2nd ed., Table 6.3, Part 2. Sunderland, MA: Sinauer Associates, Inc.; 2010.)
+artery descends along the length of the anterior spinal cord 
+on the anterior median fissure.
+Reinforcing vascular supply to these longitudinally 
+running vessels is provided by eight to ten segmental med­
+ullary arteries. The largest segmental medullary artery is 
+the artery of Adamkiewicz in the lower thoracic or upper 
+lumbar region. This vessel is typically on the left side and 
+contributes significantly to perfusion of the lower portion 
+of the spinal cord.
+Venous drainage of the spinal cord occurs through a series 
+of longitudinally running channels that connect with the 
+anterior and posterior spinal veins on the surface of the cord.
+eTable 9.5  Lateral motor systems
+Tract
+Site of origin
+Site of decussation (where relevant)
+Levels of termination
+Function
+Lateral corticospinal 
+tract
+Primary motor cortex
+Pyramidal decussation, at the 
+cervicomedullary junction
+Entire cord (predominantly 
+at cervical and lumbosacral 
+enlargements)
+Movement of contralateral limbs
+Rubrospinal tract
+Red nucleus, 
+magnocellular division
+Ventral tegmental decussation, in 
+the midbrain
+Cervical cord
+Movement of contralateral limbs 
+(function is uncertain in humans)
+(From Blumenfeld H. Neuroanatomy Through Clinical Cases 2nd ed., Table 6.3, Part 1. Sunderland, MA: Sinauer Associates, Inc.; 2010.)
+
+=== PAGE 1201 ===
+e49
+9 
+Part VI: Basal Nuclei  •  Corpus Striatum
+morphology. To appreciate the three-dimensional shape of 
+the basal nuclei and their relationship to surrounding 
+structures, it is best to view them in horizontal and coronal 
+brain sections taken at different levels of the brain.
+CORPUS STRIATUM
+The corpus striatum (Latin for “striped body”) includes the 
+caudate nucleus and lentiform nucleus. This collection of 
+structures received their name because of the striated 
+appearance of bands that interconnect the caudate nucleus 
+and putamen of the lentiform nucleus through the anterior 
+limb of the internal capsule (eFig. 9.58).
+The lentiform nucleus (Latin for “lens-shaped”) includes 
+the globus pallidus and putamen, which appear lens-shaped 
+when viewed laterally. Both of these structures are lateral to 
+the internal capsule, which separates them from the thalamus 
+Part VI: Basal nuclei
+The basal nuclei are a collection of gray-matter structures 
+named for their location deep within the base of the forebrain. 
+Functionally, the basal nuclei have a significant role in 
+controlling posture and voluntary movement through 
+connections to the thalamus, cortex, and neighboring basal 
+nuclei structures. In addition to their role in posture and 
+movement, the basal nuclei have connections to limbic system 
+pathways, which govern the expression of various behaviors 
+and motivational states. For the purposes of this section, 
+we will focus on reviewing the structures of the basal nuclei 
+and pathways involved in controlling posture and voluntary 
+movement.
+A variety of terminology is used to refer to the structures 
+of the basal nuclei individually and based on their collective 
+Head of caudate nucleus
+External capsule
+Putamen
+Extreme capsule
+Claustrum
+Cortex of insula
+Anterior horn of lateral ventricle 
+Anterior limb of internal capsule 
+Lateral medullary lamina
+External segment
+Internal segment
+Globus pallidus
+Medial medullary lamina
+Posterior limb of internal capsule
+eFig. 9.58  Horizontal section of the brain showing the relationships of the corpus striatum. Mulligan’s stain has been used to increase the 
+contrast between cell-rich areas (green/blue) and white matter. (From Crossman A. Neuroanatomy. 5th ed., Fig. 14.1. Philadelphia: Elsevier; 
+2015.)
+
+=== PAGE 1202 ===
+Neuroanatomy
+e50
+and caudate nucleus medially (eFig. 9.58). Laterally, the 
+putamen is bordered by the external capsule, a thin layer 
+of white matter adjacent to a thin gray-matter layer called 
+the claustrum. Beyond the claustrum is the external capsule, 
+which borders the white matter of the insula (eFig. 9.58).
+Medial to the internal capsule is the caudate nucleus. 
+The caudate nucleus is a large C-shaped structure divided 
+into a head, body, and tail, which closely follows the shape 
+of the lateral ventricle (eFig. 9.58). Rostrally, the head of 
+the caudate has a large rounded shape that contributes to 
+the lateral wall of the anterior horn of the lateral ventricle 
+(eFig. 9.58). Also at this level, the head of the caudate is 
+continuous with the putamen (eFig. 9.59). Because of this 
+Head of caudate
+nucleus
+Anterior limb of
+internal capsule
+Posterior limb of
+internal capsule
+Amygdala
+Putamen
+Body of caudate
+nucleus
+Tail of caudate
+nucleus
+Thalamus
+Posterior
+Anterior
+eFig. 9.59  Lateral view of basal nuclei structures and thalamus. 
+The vertical red lines highlight the course of the internal capsule. 
+The globus pallidus and putamen are separated from the thalamus 
+by the posterior limb of the internal capsule. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 14.4. Philadelphia: Elsevier; 2015.)
+close relationship the putamen and caudate are referred to 
+collectively as the striatum. At the level of the interventricular 
+foramen, the head of the caudate transitions to the body. 
+The body of the caudate is long and narrows substantially 
+as it transitions from the head to the tail (eFig. 9.59). Along 
+its course the body contributes to the floor of the lateral 
+ventricle. Near the posterior border of the thalamus the 
+body of the caudate transitions into the tail. The tail con­
+tinues anteriorly within the roof of the inferior horn of the 
+lateral ventricle to terminate in the amygdaloid nucleus 
+(eFig. 9.59).
+CONNECTIONS OF THE BASAL NUCLEI
+Input to the basal nuclei is primarily received by the striatum 
+(caudate nucleus and putamen), and output predominantly 
+leaves from the globus pallidus. Many structures send input 
+to the striatum, including all areas of the cerebral cortex, 
+thalamic nuclei, subthalamic nucleus, brainstem, and 
+substantia nigra. To understand how the basal nuclei 
+integrates all of this incoming information to influence motor 
+activity, two simplified neuronal loops are described: the 
+direct pathway and the indirect pathway.
+The direct pathway has a series of connections through 
+the basal nuclei, which result in an overall increase in motor 
+activity. This pathway begins with input to the striatum, 
+which sends axonal connections to the globus pallidus (eFig. 
+9.60A). The globus pallidus then has output connections 
+to the thalamus, which completes the circuit with axonal 
+connections back to the cortex. The indirect pathway has 
+a similar course, with the addition of output connections 
+to the subthalamic nucleus, which results in an overall 
+decrease in motor activity (eFig. 9.60B).
+
+=== PAGE 1203 ===
+e51
+9 
+Part VI: Basal Nuclei  •  Connections of the Basal Nuclei
+1
+2
+3
+4
+5
+Left motor cortex
+Precentral sulcus
+SMA
+VLN
+STN
+CST/CRST
+SNpc
+GPi
+GPe
+Striatum
+D1 receptors
+(excitatory)
+Corticostriate neuron
+1
+3
+2
+5
+6
+4
+7
+Left motor cortex
+Precentral sulcus
+SMA
+VLN
+STN
+CST/CRST
+SNpc
+GPi
+GPe
+Striatum
+D2 receptors
+(inhibitory)
+Corticostriate neuron
+A
+B
+−
+−
+−
++
++
++
++
++
+−
+−
+−
+−
++
++
++
++
++
++
+eFig. 9.60  Coronal section of the basal nuclei motor loop. A. Direct pathway. B. Indirect pathway. The red arrows represent excitatory neurons 
+(glutamate). The black and gray arrows represent inhibitory neurons (GABA). The brown arrow represents dopamine-releasing nigrostriatal 
+neurons, which is excitatory to D1 receptors on some striatal neurons and inhibitory to D2 receptors on other striatal neurons. CST/CRST, 
+corticospinal, corticoreticular fibers; GPe, GPi, external and internal segments of globus pallidus; SMA, supplementary motor area; SNpc, 
+compact part of the substantia nigra; STN, subthalamic nucleus; VLN, ventral lateral nucleus of the thalamus. (Modified from Mtui E. 
+Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 33.2. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1204 ===
+Neuroanatomy
+e52
+Midbrain
+Primary fissure
+Anterior
+lobe
+Posterior
+lobe
+Superior
+vermis
+    Hemisphere
+eFig. 9.61  Cerebellum. Superior surface. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 11.2. Philadelphia: Elsevier; 2015.)
+Inferior cerebellar peduncle
+Cerebellar hemisphere
+Midbrain
+Pons
+Superior cerebellar peduncle
+Middle cerebellar peduncle
+Pyramid
+Olive
+eFig. 9.62  Cerebellum. Lateral view of the cerebellum and cerebellar peduncles connecting to the brainstem. Portions of the cerebellar lobes 
+are removed to highlight the peduncles. (From Crossman A. Neuroanatomy. 5th ed., Fig. 11.1. Philadelphia: Elsevier; 2015.)
+Part VII: Cerebellum
+The cerebellum is the largest structure of the hindbrain. It 
+resides within the posterior cranial fossa and is composed 
+of two large hemispheres, which are connected by the vermis 
+in the midline (eFig. 9.61). Functionally, the cerebellum 
+plays a role in maintaining balance and influencing posture 
+and is responsible for coordinating movements by synchroniz­
+ing contraction and relaxation of voluntary muscles. We 
+will first examine the structural organization of the cerebel­
+lum and then review how these structures contribute to 
+the circuitry of the cerebellum.
+STRUCTURES OF THE CEREBELLUM
+Within the posterior cranial fossa, the cerebellum is covered 
+by the tentorium cerebelli of the dura mater (eFig. 9.17) 
+and connects to the posterior surface of the brainstem 
+via the superior, middle, and inferior cerebellar peduncles 
+(eFig. 9.62). Anteriorly, the cerebellum forms the roof of the 
+fourth ventricle (eFig. 9.14). On its surface, the cerebellum 
+has several convoluted folds, or folia, separated by fissures. 
+Two of these fissures serve as landmarks to divide the 
+cerebellum into three lobes. Superiorly, the primary fissure 
+separates the anterior lobe from the posterior lobe (eFig. 
+9.61). Anteriorly and inferiorly, the posterolateral fissure 
+defines the structures of the flocculonodular lobe, which 
+includes the flocculus from each hemisphere and nodule of 
+the vermis (eFig. 9.63). A third fissure, the horizontal fissure, 
+borders the superior and inferior surfaces of the cerebellum 
+(eFig. 9.64).
+Each fold or folia of the cerebellar cortex has a central 
+core of white matter covered by a thin layer of gray matter 
+superficially. In sections parallel to the median plane, the 
+branching pattern of the folia can be appreciated; this is 
+often referred to as the arbor vitae (eFig. 9.28). Deep within 
+the white matter of each hemisphere are four masses of 
+cerebellar nuclei. From lateral to medial they are the dentate, 
+emboliform, globose, and fastigial (eFig. 9.65). Note that 
+the emboliform and globose are collectively referred to as 
+
+=== PAGE 1205 ===
+e53
+9 
+Part VII: Cerebellum  •  Structures of the Cerebellum
+Anterior lobe
+Superior cerebellar
+peduncle
+Middle cerebellar
+peduncle
+Posterolateral
+fissure
+Posterior lobe
+Nodule 
+Flocculus
+Flocculonodular lobe 
+Inferior cerebellar
+peduncle
+Tonsil
+eFig. 9.63  Cerebellum. Anterior and inferior view. (From Crossman 
+A. Neuroanatomy. 5th ed., Fig. 11.4. Philadelphia: Elsevier; 2015.)
+Superior
+vermis
+Hemisphere
+Inferior
+vermis
+Medulla
+Horizontal
+fissure
+eFig. 9.64  Cerebellum. Posterior view. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 11.3. Philadelphia: Elsevier; 2015.)
+Cerebellar hemisphere
+Globose nuclei
+Emboliform nucleus
+Middle cerebellar peduncle
+Dentate nucleus
+Fastigial nucleus
+Pons
+Fourth ventricle
+eFig. 9.65  Cerebellum and brainstem. Horizontal section at the location of the fourth ventricle. Here, the four cerebellar nuclei can be seen. 
+(From Crossman A. Neuroanatomy. 5th ed., Fig. 11.8. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1206 ===
+Neuroanatomy
+e54
+(eFig. 9.67). From here, the granule cells send axons to the 
+molecular layer, where they bifurcate into parallel fibers 
+that run longitudinally in the folia. The parallel fibers then 
+synapse on Purkinje cells in the outermost Purkinje cell 
+layer (eFig. 9.67). Climbing fibers project to the Purkinje 
+cell layer and form powerful excitatory connections with 
+the Purkinje cells. The Purkinje cells then project to the 
+deep cerebellar nuclei (eFig. 9.67).
+AFFERENT CEREBELLAR PATHWAYS
+As mentioned earlier, the cerebellum receives input from 
+the cerebral cortex, brainstem, and spinal cord. Input from 
+the cerebral cortex to the cerebellum is primarily involved 
+in voluntary muscle control and coordination of movement. 
+Axonal projections from the cerebral cortex destined for the 
+cerebellum descend through the internal capsule and ter­
+minate on pontine nuclei (eFig. 9.68). The axons from the 
+pontine nuclei then cross over as transverse fibers to enter 
+the interposed nuclei. Output from the cerebellum originates 
+from one of these four nuclear complexes before leaving 
+through the superior cerebellar peduncle, predominantly. 
+In general, the output from each cerebellar hemisphere 
+coordinates movement on the ipsilateral side of the body.
+Functionally, the cerebellar cortex can be divided into 
+three areas. The vermis in the midline influences movements 
+along the axis of the body, including the neck, trunk, 
+abdomen, and pelvis (eFig. 9.66). Adjacent to the vermis, 
+the intermediate zone controls muscles of the distal upper 
+and lower limbs. The lateral zone participates in motor 
+planning to coordinate sequential movements of the entire 
+body. Input to these functional areas of cerebellar cortex 
+come from the cerebral cortex, spinal cord, and brainstem 
+by passing predominantly through the middle and inferior 
+cerebellar peduncles. Fibers entering the cerebellum proceed 
+as mossy fibers (from various regions) or climbing fibers 
+(from olivary nucleus). Mossy fibers form excitatory synapses 
+with dendrites of the granule cells, in the granule cell layer 
+A
+C
+B
+Anterior lobe
+representation
+Neocerebellar
+representation
+Posterior lobe
+representation
+HI-V
+HVI
+HVIII
+HVIIB
+Crus I
+Crus II
+Flocc
+Tons
+D
+F
+T
+Pyr
+Uv
+Nod
+MOTOR/SENSORY
+ 
+Sensorimotor task
+ 
+Motor activation
+ 
+Somatosensory activation
+COGNITIVE
+ 
+Language/verbal working memory
+ 
+Spatial
+ 
+Executive functions
+ 
+Emotions
+eFig. 9.66  Somatotopic map on the dorsal surface of the cerebellum. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 25.7A. 
+Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1207 ===
+e55
+9 
+Part VII: Cerebellum  •  Afferent Cerebellar Pathways
+To cerebellar nuclei
+Climbing fibres from
+inferior olivary nucleus
+Mossy fibres
+Molecular layer
+Purkinje cell
+Granular layer
+Long axis of folium
+Parallel fibres
+Granule cell
+Cerebellar cortex
+White matter
+eFig. 9.67  Connections of the cerebellum cortex. Afferent and efferent connections of the cerebellum and their connections to the cells of the 
+cerebellar cortex. (From Crossman A. Neuroanatomy. 5th ed., Fig. 11.10. Philadelphia: Elsevier; 2015.)
+Motor cortex
+Ventral lateral nucleus of thalamus
+Dentate nucleus
+Pontine nuclei
+Lateral corticospinal tract
+Decussation of pyramids
+Decussation of superior cerebellar peduncle
+Purkinje cell
+Pontocerebellar fibres
+eFig. 9.68  Circuitry of the neocerebellum. (From Crossman A. Neuroanatomy. 5th ed., Fig. 11.3. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1208 ===
+Neuroanatomy
+e56
+Globose and emboliform nuclei
+Purkinje cell
+Red nucleus
+Rubrospinal tract
+Dorsal spinocerebellar tract
+Ventral spinocerebellar tract
+Decussation of superior
+cerebellar peduncle
+Ventral tegmental decussation
+eFig. 9.69  Circuitry of the paleocerebellum. (From Crossman A. Neuroanatomy. 5th ed., Fig. 11.12. Philadelphia: Elsevier; 2015.)
+the contralateral cerebellum through the middle cerebellar 
+peduncle.
+Input from the spinal cord to the cerebellum conveys 
+information from muscles and joints to influence muscle 
+tone and posture. The primary spinal cord pathways with 
+connections to the cerebellum include the anterior or ventral 
+spinocerebellar and the posterior or dorsal spinocerebellar 
+tracts. These tracts originate from joint and cutaneous 
+mechanoreceptors and ascend through the spinal cord to 
+enter the ipsilateral cerebellum primarily through the inferior 
+cerebellar peduncle (eFig. 9.69).
+A final source of cerebellar input arises from the ves­
+tibular nuclei and reticular formation in the brainstem. 
+The connections are primarily involved in reflexive main­
+tenance of balance. These nuclei send axonal projections 
+to the ipsilateral cerebellum through the inferior cerebellar 
+peduncle.
+EFFERENT CEREBELLAR PATHWAYS
+Output from the cerebellum originates from one of the four 
+deep cerebellar nuclei. The largest collection of fibers leaving 
+the cerebellum originates from the dentate nucleus. Axons 
+from this nuclear complex project to the contralateral ventral 
+nucleus of the thalamus after decussating in the superior 
+cerebellar peduncle. From here, axons of the thalamic nuclei 
+project to the motor cortex (eFig. 9.70). This pathway influ­
+ences posture and movement.
+The emboliform and globose nuclei, or interposed nuclei, 
+have a similar course as the axons from the dentate, but 
+with the addition of another synaptic target. Axons from 
+the interposed nuclei decussate in the superior cerebellar 
+peduncle to synapse on the contralateral ventral nucleus 
+of the thalamus and the contralateral red nucleus in the 
+midbrain (eFig. 9.70). Axons leaving the red nucleus descend 
+to the inferior olivary nucleus in the medulla. The axonal 
+projections from the interposed nuclei function in monitor­
+ing and correcting motor activity of the upper and lower 
+extremities.
+Axons from the fastigial nucleus project to the vestibular 
+nuclei, reticular formation, contralateral ventral nucleus of 
+the thalamus, and contralateral tectum. Vestibular axons 
+pass through the inferior cerebellar peduncle to reach the 
+ipsilateral vestibular nucleus and uncinate fasciculus to 
+
+=== PAGE 1209 ===
+e57
+9 
+Part VII: Cerebellum  •  Vascular Supply
+Motor cortex
+Thalamus
+Cerebellum
+Dentate nucleus
+Interposed nucleus
+Fastigial nucleus
+Vestibular nucleus
+Red nucleus
+Midbrain
+Ventral lateral
+nucleus of thalamus
+Superior cerebellar
+peduncle
+Central tegmental tract
+Reticular formation
+Inferior olivary nucleus
+eFig. 9.70  Cerebellar efferents. Arrows indicate the direction of impulse transmission. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., 
+Fig. 25.10. Philadelphia: Elsevier; 2016.)
+reach the contralateral vestibular nucleus (eFig. 9.70). Also 
+going through the inferior cerebellar peduncle are axons 
+heading to the reticular formation. Ascending in the superior 
+cerebellar peduncles are axons that will synapse with the 
+contralateral tectum and contralateral ventral nucleus of the 
+thalamus.
+VASCULAR SUPPLY
+The cerebellum is perfused by the vertebrobasilar system 
+of arteries (eFig. 9.42). Before merging and forming the 
+basilar artery, each vertebral artery gives rise to a PICA and 
+posterior spinal artery and contributes to the formation of 
+the anterior spinal artery (eFig. 9.71). The PICA perfuses 
+the inferior portion of the cerebellum. At the level of the 
+caudal pons, the AICA branches off the basilar artery and 
+perfuses the anterior and lateral portion of the cerebellum, 
+as well as the middle and inferior cerebellar peduncles (eFig. 
+9.71). Just before the midbrain, the superior cerebellar 
+arteries branch off of the basilar artery and supply the 
+superior cerebellar peduncles and superior portion of the 
+cerebellar hemispheres (eFig. 9.71).
+Posterior
+communicating
+Posterior
+cerebral
+Anterior spinal
+Vertebral
+Superior
+cerebellar
+Anterior
+inferior
+cerebellar
+Posterior
+inferior
+cerebellar
+Pontine
+Basilar
+Labyrinthine
+Internal carotid
+eFig. 9.71  Vascular supply to the hindbrain. (From Mtui E. 
+Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 5.10. Philadelphia: 
+Elsevier; 2016.)
+
+=== PAGE 1210 ===
+Neuroanatomy
+e58
+the anterior chamber and the pupil, a small central aperture 
+that controls how much light is admitted into the eye. After 
+passing through the pupil light is refracted through the lens, 
+which along with the ciliary body, separates the anterior 
+portion of the eye from the posterior portion (eFig. 9.72). The 
+lens is a clear biconvex structure that rounds in shape as the 
+ciliary muscle contracts and relaxes the suspensory ligaments 
+attached to the borders of the lens, a parasympathetically 
+controlled process referred to as accommodation.
+After the lens, light passes through the vitreous humor 
+of the posterior chamber and is projected onto the layers 
+of the retina (eFig. 9.73). The retina is composed of a non-
+neural layer and several layers of neural cells with synaptic 
+connections. To reduce the amount of light reflected in the 
+eye, the choroid layer lining the inner surface of the sclera 
+(eFig. 9.72), along with the pigment epithelium layer (non-
+neural) of the retina, absorb and refract some of the light 
+stimulus (eFig. 9.73). Interdigitating between the pigment 
+Part VIII: Visual System
+The visual system is a complex special sensory system that 
+begins in the eyeball and has neuronal connections to the 
+thalamus, brainstem, primary visual cortex, and association 
+cortices. In addition to mediating visual perception, these 
+connections are also involved in higher visual functions, 
+such as determining spatial relationships between objects 
+and structural features of objects. In this section we will 
+explore the primary or geniculate visual pathway from the 
+retina to the primary visual cortex.
+Although the retinal layer of the eyeball is often considered 
+the beginning of visual perception, the anterior structures 
+of the eye play an important role in visual perception too. 
+The anteriormost structure is the cornea and is the first layer 
+through which light, the visual stimulus, enters the eye (eFig. 
+9.72). This transparent layer overlies the aqueous humor of 
+Optic nerve
+Subarachnoid
+space
+Optic papilla
+Choroid
+Retina
+Sclera
+Ciliary body
+Ciliary body
+Cornea
+Visual axis
+Iris
+Lens
+Aqueous humor
+Vitreous humor
+Suspensory ligaments
+Ciliary
+muscle
+Fovea 
+Central vessels of retina
+Dura arachnoid
+eFig. 9.72  Right eye. Horizontal section displaying the visual axis. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 28.2. 
+Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1211 ===
+e59
+9 
+Part VIII: Visual System  •  Central Visual Pathway
+pathway. Two other cell types present in the retina are 
+horizontal and amacrine cells. These transversely oriented 
+interneurons moderate the excitation level of bipolar and 
+ganglion cells.
+CENTRAL VISUAL PATHWAY
+Axons from the ganglion cells coalesce at the optic disc, 
+which is absent of photoreceptors and thus creates a blind 
+spot in the visual field. As they leave the optic disc they form 
+the optic nerve, acquire a myelin sheath provided by oligo­
+dendrocytes, and are invested by the cranial meninges (eFig. 
+9.72). These morphological features derived during embry­
+onic development, define the optic nerve as a component 
+of the CNS. Anterior to the infundibular stalk, the optic 
+nerves converge at the optic chiasm. Within the chiasm, 
+axons from the nasal portion of the retina decussate and 
+enter into the contralateral optic tract (eFig. 9.75). Con­
+versely, axons from the temporal portion of the retina stay 
+ipsilateral to enter the ipsilateral optic tract (eFig. 9.75).
+Continuing posteriorly, the optic tracts course around 
+the midbrain to enter the lateral geniculate nucleus of the 
+thalamus (eFig. 9.75). At this level, a small portion of the 
+fibers from the optic tract travel to the pretectal area and 
+superior colliculus to mediate the pupillary light reflex. 
+Axons leaving the lateral geniculate nucleus form the 
+epithelial cells, the photoreceptors transduce the light 
+stimulus into an electrical signal in a process called photo­
+transduction. Images formed on the retina are inverted in 
+both vertical and lateral dimensions (eFig. 9.74). Because 
+of this, the visual field is defined as having four quadrants: 
+left/right and upper/lower.
+Photoreceptors include rods, which are very sensitive to 
+light and essential for vision in dimly lit conditions, and 
+cones, which are responsible for color vision and high visual 
+acuity. Although rods and cones are both distributed across 
+the retina, rods outnumber cones by twentyfold and are 
+concentrated in the periphery of the retina. Cones predomi­
+nate near the macula and are the only photoreceptors present 
+at the fovea (eFig. 9.72). The fovea represents the primary 
+visual axis of the eye and is the location of maximal visual 
+acuity. Despite their functional differences, both the rods 
+and cones have an outer light-sensing segment, an inner 
+segment, and a synaptic terminal. These synaptic terminals 
+contact bipolar cells, the first-order neurons in the visual 
+pathway (eFig. 9.73). Bipolar cells then synapse with 
+ganglion cells, the second-order neurons in the visual 
+Optic nerve
+Amacrine cell
+Bipolar neuron
+Ganglion cell
+Light
+Horizontal cell
+8
+7
+6
+5
+4
+3
+2
+1
+eFig. 9.73  Retinal layers. (1) Pigment layer; (2) photoreceptor 
+layer; (3) outer nuclear layer; (4) outer plexiform layer; (5) inner 
+nuclear layer; (6) inner plexiform layer; (7) ganglion cell layer; (8) 
+nerve fiber layer. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 
+7th ed., Fig. 28.4. Philadelphia: Elsevier; 2016.)
+eFig. 9.74  Visual field projected on the retina. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 15.3. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1212 ===
+Neuroanatomy
+e60
+Lateral geniculate nucleus
+of thalamus
+Inferior horn of
+lateral ventricle
+Meyer’s loop
+Lower visual field fibres
+Upper visual field fibres
+eFig. 9.76  Thalamocortical fibers projecting to the primary visual cortex from the lateral geniculate nucleus. (From Crossman A. Neuroanatomy. 
+5th ed., Fig. 15.6. Philadelphia: Elsevier; 2015.)
+optic radiations, which continue on to the primary visual 
+cortex in the occipital lobe (eFig. 9.76). Fibers traveling in 
+the lower portion of the optic radiations terminate on the 
+lower half of the primary visual cortex, whereas fibers in 
+the upper portion terminate on the upper half of the cortex 
+(eFig. 9.76). A full review of how the visual field is repre­
+sented throughout the visual pathway can be reviewed in 
+eFig. 9.77.
+As mentioned previously, images formed on the retina 
+are inverted in both vertical and lateral dimensions. In 
+addition, the fibers from the nasal portion of the hemiretina 
+decussate at the optic chiasm. Because of this, the optic 
+tracts, thalamus, optic radiations, and primary visual cortex 
+receive information relating only to the contralateral half 
+of the visual field. Knowledge of how the visual field is 
+represented throughout the visual pathway is essential for 
+identifying the location of lesions in patients with visual 
+field deficits. Examples of lesions in the five major structures 
+of the visual pathway (optic nerve, optic chiasm, optic tract, 
+optic radiations, primary visual cortex) and their associated 
+visual field deficits are represented in eFig. 9.78.
+Visual fields
+Midbrain
+Lateral geniculate
+nucleus
+Retina
+Optic nerve
+Optic tract
+Optic
+radiation
+Primary visual
+cortex
+eFig. 9.75  Visual pathways. The visual fields from the left and 
+right eyes are represented distinctly, without the normal 
+intersection. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th 
+ed., Fig. 28.9. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1213 ===
+e61
+9 
+Part VIII: Visual System  •  Central Visual Pathway
+Visual field
+Representation of
+visual field upon
+retinae
+Right lateral
+geniculate nucleus
+Right visual cortex
+L
+R
+Macula
+Parieto-occipital
+sulcus
+Calcarine sulcus
+eFig. 9.77  Representation of the left half of the visual field at various portions along the visual pathway. (From Crossman A. Neuroanatomy. 
+5th ed., Fig. 15.7. Philadelphia: Elsevier; 2015.)
+Nasal
+Visual fields
+1
+2
+3
+4
+5
+6
+7
+8
+Left
+eye
+Left
+Right
+eFig. 9.78  Visual field deficits experienced with lesions along the visual pathway. 1, ipsilateral monocular scotoma; 2, monocular blindness/
+visual loss; 3, bitemporal hemianopia; 4, contralateral homonymous hemianopia; 5, contralateral homonymous superior quadrantanopia; 6 and 
+7, contralateral homonymous hemianopia with macular sparing; 8, bilateral central scotoma. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 
+7th ed., Fig. 28.11. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1214 ===
+Neuroanatomy
+e62
+pressure waves at the oval window of the fluid-filled cochlea. 
+To prevent damage from loud or high-decibel sounds, move­
+ments of the malleus and stapes are reduced by the tensor 
+tympani and stapedius muscles.
+COCHLEA
+In the cochlea, sound waves are converted into an electrical 
+signal at the organ of Corti. The organ of Corti rests upon 
+the basilar membrane in the scala media, which is filled 
+with endolymph (eFig. 9.80). In addition to contributing 
+to the formation of the scala media with the vestibular 
+membrane, the basilar membrane separates the cochlea into 
+the scala vestibuli and scala tympani, which are filled with 
+perilymph and are continuous with one another at the 
+helicotrema (eFig. 9.80).
+As the sound waves move through the perilymph they 
+displace the basilar membrane, which causes deflection of 
+the hair cells in the organ of Corti (eFig. 9.81A). These 
+sensory receptors synapse with sensory neurons, which 
+have cell bodies in spiral ganglion located within the modiolus 
+of the cochlea (eFig. 9.80). Axons leaving the modiolus 
+form the cochlear nerve near the base of the cochlea. The 
+Part IX: Auditory and 
+vestibular system
+Cranial nerve VIII, the vestibulocochlear nerve, conveys 
+sensory information from the vestibular and auditory organs 
+of the inner ear to the pontomedullary junction of the 
+brainstem. Although these sensory modalities are conveyed 
+to the brainstem by a common nerve bundle, each of these 
+sensory functions has different central pathways. In this 
+section we will first review the central auditory pathways 
+and then the vestibular pathways.
+AUDITORY PATHWAYS
+Sound waves, the auditory stimulus, are directed toward 
+the external acoustic meatus by the pinna of the outer ear 
+and through the ear canal to the tympanic membrane (eFig. 
+9.79). Vibration of the tympanic membrane, induced by 
+the incoming sound waves, is transmitted to the three ossicle 
+bones (malleus, incus, and stapes) of the middle ear. These 
+bones amplify sound waves so they can be converted to 
+Middle ear
+ossicles
+Vestibule
+Bone
+Semicircular canals:
+Horizontal
+Posterior
+Anterior
+Vestibular nerve
+Facial nerve
+Bone
+Cochlear nerve
+Ear canal
+Bone
+Cochlea
+auditory
+(Eustachian)
+tube
+Nasopharynx
+Round window
+Middle ear cavity
+Oval window
+with stapes
+Drum
+membrane
+Cartilage
+eFig. 9.79  Schematic drawing of the right outer, middle, and inner ear. The cochlea of the inner ear is located within the temporal bone. (From 
+Nolte J Fig. 14-1; from Brödel M. Three Unpublished Drawings of the Anatomy of the Human Ear. Philadelphia: W. B. Saunders; 1946.)
+
+=== PAGE 1215 ===
+e63
+9 
+Part IX: Auditory and Vestibular System  •  Central Auditory Pathways
+cochlear nerve then passes through the internal acoustic 
+meatus and subarachnoid space to enter the pontomedullary 
+junction at the cerebellopontine angle.
+CENTRAL AUDITORY PATHWAYS
+The first-order axons entering the brainstem from the cochlea 
+terminate ipsilaterally on the dorsal and ventral cochlear 
+nuclei. From here, second-order axons have several synaptic 
+targets. Second-order axons forming the ascending auditory 
+pathway ascend to the pons and project bilaterally on the 
+superior olivary nucleus (eFig. 9.82). These bilateral projec­
+tions are important for auditory acuity and localizing the 
+origin of a sound. From here, fibers continue to ascend as 
+the lateral lemniscus and terminate in the inferior colliculus 
+of the midbrain. Axons leaving the inferior colliculus then 
+have a synaptic relay in the medial geniculate nucleus of 
+the thalamus before reaching the final synaptic target: the 
+primary auditory cortex (superior temporal gyrus) of the 
+temporal lobe (eFig. 9.82). Throughout this pathway, from 
+the basilar membrane to the primary auditory cortex, audi­
+tory stimuli are tonotopically represented. This is analogous 
+to the somatotopic map previously discussed in the section 
+on somatosensory systems pathways.
+In addition to the ascending auditory pathway, the 
+superior olivary nucleus receives descending input from the 
+Organ 
+of Corti
+Bone
+Modiolus
+Vestibular
+membrane
+Helicotrema
+Scala vestibuli
+Scala 
+tympani
+Scala media
+Spiral ganglion
+Internal acoustic meatus
+Cochlear nerve
+Osseous spiral
+lamina
+Basilar membrane
+Spiral ligament
+eFig. 9.80  Sagittal section of the cochlea in the temporal bone. 
+(From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 20.1. 
+Philadelphia: Elsevier; 2016.)
+Scala vestibuli
+Scala media
+Scala tympani
+Spiral 
+ligament
+Basilar membrane
+Organ of 
+Corti
+Tunnel of Corti
+Osseous spiral 
+lamina
+Tectorial 
+membrane
+Inner hair cell
+Outer hair cell
+Stereocilium
+Ribbon synapse
+OCB
+OCB
+eFig. 9.81  Overview of the organ of Corti with a magnified view of 
+the hair cells and their connections to the olivocochlear bundle 
+(OCB). The arrows specify the direction of impulse propagation 
+along the length of the axon. (From Mtui E. Fitzgerald’s Clinical 
+Neuroanatomy. 7th ed., Fig. 20.2. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1216 ===
+Neuroanatomy
+e64
+Cochlea
+Spiral ganglion
+Cochlear nerve
+Ventral cochlear nucleus
+Dorsal cochlear nucleus
+Pyramid
+Inferior olivary nucleus
+Inferior cerebellar peduncle
+Trapezoid body
+Middle cerebellar peduncle
+Superior olivary nucleus
+Crus cerebri
+Middle cerebellar peduncle
+Inferior colliculus
+Substantia nigra
+Medial geniculate nucleus
+Superior temporal gyrus
+Temporal lobe
+Cerebral hemisphere
+Rostral midbrain
+Caudal midbrain
+Pons
+Medulla
+eFig. 9.82  Ascending connections of the auditory nerve of the vestibulocochlear nerve (CN VIII). (From Crossman A. Neuroanatomy. 5th ed., 
+Fig. 10.22. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1217 ===
+e65
+9 
+Part IX: Auditory and Vestibular System  •  Vestibular Pathways
+primary auditory cortex as a form of feedback (eFig. 9.82). 
+The superior olivary nucleus then sends descending olivo­
+cochlear fibers to the organ of Corti, which has an inhibitory 
+function on the hair cells to prevent damage from harmfully 
+loud sounds. It is also believed that the superior olivary 
+nucleus has connections with the motor nuclei of the tri­
+geminal and facial nerve to mediate reflexive contraction 
+of the tensor tympani and stapedius muscles in response 
+to loud sounds.
+VESTIBULAR PATHWAYS
+The vestibular nerve transmits afferent or sensory informa­
+tion regarding movement and position of the head from the 
+vestibular organs, which include semicircular ducts, utricle, 
+and saccule. Like the cochlear apparatus, each of these 
+vestibular organs is located within a membranous (ductal) 
+portion of the vestibular apparatus, which is surrounded 
+by a bony (canal) portion (eFig. 9.83). The cell bodies for 
+these sensory receptors are located in the vestibular (Scarpa’s) 
+ganglion within the internal acoustic meatus (eFig. 9.83). 
+The vestibular nerve then passes through the internal 
+acoustic meatus and subarachnoid space to enter the 
+pontomedullary junction at the cerebellopontine angle.
+Central vestibular pathways
+The central processes of the vestibular axons predominantly 
+terminate in the four vestibular nuclei (superior, inferior, 
+medial, and lateral), which are located in the rostral medulla 
+and caudal pons (eFig. 9.40). Axons leaving the vestibular 
+nuclei have several ascending and descending synaptic 
+targets. These pathways connect with visual motor, descend­
+ing motor, and cerebellar pathways to coordinate movement 
+and maintain posture and balance (eFig. 9.84).
+Axons ascending after leaving the vestibular nuclei form 
+the medial longitudinal fasciculus to reach the oculomotor, 
+trochlear, and abducent nuclei (eFig. 9.85). These connec­
+tions coordinate movement of the head and eyes so that 
+visual fixation on an object can be maintained. Other axons 
+ascending from the vestibular nuclei project to the cerebral 
+Cochlea
+Superior semicircular canal
+Posterior semicircular canal
+Lateral semicircular canal
+Vestibulocochlear nerve
+eFig. 9.83  Bony labyrinth. Superior view of the cochlea and 
+semicircular canals. (From Mtui E. Fitzgerald’s Clinical 
+Neuroanatomy. 7th ed., Fig. 19.1. Philadelphia: Elsevier; 2016.)
+cortex after a synaptic relay in the ventral posterior nucleus 
+of the thalamus (eFig. 9.84B). This connection assists in 
+consciously orienting oneself in space. In addition to these 
+connections, axons leaving the vestibular nuclei pass through 
+the inferior cerebellar peduncle to reach the cerebellum and 
+modulate equilibrium (eFig. 9.84B).
+Axons descending after leaving the vestibular nuclei form 
+the medial and lateral vestibulospinal tracts ipsilaterally 
+(eFig. 9.84B). As mentioned in the previous section on medial 
+motor systems in the spinal cord, the axons in these pathways 
+synapse on interneurons within the anterior horn gray 
+matter to influence spinal motor neuron activity and 
+maintain posture and balance.
+
+=== PAGE 1218 ===
+Neuroanatomy
+e66
+To the thalamus 
+LVST 
+MVST 
+MLF
+To the
+cerebellum
+3
+4
+6
+ICP 
+J
+7
+L
+6
+SO
+SVN
+SpV
+IVN
+DCN
+VCN
+MVN
+SpV
+ICP 
+Utricle, saccule, 
+semicircular ducts 
+From the spinal cord 
+From the
+cerebellum
+S
+L
+M
+I
+Cochlear nuclei 
+Vestibular nuclei 
+Vestibular ganglion 
+C
+D
+MLF
+A
+B
+C
+D
+eFig. 9.84  Vestibular nuclei connections. Inputs (A) and outputs (B). C and D refer to cross-sections of the medulla (C) and pons (D) showing 
+the vestibular nuclei. 3, oculomotor nucleus; 4, trochlear nucleus; 6, abducens nucleus; 7, facial motor nucleus; DCN, dorsal cochlear nucleus; I 
+and IVN, inferior vestibular nucleus; ICP, inferior cerebellar peduncle; J, juxtarestiform body; L, lateral vestibular nucleus; LVST, lateral 
+vestibulospinal tract; M and MVN, medial vestibular nucleus; MLF, medial longitudinal fasciculus; MVST, medial vestibulospinal tract; S and 
+SVN, superior vestibular nucleus; SO, superior olivary nucleus; SpV, spinal trigeminal nucleus; VCN, ventral cochlear nucleus. (From Nolte J. The 
+Human Brain. 7th ed., Fig. 14.29. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1219 ===
+e67
+9 
+Part IX: Auditory and Vestibular System  •  Vestibular Pathways
+To left lateral 
+rectus
+To right medial 
+rectus
+Oculomotor nucleus
+Internuclear neuron
+Cerebellar connections
+Passive displacement 
+of endolymph
+Direction of head rotation
+Medial vestibular nucleus
+Abducens nucleus
+Lateral semicircular duct
+VIII nerve
+Paramedian 
+pontine 
+reticular 
+formation
+eFig. 9.85  Coordination of head and eye movement. A rightward head turn stimulates the right medial vestibular nucleus to send impulses to 
+the contralateral paramedian pontine reticular formation (PPRF). The PPRF sends impulses to the abducens motor neurons innervating the left 
+lateral rectus and also sends internuclear fibers to the right medial longitudinal fasciculus (MLF). The MLF projects to the right oculomotor 
+nucleus, which sends axons to innervate the right medial rectus. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 19.5. 
+Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1220 ===
+Neuroanatomy
+e68
+BORDERS OF THE HYPOTHALAMUS
+Located in the ventralmost aspect of the diencephalon, the 
+hypothalamus is bounded by the lamina terminalis anteriorly, 
+the hypothalamic sulcus superiorly, and the tegmentum 
+of the midbrain posteriorly (eFig. 9.87). Laterally the 
+hypothalamus is bordered by the substantia innominata 
+rostrally and the posterior limb of the internal capsule 
+caudally. It forms the floor in addition to the lower portion 
+of the lateral walls in the third ventricle. When viewing the 
+external surface of the ventral brain, the area containing the 
+Part X: Hypothalamus
+The hypothalamus is a neuroendocrine organ that regulates 
+physiological processes for survival such as consumption 
+of fluid and food, temperature control, the sleep–wake cycle, 
+growth, and reproduction. As a result of this vast array of 
+functions, the nuclei of the hypothalamus make connections 
+with several other neural and endocrine structures in the 
+body (eFig. 9.86). In this section we will explore the nuclei 
+of the hypothalamus and their main connections.
+Upper motor neurons
+Prefrontal cortex
+Reflexes,
+motor programs
+Lower motor neuron
+Skeletal muscle
+Hypothalamus
+Reflexes,
+motor programs
+Limbic structures
+Cerebellum
+Basal ganglia
+Autonomic motor neuron
+Autonomic ganglion
+Smooth muscle,
+cardiac muscle, glands
+Afferent inputs
+Pituitary gland
+Hormonal response
+eFig. 9.86  Overview of functions regulated by the hypothalamus. (From Nolte J. The Human Brain. 7th ed., Fig. 23-2. Philadelphia: Elsevier; 
+2016.)
+
+=== PAGE 1221 ===
+e69
+9 
+Part X: Hypothalamus  •  Functional Divisions of the Hypothalamus
+hormone synthesis and release. Releasing and inhibiting 
+factors synthesized by the hypothalamus pass through 
+these portal vessels via the tuberoinfundibular tract (eFig. 
+9.89) to reach the anterior pituitary (adenohypophysis) 
+and control release of hormones produced by the anterior 
+pituitary such as adrenocorticotropic hormone, lutein­
+izing hormone, follicle-stimulating hormone, thyroid-
+stimulating hormone, growth hormone, and prolactin 
+(eFig. 9.90).
+A second connection exists between the hypothalamus 
+and pituitary through nerve fibers, which originate in the 
+supraoptic region and paraventricular nuclei of the medial 
+hypothalamus and extend through the hypothalamohy­
+pophyseal tract to the posterior lobe of the pituitary for 
+release into the circulatory system (eFig. 9.89).
+FUNCTIONAL DIVISIONS OF THE 
+HYPOTHALAMUS
+Internally, the hypothalamus is composed of many small 
+nuclei, which are divided by a parasagittal plane into a medial 
+and lateral zone. Landmarks for this dividing point are the 
+columns of the fornix and the mammillothalamic tract as 
+they reside within this sagittal plane (eFig. 9.91). The 
+hypothalamus is also divided by coronal planes into a preoptic 
+area and periventricular zone. Note that the periventricular 
+zone is not to be confused with the paraventricular nucleus, 
+which is a thin region of cell bodies lying medial to the 
+medial zone.
+Lateral zone
+Within the lateral zone of the hypothalamus is a large bundle 
+of axons forming the medial forebrain bundle (MFB) (eFig. 
+9.90). Theses fibers interconnect the hypothalamus with 
+the septal nuclei rostrally and nuclear complexes within 
+the brainstem. Axons arising from the large lateral nucleus 
+in this zone enter the MFB and function in promoting feeding 
+behavior. The other and smaller nuclear group in this zone 
+is the tuberal group. Axons from the tuberal nuclei make 
+connections with the anterior pituitary through the tuber­
+oinfundibular tract to regulate release of hormones in the 
+hypophysial portal system and to the cerebellum to regulate 
+motor activity (eFig. 9.89).
+Medial zone
+The medial zone is divided into three regions: supraoptic, 
+tuberal, and mammillary. There are four nuclei in the 
+supraoptic region, which play a role in thermoregulation, 
+osmoregulation, and the sleep–wake cycle. The supraop­
+tic and paraventricular nuclei in this region synthesize 
+antidiuretic hormone or vasopressin, which stimulates water 
+Mammillothalamic tract
+DN
+Hypothalamic sulcus
+Interventricular foramen
+Fornix
+Anterior commissure
+Lamina 
+terminalis
+Preoptic 
+nucleus
+Supraoptic 
+nucleus
+Supra-
+chiasmatic 
+nucleus
+Infundibulum
+Optic chiasm
+Middle lobe
+Dura mater
+Sphenoid 
+bone
+Adenohypophysis
+Neurohypophysis
+Arcuate 
+nucleus
+Median eminence
+TN
+MB
+PN
+DMN
+PVN
+VMN
+Hypophyseal
+stalk
+eFig. 9.87  Lateral view of hypothalamic nuclei. DMN, dorsomedial 
+nucleus; DN, dorsal nucleus; MB, mammillary body; PN, 
+posterior nucleus; PVN, paraventricular nucleus; TN, 
+tuberomammillary nucleus; VMN, ventromedial nucleus. The 
+pink structure represents the lateral hypothalamic nucleus. (From 
+Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 26.1. 
+Philadelphia: Elsevier; 2016.)
+hypothalamus is circumscribed by the optic chiasm, optic 
+tract, crus cerebri, and caudal edge of the mammillary bodies 
+(eFig. 9.88).
+CONNECTIONS TO THE PITUITARY
+Continuous with the hypothalamus inferiorly is the pituitary 
+gland. These two structures are connected by the infun­
+dibulum and hypophysial stalk just caudal to the optic 
+chiasm (eFig. 9.87). The intimate relationship of the hypo­
+thalamus to the portal circulation of the pituitary gland 
+allows the hypothalamus to be an efficient regulator of 
+
+=== PAGE 1222 ===
+Neuroanatomy
+e70
+Optic tract
+Lateral olfactory stria
+Frontal lobe
+Olfactory tract
+Olfactory bulb
+Anterior perforated substance 
+Mammillary body
+Uncus 
+Pons
+Parahippocampal gyrus
+Posterior perforated substance
+Crus cerebri
+Optic nerve
+eFig. 9.88  Structures bordering the hypothalamus. On the ventral surface of the brain, the hypothalamus is bordered by the optic chiasm, 
+optic tract, crus cerebri, and mammillary bodies. (From Crossman A. Neuroanatomy. 5th ed., Fig. 16.17. Philadelphia: Elsevier; 2015.)
+
+=== PAGE 1223 ===
+e71
+9 
+Part X: Hypothalamus  •  Functional Divisions of the Hypothalamus
+Paraventricular nucleus
+Ventromedial nucleus
+Preoptic nucleus
+Supraoptic nucleus
+Tuberoinfundibular
+tract
+Capillary loops
+Superior hypophyseal 
+artery
+Inferior 
+hypophyseal
+artery
+Portal vessel
+Adenohypophysis
+Endocrine cells
+Cavernous sinus
+Arcuate nucleus
+Hypothalamo-
+hypophyseal
+tract
+Neurohypophysis
+eFig. 9.89  Hypothalamic neuroendocrine connections to the portal 
+system. Arrow designates the direction of blood flow to the portal 
+system. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., 
+Fig. 26.3. Philadelphia: Elsevier; 2016.)
+PAR
+DMN
+Third
+ventricle
+PVN
+LN
+DMN
+VMN
+PER
+ARC
+PER
+VMN
+ARC
+LN
+Optic tract
+ZI
+Internal capsule
+Fornix
+Globus pallidus
+MFB
+Plane of section
+eFig. 9.90  Hypothalamic nuclei. Coronal section of hypothalamic 
+nuclei and their associated neural pathways. ARC, arcuate nucleus; 
+DMN, dorsomedial nucleus; LN, lateral nucleus; MFB, medial 
+forebrain bundle; PAR, paraventricular nucleus; PER, periventricular 
+nucleus; VMN, ventromedial nucleus; ZI, zona incerta. (From Mtui 
+E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 26.2. 
+Philadelphia: Elsevier; 2016.)
+uptake and oxytocin for stimulation of uterine contractions 
+and lactation in the mammary glands. Axons from these 
+nuclei are conveyed by the hypothalamohypophyseal tract 
+to the posterior pituitary for release into the circulatory 
+system (eFig. 9.89). A third nuclear group in this region is 
+the suprachiasmatic nucleus. This nucleus receives input 
+directly from the retina to influence circadian rhythms, which 
+contribute to the light–dark cycle. The anterior nucleus is the 
+final group and functions predominantly in regulating body 
+temperature.
+The tuberal region in the medial zone contains three 
+nuclei: ventromedial, dorsomedial, and arcuate. The largest 
+and best defined is the ventromedial nucleus, which functions 
+as a satiety center to decrease feeding behavior. Posterior 
+to the ventromedial nucleus is the dorsomedial nucleus, 
+which functions in the behavioral expression of rage or 
+aggressive behavior. Finally, the arcuate nucleus serves as 
+a center for releasing hormones, which are transmitted by 
+the tuberoinfundibular tract and hypophysial portal system 
+to the anterior pituitary (eFig. 9.89).
+The mammillary region or mammillary body is the final 
+group of nuclei in the medial zone. Four nuclei comprise 
+this region: medial, intermediate, lateral mammillary, and 
+posterior hypothalamic. The best defined is the medial 
+mammillary nucleus, as it is the primary site for the termina­
+tion of axons from the postcommissural fornix. This pathway 
+originates from the subiculum of the hippocampal complex 
+
+=== PAGE 1224 ===
+Neuroanatomy
+e72
+Mammillothalamic
+tract
+Anterior nucleus of thalamus
+Cingulum
+Corpus callosum
+Anterior horn
+of lateral ventricle
+Body of fornix
+Mammillary body
+Column of fornix
+eFig. 9.91  Diencephalon. Medial dissection of the diencephalon exposing the fornix and its relationship to the mammillary body and 
+mammillothalamic tract. (From Crossman A. Neuroanatomy. 5th ed., Fig. 16.6. Philadelphia: Elsevier; 2015.)
+Hypothalamus
+Pituitary
+Motor behaviour
+Hormones
+Homeostasis
+Autonomic NS
+Reticular formation
+Thalamus
+Limbic system
+Orbitofrontal cortex
+Nucleus accumbens
+Internal organ
+control
+Wakefulness/sleep
+B
+Hypothalamus
+Circulating blood
+Amygdala
+Physical, chemical
+and hormonal state
+Nucleus
+solitarius
+Brainstem
+reticular
+formation
+Thalamus
+Hippocampus
+Autonomic
+nervous system
+Brainstem
+monoaminergic
+nuclei
+A
+eFig. 9.92  Neural and non-neural connection of the hypothalamus. A. Inputs. B. Outputs. (From Crossman A. Neuroanatomy. 5th ed., Fig. 16.4. 
+Philadelphia: Elsevier; 2015.)
+and plays a key role in memory. The medial mammillary 
+nuclei also connects to structures of the limbic system.
+Periventricular zone
+The periventricular zone resides medial to the medial zone 
+and adjacent to the ependymal cells of the third ventricle. 
+Neurons from this zone predominantly synthesize releasing 
+hormones. Axons from these neuronal cells project through 
+the tuberoinfundibular tract to the hypophysial portal 
+system to influence release of hormones from the anterior 
+pituitary.
+SUMMARY OF CONNECTIONS
+Through the review of the hypothalamus thus far, it is 
+apparent that this small, 4-gram structure has a significant 
+role in regulating visceral, endocrine, and behavioral system 
+functions through multiple pathways. It is important to 
+remember the majority of the pathways mentioned represent 
+input–output relationships between the hypothalamus and 
+other structures. For a review of neural and non-neural 
+inputs and outputs, refer to the summary figures (eFig. 
+9.92A and B).
+
+=== PAGE 1225 ===
+e73
+9 
+Part XI: Olfactory and Limbic System  •  Limbic System
+Part XI: Olfactory and 
+limbic system
+OLFACTORY SYSTEM
+The sense of olfaction has a role in both pleasurable experi­
+ences and survival. The same receptors that allow us to 
+enjoy the food we consume or experience odorants in the 
+environment also help us avoid spoiled food or potentially 
+hazardous situations like a fire. Unlike the other special 
+sensory system pathways, the olfactory sensory pathway 
+is unique in that it does not have a thalamic relay before 
+reaching the primary olfactory cortex. In this section we 
+will review the course of the neurons in the olfactory system 
+and their connection to the limbic system.
+Three types of olfactory receptors make up the olfactory 
+epithelium along the lateral and septal walls of the nasal 
+cavity. These cells allow for regeneration (basal stem cells), 
+support (sustentacular cells), and transmission of informa­
+tion (olfactory receptor neurons). Each olfactory receptor 
+neuron has an olfactory vesicle with cilia that contain 
+receptors for odorant molecules and an unmyelinated axon 
+that passes through the cribriform plate to terminate in the 
+olfactory bulb (eFig. 9.93). As the olfactory receptor neurons 
+Granule cell
+Olfactory tract
+Mitral cell
+Periglomerular cell
+Glomerulus
+Cribriform plate
+Olfactory nerve fibre
+Basal cell
+Sustentacular cell
+Bipolar neuron
+1
+2
+eFig. 9.93  Cellular connections of the olfactory epithelium. (From 
+Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 34.1. 
+Philadelphia: Elsevier; 2016.)
+originate embryologically from the CNS, they are considered 
+part of the CNS and not the PNS.
+After synapsing with the mitral cells in the glomeruli of 
+the olfactory bulb, mitral cell axons converge to form the 
+olfactory tract. The olfactory tract then divides into medial 
+and lateral olfactory striae to reach different synaptic targets 
+(eFig. 9.94). Some of the axons in the medial olfactory striae 
+travel through the diagonal band to reach the septal area, 
+whereas others cross the midline in the anterior commissure 
+and inhibit mitral cell activity in the contralateral olfactory 
+bulb to enhance localization of the olfactory stimulant. 
+Axons in the lateral olfactory stria primarily terminate in 
+the piriform cortex/primary olfactory cortex of the uncus 
+and in the amygdala (eFig. 9.94).
+The medial forebrain bundle, traveling through the lateral 
+hypothalamus, connects the olfactory cortex with both the 
+hypothalamus and the brainstem to regulate autonomic 
+responses such as arousal through the reticular formation, 
+salivation, and gastric contraction.
+LIMBIC SYSTEM
+The limbic system is composed of several cortical and 
+subcortical structures that participate in an intricate network 
+of connections to regulate complicated behaviors such as 
+memory, emotions, homeostatic functions, and motivational 
+state. In this section we will review the major structures 
+and pathways that form the limbic system.
+Grossly, the limbic lobe includes a ring-shaped area of 
+cortical structures that border the brainstem. These cortical 
+areas include the cingulate gyrus, parahippocampal gyrus, 
+and subcallosal area (eFig. 9.12). Laterally, the insular cortex 
+also participates in limbic system function (eFig. 9.10). 
+Nuclear structures of the limbic system include the amygdala, 
+hippocampal formation, anterior and mediodorsal thalamic 
+nuclei, septal nuclei in the forebrain, and nucleus accumbens 
+(eFig. 9.95).
+Amygdala
+The amygdaloid nucleus is an almond-shaped structure 
+located anterior to the inferior horn of the lateral ventricle 
+and tail of the caudate within the temporal lobe (eFig. 9.96). 
+Structurally, the amygdala consists of three nuclear regions: 
+a large basolateral group and a smaller corticomedial group, 
+which includes the central nucleus. Functionally, the 
+amygdala is primarily associated with the emotion of fear, 
+but it also has an important role in autonomic and neuro­
+endocrine pathways. Connections of the amygdala are 
+predominantly bidirectional and follow three different 
+pathways: the uncinate fasciculus, stria terminalis, and 
+ventral amygdalofugal pathway (eFig. 9.97). Connections 
+to cortical areas pass through the uncinate fasciculus, which 
+
+=== PAGE 1226 ===
+Neuroanatomy
+e74
+Septal area
+Anterior commissure
+Precommissural fornix
+Cingulate gyrus
+Anterior nucleus of thalamus
+Fornix
+DMN
+Dentate gyrus
+Entorhinal cortex
+Hippocampus
+Amygdala
+Temporal polar cortex
+Orbital cortex
+Nucleus accumbens
+Mammillary body
+eFig. 9.95  Medial view of the right cerebral cortical areas included in the limbic cortex. Subcortical limbic structures are also defined. DMN, 
+dorsal medial nucleus of the thalamus. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 34.3. Philadelphia: Elsevier; 2016.)
+Olfactory bulb
+Orbital cortex
+Lateral olfactory stria
+Medial olfactory stria
+Cortical amygdala
+Anterior olfactory nucleus
+Olfactory tract
+Uncus
+Diagonal band of Broca
+Parahippocampal gyrus
+eFig. 9.94  Cortical olfactory areas. Inferior view of cortical structures involved in processing olfactory stimuli. (From Mtui E. Fitzgerald’s Clinical 
+Neuroanatomy. 7th ed., Fig. 34.2. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1227 ===
+e75
+9 
+Part XI: Olfactory and Limbic System  •  Limbic System
+Corona radiata
+Extreme capsule
+External capsule
+Putamen
+Globus pallidus
+Substantia innominata
+Internal capsule
+Anterior
+commissure
+Anterior column
+of fornix
+Insula
+eFig. 9.96  Coronal section of the brain at the level of the mammillary bodies. (From Crossman A. Neuroanatomy. 5th ed., Fig. 13.8. 
+Philadelphia: Elsevier; 2015.)
+Anterior olfactory nucleus
+Orbital cortex
+Visual association cortex
+Primary visual cortex
+Stria terminalis
+Cingulate gyrus
+S
+VS
+T
+B
+HC
+Hy
+Am
+eFig. 9.97  Major outputs of the amygdala (Am). The basolateral group is represented in blue, central group in red, and medial group in green. 
+The outputs take three routes: (1) stria terminalis to the septal nuclei (S) or hypothalamus (Hy); (2) ventral amygdalofugal pathway to the 
+hypothalamus (Hy), thalamus (mainly dorsomedial nucleus), various areas of the ventromedial prefrontal and insular cortex, ventral striatum 
+(VS), olfactory structures, and brainstem (B); and (3) directly to the hippocampus (HC) and other neocortical areas. (From Nolte J. The Human 
+Brain. 7th ed., Fig. 23-21. Philadelphia: Elsevier; 2016. Modified from Warwick R, Williams PL. Gray’s Anatomy. 35th Br ed. Philadelphia, PA: W. B. 
+Saunders; 1973.)
+
+=== PAGE 1228 ===
+Neuroanatomy
+e76
+B
+D
+C
+HC
+Am
+F
+Stria terminalis
+A
+Ventral amygdalofugal pathway
+3
+H
+HC
+Am
+M
+IP
+SN
+CP
+AC
+DSCP
+LV
+Lamina terminalis
+O
+4
+Stria terminalis
+Stria terminalis
+Terminal vein
+B
+GP
+3
+M
+O
+F
+C
+TF
+P
+HC
+Am
+Am
+C
+Stria terminalis
+D
+Ventral amygdalofugal pathway
+3
+3
+Am
+O
+F
+A
+M
+T
+TF
+H
+GPe
+GPi
+AC
+F
+P
+C
+C
+Terminal vein
+eFig. 9.98  Location of the amygdala and related fiber bundles. A. Three-dimensional reconstruction with the planes of section shown in B, C, 
+and D indicated. 3, third ventricle; 4, fourth ventricle; A, anterior thalamic nucleus; AC, anterior commissure; Am, amygdala; C, caudate 
+nucleus; CP, cerebral peduncle; DSCP, decussation of the superior cerebellar peduncles; F, fornix; GP, globus pallidus; GPe, external segment of 
+globus pallidus; GPi, internal segment of globus pallidus; H, tuberal hypothalamus; HC, hippocampus; IP, interpeduncular cistern; LV, lateral 
+ventricle (inferior horn); M, mammillary body; MT, mammillothalamic tract; O, optic tract; P, putamen; SN, substantia nigra; TF, transverse 
+fissure. (From Nolte J. The Human Brain. 7th ed., Fig. 23-20. Philadelphia: Elsevier; 2016. From A, prepared by Cheryl Cotman. A to D, modified 
+from Nolte J, Angevine JB Jr. The Human Brain in Photographs and Diagrams. 3rd ed., St. Louis, MO: Mosby; 2007.)
+progresses anterior to the amygdala. Projections to the septal 
+area and hypothalamus follow the stria terminalis (eFig. 
+9.98A–D). Fibers forming the ventral amygdalofugal pathway 
+project to thalamic nuclei and several brainstem and 
+forebrain structures (eFig. 9.98A–D).
+Nucleus accumbens
+The nucleus accumbens resides with the ventral forebrain 
+adjacent to where the putamen and head of the caudate 
+become continuous with one another (eFig. 9.99). Afferent 
+
+=== PAGE 1229 ===
+e77
+9 
+Part XI: Olfactory and Limbic System  •  Limbic System
+Anterior limb of
+internal capsule
+Nucleus accumbens
+Septum
+Septum pellucidum
+Caudate nucleus
+Putamen
+eFig. 9.99  Cerebral hemisphere viewed in a coronal section. (From Crossman A. Neuroanatomy. 5th ed., Fig. 13.6. Philadelphia: Elsevier; 2015.)
+Medullary stria
+DMN
+Fornix
+Habenular
+nucleus
+Amygdala
+Ventral amygdalofugal pathway
+Interpeduncular 
+nucleus
+Fasciculus 
+retroflexus
+Nucleus accumbens
+Septal area
+Orbital cortex
+eFig. 9.100  Septal area connections. (From Mtui E. Fitzgerald’s 
+Clinical Neuroanatomy. 7th ed., Fig. 34.23. Philadelphia: Elsevier; 
+2016.)
+axons to the nucleus accumbens come from the amygdala 
+through the amygdalofugal pathway, hippocampal formation 
+by way of the fornix, basal forebrain area from the stria 
+terminalis, and ventral tegmentum through the medial 
+forebrain bundle (eFig. 9.98A–D). Efferent axons leaving 
+the nucleus accumbens project directly to the hypothalamus 
+and globus pallidus and reach nuclei in the brainstem 
+through the medial forebrain bundle. Its connections to the 
+globus pallidus represent an important connection of the 
+limbic system to the motor system. The overall function of 
+the nucleus accumbens is recognized as a gratification center 
+and has been shown to play a role in behaviors related to 
+addiction.
+Septal nuclei
+The septal region is located rostral to the anterior commis­
+sure along the medial aspect of the cerebral hemispheres 
+(eFig. 9.99). This region appears to play a role in pleasurable 
+behaviors. Conversely, lesion studies indicate that damage to 
+this area evokes behaviors of extreme displeasure or rage. 
+Afferent axons to the septal area arise from the amygdala, 
+hippocampus, olfactory tract, and monoaminergic nuclei 
+in the brainstem (eFigs. 9.100 and 9.101). The septal 
+area also connects to a collection of cholinergic neurons 
+along the wall and roof of the third ventricle known as the 
+habenular nuclei. Axons from the habenular nuclei project 
+to the interpeduncular nucleus of the reticular formation, 
+which is believed to play a role in the sleep–wake cycle 
+(eFig. 9.100).
+Hippocampal formation
+The hippocampal formation is located in the medial ventral 
+temporal lobe (eFig. 9.102). It consists of the hippocampus, 
+dentate gyrus, and subiculum (eFig. 9.103A and B). The 
+hippocampal formation plays a role in memory processes 
+
+=== PAGE 1230 ===
+Neuroanatomy
+e78
+Insula
+Tail of caudate nucleus
+Hippocampus
+Subthalamic nucleus
+Substantia nigra
+Thalamus
+Internal capsule
+Third ventricle
+eFig. 9.102  Cerebral hemisphere viewed in cross-section. (From Crossman A. Neuroanatomy. 5th ed., Fig. 13.9. Philadelphia: Elsevier; 2015.)
+Septal area
+Anterior commissure
+Fornix
+Hippocampus
+1
+1
+2
+2
+eFig. 9.101  Septal connections to the hippocampus. (From Mtui E. 
+Fitzgerald’s Clinical Neuroanatomy. 7th ed., Fig. 34.24. Philadelphia: 
+Elsevier; 2016.)
+such as episodic memory, short-term memory, working 
+memory, and consolidation of memories. Input to the hip­
+pocampal formation is primarily received by the entorhinal 
+cortex from association cortices. Because of this, it is believed 
+that the “storage” of memories is in the association and 
+primary cortices, not in the medial temporal lobe. Neurons 
+from the entorhinal cortex project to the hippocampal forma­
+tion by two pathways: the perforant pathway and alvear 
+pathway. The perforant courses directly through the hip­
+pocampal sulcus to reach the dentate gyrus (eFig. 9.104B). 
+As the hippocampus resembles the appearance of a ram’s 
+horn, early on it was named cornu ammonis (horn of 
+Ammon). Based on its cytoarchitecture, it was subdivided 
+into four regions termed the cornu ammonis 1 to 4 (eFig. 
+9.104A). From the dentate gyrus, axons project to CA3 of 
+the hippocampus. Axons from the hippocampus leave via 
+the fornix or as Shaffer collaterals to reach CA1. Axons 
+from CA1 may enter the fornix or project to the subiculum. 
+Finally, axons from the subiculum enter the fornix or go 
+back to the entorhinal cortex.
+
+=== PAGE 1231 ===
+e79
+9 
+Part XI: Olfactory and Limbic System  •  Limbic System
+Splenium
+of corpus
+callosum
+Posterior horn
+of lateral
+ventricle
+Crus
+of fornix
+Hippocampal
+commissure
+Body
+of fornix
+Pillar
+of fornix
+Septum
+pellucidum
+Hippocampus
+Fimbria
+Dentate gyrus
+Thalamus (cut)
+A
+B
+Hippocampus
+Alveus
+Subiculum
+Lateral ventricle
+Alvear path
+Two-way connections
+with sensory
+association areas
+Perforant
+path
+Dentate gyrus
+Fimbria
+Choroid plexus
+Entorhinal cortex
+Collateral sulcus
+eFig. 9.103  Hippocampal complex. A. Superior view. B. Enlarged coronal section of the hippocampal complex. (From Mtui E. Fitzgerald’s 
+Clinical Neuroanatomy. 7th ed., Fig. 34.5A and B. Philadelphia: Elsevier; 2016.)
+1
+2
+3
+4
+5
+4
+6
+7
+8
+Collateral sulcus
+Entorhinal cortex
+Perforant path
+Alvear path
+Subiculum
+CA1 pyramidal cell
+CA3 pyramidal cell
+Granule cell
+Fimbria
+Alveus
+B
+A
+CA3
+CA2
+CA4
+CA1
+eFig. 9.104  A. Ammon’s horn. B. Input and output connections of the hippocampus. 1. Afferents from the sensory association cortex. 2. 
+Entorhinal cortex projections in the perforant pathway to the dentate gyrus. 3. Dentate granule cell connecting to the CA3. 4. CA3 neuron 
+projecting to the fimbria and CA1. 5. CA1 neuron projecting to the subiculum. 6. Subicular cell connecting to the fimbria. 7. Subicular cell 
+projecting to the entorhinal cortex. 8. Entorhinal pyramidal cell connecting to the sensory association cortex. (From Mtui E. Fitzgerald’s Clinical 
+Neuroanatomy. 7th ed., Fig. 34.6. Philadelphia: Elsevier; 2016.)
+
+=== PAGE 1232 ===
+Neuroanatomy
+e80
+Choroid plexus
+Hippocampus
+Head of caudate nucleus
+Anterior horn of
+lateral ventricle
+Thalamus
+Fimbria
+Inferior horn of lateral ventricle
+Crus of fornix
+A
+B
+eFig. 9.105  Hippocampus–fimbria–fornix system. Superior view of brain. The cerebral cortex, corpus callosum, and surrounding white matter 
+have been removed to expose the lateral ventricle. A. Choroid plexus in the lateral ventricle. B. choroid plexus removed. (From Crossman A. 
+Neuroanatomy. 5th ed., Fig. 16.15. Philadelphia: Elsevier; 2015.)
+A second afferent pathway from the entorhinal cortex 
+to the hippocampal formation is through the alvear pathway. 
+Axons in the alvear pathway project directly on to CA1 and 
+CA3 of the hippocampus (eFig. 9.104B). Similar to the 
+perforant pathway, axons leaving the alvear pathway primar­
+ily originate from CA1 and CA3, which then project to the 
+subiculum.
+Efferent axons leaving the hippocampal formation primar­
+ily exit from the subiculum and form the fornix (Latin for 
+“arch”), a white matter structure that arches over the 
+ventricular system (eFig. 9.95). The fornix begins with axons 
+exiting the hippocampus to form the alveus along the 
+ventricular surface of the hippocampus. As the axons come 
+together medially, they form a bundle referred to as the 
+fimbria of the fornix. The fornix then emerges from the hip­
+pocampal formation and curves under the corpus callosum 
+before coursing medially to run adjacent to the midline (eFig. 
+9.105). At the anterior commissure, the fornix divides into 
+a precommissural fornix and postcommissural fornix to 
+reach the nucleus accumbens, septal nuclei, medial frontal 
+cortex, mammillary nucleus, ventromedial nucleus of the 
+hypothalamus, and anterior nucleus of the dorsal thalamus 
+(eFig. 9.95).
+Through this section we have described a collection of 
+anatomical structures and defined their connections with 
+other areas of the brain and brainstem without exploring 
+
+=== PAGE 1233 ===
+e81
+9 
+Part XI: Olfactory and Limbic System  •  Acknowledgments
+circuit begins with fibers from the subiculum, which then 
+enter the fornix to reach the mammillary nuclei. These axons 
+then project through the mammillothalamic tract to the 
+anterior nucleus of the thalamus. Next, the axons from the 
+anterior nucleus of the thalamus project through the internal 
+capsule to the cingulate gyrus. Lastly, the cingulum fibers 
+from the cingulate cortex project to the parahippocampal 
+gyrus and then the entorhinal cortex and hippocampal 
+formation (eFig. 9.106). Papez’s description of this circuit 
+is useful for reviewing the major limbic system pathways; 
+however, the role of some of the structures in the pathway 
+has been shown to play little or no role in the expression 
+of emotion. In addition, many of the structures that do play 
+a role in the expression of emotion also have a role in other 
+functions.
+ACKNOWLEDGMENTS
+We gratefully acknowledge the following authors for the 
+use of illustrations from their publications in this chapter: 
+A. R. Crossman and D. Neary: Neuroanatomy: An Illustrated 
+Colour Text, 5th edition, Elsevier, Philadelphia, 2015; Todd 
+W. Vanderah and Douglas J. Gould: Nolte’s The Human Brain: 
+An Introduction to Its Functional Anatomy, 7th edition, Else­
+vier, Philadelphia, 2016; Estomih Mtui, Gregory Gruener, 
+and Peter Dockery: Fitzgerald’s Clinical Neuroanatomy and 
+Neuroscience, 7th edition, Elsevier, Philadelphia, 2016; and 
+Duane E. Haines and Gregory A. Mihailoff: Fundamental 
+Neuroscience for Basic and Clinical Applications, 5th edition, 
+Elsevier, Philadelphia, 2013.
+1
+1
+2
+3
+5
+4
+6
+6
+6
+eFig. 9.106  The circuit of Papez. 1. Neuronal projections to the 
+cingulate gyrus. 2. Projections to the entorhinal cortex. 3. Projection 
+to the hippocampus. 4. Fornix. 5. Mammillothalamic tract. 6. 
+Neuronal connections from anterior nucleus of the thalamus to the 
+cingulate cortex. (From Mtui E. Fitzgerald’s Clinical Neuroanatomy. 
+7th ed., Fig. 34.7. Philadelphia: Elsevier; 2016.)
+how these individual structures are interconnected with 
+one another. In the 1930s James Papez, an American 
+neurologist, described a circuit that links these structures 
+and cortical areas together in a way that was thought to 
+be involved in the experience and expression of emotion. 
+This is referred to as the Papez circuit (eFig. 9.106). The 

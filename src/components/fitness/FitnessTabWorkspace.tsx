@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Dumbbell, BookOpen, BarChart3, LibraryBig, Target, Database, Wrench, ShieldAlert } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
-import FitAppWorkoutLogger from './FitAppWorkoutLogger';
+import TodayRoutineStack from './TodayRoutineStack';
 import FitAppRoutinesCatalog from './FitAppRoutinesCatalog';
-import SkillsWorkspace from './skills/SkillsWorkspace';
+import CalisthenicsProgressions from './skills/CalisthenicsProgressions';
+import FitnessLibrary from './FitnessLibrary';
 import ExerciseDatabaseBrowser from './ExerciseDatabaseBrowser';
 import CustomRoutineBuilder from './CustomRoutineBuilder';
 import RealProgressSections from './analytics/RealProgressSections';
 import TendonLoadMonitor from './TendonLoadMonitor';
 import TodayCalendar from './TodayCalendar';
 import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
-import LibraryHome from '../library/LibraryHome';
+import SectionNav from '../ui/SectionNav';
+import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
+import { buildProgramCalendar } from '../../lib/fitness/programCalendar';
+import { getProgramById } from '../../data/fitness/programs';
 import styles from './FitnessTabWorkspace.module.css';
 import useIsMobile from '../ui/useIsMobile';
 import { usePrehabStateStore, getActivePrehabProtocols, isBannerDismissedToday } from '../../data/fitness/prehabStateStore';
@@ -49,6 +53,20 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
     return () => window.removeEventListener('popstate', onPopState);
   }, [initialTab]);
 
+  // B1 + restauración: día seleccionado del Hoy compartido por calendario y rutina,
+  // con default = día REAL del sistema según el calendario del programa (no martes fijo).
+  const [todayDayIndex, setTodayDayIndex] = useState<number>(() => {
+    const s = useActiveProgramStore.getState();
+    const program = getProgramById(s.programId);
+    const ctx = buildProgramCalendar({ startedAt: s.startedAt, postponedDays: s.postponedDays || 0 }, program?.durationWeeks ?? 12);
+    return ctx.todayWeekdayIndex;
+  });
+
+  const sectionNavPath =
+    activeMainTab === 'today' ? '/app/fitness'
+    : activeMainTab === 'progress' ? '/app/fitness/progress'
+    : '/app/fitness/library';
+
   const goToTab = (tab: FitnessMainTab) => {
     setActiveMainTab(tab);
     if (typeof window !== 'undefined' && window.history?.replaceState) {
@@ -61,6 +79,10 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
   return (
     <ErrorBoundary>
       <div className={styles.wrapper}>
+
+        {/* SUBMENÚ DE SECCIÓN (restaurado): mantienen las rutas/secciones consolidadas
+            (Hoy / Base de datos / Progreso / Nutrición) por encima de los tabs del workspace */}
+        <SectionNav sectionKey="fitness" currentPath={sectionNavPath} level={2} />
         
         {/* PREHAB CONDICIONAL (SI HAY MOLESTIA/ZONA AFECTADA REGISTRADA, APARECE PRIMERO PER D1) */}
         {showPrehabAlert && activeMainTab === 'today' && (
@@ -179,10 +201,12 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
           {activeMainTab === 'today' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
               {/* CRONOGRAMA SEMANAL (fecha real del sistema, sincronizado con el programa activo) */}
-              <TodayCalendar selectedDayIndex={undefined} onSelectDayIndex={undefined} />
+              <TodayCalendar selectedDayIndex={todayDayIndex} onSelectDayIndex={setTodayDayIndex} />
               {/* PROGRESIÓN ACTIVA EN TRABAJO */}
               <ActiveProgressionsTodayCard />
-              <FitAppWorkoutLogger />
+              {/* RUTINA DEL DÍA — configurador completo RESTAURADO (RIR/RPE, series, reps,
+                  pesos por serie, sustitución por ejercicio, overrides, notas) */}
+              <TodayRoutineStack selectedDayIndex={todayDayIndex} />
             </div>
           )}
 
@@ -247,7 +271,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
               )}
 
               {routinesSubTab === 'catalog' && <FitAppRoutinesCatalog />}
-              {routinesSubTab === 'skills' && <SkillsWorkspace />}
+              {routinesSubTab === 'skills' && <CalisthenicsProgressions />}
               {routinesSubTab === 'database' && <ExerciseDatabaseBrowser />}
               {routinesSubTab === 'custom' && <CustomRoutineBuilder />}
             </div>
@@ -262,7 +286,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
             </div>
           )}
 
-          {activeMainTab === 'library' && <LibraryHome />}
+          {activeMainTab === 'library' && <FitnessLibrary currentPath="/app/fitness/library/catalog" />}
         </div>
       </div>
     </ErrorBoundary>

@@ -1,8 +1,8 @@
 ---
 import PlanMaestroLayout from '../../../../layouts/PlanMaestroLayout.astro';
-import FitnessLibrary from '../../../../components/fitness/FitnessLibrary.tsx';
+import LibraryMuscles from '../../../../components/fitness/anatomy/LibraryMuscles.tsx';
 ---
 
 <PlanMaestroLayout title="Fitness - Base de Datos Anatómica & Músculos" activeDomain="fitness">
-  <FitnessLibrary client:load subTab="muscles" currentPath="/app/fitness/library/muscles" />
+  <LibraryMuscles client:load />
 </PlanMaestroLayout>

@@ -60,3 +60,4 @@ _pdf_biblia/Planeacion_Integral/3D assets/3dFiles.zip
 
 # Agent worktrees (one per parallel agent)
 .worktrees/
+.env

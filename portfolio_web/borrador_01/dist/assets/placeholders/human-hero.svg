@@ -1,0 +1,42 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Human character pipeline placeholder</title>
+  <desc id="desc">A technical character portrait breakdown placeholder showing final render, topology, material and grooming panels.</desc>
+  <rect width="1600" height="1000" fill="#0B0B0D"/>
+  <rect x="98" y="92" width="1404" height="816" rx="24" fill="#121216" stroke="#2B2C32" stroke-width="2"/>
+  <g transform="translate(214 122)">
+    <ellipse cx="360" cy="360" rx="178" ry="236" fill="#C99576"/>
+    <path d="M194 322C224 154 496 144 526 322C497 276 444 258 360 258C276 258 224 276 194 322Z" fill="#2D211D"/>
+    <path d="M206 396C218 552 278 650 360 650C442 650 502 552 514 396" fill="#D3A082"/>
+    <path d="M268 380C308 360 340 366 358 384M462 380C422 360 390 366 372 384" stroke="#281C18" stroke-width="9" stroke-linecap="round"/>
+    <path d="M344 420C338 456 342 480 360 486C378 480 382 456 376 420" stroke="#7C4F3C" stroke-width="7" stroke-linecap="round"/>
+    <path d="M315 548C346 574 382 574 414 548" stroke="#8E5146" stroke-width="8" stroke-linecap="round"/>
+    <path d="M188 360C148 383 156 478 210 498M532 360C572 383 564 478 510 498" stroke="#B98167" stroke-width="20" stroke-linecap="round"/>
+    <path d="M240 228C286 134 442 134 492 228" stroke="#4A342C" stroke-width="46" stroke-linecap="round"/>
+    <g opacity="0.45">
+      <path d="M210 332C286 286 438 286 512 332M226 430C300 398 424 398 496 430M250 514C314 546 404 546 470 514" stroke="#F1D3C0" stroke-width="2"/>
+      <path d="M360 146V650M240 230C300 312 300 540 252 610M480 230C420 312 420 540 468 610" stroke="#F1D3C0" stroke-width="2"/>
+    </g>
+  </g>
+  <rect x="900" y="160" width="430" height="148" rx="14" fill="#19191F" stroke="#343540"/>
+  <text x="934" y="206" fill="#F3F1EC" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Human Character Pipeline</text>
+  <text x="934" y="244" fill="#A6A4A0" font-family="Inter, Arial, sans-serif" font-size="18">Blender study following CG Cookie HUMAN</text>
+  <rect x="934" y="270" width="96" height="8" rx="4" fill="#FB9B6B"/>
+  <rect x="1044" y="270" width="112" height="8" rx="4" fill="#E7D7A7"/>
+  <rect x="1170" y="270" width="74" height="8" rx="4" fill="#8AE6FF"/>
+  <rect x="900" y="352" width="188" height="166" rx="12" fill="#19191F" stroke="#343540"/>
+  <text x="930" y="392" fill="#F3F1EC" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Topology</text>
+  <path d="M934 434H1054M934 468H1054M934 502H1054M950 416V508M990 416V508M1030 416V508" stroke="#8AE6FF" stroke-width="2"/>
+  <rect x="1114" y="352" width="188" height="166" rx="12" fill="#19191F" stroke="#343540"/>
+  <text x="1144" y="392" fill="#F3F1EC" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Materials</text>
+  <circle cx="1162" cy="452" r="24" fill="#C99576"/>
+  <circle cx="1210" cy="452" r="24" fill="#7B4E3A"/>
+  <circle cx="1258" cy="452" r="24" fill="#D9C6B6"/>
+  <rect x="900" y="548" width="188" height="166" rx="12" fill="#19191F" stroke="#343540"/>
+  <text x="930" y="588" fill="#F3F1EC" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Grooming</text>
+  <path d="M938 638C972 602 1016 604 1050 638M938 668C972 632 1016 634 1050 668" stroke="#E7D7A7" stroke-width="4" stroke-linecap="round"/>
+  <rect x="1114" y="548" width="188" height="166" rx="12" fill="#19191F" stroke="#343540"/>
+  <text x="1144" y="588" fill="#F3F1EC" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Lighting</text>
+  <path d="M1208 628L1230 668H1186L1208 628Z" fill="#F5C04C"/>
+  <circle cx="1208" cy="628" r="48" stroke="#F5C04C" stroke-width="3" opacity="0.5"/>
+  <text x="900" y="800" fill="#A6A4A0" font-family="Inter, Arial, sans-serif" font-size="17">Replace with final render, clay, wireframe, UVs and material sheets.</text>
+</svg>

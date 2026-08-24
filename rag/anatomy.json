@@ -1,0 +1,2871 @@
+{
+  "domain": "anatomy",
+  "version": "4.0.0",
+  "sources": [
+    {
+      "id": "grays-anatomy-students-4ed",
+      "title": "Gray's Anatomy for Students",
+      "author": "Drake, Vogl, Mitchell",
+      "year": 2020,
+      "edition": "4th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "norkin-joint-structure-6ed",
+      "title": "Joint Structure and Function: A Comprehensive Analysis (Levangie & Norkin)",
+      "author": "Pamela K. Levangie; Cynthia C. Norkin; Michael D. Lewek",
+      "year": 2019,
+      "edition": "6ª (F.A. Davis, 2019)",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "kinesiology",
+          "joint-structure",
+          "anatomy"
+        ],
+        "priority": 1
+      }
+    }
+  ],
+  "chunks": [
+    {
+      "id": "grays-cadera-hip-joint-anatomy",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "hip-joint",
+        "acetabulum",
+        "labrum",
+        "ball-and-socket",
+        "diarthrosis"
+      ],
+      "locator": {
+        "page": 428
+      },
+      "summary": "Hip joint (articulación coxofemoral): diartrosis sinovial esférica (enartrosis triaxial) formada entre la cabeza esférica del fémur y el acetábulo cóncavo del hueso coxal (formado por la fusión de ilion, isquion y pubis). Presenta alta estabilidad ósea intrínseca reforzada por el acetabular labrum (rodete acetabular fibrocartilaginoso en forma de herradura que profundiza la fosa acetabular y sella la cavidad articular generando presión negativa intraarticular). Permite flexión, extensión, abducción, aducción, rotación medial, rotación lateral y circunducción del muslo.",
+      "entities": [
+        "joint:hip",
+        "anatomy:acetabular-labrum",
+        "bone:pelvis",
+        "bone:femur"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-iliofemoral-ligament",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "iliofemoral-ligament",
+        "bigelow-ligament",
+        "hip-extension",
+        "anterior-stability",
+        "capsule"
+      ],
+      "locator": {
+        "page": 563
+      },
+      "summary": "Iliofemoral ligament (ligamento en Y de Bigelow): ligamento capsular anterior extraordinariamente grueso y resistente (el ligamento de mayor resistencia a la tracción del cuerpo humano). Origen: espina ilíaca anteroinferior y margen del acetábulo. Inserción: línea intertrocantérea anterior del fémur mediante dos fascículos divergentes (superior oblicuo e inferior vertical). Función biomecánica: se tensa fuertemente durante la extensión de la cadera impidiendo la hiperextensión del fémur en bipedestación erguida sin requerir gasto energético muscular continuo.",
+      "entities": [
+        "ligament:iliofemoral",
+        "joint:hip",
+        "bone:pelvis",
+        "bone:femur"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-pubofemoral-and-ischiofemoral-ligaments",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "pubofemoral-ligament",
+        "ischiofemoral-ligament",
+        "hip-stability",
+        "capsule",
+        "ligaments"
+      ],
+      "locator": {
+        "page": 563
+      },
+      "summary": "Ligamentos capsulares de soporte de la cadera: 1) Pubofemoral ligament: situado anteroinferiormente; se origina en la eminencia iliopúbica y cresta obturadora del pubis y se inserta en el extremo inferior de la línea intertrocantérea; se tensa en abducción y extensión de cadera, evitando la abducción excesiva. 2) Ischiofemoral ligament: situado en la cara posterior de la cápsula; se origina en el cuerpo del isquion posterior al acetábulo, enrollándose en espiral superolateralmente hacia la fosa trocantérea del fémur; se tensa en rotación medial (interna) y extensión de la cadera, limitando la rotación interna forzada.",
+      "entities": [
+        "ligament:pubofemoral",
+        "ligament:ischiofemoral",
+        "joint:hip",
+        "bone:pelvis",
+        "bone:femur"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-femoral-triangle-anatomy",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "femoral-triangle",
+        "scarpa-triangle",
+        "femoral-nerve",
+        "femoral-artery",
+        "navel"
+      ],
+      "locator": {
+        "page": 570
+      },
+      "summary": "Femoral triangle (triángulo femoral o de Scarpa): depresión subfascial triangular en la cara anterior proximal del muslo. Límites anatómicos: superiormente borde inferior del ligamento inguinal; lateralmente borde medial del músculo sartorius; medialmente borde medial del músculo adductor longus; suelo formado por iliopsoas lateralmente y pectineus medialmente; techo formado por fascia lata y fascia cribiforme. Contenido dispuesto en sentido lateral a medial mediante la mnemotecnia \"NAVEL\": 1) Femoral Nerve (nervio femoral), 2) Femoral Artery (arteria femoral), 3) Femoral Vein (vena femoral), 4) Empty space (canal femoral), 5) Lymphatics (ganglios y vasos linfáticos inguinales profundos).",
+      "entities": [
+        "anatomy:femoral-triangle",
+        "nerve:femoral",
+        "artery:femoral",
+        "vein:femoral",
+        "ligament:inguinal-ligament",
+        "muscle:sartorius",
+        "muscle:adductor-longus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-greater-sciatic-foramen",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "greater-sciatic-foramen",
+        "piriformis",
+        "sciatic-nerve",
+        "gluteal-nerves",
+        "pelvic-outlet"
+      ],
+      "locator": {
+        "page": 438
+      },
+      "summary": "Greater sciatic foramen (foramen isquiático mayor): puerta de comunicación entre la pelvis menor y la región glútea, delimitado por la escotadura isquiática mayor y convertido en foramen por los ligamentos sacrotuberoso y sacroespinoso. Es atravesado en su centro por el músculo piriformis, dividiéndolo topográficamente en: 1) Espacio suprapiriforme: transmite el nervio y vasos glúteos superiores. 2) Espacio infrapiriforme: transmite el sciatic nerve (nervio ciático), nervio cutáneo femoral posterior, nervio y vasos glúteos inferiores, nervio pudendo y vasos pudendos internos.",
+      "entities": [
+        "anatomy:greater-sciatic-foramen",
+        "muscle:piriformis",
+        "nerve:sciatic",
+        "nerve:gluteal-superior",
+        "nerve:gluteal-inferior",
+        "nerve:pudendal",
+        "ligament:sacrotuberous",
+        "ligament:sacrospinous"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-femoral-neck-inclination-angle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "inclination-angle",
+        "coxa-valga",
+        "coxa-vara",
+        "biomechanics",
+        "femoral-neck"
+      ],
+      "locator": {
+        "page": 563
+      },
+      "summary": "femoral-neck-inclination-angle: Ángulo en el plano frontal entre el eje longitudinal del cuello femoral y el eje de la diáfisis femoral (inclinationAngleDegrees). En el adulto normal oscila en ~125° (rango 120° a 135°). Variantes biomecánicas: 1) Coxa valga (>135°): alinea el cuello más verticalmente, aumentando la longitud relativa de la extremidad pero acortando el brazo de palanca del glúteo medio y aumentando las presiones articulares superiores. 2) Coxa vara (<120°): acuesta el cuello femoral, alargando el brazo de palanca del glúteo medio pero incrementando el estrés de cizallamiento en la base del cuello femoral (riesgo de fractura y epifisiolisis).",
+      "entities": [
+        "bone:femur",
+        "joint:hip",
+        "muscle:gluteus-medius"
+      ],
+      "rules": [
+        "femoral-neck-inclination-angle"
+      ]
+    },
+    {
+      "id": "grays-cadera-trendelenburg-sign-mechanics",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "trendelenburg-sign",
+        "gluteus-medius",
+        "pelvic-drop",
+        "superior-gluteal-nerve",
+        "single-leg-stance"
+      ],
+      "locator": {
+        "page": 583
+      },
+      "summary": "trendelenburg-sign-gluteus-medius-mechanics: En apoyo monopodal neutro, la contracción del glúteo medio y menor del lado en carga debe estabilizar la pelvis horizontalmente o elevarla ligeramente en el lado contralateral libre (pelvicTiltUnipodalDegrees). Un signo de Trendelenburg positivo (caída de la hemipelvis contralateral hacia abajo durante el apoyo) evidencia debilidad, atrofia o denervación motora del gluteus medius y gluteus minimus ipsilaterales por lesión o atrapamiento del nervio glúteo superior (raíces L4, L5, S1).",
+      "entities": [
+        "muscle:gluteus-medius",
+        "muscle:gluteus-minimus",
+        "nerve:gluteal-superior",
+        "joint:hip",
+        "bone:pelvis"
+      ],
+      "rules": [
+        "trendelenburg-sign-gluteus-medius-mechanics"
+      ]
+    },
+    {
+      "id": "grays-cadera-gluteus-maximus-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "gluteus-maximus",
+        "hip-extension",
+        "inferior-gluteal-nerve",
+        "iliotibial-tract",
+        "power"
+      ],
+      "locator": {
+        "page": 583
+      },
+      "summary": "Músculo gluteus maximus (glúteo mayor): el músculo más voluminoso y potente de la región glútea. Origen: cara posterolateral del ilion detrás de la línea glútea posterior, cara dorsal del sacro y cóccix, y ligamento sacrotuberoso (p. 583). Inserción: 3/4 superficiales superiores se insertan en la banda iliotibial (tracto iliotibial) de la fascia lata; el 1/4 profundo inferior se inserta en la tuberosidad glútea del fémur (p. 583). Inervación: inferior gluteal nerve (L5, S1, S2) (p. 583). Acción: principal y más potente extensor de la cadera (esencial para subir escaleras, levantarse de cuclillas y sprints); rotador lateral del fémur; asiste en la estabilización de la rodilla extendida mediante el tracto iliotibial.",
+      "entities": [
+        "muscle:gluteus-maximus",
+        "nerve:gluteal-inferior",
+        "bone:pelvis",
+        "bone:sacrum",
+        "bone:femur",
+        "anatomy:iliotibial-tract",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-gluteus-medius-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "gluteus-medius",
+        "hip-abduction",
+        "superior-gluteal-nerve",
+        "pelvic-stability",
+        "gait"
+      ],
+      "locator": {
+        "page": 584
+      },
+      "summary": "Músculo gluteus medius (glúteo medio): abductor primario de la cadera. Origen: cara externa del ilion comprendida entre las líneas glúteas anterior y posterior (p. 584). Inserción: cara lateral del trocánter mayor del fémur (p. 584). Inervación: superior gluteal nerve (L4, L5, S1) (p. 584). Acción: abducción pura de la cadera en el plano frontal; estabilizador dinámico clave de la pelvis durante la marcha evitando la caída contralateral; sus fibras anteriores realizan rotación medial y flexión de cadera; sus fibras posteriores realizan rotación lateral y extensión.",
+      "entities": [
+        "muscle:gluteus-medius",
+        "nerve:gluteal-superior",
+        "bone:pelvis",
+        "bone:femur",
+        "joint:hip"
+      ],
+      "rules": [
+        "trendelenburg-sign-gluteus-medius-mechanics"
+      ]
+    },
+    {
+      "id": "grays-cadera-piriformis-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "piriformis",
+        "external-rotation",
+        "sacral-plexus",
+        "sciatic-nerve",
+        "deep-gluteal"
+      ],
+      "locator": {
+        "page": 585
+      },
+      "summary": "Músculo piriformis (piramidal de la pelvis): músculo de referencia topográfica de la región glútea profunda. Origen: cara anterior del sacro entre los forámenes sacros anteriores S2 a S4 y borde superior de la escotadura isquiática mayor (p. 585). Inserción: vértice y borde superior del trocánter mayor del fémur (p. 585). Inervación: ramos directos del plexo sacro (S1, S2) (p. 585). Acción: potente rotador lateral (externo) del fémur con la cadera extendida; actúa como abductor de la cadera cuando la articulación coxofemoral está flexionada a 90°.",
+      "entities": [
+        "muscle:piriformis",
+        "nerve:sacral-plexus",
+        "nerve:sciatic",
+        "bone:sacrum",
+        "bone:femur",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-iliopsoas-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "iliopsoas",
+        "psoas-major",
+        "iliacus",
+        "hip-flexion",
+        "femoral-nerve"
+      ],
+      "locator": {
+        "page": 592
+      },
+      "summary": "Músculo iliopsoas (complejo iliopsoas formado por psoas major e iliacus). Origen: psoas major en los cuerpos vertebrales T12–L5 y procesos transversos lumbares; iliacus en los 2/3 superiores de la fosa ilíaca interna y ala del sacro (p. 592). Inserción: se unen distalmente para formar un tendón común que pasa bajo el ligamento inguinal e inserta en el trocánter menor del fémur (p. 592). Inervación: psoas por ramos directos anteriores de L1 a L3; iliacus por el femoral nerve (L2, L3) (p. 592). Acción: flexor primario más potente de la cadera; flexor anterior del tronco sobre los muslos; rotador lateral accesorio del fémur.",
+      "entities": [
+        "muscle:iliopsoas",
+        "muscle:psoas-major",
+        "muscle:iliacus",
+        "nerve:femoral",
+        "nerve:lumbar-plexus",
+        "bone:lumbar-vertebrae",
+        "bone:pelvis",
+        "bone:femur",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-biceps-femoris-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "biceps-femoris",
+        "hamstrings",
+        "knee-flexion",
+        "hip-extension",
+        "sciatic-nerve"
+      ],
+      "locator": {
+        "page": 598
+      },
+      "summary": "Músculo biceps femoris: componente lateral del compartimento posterior del muslo (isquiotibiales). Origen: cabeza larga en la cara inferomedial de la tuberosidad isquiática (tendón común con semitendinoso); cabeza corta en el labio lateral de la línea áspera y línea supracondílea lateral del fémur (p. 598). Inserción: cara lateral de la cabeza del peroné y cóndilo lateral de la tibia (p. 598). Inervación dual: cabeza larga por la división tibial del sciatic nerve (L5, S1, S2); cabeza corta por la división fibular común (peronea) del sciatic nerve (L5, S1, S2) (p. 598). Acción: flexión y rotación lateral de la rodilla; la cabeza larga es potente extensora de la articulación de la cadera.",
+      "entities": [
+        "muscle:biceps-femoris",
+        "nerve:sciatic",
+        "nerve:tibial",
+        "nerve:fibular-common",
+        "bone:pelvis",
+        "bone:femur",
+        "bone:fibula",
+        "joint:hip",
+        "joint:knee"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-lifting-mechanics-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "hip-extension-cues",
+        "hip-thrust",
+        "deadlift",
+        "squat",
+        "knee-valgus"
+      ],
+      "locator": {
+        "page": 583
+      },
+      "summary": "Biomecánica y técnica en patrones de extensión de cadera (Hip Thrust / Peso Muerto / Sentadilla): Cues técnicos: 1) Bloquear la cima del movimiento mediante contracción activa concéntrica del gluteus maximus manteniendo la pelvis en posición neutra, sin transferir el torque hacia la hiperextensión lumbar. 2) Mantener empuje de rodillas hacia afuera (\"spread the floor\") en rotación externa y ligera abducción para maximizar el reclutamiento del gluteus medius y prevenir el colapso dinámico. Fallos comunes: dominancia de erectores lumbares que hiperextienden la columna lumbar por amnesia glútea, y colapso de rodillas en valgo dinámico por fallo del glúteo medio.",
+      "entities": [
+        "clinical:hip-extension-cues",
+        "muscle:gluteus-maximus",
+        "muscle:gluteus-medius",
+        "joint:hip",
+        "joint:lumbar-spine"
+      ],
+      "rules": [
+        "trendelenburg-sign-gluteus-medius-mechanics"
+      ]
+    },
+    {
+      "id": "grays-cadera-piriformis-syndrome-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "piriformis-syndrome",
+        "sciatic-nerve",
+        "pseudo-sciatica",
+        "nerve-entrapment",
+        "prehab"
+      ],
+      "locator": {
+        "page": 585
+      },
+      "summary": "Síndrome del Piriforme (Piriformis Syndrome): Etiología: compresión no discogénica y atrapamiento del sciatic nerve a su paso por el foramen isquiático mayor bajo el músculo piriformis (o a través de sus fibras en variaciones anatómicas con bifurcación alta) debido a espasmo, hipertrofia o acortamiento miofascial. Sintomatología: dolor profundo en el cuadrante glúteo superior irradiado a lo largo del trayecto posterior del muslo y pantorrilla (pseudo-ciática) sin déficit neurológico lumbar primario. Prehab/Manejo: estiramiento en rotación medial con aducción y cadera flexionada a 90°; fortalecimiento excéntrico de rotadores externos y abductores pélvicos.",
+      "entities": [
+        "clinical:piriformis-syndrome",
+        "muscle:piriformis",
+        "nerve:sciatic",
+        "anatomy:greater-sciatic-foramen"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-cadera-femoroacetabular-impingement-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "femoroacetabular-impingement",
+        "fai",
+        "cam-type",
+        "pincer-type",
+        "labrum-tear"
+      ],
+      "locator": {
+        "page": 563
+      },
+      "summary": "Choque Femoroacetabular (FAI - Femoroacetabular Impingement): Conflicto mecánico articular entre la cabeza/cuello femoral y el reborde acetabular. Variedades morfológicas: 1) Cam type (choque por leva): pérdida de la esfericidad normal de la unión cabeza-cuello femoral (prominencia ósea o \"bump\" anterosuperior) que erosiona y deslamina el cartílago articular en flexión y rotación interna profundas. 2) Pincer type (choque por pinza): sobrecobertura excesiva de la cabeza femoral por el reborde anterior del acetábulo (retroversión o sobreprofundidad acetabular) que pellizca y rompe directamente el acetabular labrum. Manejo: limitar rangos forzados de flexión profunda combinada con rotación interna.\n\n<!-- stats: 15 chunks, 23 entidades cubiertas -->",
+      "entities": [
+        "clinical:femoroacetabular-impingement",
+        "anatomy:acetabular-labrum",
+        "bone:femur",
+        "bone:pelvis",
+        "joint:hip"
+      ],
+      "rules": [
+        "femoral-neck-inclination-angle"
+      ]
+    },
+    {
+      "id": "grays-codo-muneca-humeroulnar-joint",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "humeroulnar",
+        "elbow",
+        "joint",
+        "trochlear",
+        "flexion-extension"
+      ],
+      "locator": {
+        "page": 777
+      },
+      "summary": "Humeroulnar joint es una articulación sinovial de tipo trocleartrosis (ginglimo o bisagra uniaxial) formada entre la tróclea del húmero y la escotadura troclear del cúbito (olécranon y apófisis coronoides). Permite exclusivamente los movimientos de flexión y extensión en el plano sagital. La estabilidad ósea es muy alta por la congruencia entre la tróclea y la escotadura troclear; su alineación en extensión y supinación define el ángulo de carga anatómico (\"carrying angle\").",
+      "entities": [
+        "joint:humeroulnar",
+        "bone:humerus",
+        "bone:ulna"
+      ],
+      "rules": [
+        "elbow-carrying-angle-norms"
+      ]
+    },
+    {
+      "id": "grays-codo-muneca-humeroradial-joint",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "humeroradial",
+        "elbow",
+        "joint",
+        "capitulum",
+        "radius"
+      ],
+      "locator": {
+        "page": 777
+      },
+      "summary": "Humeroradial joint es una diartrosis sinovial de tipo condílea (esferoidea mecánicamente restringida) situada entre la cabeza del cóndilo humeral (capítulum) y la fóvea articular cóncava de la cabeza del radio. Acompaña los movimientos de flexión y extensión del codo y permite la rotación de la cabeza del radio durante la pronación y supinación del antebrazo.",
+      "entities": [
+        "joint:humeroradial",
+        "bone:humerus",
+        "bone:radius"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-radioulnar-joints",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "radioulnar",
+        "pivot",
+        "pronation",
+        "supination",
+        "interosseous-membrane"
+      ],
+      "locator": {
+        "page": 777
+      },
+      "summary": "Proximal radioulnar joint y distal radioulnar joint son articulaciones sinoviales de tipo trocoide (pivote uniaxial) conectadas funcionalmente a lo largo del antebrazo por la membrana interósea fibrosa. La proximal se establece entre la circunferencia de la cabeza radial, la escotadura radial del cúbito y el ligamento anular; la distal, entre la cabeza cubital y la escotadura cubital del radio. Permiten conjuntamente los movimientos axiales de pronación y supinación del antebrazo.",
+      "entities": [
+        "joint:proximal-radioulnar",
+        "joint:distal-radioulnar",
+        "bone:radius",
+        "bone:ulna",
+        "anatomy:interosseous-membrane"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-wrist-radiocarpal-joint",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "wrist",
+        "radiocarpal",
+        "joint",
+        "condyloid",
+        "carpus"
+      ],
+      "locator": {
+        "page": 805
+      },
+      "summary": "Wrist radiocarpal joint (articulación radiocarpiana) es una diartrosis sinovial elipsoidea (condílea biaxial) establecida entre la superficie articular distal del radio junto al disco articular fibrocartilaginoso radiocubital distal (complejo fibrocartilaginoso triangular) proximalmente, y tres huesos de la fila proximal del carpo distalmente: escafoides, semilunar y piramidal (el pisiforme no participa). Permite flexión, extensión, abducción (desviación radial), aducción (desviación cubital) y circunducción de la muñeca.",
+      "entities": [
+        "joint:wrist-radiocarpal",
+        "bone:radius",
+        "bone:scaphoid",
+        "bone:lunate",
+        "bone:triquetrum",
+        "anatomy:articular-disc"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-carpal-tunnel",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "carpal-tunnel",
+        "flexor-retinaculum",
+        "median-nerve",
+        "tendons",
+        "hand"
+      ],
+      "locator": {
+        "page": 806
+      },
+      "summary": "Carpal tunnel es un compartimento fibroóseo inelástico situado en la cara anterior de la muñeca, delimitado dorsalmente por el surco cóncavo de los huesos carpianos y ventralmente por el retináculo flexor (ligamento carpal transverso). Transmite un total de 10 estructuras anatómicas: 9 tendones flexores rodeados de vainas sinoviales (4 tendones del flexor digitorum superficialis, 4 tendones del flexor digitorum profundus y 1 tendón del flexor pollicis longus) y el median nerve.",
+      "entities": [
+        "anatomy:carpal-tunnel",
+        "nerve:median",
+        "ligament:flexor-retinaculum",
+        "tendon:flexor-digitorum-superficialis",
+        "tendon:flexor-digitorum-profundus",
+        "tendon:flexor-pollicis-longus"
+      ],
+      "rules": [
+        "carpal-tunnel-intracarpal-pressure-threshold"
+      ]
+    },
+    {
+      "id": "grays-codo-muneca-guyon-canal",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "guyon-canal",
+        "ulnar-tunnel",
+        "ulnar-nerve",
+        "ulnar-artery",
+        "wrist"
+      ],
+      "locator": {
+        "page": 806
+      },
+      "summary": "Guyon canal (túnel cubital palmar) es un pasaje fibroóseo superficial localizado en la cara medial anterior de la muñeca, delimitado medialmente por el hueso pisiforme y lateralmente por el gancho del hueso ganchoso (hamate), con techo formado por el ligamento carpiano palmar y músculo palmaris brevis. Transmite el ulnar nerve y la arteria y venas cubitales hacia la palma de la mano; es sitio de compresión neurológica (\"síndrome del canal de Guyon\" o parálisis del ciclista).",
+      "entities": [
+        "anatomy:guyon-canal",
+        "nerve:ulnar",
+        "artery:ulnar",
+        "bone:pisiform",
+        "bone:hamate"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-cubital-fossa",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "cubital-fossa",
+        "elbow",
+        "brachial-artery",
+        "median-nerve",
+        "radial-nerve"
+      ],
+      "locator": {
+        "page": 782
+      },
+      "summary": "Cubital fossa es una depresión triangular en la cara anterior del codo. Límites: superiormente línea imaginaria interepicondílea; medialmente borde lateral del pronator teres; lateralmente borde medial del brachioradialis; suelo formado por brachialis y supinator. Contenido dispuesto de medial a lateral: 1) median nerve, 2) brachial artery (y su bifurcación en radial y ulnar arteries), 3) tendón del biceps brachii y aponeurosis bicipital (lacertus fibrosus), 4) radial nerve (en el surco lateral entre brachialis y brachioradialis).",
+      "entities": [
+        "anatomy:cubital-fossa",
+        "nerve:median",
+        "artery:brachial",
+        "tendon:biceps-brachii",
+        "nerve:radial",
+        "muscle:pronator-teres",
+        "muscle:brachioradialis"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-anatomical-snuffbox",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "anatomical-snuffbox",
+        "radial-artery",
+        "scaphoid",
+        "extensors",
+        "wrist"
+      ],
+      "locator": {
+        "page": 802
+      },
+      "summary": "Anatomical snuffbox (tabaquera anatómica) es una depresión triangular en la cara posterolateral de la muñeca visible con el pulgar extendido. Límites: medial (posterior) formado por el tendón del extensor pollicis longus (EPL); lateral (anterior) formado por los tendones del extensor pollicis brevis (EPB) y abductor pollicis longus (APL). Suelo óseo formado por el escafoides y el trapecio. Contiene en su profundidad la radial artery cruzando hacia el primer espacio interóseo dorsal.",
+      "entities": [
+        "anatomy:anatomical-snuffbox",
+        "artery:radial",
+        "bone:scaphoid",
+        "bone:trapezium",
+        "tendon:extensor-pollicis-longus",
+        "tendon:extensor-pollicis-brevis",
+        "tendon:abductor-pollicis-longus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-carrying-angle-norms",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "carrying-angle",
+        "elbow",
+        "valgus",
+        "varus",
+        "evaluation"
+      ],
+      "locator": {
+        "page": 777
+      },
+      "summary": "elbow-carrying-angle-norms: Ángulo de carga en el plano frontal entre el eje longitudinal del húmero y del antebrazo con el codo en extensión completa y supinación. Valores normales (carryingAngleDegrees): hombres ~10°–15°; mujeres ~15°–20° (mayor por pelvis más ancha y menor masa muscular). Alteraciones clínicas: cubitus valgus cuando el ángulo supera los 20° (riesgo de tracción crónica del ulnar nerve); cubitus varus (\"deformidad en culata de pistola\" o gunstock deformity) cuando el ángulo es <5° o negativo, comúnmente secundario a fractura supracondílea infantil mal consolidada.",
+      "entities": [
+        "joint:humeroulnar",
+        "bone:humerus",
+        "bone:ulna"
+      ],
+      "rules": [
+        "elbow-carrying-angle-norms"
+      ]
+    },
+    {
+      "id": "grays-codo-muneca-carpal-tunnel-pressure-threshold",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "carpal-tunnel-pressure",
+        "ischemia",
+        "median-nerve",
+        "wrist-angle",
+        "safety"
+      ],
+      "locator": {
+        "page": 806
+      },
+      "summary": "carpal-tunnel-intracarpal-pressure-threshold: Presión intersticial dentro del túnel carpiano (carpalTunnelPressureMMHg). En posición neutra (0° flexión/extensión) oscila normalmente entre 2 y 10 mmHg (<15 mmHg normal). La flexión de muñeca >30° o la extensión >30° multiplica la presión intracarpiana de 3 a 6 veces, alcanzando >30 a 50 mmHg (umbral patológico). Por encima de 30 mmHg se produce colapso del drenaje capilar y venoso epineural, generando isquemia aguda del median nerve y parestesias.",
+      "entities": [
+        "anatomy:carpal-tunnel",
+        "nerve:median",
+        "joint:wrist-radiocarpal"
+      ],
+      "rules": [
+        "carpal-tunnel-intracarpal-pressure-threshold"
+      ]
+    },
+    {
+      "id": "grays-codo-muneca-biceps-brachii-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "biceps-brachii",
+        "supination",
+        "elbow-flexion",
+        "musculocutaneous-nerve",
+        "arm"
+      ],
+      "locator": {
+        "page": 764
+      },
+      "summary": "Músculo biceps brachii. Origen: cabeza corta en el vértice de la apófisis coracoides de la escápula; cabeza larga en el tubérculo supraglenoideo de la escápula (su tendón cruza la cavidad articular GH) (p. 764). Inserción: tuberosidad del radio y fascia profunda del antebrazo mediante la aponeurosis bicipital (lacertus fibrosus) (p. 764). Inervación: musculocutaneous nerve (C5, C6, C7) (pp. 764, 755). Acción: potente supinador del antebrazo (máxima eficacia con el codo flexionado a 90°); flexor principal del codo; flexor accesorio débil de la articulación GH (p. 764).",
+      "entities": [
+        "muscle:biceps-brachii",
+        "nerve:musculocutaneous",
+        "bone:scapula",
+        "bone:radius",
+        "joint:humeroulnar",
+        "joint:proximal-radioulnar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-brachialis-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "brachialis",
+        "elbow-flexion",
+        "musculocutaneous-nerve",
+        "arm",
+        "workhorse"
+      ],
+      "locator": {
+        "page": 765
+      },
+      "summary": "Músculo brachialis (braquial anterior). Origen: mitad distal de la cara anterior del húmero (p. 765). Inserción: tuberosidad del cúbito y cara anterior de la apófisis coronoides (p. 765). Inervación: musculocutaneous nerve (C5, C6) (p. 765). Acción: flexor puro y principal del codo en cualquier posición de pronación, supinación o agarre neutro (\"el caballo de batalla de la flexión del codo\"), ya que su inserción distal en el cúbito no rota durante la pronosupinación (p. 765).",
+      "entities": [
+        "muscle:brachialis",
+        "nerve:musculocutaneous",
+        "bone:humerus",
+        "bone:ulna",
+        "joint:humeroulnar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-brachioradialis-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "brachioradialis",
+        "elbow-flexion",
+        "midprone",
+        "radial-nerve",
+        "forearm"
+      ],
+      "locator": {
+        "page": 799
+      },
+      "summary": "Músculo brachioradialis (braquiorradial o supinador largo). Origen: 2/3 proximales de la cresta supracondílea lateral del húmero y tabique intermuscular lateral (p. 799). Inserción: cara lateral de la base de la apófisis estiloides del radio (p. 799). Inervación: radial nerve (C5, C6) proximal a la bifurcación del codo (pp. 799, 760). Acción: flexión del codo cuando el antebrazo se encuentra en posición semipronada (neutra / agarre martillo); actúa como estabilizador y shunter de la articulación del codo en movimientos rápidos (p. 799).",
+      "entities": [
+        "muscle:brachioradialis",
+        "nerve:radial",
+        "bone:humerus",
+        "bone:radius",
+        "joint:humeroulnar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-pronator-teres-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "pronator-teres",
+        "pronation",
+        "median-nerve",
+        "cubital-fossa",
+        "forearm"
+      ],
+      "locator": {
+        "page": 790
+      },
+      "summary": "Músculo pronator teres. Origen: cabeza humeral en el epicóndilo medial (origen flexor común); cabeza cubital en la cara medial de la apófisis coronoides del cúbito (p. 790). Inserción: rugosidad en la mitad de la cara lateral de la diáfisis del radio (p. 790). Inervación: median nerve (C6, C7), que pasa entre sus dos cabezas de origen (p. 790). Acción: pronación del antebrazo y flexor accesorio débil del codo (p. 790).",
+      "entities": [
+        "muscle:pronator-teres",
+        "nerve:median",
+        "bone:humerus",
+        "bone:ulna",
+        "bone:radius",
+        "joint:proximal-radioulnar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-flexor-carpi-radialis-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "flexor-carpi-radialis",
+        "wrist-flexion",
+        "radial-deviation",
+        "median-nerve",
+        "forearm"
+      ],
+      "locator": {
+        "page": 790
+      },
+      "summary": "Músculo flexor carpi radialis (palmar mayor). Origen: epicóndilo medial del húmero mediante el tendón flexor común (p. 790). Inserción: base del 2º metacarpiano (con expansiones hacia el 3º metacarpiano) (p. 790). Inervación: median nerve (C6, C7) (p. 790). Acción: flexión y abducción (desviación radial) de la muñeca; sinergista en la flexión y estabilización del carpo (p. 790).",
+      "entities": [
+        "muscle:flexor-carpi-radialis",
+        "nerve:median",
+        "bone:humerus",
+        "bone:metacarpals",
+        "joint:wrist-radiocarpal"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-flexor-carpi-ulnaris-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "flexor-carpi-ulnaris",
+        "wrist-flexion",
+        "ulnar-deviation",
+        "ulnar-nerve",
+        "pisiform"
+      ],
+      "locator": {
+        "page": 791
+      },
+      "summary": "Músculo flexor carpi ulnaris (cubital anterior). Origen: cabeza humeral en el epicóndilo medial; cabeza cubital en el olécranon y 2/3 superiores del borde posterior del cúbito (p. 791). Inserción: hueso pisiforme, prolongándose mediante ligamentos pisiganchoso y pisimetacarpiano al gancho del ganchoso y base del 5º metacarpiano (p. 791). Inervación: ulnar nerve (C7, C8, T1), que discurre entre sus dos cabezas (pp. 791, 757). Acción: flexión y aducción (desviación cubital) de la muñeca (p. 791).",
+      "entities": [
+        "muscle:flexor-carpi-ulnaris",
+        "nerve:ulnar",
+        "bone:humerus",
+        "bone:ulna",
+        "bone:pisiform",
+        "bone:hamate",
+        "bone:metacarpals"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-extensor-carpi-radialis-muscles",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "extensor-carpi-radialis",
+        "wrist-extension",
+        "radial-nerve",
+        "grip-stability",
+        "lateral-epicondyle"
+      ],
+      "locator": {
+        "page": 799
+      },
+      "summary": "Músculos extensor carpi radialis longus y brevis. Origen: Longus en el tercio distal de la cresta supracondílea lateral del húmero; Brevis en el epicóndilo lateral del húmero mediante el tendón extensor común (p. 799). Inserción: Longus en la cara dorsal de la base del 2º metacarpiano; Brevis en la cara dorsal de la base del 3º metacarpiano (p. 799). Inervación: Longus por el radial nerve (C6, C7); Brevis por el ramo profundo del radial nerve (C7, C8) (p. 799). Acción: extensión y abducción (desviación radial) de la muñeca; indispensables para estabilizar la muñeca en ligera extensión durante el agarre de fuerza manual.",
+      "entities": [
+        "muscle:extensor-carpi-radialis-longus",
+        "muscle:extensor-carpi-radialis-brevis",
+        "nerve:radial",
+        "bone:humerus",
+        "bone:metacarpals",
+        "joint:wrist-radiocarpal"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-biceps-curl-biomechanics",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "biceps-curl",
+        "mechanics",
+        "grip-variations",
+        "cues",
+        "errors"
+      ],
+      "locator": {
+        "page": 764
+      },
+      "summary": "Biomecánica y técnica de Curl de Bíceps (Barra / Mancuerna): Cues técnicos: 1) Mantener los codos alineados con el torso sin desplazarlos anteriormente para concentrar el momento de fuerza en los flexores del codo. 2) Supinación completa durante la fase concéntrica para máxima activación del biceps brachii. 3) Para enfatizar el brachialis y brachioradialis, utilizar agarre neutro (curl martillo) o pronado (curl inverso). Fallos comunes: hiperextensión de muñeca en la cima (sobrecarga flexores/extensores e inhibe fuerza de agarre); elevación de hombros o impulsión anterior del codo (activa deltoides anterior compensatoriamente).",
+      "entities": [
+        "clinical:biceps-curl-biomechanics",
+        "muscle:biceps-brachii",
+        "muscle:brachialis",
+        "muscle:brachioradialis",
+        "joint:humeroulnar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-triceps-pushdown-biomechanics",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "triceps-pushdown",
+        "mechanics",
+        "elbow-extension",
+        "wrist-stability",
+        "cues"
+      ],
+      "locator": {
+        "page": 766
+      },
+      "summary": "Biomecánica y técnica de Pushdown de Tríceps / Extensiones de Codo: Cues técnicos: 1) Mantener los codos estacionarios y fijos pegados a las costillas durante todo el recorrido de extensión. 2) Mantener la muñeca en posición neutra rígida (0° flexión/extensión) evitando la flexión o desviación cubital extrema al bloquear abajo. Fallos comunes: flexionar o quebrar las muñecas bajo carga para empujar con el peso corporal (dispara la presión en el carpal tunnel >30 mmHg); separar los codos hacia afuera (flare out) involucrando el pectoralis major y deltoides anterior.",
+      "entities": [
+        "clinical:triceps-pushdown-biomechanics",
+        "joint:humeroulnar",
+        "joint:wrist-radiocarpal"
+      ],
+      "rules": [
+        "carpal-tunnel-intracarpal-pressure-threshold"
+      ]
+    },
+    {
+      "id": "grays-codo-muneca-lateral-epicondylitis-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "lateral-epicondylitis",
+        "tennis-elbow",
+        "extensor-carpi-radialis-brevis",
+        "prehab",
+        "overuse"
+      ],
+      "locator": {
+        "page": 799
+      },
+      "summary": "Epicondilitis Lateral (\"Codo de Tenista\"): Etiología: tendinopatía por sobreuso microtraumático en el origen tendinoso extensor común en el epicóndilo lateral del húmero, afectando predominantemente al tendón del extensor carpi radialis brevis (ECRB). Prehab/Rehab: 1) Protocolos excéntricos progresivos para extensores de muñeca (FlexBar / carga excéntrica con mancuerna). 2) Fortalecimiento de la fuerza de agarre en posición neutra. 3) Evitar movimientos repetitivos combinados de pronación con extensión forzada de muñeca bajo carga.",
+      "entities": [
+        "clinical:lateral-epicondylitis",
+        "muscle:extensor-carpi-radialis-brevis",
+        "bone:humerus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-codo-muneca-carpal-tunnel-syndrome-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "carpal-tunnel-syndrome",
+        "median-nerve",
+        "paresthesias",
+        "thenar-atrophy",
+        "prehab"
+      ],
+      "locator": {
+        "page": 806
+      },
+      "summary": "Síndrome del Túnel Carpiano (Carpal Tunnel Syndrome): Etiología: compresión del median nerve dentro del carpal tunnel por tenosinovitis e inflamación de las vainas de los tendones flexores o aumento de presión intracarpiana. Sintomatología: parestesias, dolor y entumecimiento en territorio sensitivo del nervio mediano (cara palmar de pulgar, índice, medio y mitad radial del anular); en fases avanzadas, debilidad y atrofia motora de la eminencia tenar. Manejo/Prehab: férula nocturna en posición neutra (0° flexoextensión) para mantener presión intracarpiana <15 mmHg; sustitución de ejercicios en hiperextensión de muñeca (push-ups en suelo) por agarre en paralelas neutras.\n\n<!-- stats: 21 chunks, 25 entidades cubiertas -->",
+      "entities": [
+        "clinical:carpal-tunnel-syndrome",
+        "nerve:median",
+        "anatomy:carpal-tunnel",
+        "joint:wrist-radiocarpal"
+      ],
+      "rules": [
+        "carpal-tunnel-intracarpal-pressure-threshold"
+      ]
+    },
+    {
+      "id": "grays-columna-cervical-spine-segment",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "cervical-spine",
+        "atlas",
+        "axis",
+        "atlanto-occipital",
+        "mobility"
+      ],
+      "locator": {
+        "page": 52
+      },
+      "summary": "Cervical spine (segmento C1 a C7): es la región vertebral de mayor movilidad tridimensional. La articulación atlantooccipital (C0–C1) es una diartrosis elipsoidea que permite movimientos primarios de flexión y extensión craneal (inclinación \"sí\"). La articulación atlantoaxial (C1–C2) es un complejo trocoide con tres puntos articulares (dos laterales planos y uno medial de pivote entre el diente del axis y el arco anterior del atlas) responsable del 50% de la rotación axial cervical total. Las vértebras C3–C7 poseen procesos unciformes (articulaciones uncovertebrales de Luschka) que guían la flexoextensión y limitan el cizallamiento lateral.",
+      "entities": [
+        "joint:cervical-spine",
+        "bone:atlas",
+        "bone:axis",
+        "joint:atlanto-occipital",
+        "joint:atlanto-axial"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-thoracic-spine-segment",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "thoracic-spine",
+        "costovertebral",
+        "costotransverse",
+        "rib-cage",
+        "rotation"
+      ],
+      "locator": {
+        "page": 52
+      },
+      "summary": "Thoracic spine (segmento T1 a T12): se articula con las 12 costillas mediante las articulaciones costovertebrales (cabeza costal con hemicarillas de cuerpos vertebrales contiguos y disco intervertebral) y costotransversas (tubérculo costal con proceso transverso). La caja torácica y los procesos espinosos largos e imbricados restringen marcadamente la flexión y extensión sagital, pero las carillas articulares cigapofisarias orientadas en el plano coronal permiten una rotación axial sustancial.",
+      "entities": [
+        "joint:thoracic-spine",
+        "bone:ribs",
+        "bone:vertebrae",
+        "joint:costovertebral",
+        "joint:costotransverse"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-lumbar-spine-segment",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "lumbar-spine",
+        "sagittal-facets",
+        "axial-rotation",
+        "flexion-extension",
+        "stability"
+      ],
+      "locator": {
+        "page": 52
+      },
+      "summary": "Lumbar spine (segmento L1 a L5): vértebras con cuerpos masivos adaptados para soportar carga axial. Los procesos articulares cigapofisarios (facetas) están orientados predominantemente en el plano sagital con superficies articulares curvas (cóncavas superiores que envuelven a las convexas inferiores). Esta arquitectura favorece ampliamente la flexión y extensión del tronco, pero bloquea y restringe fuertemente la rotación axial a menos de 5° en total a lo largo de todo el segmento lumbar.",
+      "entities": [
+        "joint:lumbar-spine",
+        "bone:vertebrae",
+        "joint:zygapophysial"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-sacrum-coccyx-segment",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "sacrum",
+        "coccyx",
+        "sacroiliac-joint",
+        "pelvic-ring",
+        "load-transfer"
+      ],
+      "locator": {
+        "page": 52
+      },
+      "summary": "Sacrum y coccyx (segmento S1–S5 fusionados y Co1–Co4): el sacro forma la base posterior de la cintura pélvica y transmite el peso del tronco hacia los huesos coxales a través de las articulaciones sacroilíacas (SIJ), articulaciones sinoviales/sindesmosis con potente refuerzo de ligamentos sacroilíacos anteriores, posteriores e interóseos, y ligamentos sacrotuberoso y sacroespinoso. La articulación sacrococcígea es una sínfisis cartilaginosa con escasa movilidad.",
+      "entities": [
+        "joint:sacrum-coccyx",
+        "joint:sacroiliac",
+        "bone:sacrum",
+        "bone:coccyx",
+        "bone:ilium"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-intervertebral-disc",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "intervertebral-disc",
+        "anulus-fibrosus",
+        "nucleus-pulposus",
+        "collagen",
+        "shock-absorption"
+      ],
+      "locator": {
+        "page": 68
+      },
+      "summary": "Intervertebral disc (IVD): articulación cartilaginosa secundaria (sínfisis) interpuesta entre los cuerpos vertebrales desde C2–C3 hasta L5–S1. Estructura anatómica compuesta por dos regiones funcionales: 1) Anulus fibrosus: anillo externo resistente formado por láminas concéntricas de fibras de colágeno tipo I orientadas a 65° alternando en direcciones opuestas para resistir fuerzas de torsión y tracción. 2) Nucleus pulposus: núcleo gelatinoso avascular central rico en proteoglicanos hidrofílicos y colágeno tipo II que actúa disipando y redistribuyendo las cargas compresivas axiales de forma hidrostática.",
+      "entities": [
+        "anatomy:intervertebral-disc",
+        "anatomy:anulus-fibrosus",
+        "anatomy:nucleus-pulposus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-zygapophysial-joints",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "zygapophysial-joint",
+        "facet-joint",
+        "diarthrosis",
+        "motion-guiding",
+        "spine"
+      ],
+      "locator": {
+        "page": 68
+      },
+      "summary": "Zygapophysial joints (facetas articulares): articulaciones sinoviales planas situadas entre los procesos articulares superiores e inferiores de vértebras adyacentes. Cada articulación está encapsulada e inervada por los ramos mediales de los ramos posteriores (dorsales) de los nervios espinales de dos niveles adyacentes. Su orientación espacial guía y limita los planos de movimiento regional: plano oblicuo transversal a 45° en columna cervical, plano coronal en columna torácica y plano sagital en columna lumbar.",
+      "entities": [
+        "joint:zygapophysial",
+        "bone:vertebrae",
+        "nerve:spinal-dorsal-ramus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-ligamentum-flavum",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "ligamentum-flavum",
+        "elastin",
+        "spinal-canal",
+        "tension",
+        "lamina"
+      ],
+      "locator": {
+        "page": 75
+      },
+      "summary": "Ligamentum flavum (ligamento amarillo): banda ligamentosa gruesa que conecta las caras anteriores de las láminas de vértebras contiguas cerrando la pared posterior del canal vertebral. Posee una composición tisular única dominada por un 80% de fibras elásticas de elastina. Su elasticidad constante mantiene una tensión elástica continua que asiste en el retorno desde la flexión hacia la extensión vertebral y previene el plegamiento o pinzamiento del ligamento hacia el interior del canal medular durante la extensión.",
+      "entities": [
+        "ligament:ligamentum-flavum",
+        "bone:vertebral-lamina",
+        "anatomy:spinal-canal"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-sagittal-curvature-angles",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "sagittal-curves",
+        "lordosis",
+        "kyphosis",
+        "posture",
+        "evaluation"
+      ],
+      "locator": {
+        "page": 53
+      },
+      "summary": "spinal-sagittal-curvature-angles: Curvaturas sagitales fisiológicas de la columna vertebral en bipedestación neutra erguida sin carga externa (sagittalCurveDegrees): 1) Lordosis cervical: 20° a 40° (curvatura secundaria adquirida con el sostén cefálico). 2) Cifosis torácica: 20° a 50° (curvatura primaria congénita). 3) Lordosis lumbar: 30° a 80° (promedio funcional ~45°; curvatura secundaria adquirida con la bipedestación). 4) Inclinación sacra: 30° a 50° en relación a la horizontal.",
+      "entities": [
+        "joint:cervical-spine",
+        "joint:thoracic-spine",
+        "joint:lumbar-spine",
+        "bone:sacrum"
+      ],
+      "rules": [
+        "spinal-sagittal-curvature-angles"
+      ]
+    },
+    {
+      "id": "grays-columna-cord-termination-level",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "conus-medullaris",
+        "cauda-equina",
+        "lumbar-puncture",
+        "spinal-cord",
+        "anatomy"
+      ],
+      "locator": {
+        "page": 102
+      },
+      "summary": "spinal-cord-termination-level: Nivel de terminación anatómica de la médula espinal (conusMedullarisLevel). En adultos, el cono medular finaliza a nivel del disco intervertebral L1–L2 (rango fisiológico entre el borde inferior de T12 y el disco L2–L3). En neonatos alcanza el nivel vertebral L3. Por debajo del cono medular, la cisterna lumbar contiene las raíces de la cauda equina (cola de caballo) y el filum terminale inmersos en LCR; el espacio intervertebral seguro para punción lumbar o anestesia espinal es L3–L4 o L4–L5 (por debajo de la cresta ilíaca / línea de Tuffier).",
+      "entities": [
+        "anatomy:conus-medullaris",
+        "nerve:cauda-equina",
+        "anatomy:spinal-canal",
+        "bone:lumbar-vertebrae"
+      ],
+      "rules": [
+        "spinal-cord-termination-level"
+      ]
+    },
+    {
+      "id": "grays-columna-erector-spinae-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "erector-spinae",
+        "iliocostalis",
+        "longissimus",
+        "spinalis",
+        "extension"
+      ],
+      "locator": {
+        "page": 88
+      },
+      "summary": "Músculo erector spinae (erector de la columna). Origen: masa tendinosa común amplia en la cara posterior del sacro, crestas ilíacas y procesos espinosos lumbares inferiores (p. 88). División longitudinal en tres columnas: 1) Iliocostalis (columna lateral): se inserta en los ángulos de las costillas y procesos transversos cervicales C4–C6. 2) Longissimus (columna intermedia): se inserta en procesos transversos torácicos, cervicales y apófisis mastoides temporal. 3) Spinalis (columna medial): se inserta en procesos espinosos torácicos superiores y cervicales (p. 88). Inervación: ramos dorsales (posteriores) de los nervios espinales. Acción: potente extensor bilateral de la columna vertebral y cabeza; inclinación lateral unilateral.",
+      "entities": [
+        "muscle:erector-spinae",
+        "muscle:iliocostalis",
+        "muscle:longissimus",
+        "muscle:spinalis",
+        "nerve:spinal-dorsal-ramus",
+        "bone:sacrum",
+        "bone:pelvis",
+        "bone:ribs",
+        "bone:vertebrae"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-multifidus-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "multifidus",
+        "segmental-stability",
+        "lumbar-spine",
+        "transverso-spinal",
+        "rotation"
+      ],
+      "locator": {
+        "page": 92
+      },
+      "summary": "Músculo multifidus. Origen: cara posterior del sacro, espina ilíaca posterosuperior, procesos mamilares de vértebras lumbares, procesos transversos de vértebras torácicas y procesos articulares de C4–C7 (p. 92). Inserción: cruza oblicuamente de 2 a 4 segmentos vertebrales superiores para insertarse a lo largo de toda la longitud de los procesos espinosos vertebrales (p. 92). Inervación: ramos dorsales de los nervios espinales segmentarios (p. 92). Acción: estabilizador segmentario neuromuscular fundamental de la columna lumbar; proporciona rigidez intervertebral paso a paso y asiste en la extensión y rotación contralateral segmentaria.",
+      "entities": [
+        "muscle:multifidus",
+        "nerve:spinal-dorsal-ramus",
+        "bone:sacrum",
+        "bone:lumbar-vertebrae",
+        "bone:thoracic-vertebrae"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-quadratus-lumborum-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "quadratus-lumborum",
+        "lateral-flexion",
+        "rib-depression",
+        "lumbar-spine",
+        "core"
+      ],
+      "locator": {
+        "page": 97
+      },
+      "summary": "Músculo quadratus lumborum (cuadrado lumbar). Origen: tercio posterior del labio interno de la cresta ilíaca y ligamento iliolumbar (p. 97). Inserción: mitad medial del borde inferior de la 12ª costilla y vértices de los procesos transversos de L1 a L4 (p. 97). Inervación: ramos ventrales anteriores de T12 (nervio subcostal) y nervios espinales lumbares L1 a L4 (p. 97). Acción: flexión lateral unilateral de la columna lumbar; desciende y fija la 12ª costilla durante la inspiración forzada para estabilizar las inserciones del diafragma; extensor bilateral accesorio lumbar.",
+      "entities": [
+        "muscle:quadratus-lumborum",
+        "nerve:subcostal",
+        "nerve:lumbar-plexus",
+        "bone:pelvis",
+        "bone:ribs",
+        "bone:lumbar-vertebrae"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-lifting-mechanics-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "lifting-mechanics",
+        "deadlift",
+        "squat",
+        "neutral-spine",
+        "disc-pressure"
+      ],
+      "locator": {
+        "page": 68
+      },
+      "summary": "Biomecánica espinal en levantamiento bajo carga (Peso Muerto / Sentadilla): Cues técnicos: 1) Mantener la columna lumbar en posición neutra durante todo el recorrido excéntrico y concéntrico. 2) Evitar la flexión lumbar bajo carga pesada, ya que la compresión anterior acuña los cuerpos vertebrales y desplaza hidrostáticamente el nucleus pulposus hacia posterior contra las láminas del anulus fibrosus. 3) Prohibir estrictamente la flexión lumbar combinada con rotación axial bajo carga, dado que la orientación sagital de las facetas lumbares restringe la rotación (<5°) y la torsión lesiona el anillo fibroso. Fallos comunes: \"butt wink\" (retroversión pélvica en profundidad de sentadilla) y pérdida de bracing/tensión de erectores espinales.",
+      "entities": [
+        "clinical:spinal-biomechanics-lifting",
+        "anatomy:intervertebral-disc",
+        "anatomy:nucleus-pulposus",
+        "anatomy:anulus-fibrosus",
+        "muscle:erector-spinae",
+        "muscle:multifidus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-columna-disc-herniation-cauda-equina-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "disc-herniation",
+        "radiculopathy",
+        "cauda-equina",
+        "red-flags",
+        "emergency"
+      ],
+      "locator": {
+        "page": 68
+      },
+      "summary": "Hernia de Disco Lumbar y Síndrome de Cauda Equina: Etiología: ruptura de las láminas del anulus fibrosus posterolateral (donde el ligamento longitudinal posterior es más estrecho y débil) con herniación del nucleus pulposus en los niveles de mayor carga (L4–L5 y L5–S1). Patrón compresivo: una hernia posterolateral en L4–L5 comprime típicamente la raíz pasante L5 (no la saliente L4). Red Flags / Síndrome de Cauda Equina (emergencia quirúrgica por compresión masiva del saco dural bajo L2): anestesia en silla de montar (perineal/perianal), retención o incontinencia urinaria/fecal aguda, y debilidad motora bilateral progresiva en extremidades inferiores.\n\n<!-- stats: 14 chunks, 21 entidades cubiertas -->",
+      "entities": [
+        "clinical:lumbar-disc-herniation",
+        "clinical:cauda-equina-syndrome",
+        "anatomy:intervertebral-disc",
+        "nerve:cauda-equina",
+        "nerve:spinal-roots"
+      ],
+      "rules": [
+        "spinal-cord-termination-level"
+      ]
+    },
+    {
+      "id": "grays-core-torax-transversus-abdominis-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "transversus-abdominis",
+        "core",
+        "intra-abdominal-pressure",
+        "lumbar-stability",
+        "deep-abdominal"
+      ],
+      "locator": {
+        "page": 283
+      },
+      "summary": "Músculo transversus abdominis (transverso del abdomen): capa más profunda de la pared abdominal anterolateral. Origen: caras internas de los cartílagos costales 7 a 12 (interdigitándose con el diafragma), fascia toracolumbar, labio interno de los 2/3 anteriores de la cresta ilíaca y tercio lateral del ligamento inguinal (p. 283). Inserción: línea alba mediante aponeurosis amplia, cresta del pubis y pecten pubis a través del tendón conjunto (falx inguinalis) (p. 283). Inervación: ramos anteriores de nervios espinales T7 a T12 (intercostales inferiores y subcostal) e iliohipogástrico e ilioinguinal (L1) (p. 283). Acción: comprime las vísceras abdominales, eleva la presión intraabdominal (IAP) y estabiliza activamente la columna lumbar y la pelvis actuando como un corsé biológico cilíndrico sin producir flexión o rotación espinal primaria.",
+      "entities": [
+        "muscle:transversus-abdominis",
+        "nerve:intercostal",
+        "nerve:subcostal",
+        "nerve:iliohypogastric",
+        "nerve:ilioinguinal",
+        "bone:ribs",
+        "bone:pelvis"
+      ],
+      "rules": [
+        "intra-abdominal-pressure-valsalva-mechanism"
+      ]
+    },
+    {
+      "id": "grays-core-torax-rectus-abdominis-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "rectus-abdominis",
+        "trunk-flexion",
+        "posterior-pelvic-tilt",
+        "rectus-sheath",
+        "abdominal"
+      ],
+      "locator": {
+        "page": 281
+      },
+      "summary": "Músculo rectus abdominis (recto del abdomen): músculo acintado vertical dispuesto en la pared anterior del abdomen. Origen: cresta del pubis, tubérculo del pubis y cara anterior de la sínfisis púbica (p. 281). Inserción: cartílagos costales 5 a 7 y cara anterior del proceso xifoides del esternón (p. 281). Presenta típicamente de 3 a 4 intersecciones tendinosas transversas fijadas a la lámina anterior de la vaina de los rectos. Inervación: ramos anteriores de nervios espinales torácicos T7 a T12 (nervios intercostales inferiores y subcostal) (p. 281). Acción: flexor potente del tronco aproximando el tórax a la pelvis, produce retroversión (inclinación posterior) de la pelvis y comprime las vísceras abdominales.",
+      "entities": [
+        "muscle:rectus-abdominis",
+        "nerve:intercostal",
+        "bone:pubis",
+        "bone:sternum",
+        "bone:ribs"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-core-torax-external-oblique-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "external-oblique",
+        "contralateral-rotation",
+        "lateral-flexion",
+        "abdominal-wall",
+        "inguinal-ligament"
+      ],
+      "locator": {
+        "page": 281
+      },
+      "summary": "Músculo external oblique (oblicuo externo del abdomen): músculo plano más superficial de la pared abdominal anterolateral. Origen: caras externas y bordes inferiores de las costillas 5 a 12 mediante digitaciones musculares (p. 281). Inserción: línea alba mediante aponeurosis anterior, tubérculo del pubis, mitad anterior del labio externo de la cresta ilíaca; el borde libre inferior engrosado de su aponeurosis entre la espina ilíaca anterosuperior y el tubérculo del pubis forma el ligamento inguinal (de Poupart) (p. 281). Inervación: ramos anteriores de los nervios espinales T7 a T12 (p. 281). Acción: flexión lateral homolateral del tronco, rotación del tronco hacia el lado opuesto (contralateral) y flexión anterior bilateral del tronco asistiendo en la espiración forzada.",
+      "entities": [
+        "muscle:external-oblique",
+        "nerve:intercostal",
+        "nerve:subcostal",
+        "bone:ribs",
+        "bone:pelvis"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-core-torax-internal-oblique-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "internal-oblique",
+        "ipsilateral-rotation",
+        "lateral-flexion",
+        "core",
+        "thoracolumbar-fascia"
+      ],
+      "locator": {
+        "page": 282
+      },
+      "summary": "Músculo internal oblique (oblicuo interno del abdomen): músculo plano intermedio de la pared abdominal. Origen: fascia toracolumbar, 2/3 anteriores de la línea intermedia de la cresta ilíaca y 2/3 laterales del ligamento inguinal (p. 282). Inserción: bordes inferiores de los cartílagos costales de las costillas 10 a 12, línea alba mediante su aponeurosis dividida, y cresta del pubis/pecten pubis mediante el tendón conjunto (p. 282). Inervación: ramos anteriores de los nervios espinales T7 a T12 y nervio iliohipogástrico e ilioinguinal (L1) (p. 282). Acción: flexión lateral homolateral del tronco, rotación axial del tronco hacia el mismo lado (homolateral/ipsilateral) y flexión anterior bilateral de la columna.",
+      "entities": [
+        "muscle:internal-oblique",
+        "nerve:intercostal",
+        "nerve:subcostal",
+        "nerve:iliohypogastric",
+        "nerve:ilioinguinal",
+        "bone:pelvis",
+        "bone:ribs"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-core-torax-diaphragm-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "diaphragm",
+        "inspiration",
+        "phrenic-nerve",
+        "hiatus-levels",
+        "central-tendon"
+      ],
+      "locator": {
+        "page": 141
+      },
+      "summary": "Músculo diaphragm (diafragma): tabique musculotendinoso cupuliforme que separa las cavidades torácica y abdominal. Origen triple: porción esternal (cara posterior del proceso xifoides), porción costal (caras internas de los cartílagos costales y costillas 7 a 12) y porción lumbar (ligamentos arqueados medial y lateral y vértebras L1 a L3 mediante pilares derecho e izquierdo) (p. 141). Inserción: centro tendinoso trifoliado (centro frénico) (p. 141). Inervación: phrenic nerve (raíces C3, C4, C5: \"C3, 4, 5 keeps the diaphragm alive\") (p. 142). Acción: principal motor de la inspiración; su contracción desciende la cúpula aumentando el volumen vertical del tórax y elevando la IAP. Orificios principales y niveles: hiato de la vena cava inferior a nivel T8 (en centro tendinoso), hiato esofágico a nivel T10 (en pilar derecho) y hiato aórtico a nivel T12 (posterior al ligamento arqueado medio).",
+      "entities": [
+        "muscle:diaphragm",
+        "nerve:phrenic",
+        "bone:sternum",
+        "bone:ribs",
+        "bone:lumbar-vertebrae"
+      ],
+      "rules": [
+        "diaphragmatic-excursion-norms",
+        "intra-abdominal-pressure-valsalva-mechanism"
+      ]
+    },
+    {
+      "id": "grays-core-torax-psoas-major-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "psoas-major",
+        "hip-flexion",
+        "lumbar-spine",
+        "lumbar-plexus",
+        "posterior-abdominal-wall"
+      ],
+      "locator": {
+        "page": 384
+      },
+      "summary": "Músculo psoas major: músculo fusiforme voluminoso de la pared abdominal posterior. Origen: cuerpos vertebrales de T12 a L5, procesos transversos de L1 a L5 y discos intervertebrales intermedios (p. 384). Inserción: trocánter menor del fémur mediante tendón común fusionado con el músculo iliacus (músculo iliopsoas) (p. 384). Inervación: ramos anteriores del plexo lumbar (L1, L2, L3) (p. 384). Acción: potente flexor primario del muslo en la articulación coxofemoral; flexor y estabilizador postural de la columna lumbar en bipedestación y sedestación; sinergista en la marcha y elevación de la pierna.",
+      "entities": [
+        "muscle:psoas-major",
+        "nerve:lumbar-plexus",
+        "bone:lumbar-vertebrae",
+        "bone:femur",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-core-torax-rectus-sheath-anatomy",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "rectus-sheath",
+        "arcuate-line",
+        "aponeurosis",
+        "linea-alba",
+        "abdominal-wall"
+      ],
+      "locator": {
+        "page": 284
+      },
+      "summary": "Rectus sheath (vaina de los rectos): estuche aponeurótico fibroso que envuelve al rectus abdominis y músculo pyramidalis, formado por la decusación de las aponeurosis de los tres músculos abdominales planos. Disposición anatómica con respecto a la línea arqueada de Douglas: 1) Por encima de la línea arqueada (2/3 superiores): la aponeurosis del internal oblique se bifurca; la lámina anterior está formada por external oblique + hoja anterior de internal oblique; la lámina posterior está formada por hoja posterior de internal oblique + transversus abdominis + fascia transversalis. 2) Por debajo de la línea arqueada (tercio inferior, a ~1/3 de distancia entre ombligo y pubis): las tres aponeurosis pasan enteramente por delante del recto abdominal; por detrás solo queda la fascia transversalis y peritoneo parietal, permitiendo el ingreso directo de los vasos epigástricos inferiores.",
+      "entities": [
+        "anatomy:rectus-sheath",
+        "muscle:rectus-abdominis",
+        "muscle:external-oblique",
+        "muscle:internal-oblique",
+        "muscle:transversus-abdominis",
+        "artery:epigastric-inferior"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-core-torax-inguinal-canal-anatomy",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "inguinal-canal",
+        "spermatic-cord",
+        "round-ligament",
+        "ilioinguinal-nerve",
+        "hernia"
+      ],
+      "locator": {
+        "page": 286
+      },
+      "summary": "Inguinal canal (canal inguinal): conducto oblicuo intermuscular de ~4 cm de longitud orientado inferomedialmente por encima de la mitad medial del ligamento inguinal. Límites: pared anterior formada por aponeurosis del external oblique (reforzada lateralmente por internal oblique); pared posterior formada por fascia transversalis (reforzada medialmente por el tendón conjunto); techo formado por las fibras arqueadas inferiores del internal oblique y transversus abdominis; suelo formado por el ligamento inguinal (reforzado medialmente por el ligamento lacunar de Gimbernat). Contenido: cordón espermático en hombres, ligamento redondo del útero en mujeres, y el nervio ilioinguinal (L1).",
+      "entities": [
+        "anatomy:inguinal-canal",
+        "nerve:ilioinguinal",
+        "ligament:inguinal-ligament",
+        "muscle:external-oblique",
+        "muscle:internal-oblique",
+        "muscle:transversus-abdominis"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-core-torax-intra-abdominal-pressure-valsalva",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "intra-abdominal-pressure",
+        "valsalva-mechanism",
+        "spinal-unloading",
+        "bracing",
+        "lifting"
+      ],
+      "locator": {
+        "page": 258
+      },
+      "summary": "intra-abdominal-pressure-valsalva-mechanism: La co-contracción sinérgica coordinada del diafragma, transversus abdominis, musculatura del piso pélvico y multifidus lumbares (mecanismo de Valsalva / bracing abdominal) incrementa la Presión Intraabdominal (intraAbdominalPressureKPa). Valores cuantitativos: en reposo o respiración quieta oscila entre 0.5 y 1.5 kPa (4 a 11 mmHg); durante esfuerzos de carga máxima o levantamientos pesados (squats, deadlifts) supera 15 a 25 kPa (100 a 180 mmHg). Este incremento de presión hidráulica presuriza la cavidad abdominopélvica convirtiéndola en un cilindro rígido que reduce las cargas de compresión y cizallamiento sobre los discos intervertebrales lumbares en un 20% a 40%.",
+      "entities": [
+        "muscle:diaphragm",
+        "muscle:transversus-abdominis",
+        "muscle:multifidus",
+        "joint:lumbar-spine",
+        "anatomy:intervertebral-disc"
+      ],
+      "rules": [
+        "intra-abdominal-pressure-valsalva-mechanism"
+      ]
+    },
+    {
+      "id": "grays-core-torax-diaphragmatic-excursion-norms",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "diaphragmatic-excursion",
+        "respiratory-mechanics",
+        "vital-capacity",
+        "tidal-volume",
+        "diaphragm"
+      ],
+      "locator": {
+        "page": 141
+      },
+      "summary": "diaphragmatic-excursion-norms: Magnitud del desplazamiento vertical de la cúpula diafragmática durante las fases respiratorias (diaphragmExcursionCM). En respiración quieta o corriente en reposo, el descenso de la cúpula diafragmática oscila entre 1.5 cm y 2.0 cm. En inspiración y espiración profundas forzadas (capacidad vital máxima), la excursión vertical total del diafragma alcanza entre 6.0 cm y 10.0 cm, traccionando las costillas inferiores hacia afuera y arriba (movimiento en asa de cubo y brazo de bomba).",
+      "entities": [
+        "muscle:diaphragm",
+        "nerve:phrenic"
+      ],
+      "rules": [
+        "diaphragmatic-excursion-norms"
+      ]
+    },
+    {
+      "id": "grays-core-torax-abdominal-bracing-vs-hollowing",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "abdominal-bracing",
+        "abdominal-hollowing",
+        "core-stability",
+        "lifting-cues",
+        "biomechanics"
+      ],
+      "locator": {
+        "page": 280
+      },
+      "summary": "Biomecánica y técnica de activación del Core (Abdominal Bracing vs. Abdominal Hollowing): 1) Abdominal Bracing (co-activación tridimensional global): co-contracción isométrica simultánea de rectus abdominis, external oblique, internal oblique y transversus abdominis expandiendo hacia afuera y fijando la pared abdominal lateral (\"como prepararse para recibir un impacto en el abdomen\"). Maximiza la estabilidad torsional, la IAP y la resistencia al cizallamiento espinal bajo cargas axiales pesadas (squats, deadlifts). 2) Abdominal Hollowing (vacío/maniobra de retracción): retracción aislada del ombligo hacia la columna vertebral para activación selectiva del transversus abdominis; aplicable en etapas tempranas de rehabilitación motora, pero insuficiente e inestable como estrategia de soporte en cargas axiales elevadas.",
+      "entities": [
+        "clinical:abdominal-bracing-vs-hollowing",
+        "muscle:rectus-abdominis",
+        "muscle:external-oblique",
+        "muscle:internal-oblique",
+        "muscle:transversus-abdominis"
+      ],
+      "rules": [
+        "intra-abdominal-pressure-valsalva-mechanism"
+      ]
+    },
+    {
+      "id": "grays-core-torax-diastasis-recti-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "diastasis-recti",
+        "linea-alba",
+        "rectus-abdominis",
+        "core-rehab",
+        "pregnancy"
+      ],
+      "locator": {
+        "page": 281
+      },
+      "summary": "Diástasis de los Rectos (Diastasis Recti): Etiología: separación y distensión no fisiológica de los dos vientres musculares del rectus abdominis en la línea media por estiramiento, adelgazamiento y laxitud de la línea alba (>2.0 cm de separación inter-rectos medida por ecografía o palpación supraumbilical/infraumbilical), frecuentemente secundaria a aumento de presión intraabdominal sostenida durante el embarazo o sobrepeso. Manejo y Prehab: contraindicar ejercicios de flexión pura con elevación de presiones vectoriales anteriores (crunches o sit-ups clásicos, que agravan la protrusión de la brecha fascial); priorizar la reactivación isométrica del transversus abdominis, oblicuos y musculatura del piso pélvico combinada con control de inclinación pélvica.",
+      "entities": [
+        "clinical:diastasis-recti",
+        "muscle:rectus-abdominis",
+        "muscle:transversus-abdominis",
+        "anatomy:rectus-sheath"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-core-torax-inguinal-hernia-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "inguinal-hernia",
+        "direct-hernia",
+        "indirect-hernia",
+        "hesselbach-triangle",
+        "deep-ring"
+      ],
+      "locator": {
+        "page": 286
+      },
+      "summary": "Hernias Inguinales (Indirecta vs. Directa): 1) Hernia Inguinal Indirecta: protrusión del saco herniario que entra al canal inguinal lateral a los vasos epigástricos inferiores a través del anillo inguinal profundo (debido a la persistencia o cierre incompleto del proceso vaginal peritoneal); recorre todo el canal inguinal hacia el escroto o labio mayor dentro de las cubiertas del cordón espermático (es la hernia más frecuente, 75%). 2) Hernia Inguinal Directa: protrusión que empuja directamente hacia adelante a través de la pared posterior del canal inguinal medial a los vasos epigástricos inferiores dentro del trígono inguinal (triángulo de Hesselbach, delimitado por vasos epigástricos inferiores, borde lateral del recto del abdomen y ligamento inguinal) debido a debilidad muscular adquirida de la fascia transversalis y tendón conjunto.\n\n<!-- stats: 13 chunks, 16 entidades cubiertas -->",
+      "entities": [
+        "clinical:inguinal-hernia",
+        "anatomy:inguinal-canal",
+        "artery:epigastric-inferior",
+        "muscle:transversus-abdominis",
+        "muscle:internal-oblique"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-glenohumeral-joint",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "shoulder",
+        "glenohumeral",
+        "joint",
+        "diarthrosis",
+        "labrum"
+      ],
+      "locator": {
+        "page": 697
+      },
+      "summary": "Glenohumeral joint (GH) es una diartrosis esférica sinovial triaxial caracterizada por una cápsula articular laxa y gran movilidad en tres planos. La fosa glenoidea de la escápula es poco profunda y cubre únicamente un 25% a 30% de la superficie de la cabeza humeral (glenoidCoverageRatio: 0.25-0.30). El rodete glenoideo fibrocartilaginoso (glenoid labrum) profundiza la fosa glenoidea en un 50%, aumentando la congruencia y la estabilidad estática. La estabilidad dinámica del complejo depende en un 70% de la acción coaptadora centrípeta del manguito rotador.",
+      "entities": [
+        "joint:glenohumeral",
+        "anatomy:glenoid-labrum",
+        "bone:humerus",
+        "bone:scapula"
+      ],
+      "rules": [
+        "glenohumeral-stability-vacuum-force"
+      ]
+    },
+    {
+      "id": "grays-hombro-acromioclavicular-joint",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "acromioclavicular",
+        "joint",
+        "clavicle",
+        "scapula",
+        "ligaments"
+      ],
+      "locator": {
+        "page": 697
+      },
+      "summary": "Acromioclavicular joint (AC) es una diartrosis plana sinovial situada entre el extremo lateral de la clavícula y el acromion de la escápula. Posee un disco articular fibrocartilaginoso intraarticular interpuesto. Su estabilidad mecánica principal no depende de la débil cápsula articular ni del ligamento acromioclavicular, sino del potente ligamento coracoclavicular extracapsular, dividido en dos fascículos anatómicos: el ligamento conoide (medial y posterior) y el ligamento trapezoide (lateral y anterior).",
+      "entities": [
+        "joint:acromioclavicular",
+        "bone:clavicle",
+        "bone:scapula",
+        "ligament:coracoclavicular",
+        "ligament:acromioclavicular"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-sternoclavicular-joint",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "sternoclavicular",
+        "joint",
+        "axial-skeleton",
+        "clavicle",
+        "sternum"
+      ],
+      "locator": {
+        "page": 697
+      },
+      "summary": "Sternoclavicular joint (SC) es una diartrosis sinovial en silla de montar (sellar) con funcionalidad multiaxial entre el extremo esternal de la clavícula, el manubrio del esternón y el primer cartílago costal. Representa el único punto de unión ósea directa entre el miembro superior y el esqueleto axial. Contiene un fibrocartílago interarticular discoidal que previene el desplazamiento superomedial de la clavícula y disipa las fuerzas compresivas axiales transmitidas desde el brazo.",
+      "entities": [
+        "joint:sternoclavicular",
+        "bone:clavicle",
+        "bone:sternum",
+        "bone:costal-cartilage"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-scapulothoracic-mechanism",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "joint",
+      "tags": [
+        "scapulothoracic",
+        "mechanics",
+        "scapula",
+        "serratus-anterior",
+        "subscapularis"
+      ],
+      "locator": {
+        "page": 698
+      },
+      "summary": "Scapulothoracic mechanism es una seudoarticulación fisiológica y deslizante formada por planos de deslizamiento fascia-músculo entre la cara anterior de la escápula (cubierta por el músculo subscapularis) y la pared torácica posterolateral (cubierta por el músculo serratus anterior y la fascia correspondiente). Permite movimientos esenciales de elevación, depresión, protracción, retracción, rotación superior y rotación inferior de la escápula necesarios para la movilidad global del miembro superior.",
+      "entities": [
+        "joint:scapulothoracic-mechanism",
+        "muscle:serratus-anterior",
+        "muscle:subscapularis",
+        "bone:scapula",
+        "bone:thorax"
+      ],
+      "rules": [
+        "shoulder-scapulohumeral-rhythm-ratio"
+      ]
+    },
+    {
+      "id": "grays-hombro-brachial-plexus-organization",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "nerve",
+      "tags": [
+        "brachial-plexus",
+        "roots",
+        "trunks",
+        "cords",
+        "nerves"
+      ],
+      "locator": {
+        "page": 748
+      },
+      "summary": "Brachial plexus proporciona inervación motora y sensitiva al hombro y extremidad superior. Estructura anatómica organizada secuencialmente: Raíces anteriores C5, C6, C7, C8, T1 → Tres troncos (Superior: C5-C6; Medio: C7; Inferior: C8-T1) → Seis divisiones (3 anteriores, 3 posteriores) → Tres fascículos/cordones con respecto a arteria axilar (Lateral: C5-C7; Posterior: C5-T1; Medial: C8-T1). Ramos terminales derivados: axillary (C5-C6), radial (C5-T1), musculocutaneous (C5-C7), median (C5-T1), ulnar (C8-T1), suprascapular (C5-C6) y long thoracic (C5-C7).",
+      "entities": [
+        "nerve:brachial-plexus",
+        "nerve:axillary",
+        "nerve:suprascapular",
+        "nerve:musculocutaneous",
+        "nerve:radial",
+        "nerve:median",
+        "nerve:ulnar",
+        "nerve:long-thoracic"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-subacromial-space",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "subacromial-space",
+        "arch",
+        "impingement",
+        "bursa",
+        "supraspinatus"
+      ],
+      "locator": {
+        "page": 717
+      },
+      "summary": "Subacromial space es el túnel osteofibroso delimitado superiormente por el arco coracoacromial (acromion, proceso coracoides y ligamento coracoacromial) e inferiormente por la cabeza humeral. Su altura fisiológica normal oscila entre 6.0 mm y 11.0 mm (subacromialClearanceMM). Contiene el tendón del supraspinatus, la bursa subacromial/subdeltoidea y el tendón de la cabeza larga del bíceps braquial. Es la zona primaria de fricción y pinzamiento subacromial en elevación del brazo con rotación medial.",
+      "entities": [
+        "anatomy:subacromial-space",
+        "ligament:coracoacromial",
+        "tendon:supraspinatus",
+        "bursa:subacromial",
+        "tendon:biceps-long-head",
+        "bone:humerus",
+        "bone:acromion"
+      ],
+      "rules": [
+        "subacromial-space-clearance-limit"
+      ]
+    },
+    {
+      "id": "grays-hombro-axillary-neurovascular-spaces",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "anatomy",
+      "tags": [
+        "quadrangular-space",
+        "triangular-space",
+        "triangular-interval",
+        "axilla",
+        "nerves"
+      ],
+      "locator": {
+        "page": 732
+      },
+      "summary": "Espacios topográficos neurovasculares de la región escapular posterior y axila: 1) Quadrangular space: delimitado por teres minor/subscapularis superiormente, teres major inferiormente, cabeza larga del tríceps medialmente y cuello quirúrgico del húmero lateralmente; transmite axillary nerve y posterior circumflex humeral artery/vein. 2) Triangular space: delimitado por teres minor superiormente, teres major inferiormente y cabeza larga del tríceps lateralmente; transmite circumflex scapular artery. 3) Triangular interval: delimitado por teres major superiormente, cabeza larga del tríceps medialmente y diáfisis humeral lateralmente; transmite radial nerve y profunda brachii artery.",
+      "entities": [
+        "anatomy:quadrangular-space",
+        "anatomy:triangular-space",
+        "anatomy:triangular-interval",
+        "nerve:axillary",
+        "nerve:radial",
+        "artery:circumflex-humeral-posterior",
+        "artery:circumflex-scapular",
+        "artery:profunda-brachii"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-scapulohumeral-rhythm-ratio",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "scapulohumeral-rhythm",
+        "biomechanics",
+        "range-of-motion",
+        "abduction",
+        "ratio"
+      ],
+      "locator": {
+        "page": 698
+      },
+      "summary": "shoulder-scapulohumeral-rhythm-ratio: Durante la elevación completa del brazo en abducción o flexión hasta 180°, por cada 3° de movimiento global, 2° corresponden a la articulación glenohumeral y 1° a rotación superior de la escápula en el mecanismo escapulotorácico (ratioGHtoST = 2.0). Desglose angular: articulación GH aporta ~120° y articulación escapulotorácica aporta ~60°. En la fase inicial (\"setting phase\", primeros 30° de abducción o 60° de flexión), el movimiento es predominantemente glenohumeral.",
+      "entities": [
+        "joint:glenohumeral",
+        "joint:scapulothoracic-mechanism",
+        "bone:scapula",
+        "bone:humerus"
+      ],
+      "rules": [
+        "shoulder-scapulohumeral-rhythm-ratio"
+      ]
+    },
+    {
+      "id": "grays-hombro-subacromial-space-clearance-limit",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "subacromial-clearance",
+        "impingement",
+        "internal-rotation",
+        "mechanics",
+        "safety"
+      ],
+      "locator": {
+        "page": 717
+      },
+      "summary": "subacromial-space-clearance-limit: La abducción humeral en rotación medial reduce el espacio subacromial a menos de 6.0 mm (rango normal: 6.0 mm a 11.0 mm), provocando compresión del tendón del supraspinatus y bursa contra el ligamento coracoacromial y acromion. La abducción combinada con rotación lateral humeral desplaza el tubérculo mayor posteriormente, manteniendo el espacio abierto y despejando el arco en elevaciones superiores a 90°.",
+      "entities": [
+        "anatomy:subacromial-space",
+        "tendon:supraspinatus",
+        "ligament:coracoacromial",
+        "bone:humerus"
+      ],
+      "rules": [
+        "subacromial-space-clearance-limit"
+      ]
+    },
+    {
+      "id": "grays-hombro-glenohumeral-stability-rule",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "glenohumeral-stability",
+        "joint-stability",
+        "vacuum-force",
+        "labrum",
+        "compression"
+      ],
+      "locator": {
+        "page": 714
+      },
+      "summary": "glenohumeral-stability-vacuum-force: La fosa glenoidea solo cubre el 25% a 30% de la cabeza humeral (glenoidCoverageRatio: 0.25-0.30). El labrum glenoideo aporta un 50% adicional de profundidad a la fosa. La estabilidad dinámica del complejo glenohumeral depende en un 70% de la coaptación activa ejercida por los cuatro músculos del manguito rotador, que generan una fuerza compresiva centrípeta continua sobre la cabeza del húmero durante movimientos dinámicos y cargas de alta velocidad.",
+      "entities": [
+        "joint:glenohumeral",
+        "anatomy:glenoid-labrum",
+        "muscle:supraspinatus",
+        "muscle:infraspinatus",
+        "muscle:teres-minor",
+        "muscle:subscapularis"
+      ],
+      "rules": [
+        "glenohumeral-stability-vacuum-force"
+      ]
+    },
+    {
+      "id": "grays-hombro-supraspinatus-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "supraspinatus",
+        "rotator-cuff",
+        "abduction",
+        "suprascapular-nerve",
+        "shoulder"
+      ],
+      "locator": {
+        "page": 730
+      },
+      "summary": "Músculo supraspinatus. Origen: 2/3 mediales de la fosa supraespinosa de la escápula y fascia profunda supraespinosa (p. 730). Inserción: carilla superior del tubérculo mayor (troquiter) del húmero (p. 730). Inervación: suprascapular nerve (C5, C6) procedente del tronco superior del plexo braquial (pp. 730, 752). Acción: inicia los primeros 0° a 15° de abducción del brazo en la articulación GH; coapta y deprime la cabeza humeral para contrarrestar la tracción ascendente del deltoides (p. 730). Vulnerabilidad: hipovascularidad (\"zona crítica\" de Codman) cerca de su inserción tendinosa; susceptible a pinzamiento subacromial y desgarros tendinosos en abducción con rotación interna.",
+      "entities": [
+        "muscle:supraspinatus",
+        "nerve:suprascapular",
+        "bone:scapula",
+        "bone:humerus",
+        "joint:glenohumeral"
+      ],
+      "rules": [
+        "subacromial-space-clearance-limit"
+      ]
+    },
+    {
+      "id": "grays-hombro-infraspinatus-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "infraspinatus",
+        "rotator-cuff",
+        "external-rotation",
+        "suprascapular-nerve",
+        "stability"
+      ],
+      "locator": {
+        "page": 731
+      },
+      "summary": "Músculo infraspinatus. Origen: 2/3 mediales de la fosa infraespinosa de la escápula y fascia profunda (p. 731). Inserción: carilla media del tubérculo mayor del húmero (p. 731). Inervación: suprascapular nerve (C5, C6) (p. 731). Acción: rotador lateral (externo) principal del brazo en la articulación GH (hasta 80°-90° de ROM); estabilizador posterior dinámico de la cabeza humeral dentro de la cavidad glenoidea (p. 731). Vulnerabilidad: atrofia y debilidad aislada en neuropatías por compresión o atrapamiento del suprascapular nerve en la escotadura espinoglenoidea.",
+      "entities": [
+        "muscle:infraspinatus",
+        "nerve:suprascapular",
+        "bone:scapula",
+        "bone:humerus",
+        "joint:glenohumeral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-teres-minor-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "teres-minor",
+        "rotator-cuff",
+        "axillary-nerve",
+        "external-rotation",
+        "quadrangular-space"
+      ],
+      "locator": {
+        "page": 731
+      },
+      "summary": "Músculo teres minor. Origen: 2/3 superiores del borde lateral en la cara posterior de la escápula (p. 731). Inserción: carilla inferior del tubérculo mayor del húmero (p. 731). Inervación: axillary nerve (C5, C6), ramo posterior (pp. 731, 759). Acción: rotación lateral (externa) del brazo en la articulación GH y aducción débil; actúa como estabilizador dinámico posterior de la cabeza humeral (p. 731). Relación anatómica: forma el límite superior del quadrangular space y del triangular space; su denervación puede ocurrir por lesiones del axillary nerve en fracturas de cuello quirúrgico humeral.",
+      "entities": [
+        "muscle:teres-minor",
+        "nerve:axillary",
+        "bone:scapula",
+        "bone:humerus",
+        "joint:glenohumeral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-subscapularis-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "subscapularis",
+        "rotator-cuff",
+        "internal-rotation",
+        "subscapular-nerves",
+        "anterior-stability"
+      ],
+      "locator": {
+        "page": 735
+      },
+      "summary": "Músculo subscapularis. Origen: fosa subescapular en la cara anterior (costal) de la escápula (p. 735). Inserción: tubérculo menor (troquín) del húmero (p. 735). Inervación: superior y inferior subscapular nerves (C5, C6, C7) derivados del cordón posterior del plexo braquial (pp. 735, 759). Acción: potente rotador medial (interno) del brazo en la articulación GH; actúa como el coaptador y estabilizador anterior primario de la cabeza humeral frente a luxaciones anteriores (p. 735).",
+      "entities": [
+        "muscle:subscapularis",
+        "nerve:subscapular-superior",
+        "nerve:subscapular-inferior",
+        "bone:scapula",
+        "bone:humerus",
+        "joint:glenohumeral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-deltoid-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "deltoid",
+        "abduction",
+        "flexion",
+        "extension",
+        "axillary-nerve"
+      ],
+      "locator": {
+        "page": 729
+      },
+      "summary": "Músculo deltoid. Origen trifásico: porción anterior/clavicular en el tercio lateral de la clavícula; porción media/acromial en el borde lateral del acromion; porción posterior/espinal en el borde inferior de la espina escapular (p. 729). Inserción: tuberosidad deltoidea en la cara lateral del diáfisis humeral (p. 729). Inervación: axillary nerve (C5, C6) (p. 729). Acción: porción media es abductor principal del brazo de 15° a 90°; porción clavicular produce flexión y rotación medial; porción espinal produce extensión y rotación lateral del brazo (p. 729).",
+      "entities": [
+        "muscle:deltoid",
+        "nerve:axillary",
+        "bone:clavicle",
+        "bone:scapula",
+        "bone:humerus",
+        "joint:glenohumeral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-pectoralis-major-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "pectoralis-major",
+        "adduction",
+        "internal-rotation",
+        "pectoral-nerves",
+        "chest"
+      ],
+      "locator": {
+        "page": 736
+      },
+      "summary": "Músculo pectoralis major. Origen: cabeza clavicular en la mitad medial de la cara anterior de la clavícula; cabeza esternocostal en la cara anterior del esternón y cartílagos costales 1 a 6 (p. 736). Inserción: cresta del tubérculo mayor (labio lateral del surco intertubercular) del húmero (p. 736). Inervación: lateral pectoral nerve (C5, C6, C7) y medial pectoral nerve (C8, T1) (pp. 736, 756). Acción: potente aductor y rotador medial del brazo en la articulación GH; la cabeza clavicular produce flexión del brazo desde extensión (p. 736).",
+      "entities": [
+        "muscle:pectoralis-major",
+        "nerve:pectoral-lateral",
+        "nerve:pectoral-medial",
+        "bone:clavicle",
+        "bone:sternum",
+        "bone:humerus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-latissimus-dorsi-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "latissimus-dorsi",
+        "extension",
+        "adduction",
+        "thoracodorsal-nerve",
+        "back"
+      ],
+      "locator": {
+        "page": 722
+      },
+      "summary": "Músculo latissimus dorsi. Origen: procesos espinosos de T7 a L5, fascia toracolumbar, cresta ilíaca posterior y costillas inferiores 9 a 12 (p. 722). Inserción: suelo del surco intertubercular (corredera bicipital) del húmero (p. 722). Inervación: thoracodorsal nerve (C6, C7, C8) originado del cordón posterior del plexo braquial (pp. 722, 759). Acción: extensión, aducción y rotación medial del húmero en la articulación GH (\"músculo del nadador/trepador\"); deprime la cintura escapular (p. 722).",
+      "entities": [
+        "muscle:latissimus-dorsi",
+        "nerve:thoracodorsal",
+        "bone:vertebrae",
+        "bone:pelvis",
+        "bone:humerus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "grays-hombro-serratus-anterior-muscle",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "muscle",
+      "tags": [
+        "serratus-anterior",
+        "protraction",
+        "upward-rotation",
+        "long-thoracic-nerve",
+        "winged-scapula"
+      ],
+      "locator": {
+        "page": 737
+      },
+      "summary": "Músculo serratus anterior. Origen: caras laterales externas de las costillas 1 a 8 o 9 (p. 737). Inserción: cara costal anterior del borde medial de la escápula desde el ángulo superior al ángulo inferior (p. 737). Inervación: long thoracic nerve (C5, C6, C7) que desciende superficialmente por la pared torácica lateral (pp. 737, 751). Acción: protracción de la escápula, fijación de la escápula contra el tórax y rotación superior de la escápula necesaria para permitir la abducción humeral por encima de 90° (p. 737). Vulnerabilidad: su denervación produce \"escápula alada\" (winged scapula) (p. 739).",
+      "entities": [
+        "muscle:serratus-anterior",
+        "nerve:long-thoracic",
+        "bone:ribs",
+        "bone:scapula"
+      ],
+      "rules": [
+        "shoulder-scapulohumeral-rhythm-ratio"
+      ]
+    },
+    {
+      "id": "grays-hombro-overhead-press-biomechanics",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "overhead-press",
+        "scapular-plane",
+        "mechanics",
+        "cues",
+        "impingement"
+      ],
+      "locator": {
+        "page": 698
+      },
+      "summary": "Biomecánica y técnica de Press Militar / Press Vertical: Cues técnicos: 1) Mantener codos ~30° anteriores al plano coronal (plano escapular o \"scaption\"). 2) Activar serratus anterior al final del empuje para rotación superior escapular completa en el bloqueo. 3) Rotación lateral activa del húmero para liberar el tubérculo mayor bajo el acromion. Fallos comunes: abducción frontal estricta a 90° con agarre excesivamente ancho (comprime el supraspinatus), hiperextensión lumbar compensatoria por falta de flexión pura GH o rigidez del pectoralis major, y encogimiento prematuro por trapecio superior sin rotación superior escapular.",
+      "entities": [
+        "clinical:overhead-press-biomechanics",
+        "muscle:serratus-anterior",
+        "muscle:supraspinatus",
+        "joint:glenohumeral",
+        "joint:scapulothoracic-mechanism"
+      ],
+      "rules": [
+        "shoulder-scapulohumeral-rhythm-ratio",
+        "subacromial-space-clearance-limit"
+      ]
+    },
+    {
+      "id": "grays-hombro-lateral-raises-biomechanics",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "lateral-raises",
+        "deltoid",
+        "scaption",
+        "internal-rotation",
+        "mechanics"
+      ],
+      "locator": {
+        "page": 717
+      },
+      "summary": "Biomecánica y técnica de Elevaciones Laterales (Lateral Raises): Cues técnicos: 1) Orientar el pulgar neutro o levemente superior; no realizar el gesto de \"vaciar una jarra\" con pulgar hacia abajo (rotación medial). 2) Realizar la elevación dentro del plano escapular (30° anterior al plano coronal). Fallos comunes: elevación lateral en rotación medial pura que reduce el espacio subacromial a <6 mm provocando pinzamiento del supraspinatus y de la bursa subacromial a 90° de abducción; empleo de balanceo o inercia del tronco que reduce la tensión mecánica sobre el deltoides medio.",
+      "entities": [
+        "clinical:lateral-raises-biomechanics",
+        "muscle:deltoid",
+        "muscle:supraspinatus",
+        "anatomy:subacromial-space"
+      ],
+      "rules": [
+        "subacromial-space-clearance-limit"
+      ]
+    },
+    {
+      "id": "grays-hombro-subacromial-impingement-clinical",
+      "sourceId": "grays-anatomy-students-4ed",
+      "topic": "clinical",
+      "tags": [
+        "subacromial-impingement",
+        "rotator-cuff",
+        "prehab",
+        "rehabilitation",
+        "red-flags"
+      ],
+      "locator": {
+        "page": 717
+      },
+      "summary": "Síndrome de Pinzamiento Subacromial (Subacromial Impingement): Etiología: compresión mecánica del tendón del supraspinatus, bursa subacromial o cabeza larga del bíceps entre el tubérculo mayor humeral y el arco coracoacromial (acromion tipos II/III de Bigliani o espolón) durante flexión/abducción. Prehab/Rehab: 1) Fortalecimiento de rotadores externos (infraspinatus y teres minor) para deprimir y centrar la cabeza humeral. 2) Fortalecimiento de serratus anterior para restaurar rotación superior escapular. 3) Estiramiento de pectoralis minor para revertir tilt anterior escapular. Red Flags: incapacidad aguda para sostener abducción (\"drop arm test\" positivo, ruptura masiva del manguito) o dolor nocturno severo sin traumatismo.\n\n<!-- stats: 21 chunks, 30 entidades cubiertas -->",
+      "entities": [
+        "clinical:subacromial-impingement",
+        "muscle:supraspinatus",
+        "muscle:infraspinatus",
+        "muscle:teres-minor",
+        "muscle:serratus-anterior",
+        "bursa:subacromial"
+      ],
+      "rules": [
+        "subacromial-space-clearance-limit",
+        "glenohumeral-stability-vacuum-force"
+      ]
+    },
+    {
+      "id": "njs6-hip-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "cadera",
+        "acetabulo",
+        "labrum",
+        "enartrosis"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint"
+      },
+      "summary": "Cadera: enartrosis (cabeza femoral ~2/3 de esfera en el acetábulo formado por ilion, isquion y pubis — el pubis aporta 1/5). La superficie lunada (cartílago en herradura) distribuye el estrés de contacto; la apertura acetabular mira 50° hacia abajo y está antevertida ~20° (algo mayor en mujeres). El labrum acetabular (fibrocartílago en cuña, análogo al menisco de rodilla) sella la articulación, aumenta profundidad y estabilidad y resiste traslación de la cabeza; el ligamento transverso acetabular completa el anillo por debajo. Displasia acetabular (acetábulo somero) reduce cobertura de la cabeza → inestabilidad y sobrecarga del reborde superior; coxa profunda/protrusio son coberturas excesivas. Congruencia máxima en flexión + abducción + rotación lateral; la congruencia es mayor con carga que sin ella.",
+      "entities": [
+        "joint:hip",
+        "bone:acetabulum",
+        "bone:femur",
+        "ligament:labrum-hip",
+        "ligament:transverse-acetabular"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-femur",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "cadera",
+        "femur",
+        "angulo-inclinacion",
+        "anteversion",
+        "coxa"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint — Structure of the Femur"
+      },
+      "summary": "Angulaciones del fémur proximal: ángulo de inclinación cuello-diáfisis ~125° (rango normal 110-144°). Coxa valga (mayor ángulo) acerca la línea de carga al eje diafisario y REDUCE el momento de flexión del cuello (más estrés articular por menos superficie de contacto); coxa vara (menor ángulo) hunde más la cabeza en el acetábulo (más estabilidad) pero aumenta el brazo de palanca del cuello. Ángulo de torsión: anteversión femoral >15-20° (anteversión patológica) → el sujeto rota medialmente el fémur para centrar la cabeza: rotadores mediales acortados, rotación lateral limitada, y rodillas/pies que miran hacia dentro; retroversión (<15-20°): rotación medial limitada, y se asocia a desgarros labrales sintomáticos. Anteversión y coxa valga suelen coexistir (p. ej., displasia).",
+      "entities": [
+        "bone:femur"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-capsula",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "cadera",
+        "capsula",
+        "iliofemoral",
+        "pubofemoral",
+        "ischiofemoral",
+        "ligamentum-teres"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint — Capsule and Ligaments"
+      },
+      "summary": "A diferencia del hombro, la cápsula de cadera es un contribuyente sustancial a la estabilidad: estructura fibrosa densa con fibras longitudinales y oblicuas y tres engrosamientos capsuloligamentosos — iliofemoral (en Y, el más fuerte, limita extensión y rotación), pubofemoral (limita extensión y abducción) e ischiofemoral (limita rotación medial y extensión). Juntos resisten la distracción de la cabeza fuera del acetábulo; el efecto neto es que la EXTENSIÓN de cadera tensa la cápsula (posición de cierre). El ligamento redondo (ligamentum teres) es intraarticular pero extrasinovial, del escotadura acetabular a la fóvea; su papel mecánico es limitado (más relevante como portador vascular en el niño).",
+      "entities": [
+        "ligament:iliofemoral",
+        "ligament:pubofemoral",
+        "ligament:ischiofemoral",
+        "ligament:teres"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-musculos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "cadera",
+        "flexores",
+        "extensores",
+        "abductores",
+        "gluteos",
+        "hamstrings"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint — Muscle Function"
+      },
+      "summary": "Flexores primarios: iliopsoas (con recto femoral, sartorio y TFL); secundarios pectíneo, aductores y grácil (según posición). Extensores: glúteo mayor (monoarticular) + isquiotibiales biarticulares (bíceps femoral largo, semitendinoso, semimembranoso), asistidos por fibras posteriores de glúteo medio/aductor mayor. Abductores: glúteo medio y menor — el \"manguito rotador de la cadera\" (medio ~ supraespinoso, menor ~ subescapular); abducen el fémur en cadena abierta y, más importante, estabilizan la pelvis en apoyo unipodal. Rotadores laterales: seis cortos (obturador int/ext, géminos sup/inf, cuadrado femoral, piramidal). NO hay músculos con función PRIMARIA de rotación medial: los rotadores mediales más constantes son las porciones anteriores de glúteo medio/medio y el TFL.",
+      "entities": [
+        "muscle:iliopsoas",
+        "muscle:gluteus-maximus",
+        "muscle:gluteus-medius",
+        "muscle:gluteus-minimus",
+        "muscle:hamstrings",
+        "muscle:tfl"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-fuerzas",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "cadera",
+        "apoyo-unipodal",
+        "fuerza-articular",
+        "trendelenburg",
+        "baston"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Hip Joint Forces and Muscle Function in Stance"
+      },
+      "summary": "Fuerzas en bipedestación: en apoyo bipedal la línea de gravedad cae justo por detrás del eje flexo-extensor de cadera → momento extensor externo controlado por tensión pasiva capsular (con algo de iliopsoas intermitente). En APOYO UNIPODAL el peso suprayacente (HAT + miembro no cargado) crea un momento ADUCTOR con brazo ~10 cm que los abductores (brazo ~5 cm) deben igualar con el DOBLE de fuerza: la compresión articular resultante ≈ 3 veces el peso del cuerpo (ejemplo del libro: persona de 825 N → ~2.060 N en la cadera de apoyo). De ahí: perder 1 N de peso reduce ~3 N la fuerza articular; inclinar el tronco hacia el lado afectado (marcha de glúteo medio o antálgica) acerca la línea de gravedad al eje y reduce ~50% la compresión; el bastón CONTRALATERAL reduce aún más la demanda de los abductores (el dorsal ancho opuesto aporta contramomento).",
+      "entities": [
+        "muscle:gluteus-medius",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-hip-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "cadera",
+        "fractura-cuello",
+        "trocanter",
+        "artrosis",
+        "displasia"
+      ],
+      "locator": {
+        "chapter": 10,
+        "section": "Structure and Function of The Hip Joint / Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica de cadera: el peso que pasa por la cabeza femoral comprime medialmente al cuello → momento de flexión sobre el cuello femoral (tracción superior, compresión inferior); el hueso resiste peor la tracción y el cuerpo la contrarresta con actividad muscular (compresión) y con los sistemas trabeculares del cuello — falla → fractura (típica en osteoporosis con caída). Dolor en la ingle provocado por flexión + rotación medial pasivas sugiere daño labral anterosuperior y/o cambios artróticos. El síndrome de dolor del gran trocánter es queja común en mujeres de mediana edad (4:1) y en artrosis (borde lateral de cadera). La displasia detectada en lactancia se trata con posicionamiento en rana (arnés de Pavlik/Frejka) para centrar la cabeza en el acetábulo.",
+      "entities": [
+        "bone:femoral-neck",
+        "joint:hip"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "vertebra",
+        "disco-intervertebral",
+        "articulacion"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Structure and Function of the Vertebral Column"
+      },
+      "summary": "La columna tiene 33 vértebras (7 cervicales, 12 torácicas, 5 lumbares, 5 sacras fusionadas, 4 coccígeas) con curvas alternas lordosis/cifosis que aumentan resistencia y absorben carga. La unidad funcional es el segmento móvil (dos vértebras + disco + ligamentos). Hay dos tipos de articulación: intervertebrales (sínfisis con disco intercalado) y cigapofisiarias o facetarias (sinoviales entre apófisis articulares). Los movimientos intervertebrales incluyen deslizamiento, distracción, compresión e inclinación; el CANTIDAD de movimiento la determina sobre todo el tamaño del disco y la DIRECCIÓN la orientación de las facetas.",
+      "entities": [
+        "joint:interbody",
+        "joint:zygapophyseal",
+        "bone:vertebra"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-disco",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "disco-intervertebral",
+        "annulus",
+        "nucleus",
+        "nutricion"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Structure and Function of the Vertebral Column — Intervertebral Disc"
+      },
+      "summary": "El disco intervertebral: el anillo fibroso (~60% agua; colágeno tipo I y II en láminas) envuelve el núcleo pulposo gelatinoso. El disco está inervado solo en el tercio-mitad externa del anillo (nervios vertebrales y sinuvertebrales). NO recibe riego arterial directo: se nutre por difusión a través de las placas terminales, impulsada por los ciclos de carga (importante para entender degeneración con carga estática prolongada). Bajo compresión sostenida exhibe creep (deformación dependiente del tiempo): pérdida de altura, mayor abombamiento y más flexibilidad — base de la variación diurna de estatura.",
+      "entities": [
+        "joint:interbody"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-ligamentos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "columna",
+        "ligamentos",
+        "ALL",
+        "PLL",
+        "ligamentum-flavum"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Ligaments and Joint Capsules"
+      },
+      "summary": "Seis ligamentos principales: longitudinal anterior (ALL, sacro→C2, limita extensión), longitudinal posterior (PLL, C2→sacro, limita flexión), ligamento amarillo (elástico, lámina-lámina, se tensa en flexión; su hipertrofia con edad/espondilosis puede invadir el canal y comprimir médula en extensión), interespinoso (resiste flexión), supraespinoso (cordón fuerte entre ápices espinosos, se tensa en flexión; puede terminar en L3-L4) e intertransverso (resiste flexión lateral contralateral). Dato clínico: el PLL es estrecho en la región lumbar, factor de la alta incidencia de herniaciones discales posterolaterales.",
+      "entities": [
+        "ligament:all",
+        "ligament:pll",
+        "ligament:flavum",
+        "ligament:supraspinous"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-cervical",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "cervical",
+        "atlas",
+        "axis",
+        "rom",
+        "acoplamiento"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Regional Structure and Function — Cervical Region"
+      },
+      "summary": "Región cervical: la más móvil. Craneovertebral: el atlas (C1, sin cuerpo ni apófisis espinosa) acuna el occipital; el axis (C2) transmite la carga cabeza+atlas y aporta el proceso dens para la rotación. Ligamento atlantal transverso (muy fuerte, retiene el dens; el dens suele fracturarse antes de que el ligamento se rompa; limita flexión craneovertebral) y ligamentos alares (limitan rotación atlantoaxial). ROM: atlantooccipital ~15° flexión/extensión (nodding) y ~3° flexión lateral/rotación; atlantoaxial ~45° de rotación por lado (~50% de toda la rotación cervical). En cervical inferior (C3-C7) las articulaciones intervertebrales son en silla por los procesos unciformes; flexión lateral y rotación son movimientos ACOPLADOS ipsilaterales; las facetas orientadas ~45° entre plano transverso y frontal.",
+      "entities": [
+        "joint:c0-c1",
+        "joint:c1-c2",
+        "ligament:transverse-atlantal",
+        "ligament:alar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-toracica-lumbar",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "columna",
+        "toracica",
+        "lumbar",
+        "rom",
+        "iliolumbar"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Regional Structure and Function — Thoracic and Lumbar Regions"
+      },
+      "summary": "Torácica: estable y poco móvil — caja costilla, espinosas solapadas (T5-T8), cápsulas tensas, facetas ~20° del plano frontal (favorecen rotación y flexión lateral, restringen flexión/extensión, sobre todo T1-T6). Lumbar: cuerpos masivos para compresión, facetas predominantemente sagitales (favorecen flexión/extensión, poca rotación), mayor flexión en L4-L5/L5-S1. El ángulo lumbosacro (inclinación de S1) aumenta la lordosis y el cizallamiento anterior sobre L5; los ligamentos iliolumbares (L5→ilíaco) estabilizan L5 y resisten cizallamiento, flexión lateral y rotación. La fascia toracolumbar con la fascia abdominal forma un \"aro\" que añade rigidez lumbopélvica, tensable por contracción muscular.",
+      "entities": [
+        "joint:l5-s1",
+        "ligament:iliolumbar"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-spine-cargas",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "columna",
+        "compresion",
+        "torsion",
+        "cizallamiento",
+        "creep"
+      ],
+      "locator": {
+        "chapter": 4,
+        "section": "Kinetics"
+      },
+      "summary": "Cargas sobre la columna: compresión axial (gravedad + reacción del suelo + músculo + carga externa) resistida sobre todo por discos y cuerpos; el núcleo pulposo genera presión interna MAYOR que la carga aplicada (presión de hinchazón) y transmite al anillo tensiones circunferenciales. La flexión comprime estructuras anteriores y tensa posteriores; la extensión al revés. En torsión el anillo lumbar es la estructura más eficaz pero el riesgo de rotura de fibras sube al combinar torsión con flexión y compresión. El cizallamiento anterior lumbar lo resisten a partes iguales cigapofisis y disco; sostenido en el tiempo produce creep. Con pérdida de altura discal por creep la carga se desplaza del núcleo al anillo (sobre todo posterior), favoreciendo el prolapso y reduciendo nutrición del disco.",
+      "entities": [
+        "joint:interbody"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-complejo",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "hombro",
+        "complejo",
+        "esternoclavicular",
+        "acromioclavicular",
+        "glenohumeral"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Introduction"
+      },
+      "summary": "El complejo del hombro enlaza el miembro superior al tronco con clavícula, escápula y húmero unidos por tres articulaciones interdependientes: esternoclavicular (SC, única unión ósea directa con el esqueleto axial), acromioclavicular (AC) y glenohumeral (GH), más la articulación escapulotorácica (falsa articulación: la escápula desliza sobre el tórax sin tejido articular). La contradicción movilidad-vs-estabilidad se resuelve con estabilización dinámica (fuerzas musculares activas), no con constreñimiento pasivo. En combinación con el tronco puede aportar hasta ~180° de elevación al miembro superior.",
+      "entities": [
+        "joint:sc",
+        "joint:ac",
+        "joint:gh",
+        "joint:scapulothoracic",
+        "bone:clavicle",
+        "bone:scapula",
+        "bone:humerus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-sc-ac",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "hombro",
+        "esternoclavicular",
+        "acromioclavicular",
+        "coracoclavicular",
+        "disco"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Shoulder Complex Joints and Structures"
+      },
+      "summary": "SC: disco fibrocartilaginoso que divide la articulación en dos compartimentos y disipa carga; tres unidades funcionales (elevación/depresión lateral al disco, protracción/retracción medial, y rotación). Se sostiene por ligamentos esternoclaviculares anterior/posterior, costoclavicular (bilaminar, eje del movimiento) e interclavicular. AC: sinovial plana incongruente con 3 rotaciones + 3 traslaciones; su función principal es permitir la rotación escapular 3D durante el movimiento del brazo; cápsula débil reforzada por ligamentos AC superiores/inferiores y sobre todo por el coracoclavicular (conoide: freno primario de traslación inferior del acromion; trapezoide: de traslación posterior), que transfiere fuerzas del brazo hacia la clavícula y la SC estable.",
+      "entities": [
+        "joint:sc",
+        "joint:ac",
+        "ligament:coracoclavicular",
+        "ligament:costoclavicular"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-gh-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "hombro",
+        "glenohumeral",
+        "labrum",
+        "retroversion",
+        "capsula"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Shoulder Complex Joints and Structures — Glenohumeral Joint"
+      },
+      "summary": "GH: esférica (rótula) con 3 grados de rotación y 3 de traslación; cabeza humeral (1/3-1/2 de esfera, mayor superficie que la glenoidea) sobre fosa glenoidea somera. El labrum glenoideo aumenta la profundidad/congruencia ~50% y resiste traslación de la cabeza; sirve de inserción a cápsula y ligamentos. La retroversión humeral normal centra la cabeza hacia la glena dada la posición escapular en rotación interna. La cápsula es laxa y grande: tensa superiormente y floja anterior/inferior con el brazo en reposo; el paquete ligamentario capsular estabiliza sobre todo con el brazo elevado >90°; posición de máximo empaquetado (close-packed): abducción + rotación lateral.",
+      "entities": [
+        "joint:gh",
+        "ligament:labrum-glenoid"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-manguito",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "hombro",
+        "manguito-rotador",
+        "supraspinatus",
+        "estabilidad",
+        "par-de-fuerzas"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Shoulder Joint Function"
+      },
+      "summary": "Manguito rotador (supraespinoso, infraespinoso, redondo menor y subescapular): sus tendones se funden con la cápsula GH reforzándola. Los tres \"ITS\" (infraespinoso, redondo menor, subescapular) comprimen la cabeza humeral contra la glena y además tiran de ella caudalmente — esa traslación inferior es tan o más importante que la compresión para centrar la cabeza (contrarresta el deslizamiento superior del deltoides). Deltoides + ITS forman casi un par de fuerzas perfecto que rota la cabeza con mínima traslación. El supraespinoso es peculiar: componente translatorio SUPERIOR y participación continua en la elevación; teóricamente puede abducir el brazo por sí solo en casi todo el rango (el deltoides no puede sin luxar). Su tendón está bajo tensión la mayor parte del día despierto — clave en su patología.",
+      "entities": [
+        "muscle:supraspinatus",
+        "muscle:infraspinatus",
+        "muscle:teres-minor",
+        "muscle:subscapularis",
+        "muscle:deltoid"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-ritmo",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "hombro",
+        "ritmo-escapulohumeral",
+        "elevacion",
+        "escápula",
+        "disquinesia"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Integrated Function of the Shoulder Complex"
+      },
+      "summary": "Elevación total del brazo: 150-180° = 100-120° de flexión / 90-120° de abducción en GH + 50-60° de rotación superior escapular (la regla \"2:1\" GH:escápula es una simplificación útil: los segmentos se mueven concomitantemente, no secuencialmente). La rotación superior escapular nace de elevación y rotación posterior clavicular en SC (~mitad) + rotación superior en AC (~mitad); la clavícula además se retrae 20-30° en SC. Reposo escapular: rotación interna 35-45° del plano coronal, inclinación anterior 10-15°, entre costillas 2-7 a ~5 cm de la línea media. Rotadores superiores escapulares: trapecio medio/inferior + serrato anterior. Disquinesia escapular: winging (borde medial fuera del tórax = debilidad de serrato/romboides) e inclinación anterior excesiva (pectoral menor acortado) — se asocian a dolor de hombro.",
+      "entities": [
+        "joint:scapulothoracic",
+        "muscle:serratus-anterior",
+        "muscle:trapezius"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-shoulder-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "hombro",
+        "luxacion",
+        "pinzamiento",
+        "inestabilidad"
+      ],
+      "locator": {
+        "chapter": 7,
+        "section": "Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica del hombro: la GH es la articulación que más se luxa de todo el cuerpo (la dirección más frecuente es anterior, dada la laxitud capsular anteroinferior y la orientación de la glena). El diagnóstico más común de dolor disfuncional es el \"pinzamiento\" (impingement), dividido en subacromial (atrapamiento del manguito bajo el arco coracoacromial) e interno (entre cabeza humeral y glena). En hipermovilidad/laxitud capsular anterior el manguito debe compensar dinámicamente, con síntomas que empeoran a final del día o con uso repetitivo. Con la edad hay menos cambios degenerativos que en las grandes articulaciones del miembro inferior (menos carga ponderal en el miembro superior).",
+      "entities": [
+        "joint:gh"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-estructura",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "rodilla",
+        "tibiofemoral",
+        "valgo",
+        "malalineacion"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function"
+      },
+      "summary": "Rodilla tibiofemoral: dos compartimentos (medial y lateral) incongruentes — cóndilos femorales convexos sobre platillos tibiales casi planos (el medial más largo anteroposterior; platillos inclinados 7-10° hacia atrás). El eje anatómico fémur-tibia forma un valgo fisiológico ~185°: genu valgo (más ángulo) sobrecarga el compartimento lateral; genu varo el medial — la desalineación frontal se asocia fuertemente a incidencia y progresión de artrosis de rodilla (se mide como eje mecánico/línea de carga). La cápsula única envuelve tibiofemoral + patelofemoral; el refuerzo anterior es el retináculo extensor.",
+      "entities": [
+        "joint:tibiofemoral",
+        "bone:femur",
+        "bone:tibia"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-meniscos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "rodilla",
+        "meniscos",
+        "carga",
+        "vascularizacion"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Menisci"
+      },
+      "summary": "Los meniscos convierten los platillos planos en cavidades cóncavas para los cóndilos: aumentan congruencia y área de contacto (reduciendo estrés), transmiten y distribuyen el 50-70% de la carga compresiva de la rodilla y estabilizan. El medial es en C con más anclajes ligamentosos/capsulares (menos móvil → más lesiones); el lateral casi circular y más móvil. Cuernos anterior/posterior firmemente anclados a tibia; ligamento transverso los une por delante; conexiones con patela (patelomeniscales) y con cruzados. Vascularización solo periférica (los cuernos y el tercio externo vascularizado se innervan con nociceptores y mecanorreceptores; la porción central es avascular y aneural) → la capacidad de curación depende de la zona lesional (\"zona roja\" periférica cura; central no) y de la edad.",
+      "entities": [
+        "joint:tibiofemoral",
+        "structure:meniscus-medial",
+        "structure:meniscus-lateral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-ligamentos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "rodilla",
+        "MCL",
+        "LCL",
+        "ACL",
+        "PCL",
+        "cruzados"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Capsule and Ligaments"
+      },
+      "summary": "Colaterales: el medial (MCL) tiene porción superficial (epicóndilo femoral medial → tibia, se fusiona con la fascia del vasto medial y sartorio) y profunda (fusionada a cápsula y menisco medial); limita valgo y rotación. El lateral (LCL) es más laxo y NO se une al menisco lateral (fibras van al fémur-tibia-peroné). Los cruzados (ACL/PCL) se cruzan dentro de la intercondílea: guían la cinemática (rodar+deslizar) — en flexión con carga, el cóndilo rueda atrás y el ACL tenso \"obliga\" al deslizamiento anterior del fémur; el ACL resiste sobre todo la traslación ANTERIOR de la tibia (y la rotación en flexión), el PCL la posterior. Estabilizan también la rotación de la tibia (\"rotary stabilization\"). En extensión completa: ligamentos tensos + tubérculos encajados + meniscos interpuestos → rotación axial bloqueada; la rotación axial es libre con la rodilla flexionada.",
+      "entities": [
+        "ligament:mcl",
+        "ligament:lcl",
+        "ligament:acl",
+        "ligament:pcl"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-cinematica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "rodilla",
+        "rom",
+        "rotacion-automatica",
+        "screw-home",
+        "flexion"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Joint Function"
+      },
+      "summary": "Cinemática: flexo-extensión con rotación obligatoria acompañante. En los últimos grados de extensión hay rotación lateral AUTOMÁTICA (terminal) de la tibia, no muscular — \"mecanismo de enroscado\" (screw home): la superficie articular medial mayor hace que el compartimento medial ruede más. ROM frontal mínimo pero real: ~8° en extensión completa y ~13° con 20° de flexión (más = insuficiencia ligamentosa). En carga, la flexión combina rueda posterior + deslizamiento anterior del fémur sobre tibia (los meniscos migran atrás por su forma de cuña). La patela se desplaza distalmente con la flexión y su contacto femoral migra de inferior a superior/lateral.",
+      "entities": [
+        "joint:tibiofemoral"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-musculos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "rodilla",
+        "cuadriceps",
+        "isquiotibiales",
+        "patela",
+        "cizallamiento"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Tibiofemoral Joint Structure and Function — Muscle Function"
+      },
+      "summary": "Músculos: el cuádriceps extiende (la patela actúa como polea que aumenta el brazo de palanca del cuádriceps, sobre todo cerca de la extensión; su efecto decrece en flexión profunda) pero genera cizallamiento ANTERIOR de la tibia proporcional al ángulo de flexión (relevante tras lesión de ACL). Los isquiotibiales flexionan (y rotan) y aumentan su brazo de palanca extensora de cadera al flexionar la rodilla. En ejercicios con carga el cuádriceps debe generar más par cuanta más flexión (crece el brazo de momento del peso corporal) — por eso la profundidad del squat escala el estrés. Estudio citado (Beynnon, strain in vivo del ACL): tensiones similares entre ejercicios con y sin carga ponderal → dudar de la premisa \"weightbearing es inherentemente más seguro\"; individualizar la rehabilitación.",
+      "entities": [
+        "muscle:quadriceps",
+        "muscle:hamstrings",
+        "bone:patella"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-patelofemoral",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "rodilla",
+        "patelofemoral",
+        "compresion",
+        "Q-angle",
+        "banda-iliotibial"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Patellofemoral Joint"
+      },
+      "summary": "Patelofemoral: el área de contacto patela-fémur es mínima en extensión completa y crece con la flexión; la fuerza de compresión patelofemoral crece con el ángulo de flexión y la actividad del cuádriceps — al andar (~20° de flexión máxima en apoyo) es ~25-50% del peso corporal; sube mucho con sentadilla profunda/escaleras. El estrés es MAYOR en ejercicios cargados SIN apoyo ponderal con rodilla cerca de extensión, y en ejercicios CON apoyo cuando la flexión supera ~50°. El valgo fisiológico + el ángulo Q generan tracción lateral de la patela (mayor en mujeres por pelvis más ancha/anteversión, en debate); el retináculo medial (ligamento patelofemoral medial) y el deslizamiento medial normal contrarrestan; la banda ilirotibial tensa tira lateralmente de la patela en flexión y limita su desplazamiento medial → estrés del facet lateral.",
+      "entities": [
+        "joint:patellofemoral",
+        "bone:patella"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-knee-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "rodilla",
+        "lesion-meniscal",
+        "artrosis",
+        "ACL"
+      ],
+      "locator": {
+        "chapter": 11,
+        "section": "Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica: saltos, pivotes, cambios de dirección y carga cíclica repetida elevan el riesgo de lesión (meniscos, cruzados). El daño meniscal previo + pinzamiento articular predisponen a desalineación estática (varo) que sobrecarga el compartimento medial y acelera artrosis. En lesiones meniscales, la localización (periférica vascularizada vs central) y la edad determinan opciones de tratamiento (reparación vs resección). Las plicas sinoviales (esp. medial) pueden dar dolor con movimientos que cambian su orientación. La decisión de ejercicios tras lesión de ACL/PCL/patelofemoral debe basarse en la tensión real por ejercicio y ángulo, no en la dicotomía con/sin carga.",
+      "entities": [
+        "joint:tibiofemoral",
+        "ligament:acl",
+        "structure:meniscus-medial"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-talocrural",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "tobillo",
+        "talocrural",
+        "mortaja",
+        "talo",
+        "rom"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Ankle Joint"
+      },
+      "summary": "Tobillo (talocrural): sinovial en bisagra entre la mortaja (plafond tibial + maleolos tibial/fibular, que se extiende más distal en el lateral) y el cuerpo del astrágalo (trócula con surco central; carilla lateral/fibular mayor que la medial). El tróculo astragalino es MÁS ANCHO delante → en dorsiflexión el astrágalo encaja firme en la mortaja (más estabilidad; por eso los esguinces graves en inversión ocurren en flexión plantar). ROM de referencia: ~20° dorsiflexión / ~50° flexión plantar (gran variabilidad individual y por técnica). El eje pasa por los maleolos → algo oblicuo: la dorsiflexión va acompañada de abducción del pie y la flexión plantar de aducción. Los ligamentos tibiofibulares (distales) + membrana interósea mantienen la mortaja: cierta movilidad fibular es necesaria para que el astrágalo rote del todo en dorsiflexión — una lesión sindesmótica altera toda la articulación.",
+      "entities": [
+        "joint:talocrural",
+        "bone:talus",
+        "bone:tibia",
+        "bone:fibula"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-ligamentos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "ligaments",
+      "tags": [
+        "tobillo",
+        "ligamento-deloideo",
+        "ATFL",
+        "CFL",
+        "esguince"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Ligaments"
+      },
+      "summary": "Ligamentos del tobillo: la cápsula es fina (más aún adelante/detrás) → la estabilidad depende de los ligamentos. MEDIAL: ligamento colateral medial o deltoideo, en abanico (capas superficial/profunda del maleolo tibial a navicular, astrágalo y calcáneo) — tan fuerte que una fuerza extrema suele AVULSIONAR el maleolo tibial antes de romperlo. LATERAL (LCL, tres bandas): talofibular anterior (ATFL, la más débil y la más lesionada: se estresa en flexión plantar + aducción + inversión; su rotura da inestabilidad anterolateral), calcaneofibular (CFL, casi vertical, se estresa en dorsiflexión + inversión) y talofibular posterior (PTFL, raramente aislado, solo en luxaciones graves). Tests clínicos: cajón anterior (ATFL) y tilitastragalino/bostezo (CFL), con diagnóstico imperfecto — valorar en varias posiciones.",
+      "entities": [
+        "ligament:deltoid",
+        "ligament:atfl",
+        "ligament:cfl",
+        "ligament:ptfl"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-subtalar",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "tobillo",
+        "subtalar",
+        "pronacion",
+        "supination",
+        "eje"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Subtalar Joint"
+      },
+      "summary": "Subtalar (talocalcánea): tres articulaciones planas entre astrágalo y calcáneo (la posterior recibe ~75% de la fuerza transmitida). Eje oblicuo: inclinado ~42° hacia arriba-adelante del plano transverso y ~16° medial del eje anteroposterior (Manter; gran variabilidad). Por eso prona/supina son movimientos COMPUESTOS: pronación = eversión + dorsiflexión + abducción del calcáneo; supinación = inversión + flexión plantar + aducción. Articulación congruente y con fuerte soporte ligamentoso (seno del tarso, ligamento interóseo talocalcáneo, cerquillo cervical): rara vez se luxa. El astrágalo recibe todo el peso que baja de la pierna y lo reparte hacia calcáneo y antepié — \"eslabón\" mecánico entre mortaja y pie.",
+      "entities": [
+        "joint:subtalar",
+        "bone:talus",
+        "bone:calcaneus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-transverso",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "joint-structure",
+      "tags": [
+        "pie",
+        "transverso-tarsiano",
+        "chopart",
+        "ligamento-resorte",
+        "mediopie"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Structure — Transverse Tarsal Joint"
+      },
+      "summary": "Transverso tarsiano (midtarsal/Chopart): talonavicular + calcaneocuboid en una línea que transeca el pie. La \"cavidad\" para la cabeza astragalina la forman navicular (delante), deltoideo (medial), bifurcado (lateral) y el ligamento resorte o plantar calcaneonavicular (abajo, del sustentaculum tali al navicular: sostiene la cabeza del astrágalo y el arco medial; su fallo → pie plano). El mediopie es móvil cuando el retropié está pronado (las superficies talonavicular y calcaneocuboid quedan paralelas) y rígido cuando está supinado — el pie alterna amortiguador (pronado en apoyo) y palanca rígida (supinado en propulsión), y el astrágalo dirige ambos por sus linkage.",
+      "entities": [
+        "joint:talonavicular",
+        "joint:calcaneocuboid",
+        "ligament:spring"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-bovedas",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "biomechanics",
+      "tags": [
+        "pie",
+        "bovedas",
+        "aponeurosis-plantar",
+        "fascitis",
+        "windlass"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Plantar Arches"
+      },
+      "summary": "Bóvedas del pie: longitudinal medial (alta), longitudinal lateral (baja) y transversa (cuñas mediales del mediopie; 2º metatarsiano retranqueado en la clave). Soporte pasivo: forma ósea (huesos en cuña, inclinación calcáneo/1er metatarsiano), ligamento resorte, ligamentos plantares y APONEUROSIS PLANTAR (fascia plantar) del tubérculo medial del calcáneo a las placas plantares de los dedos. Mecanismo windlass: la extensión metatarsofalángica tensa la aponeurosis alrededor de las cabezas metatarsianas y ELEVA el arco (supina el pie) — así el talón al elevarse convierte el pie en palanca rígida. Soporte activo dinámico: tibial posterior (el mayor tras el tríceps; inserta en navicular y arco medial), tibial anterior, peroneo largo y flexores largos. Fascitis plantar: dolor en el tubérculo medial del calcáneo, que empeora con la extensión de dedos (tensión de la fascia). En bipedestación tranquila el retropié carga ~el doble de presión que el antepié.",
+      "entities": [
+        "structure:plantar-arch",
+        "structure:plantar-aponeurosis",
+        "ligament:spring"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-musculos",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "muscle-function",
+      "tags": [
+        "tobillo",
+        "gastrocnemio",
+        "soleo",
+        "tibial-posterior",
+        "peroneos"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Muscles of the Ankle and Foot"
+      },
+      "summary": "Músculos por compartimento: el POSTERIOR pasa por detrás del eje del tobillo → todos plantarflexores (gastrocnemio + soleus = tríceps sural, principales; plantaris, tibial posterior y flexores largos aportan solo ~5% de la fuerza plantarflexora pero sostienen el arco). El tríceps sural controla EXCÉNTRICAMENTE la dorsiflexión cargada (frenando la tibia en apoyo) y supina el retropié cargado para rigidizar el pie en el despegue; su acortamiento limita la dorsiflexión (más aún el gastrocnemio, biarticular, con rodilla extendida). ANTERIOR (por delante del eje): dorsiflexores — tibial anterior, extensores largos. LATERAL: peroneos (largo/corto) evertores y estabilizadores del arco (el peroneo largo tensa el arco transverso al insertar en la base del 1er metatarsiano). El tibial posterior pasa tras el maleolo medial e inserta en navicular + arco: principal soporte dinámico del arco (su insuficiencia → pie plano adquirido).",
+      "entities": [
+        "muscle:gastrocnemius",
+        "muscle:soleus",
+        "muscle:tibialis-posterior",
+        "muscle:tibialis-anterior",
+        "muscle:peroneus-longus"
+      ],
+      "rules": []
+    },
+    {
+      "id": "njs6-ankle-clinica",
+      "sourceId": "norkin-joint-structure-6ed",
+      "topic": "injuries",
+      "tags": [
+        "pie",
+        "hallux-valgus",
+        "esguince-tobillo",
+        "metatarsal-break"
+      ],
+      "locator": {
+        "chapter": 12,
+        "section": "Joint Function / Life Span and Clinical Considerations"
+      },
+      "summary": "Clínica y función: el \"metatarsal break\" es el eje oblicuo por las cabezas 2ª-5ª alrededor del cual se extienden las MTF cuando el talón se eleva — la elevación del talón exige contracción plantarflexora Y que el retropié pueda supinarse (si no, no hay despegue eficaz). Hallux valgus: desviación lateral del 1er dedo con MTF comprometida — reduce ROM del 1er MTP, subluxa lateralmente los flexores y concentra carga en los metatarsianos centrales. El esguince de tobillo más típico es la lesión del ATFL en flexión plantar + inversión; los esguinces recidivantes con \"sensación de inestabilidad\" deben evaluarse combinando pruebas y posiciones. Pie cavo (supinado, arco alto) vs pie pronado: alteran la distribución de presión y el riesgo de lesiones (más esguinces/estrés lateral en cavo).",
+      "entities": [
+        "joint:mtp-1",
+        "joint:talocrural",
+        "ligament:atfl"
+      ],
+      "rules": []
+    }
+  ]
+}

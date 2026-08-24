@@ -57,6 +57,36 @@
         ],
         "priority": 3
       }
+    },
+    {
+      "id": "inda-fuerza-female-strength",
+      "title": "inda-fuerza-female-strength",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "rp-renaissance-kitchen",
+      "title": "rp-renaissance-kitchen",
+      "author": "",
+      "year": null,
+      "edition": "1st",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
     }
   ],
   "rules": [
@@ -3198,6 +3228,345 @@
         "nutri-3g-cut-timing"
       ],
       "entities": []
+    },
+    {
+      "id": "nutri-inda-female-neuromuscular-recovery-and-hormonal-profile",
+      "sourceId": "inda-fuerza-female-strength",
+      "topic": "female-physiology",
+      "tags": [
+        "female-physiology",
+        "estrogen",
+        "muscle-recovery",
+        "type-1-fibers",
+        "capillary-perfusion",
+        "submaximal-volume"
+      ],
+      "locator": {
+        "chapter": "Strength as the Path to Aesthetics, pp. 49-54; Program Variables, pp. 89-95"
+      },
+      "summary": "Fisiología neuromuscular femenina y recuperación hormonal (FUERZA: A Female Guide to Strength and Physique por Marisa Inda, pp. 49–54, 89–95): Debido a una mayor proporción relativa de fibras musculares Tipo I (resistentes a la fatiga), una mayor densidad de perfusión capilar y diferencias hormonales (estrógenos que actúan como protectores de la integridad de la membrana muscular frente al daño contráctil), las mujeres levantadoras toleran mayor volumen relativo de trabajo submáximo (70% a 82.5% 1RM), requieren menores tiempos de descanso entre series (60 a 90 segundos en ejercicios accesorios, 2 a 3 minutos en levantamientos principales) y exhiben una tasa de recuperación neuromuscular más acelerada entre sesiones de alta frecuencia en comparación con los hombres a una misma intensidad relativa.",
+      "entities": [
+        "hormone:estrogen",
+        "muscle:type-1-fibers",
+        "metric:1rm"
+      ],
+      "rules": [
+        "nutri-inda-female-neuromuscular-recovery-volume-capacity"
+      ]
+    },
+    {
+      "id": "nutri-inda-female-energy-balance-and-macronutrient-management",
+      "sourceId": "inda-fuerza-female-strength",
+      "topic": "energy",
+      "tags": [
+        "energy-balance",
+        "female-nutrition",
+        "macronutrients",
+        "fat-loss",
+        "muscle-retention",
+        "strength-nutrition"
+      ],
+      "locator": {
+        "chapter": "Nutrition & Macro Management, pp. 75-88"
+      },
+      "summary": "Nutrición, balance energético y gestión de macronutrientes para fuerza y composición corporal femenina (pp. 75–88): Enfoque nutricional de Marisa Inda centrado en utilizar el entrenamiento de fuerza pesada como vehículo primario para la composición corporal estética (\"Strength as the Path to Aesthetics\"). Enfatiza la gestión estructurada del balance energético, distribuyendo macronutrientes (proteína suficiente para soporte tisular, carbohidratos para abastecer sesiones de fuerza y grasas esenciales para la función hormonal) para optimizar la pérdida de grasa y la retención de masa magra sin comprometer el rendimiento en el gimnasio ni provocar déficits energéticos lesivos.",
+      "entities": [
+        "nutrient:protein",
+        "nutrient:carbohydrates",
+        "nutrient:fat",
+        "metric:calories",
+        "diet:fat-loss"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-inda-squat-biomechanics-q-angle-cues",
+      "sourceId": "inda-fuerza-female-strength",
+      "topic": "female-physiology",
+      "tags": [
+        "squat-biomechanics",
+        "female-anatomy",
+        "q-angle",
+        "pelvis-morphology",
+        "knee-tracking",
+        "glute-torque"
+      ],
+      "locator": {
+        "chapter": "Training the Squat, pp. 15-48"
+      },
+      "summary": "Fundamentos biomecánicos y cues técnicos de la sentadilla adaptados a la morfología femenina (pp. 15–48): Para acomodar la morfología pélvica y el mayor ángulo Q femenino, se prescribe una apertura de pies ligeramente más amplia que el ancho biacromial con una rotación externa de 20° a 30°. Se enfatiza el cue técnico \"spread the floor / push knees out\" (abrir el suelo con los pies y empujar las rodillas hacia afuera) para maximizar el torque y la activación de los glúteos, asegurando un trayecto articular seguro para la rodilla y cadera bajo cargas submáximas y máximas.",
+      "entities": [
+        "joint:hip",
+        "joint:knee",
+        "muscle:gluteus-maximus",
+        "bone:pelvis"
+      ],
+      "rules": [
+        "nutri-inda-squat-technical-cues-female"
+      ]
+    },
+    {
+      "id": "nutri-inda-bench-press-and-deadlift-technical-cues",
+      "sourceId": "inda-fuerza-female-strength",
+      "topic": "female-physiology",
+      "tags": [
+        "bench-press",
+        "deadlift",
+        "technical-cues",
+        "scapular-retraction",
+        "leg-drive",
+        "lat-engagement",
+        "lumbar-lockout"
+      ],
+      "locator": {
+        "chapter": "Training the Bench Press & Deadlift, pp. 15-48"
+      },
+      "summary": "Cues técnicos de Marisa Inda para press de banca y peso muerto en levantadoras (pp. 15–48):\n1) Press de Banca: Retracción y depresión escapular estricta para crear una base torácica sólida, arco torácico controlado y \"leg drive\" activo empujando el suelo hacia adelante para estabilizar la caja torácica.\n2) Peso Muerto (convencional o sumo): Enfoque en la tensión y activación de los dorsales anchos mediante los cues \"bend the bar around your shins\" y \"pack the lats\", junto con una extensión coordinada de rodilla y cadera que evite la hiperextensión de la columna lumbar en el bloqueo.",
+      "entities": [
+        "muscle:latissimus-dorsi",
+        "muscle:upper-back",
+        "joint:scapulothoracic",
+        "bone:lumbar-spine"
+      ],
+      "rules": [
+        "nutri-inda-bench-deadlift-technical-cues"
+      ]
+    },
+    {
+      "id": "nutri-inda-calisthenics-pullups-and-conditioning",
+      "sourceId": "inda-fuerza-female-strength",
+      "topic": "female-physiology",
+      "tags": [
+        "calisthenics",
+        "pull-ups",
+        "upper-body-strength",
+        "cardiovascular-conditioning",
+        "bodyweight"
+      ],
+      "locator": {
+        "chapter": "Calisthenics & Conditioning, pp. 61-74"
+      },
+      "summary": "Pautas de calistenia, dominadas y acondicionamiento cardiovascular para atletas femeninas (pp. 61–74): Progresiones de fuerza en tren superior y peso corporal (dominadas y calistenia) adaptadas a la estructura femenina, combinadas con protocolos de acondicionamiento cardiovascular para promover la capacidad de trabajo y salud metabólica sin deteriorar la recuperación muscular específica requerida para los levantamientos de powerlifting.",
+      "entities": [
+        "muscle:latissimus-dorsi",
+        "muscle:upper-body",
+        "system:cardiovascular"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-inda-female-strength-cycle-contract-and-periodization",
+      "sourceId": "inda-fuerza-female-strength",
+      "topic": "female-physiology",
+      "tags": [
+        "periodization",
+        "12-week-cycle",
+        "powerlifting",
+        "female-lifter",
+        "glute-hypertrophy",
+        "volume-autoregulation"
+      ],
+      "locator": {
+        "chapter": "12-Week Program, pp. 89-118; Contratos TypeScript"
+      },
+      "summary": "Modelo de contrato del ciclo de fuerza femenina (`FemaleStrengthCycleContract`) y macrociclo de 12 semanas (pp. 89–118): Estructuración de un programa de 12 semanas de Powerlifting + Hipertrofia accesoria para levantadoras ('female_lifter'). Parámetros técnicos: primaryLifts (['competition_squat', 'competition_bench_press', 'conventional_or_sumo_deadlift']), accessoryEmphasis (['glute_hypertrophy', 'upper_back_posture', 'hamstrings_posterior_chain', 'deltoid_shaping']), cycleDurationWeeks (12) y peakingIncluded (true/false). Se integra en `src/data/schedules/` junto con el motor de autorregulación de volumen para calibrar densidades y descansos.\n\n<!-- stats: 6 chunks, 14 entidades cubiertas -->",
+      "entities": [
+        "diet:strength-training",
+        "metric:training-volume",
+        "schedule:12-week-macrocycle"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-rp-culinary-philosophy-high-satiety",
+      "sourceId": "rp-renaissance-kitchen",
+      "topic": "recipes-macros",
+      "tags": [
+        "culinary-philosophy",
+        "high-satiety",
+        "lean-protein-density",
+        "fat-sugar-substitution",
+        "meal-prep",
+        "diet-phases"
+      ],
+      "locator": {
+        "section": "Introduction & Culinary Philosophy, pp. 1-10"
+      },
+      "summary": "Filosofía culinaria RP (The Renaissance Kitchen Cookbook por Lori Shaw & Renaissance Periodization, pp. 1–10): Diseñada para atletas que siguen plantillas RP, levantadores en déficit o superávit calórico y preparadores de comidas (meal prep). El enfoque central radica en maximizar la saciedad mediante una elevada densidad de proteína magra, un control estricto y sustitución inteligente de grasas y azúcares añadidos, y el ajuste modular de macronutrientes por porción adaptado a las distintas fases dietéticas: déficit agresivo (aggressive cut), déficit moderado (moderate cut), mantenimiento (maintenance) o ganancia de masa (mass gain).",
+      "entities": [
+        "nutrient:protein",
+        "meal:meal-prep",
+        "diet:cutting",
+        "diet:massing",
+        "diet:maintenance"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-rp-high-protein-low-fat-culinary-substitutions",
+      "sourceId": "rp-renaissance-kitchen",
+      "topic": "recipes-macros",
+      "tags": [
+        "culinary-substitutions",
+        "fat-reduction",
+        "greek-yogurt",
+        "cooking-spray",
+        "reduced-fat-cheese",
+        "macro-density"
+      ],
+      "locator": {
+        "section": "Introduction & Culinary Guidelines, pp. 5-8"
+      },
+      "summary": "Pautas de sustitución culinaria RP para maximizar la densidad proteica y reducir calorías vacías (pp. 5–8):\n1) Sustitución de Cremas y Nata: Empleo de yogur griego 0% o 2% en lugar de crema agria, nata o mayonesa para salsas cremosas (aumenta la proteína en +10 a 15 g por porción reduciendo la grasa en un -80%).\n2) Control de Aceites de Cocción: Uso de pulverizadores de aceite en aerosol (1 a 2 segundos de disparo = ~1 a 2 g de grasa vs 1 cucharada sopera = 14 g de grasa y 120 kcal).\n3) Quesos Reducidos en Grasa: Empleo exclusivo de quesos al 2% o \"part-skim\" para aportar sabor reduciendo el aporte de grasas saturadas a la mitad (50% de reducción).",
+      "entities": [
+        "nutrient:protein",
+        "nutrient:fat",
+        "food:greek-yogurt",
+        "food:cooking-spray",
+        "food:cheese"
+      ],
+      "rules": [
+        "nutri-rp-high-protein-low-fat-culinary-substitutions"
+      ]
+    },
+    {
+      "id": "nutri-rp-lean-protein-sources-and-cooking-methods",
+      "sourceId": "rp-renaissance-kitchen",
+      "topic": "protein",
+      "tags": [
+        "lean-protein",
+        "white-fish",
+        "salmon",
+        "poultry",
+        "lean-meat",
+        "egg-whites",
+        "greek-yogurt",
+        "cooking-methods"
+      ],
+      "locator": {
+        "section": "Lean Protein Main Sources, pp. 11-50"
+      },
+      "summary": "Fuentes principales de proteína magra RP (pp. 11–50): Clasificación de recetas bajo la categoría 'lean_protein_main' centradas en pescados blancos, salmón, aves, carne magra, claras de huevo y yogur griego. Métodos de cocción prioritarios: horneado (baking), salteado en sartén bajo en aceite (pan sear low oil), cocción lenta (slow cooker) y freidora de aire o asado (air fry roast). Cada porción cuenta con un desglose estricto de macronutrientes: proteína en g, carbohidratos en g, grasas en g y calorías totales en kcal.",
+      "entities": [
+        "nutrient:protein",
+        "food:white-fish",
+        "food:salmon",
+        "food:poultry",
+        "food:lean-meat",
+        "food:egg-whites",
+        "food:greek-yogurt"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-rp-carb-sides-and-peri-workout-sources",
+      "sourceId": "rp-renaissance-kitchen",
+      "topic": "recipes-macros",
+      "tags": [
+        "carbohydrates",
+        "carb-sides",
+        "peri-workout",
+        "rice",
+        "potatoes",
+        "oats",
+        "legume-pasta",
+        "glycogen"
+      ],
+      "locator": {
+        "section": "Carbohydrate Sides & Peri-Workout Options, pp. 51-75"
+      },
+      "summary": "Guarniciones de carbohidratos y opciones peri-entrenamiento RP (pp. 51–75): Categoría 'carb_side' diseñada para sincronizar la ingesta de carbohidratos con las demandas de las sesiones de entrenamiento y modular el balance energético en fases de corte, mantenimiento o volumen. Fuentes primarias: arroces, patatas, avenas y pastas de legumbres. Permite ajustar con exactitud los gramos de carbohidratos y calorías totales por porción.",
+      "entities": [
+        "nutrient:carbohydrates",
+        "food:rice",
+        "food:potatoes",
+        "food:oats",
+        "food:legume-pasta",
+        "meal:peri-workout"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-rp-high-volume-veggies-and-satiety-soups",
+      "sourceId": "rp-renaissance-kitchen",
+      "topic": "recipes-macros",
+      "tags": [
+        "high-volume",
+        "vegetables",
+        "satiety",
+        "fiber",
+        "volume-eating",
+        "asparagus",
+        "kale",
+        "salads",
+        "cutting"
+      ],
+      "locator": {
+        "section": "Vegetables, Greens & Volume Soups, pp. 76-95"
+      },
+      "summary": "Verduras, hortalizas y sopas de volumen RP (pp. 76–95): Categoría 'high_volume_veggie' enfocada en preparaciones de muy baja densidad energética y alto volumen y fibra para maximizar la saciedad mecánica y gástrica, prioritarias en fases de déficit calórico moderado o agresivo (cutting). Incluye recetas estructuradas como sopas de espárragos, kale chips horneados y ensaladas crujientes sin aliños grasos.",
+      "entities": [
+        "food:vegetables",
+        "food:asparagus",
+        "food:kale",
+        "meal:soup",
+        "diet:cutting"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-rp-high-protein-treats-and-desserts",
+      "sourceId": "rp-renaissance-kitchen",
+      "topic": "protein",
+      "tags": [
+        "high-protein-treats",
+        "protein-desserts",
+        "whey-protein",
+        "protein-mousse",
+        "oat-cookies",
+        "smoothies",
+        "adherence"
+      ],
+      "locator": {
+        "section": "High Protein Treats & Snacks, pp. 96-124"
+      },
+      "summary": "Postres, snacks y dulces altos en proteína RP (pp. 96–124): Categoría 'high_protein_treat' desarrollada para asegurar la adherencia dietética sin comprometer el balance de macronutrientes. Opciones formuladas con proteína de suero (whey), claras y avena, tales como mousse proteico, galletas de avena y suero, y smoothies altos en proteína, con desglose cuantitativo por porción de gramos de proteína, carbohidratos, grasas y kcal.",
+      "entities": [
+        "nutrient:protein",
+        "food:whey-protein",
+        "food:oats",
+        "meal:dessert",
+        "meal:smoothie",
+        "meal:snack"
+      ],
+      "rules": []
+    },
+    {
+      "id": "nutri-rp-recipe-macro-profile-contract-and-integration",
+      "sourceId": "rp-renaissance-kitchen",
+      "topic": "recipes-macros",
+      "tags": [
+        "recipe-contract",
+        "macronutrient-profile",
+        "serving-size",
+        "cooking-methods",
+        "diet-suitability",
+        "meal-planning"
+      ],
+      "locator": {
+        "section": "Contratos TypeScript e Integración Plan Maestro OS, pp. 1-125"
+      },
+      "summary": "Modelo de contrato de perfil de macronutrientes RP (`RPRecipeMacroProfileContract`) e integración en Plan Maestro OS: Estructura de datos para recetas culinarias con los campos: recipeId (string), recipeName (string), category ('lean_protein_main' | 'carb_side' | 'high_volume_veggie' | 'healthy_fat' | 'high_protein_treat'), servingsCount (number), macrosPerServing (proteinGrams, carbGrams, fatGrams, caloriesKcal), cookingMethod ('baking' | 'pan_sear_low_oil' | 'slow_cooker' | 'air_fry_roast') y dietPhaseSuitability (['aggressive_cut', 'moderate_cut', 'maintenance', 'mass_gain']). Se integra con la base de datos de recetas (60 recetas de Lori Shaw en `src/data/recipes/`) y el motor de sustituciones de ingredientes bajos en grasa.\n\n<!-- stats: 7 chunks, 12 entidades cubiertas -->",
+      "entities": [
+        "nutrient:protein",
+        "nutrient:carbohydrates",
+        "nutrient:fat",
+        "metric:calories",
+        "diet:cutting",
+        "diet:massing",
+        "diet:maintenance"
+      ],
+      "rules": []
     }
   ]
 }
