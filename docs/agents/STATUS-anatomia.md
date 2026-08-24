@@ -31,6 +31,19 @@ deselecciona, (5) muchos clicks no seleccionan pese al hover, (6) las
 articulaciones solo resaltan sus huesos. Diagnóstico verificado contra los GLB
 reales y `PropertyBinding.sanitizeNodeName`:
 
+0. **RENDERIZADO COMPLETO EN NEGRO (hallado tras la validación del usuario con
+   servidor del worktree, puerto 4322):** el clonado de materiales por mesh
+   envolvía materiales SINGULARES en arrays de 1 (`originals.map(clone)` sin
+   preservar singular/array). Con material-array, `projectObject` de three solo
+   dibuja vía `geometry.groups` (vacías en estos GLB) → **0 draw calls
+   silenciosos, sin ningún error de consola**. Diagnosticado por bisectación
+   headless (puppeteer-core + Edge): R1 sin clonar dibuja (508k tris), R2 con
+   clonar sin dispose no → el envoltorio en array era el asesino (el `dispose`
+   de originales era inocuo: three solo registra el listener de dispose al
+   compilar programa). FIX: clonar preservando singular/array. Verificado
+   headless: esqueleto, miembro superior/inferior y cráneo renderizan; click
+   selecciona (ficha), aislamiento muestra solo la pieza, filtro Músculos deja
+   solo músculos, ficha de rodilla con marcador + ROM citado.
 1. **Doble indexado nodo+geometría** (causa de 1 y 2): `namedMeshesRef`
    indexaba cada mesh DOS veces (nombre de nodo + nombre de meshDef sanitizado,
    p.ej. "Femurr" y "mesh123") y `applyVisibility` decidía la visibilidad POR
@@ -68,6 +81,14 @@ Lógica pura extraída a `viewerLogic.ts` (+13 tests): `buildOwnerIndex`,
 (limpia ZWSP del export para labels). Verificación de datos con inventario
 real: 8/8 modelos OK (aislamiento exacto, filtros por capa, "Todo" no oculta
 nada). Hover muestra nombre legible (underscores→espacios).
+
+**Nota de entorno (importante para validar):** el dev server de la 4321 sirve
+`E:\Laboral` (main). Los commits de esta rama viven en el worktree
+`E:\Laboral\.worktrees\anatomia` → para validar sin merge:
+`node node_modules/astro/astro.js dev --host 127.0.0.1 --port 4322` con cwd el
+worktree (servidor dejado corriendo, PID 51880). Validación headless completa
+(puppeteer-core + Edge) ejecutada contra la 4322: render OK en 5 modelos,
+selección/aislamiento/filtros/marcador/ROM verificados por captura.
 
 ## Ciclo 4 — pendiente #4: ROM articular verificado con cita
 

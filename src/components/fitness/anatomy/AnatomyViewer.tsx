@@ -276,6 +276,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     setError(null);
     setIsolateTarget(null); // los nombres de mesh cambian con el modelo
     setSelectedMeshName(null); // una pieza suelta solo tiene sentido en su modelo
+    setHoverName(null); // el hover del modelo anterior queda obsoleto
     const loader = new GLTFLoader();
     const draco = new DRACOLoader();
     // decoder self-hosted (copiado de three/examples/jsm/libs/draco) — sin CDN externo
@@ -333,9 +334,14 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             // meshes y mutar emissive/opacidad por pieza contaminaba hermanas
             // (selecciones que no se limpiaban, hover fantasma). clone()
             // comparte las texturas por referencia: coste de VRAM ~0.
-            const originals = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-            mesh.material = originals.map((m) => m.clone());
+            // ⚠️ PRESERVAR singular vs array: envolver un material singular en
+            // array de 1 hace que projectObject dibuje SOLO vía geometry.groups
+            // (vacías en estos GLB) → 0 draw calls SILENCIOSOS (bug ciclo 4).
+            const originals: THREE.Material[] = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
             for (const m of originals) gltfOriginalMats.add(m);
+            mesh.material = Array.isArray(mesh.material)
+              ? mesh.material.map((m) => m.clone())
+              : (mesh.material as THREE.Material).clone();
             const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
             for (const m of mats) {
               const std = m as THREE.MeshStandardMaterial;
@@ -1010,7 +1016,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               Marcador cian = localización aproximada de la articulación (centroide de los huesos que la forman; los modelos GLB no traen la articulación como pieza separada). Los huesos se resaltan en suave para no eclipsar el marcador.
             </p>
           )}
-          {'origin' in selectedStructure && (
+          {(('origin' in selectedStructure) || selectedStructure.kind === 'joint') && (
             <StructureDetail structure={selectedStructure} />
           )}
           <a href={`/app/fitness/library/muscles?structure=${encodeURIComponent(selectedStructure.id)}`} style={{ fontSize: '0.78rem', color: 'var(--accent, #0a84ff)', fontWeight: 600 }}>
