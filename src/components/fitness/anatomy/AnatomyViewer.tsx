@@ -6,6 +6,21 @@
 // ?model=&structure=), modo "explosionado" cambiando al modelo exploded-skull,
 // reset de cámara, panel colapsable, mobile-first (useIsMobile READ de ui/) y
 // prefers-reduced-motion → render estático con aviso (una sola pasada).
+//
+// CICLO 4 (corrección de bugs de selección reportados por el usuario):
+// 1. Visibilidad decidida UNA vez por mesh (lista plana por nombre de NODO) —
+//    antes el mismo mesh se indexaba 2× (nodo + geometría) y la última escritura
+//    ganaba: rompía filtros de capa y aislamiento. Los contenedores padre
+//    (Bones/Muscles/…) NUNCA se ocultan → ningún filtro oculta un subárbol.
+// 2. Material POR MESH en carga (los GLB comparten material: mutar emissive
+//    contaminaba hermanas → selecciones que no se deseleccionaban).
+// 3. Sin outline "inverted-hull" (se percibía como mesh duplicado desfasado);
+//    el resalte es emissive+teñido, fuerte o suave.
+// 4. Click SIEMPRE selecciona: dueño más específico (hueso > articulación que
+//    lo mapea), alias nodo/geometría normalizado, y fallback a selección de
+//    PIEZA suelta (con nombre+kind) para meshes sin ficha en el grafo.
+// 5. Articulaciones: huesos constituyentes en suave + marcador 3D en la
+ //   localización aproximada de la articulación (centroide de sus huesos).
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -18,15 +33,24 @@ import {
   anatomyGraphStats,
   getStructuresForModel,
   getStructureById,
-  resolveHighlightNames,
 } from '../../../data/fitness/anatomyGraph';
 import { getMeshKind } from '../../../data/fitness/anatomy/meshCatalog';
 import type { AnatomyStructure, StructureKind } from '../../../data/fitness/anatomy/types';
+import {
+  buildOwnerIndex,
+  decideMeshVisibility,
+  prettyMeshName,
+  resolveSelectionNames,
+  type ViewerSelection,
+} from './viewerLogic';
 
 const HIGHLIGHT_COLOR = 0x35d0ff;
 const HIGHLIGHT_EMISSIVE = 0x0e7fa8;
 /** opacidad de las piezas que tapan la selección (feedback #3: capas ocluidas) */
 const OCCLUDER_OPACITY = 0.12;
+// colores pre-instanciados para highlight (evita alloc por pieza)
+const HIGHLIGHT_EMISSIVE_COLOR = new THREE.Color(HIGHLIGHT_EMISSIVE);
+const HIGHLIGHT_TINT_COLOR = new THREE.Color(HIGHLIGHT_COLOR);
 
 /** Filtros de categoría del grafo (feedback #4-5). kinds=null → sin filtrar. */
 const LAYER_FILTERS: Array<{ key: string; label: string; kinds: StructureKind[] | null }> = [
@@ -60,18 +84,25 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const rafRef = useRef<number>(0);
   const disposablesRef = useRef<Array<{ dispose: () => void }>>([]);
   const namedMeshesRef = useRef<Map<string, THREE.Object3D[]>>(new Map());
+  /** lista PLANA de meshes con su nombre de NODO — la visibilidad se decide UNA
+   *  vez por pieza (ciclo 4: antes cada mesh se indexaba 2× por nodo+geometría) */
+  const meshListRef = useRef<Array<{ mesh: THREE.Mesh; name: string }>>([]);
+  /** alias geometryName → nodeName (meshDefs de Blender distintos del nodo) */
+  const aliasToPrimaryRef = useRef<Map<string, string>>(new Map());
+  /** nombre de nodo/alias → id de la estructura dueña MÁS ESPECÍFICA */
+  const structureByMeshRef = useRef<Map<string, string>>(new Map());
   const originalsRef = useRef<Map<THREE.Object3D, { emissive?: THREE.Color; intensity?: number; color?: THREE.Color }>>(new Map());
   // refs espejo para handlers estables del loop de escena
   const stoppedRef = useRef(false);
   const staticModeRef = useRef(false);
-  const meshOwnersRef = useRef<Map<string, AnatomyStructure>>(new Map());
-  const selectedStructureRef = useRef<AnatomyStructure | undefined>(undefined);
+  const selectionRef = useRef<ViewerSelection | null>(null);  const selectionNamesRef = useRef<string[]>([]);
   const layerFilterRef = useRef('all');
-  const isolateIdRef = useRef<string | null>(null);
+  const isolateTargetRef = useRef<ViewerSelection | null>(null);
   /** meshes con material clonado para transparencia (occluders) — mesh → original */
   const matOriginalsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
   const occluderMeshesRef = useRef<THREE.Mesh[]>([]);
-  const outlineMatRef = useRef<THREE.MeshBasicMaterial | null>(null);
+  /** marcador 3D de la articulación seleccionada (core + halo) */
+  const jointMarkerRef = useRef<THREE.Group | null>(null);
   const loadingRef = useRef(true);
   const modelKeyRef = useRef(initialModel ?? 'overview-skeleton');
   const structuresForModelRef = useRef<AnatomyStructure[]>([]);
@@ -81,10 +112,14 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const [loading, setLoading] = useState(true);
   const [hoverName, setHoverName] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(initialStructure ?? queryParam('structure'));
+  /** pieza seleccionada SIN ficha en el grafo (fallback de click, ciclo 4) */
+  const [selectedMeshName, setSelectedMeshName] = useState<string | null>(null);
+  /** alias geometryName→nodeName como estado: reactiva los memos tras la carga */
+  const [aliasToPrimary, setAliasToPrimary] = useState<Map<string, string>>(new Map());
   const [panelOpen, setPanelOpen] = useState(!isMobile);
   const [error, setError] = useState<string | null>(null);
   const [layerFilter, setLayerFilter] = useState('all');
-  const [isolateId, setIsolateId] = useState<string | null>(null);
+  const [isolateTarget, setIsolateTarget] = useState<ViewerSelection | null>(null);
 
   // modelo inicial desde URL (?model=)
   useEffect(() => {
@@ -108,23 +143,38 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const selectedStructure = selectedId ? getStructureById(selectedId) : undefined;
   const stats = useMemo(() => anatomyGraphStats(), []);
 
+  // selección unificada: estructura del grafo O pieza suelta (ciclo 4)
+  const selection: ViewerSelection | null = useMemo(() => {
+    if (selectedStructure) return { type: 'structure', id: selectedStructure.id };
+    if (selectedMeshName) return { type: 'mesh', name: selectedMeshName };
+    return null;
+  }, [selectedStructure, selectedMeshName]);
+  const selectionNames = useMemo(
+    () => resolveSelectionNames(selection, model.key, getStructureById, aliasToPrimary),
+    [selection, model.key, aliasToPrimary],
+  );
+
   // lista lateral acorde al filtro de capas activo (feedback #4)
   const filterKinds = LAYER_FILTERS.find((f) => f.key === layerFilter)?.kinds ?? null;
   const panelStructures = filterKinds
     ? structuresForModel.filter((s) => filterKinds.includes(s.kind))
     : structuresForModel;
 
-  // índice meshName → estructura dueña (para filtros por categoría del grafo)
+  // índice nombre→estructura dueña (para filtros por categoría del grafo y click).
+  // Pre-carga va sin alias; al terminar la carga se reconstruye con alias
+  // (meshDef→nodo) desde el callback del loader.
   useEffect(() => {
-    const map = new Map<string, AnatomyStructure>();
-    for (const s of structuresForModel) {
-      for (const n of s.modelMeshes[model.key] ?? []) map.set(n, s);
-    }
-    meshOwnersRef.current = map;
+    structureByMeshRef.current = buildOwnerIndex(structuresForModel, model.key);
   }, [structuresForModel, model.key]);
 
-  // ── highlight de la estructura seleccionada (resalte inequívoco: emissive fuerte + outline) ──
-  const applyHighlight = useCallback((objectNames: string[]) => {
+  // ── highlight de la estructura seleccionada ─────────────────────────────────
+  // Ciclo 4: SIN outline inverted-hull (el clon escalado 1.035 se percibía como
+  // un mesh duplicado desfasado). El resalte es emissive + teñido, en dos
+  // intensidades: 'strong' (selección normal) y 'soft' (huesos constituyentes
+  // de una articulación, que no deben eclipsar el marcador de la articulación).
+  // Materiales POR MESH (clonados en carga): restaurar/mutar no contamina
+  // piezas hermanas que compartían material en el GLB.
+  const applyHighlight = useCallback((objectNames: string[], mode: 'strong' | 'soft' = 'strong') => {
     const map = namedMeshesRef.current;
     const want = new Set(objectNames);
     // restaurar anteriores
@@ -138,18 +188,10 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         }
         if (orig.color && mat.color) mat.color.copy(orig.color);
       }
-      // quitar outline (hijo del mesh)
-      for (let i = mesh.children.length - 1; i >= 0; i--) {
-        const c = mesh.children[i];
-        if ((c as THREE.Mesh).userData?.isOutline) mesh.remove(c);
-      }
     }
     originalsRef.current.clear();
-    if (!outlineMatRef.current) {
-      outlineMatRef.current = new THREE.MeshBasicMaterial({
-        color: HIGHLIGHT_COLOR, side: THREE.BackSide, transparent: true, opacity: 0.9,
-      });
-    }
+    const emissiveIntensity = mode === 'strong' ? 2.2 : 0.5;
+    const colorLerp = mode === 'strong' ? 0.5 : 0.16;
     for (const name of want) {
       const objs = map.get(name) ?? [];
       for (const obj of objs) {
@@ -165,20 +207,66 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           });
         }
         if (mat.emissive) {
-          mat.emissive = new THREE.Color(HIGHLIGHT_EMISSIVE);
-          mat.emissiveIntensity = 2.2;
+          mat.emissive.copy(HIGHLIGHT_EMISSIVE_COLOR);
+          mat.emissiveIntensity = emissiveIntensity;
         }
-        if (mat.color) mat.color.lerp(new THREE.Color(HIGHLIGHT_COLOR), 0.5);
-        // outline (inverted hull): copia barata de la geometría con caras traseras
-        if (mesh.isMesh && !mesh.children.some((c) => (c as THREE.Mesh).userData?.isOutline)) {
-          const outline = new THREE.Mesh(mesh.geometry, outlineMatRef.current!);
-          outline.userData.isOutline = true;
-          outline.scale.setScalar(1.035);
-          outline.raycast = () => {}; // no interceptar picks
-          mesh.add(outline);
-        }
+        if (mat.color) mat.color.lerp(HIGHLIGHT_TINT_COLOR, colorLerp);
       }
     }
+  }, []);
+
+  // ── marcador 3D de articulación (ciclo 4, feedback #6) ─────────────────────
+  // Los GLB no traen la articulación como pieza (mapean sus huesos). Para que
+  // la articulación EN SÍ sea lo destacado: huesos en suave + esfera marcadora
+  // (core + halo) en la localización aproximada (centroide de los huesos).
+  const removeJointMarker = useCallback(() => {
+    const g = jointMarkerRef.current;
+    if (!g) return;
+    g.removeFromParent();
+    g.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (m.isMesh) {
+        m.geometry.dispose();
+        const mats = Array.isArray(m.material) ? m.material : [m.material];
+        for (const mat of mats) mat?.dispose();
+      }
+    });
+    jointMarkerRef.current = null;
+  }, []);
+
+  const addJointMarker = useCallback((names: string[]) => {
+    const root = modelRootRef.current;
+    if (!root) return;
+    const targets: THREE.Object3D[] = [];
+    for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
+    if (!targets.length) return;
+    const box = new THREE.Box3();
+    for (const t of targets) box.expandByObject(t);
+    if (box.isEmpty()) return;
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const modelMaxDim = Math.max(...new THREE.Box3().setFromObject(root).getSize(new THREE.Vector3()).toArray()) || 1;
+    // radio relativo a la articulación (huesos que la forman), acotado al modelo
+    const r = THREE.MathUtils.clamp(
+      Math.min(size.x, size.y, size.z) * 0.14,
+      modelMaxDim * 0.008,
+      modelMaxDim * 0.045,
+    );
+    const g = new THREE.Group();
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(r, 24, 16),
+      new THREE.MeshBasicMaterial({ color: HIGHLIGHT_COLOR }),
+    );
+    const halo = new THREE.Mesh(
+      new THREE.SphereGeometry(r * 2.1, 24, 16),
+      new THREE.MeshBasicMaterial({ color: HIGHLIGHT_COLOR, transparent: true, opacity: 0.16, depthWrite: false }),
+    );
+    core.raycast = () => {}; // el marcador jamás intercepta picks
+    halo.raycast = () => {};
+    g.add(core, halo);
+    g.position.copy(center);
+    root.add(g);
+    jointMarkerRef.current = g;
   }, []);
 
   // ── carga del modelo (diferida por modelo) ─────────────────────────────────
@@ -186,7 +274,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     let cancelled = false;
     setLoading(true);
     setError(null);
-    setIsolateId(null); // los nombres de mesh cambian con el modelo
+    setIsolateTarget(null); // los nombres de mesh cambian con el modelo
+    setSelectedMeshName(null); // una pieza suelta solo tiene sentido en su modelo
     const loader = new GLTFLoader();
     const draco = new DRACOLoader();
     // decoder self-hosted (copiado de three/examples/jsm/libs/draco) — sin CDN externo
@@ -197,6 +286,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       model.file,
       (gltf) => {
         if (cancelled || !modelRootRef.current) return;
+        removeJointMarker();
         // restaurar materiales translúcidos (occluders) del modelo saliente
         for (const [mesh, orig] of matOriginalsRef.current) {
           const clone = mesh.material;
@@ -229,12 +319,23 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         }
         namedMeshesRef.current.clear();
         originalsRef.current.clear();
+        // índices de ESTA carga
+        const meshList: Array<{ mesh: THREE.Mesh; name: string }> = [];
+        const aliases = new Map<string, string>();
+        const gltfOriginalMats = new Set<THREE.Material>();
         // preparar materiales + índice de nombres (nodo y mesh)
         gltf.scene.traverse((obj) => {
           const mesh = obj as THREE.Mesh;
           if (mesh.isMesh) {
             mesh.castShadow = false;
             mesh.receiveShadow = false;
+            // material POR MESH (ciclo 4): los GLB comparten material entre
+            // meshes y mutar emissive/opacidad por pieza contaminaba hermanas
+            // (selecciones que no se limpiaban, hover fantasma). clone()
+            // comparte las texturas por referencia: coste de VRAM ~0.
+            const originals = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+            mesh.material = originals.map((m) => m.clone());
+            for (const m of originals) gltfOriginalMats.add(m);
             const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
             for (const m of mats) {
               const std = m as THREE.MeshStandardMaterial;
@@ -244,6 +345,13 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                 std.depthWrite = true;
               }
             }
+            // nombre primario = NODO (el meshDef de Blender puede ser basura:
+            // "mesh.228", "Circle.007"…); alias geometría→nodo para resolver
+            // mappings que apunten al meshDef (p.ej. Flexor_retinaculum_of_wrist)
+            const primary = obj.name || mesh.geometry?.name || '';
+            if (primary) meshList.push({ mesh, name: primary });
+            const geoName = mesh.geometry?.name ?? '';
+            if (geoName && obj.name && geoName !== obj.name) aliases.set(geoName, obj.name);
           }
           const nodeName = obj.name;
           if (nodeName) {
@@ -258,6 +366,13 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             namedMeshesRef.current.set(meshName, arr);
           }
         });
+        // los materiales originales compartidos ya no referencian meshes: liberar
+        for (const m of gltfOriginalMats) m.dispose();
+        meshListRef.current = meshList;
+        aliasToPrimaryRef.current = aliases;
+        setAliasToPrimary(aliases);
+        // dueño por pieza con prioridad de especificidad (hueso > articulación)
+        structureByMeshRef.current = buildOwnerIndex(structuresForModelRef.current, model.key, aliases);
         root.add(gltf.scene);
         // encuadre inicial
         const box = new THREE.Box3().setFromObject(root);
@@ -297,7 +412,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       cancelled = true;
       draco.dispose();
     };
-  }, [model.file, model.key]);
+  }, [model.file, model.key, removeJointMarker]);
 
   // ── escena base (una sola vez) ─────────────────────────────────────────────
   useEffect(() => {
@@ -413,15 +528,27 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       // tap vs drag: solo seleccionar si el puntero no se movió (>6px = rotación)
       if (moved || Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
       const hit = pickAt(e.clientX, e.clientY);
-      if (!hit) return;
-      // seleccionar estructura del grafo cuyo mapping incluya esta pieza (si existe)
-      const match = structuresForModelRef.current.find((s) =>
-        (s.modelMeshes[modelKeyRef.current] ?? []).includes(hit.name),
-      );
-      if (match) {
-        setSelectedId(match.id);
-        setIsolateId(null); // al cambiar de pieza se sale del aislamiento
+      if (!hit) {
+        // click en vacío: deseleccionar (ciclo 4 — antes no había forma directa)
+        setSelectedId(null);
+        setSelectedMeshName(null);
+        return;
       }
+      // dueño MÁS ESPECÍFICO de la pieza (hueso > articulación que lo mapea;
+      // alias nodo/geometría resuelto). Antes: primer match por orden del grafo
+      // (las articulaciones ganaban a los huesos) y las piezas sin dueña no
+      // seleccionaban nada.
+      const ownerId = structureByMeshRef.current.get(hit.name);
+      if (ownerId) {
+        setSelectedId(ownerId);
+        setSelectedMeshName(null);
+      } else {
+        // pieza sin ficha en el grafo: seleccionar la PIEZA (feedback inmediato:
+        // resalte + nombre + kind + centrar/aislar siguen operativos)
+        setSelectedMeshName(hit.name);
+        setSelectedId(null);
+      }
+      setIsolateTarget(null); // al cambiar de pieza se sale del aislamiento
       setHoverName(hit.name);
     };
     const onDrag = (e: PointerEvent) => {
@@ -457,8 +584,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         const m = o as THREE.Mesh;
         if (m.isMesh) m.geometry?.dispose();
       });
-      outlineMatRef.current?.dispose();
-      outlineMatRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -530,12 +655,12 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   /** Raycast cámara→pieza: lo que se interpone se vuelve translúcido. */
   const updateOccluders = useCallback(() => {
     resetOccluders();
-    const sel = selectedStructureRef.current;
-    if (!sel || isolateIdRef.current) return; // aislada = ya solo se ve la pieza
+    const sel = selectionRef.current;
+    if (!sel || isolateTargetRef.current) return; // aislada = ya solo se ve la pieza
     const root = modelRootRef.current;
     const cam = cameraRef.current;
     if (!root || !cam) return;
-    const names = resolveHighlightNames(sel, modelKeyRef.current);
+    const names = resolveSelectionNames(sel, modelKeyRef.current, getStructureById, aliasToPrimaryRef.current);
     const targets: THREE.Object3D[] = [];
     for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
     if (!targets.length) return;
@@ -575,45 +700,57 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   // ── highlight de la estructura seleccionada (se declara tras las utilidades de
   // transparencia porque debe resetear oclusores ANTES de resaltar: los oclusores
   // usan materiales CLONADOS y el resalte sobre un clon se perdería al recomputar) ──
+  // Ciclo 4: se ejecuta SIEMPRE (también con selección vacía) para limpiar el
+  // resalte anterior — antes, deseleccionar o elegir una estructura sin mapping
+  // dejaba el resalte anterior encendido.
   useEffect(() => {
-    if (loading || !selectedStructure) return;
+    if (loading) return;
     resetOccluders();
-    const names = resolveHighlightNames(selectedStructure, model.key);
-    if (names.length) applyHighlight(names);
-  }, [selectedStructure, model.key, loading, applyHighlight, resetOccluders]);
+    removeJointMarker();
+    if (!selectionNames.length) {
+      applyHighlight([]);
+      return;
+    }
+    if (selectedStructure?.kind === 'joint') {
+      // articulación: huesos constituyentes en SUAVE + marcador propio
+      applyHighlight(selectionNames, 'soft');
+      addJointMarker(selectionNames);
+    } else {
+      applyHighlight(selectionNames, 'strong');
+    }
+  }, [selectionNames, selectedStructure?.kind, loading, applyHighlight, resetOccluders, removeJointMarker, addJointMarker]);
 
   /** Visibilidad por categoría del grafo y aislamiento de pieza (feedback #4-5).
-   *  Fallback meshCatalog (ciclo 3, T4): los meshes SIN estructura dueña en el
-   *  grafo toman su kind del catálogo por tipo — así el filtro por capa actúa
-   *  sobre el modelo completo (contenedores Bones/Muscles/… incluidos) — y la
-   *  geometría auxiliar ('aux': Circle/Plane/Vert/mesh del export de Blender)
-   *  queda OCULTA por defecto. */
+   *  Ciclo 4 — decisión ÚNICA por mesh sobre la lista plana de nodos: antes se
+   *  iteraba el índice nombre→objeto y cada mesh aparecía 2× (nodo + geometría
+   *  basura de Blender) con kinds distintos; la última escritura ganaba y
+   *  rompía filtros y aislamiento. Los CONTENEDORES padre (Bones/Muscles/…)
+   *  jamás se ocultan: ningún filtro puede esconder un subárbol entero.
+   *  Fallback meshCatalog: meshes SIN estructura dueña toman su kind del
+   *  catálogo por tipo; la geometría 'aux' queda oculta por defecto. */
   const applyVisibility = useCallback(() => {
     const filter = LAYER_FILTERS.find((f) => f.key === layerFilterRef.current) ?? LAYER_FILTERS[0];
-    const iso = isolateIdRef.current ? getStructureById(isolateIdRef.current) : undefined;
-    const isoNames = iso && iso.modelMeshes[modelKeyRef.current]
-      ? new Set(iso.modelMeshes[modelKeyRef.current])
+    const isoSel = isolateTargetRef.current;
+    const isoNames = isoSel
+      ? new Set(resolveSelectionNames(isoSel, modelKeyRef.current, getStructureById, aliasToPrimaryRef.current))
       : null;
-    for (const [name, objs] of namedMeshesRef.current) {
-      const owner = meshOwnersRef.current.get(name);
+    for (const { mesh, name } of meshListRef.current) {
+      const ownerId = structureByMeshRef.current.get(name);
+      const owner = ownerId ? getStructureById(ownerId) : undefined;
       const kind = owner?.kind ?? getMeshKind(modelKeyRef.current, name);
-      let visible = true;
-      if (isoNames) visible = isoNames.has(name);
-      else if (filter.kinds) visible = filter.kinds.includes(kind as StructureKind);
-      else visible = kind !== 'aux';
-      for (const obj of objs) obj.visible = visible;
+      mesh.visible = decideMeshVisibility({ name, kind, isoNames, filterKinds: filter.kinds });
     }
     updateOccluders();
   }, [updateOccluders]);
 
-  /** Centrar la cámara en la pieza seleccionada manteniendo la orientación (feedback #2). */
+  /** Centrar la cámara en la selección manteniendo la orientación (feedback #2). */
   const centerOnSelection = useCallback(() => {
-    const sel = selectedStructureRef.current;
+    const sel = selectionRef.current;
     const cam = cameraRef.current;
     const ctrl = controlsRef.current;
     const root = modelRootRef.current;
     if (!sel || !cam || !ctrl || !root) return;
-    const names = resolveHighlightNames(sel, modelKeyRef.current);
+    const names = resolveSelectionNames(sel, modelKeyRef.current, getStructureById, aliasToPrimaryRef.current);
     const targets: THREE.Object3D[] = [];
     for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
     const box = new THREE.Box3();
@@ -639,29 +776,31 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   loadingRef.current = loading;
   modelKeyRef.current = modelKey;
   structuresForModelRef.current = structuresForModel;
-  selectedStructureRef.current = selectedStructure;
+  selectionRef.current = selection;
+  selectionNamesRef.current = selectionNames;
   layerFilterRef.current = layerFilter;
-  isolateIdRef.current = isolateId;
+  isolateTargetRef.current = isolateTarget;
+  aliasToPrimaryRef.current = aliasToPrimary;
 
   // aplicar filtros/aislamiento cuando cambia el modelo o los controles
   useEffect(() => {
     if (loading) return;
     applyVisibility();
-  }, [loading, layerFilter, isolateId, structuresForModel, applyVisibility]);
+  }, [loading, layerFilter, isolateTarget, structuresForModel, applyVisibility]);
 
   // re-derivar translucidez al cambiar selección o aislamiento
   useEffect(() => {
     if (loading) return;
     updateOccluders();
-  }, [selectedId, isolateId, loading, updateOccluders]);
+  }, [selection, isolateTarget, loading, updateOccluders]);
 
   // atajos de teclado: F centra la selección · Esc sale del aislamiento (feedback #2/#5)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      if ((e.key === 'f' || e.key === 'F') && selectedStructureRef.current) centerOnSelection();
-      else if (e.key === 'Escape' && isolateIdRef.current) setIsolateId(null);
+      if ((e.key === 'f' || e.key === 'F') && selectionNamesRef.current.length) centerOnSelection();
+      else if (e.key === 'Escape' && isolateTargetRef.current) setIsolateTarget(null);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -730,7 +869,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               <button
                 key={m.key}
                 type="button"
-                onClick={() => { setModelKey(m.key); setSelectedId(null); }}
+                onClick={() => { setModelKey(m.key); setSelectedId(null); setSelectedMeshName(null); }}
                 style={{
                   background: active ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.03)',
                   color: active ? '#fff' : 'var(--text-primary)',
@@ -752,7 +891,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               <button
                 key={f.key}
                 type="button"
-                onClick={() => { setLayerFilter(f.key); setIsolateId(null); }}
+                onClick={() => { setLayerFilter(f.key); setIsolateTarget(null); }}
                 style={{
                   background: active ? 'rgba(53,208,255,0.16)' : 'rgba(255,255,255,0.03)',
                   color: active ? '#7fdcff' : 'var(--text-primary)',
@@ -788,7 +927,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               )}
             </div>
           )}
-          {isolateId && !loading && (
+          {isolateTarget && !loading && (
             <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.5)', borderRadius: 10, padding: '5px 10px', fontSize: '0.72rem', color: '#7fdcff', fontWeight: 700 }}>
               Pieza aislada · Esc para salir
             </div>
@@ -800,7 +939,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           )}
           {hoverName && !loading && (
             <div style={{ position: 'absolute', bottom: 10, left: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.4)', borderRadius: 10, padding: '5px 10px', fontSize: '0.8rem', color: '#7fdcff', maxWidth: '80%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {hoverName}
+              {prettyMeshName(hoverName)}
             </div>
           )}
         </div>
@@ -823,7 +962,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                   <button
                     key={s.id}
                     type="button"
-                    onClick={() => { setSelectedId(active ? null : s.id); setIsolateId(null); }}
+                    onClick={() => { setSelectedId(active ? null : s.id); setSelectedMeshName(null); setIsolateTarget(null); }}
                     style={{
                       textAlign: 'left', background: active ? 'rgba(53,208,255,0.12)' : 'rgba(255,255,255,0.02)',
                       border: `1px solid ${active ? 'rgba(53,208,255,0.5)' : 'transparent'}`,
@@ -856,22 +995,59 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             <button type="button" onClick={centerOnSelection} style={btnStyle} title="Centrar la cámara en esta pieza (F)">
               <Crosshair size={14} /> Centrar <span style={{ opacity: 0.6 }}>(F)</span>
             </button>
-            {isolateId === selectedStructure.id ? (
-              <button type="button" onClick={() => setIsolateId(null)} style={{ ...btnStyle, borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' }} title="Mostrar de nuevo todo el modelo (Esc)">
+            {isolateTarget?.type === 'structure' && isolateTarget.id === selectedStructure.id ? (
+              <button type="button" onClick={() => setIsolateTarget(null)} style={{ ...btnStyle, borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' }} title="Mostrar de nuevo todo el modelo (Esc)">
                 <EyeOff size={14} /> Salir del aislamiento
               </button>
             ) : (
-              <button type="button" onClick={() => setIsolateId(selectedStructure.id)} style={btnStyle} title="Ocultar todo lo demás">
+              <button type="button" onClick={() => setIsolateTarget({ type: 'structure', id: selectedStructure.id })} style={btnStyle} title="Ocultar todo lo demás">
                 <Eye size={14} /> Aislar pieza
               </button>
             )}
           </div>
+          {selectedStructure.kind === 'joint' && (
+            <p style={{ margin: 0, fontSize: '0.74rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
+              Marcador cian = localización aproximada de la articulación (centroide de los huesos que la forman; los modelos GLB no traen la articulación como pieza separada). Los huesos se resaltan en suave para no eclipsar el marcador.
+            </p>
+          )}
           {'origin' in selectedStructure && (
             <StructureDetail structure={selectedStructure} />
           )}
           <a href={`/app/fitness/library/muscles?structure=${encodeURIComponent(selectedStructure.id)}`} style={{ fontSize: '0.78rem', color: 'var(--accent, #0a84ff)', fontWeight: 600 }}>
             Ver ficha completa en Músculos →
           </a>
+        </div>
+      )}
+
+      {/* FICHA DE PIEZA SUELTA (sin ficha en el grafo — ciclo 4: todo click selecciona) */}
+      {!selectedStructure && selectedMeshName && (
+        <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid rgba(53,208,255,0.35)', borderRadius: 16, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase' }}>
+                pieza · {getMeshKind(modelKey, selectedMeshName)}
+              </span>
+              <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>{prettyMeshName(selectedMeshName)}</h4>
+            </div>
+            <button type="button" onClick={() => setSelectedMeshName(null)} style={{ ...btnStyle, border: 'none' }}><X size={14} /></button>
+          </div>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button type="button" onClick={centerOnSelection} style={btnStyle} title="Centrar la cámara en esta pieza (F)">
+              <Crosshair size={14} /> Centrar <span style={{ opacity: 0.6 }}>(F)</span>
+            </button>
+            {isolateTarget?.type === 'mesh' && isolateTarget.name === selectedMeshName ? (
+              <button type="button" onClick={() => setIsolateTarget(null)} style={{ ...btnStyle, borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' }} title="Mostrar de nuevo todo el modelo (Esc)">
+                <EyeOff size={14} /> Salir del aislamiento
+              </button>
+            ) : (
+              <button type="button" onClick={() => setIsolateTarget({ type: 'mesh', name: selectedMeshName })} style={btnStyle} title="Ocultar todo lo demás">
+                <Eye size={14} /> Aislar pieza
+              </button>
+            )}
+          </div>
+          <p style={{ margin: 0, fontSize: '0.74rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
+            Pieza del modelo sin ficha anatómica en el grafo todavía ({stats.with3dMapping} de {stats.total} estructuras mapeadas). Puedes centrarla o aislarla; su ficha llegará con la ampliación del grafo.
+          </p>
         </div>
       )}
 
