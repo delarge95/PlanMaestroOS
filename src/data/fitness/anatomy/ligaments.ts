@@ -16,7 +16,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Anterior cruciate ligament"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Anterior cruciate ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -34,7 +34,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Posterior cruciate ligament"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Posterior cruciate ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -51,7 +51,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Fibular collateral ligament"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Fibular collateral ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -68,7 +68,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Calcaneofibular ligament"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Calcaneofibular ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -86,7 +86,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Anterior talofibular ligament"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Anterior talofibular ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -104,7 +104,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Anterior tibiofibular ligament"
   ],
   zone: `lower-leg`,
-  modelMeshes: {"lower-limb":["Anterior tibiofibular ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -121,7 +121,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Sacrospinous ligament"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Sacrospinous ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -138,7 +138,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Sacrotuberal ligament"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Sacrotuberal ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -155,7 +155,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Iliolumbar ligament"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Iliolumbar ligament .r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -172,7 +172,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Ligament of head of femur"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Ligament of head of femur.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -189,7 +189,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Transverse acetabular ligament"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Transverse acetabular ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -206,7 +206,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Ulnar collateral ligament of elbow"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Ulnar collateral ligament of elbow.r"]},
+  modelMeshes: {"upper-limb":["Ulnar_collateral_ligament_of_elbowr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -224,7 +224,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Dorsal radio-ulnar ligament"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Dorsal radio-ulnar ligament"],"upper-limb":["Dorsal radio-ulnar ligament.r"]},
+  modelMeshes: {"upper-limb":["Dorsal_radio-ulnar_ligamentr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -241,7 +241,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Palmar radio-ulnar ligament"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Palmar radio-ulnar ligament"],"upper-limb":["Palmar radio-ulnar ligament"]},
+  modelMeshes: {"upper-limb":["Palmar_radio-ulnar_ligament"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -259,7 +259,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Transverse humeral ligament"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Transverse humeral ligament.r","Transverse_humeral_ligament.r.001"]},
+  modelMeshes: {"upper-limb":["Transverse_humeral_ligamentr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -277,7 +277,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Trapezoid ligament"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Trapezoid ligament (part of coracoclavicular ligament).r","Trapezoid_ligament_(part_of_coracoclavicular_ligament).r_"]},
+  modelMeshes: {"upper-limb":["Trapezoid_ligament_(part_of_coracoclavicular_ligament)r"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -295,7 +295,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Flexor retinaculum of wrist"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Flexor retinaculum of wrist","Flexor_retinaculum_of_wrist"],"upper-limb":["Flexor_retinaculum_of_wrist"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -313,7 +313,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Extensor retinaculum of wrist"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor retinaculum of wrist","Extensor_retinaculum_of_wrist"],"upper-limb":["Extensor retinaculum of wrist","Extensor_retinaculum_of_wrist"]},
+  modelMeshes: {"upper-limb":["Extensor_retinaculum_of_wrist"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -331,7 +331,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Flexor retinaculum of ankle"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Flexor retinaculum of ankle","Flexor retinaculum of ankle.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -349,7 +349,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Plantar calcaneonavicular ligament"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Plantar calcaneonavicular ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -367,7 +367,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Long plantar ligament"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Long plantar ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}

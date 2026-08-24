@@ -17,7 +17,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo Calcaneus"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Calcaneal tendon.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -50,7 +50,7 @@ export const TENDONS: TendonEntry[] = [
     "Ligamentum Patellae"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Patella.r","Quadriceps common tendon and patellar ligament","Quadriceps common tendon and patellar ligament.r"],"overview-skeleton":["Patella.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -83,7 +83,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo Quadricipitalis"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Quadriceps common tendon and patellar ligament","Quadriceps common tendon and patellar ligament.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -115,7 +115,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo M. Supraspinati"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Supraspinatus muscle.r","Supraspinatus_muscle.r"]},
+  modelMeshes: {"upper-limb":["Supraspinatus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -147,7 +147,7 @@ export const TENDONS: TendonEntry[] = [
     "Caput Longum Tendinis Bicipitis"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Long head of biceps brachii tendon sheath.r","Long head of biceps brachii.r","Long_head_of_biceps_brachii.r.001","Tendon_of_Long_head_of_biceps_brachii.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -177,7 +177,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo Bicipitis (Distal)"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Common tendon of biceps brachii.r","Common_tendon_of_biceps_brachii.r"]},
+  modelMeshes: {"upper-limb":["Common_tendon_of_biceps_brachiir"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -275,7 +275,7 @@ export const TENDONS: TendonEntry[] = [
   zones: [
     "knee"
   ],
-  modelMeshes: {"lower-limb":["Common tendon of Semitendinosus and Long head of biceps femoris","Semimembranosus muscle tendon.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -308,7 +308,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendines Mm. Glutei Medii et Minimi"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Gluteus medius muscle.r","Gluteus minimus muscle.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -339,7 +339,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo M. Tibialis Posterioris"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Tibialis posterior muscle.r","Tibialis posterior tendon sheath.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -369,7 +369,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendines Mm. Fibularium"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Fibularis brevis muscle.r","Fibularis longus muscle.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -429,7 +429,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendines Mm. Flexorum Digitorum"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {},
+  modelMeshes: {"upper-limb":["Flexor_digitorum_profundusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -489,7 +489,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo Pes Anserinus"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Gracilis muscle.r","Sartorius muscle.r","Semitendinosus muscle.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -555,7 +555,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo Tricipitis Brachii"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Common tendon of triceps brachii.r","Common_tendon_of_triceps_brachii.r"]},
+  modelMeshes: {"upper-limb":["Common_tendon_of_triceps_brachiir"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -619,7 +619,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendines Mm. Abductoris Pollicis Longi et Extensoris Pollicis Brevis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Abductor pollicis longus","Abductor pollicis longus tendon sheath","Abductor_pollicis_longus_tendon_sheath","Extensor pollicis brevis","Extensor pollicis brevis tendon sheath","Extensor_pollicis_brevis_tendon_sheath"],"upper-limb":["Abductor pollicis longus tendon sheath","Abductor pollicis longus.r","Abductor_pollicis_longus.r","Abductor_pollicis_longus_tendon_sheath","Extensor pollicis brevis tendon sheath","Extensor pollicis brevis.r","Extensor_pollicis_brevis.r","Extensor_pollicis_brevis_tendon_sheath"]},
+  modelMeshes: {"upper-limb":["Abductor_pollicis_longus_tendon_sheath","Extensor_pollicis_brevis_tendon_sheath"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"},
     {"sourceId":"TODO-cita","note":"Ficha truncada en el export del chat (TEN-020): campos finales reconstruidos parcialmente — completar con Gray's 4th ed."}

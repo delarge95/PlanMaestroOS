@@ -16,7 +16,7 @@ export const BONES: BoneEntry[] = [
     "Frontal bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Frontal bone"],"exploded-skull":["Frontal bone"],"overview-colored-skull":["Frontal bone"],"overview-skeleton":["Frontal bone"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -32,7 +32,7 @@ export const BONES: BoneEntry[] = [
     "Parietal bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Parietal bone.l","Parietal bone.r"],"exploded-skull":["Parietal bone.l","Parietal bone.r"],"overview-colored-skull":["Parietal bone.l","Parietal bone.r"],"overview-skeleton":["Parietal bone left","Parietal bone right"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -48,7 +48,7 @@ export const BONES: BoneEntry[] = [
     "Temporal bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Temporal bones"],"exploded-skull":["Temporal bones"],"overview-colored-skull":["Temporal bone.r"],"overview-skeleton":["Temporal bone.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -64,7 +64,7 @@ export const BONES: BoneEntry[] = [
     "Occipital bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Occipital bone"],"exploded-skull":["Occipital bone"],"overview-colored-skull":["Occipital bone"],"overview-skeleton":["Occipital bone"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -80,7 +80,7 @@ export const BONES: BoneEntry[] = [
     "Sphenoid bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Sphenoid bone"],"exploded-skull":["Sphenoid bone"],"overview-colored-skull":["Sphenoid bone"],"overview-skeleton":["Sphenoid bone"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -96,7 +96,7 @@ export const BONES: BoneEntry[] = [
     "Ethmoid bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Ethmoid Bone"],"exploded-skull":["Ethmoid Bone"],"overview-colored-skull":["Ethmoid Bone"],"overview-skeleton":["Ethmoid Bone"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -112,7 +112,7 @@ export const BONES: BoneEntry[] = [
     "Zygomatic bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Zygomatic bones"],"exploded-skull":["Zygomatic bones"],"overview-colored-skull":["Zygomatic bone.r"],"overview-skeleton":["Zygomatic bone.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -128,7 +128,7 @@ export const BONES: BoneEntry[] = [
     "Maxilla"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Maxilla bone.r"],"exploded-skull":["Maxilla bone"],"overview-colored-skull":["Maxilla bone.r"],"overview-skeleton":["Maxilla bone.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -144,7 +144,7 @@ export const BONES: BoneEntry[] = [
     "Mandible"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Mandible bone"],"exploded-skull":["Mandible bone"],"overview-colored-skull":["Mandible bone"],"overview-skeleton":["Mandible bone"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -161,7 +161,7 @@ export const BONES: BoneEntry[] = [
     "Vomer"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Vomer"],"exploded-skull":["Vomer"],"overview-colored-skull":["Vomer"],"overview-skeleton":["Vomer"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -177,7 +177,7 @@ export const BONES: BoneEntry[] = [
     "Nasal bone"
   ],
   zone: `head-jaw`,
-  modelMeshes: {"colored-skull-base":["Nasal bone"],"exploded-skull":["Nasal bone"],"overview-colored-skull":["Nasal bone.r"],"overview-skeleton":["Nasal bone.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -193,7 +193,7 @@ export const BONES: BoneEntry[] = [
     "Atlas"
   ],
   zone: `cervical`,
-  modelMeshes: {"overview-skeleton":["Atlas (C1)"],"upper-limb":["Atlas (C1)"]},
+  modelMeshes: {"upper-limb":["Atlas_(C1)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -210,7 +210,7 @@ export const BONES: BoneEntry[] = [
     "Axis"
   ],
   zone: `cervical`,
-  modelMeshes: {"overview-skeleton":["Axis (C2)"],"upper-limb":["Axis (C2)"]},
+  modelMeshes: {"upper-limb":["Axis_(C2)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -227,7 +227,7 @@ export const BONES: BoneEntry[] = [
     "Cervical vertebrae"
   ],
   zone: `cervical`,
-  modelMeshes: {"overview-skeleton":["Cervical vertebrae (C3)","Cervical vertebrae (C4)","Cervical vertebrae (C5)","Cervical vertebrae (C6)","Cervical vertebrae (C7)"]},
+  modelMeshes: {"upper-limb":["Cervical_vertebra_(C3)","Cervical_vertebra_(C4)","Cervical_vertebra_(C5)","Cervical_vertebra_(C6)","Cervical_vertebra_(C7)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -243,7 +243,7 @@ export const BONES: BoneEntry[] = [
     "Thoracic vertebra"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Thoracic vertebra (T12)"],"overview-skeleton":["Thoracic vertebrae (T1)","Thoracic vertebrae (T10)","Thoracic vertebrae (T11)","Thoracic vertebrae (T12)","Thoracic vertebrae (T2)","Thoracic vertebrae (T3)","Thoracic vertebrae (T4)","Thoracic vertebrae (T5)","Thoracic vertebrae (T6)","Thoracic vertebrae (T7)","Thoracic vertebrae (T8)","Thoracic vertebrae (T9)"],"upper-limb":["Thoracic vertebra (T1)","Thoracic vertebra (T10)","Thoracic vertebra (T11)","Thoracic vertebra (T12)","Thoracic vertebra (T2)","Thoracic vertebra (T3)","Thoracic vertebra (T4)","Thoracic vertebra (T5)","Thoracic vertebra (T6)","Thoracic vertebra (T7)","Thoracic vertebra (T8)","Thoracic vertebra (T9)"],"vertebrae":["Thoracic vertebra (T7)"]},
+  modelMeshes: {"upper-limb":["Thoracic_vertebra_(T1)","Thoracic_vertebra_(T10)","Thoracic_vertebra_(T11)","Thoracic_vertebra_(T12)","Thoracic_vertebra_(T2)","Thoracic_vertebra_(T3)","Thoracic_vertebra_(T4)","Thoracic_vertebra_(T5)","Thoracic_vertebra_(T6)","Thoracic_vertebra_(T7)","Thoracic_vertebra_(T8)","Thoracic_vertebra_(T9)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -259,7 +259,7 @@ export const BONES: BoneEntry[] = [
     "Lumbar vertebra"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Lumbar vertebra (L1)","Lumbar vertebra (L2)","Lumbar vertebra (L3)","Lumbar vertebra (L4)","Lumbar vertebra (L5)"],"overview-skeleton":["Lumbar vertebrae (L1)","Lumbar vertebrae (L2)","Lumbar vertebrae (L3)","Lumbar vertebrae (L4)","Lumbar vertebrae (L5)"],"upper-limb":["Lumbar vertebra (L1)","Lumbar vertebra (L2)","Lumbar vertebra (L3)","Lumbar vertebra (L4)","Lumbar vertebra (L5)"],"vertebrae":["Lumbar vertebra (L3)"]},
+  modelMeshes: {"upper-limb":["Lumbar_vertebra_(L1)","Lumbar_vertebra_(L2)","Lumbar_vertebra_(L3)","Lumbar_vertebra_(L4)","Lumbar_vertebra_(L5)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -276,7 +276,7 @@ export const BONES: BoneEntry[] = [
     "Sacrum"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Sacrospinous ligament.r","Sacrotuberal ligament.r","Sacrum"],"overview-skeleton":["Sacrum"],"upper-limb":["Sacrum"]},
+  modelMeshes: {"upper-limb":["Sacrum"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -293,7 +293,7 @@ export const BONES: BoneEntry[] = [
     "Coccyx"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Coccyx"],"overview-skeleton":["Coccyx"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -309,7 +309,7 @@ export const BONES: BoneEntry[] = [
     "Sternum"
   ],
   zone: `chest`,
-  modelMeshes: {"overview-skeleton":["Body of sternum","Manubrium of sternum"],"upper-limb":["Body of sternum","Manubrium of sternum"]},
+  modelMeshes: {"upper-limb":["Body_of_sternum","Manubrium_of_sternum","Xiphoid_process"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -326,7 +326,7 @@ export const BONES: BoneEntry[] = [
     "Rib"
   ],
   zone: `chest`,
-  modelMeshes: {},
+  modelMeshes: {"upper-limb":["Rib_(10th)r","Rib_(11th)r","Rib_(12th)r","Rib_(1st)r","Rib_(2nd)r","Rib_(3rd)r","Rib_(4th)r","Rib_(5th)r","Rib_(6th)r","Rib_(7th)r","Rib_(8th)r","Rib_(9th)r"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -342,7 +342,7 @@ export const BONES: BoneEntry[] = [
     "Clavicle"
   ],
   zone: `shoulder`,
-  modelMeshes: {"overview-skeleton":["Clavicle.r"],"upper-limb":["Clavicle.r","Clavicular head of pectoralis major muscle.r","Clavicular part of deltoid muscle.r"]},
+  modelMeshes: {"upper-limb":["Clavicler"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -359,7 +359,7 @@ export const BONES: BoneEntry[] = [
     "Scapula"
   ],
   zone: `shoulder`,
-  modelMeshes: {"overview-skeleton":["Scapula.r."],"upper-limb":["Scapula.r."]},
+  modelMeshes: {"upper-limb":["Scapular"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -376,7 +376,7 @@ export const BONES: BoneEntry[] = [
     "Humerus"
   ],
   zone: `arm`,
-  modelMeshes: {"overview-skeleton":["Humerus.r"],"upper-limb":["Humerus.r"]},
+  modelMeshes: {"upper-limb":["Humerusr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -393,7 +393,7 @@ export const BONES: BoneEntry[] = [
     "Radius"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Radioscaphocapitate ligament","Radius"],"overview-skeleton":["Radius.r"],"upper-limb":["Radioscaphocapitate ligament","Radius.r"]},
+  modelMeshes: {"upper-limb":["Radiusr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -409,7 +409,7 @@ export const BONES: BoneEntry[] = [
     "Ulna"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Ulna","Ulnar artery","Ulnar artery (dorsal carpal br)","Ulnar collateral ligament","Ulnar nerve","Ulnar nerve Communicating br","Ulnar nerve Deep br","Ulnar nerve Dorsal cutaneous br","Ulnar nerve Palmar cutaneous br","Ulnar nerve Superficial br Common palmar digital n","Ulnar nerve Superficial br Proper palmar digital nn","Ulnar veins"],"overview-skeleton":["Ulna.r"],"upper-limb":["Ulna.r","Ulnar artery (dorsal carpal br).r","Ulnar artery.r","Ulnar collateral ligament of elbow.r","Ulnar collateral ligament of wrist.r","Ulnar head of extensor carpi ulnaris.r","Ulnar head of flexor carpi ulnaris.r","Ulnar head of pronator teres.r","Ulnar nerve Communicating br","Ulnar nerve Deep br","Ulnar nerve Dorsal cutaneous br","Ulnar nerve Palmar cutaneous br","Ulnar nerve Superficial br Common palmar digital n","Ulnar nerve Superficial br Proper palmar digital nn"]},
+  modelMeshes: {"upper-limb":["Ulnar"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -425,7 +425,7 @@ export const BONES: BoneEntry[] = [
     "Patella"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Patella.r"],"overview-skeleton":["Patella.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -442,7 +442,7 @@ export const BONES: BoneEntry[] = [
     "Hip bone"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Hip bone pubic cartilage.r","Hip bone.r"],"overview-skeleton":["Hip bone.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -459,7 +459,7 @@ export const BONES: BoneEntry[] = [
     "Femur"
   ],
   zone: `thigh`,
-  modelMeshes: {"lower-limb":["Femur.r"],"overview-skeleton":["Femur.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -476,7 +476,7 @@ export const BONES: BoneEntry[] = [
     "Tibia"
   ],
   zone: `lower-leg`,
-  modelMeshes: {"lower-limb":["Tibia.r","Tibial nerve.r","Tibialis anterior muscle.r","Tibialis anterior tendon sheath.r","Tibialis posterior muscle.r","Tibialis posterior tendon sheath.r"],"overview-skeleton":["Tibia.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -493,7 +493,7 @@ export const BONES: BoneEntry[] = [
     "Fibula"
   ],
   zone: `lower-leg`,
-  modelMeshes: {"lower-limb":["Fibula.r","Fibular artery.r","Fibular collateral ligament.r","Fibular vein.r","Fibularis brevis muscle.r","Fibularis longus muscle.r","Fibularis tertius muscle.r"],"overview-skeleton":["Fibula.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -510,7 +510,7 @@ export const BONES: BoneEntry[] = [
     "Talus"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Talus.r"],"overview-skeleton":["Talus.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -526,7 +526,7 @@ export const BONES: BoneEntry[] = [
     "Calcaneus"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Calcaneocuboid ligament.r","Calcaneofibular ligament.r","Calcaneonavicular ligament.r","Calcaneus.r"],"overview-skeleton":["Calcaneus.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -543,7 +543,7 @@ export const BONES: BoneEntry[] = [
     "Navicular bone"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Navicular bone.r"],"overview-skeleton":["Navicular bone.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -560,7 +560,7 @@ export const BONES: BoneEntry[] = [
     "Metatarsal bones"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Fifth metatarsal bone.r","First metatarsal bone.r","Fourth metatarsal bone.r","Second metatarsal bone.r","Third metatarsal bone.r"],"overview-skeleton":["Fifth metatarsal bone.r","First metatarsal bone.r","Fourth metatarsal bone.r","Second metatarsal bone.r","Third metatarsal bone.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -576,7 +576,7 @@ export const BONES: BoneEntry[] = [
     "Scaphoid"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Scaphoid"],"overview-skeleton":["Scaphoid.r"],"upper-limb":["Scaphoid.r"]},
+  modelMeshes: {"upper-limb":["Scaphoidr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -592,7 +592,7 @@ export const BONES: BoneEntry[] = [
     "Lunate bone"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Lunate bone"],"overview-skeleton":["Lunate bone.r"],"upper-limb":["Lunate bone.r"]},
+  modelMeshes: {"upper-limb":["Lunate_boner"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -608,7 +608,7 @@ export const BONES: BoneEntry[] = [
     "Hamate"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Hamate"],"overview-skeleton":["Hamate.r"],"upper-limb":["Hamate.r"]},
+  modelMeshes: {"upper-limb":["Hamater"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -624,7 +624,7 @@ export const BONES: BoneEntry[] = [
     "Trapezium"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Trapezium"],"overview-skeleton":["Trapezium.r"],"upper-limb":["Trapezium.r"]},
+  modelMeshes: {"upper-limb":["Trapeziumr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -641,7 +641,7 @@ export const BONES: BoneEntry[] = [
     "Capitate"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Capitate"],"overview-skeleton":["Capitate.r"],"upper-limb":["Capitate.r"]},
+  modelMeshes: {"upper-limb":["Capitater"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}

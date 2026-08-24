@@ -17,7 +17,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus medianus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Median nerve","Median nerve Common palmar digital nerve of the thumb","Median nerve Common palmar digital nerves","Median nerve Palmar br","Median nerve Proper palmar digital nerves","Median nerve Proper palmar digital nerves of the thumb","Median nerve Recurrent br"],"upper-limb":["Median nerve Common palmar digital nerve of the thumb","Median nerve Common palmar digital nerves","Median nerve Palmar br","Median nerve Proper palmar digital nerves","Median nerve Proper palmar digital nerves of the thumb","Median nerve Recurrent br","Median nerve.r"]},
+  modelMeshes: {"upper-limb":["Lateral_root_of_median_nerver","Medial_root_of_median_nerver","Median_nerve_Common_palmar_digital_nerve_of_the_thumb","Median_nerve_Common_palmar_digital_nerves","Median_nerve_Palmar_br","Median_nerve_Proper_palmar_digital_nerves","Median_nerve_Proper_palmar_digital_nerves_of_the_thumb","Median_nerve_Recurrent_br","Median_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -55,7 +55,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "forearm-hand"
   ],
-  modelMeshes: {"hand":["Ulnar nerve","Ulnar nerve Communicating br","Ulnar nerve Deep br","Ulnar nerve Dorsal cutaneous br","Ulnar nerve Palmar cutaneous br","Ulnar nerve Superficial br Common palmar digital n","Ulnar nerve Superficial br Proper palmar digital nn"],"upper-limb":["Ulnar nerve Communicating br","Ulnar nerve Deep br","Ulnar nerve Dorsal cutaneous br","Ulnar nerve Palmar cutaneous br","Ulnar nerve Superficial br Common palmar digital n","Ulnar nerve Superficial br Proper palmar digital nn","Ulnar nerve.r"]},
+  modelMeshes: {"upper-limb":["Ulnar_nerve_Communicating_br","Ulnar_nerve_Deep_br","Ulnar_nerve_Dorsal_cutaneous_br","Ulnar_nerve_Palmar_cutaneous_br","Ulnar_nerve_Superficial_br_Common_palmar_digital_n","Ulnar_nerve_Superficial_br_Proper_palmar_digital_nn","Ulnar_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -93,7 +93,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "forearm-hand"
   ],
-  modelMeshes: {"hand":["Radial nerve Dorsal digital nn","Radial nerve Superficial br"],"upper-limb":["Radial nerve (deep branch).r","Radial nerve (dorsal digital nn).r","Radial nerve (inferior lateral brachial cutaneous n).r","Radial nerve (posterior antebrachial cutaneous n).r","Radial nerve (posterior brachial cutaneous n).r","Radial nerve (posterior interosseus n).r","Radial nerve (superficial br).r","Radial nerve.r"]},
+  modelMeshes: {"upper-limb":["Radial_nerve_(deep_branch)r","Radial_nerve_(dorsal_digital_nn)r","Radial_nerve_(inferior_lateral_brachial_cutaneous_n)r","Radial_nerve_(posterior_antebrachial_cutaneous_n)r","Radial_nerve_(posterior_brachial_cutaneous_n)r","Radial_nerve_(posterior_interosseus_n)r","Radial_nerve_(superficial_br)r","Radial_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -126,7 +126,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus axillaris"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Axillary nerve - superior lateral br cutaneous nerve.r"]},
+  modelMeshes: {"upper-limb":["Axillary_nerve_-_superior_lateral_br_cutaneous_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -162,7 +162,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "back"
   ],
-  modelMeshes: {"upper-limb":["Suprascapular nerve.r"]},
+  modelMeshes: {"upper-limb":["Suprascapular_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -199,7 +199,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "back"
   ],
-  modelMeshes: {"upper-limb":["Long thoracic nerve.r"]},
+  modelMeshes: {"upper-limb":["Long_thoracic_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -270,7 +270,7 @@ export const NERVES: NerveEntry[] = [
     "thigh",
     "lower-leg"
   ],
-  modelMeshes: {"lower-limb":["Schiatic nerve.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -309,7 +309,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "thigh"
   ],
-  modelMeshes: {"lower-limb":["Femoral nerve.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -380,7 +380,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Tibial nerve.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -510,7 +510,7 @@ export const NERVES: NerveEntry[] = [
     "Ramus profundus nervi radialis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {},
+  modelMeshes: {"upper-limb":["Radial_nerve_(deep_branch)r","Radial_nerve_(dorsal_digital_nn)r","Radial_nerve_(inferior_lateral_brachial_cutaneous_n)r","Radial_nerve_(posterior_antebrachial_cutaneous_n)r","Radial_nerve_(posterior_brachial_cutaneous_n)r","Radial_nerve_(posterior_interosseus_n)r","Radial_nerve_(superficial_br)r","Radial_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -551,7 +551,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "thigh"
   ],
-  modelMeshes: {"lower-limb":["Obturator nerve.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -589,7 +589,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus gluteus superior"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Superior gluteal nerve.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -625,7 +625,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus gluteus inferior"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Inferior gluteal nerve.r"]},
+  modelMeshes: {},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -659,7 +659,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus musculocutaneus"
   ],
   zone: `arm`,
-  modelMeshes: {},
+  modelMeshes: {"upper-limb":["Musculocutaneus_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -729,7 +729,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "shoulder"
   ],
-  modelMeshes: {},
+  modelMeshes: {"upper-limb":["Lateral_pectoral_nerver","Medial_pectoral_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
