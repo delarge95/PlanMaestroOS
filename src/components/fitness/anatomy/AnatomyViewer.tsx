@@ -20,6 +20,7 @@ import {
   getStructureById,
   resolveHighlightNames,
 } from '../../../data/fitness/anatomyGraph';
+import { getMeshKind } from '../../../data/fitness/anatomy/meshCatalog';
 import type { AnatomyStructure, StructureKind } from '../../../data/fitness/anatomy/types';
 
 const HIGHLIGHT_COLOR = 0x35d0ff;
@@ -581,7 +582,12 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     if (names.length) applyHighlight(names);
   }, [selectedStructure, model.key, loading, applyHighlight, resetOccluders]);
 
-  /** Visibilidad por categoría del grafo y aislamiento de pieza (feedback #4-5). */
+  /** Visibilidad por categoría del grafo y aislamiento de pieza (feedback #4-5).
+   *  Fallback meshCatalog (ciclo 3, T4): los meshes SIN estructura dueña en el
+   *  grafo toman su kind del catálogo por tipo — así el filtro por capa actúa
+   *  sobre el modelo completo (contenedores Bones/Muscles/… incluidos) — y la
+   *  geometría auxiliar ('aux': Circle/Plane/Vert/mesh del export de Blender)
+   *  queda OCULTA por defecto. */
   const applyVisibility = useCallback(() => {
     const filter = LAYER_FILTERS.find((f) => f.key === layerFilterRef.current) ?? LAYER_FILTERS[0];
     const iso = isolateIdRef.current ? getStructureById(isolateIdRef.current) : undefined;
@@ -590,9 +596,11 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       : null;
     for (const [name, objs] of namedMeshesRef.current) {
       const owner = meshOwnersRef.current.get(name);
+      const kind = owner?.kind ?? getMeshKind(modelKeyRef.current, name);
       let visible = true;
       if (isoNames) visible = isoNames.has(name);
-      else if (filter.kinds) visible = owner ? filter.kinds.includes(owner.kind) : false;
+      else if (filter.kinds) visible = filter.kinds.includes(kind as StructureKind);
+      else visible = kind !== 'aux';
       for (const obj of objs) obj.visible = visible;
     }
     updateOccluders();
