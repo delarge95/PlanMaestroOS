@@ -336,8 +336,9 @@ export const CARDIO_PRESETS: CardioPreset[] = [
     summary: 'Menos velocidad, más pendiente: mismo gasto con menos impacto (ajuste de carga en cinta).',
     blocks: [
       { id: 'wu', kind: 'warmup', name: 'Llano cómodo 10 min', durationMin: 10, intensity: { label: 'Ligero–moderado', mets: 3.7, why: [MET_WALK_FLAT] } },
-      { id: 'main', kind: 'work', name: '4.8 km/h a 5% de pendiente', durationMin: 25, intensity: { label: 'Moderado-vigoroso · 80 m/min, G=5%', mets: 5.3, why: [MET_WALK_GRADE],
-        modification: { guidance: 'Para subir carga: reduce velocidad y sube pendiente (mejor que alargar el paso).', why: [cite('acsm-exercise-testing-prescription-10ed', 'Cap. 4–5 (variantes seguras caminata)', 'Reducir velocidad/incrementar pendiente para adaptar carga; evitar overstriding.')] } } },
+      { id: 'main', kind: 'work', name: '4.8 km/h a 5% de pendiente', durationMin: 25,
+        intensity: { label: 'Moderado-vigoroso · 80 m/min, G=5%', mets: 5.3, why: [MET_WALK_GRADE] },
+        modification: { guidance: 'Para subir carga: reduce velocidad y sube pendiente (mejor que alargar el paso).', why: [cite('acsm-exercise-testing-prescription-10ed', 'Cap. 4–5 (variantes seguras caminata)', 'Reducir velocidad/incrementar pendiente para adaptar carga; evitar overstriding.')] } },
       { id: 'cd', kind: 'cooldown', name: 'Llano suave 10 min', durationMin: 10, intensity: { label: 'Ligero', mets: 3.0, why: [MET_WALK_FLAT] } },
     ],
     avgMets: 4.4,
