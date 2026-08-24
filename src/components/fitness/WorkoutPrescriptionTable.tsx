@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowLeftRight, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import type { TrainingProgram } from '../../data/fitness/programs/types';
 import ExerciseLink from './ExerciseLink';
@@ -6,6 +6,7 @@ import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
 import { libraryAssetUrl } from '../../lib/library/openDocument';
+import useIsMobile from '../ui/useIsMobile';
 
 export interface WorkoutPrescriptionTableProps {
   program: TrainingProgram;
@@ -47,14 +48,9 @@ export function WorkoutPrescriptionTable({
   const toggleNote = (id: string) => {
     setExpandedNoteId((prev) => (prev === id ? null : id));
   };
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  // A4 (AG-FIT): breakpoint móvil vía hook compartido (antes: resize listener manual)
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>

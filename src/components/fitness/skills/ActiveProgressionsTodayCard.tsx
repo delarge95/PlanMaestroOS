@@ -9,6 +9,7 @@ import {
 import { calisthenicsProgressions } from '../../../data/fitness/progressionsData';
 import { findExerciseMatches } from '../../../data/exercises';
 import { PROGRESSION_ALIASES } from '../../../data/fitness/progressionAliases';
+import { progressionGroupToPathId } from '../../../data/fitness/progressionPathLinks';
 import { YouTubePlayer } from '../../ui/YouTubePlayer';
 import { ChevronLeft, ChevronRight, CheckCircle2, Flame, BookOpen, ExternalLink } from 'lucide-react';
 
@@ -35,10 +36,10 @@ export default function ActiveProgressionsTodayCard() {
       }}>
         <span>📌 No tienes progresiones activas marcadas. </span>
         <a
-          href="/app/fitness/library/skills"
+          href="/app/fitness/skills"
           style={{ color: 'var(--accent, #0a84ff)', fontWeight: 700, textDecoration: 'none', marginLeft: '4px' }}
         >
-          Explorar Progresiones y Activar una ↗
+          Explorar Rutas de Habilidad y Activar una ↗
         </a>
       </div>
     );
@@ -122,10 +123,15 @@ export default function ActiveProgressionsTodayCard() {
         </div>
 
         <a
-          href="/app/fitness/library/skills"
+          href={
+            progressionGroupToPathId(currentGroup.id, currentGroup.title)
+              ? `/app/fitness/skills?path=${encodeURIComponent(progressionGroupToPathId(currentGroup.id, currentGroup.title) || '')}`
+              : '/app/fitness/skills'
+          }
+          title="Abrir esta progresión enfocada en las rutas de habilidad"
           style={{ fontSize: '0.76rem', color: 'var(--accent, #0a84ff)', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
         >
-          <span>Ver todas las progresiones</span>
+          <span>Ver esta ruta enfocada</span>
           <ExternalLink size={12} />
         </a>
       </div>

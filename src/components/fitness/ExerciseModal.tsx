@@ -10,12 +10,15 @@ interface Props {
   exercise?: ExerciseEntry | null;
   exerciseId?: string | null;
   onClose: () => void;
+  /** B5: abre el reproductor reproduciendo (botón ▶ de la lista del día). */
+  autoPlayVideo?: boolean;
 }
 
 export default function ExerciseModal({
   exercise,
   exerciseId,
   onClose,
+  autoPlayVideo = false,
 }: Props) {
   const [activeTab, setActiveTab] = useState<
     "technique" | "muscles" | "mobility" | "substitutions"
@@ -27,10 +30,18 @@ export default function ExerciseModal({
     exercise || (exerciseId ? getExerciseDetails(exerciseId) : null);
   if (!targetExercise) return null;
 
-  const videoUrl1 =
+  // B5: video SIEMPRE visible en la ficha. Si el ejercicio no tiene enlace
+  // curado, se usa una búsqueda de YouTube por nombre (el YouTubePlayer la
+  // embebe como playlist de resultados) — nunca un vacío ni datos falsos.
+  const curatedUrl1 =
     targetExercise.youtubeLink ||
     (targetExercise as any).videoOption1 ||
     (targetExercise as any).videoUrl;
+  const videoUrl1 =
+    curatedUrl1 ||
+    `https://www.youtube.com/results?search_query=${encodeURIComponent(
+      `${targetExercise.name} calisthenics exercise form`
+    )}`;
   const videoUrl2 =
     (targetExercise as any).secondaryVideoLink ||
     (targetExercise as any).videoOption2 ||
@@ -183,22 +194,21 @@ export default function ExerciseModal({
           </button>
         </div>
 
-        {/* INLINE REPRODUCTOR */}
-        {(videoUrl1 || videoUrl2) && (
-          <div
-            style={{
-              borderRadius: "16px",
-              overflow: "hidden",
-              border: "1px solid rgba(255,255,255,0.1)",
-            }}
-          >
-            <YouTubePlayer
-              youtubeLink={videoUrl1}
-              secondaryVideoLink={videoUrl2}
-              exerciseName={targetExercise.name}
-            />
-          </div>
-        )}
+        {/* INLINE REPRODUCTOR — B5: siempre presente (YouTubePlayer READ de ui) */}
+        <div
+          style={{
+            borderRadius: "16px",
+            overflow: "hidden",
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <YouTubePlayer
+            youtubeLink={videoUrl1}
+            secondaryVideoLink={videoUrl2}
+            exerciseName={targetExercise.name}
+            autoPlay={autoPlayVideo}
+          />
+        </div>
 
         {/* TABS */}
         <div

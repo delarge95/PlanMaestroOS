@@ -1,0 +1,1339 @@
+=== PDF PAGE 1 ===
+
+=== PDF PAGE 2 ===
+
+=== PDF PAGE 3 ===
+GRAY’S 
+ANATOMY 
+FOR STUDENTS
+Fourth Edition
+Richard L. Drake, PhD, FAAA
+Director of Anatomy
+Professor of Surgery
+Cleveland Clinic Lerner College of Medicine
+Case Western Reserve University
+Cleveland, Ohio
+A. Wayne Vogl, PhD, FAAA
+Professor of Anatomy and Cell Biology
+Department of Cellular and Physiological Sciences
+Faculty of Medicine
+University of British Columbia
+Vancouver, British Columbia, Canada
+Adam W. M. Mitchell, MB BS, FRCS, FRCR
+Consultant Radiologist
+Director of Radiology
+Fortius Clinic
+London, United Kingdom
+Illustrations by
+Richard Tibbitts and Paul Richardson
+Photographs by
+Ansell Horn
+
+=== PDF PAGE 4 ===
+GRAY’S ANATOMY FOR STUDENTS, FOURTH EDITION
+	
+ISBN:	
+978-0-323-39304-1
+  IE ISBN: 978-0-323-61104-6
+Copyright © 2020 Elsevier Inc.
+All rights reserved. No part of this publication may be reproduced or transmitted in any form or by any 
+means, electronic or mechanical, including photocopying, recording, or any information storage and 
+retrieval system, without permission in writing from the publisher. Details on how to seek permission, 
+further information about the Publisher’s permissions policies, and our arrangements with organizations 
+such as the Copyright Clearance Center and the Copyright Licensing Agency can be found at our website: 
+www.elsevier.com/permissions. This book and the individual contributions contained in it are protected 
+under copyright by the Publisher (other than as may be noted herein).
+Previous editions copyrighted 2014, 2010, 2005 by Churchill Livingstone, an imprint of Elsevier Inc.
+Notices
+Knowledge and best practice in this field are constantly changing. As new research and experience 
+broaden our understanding, changes in research methods, professional practices, or medical treatment 
+may become necessary. Practitioners and researchers must always rely on their own experience and 
+knowledge in evaluating and using any information, methods, compounds, or experiments described 
+herein. In using such information or methods they should be mindful of their own safety and the safety 
+of others, including parties for whom they have a professional responsibility. With respect to any drug 
+or pharmaceutical products identified, readers are advised to check the most current information 
+provided (i) on procedures featured or (ii) by the manufacturer of each product to be administered, to 
+verify the recommended dose or formula, the method and duration of administration, and 
+contraindications. It is the responsibility of practitioners, relying on their own experience and knowledge 
+of their patients, to make diagnoses, to determine dosages and the best treatment for each individual 
+patient, and to take all appropriate safety precautions. To the fullest extent of the law, neither the 
+Publisher nor the authors, contributors, or editors, assume any liability for any injury and/or damage to 
+persons or property as a matter of products liability, negligence or otherwise, or from any use or 
+operation of any methods, products, instructions, or ideas contained in the material herein.
+The Publisher
+Library of Congress Control Number: 2018952008
+Senior Content Strategist: Jeremy Bowes
+Director, Content Development: Rebecca Gruliow
+Publishing Services Manager: Catherine Jackson
+Senior Project Manager: John Casey
+Senior Book Designer: Amy Buxton
+Printed in Canada
+9  8  7  6  5  4  3  2  1
+1600 John F. Kennedy Blvd.
+Ste. 1600
+Philadelphia, PA 19103-2899
+
+=== PDF PAGE 5 ===
+The Body
+2
+are studied at the same time. For example, if the thorax 
+is to be studied, all of its structures are examined. 
+This includes the vasculature, the nerves, the bones, 
+the muscles, and all other structures and organs 
+located in the region of the body defined as the 
+thorax. After studying this region, the other regions of 
+the body (i.e., the abdomen, pelvis, lower limb, upper 
+limb, back, head, and neck) are studied in a similar 
+fashion.
+■	 In contrast, in a systemic approach, each system of 
+the body is studied and followed throughout the entire 
+body. For example, a study of the cardiovascular system 
+looks at the heart and all of the blood vessels in the body. 
+When this is completed, the nervous system (brain, 
+spinal cord, and all the nerves) might be examined in 
+detail. This approach continues for the whole body until 
+every system, including the nervous, skeletal, muscular, 
+gastrointestinal, respiratory, lymphatic, and reproduc­
+tive systems, has been studied.
+Each of these approaches has benefits and deficiencies. 
+The regional approach works very well if the anatomy 
+course involves cadaver dissection but falls short when 
+it comes to understanding the continuity of an entire 
+system throughout the body. Similarly, the systemic 
+approach fosters an understanding of an entire system 
+throughout the body, but it is very difficult to coordinate 
+this directly with a cadaver dissection or to acquire suffi­
+cient detail.
+Important anatomical terms
+The anatomical position
+The anatomical position is the standard reference position 
+of the body used to describe the location of structures (Fig. 
+1.1). The body is in the anatomical position when standing 
+upright with feet together, hands by the side and face 
+looking forward. The mouth is closed and the facial expres­
+sion is neutral. The rim of bone under the eyes is in the 
+same horizontal plane as the top of the opening to the 
+ear, and the eyes are open and focused on something in 
+the distance. The palms of the hands face forward with the 
+fingers straight and together and with the pad of the thumb 
+turned 90° to the pads of the fingers. The toes point 
+forward.
+Anatomical planes
+Three major groups of planes pass through the body in the 
+anatomical position (Fig. 1.1).
+What is anatomy?
+Anatomy includes those structures that can be seen grossly 
+(without the aid of magnification) and microscopically 
+(with the aid of magnification). Typically, when used by 
+itself, the term anatomy tends to mean gross or macroscopic 
+anatomy—that is, the study of structures that can be seen 
+without using a microscopic. Microscopic anatomy, also 
+called histology, is the study of cells and tissues using a 
+microscope.
+Anatomy forms the basis for the practice of medicine. 
+Anatomy leads the physician toward an understanding of 
+a patient’s disease, whether he or she is carrying out a 
+physical examination or using the most advanced imaging 
+techniques. Anatomy is also important for dentists, chiro­
+practors, physical therapists, and all others involved in any 
+aspect of patient treatment that begins with an analysis of 
+clinical signs. The ability to interpret a clinical observation 
+correctly is therefore the endpoint of a sound anatomical 
+understanding.
+Observation and visualization are the primary tech­
+niques a student should use to learn anatomy. Anatomy is 
+much more than just memorization of lists of names. 
+Although the language of anatomy is important, the 
+network of information needed to visualize the position of 
+physical structures in a patient goes far beyond simple 
+memorization. Knowing the names of the various branches 
+of the external carotid artery is not the same as being able 
+to visualize the course of the lingual artery from its origin 
+in the neck to its termination in the tongue. Similarly, 
+understanding the organization of the soft palate, how it is 
+related to the oral and nasal cavities, and how it moves 
+during swallowing is very different from being able to recite 
+the names of its individual muscles and nerves. An under­
+standing of anatomy requires an understanding of the 
+context in which the terminology can be remembered.
+How can gross anatomy be studied?
+The term anatomy is derived from the Greek word temnein, 
+meaning “to cut.” Clearly, therefore, the study of anatomy 
+is linked, at its root, to dissection, although dissection of 
+cadavers by students is now augmented, or even in some 
+cases replaced, by viewing prosected (previously dissected) 
+material and plastic models, or using computer teaching 
+modules and other learning aids.
+Anatomy can be studied following either a regional or a 
+systemic approach.
+■	 With a regional approach, each region of the body 
+is studied separately and all aspects of that region 
+
+=== PDF PAGE 6 ===
+1
+3
+What Is Anatomy  •  Important Anatomical Terms
+Fig. 1.1  The anatomical position, planes, and terms of location and orientation. 
+Feet together
+toes forward
+Hands by sides
+palms forward
+Face looking forward
+Inferior margin of orbit level with
+top of external auditory meatus
+Sagittal plane
+Coronal plane
+Superior
+Anterior
+Posterior
+Medial
+Lateral
+Inferior
+Transverse, horizontal,
+or axial plane
+
+=== PDF PAGE 7 ===
+The Body
+4
+■	 Proximal and distal are used with reference to being 
+closer to or farther from a structure’s origin, particu­
+larly in the limbs. For example, the hand is distal to the 
+elbow joint. The glenohumeral joint is proximal to 
+the elbow joint. These terms are also used to describe 
+the relative positions of branches along the course of 
+linear structures, such as airways, vessels, and nerves. 
+For example, distal branches occur farther away toward 
+the ends of the system, whereas proximal branches 
+occur closer to and toward the origin of the system.
+■	 Cranial (toward the head) and caudal (toward the tail) 
+are sometimes used instead of superior and inferior, 
+respectively.
+■	 Rostral is used, particularly in the head, to describe the 
+position of a structure with reference to the nose. For 
+example, the forebrain is rostral to the hindbrain.
+Superficial and deep
+Two other terms used to describe the position of structures 
+in the body are superficial and deep. These terms are 
+used to describe the relative positions of two structures 
+with respect to the surface of the body. For example, the 
+sternum is superficial to the heart, and the stomach is deep 
+to the abdominal wall.
+Superficial and deep can also be used in a more absolute 
+fashion to define two major regions of the body. The super­
+ficial region of the body is external to the outer layer of 
+deep fascia. Deep structures are enclosed by this layer. 
+Structures in the superficial region of the body include the 
+skin, superficial fascia, and mammary glands. Deep struc­
+tures include most skeletal muscles and viscera. Superficial 
+wounds are external to the outer layer of deep fascia, 
+whereas deep wounds penetrate through it.
+■	 Coronal planes are oriented vertically and divide the 
+body into anterior and posterior parts.
+■	 Sagittal planes also are oriented vertically but are at 
+right angles to the coronal planes and divide the body 
+into right and left parts. The plane that passes through 
+the center of the body dividing it into equal right and 
+left halves is termed the median sagittal plane.
+■	 Transverse, horizontal, or axial planes divide the 
+body into superior and inferior parts.
+Terms to describe location
+Anterior (ventral) and posterior (dorsal), 
+medial and lateral, superior and inferior
+Three major pairs of terms are used to describe the location 
+of structures relative to the body as a whole or to other 
+structures (Fig. 1.1).
+■	 Anterior (or ventral) and posterior (or dorsal) 
+describe the position of structures relative to the “front” 
+and “back” of the body. For example, the nose is an 
+anterior (ventral) structure, whereas the vertebral 
+column is a posterior (dorsal) structure. Also, the nose 
+is anterior to the ears and the vertebral column is pos­
+terior to the sternum.
+■	 Medial and lateral describe the position of structures 
+relative to the median sagittal plane and the sides of 
+the body. For example, the thumb is lateral to the little 
+finger. The nose is in the median sagittal plane and 
+is medial to the eyes, which are in turn medial to the 
+external ears.
+■	 Superior and inferior describe structures in reference 
+to the vertical axis of the body. For example, the head is 
+superior to the shoulders and the knee joint is inferior 
+to the hip joint.
+Proximal and distal, cranial and caudal, 
+and rostral
+Other terms used to describe positions include proximal 
+and distal, cranial and caudal, and rostral.
+
+=== PDF PAGE 8 ===
+1
+5
+Imaging  •  Diagnostic Imaging Techniques
+Fig. 1.2  Cathode ray tube for the production of X-rays. 
+Focusing cup
+Glass X-ray tube
+X-rays
+Anode
+Tungsten target
+Tungsten filament
+Cathode
+Imaging
+Diagnostic imaging techniques
+In 1895 Wilhelm Roentgen used the X-rays from a cathode 
+ray tube to expose a photographic plate and produce the 
+first radiographic exposure of his wife’s hand. Over the past 
+35 years there has been a revolution in body imaging, 
+which has been paralleled by developments in computer 
+technology.
+Plain radiography
+X-rays are photons (a type of electromagnetic radiation) 
+and are generated from a complex X-ray tube, which is a 
+type of cathode ray tube (Fig. 1.2). The X-rays are then 
+collimated (i.e., directed through lead-lined shutters to stop 
+them from fanning out) to the appropriate area of the body. 
+As the X-rays pass through the body they are attenuated 
+(reduced in energy) by the tissues. Those X-rays that pass 
+through the tissues interact with the photographic film.
+In the body:
+■	 air attenuates X-rays a little;
+■	 fat attenuates X-rays more than air but less than 
+water; and
+■	 bone attenuates X-rays the most.
+These differences in attenuation result in differences in 
+the level of exposure of the film. When the photographic 
+film is developed, bone appears white on the film because 
+this region of the film has been exposed to the least amount 
+of X-rays. Air appears dark on the film because these 
+regions were exposed to the greatest number of X-rays.
+Modifications to this X-ray technique allow a continu­
+ous stream of X-rays to be produced from the X-ray tube 
+and collected on an input screen to allow real-time visual­
+ization of moving anatomical structures, barium studies, 
+angiography, and fluoroscopy (Fig. 1.3).
+Fig. 1.3  Fluoroscopy unit. 
+
+=== PDF PAGE 9 ===
+The Body
+6
+Fig. 1.4  Barium sulfate follow-through. 
+Fig. 1.5  Digital subtraction angiogram. 
+Contrast agents
+To demonstrate specific structures, such as bowel loops or 
+arteries, it may be necessary to fill these structures with a 
+substance that attenuates X-rays more than bowel loops or 
+arteries do normally. It is, however, extremely important 
+that these substances are nontoxic. Barium sulfate, an 
+insoluble salt, is a nontoxic, relatively high-density agent 
+that is extremely useful in the examination of the gastro­
+intestinal tract. When a barium sulfate suspension is 
+ingested it attenuates X-rays and can therefore be used to 
+demonstrate the bowel lumen (Fig. 1.4). It is common to 
+add air to the barium sulfate suspension, by either ingest­
+ing “fizzy” granules or directly instilling air into the body 
+cavity, as in a barium enema. This is known as a double-
+contrast (air/barium) study.
+For some patients it is necessary to inject contrast agents 
+directly into arteries or veins. In this case, iodine-based 
+molecules are suitable contrast agents. Iodine is chosen 
+because it has a relatively high atomic mass and so mark­
+edly attenuates X-rays, but also, importantly, it is naturally 
+excreted via the urinary system. Intra-arterial and intrave­
+nous contrast agents are extremely safe and are well toler­
+ated by most patients. Rarely, some patients have an 
+anaphylactic reaction to intra-arterial or intravenous 
+injections, so the necessary precautions must be taken. 
+Intra-arterial and intravenous contrast agents not only 
+help in visualizing the arteries and veins but because they 
+are excreted by the urinary system, can also be used to 
+visualize the kidneys, ureter, and bladder in a process 
+known as intravenous urography.
+Subtraction angiography
+During angiography it is often difficult to appreciate the 
+contrast agent in the vessels through the overlying bony 
+structures. To circumvent this, the technique of subtrac­
+tion angiography has been developed. Simply, one or 
+two images are obtained before the injection of contrast 
+media. These images are inverted (such that a negative is 
+created from the positive image). After injection of the 
+contrast media into the vessels, a further series of images 
+are obtained, demonstrating the passage of the contrast 
+through the arteries into the veins and around the circula­
+tion. By adding the “negative precontrast image” to the 
+positive postcontrast images, the bones and soft tissues 
+are subtracted to produce a solitary image of contrast 
+only. Before the advent of digital imaging this was a 
+challenge, but now the use of computers has made this 
+technique relatively straightforward and instantaneous 
+(Fig. 1.5).
+
+=== PDF PAGE 10 ===
+1
+7
+Imaging  •  Diagnostic Imaging Techniques
+Doppler ultrasound
+Doppler ultrasound enables determination of flow, its 
+direction, and its velocity within a vessel using simple 
+ultrasound techniques. Sound waves bounce off moving 
+structures and are returned. The degree of frequency shift 
+determines whether the object is moving away from or 
+toward the probe and the speed at which it is traveling. 
+Precise measurements of blood flow and blood velocity can 
+therefore be obtained, which in turn can indicate sites of 
+blockage in blood vessels.
+Computed tomography
+Computed tomography (CT) was invented in the 1970s by 
+Sir Godfrey Hounsfield, who was awarded the Nobel Prize 
+in Medicine in 1979. Since this inspired invention there 
+have been many generations of CT scanners.
+A CT scanner obtains a series of images of the body 
+(slices) in the axial plane. The patient lies on a bed, an 
+X-ray tube passes around the body (Fig. 1.7), and a series 
+of images are obtained. A computer carries out a complex 
+mathematical transformation on the multitude of images 
+to produce the final image (Fig. 1.8).
+Magnetic resonance imaging
+Nuclear magnetic resonance imaging was first described in 
+1946 and used to determine the structure of complex 
+Ultrasound
+Ultrasonography of the body is widely used for all aspects 
+of medicine.
+Ultrasound is a very high frequency sound wave 
+(not electromagnetic radiation) generated by piezoelectric 
+materials, such that a series of sound waves is produced. 
+Importantly, the piezoelectric material can also receive the 
+sound waves that bounce back from the internal organs. 
+The sound waves are then interpreted by a powerful 
+computer, and a real-time image is produced on the 
+display panel.
+Developments in ultrasound technology, including the 
+size of the probes and the frequency range, mean that a 
+broad range of areas can now be scanned.
+Traditionally ultrasound is used for assessing the 
+abdomen (Fig. 1.6) and the fetus in pregnant women. 
+Ultrasound is also widely used to assess the eyes, neck, soft 
+tissues, and peripheral musculoskeletal system. Probes 
+have been placed on endoscopes, and endoluminal ultra­
+sound of the esophagus, stomach, and duodenum is now 
+routine. Endocavity ultrasound is carried out most com­
+monly to assess the genital tract in women using a 
+transvaginal or transrectal route. In men, transrectal 
+ultrasound is the imaging method of choice to assess the 
+prostate in those with suspected prostate hypertrophy or 
+malignancy.
+Fig. 1.6  Ultrasound examination of the abdomen. 
+Fig. 1.7  Computed tomography scanner. 
+
+=== PDF PAGE 11 ===
+The Body
+8
+The important difference between gamma rays and 
+X-rays is that gamma rays are produced from within the 
+nucleus of an atom when an unstable nucleus decays, 
+whereas X-rays are produced by bombarding an atom with 
+electrons.
+For an area to be visualized, the patient must receive a 
+gamma ray emitter, which must have a number of proper­
+ties to be useful, including:
+■	 a reasonable half-life (e.g., 6 to 24 hours),
+■	 an easily measurable gamma ray, and
+molecules. The process of magnetic resonance imaging 
+(MRI) is dependent on the free protons in the hydrogen 
+nuclei in molecules of water (H2O). Because water is 
+present in almost all biological tissues, the hydrogen proton 
+is ideal. The protons within a patient’s hydrogen nuclei can 
+be regarded as small bar magnets, which are randomly 
+oriented in space. The patient is placed in a strong magnetic 
+field, which aligns the bar magnets. When a pulse of radio 
+waves is passed through the patient the magnets are 
+deflected, and as they return to their aligned position they 
+emit small radio pulses. The strength and frequency of the 
+emitted pulses and the time it takes for the protons to 
+return to their pre-excited state produce a signal. These 
+signals are analyzed by a powerful computer, and an image 
+is created (Fig. 1.9).
+By altering the sequence of pulses to which the protons 
+are subjected, different properties of the protons can be 
+assessed. These properties are referred to as the “weight­
+ing” of the scan. By altering the pulse sequence and the 
+scanning parameters, T1-weighted images (Fig. 1.10A) 
+and T2-weighted images (Fig. 1.10B) can be obtained. 
+These two types of imaging sequences provide differences 
+in image contrast, which accentuate and optimize different 
+tissue characteristics.
+From the clinical point of view:
+■	 Most T1-weighted images show dark fluid and bright 
+fat—for example, within the brain the cerebrospinal 
+fluid (CSF) is dark.
+■	 T2-weighted images demonstrate a bright signal from 
+fluid and an intermediate signal from fat—for example, 
+in the brain the CSF appears white.
+MRI can also be used to assess flow within vessels and 
+to produce complex angiograms of the peripheral and 
+cerebral circulation.
+Diffusion-weighted imaging
+Diffusion-weighted imaging provides information on the 
+degree of Brownian motion of water molecules in various 
+tissues. There is relatively free diffusion in extracellular 
+spaces and more restricted diffusion in intracellular 
+spaces. In tumors and infarcted tissue, there is an increase 
+in intracellular fluid water molecules compared with 
+the extracellular fluid environment resulting in overall 
+increased restricted diffusion, and therefore identification 
+of abnormal from normal tissue.
+Nuclear medicine imaging
+Nuclear medicine involves imaging using gamma rays, 
+which are another type of electromagnetic radiation. 
+Fig. 1.8  Computed tomography scan of the abdomen at vertebral 
+level L2. 
+Fig. 1.9  A T2-weighted MR image in the sagittal plane of the 
+pelvic viscera in a woman. 
+
+=== PDF PAGE 12 ===
+1
+9
+Imaging  •  Nuclear Medicine Imaging
+■	 energy deposition in as low a dose as possible in the 
+patient’s tissues.
+The most commonly used radionuclide (radioisotope) is 
+technetium-99m. This may be injected as a technetium 
+salt or combined with other complex molecules. For 
+example, by combining technetium-99m with methylene 
+diphosphonate (MDP), a radiopharmaceutical is produced. 
+When injected into the body this radiopharmaceutical 
+specifically binds to bone, allowing assessment of the 
+skeleton. Similarly, combining technetium-99m with other 
+compounds permits assessment of other parts of the body, 
+for example the urinary tract and cerebral blood flow.
+Depending on how the radiopharmaceutical is 
+absorbed, distributed, metabolized, and excreted by the 
+body after injection, images are obtained using a gamma 
+camera (Fig. 1.11).
+Positron emission tomography
+Positron emission tomography (PET) is an imaging 
+modality for detecting positron-emitting radionuclides. A 
+positron is an anti-electron, which is a positively charged 
+particle of antimatter. Positrons are emitted from the 
+decay of proton-rich radionuclides. Most of these radionu­
+clides are made in a cyclotron and have extremely short 
+half-lives.
+The most commonly used PET radionuclide is fluorode­
+oxyglucose (FDG) labeled with fluorine-18 (a positron 
+Fig. 1.10  T1-weighted (A) and T2-weighted (B) MR images of the 
+brain in the coronal plane. 
+A
+B
+Fig. 1.11  A gamma camera. 
+
+=== PDF PAGE 13 ===
+The Body
+10
+radiograph; that is, with the patient’s back closest to the 
+X-ray tube.).
+Occasionally, when patients are too unwell to stand 
+erect, films are obtained on the bed in an anteroposterior 
+(AP) position. These films are less standardized than PA 
+films, and caution should always be taken when interpret­
+ing AP radiographs.
+The plain chest radiograph should always be 
+checked for quality. Film markers should be placed on the 
+appropriate side. (Occasionally patients have dextrocardia, 
+which may be misinterpreted if the film marker is placed 
+inappropriately.) A good-quality chest radiograph will 
+demonstrate the lungs, cardiomediastinal contour, dia­
+phragm, ribs, and peripheral soft tissues.
+Abdominal radiograph
+Plain abdominal radiographs are obtained in the AP 
+supine position. From time to time an erect plain abdominal 
+radiograph is obtained when small bowel obstruction is 
+suspected.
+Gastrointestinal contrast examinations
+High-density contrast medium is ingested to opacify the 
+esophagus, stomach, small bowel, and large bowel. As 
+described previously (p. 6), the bowel is insufflated with air 
+(or carbon dioxide) to provide a double-contrast study. In 
+many countries, endoscopy has superseded upper gastro­
+intestinal imaging, but the mainstay of imaging the large 
+bowel is the double-contrast barium enema. Typically the 
+patient needs to undergo bowel preparation, in which 
+powerful cathartics are used to empty the bowel. At the 
+time of the examination a small tube is placed into the 
+rectum and a barium suspension is run into the large 
+bowel. The patient undergoes a series of twists and turns 
+so that the contrast passes through the entire large bowel. 
+The contrast is emptied and air is passed through the same 
+tube to insufflate the large bowel. A thin layer of barium 
+coats the normal mucosa, allowing mucosal detail to be 
+visualized (see Fig. 1.4).
+Urological contrast studies
+Intravenous urography is the standard investigation for 
+assessing the urinary tract. Intravenous contrast medium 
+is injected, and images are obtained as the medium is 
+excreted through the kidneys. A series of films are obtained 
+during this period from immediately after the injection up 
+to approximately 20 minutes later, when the bladder is full 
+of contrast medium.
+This series of radiographs demonstrates the kidneys, 
+ureters, and bladder and enables assessment of the retro­
+peritoneum and other structures that may press on the 
+urinary tract.
+emitter). Tissues that are actively metabolizing glucose 
+take up this compound, and the resulting localized high 
+concentration of this molecule compared to background 
+emission is detected as a “hot spot.”
+PET has become an important imaging modality in the 
+detection of cancer and the assessment of its treatment 
+and recurrence.
+Single photon emission computed tomography
+Single photon emission computed tomography (SPECT) 
+is an imaging modality for detecting gamma rays 
+emitted from the decay of injected radionuclides such as 
+technetium-99m, iodine-123, or iodine-131. The rays are 
+detected by a 360-degree rotating camera, which allows the 
+construction of 3D images. SPECT can be used to diagnose 
+a wide range of disease conditions such as coronary artery 
+disease and bone fractures.
+IMAGE INTERPRETATION
+Imaging is necessary in most clinical specialties to diagnose 
+pathological changes to tissues. It is paramount to appreci­
+ate what is normal and what is abnormal. An appreciation 
+of how the image is obtained, what the normal variations 
+are, and what technical considerations are necessary to 
+obtain a radiological diagnosis. Without understanding the 
+anatomy of the region imaged, it is impossible to comment 
+on the abnormal.
+Plain radiography
+Plain radiographs are undoubtedly the most common form 
+of image obtained in a hospital or local practice. Before 
+interpretation, it is important to know about the imaging 
+technique and the views obtained as standard.
+In most instances (apart from chest radiography) the 
+X-ray tube is 1 m away from the X-ray film. The object in 
+question, for example a hand or a foot, is placed upon the 
+film. When describing subject placement for radiography, 
+the part closest to the X-ray tube is referred to first and that 
+closest to the film is referred to second. For example, when 
+positioning a patient for an anteroposterior (AP) radio­
+graph, the more anterior part of the body is closest to the 
+tube and the posterior part is closest to the film.
+When X-rays are viewed on a viewing box, the right side 
+of the patient is placed to the observer’s left; therefore, the 
+observer views the radiograph as though looking at a 
+patient in the anatomical position.
+Chest radiograph
+The chest radiograph is one of the most commonly 
+requested plain radiographs. An image is taken with the 
+patient erect and placed posteroanteriorly (PA chest 
+
+=== PDF PAGE 14 ===
+1
+11
+Imaging  •  Safety in Imaging
+and a series of representative films are obtained for 
+clinical use.
+SAFETY IN IMAGING
+Whenever a patient undergoes an X-ray or nuclear medi­
+cine investigation, a dose of radiation is given (Table 1.1). 
+As a general principle it is expected that the dose given is 
+as low as reasonably possible for a diagnostic image to be 
+obtained. Numerous laws govern the amount of radiation 
+exposure that a patient can undergo for a variety of proce­
+dures, and these are monitored to prevent any excess or 
+additional dosage. Whenever a radiograph is booked, the 
+clinician ordering the procedure must appreciate its neces­
+sity and understand the dose given to the patient to ensure 
+that the benefits significantly outweigh the risks.
+Imaging modalities such as ultrasound and MRI are 
+ideal because they do not impart significant risk to the 
+patient. Moreover, ultrasound imaging is the modality of 
+choice for assessing the fetus.
+Any imaging device is expensive, and consequently 
+the more complex the imaging technique (e.g., MRI) the 
+more expensive the investigation. Investigations must be 
+carried out judiciously, based on a sound clinical history 
+and examination, for which an understanding of anatomy 
+is vital.
+Computed tomography
+Computed tomography is the preferred terminology rather 
+than computerized tomography, though both terms are 
+used interchangeably by physicians.
+It is important for the student to understand the presen­
+tation of images. Most images are acquired in the axial 
+plane and viewed such that the observer looks from below 
+and upward toward the head (from the foot of the bed). By 
+implication:
+■the right side of the patient is on the left side of the
+image, and
+■the uppermost border of the image is anterior.
+Many patients are given oral and intravenous contrast 
+media to differentiate bowel loops from other abdominal 
+organs and to assess the vascularity of normal anatomical 
+structures. When intravenous contrast is given, the earlier 
+the images are obtained, the greater the likelihood of arte­
+rial enhancement. As the time is delayed between injection 
+and image acquisition, a venous phase and an equilibrium 
+phase are also obtained.
+The great advantage of CT scanning is the ability to 
+extend and compress the gray scale to visualize the bones, 
+soft tissues, and visceral organs. Altering the window set­
+tings and window centering provides the physician with 
+specific information about these structures.
+Magnetic resonance imaging
+There is no doubt that MRI has revolutionized the under­
+standing and interpretation of the brain and its coverings. 
+Furthermore, it has significantly altered the practice of 
+musculoskeletal medicine and surgery. Images can be 
+obtained in any plane and in most sequences. Typically the 
+images are viewed using the same principles as CT. Intrave­
+nous contrast agents are also used to further enhance tissue 
+contrast. Typically, MRI contrast agents contain paramag­
+netic substances (e.g., gadolinium and manganese).
+Nuclear medicine imaging
+Most nuclear medicine images are functional studies. 
+Images are usually interpreted directly from a computer, 
+Table 1.1  The approximate dosage of radiation exposure 
+as an order of magnitude
+Examination
+Typical 
+effective 
+dose (mSv)
+Equivalent duration 
+of background 
+exposure
+Chest radiograph
+0.02
+3 days
+Abdomen
+1.00
+6 months
+Intravenous urography
+2.50
+14 months
+CT scan of head
+2.30
+1 year
+CT scan of abdomen 
+and pelvis
+10.00
+4.5 years
+
+=== PDF PAGE 15 ===
+The Body
+12
+Fig. 1.12  The axial skeleton and the appendicular skeleton. 
+Axial skeleton
+Appendicular
+skeleton
+Body systems
+SKELETAL SYSTEM
+The skeleton can be divided into two subgroups, the axial 
+skeleton and the appendicular skeleton. The axial skeleton 
+consists of the bones of the skull (cranium), vertebral 
+column, ribs, and sternum, whereas the appendicular 
+skeleton consists of the bones of the upper and lower limbs 
+(Fig. 1.12).
+The skeletal system consists of cartilage and bone.
+Cartilage
+Cartilage is an avascular form of connective tissue consist­
+ing of extracellular fibers embedded in a matrix that con­
+tains cells localized in small cavities. The amount and kind 
+of extracellular fibers in the matrix varies depending on the 
+type of cartilage. In heavy weightbearing areas or areas 
+prone to pulling forces, the amount of collagen is greatly 
+increased and the cartilage is almost inextensible. In con­
+trast, in areas where weightbearing demands and stress are 
+less, cartilage containing elastic fibers and fewer collagen 
+fibers is common. The functions of cartilage are to:
+■	 support soft tissues,
+■	 provide a smooth, gliding surface for bone articulations 
+at joints, and
+■	 enable the development and growth of long bones.
+There are three types of cartilage:
+■	 hyaline—most common; matrix contains a moderate 
+amount of collagen fibers (e.g., articular surfaces of 
+bones);
+■	 elastic—matrix contains collagen fibers along with a 
+large number of elastic fibers (e.g., external ear);
+■	 fibrocartilage—matrix contains a limited number of 
+cells and ground substance amidst a substantial amount 
+of collagen fibers (e.g., intervertebral discs).
+Cartilage is nourished by diffusion and has no blood 
+vessels, lymphatics, or nerves.
+
+=== PDF PAGE 16 ===
+Body Systems  •  Skeletal System
+1
+13
+Bone
+Bone is a calcified, living, connective tissue that forms the 
+majority of the skeleton. It consists of an intercellular 
+calcified matrix, which also contains collagen fibers, and 
+several types of cells within the matrix. Bones function as:
+■	 supportive structures for the body,
+■	 protectors of vital organs,
+■	 reservoirs of calcium and phosphorus,
+■	 levers on which muscles act to produce movement, and
+■	 containers for blood-producing cells.
+There are two types of bone, compact and spongy (tra­
+becular or cancellous). Compact bone is dense bone that 
+forms the outer shell of all bones and surrounds spongy 
+bone. Spongy bone consists of spicules of bone enclosing 
+cavities containing blood-forming cells (marrow). Classifi­
+cation of bones is by shape.
+■	 Long bones are tubular (e.g., humerus in upper limb; 
+femur in lower limb).
+■	 Short bones are cuboidal (e.g., bones of the wrist and 
+ankle).
+■	 Flat bones consist of two compact bone plates separated 
+by spongy bone (e.g., skull).
+■	 Irregular bones are bones with various shapes (e.g., 
+bones of the face).
+■	 Sesamoid bones are round or oval bones that develop in 
+tendons.
+In the clinic
+Accessory and sesamoid bones
+These are extra bones that are not usually found as part of 
+the normal skeleton, but can exist as a normal variant in 
+many people. They are typically found in multiple 
+locations in the wrist and hands, ankles and feet (Fig. 1.13). 
+These should not be mistaken for fractures on imaging.
+Sesamoid bones are embedded within tendons, the 
+largest of which is the patella. There are many other 
+sesamoids in the body particularly in tendons of the 
+hands and feet, and most frequently in flexor tendons of 
+the thumb and big toe.
+Degenerative and inflammatory changes of, as well as 
+mechanical stresses on, the accessory bones and 
+sesamoids can cause pain, which can be treated with 
+physiotherapy and targeted steroid injections, but in some 
+severe cases it may be necessary to surgically remove the 
+bone.
+Fig. 1.13  Accessory and sesamoid bones. A. Radiograph of 
+the ankle region showing an accessory bone (os trigonum). 
+B. Radiograph of the feet showing numerous sesamoid bones 
+and an accessory bone (os naviculare). 
+Os naviculare
+A
+B
+Os trigonum
+Sesamoid bones
+
+=== PDF PAGE 17 ===
+The Body
+14
+Bones are vascular and are innervated. Generally, an 
+adjacent artery gives off a nutrient artery, usually one per 
+bone, that directly enters the internal cavity of the bone 
+and supplies the marrow, spongy bone, and inner layers of 
+compact bone. In addition, all bones are covered externally, 
+except in the area of a joint where articular cartilage is 
+present, by a fibrous connective tissue membrane called the 
+periosteum, which has the unique capability of forming new 
+bone. This membrane receives blood vessels whose branches 
+supply the outer layers of compact bone. A bone stripped 
+of its periosteum will not survive. Nerves accompany the 
+vessels that supply the bone and the periosteum. Most of 
+the nerves passing into the internal cavity with the nutrient 
+artery are vasomotor fibers that regulate blood flow. Bone 
+itself has few sensory nerve fibers. On the other hand, the 
+periosteum is supplied with numerous sensory nerve fibers 
+and is very sensitive to any type of injury.
+Developmentally, all bones come from mesenchyme by 
+either intramembranous ossification, in which mesenchy­
+mal models of bones undergo ossification, or endochondral 
+ossification, in which cartilaginous models of bones form 
+from mesenchyme and undergo ossification.
+In the clinic
+Determination of skeletal age
+Throughout life the bones develop in a predictable way to 
+form the skeletally mature adult at the end of puberty. In 
+western countries skeletal maturity tends to occur between 
+the ages of 20 and 25 years. However, this may well vary 
+according to geography and socioeconomic conditions. 
+Skeletal maturity will also be determined by genetic factors 
+and disease states.
+Up until the age of skeletal maturity, bony growth and 
+development follows a typically predictable ordered state, 
+which can be measured through either ultrasound, plain 
+radiographs, or MRI scanning. Typically, the nondominant 
+(left) hand is radiographed, and the radiograph is compared 
+to a series of standard radiographs. From these images the 
+bone age can be determined (Fig. 1.14).
+In certain disease states, such as malnutrition and 
+hypothyroidism, bony maturity may be slow. If the skeletal 
+bone age is significantly reduced from the patient’s true age, 
+treatment may be required.
+In the healthy individual the bone age accurately 
+represents the true age of the patient. This is important in 
+determining the true age of the subject. This may also have 
+medicolegal importance.
+A
+B
+D
+Carpal
+bones
+C
+Fig. 1.14  A developmental series of radiographs showing the 
+progressive ossification of carpal (wrist) bones from 3 (A) to 10 
+(D) years of age. 
+
+=== PDF PAGE 18 ===
+Body Systems  •  Skeletal System
+1
+15
+In the clinic
+Bone marrow transplants
+The bone marrow serves an important function. There are 
+two types of bone marrow, red marrow (otherwise known 
+as myeloid tissue) and yellow marrow. Red blood cells, 
+platelets, and most white blood cells arise from within the 
+red marrow. In the yellow marrow a few white cells are 
+made; however, this marrow is dominated by large fat 
+globules (producing its yellow appearance) (Fig. 1.15).
+From birth most of the body’s marrow is red; however, 
+as the subject ages, more red marrow is converted into 
+yellow marrow within the medulla of the long and 
+flat bones.
+Bone marrow contains two types of stem cells. 
+Hemopoietic stem cells give rise to the white blood cells, 
+red blood cells, and platelets. Mesenchymal stem cells 
+differentiate into structures that form bone, cartilage, 
+and muscle.
+There are a number of diseases that may involve the 
+bone marrow, including infection and malignancy. In patients 
+who develop a bone marrow malignancy (e.g., leukemia) it 
+may be possible to harvest nonmalignant cells from the 
+patient’s bone marrow or cells from another person’s bone 
+marrow. The patient’s own marrow can be destroyed with 
+chemotherapy or radiation and the new cells infused. This 
+treatment is bone marrow transplantation.
+Fig. 1.15  T1-weighted image in the coronal plane, 
+demonstrating the relatively high signal intensity returned from 
+the femoral heads and proximal femoral necks, consistent with 
+yellow marrow. In this young patient, the vertebral bodies return 
+an intermediate darker signal that represents red marrow. There 
+is relatively little fat in these vertebrae; hence the lower signal 
+return. 
+Yellow marrow in femoral head
+Red marrow in body
+of lumbar vertebra
+
+=== PDF PAGE 19 ===
+The Body
+16
+In the clinic
+Bone fractures
+Fractures occur in normal bone because of abnormal load or 
+stress, in which the bone gives way (Fig. 1.16A). Fractures 
+may also occur in bone that is of poor quality (osteoporosis); 
+in such cases a normal stress is placed upon a bone that is 
+not of sufficient quality to withstand this force and 
+subsequently fractures.
+In children whose bones are still developing, fractures 
+may occur across the growth plate or across the shaft. These 
+shaft fractures typically involve partial cortical disruption, 
+similar to breaking a branch of a young tree; hence they are 
+termed “greenstick” fractures.
+After a fracture has occurred, the natural response is to 
+heal the fracture. Between the fracture margins a blood clot 
+is formed into which new vessels grow. A jelly-like matrix is 
+formed, and further migration of collagen-producing cells 
+occurs. On this soft tissue framework, calcium 
+hydroxyapatite is produced by osteoblasts and forms 
+insoluble crystals, and then bone matrix is laid down. As 
+more bone is produced, a callus can be demonstrated 
+forming across the fracture site.
+Treatment of fractures requires a fracture line reduction. If 
+this cannot be maintained in a plaster of Paris cast, it may 
+require internal or external fixation with screws and metal 
+rods (Fig. 1.16B).
+Fig. 1.16  Radiograph, lateral view, showing fracture of the ulna 
+at the elbow joint (A) and repair of this fracture (B) using 
+internal fixation with a plate and multiple screws. 
+A
+B
+In the clinic
+Avascular necrosis
+Avascular necrosis is cellular death of bone resulting from a 
+temporary or permanent loss of blood supply to that bone. 
+Avascular necrosis may occur in a variety of medical 
+conditions, some of which have an etiology that is less than 
+clear. A typical site for avascular necrosis is a fracture across 
+the femoral neck in an elderly patient. In these patients there 
+is loss of continuity of the cortical medullary blood flow with 
+loss of blood flow deep to the retinacular fibers. This 
+essentially renders the femoral head bloodless; it 
+subsequently undergoes necrosis and collapses (Fig. 1.17). In 
+these patients it is necessary to replace the femoral head 
+with a prosthesis.
+Fig. 1.17  Image of the hip joints demonstrating loss of height of 
+the right femoral head with juxta-articular bony sclerosis and 
+subchondral cyst formation secondary to avascular necrosis. 
+There is also significant wasting of the muscles supporting the 
+hip, which is secondary to disuse and pain. 
+Normal left hip
+Bladder
+Avascular necrosis
+Wasting of gluteal muscle
+
+=== PDF PAGE 20 ===
+Body Systems  •  Skeletal System
+1
+17
+In the clinic
+Epiphyseal fractures
+As the skeleton develops, there are stages of intense 
+growth typically around the ages of 7 to 10 years and later 
+in puberty. These growth spurts are associated with 
+increased cellular activity around the growth plate 
+between the head and shaft of a bone. This increase in 
+activity renders the growth plates more vulnerable to 
+injuries, which may occur from dislocation across a 
+growth plate or fracture through a growth plate. 
+Occasionally an injury may result in growth plate 
+compression, destroying that region of the growth plate, 
+which may result in asymmetrical growth across that joint 
+region. All fractures across the growth plate must be 
+treated with care and expediency, requiring fracture 
+reduction.
+Fig. 1.18  Joints. A. Synovial joint. B. Solid joint. 
+A
+B
+Synovial joint
+Solid joint
+Bone
+Articular cavity
+Bone
+Bone
+Connective tissue
+Bone
+Joints
+The sites where two skeletal elements come together 
+are termed joints. The two general categories of joints 
+(Fig. 1.18) are those in which:
+■	 the skeletal elements are separated by a cavity (i.e., 
+synovial joints), and
+■	 there is no cavity and the components are held together 
+by connective tissue (i.e., solid joints).
+Blood vessels that cross over a joint and nerves that 
+innervate muscles acting on a joint usually contribute 
+articular branches to that joint.
+Synovial joints
+Synovial joints are connections between skeletal compo­
+nents where the elements involved are separated by a 
+narrow articular cavity (Fig. 1.19). In addition to contain­
+ing an articular cavity, these joints have a number of 
+characteristic features.
+First, a layer of cartilage, usually hyaline cartilage, 
+covers the articulating surfaces of the skeletal elements. In 
+other words, bony surfaces do not normally contact one 
+another directly. As a consequence, when these joints are 
+viewed in normal radiographs, a wide gap seems to sepa­
+rate the adjacent bones because the cartilage that covers 
+the articulating surfaces is more transparent to X-rays 
+than bone.
+A second characteristic feature of synovial joints is the 
+presence of a joint capsule consisting of an inner syno­
+vial membrane and an outer fibrous membrane.
+■	 The synovial membrane attaches to the margins of the 
+joint surfaces at the interface between the cartilage and 
+bone and encloses the articular cavity. The synovial 
+membrane is highly vascular and produces synovial 
+fluid, which percolates into the articular cavity and 
+lubricates the articulating surfaces. Closed sacs of 
+synovial membrane also occur outside joints, where 
+they form synovial bursae or tendon sheaths. Bursae 
+often intervene between structures, such as tendons 
+and bone, tendons and joints, or skin and bone, and 
+reduce the friction of one structure moving over the 
+other. Tendon sheaths surround tendons and also 
+reduce friction.
+■	 The fibrous membrane is formed by dense connective 
+tissue and surrounds and stabilizes the joint. Parts of 
+the fibrous membrane may thicken to form ligaments, 
+which further stabilize the joint. Ligaments outside the 
+capsule usually provide additional reinforcement.
+Another common but not universal feature of synovial 
+joints is the presence of additional structures within the 
+area enclosed by the capsule or synovial membrane, such 
+as articular discs (usually composed of fibrocartilage), 
+fat pads, and tendons. Articular discs absorb compres­
+sion forces, adjust to changes in the contours of joint sur­
+faces during movements, and increase the range of 
+movements that can occur at joints. Fat pads usually occur 
+between the synovial membrane and the capsule and move 
+
+=== PDF PAGE 21 ===
+The Body
+18
+Fig. 1.19  Synovial joints. A. Major features of a synovial joint. B. Accessory structures associated with synovial joints. 
+Bone
+Bone
+Bone
+Bone
+Fibrous
+membrane
+A 
+B
+Fibrous
+membrane
+Synovial
+membrane
+Joint
+capsule
+Synovial
+membrane
+Hyaline
+cartilage
+Hyaline cartilage
+Articular cavity
+Articular cavity
+Sheath
+Bursa
+Tendon
+Articular
+disc
+Fat pad
+Skin
+into and out of regions as joint contours change during 
+movement. Redundant regions of the synovial membrane 
+and fibrous membrane allow for large movements at joints.
+Descriptions of  synovial joints based on shape 
+and movement
+Synovial joints are described based on shape and 
+movement:
+■	 based on the shape of their articular surfaces, synovial 
+joints are described as plane (flat), hinge, pivot, 
+bicondylar (two sets of contact points), condylar (ellip­
+soid), saddle, and ball and socket;
+■	 based on movement, synovial joints are described as 
+uniaxial (movement in one plane), biaxial (movement 
+in two planes), and multiaxial (movement in three 
+planes).
+Hinge joints are uniaxial, whereas ball and socket joints 
+are multiaxial.
+
+=== PDF PAGE 22 ===
+Body Systems  •  Skeletal System
+1
+19
+adduction, circumduction, and rotation (e.g., hip 
+joint)
+Solid joints
+Solid joints are connections between skeletal elements 
+where the adjacent surfaces are linked together either 
+by fibrous connective tissue or by cartilage, usually fibro­
+cartilage (Fig. 1.21). Movements at these joints are more 
+restricted than at synovial joints.
+Fibrous joints include sutures, gomphoses, and 
+syndesmoses.
+■	 Sutures occur only in the skull where adjacent bones 
+are linked by a thin layer of connective tissue termed a 
+sutural ligament.
+■	 Gomphoses occur only between the teeth and adjacent 
+bone. In these joints, short collagen tissue fibers in the 
+periodontal ligament run between the root of the tooth 
+and the bony socket.
+■	 Syndesmoses are joints in which two adjacent bones 
+are linked by a ligament. Examples are the ligamentum 
+flavum, which connects adjacent vertebral laminae, 
+and an interosseous membrane, which links, for 
+example, the radius and ulna in the forearm.
+Cartilaginous joints include synchondroses and 
+symphyses.
+Specific types of  synovial joints 
+(Fig. 1.20)
+■	 Plane joints—allow sliding or gliding movements when 
+one bone moves across the surface of another (e.g., 
+acromioclavicular joint)
+■	 Hinge joints—allow movement around one axis that 
+passes transversely through the joint; permit flexion and 
+extension (e.g., elbow [humero-ulnar] joint)
+■	 Pivot joints—allow movement around one axis that 
+passes longitudinally along the shaft of the bone; permit 
+rotation (e.g., atlanto-axial joint)
+■	 Bicondylar joints—allow movement mostly in one axis 
+with limited rotation around a second axis; formed by 
+two convex condyles that articulate with concave or flat 
+surfaces (e.g., knee joint)
+■	 Condylar (ellipsoid) joints—allow movement around 
+two axes that are at right angles to each other; permit 
+flexion, extension, abduction, adduction, and circum­
+duction (limited) (e.g., wrist joint)
+■	 Saddle joints—allow movement around two axes that 
+are at right angles to each other; the articular surfaces 
+are saddle shaped; permit flexion, extension, abduction, 
+adduction, and circumduction (e.g., carpometacarpal 
+joint of the thumb)
+■	 Ball and socket joints—allow movement around 
+multiple axes; permit flexion, extension, abduction, 
+Fig. 1.20  Various types of synovial joints. A. Condylar (wrist). B. Gliding (radio-ulnar). C. Hinge (elbow). D. Ball and socket (hip). E. Saddle 
+(carpometacarpal of thumb). F. Pivot (atlanto-axial). 
+B
+F
+A
+C
+D
+E
+Radius
+Wrist joint
+Humerus
+Synovial membrane
+Radius
+Cartilage
+Synovial membrane
+Femur
+Trapezium
+Metacarpal I
+Synovial cavity
+Ulna
+Articular disc
+Synovial
+membrane
+Atlas
+Odontoid process
+of axis
+Olecranon
+Ulna
+
+=== PDF PAGE 23 ===
+The Body
+20
+Fig. 1.21  Solid joints. 
+Fibrous
+Cartilaginous
+SOLID JOINTS
+Sutures
+Gomphosis
+Syndesmosis
+Synchondrosis
+Symphysis
+Sutural ligament
+Head
+Long bone
+Shaft
+Tooth
+Bone
+Ulna
+Interosseous
+membrane
+Radius
+Periodontal
+ligament
+Skull
+Cartilage of
+growth plate
+Intervertebral
+discs
+Pubic
+symphysis
+■	 Synchondroses occur where two ossification centers 
+in a developing bone remain separated by a layer of 
+cartilage, for example, the growth plate that occurs 
+between the head and shaft of developing long bones. 
+These joints allow bone growth and eventually become 
+completely ossified.
+■	 Symphyses occur where two separate bones are inter­
+connected by cartilage. Most of these types of joints 
+occur in the midline and include the pubic symphysis 
+between the two pelvic bones, and intervertebral discs 
+between adjacent vertebrae.
+
+=== PDF PAGE 24 ===
+Body Systems  •  Skeletal System
+1
+21
+In the clinic
+Degenerative joint disease
+Degenerative joint disease is commonly known as 
+osteoarthritis or osteoarthrosis. The disorder is related to 
+aging but not caused by aging. Typically there are decreases 
+in water and proteoglycan content within the cartilage. The 
+cartilage becomes more fragile and more susceptible to 
+mechanical disruption (Fig. 1.22). As the cartilage wears, the 
+underlying bone becomes fissured and also thickens. 
+Synovial fluid may be forced into small cracks that appear in 
+the bone’s surface, which produces large cysts. Furthermore, 
+reactive juxta-articular bony nodules are formed 
+(osteophytes) (Fig. 1.23). As these processes occur, there is 
+slight deformation, which alters the biomechanical forces 
+through the joint. This in turn creates abnormal stresses, 
+which further disrupt the joint.
+In the United States, osteoarthritis accounts for up to 
+one-quarter of primary health care visits and is regarded as a 
+significant problem.
+The etiology of osteoarthritis is not clear; however, 
+osteoarthritis can occur secondary to other joint diseases, 
+such as rheumatoid arthritis and infection. Overuse of joints 
+and abnormal strains, such as those experienced by people 
+who play sports, often cause one to be more susceptible to 
+chronic joint osteoarthritis.
+Various treatments are available, including weight 
+reduction, proper exercise, anti-inflammatory drug treatment, 
+and joint replacement (Fig. 1.24).
+Fig. 1.22  This operative photograph demonstrates the focal 
+areas of cartilage loss in the patella and femoral condyles 
+throughout the knee joint. 
+Patella
+Cartilage loss
+Femoral condyles
+Cartilage loss
+Fig. 1.23  This radiograph demonstrates the loss of joint space in 
+the medial compartment and presence of small spiky 
+osteophytic regions at the medial lateral aspect of the joint. 
+Osteophytes
+Loss of joint space
+
+=== PDF PAGE 25 ===
+The Body
+22
+Arthroscopy
+Arthroscopy is a technique of visualizing the inside of a joint 
+using a small telescope placed through a tiny incision in the 
+skin. Arthroscopy can be performed in most joints. However, 
+it is most commonly performed in the knee, shoulder, ankle, 
+and hip joints.
+Arthroscopy allows the surgeon to view the inside of the 
+joint and its contents. Notably, in the knee, the menisci and 
+the ligaments are easily seen, and it is possible using 
+separate puncture sites and specific instruments to remove 
+the menisci and replace the cruciate ligaments. The 
+advantages of arthroscopy are that it is performed through 
+small incisions, it enables patients to quickly recover and 
+return to normal activity, and it only requires either a light 
+anesthetic or regional anesthesia during the procedure.
+In the clinic—cont’d
+Fig. 1.24  After knee replacement. This radiograph shows the 
+position of the prosthesis. 
+In the clinic
+Joint replacement
+Joint replacement is undertaken for a variety of reasons. 
+These predominantly include degenerative joint disease and 
+joint destruction. Joints that have severely degenerated or 
+lack their normal function are painful. In some patients, the 
+pain may be so severe that it prevents them from leaving 
+the house and undertaking even the smallest of activities 
+without discomfort.
+Large joints are commonly affected, including the hip, 
+knee, and shoulder. However, with ongoing developments 
+in joint replacement materials and surgical techniques, even 
+small joints of the fingers can be replaced.
+Typically, both sides of the joint are replaced; in the hip 
+joint the acetabulum will be reamed, and a plastic or metal 
+cup will be introduced. The femoral component will be fitted 
+precisely to the femur and cemented in place (Fig. 1.25).
+Most patients derive significant benefit from joint 
+replacement and continue to lead an active life afterward. In 
+a minority of patients who have been fitted with a metal 
+acetabular cup and metal femoral component, an aseptic 
+lymphocyte-dominated vasculitis-associated lesion (ALVAL) 
+may develop, possibly caused by a hypersensitivity response 
+to the release of metal ions in adjacent tissues. These 
+patients often have chronic pain and might need additional 
+surgery to replace these joint replacements with safer 
+models.
+Fig. 1.25  This is a radiograph, anteroposterior view, of the 
+pelvis after a right total hip replacement. There are additional 
+significant degenerative changes in the left hip joint, which will 
+also need to be replaced. 
+Artificial femoral head
+Acetabulum
+

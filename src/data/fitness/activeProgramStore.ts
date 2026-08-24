@@ -11,6 +11,8 @@ export interface ActiveProgramState {
   startedAt: string;
   updatedAt: string;
   postponedDays: number;
+  /** Fecha (YYYY-MM-DD) de la última postergación — evita postergar 2 veces el mismo día (B2). */
+  lastPostponedOn: string | null;
 
   // Actions
   setActiveProgram: (programId: string, week?: number, dayId?: string) => void;
@@ -37,6 +39,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
       startedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       postponedDays: 0,
+      lastPostponedOn: null,
 
       setActiveProgram: (programId: string, week = 1, dayId = '') => {
         set((state) => {
@@ -131,15 +134,22 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
       },
 
       postponeDay: () => {
-        set((state) => ({
-          postponedDays: (state.postponedDays || 0) + 1,
-          updatedAt: new Date().toISOString()
-        }));
+        const todayIso = new Date().toISOString().slice(0, 10);
+        set((state) => {
+          // B2: una sola postergación por día real (no acumula dobles clics)
+          if (state.lastPostponedOn === todayIso) return state;
+          return {
+            postponedDays: (state.postponedDays || 0) + 1,
+            lastPostponedOn: todayIso,
+            updatedAt: new Date().toISOString()
+          };
+        });
       },
 
       resetPostponedDays: () => {
         set({
           postponedDays: 0,
+          lastPostponedOn: null,
           updatedAt: new Date().toISOString()
         });
       },
@@ -152,6 +162,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
           currentDayId: 'mm-w1-minmax-d1',
           selectedExerciseOverrides: {},
           postponedDays: 0,
+          lastPostponedOn: null,
           updatedAt: new Date().toISOString()
         });
       }
@@ -166,6 +177,7 @@ export const useActiveProgramStore = create<ActiveProgramState>()(
         currentDayId: state.currentDayId,
         selectedExerciseOverrides: state.selectedExerciseOverrides,
         postponedDays: state.postponedDays,
+        lastPostponedOn: state.lastPostponedOn,
         startedAt: state.startedAt
       })
     }

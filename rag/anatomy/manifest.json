@@ -2,6 +2,16 @@
   "domain": "anatomy",
   "sources": [
     {
+      "id": "grays-anatomy-students-4ed",
+      "title": "Gray's Anatomy for Students",
+      "author": "Drake, Vogl, Mitchell",
+      "year": 2020,
+      "edition": "4th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["anatomy"], "priority": 1 }
+    },
+    {
       "id": "norkin-joint-structure-6ed",
       "title": "Joint Structure and Function: A Comprehensive Analysis (Levangie & Norkin)",
       "author": "Pamela K. Levangie; Cynthia C. Norkin; Michael D. Lewek",

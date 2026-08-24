@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import type { SkillDomain } from '../../../data/fitness/skills/types';
 import { skillPaths } from '../../../data/fitness/skills/skillPaths';
@@ -21,6 +21,8 @@ export interface ExplorePathsViewProps {
   onlyActive?: boolean;
   searchTerm?: string;
   hideInternalFilters?: boolean;
+  /** B4: ruta a enfocar/expander al montar (deep-link ?path= desde Hoy). */
+  focusPathId?: string | null;
 }
 
 export function ExplorePathsView({
@@ -28,12 +30,20 @@ export function ExplorePathsView({
   selectedDomain: externalDomain,
   onlyActive: externalOnlyActive,
   searchTerm: externalSearchTerm = '',
-  hideInternalFilters = false
+  hideInternalFilters = false,
+  focusPathId = null
 }: ExplorePathsViewProps) {
   const activeStepIds = useSkillStateStore((s) => s.activeStepIds);
   const [internalDomain, setInternalDomain] = useState<SkillDomain | 'all'>('all');
   const [expandedPathId, setExpandedPathId] = useState<string | null>(null);
   const [internalOnlyActive, setInternalOnlyActive] = useState(false);
+
+  // B4: deep-link — expande la ruta enfocada (p.ej. desde la tarjeta de Hoy)
+  useEffect(() => {
+    if (focusPathId && skillPaths.some((p) => p.id === focusPathId)) {
+      setExpandedPathId(focusPathId);
+    }
+  }, [focusPathId]);
 
   const selectedDomain = externalDomain ?? internalDomain;
   const onlyActive = externalOnlyActive ?? internalOnlyActive;

@@ -1,8 +1,16 @@
 ---
-import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
-import FitnessTabWorkspace from '../../../components/fitness/FitnessTabWorkspace.tsx';
+// A1 (AG-FIT): alias redirigido a /app/fitness (experiencia oficial con tabs).
+// El sitio es estático (output: 'static'), por lo que la redirección se hace
+// con meta-refresh + link visible (patrón sin JS).
 ---
-
-<PlanMaestroLayout title="Fitness - Hoy" activeDomain="fitness">
-  <FitnessTabWorkspace client:load initialTab="today" />
-</PlanMaestroLayout>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/app/fitness" />
+    <title>Fitness — Redirigiendo…</title>
+  </head>
+  <body style="background:#0d0d0f;color:#fff;font-family:system-ui;padding:40px;text-align:center;">
+    <p>Moviendo el árbol viejo de "Hoy" a la experiencia oficial…</p>
+    <p><a style="color:#0a84ff" href="/app/fitness">Ir a /app/fitness</a></p>
+  </body>
+</html>

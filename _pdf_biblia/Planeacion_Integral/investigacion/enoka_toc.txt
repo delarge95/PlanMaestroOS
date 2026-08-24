@@ -1,0 +1,641 @@
+=== PAGE 5 ===
+Neuromechanics 
+of Human Movement 
+FOUR TH EDI TION 
+Roger M. Enoka, PhD 
+University of Colorado at Boulder 
+‘5 
+Human Kinetics 
+
+=== PAGE 6 ===
+Library of Congress Cataloging-in-Publication Data 
+Enoka, Roger M., 1949- 
+Neuromechanics of human movement / Roger M. Enoka. -- 4th ed. 
+p.;cm. 
+Includes bibliographical references and index. 
+ISBN-13: 978-0-7360-6679-2 (hard cover) 
+ISBN-10: 0-7360-6679-9 (hard cover) 
+1. Kinesiology. 2. Human mechanics. I. Title. 
+[DNLM: 1. Biomechanics. 
+2. Movement--physiology. 
+3. Adaptation, Physiological. 
+4. Musculoskeletal Physiology. WE 103 
+E59n 2008] 
+QP303.E56 2008 
+612.7°6--dc22 
+2008020965 
+ISBN-10: 0-7360-6679-9 
+ISBN-13: 978-0-7360-6679-2 
+Copyright © 2008, 2002, 1994, 1988 by Roger M. Enoka. 
+All rights reserved. Except for use in a review, the reproduction or utilization of this work in any form or by any electronic, mechani- 
+cal, or other means, now known or hereafter invented, including xerography, photocopying, and recording, and in any information 
+storage and retrieval system, is forbidden without the written permission of the publisher. 
+Acquisitions Editor: Loarn D. Robertson, PhD; Developmental Editor: Maureen Eckstein; Assistant Editor: Christine Bryant 
+Cohen; Copyeditor: Joyce Sexton; Proofreader: Sarah Wiseman; Indexer: Craig Brown; Permission Manager: Dalene Reeder; 
+Graphic Designer: Fred Starbird; Graphic Artist: Kathleen Boudreau-Fuoss; Cover Designer: Keith Blomberg; Photographer 
+(Cover): Neil Bernstein; Visual Production Assistant: Joyce Brumfield; Photo Office Assistant: Jason Allen; Art Manager: Kelly 
+Hendren; Associate Art Manager: Alan L. Wilborn; Illustrators: Accurate Art and Carolyn Barry; Printer: Sheridan Books 
+Printed in the United States of America 
+Ke 
+“CER 
+OG 
+The paper in this book is certified under a sustainable forestry program. 
+Human Kinetics 
+Web site: www.HumanKinetics.com 
+United States: Human Kinetics, P.O. Box 5076, Champaign, IL 61825-5076 
+800-747-4457 
+email: humank @hkusa.com 
+Canada: Human Kinetics, 475 Devonshire Road Unit 100, Windsor, ON N8Y 2L5 
+800-465-7301 (in Canada only) 
+email: info@hkcanada.com 
+Europe: Human Kinetics, 107 Bradford Road, Stanningley, Leeds LS28 6 AT, United Kingdom 
++44 (0) 113 255 5665 
+email: hk @hkeurope.com 
+Australia: Human Kinetics, 57A Price Avenue, Lower Mitcham, South Australia 5062 
+08 8372 0999 
+e-mail: info@hkaustralia.com 
+New Zealand: Human Kinetics, P.O. Box 80, Torrens Park, South Australia 5062 
+0800 222 062 
+e-mail: info@hknewzealand.com 
+
+=== PAGE 7 ===
+To Bonny, Joel, and Seth 
+and 
+Maro, Chrissy, Katelyn, and Abby 
+
+=== PAGE 8 ===
+an 
+Bat 
+Pat 
+| 
+oS. aes so at 
+= ern es 
+“ae ee 
+| 
+i aa ee 
+ie 
+ae 
+a — 
+: 
+a eed 
+;. 
+= 
+arg? 
+ah 
+a 
+ee 
+. 
+ged WOR... 
+KIee ben 
+vat 
+u * 
+ws 
+ou 
+oar 
+ar 
+a ie 
+: 
+— 
+ears fi 
+et | sakes | ie 
+eet 
+ae: 
+: 
+iS 
+ao TERA, ¢ 
+[ a 
+eed vhs ah] acces 3 uae Bie 
+= 
+Liye cape Mr Hct: = settled i fc 
+fi oie 
+ps 
+i 
+ire po: ane t.” vk 
+“ths 
+hes 
+ng: is 
+= 
+ai. ete oo 
+apetion 
+tL de legis 
+Te 
+ui ie 
+ie es 
+\) 
+el Soe 
+lag 
+pe 
+‘- 
+) ee - 
+
+=== PAGE 9 ===
+Contents 
+MLR 
+SENN ONT RSNA TN THOR 
+OTEEE ACNE EO ASEAN LOCNT Te 
+OSN RUE TAA IMANITI SONOS NIC 
+Preface 
+vii 
+Acknowledgments 
+ix 
+part I ««» 
+The Force-Motion Relation 1 
+CHAPTER 1 
+Describing Motion. ... . FT 
+Me ee 
+Re 
+RT 
+ee Nee: 3 
+Measurement Rules 
+3 « Motion Descriptors 
+5 
+Constant Acceleration 
+9 = Up and Down 
+14 
+Graphic Connections 
+18 = Scalars and Vectors 
+19 
+Linear and Angular Motion 
+23 « Curve Fitting and Smoothing 
+29 
+Summary 
+39 = Suggested Readings 
+39 
+ERAPTER 2 
+PaMoverient: FOLCeSi).. 
+ccc 
+Soca eee: delatn ceedoln 
+ees 
+ee 
+41 
+Laws of Motion 
+41 = Free Body Diagram 
+43 = Torque 
+44 
+Forces Due to Body Mass 
+46 « Forces Due to the Surroundings 
+56 
+Momentum 
+68 = Work 
+81 = Summary 
+90 « Suggested Readings 
+90 
+CHAPTER 3 
+Forces Within the Body ........-. 5225-242 eee eee 91 
+Musculoskeletal Forces 
+91 = Static Analysis 
+107 
+Dynamic Analysis 
+118 = Joint Forces, Torques, and Power 
+129 
+Summary 
+140 » Suggested Readings 
+140 
+cHapteR 4 
+Running, Jumping, and Throwing ................-. 
+141 
+Walking and Running 
+141 = Jumping 
+157 = Throwing and Kicking 
+165 
+Summary 
+167 
+«= Suggested Readings 
+167 
+PartI Summary 
+169 
+CHAPTER Dae 
+excitable. Membranes. 
+isi exccanvidty 
+© 
+2 22 Se 
+ee 
+ee «Se 
+173 
+Essentials of Electricity 
+173 = Resting Membrane Potential 
+178 
+Neurons 
+181 = Synaptic Transmission 
+188 = Electromyography 
+197 
+Summary 
+203 « Suggested Readings 
+204 
+
+=== PAGE 10 ===
+vi 
+«** 
+Contents 
+CHAPTER O.. 
+Muscle and Motor-UiitSe 
+“ep 
+ue Gs. 
+- 
+e  e 
+e 
+205 
+Muscle 
+205 « Excitation-Contraction Coupling 
+210 
+Motor Unit 
+215 
+» Muscle Mechanics 
+228 = Summary 
+248 
+Suggested Readings 
+248 
+cHapteR 2 
+Voluntary Movement... 
+« 
+. 
+= .. 
+1 224 
+2 eee ee 
+249 
+Spinal Reflexes 
+249 = Automatic Responses 
+272 * Voluntary Actions 
+288 
+Summary 
+299 = Suggested Readings 
+300 
+Part II Summary 
+301 
+part 
+IIT <*> Adaptability 
+of the Motor System 
+= 303 
+CHAPTER Os ACUte AGjUStMENtS «ccs pe ae ue ew 
+as 
+ee Ce 
+OD 
+Warm-Up Effects 
+305 = Flexibility 
+309 
+Muscle Soreness and Damage 
+313 = Muscle Fatigue 
+317 
+Muscle Potentiation 
+338 * Arousal 
+343 = Summary 
+346 
+Suggested Readings 
+347 
+CHAPTER 9 Chronic Adaptations... 
+. «5 «+ snes. ape ox) 
+e849 
+Muscle Strength 
+349 = Muscle Power 
+372 
+Adaptation to Reduced Use 
+377 = Motor Recovery From Injury 
+388 
+Adaptations With Age 
+394 = Summary 
+402 
+Suggested Readings 
+403 
+Part II] Summary 
+404 
+Appendix A = SI Units 
+405 
+Appendix B = Conversion Factors 
+409 
+Appendix C = Equations 
+417 
+Glossary 
+421 
+References 
+443 
+Index 
+523 
+About the Author 
+549 
+
+=== PAGE 11 ===
+Preface 
+euromechanics of Human Movement is intended to provide a foundation for studying how 
+the nervous system controls the actions of muscles to exert forces on their surroundings 
+and thereby produce movement. Because movement is constrained by the laws of physics, both 
+the activation signals generated by the nervous system and the forces exerted by the muscles 
+must accommodate these constraints. Accordingly, the content of the text is derived from the 
+disciplines of neurophysiology (neuro-) and physics (mechanics) to provide a neuromechanical 
+perspective on the study of human movement. 
+The text is organized into three parts. Part I focuses on Newton’s laws of motion and their 
+application to the study of human movement. This material, typically referred to in a physics 
+text as mechanics, outlines the physical laws that define the properties of movement. The four 
+chapters in part I examine the concepts required to describe motion, the external forces that 
+act on the human body, the forces that exist within the human body, and the techniques that 
+can be used to analyze movement with examples from running, jumping, and throwing. The 
+most significant changes in this section from the third edition are that the material on electro- 
+myography has been moved to chapter 5 on electricity, new figures have been included, and 
+the citations have been updated. 
+Part II introduces the essential concepts from neurophysiology needed to understand how 
+movement is produced by the nervous system and muscles. Those parts of the human body 
+involved in the production of movement are collectively known as the motor system. The three 
+chapters on the motor system address excitable membranes, muscle and motor units, and volun- 
+tary movement. Chapter 5 deals with electricity, the resting membrane potential, the properties 
+of neurons, synaptic transmission, excitation-contraction coupling, and electromyography. 
+Chapter 6 addresses motor units, muscle mechanics, and the organization and activation of 
+muscles. Chapter 7 examines spinal reflexes, central pattern generators, and supraspinal control 
+of voluntary movement. Part II is completely revised from the third edition. 
+Part III focuses on the acute and chronic changes that can occur in the motor system in 
+response to various interventions. The acute adjustments include warm-up effects, flexibility, 
+muscle soreness and damage, muscle fatigue, muscle potentiation, and arousal. The chronic 
+adaptations comprise the effects of strength and power training, the effects of reduced use, 
+motor recovery from injury, and adaptations with aging. Although part III is similar to that in 
+the third edition, it has been updated to include more recent concepts and citations, as well as 
+many new figures, and the discussion on aging has been reorganized and expanded. 
+Because the intent of the text is to provide a scientific basis for the study of human move- 
+ment, the ideas and principles are discussed in scientific terms, and more attention is devoted 
+to precise definitions and measurements than is commonly the case in everyday conversation. 
+There is also a presentation package and image bank that accompany this text. It contains 
+PowerPoint slides that include most of the figures, tables, and photos in this text. 
+With this foundation, it should be possible to advance the study of human movement. This 
+goal is well illustrated by the analogy from Sherlock Holmes on the following page: How could 
+Holmes know of Watson’s intentions? The answer is, of course, that he used his well-known 
+ability to apply deductive reasoning. In a similar vein, 
+movement can be considered the conclusion of a process, 
+and our task, based on rigorously defined terms and con- 
+cepts, is to identify the intervening steps between the start- 
+= 
+O O 
+ing point and the conclusion. The state of our knowledge 
+on the neuromechanics of human movement is rather rudi- 
+s 
+mentary, so I hope that you find the fourth edition of the text 
+available at 
+both a valuable resource and an inspiration for new ideas. 
+HumankKinetics.com 
+
+=== PAGE 12 ===
+THE STRAND 
+MAGAZINE. 
+Vol. xxvi. 
+DECEMBER, 
+1903. 
+No. 156. 
+THE RETURN 
+OF 
+SHERLOCK HOLMES. 
+By A. CONAN 
+DOYLE. 
+III.—The Adventure of the Dancing Men. 
+OLMES had been seated for 
+some hours in silence with his 
+long, thin back curved over a 
+chemical vessel in which he 
+: 
+was 
+brewing 
+a particularly 
+EES malodorous product. His head 
+was sunk upon his breast, and he looked 
+from my point of view like a strange, lank 
+bird, with dull grey plumage and a black 
+top-knot. 
+“So, Watson,” said he, suddenly, “ you 
+do not propose to invest in South African 
+securities ?” 
+I gave a start of astonishment. Accustomed 
+as 1 was to Holmes’s curious faculties, this 
+sudden intrusion into my most 
+intimate 
+thoughts was utterly inexplicable. 
+“How on earth do you know that?” I 
+asked. 
+He wheeled round upon his stool, with a 
+steaming test-tube in his hand and a gleam 
+of amusement in his deep-set eyes. 
+“Now, Watson, confess yourself utterly 
+taken aback,” said he. 
+“YT am.” 
+“I ought to make you sign a paper to that 
+effect.” 
++ Why?” 
+“Because in five minutes you will say that 
+it is all so absurdly simple.” 
+“T am sure that I shall say nothing of the 
+kind.” 
+“You see, my dear Watson”—-he propped 
+his test-tube in the rack and began to lecture 
+with the air of a professor addressing his class 
+—~‘it is not really difficult to construct a 
+Vol, xxvi, +76, 
+eyetey 
+be 
+iS Sus! Bi 
+RTA KS 
+er 
+series of inferences, each dependent upon its 
+predecessor and each simple in itself. 
+If, after 
+doing so, one simply knocks out 
+all the 
+central inferences and presents one’s audience 
+with the starting-point and the conclusion, 
+one may produce a startling, though possibly 
+a meretricious, effect. 
+Now, it was not really 
+difficult, by an 
+inspection 
+of the groove 
+between your left forefinger and thumb, to 
+feel sure that you did of propose to invest 
+your small capital in the goldfields.” 
+“T see no connection.” 
+“Very likely not; but I can quickly show 
+you a close connection. Here are the missing 
+links of the very simple chain: 
+1. You had 
+chalk between your left finger and thumb 
+when you returned fram the club last night. 
+2. You put chalk 
+there when you play 
+billiards ‘to steady the cue. 
+3. You never 
+play billiards except with Thurston. 
+4. You 
+told me four weeks ago that Thurston had 
+an option.on some South African property 
+which would expire in a month, and which 
+he desired you to share with him. 
+5. Your 
+cheque-book is locked in my drawer, and 
+you have not asked for the key. 
+6. You 
+do not propose to invest your money in this 
+manner.” 
+“ How absurdly simple!” I cried. 
+“Quite so!” said 
+he, a little 
+nettled. 
+“Every problem becomes very childish when 
+once it is explained to you. 
+Here is an 
+unexplained one. 
+See what you can make of 
+that, friend Watson.” 
+He tossed a sheet of 
+paper upon the table and turned once more 
+to his chemical analysis. 
+369 
+Note. From The Illustrated Sherlock Holmes (p. 369) by A. C. Doyle, 1985, New York: Clarkson N. Potter, Inc. 
+Copyright 1985 by Clarkson N. Potter, Inc. Reprinted by permission 
+
+=== PAGE 13 ===
+Acknowledgments 
+A 
+s with the previous three editions of this book, the work is the product of a community 
+that includes students at the University of Colorado in Boulder, current and former 
+members of the Neurophysiology of Movement Laboratory, and colleagues who share a pas- 
+sion for the neuromechanics of movement. I am indebted, in particular, to critical contributions 
+by four individuals: Professor Jacques Duchateau, who is a source of inspiration and a helpful 
+editor; Carolyn Barry, who drew most of the new figures; Joel Enoka, who assisted with many 
+editorial details; and Kenji Narazaki, who scrutinized much of the text for errors. To these 
+individuals, and to those of you who assisted in other ways, many thanks. 
+ix 
+
+=== PAGE 14 ===
+. 
+. 
+a 
+; 
+io 
+Z 
+s 
+* 
+- » r § 
+~ 
+~% 4 os 
+. 
+: 
+RES oe ol 
+ated 
+ain 
+vo) 
+. 
+=n 
+ eeetaaecd Nipiss at rly inti cllepse ier ‘eng 
+om 
+re 
+x 
+4 
+Cle 
+ee a 
+eee 
+MaAgaaite. 
+piiitanen 
+5 tata rae atts Bas ai pevy aa 
+dleepontapele pais 
+MAC 
+ee Saeees 
+ seTS ea Auer: Ri 
+eee a! 
+st ie 
+GAR 
+fy ee Se edapebing (A 
+Sproaparirar U-oupios asiiue sab 
+i, 
+thane 
+er pies eit sligeany. Vy: 
+Ww a ose. 
+aa 
+nl 
+ac 
+! 
+a 
+aie 
+sane: Rie Sec 
+ae sis 
+Ke a 
+pce Sent weds uate Reni! 
+" 
+Bi ei 1s 
+Rte ee 
+ee 
+Man 
+BAe 
+ae ae *. sa hleeeea Cad Aes 
+cei HM" tied he Canoe 
+i= Ris me A ery Sree 
+‘i 
+A 
+: 
+= aes iret eid prveees 
+SER 
+eg 
+bance a acs see Ge se 
+mi eo ane Co 
+: 
+Pe nel 
+aie eae. et 
+aaa oe 
+e ee 
+ee 
+pers pares Sie BR Sag Mes ca as 
+ee 
+Say 
+—, 
+Sees 
+Sa Saeed 
+ibe sak Beep toe . hr 
+ey. 
+Lo 
+ak ee. oe pay et. an ce 
+§ 
+aw 
+a 
+es mit te, mT 
+pm 
+Se ee 
+po 
+kia 2 par *: jae chia 
+* Laie oe 
+2. 
+oP dees et Sparen easn,:, eiracatons ewe 
+_ 
+> Sag 
+eas ese i 
+Sgt: a 
+x 
+"7 “a Sie Fi he “hee ea 
+ay eae aan 
+~ 
+>=. 
+24; 
+— 
+7 ney Bore Bayh: 
+-~_% 
+eo. = aes” 
+AT 
+; 
+eee —ieeting net aA Be ah shi 
+x 
+iamsecty > ER cuine wel B grees. 
+tines sea cd 
+~~ - 
+anit 
+sae = 
+i, 
+eee! 
+fe" 
+ee —— 
+Gee 
+eget 
+; 
+ia eee 
+eee 
+TO x ain a 
+' 
+oe 
+lepine 
+; Behe sysigps 
+a a. ae 
+AS 
+; 
+Core. 
+ae eae 
+- “ 
+

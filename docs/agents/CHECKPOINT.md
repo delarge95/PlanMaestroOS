@@ -1,4 +1,11 @@
-# CHECKPOINT — Plan Maestro OS, estado al agotarse créditos (2026-08-23)
+# CHECKPOINT — Plan Maestro OS (actualizado 2026-08-23, post-incidente + nuevo workflow)
+
+> ## NOVEDADES DE LA ÚLTIMA SESIÓN
+> 1. **Incidente FIT corregido** (commit 757a5f2): restaurados TodayRoutineStack (configurador completo RIR/RPE/sustituciones), SectionNav de submenús, CalisthenicsProgressions (buscador) y FitnessLibrary (agrupaciones) dentro del workspace. Regla de Oro añadida al plan §0.9.
+> 2. **Bloque A extraído**: 116 archivos en `biblioteca/extracciones/` (Gray's/Moore/MacIntosh/Enoka por capítulos + Nippard + Daniels + otros) — ejecutado por el usuario con Gemini.
+> 3. **API key Gemini** guardada en `.env` (gitignored) para el worker IA de AG-CORE Fase C.
+> 4. **Workflow nuevo**: `docs/orquestacion/NORMAS_ORQUESTADOR.md` + reglas por entorno en `docs/orquestacion/entornos/`. Los créditos Zcode son última opción; el trabajo se delega a entornos externos vía puente humano.
+> 5. **Límite de uso Zcode**: subagentes caídos hasta 2026-08-24 09:21 (ventana de 5h agotada). ANATOM quedó a mitad de tarea 4 (visor con feedback del usuario enviado pero no procesado); CARDIO murió al arranque (sin trabajo previo).
 
 > Documento duradero de recuperación. Si este chat se pierde, cualquier sesión nueva puede retomar desde aquí: `docs/agents/PLAN_MULTIAGENTE.md` (segmentación), `docs/agents/PROMPTS_INICIALES.md` (prompts de arranque), `docs/agents/TAREAS_USUARIO.md` (mandatos extra), este checkpoint (estado), y los `docs/agents/STATUS-*.md` de cada agente.
 > Regla de reanudación: cada agente SIEMPRE arranca con `git merge main --no-edit` en su worktree y lee este checkpoint + su STATUS.

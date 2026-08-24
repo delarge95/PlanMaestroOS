@@ -45,34 +45,9 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
     return Object.keys(exerciseDatabase).slice(0, 30).sort();
   }, [flatLog]);
 
-  // Si flatLog está vacío, generar datos mock representativos basados en el programa activo
-  const effectiveLog: FlatLogEntry[] = useMemo(() => {
-    if (flatLog.length > 0) return flatLog;
-
-    const baseEntries: FlatLogEntry[] = [];
-    const sampleExercises = ['Barbell Bench Press', 'Barbell Squat', 'Barbell Deadlift', 'Pull Up', 'Overhead Press'];
-    const now = Date.now();
-    const dayMs = 24 * 60 * 60 * 1000;
-
-    for (let w = 4; w >= 1; w--) {
-      sampleExercises.forEach((exName, idx) => {
-        const timeIso = new Date(now - (w * 7 * dayMs) + (idx * dayMs)).toISOString();
-        const baseWeight = 60 + idx * 25 + (5 - w) * 2.5;
-        const reps = 8 + (idx % 3);
-
-        baseEntries.push({
-          weekId: `Semana ${5 - w}`,
-          dayId: `Día ${idx + 1}`,
-          exName,
-          timestamp: timeIso,
-          weight: baseWeight,
-          reps
-        });
-      });
-    }
-
-    return baseEntries;
-  }, [flatLog]);
+  // B8: NUNCA datos mock. Sin log real -> el gráfico queda vacío y se muestra
+  // el estado "Pendiente: logger" (antes se fabricaban 4 semanas de series).
+  const effectiveLog: FlatLogEntry[] = flatLog;
 
   // Filtrado de entradas de log según la selección del usuario
   const filteredLog = useMemo(() => {
@@ -368,8 +343,8 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
       {/* RENDERIZADO DEL GRÁFICO DINÁMICO SVG */}
       <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '16px', minHeight: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))' }}>
         {chartData.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-tertiary)', padding: '40px 0', fontSize: '0.86rem' }}>
-            Sin registros de datos para el filtro seleccionado.
+          <div style={{ textAlign: 'center', color: 'var(--text-tertiary)', padding: '40px 20px', fontSize: '0.86rem', border: '1px dashed rgba(255,255,255,0.14)', borderRadius: '10px', opacity: 0.8 }}>
+            Pendiente: logger — completa una sesión en Hoy para ver rendimiento real aquí.
           </div>
         ) : (
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: '16px', height: '160px', padding: '10px 0' }}>

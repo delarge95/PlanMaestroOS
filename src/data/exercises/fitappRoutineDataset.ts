@@ -1,4 +1,32 @@
-import type { RoutineWeek, RoutineDay } from '../../components/fitness/UnifiedRoutineTable';
+// src/data/exercises/fitappRoutineDataset.ts
+// Fuente única de la rutina Min-Max (y datasets de semanas powerbuilding/glute)
+// para visualización compacta (DrawerMiniFitnessViewer, grids semanales).
+// Los tipos RoutineExercise/RoutineDay/RoutineWeek vivían en UnifiedRoutineTable
+// (UI borrada en A2); se movieron aquí, junto a su único consumidor de datos.
+
+export interface RoutineExercise {
+  name: string;
+  subOption1?: string;
+  subOption2?: string;
+  calisthenicsSub?: string;
+  warmupSets: string;
+  sets: number | string;
+  repRange: string;
+  rirOrRpe: string;
+  rest: string;
+  notes: string;
+}
+
+export interface RoutineDay {
+  dayName: string;
+  exercises: RoutineExercise[];
+}
+
+export interface RoutineWeek {
+  weekName: string;
+  notes?: string;
+  days: RoutineDay[];
+}
 
 // BASE DAY DEFINITIONS FOR MIN-MAX PROGRAM (PDF ACCURATE)
 const minMaxWeek1Days: RoutineDay[] = [

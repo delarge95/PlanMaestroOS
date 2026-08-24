@@ -1,72 +1,123 @@
 // src/components/fitness/TodayCalendar.tsx
-import React from 'react';
+// B1 (AG-FIT): cronograma con calendario REAL — el día actual se deriva de la
+// fecha del sistema (new Date()), anclado al lunes de startedAt y corrido por
+// postponedDays (postergar corre el plan entero un día). Grid semanal L-V
+// (workoutDayIndex 1-5, mismo vocabulario que src/data/schedules/scheduleData.ts).
+import React, { useEffect, useMemo, useState } from 'react';
 import { Calendar, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getProgramById } from '../../data/fitness/programs';
+import {
+  buildProgramCalendar,
+  programWeekDays,
+  formatDateShort,
+  DAY_SHORT,
+  type ProgramCalendarDay
+} from '../../lib/fitness/programCalendar';
 
 interface TodayCalendarProps {
-  selectedDayIndex: number;
-  onSelectDayIndex: (index: number) => void;
+  selectedDayIndex?: number;
+  onSelectDayIndex?: (index: number) => void;
+}
+
+interface HistoryEntryLike {
+  programId?: string;
+  week?: number;
+  dayId?: string;
+}
+
+function readHistoryDone(): Set<string> {
+  try {
+    const raw = localStorage.getItem('fitapp_workout_history');
+    if (!raw) return new Set();
+    const entries = JSON.parse(raw) as HistoryEntryLike[];
+    return new Set(
+      entries
+        .filter((e) => e.programId && e.week && e.dayId)
+        .map((e) => `${e.programId}:${e.week}:${e.dayId}`)
+    );
+  } catch {
+    return new Set();
+  }
 }
 
 export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: TodayCalendarProps) {
   const activeProgramId = useActiveProgramStore((s) => s.programId);
   const currentWeek = useActiveProgramStore((s) => s.currentWeek);
+  const startedAt = useActiveProgramStore((s) => s.startedAt);
   const postponedDays = useActiveProgramStore((s) => s.postponedDays || 0);
   const setWeek = useActiveProgramStore((s) => s.setWeek);
+  const setDay = useActiveProgramStore((s) => s.setDay);
 
   const program = getProgramById(activeProgramId);
+
+  // Contexto de calendario real (fecha del sistema)
+  const ctx = useMemo(
+    () => buildProgramCalendar({ startedAt, postponedDays }, program?.durationWeeks ?? 12),
+    [startedAt, postponedDays, program?.durationWeeks]
+  );
+
+  // B1: sincroniza el store con la semana/día DERIVADOS una vez por montaje
+  // (la navegación manual posterior no se sobreescribe).
+  const [synced, setSynced] = useState(false);
+  useEffect(() => {
+    if (synced || !program) return;
+    setSynced(true);
+    if (currentWeek !== ctx.derivedWeek) setWeek(ctx.derivedWeek);
+    const safeWeekIdx = Math.min(Math.max(ctx.derivedWeek - 1, 0), (program.weeks?.length || 1) - 1);
+    const week = program.weeks?.[safeWeekIdx];
+    if (week && ctx.derivedDayIndex !== undefined) {
+      const day = week.days?.[ctx.derivedDayIndex];
+      if (day) setDay(day.id);
+    }
+  }, [synced, program, ctx.derivedWeek, ctx.derivedDayIndex, currentWeek, setWeek, setDay]);
+
+  // Día seleccionado: prop externo o el día real
+  const [internalDayIndex, setInternalDayIndex] = useState<number>(ctx.todayWeekdayIndex);
+  const effectiveDayIndex = selectedDayIndex ?? internalDayIndex;
+
+  const handleSelectDay = (idx: number) => {
+    setInternalDayIndex(idx);
+    onSelectDayIndex?.(idx);
+  };
+
+  // Semana mostrada = currentWeek del store (navegable); fechas REALES de esa semana
   const safeWeekIndex = Math.min(Math.max(currentWeek - 1, 0), (program.weeks?.length || 1) - 1);
   const activeWeek = program.weeks?.[safeWeekIndex] || program.weeks?.[0];
 
-  // Fecha base: Semana 2 = Lunes 10 de Agosto de 2026 (Hoy = Martes 11)
-  const baseDate = new Date(2026, 7, 10);
-  const weekOffset = (currentWeek - 2) * 7;
-  const daysOfWeek = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+  const weekDays: ProgramCalendarDay[] = useMemo(
+    () => programWeekDays(ctx.programStartMonday, currentWeek, postponedDays),
+    [ctx.programStartMonday, currentWeek, postponedDays]
+  );
 
-  // Mapeo dinámico teniendo en cuenta semanas pasadas, presente y futuras, más postponedDays
-  const scheduleDays = daysOfWeek.map((dayName, idx) => {
-    const dayDate = new Date(baseDate);
-    dayDate.setDate(baseDate.getDate() + weekOffset + idx);
-    const dateFormatted = `${dayDate.getDate()} ${dayDate.toLocaleDateString('es-ES', { month: 'short' })}`;
-    const isToday = currentWeek === 2 && idx === 1; // Martes 11 Ago (Semana 2)
+  const [historyDone] = useState<Set<string>>(() => readHistoryDone());
 
-    // Ajuste de índice por postergación si la postergación ocurrió
-    let workoutDayIdx = idx;
-    if (postponedDays > 0 && idx >= 1) {
-      workoutDayIdx = idx - postponedDays;
-    }
-
-    const isPostponedRest = postponedDays > 0 && idx === 1;
-    const hasWorkout = !isPostponedRest && workoutDayIdx >= 0 && workoutDayIdx < (activeWeek?.days?.length || 5);
+  const scheduleDays = weekDays.map((wd, idx) => {
+    const isToday = wd.date.toDateString() === ctx.today.toDateString();
+    const isPast = wd.date.getTime() < ctx.today.getTime();
+    const dayData = activeWeek?.days?.[idx];
+    const hasWorkout = wd.isTrainingDay && Boolean(dayData);
+    const doneKey = `${program.id}:${currentWeek}:${dayData?.id ?? ''}`;
+    const isDone = hasWorkout && historyDone.has(doneKey);
 
     let status: 'done' | 'today' | 'pending' | 'rest' = 'pending';
-    if (currentWeek < 2) {
-      status = hasWorkout ? 'done' : 'rest';
-    } else if (currentWeek === 2) {
-      if (idx < 1) status = hasWorkout ? 'done' : 'rest';
-      else if (idx === 1) status = isToday ? 'today' : 'pending';
-      else status = hasWorkout ? 'pending' : 'rest';
-    } else {
-      status = hasWorkout ? 'pending' : 'rest';
-    }
+    if (!hasWorkout) status = 'rest';
+    else if (isDone) status = 'done';
+    else if (isToday) status = 'today';
+    else if (isPast) status = 'done'; // pasado sin registro: transcurrido
 
-    let label = 'Descanso';
-    if (isPostponedRest) {
-      label = 'Postergado';
-    } else if (hasWorkout) {
-      const dayData = activeWeek?.days?.[workoutDayIdx];
+    let label = wd.weekdayIndex === 5 ? 'LISS' : 'Descanso';
+    if (hasWorkout) {
       label = dayData?.name
         ? dayData.name.replace(/^Día\s*\d+:\s*/i, '')
-        : `Día ${workoutDayIdx + 1}`;
+        : `Día ${idx + 1}`;
     }
 
     return {
       index: idx,
-      dayName,
-      dateFormatted,
+      dayName: DAY_SHORT[idx],
+      dateFormatted: formatDateShort(wd.date),
       isToday,
-      isRest: !hasWorkout,
       label,
       status
     };
@@ -84,16 +135,23 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
         gap: 'var(--space-md)'
       }}
     >
-      {/* CABECERA CON NAVEGADOR DE SEMANAS */}
+      {/* CABECERA: día real + navegador de semanas */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <Calendar size={18} style={{ color: 'var(--accent, #0a84ff)' }} />
           <h3 style={{ fontSize: 'var(--fs-step, 1.0625rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-            Cronograma Semanal
+            Hoy es {ctx.todayWeekdayName.toLowerCase()} {formatDateShort(ctx.today)}
           </h3>
+          {postponedDays > 0 && (
+            <span
+              title="Postergaciones acumuladas del plan"
+              style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff9f0a', background: 'rgba(255,159,10,0.12)', border: '1px solid rgba(255,159,10,0.3)', padding: '2px 8px', borderRadius: '999px' }}
+            >
+              Plan corrido {postponedDays} {postponedDays === 1 ? 'día' : 'días'}
+            </span>
+          )}
         </div>
 
-        {/* CONTROLES DE NAVEGACIÓN ENTRE SEMANAS */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button
             type="button"
@@ -139,16 +197,16 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
         </div>
       </div>
 
-      {/* DÍAS CON FECHAS */}
+      {/* DÍAS CON FECHAS REALES */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px' }}>
         {scheduleDays.map((sd) => {
-          const isSelected = selectedDayIndex === sd.index;
+          const isSelected = effectiveDayIndex === sd.index;
 
           return (
             <button
               key={sd.dayName}
               type="button"
-              onClick={() => onSelectDayIndex(sd.index)}
+              onClick={() => handleSelectDay(sd.index)}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
