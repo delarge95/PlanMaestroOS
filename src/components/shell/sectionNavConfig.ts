@@ -15,6 +15,7 @@ export const SECTION_NAV: Record<string, NavItemConfig[]> = {
     { href: '/app/fitness', label: 'Hoy', end: true },
     { href: '/app/fitness/library', label: 'Base de datos' },
     { href: '/app/fitness/progress', label: 'Progreso' },
+    { href: '/app/fitness/cardio', label: 'Cardio' },
     { href: '/app/fitness/nutrition', label: 'Nutrición' },
   ],
   'fitness.library': [
