@@ -319,7 +319,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     scene.add(root);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = !reducedMotion;
+    controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.rotateSpeed = 0.8;
     controls.enablePan = true; // feedback usuario: pan (botón derecho / dos dedos)
@@ -462,25 +462,19 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── loop de render: reactivo a prefers-reduced-motion ──────────────────────
-  // (el estado puede llegar DESPUÉS del montaje: arrancar/parar el RAF aquí,
-  //  no en el efecto de escena que solo corre una vez)
+  // ── loop de render ─────────────────────────────────────────────────────────
+  // prefers-reduced-motion ya NO deshabilita controles ni bucle: orbit/zoom/pan
+  // son interacciones del usuario, no animación ambiental. El "modo estático"
+  // anterior rompía el visor completo en sistemas con reducir-animaciones
+  // (controls off + sin re-render tras filtros/highlight/carga). No hay
+  // auto-rotación, así que el único movimiento es el que inicia el usuario.
   useEffect(() => {
     const renderer = rendererRef.current;
     const scene = sceneRef.current;
     const camera = cameraRef.current;
     const ctrl = controlsRef.current;
     if (!renderer || !scene || !camera || !ctrl) return;
-    staticModeRef.current = reducedMotion;
-    if (reducedMotion) {
-      // una sola pasada estática; OrbitControls deshabilitado
-      stoppedRef.current = true;
-      cancelAnimationFrame(rafRef.current);
-      ctrl.enabled = false;
-      ctrl.enableDamping = false;
-      renderer.render(scene, camera);
-      return () => {};
-    }
+    staticModeRef.current = false;
     stoppedRef.current = false;
     ctrl.enabled = true;
     ctrl.enableDamping = true;
@@ -494,7 +488,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       stoppedRef.current = true;
       cancelAnimationFrame(rafRef.current);
     };
-  }, [reducedMotion]);
+  }, []);
 
   // ── transparencia de capas que tapan la selección (feedback #3) ────────────
   // clone-on-write del material: los GLB comparten material entre meshes y
