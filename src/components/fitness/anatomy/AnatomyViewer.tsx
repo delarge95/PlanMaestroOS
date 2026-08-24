@@ -180,12 +180,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     }
   }, []);
 
-  useEffect(() => {
-    if (loading || !selectedStructure) return;
-    const names = resolveHighlightNames(selectedStructure, model.key);
-    if (names.length) applyHighlight(names);
-  }, [selectedStructure, model.key, loading, applyHighlight]);
-
   // ── carga del modelo (diferida por modelo) ─────────────────────────────────
   useEffect(() => {
     let cancelled = false;
@@ -532,10 +526,15 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     }
   }, []);
 
-  /** Raycast cámara→pieza: lo que se interpone se vuelve translúcido. */
-  const updateOccluders = useCallback(() => {
+  /** Restaura los materiales clonados de los oclusores actuales. */
+  const resetOccluders = useCallback(() => {
     for (const mesh of occluderMeshesRef.current) setMeshOpacity(mesh, null);
     occluderMeshesRef.current = [];
+  }, [setMeshOpacity]);
+
+  /** Raycast cámara→pieza: lo que se interpone se vuelve translúcido. */
+  const updateOccluders = useCallback(() => {
+    resetOccluders();
     const sel = selectedStructureRef.current;
     if (!sel || isolateIdRef.current) return; // aislada = ya solo se ve la pieza
     const root = modelRootRef.current;
@@ -576,7 +575,17 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       setMeshOpacity(m, OCCLUDER_OPACITY);
       occluderMeshesRef.current.push(m);
     }
-  }, [setMeshOpacity]);
+  }, [setMeshOpacity, resetOccluders]);
+
+  // ── highlight de la estructura seleccionada (se declara tras las utilidades de
+  // transparencia porque debe resetear oclusores ANTES de resaltar: los oclusores
+  // usan materiales CLONADOS y el resalte sobre un clon se perdería al recomputar) ──
+  useEffect(() => {
+    if (loading || !selectedStructure) return;
+    resetOccluders();
+    const names = resolveHighlightNames(selectedStructure, model.key);
+    if (names.length) applyHighlight(names);
+  }, [selectedStructure, model.key, loading, applyHighlight, resetOccluders]);
 
   /** Visibilidad por categoría del grafo y aislamiento de pieza (feedback #4-5). */
   const applyVisibility = useCallback(() => {
