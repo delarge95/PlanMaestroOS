@@ -1080,6 +1080,20 @@ function StructureDetail({ structure }: { structure: AnatomyStructure }) {
       {row('Inserción', (structure as any).insertion)}
       {row('Inervación', (structure as any).innervation)}
       {row('Acción', (structure as any).action)}
+      {structure.kind === 'joint' && (structure as any).rom?.length ? (
+        <div style={{ gridColumn: '1 / -1' }}>
+          <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
+          <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {(structure as any).rom.map((r: { motion: string; value: string; condition?: string; sourceRefs: Array<{ locator?: string }> }) => (
+              <li key={r.motion} style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                <strong style={{ color: 'var(--text-primary)' }}>{r.motion}:</strong> {r.value}
+                {r.condition ? ` — ${r.condition}` : ''}
+                <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)' }}> ({r.sourceRefs.map((sr) => sr.locator).join('; ')})</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : undefined}
       {row('Zona', structure.zone)}
       {row('Lesiones típicas', (structure as any).injuries)}
       {row('Atrapamiento', (structure as any).entrapmentSite)}
