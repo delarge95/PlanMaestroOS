@@ -270,7 +270,7 @@ export const NERVES: NerveEntry[] = [
     "thigh",
     "lower-leg"
   ],
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Schiatic_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -309,7 +309,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "thigh"
   ],
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Anterior_cutaneous_branches_of_Femoral_nerver","Femoral_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -343,7 +343,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Common_fibular_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -380,7 +380,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Medial_calcaneal_branches_of_Tibial_nerver","Tibial_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -414,7 +414,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus cutaneus femoris lateralis"
   ],
   zone: `hip`,
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Lateral_femoral_cuteneous_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -445,7 +445,7 @@ export const NERVES: NerveEntry[] = [
     "Rami ventrales L4-S1"
   ],
   zone: `spine`,
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Plexus_lumbarisr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -551,7 +551,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "thigh"
   ],
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Anterior_branch_of_Obturator_nerver","Cutaneous_br_of_Anterior_br_of_Obturator_nerver","Obturator_nerver","Posterior_branch_of_Obturator_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -589,7 +589,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus gluteus superior"
   ],
   zone: `hip`,
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Superior_gluteal_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -625,7 +625,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus gluteus inferior"
   ],
   zone: `hip`,
-  modelMeshes: {},
+  modelMeshes: {"lower-limb":["Inferior_gluteal_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
