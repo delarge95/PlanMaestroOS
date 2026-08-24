@@ -1,9 +1,10 @@
 # STATUS — AG-ANATOM (rama `agent/anatomia`)
 
-> Ciclo anatomía COMPLETO (2026-08-23): tareas 1-7 + feedback del usuario
-> (F1/F2) + reconciliación RAG con main. Merge de main al día (workflow
-> docs/orquestacion, rag/anatomy Gray's, restauración UX fitness). Sin push;
-> commits locales.
+> Ciclo 3 COMPLETO (2026-08-23): MAPPING REAL GLB ↔ anatomyGraph. El ciclo 2
+> dejaba selección/aislamiento/filtros rotos: solo el 11% de los 722 mapeos
+> coincidía con los GLB reales (4 modelos al 0%). Ciclo 3: **0 mapeos huérfanos
+> verificados por test**, catálogo por tipo para el modelo completo y filtros
+> operativos. Sin push; commits locales.
 
 ## Territorio
 
@@ -13,41 +14,78 @@
 resto de fitness (TodayRoutineStack y restaurados de main), nutrition,
 ui/tokens/nav (ticket AG-CORE).
 
-## Mapeo 3D logrado (inventario → grafo → visor)
+## Ciclo 3 — hallazgos clave (por qué fallaba TODO el mapping)
 
-**Activos**: 8 GLB Draco-comprimidos en `public/models/anatomy/` (~23 MB
-total, ≤6.6 MB c/u; decoder Draco self-hosted en `/models/anatomy/draco/`,
-sin CDN). Inventario con parser propio (`rag/anatomy/scripts/inventory-glb.mjs`,
-`mesh-names.json`).
+1. **Los nombres reales viven en `nodes[].name`**, no en `meshes[].name`:
+   el inventario del ciclo 2 leyó meshDefs (basura de Blender "mesh.228",
+   "Vert.015", "Circle.007" o vacíos) → "0 meshes" en cráneos/vertebrae y
+   un "mesh" en overview-skeleton.
+2. **El visor renombra todo en runtime** (three.js GLTFLoader):
+   `PropertyBinding.sanitizeNodeName` (espacios→`_`, elimina `. : / [ ]` —
+   "muscle.r"→"muscler", el punto NO deja separador) + `createUniqueName`
+   (`_N` en colisiones; el NODO reserva nombre antes que el mesh → el nombre
+   del meshDef nunca sobrevive). El grafo mapeaba nombres crudos con
+   espacios/puntos que en la escena no existen.
+3. **Los 43 "Circle.NNN" de lower-limb NO son basura en escena**: son los
+   meshDefs de las bursas (nodos bien nombrados bajo la raíz "Bursae"). La
+   regla `aux` queda como defensa ante helper que sí llegue nombrada.
+4. **Las raíces de escena son contenedores de categoría** (Bones, Muscles,
+   Nerves, "Arm - muscles", …): el filtro de capas anterior los ocultaba al
+   no tener dueño → escondía el modelo entero. Ahora el catálogo les da kind.
 
-| Modelo | Estructuras del grafo | Peso |
-|---|---|---|
-| lower-limb | 96 | 5.9 MB |
-| upper-limb | 81 | 6.6 MB |
-| overview-skeleton | 58 | 3.3 MB |
-| hand | 36 | 3.1 MB |
-| colored-skull-base / exploded-skull / overview-colored-skull | 13 c/u | 1.1 MB |
-| vertebrae | 3 | 0.2 MB |
+## Ciclo 3 — mapeo logrado (todo verificado contra nombres runtime)
 
-**Grafo** (`src/data/fitness/anatomyGraph.ts`, datos en
-`src/data/fitness/anatomy/`): **267 estructuras** con mapping GLB por
-`modelMeshes` (nodo y/o nombre de geometría):
+Pipeline `rag/anatomy/scripts/remap.ts` (capas exacto→agresivo→alias manual
++ resolución de "mejor dueño"; aliases en `meshAliases.ts`). Reporte:
+`rag/anatomy/extracciones/remap-report.md`; inventario canónico:
+`rag/anatomy/extracciones/mesh-names.json` + `modelos-inventario.md`
+(convención de nombres por GLB). Validación: `npx tsx
+rag/anatomy/scripts/coverage-report.ts`.
 
-| Tipo | Total | Con mapping 3D |
-|---|---|---|
-| músculos | 146 | 83 |
-| huesos | 39 | 38 |
-| nervios | 22 | 12 |
-| ligamentos | 21 | 21 |
-| tendones | 20 | 13 |
-| articulaciones | 19 | 18 |
-| **total** | **267** | **185 (69%)** |
+| Modelo | Nombres runtime | Estructuras seleccionables | Nombres con dueño | % clasificado (meshCatalog) |
+|---|---|---|---|---|
+| upper-limb | 575 | 96 | 164 | 95.3% |
+| lower-limb | 462 | 107 | 118 | 91.3% |
+| hand | 235 | 41 | 63 | 98.3% |
+| overview-skeleton | 147 | 59 | 75 | 100% |
+| colored-skull-base / exploded / overview-colored | 30/30/31 | 12 c/u | 12 c/u | 100% |
+| vertebrae | 4 | 5 | 3 | 100% |
 
-Cobertura pendiente: músculos sin GLB dedicado (torso/trunk detallado) y
-nervios (los modelos no traen capas neurales nombradas). El esqueleto
-axial está cubierto por overview-skeleton/vertebrae.
+**Grafo: 267 estructuras · 211 con mapping 3D (79%) · 640 mapeos
+estructura→mesh, 0 huérfanos** (`meshMapping.test.ts` compara cada nombre
+contra mesh-names.json). Por tipo: huesos 39/39, ligamentos 21/21,
+articulaciones 19/19, músculos 98/146, nervios 18/22, tendones 16/20.
 
-## Features del visor (tareas 4, 4-FINAL y feedback F1)
+### Decisiones de alias (defendibles)
+
+- **Cabezas/partes como multi-mesh**: bíceps/tríceps/gastrocnemios por
+  cabezas; deltoides clavicular/acromial/espinal ↔ Deltoideus ant/med/post;
+  pectoral mayor por 4 cabezas; trapecio entero + 3 partes.
+- **Articulaciones → huesos constituyentes** (los GLB no traen "articulación"
+  como pieza): hombro=húmero+escápula, rodilla=fémur+tibia+rótula, etc.
+- **Aproximaciones documentadas**: tendones sin mesh propio → vientre
+  muscular o vaina (supraspinatus, psoas-iliaco, flexores de la mano,
+  De Quervain = vainas APL+EPB); VMO → vasto medial.
+- **Typos del modelo resueltos por alias**: "Schiatic nerve" (isquiático),
+  "cuteneous", "Musculocutaneus", "Articularis genus", "Iliolumbar ligament .r".
+- **Honestidad por encima del número**: referencias sin contraparte real
+  ELIMINADAS (p.ej. temporalis/masetero ya NO mapean el hueso temporal);
+  las estructuras se conservan para la BD de Músculos.
+
+## meshCatalog (T4) — filtros sobre el modelo COMPLETO
+
+`src/data/fitness/anatomy/meshCatalog.ts` (generado por
+`rag/anatomy/scripts/build-mesh-catalog.mjs`): kind de TODOS los ~1500
+nombres runtime (muscle|tendon|ligament|joint|nerve|bone|vessel|fascia|
+cartilage|other|aux) por patrón anatómico > contenedor de categoría del GLB
+> other, con overrides manuales preservados entre regeneraciones. El visor
+(`applyVisibility`, cambio mínimo y aditivo) usa el catálogo como fallback
+cuando un mesh no tiene estructura dueña — así los contenedores
+Bones/Muscles/… participan de la visibilidad jerárquica — y la geometría
+`aux` queda oculta por defecto. El tokenizador resuelve el glued-r del
+sanitize ("ligamentr"→"ligament", "Femurr"→"Femur").
+
+## Features del visor (tareas 4, 4-FINAL, feedback F1 y ciclo 3 T4)
 
 `/app/fitness/anatomy` — `AnatomyViewer.tsx` (three.js puro, sin R3F):
 
@@ -145,18 +183,27 @@ del workspace restaurado y NO se toca):
 - `npx astro check`: **0 errors, 0 warnings** (requiere
   `NODE_OPTIONS=--max-old-space-size=8192` en esta máquina; hints
   restantes son del decoder Draco minificado y scripts .mjs ajenos).
-- `npm test`: **18 archivos, 170+ tests verdes** (incl.
-  `anatomyGraph.test.ts` con 14: integridad de zonas/modelMeshes,
-  buscador, matcher de ejercicios directo y por zona).
+- `npm test`: **21 archivos, 185 tests verdes**, incl. los 14 previos del
+  grafo + `meshMapping.test.ts` (3: 0 huérfanos, modelos válidos, aux jamás
+  mapeado) + `meshCatalog.test.ts` (5: muestras por modelo, aux, overrides,
+  cobertura ≥88-100% por modelo).
+- Pendiente de misión control: **validación visual del usuario** de
+  selección/aislamiento/filtros en los 8 modelos tras el merge.
 
 ## Pendientes
 
-1. **Lotes curados del usuario** (Moore/MacIntosh/Enoka → fuentes →
+1. **Validación visual del usuario** (selección/aislamiento/filtros en los
+   8 modelos) — orquestador tras merge.
+2. **Lotes curados del usuario** (Moore/MacIntosh/Enoka → fuentes →
    `--domain anatomy` + `--index`) y verificación bibliográfica
    (`pending` → citado) del grafo.
-2. Cobertura 3D de músculos de torso y nervios (depende de GLB con capas
-   nombradas; hoy 83/146 y 12/22).
-3. ROM numérico por articulación (hoy `romNote` textual en algunas
+3. Cobertura 3D de músculos de torso/cabeza/cuello (48 sin GLB dedicado:
+   hoy 98/146) y 4 nervios sin capa neural en los modelos (18/22). Son
+   honestos "sin contraparte": requieren GLB con esas capas.
+4. ROM numérico por articulación (hoy `romNote` textual en algunas
    articulaciones).
-4. Recompute de oclusores en orbit continuo (si el usuario lo pide;
+5. Recompute de oclusores en orbit continuo (si el usuario lo pide;
    hoy solo en eventos).
+6. Nombres ZWSP residuales del export ("Art_cart_of_talusr_\u200b"):
+   mapean y filtran bien, pero si se regeneran los GLB conviene
+   limpiarlos en origen.
