@@ -1,4 +1,10 @@
 // src/data/career/companies.ts - Base de Datos e Historial Inmutable de Empresas
+//
+// Los datos REALES viven en companiesSeed.ts (auto-generado del tracker xlsx) y
+// se enriquecen con el doc-11 en companyTargets.ts (Tarea 2). `initialCompanies`
+// mantiene compatibilidad apuntando a esos datos reales (mocks eliminados).
+
+import { companiesSeed } from './companiesSeed';
 
 export interface CompanyTimelineEvent {
   id: string;
@@ -14,29 +20,10 @@ export interface CompanyRecord {
   tier: 'Top Priority' | 'Standard' | 'Watchlist';
   archived: boolean;
   timeline: CompanyTimelineEvent[];
+  /** Procedencia del registro (trazabilidad). */
+  source?: 'tracker-xlsx' | 'doc-11' | 'manual';
+  /** Fuente citada para los datos enriquecidos (p. ej. "doc-11 §Tier-A"). */
+  sourceRef?: string;
 }
 
-export const initialCompanies: CompanyRecord[] = [
-  {
-    id: 'comp-1',
-    name: 'Epic Games',
-    website: 'https://epicgames.com',
-    tier: 'Top Priority',
-    archived: false,
-    timeline: [
-      { id: 't1', dateIso: '2026-08-01', type: 'message', note: 'Mensaje de contacto inicial enviado a lead Recruiter en LinkedIn' },
-      { id: 't2', dateIso: '2026-08-05', type: 'cv_sent', note: 'Enviado CV TechArt v3.2 y enlace a demo TwinSight' },
-      { id: 't3', dateIso: '2026-08-08', type: 'reply', note: 'Respuesta positiva de recruiter pidiendo disponibilidad' }
-    ]
-  },
-  {
-    id: 'comp-2',
-    name: 'Ubisoft',
-    website: 'https://ubisoft.com',
-    tier: 'Standard',
-    archived: false,
-    timeline: [
-      { id: 't4', dateIso: '2026-08-02', type: 'cv_sent', note: 'Aplicación enviada para Graphics Engineer via Portal' }
-    ]
-  }
-];
+export const initialCompanies: CompanyRecord[] = companiesSeed;

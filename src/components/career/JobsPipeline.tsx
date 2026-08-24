@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SectionNav from '../ui/SectionNav';
-import { initialApplications, type JobApplication, type PipelineStage } from '../../data/career/applications';
+import { type PipelineStage } from '../../data/career/applications';
+import { useCareerStore } from '../../data/career/careerStore';
 import JobsSchedule from './JobsSchedule';
 import CompanyDatabase from './CompanyDatabase';
 import ErrorBoundary from '../ErrorBoundary';
@@ -13,14 +14,9 @@ export interface JobsPipelineProps {
 }
 
 export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsPipelineProps) {
-  const [applications, setApplications] = useState<JobApplication[]>(initialApplications);
+  const applications = useCareerStore((s) => s.applications);
+  const moveStage = useCareerStore((s) => s.moveStage);
   const [activeTab, setActiveTab] = useState<'pipeline' | 'schedule' | 'companies'>('pipeline');
-
-  const moveStage = (appId: string, targetStage: PipelineStage) => {
-    setApplications((prev) =>
-      prev.map((a) => (a.id === appId ? { ...a, stage: targetStage, updatedAtIso: new Date().toISOString().split('T')[0] } : a))
-    );
-  };
 
   return (
     <ErrorBoundary>
