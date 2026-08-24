@@ -6,6 +6,7 @@ import {
   anatomyGraphStats,
   anatomyViewerUrl,
   findExercisesForMuscle,
+  findExercisesForZone,
   getMuscles,
   getStructuresByZone,
   getStructuresForModel,
@@ -124,6 +125,18 @@ describe('vinculación con ejercicios (READ exerciseDatabase)', () => {
     expect(anatomyViewerUrl(find('mus-biceps-brachii'))).toContain('/app/fitness/anatomy?model=');
     const sinModelo = ANATOMY_STRUCTURES.find((s) => Object.keys(s.modelMeshes).length === 0);
     if (sinModelo) expect(anatomyViewerUrl(sinModelo)).toBeUndefined();
+  });
+
+  it('findExercisesForZone (fallback F2): rodilla trae cuádriceps/isquios, hombro press/presses', () => {
+    const knee = findExercisesForZone('knee', 10);
+    expect(knee.length).toBeGreaterThan(0);
+    const shoulder = findExercisesForZone('shoulder', 10);
+    expect(shoulder.length).toBeGreaterThan(0);
+    expect(shoulder.some((e) => /press|raise|fly/i.test(e.name))).toBe(true);
+  });
+
+  it('findExercisesForZone: zonas sin tokens (p.ej. head-jaw) devuelven vacío', () => {
+    expect(findExercisesForZone('head-jaw')).toEqual([]);
   });
 });
 

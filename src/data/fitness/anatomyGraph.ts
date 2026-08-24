@@ -202,6 +202,45 @@ export interface ExerciseLink {
   strength: boolean;
 }
 
+const sortExerciseLinks = (links: ExerciseLink[]): ExerciseLink[] =>
+  [...links.values()].sort((a, b) =>
+    a.strength === b.strength ? a.name.localeCompare(b.name) : a.strength ? -1 : 1,
+  );
+
+/**
+ * Tokens de exerciseDatabase típicos de cada zona corporal (tarea F2). Fallback
+ * para estructuras sin match directo de nombre (tendones, ligamentos,
+ * articulaciones, nervios): "ejercicios que la cargan" vía zona del grafo.
+ */
+const ZONE_EXERCISE_TOKENS: Partial<Record<BodyZone, string[]>> = {
+  cervical: ['Neck Flexors', 'Neck Extensors', 'Cervical Spine Stabilizers', 'Upper Trapezius'],
+  shoulder: ['Deltoid Group', 'Rotator Cuff', 'Anterior Deltoids', 'Posterior Deltoid', 'Lateral Deltoids', 'Scapular Stabilizers', 'Shoulder Girdle'],
+  chest: ['Pectoralis Major', 'Pectorals', 'Serratus Anterior'],
+  back: ['Latissimus Dorsi & Teres Major', 'Lats', 'Trapezius & Rhomboids', 'Trapezius', 'Rhomboids', 'Scapular & Thoracic Muscles'],
+  arm: ['Triceps Brachii Group', 'Triceps', 'Biceps Brachii', 'Biceps', 'Brachialis'],
+  'forearm-hand': ['Forearm Group', 'Forearms', 'Grip', 'Wrist Stabilizers', 'Hand Muscles'],
+  core: ['Core', 'Rectus Abdominis', 'Obliques', 'Transverse Abdominis'],
+  spine: ['Erector Spinae', 'Spinal Erectors', 'Lower Back'],
+  hip: ['Glutes', 'Gluteal Region', 'Gluteus Medius', 'Hip Flexors', 'Adductors'],
+  thigh: ['Quadriceps Femoris', 'Quadriceps', 'Hamstrings', 'Hamstring Group', 'Glutes'],
+  knee: ['Quadriceps Femoris', 'Quadriceps', 'Hamstrings', 'Hamstring Group'],
+  'lower-leg': ['Calf Group', 'Gastrocnemius', 'Soleus'],
+  'ankle-foot': ['Calf Group', 'Soleus', 'Ankle Stabilizers', 'Ankle and Foot Stabilizers'],
+};
+
+/** Ejercicios del exerciseDatabase (READ) que cargan la zona corporal dada. */
+export function findExercisesForZone(zone: BodyZone, limit = 12): ExerciseLink[] {
+  const out = new Map<string, ExerciseLink>();
+  for (const token of ZONE_EXERCISE_TOKENS[zone] ?? []) {
+    for (const h of tokenIndex.get(normalize(token)) ?? []) {
+      const prev = out.get(h.name);
+      if (!prev) out.set(h.name, { name: h.name, strength: h.strength });
+      else if (h.strength) prev.strength = true;
+    }
+  }
+  return sortExerciseLinks(out).slice(0, limit);
+}
+
 /** Ejercicios del exerciseDatabase (READ) que cargan el músculo/estructura dada. */
 export function findExercisesForMuscle(muscle: MuscleEntry | TendonEntry | AnatomyStructure, limit = 12): ExerciseLink[] {
   const en = normalize(muscle.nameEn);
@@ -219,9 +258,7 @@ export function findExercisesForMuscle(muscle: MuscleEntry | TendonEntry | Anato
       else if (h.strength) prev.strength = true;
     }
   }
-  return [...out.values()]
-    .sort((a, b) => (a.strength === b.strength ? a.name.localeCompare(b.name) : a.strength ? -1 : 1))
-    .slice(0, limit);
+  return sortExerciseLinks(out).slice(0, limit);
 }
 
 /** Modelo GLB con más meshes de la estructura (para visor/miniatura). */

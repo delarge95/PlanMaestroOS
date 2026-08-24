@@ -8,7 +8,6 @@ import { Search, X, ChevronDown, ChevronUp, Bone, Zap, Link2, Activity, Hand, Ro
 import useIsMobile from '../../ui/useIsMobile';
 import StructureThumbnail from './StructureThumbnail';
 import {
-  BODY_ZONES,
   BODY_ZONE_LABELS_ES,
   MUSCLE_ACTION_LABELS_ES,
   getMuscles,
@@ -20,6 +19,7 @@ import {
   getMusclesByAction,
   getStructureById,
   findExercisesForMuscle,
+  findExercisesForZone,
   anatomyViewerUrl,
   anatomyGraphStats,
 } from '../../../data/fitness/anatomyGraph';
@@ -385,11 +385,19 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
 // ── Ejercicios que cargan la estructura (READ exerciseDatabase de AG-FIT) ─────
 
 function ExercisesThatLoad({ structure }: { structure: AnatomyStructure }) {
-  const exercises = useMemo(() => findExercisesForMuscle(structure, 10), [structure]);
+  // match directo por músculo (nombre+sinónimos); si no hay (tendones,
+  // ligamentos, articulaciones, nervios), fallback por zona del grafo (F2)
+  const { exercises, byZone } = useMemo(() => {
+    const direct = findExercisesForMuscle(structure, 10);
+    if (direct.length) return { exercises: direct, byZone: false };
+    return { exercises: findExercisesForZone(structure.zone, 10), byZone: true };
+  }, [structure]);
   if (!exercises.length) return null;
   return (
     <div>
-      <span style={kickerStyle}>Ejercicios que la cargan ({exercises.length})</span>
+      <span style={kickerStyle}>
+        {byZone ? `Ejercicios que cargan la zona · ${BODY_ZONE_LABELS_ES[structure.zone]}` : `Ejercicios que la cargan (${exercises.length})`}
+      </span>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 3 }}>
         {exercises.map((e) => (
           <span
