@@ -3,18 +3,23 @@
   "domains": {
     "anatomy": {
       "version": "4.0.0",
-      "sources": 2,
-      "chunks": 116
+      "sources": 7,
+      "chunks": 407
     },
     "cardio": {
       "version": "4.0.0",
+      "sources": 3,
+      "chunks": 29
+    },
+    "fitness": {
+      "version": "4.0.0",
       "sources": 1,
-      "chunks": 10
+      "chunks": 12
     },
     "nutrition": {
       "version": "4.0.0",
-      "sources": 5,
-      "chunks": 28
+      "sources": 6,
+      "chunks": 36
     },
     "portfolio": {
       "version": "4.0.0",

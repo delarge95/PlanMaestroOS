@@ -1,0 +1,6 @@
+{
+  "domain": "fitness",
+  "sources": [
+    { "id": "acsm-exercise-testing-prescription-10ed", "title": "ACSM's Guidelines for Exercise Testing and Prescription", "author": "ACSM", "year": 2022, "edition": "10th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["testing", "prescription"], "priority": 1 } }
+  ]
+}

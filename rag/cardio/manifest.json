@@ -1,1 +1,8 @@
-{ "domain": "cardio", "sources": [ { "id": "daniels-running-formula-4ed", "title": "Daniels' Running Formula", "author": "Jack Daniels", "year": 2022, "edition": "4th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["cardio", "running"], "priority": 1 } } ] }
+{
+  "domain": "cardio",
+  "sources": [
+    { "id": "daniels-running-formula-4ed", "title": "Daniels' Running Formula", "author": "Jack Daniels", "year": 2022, "edition": "4th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["cardio", "running"], "priority": 1 } },
+    { "id": "allen-power-meter-3ed", "title": "Training and Racing with a Power Meter", "author": "Allen, Coggan", "year": 2019, "edition": "3rd", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["cardio", "cycling-power"], "priority": 1 } },
+    { "id": "bangsbo-running-science", "title": "Running Science", "author": "Jens Bangsbo", "year": null, "edition": "n/d", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["cardio", "running-science"], "priority": 2 } }
+  ]
+}

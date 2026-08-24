@@ -1,25 +1,12 @@
 {
   "domain": "anatomy",
   "sources": [
-    {
-      "id": "grays-anatomy-students-4ed",
-      "title": "Gray's Anatomy for Students",
-      "author": "Drake, Vogl, Mitchell",
-      "year": 2020,
-      "edition": "4th",
-      "type": "book",
-      "evidenceTier": "expert-book",
-      "authority": { "domains": ["anatomy"], "priority": 1 }
-    },
-    {
-      "id": "norkin-joint-structure-6ed",
-      "title": "Joint Structure and Function: A Comprehensive Analysis (Levangie & Norkin)",
-      "author": "Pamela K. Levangie; Cynthia C. Norkin; Michael D. Lewek",
-      "year": 2019,
-      "edition": "6ª (F.A. Davis, 2019)",
-      "type": "book",
-      "evidenceTier": "expert-book",
-      "authority": { "domains": ["kinesiology", "joint-structure", "anatomy"], "priority": 1 }
-    }
+    { "id": "grays-anatomy-students-4ed", "title": "Gray's Anatomy for Students", "author": "Drake, Vogl, Mitchell", "year": 2020, "edition": "4th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["anatomy"], "priority": 1 } },
+    { "id": "njs6-levangie-norkin", "title": "Joint Structure and Function (Levangie & Norkin)", "author": "Levangie, Norkin", "year": 2019, "edition": "6th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["anatomy", "joints"], "priority": 2 } },
+    { "id": "moore-clinically-oriented-6ed", "title": "Clinically Oriented Anatomy", "author": "Moore, Dalley, Agur", "year": 2010, "edition": "6th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["anatomy", "clinical-anatomy"], "priority": 2 } },
+    { "id": "macintosh-skeletal-muscle-2ed", "title": "Skeletal Muscle: Form and Function", "author": "MacIntosh, Gardiner, McComas", "year": 2006, "edition": "2nd", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["muscle-physiology"], "priority": 1 } },
+    { "id": "enoka-neuromechanics-4ed", "title": "Neuromechanics of Human Movement", "author": "Roger Enoka", "year": 2008, "edition": "4th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["neuro-motor-control"], "priority": 1 } },
+    { "id": "norkin-joint-structure-6ed", "title": "Joint Structure and Function (extracto curado Gemini)", "author": "Levangie, Norkin", "year": 2019, "edition": "6th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["joints"], "priority": 3 } },
+    { "id": "macintosh-open-textbook-exphys", "title": "Open Textbook of Exercise Physiology", "author": "varios", "year": null, "edition": "n/d", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["exercise-physiology"], "priority": 4 } }
   ]
 }

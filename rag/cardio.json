@@ -17,9 +17,536 @@
         ],
         "priority": 1
       }
+    },
+    {
+      "id": "allen-power-meter-3ed",
+      "title": "Training and Racing with a Power Meter",
+      "author": "Allen, Coggan",
+      "year": 2019,
+      "edition": "3rd",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "cardio",
+          "cycling-power"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "bangsbo-running-science",
+      "title": "Running Science",
+      "author": "Jens Bangsbo",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "cardio",
+          "running-science"
+        ],
+        "priority": 2
+      }
     }
   ],
   "chunks": [
+    {
+      "id": "allen-ftp-testing-protocol-20min",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "ftp",
+        "functional-threshold-power",
+        "20-min-test",
+        "power-meter",
+        "frc-depletion",
+        "cycling"
+      ],
+      "locator": {
+        "chapter": 3,
+        "page": 30,
+        "section": "\"también Cap. 3, pp. 30; Cap. 10, pp. 187\""
+      },
+      "summary": "ftp-test-protocol: Protocolo de Evaluación del Umbral de Potencia Funcional (FTP 20-Min): El FTP es la potencia máxima media que un ciclista puede sostener en estado cuasi-estable durante $\\approx 60\\ \\text{minutos}$ ($30\\text{ a }70\\ \\text{min}$ según perfil). 1) **Protocolo Estandarizado de Calentamiento:** $15\\ \\text{min}$ de pedaleo aeróbico progresivo $\\to 3\\times 1\\ \\text{min}$ de pedaleo a alta cadencia ($>100\\ \\text{rpm}$) $\\to 5\\ \\text{min}$ de pedaleo suave $\\to$ **$5\\ \\text{min}$ a tope (*all-out*)** para agotar la capacidad de reserva funcional anaeróbica (**FRC**) $\\to 10\\ \\text{min}$ de recuperación suave. 2) **Test Principal de 20 Minutos:** contrarreloj máxima de $20\\ \\text{min}$ a ritmo uniforme. 3) **Cálculo:** **$\\text{FTP} = \\text{Potencia Media 20-min} \\times 0.95$** (descontar el $5\\%$; atletas con alta capacidad anaeróbica restan $7\\%$; especialistas puramente aeróbicos restan $2\\%\\text{--}3\\%$). Periodicidad: retestear cada **6 a 8 semanas**.",
+      "entities": [
+        "clinical:functional-threshold-power",
+        "clinical:aerobic-testing-frequency"
+      ],
+      "rules": [
+        "ftp-test-protocol",
+        "aerobic-testing-frequency"
+      ]
+    },
+    {
+      "id": "allen-coggan-classic-power-training-zones",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "power-zones",
+        "coggan-zones",
+        "sweet-spot",
+        "ftp-percentages",
+        "intensity-domains",
+        "cycling"
+      ],
+      "locator": {
+        "chapter": 3,
+        "page": 32,
+        "section": "\"también Cap. 3, pp. 32; Cap. 5, pp. 58\""
+      },
+      "summary": "training-zones-classic: Sistema Clásico de 7 Zonas de Entrenamiento por Potencia de Coggan: Niveles de intensidad estructurados respecto al porcentaje del FTP individual: 1) **Zona 1 — Recuperación Activa (*Active Recovery*):** **$<55\\%\\ \\text{FTP}$** (duración ilimitada; flujo sanguíneo y aclaramiento). 2) **Zona 2 — Resistencia Aeróbica (*Endurance*):** **$56\\%\\text{ a }75\\%\\ \\text{FTP}$** ($2\\text{ a }5+\\ \\text{horas}$; biogénesis mitocondrial, densidad capilar, oxidación de ácidos grasos). 3) **Zona 3 — Tempo:** **$76\\%\\text{ a }90\\%\\ \\text{FTP}$** ($1\\text{ a }3\\ \\text{horas}$; almacenamiento de glucógeno y resistencia muscular). 4) **Zona 4a — Sweet Spot:** **$88\\%\\text{ a }93\\%\\ \\text{FTP}$** ($10\\text{ a }60\\ \\text{min}$; máxima ganancia de FTP con menor fatiga residual que el umbral estricto). 5) **Zona 4 — Umbral de Lactato (*Lactate Threshold*):** **$91\\%\\text{ a }105\\%\\ \\text{FTP}$** ($10\\text{ a }60\\ \\text{min}$). 6) **Zona 5 — Potencia Aeróbica Máxima ($\\dot{V}\\text{O}_2\\max$):** **$106\\%\\text{ a }120\\%\\ \\text{FTP}$** ($3\\text{ a }8\\ \\text{min}$). […]",
+      "entities": [
+        "clinical:power-training-zones",
+        "clinical:sweet-spot-training"
+      ],
+      "rules": [
+        "training-zones-classic"
+      ]
+    },
+    {
+      "id": "allen-interval-stop-criterion-dropoff",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "interval-training",
+        "drop-off-criterion",
+        "fatigue-threshold",
+        "vo2max-intervals",
+        "quality-control"
+      ],
+      "locator": {
+        "chapter": 5,
+        "page": 55,
+        "section": "\"también Cap. 5, pp. 55\""
+      },
+      "summary": "interval-stop-criterion: Criterio de Detención de Intervalos por Caída de Potencia (*Drop-Off Rule*): Para asegurar que las series de intervalos de alta intensidad mantengan el estímulo de calidad fisiológica sin acumular fatiga estéril: 1) **Referencia del Tercer Intervalo:** los dos primeros intervalos de una serie se descartan como referencia base debido a la disponibilidad inicial de la reserva anaeróbica fresca (FRC); **la potencia media del tercer intervalo representa la capacidad repetible del día**. 2) **Umbrales de Interrupción de la Sesión:** a) *Intervalos de $\\dot{V}\\text{O}_2\\max$ (Zona 5, 3–8 min):* finalizar la sesión de intervalos en cuanto la potencia media caiga **$>5\\%$ por debajo de la potencia del 3er intervalo**; b) *Intervalos de Capacidad Anaeróbica (Zona 6, 30 s–2 min):* detener cuando la potencia decaiga **$>10\\%\\text{ a }12\\%$**; c) *Intervalos Neuromusculares (Zona 7, $<30\\ \\text{s}$):* detener cuando no se alcance el umbral mínimo objetivo de potencia pico.",
+      "entities": [
+        "clinical:interval-stop-criterion",
+        "clinical:power-intervals"
+      ],
+      "rules": [
+        "interval-stop-criterion"
+      ]
+    },
+    {
+      "id": "allen-normalized-power-and-variability-index",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "normalized-power",
+        "variability-index",
+        "np-algorithm",
+        "pacing-steadiness",
+        "rolling-average"
+      ],
+      "locator": {
+        "chapter": 7,
+        "page": 107,
+        "section": "\"también Cap. 7, pp. 107\""
+      },
+      "summary": "normalized-power-calculation: Algoritmo de Potencia Normalizada (NP) e Índice de Variabilidad (VI): 1) **Cálculo Matemático de Potencia Normalizada ($NP$):** estima el costo metabólico y neuromuscular real de un esfuerzo variable: a) Calcular la media móvil de $30\\ \\text{segundos}$ de potencia; b) Elevar cada valor móvil a la cuarta potencia ($\\text{W}^4$); c) Promediar todos los valores elevados; d) Extraer la raíz cuarta ($\\sqrt[4]{\\text{Media}}$). Solo es matemáticamente válido para segmentos continuos $\\ge 30\\ \\text{segundos}$. 2) **Índice de Variabilidad ($VI = NP / \\text{Potencia Media}$):** cuantifica la regularidad del ritmo: **Contrarreloj plana / Triatlón:** $VI = 1.00\\text{ a }1.05$ (ritmo uniforme óptimo); **Carreras en Ruta / Criteriums:** $VI = 1.05\\text{ a }1.15$; **MTB Cross-Country / Ciclocross:** $VI = 1.10\\text{ a }1.20+$.",
+      "entities": [
+        "clinical:normalized-power",
+        "clinical:variability-index"
+      ],
+      "rules": [
+        "normalized-power-calculation",
+        "variability-index-norms"
+      ]
+    },
+    {
+      "id": "allen-training-stress-score-and-intensity-factor",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "tss",
+        "intensity-factor",
+        "training-stress-score",
+        "workload-quantification",
+        "session-load"
+      ],
+      "locator": {
+        "chapter": 7,
+        "page": 111,
+        "section": "\"también Cap. 7, pp. 111\""
+      },
+      "summary": "tss-calculation: Factor de Intensidad (IF) y Training Stress Score (TSS): 1) **Factor de Intensidad ($IF$):** ratio entre la potencia normalizada de la sesión y el FTP del atleta: $IF = \\frac{NP}{FTP}$ (recuperación $<0.75$; fondo $0.65\\text{--}0.80$; tempo $0.75\\text{--}0.90$; contrarreloj 1h $\\sim 1.00$). 2) **Training Stress Score ($TSS$):** cuantificación de la dosis de carga biológica de la sesión: $\\text{TSS} = \\frac{\\text{Tiempo (segundos)} \\times NP \\times IF}{FTP \\times 3600} \\times 100 = \\text{Duración (horas)} \\times IF^2 \\times 100$. Referencia base: **$1\\ \\text{hora al 100% FTP} = 100\\ \\text{TSS}$ ($IF = 1.0$)**. Sensibilidad matemática: debido a la relación cuadrática ($IF^2$), un error del $4\\%$ en la estimación del FTP introduce un error del $\\approx 8\\%$ en el cálculo final del TSS.",
+      "entities": [
+        "clinical:training-stress-score",
+        "clinical:intensity-factor"
+      ],
+      "rules": [
+        "tss-calculation"
+      ]
+    },
+    {
+      "id": "allen-performance-management-chart-pmc",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "pmc",
+        "ctl",
+        "atl",
+        "tsb",
+        "chronic-training-load",
+        "acute-training-load",
+        "training-stress-balance"
+      ],
+      "locator": {
+        "chapter": 9,
+        "page": 153,
+        "section": "\"también Cap. 9, pp. 153\""
+      },
+      "summary": "performance-manager-defaults: Modelo del Performance Management Chart (PMC: CTL, ATL, TSB): Modela la dinámica de adaptación biológica mediante medias móviles exponenciales ponderadas (EWMA) del TSS diario: 1) **Carga Crónica de Entrenamiento ($CTL$, \"Fitness\"):** constante de tiempo de **$42\\ \\text{días}$** ($\\approx 6\\ \\text{semanas}$); refleja adaptaciones fisiológicas a largo plazo ($CTL$ óptimo sostenible $100\\text{ a }150\\ \\text{TSS/día}$). 2) **Carga Aguda de Entrenamiento ($ATL$, \"Fatiga\"):** constante de tiempo de **$7\\ \\text{días}$** ($5\\text{ a }14\\ \\text{días}$ según edad/modalidad); refleja fatiga reciente. 3) **Balance de Estrés del Entrenamiento ($TSB$, \"Forma\"):** **$\\text{TSB} = \\text{CTL} - \\text{ATL}$**. 4) **Tasa Segura de Incremento de CTL (*Ramp Rate*):** incremento semanal seguro de **$3\\text{ a }7\\ \\text{TSS/día/semana}$**. Superar $>7\\ \\text{TSS/día/semana}$ durante $>4\\ \\text{semanas}$ consecutivas eleva exponencialmente el riesgo de sobreentrenamiento (*overreaching* no funcional/enfermedad).",
+      "entities": [
+        "clinical:performance-manager-chart",
+        "clinical:ctl-ramp-rate"
+      ],
+      "rules": [
+        "performance-manager-defaults",
+        "ctl-ramp-rate-safety"
+      ]
+    },
+    {
+      "id": "allen-tsb-peaking-and-tapering-guidelines",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "tsb",
+        "peaking",
+        "tapering",
+        "race-readiness",
+        "form-status",
+        "personal-best"
+      ],
+      "locator": {
+        "chapter": 9,
+        "page": 167,
+        "section": "\"también Cap. 9, pp. 167\""
+      },
+      "summary": "tsb-peaking-guidelines: Pautas de Puesta a Punto (Peaking y Tapering) según Valores de TSB: El valor óptimo de TSB para el día de competición depende del perfil neuromuscular de la prueba: 1) **Eventos Cortos y Explosivos ($<5\\ \\text{min}$, Pista / Criterium / Sprints):** demandan máxima frescura neuromuscular con **$\\text{TSB} = +15\\text{ a }+30$**. 2) **Eventos Aeróbicos y de Resistencia General ($>5\\ \\text{min}$, Fondo / Ruta / Triatlón):** el rendimiento óptimo ocurre en una amplia ventana de **$\\text{TSB} = -10\\text{ a }+25$**; la mayoría de récords personales (*Personal Bests*) acontecen con **$\\text{TSB entre } -5\\text{ y }+15$**. 3) **Pruebas de Ultra-Resistencia (Ironman / Gran Fondo):** no extender excesivamente el descanso pasivo; un TSB excesivamente positivo ($>+25\\text{ a }+30$) produce pérdida de acondicionamiento aeróbico periférico; un TSB neutro o ligeramente positivo ($0\\text{ a }+10$) con pendiente ascendente es ideal.",
+      "entities": [
+        "clinical:tsb-peaking-guidelines",
+        "clinical:tapering-protocol"
+      ],
+      "rules": [
+        "tsb-peaking-guidelines"
+      ]
+    },
+    {
+      "id": "allen-functional-reserve-capacity-and-matches",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "frc",
+        "matches",
+        "matchbook",
+        "anaerobic-capacity",
+        "power-duration",
+        "tactical-pacing"
+      ],
+      "locator": {
+        "chapter": 6,
+        "page": 99,
+        "section": "\"también Cap. 6, pp. 99; Cap. 8, pp. 139\""
+      },
+      "summary": "match-definition: Capacidad de Reserva Funcional (FRC) y Gestión Táctica de \"Fósforos\" (*Matches*): 1) **Capacidad de Reserva Funcional ($FRC$):** cantidad total de trabajo continuo que el ciclista puede producir por encima de su FTP antes de alcanzar el agotamiento (expresada en kilojulios, ej. $FRC = 20\\ \\text{kJ}$). Cálculo de potencia sobre FTP: $\\text{Vatios Extra} = \\frac{FRC\\ (\\text{Joules})}{\\text{Duración (segundos)}}$ (ej. con $20\\ \\text{kJ}$, se disponen de $+666\\ \\text{W}$ sobre FTP durante $30\\ \\text{s}$, o $+166\\ \\text{W}$ durante $120\\ \\text{s}$). 2) **Definición de \"Fósforo\" (*Match*):** esfuerzo de alta intensidad que sobrepasa **$\\ge 120\\%\\ \\text{FTP}$ durante $\\ge 1\\ \\text{minuto}$** (o $\\ge 110\\%\\ \\text{FTP}$ durante $\\ge 5\\ \\text{min}$). Cada ataque o subida explosiva \"quema un fósforo\" del stock finito; una vez agotado el *matchbook*, el atleta pierde la capacidad de responder a ataques y sufre fallo de rendimiento.",
+      "entities": [
+        "clinical:functional-reserve-capacity",
+        "clinical:matchbook-tactics"
+      ],
+      "rules": [
+        "match-definition",
+        "frc-capacity-math"
+      ]
+    },
+    {
+      "id": "allen-triathlon-and-time-trial-pacing-budget",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "triathlon-pacing",
+        "time-trial",
+        "ironman-pacing",
+        "intensity-budget",
+        "cycling-efficiency"
+      ],
+      "locator": {
+        "chapter": 12,
+        "page": 241,
+        "section": "\"también Cap. 12, pp. 241\""
+      },
+      "summary": "triathlon-pacing-if-budget: Presupuesto de Intensidad (IF) y Pacing en Triatlón y Contrarreloj: Para preservar la capacidad muscular para el segmento final de carrera a pie, la potencia en bicicleta debe regularse por distancia: 1) **Presupuesto por Disciplina:** a) *Triatlón Sprint:* $IF = 0.90\\text{ a }0.95$ ($\\text{TSS } 80\\text{--}100$); b) *Triatlón Olímpico:* $IF = 0.80\\text{ a }0.90$ ($\\text{TSS } 120\\text{--}160$); c) *Medio Ironman (70.3):* $IF = 0.70\\text{ a }0.80$ ($\\text{TSS } 180\\text{--}250$); d) *Ironman Completo:* **$IF = 0.65\\text{ a }0.75$** con un techo estricto de **$\\text{TSS } \\le 280\\text{ a }300$** ($>300\\ \\text{TSS}$ = colapso en el maratón). 2) **Gestión del Ritmo en Subidas y Salida:** primeros 30–45 min al $95\\%$ del target; colinas largas ($>3\\ \\text{min}$) a $\\le 105\\%$ del target; repechos cortos ($30\\ \\text{s--}2\\ \\text{min}$) a $\\le 110\\%$; mantener $VI \\le 1.05$.",
+      "entities": [
+        "clinical:triathlon-power-pacing",
+        "clinical:ironman-cycling-budget"
+      ],
+      "rules": [
+        "triathlon-pacing-if-budget"
+      ]
+    },
+    {
+      "id": "allen-quadrant-analysis-force-velocity",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "muscle",
+      "tags": [
+        "quadrant-analysis",
+        "aepf",
+        "cpv",
+        "pedal-force",
+        "cadence",
+        "neuromuscular-specificity"
+      ],
+      "locator": {
+        "chapter": 7,
+        "page": 114,
+        "section": "\"también Cap. 7, pp. 114\""
+      },
+      "summary": "quadrant-analysis-thresholds: Análisis de Cuadrantes (Fuerza Efectiva de Pedaleo vs Velocidad Periférica): Divide el esfuerzo neuromuscular según los umbrales de Fuerza Efectiva Media por Pedalada (AEPF, Newtons) y Velocidad Periférica de la Biela (CPV, m/s) medidos en FTP: 1) **Cuadrante I (Alta Fuerza + Alta Velocidad):** sprints, ataques lanzados, aceleraciones a alta cadencia. 2) **Cuadrante II (Alta Fuerza + Baja Velocidad):** subidas empinadas, arrancadas desde parado (*standing starts*), pedaleo a baja cadencia; reclutamiento acelerado de fibras Tipo II. 3) **Cuadrante III (Baja Fuerza + Baja Velocidad):** rodaje suave de recuperación, pedaleo pasivo en pelotón. 4) **Cuadrante IV (Baja Fuerza + Alta Velocidad):** pedaleo fluido en llano, bajadas, criteriums rápidos. Regla neuromuscular: la fuerza máxima no es limitante en ciclismo de resistencia (se utiliza $<25\\%$ de la fuerza máxima voluntaria en FTP y $<50\\%$ en subidas de 45 rpm).",
+      "entities": [
+        "clinical:quadrant-analysis",
+        "muscle:skeletal-muscle"
+      ],
+      "rules": [
+        "quadrant-analysis-thresholds",
+        "strength-not-limiting"
+      ]
+    },
+    {
+      "id": "allen-kilojoule-caloric-expenditure-equivalence",
+      "sourceId": "allen-power-meter-3ed",
+      "topic": "clinical",
+      "tags": [
+        "kilojoules",
+        "calories",
+        "mechanical-work",
+        "thermodynamic-efficiency",
+        "energy-budget"
+      ],
+      "locator": {
+        "chapter": 1,
+        "page": 11,
+        "section": "\"también Cap. 1, p. 11\""
+      },
+      "summary": "kilojoule-calorie-estimation: Equivalencia Práctica 1:1 entre Kilojulios Mecánicos y Calorías Metabólicas: En el análisis de datos de potenciómetros ciclistas, el trabajo mecánico total realizado registrado en kilojulios ($\\text{kJ}$) equivale prácticamente $1:1$ al gasto de energía metabólica del ciclista expresado en kilocalorías ($\\text{kcal}$): $\\text{Gasto Metabólico (kcal)} \\approx \\text{Trabajo Mecánico Registrado (kJ)}$. Fundamento biofísico: la eficiencia termodinámica bruta (*gross efficiency*) del músculo humano durante el pedaleo oscila entre el **$20\\%\\text{ y el }25\\%$** ($\\approx 22\\%$). Dado que $1\\ \\text{kcal} = 4.184\\ \\text{kJ}$ (factor multiplicador $\\times 4.184$), el rendimiento del $22\\%$ ($\\times 0.22$) cancela exactamente la constante de conversión termodinámica ($4.184 \\times 0.22 \\approx 0.92\\text{ a }1.04$). Ejemplo práctico: una sesión de $2000\\ \\text{kJ}$ en el potenciómetro representa un gasto calórico real de $\\approx 2000\\ \\text{kcal}$.\n\n<!-- stats: 11 chunks, 16 entidades cubiertas -->",
+      "entities": [
+        "clinical:caloric-expenditure",
+        "clinical:mechanical-work-kj"
+      ],
+      "rules": [
+        "kilojoule-calorie-estimation"
+      ]
+    },
+    {
+      "id": "bangsbo-running-intensity-zones-distribution",
+      "sourceId": "bangsbo-running-science",
+      "topic": "clinical",
+      "tags": [
+        "running-zones",
+        "intensity-distribution",
+        "polarized-training",
+        "lactate-threshold",
+        "vvo2max",
+        "endurance"
+      ],
+      "locator": {
+        "page": 125
+      },
+      "summary": "run-intensity-threshold-min: Zonas de Intensidad de Carrera y Distribución de Carga Aeróbica: La prescripción se estructura en 5 zonas fisiológicas respecto a la velocidad en $\\dot{V}\\text{O}_2\\max$ ($v\\dot{V}\\text{O}_2\\max$), frecuencia cardíaca máxima y lactato: 1) **Zona 1 — Aeróbica Ligera (*Recovery / Base*):** $60\\%\\text{ a }70\\%\\ v\\dot{V}\\text{O}_2\\max$, $<75\\%\\ \\text{FC}_{\\max}$, $[La] < 2\\ \\text{mM}$; regeneración y volumen. 2) **Zona 2 — Aeróbica Moderada (*Endurance*):** $70\\%\\text{ a }80\\%\\ v\\dot{V}\\text{O}_2\\max$, $75\\%\\text{ a }85\\%\\ \\text{FC}_{\\max}$, $[La] \\approx 2\\ \\text{mM}$; carreras continuas largas de $60\\text{ a }120\\ \\text{min}$. 3) **Zona 3 — Umbral Anaeróbico (*Threshold*):** **$80\\%\\text{ a }90\\%\\ v\\dot{V}\\text{O}_2\\max$**, **$85\\%\\text{ a }92\\%\\ \\text{FC}_{\\max}$**, $[La] \\approx 3\\text{ a }4\\ \\text{mM}$; rodajes controlados de $20\\text{ a }45\\ \\text{min}$ o intervalos largos. 4) **Zona 4 — Capacidad Aeróbica ($\\dot{V}\\text{O}_2\\max$):** $90\\%\\text{ a }100\\%\\ v\\dot{V}\\text{O}_2\\max$, $95\\%\\text{ a }100\\%\\ \\text{FC}_{\\max}$, $[La] \\approx 6\\text{ a }10\\ \\text{mM}$; intervalos de $2\\text{ a }5\\ \\text{min}$. […]",
+      "entities": [
+        "clinical:running-intensity-zones",
+        "clinical:training-distribution"
+      ],
+      "rules": [
+        "run-intensity-threshold-min",
+        "run-aerobic-base-distribution",
+        "run-aerobic-session-prescription",
+        "run-threshold-speed-prescription"
+      ]
+    },
+    {
+      "id": "bangsbo-running-volume-progression-and-overuse-risk",
+      "sourceId": "bangsbo-running-science",
+      "topic": "clinical",
+      "tags": [
+        "mileage",
+        "overuse-injuries",
+        "10-percent-rule",
+        "marathon-prep",
+        "tendonitis",
+        "shin-splints"
+      ],
+      "locator": {
+        "page": 147
+      },
+      "summary": "run-volume-progression-injury: Progresión de Volumen Semanal y Epidemiología de Lesiones por Sobreuso: 1) **Volumen de Entrenamiento por Población:** corredores recreativos experimentan rendimientos decrecientes y meseta adaptativa a partir de **$50\\text{ a }70\\ \\text{km/semana}$**; atletas de élite de fondo y maratón requieren volúmenes sostenidos de **$160\\text{ a }220+\\ \\text{km/semana}$** distribuidos en 10–14 sesiones. 2) **Regla Segura de Progresión de Volumen:** el incremento semanal no debe exceder el **$\\le 10\\%$ de aumento de kilometraje semanal** para permitir la adaptación viscoelástica del colágeno en tendones y periostio. 3) **Factores de Riesgo de Lesión por Sobreuso:** los errores de entrenamiento (aumento brusco de volumen, intensidad o cuestas) causan el **$60\\%\\text{ a }75\\%$ de las lesiones**; el antecedente de una lesión previa en los últimos 12 meses es el factor predictivo independiente más potente de recidiva (tendinopatía de Aquiles, fascitis plantar, periostitis tibial medial y síndrome de la cintilla iliotibial).",
+      "entities": [
+        "tendon:achilles-tendon",
+        "tendon:plantar-aponeurosis",
+        "clinical:overuse-injury-risk"
+      ],
+      "rules": [
+        "run-volume-elite-distance",
+        "run-volume-recreational-plateau",
+        "run-volume-progression-injury",
+        "run-training-error-flag",
+        "run-previous-injury-flag"
+      ]
+    },
+    {
+      "id": "bangsbo-running-economy-allometric-scaling",
+      "sourceId": "bangsbo-running-science",
+      "topic": "clinical",
+      "tags": [
+        "running-economy",
+        "allometric-scaling",
+        "oxygen-cost",
+        "elite-runners",
+        "steady-state",
+        "submaximal"
+      ],
+      "locator": {
+        "page": 88
+      },
+      "summary": "run-economy-scaling: Normalización Alométrica de la Economía de Carrera y Adaptación a Largo Plazo: 1) **Ecalamiento Alométrico Exponencial ($0.75$):** la expresión lineal clásica del costo de oxígeno ($\\text{mL/kg/min}$) penaliza artificialmente a los corredores de mayor masa corporal debido a que la tasa metabólica basal y el costo elástico escalan con la superficie corporal. La normalización matemática rigurosa exige expresar el consumo submáximo respecto a la masa alométrica: **$\\text{mL }O_2 / \\text{kg}^{0.75} / \\text{min}$** (o $\\text{L }O_2 / \\text{kg}^{0.75} / \\text{km}$). 2) **Protocolo de Medición:** test submáximo en cinta rodante a velocidad constante durante $\\ge 4\\text{ a }5\\ \\text{minutos}$ en estado estable ($RER < 1.0$, $[La] < 2.5\\ \\text{mM}$) con calzado de competición. 3) **Cinética de Adaptación:** mientras que el $\\dot{V}\\text{O}_2\\max$ alcanza su techo genético tras 2 a 4 años de entrenamiento vigoroso, la **economía de carrera continúa mejorando un $1\\%\\text{ a }2\\%$ anual durante más de una década** de entrenamiento continuo por optimización neuromuscular y rigidez tendinosa.",
+      "entities": [
+        "clinical:running-economy-allometric",
+        "clinical:oxygen-cost-running"
+      ],
+      "rules": [
+        "run-economy-scaling",
+        "run-economy-test-protocol",
+        "run-economy-long-term-adaptation",
+        "run-economy-fatigue-testing"
+      ]
+    },
+    {
+      "id": "bangsbo-running-vo2max-intervals-and-threshold-sessions",
+      "sourceId": "bangsbo-running-science",
+      "topic": "clinical",
+      "tags": [
+        "vo2max-intervals",
+        "threshold-runs",
+        "work-to-rest",
+        "work-bouts",
+        "anaerobic-capacity",
+        "strides"
+      ],
+      "locator": {
+        "page": 158
+      },
+      "summary": "run-vo2max-intervals: Prescripción de Intervalos de $\\dot{V}\\text{O}_2\\max$, Umbral y Rectas Alácticas (*Strides*): 1) **Sesiones de Umbral Anaeróbico:** a) Carrera continua a ritmo de umbral de **$20\\text{ a }45\\ \\text{min}$**; o b) Intervalos largos de umbral: $3\\text{ a }5 \\times 2\\text{--}3\\ \\text{km}$ al $85\\%\\text{--}90\\%\\ v\\dot{V}\\text{O}_2\\max$ con pausas cortas ($60\\text{--}90\\ \\text{s}$). 2) **Intervalos de $\\dot{V}\\text{O}_2\\max$ (Zona 4):** repeticiones de **$2\\text{ a }5\\ \\text{minutos}$** al **$95\\%\\text{ a }100\\%\\ v\\dot{V}\\text{O}_2\\max$** ($\\ge 95\\%\\ \\text{FC}_{\\max}$) con un ratio trabajo:descanso de **$1:1\\text{ a }2:1$** (ej. $5\\times 3\\ \\text{min}$ con $2\\ \\text{min}$ de trote activo), acumulando $12\\text{ a }20\\ \\text{min}$ en zona de consumo máximo. 3) **Rectas Alácticas (*Strides*):** $5\\text{ a }10 \\times 60\\text{--}100\\ \\text{m}$ a velocidad de sprint submáximo ($>95\\%$ velocidad máxima) con recuperación completa ($\\ge 60\\ \\text{s}$) para estimular el reclutamiento motor de unidades rápidas sin acumulación de lactato.",
+      "entities": [
+        "clinical:vo2max-intervals",
+        "clinical:threshold-training"
+      ],
+      "rules": [
+        "run-vo2max-intervals",
+        "run-anaerobic-capacity-prescription",
+        "run-strides-alactic"
+      ]
+    },
+    {
+      "id": "bangsbo-running-taper-high-intensity-maintenance",
+      "sourceId": "bangsbo-running-science",
+      "topic": "clinical",
+      "tags": [
+        "tapering",
+        "peaking",
+        "race-preparation",
+        "blood-volume",
+        "glycogen-supercompensation"
+      ],
+      "locator": {
+        "page": 165
+      },
+      "summary": "run-taper-high-intensity: Puesta a Punto Competitiva (Tapering) y Mantenimiento de la Intensidad: Para maximizar el rendimiento en la competición de fondo disipando la fatiga acumulada sin perder adaptaciones biológicas: 1) **Reducción de Volumen:** reducir el kilometraje semanal total entre un **$40\\%\\text{ y un }60\\%$** de forma exponencial o escalonada a lo largo de **$1\\text{ a }3\\ \\text{semanas}$** previas al evento. 2) **Mantenimiento de la Frecuencia:** disminuir la frecuencia de entrenamiento de forma muy leve ($\\le 20\\%$, ej. de 6 a 5 días/semana). 3) **Regla Fisiológica Cardinal — Mantener la Intensidad de los Intervalos:** **la intensidad de las sesiones de calidad debe mantenerse intacta** ($95\\%\\text{--}100\\%\\ v\\dot{V}\\text{O}_2\\max$ y ritmo de competición), reduciendo únicamente el número de repeticiones de la serie (volumen intra-sesión). La reducción de intensidad durante el taper causa pérdida del volumen plasmático, caída de la actividad de enzimas oxidativas mitocondriales (CS) y declive del $\\dot{V}\\text{O}_2\\max$.",
+      "entities": [
+        "clinical:tapering-protocol",
+        "clinical:high-intensity-maintenance"
+      ],
+      "rules": [
+        "run-taper-high-intensity"
+      ]
+    },
+    {
+      "id": "bangsbo-running-biomechanics-stride-and-flexibility-caution",
+      "sourceId": "bangsbo-running-science",
+      "topic": "joint",
+      "tags": [
+        "stride-length",
+        "running-economy",
+        "muscle-stiffness",
+        "hamstring-flexibility",
+        "elastic-energy"
+      ],
+      "locator": {
+        "page": 92
+      },
+      "summary": "run-flexibility-economy-caution: Auto-Selección de Zancada, Rigidez Musculotendinosa y Precaución con la Flexibilidad: 1) **Optimización de la Longitud y Frecuencia de Zancada:** los corredores entrenados auto-seleccionan de forma natural la combinación de longitud y frecuencia de zancada que minimiza el consumo metabólico de oxígeno; imponer modificaciones técnicas conscientes forzadas (aumentar artificialmente la zancada) incrementa el costo energético y las fuerzas de frenado. 2) **Paradoja de la Flexibilidad en Corredores:** una **flexibilidad pasiva excesiva en isquiotibiales y tobillo se correlaciona con una PEOR economía de carrera**. Una moderada rigidez músculo-tendinosa (*musculotendinous stiffness*) en el tríceps sural y tendón de Aquiles permite almacenar y restituir energía elástica de forma pasiva sin gasto de ATP durante la fase de apoyo. 3) **Minimización de la Oscilación Vertical:** limitar el rebote vertical del centro de masa disminuye el trabajo muscular mecánico contra la gravedad.",
+      "entities": [
+        "joint:hip-joint",
+        "tendon:achilles-tendon",
+        "muscle:hamstrings"
+      ],
+      "rules": [
+        "run-stride-self-selection",
+        "run-flexibility-economy-caution",
+        "run-hill-bounce-economy"
+      ]
+    },
+    {
+      "id": "bangsbo-running-aerodynamics-drafting-and-heat",
+      "sourceId": "bangsbo-running-science",
+      "topic": "clinical",
+      "tags": [
+        "drafting",
+        "aerodynamics",
+        "air-resistance",
+        "heat-stress",
+        "pacing-adjustment",
+        "wind"
+      ],
+      "locator": {
+        "page": 75
+      },
+      "summary": "run-air-resistance-tactics: Aerodinámica de Carrera, Beneficio del Drafting y Adaptación al Calor: 1) **Resistencia del Aire y Ahorro por Drafting:** la resistencia aerodinámica representa del **$2\\%\\text{ al }8\\%$ del costo energético total** en carrera en pista o asfalto (aumentando con el cuadrado de la velocidad y con el viento en contra). Correr en posición de resguardo directo (*drafting*) inmediatamente detrás de otro corredor a $\\le 1\\ \\text{metro}$ **reduce la resistencia del aire en un $50\\%\\text{ a }70\\%$**, generando un **ahorro metabólico neto de $\\sim 1\\%\\text{ a }3\\%$ del consumo de oxígeno** ($\\dot{V}\\text{O}_2$), equivalente a una ganancia de varios segundos por kilómetro. 2) **Ajuste de Ritmo por Calor:** a temperaturas ambientales $>15^\\circ\\text{C}$, reducir el ritmo de competición previsto en un **$2\\%\\text{ a }3\\%$ por cada $5^\\circ\\text{C}$ de incremento térmico** por encima de $15^\\circ\\text{C}$ para prevenir la hipertermia precoz y el fallo circulatorio por redistribución cutánea del flujo sanguíneo.",
+      "entities": [
+        "clinical:drafting-aerodynamics",
+        "clinical:heat-pace-adjustment"
+      ],
+      "rules": [
+        "run-air-resistance-tactics",
+        "run-heat-adjustment"
+      ]
+    },
+    {
+      "id": "bangsbo-running-muscle-fibers-mhc-transitions",
+      "sourceId": "bangsbo-running-science",
+      "topic": "muscle",
+      "tags": [
+        "muscle-fibers",
+        "mhc",
+        "type-i-fibers",
+        "type-iia",
+        "distance-runners",
+        "sprint-transitions"
+      ],
+      "locator": {
+        "page": 45
+      },
+      "summary": "run-fiber-type-talent-id: Tipología de Fibras Musculares y Transiciones de Cadenas Pesadas de Miosina (MHC): 1) **Perfil de Fibras en Corredores de Élite:** los corredores de fondo y maratón de nivel internacional presentan una dotación del **$70\\%\\text{ al }90\\%$ de fibras lentas Tipo I (MHC-I)** en el músculo vasto lateral y gastrocnemio, caracterizadas por una densidad mitocondrial extrema, alta actividad de citrato sintasa y capilarización elevada (relación $\\ge 2.5\\text{ capilares/fibra}$). 2) **Plasticidad por Entrenamiento:** el entrenamiento de resistencia prolongado y el entrenamiento de sprints inducen una transición de isoformas de miosina desde las fibras rápidas glucolíticas puras (**MHC-IIx / IIb**) hacia las fibras rápidas oxidativas más resistentes a la fatiga (**MHC-IIa**). El desentrenamiento y la inactividad aumentan la expresión de isoformas híbridas y de MHC-IIx no adaptadas.\n\n<!-- stats: 8 chunks, 12 entidades cubiertas -->",
+      "entities": [
+        "muscle:skeletal-muscle",
+        "protein:myosin-heavy-chains"
+      ],
+      "rules": [
+        "run-fiber-type-talent-id",
+        "run-sprint-mhc-oscillation"
+      ]
+    },
     {
       "id": "cardio-daniels-fundamental-principles-adaptation",
       "sourceId": "daniels-running-formula-4ed",
