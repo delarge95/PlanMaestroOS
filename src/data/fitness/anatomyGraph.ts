@@ -202,8 +202,8 @@ export interface ExerciseLink {
   strength: boolean;
 }
 
-const sortExerciseLinks = (links: ExerciseLink[]): ExerciseLink[] =>
-  [...links.values()].sort((a, b) =>
+const sortExerciseLinks = (out: Map<string, ExerciseLink>): ExerciseLink[] =>
+  [...out.values()].sort((a, b) =>
     a.strength === b.strength ? a.name.localeCompare(b.name) : a.strength ? -1 : 1,
   );
 
