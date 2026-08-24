@@ -50,7 +50,7 @@ export const TENDONS: TendonEntry[] = [
     "Ligamentum Patellae"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Patellar","Quadriceps_common_tendon_and_patellar_ligament","Quadriceps_common_tendon_and_patellar_ligamentr"]},
+  modelMeshes: {"lower-limb":["Patellar","Quadriceps_common_tendon_and_patellar_ligament","Quadriceps_common_tendon_and_patellar_ligamentr"],"overview-skeleton":["Patellar"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
