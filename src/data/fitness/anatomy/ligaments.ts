@@ -224,7 +224,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Dorsal radio-ulnar ligament"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"upper-limb":["Dorsal_radio-ulnar_ligamentr"],"hand":["Dorsal_radio-ulnar_ligament"]},
+  modelMeshes: {"hand":["Dorsal_radio-ulnar_ligament"],"upper-limb":["Dorsal_radio-ulnar_ligamentr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -241,7 +241,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Palmar radio-ulnar ligament"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"upper-limb":["Palmar_radio-ulnar_ligament"],"hand":["Palmar_radio-ulnar_ligament"]},
+  modelMeshes: {"hand":["Palmar_radio-ulnar_ligament"],"upper-limb":["Palmar_radio-ulnar_ligament"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -313,7 +313,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Extensor retinaculum of wrist"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"upper-limb":["Extensor_retinaculum_of_wrist"],"hand":["Extensor_retinaculum_of_wrist"]},
+  modelMeshes: {"hand":["Extensor_retinaculum_of_wrist"],"upper-limb":["Extensor_retinaculum_of_wrist"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
