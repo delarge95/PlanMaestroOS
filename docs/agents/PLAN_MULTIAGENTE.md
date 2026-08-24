@@ -18,6 +18,8 @@ Estos principios son vinculantes para TODOS los agentes:
 6. **UX simple, motor complejo.** Cada pantalla responde una pregunta: "¿qué hago hoy y por qué?". Todo consejo lleva su "¿por qué?" con cita a fuente.
 7. **Contrato de estado del usuario antes que las reglas.** `UserState` (perfil, daily logs, sesiones, dolor, skills, métricas) es prerrequisito: las condiciones de aplicación de las reglas dependen de qué es expresable en él.
 8. **Gobernanza de reglas**: `draft → reviewed → approved`; deprecación nunca borrado; `evidenceTier` (meta-análisis > RCT > observacional > libro de experto) participa en resolución de conflictos entre fuentes.
+9. **REGLA DE ORO (innegociable, añadida 2026-08-23 tras incidente FIT)**: prohibido eliminar o reemplazar funciones/trabajos consolidados. Todo cambio es ADITIVO o requiere aprobación explícita del usuario. Ningún agente borra componentes "porque parecen muertos" sin verificación de referencias Y aprobación. La UX consolidada (buscadores, submenús, agrupaciones, configuradores completos) es intocable salvo mandato expreso.
+10. **Orquestación económica**: el trabajo de bajo razonamiento se delega a los entornos externos gratuitos según la matriz de `docs/orquestacion/NORMAS_ORQUESTADOR.md` (navegadores ilimitados → OX Alpha → Antigravity/Zed → Autoclaw → créditos Zcode como última opción). Los subagentes de crédito solo para razonamiento máximo.
 
 ---
 
