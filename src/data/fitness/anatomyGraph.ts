@@ -224,14 +224,19 @@ export function findExercisesForMuscle(muscle: MuscleEntry | TendonEntry | Anato
     .slice(0, limit);
 }
 
-/** URL del visor 3D con modelo+estructura preseleccionados. */
-export function anatomyViewerUrl(structure: AnatomyStructure): string | undefined {
+/** Modelo GLB con más meshes de la estructura (para visor/miniatura). */
+export function bestModelKeyForStructure(structure: AnatomyStructure): string | undefined {
   const models = Object.keys(structure.modelMeshes);
   if (!models.length) return undefined;
-  // modelo preferido: el de más meshes de la estructura
-  const best = models.reduce((a, b) =>
+  return models.reduce((a, b) =>
     (structure.modelMeshes[b]?.length ?? 0) > (structure.modelMeshes[a]?.length ?? 0) ? b : a,
   );
+}
+
+/** URL del visor 3D con modelo+estructura preseleccionados. */
+export function anatomyViewerUrl(structure: AnatomyStructure): string | undefined {
+  const best = bestModelKeyForStructure(structure);
+  if (!best) return undefined;
   return `/app/fitness/anatomy?model=${encodeURIComponent(best)}&structure=${encodeURIComponent(structure.id)}`;
 }
 

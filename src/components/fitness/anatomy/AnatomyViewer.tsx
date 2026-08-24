@@ -11,7 +11,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Box, RotateCcw, Layers, ChevronDown, ChevronUp, Scan, X, Loader2 } from 'lucide-react';
+import { Box, RotateCcw, Layers, ChevronDown, ChevronUp, Scan, X, Loader2, Crosshair, Eye, EyeOff } from 'lucide-react';
 import useIsMobile from '../../ui/useIsMobile';
 import {
   ANATOMY_MODELS,
@@ -20,10 +20,21 @@ import {
   getStructureById,
   resolveHighlightNames,
 } from '../../../data/fitness/anatomyGraph';
-import type { AnatomyStructure } from '../../../data/fitness/anatomy/types';
+import type { AnatomyStructure, StructureKind } from '../../../data/fitness/anatomy/types';
 
 const HIGHLIGHT_COLOR = 0x35d0ff;
 const HIGHLIGHT_EMISSIVE = 0x0e7fa8;
+/** opacidad de las piezas que tapan la selección (feedback #3: capas ocluidas) */
+const OCCLUDER_OPACITY = 0.12;
+
+/** Filtros de categoría del grafo (feedback #4-5). kinds=null → sin filtrar. */
+const LAYER_FILTERS: Array<{ key: string; label: string; kinds: StructureKind[] | null }> = [
+  { key: 'all', label: 'Todo', kinds: null },
+  { key: 'muscle', label: 'Músculos', kinds: ['muscle'] },
+  { key: 'connective', label: 'Tendones + ligamentos', kinds: ['tendon', 'ligament'] },
+  { key: 'nerve', label: 'Nervios', kinds: ['nerve'] },
+  { key: 'skeleton', label: 'Huesos + articulaciones', kinds: ['bone', 'joint'] },
+];
 
 function queryParam(name: string): string | null {
   if (typeof window === 'undefined') return null;
@@ -52,6 +63,14 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   // refs espejo para handlers estables del loop de escena
   const stoppedRef = useRef(false);
   const staticModeRef = useRef(false);
+  const meshOwnersRef = useRef<Map<string, AnatomyStructure>>(new Map());
+  const selectedStructureRef = useRef<AnatomyStructure | undefined>(undefined);
+  const layerFilterRef = useRef('all');
+  const isolateIdRef = useRef<string | null>(null);
+  /** meshes con material clonado para transparencia (occluders) — mesh → original */
+  const matOriginalsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
+  const occluderMeshesRef = useRef<THREE.Mesh[]>([]);
+  const outlineMatRef = useRef<THREE.MeshBasicMaterial | null>(null);
   const loadingRef = useRef(true);
   const modelKeyRef = useRef(initialModel ?? 'overview-skeleton');
   const structuresForModelRef = useRef<AnatomyStructure[]>([]);
@@ -63,6 +82,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const [selectedId, setSelectedId] = useState<string | null>(initialStructure ?? queryParam('structure'));
   const [panelOpen, setPanelOpen] = useState(!isMobile);
   const [error, setError] = useState<string | null>(null);
+  const [layerFilter, setLayerFilter] = useState('all');
+  const [isolateId, setIsolateId] = useState<string | null>(null);
 
   // modelo inicial desde URL (?model=)
   useEffect(() => {
@@ -86,7 +107,22 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const selectedStructure = selectedId ? getStructureById(selectedId) : undefined;
   const stats = useMemo(() => anatomyGraphStats(), []);
 
-  // ── highlight de la estructura seleccionada ────────────────────────────────
+  // lista lateral acorde al filtro de capas activo (feedback #4)
+  const filterKinds = LAYER_FILTERS.find((f) => f.key === layerFilter)?.kinds ?? null;
+  const panelStructures = filterKinds
+    ? structuresForModel.filter((s) => filterKinds.includes(s.kind))
+    : structuresForModel;
+
+  // índice meshName → estructura dueña (para filtros por categoría del grafo)
+  useEffect(() => {
+    const map = new Map<string, AnatomyStructure>();
+    for (const s of structuresForModel) {
+      for (const n of s.modelMeshes[model.key] ?? []) map.set(n, s);
+    }
+    meshOwnersRef.current = map;
+  }, [structuresForModel, model.key]);
+
+  // ── highlight de la estructura seleccionada (resalte inequívoco: emissive fuerte + outline) ──
   const applyHighlight = useCallback((objectNames: string[]) => {
     const map = namedMeshesRef.current;
     const want = new Set(objectNames);
@@ -101,8 +137,18 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         }
         if (orig.color && mat.color) mat.color.copy(orig.color);
       }
+      // quitar outline (hijo del mesh)
+      for (let i = mesh.children.length - 1; i >= 0; i--) {
+        const c = mesh.children[i];
+        if ((c as THREE.Mesh).userData?.isOutline) mesh.remove(c);
+      }
     }
     originalsRef.current.clear();
+    if (!outlineMatRef.current) {
+      outlineMatRef.current = new THREE.MeshBasicMaterial({
+        color: HIGHLIGHT_COLOR, side: THREE.BackSide, transparent: true, opacity: 0.9,
+      });
+    }
     for (const name of want) {
       const objs = map.get(name) ?? [];
       for (const obj of objs) {
@@ -117,10 +163,19 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             color: mat.color?.clone(),
           });
         }
-        if (!mat.emissive) continue;
-        mat.emissive = new THREE.Color(HIGHLIGHT_EMISSIVE);
-        mat.emissiveIntensity = 1.4;
-        mat.color.lerp(new THREE.Color(HIGHLIGHT_COLOR), 0.35);
+        if (mat.emissive) {
+          mat.emissive = new THREE.Color(HIGHLIGHT_EMISSIVE);
+          mat.emissiveIntensity = 2.2;
+        }
+        if (mat.color) mat.color.lerp(new THREE.Color(HIGHLIGHT_COLOR), 0.5);
+        // outline (inverted hull): copia barata de la geometría con caras traseras
+        if (mesh.isMesh && !mesh.children.some((c) => (c as THREE.Mesh).userData?.isOutline)) {
+          const outline = new THREE.Mesh(mesh.geometry, outlineMatRef.current!);
+          outline.userData.isOutline = true;
+          outline.scale.setScalar(1.035);
+          outline.raycast = () => {}; // no interceptar picks
+          mesh.add(outline);
+        }
       }
     }
   }, []);
@@ -136,6 +191,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     let cancelled = false;
     setLoading(true);
     setError(null);
+    setIsolateId(null); // los nombres de mesh cambian con el modelo
     const loader = new GLTFLoader();
     const draco = new DRACOLoader();
     // decoder self-hosted (copiado de three/examples/jsm/libs/draco) — sin CDN externo
@@ -146,6 +202,15 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       model.file,
       (gltf) => {
         if (cancelled || !modelRootRef.current) return;
+        // restaurar materiales translúcidos (occluders) del modelo saliente
+        for (const [mesh, orig] of matOriginalsRef.current) {
+          const clone = mesh.material;
+          mesh.material = orig;
+          const mats = Array.isArray(clone) ? clone : [clone];
+          for (const m of mats) m?.dispose();
+        }
+        matOriginalsRef.current.clear();
+        occluderMeshesRef.current = [];
         // limpiar modelo anterior (liberar VRAM: geometrías, materiales y texturas)
         const root = modelRootRef.current;
         root.traverse((o) => {
@@ -263,7 +328,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     controls.enableDamping = !reducedMotion;
     controls.dampingFactor = 0.08;
     controls.rotateSpeed = 0.8;
-    controls.enablePan = false;
+    controls.enablePan = true; // feedback usuario: pan (botón derecho / dos dedos)
 
     sceneRef.current = scene;
     cameraRef.current = camera;
@@ -300,8 +365,13 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const hits = raycaster.intersectObject(root, true);
       for (const h of hits) {
         let o: THREE.Object3D | null = h.object;
+        let visibleThrough = o.visible;
         while (o && o !== root) {
-          if (o.name && !o.name.startsWith('node-')) return o;
+          if (!o.visible) visibleThrough = false;
+          if (o.name && !o.name.startsWith('node-')) {
+            if (visibleThrough) return o;
+            break; // pieza oculta por filtro/aislamiento: probar siguiente hit
+          }
           o = o.parent;
         }
       }
@@ -353,7 +423,10 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const match = structuresForModelRef.current.find((s) =>
         (s.modelMeshes[modelKeyRef.current] ?? []).includes(hit.name),
       );
-      if (match) setSelectedId(match.id);
+      if (match) {
+        setSelectedId(match.id);
+        setIsolateId(null); // al cambiar de pieza se sale del aislamiento
+      }
       setHoverName(hit.name);
     };
     const onDrag = (e: PointerEvent) => {
@@ -389,6 +462,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         const m = o as THREE.Mesh;
         if (m.isMesh) m.geometry?.dispose();
       });
+      outlineMatRef.current?.dispose();
+      outlineMatRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -427,10 +502,159 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     };
   }, [reducedMotion]);
 
+  // ── transparencia de capas que tapan la selección (feedback #3) ────────────
+  // clone-on-write del material: los GLB comparten material entre meshes y
+  // mutar la opacidad contaminaría a piezas no deseadas.
+  const setMeshOpacity = useCallback((mesh: THREE.Mesh, opacity: number | null) => {
+    if (opacity === null) {
+      const orig = matOriginalsRef.current.get(mesh);
+      if (orig) {
+        const clone = mesh.material;
+        mesh.material = orig;
+        const mats = Array.isArray(clone) ? clone : [clone];
+        for (const m of mats) m?.dispose();
+        matOriginalsRef.current.delete(mesh);
+      }
+      return;
+    }
+    if (!matOriginalsRef.current.has(mesh)) {
+      matOriginalsRef.current.set(mesh, mesh.material);
+      mesh.material = Array.isArray(mesh.material)
+        ? mesh.material.map((m) => m.clone())
+        : mesh.material.clone();
+    }
+    const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    for (const m of mats) {
+      const std = m as THREE.MeshStandardMaterial;
+      std.transparent = true;
+      std.opacity = opacity;
+      std.depthWrite = false;
+    }
+  }, []);
+
+  /** Raycast cámara→pieza: lo que se interpone se vuelve translúcido. */
+  const updateOccluders = useCallback(() => {
+    for (const mesh of occluderMeshesRef.current) setMeshOpacity(mesh, null);
+    occluderMeshesRef.current = [];
+    const sel = selectedStructureRef.current;
+    if (!sel || isolateIdRef.current) return; // aislada = ya solo se ve la pieza
+    const root = modelRootRef.current;
+    const cam = cameraRef.current;
+    if (!root || !cam) return;
+    const names = resolveHighlightNames(sel, modelKeyRef.current);
+    const targets: THREE.Object3D[] = [];
+    for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
+    if (!targets.length) return;
+    const targetSet = new Set(targets);
+    const ray = new THREE.Raycaster();
+    const occ = new Set<THREE.Mesh>();
+    const dir = new THREE.Vector3();
+    const center = new THREE.Vector3();
+    for (const t of targets.slice(0, 12)) {
+      t.getWorldPosition(center);
+      dir.copy(center).sub(cam.position);
+      const dist = dir.length();
+      if (dist < 1e-6) continue;
+      dir.normalize();
+      ray.set(cam.position, dir);
+      ray.far = dist * 0.98;
+      for (const h of ray.intersectObject(root, true)) {
+        const m = h.object as THREE.Mesh;
+        if (!m.isMesh || !m.visible || targetSet.has(m)) continue;
+        // descartar antecesor invisible (los rayos de three no comprueban visible)
+        let p: THREE.Object3D | null = m;
+        let visibleThrough = true;
+        while (p && p !== root) {
+          if (!p.visible) { visibleThrough = false; break; }
+          p = p.parent;
+        }
+        if (visibleThrough) occ.add(m);
+        if (occ.size > 40) break;
+      }
+    }
+    for (const m of occ) {
+      setMeshOpacity(m, OCCLUDER_OPACITY);
+      occluderMeshesRef.current.push(m);
+    }
+  }, [setMeshOpacity]);
+
+  /** Visibilidad por categoría del grafo y aislamiento de pieza (feedback #4-5). */
+  const applyVisibility = useCallback(() => {
+    const filter = LAYER_FILTERS.find((f) => f.key === layerFilterRef.current) ?? LAYER_FILTERS[0];
+    const iso = isolateIdRef.current ? getStructureById(isolateIdRef.current) : undefined;
+    const isoNames = iso && iso.modelMeshes[modelKeyRef.current]
+      ? new Set(iso.modelMeshes[modelKeyRef.current])
+      : null;
+    for (const [name, objs] of namedMeshesRef.current) {
+      const owner = meshOwnersRef.current.get(name);
+      let visible = true;
+      if (isoNames) visible = isoNames.has(name);
+      else if (filter.kinds) visible = owner ? filter.kinds.includes(owner.kind) : false;
+      for (const obj of objs) obj.visible = visible;
+    }
+    updateOccluders();
+  }, [updateOccluders]);
+
+  /** Centrar la cámara en la pieza seleccionada manteniendo la orientación (feedback #2). */
+  const centerOnSelection = useCallback(() => {
+    const sel = selectedStructureRef.current;
+    const cam = cameraRef.current;
+    const ctrl = controlsRef.current;
+    const root = modelRootRef.current;
+    if (!sel || !cam || !ctrl || !root) return;
+    const names = resolveHighlightNames(sel, modelKeyRef.current);
+    const targets: THREE.Object3D[] = [];
+    for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
+    const box = new THREE.Box3();
+    if (targets.length) {
+      for (const t of targets) box.expandByObject(t);
+    } else {
+      box.setFromObject(root);
+    }
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    const dir = cam.position.clone().sub(ctrl.target).normalize();
+    cam.position.copy(center).add(dir.multiplyScalar(Math.max(maxDim * 2.2, maxDim)));
+    ctrl.target.copy(center);
+    ctrl.update();
+    if (staticModeRef.current && rendererRef.current && sceneRef.current) {
+      rendererRef.current.render(sceneRef.current, cam);
+    }
+    updateOccluders();
+  }, [updateOccluders]);
+
   // sincronizar refs espejo (los handlers del canvas leen de aquí)
   loadingRef.current = loading;
   modelKeyRef.current = modelKey;
   structuresForModelRef.current = structuresForModel;
+  selectedStructureRef.current = selectedStructure;
+  layerFilterRef.current = layerFilter;
+  isolateIdRef.current = isolateId;
+
+  // aplicar filtros/aislamiento cuando cambia el modelo o los controles
+  useEffect(() => {
+    if (loading) return;
+    applyVisibility();
+  }, [loading, layerFilter, isolateId, structuresForModel, applyVisibility]);
+
+  // re-derivar translucidez al cambiar selección o aislamiento
+  useEffect(() => {
+    if (loading) return;
+    updateOccluders();
+  }, [selectedId, isolateId, loading, updateOccluders]);
+
+  // atajos de teclado: F centra la selección · Esc sale del aislamiento (feedback #2/#5)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if ((e.key === 'f' || e.key === 'F') && selectedStructureRef.current) centerOnSelection();
+      else if (e.key === 'Escape' && isolateIdRef.current) setIsolateId(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [centerOnSelection]);
 
   // re-render estático cuando termina la carga (reduced motion)
   useEffect(() => {
@@ -455,6 +679,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     if (reducedMotion && rendererRef.current && sceneRef.current) {
       rendererRef.current.render(sceneRef.current, cam);
     }
+    updateOccluders();
   };
 
   return (
@@ -507,9 +732,29 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             );
           })}
         </div>
+        {/* FILTROS POR CATEGORÍA DEL GRAFO (feedback usuario) */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.4px', fontWeight: 700 }}>Capas</span>
+          {LAYER_FILTERS.map((f) => {
+            const active = layerFilter === f.key;
+            return (
+              <button
+                key={f.key}
+                type="button"
+                onClick={() => { setLayerFilter(f.key); setIsolateId(null); }}
+                style={{
+                  background: active ? 'rgba(53,208,255,0.16)' : 'rgba(255,255,255,0.03)',
+                  color: active ? '#7fdcff' : 'var(--text-primary)',
+                  border: `1px solid ${active ? 'rgba(53,208,255,0.55)' : 'var(--color-border-subtle, rgba(255,255,255,0.1))'}`,
+                  borderRadius: 16, padding: '4px 11px', fontSize: '0.72rem', fontWeight: active ? 700 : 500, cursor: 'pointer',
+                }}
+              >
+                {f.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
-
-      {/* CANVAS + PANEL */}
       <div style={{ display: 'flex', gap: 12, flexDirection: isMobile ? 'column' : 'row' }}>
         <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
           <div
@@ -532,6 +777,11 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               )}
             </div>
           )}
+          {isolateId && !loading && (
+            <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.5)', borderRadius: 10, padding: '5px 10px', fontSize: '0.72rem', color: '#7fdcff', fontWeight: 700 }}>
+              Pieza aislada · Esc para salir
+            </div>
+          )}
           {reducedMotion && !loading && (
             <div style={{ position: 'absolute', top: 10, left: 10, right: 10, background: 'rgba(10,11,14,0.8)', borderRadius: 10, padding: '6px 10px', fontSize: '0.74rem', color: 'var(--text-secondary)', display: 'flex', gap: 6, alignItems: 'center' }}>
               <Scan size={13} /> Movimiento reducido activo: render estático (usa el selector y “Cámara” para cambiar de vista).
@@ -551,18 +801,18 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             onClick={() => setPanelOpen((o) => !o)}
             style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}
           >
-            <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>Estructuras en este modelo ({structuresForModel.length})</span>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>Estructuras en este modelo ({panelStructures.length}{filterKinds ? ' filtradas' : ''})</span>
             {panelOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </button>
           {panelOpen && (
             <div style={{ maxHeight: isMobile ? 220 : 420, overflowY: 'auto', padding: '0 10px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {structuresForModel.map((s) => {
+              {panelStructures.map((s) => {
                 const active = selectedId === s.id;
                 return (
                   <button
                     key={s.id}
                     type="button"
-                    onClick={() => setSelectedId(active ? null : s.id)}
+                    onClick={() => { setSelectedId(active ? null : s.id); setIsolateId(null); }}
                     style={{
                       textAlign: 'left', background: active ? 'rgba(53,208,255,0.12)' : 'rgba(255,255,255,0.02)',
                       border: `1px solid ${active ? 'rgba(53,208,255,0.5)' : 'transparent'}`,
@@ -589,6 +839,21 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>{selectedStructure.nameEs} <span style={{ fontWeight: 500, color: 'var(--text-tertiary)', fontSize: '0.8rem' }}>{selectedStructure.nameEn}</span></h4>
             </div>
             <button type="button" onClick={() => setSelectedId(null)} style={{ ...btnStyle, border: 'none' }}><X size={14} /></button>
+          </div>
+          {/* acciones de cámara/capas sobre la pieza (feedback usuario) */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button type="button" onClick={centerOnSelection} style={btnStyle} title="Centrar la cámara en esta pieza (F)">
+              <Crosshair size={14} /> Centrar <span style={{ opacity: 0.6 }}>(F)</span>
+            </button>
+            {isolateId === selectedStructure.id ? (
+              <button type="button" onClick={() => setIsolateId(null)} style={{ ...btnStyle, borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' }} title="Mostrar de nuevo todo el modelo (Esc)">
+                <EyeOff size={14} /> Salir del aislamiento
+              </button>
+            ) : (
+              <button type="button" onClick={() => setIsolateId(selectedStructure.id)} style={btnStyle} title="Ocultar todo lo demás">
+                <Eye size={14} /> Aislar pieza
+              </button>
+            )}
           </div>
           {'origin' in selectedStructure && (
             <StructureDetail structure={selectedStructure} />

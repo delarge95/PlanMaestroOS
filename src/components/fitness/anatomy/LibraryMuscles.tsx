@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Search, X, ChevronDown, ChevronUp, Bone, Zap, Link2, Activity, Hand, Rotate3d } from 'lucide-react';
 import useIsMobile from '../../ui/useIsMobile';
+import StructureThumbnail from './StructureThumbnail';
 import {
   BODY_ZONES,
   BODY_ZONE_LABELS_ES,
@@ -365,6 +366,9 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
               </p>
             ))}
           </div>
+
+          {/* MINIATURA 3D INTERACTIVA (clic → visor completo con la pieza) */}
+          <StructureThumbnail structureId={s.id} />
 
           {/* VER EN 3D */}
           {viewerUrl && (
