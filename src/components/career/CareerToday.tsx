@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import SectionNav from '../ui/SectionNav';
 import Button from '../ui/Button';
 import { Briefcase, ArrowRight } from 'lucide-react';
+import { useCareerStore } from '../../data/career/careerStore';
+import { validateSingleNextAction, type JobApplication } from '../../data/career/applications';
+import WeeklyExecutionBoard from './WeeklyExecutionBoard';
 
 export interface CareerTodayProps {
   currentPath?: string;
 }
 
+/** Siguiente acción laboral: la aplicación activa con follow-up más próximo (determinista). */
+function pickTopApplication(applications: JobApplication[], todayIso: string): JobApplication | undefined {
+  return applications
+    .filter((a) => a.stage !== 'Cerrado' && validateSingleNextAction(a) && a.followUpDateIso)
+    .sort((a, b) => a.followUpDateIso.localeCompare(b.followUpDateIso))[0];
+}
+
 export default function CareerToday({ currentPath = '/app/career' }: CareerTodayProps) {
-  const nextAction = 'Completar documentación de arquitectura TwinSight MVP';
-  const applicationsThisWeekCount = 4;
-  const pendingFollowups = [
-    { id: 'f1', company: 'Epic Games', role: 'Tech Artist', dueDate: 'Hoy' },
-    { id: 'f2', company: 'Ubisoft', role: 'Graphics Engineer', dueDate: 'Mañana' },
-    { id: 'f3', company: 'Riot Games', role: 'VFX Artist', dueDate: 'En 3 días' }
-  ];
+  const applications = useCareerStore((s) => s.applications);
+
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const top = useMemo(() => pickTopApplication(applications, todayIso), [applications, todayIso]);
+  const pendingActionCount = useMemo(
+    () => applications.filter((a) => a.stage !== 'Cerrado' && !validateSingleNextAction(a)).length,
+    [applications]
+  );
+  const activeCount = useMemo(() => applications.filter((a) => a.stage !== 'Cerrado').length, [applications]);
 
   return (
     <ErrorBoundary>
@@ -38,7 +50,7 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
                 Laboral
               </h1>
               <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
-                Gestión de carrera, portafolio & pipeline de empleo
+                Gestión de carrera, portafolio & pipeline de empleo · {activeCount} aplicaciones activas (tracker real)
               </span>
             </div>
           </div>
@@ -50,57 +62,69 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
           </a>
         </div>
 
-        {/* PRÓXIMA ACCIÓN LABORAL (UNA SOLA) */}
-        <div style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--color-accent-primary-soft)',
-          borderRadius: 'var(--radius-md)',
-          padding: 'var(--space-md)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '12px'
-        }}>
-          <div>
-            <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
-              Próxima acción
-            </span>
-            <strong style={{ fontSize: '1rem', color: 'var(--text)', display: 'block', marginTop: '2px' }}>
-              {nextAction}
-            </strong>
-          </div>
-
-          <Button variant="secondary" size="sm">
-            Empezar 10 min
-          </Button>
-        </div>
-
-        {/* MÉTRICAS DE APLICACIONES Y SEGUIMIENTOS PENDIENTES */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-md)' }}>
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>
-              Aplicaciones esta semana
-            </span>
-            <strong style={{ fontSize: '1.8rem', color: 'var(--color-accent-primary)', display: 'block', marginTop: '2px' }}>
-              {applicationsThisWeekCount}
-            </strong>
-          </div>
-
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>
-              Seguimientos pendientes ({pendingFollowups.length})
-            </span>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {pendingFollowups.map((f) => (
-                <div key={f.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', background: 'rgba(255,255,255,0.02)', padding: '4px 8px', borderRadius: '4px' }}>
-                  <strong style={{ color: 'var(--text)' }}>{f.company} · {f.role}</strong>
-                  <span style={{ color: 'var(--color-accent-warning)', fontWeight: 600 }}>{f.dueDate}</span>
-                </div>
-              ))}
+        {/* PRÓXIMA ACCIÓN LABORAL (UNA SOLA — real, del store) */}
+        {top ? (
+          <div style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--color-accent-primary-soft)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-md)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '12px',
+            flexWrap: 'wrap'
+          }}>
+            <div>
+              <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+                Próxima acción · {top.companyName} · {top.roleTitle}
+              </span>
+              <strong style={{ fontSize: '1rem', color: 'var(--text)', display: 'block', marginTop: '2px' }}>
+                {top.singleNextAction}
+              </strong>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>
+                seguimiento: {top.followUpDateIso} · fuente: tracker xlsx (doc-12)
+              </span>
             </div>
+
+            <a href="/app/career/jobs" style={{ textDecoration: 'none' }}>
+              <Button variant="secondary" size="sm">
+                Empezar 10 min
+              </Button>
+            </a>
           </div>
-        </div>
+        ) : (
+          <div style={{
+            background: 'var(--surface)',
+            border: '1px dashed var(--color-accent-warning)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-md)'
+          }}>
+            <strong style={{ fontSize: '0.9rem', color: 'var(--text)' }}>
+              Sin próxima acción definida en ninguna aplicación activa
+            </strong>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginTop: '4px' }}>
+              Regla de contrato (doc-12): cada aplicación necesita exactamente una única próxima acción. Defínela en el pipeline.
+            </span>
+          </div>
+        )}
+
+        {/* TABLERO SEMANAL DE EJECUCIÓN (doc-34 — mandato usuario) */}
+        <WeeklyExecutionBoard />
+
+        {/* AVISO DE CONTRATO PENDIENTE */}
+        {pendingActionCount > 0 && (
+          <div style={{
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid var(--color-accent-warning)',
+            borderRadius: 'var(--radius-sm)',
+            padding: '8px 12px',
+            fontSize: '0.75rem',
+            color: 'var(--text-secondary)'
+          }}>
+            <strong style={{ color: 'var(--color-accent-warning)' }}>{pendingActionCount} aplicación(es)</strong> sin única próxima acción definida — el movimiento de columna está bloqueado hasta definirla.
+          </div>
+        )}
 
       </div>
     </ErrorBoundary>

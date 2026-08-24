@@ -1,0 +1,1189 @@
+{
+  "domain": "career",
+  "sources": [
+    {
+      "id": "doc-00",
+      "title": "00_master_audit_blueprint",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "positioning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-01",
+      "title": "01_source_of_truth_profile",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "positioning",
+          "career"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "doc-02",
+      "title": "02_market_role_fit_and_positioning",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "positioning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-03",
+      "title": "03_salary_benchmark_and_remote_colombia",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "salary",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-04",
+      "title": "04_eu_portugal_germany_mobility_strategy",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "mobility",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-05",
+      "title": "05_language_strategy_and_roi",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "languages-strategy",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-06",
+      "title": "06_education_courses_rebelway_masters_phd",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "education",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-07",
+      "title": "07_portfolio_strategy_and_project_architecture",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-08b",
+      "title": "08B_twinsight_case_study_final_structure",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-08",
+      "title": "08_twinsight_x500_case_study",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-09",
+      "title": "09_ara_ai_tools_and_secondary_projects",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "projects",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-10",
+      "title": "10_github_linkedin_cv_strategy",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "presence",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-11",
+      "title": "11_company_targets_job_boards_recruiters",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "companies",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-12",
+      "title": "12_application_system_and_tracker",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "tracker",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-13",
+      "title": "13_interview_negotiation_and_offer_risk",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "interviews",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-14",
+      "title": "14_30_60_90_execution_plan",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "planning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-15",
+      "title": "15_final_integrated_strategy",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "planning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-16",
+      "title": "16_final_consistency_audit_and_gap_register",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "planning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-17",
+      "title": "17_cv_base_and_role_variants",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-18",
+      "title": "18_linkedin_final_rewrite",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "presence",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-19b",
+      "title": "19B_github_readme_twinsight_final",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-19",
+      "title": "19_github_readme_templates",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-20",
+      "title": "20_portfolio_copy_and_site_structure",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-21b",
+      "title": "21B_twinsight_demo_video_final_plan",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-21",
+      "title": "21_twinsight_demo_video_script_and_shotlist",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-22",
+      "title": "22_outreach_templates_english_spanish",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "outreach",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-23",
+      "title": "23_interview_answer_bank",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "interviews",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-24",
+      "title": "24_offer_evaluation_scorecard",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "interviews",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-26",
+      "title": "26_weekly_execution_dashboard",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "tracker",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-27",
+      "title": "27_strategy_scenarios_conservative_balanced_aggressive",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "planning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-28b",
+      "title": "28B_public_cv_resume_benchmark",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-28c",
+      "title": "28C_github_profiles_benchmark",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "benchmarks",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-28d-alt",
+      "title": "28D_artstation_portfolio_benchmark (1)",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-28d",
+      "title": "28D_artstation_portfolio_benchmark",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-28d-complete",
+      "title": "28D_artstation_portfolio_benchmark_complete",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-28e",
+      "title": "28E_artstation_profile_optimization_strategy",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-28",
+      "title": "28_competitor_profile_benchmark",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "benchmarks",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-29b",
+      "title": "29B_demo_reels_benchmark",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-29c",
+      "title": "29C_artstation_breakdown_benchmark",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-29",
+      "title": "29_portfolio_case_study_benchmark",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-30",
+      "title": "30_live_job_postings_market_snapshot",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "companies",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-31",
+      "title": "31_application_targeting_matrix_and_search_protocol",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "planning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-32",
+      "title": "32_application_materials_gap_closure_plan",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "planning",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-33",
+      "title": "33_portfolio_asset_production_sprint",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "doc-34",
+      "title": "34_weekly_application_execution_system",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "tracker",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-35",
+      "title": "35_interview_defense_and_technical_screen_system",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "interviews",
+          "career"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "doc-36",
+      "title": "36_public_profile_launch_sequence",
+      "author": "Plan Maestro OS — investigación laboral (Alexander Woodcock)",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "portfolio",
+          "career"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "hist-alexander-woodcock-context",
+      "title": "Historic/alexander_woodcock_context",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-contexto-maestro-alexander-descatualizado-aun-si",
+      "title": "Historic/contexto_maestro_alexander (descatualizado, aún sin terminar proyecto)",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-deep-research-report-8",
+      "title": "Historic/deep-research-report (8)",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-estrategia-idiomas-mercado-laboral-technical-art",
+      "title": "Historic/estrategia_idiomas_mercado_laboral_technical_artist",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-job-search-strategy",
+      "title": "Historic/job_search_strategy",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-master-schedule",
+      "title": "Historic/master_schedule",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-plan-audit",
+      "title": "Historic/plan_audit",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-portfolio-strategy",
+      "title": "Historic/portfolio_strategy",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "hist-ticktick-schedule",
+      "title": "Historic/ticktick_schedule",
+      "author": "Plan Maestro OS — histórico",
+      "year": 2025,
+      "edition": "v0",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "historic",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-d2-conferences-events-demo-venues",
+      "title": "Research/D2_conferences_events_demo_venues",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-e1-technical-volunteering-opportunities",
+      "title": "Research/E1_technical_volunteering_opportunities",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-agent-a4-artstation-portfolio-benchmark-1",
+      "title": "Research/agent_A4_artstation_portfolio_benchmark (1)",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-agent-a4-artstation-portfolio-benchmark",
+      "title": "Research/agent_A4_artstation_portfolio_benchmark",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-agente-b2-digital-twin-simulation-live-jobs-part",
+      "title": "Research/agente_B2_digital_twin_simulation_live_jobs_partial_capture",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-cerrando-sistema",
+      "title": "Research/cerrando_sistema",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-00",
+      "title": "Research/deep-research-report_00",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-01-structure",
+      "title": "Research/deep-research-report_01_structure",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-02",
+      "title": "Research/deep-research-report_02",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-03",
+      "title": "Research/deep-research-report_03",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-04",
+      "title": "Research/deep-research-report_04",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-05",
+      "title": "Research/deep-research-report_05",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-06",
+      "title": "Research/deep-research-report_06",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-11",
+      "title": "Research/deep-research-report_11",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-13",
+      "title": "Research/deep-research-report_13",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-c3",
+      "title": "Research/deep-research-report_C3",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-deep-research-report-c4",
+      "title": "Research/deep-research-report_C4",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "res-paquete-continuidad-agent-research",
+      "title": "Research/paquete_continuidad_agent_research",
+      "author": "Plan Maestro OS — agentes de investigación",
+      "year": 2026,
+      "edition": "v1",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "research",
+          "career"
+        ],
+        "priority": 4
+      }
+    }
+  ]
+}
