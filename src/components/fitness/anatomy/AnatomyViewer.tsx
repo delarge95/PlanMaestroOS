@@ -729,8 +729,14 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     if (loading) return;
     resetOccluders();
     removeJointMarker();
-    // restaurar TODO desde el estado prístino (evita highlight residual)
-    for (const { mesh } of piecesRef.current.values()) restorePristine(mesh);
+    // restaurar TODO desde el estado prístino + re-aplicar tinte (evita highlight residual)
+    const stTint = stateRef.current;
+    for (const { mesh, piece } of piecesRef.current.values()) {
+      restorePristine(mesh);
+      const mat = mesh.material as THREE.MeshStandardMaterial | undefined;
+      const orig = mat?.userData?.__origColor as THREE.Color | undefined;
+      if (mat?.color && orig && stTint.colorByKind) mat.color.copy(orig).lerp(new THREE.Color(layerDef(piece.kind).color), KIND_TINT_STRENGTH);
+    }
     if (!selectedId || !path || path.structureId !== selectedId) return;
     const g = groupsByStructureRef.current.get(selectedId);
     if (!g) return;
@@ -751,7 +757,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const mat = e.mesh.material as THREE.MeshStandardMaterial | undefined;
       if (!mat?.emissive) continue;
       mat.emissive.set(hc);
-      mat.emissiveIntensity = path.pieceKey ? 1.9 : 1.4;
+      mat.emissiveIntensity = 1.6;
       if (mat.color) mat.color.lerp(new THREE.Color(hc), 0.4);
     }
     for (const k of parentNames) {
