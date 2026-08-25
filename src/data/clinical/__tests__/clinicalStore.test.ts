@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import type { ExposureItem } from '../clinicalStore';
 
 class MemoryStorage {
   private map = new Map<string, string>();
@@ -31,7 +32,7 @@ describe('clinicalStore (clinical-state-v1)', () => {
   beforeEach(() => {
     resetStore();
     storage.clear();
-    const seed = [
+    const seed: ExposureItem[] = [
       { id: 'exp_1', title: 'A', hierarchyLevel: 'Baja', description: '', preAnxiety: 5, postAnxiety: 3, completed: false, notes: '' },
       { id: 'exp_2', title: 'B', hierarchyLevel: 'Media', description: '', preAnxiety: 7, postAnxiety: 4, completed: false, notes: '' },
       { id: 'exp_3', title: 'C', hierarchyLevel: 'Alta', description: '', preAnxiety: 8, postAnxiety: 5, completed: false, notes: '' }
