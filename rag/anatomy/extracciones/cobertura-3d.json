@@ -1,0 +1,3230 @@
+{
+ "generado": "2026-08-25T05:09:00.795Z",
+ "filas": [
+  {
+   "id": "mus-masseter",
+   "kind": "muscle",
+   "nameEs": "Masetero",
+   "nameEn": "Masseter",
+   "zone": "head-jaw",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-temporalis",
+   "kind": "muscle",
+   "nameEs": "Temporal",
+   "nameEn": "Temporalis",
+   "zone": "head-jaw",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-lateral-pterygoid",
+   "kind": "muscle",
+   "nameEs": "Pterigoideo Lateral",
+   "nameEn": "Lateral Pterygoid",
+   "zone": "head-jaw",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "overview-skeleton:Lateral_cuneiform_boner (0.5)"
+  },
+  {
+   "id": "mus-medial-pterygoid",
+   "kind": "muscle",
+   "nameEs": "Pterigoideo Medial",
+   "nameEn": "Medial Pterygoid",
+   "zone": "head-jaw",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "overview-skeleton:Lower_medial_incisorr (0.5)"
+  },
+  {
+   "id": "mus-occipitofrontalis",
+   "kind": "muscle",
+   "nameEs": "Occipitofrontal",
+   "nameEn": "Occipitofrontalis",
+   "zone": "head-jaw",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-orbicularis-oculi",
+   "kind": "muscle",
+   "nameEs": "Orbicular de los Párpados",
+   "nameEn": "Orbicularis Oculi",
+   "zone": "head-jaw",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Zona_orbicularis_of_hip_jointr (0.5)"
+  },
+  {
+   "id": "mus-orbicularis-oris",
+   "kind": "muscle",
+   "nameEs": "Orbicular de la Boca",
+   "nameEn": "Orbicularis Oris",
+   "zone": "head-jaw",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Zona_orbicularis_of_hip_jointr (0.5)"
+  },
+  {
+   "id": "mus-buccinator",
+   "kind": "muscle",
+   "nameEs": "Buccinador",
+   "nameEn": "Buccinator",
+   "zone": "head-jaw",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-zygomaticus-major",
+   "kind": "muscle",
+   "nameEs": "Cigomático Mayor",
+   "nameEn": "Zygomaticus Major",
+   "zone": "head-jaw",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "upper-limb:Abdominal_head_of_pectoralis_major_muscler (0.5)"
+  },
+  {
+   "id": "mus-extraocular-muscles",
+   "kind": "muscle",
+   "nameEs": "Músculos Extraoculares",
+   "nameEn": "Extraocular Muscles",
+   "zone": "head-jaw",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:1st_Dorsal_interossei_muscles_of_footr (0.5)"
+  },
+  {
+   "id": "mus-sternocleidomastoid",
+   "kind": "muscle",
+   "nameEs": "Esternocleidomastoideo",
+   "nameEn": "Sternocleidomastoid",
+   "zone": "cervical",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-platysma",
+   "kind": "muscle",
+   "nameEs": "Platisma",
+   "nameEn": "Platysma",
+   "zone": "cervical",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-scalenus-anterior",
+   "kind": "muscle",
+   "nameEs": "Escaleno Anterior",
+   "nameEn": "Scalenus Anterior",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Anterior_cruciate_ligamentr (0.5)"
+  },
+  {
+   "id": "mus-scalenus-medius",
+   "kind": "muscle",
+   "nameEs": "Escaleno Medio",
+   "nameEn": "Scalenus Medius",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Gluteus_medius_muscler (0.5)"
+  },
+  {
+   "id": "mus-scalenus-posterior",
+   "kind": "muscle",
+   "nameEs": "Escaleno Posterior",
+   "nameEn": "Scalenus Posterior",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Interossea__Posterior_sacro-iliac_ligamentr (0.5)"
+  },
+  {
+   "id": "mus-longus-colli",
+   "kind": "muscle",
+   "nameEs": "Largo del Cuello",
+   "nameEn": "Longus Colli",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Extensor_digitorum_longus_tendonsr (0.5)"
+  },
+  {
+   "id": "mus-longus-capitis",
+   "kind": "muscle",
+   "nameEs": "Largo de la Cabeza",
+   "nameEn": "Longus Capitis",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Extensor_digitorum_longus_tendonsr (0.5)"
+  },
+  {
+   "id": "mus-rectus-capitis-anterior",
+   "kind": "muscle",
+   "nameEs": "Recto Anterior de la Cabeza",
+   "nameEn": "Rectus Capitis Anterior",
+   "zone": "cervical",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-rectus-capitis-lateralis",
+   "kind": "muscle",
+   "nameEs": "Recto Lateral de la Cabeza",
+   "nameEn": "Rectus Capitis Lateralis",
+   "zone": "cervical",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-splenius-capitis",
+   "kind": "muscle",
+   "nameEs": "Esplenio de la Cabeza",
+   "nameEn": "Splenius Capitis",
+   "zone": "cervical",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-splenius-cervicis",
+   "kind": "muscle",
+   "nameEs": "Esplenio del Cuello",
+   "nameEn": "Splenius Cervicis",
+   "zone": "cervical",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-suboccipital-muscles",
+   "kind": "muscle",
+   "nameEs": "Suboccipitales",
+   "nameEn": "Suboccipital Muscles",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:1st_Dorsal_interossei_muscles_of_footr (0.5)"
+  },
+  {
+   "id": "mus-suprahyoid-muscles",
+   "kind": "muscle",
+   "nameEs": "Suprahioideos",
+   "nameEn": "Suprahyoid Muscles",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:1st_Dorsal_interossei_muscles_of_footr (0.5)"
+  },
+  {
+   "id": "mus-infrahyoid-muscles",
+   "kind": "muscle",
+   "nameEs": "Infrahioideos",
+   "nameEn": "Infrahyoid Muscles",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:1st_Dorsal_interossei_muscles_of_footr (0.5)"
+  },
+  {
+   "id": "mus-diaphragm",
+   "kind": "muscle",
+   "nameEs": "Diafragma",
+   "nameEn": "Diaphragm",
+   "zone": "chest",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-external-intercostals",
+   "kind": "muscle",
+   "nameEs": "Intercostales Externos",
+   "nameEn": "External Intercostals",
+   "zone": "chest",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Superficial_external_pudendal_arteryr (0.5)"
+  },
+  {
+   "id": "mus-internal-intercostals",
+   "kind": "muscle",
+   "nameEs": "Intercostales Internos",
+   "nameEn": "Internal Intercostals",
+   "zone": "chest",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "upper-limb:Internal_thoracic_arteryr (0.5)"
+  },
+  {
+   "id": "mus-innermost-intercostals",
+   "kind": "muscle",
+   "nameEs": "Intercostales Íntimos",
+   "nameEn": "Innermost Intercostals",
+   "zone": "chest",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-transversus-thoracis",
+   "kind": "muscle",
+   "nameEs": "Transverso del Tórax",
+   "nameEn": "Transversus Thoracis",
+   "zone": "chest",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-subcostal-muscles",
+   "kind": "muscle",
+   "nameEs": "Subcostales",
+   "nameEn": "Subcostal Muscles",
+   "zone": "chest",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:1st_Dorsal_interossei_muscles_of_footr (0.5)"
+  },
+  {
+   "id": "mus-levatores-costarum",
+   "kind": "muscle",
+   "nameEs": "Elevadores de las Costillas",
+   "nameEn": "Levatores Costarum",
+   "zone": "chest",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-rectus-abdominis",
+   "kind": "muscle",
+   "nameEs": "Recto Abdominal",
+   "nameEn": "Rectus Abdominis",
+   "zone": "core",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Rectus_femorisr (0.5)"
+  },
+  {
+   "id": "mus-external-oblique",
+   "kind": "muscle",
+   "nameEs": "Oblicuo Externo",
+   "nameEn": "External Oblique",
+   "zone": "core",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Oblique_head_of_adductor_hallucisr (0.5)"
+  },
+  {
+   "id": "mus-internal-oblique",
+   "kind": "muscle",
+   "nameEs": "Oblicuo Interno",
+   "nameEn": "Internal Oblique",
+   "zone": "core",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Oblique_head_of_adductor_hallucisr (0.5)"
+  },
+  {
+   "id": "mus-transversus-abdominis",
+   "kind": "muscle",
+   "nameEs": "Transverso Abdominal",
+   "nameEn": "Transversus Abdominis",
+   "zone": "core",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-pyramidalis",
+   "kind": "muscle",
+   "nameEs": "Piramidal",
+   "nameEn": "Pyramidalis",
+   "zone": "core",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-quadratus-lumborum",
+   "kind": "muscle",
+   "nameEs": "Cuadrado Lumbar",
+   "nameEn": "Quadratus Lumborum",
+   "zone": "core",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Quadratus_femoris_muscler (0.5)"
+  },
+  {
+   "id": "mus-erector-spinae",
+   "kind": "muscle",
+   "nameEs": "Erector de la Columna",
+   "nameEn": "Erector Spinae",
+   "zone": "spine",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-semispinalis",
+   "kind": "muscle",
+   "nameEs": "Semiespinal",
+   "nameEn": "Semispinalis",
+   "zone": "spine",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-multifidus",
+   "kind": "muscle",
+   "nameEs": "Multifidus",
+   "nameEn": "Multifidus",
+   "zone": "spine",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-rotatores",
+   "kind": "muscle",
+   "nameEs": "Rotadores",
+   "nameEn": "Rotatores",
+   "zone": "spine",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-interspinales",
+   "kind": "muscle",
+   "nameEs": "Interespinosos",
+   "nameEn": "Interspinales",
+   "zone": "spine",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-intertransversarii",
+   "kind": "muscle",
+   "nameEs": "Intertransversos",
+   "nameEn": "Intertransversarii",
+   "zone": "spine",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-trapezius",
+   "kind": "muscle",
+   "nameEs": "Trapecio",
+   "nameEn": "Trapezius",
+   "zone": "back",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-rhomboid-major",
+   "kind": "muscle",
+   "nameEs": "Romboides Mayor",
+   "nameEn": "Rhomboid Major",
+   "zone": "back",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-rhomboid-minor",
+   "kind": "muscle",
+   "nameEs": "Romboides Menor",
+   "nameEn": "Rhomboid Minor",
+   "zone": "back",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-levator-scapulae",
+   "kind": "muscle",
+   "nameEs": "Elevador de la Escápula",
+   "nameEn": "Levator Scapulae",
+   "zone": "back",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-latissimus-dorsi",
+   "kind": "muscle",
+   "nameEs": "Dorsal Ancho",
+   "nameEn": "Latissimus Dorsi",
+   "zone": "back",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-teres-major",
+   "kind": "muscle",
+   "nameEs": "Redondo Mayor",
+   "nameEn": "Teres Major",
+   "zone": "back",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-pectoralis-major",
+   "kind": "muscle",
+   "nameEs": "Pectoral Mayor",
+   "nameEn": "Pectoralis Major",
+   "zone": "chest",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-pectoralis-minor",
+   "kind": "muscle",
+   "nameEs": "Pectoral Menor",
+   "nameEn": "Pectoralis Minor",
+   "zone": "chest",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-subclavius",
+   "kind": "muscle",
+   "nameEs": "Subclavio",
+   "nameEn": "Subclavius",
+   "zone": "chest",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-serratus-anterior",
+   "kind": "muscle",
+   "nameEs": "Serrato Anterior",
+   "nameEn": "Serratus Anterior",
+   "zone": "back",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-serratus-posterior-superior",
+   "kind": "muscle",
+   "nameEs": "Serrato Posterior Superior",
+   "nameEn": "Serratus Posterior Superior",
+   "zone": "back",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Superior_clunial_nerve_(posterior_rami)r (0.67)"
+  },
+  {
+   "id": "mus-serratus-posterior-inferior",
+   "kind": "muscle",
+   "nameEs": "Serrato Posterior Inferior",
+   "nameEn": "Serratus Posterior Inferior",
+   "zone": "back",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-sternalis",
+   "kind": "muscle",
+   "nameEs": "Esternal",
+   "nameEn": "Sternalis",
+   "zone": "back",
+   "estado": "sin geometría en los GLB",
+   "modelos": [],
+   "candidato": null
+  },
+  {
+   "id": "mus-supraspinatus",
+   "kind": "muscle",
+   "nameEs": "Supraespinoso",
+   "nameEn": "Supraspinatus",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-infraspinatus",
+   "kind": "muscle",
+   "nameEs": "Infraespinoso",
+   "nameEn": "Infraspinatus",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-teres-minor",
+   "kind": "muscle",
+   "nameEs": "Redondo Menor",
+   "nameEn": "Teres Minor",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-subscapularis",
+   "kind": "muscle",
+   "nameEs": "Subescapular",
+   "nameEn": "Subscapularis",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-deltoideus-anterior",
+   "kind": "muscle",
+   "nameEs": "Deltoide Anterior",
+   "nameEn": "Deltoideus Anterior",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-deltoideus-medius",
+   "kind": "muscle",
+   "nameEs": "Deltoide Medio",
+   "nameEn": "Deltoideus Medius",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-deltoideus-posterior",
+   "kind": "muscle",
+   "nameEs": "Deltoide Posterior",
+   "nameEn": "Deltoideus Posterior",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-biceps-brachii",
+   "kind": "muscle",
+   "nameEs": "Bíceps Braquial",
+   "nameEn": "Biceps Brachii",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-brachialis",
+   "kind": "muscle",
+   "nameEs": "Braquial",
+   "nameEn": "Brachialis",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-coracobrachialis",
+   "kind": "muscle",
+   "nameEs": "Coracobraquial",
+   "nameEn": "Coracobrachialis",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-triceps-brachii",
+   "kind": "muscle",
+   "nameEs": "Tríceps Braquial",
+   "nameEn": "Triceps Brachii",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-anconeus",
+   "kind": "muscle",
+   "nameEs": "Aconeo",
+   "nameEn": "Anconeus",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-pronator-teres",
+   "kind": "muscle",
+   "nameEs": "Pronador Redondo",
+   "nameEn": "Pronator Teres",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-carpi-radialis",
+   "kind": "muscle",
+   "nameEs": "Flexor Radial del Carpo",
+   "nameEn": "Flexor Carpi Radialis",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-palmaris-longus",
+   "kind": "muscle",
+   "nameEs": "Palmar Largo",
+   "nameEn": "Palmaris Longus",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-carpi-ulnaris",
+   "kind": "muscle",
+   "nameEs": "Flexor Cubital del Carpo",
+   "nameEn": "Flexor Carpi Ulnaris",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-digitorum-superficialis",
+   "kind": "muscle",
+   "nameEs": "Flexor Superficial de los Dedos",
+   "nameEn": "Flexor Digitorum Superficialis",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-digitorum-profundus",
+   "kind": "muscle",
+   "nameEs": "Flexor Profundo de los Dedos",
+   "nameEn": "Flexor Digitorum Profundus",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-pollicis-longus",
+   "kind": "muscle",
+   "nameEs": "Flexor Largo del Pulgar",
+   "nameEn": "Flexor Pollicis Longus",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-pronator-quadratus",
+   "kind": "muscle",
+   "nameEs": "Pronador Cuadrado",
+   "nameEn": "Pronator Quadratus",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-brachioradialis",
+   "kind": "muscle",
+   "nameEs": "Braquiorradial",
+   "nameEn": "Brachioradialis",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-carpi-radialis-longus",
+   "kind": "muscle",
+   "nameEs": "Extensor Radial Largo del Carpo",
+   "nameEn": "Extensor Carpi Radialis Longus",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-carpi-radialis-brevis",
+   "kind": "muscle",
+   "nameEs": "Extensor Radial Corto del Carpo",
+   "nameEn": "Extensor Carpi Radialis Brevis",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-digitorum",
+   "kind": "muscle",
+   "nameEs": "Extensor de los Dedos",
+   "nameEn": "Extensor Digitorum",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-digiti-minimi",
+   "kind": "muscle",
+   "nameEs": "Extensor del Meñique",
+   "nameEn": "Extensor Digiti Minimi",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-carpi-ulnaris",
+   "kind": "muscle",
+   "nameEs": "Extensor Cubital del Carpo",
+   "nameEn": "Extensor Carpi Ulnaris",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-supinator",
+   "kind": "muscle",
+   "nameEs": "Supinador",
+   "nameEn": "Supinator",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-abductor-pollicis-longus",
+   "kind": "muscle",
+   "nameEs": "Abductor Largo del Pulgar",
+   "nameEn": "Abductor Pollicis Longus",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-pollicis-brevis",
+   "kind": "muscle",
+   "nameEs": "Extensor Corto del Pulgar",
+   "nameEn": "Extensor Pollicis Brevis",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-pollicis-longus",
+   "kind": "muscle",
+   "nameEs": "Extensor Largo del Pulgar",
+   "nameEn": "Extensor Pollicis Longus",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-indicis",
+   "kind": "muscle",
+   "nameEs": "Extensor del Índice",
+   "nameEn": "Extensor Indicis",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-thenar-muscles",
+   "kind": "muscle",
+   "nameEs": "Eminencia Tenar",
+   "nameEn": "Thenar Muscles",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-hypothenar-muscles",
+   "kind": "muscle",
+   "nameEs": "Eminencia Hipotenar",
+   "nameEn": "Hypothenar Muscles",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-lumbrical-muscles-of-hand",
+   "kind": "muscle",
+   "nameEs": "Lumbricales de la Mano",
+   "nameEn": "Lumbrical Muscles of Hand",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-palmar-interossei",
+   "kind": "muscle",
+   "nameEs": "Interóseos Palmares",
+   "nameEn": "Palmar Interossei",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-dorsal-interossei-of-hand",
+   "kind": "muscle",
+   "nameEs": "Interóseos Dorsales de la Mano",
+   "nameEn": "Dorsal Interossei of Hand",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-psoas-major",
+   "kind": "muscle",
+   "nameEs": "Psoas Mayor",
+   "nameEn": "Psoas Major",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-psoas-minor",
+   "kind": "muscle",
+   "nameEs": "Psoas Menor",
+   "nameEn": "Psoas Minor",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-iliacus",
+   "kind": "muscle",
+   "nameEs": "Ilíaco",
+   "nameEn": "Iliacus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-sartorius",
+   "kind": "muscle",
+   "nameEs": "Sartorio",
+   "nameEn": "Sartorius",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-pectineus",
+   "kind": "muscle",
+   "nameEs": "Pectíneo",
+   "nameEn": "Pectineus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-gluteus-maximus",
+   "kind": "muscle",
+   "nameEs": "Glúteo Mayor",
+   "nameEn": "Gluteus Maximus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-gluteus-medius",
+   "kind": "muscle",
+   "nameEs": "Glúteo Medio",
+   "nameEn": "Gluteus Medius",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-gluteus-minimus",
+   "kind": "muscle",
+   "nameEs": "Glúteo Menor",
+   "nameEn": "Gluteus Minimus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-tensor-fasciae-latae",
+   "kind": "muscle",
+   "nameEs": "Tensor de la Fascia Lata",
+   "nameEn": "Tensor Fasciae Latae",
+   "zone": "hip",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Tensor_fasciae_lataer (0.67)"
+  },
+  {
+   "id": "mus-piriformis",
+   "kind": "muscle",
+   "nameEs": "Piriforme",
+   "nameEn": "Piriformis",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-obturator-internus",
+   "kind": "muscle",
+   "nameEs": "Obturador Interno",
+   "nameEn": "Obturator Internus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-obturator-externus",
+   "kind": "muscle",
+   "nameEs": "Obturador Externo",
+   "nameEn": "Obturator Externus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-superior-gemellus",
+   "kind": "muscle",
+   "nameEs": "Gemelo Superior",
+   "nameEn": "Superior Gemellus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-inferior-gemellus",
+   "kind": "muscle",
+   "nameEs": "Gemelo Inferior",
+   "nameEn": "Inferior Gemellus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-quadratus-femoris",
+   "kind": "muscle",
+   "nameEs": "Cuadrado Femoral",
+   "nameEn": "Quadratus Femoris",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-rectus-femoris",
+   "kind": "muscle",
+   "nameEs": "Recto Femoral",
+   "nameEn": "Rectus Femoris",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-vastus-lateralis",
+   "kind": "muscle",
+   "nameEs": "Vasto Lateral",
+   "nameEn": "Vastus Lateralis",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-vastus-medialis-obliquus",
+   "kind": "muscle",
+   "nameEs": "Vasto Medial Oblicuo (VMO)",
+   "nameEn": "Vastus Medialis Obliquus",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-vastus-intermedius",
+   "kind": "muscle",
+   "nameEs": "Vasto Intermedio",
+   "nameEn": "Vastus Intermedius",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-articularis-genu",
+   "kind": "muscle",
+   "nameEs": "Articular de la Rodilla",
+   "nameEn": "Articularis Genu",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-biceps-femoris-long-head",
+   "kind": "muscle",
+   "nameEs": "Bíceps Femoral - Cabeza Larga",
+   "nameEn": "Biceps Femoris Long Head",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-biceps-femoris-short-head",
+   "kind": "muscle",
+   "nameEs": "Bíceps Femoral - Cabeza Corta",
+   "nameEn": "Biceps Femoris Short Head",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-semitendinosus",
+   "kind": "muscle",
+   "nameEs": "Semitendinoso",
+   "nameEn": "Semitendinosus",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-semimembranosus",
+   "kind": "muscle",
+   "nameEs": "Semimembranoso",
+   "nameEn": "Semimembranosus",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-adductor-magnus",
+   "kind": "muscle",
+   "nameEs": "Aductor Mayor",
+   "nameEn": "Adductor Magnus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-adductor-longus",
+   "kind": "muscle",
+   "nameEs": "Aductor Largo",
+   "nameEn": "Adductor Longus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-adductor-brevis",
+   "kind": "muscle",
+   "nameEs": "Aductor Corto",
+   "nameEn": "Adductor Brevis",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-adductor-minimus",
+   "kind": "muscle",
+   "nameEs": "Aductor Mínimo",
+   "nameEn": "Adductor Minimus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-gracilis",
+   "kind": "muscle",
+   "nameEs": "Grácil",
+   "nameEn": "Gracilis",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-tibialis-anterior",
+   "kind": "muscle",
+   "nameEs": "Tibial Anterior",
+   "nameEn": "Tibialis Anterior",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-hallucis-longus",
+   "kind": "muscle",
+   "nameEs": "Extensor Largo del Hallux",
+   "nameEn": "Extensor Hallucis Longus",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-digitorum-longus",
+   "kind": "muscle",
+   "nameEs": "Extensor Largo de los Dedos",
+   "nameEn": "Extensor Digitorum Longus",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-fibularis-tertius",
+   "kind": "muscle",
+   "nameEs": "Fibular Tercero",
+   "nameEn": "Fibularis Tertius",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-fibularis-longus",
+   "kind": "muscle",
+   "nameEs": "Fibular Largo",
+   "nameEn": "Fibularis Longus",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-fibularis-brevis",
+   "kind": "muscle",
+   "nameEs": "Fibular Corto",
+   "nameEn": "Fibularis Brevis",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-gastrocnemius",
+   "kind": "muscle",
+   "nameEs": "Gastrocnemio",
+   "nameEn": "Gastrocnemius",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-soleus",
+   "kind": "muscle",
+   "nameEs": "Sóleo",
+   "nameEn": "Soleus",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-plantaris",
+   "kind": "muscle",
+   "nameEs": "Plantar",
+   "nameEn": "Plantaris",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-popliteus",
+   "kind": "muscle",
+   "nameEs": "Poplíteo",
+   "nameEn": "Popliteus",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-hallucis-longus",
+   "kind": "muscle",
+   "nameEs": "Flexor Largo del Hallux",
+   "nameEn": "Flexor Hallucis Longus",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-digitorum-longus",
+   "kind": "muscle",
+   "nameEs": "Flexor Largo de los Dedos",
+   "nameEn": "Flexor Digitorum Longus",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-tibialis-posterior",
+   "kind": "muscle",
+   "nameEs": "Tibial Posterior",
+   "nameEn": "Tibialis Posterior",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-hallucis-brevis",
+   "kind": "muscle",
+   "nameEs": "Extensor Corto del Hallux",
+   "nameEn": "Extensor Hallucis Brevis",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-extensor-digitorum-brevis",
+   "kind": "muscle",
+   "nameEs": "Extensor Corto de los Dedos",
+   "nameEn": "Extensor Digitorum Brevis",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-abductor-hallucis",
+   "kind": "muscle",
+   "nameEs": "Abductor del Hallux",
+   "nameEn": "Abductor Hallucis",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-digitorum-brevis",
+   "kind": "muscle",
+   "nameEs": "Flexor Corto de los Dedos",
+   "nameEn": "Flexor Digitorum Brevis",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-abductor-digiti-minimi-foot",
+   "kind": "muscle",
+   "nameEs": "Abductor del Meñique (Pie)",
+   "nameEn": "Abductor Digiti Minimi (Foot)",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-quadratus-plantae",
+   "kind": "muscle",
+   "nameEs": "Cuadrado Plantar",
+   "nameEn": "Quadratus Plantae",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-lumbrical-muscles-of-foot",
+   "kind": "muscle",
+   "nameEs": "Lumbricales del Pie",
+   "nameEn": "Lumbrical Muscles of Foot",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-flexor-hallucis-brevis",
+   "kind": "muscle",
+   "nameEs": "Flexor Corto del Hallux",
+   "nameEn": "Flexor Hallucis Brevis",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-adductor-hallucis",
+   "kind": "muscle",
+   "nameEs": "Aductor del Hallux",
+   "nameEn": "Adductor Hallucis",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-interossei-of-foot",
+   "kind": "muscle",
+   "nameEs": "Interóseos del Pie",
+   "nameEn": "Interossei of Foot",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "mus-levator-ani",
+   "kind": "muscle",
+   "nameEs": "Elevador del Ano",
+   "nameEn": "Levator Ani",
+   "zone": "core",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "upper-limb:Levator_scapulaer (1)"
+  },
+  {
+   "id": "mus-coccygeus",
+   "kind": "muscle",
+   "nameEs": "Coccígeo",
+   "nameEn": "Coccygeus",
+   "zone": "core",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-achilles-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón de Aquiles",
+   "nameEn": "Achilles tendon",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-patellar-ligament",
+   "kind": "tendon",
+   "nameEs": "Tendón Patelar",
+   "nameEn": "Patellar ligament",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-quadriceps-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón del Cuádriceps",
+   "nameEn": "Quadriceps tendon",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-supraspinatus-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón del Supraespinoso",
+   "nameEn": "Supraspinatus tendon",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-long-head-of-biceps-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón Cabeza Larga del Bíceps",
+   "nameEn": "Long head of biceps tendon",
+   "zone": "shoulder",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Common_tendon_of_Semitendinosus_and_Long_head_of_biceps_femoris (1)"
+  },
+  {
+   "id": "ten-biceps-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón Distal del Bíceps",
+   "nameEn": "Biceps tendon",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-common-extensor-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón Common Extensor",
+   "nameEn": "Common extensor tendon",
+   "zone": "arm",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "upper-limb:Common_tendon_of_extensor_carpi_ulnarisr (1)"
+  },
+  {
+   "id": "ten-common-flexor-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón Common Flexor",
+   "nameEn": "Common flexor tendon",
+   "zone": "arm",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "upper-limb:Common_tendon_of_flexor_carpi_ulnarisr (1)"
+  },
+  {
+   "id": "ten-hamstring-tendons",
+   "kind": "tendon",
+   "nameEs": "Tendón Proximal de Isquios",
+   "nameEn": "Hamstring tendons",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-gluteus-medius-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendones del Glúteo Medio/Menor",
+   "nameEn": "Gluteus medius tendon",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-tibialis-posterior-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón del Tibial Posterior",
+   "nameEn": "Tibialis posterior tendon",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-fibularis-longus-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendones Fibulares",
+   "nameEn": "Fibularis longus tendon",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-adductor-longus",
+   "kind": "tendon",
+   "nameEs": "Tendón del Aductor Largo",
+   "nameEn": "Adductor longus",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-flexor-tendons-of-hand",
+   "kind": "tendon",
+   "nameEs": "Tendones Flexores de Dedos + Poleas",
+   "nameEn": "Flexor tendons of hand",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-plantar-fascia",
+   "kind": "tendon",
+   "nameEs": "Fascia Plantar",
+   "nameEn": "Plantar fascia",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-pes-anserinus",
+   "kind": "tendon",
+   "nameEs": "Tendón de la Pata de Ganso",
+   "nameEn": "Pes anserinus",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-iliopsoas-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón del Psoas-Ilíaco",
+   "nameEn": "Iliopsoas tendon",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-triceps-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón Distal del Tríceps",
+   "nameEn": "Triceps tendon",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ten-pectoralis-major-tendon",
+   "kind": "tendon",
+   "nameEs": "Tendón del Pectoral Mayor",
+   "nameEn": "Pectoralis major tendon",
+   "zone": "chest",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "upper-limb:Abdominal_head_of_pectoralis_major_muscler (0.67)"
+  },
+  {
+   "id": "ten-de-quervain-s-disease",
+   "kind": "tendon",
+   "nameEs": "Tendones de De Quervain",
+   "nameEn": "De quervain's disease",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-median-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Mediano",
+   "nameEn": "Median nerve",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-ulnar-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Ulnar",
+   "nameEn": "Ulnar nerve",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-radial-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Radial",
+   "nameEn": "Radial nerve",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-axillary-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Axilar",
+   "nameEn": "Axillary nerve",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-suprascapular-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Supraescapular",
+   "nameEn": "Suprascapular nerve",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-long-thoracic-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Torácico Largo",
+   "nameEn": "Long thoracic nerve",
+   "zone": "chest",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-accessory-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Accesorio (XI)",
+   "nameEn": "Accessory nerve",
+   "zone": "cervical",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Accessory_saphenous_veinr (0.5)"
+  },
+  {
+   "id": "ner-sciatic-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Ciático",
+   "nameEn": "Sciatic nerve",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-femoral-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Femoral",
+   "nameEn": "Femoral nerve",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-common-peroneal-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Fibular Común",
+   "nameEn": "Common peroneal nerve",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-tibial-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Tibial",
+   "nameEn": "Tibial nerve",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-lateral-femoral-cutaneous-nerve",
+   "kind": "nerve",
+   "nameEs": "N. Cutáneo Femoral Lateral",
+   "nameEn": "Lateral femoral cutaneous nerve",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-lumbar-nerve",
+   "kind": "nerve",
+   "nameEs": "Raíces Lumbares",
+   "nameEn": "Lumbar nerve",
+   "zone": "spine",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-pudendal-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Pudendo",
+   "nameEn": "Pudendal nerve",
+   "zone": "core",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Superficial_external_pudendal_arteryr (0.5)"
+  },
+  {
+   "id": "ner-posterior-interosseous-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Interóseo Posterior (PIN)",
+   "nameEn": "Posterior interosseous nerve",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-obturator-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Obturador",
+   "nameEn": "Obturator nerve",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-superior-gluteal-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Glúteo Superior",
+   "nameEn": "Superior gluteal nerve",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-inferior-gluteal-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Glúteo Inferior",
+   "nameEn": "Inferior gluteal nerve",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-musculocutaneous-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Musculocutáneo",
+   "nameEn": "Musculocutaneous nerve",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-thoracodorsal-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Toracodorsal",
+   "nameEn": "Thoracodorsal nerve",
+   "zone": "back",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr (0.5)"
+  },
+  {
+   "id": "ner-pectoral-nerves",
+   "kind": "nerve",
+   "nameEs": "Nervios Pectorales",
+   "nameEn": "Pectoral nerves",
+   "zone": "chest",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "ner-mandibular-nerve",
+   "kind": "nerve",
+   "nameEs": "Nervio Mandibular (V3)",
+   "nameEn": "Mandibular nerve",
+   "zone": "head-jaw",
+   "estado": "sin mapping propio — candidato parcial",
+   "modelos": [],
+   "candidato": "lower-limb:Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr (0.5)"
+  },
+  {
+   "id": "art-shoulder-joint",
+   "kind": "joint",
+   "nameEs": "Glenohumeral (Hombro)",
+   "nameEn": "Shoulder joint",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-acromioclavicular-joint",
+   "kind": "joint",
+   "nameEs": "Acromioclavicular",
+   "nameEn": "Acromioclavicular joint",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-elbow-joint",
+   "kind": "joint",
+   "nameEs": "Codo",
+   "nameEn": "Elbow joint",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-wrist-joint",
+   "kind": "joint",
+   "nameEs": "Muñeca (Radiocarpiana)",
+   "nameEn": "Wrist joint",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-cervical-vertebrae",
+   "kind": "joint",
+   "nameEs": "Columna Cervical",
+   "nameEn": "Cervical vertebrae",
+   "zone": "cervical",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb",
+    "vertebrae"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-lumbar-vertebrae",
+   "kind": "joint",
+   "nameEs": "Columna Lumbar",
+   "nameEn": "Lumbar vertebrae",
+   "zone": "spine",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton",
+    "upper-limb",
+    "vertebrae"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-sacroiliac-joint",
+   "kind": "joint",
+   "nameEs": "Sacroilíaca",
+   "nameEn": "Sacroiliac joint",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-hip-joint",
+   "kind": "joint",
+   "nameEs": "Coxofemoral (Cadera)",
+   "nameEn": "Hip joint",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-knee-joint",
+   "kind": "joint",
+   "nameEs": "Rodilla (Femorotibial)",
+   "nameEn": "Knee joint",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-ankle-joint",
+   "kind": "joint",
+   "nameEs": "Tobillo (Talocrural)",
+   "nameEn": "Ankle joint",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-subtalar-joint",
+   "kind": "joint",
+   "nameEs": "Subtalar + Mediotarsiana",
+   "nameEn": "Subtalar joint",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-scapulothoracic-joint",
+   "kind": "joint",
+   "nameEs": "Escapulotorácica",
+   "nameEn": "Scapulothoracic joint",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-hand-joint",
+   "kind": "joint",
+   "nameEs": "Mano",
+   "nameEn": "Hand joint",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-sternoclavicular-joint",
+   "kind": "joint",
+   "nameEs": "Esternoclavicular",
+   "nameEn": "Sternoclavicular joint",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-patellofemoral-joint",
+   "kind": "joint",
+   "nameEs": "Femoropatelar",
+   "nameEn": "Patellofemoral joint",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-radioulnar-articulation",
+   "kind": "joint",
+   "nameEs": "Radioulnar Proximal",
+   "nameEn": "Radioulnar articulation",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-radioulnar-articulation-art-druj",
+   "kind": "joint",
+   "nameEs": "Radioulnar Distal",
+   "nameEn": "Radioulnar articulation",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-tibiofibular-joint",
+   "kind": "joint",
+   "nameEs": "Tibiofibular Superior",
+   "nameEn": "Tibiofibular joint",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "art-temporomandibular-joint",
+   "kind": "joint",
+   "nameEs": "Temporomandibular (ATM)",
+   "nameEn": "Temporomandibular joint",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-frontal-bone",
+   "kind": "bone",
+   "nameEs": "Hueso frontal",
+   "nameEn": "Frontal bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-parietal-bone",
+   "kind": "bone",
+   "nameEs": "Hueso parietal",
+   "nameEn": "Parietal bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-temporal-bone",
+   "kind": "bone",
+   "nameEs": "Hueso temporal",
+   "nameEn": "Temporal bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-occipital-bone",
+   "kind": "bone",
+   "nameEs": "Hueso occipital",
+   "nameEn": "Occipital bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-sphenoid-bone",
+   "kind": "bone",
+   "nameEs": "Hueso esfenoides",
+   "nameEn": "Sphenoid bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-ethmoid-bone",
+   "kind": "bone",
+   "nameEs": "Hueso etmoides",
+   "nameEn": "Ethmoid bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-zygomatic-bone",
+   "kind": "bone",
+   "nameEs": "Hueso cigomático",
+   "nameEn": "Zygomatic bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-maxilla",
+   "kind": "bone",
+   "nameEs": "Maxilar",
+   "nameEn": "Maxilla",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-mandible",
+   "kind": "bone",
+   "nameEs": "Mandíbula",
+   "nameEn": "Mandible",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-vomer",
+   "kind": "bone",
+   "nameEs": "Vómer",
+   "nameEn": "Vomer",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-nasal-bone",
+   "kind": "bone",
+   "nameEs": "Hueso nasal",
+   "nameEn": "Nasal bone",
+   "zone": "head-jaw",
+   "estado": "mapeada",
+   "modelos": [
+    "colored-skull-base",
+    "exploded-skull",
+    "overview-colored-skull",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-atlas",
+   "kind": "bone",
+   "nameEs": "Atlas (C1)",
+   "nameEn": "Atlas",
+   "zone": "cervical",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-axis",
+   "kind": "bone",
+   "nameEs": "Axis (C2)",
+   "nameEn": "Axis",
+   "zone": "cervical",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-cervical-vertebrae",
+   "kind": "bone",
+   "nameEs": "Vértebras cervicales (C3-C7)",
+   "nameEn": "Cervical vertebrae",
+   "zone": "cervical",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb",
+    "vertebrae"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-thoracic-vertebra",
+   "kind": "bone",
+   "nameEs": "Vértebras torácicas (T1-T12)",
+   "nameEn": "Thoracic vertebra",
+   "zone": "spine",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton",
+    "upper-limb",
+    "vertebrae"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-lumbar-vertebra",
+   "kind": "bone",
+   "nameEs": "Vértebras lumbares (L1-L5)",
+   "nameEn": "Lumbar vertebra",
+   "zone": "spine",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton",
+    "upper-limb",
+    "vertebrae"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-sacrum",
+   "kind": "bone",
+   "nameEs": "Sacro",
+   "nameEn": "Sacrum",
+   "zone": "spine",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-coccyx",
+   "kind": "bone",
+   "nameEs": "Cóccix",
+   "nameEn": "Coccyx",
+   "zone": "spine",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-sternum",
+   "kind": "bone",
+   "nameEs": "Esternón",
+   "nameEn": "Sternum",
+   "zone": "chest",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-rib",
+   "kind": "bone",
+   "nameEs": "Costillas",
+   "nameEn": "Rib",
+   "zone": "chest",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-clavicle",
+   "kind": "bone",
+   "nameEs": "Clavícula",
+   "nameEn": "Clavicle",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-scapula",
+   "kind": "bone",
+   "nameEs": "Escápula",
+   "nameEn": "Scapula",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-humerus",
+   "kind": "bone",
+   "nameEs": "Húmero",
+   "nameEn": "Humerus",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-radius",
+   "kind": "bone",
+   "nameEs": "Radio",
+   "nameEn": "Radius",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-ulna",
+   "kind": "bone",
+   "nameEs": "Ulna",
+   "nameEn": "Ulna",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-patella",
+   "kind": "bone",
+   "nameEs": "Rótula",
+   "nameEn": "Patella",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-hip-bone",
+   "kind": "bone",
+   "nameEs": "Hueso coxal",
+   "nameEn": "Hip bone",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-femur",
+   "kind": "bone",
+   "nameEs": "Fémur",
+   "nameEn": "Femur",
+   "zone": "thigh",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-tibia",
+   "kind": "bone",
+   "nameEs": "Tibia",
+   "nameEn": "Tibia",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-fibula",
+   "kind": "bone",
+   "nameEs": "Peroné",
+   "nameEn": "Fibula",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-talus",
+   "kind": "bone",
+   "nameEs": "Astrágalo",
+   "nameEn": "Talus",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-calcaneus",
+   "kind": "bone",
+   "nameEs": "Calcáneo",
+   "nameEn": "Calcaneus",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-navicular-bone",
+   "kind": "bone",
+   "nameEs": "Escafoides tarsiano",
+   "nameEn": "Navicular bone",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-metatarsal-bones",
+   "kind": "bone",
+   "nameEs": "Metatarsianos",
+   "nameEn": "Metatarsal bones",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb",
+    "overview-skeleton"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-scaphoid",
+   "kind": "bone",
+   "nameEs": "Escafoides (carpo)",
+   "nameEn": "Scaphoid",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-lunate-bone",
+   "kind": "bone",
+   "nameEs": "Semilunar",
+   "nameEn": "Lunate bone",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-hamate",
+   "kind": "bone",
+   "nameEs": "Ganchoso",
+   "nameEn": "Hamate",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-trapezium",
+   "kind": "bone",
+   "nameEs": "Trapecio (carpo)",
+   "nameEn": "Trapezium",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "bone-capitate",
+   "kind": "bone",
+   "nameEs": "Grande (carpo)",
+   "nameEn": "Capitate",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "overview-skeleton",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-anterior-cruciate-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento cruzado anterior (LCA)",
+   "nameEn": "Anterior cruciate ligament",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-posterior-cruciate-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento cruzado posterior (LCP)",
+   "nameEn": "Posterior cruciate ligament",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-fibular-collateral-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento colateral lateral (LCL)",
+   "nameEn": "Fibular collateral ligament",
+   "zone": "knee",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-calcaneofibular-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento calcaneofibular",
+   "nameEn": "Calcaneofibular ligament",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-anterior-talofibular-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento talofibular anterior (ATFL)",
+   "nameEn": "Anterior talofibular ligament",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-anterior-tibiofibular-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento tibiofibular anterior",
+   "nameEn": "Anterior tibiofibular ligament",
+   "zone": "lower-leg",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-sacrospinous-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento sacroespinoso",
+   "nameEn": "Sacrospinous ligament",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-sacrotuberal-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento sacrotuberal",
+   "nameEn": "Sacrotuberal ligament",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-iliolumbar-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento iliolumbar",
+   "nameEn": "Iliolumbar ligament",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-ligament-of-head-of-femur",
+   "kind": "ligament",
+   "nameEs": "Ligamento de la cabeza del fémur",
+   "nameEn": "Ligament of head of femur",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-transverse-acetabular-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento transverso del acetábulo",
+   "nameEn": "Transverse acetabular ligament",
+   "zone": "hip",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-ulnar-collateral-ligament-of-elbow",
+   "kind": "ligament",
+   "nameEs": "Ligamento colateral cubital del codo",
+   "nameEn": "Ulnar collateral ligament of elbow",
+   "zone": "arm",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-dorsal-radio-ulnar-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento radio-ulnar dorsal",
+   "nameEn": "Dorsal radio-ulnar ligament",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-palmar-radio-ulnar-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento radio-ulnar palmar",
+   "nameEn": "Palmar radio-ulnar ligament",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-transverse-humeral-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento humeral transverso",
+   "nameEn": "Transverse humeral ligament",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-trapezoid-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento trapezoide (coracoclavicular)",
+   "nameEn": "Trapezoid ligament",
+   "zone": "shoulder",
+   "estado": "mapeada",
+   "modelos": [
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-flexor-retinaculum-of-wrist",
+   "kind": "ligament",
+   "nameEs": "Retináculo flexor de la muñeca",
+   "nameEn": "Flexor retinaculum of wrist",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-extensor-retinaculum-of-wrist",
+   "kind": "ligament",
+   "nameEs": "Retináculo extensor de la muñeca",
+   "nameEn": "Extensor retinaculum of wrist",
+   "zone": "forearm-hand",
+   "estado": "mapeada",
+   "modelos": [
+    "hand",
+    "upper-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-flexor-retinaculum-of-ankle",
+   "kind": "ligament",
+   "nameEs": "Retináculo flexor del tobillo",
+   "nameEn": "Flexor retinaculum of ankle",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-plantar-calcaneonavicular-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento calcaneonavicular plantar",
+   "nameEn": "Plantar calcaneonavicular ligament",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  },
+  {
+   "id": "lig-long-plantar-ligament",
+   "kind": "ligament",
+   "nameEs": "Ligamento plantar largo",
+   "nameEn": "Long plantar ligament",
+   "zone": "ankle-foot",
+   "estado": "mapeada",
+   "modelos": [
+    "lower-limb"
+   ],
+   "candidato": null
+  }
+ ]
+}

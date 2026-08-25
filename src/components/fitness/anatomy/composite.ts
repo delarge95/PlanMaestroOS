@@ -185,39 +185,42 @@ export function buildSubgroups(structureNameEn: string, pieces: Array<[string, s
 }
 
 /**
- * Resuelve la selección tras un click sobre una pieza (máquina de fases):
- * - otra estructura → conjunto (fase 1).
- * - misma estructura, subconjunto no seleccionado → baja al subconjunto (o a
- *   la pieza si el grupo es hoja de una sola pieza).
- * - mismo subconjunto → baja a la pieza clickeada.
- * - misma pieza ya seleccionada → sube un nivel.
+ * Resuelve la selección tras un click sobre una pieza (máquina de fases).
+ * El PRIMER click SIEMPRE selecciona el CONJUNTO (estructura entera) — nunca
+ * salta a la pieza. Los clicks siguientes descienden: subconjunto → pieza.
+ * Click en la misma pieza del nivel hoja → sube un nivel.
  */
 export function resolveClick(args: {
   current: SelectionPath | null;
   clickedPieceKey: string;
   clickedStructureId: string;
-  /** grupos (groupKey → nombres de pieza) de la estructura clickeada. */
+  /** grupos (groupKey → claves de pieza) de la estructura clickeada. */
   groups: Map<string, string[]>;
   /** grupo al que pertenece la pieza clickeada. */
   clickedGroupKey: string;
 }): SelectionPath {
   const { current, clickedStructureId, groups, clickedGroupKey } = args;
-  const descend = (): SelectionPath => {
-    const groupSize = groups.get(clickedGroupKey)?.length ?? 1;
-    return groupSize > 1
-      ? { structureId: clickedStructureId, groupKey: clickedGroupKey, pieceKey: null }
-      : { structureId: clickedStructureId, groupKey: null, pieceKey: args.clickedPieceKey };
-  };
-  if (!current || current.structureId !== clickedStructureId) return descend();
+  // NUEVO conjunto o cambio de estructura: SIEMPRE fase conjunto
+  if (!current || current.structureId !== clickedStructureId)
+    return { structureId: clickedStructureId, groupKey: null, pieceKey: null };
   const p = current;
-  if (p.groupKey === null) return descend();
-  if (p.groupKey !== clickedGroupKey) return descend();
-  // mismo subconjunto
-  if (p.pieceKey === null) return { ...p, pieceKey: args.clickedPieceKey };
-  if (p.pieceKey === args.clickedPieceKey) {
-    const groupSize = groups.get(clickedGroupKey)?.length ?? 1;
-    return groupSize > 1 ? { ...p, pieceKey: null } : { structureId: p.structureId, groupKey: null, pieceKey: null };
+  const groupSize = groups.get(clickedGroupKey)?.length ?? 1;
+  // conjunto → subconjunto (multi-pieza) o directamente pieza (grupo hoja)
+  if (p.groupKey === null && p.pieceKey === null) {
+    return groupSize > 1
+      ? { ...p, groupKey: clickedGroupKey }
+      : { ...p, pieceKey: args.clickedPieceKey };
   }
+  // subconjunto → pieza, o cambio de subconjunto
+  if (p.groupKey !== clickedGroupKey) {
+    return groupSize > 1
+      ? { ...p, groupKey: clickedGroupKey, pieceKey: null }
+      : { ...p, groupKey: clickedGroupKey, pieceKey: args.clickedPieceKey };
+  }
+  // subconjunto → pieza
+  if (p.pieceKey === null) return { ...p, pieceKey: args.clickedPieceKey };
+  // misma pieza → subir a subconjunto
+  if (p.pieceKey === args.clickedPieceKey) return { ...p, pieceKey: null };
   return { ...p, pieceKey: args.clickedPieceKey };
 }
 

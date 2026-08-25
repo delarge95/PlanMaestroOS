@@ -132,7 +132,7 @@ describe('resolveClick — máquina de fases', () => {
 
   it('click en otra estructura → conjunto (fase 1)', () => {
     const next = resolveClick({ current: null, clickedPieceKey: long, clickedStructureId: S, groups: tricepsKeys, clickedGroupKey: longKey });
-    expect(next).toEqual({ structureId: S, groupKey: null, pieceKey: long });
+    expect(next).toEqual({ structureId: S, groupKey: null, pieceKey: null });
   });
 
   it('grupo hoja de 1 pieza: 2º click selecciona la pieza directamente', () => {
@@ -163,7 +163,7 @@ describe('resolveClick — máquina de fases', () => {
   it('click en subconjunto hermano cambia de subconjunto', () => {
     const next = resolveClick({ current: { structureId: S, groupKey: 'head', pieceKey: K('a1') }, clickedPieceKey: K('m'), clickedStructureId: S, groups: multiGroups, clickedGroupKey: 'medial' });
     expect(next.pieceKey).toBe(K('m'));
-    expect(next.groupKey).toBeNull();
+    expect(next.groupKey).toBe('medial');
   });
 });
 

@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-25T01:22:42.889Z",
+ "generado": "2026-08-25T05:05:54.101Z",
  "modelos": {
   "overview-skeleton": {
    "piezas": 144
@@ -3484,7 +3484,7 @@
     "name": "Tensor_fasciae_lataer",
     "region": "lower",
     "container": "Muscles",
-    "kind": "muscle",
+    "kind": "fascia",
     "verts": 599
    },
    {
@@ -4756,7 +4756,7 @@
     "name": "Extensor_digitorum_longus-fibularis_tertius_vaginae_tendinumr",
     "region": "lower",
     "container": "Bursae",
-    "kind": "bursa",
+    "kind": "tendon",
     "verts": 4808
    },
    {
@@ -4836,7 +4836,7 @@
     "name": "Plantar_tendinous_sheath_of_fibularis_longusr",
     "region": "lower",
     "container": "Bursae",
-    "kind": "bursa",
+    "kind": "tendon",
     "verts": 884
    },
    {
@@ -4924,7 +4924,7 @@
     "name": "Subfascial_prepatellar_bursar",
     "region": "lower",
     "container": "Bursae",
-    "kind": "bursa",
+    "kind": "fascia",
     "verts": 162
    },
    {
@@ -5236,7 +5236,7 @@
     "name": "Fibrous_sheath_of_toesr",
     "region": "lower",
     "container": "Overlays",
-    "kind": "overlay",
+    "kind": "ligament",
     "verts": 4308
    },
    {
@@ -5252,7 +5252,7 @@
     "name": "Lateral_patellar_retinaculum_(horizontal_part)r",
     "region": "lower",
     "container": "Overlays",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 132
    },
    {
@@ -5260,7 +5260,7 @@
     "name": "Lateral_patellar_retinaculum_(vertical_part)r",
     "region": "lower",
     "container": "Overlays",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 246
    },
    {
@@ -5276,7 +5276,7 @@
     "name": "Medial_patellar_retinaculum_(horizontal_part)r",
     "region": "lower",
     "container": "Overlays",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 156
    },
    {
@@ -5284,7 +5284,7 @@
     "name": "Medial_patellar_retinaculum_(vertical_part)r",
     "region": "lower",
     "container": "Overlays",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 240
    },
    {
@@ -5396,7 +5396,7 @@
     "name": "Zona_orbicularis_of_hip_jointr",
     "region": "lower",
     "container": "Overlays",
-    "kind": "overlay",
+    "kind": "ligament",
     "verts": 204
    },
    {
@@ -5923,7 +5923,7 @@
     "name": "Brachial_fasciar",
     "region": "upper",
     "container": "Arm - capsules, ligaments, fasciae",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 4396
    },
    {
@@ -6457,7 +6457,7 @@
     "name": "Antebrachial_fasciar",
     "region": "upper",
     "container": "Forearm - capsules, ligaments, fasciae",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 3250
    },
    {
@@ -7467,7 +7467,7 @@
     "name": "Extensor_retinaculum_of_wrist",
     "region": "upper",
     "container": "Hand and wrist - capsules, ligaments, fasciae",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 472,
     "hiddenByDup": "hand:Extensor_retinaculum_of_wrist"
    },
@@ -7494,7 +7494,7 @@
     "name": "Flexor_retinaculum",
     "region": "upper",
     "container": "Hand and wrist - capsules, ligaments, fasciae",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 192,
     "hiddenByDup": "hand:Palmar_carpometacarpal_ligaments"
    },
@@ -7773,7 +7773,7 @@
     "name": "Thickened_part_of_antebrachial_fascia",
     "region": "upper",
     "container": "Hand and wrist - capsules, ligaments, fasciae",
-    "kind": "ligament",
+    "kind": "fascia",
     "verts": 604,
     "hiddenByDup": "hand:Flexor_retinaculum_of_wrist"
    },
@@ -11892,16 +11892,15 @@
   "porKind": {
    "bone": 305,
    "cartilage": 174,
-   "ligament": 277,
-   "muscle": 191,
-   "tendon": 44,
-   "fascia": 17,
+   "ligament": 270,
+   "muscle": 190,
+   "tendon": 46,
+   "fascia": 28,
    "artery": 120,
    "vein": 81,
    "nerve": 113,
-   "bursa": 51,
-   "other": 5,
-   "overlay": 2
+   "bursa": 48,
+   "other": 5
   },
   "explodePairs": {
    "Ethmoid_Bone": "Ethmoid_Bone",

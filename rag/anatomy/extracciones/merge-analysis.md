@@ -1,6 +1,6 @@
 # Análisis de solapamiento GLB para el modelo compuesto
 
-> Generado por analyze-merge.mjs (2026-08-25T01:22:42.889Z). Nombres normalizados
+> Generado por analyze-merge.mjs (2026-08-25T05:05:54.101Z). Nombres normalizados
 > (minúsculas, sin puntuación/laterales ambiguos) — la coincidencia exacta de
 > traducción mundial confirma si dos piezas son la misma geometría en el mismo
 > espacio.
@@ -64,7 +64,7 @@
 
 - Total piezas: **1380**
 - Por región: axial(36), upper(572), skull(58), lower(484), hand(230)
-- Por tipo: bone(305), cartilage(174), ligament(277), muscle(191), tendon(44), fascia(17), artery(120), vein(81), nerve(113), bursa(51), other(5), overlay(2)
+- Por tipo: bone(305), cartilage(174), ligament(270), muscle(190), tendon(46), fascia(28), artery(120), vein(81), nerve(113), bursa(48), other(5)
 - Ocultas por dedup: overview-skeleton(88), lower-limb(1), upper-limb(204)
 - Explosión: 28/29 pares emparejados
 - Overlays (piel) muestra lower-limb: Adductor_canalr, Adductor_hiatusr, Adductor_minimus_overlayr, Annular_ligaments_of_1st_toe_A1-A5r, Annular_ligaments_of_2nd_toe_A1-A5r, Annular_ligaments_of_3rd_toe_A1-A5r

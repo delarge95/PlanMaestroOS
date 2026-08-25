@@ -235,14 +235,25 @@ function kindFromContainer(container, name) {
   if (/nerve/.test(c)) return 'nerve';
   // los tendones viven en contenedores de músculos: el nombre manda
   if (/tendon/.test(n)) return 'tendon';
+  // vainas sinoviales y fundas tendinosas → tendón (sistema tendinoso)
+  if (/vagina[e]?_tendinum|tendon_sheath|tendinous_sheath/.test(n)) return 'tendon';
+  // FASCIA por nombre (el contenedor "capsules, ligaments, fasciae" las mete
+  // con ligamentos — error detectado: Brachial_fasciar); retináculos son
+  // engrosamientos fasciales
+  if (/fascia|retinaculum/.test(n)) return 'fascia';
   if (/muscle/.test(c)) return 'muscle';
   if (/cartilage/.test(c)) return 'cartilage';
   if (/synovia|bursa/.test(c)) return 'bursa';
-  if (/ligament|capsule|fasciae|retinaculum/.test(c)) return 'ligament';
+  if (/ligament|capsule|fasciae|retinaculum|zona_orbicularis|fibrous_sheath/.test(c)) {
+    // dentro de contenedores de ligamentos puede haber fascias nombradas
+    if (/fascia|retinaculum/.test(n)) return 'fascia';
+    if (/bursa/.test(n)) return 'bursa';
+    if (/tendon/.test(n)) return 'tendon';
+    return 'ligament';
+  }
   if (/^fascia/.test(c)) return 'fascia';
   if (/overlay/.test(c)) {
-    // el contenedor Overlays mezcla overlays de ligamentos/estructuras superficiales
-    if (/ligament|retinaculum/.test(n)) return 'ligament';
+    if (/ligament|retinaculum|zona_orbicularis|fibrous_sheath/.test(n)) return 'ligament';
     if (/bursa/.test(n)) return 'bursa';
     if (/tendon/.test(n)) return 'tendon';
     if (/adductor|pollicis/.test(n)) return 'muscle';
