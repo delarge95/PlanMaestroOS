@@ -114,3 +114,23 @@ worktree ajeno fue modificado (Regla de Oro). Si el proceso externo reclama `age
 - Confirmar que la instancia 1 cierra 04/06/README (su plan) y esta instancia toma migración TS completa
   (resto de servicios → catálogos JSON/TS) + tests vitest cuando haya worktree estable.
 - Validar bandas operativas v1.1 y la política de solapes entre niveles.
+
+---
+
+### Adenda ciclo 2 (post-lectura del estado final de la instancia 1)
+
+Mientras esta instancia redactaba su sección, la instancia 1 avanzó 13 commits más y cerró TODO su plan:
+familias D/E/G completas (`c486655`, `63d40ad`), paquetes PK-01..PK-10 + retainers (`51b9f57`, restaurado en
+`02fd55e` tras incidente documentado), README índice con banners superseded (`9a1aec5`), auditoría aritmética
+del caso drone (`2b86eef`) y preservación Regla de Oro de los dos documentos paralelos de esta instancia
+(`236e88c` — CATALOGO_SERVICIOS + METODOLOGIA_ESTIMACION vuelven a estar en el árbol). Correcciones a esta
+sección:
+
+1. ~~"instancia 1 cierra 04/06"~~ → **ya cerrados**; el catálogo A–G + paquetes está completo.
+2. El hallazgo de bandas de esta instancia coincide con el "hallazgo de auditoría" del README de la instancia 1;
+   el fix `01 v1.1` de esta instancia lo resuelve **provisionalmente** (operativa para presupuestar, corredor para
+   calibrar, cero precios alterados). Decisión definitiva de bandas sigue siendo del usuario (README §Hallazgo).
+3. La recomendación del README (consolidar sobre N1–N4 y usar el material T1–T4 paralelo como verificación
+   cruzada) es asumida también por esta instancia.
+4. Siguiente tarea natural de esta instancia (sin choque): migrar el resto de familias a datos TS consumibles +
+   `bandas.json` como fuente única de dinero, y tests vitest — requiere worktree estable o aprobación de namespace.
