@@ -66,9 +66,9 @@ Entrega: N1 2–4 días · N2 ~1 semana · N3 2–3 semanas · N4 4–8 semanas.
 | Testing + QA + documentación | N1 2–5 · N2 5–12 · N3 12–25 · N4 25–50 |
 | **Total horas** | **N1 21–45 · N2 45–114 · N3 114–245 · N4 245–480** |
 
-**Presupuesto:** N1 **$520–1350** · N2 **$1250–4000** · N3 **$3900–11100** · N4 **$11000–26400**
+**Presupuesto:** N1 **$500–1350** · N2 **$1250–4000** · N3 **$3900–11100** · N4 **$11000–26400**
 Entrega: N1 1–2 semanas · N2 3–5 semanas · N3 6–10 semanas · N4 10–20 semanas.
-Proyectos N3/N4 SIEMPRE por hitos (§7 del modelo de cobro).
+Proyectos N3/N4 SIEMPRE por hitos (§8 Pagos).
 
 ---
 
@@ -107,7 +107,7 @@ Assets 3D cotizados aparte (Familia B). Entrega: N1 3–5 días · N2 1–2 sema
 | Perf + QA + deploy | N1 1–3 · N2 3–6 · N3 6–14 · N4 14–30 |
 | **Total horas** | **N1 9–23 · N2 23–54 · N3 54–120 · N4 120–250** |
 
-**Presupuesto:** N1 **$220–700** · N2 **$600–1900** · N3 **$1800–5400** · N4 **$5400–13800**
+**Presupuesto:** N1 **$220–700** · N2 **$600–1900** · N3 **$1850–5400** · N4 **$5400–13800**
 Modificador: integración e-commerce real (Shopify/Woo/custom) **+15–30 h** según plataforma, cotizado aparte tras discovery.
 Entrega: N1 3–4 días · N2 1–2 semanas · N3 3–5 semanas · N4 6–10 semanas.
 
@@ -129,7 +129,7 @@ Entrega: N1 3–4 días · N2 1–2 semanas · N3 3–5 semanas · N4 6–10 sem
 | Build optimizada + QA + deploy | N1 2–4 · N2 4–10 · N3 10–20 · N4 20–40 |
 | **Total horas** | **N1 14,5–29 · N2 29–71 · N3 71–157 · N4 157–327** |
 
-**Presupuesto:** N1 **$360–870** · N2 **$800–2500** · N3 **$2400–7100** · N4 **$7000–18000**
+**Presupuesto:** N1 **$360–900** · N2 **$800–2500** · N3 **$2400–7100** · N4 **$7000–18000**
 
 ---
 
@@ -148,7 +148,7 @@ Entrega: N1 3–4 días · N2 1–2 semanas · N3 3–5 semanas · N4 6–10 sem
 | QA browsers + deploy CDN | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
 | **Total horas** | **N1 5–14 · N2 14–32 · N3 32–70 · N4 70–145** |
 
-**Presupuesto:** N1 **$120–420** · N2 **$390–1120** · N3 **$1100–3150** · N4 **$3100–8000**
+**Presupuesto:** N1 **$120–420** · N2 **$390–1150** · N3 **$1100–3200** · N4 **$3100–8000**
 
 ---
 
@@ -167,7 +167,7 @@ Entrega: N1 3–4 días · N2 1–2 semanas · N3 3–5 semanas · N4 6–10 sem
 | Deploy + analytics opcional | N1 0,5–1 · N2 1–2 · N3 2–4 · N4 4–8 |
 | **Total horas** | **N1 5,5–12 · N2 12–32 · N3 32–66 · N4 66–133** |
 
-**Presupuesto:** N1 **$130–360** · N2 **$330–1120** · N3 **$1100–3000** · N4 **$2900–7400**
+**Presupuesto:** N1 **$130–360** · N2 **$330–1150** · N3 **$1100–3000** · N4 **$2900–7400**
 Bloque adicional de 5 slides: +20–30%.
 
 ---
@@ -186,5 +186,5 @@ Bloque adicional de 5 slides: +20–30%.
 | QA en dispositivos reales | N1 0,5–1 · N2 1–3 · N3 3–6 · N4 6–12 |
 | **Total horas** | **N1 3,5–8 · N2 8–19 · N3 19–38 · N4 38–77** |
 
-**Presupuesto:** N1 **$80–240** · N2 **$220–700** · N3 **$650–1700** · N4 **$1700–4300**
+**Presupuesto:** N1 **$80–240** · N2 **$220–700** · N3 **$650–1750** · N4 **$1700–4300**
 Nota: AR con tracking avanzado (image tracking, occlusion, WebXR profundo) NO está en esta ficha — se estima como proyecto a medida tras discovery.
