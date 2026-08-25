@@ -378,12 +378,14 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       if (loadingRef.current) return;
       const hit = pickAt(e.clientX, e.clientY);
       if (!hit) { setIsolation(null); return; }
+      // Doble click = aislar la estructura dueña de la pieza golpeada,
+      // INDEPENDIENTE de los clicks simples que lo precedieron (los dos clicks
+      // del doble click ciclan la selección; el dblclick aísla el CONJUNTO).
       const key = String(hit.userData.__pieceKey);
       const ownerId = structureByPieceRef.current.get(key);
-      const p = stateRef.current.path;
-      if (!ownerId || !p || p.structureId !== ownerId) return;
+      if (!ownerId) { setIsolation(null); return; }
       const g = ensureGroups(ownerId);
-      const keys = unitPieceKeys(p, g.groups);
+      const keys = [...new Set([...g.groups.values()].flat())];
       const box = new THREE.Box3();
       for (const k of keys) {
         const entry = piecesRef.current.get(k);
@@ -393,12 +395,13 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const size = box.getSize(new THREE.Vector3());
       const margin = Math.max(size.x, size.y, size.z) * 0.12;
       box.expandByVector(new THREE.Vector3(margin, margin, margin));
+      // sincronizar la selección con el conjunto aislado
+      setPath({ structureId: ownerId, groupKey: null, pieceKey: null });
+      setSelectedId(ownerId);
       setIsolation({
         box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
         kinds: new Set(stateRef.current.selectable),
-        label: p.pieceKey ? phaseLabel(p.pieceKey.split(':').slice(1).join(':'))
-          : p.groupKey ? (p.groupKey === '(estructura)' ? (getStructureById(ownerId)?.nameEs ?? p.groupKey) : phaseLabel(p.groupKey))
-          : (getStructureById(ownerId)?.nameEs ?? ''),
+        label: getStructureById(ownerId)?.nameEs ?? '',
       });
     };
     const onDrag = (e: PointerEvent) => {
