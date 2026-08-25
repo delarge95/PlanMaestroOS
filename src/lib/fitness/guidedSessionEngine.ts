@@ -268,6 +268,14 @@ export function skipRest(state: GuidedSessionState): GuidedSessionState {
   return { ...state, phase: 'working', restRemainingSec: 0 };
 }
 
+/** Ajusta el descanso en curso (+/- segundos); mínimo 5s restantes. */
+export function adjustRest(state: GuidedSessionState, deltaSec: number): GuidedSessionState {
+  if (state.phase !== 'resting') return state;
+  const remaining = Math.max(5, state.restRemainingSec + deltaSec);
+  const total = Math.max(remaining, state.restTotalSec + deltaSec);
+  return { ...state, restRemainingSec: remaining, restTotalSec: total };
+}
+
 /** Tick de 1s del cronómetro de descanso; al llegar a 0 vuelve a 'working'. */
 export function tickRest(state: GuidedSessionState): GuidedSessionState {
   if (state.phase !== 'resting') return state;

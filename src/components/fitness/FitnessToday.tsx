@@ -12,6 +12,7 @@ import { useSkillStateStore } from '../../data/fitness/skills/skillStateStore';
 import { getSkillStepById } from '../../data/fitness/skills/skillSteps';
 import { skillPaths } from '../../data/fitness/skills/skillPaths';
 import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
+import GuidedModeLauncher from './guided/GuidedModeLauncher';
 
 export interface FitnessTodayProps {
   currentPath?: string;
@@ -89,6 +90,10 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
 
           {/* ACTIVIDAD 2: RUTINA DEL DÍA PRINCIPAL COMO DESPLEGABLE */}
           <TodayRoutineStack selectedDayIndex={selectedDayIndex} />
+
+          {/* B9 (ADITIVO): entrada al Modo Guiado junto a la rutina del día.
+              No reemplaza nada: TodayRoutineStack queda intacto. */}
+          <GuidedModeLauncher selectedDayIndex={selectedDayIndex} />
         </div>
 
       </div>
