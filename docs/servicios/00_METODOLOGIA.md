@@ -1,145 +1,138 @@
-# AG-SERV · 00 — Metodología de estimación y cobro
+# 00 · Metodología de estimación y cobro — AG-SERV
 
-> Versión 1.0 · 2026-08-25 · Owner: AG-SERV (rama `agent/services`)
-> Fuente de verdad del CÓMO se estima y cobra. El QUÉ (tareas y rangos por servicio) vive en los catálogos C1–C7 de esta carpeta.
-> Regla de trazabilidad: toda tarifa u hora publicada está anclada al doc `03_salary_benchmark_and_remote_colombia.md` (sección citada como doc-03) o está marcada explícitamente como **inferencia propia documentada**.
-
----
-
-## 1. Principios de estimación
-
-1. **Rangos, nunca cifras únicas.** Todo servicio se publica como rango min–max en USD, con criterios objetivos que ubican un caso concreto dentro del rango.
-2. **Desglose antes de precio.** Ningún rango de paquete existe sin tabla de subtareas que lo soporte (`subtarea × tier → horas min/max`).
-3. **Complejidad por criterios objetivos** (§3), medibles en el brief: piezas, presupuesto de triángulos, materiales, interactividad, integración. No por intuición.
-4. **El precio es la suma del trabajo**, no un número negociado hacia atrás desde lo que "el cliente puede pagar". Los descuentos son explícitos y acotados (§5).
-5. **Estimación ≠ cotización cerrada.** Los rangos sirven para scoping y expectativas; la cotización formal se emite por proyecto tras discovery y queda documentada aparte.
-6. **Horas facturables conservadoras**: 120–140 h/mes (doc-03 §2.2). Ningún plan de ingresos asume 160 h facturadas.
-7. **Fiscalidad fuera de alcance**: USD es la moneda de cotización; IVA/retenciones/exportación de servicios se validan con contador (doc-03 §7).
+> Versión 1 · 2026-08-25 · Rate card v1 (`src/data/services/rateCard.ts` es la fuente determinista;
+> este doc registra su derivación y las reglas de uso).
+> **Alcance**: estimación operativa para scoping y publicación de rangos. La cotización cerrada se
+> emite por proyecto tras discovery pago (ver §7.8).
 
 ---
 
-## 2. Rate card v1 (tarifas base por hora, USD)
+## 1. Principios
 
-| ID | Clase de trabajo | Alcance típico | Tarifa/h | Anclaje |
-|---|---|---|---|---|
-| RC-ART | Arte 3D offline | modelado, lookdev, iluminación, render, animación offline | 20–28 | Inferencia propia: banda global freelance USD 20–50/h (doc-03 §4.1, matriz operativa) pisada a la meta de entrada rápida para competitividad (doc-03 §9.1); coherente con mercado US de 3D artists descontado por acceso LATAM (doc-03 §4.9) |
-| RC-RTA | Asset realtime / technical art | retopología, bake, LODs, optimización, shaders de soporte | 25–35 | Middle Unity Developer contractor Colombia USD 27–35/h (doc-03 §4.1 [lemon-core]); extremo artístico baja levemente el piso (inferencia propia) |
-| RC-WEB | Dev integración web 3D / Unity WebGL | three.js/babylon.js, embeds, builds Unity WebGL, puentes JS | 27–38 | Ídem [lemon-core]; techo ampliado por especialización WebGL/technical visualization, ruta diferenciadora del perfil (doc-03 §4.3) |
-| RC-AI | IA aplicada / automatización | LLM tooling, Python, RAG ligero, workflows | 28–40 | Python remoto LATAM Colombia entry→senior USD 30k–66k/año ≈ USD 14–32/h efectivas (doc-03 §4.7 [hiretalent-python]); premium por entrega llave-en-mano (inferencia propia); techo coherente con ruta USD 6k/mes ≈ USD 37.5/h (doc-03 §9.3) |
-| RC-CON | Consultoría / arquitectura / auditoría | discovery, auditorías técnicas, roadmaps, acompañamiento | 40–55 | Proxy Technical Artist US promedio ~USD 66.69/h y rango 127k–152k/año (doc-03 §4.2 [zip-ta]) descontado por acceso contractor desde Colombia; categoría *strategic estimate* (doc-03 §2.1) |
+1. **Trazabilidad numérica**: toda cifra publicada se reconstruye como `Σ(horas_subtarea × tarifa_clase)`.
+   Nada de números "a ojo" sin tabla que los soporte.
+2. **Rangos, nunca cifras únicas**: min–max en USD, con drivers objetivos que ubican un proyecto
+   dentro del rango (§8).
+3. **Desglose antes que precio**: ningún paquete sin su tabla de subtareas por tier.
+4. **Anclaje a benchmark**: tarifas derivadas de `03_salary_benchmark_and_remote_colombia.md` (READ),
+   con sección citada; lo no cubierto se marca como *inferencia propia documentada*.
+5. **Versionado**: cambio de tarifas = rate card v2 citando fuente nueva. Deprecación, nunca borrado.
 
-### Consistencia con las metas de ingreso (doc-03 §9)
+## 2. Anclas salariales (doc-03)
 
-| Meta mensual bruta | Horas necesarias a bandas medias | Lectura |
+| Ancla | Valor | Sección/Nota doc-03 | Uso |
+|---|---|---|---|
+| Middle Unity Developer, contractor Colombia | **USD 27–35/h** (confianza alta, Lemon.io) | §4 tabla contractor / nota `lemon-core` | Clase RT |
+| Freelance global | **USD 20–50/h** | §4 tabla "Global freelance" | Techo general |
+| 3D Artist EE.UU. promedio | USD 82k/año (~39.5/h), rango 41k–142k | §6 / nota `zip-3dartist` | Clase ART |
+| Python dev LATAM mid | ~USD 46k/año (empleado) | §5 / nota `hiretalent-python` | Clase AI (base) |
+| Senior LATAM empleado | USD 55–70k/año (~26–34/h) + prima contractor 1.25–1.5× | §3 bandas Howdy + §7 | Clase TL |
+| Horas facturables reales | 120–140 h/mes (no 160) | §2.2 | Overhead ya cargado en tarifas |
+| Metas de ingreso | piso 1.5k · objetivo 3k · stretch 6k/mes | §9 | Sanity check: a 130 h/mes, la mezcla P50 del catálogo debe rendir ≥ 3k |
+
+**Clases derivadas** (= `rateCard.ts` v1, citas íntegras en cada `derivationRef`):
+
+| Clase | Nombre | USD/h | Derivación resumida |
+|---|---|---|---|
+| `ART` | Arte & Diseño | 25–38 | Freelance global 20–50 + promedio 3D Artist US ajustado a contractor LATAM |
+| `RT` | Realtime & Dev | 28–45 | Middle Unity COL 27–35 + banda superior freelance global |
+| `AI` | IA & Automatización | 35–55 | Base Python LATAM mid + prima IA en freelance (extremo alto banda global) |
+| `TL` | Dirección Técnica | 32–48 | Senior LATAM 26–34/h × prima contractor 1.25–1.5× |
+
+*Inferencia propia documentada*: la prima IA y el ajuste LATAM de promedios US son inferencias
+operativas (no hay dato directo de mercado freelance IA-LATAM en doc-03); quedan marcadas aquí
+y se recalibrarán con las primeras 5–10 cotizaciones reales.
+
+## 3. Escala de complejidad S/M/L/XL
+
+Definición única para todo el catálogo. Cuando una subtarea usa otra métrica (piezas CAD, segundos
+de animación, nº de planos), su ficha lo declara y mapea a esta escala.
+
+| Tier | Asset/escena | Criterios orientativos |
 |---|---|---|
-| USD 1.500 (piso, §9.1) | ~54–75 h/mes | Un proyecto M o dos S al mes cubren el piso |
-| USD 3.000 (objetivo 3–6 meses, §9.2) | ~86–111 h/mes | Alcanzable dentro de las 120–140 h facturables conservadoras |
-| USD 6.000 (estratégico 12–24 meses, §9.3) | >150 h a banda media, o mezcla con RC-CON/proyectos L–XL | Requiere retainers + proyectos grandes; no es promesa de corto plazo |
+| **S** | Simple | ≤ 5 piezas o prop único; 1 familia de materiales; sin rig; integración estándar sin lógica custom |
+| **M** | Medio | 5–25 piezas o producto completo; materiales PBR estándar; rig mecánico simple o 1–2 clips; interacción básica |
+| **L** | Complejo | 25–100 piezas; shaders custom simples; optimización exigente (mobile); lógica de interacción media |
+| **XL** | Muy complejo | > 100 piezas o sistema multi-escena; rigs avanzados; pipelines combinados; apps completas |
 
----
+## 4. Subtareas: contrato
 
-## 3. Escala de complejidad S / M / L / XL
+Cada subtarea declara: `id`, `name`, clase tarifaria, horas por tier aplicable (`undefined` = no aplica)
+y opcionalmente `drivers` (qué mueve sus horas). Las tareas compuestas referencian módulos por id
+(`ServiceTask.moduleIds`) en vez de duplicar tablas — p. ej. B2 = B1 + módulo de interactividad.
 
-Cada tarea del catálogo declara qué dimensiones aplican. Valores objetivo medibles:
-
-| Dimensión | S | M | L | XL |
-|---|---|---|---|---|
-| Piezas / objetos (ensamblaje CAD o escena) | ≤8 | 9–30 | 31–100 | >100 |
-| Presupuesto de tris del asset final (realtime) | <10k | 10k–50k | 50k–150k | >150k o multi-escena |
-| Materiales / texturas | ≤2 básicos | 2–4 sets PBR | >4 sets o shaders custom | librería/sistema de materiales paramétrico |
-| Animación | ninguna o turntable | loop simple (≤2 clips) | secuencias múltiples/triggers | sistema riggado complejo o cinemática |
-| Interactividad | ninguna / órbita básica | hotspots, UI de lectura | mecánicas custom (exploded, cutaway, configurador) | app completa con estado/datos/flujos |
-| Integración web | embed pasivo | página existente con UI | sección/experiencia dedicada | aplicación web completa |
-
-### Regla de escalado del tier
-
-1. El tier final NO es un promedio: es el **segundo nivel más alto** entre las dimensiones aplicables (una sola dimensión disparada no arrastra todo el proyecto; dos sí).
-2. Si ≥2 dimensiones caen en XL → proyecto XL → obligatorio discovery tarifado previo (fijo, ver catálogos) antes de comprometer rango.
-3. Las **piezas repetidas cuentan una vez** (+instancing): 40 tornillos iguales = 1 tipo de pieza.
-
----
-
-## 4. Fórmula de estimación (subtareas → paquete)
+## 5. Fórmula de estimación y redondeo
 
 ```text
-precio_min = Σ horas_min(subtarea_i, tier) × tarifa_min(clase RC de subtarea_i)
-precio_max = Σ horas_max(subtarea_i, tier) × tarifa_max(clase RC de subtarea_i)
-redondeo   = múltiplos de USD 50
-plazo_días = ⌈Σ horas_mid / 4⌉ días hábiles + margen de rondas de revisión (1 día por ronda)
+horas_rango(tarea, tier)   = Σ horas_min(subtareas) .. Σ horas_max(subtareas)
+costo_raw                  = [ Σ(h_min_i × tarifa_min_clase_i) , Σ(h_max_i × tarifa_max_clase_i) ]
+redondeo comercial         : min → floor a múltiplo de 25 ; max → round-half-up a múltiplo de 50
+                             montos < 100 → múltiplos de 5
+paquete combinado          = suma de partes YA redondeadas (trazabilidad pieza a pieza);
+                             el descuento de bundle se aplica al final (§6.2)
 ```
 
-Notas:
-- Cada subtarea declara su clase RC (quién la ejecuta: arte, dev, IA, consultoría). Una tarea puede mezclar clases.
-- Los rangos de horas YA incluyen QA interno y empaquetado de entregables; NO incluyen tiempos de espera de feedback del cliente (eso mueve el calendario, nunca el precio).
-- Incertidumbre inherente ±15% asumida dentro de cada rango; si el discovery revela desviación >20% sobre el alcance estimado → re-cotización formal (§6).
+Empates en el redondeo → al alza. El redondeo comercial es presentación; `PackageEstimate.raw`
+conserva el valor exacto para auditoría.
 
----
+## 6. Multiplicadores y descuentos
 
-## 5. Multiplicadores y ajustes
-
-| Factor | Ajuste | Condición |
+### 6.1 Multiplicadores
+| Factor | Efecto | Condición |
 |---|---|---|
-| Rush (plazo < 60% del estándar) | +30% | sujeto a disponibilidad real |
-| Super-rush (< 40% del estándar) | +50% | solo si no compromete calidad verificable |
-| Gestión multi-stakeholder (>3 revisores) | +10–15% | se detecta en discovery |
-| Bundle (≥3 servicios combinados) | −5 a −10% | nunca acumulable con rush |
-| Cliente recurrente (2º proyecto en adelante) | −5% | aplica también a retainers |
-| Licencias de terceros (HDRI, plugins, assets stock, API) | costo directo | +10% solo si AG-SERV gestiona la compra |
-| Idioma de entrega ES o EN | incluido | otros idiomas: fuera de alcance |
+| Urgencia | ×1.25–1.35 | Entrega < 72 h desde kickoff, calendario bloqueado |
+| Fin de semana/nocturno crítico | ×1.20 | Solo hitos imposibles de mover; evitable por planificación |
 
----
-
-## 6. Políticas transversales
-
-### Revisiones
-- Incluidas: **2 rondas por entregable visual**, feedback consolidado en un solo documento/punto por ronda.
-- Ronda adicional: 10% del valor del paquete por ronda, o horas reales × tarifa si resulta menor.
-- Cambio de alcance (nueva funcionalidad, no refinamiento): línea de estimación nueva; jamás absorción silenciosa.
-
-### Calendario
-- Pausas de feedback >7 días hábiles re-agendan el calendario sin penalización para ninguna parte.
-- El plazo corre desde la recepción del anticipo Y de los insumos completos (brief, archivos fuente, accesos).
-
-### Propiedad intelectual
-- Traspaso de derechos del entregable al pago final.
-- AG-SERV retiene derecho a mostrar el trabajo en portafolio salvo NDA firmado (el caso TwinSight documenta este patrón).
-
----
-
-## 7. Estructura de pago
-
-| Tamaño del proyecto | Esquema |
+### 6.2 Descuentos (aplican sobre publicado, nunca apilables entre sí — rige el mayor)
+| Bundle | Dcto |
 |---|---|
-| ≤ USD 500 | 100% anticipado (clientes nuevos; recurrentes: 50/50) |
-| USD 500–2.000 | 50% anticipo / 50% entrega |
-| USD 2.000–8.000 | 40% anticipo / 30% hito intermedio / 30% entrega |
-| > USD 8.000 o > 6 semanas | hitos quincenales; última cuota tras aceptación final |
+| Asset (familia ASRT) + su integración (WEB/EXP) | −10% |
+| Render estático + animación (familia REND completa) | −5% |
+| 3+ servicios en un mismo encargo | −12% máx. |
+| Cliente recurrente (desde 2º proyecto) | −5% |
 
-- Métodos: Wise/Payoneer/SWIFT, siempre reconciliables factura↔contrato↔pago (doc-03 §7.7).
-- Contrato/SOW firmado antes de arrancar; define entregables, rondas, plazos y propiedad intelectual (doc-03 §6.2).
-- Retainers: facturación mensual anticipada (catálogo C7).
+## 7. Políticas comerciales transversales
 
----
+1. **Pagos**: anticipo 50%, saldo contra entrega. Encargos < $400: 100% por adelantado.
+   Proyectos > $3,000: hitos 33/33/34 ligados a entregables.
+2. **Revisiones**: incluidas **2 rondas** por entregable (una ronda = un set consolidado de feedback).
+   Ronda extra: hora de la clase dominante de la tarea.
+3. **Licencias**: licencia de uso estándar para el cliente incluida (sin revenda ni exclusividad).
+   Exclusiva de mercado: +20–40% según alcance. Compra de archivos fuente: +25% (siempre sujeto a
+   acuerdos con terceros si hay assets comprados).
+4. **Validez** de presupuesto: 21 días (rate card vigente).
+5. **Garantía técnica**: bugs de integración corregidos sin costo durante 30 días post-entrega.
+   No cubre cambios de contenido ni nuevos requisitos.
+6. **Kill fee**: cancelación a mitad de camino → se factura el trabajo realizado con mínimo 25%
+   del total pactado.
+7. **Exclusiones globales** (nunca incluidas salvo pacto expreso): música licenciada, voice-over,
+   hosting/suscripciones mensuales, assets de terceros, costes de API de IA (los paga el cliente,
+   BYOK), impuestos y cumplimiento fiscal local (doc-03 §7: validación con contador).
+8. **Discovery**: proyectos WEB/EXP/IA ≥ tier M requieren discovery pago previo ($175–750 según
+   alcance, acreditable al proyecto si se cierra dentro de 30 días). Sin discovery no hay cifra
+   cerrada — solo el rango público de este catálogo.
+9. **Fees de pasarela** (Wise/PayPal ~3–5%) asumidos dentro del precio publicado.
 
-## 8. Exclusiones estándar (aplican a TODO el catálogo)
+## 8. Drivers de variación (materia prima de los sliders futuros)
 
-Ningún paquete incluye, salvo acuerdo expreso por escrito:
+Cada familia documenta qué mueve el precio min→max. Ejemplos canónicos por familia (uno será el
+slider de referencia de la web futura):
 
-1. Hosting, dominios e infraestructura recurrente (setup inicial sí; operación la paga el cliente).
-2. Costos de API de modelos de IA / embeddings / almacenamiento cloud asociados.
-3. Licencias de software, plugins, HDRI o assets de terceros que el cliente deba poseer.
-4. Música, locución o efectos de sonido licenciados (costo directo del cliente).
-5. Copywriting final de marketing del cliente (textos definitivos los provee el cliente).
-6. Mantenimiento/evolución post-entrega (se contrata como retainer, catálogo C7).
-7. Traducciones fuera de ES/EN.
-8. Impuestos según residencia fiscal del cliente (doc-03 §7.5: validar tratamiento con contador).
+| Familia | Driver principal | Ejemplo min ↔ max |
+|---|---|---|
+| CAD | nº y clase de piezas, limpieza del CAD | drone básico 8–12 piezas ↔ drone pro 60–120 pzas c/gimbal y cableado |
+| REND | duración, sims, resolución | loop 5–10 s ↔ pieza 45–90 s con FX |
+| ASRT | interactividad, rig, shaders | prop estático ↔ máquina XL interactuable con exploded view |
+| WEB | plataforma, lógica custom, perf móvil | embed visor ↔ web app configurador |
+| EXP | coreografía scroll, gameplay, contenido | scrollytelling S ↔ minijuego L |
+| IA | superficie (chat/RAG/automatización), integraciones | widget chat BYOK ↔ automatización multi-proceso con RAG interno |
+| VFX | nº de planos, tracking, FX sobre toma | 1 plano simple ↔ secuencia multiclip con scene recon |
 
----
+Los ejemplos visuales por tier usan **placeholders explícitos** hasta contar con assets reales
+(coordinación con AG-PORT / sprint doc-33). Prohibido inventar URLs, clientes o demos.
 
-## 9. Versionado de tarifas
+## 9. Calibración
 
-| Versión | Fecha | Vigencia | Notas |
-|---|---|---|---|
-| v1 | 2026-08-25 | actual | Rate card inicial anclada a doc-03; primer catálogo C1–C7 |
-
-Regla: cambiar una tarifa base = publicar rate card v(N+1) con changelog y re-anclaje citado; los proyectos ya cotizados cierran a su versión. Nunca se edita una versión vigente silenciosamente.
+Tras cada 5–10 cotizaciones cerradas: comparar horas estimadas vs reales, ajustar la siguiente
+versión de rate card citando evidencia. Meta de sanity: mezcla P50 del catálogo rinde ≥ USD 3k/mes
+a 130 h facturables (doc-03 §9.2).
