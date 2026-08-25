@@ -2,6 +2,36 @@
   "domain": "nutrition",
   "sources": [
     {
+      "id": "nsca-est-4ed",
+      "title": "NSCA Essentials of Strength Training and Conditioning",
+      "author": "NSCA — eds. G. Gregory Haff & N. Travis Triplett",
+      "year": 2016,
+      "edition": "4th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "sportnutrition-3g-2022",
+      "title": "Sport Nutrition (3G e-learning)",
+      "author": "3G e-learning",
+      "year": 2022,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
       "id": "bibliotex-sport-nutrition-2022",
       "title": "bibliotex sport nutrition 2022",
       "author": "",

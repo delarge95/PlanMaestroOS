@@ -1,5 +1,9 @@
 // src/data/fitness/nutrition/rules.ts — Acceso tipado al RAG de nutrición (rag/nutrition.json, formato v4)
-// Los valores de cálculo SIEMPRE se leen del JSON (fuente única de verdad); este módulo solo tipa y busca.
+// Desde el ciclo 2 NO existe array rules[] legacy: las reglas viven como chunks
+// (rag/nutrition/fuentes/<sourceId>--rules.md) con sus valores numéricos codificados
+// en `entities` (num:ruta=valor, unit:, confidence:, tier:, cond:clave=valor).
+// Este módulo compila un índice derivado chunks→RagRule una vez al cargar; los
+// valores de cálculo SIEMPRE se leen del JSON reconstruido (fuente única de verdad).
 
 import ragJson from '../../../../rag/nutrition.json';
 import type { Confidence, RuleCitation } from './types';
@@ -27,29 +31,120 @@ export interface RagSource {
   id: string;
   title: string;
   author: string;
-  year: number;
+  year: number | null;
   edition: string;
   type: string;
   evidenceTier: string;
+}
+
+interface RawChunk {
+  id: string;
+  sourceId: string;
+  topic: string;
+  tags?: string[];
+  summary: string;
+  entities?: string[];
+  locator: { chapter?: number | string; page?: number };
 }
 
 interface RagFileShape {
   domain: string;
   version: string;
   sources: RagSource[];
-  rules: RagRule[];
+  chunks: RawChunk[];
 }
 
 export const nutritionRag = ragJson as unknown as RagFileShape;
 
 const SOURCE_SHORT: Record<string, string> = {
   'nsca-est-4ed': 'NSCA Essentials 4ª ed (2016)',
-  'maughan-nis-2000': 'Maughan, Nutrition in Sport (IOC, 2000)',
+  'maughan-nutrition-in-sport': 'Maughan, Nutrition in Sport (IOC, 2000)',
   'sportnutrition-3g-2022': 'Sport Nutrition, 3G E-learning (2022)',
 };
 
+function setByPath(target: Record<string, unknown>, path: string, value: number): void {
+  const parts = path.split('.');
+  let node = target;
+  for (let i = 0; i < parts.length - 1; i += 1) {
+    const key = parts[i];
+    if (typeof node[key] !== 'object' || node[key] === null) {
+      node[key] = {};
+    }
+    node = node[key] as Record<string, unknown>;
+  }
+  node[parts[parts.length - 1]] = value;
+}
+
+/** Convierte un chunk de regla (generado por migrate-rules-to-chunks.ts) en RagRule. */
+function chunkToRule(chunk: RawChunk): RagRule | null {
+  if (
+    typeof chunk.locator.chapter !== 'number' ||
+    typeof chunk.locator.page !== 'number' ||
+    typeof chunk.summary !== 'string'
+  ) {
+    return null;
+  }
+
+  let hasValues = false;
+  const values: Record<string, unknown> = {};
+  let unit: string | undefined;
+  let confidence: Confidence = 'qualitative';
+  let evidenceTier = '';
+  const conditions: Record<string, unknown> = {};
+
+  for (const entity of chunk.entities ?? []) {
+    const eq = entity.indexOf('=');
+    const [prefixRaw, value] = eq === -1 ? [entity, undefined] : [entity.slice(0, eq), entity.slice(eq + 1)];
+    if (prefixRaw.startsWith('num:') && value !== undefined) {
+      const path = prefixRaw.slice(4).replace(/^root\./, '');
+      setByPath(values, path, Number(value));
+      hasValues = true;
+    } else if (prefixRaw.startsWith('unit:') && value !== undefined) {
+      unit = value;
+    } else if (prefixRaw.startsWith('confidence:') && value !== undefined) {
+      confidence = (['explicit', 'inferred', 'qualitative'].includes(value) ? value : 'qualitative') as Confidence;
+    } else if (prefixRaw.startsWith('tier:') && value !== undefined) {
+      evidenceTier = value;
+    } else if (prefixRaw.startsWith('cond:') && value !== undefined) {
+      conditions[prefixRaw.slice(5)] = value;
+    }
+  }
+
+  return {
+    id: chunk.id,
+    sourceId: chunk.sourceId,
+    topic: chunk.topic,
+    tags: chunk.tags,
+    statement: chunk.summary,
+    values: hasValues ? (values as RagRule['values']) : null,
+    unit,
+    conditions: Object.keys(conditions).length > 0 ? conditions : undefined,
+    confidence,
+    evidenceTier,
+    locator: { chapter: chunk.locator.chapter, page: chunk.locator.page },
+  };
+}
+
+/** Índice derivado compilado: todos los chunks que representan reglas (locator cap+page), indexados por id. */
+function compileRuleIndex(): Map<string, RagRule> {
+  const index = new Map<string, RagRule>();
+  for (const chunk of nutritionRag.chunks) {
+    const rule = chunkToRule(chunk);
+    if (rule) index.set(rule.id, rule);
+  }
+  return index;
+}
+
+const RULE_INDEX = compileRuleIndex();
+
+/** Reglas derivadas de chunks (compat: mismo consumo que el antiguo rules[] del JSON). */
+export const nutritionRules: RagRule[] = [...RULE_INDEX.values()];
+
+/** Vista compatible del RAG: rules[] ahora es DERIVADO de chunks, nunca leído del JSON. */
+export const nutritionRagView = { ...nutritionRag, rules: nutritionRules };
+
 export function getRule(ruleId: string): RagRule | undefined {
-  return nutritionRag.rules.find((r) => r.id === ruleId);
+  return RULE_INDEX.get(ruleId);
 }
 
 /** Regla obligatoria: si el RAG pierde una regla usada por la UI, queremos fallar en pruebas, no en runtime. */

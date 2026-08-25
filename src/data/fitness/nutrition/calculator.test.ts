@@ -12,7 +12,7 @@ import {
   postWorkoutProteinGrams,
   proteinTarget,
 } from './calculator';
-import { nutritionRag } from './rules';
+import { nutritionRules } from './rules';
 
 describe('activityFromHours', () => {
   it('clasifica los tres niveles por horas semanales', () => {
@@ -125,7 +125,7 @@ describe('buildDayType', () => {
 
 describe('integridad calculadora ↔ RAG', () => {
   it('toda regla citada por la calculadora existe en rag/nutrition.json', () => {
-    const ruleIds = new Set(nutritionRag.rules.map((r) => r.id));
+    const ruleIds = new Set(nutritionRules.map((r) => r.id));
     const targets = computeTargets({ weightKg: 70, sex: 'male', goal: 'deficit', trainingHoursPerWeek: 8 });
     const slots = buildDayType({ weightKg: 70, sex: 'male', goal: 'deficit', trainingHoursPerWeek: 8 });
     const cited = [
