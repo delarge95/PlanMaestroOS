@@ -1,0 +1,560 @@
+{
+  "domain": "clinical",
+  "version": "4.0.0",
+  "sources": [
+    {
+      "id": "plan-accion-tdah-ansiedad-social",
+      "title": "Plan de acción profesional — TDAH, ansiedad social y comorbilidades",
+      "author": "Documento interno del usuario (elaborado sobre NICE NG87/CG159/CG142, Cochrane 2018, Safren et al. JAMA 2010, Mayo-Wilson et al. Lancet Psychiatry 2014, AASM 2021, VA/DoD 2023)",
+      "year": 2026,
+      "type": "pdf",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "tdah",
+          "ansiedad-social",
+          "sueno-cbti"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "reporte-clinico-neurodesarrollo",
+      "title": "Informe clínico estructurado con anexos de evaluación (neurodesarrollo / ansiedad de desempeño)",
+      "author": "Documento interno del usuario",
+      "year": 2026,
+      "type": "pdf",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "psicoeducacion",
+          "formulacion-funcional"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "clinical-protocols-dataset",
+      "title": "src/data/clinical/protocols.ts — protocolos de regulación de la app (rumia, anti-perfeccionismo, desconexión nocturna)",
+      "author": "Dataset propio de Plan Maestro OS",
+      "year": null,
+      "type": "dataset",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "protocolos-app"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "clinical-routines-dataset",
+      "title": "src/data/clinical/routines.ts — rutinas operacionales CBT/TDAH de la app",
+      "author": "Dataset propio de Plan Maestro OS",
+      "year": null,
+      "type": "dataset",
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "rutinas-app"
+        ],
+        "priority": 1
+      }
+    }
+  ],
+  "chunks": [
+    {
+      "id": "clin-app-proto-rumia-10-min",
+      "sourceId": "clinical-protocols-dataset",
+      "topic": "rumiacion",
+      "tags": [
+        "limite-10-min",
+        "cambio-de-entorno",
+        "volcado-escrito"
+      ],
+      "locator": {
+        "section": "proto-1 (Control de Rumia)"
+      },
+      "summary": "Protocolo de control de rumia implementado en la app: cuando un pensamiento recursivo supera los 10 minutos, se considera improductivo por definición operativa — se escribe en papel (volcado físico) y se cambia de entorno físico inmediatamente. Fundamento parafraseado del dataset: la rumiación consume recursos ejecutivos sin generar resolución, así que el temporizador estricto convierte la revisión mental en una tarea acotada con final visible.",
+      "entities": [
+        "protocolo:rumia-10-min",
+        "estrategia:cambio-de-entorno"
+      ],
+      "rules": [
+        "clin:post-evento-limite-10-min"
+      ]
+    },
+    {
+      "id": "clin-app-proto-suficientemente-bueno",
+      "sourceId": "clinical-protocols-dataset",
+      "topic": "anti-perfeccionismo",
+      "tags": [
+        "estandar-suficientemente-bueno",
+        "umbral-minimo",
+        "cierre"
+      ],
+      "locator": {
+        "section": "proto-2 (Estándar Suficientemente Bueno)"
+      },
+      "summary": "Anti-perfeccionismo operativo: definir el umbral mínimo aceptable del entregable ANTES de iniciar; cuando los criterios core se cumplen, la tarea se marca completada sin añadir capas secundarias de pulido. El criterio del dataset: un entregable funcional a tiempo supera infinitamente un borrador perfecto sin publicar.",
+      "entities": [
+        "concepto:umbral-minimo-aceptable",
+        "estrategia:sin-capas-de-pulido"
+      ],
+      "rules": [
+        "clin:tdah-cierre-terminado"
+      ]
+    },
+    {
+      "id": "clin-app-proto-desconexion-nocturna",
+      "sourceId": "clinical-protocols-dataset",
+      "topic": "higiene-del-sueno",
+      "tags": [
+        "cbt-i",
+        "pantallas-60-min",
+        "latencia-de-inicio"
+      ],
+      "locator": {
+        "section": "proto-3 (Desconexión Nocturna CBT-I)"
+      },
+      "summary": "Protocolo de desconexión nocturna CBT-I: cero pantallas interactivas durante los 60 minutos previos a la ventana de sueño, reemplazando el feed social por lectura física o música ambiental. Objetivo parafraseado del dataset: reducir la latencia de inicio del sueño y estabilizar el ritmo circadiano.",
+      "entities": [
+        "regla:cero-pantallas-60-min",
+        "sustituto:lectura-fisica-o-musica"
+      ],
+      "rules": [
+        "clin:sueno-plan-minimo"
+      ]
+    },
+    {
+      "id": "clin-app-rot-desconexion-nocturna",
+      "sourceId": "clinical-routines-dataset",
+      "topic": "rutina-diaria",
+      "tags": [
+        "sueno",
+        "luz-calida",
+        "volcado-fisico"
+      ],
+      "locator": {
+        "section": "rot-1 (Desconexión Nocturna)"
+      },
+      "summary": "Rutina diaria de desconexión nocturna (~15 min): apagar pantallas principales a las 21:00, activar luz cálida de lectura y anotar pensamientos pendientes en una libreta de volcado físico. Objetivo declarado: proteger la ventana de descanso reduciendo la estimulación dopaminérgica de la noche.",
+      "entities": [
+        "rutina:desconexion-nocturna",
+        "duracion:15-min",
+        "frecuencia:diaria"
+      ],
+      "rules": [
+        "clin:sueno-plan-minimo"
+      ]
+    },
+    {
+      "id": "clin-app-rot-exposicion-microinteracciones",
+      "sourceId": "clinical-routines-dataset",
+      "topic": "rutina-diaria",
+      "tags": [
+        "exposicion-social",
+        "micro-interacciones",
+        "pre-post-0-10"
+      ],
+      "locator": {
+        "section": "rot-2 (Exposición Social Gradual)"
+      },
+      "summary": "Rutina diaria de exposición social gradual vía micro-interacciones (~10 min): enviar un mensaje o comentario sin revisarlo tres veces, hacer una consulta directa en tienda o videollamada corta, y registrar la ansiedad percibida (0-10) antes y después. Objetivo: aumentar tolerancia a la evaluación externa con pasos de bajo riesgo y evidencia propia del contraste pre/post.",
+      "entities": [
+        "rutina:exposicion-micro",
+        "metrica:ansiedad-pre-post-0-10",
+        "frecuencia:diaria"
+      ],
+      "rules": [
+        "clin:as-jerarquia-exposicion"
+      ]
+    },
+    {
+      "id": "clin-app-rot-pausa-somatica",
+      "sourceId": "clinical-routines-dataset",
+      "topic": "rutina-diaria",
+      "tags": [
+        "respiracion-4-7-8",
+        "tono-vagal",
+        "regulacion-somatica"
+      ],
+      "locator": {
+        "section": "rot-3 (Pausa Somática)"
+      },
+      "summary": "Rutina diaria de pausa somática (~5 min) para momentos de hiperactivación o sobrecarga: tres ciclos de respiración con inspiración de 4 segundos, sostener 7 y exhalar en 8; atender los puntos de contacto de los pies con el suelo; reanudar la actividad a velocidad intencionalmente pausada. Objetivo: reajustar el tono autonómico antes de continuar.",
+      "entities": [
+        "tecnica:respiracion-4-7-8",
+        "estrategia:puntos-de-contacto",
+        "frecuencia:diaria"
+      ],
+      "rules": [
+        "clin:emocion-frase-puente"
+      ]
+    },
+    {
+      "id": "clin-plan-diario-minimo",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "auto-registro",
+      "tags": [
+        "diario",
+        "baseline",
+        "bio-feedback",
+        "monitoreo"
+      ],
+      "locator": {
+        "page": 4
+      },
+      "summary": "El documento propone un registro mínimo diario como línea base y herramienta de seguimiento continuo: hora de acostarse y calidad de sueño (0-10), minutos reales de trabajo profundo, si hubo exposición social con niveles de ansiedad pre y post (escala 0-100), estado de ánimo (0-10) e intensidad de conflictos (0-10). La idea central es separar las variables (sueño, ansiedad, evitación, consumo, productividad) para ver relaciones causales propias en lugar de atribuirlas a \"falta de disciplina\". Este diario es la base conceptual del check-in de bio-feedback diario de la app (energía/ansiedad/dolor/sueño).",
+      "entities": [
+        "instrumento:diario-minimo",
+        "metrica:sueno-0-10",
+        "metrica:animo-0-10",
+        "metrica:exposicion-pre-post-0-100"
+      ],
+      "rules": []
+    },
+    {
+      "id": "clin-plan-sistema-externo-unico",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "tdah-sistema-externo",
+      "tags": [
+        "agenda-unica",
+        "lista-maestra",
+        "revision-semanal",
+        "recordatorios-externos"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "Módulo TDAH de sistema externo único: concentrar toda la gestión en una sola agenda/calendario, mantener una lista maestra de proyectos fuera de la cabeza, limitar la lista diaria a un máximo de 3 tareas, fijar una revisión semanal estable y apoyarse en recordatorios externos en vez de memoria interna. Regla operativa: si algo no está en el sistema externo, no existe como compromiso. Objetivo: reducir fechas perdidas y mala estimación temporal sin depender de la fuerza de voluntad.",
+      "entities": [
+        "estrategia:agenda-unica",
+        "estrategia:revision-semanal-fija",
+        "limite:max-3-tareas-dia"
+      ],
+      "rules": [
+        "clin:tdah-sistema-externo"
+      ]
+    },
+    {
+      "id": "clin-plan-inicio-tareas-version-mala",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "tdah-inicio-tareas",
+      "tags": [
+        "anti-procrastinacion",
+        "version-mala",
+        "micro-tarea",
+        "latencia-de-inicio"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "Protocolo anti-inercia para iniciar tareas: definir explícitamente una micro-tarea de los primeros 10 minutos, abrir exactamente el archivo o material necesario (sin pestañas secundarias), ejecutar deliberadamente una \"versión mala\" inicial para romper la parálisis, registrar en una línea la fricción aparecida sin juzgarla, y cerrar el bloque escribiendo cuál será el próximo paso concreto. La meta declarada es reducir la latencia de inicio, no producir trabajo perfecto: arrancar mal y pronto vence a preparar eternamente.",
+      "entities": [
+        "estrategia:tarea-de-10-minutos",
+        "estrategia:version-mala",
+        "metrica:minutos-hasta-inicio"
+      ],
+      "rules": [
+        "clin:tdah-inicio-10-min"
+      ]
+    },
+    {
+      "id": "clin-plan-cierre-suficientemente-terminado",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "tdah-cierre-tareas",
+      "tags": [
+        "perfeccionismo",
+        "criterio-de-terminado",
+        "entregable",
+        "proyectos-al-80"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "Módulo de cierre de tareas orientado al problema de proyectos estancados entre 80% y 95% por detalles finales no cerrados: definir qué significa \"suficientemente terminado\" ANTES de empezar, separar conscientemente la versión entregable de la versión ideal, usar checklists de cierre verificables y reservar un bloque exclusivo para terminar en lugar de abrir cosas nuevas. El estándar aceptado es que un entregable funcional a tiempo supera a un borrador perfecto nunca publicado.",
+      "entities": [
+        "estrategia:criterio-de-terminado-previo",
+        "estrategia:checklist-de-cierre",
+        "concepto:version-entregable-vs-ideal"
+      ],
+      "rules": [
+        "clin:tdah-cierre-terminado"
+      ]
+    },
+    {
+      "id": "clin-plan-estimacion-temporal-corregida",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "tdah-estimacion-temporal",
+      "tags": [
+        "optimismo-temporal",
+        "multiplicadores-de-correccion",
+        "bloques"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "Corrección operativa del optimismo temporal típico del TDAH inatento: a las estimaciones iniciales se les aplican multiplicadores de corrección — menos de 1 hora estimada se multiplica por 2; entre 1 y 4 horas se multiplica por 2.5; lo que se estima en un día se divide en 3 bloques reales de trabajo; lo que excede un día se convierte en entregables diarios concretos en lugar de una meta difusa de largo plazo. El objetivo es planificar con tiempos realistas observados, no con los deseados.",
+      "entities": [
+        "regla:estimacion-x2-menos-1h",
+        "regla:estimacion-x25-1a4h",
+        "estrategia:entregables-diarios"
+      ],
+      "rules": [
+        "clin:tdah-estimacion-temporal"
+      ]
+    },
+    {
+      "id": "clin-plan-distractores-escape",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "tdah-distractores",
+      "tags": [
+        "celular",
+        "pomodoro",
+        "si-entonces",
+        "entorno-preparado"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "Gestión de distractores y escapes (celular, hiperfocos no prioritarios, sueño evitativo): dejar el celular fuera del alcance físico durante los bloques de trabajo, usar ciclos 45/10 o 25/5 según la carga, preparar el entorno físico antes de empezar, registrar los episodios de escape sin castigarse (el registro informa, no penaliza) y usar implementación de intención \"si-entonces\" — p. ej., si abro un juego, entonces cronometro 5 minutos y vuelvo a la tarea.",
+      "entities": [
+        "estrategia:bloques-45-10",
+        "estrategia:bloques-25-5",
+        "estrategia:celular-fuera-de-alcance",
+        "tecnica:si-entonces"
+      ],
+      "rules": [
+        "clin:tdah-gestion-distractores"
+      ]
+    },
+    {
+      "id": "clin-plan-regulacion-emocional-frase-puente",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "regulacion-emocional",
+      "tags": [
+        "explosion",
+        "pausa-fisica",
+        "frase-puente",
+        "inhibicion"
+      ],
+      "locator": {
+        "page": 7
+      },
+      "summary": "Secuencia de regulación emocional para el patrón inhibición prolongada + explosión: detectar la señal temprana de activación, nombrarla (\"estoy activado\"), tomar una pausa física breve, entregar una frase puente a la otra persona y retomar después con estructura. Frases puente parafraseadas: avisar que se necesita unos 20 minutos y se vuelve; reconocer que no se puede responder bien en ese nivel de activación; expresar voluntad de resolverlo pero bajando primero la intensidad. La explosión evitada vale más que la respuesta instantánea.",
+      "entities": [
+        "estrategia:senal-temprana",
+        "estrategia:frase-puente",
+        "protocolo:pausa-retorno"
+      ],
+      "rules": [
+        "clin:emocion-frase-puente"
+      ]
+    },
+    {
+      "id": "clin-plan-conductas-de-seguridad",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "ansiedad-social-conductas-seguridad",
+      "tags": [
+        "conductas-de-seguridad",
+        "evitacion-encubierta",
+        "exposicion"
+      ],
+      "locator": {
+        "page": 8
+      },
+      "summary": "Catálogo de conductas de seguridad de ansiedad social con su función y su costo: sobrepreparar reduce incertidumbre pero alimenta perfeccionismo y retraso; evitar la mirada baja la amenaza percibida pero aumenta el autofoco; hablar poco previene errores pero reduce conexión y agencia; sobreexplicar intenta prevenir crítica y fatiga al oyente; disculparse busca evitar rechazo y refuerza sensación de inferioridad; revisar mentalmente busca certeza y mantiene rumiación; apoyarse en sustancias desinhibe pero impide aprender que se puede estar bien en sobrio. Intervención: retirarlas gradualmente DURANTE las exposiciones, una a una, porque mantienen la creencia de peligro.",
+      "entities": [
+        "conducta:sobrepreparar",
+        "conducta:evitar-mirada",
+        "conducta:hablar-poco",
+        "conducta:sobreexplicar",
+        "conducta:disculparse",
+        "conducta:revisar-mentalmente"
+      ],
+      "rules": [
+        "clin:as-reducir-seguridad"
+      ]
+    },
+    {
+      "id": "clin-plan-atencion-externa",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "ansiedad-social-atencion",
+      "tags": [
+        "foco-externo",
+        "autofoco",
+        "atencion-entrenada"
+      ],
+      "locator": {
+        "page": 8
+      },
+      "summary": "Entrenamiento de atención externa para contrarrestar el autofoco durante situaciones evaluativas: describir deliberadamente detalles del ambiente mientras se conversa, escuchar el CONTENIDO de lo que dice el otro sin evaluar simultáneamente el propio desempeño, llevar cuenta de las preguntas que se le hacen a la otra persona y, en presentaciones, focalizarse en transmitir tres ideas claras en lugar de monitorizarse para \"verse perfecto\". Redirigir la atención afuera reduce la retroalimentación ansiosa interna.",
+      "entities": [
+        "ejercicio:describir-ambiente",
+        "ejercicio:contar-preguntas",
+        "estrategia:transmitir-3-ideas"
+      ],
+      "rules": [
+        "clin:as-foco-externo"
+      ]
+    },
+    {
+      "id": "clin-plan-video-feedback",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "ansiedad-social-video-feedback",
+      "tags": [
+        "video-feedback",
+        "prediccion-vs-evidencia",
+        "sesgo-negativo"
+      ],
+      "locator": {
+        "page": 8
+      },
+      "summary": "Protocolo de video feedback: grabar una presentación breve; ANTES de verse, escribir predicciones concretas de cómo se vio y sonó; luego observar el video adoptando el rol de observador externo (no buscando defectos); comparar explícitamente predicción versus evidencia observable; repetir el ejercicio reduciendo progresivamente las conductas de seguridad. El objetivo es corregir el sesgo de autocrítica: la imagen mental de uno suele ser notablemente más negativa que lo que los demás perciben.",
+      "entities": [
+        "protocolo:video-feedback",
+        "comparacion:prediccion-vs-evidencia"
+      ],
+      "rules": [
+        "clin:as-video-feedback"
+      ]
+    },
+    {
+      "id": "clin-plan-exposicion-graduada-jerarquia",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "ansiedad-social-exposicion",
+      "tags": [
+        "jerarquia-9-niveles",
+        "exposicion-graduada",
+        "criterios-de-avance"
+      ],
+      "locator": {
+        "chapter": "Fase 3",
+        "page": 9
+      },
+      "summary": "Exposición graduada estructurada en 9 niveles con criterio de avance explícito por nivel: (1) explicar un tema 3 minutos en voz alta a solas ×3 veces; (2) grabar audio de 5 minutos hasta que la ansiedad baje ≥20% o haya aprendizaje claro; (3) grabar video de 5 minutos y verlo sin rumiación extendida; (4) presentar a una persona segura pidiendo feedback específico; (5) mostrar una demo imperfecta tolerando error visible; (6) presentar a 2-3 personas respondiendo 3 preguntas; (7) simular jurado hostil moderado usando frase estructurada sin defenderse impulsivamente; (8) ensayo completo cronometrado ejecutándose aunque la ansiedad supere 60/100; (9) sustentación real completada sin evitación. La exposición debe ser repetida, medible, con reducción de conductas de seguridad y centrada en aprendizaje, no solo en habituarse.",
+      "entities": [
+        "jerarquia:exposicion-9-niveles",
+        "criterio:avance-por-aprendizaje",
+        "nivel:audio-5min",
+        "nivel:demo-imperfecta",
+        "nivel:jurado-hostil"
+      ],
+      "rules": [
+        "clin:as-jerarquia-exposicion"
+      ]
+    },
+    {
+      "id": "clin-plan-post-evento-rumiacion-limitada",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "rumiacion-post-evento",
+      "tags": [
+        "limite-10-min",
+        "procesamiento-estructurado",
+        "cierre"
+      ],
+      "locator": {
+        "page": 9
+      },
+      "summary": "Procesamiento post-evento con límite estricto de rumiación: tras una situación evaluativa, la revisión se limita a 10 minutos estructurados que responden cuatro preguntas — ¿qué predije?, ¿qué ocurrió en términos observables?, ¿qué evidencia contradice la catástrofe imaginada?, ¿qué haría distinto por técnica y no por vergüenza? — y termina con un cierre explícito: no más análisis ese día. La rumiación ilimitada se trata como mantenimiento del problema, no como resolución.",
+      "entities": [
+        "protocolo:rumiacion-10-min",
+        "pregunta:evidencia-contradice-catastrofe"
+      ],
+      "rules": [
+        "clin:post-evento-limite-10-min"
+      ]
+    },
+    {
+      "id": "clin-plan-bucle-integrado-regla-central",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "integracion-tdah-ansiedad",
+      "tags": [
+        "bucle-retraso-verguenza",
+        "regla-clinica-central",
+        "sistemas-externos"
+      ],
+      "locator": {
+        "page": 9
+      },
+      "summary": "Modelo integrado del bucle combinado: el TDAH produce retrasos reales; el retraso genera vergüenza; la vergüenza activa ansiedad social; la ansiedad lleva a evitación; la evitación produce más retraso. Las respuestas se emparejan por problema: para no iniciar → micro-tarea de 10 minutos + rebajar la catástrofe del error; para no terminar → criterio de terminado + tolerar imperfección visible; para presentar → guion de 3 ideas + exposición con video feedback; para preguntas difíciles → tarjetas de respuesta preparadas; para conflicto de pareja → pausa con frase puente + tolerancia a evaluación negativa. Regla clínica central del documento: no se busca trabajar SIN ansiedad, sino trabajar CON ansiedad suficiente y sistemas externos suficientes.",
+      "entities": [
+        "bucle:retraso-verguenza-evitacion",
+        "regla:trabajar-con-ansiedad-suficiente"
+      ],
+      "rules": [
+        "clin:integracion-bucle"
+      ]
+    },
+    {
+      "id": "clin-plan-sueno-plan-minimo",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "sueno-cbti",
+      "tags": [
+        "higiene-del-sueno",
+        "pantalla-fuera",
+        "despertar-fijo",
+        "derivacion-apnea"
+      ],
+      "locator": {
+        "page": 11
+      },
+      "summary": "Plan mínimo progresivo de semanas para el sueño, inspirado en principios CBT-I: semana 1 solo llevar diario de sueño/pantalla/consumo; semana 2 sacar pantallas 20-30 minutos antes de dormir; semana 3 sustituir video por audio si se necesita estímulo para dormir; semana 4 fijar hora de despertar con tolerancia ±30 min; semana 5 revisar señales de alerta fisiológica. Derivación médica recomendada si persisten: jadeos o ahogos nocturnos, somnolencia diurna funcional, bruxismo severo, cefalea matutina o pausas respiratorias observadas — señales que requieren evaluación de medicina del sueño, no autocuidado.",
+      "entities": [
+        "protocolo:pantalla-fuera-20-30min",
+        "estrategia:despertar-fijo-30min",
+        "senal:derivacion-medicina-sueno"
+      ],
+      "rules": [
+        "clin:sueno-plan-minimo"
+      ]
+    },
+    {
+      "id": "clin-plan-cannabis-registro-funcion",
+      "sourceId": "plan-accion-tdah-ansiedad-social",
+      "topic": "cannabis-reduccion-experimental",
+      "tags": [
+        "registro-de-funcion",
+        "enfoque-experimental",
+        "sustitutos",
+        "abstinencia"
+      ],
+      "locator": {
+        "page": 10
+      },
+      "summary": "Enfoque experimental y no moralizante del uso nocturno de cannabis como regulador de corto plazo: primero registrar 14 días la FUNCIÓN del consumo (dormir, calmar ansiedad, apagar pensamientos, hábito, placer) antes de cambiar nada; luego reducir el automatismo consumiendo solo si la razón quedó registrada previamente; probar 1-2 noches por semana sin consumo si resulta tolerable; usar sustitutos sensoriales (audio sin video, respiración lenta, ducha, lectura ligera, rutina de cierre); vigilar síntomas de abstinencia (irritabilidad, ansiedad, insomnio, apetito, sueños intensos). Si el uso escala rápido o aparece dependencia clara, escalar a profesional — este módulo no sustituye tratamiento de adicciones.",
+      "entities": [
+        "estrategia:registro-previo-de-razon",
+        "protocolo:14-dias-de-medicion",
+        "senal:evaluar-abstinencia"
+      ],
+      "rules": [
+        "clin:cannabis-registro-funcion"
+      ]
+    },
+    {
+      "id": "clin-reporte-bucle-mantenimiento-funcional",
+      "sourceId": "reporte-clinico-neurodesarrollo",
+      "topic": "psicoeducacion-mantenimiento",
+      "tags": [
+        "formulacion-funcional",
+        "bucle",
+        "psicoeducacion",
+        "factores-mantenedores"
+      ],
+      "locator": {
+        "chapter": "Síntesis clínica",
+        "page": 2
+      },
+      "summary": "Modelo funcional de mantenimiento (psicoeducativo, sin valor diagnóstico): el informe describe una cadena donde las dificultades de base de organización y atención producen desorganización, procrastinación y proyectos inconclusos; el miedo a la evaluación añade vergüenza, evitación y perfeccionismo defensivo; la sensibilidad a humillación e invalidación sostiene hipervigilancia interpersonal; y el sueño subóptimo junto a reguladores de corto plazo (pantallas, sustancias) degradan energía, concentración, fluidez verbal y estabilidad emocional. Lectura operativa para la app: intervenir conductualmente en cualquier eslabón (sistema externo, exposición, higiene de sueño) debilita el bucle completo; ninguna variable explica todo ni ninguna mejora es lineal.",
+      "entities": [
+        "bucle:tdah-desorganizacion",
+        "bucle:ansiedad-evitacion-verguenza",
+        "factor:sueno-suboptimo",
+        "factor:reguladores-corto-plazo"
+      ],
+      "rules": []
+    }
+  ]
+}

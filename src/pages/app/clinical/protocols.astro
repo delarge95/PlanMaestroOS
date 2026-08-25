@@ -1,6 +1,7 @@
 ---
 import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
 import ProtocolCard from '../../../components/clinical/ProtocolCard.tsx';
+import ClinicalDisclaimerNote from '../../../components/clinical/ClinicalDisclaimerNote.tsx';
 import { clinicalProtocols } from '../../../data/clinical/protocols.ts';
 import Button from '../../../components/ui/Button.tsx';
 ---
@@ -23,5 +24,7 @@ import Button from '../../../components/ui/Button.tsx';
         <ProtocolCard client:load protocol={p} />
       ))}
     </div>
+
+    <ClinicalDisclaimerNote compact client:load />
   </div>
 </PlanMaestroLayout>

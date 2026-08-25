@@ -1,0 +1,41 @@
+{
+  "domain": "clinical",
+  "sources": [
+    {
+      "id": "plan-accion-tdah-ansiedad-social",
+      "title": "Plan de acción profesional — TDAH, ansiedad social y comorbilidades",
+      "author": "Documento interno del usuario (elaborado sobre NICE NG87/CG159/CG142, Cochrane 2018, Safren et al. JAMA 2010, Mayo-Wilson et al. Lancet Psychiatry 2014, AASM 2021, VA/DoD 2023)",
+      "year": 2026,
+      "type": "pdf",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["tdah", "ansiedad-social", "sueno-cbti"], "priority": 1 }
+    },
+    {
+      "id": "reporte-clinico-neurodesarrollo",
+      "title": "Informe clínico estructurado con anexos de evaluación (neurodesarrollo / ansiedad de desempeño)",
+      "author": "Documento interno del usuario",
+      "year": 2026,
+      "type": "pdf",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["psicoeducacion", "formulacion-funcional"], "priority": 2 }
+    },
+    {
+      "id": "clinical-protocols-dataset",
+      "title": "src/data/clinical/protocols.ts — protocolos de regulación de la app (rumia, anti-perfeccionismo, desconexión nocturna)",
+      "author": "Dataset propio de Plan Maestro OS",
+      "year": null,
+      "type": "dataset",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["protocolos-app"], "priority": 1 }
+    },
+    {
+      "id": "clinical-routines-dataset",
+      "title": "src/data/clinical/routines.ts — rutinas operacionales CBT/TDAH de la app",
+      "author": "Dataset propio de Plan Maestro OS",
+      "year": null,
+      "type": "dataset",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["rutinas-app"], "priority": 1 }
+    }
+  ]
+}

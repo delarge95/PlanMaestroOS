@@ -16,6 +16,11 @@
       "sources": 74,
       "chunks": 1647
     },
+    "clinical": {
+      "version": "4.0.0",
+      "sources": 4,
+      "chunks": 22
+    },
     "fitness": {
       "version": "4.0.0",
       "sources": 1,
