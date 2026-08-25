@@ -176,7 +176,20 @@ Ningún placeholder se publica sin marcar.
 
 ---
 
-## 4. Checklist QA de catálogos (aplicar antes de cada cierre de ciclo)
+## 5. Guardarraíles para componer paquetes (referenciado por `06_paquetes.md`)
+
+- **5.1 Sumar horas, no presupuestos.** La composición de un paquete suma las HORAS de sus componentes
+  por nivel; el presupuesto único del paquete sale de aplicar la fórmula del 01 §3 al total.
+- **5.2 Nunca sumar rangos ya redondeados.** El redondeo (10/50/100) aplica UNA sola vez, al subtotal final
+  del paquete; sumar cifras redondeadas de cada componente infla el rango silenciosamente.
+- **5.3 Nivel por componente, no por paquete.** Cada subtarea conserva su propio N1–N4; si un componente
+  sube de nivel en intake, solo él re-estima (con la regla del peor caso gobernante §1).
+- **5.4 Descuentos sobre el subtotal calculado.** Batch/recurrente (01 §4) aplican tras la fórmula y se
+  muestran como línea propia: original → modificador → final. Jamás se "regatean" dentro de las horas.
+
+---
+
+## 6. Checklist QA de catálogos (aplicar antes de cada cierre de ciclo)
 
 - [ ] Catálogos publican SOLO horas (cero literales de dinero fuera del 01/bandas).
 - [ ] Totales de horas por nivel = suma de sus subtareas (auditoría aritmética).
