@@ -408,6 +408,627 @@
       ]
     },
     {
+      "id": "kaleb-kegel-pelvic-floor-identification-and-safety",
+      "sourceId": "kaleb-kegel-men-2019",
+      "topic": "muscle",
+      "tags": [
+        "kegel-identification",
+        "pubococcygeus",
+        "bulbospongiosus",
+        "ischiocavernosus",
+        "micturition-warning",
+        "pelvic-floor"
+      ],
+      "locator": {
+        "page": 2
+      },
+      "summary": "kegel_identification_method: Localización del Suelo Pélvico Masculino y Advertencia de Seguridad en Micción: 1) **Identificación Propioceptiva:** para localizar los músculos elevador del ano (pubococcígeo) y bulboesponjoso/isquiocavernoso, el usuario puede interrumpir voluntariamente el flujo urinario a mitad de micción o contraer los músculos anales como si contuviera una flatulencia. 2) **Regla de Seguridad Cardinal:** **está estrictamente prohibido utilizar la interrupción del chorro urinario como método habitual de entrenamiento o ejercicio de Kegel**; detener la orina repetidamente altera el reflejo del detrusor vesical, incrementa la presión vesicoureteral y eleva sustancialmente el riesgo de infecciones del tracto urinario (ITU) y retención urinaria incompleta. La prueba de interrupción se limita exclusivamente a una sola ocasión como test diagnóstico de localización.",
+      "entities": [
+        "muscle:pubococcygeus",
+        "muscle:bulbospongiosus",
+        "muscle:ischiocavernosus",
+        "clinical:kegel-safety"
+      ],
+      "rules": [
+        "kegel_identification_method",
+        "kegel_isolation_breathing"
+      ]
+    },
+    {
+      "id": "kaleb-kegel-dosage-hold-duration-and-relaxation-ratio",
+      "sourceId": "kaleb-kegel-men-2019",
+      "topic": "volume",
+      "tags": [
+        "kegel-dosage",
+        "hold-duration",
+        "relaxation-ratio",
+        "sessions-per-day",
+        "pelvic-floor-prescription"
+      ],
+      "locator": {
+        "page": 3
+      },
+      "summary": "kegel_daily_sessions: Dosificación, Tiempos de Tensión y Ratio de Relajación en Kegel Masculino: 1) **Frecuencia y Volumen Diario:** realizar **$3\\ \\text{sesiones diarias}$** de entrenamiento de suelo pélvico con **$10\\text{ a }20\\ \\text{repeticiones por sesión}$** (acumulando de $30\\text{ a }60\\ \\text{contracciones diarias}$). 2) **Duración de la Contracción y Ratio $1:1$ de Relajación:** iniciar con contracciones isométricas de **$3\\text{ a }5\\ \\text{segundos}$**, progresando paulatinamente hasta **$10\\ \\text{segundos de hold}$**; cada contracción debe ir obligatoriamente seguida de un **tiempo de relajación pasiva completa igual o superior ($3\\text{ a }5\\ \\text{segundos}$ de pausa)** para evitar espasmos musculares, hipertonía y síndrome de dolor pélvico crónico. 3) **Duración:** cada sesión toma de $3\\text{ a }5\\ \\text{minutos}$.",
+      "entities": [
+        "muscle:levator-ani",
+        "muscle:bulbospongiosus",
+        "clinical:kegel-dosage-protocol"
+      ],
+      "rules": [
+        "kegel_daily_adherence",
+        "kegel_daily_sessions",
+        "kegel_reps_per_session",
+        "kegel_hold_relax_duration",
+        "kegel_session_duration"
+      ]
+    },
+    {
+      "id": "kaleb-kegel-postural-progression-and-isolation-cues",
+      "sourceId": "kaleb-kegel-men-2019",
+      "topic": "progression",
+      "tags": [
+        "postural-progression",
+        "isolation-cues",
+        "compensation-prevention",
+        "valsalva-avoidance",
+        "motor-control"
+      ],
+      "locator": {
+        "page": 3
+      },
+      "summary": "kegel_position_progression: Progresión Postural y Claves de Aislamiento Neuromuscular sin Compensación: 1) **Jerarquía Postural Progresiva:** a) *Nivel 1 — Decúbito Supino (Acostado):* elimina la presión gravitacional de las vísceras abdominales sobre el diafragma pélvico, facilitando el aprendizaje propioceptivo; $\\to$ b) *Nivel 2 — Sedestación:* control postural contra gravedad; $\\to$ c) *Nivel 3 — Bipedestación:* integración con el tono postural global; $\\to$ d) *Nivel 4 — Dinámico / Tareas Funcionales:* contracciones al caminar o toser. 2) **Criterios de Aislamiento Estricto:** mantener una **respiración diafragmática fluida sin maniobra de Valsalva** y **cero co-contracción de glúteos, aductores femorales o pared abdominal superficial**; contraer únicamente la musculatura pélvica profunda (\"elevar los testículos y tirar del ano hacia adentro\").",
+      "entities": [
+        "muscle:gluteus-maximus",
+        "muscle:rectus-abdominis",
+        "muscle:adductor-magnus",
+        "clinical:kegel-progression"
+      ],
+      "rules": [
+        "kegel_position_progression",
+        "kegel_isolation_breathing",
+        "kegel_functional_trigger",
+        "kegel_progression_gate"
+      ]
+    },
+    {
+      "id": "kaleb-kegel-clinical-timelines-ed-pe-and-continence",
+      "sourceId": "kaleb-kegel-men-2019",
+      "topic": "clinical",
+      "tags": [
+        "premature-ejaculation",
+        "erectile-dysfunction",
+        "urinary-continence",
+        "clinical-timelines",
+        "sexual-performance"
+      ],
+      "locator": {
+        "page": 5
+      },
+      "summary": "kegel_pe_program_duration: Plazos Clínicos de Respuesta: Disfunción Eréctil, Eyaculación Precoz e Incontinencia: 1) **Disfunción Eréctil (DE) y Calidad de Erección:** el fortalecimiento del músculo isquiocavernoso y bulboesponjoso comprime la vena dorsal profunda del pene, reduciendo el escape venoso; **primera reevaluación clínica de rigidez eréctil a las $4\\text{ a }6\\ \\text{semanas}$** de práctica diaria regular. 2) **Control de Eyaculación Precoz (EP):** el entrenamiento del suelo pélvico permite inhibir voluntariamente las contracciones reflejas clónicas del bulboesponjoso que preceden a la emisión eyaculatoria; requiere un **programa estructurado continuo de un mínimo de $12\\ \\text{semanas}$** para lograr un incremento estadísticamente significativo en la latencia eyaculatoria intravaginal (IELT). 3) **Incontinencia Urinaria:** práctica continuada durante $3\\text{ a }6\\ \\text{meses}$ para recuperación post-prostatectomía.\n\n<!-- stats: 4 chunks, 10 entidades cubiertas -->",
+      "entities": [
+        "organ:penis",
+        "organ:urinary-bladder",
+        "organ:prostate",
+        "clinical:kegel-sexual-outcomes"
+      ],
+      "rules": [
+        "kegel_ed_reassessment",
+        "kegel_pe_program_duration",
+        "kegel_continence_dose"
+      ]
+    },
+    {
+      "id": "metz-pe-definition-realistic-norms-and-pesi-screening",
+      "sourceId": "metz-coping-pe-2003",
+      "topic": "clinical",
+      "tags": [
+        "premature-ejaculation",
+        "pesi-index",
+        "ielt-norms",
+        "medical-triage",
+        "sexual-health",
+        "male-health"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "pe-control-assessment: Definición Clínica, Baremos Normativos de Duración y Cribado PESI: 1) **Definición Biopsicosocial de Eyaculación Precoz (EP):** la EP no se define por un cronómetro arbitrario, sino como la **incapacidad persistente de ejercer un control voluntario sobre el momento de la eyaculación**, generando angustia personal o insatisfacción en la pareja. 2) **Baremos Normativos de Duración (IELT):** la duración media normativo-fisiológica de la penetración intravaginal en la población general es de **$4\\text{ a }7\\ \\text{minutos}$** (desmitificando expectativas irreales de $>20\\text{--}30\\ \\text{min}$). 3) **Bandas de Severidad PESI (*Premature Ejaculation Severity Index* — $0\\text{ a }100$):** Muy Leve ($0\\text{--}20$), Leve ($21\\text{--}40$), Moderada ($41\\text{--}60$), Alta ($61\\text{--}80$) y Extrema ($81\\text{--}100$). 4) **Criterios de Derivación Médica Inmediata:** la EP adquirida de inicio repentino tras años de función normal exige evaluación urológica/endocrinológica para descartar prostatitis crónica, hiper/hipotiroidismo o neuropatía.",
+      "entities": [
+        "organ:prostate",
+        "hormone:thyroid-hormone",
+        "clinical:pesi-assessment"
+      ],
+      "rules": [
+        "pe-control-assessment",
+        "pesi-severity-bands",
+        "medical-referral-acquired-pe",
+        "realistic-sex-duration-expectations"
+      ]
+    },
+    {
+      "id": "metz-pe-arousal-scale-and-pelvic-floor-relaxation-skill",
+      "sourceId": "metz-coping-pe-2003",
+      "topic": "muscle",
+      "tags": [
+        "arousal-scale",
+        "pelvic-relaxation",
+        "reverse-kegel",
+        "ejaculatory-inevitability",
+        "neuromotor-control"
+      ],
+      "locator": {
+        "page": 2
+      },
+      "summary": "pelvic-muscle-basic-training: Escala de Excitación ($0\\text{--}10$) y Habilidad de Relajación del Suelo Pélvico: 1) **Escala Subjetiva de Excitación Sexual ($0\\text{ a }10$):** Nivel 0 (cero excitación) $\\to$ Nivel 5 (excitación moderada/placer) $\\to$ Nivel 7 (alta excitación placentera / \"zona de control activo\") $\\to$ **Nivel 8.5 a 9.0: Punto de Inevitabilidad Eyaculatoria (PEI)**, donde se dispara el reflejo espinal involuntario simpático e irreversible. 2) **La Paradoja de la Relajación Pélvica (*Reverse Kegel*):** aunque el fortalecimiento del suelo pélvico es útil, **la habilidad neuromuscular cardinal para retrasar la eyaculación es la capacidad de RELAJAR conscientemente el suelo pélvico (músculos pubococcígeo y bulboesponjoso)** al alcanzar un nivel de excitación 6–7; contraer o tensar el periné en alta excitación acelera el reflejo eyaculatorio; relajar el diafragma pélvico con respiración diafragmática lenta estabiliza la excitación.",
+      "entities": [
+        "muscle:bulbospongiosus",
+        "muscle:levator-ani",
+        "nerve:pudendal-nerve",
+        "clinical:pelvic-down-training"
+      ],
+      "rules": [
+        "pelvic-muscle-basic-training",
+        "pelvic-muscle-relaxed-insertion",
+        "relaxation-attention-threshold"
+      ]
+    },
+    {
+      "id": "metz-pe-graduated-stop-start-individual-protocol",
+      "sourceId": "metz-coping-pe-2003",
+      "topic": "progression",
+      "tags": [
+        "stop-start-technique",
+        "masturbation-protocol",
+        "sensory-awareness",
+        "arousal-pacing",
+        "behavioral-training"
+      ],
+      "locator": {
+        "page": 8
+      },
+      "summary": "individual-stop-start-dose: Protocolo Conductual Graduado de Parada-Arranque (*Stop-Start*) Individual: 1) **Protocolo Canónico Individual (Semann-Master & Johnson modificado):** durante la autoestimulación manual con lubricante (para simular fricción real y desaconsejar el agarre seco rápido): **estimular hasta alcanzar un nivel 7 de excitación $\\to$ detener completamente la estimulación manual o reducir la velocidad a caricias suaves $\\to$ relajar conscientemente el suelo pélvico y respirar profundamente hasta que la excitación baje a nivel 4–5 $\\to$ reanudar la estimulación**. 2) **Dosificación:** realizar **$3\\ \\text{ciclos de parada-arranque}$ antes de permitir la eyaculación en el 4.º ciclo**, practicado **$2\\text{ a }4\\ \\text{veces por semana}$**. 3) **Desensibilización:** contraindicar el uso de cremas anestésicas o preservativos triples como solución definitiva, ya que impiden el aprendizaje de las señales propioceptivas corporales.",
+      "entities": [
+        "organ:penis",
+        "nerve:dorsal-nerve-of-penis",
+        "clinical:stop-start-protocol"
+      ],
+      "rules": [
+        "individual-stop-start-dose",
+        "arousal-continuum-step-size",
+        "avoid-desensitization-as-primary-strategy"
+      ]
+    },
+    {
+      "id": "metz-pe-partner-sensate-focus-and-motionless-insertion",
+      "sourceId": "metz-coping-pe-2003",
+      "topic": "technique",
+      "tags": [
+        "sensate-focus",
+        "couple-protocol",
+        "motionless-insertion",
+        "slow-thrusting",
+        "transition-intercourse"
+      ],
+      "locator": {
+        "page": 8
+      },
+      "summary": "couple-stop-start-session-structure: Transición a la Pareja: Enfoque Sensorial (*Sensate Focus*) e Inserción Inmóvil: 1) **Focalización Sensorial Sin Coito ($1\\text{ a }2\\ \\text{semanas}$):** caricias corporales no genitales para extinguir la ansiedad de rendimiento anticipatoria. 2) **Parada-Arranque Asistido por la Pareja:** la pareja estimula manualmente al hombre con lubricante, deteniéndose ante la señal verbal del hombre al nivel 7. 3) **Técnica de Inserción Inmóvil (*Quiet / Motionless Insertion*):** durante el coito (preferiblemente posición superior de la mujer o lateral para reducir tono muscular): **introducir el pene y permanecer totalmente inmóviles durante $30\\text{ a }60\\ \\text{segundos}$**, enfocándose exclusivamente en la respiración diafragmática profunda y la relajación total del suelo pélvico; una vez que la excitación inicial baja a nivel 4–5, iniciar movimientos pélvicos lentos y rítmicos.",
+      "entities": [
+        "muscle:pubococcygeus",
+        "clinical:sensate-focus-couple"
+      ],
+      "rules": [
+        "couple-stop-start-session-structure",
+        "intercourse-acclimation-duration",
+        "relaxed-pleasuring-no-sex-window",
+        "genital-exploration-minimum-repetitions"
+      ]
+    },
+    {
+      "id": "metz-pe-relapse-prevention-and-couple-communication",
+      "sourceId": "metz-coping-pe-2003",
+      "topic": "clinical",
+      "tags": [
+        "relapse-prevention",
+        "sexual-communication",
+        "lapse-vs-relapse",
+        "couple-checkin",
+        "stress-management"
+      ],
+      "locator": {
+        "page": 10
+      },
+      "summary": "lapse-adaptive-response: Prevención de Recaídas, Gestión de Deslices (*Lapses*) y Comunicación Asertiva: 1) **Diferenciación entre Desliz (*Lapse*) y Recaída (*Relapse*):** un episodio aislado de eyaculación rápida tras periodos de estrés, fatiga o abstinencia prolongada es un **evento fisiológico normal (*lapse*)**, no el fracaso del tratamiento; la reacción catastrófica ante un desliz reactiva el círculo vicioso de ansiedad. 2) **Cadencia de Mantenimiento:** mantener una frecuencia sexual regular ($1\\text{--}2\\times/\\text{sem}$) y realizar una sesión de revisión mensual de pareja de $20\\text{--}30\\ \\text{min}$ para evaluar la satisfacción mutua. 3) **Protocolo de Comunicación Asertiva:** utilizar la técnica de paráfrasis empática sin culpas (\"hablar desde el yo\" y escuchar sin defensividad) para disipar tensiones relacionales que elevan el tono simpático.\n\n<!-- stats: 5 chunks, 12 entidades cubiertas -->",
+      "entities": [
+        "hormone:cortisol",
+        "clinical:relapse-prevention-pe"
+      ],
+      "rules": [
+        "lapse-adaptive-response",
+        "relapse-prevention-cadence",
+        "paraphrase-communication-protocol",
+        "healthy-lifestyle-support"
+      ]
+    },
+    {
+      "id": "cooper-pe-behavioral-physical-techniques-efficacy-and-ielt",
+      "sourceId": "paper-cooper-2015-pe-behavioral-therapies",
+      "topic": "clinical",
+      "tags": [
+        "systematic-review",
+        "premature-ejaculation",
+        "ielt-improvement",
+        "stop-start",
+        "squeeze-technique",
+        "sensate-focus"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "behavioral-physical-technique-waitlist-efficacy: Evidencia Sistemática de Técnicas Conductuales Físicas en Eyaculación Precoz: 1) **Eficacia Frente a Lista de Espera:** la revisión sistemática de 10 ECA (521 participantes) demuestra que las técnicas físicas clásicas (*Stop-Start*, *Squeeze* / compresión del glande, y *Sensate Focus*) generan un **incremento medio estadísticamente significativo en la latencia eyaculatoria intravaginal (IELT) de $+6.8\\text{ a }+9.1\\ \\text{minutos}$** frente a controles en lista de espera. 2) **Formatos de Autoayuda (*Bibliotherapy* / Web):** los programas estructurados de autoayuda guiada (manuales escritos y plataformas web) mostraron una eficacia comparable a la terapia presencial de pareja en la mejora del IELT y el control percibido, con mantenimiento de ganancias a los 3 meses de seguimiento.",
+      "entities": [
+        "organ:penis",
+        "clinical:behavioral-pe-therapies"
+      ],
+      "rules": [
+        "behavioral-physical-technique-waitlist-efficacy",
+        "web-sensate-focus-outcome"
+      ]
+    },
+    {
+      "id": "cooper-pe-combined-behavioral-and-pharmacotherapy-synergy",
+      "sourceId": "paper-cooper-2015-pe-behavioral-therapies",
+      "topic": "clinical",
+      "tags": [
+        "multimodal-therapy",
+        "behavioral-plus-drug",
+        "relapse-prevention",
+        "ssri-tapering",
+        "pe-treatment"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "combined-behavioral-drug-superiority: Sinergia de Terapia Combinada (Conductual + Fármacos) y Prevención de Recaídas: 1) **Superioridad de la Terapia Multimodal:** la combinación de técnicas conductuales (*Stop-Start*, reeducación sensorial y suelo pélvico) junto con farmacoterapia (ISRS a demanda como Dapoxetina, o inhibidores de la PDE-5) demuestra una **mayor tasa de satisfacción global, mayor prolongación del IELT y reducción superior de la ansiedad de desempeño** que la monoterapia farmacológica o conductual aislada. 2) **Mantenimiento Post-Retirada:** la ventaja crítica del componente conductual es que **proporciona habilidades neuromotoras y cognitivas permanentes que previenen el rebote y la recaída inmediata** al suspender el tratamiento farmacológico.",
+      "entities": [
+        "drug:dapoxetine",
+        "drug:clomipramine",
+        "clinical:combined-pe-therapy"
+      ],
+      "rules": [
+        "combined-behavioral-drug-superiority",
+        "behavioral-alone-vs-drug-mixed"
+      ]
+    },
+    {
+      "id": "cooper-pe-pelvic-floor-rehabilitation-and-biofeedback-protocol",
+      "sourceId": "paper-cooper-2015-pe-behavioral-therapies",
+      "topic": "muscle",
+      "tags": [
+        "pelvic-floor-rehab",
+        "pfmt",
+        "biofeedback",
+        "electrostimulation",
+        "male-pelvic-floor"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "pelvic-floor-rehab-dose: Protocolo de Rehabilitación del Suelo Pélvico con Biofeedback (Pastore / Cooper 2015): 1) **Protocolo de Entrenamiento de Musculatura del Suelo Pélvico (PFMT):** intervención estructurada de **$12\\ \\text{semanas}$ de duración consistente en contracciones activas del periné guiadas por biofeedback electromiográfico (EMG)** de superficie y estimulación eléctrica perineal: **sesiones de $20\\ \\text{minutos}$, $3\\ \\text{veces por semana}$**. 2) **Resultados Clínicos:** más del **$80\\%\\ \\text{de los pacientes}$ con eyaculación precoz de por vida o adquirida lograron control voluntario del reflejo eyaculatorio** y un incremento de $>3\\text{--}4\\times$ en su IELT basal, confirmando que la fuerza y el control inhibitorio del músculo bulboesponjoso son modificables mediante ejercicio terapéutico.\n\n<!-- stats: 3 chunks, 7 entidades cubiertas -->",
+      "entities": [
+        "muscle:bulbospongiosus",
+        "muscle:ischiocavernosus",
+        "clinical:pfmt-pe-protocol"
+      ],
+      "rules": [
+        "pelvic-floor-rehab-dose",
+        "stop-start-device-dose"
+      ]
+    },
+    {
+      "id": "helmer-vet-asex-sexual-dysfunction-screening-thresholds",
+      "sourceId": "paper-helmer-2015-veterans-sexual-health",
+      "topic": "clinical",
+      "tags": [
+        "asex-scale",
+        "sexual-dysfunction-screening",
+        "veteran-health",
+        "intake-triage",
+        "clinical-assessment"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "optional_asex_screening_for_sexual_dysfunction: Umbrales Clínicos de Cribado de Disfunción Sexual (Escala ASEX): 1) **Criterios Psicométricos de la Escala ASEX (*Arizona Sexual Experience Scale* — 5 a 30 puntos):** cribado validado para evaluar cinco dimensiones (deseo, excitación psicológica, lubricación/erección, capacidad de orgasmo y satisfacción orgásmica). **Criterios de Positividad para Disfunción Sexual:** a) **Puntuación Total $>19\\ \\text{puntos}$**; $\\to$ b) **Cualquier ítem individual con puntuación $\\ge 5$** (disfunción severa en esa dimensión); $\\to$ c) **Tres o más ítems cualesquiera con puntuación $\\ge 3$**. 2) **Acción del Sistema:** ante un resultado positivo, activar banderas de recomendación para evaluación médica y sexológica profesional.",
+      "entities": [
+        "clinical:asex-screening-scale"
+      ],
+      "rules": [
+        "optional_asex_screening_for_sexual_dysfunction"
+      ]
+    },
+    {
+      "id": "helmer-vet-trauma-ptsd-and-medication-triage",
+      "sourceId": "paper-helmer-2015-veterans-sexual-health",
+      "topic": "clinical",
+      "tags": [
+        "ptsd-hyperarousal",
+        "psychotropic-medication",
+        "ssri-snri",
+        "veteran-sexual-health",
+        "biopsychosocial-triage"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "veteran_deployment_sexual_concern_referral: Triage Biopsicosocial en Veteranos: TEPT, Fármacos Psiquiátricos y Comunicación: 1) **Etiología Multifactorial Post-Trauma:** en veteranos y personas con antecedentes de trauma o estrés postraumático (TEPT), la disfunción sexual resulta de la **hiperactivación simpática crónica (que bloquea el tono parasimpático genital), el dolor musculoesquelético crónico y los efectos secundarios de fármacos psicotrópicos (ISRS/IRSN)**. 2) **Revisión Farmacológica:** ante quejas de anorgasmia o pérdida de libido tras iniciar antidepresivos, derivar al psiquiatra para ajuste de dosis o cambio de molécula, prohibiendo la suspensión abrupta. 3) **Comunicación:** desculpabilizar a la pareja para prevenir la ruptura del vínculo afectivo.\n\n<!-- stats: 2 chunks, 4 entidades cubiertas -->",
+      "entities": [
+        "hormone:cortisol",
+        "hormone:epinephrine",
+        "clinical:veteran-sexual-health-triage"
+      ],
+      "rules": [
+        "veteran_deployment_sexual_concern_referral",
+        "ssri_snri_sexual_side_effect_medication_review",
+        "partner_communication_support"
+      ]
+    },
+    {
+      "id": "pastuszak-trt-formulations-and-differential-erythrocytosis-risk",
+      "sourceId": "paper-pastuszak-2015-testosterone-preparations",
+      "topic": "clinical",
+      "tags": [
+        "trt-formulations",
+        "erythrocytosis-risk",
+        "hematocrit-elevation",
+        "injections-vs-gels",
+        "pharmacokinetics"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "trt-formulation-erythrocytosis-risk: Riesgo Diferencial de Eritrocitosis según Formulación de Testosterona (Pastuszak 2015): 1) **Incidencia de Eritrocitosis (Hematocrito $\\ge 50\\%$) por Vía de Administración:** en un seguimiento de 3 años en hombres hipogonadales: a) *Inyecciones Intramusculares (Cipionato/Enantato):* **$66.7\\%\\ \\text{de incidencia de eritrocitosis}$** (debido a los picos suprafisiológicos agudos de testosterona libre); b) *Pellets Subcutáneos:* **$35.1\\%$**; c) *Geles Transdérmicos:* **$12.8\\%$** (farmacocinética estable diaria que minimiza la estimulación de la eritropoyetina renal). 2) **Tiempo Medio de Aparición:** las inyecciones provocan eritrocitosis significativamente más rápido (**media de $8.9\\ \\text{meses}$**) en comparación con pellets ($12.9\\ \\text{meses}$) y geles ($17.5\\ \\text{meses}$).",
+      "entities": [
+        "hormone:testosterone",
+        "cell:erythrocytes",
+        "clinical:trt-erythrocytosis-study"
+      ],
+      "rules": [
+        "trt-formulation-erythrocytosis-risk",
+        "trt-hgb-hct-monitoring-window"
+      ]
+    },
+    {
+      "id": "pastuszak-trt-blood-monitoring-and-hematocrit-safety-thresholds",
+      "sourceId": "paper-pastuszak-2015-testosterone-preparations",
+      "topic": "clinical",
+      "tags": [
+        "trt-monitoring",
+        "hematocrit-cutoff",
+        "hyperviscosity-risk",
+        "phlebotomy",
+        "blood-markers"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "trt-hgb-hct-monitoring-window: Protocolo de Monitorización Sanguínea y Umbrales Críticos de Hematocrito en TRT: 1) **Ventana de Monitorización Analítica:** todo paciente en terapia de reemplazo de testosterona (TRT) debe realizarse un panel de control completo (Hemograma/Hematocrito, Testosterona Total/Libre, Estradiol sensible, PSA y perfil lipídico) **cada $3\\text{ a }6\\ \\text{meses}$ durante el primer año y anualmente tras estabilización**. 2) **Umbrales Críticos de Seguridad:** a) *Hematocrito $\\ge 50\\%$:* señal de alerta para reducir dosis, fraccionar la frecuencia de inyección o transicionar a geles transdérmicos; b) **Hematocrito $>54\\%$:** **umbral de corte absoluto de seguridad clínica** que exige suspensión temporal, ajuste de dosis o flebotomía terapéutica inmediata para prevenir eventos tromboembólicos por hiperviscosidad sanguínea.",
+      "entities": [
+        "cell:erythrocytes",
+        "protein:hemoglobin",
+        "clinical:trt-monitoring-protocol"
+      ],
+      "rules": [
+        "trt-hgb-hct-monitoring-window",
+        "trt-medication-profile-dosing-metadata"
+      ]
+    },
+    {
+      "id": "pastuszak-trt-estradiol-aromatization-and-prostate-psa-safety",
+      "sourceId": "paper-pastuszak-2015-testosterone-preparations",
+      "topic": "clinical",
+      "tags": [
+        "estradiol-aromatization",
+        "psa-monitoring",
+        "prostate-safety",
+        "endocrine-replacement"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "trt-estradiol-monitoring: Cinética de Aromatización de Estradiol y Seguridad Prostática (PSA) en TRT: 1) **Elevación de Estradiol ($E_2$):** la aromatización periférica de testosterona a estradiol es proporcional a la magnitud del pico sérico de testosterona: las **inyecciones intramusculares inducen el mayor incremento absoluto de $E_2$ ($+15\\text{ a }25\\ \\text{pg/mL}$)**, mientras que los geles transdérmicos mantienen niveles más estables dentro del rango fisiológico normal ($20\\text{--}40\\ \\text{pg/mL}$). 2) **Seguridad Prostática (PSA):** en hombres con hipogonadismo secundario sin cáncer de próstata activo, la TRT en rangos terapéuticos controlados **no produjo incrementos patológicos significativos en el Antígeno Prostático Específico (PSA)** a lo largo de 36 meses de seguimiento.\n\n<!-- stats: 3 chunks, 7 entidades cubiertas -->",
+      "entities": [
+        "hormone:estradiol",
+        "hormone:testosterone",
+        "protein:psa",
+        "clinical:trt-safety-markers"
+      ],
+      "rules": [
+        "trt-estradiol-monitoring",
+        "trt-psa-prostate-monitoring",
+        "trt-lipid-monitoring-no-assumption"
+      ]
+    },
+    {
+      "id": "pearce-pros-active-surveillance-sexual-trajectory-and-predictors",
+      "sourceId": "paper-pearce-2015-sexual-dysfunction-prostate-surveillance",
+      "topic": "clinical",
+      "tags": [
+        "active-surveillance",
+        "prostate-cancer",
+        "epic-26",
+        "sexual-function-trajectory",
+        "diabetes-risk",
+        "age-predictor"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "prostate_as_expected_sexual_function_decline: Trayectoria de Función Sexual y Predictores Clínicos en Vigilancia Activa de Próstata: 1) **Evolución Longitudinal de la Función Sexual (EPIC-26 Sexual — Escala $0\\text{ a }100$):** en hombres con cáncer de próstata de bajo riesgo en vigilancia activa (*Active Surveillance - AS*, sin prostatectomía ni radioterapia): la puntuación de función eréctil y sexual presenta un **declive natural leve y progresivo de $-2.5\\text{ a }-3.0\\ \\text{puntos por año}$** a lo largo de 24 meses. 2) **Predictores Clínicos Independientes:** a) *Edad avanzada* ($p < 0.001$); b) *Presencia de Diabetes Mellitus* ($p = 0.01$, riesgo relativo $>2.5\\times$ de disfunción eréctil moderada a severa); c) *Niveles basales de PSA y densidad de PSA*. 3) **Hallazgo Clave:** el **número repetido de biopsias prostáticas transrectales NO predice el deterioro de la función eréctil**, confirmando que la pérdida funcional es de etiología vascular/edad y no por trauma de biopsia.",
+      "entities": [
+        "organ:prostate",
+        "protein:psa",
+        "clinical:epic26-sexual-function"
+      ],
+      "rules": [
+        "prostate_as_expected_sexual_function_decline",
+        "prostate_as_sd_risk_factors_age_diabetes_psa",
+        "prostate_as_biopsy_anxiety_not_sd_predictors"
+      ]
+    },
+    {
+      "id": "pearce-pros-cardiometabolic-risk-and-anxiety-adaptation",
+      "sourceId": "paper-pearce-2015-sexual-dysfunction-prostate-surveillance",
+      "topic": "clinical",
+      "tags": [
+        "cardiometabolic-risk",
+        "prostate-anxiety",
+        "max-pc",
+        "vascular-comorbidity",
+        "quality-of-life"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "prostate_as_comorbidity_association: Comorbilidades Cardiometabólicas y Adaptación de la Ansiedad (MAX-PC): 1) **Impacto Vascular de Comorbilidades:** la presencia concurrente de hipertensión arterial, dislipidemia, cardiopatía coronaria y diabetes acelera el deterioro endotelial y la insuficiencia arterial cavernosa en pacientes uro-oncológicos mayores, subrayando la indicación prioritaria de ejercicio aeróbico regular y control metabólico. 2) **Dinámica de la Ansiedad Específica por Cáncer (*MAX-PC Score* — $0\\text{ a }54$):** la ansiedad psicológica específica por el cáncer de próstata y el miedo a la progresión disminuyen significativamente de forma espontánea durante los primeros $12\\text{ a }24\\ \\text{meses}$ de permanencia en el protocolo de vigilancia activa.\n\n<!-- stats: 2 chunks, 4 entidades cubiertas -->",
+      "entities": [
+        "organ:prostate",
+        "clinical:max-pc-anxiety-scale"
+      ],
+      "rules": [
+        "prostate_as_comorbidity_association",
+        "prostate_as_anxiety_expected_decrease"
+      ]
+    },
+    {
+      "id": "raveendran-pe-issm-classification-and-ielt-thresholds",
+      "sourceId": "paper-raveendran-2021-pe-narrative-review",
+      "topic": "clinical",
+      "tags": [
+        "issm-definition",
+        "premature-ejaculation",
+        "ielt-cutoffs",
+        "lifelong-pe",
+        "acquired-pe",
+        "5ht-receptors"
+      ],
+      "locator": {
+        "page": 2021
+      },
+      "summary": "ielt-diagnostic-thresholds: Clasificación Diagnóstica de la ISSM y Umbrales Temporales de IELT: 1) **Definición de la Sociedad Internacional de Medicina Sexual (ISSM):** la eyaculación precoz (EP) requiere la tríada de: latencia corta, incapacidad de retraso voluntario y angustia personal o interpersonal negativa. 2) **Los Cuatro Fenotipos Clínicos según IELT (*Intravaginal Ejaculation Latency Time*):** a) *EP de por Vida (*Lifelong*):* IELT **$<1\\ \\text{minuto}$ ($30\\text{--}60\\ \\text{segundos}$)** presente desde el primer coito (hiposensibilidad genética de receptores $5\\text{-HT}_{2C}$ o hipersensibilidad de $5\\text{-HT}_{1A}$); b) *EP Adquirida:* IELT **$<3\\ \\text{minutos}$** que se desarrolla tras un funcionamiento previo normal (etiología urológica como prostatitis crónica o disfunción eréctil secundaria); c) *EP Variable Natural:* latencia corta situacional esporádica; d) *Disfunción Eyaculatoria Prematura Subjetiva:* IELT normal ($\\ge 3\\text{--}5\\ \\text{min}$) con percepción distorsionada.",
+      "entities": [
+        "molecule:serotonin",
+        "organ:prostate",
+        "clinical:issm-pe-classification"
+      ],
+      "rules": [
+        "ielt-diagnostic-thresholds"
+      ]
+    },
+    {
+      "id": "raveendran-pe-pharmacotherapy-timing-and-dapoxetine-kinetics",
+      "sourceId": "paper-raveendran-2021-pe-narrative-review",
+      "topic": "clinical",
+      "tags": [
+        "dapoxetine",
+        "on-demand-ssri",
+        "topical-anesthetics",
+        "pharmacokinetics",
+        "pe-management"
+      ],
+      "locator": {
+        "page": 2021
+      },
+      "summary": "dapoxetine-ondemand-pharmacokinetics: Farmacocinética, Ventanas de Administración y Seguridad en Tratamiento de la EP: 1) **ISRS a Demanda (Dapoxetina):** fármaco de acción ultracorta aprobado específicamente para EP: ingerir **$1\\text{ a }3\\ \\text{horas antes}$ de la actividad sexual** ($30\\text{ a }60\\ \\text{mg}$); vida media de eliminación terminal corta ($1.5\\ \\text{horas}$); máximo estricto de una sola dosis cada $24\\ \\text{horas}$ (vigilar mareo o hipotensión ortostática). 2) **ISRS de Uso Diario (Paroxetina, Sertralina, Fluoxetina):** requieren de **$1\\text{ a }2\\ \\text{semanas}$ de toma diaria continua** para alcanzar la ocupación terapéutica del transportador de serotonina (SERT) en el SNC. 3) **Anestésicos Tópicos (Lidocaína/Prilocaina):** aplicar **$20\\text{ a }30\\ \\text{minutos antes}$ de la penetración**, retirando el exceso con agua o usando preservativo para evitar la transferencia anestésica a la mucosa vaginal de la pareja.",
+      "entities": [
+        "drug:dapoxetine",
+        "drug:paroxetine",
+        "drug:lidocaine",
+        "clinical:pe-pharmacotherapy"
+      ],
+      "rules": [
+        "dapoxetine-ondemand-pharmacokinetics",
+        "topical-anesthetic-timing",
+        "ssri-daily-therapeutic-window",
+        "pde5i-comorbidity-rule"
+      ]
+    },
+    {
+      "id": "raveendran-pe-neurobiology-spinal-generator-and-pelvic-control",
+      "sourceId": "paper-raveendran-2021-pe-narrative-review",
+      "topic": "muscle",
+      "tags": [
+        "spinal-ejaculatory-generator",
+        "onuf-nucleus",
+        "bulbospongiosus-clonic-reflex",
+        "pelvic-floor-inhibition"
+      ],
+      "locator": {
+        "page": 2021
+      },
+      "summary": "internal-squeeze-technique: Neurobiología del Generador Espinal y Control Mecánico del Músculo Bulboesponjoso: 1) **Arco Reflejo Eyaculatorio:** coordinado por el Generador Eyaculatorio Espinal Lumbosacro (médula $L_3\\text{--}L_4$ y Núcleo de Onuf en $S_1\\text{--}S_2$): a) *Fase de Emisión (Control Simpático $T_{10}\\text{--}L_2$):* contracción de conductos deferentes, próstata y vesículas seminales depositando semen en uretra posterior; b) *Fase de Expulsión (Control Somático $S_2\\text{--}S_4$):* contracciones clónicas rítmicas e involuntarias de los músculos bulboesponjoso e isquiocavernoso ($0.8\\ \\text{s}$ de intervalo). 2) **Inhibición Muscular Voluntaria:** el entrenamiento del suelo pélvico permite al atleta **inhibir conscientemente el reflejo de espasmo del bulboesponjoso mediante contracción tónica sostenida previa al punto de no retorno o relajación diafragmática profunda**, bloqueando la progresión hacia la fase de expulsión.\n\n<!-- stats: 3 chunks, 8 entidades cubiertas -->",
+      "entities": [
+        "muscle:bulbospongiosus",
+        "muscle:ischiocavernosus",
+        "nerve:pudendal-nerve",
+        "clinical:ejaculatory-reflex-arc"
+      ],
+      "rules": [
+        "internal-squeeze-technique",
+        "behavioral-consistency-habituation"
+      ]
+    },
+    {
+      "id": "veale-bdd-psychosexual-profile-and-iief-dysfunction",
+      "sourceId": "paper-veale-2015-bdd-sexual-functioning",
+      "topic": "clinical",
+      "tags": [
+        "bdd-psychopathology",
+        "body-dysmorphic-disorder",
+        "iief-score",
+        "erectile-dysfunction",
+        "body-image-anxiety"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "body_image_preoccupation_referral: Perfil Psicosexual y Disfunción Eréctil en el Trastorno Dismórfico Corporal (BDD — Veale 2015): 1) **Disfunción Sexual en BDD Genital (*Índice IIEF*):** en la comparación de cohortes (hombres con BDD centrado en tamaño peniano vs hombres con ansiedad por tamaño sin BDD vs controles): los hombres con BDD presentan **puntuaciones significativamente más bajas en función eréctil ($p < 0.001$), satisfacción coital y satisfacción global en el IIEF**, a pesar de mantener intactos los niveles basales de deseo sexual. 2) **Psicopatología y Conductas Compulsivas:** el trastorno se caracteriza por **conductas repetitivas de comprobación (mediciones reiteradas, uso compulsivo del espejo $>1\\ \\text{h/día}$)**, evitación de la intimidad sexual y elevado riesgo de depresión mayor e ideación autolítica, mediadas por la ansiedad de desempeño y la distorsión del esquema corporal.",
+      "entities": [
+        "organ:penis",
+        "clinical:iief-scale",
+        "clinical:bdd-assessment"
+      ],
+      "rules": [
+        "body_image_preoccupation_referral",
+        "sexual_dysfunction_with_body_image_concern"
+      ]
+    },
+    {
+      "id": "veale-bdd-safety-prohibition-genital-alteration-and-cbt-referral",
+      "sourceId": "paper-veale-2015-bdd-sexual-functioning",
+      "topic": "clinical",
+      "tags": [
+        "bdd-safety",
+        "genital-alteration-prohibition",
+        "jelqing-risk",
+        "cbt-referral",
+        "psychological-triage"
+      ],
+      "locator": {
+        "page": 2015
+      },
+      "summary": "avoid_genital_size_alteration_practices: Prohibición de Prácticas Mecánicas de Modificación y Triage Clínico TCC: 1) **Prohibición Absoluta de Técnicas Mecánicas No Validadas:** el sistema de entrenamiento y salud debe **prohibir estrictamente cualquier prescripción, rutina o dispositivo destinado a la alteración del tamaño genital (*jelqing*, extensores de tracción manual, bombas de vacío excesivas o inyecciones de modelado)**; estas prácticas conllevan alto riesgo de neuropatía dorsal del pene, rotura de cuerpos cavernosos, hematomas profundos y fibrosis irreversible de la túnica albugínea (deformidad tipo Peyronie). 2) **Abordaje Basado en Evidencia:** el tratamiento de elección para el BDD y la ansiedad severa de imagen corporal es la **Terapia Cognitivo-Conductual (TCC) especializada con prevención de respuesta** y evaluación psiquiátrica, estando contraindicadas las intervenciones quirúrgicas o mecánicas cosméticas.\n\n<!-- stats: 2 chunks, 4 entidades cubiertas -->",
+      "entities": [
+        "organ:penis",
+        "nerve:dorsal-nerve-penis",
+        "clinical:cbt-bdd-protocol"
+      ],
+      "rules": [
+        "avoid_genital_size_alteration_practices",
+        "body_image_preoccupation_referral"
+      ]
+    },
+    {
       "id": "clin-plan-diario-minimo",
       "sourceId": "plan-accion-tdah-ansiedad-social",
       "topic": "auto-registro",
@@ -770,6 +1391,285 @@
         "factor:reguladores-corto-plazo"
       ],
       "rules": []
+    },
+    {
+      "id": "wuh-fit-vascular-hypothesis-and-dietary-endothelial-support",
+      "sourceId": "wuh-sexual-fitness-2002",
+      "topic": "clinical",
+      "tags": [
+        "sexual-fitness",
+        "vascular-health",
+        "nitric-oxide",
+        "endothelial-function",
+        "mediterranean-diet",
+        "l-arginine"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "diet_low_saturated_fat: Hipótesis Vascular del Fitness Sexual, Función Endotelial y Soporte Nutricional: 1) **Hipótesis Microvascular de la Función Sexual:** la respuesta de erección e ingurgitación clitorídea/genital depende de la síntesis de **óxido nítrico endotelial (NO)** y de la permeabilidad de las arterias pudendas cavernosas; la disfunción eréctil es a menudo el primer centinela de aterosclerosis o enfermedad cardiovascular subyacente. 2) **Pautas Dietéticas Pro-Vascular:** a) Dieta de estilo mediterráneo con **grasas saturadas $<7\\%\\text{--}10\\%$ de las calorías totales** y colesterol controlado; b) Alimentos ricos en nitratos dietéticos (espinacas, remolacha) y flavonoides para estimular la vasodilatación dependiente del endotelio; c) Aporte de L-Arginina y **zinc ($15\\text{ a }30\\ \\text{mg/día}$ en mariscos, semillas de calabaza)** para la síntesis de testosterona y la espermatogénesis.",
+      "entities": [
+        "molecule:nitric-oxide",
+        "molecule:zinc",
+        "molecule:l-arginine",
+        "clinical:endothelial-sexual-health"
+      ],
+      "rules": [
+        "diet_low_saturated_fat",
+        "diet_cholesterol_control",
+        "food_nitric_oxide_support",
+        "food_zinc_fertility"
+      ]
+    },
+    {
+      "id": "wuh-fit-aerobic-exercise-dosage-and-autonomic-balance",
+      "sourceId": "wuh-sexual-fitness-2002",
+      "topic": "volume",
+      "tags": [
+        "aerobic-exercise",
+        "moderate-intensity",
+        "pelvic-blood-flow",
+        "overtraining-libido",
+        "testosterone"
+      ],
+      "locator": {
+        "page": 5
+      },
+      "summary": "ex_base_volume: Dosificación de Ejercicio Cardiovascular y Equilibrio Autonómico para Salud Sexual: 1) **Prescripción de Ejercicio Aeróbico Moderado:** prescribir de **$30\\text{ a }45\\ \\text{minutos}$ de actividad cardiovascular moderada ($60\\%\\text{--}75\\%\\ \\text{FCmáx}$) de $3\\text{ a }5\\ \\text{días por semana}$** (o $10,000\\ \\text{pasos diarios}$); mejora la sensibilidad a la insulina, reduce la inflamación vascular y optimiza el flujo arterial pélvico. 2) **Precaución con los Extremos de Sobreentrenamiento:** el volumen aeróbico o de fuerza excesivo y no recuperado eleva el cortisol basal y la globulina fijadora de hormonas sexuales (SHBG), provocando una **caída drástica de la testosterona libre y de la libido**; mantener el equilibrio energético y evitar déficits calóricos severos.",
+      "entities": [
+        "hormone:testosterone",
+        "molecule:endorphins",
+        "clinical:sexual-fitness-exercise"
+      ],
+      "rules": [
+        "ex_base_volume",
+        "ex_moderate_intensity",
+        "ex_walking",
+        "ex_extremes_caution",
+        "weight_bmi_extremes_caution"
+      ]
+    },
+    {
+      "id": "wuh-fit-sleep-architecture-and-nocturnal-tumescence",
+      "sourceId": "wuh-sexual-fitness-2002",
+      "topic": "clinical",
+      "tags": [
+        "sleep-hygiene",
+        "rem-sleep",
+        "nocturnal-penile-tumescence",
+        "npt",
+        "oxygenation",
+        "circadian-rhythm"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "sleep_duration: Arquitectura del Sueño, Tumescencia Nocturna (NPT) y Oxigenación Tisular Genital: 1) **Duración y Fases REM:** prescribir **$7\\text{ a }8\\ \\text{horas de sueño ininterrumpido}$**; durante las fases de sueño MOR (REM) ocurren episodios de tumescencia peneana nocturna (NPT) o ingurgitación clitorídea ($3\\text{ a }5\\ \\text{episodios por noche}$ sumando $90\\text{--}180\\ \\text{min}$), fundamentales para la **oxigenación periódica del tejido cavernoso y la prevención de fibrosis eréctil**. 2) **Higiene del Sueño:** latencia de sueño diana de $15\\text{ a }30\\ \\text{min}$; corte estricto de **cafeína $>6\\ \\text{horas}$ antes de dormir** y alcohol $>2\\text{--}3\\ \\text{h}$ antes; descartar apnea obstructiva del sueño (causa frecuente de disfunción eréctil por hipoxia intermitente).",
+      "entities": [
+        "hormone:testosterone",
+        "hormone:melatonin",
+        "clinical:sleep-sexual-health"
+      ],
+      "rules": [
+        "sleep_duration",
+        "sleep_latency",
+        "sleep_stimulant_cutoff",
+        "sleep_alcohol_cutoff",
+        "sleep_apnea_redflag"
+      ]
+    },
+    {
+      "id": "wuh-fit-stress-reduction-and-parasympathetic-tone",
+      "sourceId": "wuh-sexual-fitness-2002",
+      "topic": "clinical",
+      "tags": [
+        "stress-reduction",
+        "sympathetic-tone",
+        "parasympathetic-vasodilation",
+        "cortisol",
+        "diaphragmatic-breathing"
+      ],
+      "locator": {
+        "page": 7
+      },
+      "summary": "stress_breathing: Reducción del Estrés y Activación Parasimpática para la Vasodilatación Genital: 1) **Fisiología de la Inhibición por Estrés:** la hiperactivación simpática crónica mediada por adrenalina y cortisol produce una **vasoconstricción arteriolar periférica persistente en los lechos vasculares pélvicos**, inhibiendo mecánicamente la erección y la lubricación. 2) **Técnicas de Activación Vagal ($10\\text{ a }15\\ \\text{Minutos Diarios}$):** a) Respiración diafragmática rítmica lenta ($4\\text{--}7\\text{--}8$); b) Baños con agua caliente ($38\\text{--}40^\\circ\\text{C}$ durante $15\\text{--}20\\ \\text{min}$) para inducir vasodilatación periférica y relajación fascial; c) \"Citas de intimidad\" semanales sin expectativas de rendimiento sexual para extinguir la ansiedad anticipatoria.",
+      "entities": [
+        "hormone:cortisol",
+        "hormone:epinephrine",
+        "clinical:stress-sexual-inhibition"
+      ],
+      "rules": [
+        "stress_breathing",
+        "stress_meditation",
+        "stress_warm_water",
+        "stress_daily_break",
+        "stress_date_night"
+      ]
+    },
+    {
+      "id": "wuh-fit-substance-cutoffs-and-medication-screening",
+      "sourceId": "wuh-sexual-fitness-2002",
+      "topic": "clinical",
+      "tags": [
+        "nicotine-vasoconstriction",
+        "alcohol-moderation",
+        "ssri-side-effects",
+        "antihypertensives",
+        "substance-limits"
+      ],
+      "locator": {
+        "page": 3
+      },
+      "summary": "subst_nicotine_stop: Toxicología de Sustancias y Cribado de Efectos Secundarios de Fármacos: 1) **Cesación Tabáquica / Nicotina:** la nicotina es un potente vasoconstrictor agudo y crónico que **reduce el flujo de las arterias cavernosas hasta en un $50\\%$** en ensayos Doppler; el abandono del tabaco es prioritario para restaurar la función eréctil. 2) **Límite de Alcohol:** limitar el consumo a **$\\le 1\\text{ a }2\\ \\text{bebidas estándar/día}$**; el exceso agudo deprime el SNC retrasando la excitación y bloqueando la erección. 3) **Cribado Farmacológico:** consultar con el médico tratante ante el uso de betabloqueantes, diuréticos tiazídicos o antidepresivos ISRS (asociados a disfunción eréctil, anorgasmia y pérdida de libido), evaluando alternativas terapéuticas sin suspender la medicación abruptamente.\n\n<!-- stats: 5 chunks, 11 entidades cubiertas -->",
+      "entities": [
+        "molecule:nicotine",
+        "molecule:ethanol",
+        "clinical:medication-sexual-side-effects"
+      ],
+      "rules": [
+        "subst_nicotine_stop",
+        "subst_alcohol_limit",
+        "med_review_sexual_side_effects",
+        "med_ssri_strategy",
+        "med_antihypertensive_strategy"
+      ]
+    },
+    {
+      "id": "zilbergeld-sex-pelvic-floor-kegel-progression-and-adaptation",
+      "sourceId": "zilbergeld-new-male-sexuality-1992",
+      "topic": "muscle",
+      "tags": [
+        "pelvic-floor-kegel",
+        "quick-flicks",
+        "sustained-holds",
+        "pc-muscle",
+        "motor-control",
+        "male-sexuality"
+      ],
+      "locator": {
+        "page": 15
+      },
+      "summary": "pf-kegel-entry-volume: Protocolo de Entrenamiento y Progresión del Suelo Pélvico Masculino (Zilbergeld): 1) **Doble Modalidad de Contracción (Fibras Rápidas y Lentas):** a) *Contracciones Rápidas (*Quick Flicks*):* contracciones máximas instantáneas de $1\\ \\text{segundo}$ para reclutar unidades motoras fásicas; b) *Contracciones Sostenidas (*Holds*):* contracciones continuas de **$3\\ \\text{segundos}$ con $3\\ \\text{s de relajación completa}$** para resistencia tónica. 2) **Volumen y Progresión Diaria:** iniciar con $1\\text{ a }2\\ \\text{series de }10\\text{ a }20\\ \\text{reps}$ de cada modalidad, progresando a lo largo de 4 semanas hasta **$3\\ \\text{series de }20\\ \\text{repeticiones con }3\\ \\text{segundos de hold}$ ($60\\ \\text{contracciones diarias}$)**. 3) **Plazo de Adaptación:** se requiere un **mínimo estricto de $6\\text{ a }8\\ \\text{semanas}$ de práctica diaria constante** antes de que el control neuromuscular sea transferible y funcional durante la excitación sexual y el coito.",
+      "entities": [
+        "muscle:pubococcygeus",
+        "muscle:bulbospongiosus",
+        "clinical:zilbergeld-kegel-protocol"
+      ],
+      "rules": [
+        "pf-kegel-entry-volume",
+        "pf-kegel-hold-progression",
+        "pf-kegel-min-duration"
+      ]
+    },
+    {
+      "id": "zilbergeld-sex-ejaculatory-control-stop-start-progression",
+      "sourceId": "zilbergeld-new-male-sexuality-1992",
+      "topic": "progression",
+      "tags": [
+        "stop-start-mastery",
+        "ejaculatory-control",
+        "arousal-level-7",
+        "advance-criteria",
+        "behavioral-desensitization"
+      ],
+      "locator": {
+        "page": 20
+      },
+      "summary": "ejac-control-stop-threshold: Programa de Dominio de Parada-Arranque (*Stop-Start*) y Criterios de Avance: 1) **Estructura de la Sesión:** **$3\\text{ a }5\\ \\text{sesiones semanales}$ de $15\\text{ a }20\\ \\text{minutos}$** de autoestimulación. 2) **Umbral de Parada y Respiración:** detener la estimulación al alcanzar el **Nivel 7 de excitación (en escala $0\\text{--}10$)**; realizar una **pausa de $30\\text{ a }60\\ \\text{segundos}$ respirando profundamente desde el abdomen** hasta que la excitación descienda a nivel 4–5 antes de reiniciar. 3) **Criterio Estricto de Avance de Nivel:** para avanzar entre etapas (1.º Masturbación seca $\\to$ 2.º Con lubricante $\\to$ 3.º Manual por la pareja $\\to$ 4.º Inserción inmóvil $\\to$ 5.º Coito con empuje lento), el usuario debe lograr **$15\\ \\text{minutos de estimulación con }3\\text{ a }4\\ \\text{paradas}$ sin eyaculación involuntaria en $3\\ \\text{sesiones consecutivas}$**.",
+      "entities": [
+        "organ:penis",
+        "nerve:pudendal-nerve",
+        "clinical:stop-start-mastery-program"
+      ],
+      "rules": [
+        "ejac-control-frequency",
+        "ejac-control-session-duration",
+        "ejac-control-stop-threshold",
+        "ejac-control-stop-length",
+        "ejac-control-advance-criterion"
+      ]
+    },
+    {
+      "id": "zilbergeld-sex-erectile-performance-anxiety-and-coital-ban",
+      "sourceId": "zilbergeld-new-male-sexuality-1992",
+      "topic": "clinical",
+      "tags": [
+        "erection-therapy",
+        "performance-anxiety",
+        "coital-ban",
+        "sensate-focus",
+        "spectatoring"
+      ],
+      "locator": {
+        "page": 18
+      },
+      "summary": "erection-therapy-intercourse-ban: Terapia de Ansiedad de Desempeño Eréctil y Regla de Prohibición del Coito: 1) **Mecanismo de la Ansiedad de Desempeño (*Spectatoring*):** la auto-observación crítica y la presión por mantener una erección rígida activan descargas adrenérgicas simpáticas que colapsan el flujo sanguíneo arteriolar de los cuerpos cavernosos. 2) **Regla Mandatoria de Prohibición del Coito (*The Intercourse Ban*):** durante las primeras fases de la terapia de pareja y focalización sensorial, **está terminantemente prohibido cualquier intento de penetración o coito**; eliminar la expectativa de erección y penetración extingue la respuesta de alarma simpática, permitiendo que la respuesta eréctil parasimpática reaparezca de forma espontánea y natural. 3) **Frecuencia:** $2\\text{ a }3\\ \\text{sesiones semanales}$ de caricias no genitales.",
+      "entities": [
+        "organ:penis",
+        "hormone:epinephrine",
+        "clinical:coital-ban-protocol"
+      ],
+      "rules": [
+        "erection-therapy-frequency",
+        "erection-therapy-intercourse-ban",
+        "sexual-selfhelp-program-duration"
+      ]
+    },
+    {
+      "id": "zilbergeld-sex-medical-triage-and-nitrate-contraindication",
+      "sourceId": "zilbergeld-new-male-sexuality-1992",
+      "topic": "clinical",
+      "tags": [
+        "medical-triage",
+        "organic-ed",
+        "pde5-inhibitors",
+        "nitrate-warning",
+        "severe-hypotension",
+        "contraindications"
+      ],
+      "locator": {
+        "page": 21
+      },
+      "summary": "viagra-nitrate-contraindication: Banderas Rojas de Triage Médico y Contraindicación Absoluta de Nitratos con PDE5: 1) **Triage Clínico de Causa Orgánica vs Psicógena:** si un hombre presenta **pérdida total y global de erecciones (incluyendo ausencia absoluta de erecciones nocturnas y matutinas)** o disfunción eréctil tras cirugía pélvica/trauma, se requiere derivación urológica inmediata para evaluar etiología vascular, neurológica o endocrina (testosterona, prolactina). 2) **Contraindicación Letal Absoluta:** **está terminantemente prohibida la administración de inhibidores de la PDE-5 (Sildenafil / Viagra, Tadalafil, Vardenafil) en pacientes que utilicen cualquier fármaco a base de nitratos (nitroglicerina, mononitrato de isosorbida)** o drogas recreativas de nitrito de amilo (\"poppers\"); la sinergia en la vía NO-GMPc provoca una vasodilatación masiva con hipotensión refractaria potencialmente mortal e infarto.",
+      "entities": [
+        "drug:sildenafil",
+        "drug:nitroglycerin",
+        "molecule:nitric-oxide",
+        "clinical:pde5-nitrate-fatal-interaction"
+      ],
+      "rules": [
+        "medical-referral-global-erectile-failure",
+        "medical-referral-low-desire",
+        "viagra-nitrate-contraindication",
+        "substance-vascular-sexual-flag"
+      ]
+    },
+    {
+      "id": "zilbergeld-sex-conflict-timeout-and-communication-rituals",
+      "sourceId": "zilbergeld-new-male-sexuality-1992",
+      "topic": "clinical",
+      "tags": [
+        "conflict-timeout",
+        "heart-rate-threshold",
+        "emotional-flooding",
+        "couple-communication",
+        "body-rubs"
+      ],
+      "locator": {
+        "page": 12
+      },
+      "summary": "conflict-timeout-pulse: Regulación Fisiológica de Conflictos de Pareja y Rituales de Conexión: 1) **Regla del Tiempo Fuera Fisiológico (*The 100 BPM Timeout Rule*):** cuando una discusión de pareja eleva la **frecuencia cardíaca de cualquiera de los dos por encima de $100\\ \\text{latidos por minuto}$**, se produce un secuestro autonómico (\"inundación emocional / *diffuse physiological arousal*\") que bloquea la empatía cortical y la escucha: **mandato de tiempo fuera obligatorio de $20\\text{ a }30\\ \\text{minutos}$ en soledad**, respirando con el abdomen y sin rumiación cognitiva hostil, antes de retomar el diálogo. 2) **Rituales de Contacto (*Body Rubs*):** sesiones no demandantes de masajes y caricias de $20\\text{ a }30\\ \\text{minutos}$ sin expectativa genital para regular el sistema nervioso.\n\n<!-- stats: 5 chunks, 12 entidades cubiertas -->",
+      "entities": [
+        "organ:heart",
+        "hormone:cortisol",
+        "clinical:conflict-timeout-rule"
+      ],
+      "rules": [
+        "conflict-timeout-pulse",
+        "body-rub-duration",
+        "communication-listening-frequency",
+        "feeling-checkin-frequency"
+      ]
     }
   ]
 }

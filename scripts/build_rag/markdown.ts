@@ -68,7 +68,16 @@ function parseLocator(meta: Map<string, string>): RagLocator {
   const page = meta.get('page');
   if (page !== undefined) {
     const n = Number(page);
-    if (Number.isFinite(n)) locator.page = n;
+    if (Number.isFinite(n)) {
+      locator.page = n;
+    } else {
+      const match = /\d+/.exec(page);
+      if (match) {
+        locator.page = parseInt(match[0], 10);
+      } else {
+        locator.section = page;
+      }
+    }
   }
   const section = meta.get('section');
   if (section) locator.section = section;
