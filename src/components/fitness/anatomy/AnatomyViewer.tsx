@@ -46,16 +46,19 @@ import {
   FOCUS_LABELS,
   KIND_TINT_STRENGTH,
   LAYER_DEFS,
+  buildSubgroups,
   focusFromLegacyModel,
   highlightColor,
   layerDef,
-  nextPhaseSelection,
   phaseLabel,
   pieceKey,
   pieceVisible,
+  resolveClick,
+  unitPieceKeys,
+  type Aabb,
   type CompositeFocus,
   type CompositeKind,
-  type PieceSelection,
+  type SelectionPath,
 } from './composite';
 import { buildOwnerIndex } from './viewerLogic';
 
@@ -141,8 +144,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const structureByPieceRef = useRef<Map<string, string>>(new Map());
   /** estructura → nº de piezas presentes en el compuesto */
   const structurePieceCountRef = useRef<Map<string, number>>(new Map());
-  /** valores originales de material para restaurar el highlight */
-  const originalsRef = useRef<Map<THREE.Object3D, { emissive?: THREE.Color; intensity?: number; color?: THREE.Color }>>(new Map());
   /** materiales intercambiados por clones (oclu­sores) — mesh → original */
   const matOriginalsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
   const occluderMeshesRef = useRef<THREE.Mesh[]>([]);
@@ -156,13 +157,20 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const stateRef = useRef({
     focus: 'full' as CompositeFocus,
     layers: new Set<CompositeKind>(DEFAULT_LAYERS),
+    /** filtros de SELECCIÓN: kinds clickeables/aislables */
+    selectable: new Set<CompositeKind>(LAYER_DEFS.map((l) => l.kind)),
     hidden: new Set<string>(),
-    isolated: new Set<string>(),
-    selection: { structureId: null, phasePiece: null } as PieceSelection,
+    /** aislamiento: caja de la unidad + kinds incluidos + etiqueta */
+    isolation: null as { box: Aabb; kinds: ReadonlySet<CompositeKind>; label: string } | null,
+    path: null as SelectionPath | null,
     colorByKind: true,
     skullVersion: 'colored' as 'colored' | 'general',
     explodeT: 0,
   });
+  /** grupos (subconjuntos) por estructura, construidos perezosamente */
+  const groupsByStructureRef = useRef<Map<string, { groups: Map<string, string[]>; groupOf: Map<string, string> }>>(new Map());
+  /** AABB mundial por pieza (calculado perezosamente para el aislamiento) */
+  const aabbRef = useRef<Map<string, Aabb>>(new Map());
 
   const [reducedMotion, setReducedMotion] = useState(false);
   const [progress, setProgress] = useState<{ done: number; total: number; label: string }>({ done: 0, total: COMPOSITE_MODELS.length, label: '' });
@@ -184,8 +192,9 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const [skullVersion, setSkullVersion] = useState<'colored' | 'general'>('colored');
   const [explodeT, setExplodeT] = useState(0);
   const [selectedId, setSelectedId] = useState<string | null>(initialStructure ?? queryParam('structure'));
-  const [phasePiece, setPhasePiece] = useState<string | null>(null);
-  const [isolated, setIsolated] = useState<Set<string>>(new Set());
+  const [path, setPath] = useState<SelectionPath | null>(null);
+  const [selectable, setSelectable] = useState<Set<CompositeKind>>(new Set(LAYER_DEFS.map((l) => l.kind)));
+  const [isolation, setIsolation] = useState<{ box: Aabb; kinds: ReadonlySet<CompositeKind>; label: string } | null>(null);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [panelOpen, setPanelOpen] = useState(!isMobile);
   const [panelQuery, setPanelQuery] = useState('');
@@ -197,8 +206,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   // sincronizar refs espejo (los handlers del canvas leen de aquí)
   loadingRef.current = loading;
   stateRef.current = {
-    focus, layers, hidden, isolated,
-    selection: { structureId: selectedId, phasePiece },
+    focus, layers, hidden, selectable, isolation,
+    path: selectedId && path && path.structureId === selectedId ? path : selectedId ? { structureId: selectedId, groupKey: null, pieceKey: null } : null,
     colorByKind, skullVersion, explodeT,
   };
 
@@ -270,8 +279,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     let lastHover: THREE.Object3D | null = null;
-    let lastHoverEmissive: THREE.Color | null = null;
-    let lastHoverIntensity = 0;
     let downX = 0;
     let downY = 0;
     let moved = false;
@@ -285,11 +292,14 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       for (const h of hits) {
         let o: THREE.Object3D | null = h.object;
         let visibleThrough = o.visible;
+        let motivo = '';
         while (o && o !== root) {
           if (!o.visible) visibleThrough = false;
           if (o.name && o.userData?.__pieceKey) {
-            if (visibleThrough) return o;
-            break;
+            if (!visibleThrough) { motivo = 'invisible'; break; }
+            const entry = piecesRef.current.get(String(o.userData.__pieceKey));
+            if (entry && !stateRef.current.selectable.has(entry.piece.kind)) { motivo = `kind:${entry.piece.kind}`; break; }
+            return o;
           }
           o = o.parent;
         }
@@ -297,29 +307,30 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       return null;
     };
 
+    const selectedKeysNow = (): Set<string> => {
+      const p = stateRef.current.path;
+      if (!p) return new Set();
+      const groups = groupsByStructureRef.current.get(p.structureId);
+      return new Set(groups ? unitPieceKeys(p, groups.groups) : []);
+    };
+
     const onMove = (e: PointerEvent) => {
       if (loadingRef.current) return;
       const hit = pickAt(e.clientX, e.clientY);
       setHoverName(hit ? String(hit.userData.__pieceName ?? hit.name ?? '') : null);
       if (hit !== lastHover) {
-        if (lastHover && lastHoverEmissive) {
-          const mat = (lastHover as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
-          if (mat?.emissive && !originalsRef.current.has(lastHover)) {
-            mat.emissive.copy(lastHoverEmissive);
-            mat.emissiveIntensity = lastHoverIntensity;
-          }
-        }
+        // restaurar SIEMPRE desde el estado prístino (evita highlight residual)
+        if (lastHover) restorePristine(lastHover as THREE.Mesh);
         lastHover = hit;
-        const mat = hit ? (hit as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined : undefined;
-        if (hit && mat?.emissive && !originalsRef.current.has(hit)) {
-          lastHoverEmissive = mat.emissive.clone();
-          lastHoverIntensity = mat.emissiveIntensity;
-          const p = piecesRef.current.get(String(hit.userData.__pieceKey));
-          mat.emissive.set(p ? highlightColor(p.piece.kind) : 0x0e7fa8);
-          mat.emissiveIntensity = 0.7;
-        } else {
-          lastHoverEmissive = null;
-          lastHoverIntensity = 0;
+        const key = hit ? String(hit.userData.__pieceKey) : null;
+        if (hit && key && !selectedKeysNow().has(key)) {
+          // el hover no pisa la selección: se omite si la pieza está seleccionada
+          const mat = (hit as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
+          if (mat?.emissive) {
+            const p = piecesRef.current.get(key);
+            mat.emissive.set(p ? highlightColor(p.piece.kind) : 0x0e7fa8);
+            mat.emissiveIntensity = 0.7;
+          }
         }
         if (staticModeRef.current) renderer.render(scene, camera);
       }
@@ -336,19 +347,66 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       if (!hit) {
         // click en vacío: deseleccionar todo
         setSelectedId(null);
-        setPhasePiece(null);
+        setPath(null);
         return;
       }
       const key = String(hit.userData.__pieceKey);
-      const ownerId = structureByPieceRef.current.get(key) ?? null;
-      const next = nextPhaseSelection({
-        current: stateRef.current.selection,
+      const ownerId = structureByPieceRef.current.get(key);
+      if (!ownerId) { setSelectedId(null); setPath(null); return; }
+
+      // grupos (subconjuntos) de la estructura, construidos perezosamente
+      let g = groupsByStructureRef.current.get(ownerId);
+      if (!g) {
+        const st = getStructureById(ownerId);
+        const piecesOfStructure = [...structureByPieceRef.current.entries()]
+          .filter(([, id]) => id === ownerId)
+          .map(([k]) => [k, k.split(':').slice(1).join(':')] as [string, string]);
+        const groups = buildSubgroups(st?.nameEn ?? '', piecesOfStructure);
+        const groupOf = new Map<string, string>();
+        for (const [gk, list] of groups) for (const k of list) groupOf.set(k, gk);
+        g = { groups, groupOf };
+        groupsByStructureRef.current.set(ownerId, g);
+      }
+      const groupKey = g.groupOf.get(key) ?? '(estructura)';
+      const next = resolveClick({
+        current: stateRef.current.path?.structureId === ownerId ? stateRef.current.path : null,
         clickedPieceKey: key,
         clickedStructureId: ownerId,
-        structurePieceCount: ownerId ? (structurePieceCountRef.current.get(ownerId) ?? 1) : 1,
+        groups: g.groups,
+        clickedGroupKey: groupKey,
       });
-      setSelectedId(next.structureId);
-      setPhasePiece(next.phasePiece);
+      setPath(next);
+      setSelectedId(ownerId);
+    };
+
+    // DOBLE CLICK = aislar la unidad actual; doble click fuera = desaislar
+    const onDblClick = (e: MouseEvent) => {
+      if (loadingRef.current) return;
+      const hit = pickAt(e.clientX, e.clientY);
+      if (!hit) { setIsolation(null); return; }
+      const key = String(hit.userData.__pieceKey);
+      const ownerId = structureByPieceRef.current.get(key);
+      const p = stateRef.current.path;
+      if (!ownerId || !p || p.structureId !== ownerId) return;
+      const g = groupsByStructureRef.current.get(ownerId);
+      if (!g) return;
+      const keys = unitPieceKeys(p, g.groups);
+      const box = new THREE.Box3();
+      for (const k of keys) {
+        const entry = piecesRef.current.get(k);
+        if (entry) box.expandByObject(entry.mesh);
+      }
+      if (box.isEmpty()) return;
+      const size = box.getSize(new THREE.Vector3());
+      const margin = Math.max(size.x, size.y, size.z) * 0.12;
+      box.expandByVector(new THREE.Vector3(margin, margin, margin));
+      setIsolation((prev) => {
+          return {
+          box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
+          kinds: new Set(stateRef.current.selectable),
+          label: p.pieceKey ? phaseLabel(p.pieceKey.split(':').slice(1).join(':')) : p.groupKey ? (p.groupKey === '(estructura)' ? (getStructureById(ownerId)?.nameEs ?? p.groupKey) : phaseLabel(p.groupKey)) : (getStructureById(ownerId)?.nameEs ?? ''),
+        };
+      });
     };
     const onDrag = (e: PointerEvent) => {
       if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) moved = true;
@@ -359,11 +417,13 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     dom.addEventListener('pointerdown', onDown);
     dom.addEventListener('pointermove', onDrag);
     dom.addEventListener('pointerup', onClick);
+    dom.addEventListener('dblclick', onDblClick);
     const disposables = [() => {
       dom.removeEventListener('pointermove', onMove);
       dom.removeEventListener('pointerdown', onDown);
       dom.removeEventListener('pointermove', onDrag);
       dom.removeEventListener('pointerup', onClick);
+      dom.removeEventListener('dblclick', onDblClick);
     }];
 
     return () => {
@@ -407,8 +467,28 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
     for (const m of mats) {
       const std = m as THREE.MeshStandardMaterial;
-      if (std?.color) (std.userData as Record<string, unknown>).__origColor = std.color.clone();
+      if (std?.color) {
+        // estado PRÍSTINO: highlight/hover restauran desde aquí (nunca desde un
+        // snapshot tomado tras otra mutación — causa del highlight residual)
+        (std.userData as Record<string, unknown>).__origColor = std.color.clone();
+        if (std.emissive) {
+          (std.userData as Record<string, unknown>).__origEmissive = std.emissive.clone();
+          (std.userData as Record<string, unknown>).__origEmissiveIntensity = std.emissiveIntensity;
+        }
+      }
     }
+  };
+
+  /** restaura el material de un mesh a su estado prístino. */
+  const restorePristine = (mesh: THREE.Mesh) => {
+    const mat = mesh.material as THREE.MeshStandardMaterial | undefined;
+    if (!mat) return;
+    const ud = mat.userData as Record<string, unknown>;
+    const origColor = ud.__origColor as THREE.Color | undefined;
+    const origEm = ud.__origEmissive as THREE.Color | undefined;
+    const origInt = ud.__origEmissiveIntensity as number | undefined;
+    if (mat.color && origColor) mat.color.copy(origColor);
+    if (mat.emissive && origEm) { mat.emissive.copy(origEm); mat.emissiveIntensity = origInt ?? 0; }
   };
 
   // ── carga progresiva del compuesto ──────────────────────────────────────────
@@ -450,6 +530,10 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             if (piece) {
               piecesRef.current.set(key, { mesh, piece, key });
               toAdd.push(mesh);
+              // pieza oculta por dedup (representada por un especialista):
+              // NO clickeable — si interceptara el ray, el walk la rechaza y el
+              // click "no hace nada" aunque detrás haya la pieza visible real
+              if (piece.hiddenByDup) mesh.raycast = () => {};
               const ownerId = owners.get(obj.name ?? '') ?? owners.get(key);
               if (ownerId) {
                 if (!structureByPieceRef.current.has(key)) structureByPieceRef.current.set(key, ownerId);
@@ -482,7 +566,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         }
         setLoading(false);
       } catch (err) {
-        console.error(`[composite] error de carga en "${stateRef.current ? MODEL_LABELS[COMPOSITE_MODELS[Math.min(progress.done, COMPOSITE_MODELS.length - 1)]] : '?'}":`, (err as Error)?.stack ?? err);
         if (!cancelled) {
           setError(`No se pudo cargar el modelo compuesto. ${(err as Error)?.message ?? ''}`);
           setLoading(false);
@@ -500,8 +583,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         focus: st.focus,
         layers: st.layers,
         hidden: st.hidden,
-        isolated: st.isolated,
-      });
+        isolation: st.isolation,
+      }, aabbRef.current.get(pieceKey(piece.model, piece.name)));
       // el cráneo "vista general" sustituye a las piezas coloreadas
       if (st.focus === 'skull' && st.skullVersion === 'general' && piece.model === 'colored-skull-base' && piece.region === 'skull') {
         mesh.visible = false;
@@ -549,18 +632,17 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   }, [setMeshOpacity]);
 
   const selectionPieceKeys = useCallback((): string[] => {
-    const sel = stateRef.current.selection;
-    if (sel.phasePiece) return [sel.phasePiece];
-    if (!sel.structureId) return [];
-    const out: string[] = [];
-    for (const [key, id] of structureByPieceRef.current) if (id === sel.structureId) out.push(key);
-    return out;
+    const p = stateRef.current.path;
+    if (!p) return [];
+    const g = groupsByStructureRef.current.get(p.structureId);
+    if (!g) return [];
+    return unitPieceKeys(p, g.groups);
   }, []);
 
   const updateOccluders = useCallback(() => {
     resetOccluders();
     const keys = selectionPieceKeys();
-    if (!keys.length || stateRef.current.isolated.size > 0) return;
+    if (!keys.length || stateRef.current.isolation) return;
     const cam = cameraRef.current;
     const root = rootRef.current;
     if (!cam || !root) return;
@@ -650,49 +732,33 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     if (loading) return;
     resetOccluders();
     removeJointMarker();
-    // restaurar anteriores
-    for (const [obj, orig] of originalsRef.current) {
-      const mat = (obj as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
-      if (mat) {
-        if (mat.emissive) {
-          mat.emissive.copy(orig.emissive ?? new THREE.Color(0x000000));
-          mat.emissiveIntensity = orig.intensity ?? 0;
-        }
-        if (orig.color && mat.color) mat.color.copy(orig.color);
-      }
-    }
-    originalsRef.current.clear();
-    const keys = selectionPieceKeys();
-    if (!keys.length) return;
+      // restaurar SIEMPRE desde el estado prístino (evita highlight residual)
+    for (const { mesh } of piecesRef.current.values()) restorePristine(mesh);
+    if (!selectedId || !path || path.structureId !== selectedId) return;
+    const g = groupsByStructureRef.current.get(selectedId);
+    if (!g) return;
+    const unitKeys = [...new Set(unitPieceKeys(path, g.groups))];
     const isJoint = selectedStructure?.kind === 'joint';
-    const soft = isJoint || (phasePiece != null && keys.length > 1);
-    for (const k of keys) {
+    const hc = highlightColor(STRUCTURE_KIND_TO_COMPOSITE[selectedStructure?.kind ?? 'bone']);
+    for (const k of unitKeys) {
       const e = piecesRef.current.get(k);
       if (!e || !e.mesh.visible) continue;
-      const mesh = e.mesh;
-      const mat = mesh.material as THREE.MeshStandardMaterial | undefined;
+      const mat = e.mesh.material as THREE.MeshStandardMaterial | undefined;
       if (!mat?.emissive) continue;
-      if (!originalsRef.current.has(mesh)) {
-        originalsRef.current.set(mesh, {
-          emissive: mat.emissive?.clone(),
-          intensity: mat.emissiveIntensity,
-          color: mat.color?.clone(),
-        });
-      }
-      const hc = highlightColor(STRUCTURE_KIND_TO_COMPOSITE[selectedStructure?.kind ?? 'bone']);
+      const isUnitPiece = !path.pieceKey || k === path.pieceKey;
       mat.emissive.set(hc);
-      mat.emissiveIntensity = !soft || k === phasePiece ? 1.6 : 0.45;
-      if (mat.color && (!soft || k === phasePiece)) mat.color.lerp(new THREE.Color(hc), 0.35);
+      mat.emissiveIntensity = isUnitPiece ? 1.7 : 0.35;
+      if (mat.color && isUnitPiece) mat.color.lerp(new THREE.Color(hc), 0.35);
     }
-    if (isJoint) addJointMarker(keys);
+    if (isJoint) addJointMarker(unitKeys);
     updateOccluders();
-  }, [selectedId, phasePiece, loading, selectedStructure?.kind, resetOccluders, removeJointMarker, addJointMarker, updateOccluders, selectionPieceKeys]);
+  }, [selectedId, path, loading, selectedStructure?.kind, resetOccluders, removeJointMarker, addJointMarker, updateOccluders]);
 
   // ── aplicar visibilidad cuando cambian focus/capas/aislamiento/ocultas ─────
   useEffect(() => {
     if (loading) return;
     applyVisibility();
-  }, [loading, focus, layers, hidden, isolated, skullVersion, explodeT, applyVisibility]);
+  }, [loading, focus, layers, hidden, isolation, selectable, skullVersion, explodeT, applyVisibility]);
 
   // ── auto-encuadre al cambiar focus (sobre las piezas visibles de la región) ─
   useEffect(() => {
@@ -878,12 +944,12 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      if ((e.key === 'f' || e.key === 'F') && (selectedId || phasePiece)) centerOnSelection();
-      else if (e.key === 'Escape' && isolated.size > 0) setIsolated(new Set());
+      if ((e.key === 'f' || e.key === 'F') && selectedId) centerOnSelection();
+      else if (e.key === 'Escape' && isolation) setIsolation(null);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [centerOnSelection, selectedId, phasePiece, isolated.size]);
+  }, [centerOnSelection, selectedId, isolation]);
 
   useEffect(() => {
     if (reducedMotion && !loading && rendererRef.current && sceneRef.current && cameraRef.current) {
@@ -908,16 +974,22 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
 
   // ── acciones de aislamiento/ocultar ─────────────────────────────────────────
   const currentPieceKeys = selectionPieceKeys();
-  const currentIsFullyIsolated = currentPieceKeys.length > 0 && currentPieceKeys.every((k) => isolated.has(k));
-  const toggleIsolateCurrent = () => {
+  /** aísla la unidad actual (equivalente al doble click); accesible por botón. */
+  const isolateCurrent = () => {
     if (!currentPieceKeys.length) return;
-    setIsolated((prev) => {
-      const next = new Set(prev);
-      for (const k of currentPieceKeys) {
-        if (currentIsFullyIsolated) next.delete(k);
-        else next.add(k);
-      }
-      return next;
+    const box = new THREE.Box3();
+    for (const k of currentPieceKeys) {
+      const e = piecesRef.current.get(k);
+      if (e) box.expandByObject(e.mesh);
+    }
+    if (box.isEmpty()) return;
+    const size = box.getSize(new THREE.Vector3());
+    const margin = Math.max(size.x, size.y, size.z) * 0.12;
+    box.expandByVector(new THREE.Vector3(margin, margin, margin));
+    setIsolation({
+      box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
+      kinds: new Set(stateRef.current.selectable),
+      label: path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : path?.groupKey ? phaseLabel(path.groupKey) : (selectedStructure?.nameEs ?? ''),
     });
   };
   const hideCurrent = () => {
@@ -951,7 +1023,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     return tree;
   }, [compositeStructures, panelQuery]);
 
-  const isolatedCount = isolated.size;
+  const isolationActive = !!isolation;
   const hiddenCount = hidden.size;
 
   return (
@@ -981,7 +1053,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               <button
                 key={f}
                 type="button"
-                onClick={() => { setFocus(f); setSelectedId(null); setPhasePiece(null); }}
+                onClick={() => { setFocus(f); setSelectedId(null); setPath(null); }}
                 style={{
                   background: active ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.03)',
                   color: active ? '#fff' : 'var(--text-primary)',
@@ -1064,12 +1136,44 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           </label>
         </div>
 
+        {/* FILTROS DE SELECCIÓN: qué tipos son clickeables/aislables */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.4px', fontWeight: 700 }} title="Determina qué tipos se pueden clickear y qué se incluye al aislar">Selección</span>
+          {LAYER_DEFS.map(({ kind, label, color }) => {
+            const active = selectable.has(kind);
+            return (
+              <button
+                key={kind}
+                type="button"
+                onClick={() => setSelectable((prev) => {
+                  const next = new Set(prev);
+                  if (next.has(kind)) next.delete(kind);
+                  else next.add(kind);
+                  return next;
+                })}
+                title={active ? 'Clickeable: sí — click para desactivar' : 'Clickeable: no — click para activar'}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  background: active ? 'rgba(255,255,255,0.06)' : 'transparent',
+                  color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  border: `1px dashed ${active ? hexCss(color) : 'var(--color-border-subtle, rgba(255,255,255,0.15))'}`,
+                  borderRadius: 14, padding: '3px 9px', fontSize: '0.7rem', cursor: 'pointer',
+                  opacity: active ? 1 : 0.55, textDecoration: active ? 'none' : 'line-through',
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
+          <span style={{ fontSize: '0.66rem', color: 'var(--text-tertiary)' }}>← qué tipos se pueden clickear y aislar</span>
+        </div>
+
         {/* gestión de aisladas/ocultas */}
-        {(isolatedCount > 0 || hiddenCount > 0) && (
+        {(isolationActive || hiddenCount > 0) && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-            {isolatedCount > 0 && (
+            {isolationActive && (
               <span style={{ fontSize: '0.72rem', color: '#7fdcff', fontWeight: 700, background: 'rgba(53,208,255,0.12)', border: '1px solid rgba(53,208,255,0.4)', borderRadius: 10, padding: '3px 9px' }}>
-                {isolatedCount} aislada{isolatedCount > 1 ? 's' : ''} · Esc para ver todo
+                Aislado: {isolation?.label} · doble click fuera para ver todo
               </span>
             )}
             {hiddenCount > 0 && (
@@ -1106,9 +1210,9 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
               )}
             </div>
           )}
-          {isolatedCount > 0 && !loading && (
+          {isolationActive && !loading && (
             <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.5)', borderRadius: 10, padding: '5px 10px', fontSize: '0.72rem', color: '#7fdcff', fontWeight: 700 }}>
-              {isolatedCount} pieza{isolatedCount > 1 ? 's' : ''} aislada{isolatedCount > 1 ? 's' : ''} · Esc para salir
+              Aislado: {isolation?.label} · doble click fuera = ver todo
             </div>
           )}
           {hiddenCount > 0 && !loading && (
@@ -1174,7 +1278,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                                 <button
                                   key={st.id}
                                   type="button"
-                                  onClick={() => { setSelectedId(active ? null : st.id); setPhasePiece(null); }}
+                                  onClick={() => { setSelectedId(active ? null : st.id); setPath(null); }}
                                   style={{
                                     textAlign: 'left', background: active ? 'rgba(53,208,255,0.12)' : 'rgba(255,255,255,0.02)',
                                     border: `1px solid ${active ? 'rgba(53,208,255,0.5)' : 'transparent'}`,
@@ -1201,39 +1305,53 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       </div>
 
       {/* FICHA RICA */}
-      {selectedStructure && (
+      {selectedStructure && path && path.structureId === selectedStructure.id && (
         <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid rgba(53,208,255,0.35)', borderRadius: 16, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
               <span style={{ fontSize: '0.68rem', color: hexCss(layerDef(STRUCTURE_KIND_TO_COMPOSITE[selectedStructure.kind]).color), fontWeight: 800, textTransform: 'uppercase' }}>
-                {selectedStructure.kind}{phasePiece ? ' · pieza individual (fase 2)' : ''}
+                {selectedStructure.kind}
               </span>
-              <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                {phasePiece ? phaseLabel(phasePiece.split(':')[1] ?? '') : selectedStructure.nameEs}
-                {' '}
-                <span style={{ fontWeight: 500, color: 'var(--text-tertiary)', fontSize: '0.8rem' }}>{phasePiece ? `— dentro de ${selectedStructure.nameEs}` : selectedStructure.nameEn}</span>
-              </h4>
-              {!phasePiece && (structurePieceCountRef.current.get(selectedStructure.id) ?? 1) > 1 && (
-                <p style={{ margin: '2px 0 0', fontSize: '0.72rem', color: '#ffc98a' }}>
-                  Esta estructura tiene {structurePieceCountRef.current.get(selectedStructure.id)} piezas — haz un 2º click sobre una cabeza/pieza en el modelo para seleccionarla individualmente.
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexWrap: 'wrap', margin: '2px 0' }}>
+                <button type="button" onClick={() => setPath({ structureId: selectedStructure.id, groupKey: null, pieceKey: null })} style={{ ...crumbStyle, fontWeight: (path.groupKey || path.pieceKey) ? 500 : 800, color: (path.groupKey || path.pieceKey) ? 'var(--text-tertiary)' : 'var(--text-primary)', cursor: (path.groupKey || path.pieceKey) ? 'pointer' : 'default' }}>
+                  {selectedStructure.nameEs}
+                </button>
+                {path.groupKey ? (
+                  <>
+                    <span style={{ color: 'var(--text-tertiary)', fontSize: '0.7rem' }}>›</span>
+                    <button type="button" onClick={() => setPath({ ...path, pieceKey: null })} style={{ ...crumbStyle, fontWeight: path.pieceKey ? 500 : 800, color: path.pieceKey ? 'var(--text-tertiary)' : 'var(--text-primary)', cursor: path.pieceKey ? 'pointer' : 'default' }}>
+                      {path.groupKey === '(estructura)' ? selectedStructure.nameEs : phaseLabel(path.groupKey)}
+                    </button>
+                  </>
+                ) : null}
+                {path.pieceKey ? (
+                  <>
+                    <span style={{ color: 'var(--text-tertiary)', fontSize: '0.7rem' }}>›</span>
+                    <span style={{ ...crumbStyle, fontWeight: 800, color: 'var(--text-primary)' }}>{phaseLabel(path.pieceKey.split(':').slice(1).join(':'))}</span>
+                  </>
+                ) : null}
+              </div>
+              {path.groupKey === null && (structurePieceCountRef.current.get(selectedStructure.id) ?? 1) > 1 ? (
+                <p style={{ margin: 0, fontSize: '0.72rem', color: '#ffc98a' }}>
+                  Conjunto de {structurePieceCountRef.current.get(selectedStructure.id)} piezas — click sobre una parte para entrar al subconjunto · doble click para aislar.
                 </p>
-              )}
+              ) : null}
             </div>
-            <button type="button" onClick={() => { setSelectedId(null); setPhasePiece(null); }} style={{ ...btnStyle, border: 'none' }}><X size={14} /></button>
+            <button type="button" onClick={() => { setSelectedId(null); setPath(null); }} style={{ ...btnStyle, border: 'none' }}><X size={14} /></button>
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <button type="button" onClick={centerOnSelection} style={btnStyle} title="Centrar la cámara en esta pieza (F)">
+            <button type="button" onClick={centerOnSelection} style={btnStyle} title="Centrar la cámara en esta selección (F)">
               <Crosshair size={14} /> Centrar <span style={{ opacity: 0.6 }}>(F)</span>
             </button>
             <button
               type="button"
-              onClick={toggleIsolateCurrent}
-              style={{ ...btnStyle, ...(currentIsFullyIsolated ? { borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' } : {}) }}
-              title="Mostrar solo esta pieza (acumulable con otras)"
+              onClick={isolateCurrent}
+              style={{ ...btnStyle, ...(isolationActive ? { borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' } : {}) }}
+              title="Aislar esta unidad — doble click en el modelo también funciona"
             >
-              {currentIsFullyIsolated ? <EyeOff size={14} /> : <Eye size={14} />} {currentIsFullyIsolated ? 'Quitar del aislamiento' : 'Aislar'}{isolatedCount > 0 ? ` (${isolatedCount})` : ''}
+              {isolationActive ? <EyeOff size={14} /> : <Eye size={14} />} {isolationActive ? 'Ver todo' : 'Aislar'}
             </button>
-            <button type="button" onClick={hideCurrent} style={btnStyle} title="Ocultar esta pieza (se puede desocultar)">
+            <button type="button" onClick={hideCurrent} style={btnStyle} title="Ocultar esta selección (desocultar arriba)">
               <EyeOff size={14} /> Ocultar
             </button>
           </div>
@@ -1243,7 +1361,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           </a>
         </div>
       )}
-
       <p style={{ margin: 0, fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
         {stats.total} estructuras · {stats.with3dMapping} con mapping 3D · compuesto: {COMPOSITE_STATS.total} piezas de 5 modelos · {stats.pendingCitation} pendientes de verificación bibliográfica.
       </p>
@@ -1254,6 +1371,10 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
 function hexCss(n: number): string {
   return `#${n.toString(16).padStart(6, '0')}`;
 }
+
+const crumbStyle: React.CSSProperties = {
+  background: 'transparent', border: 'none', padding: 0, fontSize: '0.78rem', lineHeight: 1.3,
+};
 
 const btnStyle: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,0.04)',

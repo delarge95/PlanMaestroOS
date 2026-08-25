@@ -1,19 +1,23 @@
 ﻿// src/components/fitness/anatomy/__tests__/composite.test.ts
-// AG-ANATOM ciclo 5 â€” lÃ³gica pura del modelo compuesto.
+// AG-ANATOM — lógica pura del modelo compuesto y la selección jerárquica.
 
 import { describe, it, expect } from 'vitest';
 import {
   DEFAULT_LAYERS,
   FOCUS_LABELS,
   VERTEBRAE_PIECES,
+  buildSubgroups,
   focusFromLegacyModel,
-  nextPhaseSelection,
   phaseLabel,
   pieceKey,
   pieceVisible,
+  resolveClick,
+  unitPieceKeys,
   highlightColor,
   layerDef,
+  type Aabb,
   type CompositeKind,
+  type SelectionPath,
 } from '../composite';
 import { COMPOSITE_PIECES, COMPOSITE_STATS, EXPLODE_PAIRS } from '../../../../data/fitness/anatomy/compositePlan';
 
@@ -26,78 +30,152 @@ const piece = (over: Partial<Parameters<typeof pieceVisible>[0]>) => ({
   ...over,
 });
 
+const NO_BOX: Aabb = { min: [-10, -10, -10], max: [10, 10, 10] };
+
 describe('pieceVisible', () => {
-  const base = { focus: 'full' as const, layers: new Set<CompositeKind>(DEFAULT_LAYERS), hidden: new Set<string>(), isolated: new Set<string>() };
-
-  it('vista completa + capa activa + sin dedup â†’ visible', () => {
-    expect(pieceVisible(piece({}), base)).toBe(true);
+  const base = () => ({
+    focus: 'full' as const,
+    layers: new Set<CompositeKind>(DEFAULT_LAYERS),
+    hidden: new Set<string>(),
+    isolation: null,
   });
 
-  it('capa inactiva â†’ oculto (p.ej. mostrar solo mÃºsculo y tendÃ³n)', () => {
-    expect(pieceVisible(piece({ kind: 'artery' }), base)).toBe(false);
-    expect(pieceVisible(piece({ kind: 'muscle' }), { ...base, layers: new Set<CompositeKind>(['muscle', 'tendon']) })).toBe(true);
-    expect(pieceVisible(piece({ kind: 'bone' }), { ...base, layers: new Set<CompositeKind>(['muscle', 'tendon']) })).toBe(false);
+  it('vista completa + capa activa + sin dedup → visible', () => {
+    expect(pieceVisible(piece({}), base(), NO_BOX)).toBe(true);
   });
 
-  it('focus por regiÃ³n filtra las demÃ¡s regiones', () => {
-    const upper = { ...base, focus: 'upper' as const };
-    expect(pieceVisible(piece({ region: 'upper' }), upper)).toBe(true);
-    expect(pieceVisible(piece({ region: 'lower' }), upper)).toBe(false);
+  it('capa inactiva → oculto (p.ej. mostrar solo músculo y tendón)', () => {
+    expect(pieceVisible(piece({ kind: 'artery' }), base(), NO_BOX)).toBe(false);
+    const st = { ...base(), layers: new Set<CompositeKind>(['muscle', 'tendon'] as CompositeKind[]) };
+    expect(pieceVisible(piece({ kind: 'muscle' }), st, NO_BOX)).toBe(true);
+    expect(pieceVisible(piece({ kind: 'bone' }), st, NO_BOX)).toBe(false);
   });
 
-  it('focus vÃ©rtebras: solo las 3 piezas del modelo vertebrae', () => {
-    const vert = { ...base, focus: 'vertebrae' as const };
-    expect(pieceVisible(piece({ name: 'Cervical vertebra (C4)', region: 'upper' }), vert)).toBe(true);
-    expect(pieceVisible(piece({ name: 'Femurr', region: 'lower' }), vert)).toBe(false);
+  it('focus por región filtra las demás regiones', () => {
+    const upper = { ...base(), focus: 'upper' as const };
+    expect(pieceVisible(piece({ region: 'upper' }), upper, NO_BOX)).toBe(true);
+    expect(pieceVisible(piece({ region: 'lower' }), upper, NO_BOX)).toBe(false);
+  });
+
+  it('focus vértebras: solo las 3 piezas del modelo vertebrae', () => {
+    const vert = { ...base(), focus: 'vertebrae' as const };
+    expect(pieceVisible(piece({ name: 'Cervical vertebra (C4)', region: 'upper' }), vert, NO_BOX)).toBe(true);
+    expect(pieceVisible(piece({ name: 'Femurr', region: 'lower' }), vert, NO_BOX)).toBe(false);
     expect(VERTEBRAE_PIECES.size).toBe(3);
   });
 
-  it('hiddenByDup (representada por especialista) â†’ oculta por defecto', () => {
-    expect(pieceVisible(piece({ hiddenByDup: 'lower-limb:Femurr' }), base)).toBe(false);
+  it('hiddenByDup (representada por especialista) → oculta por defecto', () => {
+    expect(pieceVisible(piece({ hiddenByDup: 'lower-limb:Femurr' }), base(), NO_BOX)).toBe(false);
   });
 
-  it('oculta manual gana sobre todo salvo aislamiento', () => {
+  it('oculta manual', () => {
     const key = pieceKey('overview-skeleton', 'X');
-    expect(pieceVisible(piece({}), { ...base, hidden: new Set([key]) })).toBe(false);
-    expect(pieceVisible(piece({}), { ...base, hidden: new Set([key]), isolated: new Set([key]) })).toBe(true);
+    expect(pieceVisible(piece({}), { ...base(), hidden: new Set([key]) }, NO_BOX)).toBe(false);
   });
 
-  it('aislamiento: solo las piezas aisladas son visibles', () => {
-    const st = { ...base, isolated: new Set(['lower-limb:Femurr']) };
-    expect(pieceVisible(piece({ model: 'lower-limb', name: 'Femurr', region: 'lower' }), st)).toBe(true);
-    expect(pieceVisible(piece({}), st)).toBe(false);
+  it('aislamiento: solo kinds seleccionables que cruzan la caja de la unidad', () => {
+    const st = {
+      ...base(),
+      isolation: {
+        box: { min: [0, 0, 0], max: [1, 1, 1] } as Aabb,
+        kinds: new Set<CompositeKind>(['muscle']),
+      },
+    };
+    const dentro = piece({ kind: 'muscle', model: 'upper-limb', name: 'Triceps' });
+    const fuera = piece({ kind: 'muscle', model: 'lower-limb', name: 'Soleus' });
+    const boneDentro = piece({ kind: 'bone' });
+    // dentro de la caja (AABB que cruza [0..1])
+    expect(pieceVisible(dentro, st, { min: [0.2, 0.2, 0.2], max: [0.8, 0.8, 0.8] })).toBe(true);
+    // fuera de la caja
+    expect(pieceVisible(fuera, st, { min: [-5, -5, -5], max: [-4, -4, -4] })).toBe(false);
+    // kind NO incluido en los filtros de selección → no se aísla aunque cruce
+    expect(pieceVisible(boneDentro, st, { min: [0.2, 0.2, 0.2], max: [0.8, 0.8, 0.8] })).toBe(false);
   });
 });
 
-describe('nextPhaseSelection â€” selecciÃ³n por fases', () => {
-  it('click en otra estructura â†’ fase 1 (estructura entera)', () => {
-    const next = nextPhaseSelection({ current: { structureId: null, phasePiece: null }, clickedPieceKey: 'upper-limb:Triceps', clickedStructureId: 'mus-triceps', structurePieceCount: 3 });
-    expect(next).toEqual({ structureId: 'mus-triceps', phasePiece: null });
+describe('buildSubgroups — subconjuntos por nombre', () => {
+  it('triceps: 3 cabezas → 3 subconjuntos hoja', () => {
+    const g = buildSubgroups('Triceps brachii', [
+      ['m:Long head of triceps brachii', 'Long head of triceps brachii'],
+      ['m:Lateral head of triceps brachii', 'Lateral head of triceps brachii'],
+      ['m:Medial head of triceps brachii', 'Medial head of triceps brachii'],
+    ]);
+    expect(g.size).toBe(3);
+    for (const list of g.values()) expect(list.length).toBe(1);
   });
 
-  it('2Âº click sobre cabeza de la misma estructura multi-pieza â†’ fase 2 (solo esa cabeza)', () => {
-    const next = nextPhaseSelection({ current: { structureId: 'mus-triceps', phasePiece: null }, clickedPieceKey: 'upper-limb:Long head of triceps brachii', clickedStructureId: 'mus-triceps', structurePieceCount: 3 });
-    expect(next).toEqual({ structureId: 'mus-triceps', phasePiece: 'upper-limb:Long head of triceps brachii' });
+  it('costillas: cada costilla su subconjunto', () => {
+    const g = buildSubgroups('Rib', [['m:Rib (1st)', 'Rib (1st)'], ['m:Rib (2nd)', 'Rib (2nd)'], ['m:Rib (3rd)', 'Rib (3rd)']]);
+    expect(g.size).toBe(3);
+  });
+});
+
+describe('resolveClick — máquina de fases', () => {
+  // triceps: 3 grupos hoja (1 pieza cada uno)
+  const S = 'mus-triceps';
+  const K = (n: string) => pieceKey('upper-limb', n);
+  const tricepsGroups = buildSubgroups('Triceps brachii', [
+    ['m:Long head of triceps brachii', 'Long head of triceps brachii'],
+    ['m:Lateral head of triceps brachii', 'Lateral head of triceps brachii'],
+    ['m:Medial head of triceps brachii', 'Medial head of triceps brachii'],
+  ]);
+  const long = K('Long head of triceps brachii');
+  const lat = K('Lateral head of triceps brachii');
+  const tricepsKeys = new Map([...tricepsGroups.entries()].map(([g, list]) => [g, list.map((n) => K(n))]));
+  const longKey = 'long head';
+
+  // caso multi-pieza: un subconjunto con 2 piezas (3 niveles reales)
+  const multiGroups = new Map<string, string[]>([
+    ['head', [K('a1'), K('a2')]],
+    ['medial', [K('m')]],
+  ]);
+
+  it('click en otra estructura → conjunto (fase 1)', () => {
+    const next = resolveClick({ current: null, clickedPieceKey: long, clickedStructureId: S, groups: tricepsKeys, clickedGroupKey: longKey });
+    expect(next).toEqual({ structureId: S, groupKey: null, pieceKey: long });
   });
 
-  it('click en OTRA cabeza sigue en fase 2 (cambia la cabeza)', () => {
-    const next = nextPhaseSelection({ current: { structureId: 'mus-triceps', phasePiece: 'upper-limb:Long head of triceps brachii' }, clickedPieceKey: 'upper-limb:Lateral head of triceps brachii', clickedStructureId: 'mus-triceps', structurePieceCount: 3 });
-    expect(next.phasePiece).toBe('upper-limb:Lateral head of triceps brachii');
+  it('grupo hoja de 1 pieza: 2º click selecciona la pieza directamente', () => {
+    const next = resolveClick({ current: { structureId: S, groupKey: null, pieceKey: null }, clickedPieceKey: long, clickedStructureId: S, groups: tricepsKeys, clickedGroupKey: longKey });
+    expect(next).toEqual({ structureId: S, groupKey: null, pieceKey: long });
   });
 
-  it('click en la misma cabeza de fase 2 â†’ vuelve a fase 1', () => {
-    const next = nextPhaseSelection({ current: { structureId: 'mus-triceps', phasePiece: 'upper-limb:Long head of triceps brachii' }, clickedPieceKey: 'upper-limb:Long head of triceps brachii', clickedStructureId: 'mus-triceps', structurePieceCount: 3 });
-    expect(next).toEqual({ structureId: 'mus-triceps', phasePiece: null });
+  it('subconjunto multi-pieza: 2º click baja al subconjunto', () => {
+    const next = resolveClick({ current: { structureId: S, groupKey: null, pieceKey: null }, clickedPieceKey: K('a1'), clickedStructureId: S, groups: multiGroups, clickedGroupKey: 'head' });
+    expect(next).toEqual({ structureId: S, groupKey: 'head', pieceKey: null });
   });
 
-  it('estructura de UNA pieza: no hay fase 2', () => {
-    const next = nextPhaseSelection({ current: { structureId: 'bone-femur', phasePiece: null }, clickedPieceKey: 'lower-limb:Femurr', clickedStructureId: 'bone-femur', structurePieceCount: 1 });
-    expect(next.phasePiece).toBeNull();
+  it('3º click en pieza del subconjunto → pieza individual', () => {
+    const next = resolveClick({ current: { structureId: S, groupKey: 'head', pieceKey: null }, clickedPieceKey: K('a1'), clickedStructureId: S, groups: multiGroups, clickedGroupKey: 'head' });
+    expect(next).toEqual({ structureId: S, groupKey: 'head', pieceKey: K('a1') });
   });
 
-  it('pieza sin dueÃ±a â†’ selecciÃ³n directa de pieza', () => {
-    const next = nextPhaseSelection({ current: { structureId: 'mus-x', phasePiece: null }, clickedPieceKey: 'lower-limb:Adductor canal.r', clickedStructureId: null, structurePieceCount: 0 });
-    expect(next.phasePiece).toBe('lower-limb:Adductor canal.r');
+  it('click en otra pieza del mismo subconjunto cambia la pieza', () => {
+    const next = resolveClick({ current: { structureId: S, groupKey: 'head', pieceKey: K('a1') }, clickedPieceKey: K('a2'), clickedStructureId: S, groups: multiGroups, clickedGroupKey: 'head' });
+    expect(next).toEqual({ structureId: S, groupKey: 'head', pieceKey: K('a2') });
+  });
+
+  it('click en la misma pieza → sube al subconjunto', () => {
+    const next = resolveClick({ current: { structureId: S, groupKey: 'head', pieceKey: K('a1') }, clickedPieceKey: K('a1'), clickedStructureId: S, groups: multiGroups, clickedGroupKey: 'head' });
+    expect(next).toEqual({ structureId: S, groupKey: 'head', pieceKey: null });
+  });
+
+  it('click en subconjunto hermano cambia de subconjunto', () => {
+    const next = resolveClick({ current: { structureId: S, groupKey: 'head', pieceKey: K('a1') }, clickedPieceKey: K('m'), clickedStructureId: S, groups: multiGroups, clickedGroupKey: 'medial' });
+    expect(next.pieceKey).toBe(K('m'));
+    expect(next.groupKey).toBeNull();
+  });
+});
+
+describe('unitPieceKeys', () => {
+  it('devuelve las piezas del nivel del path', () => {
+    const groups = new Map([['long head', ['m:a', 'm:b']], ['other', ['m:c']]]);
+    const p1: SelectionPath = { structureId: 's', groupKey: 'long head', pieceKey: null };
+    expect(unitPieceKeys(p1, groups)).toEqual(['m:a', 'm:b']);
+    const p2: SelectionPath = { structureId: 's', groupKey: 'long head', pieceKey: 'm:a' };
+    expect(unitPieceKeys(p2, groups)).toEqual(['m:a']);
+    const p3: SelectionPath = { structureId: 's', groupKey: null, pieceKey: null };
+    expect(unitPieceKeys(p3, groups)).toEqual(['m:a', 'm:b', 'm:c']);
   });
 });
 
@@ -118,38 +196,39 @@ describe('focus y compatibilidad de URLs', () => {
 });
 
 describe('plan de compuesto (datos generados)', () => {
-  it('total y regiones cuadran con el anÃ¡lisis', () => {
+  it('total y regiones cuadran con el análisis', () => {
     expect(COMPOSITE_PIECES.length).toBe(COMPOSITE_STATS.total);
     expect(COMPOSITE_PIECES.length).toBe(1380);
     const sum = Object.values(COMPOSITE_STATS.porRegion).reduce((a, b) => a + b, 0);
     expect(sum).toBe(COMPOSITE_STATS.total);
   });
 
-  it('todas las piezas tienen modelo/kind/regiÃ³n vÃ¡lidos', () => {
+  it('cráneo: TODAS las piezas del skeleton en región skull están ocultas por dedup (fix cráneo duplicado)', () => {
+    const sk = COMPOSITE_PIECES.filter((p) => p.model === 'overview-skeleton' && p.region === 'skull');
+    expect(sk.length).toBeGreaterThanOrEqual(25);
+    for (const p of sk) expect(p.hiddenByDup, p.name).toBeTruthy();
+  });
+
+  it('todas las piezas tienen modelo/kind/región válidos y claves únicas', () => {
     const models = new Set(['overview-skeleton', 'lower-limb', 'upper-limb', 'hand', 'colored-skull-base']);
     const regions = new Set(['axial', 'skull', 'upper', 'lower', 'hand']);
+    const keys = new Set<string>();
     for (const p of COMPOSITE_PIECES) {
       expect(models.has(p.model), p.name).toBe(true);
       expect(regions.has(p.region), p.name).toBe(true);
-      expect(p.kind.length, p.name).toBeGreaterThan(0);
+      keys.add(pieceKey(p.model, p.name));
     }
-  });
-
-  it('las claves model:name son Ãºnicas', () => {
-    const keys = new Set(COMPOSITE_PIECES.map((p) => pieceKey(p.model, p.name)));
     expect(keys.size).toBe(COMPOSITE_PIECES.length);
   });
 
-  it('explosiÃ³n: todos los pares explodedâ†’base existen en el plan', () => {
+  it('explosión: los pares apuntan a piezas base existentes en el plan', () => {
     const keys = new Set(COMPOSITE_PIECES.map((p) => pieceKey(p.model, p.name)));
     const pairs = Object.entries(EXPLODE_PAIRS);
     expect(pairs.length).toBeGreaterThanOrEqual(28);
-    for (const [exp, base] of pairs) {
-      expect(keys.has(pieceKey('colored-skull-base', base)), base).toBe(true);
-    }
+    for (const [, base] of pairs) expect(keys.has(pieceKey('colored-skull-base', base)), base).toBe(true);
   });
 
-  it('capas por defecto y colores de capa definidos', () => {
+  it('capas por defecto y colores definidos', () => {
     expect(DEFAULT_LAYERS.length).toBe(5);
     for (const k of DEFAULT_LAYERS) expect(layerDef(k).label.length).toBeGreaterThan(0);
     expect(highlightColor('muscle')).not.toBe(layerDef('muscle').color);

@@ -205,6 +205,28 @@ const SPECIALISTS = [
 const REGION_PRIORITY = { hand: 0, skull: 1, lower: 2, upper: 3, axial: 9 };
 
 const normSets = Object.fromEntries(keys.map((k) => [k, new Set(MODELS[k].pieces.keys().map(norm))]));
+/** norms sin plural final (para cruzar singular/plural entre modelos; teeth→tooth) */
+const normSetsSg = Object.fromEntries(keys.map((k) => [k, new Set([...normSets[k]].map((n) => n.replace(/teeth$/, 'tooth').replace(/s$/, '')))]));
+
+// ── zona anatómica de las piezas del skeleton SEGÚN EL GRAFO (bones.ts) ─────
+// El nombre no basta (typos del export: "Temporal_boner" vs "Temporal_bones");
+// el grafo ya mapea cada pieza del skeleton a una estructura con zona.
+const ZONE_TO_REGION = {
+  'head-jaw': 'skull', 'forearm-hand': 'hand',
+  shoulder: 'upper', chest: 'upper', back: 'upper', arm: 'upper',
+  hip: 'lower', thigh: 'lower', knee: 'lower', 'lower-leg': 'lower', 'ankle-foot': 'lower',
+  cervical: 'axial', spine: 'axial', core: 'axial',
+};
+const skeletonZoneByPiece = {};
+try {
+  const bonesTs = readFileSync(join(process.cwd(), 'src/data/fitness/anatomy/bones.ts'), 'utf8');
+  for (const block of bonesTs.split(/(?=id:)/)) {
+    const zone = block.match(/zone:\s*`([a-z-]+)`/)?.[1];
+    const mm = block.match(/modelMeshes:\s*\{[^}]*"overview-skeleton":\s*\[([^\]]+)\]/);
+    if (!zone || !mm) continue;
+    for (const n of mm[1].matchAll(/"([^"]+)"/g)) skeletonZoneByPiece[norm(n[1])] = zone;
+  }
+} catch { console.warn('bones.ts no legible para zonas — fallback por nombre'); }
 
 function kindFromContainer(container, name) {
   const c = container.toLowerCase(), n = name.toLowerCase();
@@ -246,9 +268,17 @@ for (const { model } of SPECIALISTS) {
 
 function assignRegion(model, name) {
   if (model !== 'overview-skeleton') return SPECIALISTS.find((s) => s.model === model).region;
+  // 1) zona del grafo (precisa, inmune a typos del export)
+  const zone = skeletonZoneByPiece[norm(name)];
+  if (zone && ZONE_TO_REGION[zone]) return ZONE_TO_REGION[zone];
+  // 2) fallback: nombre normalizado contra especialistas, tolerante a la 'r'
+  //    pegada por el sanitize (".r"→"r") y a plural/singular
   const n = norm(name);
-  for (const { model: sm, region } of SPECIALISTS) {
-    if (normSets[sm].has(n)) return region;
+  const variantes = [n, n.replace(/r$/, ''), n.replace(/s$/, ''), n.replace(/r$/, '').replace(/s$/, '')];
+  for (const v of variantes) {
+    for (const { model: sm, region } of SPECIALISTS) {
+      if (normSets[sm].has(v) || normSetsSg[sm].has(v)) return region;
+    }
   }
   return 'axial';
 }
@@ -259,20 +289,27 @@ for (const model of ['overview-skeleton', 'lower-limb', 'upper-limb', 'hand', 'c
   for (const [name, info] of MODELS[model].pieces) {
     const region = assignRegion(model, name);
     let hiddenByDup = null;
-    // dedup: especialistas de prioridad superior tapan esta pieza si AABB ≈
-    const myPriority = REGION_PRIORITY[region];
-    for (const { model: sm, region: sr } of SPECIALISTS) {
-      if (REGION_PRIORITY[sr] >= myPriority && sm !== model) continue;
-      if (sr === region && sm === model) continue;
-      const hit = aabbIndex[sm].find(({ aabb }) => aabbEq(aabb, info.aabb));
-      if (hit) { hiddenByDup = `${sm}:${hit.name}`; break; }
-    }
-    // también: piezas de especialista tapadas por otro de prioridad superior
-    if (model !== 'overview-skeleton' && !hiddenByDup) {
-      const n = norm(name);
+    // CRÁNEO: dedup por REGIÓN completa — el cráneo coloreado cubre TODO el
+    // cráneo; las piezas de cráneo del skeleton que no coinciden por AABB
+    // sobremontaban versiones distintas (cráneo duplicado, reporte usuario).
+    if (model === 'overview-skeleton' && region === 'skull') {
+      hiddenByDup = 'colored-skull-base:(región cráneo completa)';
+    } else {
+      // dedup: especialistas de prioridad superior tapan esta pieza si AABB ≈
+      const myPriority = REGION_PRIORITY[region];
       for (const { model: sm, region: sr } of SPECIALISTS) {
-        if (REGION_PRIORITY[sr] >= myPriority || sm === model) continue;
-        if (normSets[sm].has(n)) { hiddenByDup = `${sm}:${name}`; break; }
+        if (REGION_PRIORITY[sr] >= myPriority && sm !== model) continue;
+        if (sr === region && sm === model) continue;
+        const hit = aabbIndex[sm].find(({ aabb }) => aabbEq(aabb, info.aabb));
+        if (hit) { hiddenByDup = `${sm}:${hit.name}`; break; }
+      }
+      // también: piezas de especialista tapadas por otro de prioridad superior
+      if (model !== 'overview-skeleton' && !hiddenByDup) {
+        const n = norm(name);
+        for (const { model: sm, region: sr } of SPECIALISTS) {
+          if (REGION_PRIORITY[sr] >= myPriority || sm === model) continue;
+          if (normSets[sm].has(n)) { hiddenByDup = `${sm}:${name}`; break; }
+        }
       }
     }
     if (hiddenByDup) dupStats[model] = (dupStats[model] ?? 0) + 1;

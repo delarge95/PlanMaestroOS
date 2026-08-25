@@ -88,35 +88,41 @@ export function pieceKey(model: string, name: string): string {
   return `${model}:${name}`;
 }
 
-/** Estado de selección (fases incluidas) sobre piezas. */
-export interface PieceSelection {
-  /** estructura del grafo seleccionada (fase 1), si existe dueña. */
-  structureId: string | null;
-  /** pieza individual seleccionada en fase 2 (clave model:name). */
-  phasePiece: string | null;
+/** AABB serializable (mundo) de una pieza o unidad. */
+export interface Aabb { min: [number, number, number]; max: [number, number, number] }
+
+export function aabbIntersects(a: Aabb, b: Aabb): boolean {
+  return a.min[0] <= b.max[0] && a.max[0] >= b.min[0]
+    && a.min[1] <= b.max[1] && a.max[1] >= b.min[1]
+    && a.min[2] <= b.max[2] && a.max[2] >= b.min[2];
 }
 
 export interface VisibilityState {
   focus: CompositeFocus;
+  /** capas VISIBLES (independiente de lo seleccionable). */
   layers: ReadonlySet<CompositeKind>;
   /** claves de pieza ocultas manualmente (model:name). */
   hidden: ReadonlySet<string>;
-  /** claves aisladas (model:name) — si no está vacío, SOLO esas se ven. */
-  isolated: ReadonlySet<string>;
+  /** aislamiento activo: caja de la unidad + kinds incluidos (filtros de selección). */
+  isolation: { box: Aabb; kinds: ReadonlySet<CompositeKind> } | null;
 }
 
 /**
  * Visibilidad de UNA pieza del compuesto (decisión única por pieza).
  * Prioridad: aislamiento > oculta manual > capas > focus > dedup.
+ * `aabb`: caja mundial de la pieza (solo necesaria con aislamiento activo).
  */
 export function pieceVisible(
   piece: { model: string; name: string; region: CompositeRegion; kind: CompositeKind; hiddenByDup?: string },
   state: VisibilityState,
+  aabb?: Aabb,
 ): boolean {
-  const key = pieceKey(piece.model, piece.name);
-  // aislamiento: solo las aisladas (el resto, oculto)
-  if (state.isolated.size > 0) return state.isolated.has(key);
-  if (state.hidden.has(key)) return false;
+  // aislamiento: solo piezas de kinds seleccionables que cruzan la caja de la unidad
+  if (state.isolation) {
+    if (!state.isolation.kinds.has(piece.kind)) return false;
+    if (!aabb || !aabbIntersects(aabb, state.isolation.box)) return false;
+  }
+  if (state.hidden.has(pieceKey(piece.model, piece.name))) return false;
   // focus: región del focus; vertebrae = solo las 3 vértebras del modelo aislado
   if (state.focus !== 'full') {
     if (state.focus === 'vertebrae') {
@@ -130,41 +136,101 @@ export function pieceVisible(
   return true;
 }
 
-// ── Selección por fases ──────────────────────────────────────────────────────
+/** kind seleccionable/clickeable (filtros de selección). */
+export function kindSelectable(kind: CompositeKind, selectable: ReadonlySet<CompositeKind>): boolean {
+  return selectable.has(kind);
+}
 
-/**
- * Resuelve la selección tras un click sobre una pieza.
- * - La pieza pertenece a otra estructura → fase 1 (estructura entera).
- * - La pieza pertenece a la estructura YA seleccionada y esta es multi-pieza
- *   (p.ej. tríceps con 3 cabezas) → fase 2 (solo esa cabeza/pieza).
- * - Segundo click en la misma pieza de fase 2 → vuelve a fase 1 (estructura).
- */
-export function nextPhaseSelection(args: {
-  current: PieceSelection;
-  clickedPieceKey: string;
-  clickedStructureId: string | null;
-  /** nº de piezas que la estructura seleccionada tiene en el compuesto. */
-  structurePieceCount: number;
-}): PieceSelection {
-  const { current, clickedPieceKey, clickedStructureId, structurePieceCount } = args;
-  if (!clickedStructureId) {
-    // pieza sin ficha: selección directa de pieza (fase 2 implícita)
-    return { structureId: current.structureId, phasePiece: clickedPieceKey };
-  }
-  if (current.structureId === clickedStructureId) {
-    // misma estructura: alternar fase 2
-    if (structurePieceCount > 1) {
-      if (current.phasePiece === clickedPieceKey) return { structureId: clickedStructureId, phasePiece: null };
-      return { structureId: clickedStructureId, phasePiece: clickedPieceKey };
-    }
-    return { structureId: clickedStructureId, phasePiece: null };
-  }
-  return { structureId: clickedStructureId, phasePiece: null };
+// ── Selección jerárquica por fases (conjunto → subconjunto → pieza) ─────────
+
+export interface SelectionPath {
+  /** estructura (conjunto) — siempre presente al seleccionar. */
+  structureId: string;
+  /** subconjunto (nivel 1): clave de grupo derivada del nombre de pieza. */
+  groupKey: string | null;
+  /** pieza individual (nivel hoja). */
+  pieceKey: string | null;
+}
+
+const STOPWORDS = new Set(['of', 'the', 'and', 'de', 'la', 'el']);
+
+function tokenize(name: string): string[] {
+  return (name || '')
+    .normalize('NFD').replace(/[\u0300-\u036f\u200b-\u200d\ufeff]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .split(' ')
+    .filter((t) => t && !STOPWORDS.has(t));
 }
 
 /**
- * Etiqueta de fase para la ficha: en fase 2, extrae el nombre legible de la
- * cabeza/pieza desde el nombre runtime (p.ej. "Long head of triceps brachii").
+ * Agrupa las piezas de una estructura en SUBCONJUNTOS derivados del nombre:
+ * tokens de la pieza menos los tokens comunes con la estructura.
+ * p.ej. "Long head of triceps brachii" en "Triceps brachii" → grupo "long head".
+ * `pieces` son pares [clave completa model:name, nombre runtime]. Los grupos
+ * guardan CLAVES COMPLETAS (una misma estructura puede tener piezas en
+ * distintos modelos del compuesto).
+ */
+export function buildSubgroups(structureNameEn: string, pieces: Array<[string, string]>): Map<string, string[]> {
+  const base = new Set(tokenize(structureNameEn));
+  const groups = new Map<string, string[]>();
+  for (const [key, name] of pieces) {
+    const toks = tokenize(name);
+    const diff = toks.filter((t) => !base.has(t));
+    const g = diff.length ? diff.join(' ') : '(estructura)';
+    groups.set(g, [...(groups.get(g) ?? []), key]);
+  }
+  return groups;
+}
+
+/**
+ * Resuelve la selección tras un click sobre una pieza (máquina de fases):
+ * - otra estructura → conjunto (fase 1).
+ * - misma estructura, subconjunto no seleccionado → baja al subconjunto (o a
+ *   la pieza si el grupo es hoja de una sola pieza).
+ * - mismo subconjunto → baja a la pieza clickeada.
+ * - misma pieza ya seleccionada → sube un nivel.
+ */
+export function resolveClick(args: {
+  current: SelectionPath | null;
+  clickedPieceKey: string;
+  clickedStructureId: string;
+  /** grupos (groupKey → nombres de pieza) de la estructura clickeada. */
+  groups: Map<string, string[]>;
+  /** grupo al que pertenece la pieza clickeada. */
+  clickedGroupKey: string;
+}): SelectionPath {
+  const { current, clickedStructureId, groups, clickedGroupKey } = args;
+  const descend = (): SelectionPath => {
+    const groupSize = groups.get(clickedGroupKey)?.length ?? 1;
+    return groupSize > 1
+      ? { structureId: clickedStructureId, groupKey: clickedGroupKey, pieceKey: null }
+      : { structureId: clickedStructureId, groupKey: null, pieceKey: args.clickedPieceKey };
+  };
+  if (!current || current.structureId !== clickedStructureId) return descend();
+  const p = current;
+  if (p.groupKey === null) return descend();
+  if (p.groupKey !== clickedGroupKey) return descend();
+  // mismo subconjunto
+  if (p.pieceKey === null) return { ...p, pieceKey: args.clickedPieceKey };
+  if (p.pieceKey === args.clickedPieceKey) {
+    const groupSize = groups.get(clickedGroupKey)?.length ?? 1;
+    return groupSize > 1 ? { ...p, pieceKey: null } : { structureId: p.structureId, groupKey: null, pieceKey: null };
+  }
+  return { ...p, pieceKey: args.clickedPieceKey };
+}
+
+/** Claves de pieza de la unidad seleccionada en el nivel actual del path. */
+export function unitPieceKeys(path: SelectionPath, groups: Map<string, string[]>): string[] {
+  if (path.pieceKey) return [path.pieceKey];
+  if (path.groupKey) return groups.get(path.groupKey) ?? [];
+  return [...new Set([...groups.values()].flat())];
+}
+
+/**
+ * Etiqueta de fase para la ficha: extrae el nombre legible de la cabeza/pieza
+ * desde el nombre runtime (p.ej. "Long head of triceps brachii").
  */
 export function phaseLabel(pieceName: string): string {
   return pieceName
