@@ -34,6 +34,8 @@ export interface Subtask {
   rateClass: RateClassId;
   hoursByTier: HoursByTier;
   drivers?: readonly string[];
+  /** Las opcionales se omiten si el tier no les aplica sin invalidar la tarea (p. ej. rig en proyecto sin personaje). */
+  optional?: boolean;
 }
 
 /** Las tareas compuestas (pipeline realtime B1-B4) referencian módulos por id. */
