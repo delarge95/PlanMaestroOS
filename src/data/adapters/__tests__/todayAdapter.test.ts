@@ -59,7 +59,7 @@ describe('todayAdapter (AG-ORQ)', () => {
         { Titulo: 'Preparar demo reel', AreaId: 'Carrera', Estado: 'Próxima', Prioridad: 'Alta', Regla10Min: false, SuficientementeBueno: false, Creado: '2026-08-25', Actualizado: '2026-08-25' },
         { Titulo: 'Entrenar piernas', AreaId: 'Fitness', Estado: 'Próxima', Prioridad: 'Media', Regla10Min: false, SuficientementeBueno: false, Creado: '2026-08-25', Actualizado: '2026-08-25' },
       ],
-      { BloqueA: 'Bloque A · Testing Notion' }
+      { Fecha: '2026-08-25', Top3TaskIds: [], BloqueA: 'Bloque A · Testing Notion', CheckInAM: false, CierrePM: false }
     );
 
     expect(mapped.activeBlock).toBe('Bloque A · Testing Notion');

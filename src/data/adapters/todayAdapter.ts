@@ -73,9 +73,7 @@ export function getTodayDomainView(
   // --- 2. Career Domain (Consumo de careerStore) ---
   const careerState = ssrSafe ? null : useCareerStore.getState();
   const applications = careerState?.applications || [];
-  const activeApps = applications.filter(
-    (a) => a.stage !== "rejected" && a.stage !== "archived",
-  );
+  const activeApps = applications.filter((a) => a.stage !== "Cerrado");
   const pendingFollowUps = applications.filter(
     (a) => a.trackerStatus === "needs_follow_up",
   );
