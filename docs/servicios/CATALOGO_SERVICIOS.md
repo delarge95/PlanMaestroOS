@@ -136,19 +136,19 @@ Pipeline modular compartido. Cada tarjeta de tarea indica qué módulos aplica.
 
 #### B1 · Asset estático NO interactuable
 Módulos: BM1–BM6, BM9–BM11. Caso: hero visual web, fondo de escena, props.
-Rango total típico: **S ≈ 6–13 h · M ≈ 17–46 h · L ≈ 46–107 h · XL ≈ 100–228 h**
+Rango total (motor v1): **S 5.5–17 h · 130–710 USD — M 19–50 h · 485–2 015 USD — L 50–115 h · 1 295–4 605 USD — XL 115–250 h · 2 980–9 990 USD**
 
 #### B2 · Asset estático INTERACTUABLE (inspeccionable: rotar/zoom/seleccionar partes)
 Módulos: BM1–BM6, **BM12**, BM9–BM11. Caso: visor de producto, pieza de museo, equipamiento médico.
-Rango total típico: **S ≈ 7–15 h · M ≈ 19–50 h · L ≈ 50–115 h · XL ≈ 108–244 h**
+Rango total (motor v1): **S 6–18.5 h · 140–780 USD — M 20.5–54 h · 525–2 195 USD — L 54–123 h · 1 405–4 965 USD — XL 123–266 h · 3 200–10 710 USD**
 
 #### B3 · Asset animado NO interactuable
 Módulos: BM1–BM8, BM9–BM11. Caso: mascota/logo animado, NPC de fondo, turntable animado.
-Rango total típico (sin personaje riggeado completo): **M ≈ 26–66 h · L ≈ 68–152 h · XL ≈ 148–333 h**
+Rango total (motor v1): **M 28–72 h · 710–2 855 USD — L 72–170 h · 1 845–6 695 USD — XL 170–365 h · 4 355–14 360 USD** (sin tier S: el rig/animación es obligatorio)
 
 #### B4 · Asset animado INTERACTUABLE
 Módulos: BM1–BM8, **BM12**, BM9–BM11. Caso: personaje jugable, demostrador de producto con estados.
-Rango total típico: **M ≈ 32–76 h · L ≈ 82–187 h · XL ≈ 178–403 h**
+Rango total (motor v1): **M 29.5–76 h · 750–3 035 USD — L 76–178 h · 1 955–7 055 USD — XL 178–381 h · 4 575–15 080 USD**
 
 #### B5 · Shaders estilizados (toon, holograma, disolución, agua, outline…)
 
@@ -160,7 +160,7 @@ Rango total típico: **M ≈ 32–76 h · L ≈ 82–187 h · XL ≈ 178–403 h
 | B5.4 | Optimización WebGL/mobile (precisión, fills, overdraw) | 1–2 | 2–5 | 5–10 | 10–18 | RT |
 | B5.5 | Fallbacks/degradación elegante (dispositivos bajos) | 0.5–1 | 1–3 | 3–6 | 6–10 | RT |
 
-Total típico: **S ≈ 7–14 h · M ≈ 14–32 h · L ≈ 32–66 h · XL ≈ 66–122 h**
+Total (motor v1): **S 6.5–14 h · 165–620 USD — M 14–32 h · 375–1 415 USD — L 32–66 h · 875–2 915 USD — XL 66–122 h · 1 820–5 395 USD**
 
 #### B6 · Mecánicas específicas sobre modelo (vista explosionada, corte, medición…)
 
@@ -174,7 +174,7 @@ Requiere asset con jerarquía apta (propio o de tercero; si es de tercero, B6.1 
 | B6.4 | Callouts/etiquetas 3D→2D (hotspots, líneas guía, fichas) | 1–3 | 3–6 | 6–12 | 12–20 | RT |
 | B6.5 | UI de control integrada (sliders/toggles/estados persistidos) | 1–3 | 3–6 | 6–12 | 12–24 | RT |
 
-Vista explosionada standalone (con asset propio listo): **S ≈ 6–12 h · M ≈ 14–29 h · L ≈ 29–59 h · XL ≈ 57–104 h**
+Tarea completa B6 (motor v1): **S 7–17 h · 185–765 USD — M 17–39 h · 465–1 755 USD — L 39–79 h · 1 085–3 555 USD — XL 79–144 h · 2 210–6 480 USD**. Vista explosionada sola = estimación mixta con solo B6.1+B6.2+B6.4+B6.5 en el motor.
 
 #### B7 · Conversión CAD → 3D WebGL-ready ⭐ (ancla comercial)
 
@@ -191,7 +191,7 @@ El caso del "slider de drone": mismo servicio, extremos muy distintos. Pricing =
 | B7.7 | Materiales (spec-driven desde CAD o artístico) | 0.5–2 | 2–5 | 5–12 | 12–25 | ART |
 | B7.8 | LODs + validación final en target webgl | 0.5–1 | 1–3 | 3–7 | 7–15 | RT |
 
-Total típico: **S ≈ 4–12 h · M ≈ 12–35 h · L ≈ 35–84 h · XL ≈ 84–178 h**
+Total (motor v1): **S 4–12 h · 80–540 USD — M 12–35 h · 315–1 540 USD — L 35–84 h · 950–3 700 USD — XL 84–178 h · 2 305–7 835 USD**
 
 **Tabla de excedente por pieza** (cuando el conteo domina el esfuerzo; se combina con el tier):
 
@@ -207,10 +207,10 @@ Descuento por volumen: −10 % a partir de pieza 41, −20 % a partir de pieza 1
 
 | Extremo | Descripción | Tier | Estimación |
 |---|---|---|---|
-| Slider mínimo | Drone quad mini estilo juguete: 6–8 piezas primitivas, estático, 12 k tris, materiales planos | S | ≈ 8–14 h ⇒ **225–630 USD** |
-| Slider medio | Drone consumer con hélices y tren removibles: ~25 piezas, algunas curvas, texturas PBR estándar | M | ≈ 24–45 h ⇒ **670–2 000 USD** |
-| Slider alto | Drone cinematográfico: ~80 piezas, gimbal articulado, preparado para vista explosionada, LODs | L | ≈ 60–110 h ⇒ **1 700–5 000 USD** |
-| Slider máximo | Familia/flota de drones con accesorios configurables: >150 piezas, pipeline paramétrico reutilizable | XL | ≈ 120–220 h ⇒ **3 400–9 900 USD** |
+| Slider mínimo | Drone quad mini estilo juguete: 6–8 piezas primitivas, estático, 12 k tris, materiales planos | S | 4.7–13.75 h ⇒ **95–620 USD** |
+| Slider medio | Drone consumer con hélices y tren removibles: ~25 piezas (15 primitivas + 10 curvas), texturas PBR estándar | M | 16–44.75 h ⇒ **425–1 980 USD** |
+| Slider alto | Drone cinematográfico: ~80 piezas (30+35+15 con gimbal articulado), preparado para vista explosionada, LODs | L | ≈ 54–131 h ⇒ **1 485–5 830 USD** |
+| Slider máximo | Familia/flota de drones con accesorios configurables: >150 piezas, pipeline paramétrico reutilizable | XL | ≈ 115–254 h ⇒ **3 170–11 265 USD** |
 
 (Cálculo con clases RT/ART según módulos; el motor de estimación reproduce estos números.)
 
@@ -227,7 +227,7 @@ Descuento por volumen: −10 % a partir de pieza 41, −20 % a partir de pieza 1
 | C1.3 | Integración en página (responsive, lazy load, estados de carga) | 1–3 | 3–6 | 6–12 | — | RT |
 | C1.4 | QA cross-browser/mobile | 0.5–1 | 1–3 | 3–6 | — | RT |
 
-Total típico: **S ≈ 3–8 h · M ≈ 7–20 h · L ≈ 17–34 h**
+Total (motor v1): **S 3–8.5 h · 75–390 USD — M 8.5–20 h · 230–910 USD — L 19.5–39 h · 545–1 770 USD** (tope L: más allá = C2 custom)
 
 #### C2 · Integración custom three.js / babylon.js
 
@@ -240,7 +240,7 @@ Total típico: **S ≈ 3–8 h · M ≈ 7–20 h · L ≈ 17–34 h**
 | C2.5 | Performance pass (instancing, culling, budgets, profiling) | 1–2 | 2–6 | 6–14 | 14–28 | RT |
 | C2.6 | QA cross-device + hooks de analítica | 1–2 | 2–4 | 4–8 | 8–16 | TL |
 
-Visor interactivo single-model (C2.1–C2.6 tier S/M): **≈ 8–38 h**
+Visor interactivo single-model (motor v1): **S 8–18 h · 215–820 USD — M 18–42 h · 495–1 905 USD**
 
 #### C3 · Unity WebGL embebido
 
@@ -260,7 +260,7 @@ Visor interactivo single-model (C2.1–C2.6 tier S/M): **≈ 8–38 h**
 | C4.3 | Progressive loading/preload UX (primera pintura rápida) | 1–3 | 3–6 | 6–12 | 12–20 | RT |
 | C4.4 | Reduced-motion + accesibilidad fallback | 1–2 | 2–4 | 4–8 | — | RT |
 
-One-page scrolly con asset existente: **M ≈ 15–32 h · L ≈ 32–64 h** (el asset va por familia B aparte).
+One-page scrolly con asset existente (motor v1): **M 15–32 h · 425–1 465 USD — L 32–64 h · 920–2 930 USD** (el asset va por familia B aparte).
 
 #### C5 · Minijuego 3D en web
 
@@ -272,7 +272,7 @@ One-page scrolly con asset existente: **M ≈ 15–32 h · L ≈ 32–64 h** (el
 | C5.4 | Score/persistencia/share (opcional) | 1–3 | 3–6 | 6–12 | 12–20 | RT |
 | C5.5 | Controles mobile + game feel/tuning | 1–3 | 3–8 | 8–18 | 18–35 | RT |
 
-Minijuego arcade simple: **M ≈ 22–64 h · L ≈ 64–136 h** (assets aparte, familia B).
+Minijuego arcade simple (motor v1): **M 27–64 h · 760–2 905 USD — L 64–138 h · 1 815–6 255 USD** (assets aparte, familia B).
 
 #### C6 · Catálogo interactivo / configurador de producto
 
@@ -284,7 +284,7 @@ Minijuego arcade simple: **M ≈ 22–64 h · L ≈ 64–136 h** (assets aparte,
 | C6.4 | Filtros/búsqueda/comparador | 2–4 | 4–10 | 10–20 | 20–35 | RT |
 | C6.5 | CTA compra/contacto + integración e-commerce básica | 1–3 | 3–8 | 8–16 | 16–30 | RT |
 
-Configurador de producto (tier M, con assets listos): **≈ 21–56 h**
+Configurador de producto (tier M, con assets listos; motor v1): **23–56 h · 630–2 520 USD**
 
 #### C7 · Web App 3D completa (producto)
 
@@ -298,7 +298,7 @@ Configurador de producto (tier M, con assets listos): **≈ 21–56 h**
 | C7.6 | Analytics/SEO/performance audit | 2–4 | 4–8 | 8–16 | 16–32 | TL |
 | C7.7 | Deploy CI + documentación + handoff | 2–4 | 4–8 | 8–14 | 14–24 | TL |
 
-MVP acotado (tier M sin backend pesado): **≈ 62–142 h**. Producto completo XL: **300–650+ h ⇒ multi-mes con hitos**.
+MVP acotado (tier M sin backend pesado; motor v1): **62–142 h · 1 765–6 380 USD**. Producto completo XL: **314–654 h · 8 935–29 355 USD ⇒ multi-mes con hitos**.
 
 #### C8 · Presentación web / microsite de pitch
 
@@ -308,7 +308,7 @@ MVP acotado (tier M sin backend pesado): **≈ 62–142 h**. Producto completo X
 | C8.2 | Diseño + build de secciones | 4–8 | 8–18 | 18–36 | 36–60 | RT |
 | C8.3 | Motion/transiciones + responsive pulido | 2–4 | 4–10 | 10–20 | 20–32 | RT |
 
-Microsite de presentación (tier M): **≈ 16–36 h**
+Microsite de presentación (tier M; motor v1): **16–36 h · 455–1 645 USD**
 
 ---
 
@@ -325,7 +325,7 @@ Microsite de presentación (tier M): **≈ 16–36 h**
 | D1.7 | Compositing de passes + grain/color match | 1–3 | 3–6 | 6–14 | 14–28 | ART |
 | D1.8 | QC + entregas de versiones | 0.5–1 | 1–2 | 2–4 | 4–8 | TL |
 
-Shot simple (modelo sobre foto o plano fijo, sin FX): **S ≈ 5–10 h**. Shot cinematográfico con cámara móvil + FX: **L/XL ≈ 46–227 h**.
+Shot simple (modelo sobre foto o plano fijo, sin FX; motor v1): **S 5.5–14 h · 135–575 USD**. Shot cinematográfico con cámara móvil + FX: **L 51–116 h · 1 320–4 670 USD — XL 116–227 h · 3 010–9 100 USD**.
 Pack de shots: −10 % a partir del 2º shot (reutiliza tracking/setup cuando la secuencia lo permite).
 
 ---
@@ -343,7 +343,7 @@ Pack de shots: −10 % a partir del 2º shot (reutiliza tracking/setup cuando la
 | E1.5 | Worker/backend (key management, rate limits, control de costos por llamada) | 3–6 | 6–12 | 12–24 | 24–44 | AI |
 | E1.6 | Logging/observabilidad básica (qué preguntaron, qué respondió) | 1–2 | 2–5 | 5–10 | 10–16 | AI |
 
-Asistente FAQ (tier S/M): **≈ 14–51 h**. Asistente con RAG multi-fuente (L): **≈ 63–124 h**.
+Asistente FAQ (motor v1): **S 14–28 h · 455–1 455 USD — M 28–63 h · 920–3 270 USD**. Asistente con RAG multi-fuente (L): **63–124 h · 2 080–6 465 USD**.
 Nota de operación: costo de tokens/API lo paga el cliente directo o vía recargo transparente (decidir por proyecto; placeholder hasta definir proveedor).
 
 #### E2 · Automatización indirecta en sitio (generadores internos, formularios inteligentes, resúmenes)
@@ -355,7 +355,7 @@ Nota de operación: costo de tokens/API lo paga el cliente directo o vía recarg
 | E2.3 | UI admin/config interna | 2–5 | 5–12 | 12–24 | 24–40 | RT |
 | E2.4 | Evaluación + iteración con uso real | 1–3 | 3–8 | 8–16 | 16–28 | AI |
 
-Automatización de 1 flujo (tier M): **≈ 20–46 h**
+Automatización de 1 flujo (tier M; motor v1): **20–46 h · 650–2 355 USD**
 
 #### E3 · IA dentro de empresa/agencia (consultoría + implementación)
 
@@ -368,7 +368,7 @@ Automatización de 1 flujo (tier M): **≈ 20–46 h**
 | E3.5 | Capacitación + documentación + handoff | 2–4 | 4–8 | 8–16 | 16–28 | TL |
 | E3.6 | Mejora continua (retainer mensual) | 4–8 h/mes | 8–16 | 16–32 | 32–64 | AI |
 
-Engagement completo inicial (tier M: E3.1–E3.5): **≈ 43–102 h**.
+Engagement completo inicial (tier M: E3.1–E3.5; motor v1): **49–110 h · 1 660–5 815 USD**.
 
 ---
 
@@ -380,7 +380,7 @@ Engagement completo inicial (tier M: E3.1–E3.5): **≈ 43–102 h**.
 | F2 | FX genérico (partículas/simulación para render offline o realtime VFX graph) | S 2–5 · M 5–14 · L 14–30 · XL 30–60 h por efecto; packs con −15 % desde el 3º efecto similar | ART |
 | F3 | **Optimization Doctor** — rescate/optimización de assets existentes | Auditoría S 1–3 / M 3–8 h (reporte de draw calls, memoria, tris) + optimización S 2–5 / M 5–14 / L 14–30 / XL 30–70 h. Coincide con el posicionamiento doc 02 | RT |
 | F4 | Consultoría técnica / auditorías puntuales | Hora suelta TL 32–48 USD. Auditoría de performance WebGL empaquetada: S 3–6 · M 6–12 · L 12–24 h | TL |
-| F5 | Retainer mensual de producción mixta | Bloques prepagados 20 h (−10 %) / 40 h (−12 %) / 80 h (−15 %) mezclando familias A–F; expira a 60 días | mix |
+| F5 | Retainer mensual de producción mixta | Bloques prepagados: 20 h (−10 %) **450–810 USD** · 40 h (−12 %) **985–1 585 USD** · 80 h (−15 %) **1 900–3 060 USD**, mezclando familias A–F; expira a 60 días | mix |
 
 ---
 
@@ -390,18 +390,18 @@ Cada paquete declara: incluye / no incluye / rango agregado (motor) / duración 
 
 | ID | Paquete | Composición (à-la-carte) | Rango publicado* | Duración |
 |---|---|---|---|---|
-| PK-01 | **Hero Renders** | A1 ×3 imágenes misma escena (mix S/M) | 700–2 400 USD | 1–2 sem |
-| PK-02 | **Turntable de Producto** | B1 (S/M) + C1 embed | 550–2 100 USD | 1–2 sem |
-| PK-03 | **Exploded Experience** | B7 (M/L) + B6 explosión + callouts + C2 visor | 3 200–12 000 USD | 3–6 sem |
-| PK-04 | **Scrolly Landing** | C4 + C2 + asset B1/B3 (M/L) | 2 800–11 000 USD | 3–6 sem |
-| PK-05 | **Minijuego Promo** | C5 (M/L) + asset B3/B4 | 2 500–9 500 USD | 3–6 sem |
-| PK-06 | **Catálogo Interactivo** | C6 (M/L) + B2 ×n assets | 2 200–9 000 USD | 3–7 sem |
-| PK-07 | **Asistente IA para tu Web** | E1 (S/L) | 900–5 000 USD | 2–4 sem |
-| PK-08 | **VFX Shot Pack** | D1 ×3 shots (mix S/M) | 1 100–4 200 USD | 2–4 sem |
-| PK-09 | **Web App 3D MVP** | C7 recortado (M, backend ligero) | 4 500–11 000 USD | 4–8 sem |
-| PK-10 | **Retainer Producción** | F5 bloques 20/40/80 h | 570–3 420 USD/mes | continuo |
+| PK-01 | **Hero Renders** | A1 ×3 imágenes misma escena (mix S/M) | 435–1 520 USD | ~2 sem |
+| PK-02 | **Turntable de Producto** | B1 (S/M) + C1 embed | 675–2 780 USD | ~3 sem |
+| PK-03 | **Exploded Experience** | B7 + B6 explosión + callouts + C2 visor | 1 210–4 940 USD | ~5 sem |
+| PK-04 | **Scrolly Landing** | C4 + C2 + asset B1/B3 | 1 330–5 120 USD | ~5 sem |
+| PK-05 | **Minijuego Promo** | C5 + asset B3/B4 | 1 395–5 475 USD | ~6 sem |
+| PK-06 | **Catálogo Interactivo** | C6 + B2 ×n assets | 1 095–4 480 USD | ~5 sem |
+| PK-07 | **Asistente IA para tu Web** | E1 (S/L) | 870–3 110 USD | ~3 sem |
+| PK-08 | **VFX Shot Pack** | D1 ×3 shots (mix S/M) | 1 320–5 285 USD | ~6 sem |
+| PK-09 | **Web App 3D MVP** | C7 recortado (M, backend ligero) | 1 675–6 065 USD | ~6 sem |
+| PK-10 | **Retainer Producción** | F5 bloques 20/40/80 h | 450–3 060 USD/mes | continuo |
 
-*Rangos publicados = agregados del motor ± buffer de riesgo pequeño; se recalculan al recalibrar la rate card. Los valores de esta tabla son los puntos de partida v1 y DEBEN regenerarse desde el motor antes de publicarse en cualquier superficie (pendiente Fase 1).
+*Rangos publicados = `estimatePackage()` del motor v1 (composición à-la-carte ×0.95 en extremos por bundle −10 % sobre punto medio). Duración = política 2.9 (`ceil(horas_netas_max/25)`). Regenerar con el motor ante cualquier cambio de rate card o catálogo.
 
 Anti-patrones de venta (reglas propias):
 1. Nunca vender XL como fixed price sin hitos y cláusula de alcance.
@@ -436,4 +436,4 @@ Anti-patrones de venta (reglas propias):
 
 ---
 
-*AG-SERV · catálogo v1.0 — espejo determinista: `src/data/services/**`. Cualquier cifra de UI debe reproducir estos números.*
+*AG-SERV · catálogo v1.0 — espejo determinista: `src/data/services/**`. Los totales de tarea/paquete de este doc fueron generados y verificados por el motor (`estimateTaskAtTier`/`estimatePackage`, tests en `__tests__`); ante cambio de rate card o catálogo, regenerar desde ahí.*
