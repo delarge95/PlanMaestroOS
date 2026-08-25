@@ -70,7 +70,7 @@
         "mealId": "omni-m1-desayuno",
         "name": "Comida 1: Desayuno / Primer Pulso Proteico",
         "timing": "07:30 - 08:30",
-        "targetKcal": 560,
+        "targetKcal": 556,
         "macroSplit": {
           "proteinG": 38.0,
           "carbsG": 65.0,
@@ -83,28 +83,28 @@
             "amountGrams": 75,
             "pG": 10.0,
             "cG": 45.0,
-            "fG": 5.2
+            "fG": 5.0
           },
           {
             "group": "Huevos enteros pasteurizados (Grado A)",
             "amountGrams": 110,
             "unitDescription": "2 unidades medianas",
-            "pG": 13.5,
-            "cG": 0.8,
-            "fG": 10.2
+            "pG": 13.0,
+            "cG": 1.0,
+            "fG": 10.5
           },
           {
             "group": "Claras de huevo líquidas pasteurizadas",
-            "amountGrams": 100,
-            "pG": 11.0,
-            "cG": 0.7,
+            "amountGrams": 130,
+            "pG": 14.0,
+            "cG": 0.0,
             "fG": 0.2
           },
           {
             "group": "Fruta fresca entera (Plátano / Frutos rojos)",
-            "amountGrams": 120,
-            "pG": 1.2,
-            "cG": 24.0,
+            "amountGrams": 95,
+            "pG": 1.0,
+            "cG": 19.0,
             "fG": 0.3
           }
         ],
@@ -114,7 +114,7 @@
         "mealId": "omni-m2-almuerzo",
         "name": "Comida 2: Almuerzo / Carga Previa",
         "timing": "13:00 - 14:00",
-        "targetKcal": 680,
+        "targetKcal": 676,
         "macroSplit": {
           "proteinG": 44.0,
           "carbsG": 80.0,
@@ -124,29 +124,29 @@
         "genericFoodGroups": [
           {
             "group": "Carne magra de ave (Pechuga de pollo o pavo)",
-            "amountGrams": 180,
-            "pG": 40.0,
+            "amountGrams": 165,
+            "pG": 38.0,
             "cG": 0.0,
-            "fG": 3.6
+            "fG": 3.5
           },
           {
             "group": "Cereales / Arroz blanco o jazmín (peso en seco)",
-            "amountGrams": 85,
-            "pG": 6.5,
-            "cG": 67.0,
-            "fG": 0.8
+            "amountGrams": 90,
+            "pG": 4.0,
+            "cG": 72.0,
+            "fG": 0.5
           },
           {
             "group": "Aceite de oliva virgen extra (AOVE prensado en frío)",
             "amountGrams": 15,
             "pG": 0.0,
             "cG": 0.0,
-            "fG": 15.0
+            "fG": 15.5
           },
           {
             "group": "Hortalizas y verduras de hoja verde (Brócoli / Espinacas)",
-            "amountGrams": 200,
-            "pG": 3.5,
+            "amountGrams": 150,
+            "pG": 2.0,
             "cG": 8.0,
             "fG": 0.5
           }
@@ -157,33 +157,33 @@
         "mealId": "omni-m3-peri-workout",
         "name": "Comida 3: Peri-Entrenamiento (Pre + Post-Esfuerzo Inmediato)",
         "timing": "17:00 - 18:30 (Ventana de Sesión)",
-        "targetKcal": 510,
+        "targetKcal": 504,
         "macroSplit": {
           "proteinG": 32.0,
           "carbsG": 85.0,
-          "fatG": 4.5
+          "fatG": 4.0
         },
         "leucineContentG": 3.4,
         "genericFoodGroups": [
           {
             "group": "Aislado de proteína de suero lácteo (Whey Isolate 90%)",
-            "amountGrams": 30,
-            "pG": 27.0,
+            "amountGrams": 33,
+            "pG": 30.0,
             "cG": 1.0,
             "fG": 0.5
           },
           {
-            "group": "Cereales instantáneos / Harina de arroz o maltodextrina",
-            "amountGrams": 50,
-            "pG": 3.5,
-            "cG": 42.0,
+            "group": "Cereales instantáneos / Harina de arroz o amilopectina",
+            "amountGrams": 55,
+            "pG": 1.0,
+            "cG": 46.0,
             "fG": 0.5
           },
           {
             "group": "Fruta desecada o fresca de rápida absorción (Dátiles / Plátano)",
             "amountGrams": 80,
-            "pG": 1.5,
-            "cG": 40.0,
+            "pG": 1.0,
+            "cG": 38.0,
             "fG": 0.2
           },
           {
@@ -191,7 +191,7 @@
             "amountGrams": 750,
             "pG": 0.0,
             "cG": 0.0,
-            "fG": 0.0
+            "fG": 2.8
           }
         ],
         "physiologicalObjective": "Hiperaminoacidemia rápida post-esfuerzo, activación de la vía mTORC1, aceleración de la resíntesis de glucógeno mediante transportadores GLUT4 estimulados por la contracción."
@@ -200,41 +200,41 @@
         "mealId": "omni-m4-cena",
         "name": "Comida 4: Cena / Síntesis Proteica Nocturna",
         "timing": "21:00 - 22:00",
-        "targetKcal": 652,
+        "targetKcal": 666,
         "macroSplit": {
-          "proteinG": 41.0,
-          "carbsG": 51.0,
-          "fatG": 33.0
+          "proteinG": 40.0,
+          "carbsG": 50.0,
+          "fatG": 34.0
         },
         "leucineContentG": 3.3,
         "genericFoodGroups": [
           {
-            "group": "Pescado azul rico en Omega-3 (Salmón / Caballa / Trucha)",
+            "group": "Pescado azul rico en Omega-3 (Salmón / Trucha)",
             "amountGrams": 170,
-            "pG": 35.0,
+            "pG": 36.0,
             "cG": 0.0,
-            "fG": 21.0
+            "fG": 20.0
           },
           {
             "group": "Tubérculos cocidos (Patata / Boniato al vapor)",
             "amountGrams": 220,
-            "pG": 4.0,
-            "cG": 42.0,
-            "fG": 0.3
+            "pG": 3.0,
+            "cG": 44.0,
+            "fG": 0.2
           },
           {
             "group": "Aceite de oliva virgen extra",
-            "amountGrams": 10,
+            "amountGrams": 13,
             "pG": 0.0,
             "cG": 0.0,
-            "fG": 10.0
+            "fG": 13.5
           },
           {
             "group": "Verduras mixtas cocidas (Calabacín, Judías verdes)",
-            "amountGrams": 200,
-            "pG": 2.5,
-            "cG": 7.0,
-            "fG": 0.4
+            "amountGrams": 150,
+            "pG": 1.0,
+            "cG": 6.0,
+            "fG": 0.3
           }
         ],
         "physiologicalObjective": "Aporte de ácidos grasos EPA/DHA antiinflamatorios, digestión más lenta para sostener el balance nitrogenado positivo durante las 7-8 horas de sueño reparador."
@@ -256,48 +256,48 @@
         "mealId": "veg-m1-desayuno",
         "name": "Comida 1: Desayuno / Primer Pulso Proteico Vegetal-Lácteo",
         "timing": "07:30 - 08:30",
-        "targetKcal": 565,
+        "targetKcal": 556,
         "macroSplit": {
-          "proteinG": 38.5,
-          "carbsG": 64.0,
-          "fatG": 17.0
+          "proteinG": 38.0,
+          "carbsG": 65.0,
+          "fatG": 16.0
         },
         "leucineContentG": 3.2,
         "genericFoodGroups": [
           {
             "group": "Cereales enteros / Copos de avena integral",
-            "amountGrams": 70,
-            "pG": 9.5,
-            "cG": 42.0,
-            "fG": 4.8
+            "amountGrams": 75,
+            "pG": 10.0,
+            "cG": 45.0,
+            "fG": 5.0
           },
           {
-            "group": "Queso fresco batido 0% / Yogur griego desnatado / Skyr",
-            "amountGrams": 200,
-            "pG": 22.0,
-            "cG": 8.0,
+            "group": "Queso fresco batido 0% / Skyr / Yogur griego desnatado",
+            "amountGrams": 220,
+            "pG": 24.0,
+            "cG": 9.0,
             "fG": 0.4
           },
           {
             "group": "Semillas oleaginosas (Chía / Semillas de lino trituradas)",
-            "amountGrams": 15,
-            "pG": 3.0,
+            "amountGrams": 12,
+            "pG": 2.5,
+            "cG": 1.0,
+            "fG": 4.5
+          },
+          {
+            "group": "Frutos secos (Nueces de nogal)",
+            "amountGrams": 9,
+            "pG": 1.0,
             "cG": 1.0,
             "fG": 6.0
           },
           {
-            "group": "Frutos secos (Nueces de nogal)",
-            "amountGrams": 10,
-            "pG": 1.5,
-            "cG": 1.5,
-            "fG": 6.5
-          },
-          {
             "group": "Fruta entera (Frutos rojos / Arándanos)",
-            "amountGrams": 100,
-            "pG": 1.0,
-            "cG": 12.0,
-            "fG": 0.3
+            "amountGrams": 80,
+            "pG": 0.5,
+            "cG": 9.0,
+            "fG": 0.1
           }
         ],
         "physiologicalObjective": "Combinación láctea rica en caseína y suero natural con fibra prebiótica soluble de la avena y ácidos grasos alfa-linolénicos (ALA) de las semillas."
@@ -306,48 +306,48 @@
         "mealId": "veg-m2-almuerzo",
         "name": "Comida 2: Almuerzo / Matriz Legumbre-Cereal Complementaria",
         "timing": "13:00 - 14:00",
-        "targetKcal": 675,
+        "targetKcal": 676,
         "macroSplit": {
-          "proteinG": 43.0,
-          "carbsG": 81.0,
-          "fatG": 18.5
+          "proteinG": 44.0,
+          "carbsG": 80.0,
+          "fatG": 20.0
         },
         "leucineContentG": 3.3,
         "genericFoodGroups": [
           {
-            "group": "Derivados de soja no transgénica (Tofu firme o Tempeh fermentado)",
-            "amountGrams": 180,
-            "pG": 28.0,
-            "cG": 4.0,
-            "fG": 11.0
+            "group": "Derivados de soja no transgénica (Tofu firme o Tempeh)",
+            "amountGrams": 160,
+            "pG": 26.0,
+            "cG": 3.0,
+            "fG": 9.0
           },
           {
-            "group": "Legumbres cocidas (Lentejas o garbanzos en conserva/hervidos)",
-            "amountGrams": 150,
-            "pG": 13.0,
-            "cG": 30.0,
-            "fG": 1.2
+            "group": "Legumbres cocidas (Lentejas o garbanzos hervidos)",
+            "amountGrams": 120,
+            "pG": 11.0,
+            "cG": 25.0,
+            "fG": 0.5
           },
           {
-            "group": "Pseudocereales / Quinoa o arroz integral (peso en seco)",
-            "amountGrams": 50,
-            "pG": 6.0,
-            "cG": 38.0,
-            "fG": 1.5
+            "group": "Pseudocereales / Quinoa o arroz integral (en seco)",
+            "amountGrams": 60,
+            "pG": 5.0,
+            "cG": 45.0,
+            "fG": 1.0
           },
           {
             "group": "Aceite de oliva virgen extra",
-            "amountGrams": 10,
+            "amountGrams": 9,
             "pG": 0.0,
             "cG": 0.0,
-            "fG": 10.0
+            "fG": 9.0
           },
           {
-            "group": "Hortalizas crucíferas (Brócoli / Coliflor / Col rizada)",
-            "amountGrams": 200,
-            "pG": 4.0,
-            "cG": 8.0,
-            "fG": 0.4
+            "group": "Hortalizas crucíferas (Brócoli / Col rizada)",
+            "amountGrams": 150,
+            "pG": 2.0,
+            "cG": 7.0,
+            "fG": 0.5
           }
         ],
         "physiologicalObjective": "Complementación de aminoácidos limitantes (lisina de las legumbres + metionina/cisteína del arroz/quinoa) para alcanzar un valor biológico equiparable a la proteína animal."
@@ -356,33 +356,33 @@
         "mealId": "veg-m3-peri-workout",
         "name": "Comida 3: Peri-Entrenamiento (Aislado Vegetal + Carbohidrato Rápido)",
         "timing": "17:00 - 18:30",
-        "targetKcal": 505,
+        "targetKcal": 504,
         "macroSplit": {
           "proteinG": 32.0,
-          "carbsG": 84.0,
+          "carbsG": 85.0,
           "fatG": 4.0
         },
         "leucineContentG": 3.0,
         "genericFoodGroups": [
           {
             "group": "Proteína vegetal en polvo aislada (Blend Guisante 70% + Arroz 30%)",
-            "amountGrams": 35,
-            "pG": 28.0,
+            "amountGrams": 36,
+            "pG": 29.0,
             "cG": 2.0,
             "fG": 1.2
           },
           {
             "group": "Harina de avena o amilopectina / Ciclodextrina",
-            "amountGrams": 50,
-            "pG": 4.0,
-            "cG": 40.0,
+            "amountGrams": 55,
+            "pG": 2.0,
+            "cG": 44.0,
             "fG": 2.5
           },
           {
             "group": "Plátano maduro o puré de manzana",
-            "amountGrams": 150,
-            "pG": 1.5,
-            "cG": 35.0,
+            "amountGrams": 160,
+            "pG": 1.0,
+            "cG": 39.0,
             "fG": 0.3
           },
           {
@@ -399,54 +399,54 @@
         "mealId": "veg-m4-cena",
         "name": "Comida 4: Cena / Concentrado Proteico y Fibra Digestiva",
         "timing": "21:00 - 22:00",
-        "targetKcal": 660,
+        "targetKcal": 666,
         "macroSplit": {
-          "proteinG": 41.0,
+          "proteinG": 40.0,
           "carbsG": 50.0,
-          "fatG": 34.5
+          "fatG": 34.0
         },
         "leucineContentG": 3.2,
         "genericFoodGroups": [
           {
             "group": "Proteína de trigo lavada (Seitán natural) o Soja texturizada",
-            "amountGrams": 120,
-            "pG": 29.0,
-            "cG": 5.0,
-            "fG": 1.8
+            "amountGrams": 100,
+            "pG": 25.0,
+            "cG": 4.0,
+            "fG": 1.5
           },
           {
             "group": "Huevos enteros camperos",
             "amountGrams": 110,
             "unitDescription": "2 unidades",
-            "pG": 13.5,
-            "cG": 0.8,
-            "fG": 10.2
+            "pG": 13.0,
+            "cG": 1.0,
+            "fG": 10.5
           },
           {
             "group": "Tubérculos (Boniato o patata al horno)",
             "amountGrams": 200,
-            "pG": 3.5,
+            "pG": 1.0,
             "cG": 40.0,
             "fG": 0.2
           },
           {
             "group": "Aceite de oliva virgen extra",
-            "amountGrams": 15,
+            "amountGrams": 14,
             "pG": 0.0,
             "cG": 0.0,
-            "fG": 15.0
+            "fG": 14.0
           },
           {
             "group": "Frutos secos (Almendras o nueces)",
-            "amountGrams": 15,
-            "pG": 3.0,
-            "cG": 1.5,
-            "fG": 8.0
+            "amountGrams": 11,
+            "pG": 0.5,
+            "cG": 1.0,
+            "fG": 7.5
           },
           {
             "group": "Verduras de hoja verde variadas",
-            "amountGrams": 150,
-            "pG": 2.0,
+            "amountGrams": 100,
+            "pG": 0.5,
             "cG": 4.0,
             "fG": 0.3
           }

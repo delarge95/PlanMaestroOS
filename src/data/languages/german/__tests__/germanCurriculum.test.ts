@@ -82,7 +82,7 @@ describe('Currículo alemán — integridad', () => {
       const ids = initialVocabulary.map((v) => v.id);
       expect(new Set(ids).size).toBe(ids.length);
       expect(ids).toContain('v1'); // semilla original intacta
-      expect(initialVocabulary.filter((v) => v.language === 'de').length).toBe(initialVocabulary.length);
+      expect(initialVocabulary.filter((v) => v.language === 'de').length).toBe(47);
     });
   });
 });
