@@ -36,6 +36,170 @@
       "type": "dataset",
       "evidenceTier": "internal-doc",
       "authority": { "domains": ["rutinas-app"], "priority": 1 }
+    },
+    {
+      "id": "metz-coping-pe-2003",
+      "title": "Coping with Premature Ejaculation",
+      "author": "Michael E. Metz & Barry W. McCarthy",
+      "year": 2003,
+      "edition": "1st",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["salud-sexual"], "priority": 2 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — llega por puente Gemini Flash (biblioteca/_llm-outputs/gemini-flash/), extracción ya en biblioteca/extracciones/metz-coping-pe-2003.md"
+      }
+    },
+    {
+      "id": "kaleb-kegel-men-2019",
+      "title": "Kegel Exercise for Men",
+      "author": "Vincent Kaleb",
+      "year": 2019,
+      "edition": "1st",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["salud-sexual", "suelo-pelvico"], "priority": 3 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — extracción ya en biblioteca/extracciones/kaleb-kegel-men-2019.md"
+      }
+    },
+    {
+      "id": "zilbergeld-new-male-sexuality-1992",
+      "title": "The New Male Sexuality",
+      "author": "Bernie Zilbergeld",
+      "year": 1992,
+      "edition": "revised",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["salud-sexual"], "priority": 3 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — extracción ya en biblioteca/extracciones/zilbergeld-new-male-sexuality-1992.md"
+      }
+    },
+    {
+      "id": "wuh-sexual-fitness-2002",
+      "title": "Sexual Fitness: 7 Essential Elements",
+      "author": "David K. Wuh & Cathy Fox",
+      "year": 2002,
+      "edition": "1st",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["salud-sexual"], "priority": 4 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — extracción ya en biblioteca/extracciones/wuh-sexual-fitness-2002.md"
+      }
+    },
+    {
+      "id": "paper-cooper-2015-pe-behavioral-therapies",
+      "title": "Behavioral Therapies for Management of Premature Ejaculation: A Systematic Review",
+      "author": "Cooper, Martyn-St James, Kaltenthaler, et al. (Sexual Medicine)",
+      "year": 2015,
+      "type": "paper",
+      "evidenceTier": "meta-analysis",
+      "authority": { "domains": ["salud-sexual"], "priority": 1 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — extracción ya en biblioteca/extracciones/paper-cooper-2015-pe-behavioral-therapies.md"
+      }
+    },
+    {
+      "id": "paper-raveendran-2021-pe-narrative-review",
+      "title": "Premature Ejaculation — Current Concepts in Management: Narrative Review",
+      "author": "Raveendran & Agarwal (Int J Reprod BioMed)",
+      "year": 2021,
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": { "domains": ["salud-sexual"], "priority": 2 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — extracción ya en biblioteca/extracciones/paper-raveendran-2021-pe-narrative-review.md"
+      }
+    },
+    {
+      "id": "paper-pearce-2015-sexual-dysfunction-prostate-surveillance",
+      "title": "Longitudinal Predictors of Sexual Dysfunction in Men on Active Surveillance for Prostate Cancer",
+      "author": "Pearce et al. (Sexual Medicine)",
+      "year": 2015,
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": { "domains": ["salud-sexual"], "priority": 3 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — puente Gemini Flash"
+      }
+    },
+    {
+      "id": "paper-pastuszak-2015-testosterone-preparations",
+      "title": "Comparison of Testosterone Gels, Injections, and Pellets",
+      "author": "Pastuszak et al. (Sexual Medicine)",
+      "year": 2015,
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": { "domains": ["salud-sexual"], "priority": 3 },
+      "gates": {
+        "nivel-permitido": "solo contextual/farmacológico-informativo — JAMÁS pauta ni dosificación; derivación obligatoria a urólogo/endocrino",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — puente Gemini Flash"
+      }
+    },
+    {
+      "id": "paper-helmer-2015-veterans-sexual-health",
+      "title": "Sexual Health and Function of Recent Male Combat Veterans",
+      "author": "Helmer et al. (Sexual Medicine)",
+      "year": 2015,
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": { "domains": ["salud-sexual"], "priority": 4 },
+      "gates": {
+        "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — puente Gemini Flash"
+      }
+    },
+    {
+      "id": "paper-veale-2015-bdd-sexual-functioning",
+      "title": "Sexual Functioning and Behavior of Men with BDD vs Men Anxious about Penis Size",
+      "author": "Veale et al. (Sexual Medicine)",
+      "year": 2015,
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": { "domains": ["salud-sexual"], "priority": 4 },
+      "gates": {
+        "nivel-permitido": "psicoeducativo — contenido sensible de imagen corporal; nunca screening diagnóstico desde la app; derivación a profesional",
+        "intervencion-medica": false,
+        "consejo-medico-directo": false,
+        "disclaimer-visible-obligatorio": true,
+        "chunking": "pendiente — puente Gemini Flash"
+      }
     }
   ]
 }

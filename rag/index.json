@@ -18,7 +18,7 @@
     },
     "clinical": {
       "version": "4.0.0",
-      "sources": 4,
+      "sources": 14,
       "chunks": 22
     },
     "fitness": {
