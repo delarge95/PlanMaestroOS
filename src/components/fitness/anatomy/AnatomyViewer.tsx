@@ -58,6 +58,8 @@ import {
   type SelectionPath,
 } from './composite';
 import { buildOwnerIndex } from './viewerLogic';
+import { primaryGroup } from '../../../data/fitness/anatomy/anatomyHierarchy';
+import { loadAnatomyModel } from './gltfCache';
 
 const COMPOSITE_MODELS = ['overview-skeleton', 'lower-limb', 'upper-limb', 'hand', 'colored-skull-base'] as const;
 const MODEL_LABELS: Record<string, string> = {
@@ -222,9 +224,39 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   }, []);
 
   // ── helpers de grupos (perezosos por estructura) ────────────────────────────
+  /**
+   * Grupos de una estructura usando la JERARQUÍA ANATÓMICA EXPLÍCITA
+   * (anatomyHierarchy.ts). Si la estructura pertenece a un grupo anatómico
+   * (p.ej. Deltoideus Medius → grp-deltoideus), los grupos incluyen TODAS
+   * las piezas de TODAS las estructuras del grupo → click en cualquier
+   * cabeza del deltoide resalta las 3 cabezas juntas.
+   * Estructuras sin grupo anatómico → fallback a buildSubgroups por nombre.
+   */
   const ensureGroups = useCallback((structureId: string) => {
     let g = groupsByStructureRef.current.get(structureId);
     if (g) return g;
+    const grp = primaryGroup(structureId);
+    if (grp) {
+      // JERARQUÍA ANATÓMICA: los subconjuntos = cada estructura del grupo
+      const groups = new Map<string, string[]>();
+      const groupOf = new Map<string, string>();
+      for (const sId of grp.structureIds) {
+        const st = getStructureById(sId);
+        if (!st) continue;
+        const keys: string[] = [];
+        for (const m of COMPOSITE_MODELS) {
+          for (const n of st.modelMeshes[m] ?? []) {
+            const k = pieceKey(m, n);
+            if (piecesRef.current.has(k)) { keys.push(k); groupOf.set(k, sId); }
+          }
+        }
+        if (keys.length) groups.set(sId, keys);
+      }
+      g = { groups, groupOf };
+      groupsByStructureRef.current.set(structureId, g);
+      return g;
+    }
+    // FALLBACK: subgrupos derivados del nombre (estructuras sin grupo anatómico)
     const st = getStructureById(structureId);
     const piecesOfStructure = [...structureByPieceRef.current.entries()]
       .filter(([, id]) => id === structureId)
