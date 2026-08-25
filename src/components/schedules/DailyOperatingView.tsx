@@ -23,7 +23,7 @@ const initialDailyBlocks: DailyBlock[] = [
   { id: 'b5', time: '09:00', shortTitle: 'Planeación TDAH', fullTitle: 'Agenda & Selección de Foco', category: 'clinical', status: 'completed' },
   { id: 'b6', time: '09:20', shortTitle: 'Bloque A: TwinSight MVP', fullTitle: 'Trabajo Profundo TwinSight X500', category: 'career', status: 'in_progress', actionUrl: '/app/career', actionLabel: 'TwinSight' },
   { id: 'b7', time: '12:00', shortTitle: 'Almuerzo & Descanso', fullTitle: 'Almuerzo & Pausa Digestiva', category: 'general', status: 'pending' },
-  { id: 'b8', time: '13:30', shortTitle: 'Alemán A1 (25 min)', fullTitle: 'Práctica & Vocabulario Alemán', category: 'german', status: 'pending', actionUrl: '/app/german', actionLabel: 'Alemán' },
+  { id: 'b8', time: '13:30', shortTitle: 'Alemán A1 (25 min)', fullTitle: 'Práctica & Vocabulario Alemán', category: 'german', status: 'pending', actionUrl: '/app/languages/german', actionLabel: 'Alemán' },
   { id: 'b9', time: '14:00', shortTitle: 'Exposición CBT', fullTitle: 'Sustentación & Regulación', category: 'clinical', status: 'pending' },
   { id: 'b10', time: '14:45', shortTitle: 'Bloque B: Producción', fullTitle: 'Caso de Estudio & GitHub Commit', category: 'career', status: 'pending', actionUrl: '/app/career', actionLabel: 'GitHub' },
   { id: 'b11', time: '17:15', shortTitle: 'Movilidad PM', fullTitle: 'Elephant Walks & Cadera', category: 'fitness', status: 'pending' },
