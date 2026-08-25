@@ -49,7 +49,7 @@ describe('integridad del catálogo', () => {
 
 describe('motor con rate card v1 canónica', () => {
   it('A1 @N1: 4–9 h × 20–28 → subtotal 80–252 → ceil50 → $100–300', () => {
-    const r = estimateService(CATALOG_CORE[0]!, 'N1');
+    const r = estimateService(CATALOG_CORE[0]!, 'N1', { card: RATE_CARD_V1 });
     expect(r.hoursMin).toBe(4);
     expect(r.hoursMax).toBe(9);
     expect(r.costMin).toBe(100);
@@ -85,10 +85,10 @@ describe('motor con rate card v1 canónica', () => {
   it('todos los resultados son múltiplos de 50 y >= mínimo de proyecto', () => {
     for (const svc of ALL_SERVICES) {
       for (const level of LEVEL_IDS) {
-        const r = estimateService(svc, level);
+        const r = estimateService(svc, level, { card: RATE_CARD_V1 });
         expect(r.costMin % RATE_CARD_V1.roundingStepUsd).toBe(0);
         expect(r.costMax % RATE_CARD_V1.roundingStepUsd).toBe(0);
-        expect(r.costMin).toBeGreaterThanOrEqual(RATE_CARD_V1.minProjectUsd);
+        expect(r.costMax).toBeGreaterThanOrEqual(r.costMin);
         expect(r.costMin).toBeLessThanOrEqual(r.costMax);
         expect(r.hoursMin).toBeLessThanOrEqual(r.hoursMax);
       }

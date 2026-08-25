@@ -1,7 +1,13 @@
 import type { HoursByLevel, ServiceDefinition, Subtask } from './types';
 
 const h = (min: number, max: number) => ({ min, max });
-const lvl = (n1: [number, number], n2: [number, number], n3: [number, number], n4: [number, number]): HoursByLevel => ({
+
+type Tup = [number, number];
+
+const q = (v: number) => Math.max(0.25, Math.round(v * 4) / 4);
+
+const lvl = (xs: Tup | null, n1: Tup, n2: Tup, n3: Tup, n4: Tup): HoursByLevel => ({
+  XS: h(xs ? xs[0] : q(n1[0] * 0.5), xs ? xs[1] : q(n1[1] * 0.55)),
   N1: h(n1[0], n1[1]),
   N2: h(n2[0], n2[1]),
   N3: h(n3[0], n3[1]),
@@ -16,51 +22,53 @@ const st = (id: string, nameEs: string, hours: HoursByLevel, extra: Partial<Subt
 });
 
 const DOC_02 = 'docs/servicios/02_catalogo_render_assets_rt.md';
+const DOC_03 = 'docs/servicios/03_catalogo_web_experiencias.md';
+const DOC_04 = 'docs/servicios/04_catalogo_footage_ia_soporte.md';
 
 const a1Subtasks: Subtask[] = [
-  st('a1-intake', 'Intake/brief + referencias', lvl([0.5, 1], [1, 2], [2, 3], [3, 5])),
-  st('a1-setup', 'Setup escena (cámara, luz, HDRI, composición)', lvl([1, 2], [2, 4], [4, 8], [8, 16])),
-  st('a1-materiales', 'Materiales/texturizado', lvl([1, 3], [3, 6], [6, 12], [12, 24])),
-  st('a1-render', 'Render + iteraciones (2 rondas incl.)', lvl([1, 2], [2, 4], [4, 8], [8, 12])),
-  st('a1-post', 'Post-producción (color, retoque, formatos)', lvl([0.5, 1], [1, 2], [2, 4], [4, 8])),
+  st('a1-intake', 'Intake/brief + referencias', lvl(null, [0.5, 1], [1, 2], [2, 3], [3, 5])),
+  st('a1-setup', 'Setup escena (cámara, luz, HDRI, composición)', lvl(null, [1, 2], [2, 4], [4, 8], [8, 16])),
+  st('a1-materiales', 'Materiales/texturizado', lvl(null, [1, 3], [3, 6], [6, 12], [12, 24])),
+  st('a1-render', 'Render + iteraciones (2 rondas incl.)', lvl(null, [1, 2], [2, 4], [4, 8], [8, 12])),
+  st('a1-post', 'Post-producción (color, retoque, formatos)', lvl(null, [0.5, 1], [1, 2], [2, 4], [4, 8])),
 ];
 
 const a2Subtasks: Subtask[] = [
-  st('a2-storyboard', 'Brief/storyboard/animatic', lvl([1, 2], [3, 5], [5, 10], [10, 20])),
-  st('a2-layout', 'Layout escena + cámaras', lvl([1, 2], [2, 5], [5, 10], [10, 20])),
-  st('a2-animacion', 'Animación (keyframe/procedural)', lvl([2, 4], [4, 10], [10, 25], [25, 60])),
-  st('a2-materiales', 'Materiales/iluminación', lvl([1, 3], [3, 6], [6, 12], [12, 24])),
-  st('a2-fx', 'FX/simulaciones', lvl([0, 0], [0, 6], [6, 20], [20, 50]), { optional: true }),
-  st('a2-render', 'Render + QC técnico', lvl([1, 2], [2, 5], [5, 12], [12, 30])),
-  st('a2-post', 'Edición/post/entrega', lvl([1, 2], [2, 4], [4, 8], [8, 16])),
+  st('a2-storyboard', 'Brief/storyboard/animatic', lvl([0.5, 1], [1, 2], [3, 5], [5, 10], [10, 20])),
+  st('a2-layout', 'Layout escena + cámaras', lvl([0.25, 0.5], [1, 2], [2, 5], [5, 10], [10, 20])),
+  st('a2-animacion', 'Animación (keyframe/procedural)', lvl([0.5, 1], [2, 4], [4, 10], [10, 25], [25, 60])),
+  st('a2-materiales', 'Materiales/iluminación', lvl([0.25, 0.75], [1, 3], [3, 6], [6, 12], [12, 24])),
+  st('a2-fx', 'FX/simulaciones', lvl([0, 0], [0, 0], [0, 6], [6, 20], [20, 50]), { optional: true }),
+  st('a2-render', 'Render + QC técnico', lvl([0.5, 1], [1, 2], [2, 5], [5, 12], [12, 30])),
+  st('a2-post', 'Edición/post/entrega', lvl([0.25, 0.75], [1, 2], [2, 4], [4, 8], [8, 16])),
 ];
 
 export const B_CORE_SUBTASKS: Subtask[] = [
-  st('b-intake', 'Intake/QC de referencias y specs técnicas', lvl([0.5, 1], [1, 2], [2, 3], [3, 5])),
-  st('b-modelado', 'Blockout/modelado hi→low (hard-surface u orgánico)', lvl([2, 4], [4, 10], [10, 25], [25, 80])),
-  st('b-uv', 'UV unwrap', lvl([1, 2], [2, 4], [4, 8], [8, 16])),
-  st('b-baking', 'Baking de mapas (AO/normal/etc.)', lvl([0.5, 1], [1, 3], [3, 6], [6, 12])),
-  st('b-texturizado', 'Texturizado PBR', lvl([1, 3], [3, 6], [6, 14], [14, 30])),
-  st('b-optimizacion', 'Optimización (LODs, draw calls, Draco/meshopt)', lvl([0.5, 1], [1, 3], [3, 6], [6, 12])),
-  st('b-qa', 'QA en motor target + export final', lvl([0.5, 1], [1, 2], [2, 4], [4, 8])),
+  st('b-intake', 'Intake/QC de referencias y specs técnicas', lvl(null, [0.5, 1], [1, 2], [2, 3], [3, 5])),
+  st('b-modelado', 'Blockout/modelado hi→low (hard-surface u orgánico)', lvl(null, [2, 4], [4, 10], [10, 25], [25, 80])),
+  st('b-uv', 'UV unwrap', lvl(null, [1, 2], [2, 4], [4, 8], [8, 16])),
+  st('b-baking', 'Baking de mapas (AO/normal/etc.)', lvl(null, [0.5, 1], [1, 3], [3, 6], [6, 12])),
+  st('b-texturizado', 'Texturizado PBR', lvl(null, [1, 3], [3, 6], [6, 14], [14, 30])),
+  st('b-optimizacion', 'Optimización (LODs, draw calls, Draco/meshopt)', lvl(null, [0.5, 1], [1, 3], [3, 6], [6, 12])),
+  st('b-qa', 'QA en motor target + export final', lvl(null, [0.5, 1], [1, 2], [2, 4], [4, 8])),
 ];
 
 export const DELTA_INTERACTIVIDAD: Subtask = st(
   'delta-interaccion',
   'Interactividad básica (hotspots/highlight/selección)',
-  lvl([2, 4], [4, 8], [8, 16], [16, 32]),
+  lvl(null, [2, 4], [4, 8], [8, 16], [16, 32]),
 );
 
 export const DELTA_ANIM_LOOP: Subtask = st(
   'delta-anim-loop',
   'Animación en loop (rig simple o blendshapes + clip idle)',
-  lvl([4, 8], [8, 16], [16, 35], [35, 80]),
+  lvl(null, [4, 8], [8, 16], [16, 35], [35, 80]),
 );
 
 export const DELTA_ANIM_INTERACTIVA: Subtask = st(
   'delta-anim-interactiva',
   'Animación interactiva (estados, input, transiciones)',
-  lvl([8, 15], [15, 30], [30, 70], [70, 150]),
+  lvl(null, [8, 15], [15, 30], [30, 70], [70, 150]),
 );
 
 export const CATALOG_CORE: ServiceDefinition[] = [
@@ -69,13 +77,7 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     family: 'render',
     nameEs: 'Render 3D estático',
     unitEs: 'imagen',
-    driversEs: [
-      'complejidad del asset',
-      'nº de vistas/variantes',
-      'resolución final',
-      'tipo de materiales (PBR estándar vs SSS/telas/líquidos)',
-      'retoque post',
-    ],
+    driversEs: ['complejidad del asset', 'nº de vistas/variantes', 'resolución final', 'tipo de materiales (PBR estándar vs SSS/telas/líquidos)', 'retoque post'],
     confidence: 'explicit',
     subtasks: a1Subtasks,
     sourceDoc: DOC_02,
@@ -84,15 +86,8 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     id: 'a2-render-animacion',
     family: 'render',
     nameEs: 'Render animación 3D',
-    unitEs: 'clip ~10 s 1080p 30 fps',
-    driversEs: [
-      'duración total',
-      'sims/FX presentes',
-      'personajes/rigging',
-      'cámaras complejas',
-      'resolución/fps',
-      'audio',
-    ],
+    unitEs: 'clip ~10 s 1080p 30 fps (XS = loop 2–3 s)',
+    driversEs: ['duración total', 'sims/FX presentes', 'personajes/rigging', 'cámaras complejas', 'resolución/fps', 'audio'],
     confidence: 'explicit',
     subtasks: a2Subtasks,
     sourceDoc: DOC_02,
@@ -145,11 +140,11 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     driversEs: ['nº de efectos', 'target desktop/móvil', 'integración pipeline existente', 'documentación'],
     confidence: 'inferred',
     subtasks: [
-      st('b5-brief', 'Brief/referencias + prueba de concepto visual', lvl([1, 2], [2, 3], [3, 5], [5, 8])),
-      st('b5-implementacion', 'Implementación shader (R&D)', lvl([2, 5], [5, 12], [12, 30], [30, 70])),
-      st('b5-tuning', 'Tuning de parámetros + variantes', lvl([1, 2], [2, 5], [5, 12], [12, 25])),
-      st('b5-perf', 'Optimización/perf móvil', lvl([0.5, 2], [2, 4], [4, 10], [10, 20])),
-      st('b5-docs', 'Documentación + escena ejemplo', lvl([0.5, 1], [1, 3], [3, 6], [6, 12])),
+      st('b5-brief', 'Brief/referencias + prueba de concepto visual', lvl(null, [1, 2], [2, 3], [3, 5], [5, 8])),
+      st('b5-implementacion', 'Implementación shader (R&D)', lvl(null, [2, 5], [5, 12], [12, 30], [30, 70])),
+      st('b5-tuning', 'Tuning de parámetros + variantes', lvl(null, [1, 2], [2, 5], [5, 12], [12, 25])),
+      st('b5-perf', 'Optimización/perf móvil', lvl(null, [0.5, 2], [2, 4], [4, 10], [10, 20])),
+      st('b5-docs', 'Documentación + escena ejemplo', lvl(null, [0.5, 1], [1, 3], [3, 6], [6, 12])),
     ],
     sourceDoc: DOC_02,
   },
@@ -161,10 +156,10 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     driversEs: ['nº partes móviles', 'profundidad del despiece', 'UI asociada'],
     confidence: 'inferred',
     subtasks: [
-      st('b6-preparacion', 'Análisis/preparación de despiece del asset', lvl([1, 3], [3, 6], [6, 15], [15, 40])),
-      st('b6-explosion', 'Setup animación/explosión (curvas, etapas)', lvl([2, 4], [4, 10], [10, 25], [25, 60])),
-      st('b6-ui', 'UI/controles (slider, steps, etiquetas)', lvl([2, 4], [4, 8], [8, 18], [18, 40])),
-      st('b6-integracion', 'Integración motor + perf', lvl([1, 2], [2, 5], [5, 12], [12, 25])),
+      st('b6-preparacion', 'Análisis/preparación de despiece del asset', lvl(null, [1, 3], [3, 6], [6, 15], [15, 40])),
+      st('b6-explosion', 'Setup animación/explosión (curvas, etapas)', lvl(null, [2, 4], [4, 10], [10, 25], [25, 60])),
+      st('b6-ui', 'UI/controles (slider, steps, etiquetas)', lvl(null, [2, 4], [4, 8], [8, 18], [18, 40])),
+      st('b6-integracion', 'Integración motor + perf', lvl(null, [1, 2], [2, 5], [5, 12], [12, 25])),
     ],
     sourceDoc: DOC_02,
   },
@@ -176,11 +171,11 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     driversEs: ['estado de partida (topología/UVs/materiales)', 'poly count objetivo', 'plataformas objetivo'],
     confidence: 'qualitative',
     subtasks: [
-      st('b7-auditoria', 'Auditoría técnica (poly/tris, overdraw, texturas, draw calls)', lvl([0.5, 1], [1, 2], [2, 4], [4, 8])),
-      st('b7-retopo', 'Retopo/rebuild parcial', lvl([0, 2], [2, 6], [6, 15], [15, 40])),
-      st('b7-rebake', 'Re-bake/texturas', lvl([0.5, 2], [2, 5], [5, 12], [12, 25])),
-      st('b7-lods', 'LODs/export', lvl([0.5, 1], [1, 2], [2, 5], [5, 10])),
-      st('b7-qa', 'QA motor', lvl([0.5, 1], [1, 2], [2, 3], [3, 6])),
+      st('b7-auditoria', 'Auditoría técnica (poly/tris, overdraw, texturas, draw calls)', lvl(null, [0.5, 1], [1, 2], [2, 4], [4, 8])),
+      st('b7-retopo', 'Retopo/rebuild parcial', lvl(null, [0, 2], [2, 6], [6, 15], [15, 40])),
+      st('b7-rebake', 'Re-bake/texturas', lvl(null, [0.5, 2], [2, 5], [5, 12], [12, 25])),
+      st('b7-lods', 'LODs/export', lvl(null, [0.5, 1], [1, 2], [2, 5], [5, 10])),
+      st('b7-qa', 'QA motor', lvl(null, [0.5, 1], [1, 2], [2, 3], [3, 6])),
     ],
     sourceDoc: DOC_02,
   },
@@ -192,9 +187,9 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     driversEs: ['tipo de rig (props vs biped facial)', 'nº de clips', 'calidad de deformación'],
     confidence: 'inferred',
     subtasks: [
-      st('b8-rig', 'Rig base (según complejidad)', lvl([2, 5], [5, 12], [12, 30], [30, 70])),
-      st('b8-pesos', 'Pesos/deformación', lvl([1, 3], [3, 8], [8, 20], [20, 45])),
-      st('b8-clips', 'Clips de animación (lote de 2)', lvl([2, 6], [6, 12], [12, 24], [24, 50])),
+      st('b8-rig', 'Rig base (según complejidad)', lvl(null, [2, 5], [5, 12], [12, 30], [30, 70])),
+      st('b8-pesos', 'Pesos/deformación', lvl(null, [1, 3], [3, 8], [8, 20], [20, 45])),
+      st('b8-clips', 'Clips de animación (lote de 2)', lvl(null, [2, 6], [6, 12], [12, 24], [24, 50])),
     ],
     sourceDoc: DOC_02,
   },
@@ -203,22 +198,28 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     family: 'datos',
     nameEs: 'CAD → WebGL ready (servicio insignia)',
     unitEs: 'ensamblaje CAD',
-    driversEs: [
-      'nº de piezas del ensamblaje (driver principal)',
-      'complejidad geométrica (prismático vs freeform)',
-      'calidad del CAD de origen',
-      'necesidad de despiece posterior (encadena con B6)',
-      'target web desktop vs móvil exigente',
-    ],
+    driversEs: ['nº de piezas del ensamblaje (driver principal)', 'complejidad geométrica (prismático vs freeform)', 'calidad del CAD de origen', 'necesidad de despiece posterior (encadena con B6)', 'target web desktop vs móvil exigente'],
     confidence: 'explicit',
+    cotizador: {
+      driverPrincipal: {
+        nombre: 'número de piezas del ensamblaje',
+        umbrales: ['≤15 piezas simples/prismáticas', '15–60 piezas mixtas', '60–150 piezas o freeform moderado', '150+ piezas / freeform masivo / cableado'],
+      },
+      addOns: [
+        { id: 'B6', refServicio: 'b6-mecanicas-especificas', delta: 'ver ficha B6' },
+        { id: 'USDZ-AR', delta: '+10%' },
+        { id: 'REPORTE-PERF', delta: '+5%' },
+        { id: 'LOTE-MULTI', delta: '−15–25% por modelo adicional' },
+      ],
+    },
     subtasks: [
-      st('f1-ingesta', 'Ingesta CAD/QC (limpieza import, unidades, escala)', lvl([0.5, 1], [1, 3], [3, 6], [6, 15])),
-      st('f1-retopo', 'Decimado/retopo por pieza', lvl([1, 3], [3, 10], [10, 30], [30, 100])),
-      st('f1-uvs-baking', 'UVs + baking batch (AO/normal/curvature)', lvl([1, 2], [2, 6], [6, 15], [15, 40])),
-      st('f1-texturas', 'Texturas/materiales PBR técnicos', lvl([1, 3], [3, 8], [8, 20], [20, 45])),
-      st('f1-metadata', 'Jerarquía/nombres/metadata por pieza (IDs)', lvl([0.5, 1], [1, 3], [3, 8], [8, 20])),
-      st('f1-lods', 'LODs + compresión (Draco/KTX2)', lvl([0.5, 1], [1, 3], [3, 8], [8, 18])),
-      st('f1-qa', 'QA visor web + reporte de performance', lvl([0.5, 1], [1, 2], [2, 5], [5, 12])),
+      st('f1-ingesta', 'Ingesta CAD/QC (limpieza import, unidades, escala)', lvl([0.5, 1], [0.5, 1], [1, 3], [3, 6], [6, 15])),
+      st('f1-retopo', 'Decimado/retopo por pieza', lvl([0.75, 1.5], [1, 3], [3, 10], [10, 30], [30, 100])),
+      st('f1-uvs-baking', 'UVs + baking batch (AO/normal/curvature)', lvl([0.5, 1.25], [1, 2], [2, 6], [6, 15], [15, 40])),
+      st('f1-texturas', 'Texturas/materiales PBR técnicos', lvl([0.75, 1.5], [1, 3], [3, 8], [8, 20], [20, 45])),
+      st('f1-metadata', 'Jerarquía/nombres/metadata por pieza (IDs)', lvl([0.25, 0.75], [0.5, 1], [1, 3], [3, 8], [8, 20])),
+      st('f1-lods', 'LODs + compresión (Draco/KTX2)', lvl([0.25, 0.75], [0.5, 1], [1, 3], [3, 8], [8, 18])),
+      st('f1-qa', 'QA visor web + reporte de performance', lvl([0.25, 0.75], [0.5, 1], [1, 2], [2, 5], [5, 12])),
     ],
     sourceDoc: DOC_02,
   },
@@ -230,12 +231,75 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     driversEs: ['unicidad del material', 'tileable vs unique bake', 'restricción NoAI'],
     confidence: 'explicit',
     subtasks: [
-      st(
-        'f2-set',
-        'Diseño/generación del set + calibración PBR (seamless + preview en contexto)',
-        lvl([1, 2], [2, 4], [4, 8], [8, 15]),
-      ),
+      st('f2-set', 'Diseño/generación del set + calibración PBR (seamless + preview en contexto)', lvl([0.5, 1], [1, 2], [2, 4], [4, 8], [8, 15])),
     ],
     sourceDoc: DOC_02,
+  },
+  {
+    id: 'c1-visor-embebido',
+    family: 'web-3d',
+    nameEs: 'Visor 3D embebido ligero (Spline / model-viewer / Sketchfab)',
+    unitEs: 'escena embebida',
+    driversEs: ['visor elegido (licencia/plan)', 'nº de escenas', 'hotspots soportados por el visor', 'personalización de UI posible'],
+    confidence: 'explicit',
+    subtasks: [
+      st('c1-intake', 'Intake + QC del asset y del plan del visor', lvl([0.5, 1], [1, 2], [2, 3], [3, 5], [4, 6])),
+      st('c1-setup-embed', 'Optimización/upload + embed responsive + tuning + QA browsers', lvl([2, 4], [2.5, 5], [5, 10], [10, 19], [20, 38])),
+    ],
+    sourceDoc: DOC_03,
+  },
+  {
+    id: 'c2-visor-custom',
+    family: 'web-3d',
+    nameEs: 'Visor custom three.js / Babylon.js',
+    unitEs: 'visor web',
+    driversEs: ['nº hotspots/features', 'datos dinámicos (JSON/CMS) vs hardcode', 'AR opcional', 'i18n', 'UI provista o incluida'],
+    confidence: 'explicit',
+    subtasks: [
+      st('c2-spec-carga', 'Spec técnica + pipeline de carga (GLB + Draco/KTX2)', lvl([1.5, 3.5], [2.5, 6], [7, 13], [14, 28], [28, 56])),
+      st('c2-interaccion-ui', 'Interacción núcleo + UI overlay (info, controles, responsive)', lvl([2.5, 6], [3.5, 9], [9, 18], [18, 38], [38, 76])),
+      st('c2-perf-deploy', 'Perf móvil + QA browsers + entrega/integración', lvl([1, 2.5], [1.5, 5], [4, 9], [10, 22], [22, 49])),
+    ],
+    sourceDoc: DOC_03,
+  },
+  {
+    id: 'c3-webapp-3d',
+    family: 'web-3d',
+    nameEs: 'Web App 3D (configurador / herramienta técnica)',
+    unitEs: 'aplicación web',
+    driversEs: ['variantes/reglas de configuración', 'fuente de datos (CMS/API)', 'autenticación', 'nº SKUs/assets', 'integraciones terceros'],
+    confidence: 'inferred',
+    subtasks: [
+      st('c3-discovery', 'Discovery/spec funcional + flujo/wireframe', lvl([3, 6], [5, 11], [11, 26], [27, 57], [57, 112])),
+      st('c3-core', 'Arquitectura + escena 3D configurable + reglas', lvl([6, 12], [11, 23], [23, 58], [58, 124], [124, 244])),
+      st('c3-qa-deploy', 'QA/E2E + perf + deploy/docs/handoff', lvl([3, 6], [5, 11], [11, 30], [29, 64], [64, 124])),
+    ],
+    sourceDoc: DOC_03,
+  },
+  {
+    id: 'd1-compositing-foto',
+    family: 'vfx',
+    nameEs: 'Compositing 3D sobre fotografía',
+    unitEs: 'imagen (toma única)',
+    driversEs: ['complejidad del fondo', 'calidad de la foto', 'nº de capas CG', 'materiales reflectivos/translúcidos'],
+    confidence: 'explicit',
+    subtasks: [
+      st('d1-analisis-solve', 'Análisis de escena + resolución de cámara', lvl([1.5, 3.5], [2.5, 6], [6, 13], [13, 26], [26, 47])),
+      st('d1-integracion-comp', 'Layout + integración modelo + lighting match + comp final', lvl([2.5, 5.5], [4, 9], [9, 20], [20, 39], [39, 70])),
+    ],
+    sourceDoc: DOC_04,
+  },
+  {
+    id: 'g1-discovery-scoping',
+    family: 'soporte',
+    nameEs: 'Discovery & scoping de proyecto',
+    unitEs: 'informe + SOW borrador (50 % acreditable al contratar en 60 días)',
+    driversEs: ['nº de stakeholders', 'estado del material de entrada', 'incertidumbre técnica'],
+    confidence: 'qualitative',
+    subtasks: [
+      st('g1-trabajo', 'Intake/entrevistas + análisis técnico + SOW con estimación', lvl([2, 4.5], [2.5, 6], [6, 12], [12, 24], [24, 40])),
+      st('g1-presentacion', 'Presentación y revisión con el cliente', lvl([0.5, 1.5], [1, 2], [2, 4], [4, 8], [8, 14])),
+    ],
+    sourceDoc: DOC_04,
   },
 ];
