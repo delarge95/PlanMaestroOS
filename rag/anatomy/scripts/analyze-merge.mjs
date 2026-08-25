@@ -81,6 +81,24 @@ function worldAabb(localMin, localMax, world) {
 
 const norm = (s) => (s || '').normalize('NFD').replace(/[\u0300-\u036f\u200b\u200c\ufeff]/g, '').toLowerCase().replace(/[\[\]()]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 
+// ── nombres RUNTIME: GLTFLoader sanitiza (sanitizeNodeName) y deduplica ─────
+// (mismas reglas validadas en inventory-glb.mjs ciclo 3)
+const sanitize = (s) => String(s ?? '').replace(/\s/g, '_').replace(/[[\].:/]/g, '');
+function makeUniquifier() {
+  const used = new Map();
+  return (name) => {
+    const s = sanitize(name);
+    if (!s) return s;
+    if (used.has(s)) {
+      const n = used.get(s) + 1;
+      used.set(s, n);
+      return `${s}_${n}`;
+    }
+    used.set(s, 0);
+    return s;
+  };
+}
+
 // ── analizar cada modelo ─────────────────────────────────────────────────────
 const FILES = ['overview-skeleton', 'upper-limb', 'lower-limb', 'hand', 'colored-skull-base', 'overview-colored-skull', 'exploded-skull', 'vertebrae'];
 const MODELS = {};
@@ -88,11 +106,15 @@ for (const key of FILES) {
   const glb = parseGlb(readFileSync(join(GLB_DIR, `${key}.glb`)));
   const nodes = glb.nodes ?? [];
   const sceneRoots = glb.scenes?.[glb.scene ?? 0]?.nodes ?? [];
-  const pieces = new Map(); // nombre runtime → info
+  const uniquify = makeUniquifier();
+  const pieces = new Map(); // nombre RUNTIME (sanitizado) → info
   const walk = (ni, parent) => {
     const node = nodes[ni];
     if (!node) return;
     const world = composeWorld(node, parent);
+    // GLTFLoader nombra TODOS los nodos (grupos incluidos): el uniquifier
+    // debe consumir en el mismo orden para replicar sufijos _N
+    const runtimeName = uniquify(node.name);
     if (node.mesh !== undefined && node.name) {
       const mesh = glb.meshes?.[node.mesh];
       let aabbWorld = null;
@@ -100,7 +122,7 @@ for (const key of FILES) {
         const acc = glb.accessors[mesh.primitives[0].attributes.POSITION];
         if (acc?.min && acc?.max) aabbWorld = worldAabb(acc.min, acc.max, world);
       }
-      pieces.set(node.name, {
+      pieces.set(runtimeName, {
         parent: nodes[parent.i]?.name ?? '(raíz)',
         t: world.t.map((n) => +n.toFixed(4)),
         aabb: aabbWorld,
@@ -189,6 +211,8 @@ function kindFromContainer(container, name) {
   if (/arter/.test(c)) return 'artery';
   if (/vein/.test(c)) return 'vein';
   if (/nerve/.test(c)) return 'nerve';
+  // los tendones viven en contenedores de músculos: el nombre manda
+  if (/tendon/.test(n)) return 'tendon';
   if (/muscle/.test(c)) return 'muscle';
   if (/cartilage/.test(c)) return 'cartilage';
   if (/synovia|bursa/.test(c)) return 'bursa';
@@ -303,7 +327,7 @@ out.plan = {
 writeFileSync(join(OUT_DIR, 'merge-analysis.json'), JSON.stringify(out, null, 1));
 
 // ── generar src/data/fitness/anatomy/compositePlan.ts (consumo del visor) ────
-const esc = (s) => String(s).replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+const esc = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
 let ts = `// src/data/fitness/anatomy/compositePlan.ts
 // AG-ANATOM — GENERADO por rag/anatomy/scripts/analyze-merge.mjs (no editar a mano).
 // Plan del modelo COMPUESTO: unión de los 5 GLB con dedup geométrico por AABB
@@ -312,6 +336,7 @@ let ts = `// src/data/fitness/anatomy/compositePlan.ts
 // hiddenByDup: la pieza queda oculta por defecto porque un especialista la
 // representa con geometría idéntica en el mismo sitio.
 // Regenerar: node rag/anatomy/scripts/analyze-merge.mjs
+// (emitido como tuplas compactas: 1380 object literals desbordan el inferidor de TS)
 
 export type CompositeRegion = 'axial' | 'skull' | 'upper' | 'lower' | 'hand';
 export type CompositeKind =
@@ -328,12 +353,17 @@ export interface CompositePiece {
   hiddenByDup?: string;
 }
 
-export const COMPOSITE_PIECES: CompositePiece[] = [
+// [model, name, region, kind, container, hiddenByDup?]
+const RAW: Array<[string, string, CompositeRegion, CompositeKind, string, string?]> = [
 `;
 for (const p of COMPOSITE) {
-  ts += `  { model: '${p.model}', name: '${esc(p.name)}', region: '${p.region}', kind: '${p.kind}', container: '${esc(p.container)}'${p.hiddenByDup ? `, hiddenByDup: '${esc(p.hiddenByDup)}'` : ''} },\n`;
+  ts += `  ['${esc(p.model)}', '${esc(p.name)}', '${p.region}', '${p.kind}', '${esc(p.container)}'${p.hiddenByDup ? `, '${esc(p.hiddenByDup)}'` : ''}],\n`;
 }
 ts += `];
+
+export const COMPOSITE_PIECES: CompositePiece[] = RAW.map(([model, name, region, kind, container, hiddenByDup]) => ({
+  model, name, region, kind, container, hiddenByDup,
+}));
 
 /** Pares exploded↔base del cráneo para el slider de explosión (por nombre). */
 export const EXPLODE_PAIRS: Record<string, string> = {
@@ -347,7 +377,7 @@ export const COMPOSITE_STATS = {
   porKind: ${JSON.stringify(out.plan.porKind)},
   ocultasPorDup: ${JSON.stringify(out.plan.ocultasPorDup)},
   generado: '${out.generado}',
-} as const;
+};
 `;
 writeFileSync(join(process.cwd(), 'src/data/fitness/anatomy/compositePlan.ts'), ts);
 console.log('OK → compositePlan.ts (' + COMPOSITE.length + ' piezas)');

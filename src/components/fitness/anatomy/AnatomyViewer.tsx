@@ -1,65 +1,111 @@
-// src/components/fitness/anatomy/AnatomyViewer.tsx
-// AG-ANATOM — visor 3D anatómico (tarea 4, Fase 0 de la ficha §3.2B).
-// Three.js puro (sin react-three-fiber): carga diferida por modelo, Draco decoder
-// self-hosted (/models/anatomy/draco), OrbitControls, hover/tap pieza → nombre +
-// highlight emissive, selección de estructura desde el grafo (query params
-// ?model=&structure=), modo "explosionado" cambiando al modelo exploded-skull,
-// reset de cámara, panel colapsable, mobile-first (useIsMobile READ de ui/) y
-// prefers-reduced-motion → render estático con aviso (una sola pasada).
+﻿// src/components/fitness/anatomy/AnatomyViewer.tsx
+// AG-ANATOM — visor 3D anatómico COMPUESTO (ciclo 5, mandato usuario).
 //
-// CICLO 4 (corrección de bugs de selección reportados por el usuario):
-// 1. Visibilidad decidida UNA vez por mesh (lista plana por nombre de NODO) —
-//    antes el mismo mesh se indexaba 2× (nodo + geometría) y la última escritura
-//    ganaba: rompía filtros de capa y aislamiento. Los contenedores padre
-//    (Bones/Muscles/…) NUNCA se ocultan → ningún filtro oculta un subárbol.
-// 2. Material POR MESH en carga (los GLB comparten material: mutar emissive
-//    contaminaba hermanas → selecciones que no se deseleccionaban).
-// 3. Sin outline "inverted-hull" (se percibía como mesh duplicado desfasado);
-//    el resalte es emissive+teñido, fuerte o suave.
-// 4. Click SIEMPRE selecciona: dueño más específico (hueso > articulación que
-//    lo mapea), alias nodo/geometría normalizado, y fallback a selección de
-//    PIEZA suelta (con nombre+kind) para meshes sin ficha en el grafo.
-// 5. Articulaciones: huesos constituyentes en suave + marcador 3D en la
- //   localización aproximada de la articulación (centroide de sus huesos).
+// Arquitectura (reemplaza al visor de modelo único del ciclo 4 — historial en git):
+// - MODELO COMPUESTO: carga progresiva de 5 GLB que comparten espacio mundial
+//   (Δ=0 verificado por AABB en rag/anatomy/extracciones/merge-analysis.md) con
+//   dedup geométrico según compositePlan (piezas hiddenByDup ocultas: el
+//   especialista las representa).
+// - FOCUS por región: Completo / Cráneo / Mano / Miembro superior / inferior /
+//   Vértebras aisladas (deep-link legacy ?model= mapeado a focus).
+// - CAPAS MULTI-SELECCIONABLES con color por tipo (huesos, músculos, tendones,
+//   ligamentos, nervios, arterias, venas, cartílagos, bursas, fascia, superficie).
+// - SELECCIÓN POR FASES: 1er click = estructura entera (p.ej. tríceps);
+//   2º click sobre una cabeza = solo esa cabeza; otro click sobre la misma =
+//   volver a la estructura.
+// - AISLAMIENTO MÚLTIPLE + OCULTAR/DESOCULTAR piezas.
+// - CRÁNEO: toggle Coloreado/Vista general + slider de explosión (cross-fade
+//   con alineamiento por centroide: el exploded trae el desplazamiento horneado
+//   en vértices, no en transforms).
+// - FICHA RICA con todos los campos de la BD y trazabilidad.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Box, RotateCcw, Layers, ChevronDown, ChevronUp, Scan, X, Loader2, Crosshair, Eye, EyeOff } from 'lucide-react';
+import {
+  Box, RotateCcw, ChevronDown, ChevronUp, Scan, X, Loader2, Crosshair, Eye, EyeOff, Search, Layers as LayersIcon,
+} from 'lucide-react';
 import useIsMobile from '../../ui/useIsMobile';
 import {
-  ANATOMY_MODELS,
+  ANATOMY_STRUCTURES,
+  BODY_ZONE_LABELS_ES,
   anatomyGraphStats,
-  getStructuresForModel,
   getStructureById,
+  type AnatomyStructure,
+  type BodyZone,
+  type StructureKind,
 } from '../../../data/fitness/anatomyGraph';
-import { getMeshKind } from '../../../data/fitness/anatomy/meshCatalog';
-import type { AnatomyStructure, StructureKind } from '../../../data/fitness/anatomy/types';
 import {
-  buildOwnerIndex,
-  decideMeshVisibility,
-  prettyMeshName,
-  resolveSelectionNames,
-  type ViewerSelection,
-} from './viewerLogic';
+  COMPOSITE_PIECES,
+  EXPLODE_PAIRS,
+  COMPOSITE_STATS,
+  type CompositePiece,
+} from '../../../data/fitness/anatomy/compositePlan';
+import type { JointEntry } from '../../../data/fitness/anatomy/types';
+import {
+  DEFAULT_LAYERS,
+  FOCUS_LABELS,
+  KIND_TINT_STRENGTH,
+  LAYER_DEFS,
+  focusFromLegacyModel,
+  highlightColor,
+  layerDef,
+  nextPhaseSelection,
+  phaseLabel,
+  pieceKey,
+  pieceVisible,
+  type CompositeFocus,
+  type CompositeKind,
+  type PieceSelection,
+} from './composite';
+import { buildOwnerIndex } from './viewerLogic';
 
-const HIGHLIGHT_COLOR = 0x35d0ff;
-const HIGHLIGHT_EMISSIVE = 0x0e7fa8;
-/** opacidad de las piezas que tapan la selección (feedback #3: capas ocluidas) */
-const OCCLUDER_OPACITY = 0.12;
-// colores pre-instanciados para highlight (evita alloc por pieza)
-const HIGHLIGHT_EMISSIVE_COLOR = new THREE.Color(HIGHLIGHT_EMISSIVE);
-const HIGHLIGHT_TINT_COLOR = new THREE.Color(HIGHLIGHT_COLOR);
+/** GLB que componen el modelo compuesto, en orden de carga. */
+const COMPOSITE_MODELS = ['overview-skeleton', 'lower-limb', 'upper-limb', 'hand', 'colored-skull-base'] as const;
+const MODEL_LABELS: Record<string, string> = {
+  'overview-skeleton': 'Esqueleto base',
+  'lower-limb': 'Miembro inferior',
+  'upper-limb': 'Miembro superior',
+  hand: 'Mano',
+  'colored-skull-base': 'Cráneo',
+};
+/** lookup O(1) del plan por clave model:name */
+const PLAN_BY_KEY = new Map(COMPOSITE_PIECES.map((p) => [pieceKey(p.model, p.name), p]));
 
-/** Filtros de categoría del grafo (feedback #4-5). kinds=null → sin filtrar. */
-const LAYER_FILTERS: Array<{ key: string; label: string; kinds: StructureKind[] | null }> = [
-  { key: 'all', label: 'Todo', kinds: null },
-  { key: 'muscle', label: 'Músculos', kinds: ['muscle'] },
-  { key: 'connective', label: 'Tendones + ligamentos', kinds: ['tendon', 'ligament'] },
-  { key: 'nerve', label: 'Nervios', kinds: ['nerve'] },
-  { key: 'skeleton', label: 'Huesos + articulaciones', kinds: ['bone', 'joint'] },
-];
+/**
+ * Loader PROPIO del compuesto (NO gltfCache): el compuesto se apropia de las
+ * mallas (las re-parenta a sus grupos), y gltfCache comparte escenas con las
+ * miniaturas — mutarlas desde aquí las rompería. Cache local por sesión.
+ */
+const compositeCache = new Map<string, Promise<THREE.Group>>();
+function loadCompositeModel(file: string): Promise<THREE.Group> {
+  let p = compositeCache.get(file);
+  if (!p) {
+    p = (async () => {
+      const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js');
+      const { DRACOLoader } = await import('three/examples/jsm/loaders/DRACOLoader.js');
+      const loader = new GLTFLoader();
+      const draco = new DRACOLoader();
+      draco.setDecoderPath('/models/anatomy/draco/');
+      loader.setDRACOLoader(draco);
+      const gltf = await loader.loadAsync(file);
+      draco.dispose();
+      return gltf.scene;
+    })();
+    compositeCache.set(file, p);
+    p.catch(() => compositeCache.delete(file));
+  }
+  return p;
+}
+
+/** StructureKind del grafo → kind de compuesto (para color/highlight). */
+const STRUCTURE_KIND_TO_COMPOSITE: Record<StructureKind, CompositeKind> = {
+  bone: 'bone',
+  muscle: 'muscle',
+  tendon: 'tendon',
+  ligament: 'ligament',
+  nerve: 'nerve',
+  joint: 'cartilage',
+};
 
 function queryParam(name: string): string | null {
   if (typeof window === 'undefined') return null;
@@ -67,10 +113,14 @@ function queryParam(name: string): string | null {
 }
 
 interface Props {
-  /** modelo inicial (por defecto el esqueleto general) */
   initialModel?: string;
-  /** estructura inicial a resaltar (id del grafo) */
   initialStructure?: string;
+}
+
+interface PieceEntry {
+  mesh: THREE.Mesh;
+  piece: CompositePiece;
+  key: string;
 }
 
 export default function AnatomyViewer({ initialModel, initialStructure }: Props) {
@@ -80,55 +130,79 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
-  const modelRootRef = useRef<THREE.Group | null>(null);
+  const rootRef = useRef<THREE.Group | null>(null);
   const rafRef = useRef<number>(0);
-  const disposablesRef = useRef<Array<{ dispose: () => void }>>([]);
-  const namedMeshesRef = useRef<Map<string, THREE.Object3D[]>>(new Map());
-  /** lista PLANA de meshes con su nombre de NODO — la visibilidad se decide UNA
-   *  vez por pieza (ciclo 4: antes cada mesh se indexaba 2× por nodo+geometría) */
-  const meshListRef = useRef<Array<{ mesh: THREE.Mesh; name: string }>>([]);
-  /** alias geometryName → nodeName (meshDefs de Blender distintos del nodo) */
-  const aliasToPrimaryRef = useRef<Map<string, string>>(new Map());
-  /** nombre de nodo/alias → id de la estructura dueña MÁS ESPECÍFICA */
-  const structureByMeshRef = useRef<Map<string, string>>(new Map());
-  const originalsRef = useRef<Map<THREE.Object3D, { emissive?: THREE.Color; intensity?: number; color?: THREE.Color }>>(new Map());
-  // refs espejo para handlers estables del loop de escena
   const stoppedRef = useRef(false);
   const staticModeRef = useRef(false);
-  const selectionRef = useRef<ViewerSelection | null>(null);  const selectionNamesRef = useRef<string[]>([]);
-  const layerFilterRef = useRef('all');
-  const isolateTargetRef = useRef<ViewerSelection | null>(null);
-  /** meshes con material clonado para transparencia (occluders) — mesh → original */
+
+  /** piezas del compuesto indexadas por clave model:name */
+  const piecesRef = useRef<Map<string, PieceEntry>>(new Map());
+  /** pieza → estructura dueña (dueño más específico) */
+  const structureByPieceRef = useRef<Map<string, string>>(new Map());
+  /** estructura → nº de piezas presentes en el compuesto */
+  const structurePieceCountRef = useRef<Map<string, number>>(new Map());
+  /** valores originales de material para restaurar el highlight */
+  const originalsRef = useRef<Map<THREE.Object3D, { emissive?: THREE.Color; intensity?: number; color?: THREE.Color }>>(new Map());
+  /** materiales intercambiados por clones (oclu­sores) — mesh → original */
   const matOriginalsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
   const occluderMeshesRef = useRef<THREE.Mesh[]>([]);
-  /** marcador 3D de la articulación seleccionada (core + halo) */
   const jointMarkerRef = useRef<THREE.Group | null>(null);
+  /** grupo del cráneo explosionado + offsets de alineación por pieza */
+  const explodedRef = useRef<{ group: THREE.Group; offsets: Map<string, THREE.Vector3> } | null>(null);
+  /** grupo del cráneo vista general (overview-colored-skull) */
+  const generalSkullRef = useRef<THREE.Group | null>(null);
+
   const loadingRef = useRef(true);
-  const modelKeyRef = useRef(initialModel ?? 'overview-skeleton');
-  const structuresForModelRef = useRef<AnatomyStructure[]>([]);
+  const stateRef = useRef({
+    focus: 'full' as CompositeFocus,
+    layers: new Set<CompositeKind>(DEFAULT_LAYERS),
+    hidden: new Set<string>(),
+    isolated: new Set<string>(),
+    selection: { structureId: null, phasePiece: null } as PieceSelection,
+    colorByKind: true,
+    skullVersion: 'colored' as 'colored' | 'general',
+    explodeT: 0,
+  });
 
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [modelKey, setModelKey] = useState(initialModel ?? 'overview-skeleton');
+  const [progress, setProgress] = useState<{ done: number; total: number; label: string }>({ done: 0, total: COMPOSITE_MODELS.length, label: '' });
   const [loading, setLoading] = useState(true);
   const [hoverName, setHoverName] = useState<string | null>(null);
+  const [focus, setFocus] = useState<CompositeFocus>(() => {
+    const fromModel = focusFromLegacyModel(initialModel ?? queryParam('model'));
+    if (fromModel) return fromModel;
+    // deep-link de estructura: focus = el mejor modelo que la contiene
+    const sid = initialStructure ?? queryParam('structure');
+    const s = sid ? getStructureById(sid) : undefined;
+    if (s) {
+      for (const m of COMPOSITE_MODELS) if ((s.modelMeshes[m]?.length ?? 0) > 0) return focusFromLegacyModel(m) ?? 'full';
+    }
+    return 'full';
+  });
+  const [layers, setLayers] = useState<Set<CompositeKind>>(new Set(DEFAULT_LAYERS));
+  const [colorByKind, setColorByKind] = useState(true);
+  const [skullVersion, setSkullVersion] = useState<'colored' | 'general'>('colored');
+  const [explodeT, setExplodeT] = useState(0);
   const [selectedId, setSelectedId] = useState<string | null>(initialStructure ?? queryParam('structure'));
-  /** pieza seleccionada SIN ficha en el grafo (fallback de click, ciclo 4) */
-  const [selectedMeshName, setSelectedMeshName] = useState<string | null>(null);
-  /** alias geometryName→nodeName como estado: reactiva los memos tras la carga */
-  const [aliasToPrimary, setAliasToPrimary] = useState<Map<string, string>>(new Map());
+  const [phasePiece, setPhasePiece] = useState<string | null>(null);
+  const [isolated, setIsolated] = useState<Set<string>>(new Set());
+  const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [panelOpen, setPanelOpen] = useState(!isMobile);
+  const [panelQuery, setPanelQuery] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [layerFilter, setLayerFilter] = useState('all');
-  const [isolateTarget, setIsolateTarget] = useState<ViewerSelection | null>(null);
 
-  // modelo inicial desde URL (?model=)
-  useEffect(() => {
-    const m = initialModel ?? queryParam('model');
-    if (m && ANATOMY_MODELS.some((x) => x.key === m)) setModelKey(m);
-    const s = initialStructure ?? queryParam('structure');
-    if (s) setSelectedId(s);
-  }, [initialModel, initialStructure]);
+  const selectedStructure = selectedId ? getStructureById(selectedId) : undefined;
+  const stats = useMemo(() => anatomyGraphStats(), []);
 
+  // sincronizar refs espejo (los handlers del canvas leen de aquí)
+  loadingRef.current = loading;
+  stateRef.current = {
+    focus, layers, hidden, isolated,
+    selection: { structureId: selectedId, phasePiece },
+    colorByKind, skullVersion, explodeT,
+  };
+
+  // prefers-reduced-motion
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -138,295 +212,25 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     return () => mq.removeEventListener('change', update);
   }, []);
 
-  const model = useMemo(() => ANATOMY_MODELS.find((m) => m.key === modelKey) ?? ANATOMY_MODELS[0], [modelKey]);
-  const structuresForModel = useMemo(() => getStructuresForModel(model.key), [model.key]);
-  const selectedStructure = selectedId ? getStructureById(selectedId) : undefined;
-  const stats = useMemo(() => anatomyGraphStats(), []);
-
-  // selección unificada: estructura del grafo O pieza suelta (ciclo 4)
-  const selection: ViewerSelection | null = useMemo(() => {
-    if (selectedStructure) return { type: 'structure', id: selectedStructure.id };
-    if (selectedMeshName) return { type: 'mesh', name: selectedMeshName };
-    return null;
-  }, [selectedStructure, selectedMeshName]);
-  const selectionNames = useMemo(
-    () => resolveSelectionNames(selection, model.key, getStructureById, aliasToPrimary),
-    [selection, model.key, aliasToPrimary],
+  // ── estructuras del compuesto (panel) ───────────────────────────────────────
+  const compositeStructures = useMemo(
+    () => ANATOMY_STRUCTURES.filter((s) => COMPOSITE_MODELS.some((m) => (s.modelMeshes[m]?.length ?? 0) > 0)),
+    [],
   );
 
-  // lista lateral acorde al filtro de capas activo (feedback #4)
-  const filterKinds = LAYER_FILTERS.find((f) => f.key === layerFilter)?.kinds ?? null;
-  const panelStructures = filterKinds
-    ? structuresForModel.filter((s) => filterKinds.includes(s.kind))
-    : structuresForModel;
-
-  // índice nombre→estructura dueña (para filtros por categoría del grafo y click).
-  // Pre-carga va sin alias; al terminar la carga se reconstruye con alias
-  // (meshDef→nodo) desde el callback del loader.
-  useEffect(() => {
-    structureByMeshRef.current = buildOwnerIndex(structuresForModel, model.key);
-  }, [structuresForModel, model.key]);
-
-  // ── highlight de la estructura seleccionada ─────────────────────────────────
-  // Ciclo 4: SIN outline inverted-hull (el clon escalado 1.035 se percibía como
-  // un mesh duplicado desfasado). El resalte es emissive + teñido, en dos
-  // intensidades: 'strong' (selección normal) y 'soft' (huesos constituyentes
-  // de una articulación, que no deben eclipsar el marcador de la articulación).
-  // Materiales POR MESH (clonados en carga): restaurar/mutar no contamina
-  // piezas hermanas que compartían material en el GLB.
-  const applyHighlight = useCallback((objectNames: string[], mode: 'strong' | 'soft' = 'strong') => {
-    const map = namedMeshesRef.current;
-    const want = new Set(objectNames);
-    // restaurar anteriores
-    for (const [obj, orig] of originalsRef.current) {
-      const mesh = obj as THREE.Mesh;
-      const mat = mesh.material as THREE.MeshStandardMaterial | undefined;
-      if (mat) {
-        if (mat.emissive) {
-          mat.emissive.copy(orig.emissive ?? new THREE.Color(0x000000));
-          mat.emissiveIntensity = orig.intensity ?? 0;
-        }
-        if (orig.color && mat.color) mat.color.copy(orig.color);
-      }
-    }
-    originalsRef.current.clear();
-    const emissiveIntensity = mode === 'strong' ? 2.2 : 0.5;
-    const colorLerp = mode === 'strong' ? 0.5 : 0.16;
-    for (const name of want) {
-      const objs = map.get(name) ?? [];
-      for (const obj of objs) {
-        const mesh = obj as THREE.Mesh;
-        const mat = mesh.material as THREE.MeshStandardMaterial | undefined;
-        if (!mat) continue;
-        // mismo objeto puede aparecer por nombre de nodo y de geometry: guardar original solo una vez
-        if (!originalsRef.current.has(obj)) {
-          originalsRef.current.set(obj, {
-            emissive: mat.emissive?.clone(),
-            intensity: mat.emissiveIntensity,
-            color: mat.color?.clone(),
-          });
-        }
-        if (mat.emissive) {
-          mat.emissive.copy(HIGHLIGHT_EMISSIVE_COLOR);
-          mat.emissiveIntensity = emissiveIntensity;
-        }
-        if (mat.color) mat.color.lerp(HIGHLIGHT_TINT_COLOR, colorLerp);
-      }
-    }
+  const layerCounts = useMemo(() => {
+    const c: Record<string, number> = {};
+    for (const p of COMPOSITE_PIECES) c[p.kind] = (c[p.kind] ?? 0) + 1;
+    return c;
   }, []);
 
-  // ── marcador 3D de articulación (ciclo 4, feedback #6) ─────────────────────
-  // Los GLB no traen la articulación como pieza (mapean sus huesos). Para que
-  // la articulación EN SÍ sea lo destacado: huesos en suave + esfera marcadora
-  // (core + halo) en la localización aproximada (centroide de los huesos).
-  const removeJointMarker = useCallback(() => {
-    const g = jointMarkerRef.current;
-    if (!g) return;
-    g.removeFromParent();
-    g.traverse((o) => {
-      const m = o as THREE.Mesh;
-      if (m.isMesh) {
-        m.geometry.dispose();
-        const mats = Array.isArray(m.material) ? m.material : [m.material];
-        for (const mat of mats) mat?.dispose();
-      }
-    });
-    jointMarkerRef.current = null;
-  }, []);
-
-  const addJointMarker = useCallback((names: string[]) => {
-    const root = modelRootRef.current;
-    if (!root) return;
-    const targets: THREE.Object3D[] = [];
-    for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
-    if (!targets.length) return;
-    const box = new THREE.Box3();
-    for (const t of targets) box.expandByObject(t);
-    if (box.isEmpty()) return;
-    const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3());
-    const modelMaxDim = Math.max(...new THREE.Box3().setFromObject(root).getSize(new THREE.Vector3()).toArray()) || 1;
-    // radio relativo a la articulación (huesos que la forman), acotado al modelo
-    const r = THREE.MathUtils.clamp(
-      Math.min(size.x, size.y, size.z) * 0.14,
-      modelMaxDim * 0.008,
-      modelMaxDim * 0.045,
-    );
-    const g = new THREE.Group();
-    const core = new THREE.Mesh(
-      new THREE.SphereGeometry(r, 24, 16),
-      new THREE.MeshBasicMaterial({ color: HIGHLIGHT_COLOR }),
-    );
-    const halo = new THREE.Mesh(
-      new THREE.SphereGeometry(r * 2.1, 24, 16),
-      new THREE.MeshBasicMaterial({ color: HIGHLIGHT_COLOR, transparent: true, opacity: 0.16, depthWrite: false }),
-    );
-    core.raycast = () => {}; // el marcador jamás intercepta picks
-    halo.raycast = () => {};
-    g.add(core, halo);
-    g.position.copy(center);
-    root.add(g);
-    jointMarkerRef.current = g;
-  }, []);
-
-  // ── carga del modelo (diferida por modelo) ─────────────────────────────────
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    setIsolateTarget(null); // los nombres de mesh cambian con el modelo
-    setSelectedMeshName(null); // una pieza suelta solo tiene sentido en su modelo
-    setHoverName(null); // el hover del modelo anterior queda obsoleto
-    const loader = new GLTFLoader();
-    const draco = new DRACOLoader();
-    // decoder self-hosted (copiado de three/examples/jsm/libs/draco) — sin CDN externo
-    draco.setDecoderPath('/models/anatomy/draco/');
-    loader.setDRACOLoader(draco);
-
-    loader.load(
-      model.file,
-      (gltf) => {
-        if (cancelled || !modelRootRef.current) return;
-        removeJointMarker();
-        // restaurar materiales translúcidos (occluders) del modelo saliente
-        for (const [mesh, orig] of matOriginalsRef.current) {
-          const clone = mesh.material;
-          mesh.material = orig;
-          const mats = Array.isArray(clone) ? clone : [clone];
-          for (const m of mats) m?.dispose();
-        }
-        matOriginalsRef.current.clear();
-        occluderMeshesRef.current = [];
-        // limpiar modelo anterior (liberar VRAM: geometrías, materiales y texturas)
-        const root = modelRootRef.current;
-        root.traverse((o) => {
-          const m = o as THREE.Mesh;
-          if (!m.isMesh) return;
-          m.geometry?.dispose();
-          const mats = Array.isArray(m.material) ? m.material : [m.material];
-          for (const mat of mats) {
-            const std = mat as THREE.MeshStandardMaterial | null;
-            if (!std) continue;
-            for (const key of Object.keys(std) as Array<keyof THREE.MeshStandardMaterial>) {
-              const tex = std[key] as unknown as THREE.Texture | undefined;
-              if (tex && (tex as THREE.Texture).isTexture) tex.dispose();
-            }
-            std.dispose();
-          }
-        });
-        while (root.children.length) {
-          const child = root.children[0];
-          root.remove(child);
-        }
-        namedMeshesRef.current.clear();
-        originalsRef.current.clear();
-        // índices de ESTA carga
-        const meshList: Array<{ mesh: THREE.Mesh; name: string }> = [];
-        const aliases = new Map<string, string>();
-        const gltfOriginalMats = new Set<THREE.Material>();
-        // preparar materiales + índice de nombres (nodo y mesh)
-        gltf.scene.traverse((obj) => {
-          const mesh = obj as THREE.Mesh;
-          if (mesh.isMesh) {
-            mesh.castShadow = false;
-            mesh.receiveShadow = false;
-            // material POR MESH (ciclo 4): los GLB comparten material entre
-            // meshes y mutar emissive/opacidad por pieza contaminaba hermanas
-            // (selecciones que no se limpiaban, hover fantasma). clone()
-            // comparte las texturas por referencia: coste de VRAM ~0.
-            // ⚠️ PRESERVAR singular vs array: envolver un material singular en
-            // array de 1 hace que projectObject dibuje SOLO vía geometry.groups
-            // (vacías en estos GLB) → 0 draw calls SILENCIOSOS (bug ciclo 4).
-            const originals: THREE.Material[] = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-            for (const m of originals) gltfOriginalMats.add(m);
-            mesh.material = Array.isArray(mesh.material)
-              ? mesh.material.map((m) => m.clone())
-              : (mesh.material as THREE.Material).clone();
-            const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-            for (const m of mats) {
-              const std = m as THREE.MeshStandardMaterial;
-              if (std) {
-                std.side = THREE.FrontSide;
-                std.transparent = false;
-                std.depthWrite = true;
-              }
-            }
-            // nombre primario = NODO (el meshDef de Blender puede ser basura:
-            // "mesh.228", "Circle.007"…); alias geometría→nodo para resolver
-            // mappings que apunten al meshDef (p.ej. Flexor_retinaculum_of_wrist)
-            const primary = obj.name || mesh.geometry?.name || '';
-            if (primary) meshList.push({ mesh, name: primary });
-            const geoName = mesh.geometry?.name ?? '';
-            if (geoName && obj.name && geoName !== obj.name) aliases.set(geoName, obj.name);
-          }
-          const nodeName = obj.name;
-          if (nodeName) {
-            const arr = namedMeshesRef.current.get(nodeName) ?? [];
-            arr.push(obj);
-            namedMeshesRef.current.set(nodeName, arr);
-          }
-          const meshName = (obj as THREE.Mesh).isMesh ? ((obj as THREE.Mesh).geometry?.name ?? '') : '';
-          if (meshName) {
-            const arr = namedMeshesRef.current.get(meshName) ?? [];
-            arr.push(obj);
-            namedMeshesRef.current.set(meshName, arr);
-          }
-        });
-        // los materiales originales compartidos ya no referencian meshes: liberar
-        for (const m of gltfOriginalMats) m.dispose();
-        meshListRef.current = meshList;
-        aliasToPrimaryRef.current = aliases;
-        setAliasToPrimary(aliases);
-        // dueño por pieza con prioridad de especificidad (hueso > articulación)
-        structureByMeshRef.current = buildOwnerIndex(structuresForModelRef.current, model.key, aliases);
-        root.add(gltf.scene);
-        // encuadre inicial
-        const box = new THREE.Box3().setFromObject(root);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const cam = cameraRef.current;
-        if (cam) {
-          cam.position.set(center.x + maxDim * 0.9, center.y + maxDim * 0.35, center.z + maxDim * 1.5);
-          cam.near = maxDim / 100;
-          cam.far = maxDim * 20;
-          cam.updateProjectionMatrix();
-          cam.lookAt(center);
-        }
-        const ctrl = controlsRef.current;
-        if (ctrl) {
-          ctrl.target.copy(center);
-          ctrl.maxDistance = maxDim * 6;
-          ctrl.minDistance = maxDim * 0.35;
-          ctrl.update();
-        }
-        if (sceneRef.current) {
-          const hemi = sceneRef.current.children.find((c) => c instanceof THREE.HemisphereLight) as THREE.HemisphereLight | undefined;
-          if (hemi) hemi.position.set(center.x, center.y + maxDim, center.z);
-        }
-        setLoading(false);
-      },
-      undefined,
-      (err) => {
-        if (!cancelled) {
-          setError(`No se pudo cargar el modelo (${model.file}). ${(err as Error)?.message ?? ''}`);
-          setLoading(false);
-        }
-      },
-    );
-    return () => {
-      cancelled = true;
-      draco.dispose();
-    };
-  }, [model.file, model.key, removeJointMarker]);
-
-  // ── escena base (una sola vez) ─────────────────────────────────────────────
+  // ── escena base (una sola vez) ──────────────────────────────────────────────
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x0a0b0e);
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 60);
     const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: false, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     mount.appendChild(renderer.domElement);
@@ -444,13 +248,13 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.rotateSpeed = 0.8;
-    controls.enablePan = true; // feedback usuario: pan (botón derecho / dos dedos)
+    controls.enablePan = true;
 
     sceneRef.current = scene;
     cameraRef.current = camera;
     controlsRef.current = controls;
     rendererRef.current = renderer;
-    modelRootRef.current = root;
+    rootRef.current = root;
 
     const resize = () => {
       const w = mount.clientWidth || 1;
@@ -468,7 +272,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     let lastHover: THREE.Object3D | null = null;
     let lastHoverEmissive: THREE.Color | null = null;
     let lastHoverIntensity = 0;
-    // tap vs drag (seleccionar solo si el puntero no se movió al soltar)
     let downX = 0;
     let downY = 0;
     let moved = false;
@@ -484,9 +287,9 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         let visibleThrough = o.visible;
         while (o && o !== root) {
           if (!o.visible) visibleThrough = false;
-          if (o.name && !o.name.startsWith('node-')) {
+          if (o.name && o.userData?.__pieceKey) {
             if (visibleThrough) return o;
-            break; // pieza oculta por filtro/aislamiento: probar siguiente hit
+            break;
           }
           o = o.parent;
         }
@@ -497,9 +300,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     const onMove = (e: PointerEvent) => {
       if (loadingRef.current) return;
       const hit = pickAt(e.clientX, e.clientY);
-      setHoverName(hit?.name ?? null);
+      setHoverName(hit ? String(hit.userData.__pieceName ?? hit.name ?? '') : null);
       if (hit !== lastHover) {
-        // restaurar anterior
         if (lastHover && lastHoverEmissive) {
           const mat = (lastHover as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
           if (mat?.emissive && !originalsRef.current.has(lastHover)) {
@@ -509,18 +311,16 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         }
         lastHover = hit;
         const mat = hit ? (hit as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined : undefined;
-        if (hit && mat?.emissive) {
+        if (hit && mat?.emissive && !originalsRef.current.has(hit)) {
           lastHoverEmissive = mat.emissive.clone();
           lastHoverIntensity = mat.emissiveIntensity;
-          if (!originalsRef.current.has(hit)) {
-            mat.emissive.set(HIGHLIGHT_EMISSIVE);
-            mat.emissiveIntensity = 0.9;
-          }
+          const p = piecesRef.current.get(String(hit.userData.__pieceKey));
+          mat.emissive.set(p ? highlightColor(p.piece.kind) : 0x0e7fa8);
+          mat.emissiveIntensity = 0.7;
         } else {
           lastHoverEmissive = null;
           lastHoverIntensity = 0;
         }
-        // en modo estático (reduced motion) no hay loop: pintar el hover a mano
         if (staticModeRef.current) renderer.render(scene, camera);
       }
     };
@@ -531,31 +331,24 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     };
     const onClick = (e: PointerEvent) => {
       if (loadingRef.current) return;
-      // tap vs drag: solo seleccionar si el puntero no se movió (>6px = rotación)
       if (moved || Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
       const hit = pickAt(e.clientX, e.clientY);
       if (!hit) {
-        // click en vacío: deseleccionar (ciclo 4 — antes no había forma directa)
+        // click en vacío: deseleccionar todo
         setSelectedId(null);
-        setSelectedMeshName(null);
+        setPhasePiece(null);
         return;
       }
-      // dueño MÁS ESPECÍFICO de la pieza (hueso > articulación que lo mapea;
-      // alias nodo/geometría resuelto). Antes: primer match por orden del grafo
-      // (las articulaciones ganaban a los huesos) y las piezas sin dueña no
-      // seleccionaban nada.
-      const ownerId = structureByMeshRef.current.get(hit.name);
-      if (ownerId) {
-        setSelectedId(ownerId);
-        setSelectedMeshName(null);
-      } else {
-        // pieza sin ficha en el grafo: seleccionar la PIEZA (feedback inmediato:
-        // resalte + nombre + kind + centrar/aislar siguen operativos)
-        setSelectedMeshName(hit.name);
-        setSelectedId(null);
-      }
-      setIsolateTarget(null); // al cambiar de pieza se sale del aislamiento
-      setHoverName(hit.name);
+      const key = String(hit.userData.__pieceKey);
+      const ownerId = structureByPieceRef.current.get(key) ?? null;
+      const next = nextPhaseSelection({
+        current: stateRef.current.selection,
+        clickedPieceKey: key,
+        clickedStructureId: ownerId,
+        structurePieceCount: ownerId ? (structurePieceCountRef.current.get(ownerId) ?? 1) : 1,
+      });
+      setSelectedId(next.structureId);
+      setPhasePiece(next.phasePiece);
     };
     const onDrag = (e: PointerEvent) => {
       if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) moved = true;
@@ -566,40 +359,26 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     dom.addEventListener('pointerdown', onDown);
     dom.addEventListener('pointermove', onDrag);
     dom.addEventListener('pointerup', onClick);
-    disposablesRef.current.push({
-      dispose: () => {
-        dom.removeEventListener('pointermove', onMove);
-        dom.removeEventListener('pointerdown', onDown);
-        dom.removeEventListener('pointermove', onDrag);
-        dom.removeEventListener('pointerup', onClick);
-      },
-    });
-
-    // (el loop de render lo posee el efecto de reduced-motion, que reacciona al cambio)
+    const disposables = [() => {
+      dom.removeEventListener('pointermove', onMove);
+      dom.removeEventListener('pointerdown', onDown);
+      dom.removeEventListener('pointermove', onDrag);
+      dom.removeEventListener('pointerup', onClick);
+    }];
 
     return () => {
       stoppedRef.current = true;
       cancelAnimationFrame(rafRef.current);
       ro.disconnect();
-      for (const d of disposablesRef.current) d.dispose();
-      disposablesRef.current = [];
+      for (const d of disposables) d();
       controls.dispose();
       renderer.dispose();
       if (dom.parentElement) dom.parentElement.removeChild(dom);
-      scene.traverse((o) => {
-        const m = o as THREE.Mesh;
-        if (m.isMesh) m.geometry?.dispose();
-      });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── loop de render ─────────────────────────────────────────────────────────
-  // prefers-reduced-motion ya NO deshabilita controles ni bucle: orbit/zoom/pan
-  // son interacciones del usuario, no animación ambiental. El "modo estático"
-  // anterior rompía el visor completo en sistemas con reducir-animaciones
-  // (controls off + sin re-render tras filtros/highlight/carga). No hay
-  // auto-rotación, así que el único movimiento es el que inicia el usuario.
+  // ── loop de render ──────────────────────────────────────────────────────────
   useEffect(() => {
     const renderer = rendererRef.current;
     const scene = sceneRef.current;
@@ -609,7 +388,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     staticModeRef.current = false;
     stoppedRef.current = false;
     ctrl.enabled = true;
-    ctrl.enableDamping = true;
     const loop = () => {
       ctrl.update();
       renderer.render(scene, camera);
@@ -622,9 +400,122 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     };
   }, []);
 
-  // ── transparencia de capas que tapan la selección (feedback #3) ────────────
-  // clone-on-write del material: los GLB comparten material entre meshes y
-  // mutar la opacidad contaminaría a piezas no deseadas.
+  // ── clonado de material por mesh PRESERVANDO singular/array ─────────────────
+  const cloneMaterials = (mesh: THREE.Mesh) => {
+    if (Array.isArray(mesh.material)) mesh.material = mesh.material.map((m) => m.clone());
+    else mesh.material = (mesh.material as THREE.Material).clone();
+    const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    for (const m of mats) {
+      const std = m as THREE.MeshStandardMaterial;
+      if (std?.color) (std.userData as Record<string, unknown>).__origColor = std.color.clone();
+    }
+  };
+
+  // ── carga progresiva del compuesto ──────────────────────────────────────────
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      setError(null);
+      piecesRef.current.clear();
+      structureByPieceRef.current.clear();
+      structurePieceCountRef.current.clear();
+      try {
+        for (let i = 0; i < COMPOSITE_MODELS.length; i++) {
+          const model = COMPOSITE_MODELS[i];
+          if (cancelled) return;
+          setProgress({ done: i, total: COMPOSITE_MODELS.length, label: MODEL_LABELS[model] });
+          const scene = await loadCompositeModel(`/models/anatomy/${model}.glb`);
+          if (cancelled || !rootRef.current) return;
+          if (!scene) throw new Error(`GLB sin escena: ${model}`);
+          const root = rootRef.current;
+          const group = new THREE.Group();
+          group.name = model;
+          const structures = ANATOMY_STRUCTURES.filter((s) => (s.modelMeshes[model]?.length ?? 0) > 0);
+          const owners = buildOwnerIndex(structures, model);
+          // RECOLECTAR primero, re-parentar DESPUÉS: hacer group.add() dentro del
+          // traverse muta el array de children que se está iterando (three hace
+          // parent.remove() al añadir) → crash silencioso "reading 'traverse'".
+          const toAdd: THREE.Mesh[] = [];
+          scene.traverse((obj) => {
+            const mesh = obj as THREE.Mesh;
+            if (!mesh.isMesh) return;
+            mesh.castShadow = false;
+            mesh.receiveShadow = false;
+            cloneMaterials(mesh);
+            const key = pieceKey(model, obj.name ?? '');
+            const piece = PLAN_BY_KEY.get(key);
+            mesh.userData.__pieceKey = key;
+            mesh.userData.__pieceName = obj.name ?? '';
+            if (piece) {
+              piecesRef.current.set(key, { mesh, piece, key });
+              toAdd.push(mesh);
+              const ownerId = owners.get(obj.name ?? '') ?? owners.get(key);
+              if (ownerId) {
+                if (!structureByPieceRef.current.has(key)) structureByPieceRef.current.set(key, ownerId);
+                structurePieceCountRef.current.set(ownerId, (structurePieceCountRef.current.get(ownerId) ?? 0) + 1);
+              }
+            }
+          });
+          for (const mesh of toAdd) group.add(mesh);
+          root.add(group);
+        }
+        setProgress({ done: COMPOSITE_MODELS.length, total: COMPOSITE_MODELS.length, label: '' });
+        // encuadre inicial
+        const root = rootRef.current;
+        const cam = cameraRef.current;
+        const ctrl = controlsRef.current;
+        if (root && cam && ctrl) {
+          const box = new THREE.Box3().setFromObject(root);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z) || 1;
+          cam.position.set(center.x + maxDim * 0.9, center.y + maxDim * 0.35, center.z + maxDim * 1.5);
+          cam.near = maxDim / 200;
+          cam.far = maxDim * 20;
+          cam.updateProjectionMatrix();
+          cam.lookAt(center);
+          ctrl.target.copy(center);
+          ctrl.maxDistance = maxDim * 6;
+          ctrl.minDistance = maxDim * 0.2;
+          ctrl.update();
+        }
+        setLoading(false);
+      } catch (err) {
+        console.error(`[composite] error de carga en "${stateRef.current ? MODEL_LABELS[COMPOSITE_MODELS[Math.min(progress.done, COMPOSITE_MODELS.length - 1)]] : '?'}":`, (err as Error)?.stack ?? err);
+        if (!cancelled) {
+          setError(`No se pudo cargar el modelo compuesto. ${(err as Error)?.message ?? ''}`);
+          setLoading(false);
+        }
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  // ── visibilidad por pieza (focus/capas/aislamiento/ocultas/dedup) ───────────
+  const applyVisibility = useCallback(() => {
+    const st = stateRef.current;
+    for (const { mesh, piece } of piecesRef.current.values()) {
+      mesh.visible = pieceVisible(piece, {
+        focus: st.focus,
+        layers: st.layers,
+        hidden: st.hidden,
+        isolated: st.isolated,
+      });
+      // el cráneo "vista general" sustituye a las piezas coloreadas
+      if (st.focus === 'skull' && st.skullVersion === 'general' && piece.model === 'colored-skull-base' && piece.region === 'skull') {
+        mesh.visible = false;
+      }
+    }
+    if (generalSkullRef.current) {
+      generalSkullRef.current.visible = st.focus === 'skull' && st.skullVersion === 'general';
+    }
+    if (explodedRef.current) {
+      explodedRef.current.group.visible = st.focus === 'skull' && st.skullVersion === 'colored' && st.explodeT > 0.001;
+    }
+  }, []);
+
+  // ── transparencia de capas que tapan la selección ───────────────────────────
   const setMeshOpacity = useCallback((mesh: THREE.Mesh, opacity: number | null) => {
     if (opacity === null) {
       const orig = matOriginalsRef.current.get(mesh);
@@ -641,7 +532,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       matOriginalsRef.current.set(mesh, mesh.material);
       mesh.material = Array.isArray(mesh.material)
         ? mesh.material.map((m) => m.clone())
-        : mesh.material.clone();
+        : (mesh.material as THREE.Material).clone();
     }
     const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
     for (const m of mats) {
@@ -652,23 +543,32 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     }
   }, []);
 
-  /** Restaura los materiales clonados de los oclusores actuales. */
   const resetOccluders = useCallback(() => {
     for (const mesh of occluderMeshesRef.current) setMeshOpacity(mesh, null);
     occluderMeshesRef.current = [];
   }, [setMeshOpacity]);
 
-  /** Raycast cámara→pieza: lo que se interpone se vuelve translúcido. */
+  const selectionPieceKeys = useCallback((): string[] => {
+    const sel = stateRef.current.selection;
+    if (sel.phasePiece) return [sel.phasePiece];
+    if (!sel.structureId) return [];
+    const out: string[] = [];
+    for (const [key, id] of structureByPieceRef.current) if (id === sel.structureId) out.push(key);
+    return out;
+  }, []);
+
   const updateOccluders = useCallback(() => {
     resetOccluders();
-    const sel = selectionRef.current;
-    if (!sel || isolateTargetRef.current) return; // aislada = ya solo se ve la pieza
-    const root = modelRootRef.current;
+    const keys = selectionPieceKeys();
+    if (!keys.length || stateRef.current.isolated.size > 0) return;
     const cam = cameraRef.current;
-    if (!root || !cam) return;
-    const names = resolveSelectionNames(sel, modelKeyRef.current, getStructureById, aliasToPrimaryRef.current);
-    const targets: THREE.Object3D[] = [];
-    for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
+    const root = rootRef.current;
+    if (!cam || !root) return;
+    const targets: THREE.Mesh[] = [];
+    for (const k of keys) {
+      const e = piecesRef.current.get(k);
+      if (e?.mesh.visible) targets.push(e.mesh);
+    }
     if (!targets.length) return;
     const targetSet = new Set(targets);
     const ray = new THREE.Raycaster();
@@ -686,7 +586,6 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       for (const h of ray.intersectObject(root, true)) {
         const m = h.object as THREE.Mesh;
         if (!m.isMesh || !m.visible || targetSet.has(m)) continue;
-        // descartar antecesor invisible (los rayos de three no comprueban visible)
         let p: THREE.Object3D | null = m;
         let visibleThrough = true;
         while (p && p !== root) {
@@ -698,121 +597,294 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       }
     }
     for (const m of occ) {
-      setMeshOpacity(m, OCCLUDER_OPACITY);
+      setMeshOpacity(m, 0.12);
       occluderMeshesRef.current.push(m);
     }
-  }, [setMeshOpacity, resetOccluders]);
+  }, [resetOccluders, setMeshOpacity, selectionPieceKeys]);
 
-  // ── highlight de la estructura seleccionada (se declara tras las utilidades de
-  // transparencia porque debe resetear oclusores ANTES de resaltar: los oclusores
-  // usan materiales CLONADOS y el resalte sobre un clon se perdería al recomputar) ──
-  // Ciclo 4: se ejecuta SIEMPRE (también con selección vacía) para limpiar el
-  // resalte anterior — antes, deseleccionar o elegir una estructura sin mapping
-  // dejaba el resalte anterior encendido.
+  // ── marcador de articulación ────────────────────────────────────────────────
+  const removeJointMarker = useCallback(() => {
+    const g = jointMarkerRef.current;
+    if (!g) return;
+    g.removeFromParent();
+    g.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (m.isMesh) {
+        m.geometry.dispose();
+        const mats = Array.isArray(m.material) ? m.material : [m.material];
+        for (const mat of mats) mat?.dispose();
+      }
+    });
+    jointMarkerRef.current = null;
+  }, []);
+
+  const addJointMarker = useCallback((keys: string[]) => {
+    const root = rootRef.current;
+    if (!root) return;
+    const targets: THREE.Object3D[] = [];
+    for (const k of keys) {
+      const e = piecesRef.current.get(k);
+      if (e?.mesh.visible) targets.push(e.mesh);
+    }
+    if (!targets.length) return;
+    const box = new THREE.Box3();
+    for (const t of targets) box.expandByObject(t);
+    if (box.isEmpty()) return;
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const modelMaxDim = Math.max(...new THREE.Box3().setFromObject(root).getSize(new THREE.Vector3()).toArray()) || 1;
+    const r = THREE.MathUtils.clamp(Math.min(size.x, size.y, size.z) * 0.14, modelMaxDim * 0.006, modelMaxDim * 0.035);
+    const g = new THREE.Group();
+    const core = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), new THREE.MeshBasicMaterial({ color: 0x35d0ff }));
+    const halo = new THREE.Mesh(new THREE.SphereGeometry(r * 2.1, 24, 16), new THREE.MeshBasicMaterial({ color: 0x35d0ff, transparent: true, opacity: 0.16, depthWrite: false }));
+    core.raycast = () => {};
+    halo.raycast = () => {};
+    g.add(core, halo);
+    g.position.copy(center);
+    root.add(g);
+    jointMarkerRef.current = g;
+  }, []);
+
+  // ── highlight de la selección (color por tipo de estructura) ────────────────
   useEffect(() => {
     if (loading) return;
     resetOccluders();
     removeJointMarker();
-    if (!selectionNames.length) {
-      applyHighlight([]);
-      return;
+    // restaurar anteriores
+    for (const [obj, orig] of originalsRef.current) {
+      const mat = (obj as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
+      if (mat) {
+        if (mat.emissive) {
+          mat.emissive.copy(orig.emissive ?? new THREE.Color(0x000000));
+          mat.emissiveIntensity = orig.intensity ?? 0;
+        }
+        if (orig.color && mat.color) mat.color.copy(orig.color);
+      }
     }
-    if (selectedStructure?.kind === 'joint') {
-      // articulación: huesos constituyentes en SUAVE + marcador propio
-      applyHighlight(selectionNames, 'soft');
-      addJointMarker(selectionNames);
-    } else {
-      applyHighlight(selectionNames, 'strong');
+    originalsRef.current.clear();
+    const keys = selectionPieceKeys();
+    if (!keys.length) return;
+    const isJoint = selectedStructure?.kind === 'joint';
+    const soft = isJoint || (phasePiece != null && keys.length > 1);
+    for (const k of keys) {
+      const e = piecesRef.current.get(k);
+      if (!e || !e.mesh.visible) continue;
+      const mesh = e.mesh;
+      const mat = mesh.material as THREE.MeshStandardMaterial | undefined;
+      if (!mat?.emissive) continue;
+      if (!originalsRef.current.has(mesh)) {
+        originalsRef.current.set(mesh, {
+          emissive: mat.emissive?.clone(),
+          intensity: mat.emissiveIntensity,
+          color: mat.color?.clone(),
+        });
+      }
+      const hc = highlightColor(STRUCTURE_KIND_TO_COMPOSITE[selectedStructure?.kind ?? 'bone']);
+      mat.emissive.set(hc);
+      mat.emissiveIntensity = !soft || k === phasePiece ? 1.6 : 0.45;
+      if (mat.color && (!soft || k === phasePiece)) mat.color.lerp(new THREE.Color(hc), 0.35);
     }
-  }, [selectionNames, selectedStructure?.kind, loading, applyHighlight, resetOccluders, removeJointMarker, addJointMarker]);
-
-  /** Visibilidad por categoría del grafo y aislamiento de pieza (feedback #4-5).
-   *  Ciclo 4 — decisión ÚNICA por mesh sobre la lista plana de nodos: antes se
-   *  iteraba el índice nombre→objeto y cada mesh aparecía 2× (nodo + geometría
-   *  basura de Blender) con kinds distintos; la última escritura ganaba y
-   *  rompía filtros y aislamiento. Los CONTENEDORES padre (Bones/Muscles/…)
-   *  jamás se ocultan: ningún filtro puede esconder un subárbol entero.
-   *  Fallback meshCatalog: meshes SIN estructura dueña toman su kind del
-   *  catálogo por tipo; la geometría 'aux' queda oculta por defecto. */
-  const applyVisibility = useCallback(() => {
-    const filter = LAYER_FILTERS.find((f) => f.key === layerFilterRef.current) ?? LAYER_FILTERS[0];
-    const isoSel = isolateTargetRef.current;
-    const isoNames = isoSel
-      ? new Set(resolveSelectionNames(isoSel, modelKeyRef.current, getStructureById, aliasToPrimaryRef.current))
-      : null;
-    for (const { mesh, name } of meshListRef.current) {
-      const ownerId = structureByMeshRef.current.get(name);
-      const owner = ownerId ? getStructureById(ownerId) : undefined;
-      const kind = owner?.kind ?? getMeshKind(modelKeyRef.current, name);
-      mesh.visible = decideMeshVisibility({ name, kind, isoNames, filterKinds: filter.kinds });
-    }
+    if (isJoint) addJointMarker(keys);
     updateOccluders();
-  }, [updateOccluders]);
+  }, [selectedId, phasePiece, loading, selectedStructure?.kind, resetOccluders, removeJointMarker, addJointMarker, updateOccluders, selectionPieceKeys]);
 
-  /** Centrar la cámara en la selección manteniendo la orientación (feedback #2). */
-  const centerOnSelection = useCallback(() => {
-    const sel = selectionRef.current;
+  // ── aplicar visibilidad cuando cambian focus/capas/aislamiento/ocultas ─────
+  useEffect(() => {
+    if (loading) return;
+    applyVisibility();
+  }, [loading, focus, layers, hidden, isolated, skullVersion, explodeT, applyVisibility]);
+
+  // ── auto-encuadre al cambiar focus (sobre las piezas visibles de la región) ─
+  useEffect(() => {
+    if (loading) return;
+    setHoverName(null);
     const cam = cameraRef.current;
     const ctrl = controlsRef.current;
-    const root = modelRootRef.current;
-    if (!sel || !cam || !ctrl || !root) return;
-    const names = resolveSelectionNames(sel, modelKeyRef.current, getStructureById, aliasToPrimaryRef.current);
-    const targets: THREE.Object3D[] = [];
-    for (const n of names) targets.push(...(namedMeshesRef.current.get(n) ?? []));
+    if (!cam || !ctrl) return;
     const box = new THREE.Box3();
-    if (targets.length) {
-      for (const t of targets) box.expandByObject(t);
-    } else {
-      box.setFromObject(root);
+    let any = false;
+    for (const { mesh } of piecesRef.current.values()) {
+      if (mesh.visible) { box.expandByObject(mesh); any = true; }
     }
+    if (!any) return;
     const size = box.getSize(new THREE.Vector3());
     const center = box.getCenter(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z) || 1;
     const dir = cam.position.clone().sub(ctrl.target).normalize();
-    cam.position.copy(center).add(dir.multiplyScalar(Math.max(maxDim * 2.2, maxDim)));
+    cam.position.copy(center).add(dir.multiplyScalar(Math.max(maxDim * 2.4, maxDim * 0.5 + 0.25)));
     ctrl.target.copy(center);
     ctrl.update();
-    if (staticModeRef.current && rendererRef.current && sceneRef.current) {
-      rendererRef.current.render(sceneRef.current, cam);
+  }, [focus, loading]);
+
+  // ── tinte por tipo de capa ──────────────────────────────────────────────────
+  useEffect(() => {
+    if (loading) return;
+    for (const { mesh, piece } of piecesRef.current.values()) {
+      const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+      for (const m of mats) {
+        const std = m as THREE.MeshStandardMaterial;
+        const orig = std.userData?.__origColor as THREE.Color | undefined;
+        if (!std.color || !orig) continue;
+        if (colorByKind) std.color.copy(orig).lerp(new THREE.Color(layerDef(piece.kind).color), KIND_TINT_STRENGTH);
+        else std.color.copy(orig);
+      }
     }
-    updateOccluders();
-  }, [updateOccluders]);
+  }, [colorByKind, loading]);
 
-  // sincronizar refs espejo (los handlers del canvas leen de aquí)
-  loadingRef.current = loading;
-  modelKeyRef.current = modelKey;
-  structuresForModelRef.current = structuresForModel;
-  selectionRef.current = selection;
-  selectionNamesRef.current = selectionNames;
-  layerFilterRef.current = layerFilter;
-  isolateTargetRef.current = isolateTarget;
-  aliasToPrimaryRef.current = aliasToPrimary;
-
-  // aplicar filtros/aislamiento cuando cambia el modelo o los controles
+  // ── cráneo: grupo explosionado + vista general (carga diferida) ─────────────
   useEffect(() => {
-    if (loading) return;
-    applyVisibility();
-  }, [loading, layerFilter, isolateTarget, structuresForModel, applyVisibility]);
+    if (loading || focus !== 'skull') return;
+    let cancelled = false;
+    (async () => {
+      try {
+        if (skullVersion === 'colored' && !explodedRef.current) {
+          setProgress({ done: 0, total: 1, label: 'Cráneo explosionado' });
+          const scene = await loadCompositeModel('/models/anatomy/exploded-skull.glb');
+          if (cancelled || !scene) return;
+          const group = new THREE.Group();
+          const offsets = new Map<string, THREE.Vector3>();
+          const toAdd: Array<{ mesh: THREE.Mesh; key: string; baseName: string }> = [];
+          scene.traverse((obj) => {
+            const mesh = obj as THREE.Mesh;
+            if (!mesh.isMesh) return;
+            cloneMaterials(mesh);
+            const baseName = EXPLODE_PAIRS[obj.name ?? ''];
+            const baseEntry = baseName ? piecesRef.current.get(pieceKey('colored-skull-base', baseName)) : null;
+            if (!baseEntry) { mesh.visible = false; return; }
+            const key = pieceKey('exploded-skull', obj.name ?? '');
+            toAdd.push({ mesh, key, baseName });
+            offsets.set(key, new THREE.Vector3());
+          });
+          for (const { mesh, key, baseName } of toAdd) {
+            const baseEntry = piecesRef.current.get(pieceKey('colored-skull-base', baseName))!;
+            const baseCenter = new THREE.Vector3();
+            baseEntry.mesh.geometry.computeBoundingBox();
+            baseEntry.mesh.geometry.boundingBox!.getCenter(baseCenter);
+            baseEntry.mesh.localToWorld(baseCenter);
+            const expCenter = new THREE.Vector3();
+            mesh.geometry.computeBoundingBox();
+            mesh.geometry.boundingBox!.getCenter(expCenter);
+            mesh.localToWorld(expCenter);
+            mesh.userData.__pieceKey = key;
+            mesh.userData.__pieceName = `exploded · ${baseName}`;
+            mesh.visible = false;
+            offsets.set(key, baseCenter.clone().sub(expCenter));
+            group.add(mesh);
+            piecesRef.current.set(key, {
+              mesh,
+              piece: { ...baseEntry.piece, model: 'exploded-skull', name: baseName, hiddenByDup: undefined },
+              key,
+            });
+          }
+          rootRef.current?.add(group);
+          explodedRef.current = { group, offsets };
+          setProgress({ done: 1, total: 1, label: '' });
+        }
+        if (skullVersion === 'general' && !generalSkullRef.current) {
+          setProgress({ done: 0, total: 1, label: 'Cráneo vista general' });
+          const scene = await loadCompositeModel('/models/anatomy/overview-colored-skull.glb');
+          if (cancelled || !scene) return;
+          const group = new THREE.Group();
+          const toAdd: THREE.Mesh[] = [];
+          scene.traverse((obj) => {
+            const mesh = obj as THREE.Mesh;
+            if (!mesh.isMesh) return;
+            cloneMaterials(mesh);
+            const key = pieceKey('overview-colored-skull', obj.name ?? '');
+            mesh.userData.__pieceKey = key;
+            mesh.userData.__pieceName = obj.name ?? '';
+            const piece: CompositePiece = {
+              model: 'overview-colored-skull',
+              name: obj.name ?? '',
+              region: 'skull',
+              kind: 'bone',
+              container: 'Bones',
+            };
+            piecesRef.current.set(key, { mesh, piece, key });
+            toAdd.push(mesh);
+          });
+          for (const mesh of toAdd) group.add(mesh);
+          rootRef.current?.add(group);
+          generalSkullRef.current = group;
+          setProgress({ done: 1, total: 1, label: '' });
+        }
+        applyVisibility();
+      } catch (err) {
+        if (!cancelled) setError(`No se pudo cargar la variante del cráneo. ${(err as Error)?.message ?? ''}`);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [loading, focus, skullVersion, applyVisibility]);
 
-  // re-derivar translucidez al cambiar selección o aislamiento
+  // ── slider de explosión: cross-fade + alineamiento por centroide ────────────
   useEffect(() => {
-    if (loading) return;
-    updateOccluders();
-  }, [selection, isolateTarget, loading, updateOccluders]);
+    if (focus !== 'skull' || skullVersion !== 'colored') return;
+    const t = explodeT;
+    const baseFade = Math.max(0, Math.min(1, 1 - t * 2));
+    const expFade = Math.max(0, Math.min(1, t * 2));
+    for (const { mesh, piece } of piecesRef.current.values()) {
+      if (piece.model !== 'colored-skull-base' || piece.region !== 'skull') continue;
+      const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+      for (const m of mats) {
+        const std = m as THREE.MeshStandardMaterial;
+        std.transparent = baseFade < 0.999;
+        std.opacity = baseFade;
+        std.depthWrite = baseFade > 0.5;
+      }
+    }
+    const exp = explodedRef.current;
+    if (exp) {
+      for (const [key, offset] of exp.offsets) {
+        const e = piecesRef.current.get(key);
+        if (!e) continue;
+        e.mesh.position.copy(offset).multiplyScalar(1 - t);
+        const mats = Array.isArray(e.mesh.material) ? e.mesh.material : [e.mesh.material];
+        for (const m of mats) {
+          const std = m as THREE.MeshStandardMaterial;
+          std.transparent = expFade < 0.999;
+          std.opacity = expFade;
+          std.depthWrite = expFade > 0.5;
+        }
+      }
+    }
+  }, [explodeT, focus, skullVersion]);
 
-  // atajos de teclado: F centra la selección · Esc sale del aislamiento (feedback #2/#5)
+  // ── centrar cámara en la selección ──────────────────────────────────────────
+  const centerOnSelection = useCallback(() => {
+    const cam = cameraRef.current;
+    const ctrl = controlsRef.current;
+    const root = rootRef.current;
+    if (!cam || !ctrl || !root) return;
+    const keys = selectionPieceKeys();
+    const box = new THREE.Box3();
+    let any = false;
+    for (const k of keys) {
+      const e = piecesRef.current.get(k);
+      if (e?.mesh.visible) { box.expandByObject(e.mesh); any = true; }
+    }
+    if (!any) box.setFromObject(root);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    const dir = cam.position.clone().sub(ctrl.target).normalize();
+    cam.position.copy(center).add(dir.multiplyScalar(Math.max(maxDim * 2.2, maxDim * 0.4 + 0.3)));
+    ctrl.target.copy(center);
+    ctrl.update();
+    if (staticModeRef.current && rendererRef.current && sceneRef.current) rendererRef.current.render(sceneRef.current, cam);
+  }, [selectionPieceKeys]);
+
+  // atajos: F centra · Esc sale del aislamiento
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      if ((e.key === 'f' || e.key === 'F') && selectionNamesRef.current.length) centerOnSelection();
-      else if (e.key === 'Escape' && isolateTargetRef.current) setIsolateTarget(null);
+      if ((e.key === 'f' || e.key === 'F') && (selectedId || phasePiece)) centerOnSelection();
+      else if (e.key === 'Escape' && isolated.size > 0) setIsolated(new Set());
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [centerOnSelection]);
+  }, [centerOnSelection, selectedId, phasePiece, isolated.size]);
 
-  // re-render estático cuando termina la carga (reduced motion)
   useEffect(() => {
     if (reducedMotion && !loading && rendererRef.current && sceneRef.current && cameraRef.current) {
       rendererRef.current.render(sceneRef.current, cameraRef.current);
@@ -820,7 +892,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   }, [reducedMotion, loading]);
 
   const resetCamera = () => {
-    const root = modelRootRef.current;
+    const root = rootRef.current;
     const cam = cameraRef.current;
     const ctrl = controlsRef.current;
     if (!root || !cam || !ctrl) return;
@@ -832,11 +904,55 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     cam.lookAt(center);
     ctrl.target.copy(center);
     ctrl.update();
-    if (reducedMotion && rendererRef.current && sceneRef.current) {
-      rendererRef.current.render(sceneRef.current, cam);
-    }
-    updateOccluders();
   };
+
+  // ── acciones de aislamiento/ocultar ─────────────────────────────────────────
+  const currentPieceKeys = selectionPieceKeys();
+  const currentIsFullyIsolated = currentPieceKeys.length > 0 && currentPieceKeys.every((k) => isolated.has(k));
+  const toggleIsolateCurrent = () => {
+    if (!currentPieceKeys.length) return;
+    setIsolated((prev) => {
+      const next = new Set(prev);
+      for (const k of currentPieceKeys) {
+        if (currentIsFullyIsolated) next.delete(k);
+        else next.add(k);
+      }
+      return next;
+    });
+  };
+  const hideCurrent = () => {
+    setHidden((prev) => {
+      const next = new Set(prev);
+      for (const k of currentPieceKeys) next.add(k);
+      return next;
+    });
+  };
+
+  // ── panel árbol: categoría (tipo) → subcategoría (zona) → estructuras ───────
+  const KIND_ORDER: StructureKind[] = ['muscle', 'tendon', 'ligament', 'nerve', 'joint', 'bone'];
+  const KIND_LABELS: Record<StructureKind, string> = {
+    muscle: 'Músculos', tendon: 'Tendones', ligament: 'Ligamentos',
+    nerve: 'Nervios', joint: 'Articulaciones', bone: 'Huesos',
+  };
+  const panelTree = useMemo(() => {
+    const q = panelQuery.trim().toLowerCase();
+    const list = compositeStructures.filter((s) => !q || `${s.nameEs} ${s.nameEn} ${s.synonyms.join(' ')}`.toLowerCase().includes(q));
+    const tree: Array<{ kind: StructureKind; groups: Array<{ zone: BodyZone; items: AnatomyStructure[] }> }> = [];
+    for (const kind of KIND_ORDER) {
+      const ofKind = list.filter((s) => s.kind === kind);
+      if (!ofKind.length) continue;
+      const byZone = new Map<BodyZone, AnatomyStructure[]>();
+      for (const s of ofKind) byZone.set(s.zone, [...(byZone.get(s.zone) ?? []), s]);
+      tree.push({
+        kind,
+        groups: [...byZone.entries()].map(([zone, items]) => ({ zone, items: items.sort((a, b) => a.nameEs.localeCompare(b.nameEs)) })),
+      });
+    }
+    return tree;
+  }, [compositeStructures, panelQuery]);
+
+  const isolatedCount = isolated.size;
+  const hiddenCount = hidden.size;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -845,37 +961,27 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           <div>
             <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-              Visor anatómico 3D
+              Visor anatómico 3D · modelo compuesto
             </span>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
-              {model.label} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--text-tertiary)' }}>{model.sizeMb.toFixed(2)} MB · {model.meshCount} piezas</span>
+              {FOCUS_LABELS[focus]} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--text-tertiary)' }}>{COMPOSITE_STATS.total} piezas · 5 modelos fusionados</span>
             </h3>
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            {modelKey === 'colored-skull-base' && (
-              <button type="button" onClick={() => setModelKey('exploded-skull')} style={btnStyle} title="Ver cráneo explosionado">
-                <Layers size={14} /> <span style={{ fontSize: '0.78rem' }}>Explosionar</span>
-              </button>
-            )}
-            {modelKey === 'exploded-skull' && (
-              <button type="button" onClick={() => setModelKey('colored-skull-base')} style={btnStyle} title="Volver al cráneo armado">
-                <Box size={14} /> <span style={{ fontSize: '0.78rem' }}>Armado</span>
-              </button>
-            )}
-            <button type="button" onClick={resetCamera} style={btnStyle} title="Resetear cámara">
-              <RotateCcw size={14} /> <span style={{ fontSize: '0.78rem' }}>Cámara</span>
-            </button>
-          </div>
+          <button type="button" onClick={resetCamera} style={btnStyle} title="Resetear cámara">
+            <RotateCcw size={14} /> <span style={{ fontSize: '0.78rem' }}>Cámara</span>
+          </button>
         </div>
-        {/* SELECTOR DE MODELOS */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {ANATOMY_MODELS.map((m) => {
-            const active = m.key === modelKey;
+
+        {/* FOCUS */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+          <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.4px', fontWeight: 700 }}>Focus</span>
+          {(Object.keys(FOCUS_LABELS) as CompositeFocus[]).map((f) => {
+            const active = focus === f;
             return (
               <button
-                key={m.key}
+                key={f}
                 type="button"
-                onClick={() => { setModelKey(m.key); setSelectedId(null); setSelectedMeshName(null); }}
+                onClick={() => { setFocus(f); setSelectedId(null); setPhasePiece(null); }}
                 style={{
                   background: active ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.03)',
                   color: active ? '#fff' : 'var(--text-primary)',
@@ -883,185 +989,270 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                   borderRadius: 18, padding: '5px 12px', fontSize: '0.76rem', fontWeight: active ? 700 : 500, cursor: 'pointer',
                 }}
               >
-                {m.label}
+                {FOCUS_LABELS[f]}
               </button>
             );
           })}
         </div>
-        {/* FILTROS POR CATEGORÍA DEL GRAFO (feedback usuario) */}
+
+        {/* CRÁNEO: versión + explosión */}
+        {focus === 'skull' && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', background: 'rgba(255,255,255,0.02)', borderRadius: 12, padding: '8px 10px' }}>
+            <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', fontWeight: 700 }}>Versión</span>
+            {(['colored', 'general'] as const).map((v) => (
+              <button key={v} type="button" onClick={() => setSkullVersion(v)} style={{
+                background: skullVersion === v ? 'rgba(53,208,255,0.16)' : 'rgba(255,255,255,0.03)',
+                color: skullVersion === v ? '#7fdcff' : 'var(--text-primary)',
+                border: `1px solid ${skullVersion === v ? 'rgba(53,208,255,0.55)' : 'var(--color-border-subtle, rgba(255,255,255,0.1))'}`,
+                borderRadius: 14, padding: '3px 10px', fontSize: '0.72rem', cursor: 'pointer',
+              }}>
+                {v === 'colored' ? 'Coloreado' : 'Vista general'}
+              </button>
+            ))}
+            {skullVersion === 'colored' && (
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 220 }}>
+                <Box size={13} style={{ color: 'var(--text-tertiary)' }} />
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>Explosión</span>
+                <input
+                  type="range" min={0} max={1} step={0.01} value={explodeT}
+                  onChange={(e) => setExplodeT(Number(e.target.value))}
+                  style={{ flex: 1, accentColor: '#35d0ff' }}
+                />
+                <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', width: 34 }}>{Math.round(explodeT * 100)}%</span>
+              </label>
+            )}
+          </div>
+        )}
+
+        {/* CAPAS multi-seleccionables */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-          <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.4px', fontWeight: 700 }}>Capas</span>
-          {LAYER_FILTERS.map((f) => {
-            const active = layerFilter === f.key;
+          <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.4px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+            <LayersIcon size={12} /> Capas
+          </span>
+          {LAYER_DEFS.map(({ kind, label, color }) => {
+            const active = layers.has(kind);
             return (
               <button
-                key={f.key}
+                key={kind}
                 type="button"
-                onClick={() => { setLayerFilter(f.key); setIsolateTarget(null); }}
+                onClick={() => setLayers((prev) => {
+                  const next = new Set(prev);
+                  if (next.has(kind)) next.delete(kind);
+                  else next.add(kind);
+                  return next;
+                })}
+                title={`${layerCounts[kind] ?? 0} piezas`}
                 style={{
-                  background: active ? 'rgba(53,208,255,0.16)' : 'rgba(255,255,255,0.03)',
-                  color: active ? '#7fdcff' : 'var(--text-primary)',
-                  border: `1px solid ${active ? 'rgba(53,208,255,0.55)' : 'var(--color-border-subtle, rgba(255,255,255,0.1))'}`,
-                  borderRadius: 16, padding: '4px 11px', fontSize: '0.72rem', fontWeight: active ? 700 : 500, cursor: 'pointer',
+                  display: 'inline-flex', alignItems: 'center', gap: 5,
+                  background: active ? 'rgba(53,208,255,0.14)' : 'rgba(255,255,255,0.03)',
+                  color: active ? '#fff' : 'var(--text-tertiary)',
+                  border: `1px solid ${active ? `${hexCss(color)}88` : 'var(--color-border-subtle, rgba(255,255,255,0.1))'}`,
+                  borderRadius: 14, padding: '3px 9px', fontSize: '0.7rem', fontWeight: active ? 700 : 500, cursor: 'pointer',
+                  opacity: active ? 1 : 0.75,
                 }}
               >
-                {f.label}
+                <span style={{ width: 8, height: 8, borderRadius: 99, background: hexCss(color), display: 'inline-block' }} />
+                {label} <span style={{ opacity: 0.6 }}>{layerCounts[kind] ?? 0}</span>
               </button>
             );
           })}
+          <button type="button" onClick={() => setLayers(new Set(LAYER_DEFS.map((l) => l.kind)))} style={{ ...btnStyle, padding: '3px 8px', fontSize: '0.68rem' }}>Todas</button>
+          <button type="button" onClick={() => setLayers(new Set())} style={{ ...btnStyle, padding: '3px 8px', fontSize: '0.68rem' }}>Ninguna</button>
+          <label style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '0.7rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+            <input type="checkbox" checked={colorByKind} onChange={(e) => setColorByKind(e.target.checked)} style={{ accentColor: '#35d0ff' }} />
+            Colorear por tipo
+          </label>
         </div>
+
+        {/* gestión de aisladas/ocultas */}
+        {(isolatedCount > 0 || hiddenCount > 0) && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+            {isolatedCount > 0 && (
+              <span style={{ fontSize: '0.72rem', color: '#7fdcff', fontWeight: 700, background: 'rgba(53,208,255,0.12)', border: '1px solid rgba(53,208,255,0.4)', borderRadius: 10, padding: '3px 9px' }}>
+                {isolatedCount} aislada{isolatedCount > 1 ? 's' : ''} · Esc para ver todo
+              </span>
+            )}
+            {hiddenCount > 0 && (
+              <button type="button" onClick={() => setHidden(new Set())} style={{ ...btnStyle, fontSize: '0.72rem', borderColor: 'rgba(255,180,80,0.5)', color: '#ffc98a' }}>
+                <Eye size={13} /> Desocultar {hiddenCount} pieza{hiddenCount > 1 ? 's' : ''}
+              </button>
+            )}
+          </div>
+        )}
       </div>
+
       <div style={{ display: 'flex', gap: 12, flexDirection: isMobile ? 'column' : 'row' }}>
         <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
           <div
             ref={mountRef}
             style={{
-              width: '100%', height: isMobile ? 340 : 480,
+              width: '100%', height: isMobile ? 340 : 520,
               background: '#0a0b0e', borderRadius: 16, border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
               overflow: 'hidden', touchAction: 'none', cursor: 'grab',
             }}
           />
-          {/* overlays */}
           {(loading || error) && (
             <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', background: 'rgba(10,11,14,0.72)', borderRadius: 16 }}>
               {error ? (
                 <p style={{ color: '#ff8080', fontSize: '0.85rem', padding: '0 20px', textAlign: 'center' }}>{error}</p>
               ) : (
-                <span style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                  <Loader2 size={16} /> Cargando {model.label}…
+                <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                  <Loader2 size={18} />
+                  {progress.label ? `Cargando ${progress.label} (${progress.done + 1}/${progress.total})…` : 'Preparando visor…'}
+                  <span style={{ display: 'block', width: 180, height: 4, borderRadius: 99, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                    <span style={{ display: 'block', height: '100%', width: `${(progress.done / progress.total) * 100}%`, background: '#35d0ff', transition: 'width 0.3s' }} />
+                  </span>
                 </span>
               )}
             </div>
           )}
-          {isolateTarget && !loading && (
+          {isolatedCount > 0 && !loading && (
             <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.5)', borderRadius: 10, padding: '5px 10px', fontSize: '0.72rem', color: '#7fdcff', fontWeight: 700 }}>
-              Pieza aislada · Esc para salir
+              {isolatedCount} pieza{isolatedCount > 1 ? 's' : ''} aislada{isolatedCount > 1 ? 's' : ''} · Esc para salir
+            </div>
+          )}
+          {hiddenCount > 0 && !loading && (
+            <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(255,180,80,0.4)', borderRadius: 10, padding: '5px 10px', fontSize: '0.72rem', color: '#ffc98a' }}>
+              {hiddenCount} oculta{hiddenCount > 1 ? 's' : ''}
             </div>
           )}
           {reducedMotion && !loading && (
             <div style={{ position: 'absolute', top: 10, left: 10, right: 10, background: 'rgba(10,11,14,0.8)', borderRadius: 10, padding: '6px 10px', fontSize: '0.74rem', color: 'var(--text-secondary)', display: 'flex', gap: 6, alignItems: 'center' }}>
-              <Scan size={13} /> Movimiento reducido activo: render estático (usa el selector y “Cámara” para cambiar de vista).
+              <Scan size={13} /> Movimiento reducido activo: render estático.
             </div>
           )}
           {hoverName && !loading && (
             <div style={{ position: 'absolute', bottom: 10, left: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.4)', borderRadius: 10, padding: '5px 10px', fontSize: '0.8rem', color: '#7fdcff', maxWidth: '80%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {prettyMeshName(hoverName)}
+              {phaseLabel(hoverName)}
             </div>
           )}
         </div>
 
-        {/* PANEL LATERAL: estructuras del modelo */}
-        <div style={{ width: isMobile ? '100%' : 280, background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 16, overflow: 'hidden', alignSelf: 'flex-start' }}>
+        {/* PANEL ÁRBOL */}
+        <div style={{ width: isMobile ? '100%' : 300, background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 16, overflow: 'hidden', alignSelf: 'flex-start' }}>
           <button
             type="button"
             onClick={() => setPanelOpen((o) => !o)}
             style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}
           >
-            <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>Estructuras en este modelo ({panelStructures.length}{filterKinds ? ' filtradas' : ''})</span>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>Estructuras ({compositeStructures.length})</span>
             {panelOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </button>
           {panelOpen && (
-            <div style={{ maxHeight: isMobile ? 220 : 420, overflowY: 'auto', padding: '0 10px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {panelStructures.map((s) => {
-                const active = selectedId === s.id;
-                return (
-                  <button
-                    key={s.id}
-                    type="button"
-                    onClick={() => { setSelectedId(active ? null : s.id); setSelectedMeshName(null); setIsolateTarget(null); }}
-                    style={{
-                      textAlign: 'left', background: active ? 'rgba(53,208,255,0.12)' : 'rgba(255,255,255,0.02)',
-                      border: `1px solid ${active ? 'rgba(53,208,255,0.5)' : 'transparent'}`,
-                      borderRadius: 8, padding: '6px 8px', cursor: 'pointer', color: 'var(--text-primary)',
-                      display: 'flex', justifyContent: 'space-between', gap: 6, alignItems: 'center',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.78rem', fontWeight: active ? 700 : 500 }}>{s.nameEs}</span>
-                    <span style={{ fontSize: '0.62rem', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>{s.kind}</span>
-                  </button>
-                );
-              })}
-            </div>
+            <>
+              <div style={{ padding: '0 10px 8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.04)', borderRadius: 8, padding: '5px 8px' }}>
+                  <Search size={13} style={{ color: 'var(--text-tertiary)' }} />
+                  <input
+                    value={panelQuery}
+                    onChange={(e) => setPanelQuery(e.target.value)}
+                    placeholder="Buscar estructura…"
+                    style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-primary)', fontSize: '0.78rem' }}
+                  />
+                  {panelQuery ? <button type="button" onClick={() => setPanelQuery('')} style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer' }}><X size={12} /></button> : null}
+                </div>
+              </div>
+              <div style={{ maxHeight: isMobile ? 260 : 480, overflowY: 'auto', padding: '0 10px 12px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                {panelTree.map(({ kind, groups }) => {
+                  const color = hexCss(layerDef(STRUCTURE_KIND_TO_COMPOSITE[kind]).color);
+                  return (
+                    <details key={kind} open>
+                      <summary style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: '0.76rem', fontWeight: 800, color: 'var(--text-primary)', listStyle: 'none', padding: '4px 2px' }}>
+                        <span style={{ width: 8, height: 8, borderRadius: 99, background: color, display: 'inline-block' }} />
+                        {KIND_LABELS[kind]}
+                        <span style={{ color: 'var(--text-tertiary)', fontWeight: 500, fontSize: '0.68rem' }}>({groups.reduce((a, g) => a + g.items.length, 0)})</span>
+                      </summary>
+                      {groups.map(({ zone, items }) => (
+                        <details key={zone} style={{ marginLeft: 14 }} open={!panelQuery}>
+                          <summary style={{ cursor: 'pointer', fontSize: '0.7rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.3px', listStyle: 'none', padding: '3px 0' }}>
+                            {BODY_ZONE_LABELS_ES[zone]} ({items.length})
+                          </summary>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 8 }}>
+                            {items.map((st) => {
+                              const active = selectedId === st.id;
+                              return (
+                                <button
+                                  key={st.id}
+                                  type="button"
+                                  onClick={() => { setSelectedId(active ? null : st.id); setPhasePiece(null); }}
+                                  style={{
+                                    textAlign: 'left', background: active ? 'rgba(53,208,255,0.12)' : 'rgba(255,255,255,0.02)',
+                                    border: `1px solid ${active ? 'rgba(53,208,255,0.5)' : 'transparent'}`,
+                                    borderRadius: 7, padding: '4px 7px', cursor: 'pointer', color: 'var(--text-primary)',
+                                    fontSize: '0.75rem', fontWeight: active ? 700 : 500,
+                                  }}
+                                  title={st.nameEn}
+                                >
+                                  {st.nameEs}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </details>
+                      ))}
+                    </details>
+                  );
+                })}
+                {!panelTree.length && <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', padding: '4px 2px' }}>Sin resultados para «{panelQuery}».</p>}
+              </div>
+            </>
           )}
         </div>
       </div>
 
-      {/* FICHA DE LA ESTRUCTURA SELECCIONADA */}
+      {/* FICHA RICA */}
       {selectedStructure && (
-        <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid rgba(53,208,255,0.35)', borderRadius: 16, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid rgba(53,208,255,0.35)', borderRadius: 16, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase' }}>{selectedStructure.kind}</span>
-              <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>{selectedStructure.nameEs} <span style={{ fontWeight: 500, color: 'var(--text-tertiary)', fontSize: '0.8rem' }}>{selectedStructure.nameEn}</span></h4>
+              <span style={{ fontSize: '0.68rem', color: hexCss(layerDef(STRUCTURE_KIND_TO_COMPOSITE[selectedStructure.kind]).color), fontWeight: 800, textTransform: 'uppercase' }}>
+                {selectedStructure.kind}{phasePiece ? ' · pieza individual (fase 2)' : ''}
+              </span>
+              <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                {phasePiece ? phaseLabel(phasePiece.split(':')[1] ?? '') : selectedStructure.nameEs}
+                {' '}
+                <span style={{ fontWeight: 500, color: 'var(--text-tertiary)', fontSize: '0.8rem' }}>{phasePiece ? `— dentro de ${selectedStructure.nameEs}` : selectedStructure.nameEn}</span>
+              </h4>
+              {!phasePiece && (structurePieceCountRef.current.get(selectedStructure.id) ?? 1) > 1 && (
+                <p style={{ margin: '2px 0 0', fontSize: '0.72rem', color: '#ffc98a' }}>
+                  Esta estructura tiene {structurePieceCountRef.current.get(selectedStructure.id)} piezas — haz un 2º click sobre una cabeza/pieza en el modelo para seleccionarla individualmente.
+                </p>
+              )}
             </div>
-            <button type="button" onClick={() => setSelectedId(null)} style={{ ...btnStyle, border: 'none' }}><X size={14} /></button>
+            <button type="button" onClick={() => { setSelectedId(null); setPhasePiece(null); }} style={{ ...btnStyle, border: 'none' }}><X size={14} /></button>
           </div>
-          {/* acciones de cámara/capas sobre la pieza (feedback usuario) */}
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <button type="button" onClick={centerOnSelection} style={btnStyle} title="Centrar la cámara en esta pieza (F)">
               <Crosshair size={14} /> Centrar <span style={{ opacity: 0.6 }}>(F)</span>
             </button>
-            {isolateTarget?.type === 'structure' && isolateTarget.id === selectedStructure.id ? (
-              <button type="button" onClick={() => setIsolateTarget(null)} style={{ ...btnStyle, borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' }} title="Mostrar de nuevo todo el modelo (Esc)">
-                <EyeOff size={14} /> Salir del aislamiento
-              </button>
-            ) : (
-              <button type="button" onClick={() => setIsolateTarget({ type: 'structure', id: selectedStructure.id })} style={btnStyle} title="Ocultar todo lo demás">
-                <Eye size={14} /> Aislar pieza
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={toggleIsolateCurrent}
+              style={{ ...btnStyle, ...(currentIsFullyIsolated ? { borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' } : {}) }}
+              title="Mostrar solo esta pieza (acumulable con otras)"
+            >
+              {currentIsFullyIsolated ? <EyeOff size={14} /> : <Eye size={14} />} {currentIsFullyIsolated ? 'Quitar del aislamiento' : 'Aislar'}{isolatedCount > 0 ? ` (${isolatedCount})` : ''}
+            </button>
+            <button type="button" onClick={hideCurrent} style={btnStyle} title="Ocultar esta pieza (se puede desocultar)">
+              <EyeOff size={14} /> Ocultar
+            </button>
           </div>
-          {selectedStructure.kind === 'joint' && (
-            <p style={{ margin: 0, fontSize: '0.74rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
-              Marcador cian = localización aproximada de la articulación (centroide de los huesos que la forman; los modelos GLB no traen la articulación como pieza separada). Los huesos se resaltan en suave para no eclipsar el marcador.
-            </p>
-          )}
-          {(('origin' in selectedStructure) || selectedStructure.kind === 'joint') && (
-            <StructureDetail structure={selectedStructure} />
-          )}
+          <StructureFicha structure={selectedStructure} />
           <a href={`/app/fitness/library/muscles?structure=${encodeURIComponent(selectedStructure.id)}`} style={{ fontSize: '0.78rem', color: 'var(--accent, #0a84ff)', fontWeight: 600 }}>
             Ver ficha completa en Músculos →
           </a>
         </div>
       )}
 
-      {/* FICHA DE PIEZA SUELTA (sin ficha en el grafo — ciclo 4: todo click selecciona) */}
-      {!selectedStructure && selectedMeshName && (
-        <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid rgba(53,208,255,0.35)', borderRadius: 16, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase' }}>
-                pieza · {getMeshKind(modelKey, selectedMeshName)}
-              </span>
-              <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>{prettyMeshName(selectedMeshName)}</h4>
-            </div>
-            <button type="button" onClick={() => setSelectedMeshName(null)} style={{ ...btnStyle, border: 'none' }}><X size={14} /></button>
-          </div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <button type="button" onClick={centerOnSelection} style={btnStyle} title="Centrar la cámara en esta pieza (F)">
-              <Crosshair size={14} /> Centrar <span style={{ opacity: 0.6 }}>(F)</span>
-            </button>
-            {isolateTarget?.type === 'mesh' && isolateTarget.name === selectedMeshName ? (
-              <button type="button" onClick={() => setIsolateTarget(null)} style={{ ...btnStyle, borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' }} title="Mostrar de nuevo todo el modelo (Esc)">
-                <EyeOff size={14} /> Salir del aislamiento
-              </button>
-            ) : (
-              <button type="button" onClick={() => setIsolateTarget({ type: 'mesh', name: selectedMeshName })} style={btnStyle} title="Ocultar todo lo demás">
-                <Eye size={14} /> Aislar pieza
-              </button>
-            )}
-          </div>
-          <p style={{ margin: 0, fontSize: '0.74rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
-            Pieza del modelo sin ficha anatómica en el grafo todavía ({stats.with3dMapping} de {stats.total} estructuras mapeadas). Puedes centrarla o aislarla; su ficha llegará con la ampliación del grafo.
-          </p>
-        </div>
-      )}
-
       <p style={{ margin: 0, fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
-        {stats.total} estructuras · {stats.with3dMapping} con mapping 3D · {stats.pendingCitation} pendientes de verificación bibliográfica (Gray's/Moore/Norkin — plan Gemini).
+        {stats.total} estructuras · {stats.with3dMapping} con mapping 3D · compuesto: {COMPOSITE_STATS.total} piezas de 5 modelos · {stats.pendingCitation} pendientes de verificación bibliográfica.
       </p>
     </div>
   );
+}
+
+function hexCss(n: number): string {
+  return `#${n.toString(16).padStart(6, '0')}`;
 }
 
 const btnStyle: React.CSSProperties = {
@@ -1070,40 +1261,152 @@ const btnStyle: React.CSSProperties = {
   borderRadius: 8, padding: '6px 10px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600,
 };
 
-function StructureDetail({ structure }: { structure: AnatomyStructure }) {
-  const row = (label: string, value?: string | string[]) => {
-    if (!value || (Array.isArray(value) && !value.length)) return null;
-    return (
-      <div>
-        <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>{label}</span>
-        <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>{Array.isArray(value) ? value.join(' · ') : value}</p>
-      </div>
-    );
-  };
+// ── FICHA RICA: todos los campos de la BD, agrupados y etiquetados ──────────
+function Row({ label, value, color }: { label: string; value?: string | string[] | null; color?: string }) {
+  if (!value || (Array.isArray(value) && !value.length)) return null;
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 10 }}>
-      {row('Origen', (structure as any).origin)}
-      {row('Inserción', (structure as any).insertion)}
-      {row('Inervación', (structure as any).innervation)}
-      {row('Acción', (structure as any).action)}
-      {structure.kind === 'joint' && (structure as any).rom?.length ? (
-        <div style={{ gridColumn: '1 / -1' }}>
-          <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
-          <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {(structure as any).rom.map((r: { motion: string; value: string; condition?: string; sourceRefs: Array<{ locator?: string }> }) => (
-              <li key={r.motion} style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                <strong style={{ color: 'var(--text-primary)' }}>{r.motion}:</strong> {r.value}
-                {r.condition ? ` — ${r.condition}` : ''}
-                <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)' }}> ({r.sourceRefs.map((sr) => sr.locator).join('; ')})</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : undefined}
-      {row('Zona', structure.zone)}
-      {row('Lesiones típicas', (structure as any).injuries)}
-      {row('Atrapamiento', (structure as any).entrapmentSite)}
-      {row('Huesos', (structure as any).bones)}
+    <div>
+      <span style={{ fontSize: '0.66rem', color: color ?? 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>{label}</span>
+      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>{Array.isArray(value) ? value.join(' · ') : value}</p>
+    </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.07))', paddingTop: 10 }}>
+      <span style={{ fontSize: '0.64rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.6px', color: 'var(--text-tertiary)' }}>{title}</span>
+      {children}
+    </div>
+  );
+}
+
+function StructureFicha({ structure }: { structure: AnatomyStructure }) {
+  const kindColor = hexCss(layerDef(STRUCTURE_KIND_TO_COMPOSITE[structure.kind]).color);
+  const nameOf = (id: string) => getStructureById(id)?.nameEs ?? id;
+  const s = structure as unknown as Record<string, unknown>;
+  const rom = structure.kind === 'joint' ? (structure as JointEntry).rom : undefined;
+  const cite = (structure.sourceRefs ?? []).map((r) => `${r.sourceId}${r.locator ? ` · ${r.locator}` : ''}${r.pending ? ' (pendiente de verificar)' : ' ✓'}`).join(' | ');
+  const zoneLabel = (z: string) => BODY_ZONE_LABELS_ES[z as BodyZone] ?? z;
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: 10 }}>
+        <Row label="Zona principal" value={zoneLabel(s.zone as string)} color={kindColor} />
+        <Row label="Zonas secundarias" value={(s.zones as string[] | undefined)?.map(zoneLabel)} color={kindColor} />
+        <Row label="Sinónimos" value={structure.synonyms} color={kindColor} />
+      </div>
+
+      {structure.kind === 'muscle' && (
+        <>
+          <Section title="Anatomía">
+            <Row label="Origen" value={s.origin as string} color={kindColor} />
+            <Row label="Inserción" value={s.insertion as string} color={kindColor} />
+            <Row label="Inervación" value={s.innervation as string} color={kindColor} />
+            <Row label="Acción" value={s.action as string[]} color={kindColor} />
+            <Row label="Etiquetas de acción" value={(s.actionTags as string[])?.map((t) => `#${t}`)} color={kindColor} />
+          </Section>
+          <Section title="Función">
+            <Row label="Rol biomecánico" value={s.biomechanicalRole as string} color={kindColor} />
+            <Row label="Estética" value={s.aesthetics as string} color={kindColor} />
+          </Section>
+          <Section title="Entrenamiento">
+            <Row label="Ejercicios citados" value={s.trainingExercises as string[]} color={kindColor} />
+            <Row label="Ejercicios de riesgo" value={s.riskExercises as string[]} color={kindColor} />
+            <Row label="Primario en entrenamiento" value={s.primaryForTraining ? 'Sí' : 'No'} color={kindColor} />
+          </Section>
+          <Section title="Relaciones">
+            <Row label="Sinergistas" value={(s.synergists as string[])?.map(nameOf)} color={kindColor} />
+            <Row label="Antagonistas" value={(s.antagonists as string[])?.map(nameOf)} color={kindColor} />
+          </Section>
+        </>
+      )}
+
+      {structure.kind === 'joint' && (
+        <>
+          <p style={{ margin: 0, fontSize: '0.74rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
+            Marcador cian = localización aproximada de la articulación (centroide de los huesos que la forman; los modelos GLB no traen la articulación como pieza separada). Los huesos se resaltan en suave para no eclipsar el marcador.
+          </p>
+          {rom?.length ? (
+            <div>
+              <span style={{ fontSize: '0.66rem', color: kindColor, fontWeight: 700, textTransform: 'uppercase' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
+              <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {rom.map((r) => (
+                  <li key={r.motion} style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                    <strong style={{ color: 'var(--text-primary)' }}>{r.motion}:</strong> {r.value}
+                    {r.condition ? ` — ${r.condition}` : ''}
+                    <span style={{ fontSize: '0.66rem', color: 'var(--text-tertiary)' }}> ({r.sourceRefs.map((sr) => sr.locator).join('; ')})</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          <Section title="Articulación">
+            <Row label="Tipo articular" value={s.jointType as string} color={kindColor} />
+            <Row label="Huesos" value={s.bones as string} color={kindColor} />
+            <Row label="Movimientos" value={s.movements as string} color={kindColor} />
+            <Row label="Estabilizadores" value={s.stabilizers as string} color={kindColor} />
+          </Section>
+          <Section title="Clínica (estructura, no diagnóstico)">
+            <Row label="Lesiones" value={s.lesions as string} color={kindColor} />
+            <Row label="Rehabilitación" value={s.rehab as string[]} color={kindColor} />
+            <Row label="Riesgo bajo carga" value={s.riskyUnderLoad as string[]} color={kindColor} />
+            <Row label="Relacionadas" value={(s.relatedStructures as string[])?.map(nameOf)} color={kindColor} />
+          </Section>
+        </>
+      )}
+
+      {structure.kind === 'tendon' && (
+        <>
+          <Section title="Tendón">
+            <Row label="Inserción" value={s.insertion as string} color={kindColor} />
+            <Row label="Músculos que lo forman" value={(s.muscles as string[])?.map(nameOf)} color={kindColor} />
+          </Section>
+          <Section title="Clínica (estructura, no diagnóstico)">
+            <Row label="Lesiones típicas" value={s.injuries as string} color={kindColor} />
+            <Row label="Rehabilitación" value={s.rehab as string[]} color={kindColor} />
+            <Row label="Factores de riesgo" value={s.risks as string[]} color={kindColor} />
+          </Section>
+        </>
+      )}
+
+      {structure.kind === 'nerve' && (
+        <>
+          <Section title="Nervio">
+            <Row label="Inerva / trayecto" value={s.innervates as string} color={kindColor} />
+            <Row label="Atrapamiento" value={s.entrapmentSite as string} color={kindColor} />
+          </Section>
+          <Section title="Clínica (estructura, no diagnóstico)">
+            <Row label="Síntomas de afectación" value={s.symptoms as string} color={kindColor} />
+            <Row label="Contexto de lesión" value={s.lesionContext as string} color={kindColor} />
+            <Row label="Rehabilitación" value={s.rehab as string[]} color={kindColor} />
+            <Row label="Factores de riesgo" value={s.risks as string[]} color={kindColor} />
+            <Row label="Relacionadas" value={(s.relatedStructures as string[])?.map(nameOf)} color={kindColor} />
+          </Section>
+        </>
+      )}
+
+      {structure.kind === 'ligament' && (
+        <Section title="Ligamento">
+          <Row label="Estabiliza" value={s.jointId ? nameOf(s.jointId as string) : undefined} color={kindColor} />
+          <Row label="Nota" value={s.note as string} color={kindColor} />
+        </Section>
+      )}
+
+      {structure.kind === 'bone' && (
+        <Section title="Hueso">
+          <Row label="Nota funcional" value={s.note as string} color={kindColor} />
+        </Section>
+      )}
+
+      <Section title="Trazabilidad">
+        <Row label="Fuentes" value={cite || undefined} color={kindColor} />
+        {s.wikiEn ? (
+          <a href={`https://en.wikipedia.org/wiki/${encodeURIComponent(s.wikiEn as string)}`} target="_blank" rel="noreferrer" style={{ fontSize: '0.76rem', color: 'var(--accent, #0a84ff)' }}>
+            Wikipedia: {s.wikiEn as string} →
+          </a>
+        ) : null}
+      </Section>
     </div>
   );
 }

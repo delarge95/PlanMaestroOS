@@ -1,6 +1,6 @@
 # Análisis de solapamiento GLB para el modelo compuesto
 
-> Generado por analyze-merge.mjs (2026-08-24T23:32:42.033Z). Nombres normalizados
+> Generado por analyze-merge.mjs (2026-08-25T00:35:07.300Z). Nombres normalizados
 > (minúsculas, sin puntuación/laterales ambiguos) — la coincidencia exacta de
 > traducción mundial confirma si dos piezas son la misma geometría en el mismo
 > espacio.
@@ -9,7 +9,7 @@
 
 | Par | Comunes | %A | %B | Δtraducción med/min/max |
 |---|---|---|---|---|
-| overview-skeleton ↔ upper-limb | 60 | 42% | 11% | 0 / 0 / 0 |
+| overview-skeleton ↔ upper-limb | 50 | 35% | 9% | 0 / 0 / 0 |
 | overview-skeleton ↔ lower-limb | 34 | 24% | 8% | 0 / 0 / 0 |
 | overview-skeleton ↔ hand | 0 | 0% | 0% | — / — / — |
 | overview-skeleton ↔ colored-skull-base | 7 | 5% | 24% | 0 / 0 / 0 |
@@ -40,13 +40,13 @@
 
 ## Piezas exclusivas (sin equivalente normalizado)
 
-- **overview-skeleton**: 24 exclusivas — p.ej. Cervical vertebrae (C3), Cervical vertebrae (C4), Cervical vertebrae (C5), Cervical vertebrae (C6), Cervical vertebrae (C7), Lumbar vertebrae (L1), Lumbar vertebrae (L2), Lumbar vertebrae (L3)
-- **upper-limb**: 388 exclusivas — p.ej. Thoracic vertebra (T1), Thoracic vertebra (T10), Thoracic vertebra (T11), Thoracic vertebra (T2), Thoracic vertebra (T3), Thoracic vertebra (T4), Thoracic vertebra (T5), Thoracic vertebra (T6)
-- **lower-limb**: 406 exclusivas — p.ej. Acetabular labrum.r, Annulus fibrosus L1 L2, Art cart of calcaneus.r , Art cart of cuboid bone.r, Art cart of femur distal end.r, Art cart of femur head.r, Art cart of fibula proximal tibiofibular joint.r, Art cart of fibula talofibular joint.r
-- **hand**: 152 exclusivas — p.ej. 1st metacarpal bone, 2nd metacarpal bone, 3rd metacarpal bone, 4th metacarpal bone, 5th metacarpal bone, Capitate, Distal phalanx of 1st finger, Distal phalanx of 2d finger
-- **colored-skull-base**: 1 exclusivas — p.ej. Lower first premolars
+- **overview-skeleton**: 34 exclusivas — p.ej. Cervical_vertebrae_(C3), Cervical_vertebrae_(C4), Cervical_vertebrae_(C5), Cervical_vertebrae_(C6), Cervical_vertebrae_(C7), Lumbar_vertebrae_(L1), Lumbar_vertebrae_(L2), Lumbar_vertebrae_(L3)
+- **upper-limb**: 398 exclusivas — p.ej. Thoracic_vertebra_(T1), Thoracic_vertebra_(T10), Thoracic_vertebra_(T11), Thoracic_vertebra_(T2), Thoracic_vertebra_(T3), Thoracic_vertebra_(T4), Thoracic_vertebra_(T5), Thoracic_vertebra_(T6)
+- **lower-limb**: 406 exclusivas — p.ej. Acetabular_labrumr, Annulus_fibrosus_L1_L2, Art_cart_of_calcaneusr_, Art_cart_of_cuboid_boner, Art_cart_of_femur_distal_endr, Art_cart_of_femur_headr, Art_cart_of_fibula_proximal_tibiofibular_jointr, Art_cart_of_fibula_talofibular_jointr
+- **hand**: 152 exclusivas — p.ej. 1st_metacarpal_bone, 2nd_metacarpal_bone, 3rd_metacarpal_bone, 4th_metacarpal_bone, 5th_metacarpal_bone, Capitate, Distal_phalanx_of_1st_finger, Distal_phalanx_of_2d_finger
+- **colored-skull-base**: 1 exclusivas — p.ej. Lower_first_premolars
 - **overview-colored-skull**: 0 exclusivas — p.ej. 
-- **exploded-skull**: 2 exclusivas — p.ej. Lower first premolar, Maxilla bone
+- **exploded-skull**: 2 exclusivas — p.ej. Lower_first_premolar, Maxilla_bone
 - **vertebrae**: 0 exclusivas — p.ej. 
 
 ## Contenedores raíz por modelo
@@ -63,9 +63,9 @@
 ## Plan de compuesto
 
 - Total piezas: **1380**
-- Por región: upper(591), axial(44), lower(486), skull(36), hand(223)
-- Por tipo: bone(305), cartilage(174), ligament(278), muscle(216), fascia(17), artery(120), vein(81), nerve(113), bursa(69), other(5), overlay(2)
-- Ocultas por dedup: overview-skeleton(53), lower-limb(1), upper-limb(204)
+- Por región: upper(581), axial(54), lower(486), skull(36), hand(223)
+- Por tipo: bone(305), cartilage(174), ligament(277), muscle(191), tendon(44), fascia(17), artery(120), vein(81), nerve(113), bursa(51), other(5), overlay(2)
+- Ocultas por dedup: overview-skeleton(63), lower-limb(1), upper-limb(204)
 - Explosión: 28/29 pares emparejados
-- Overlays (piel) muestra lower-limb: Adductor canal.r, Adductor hiatus.r, Adductor minimus overlay.r, Annular ligaments of 1st toe A1-A5.r, Annular ligaments of 2nd toe A1-A5.r, Annular ligaments of 3rd toe A1-A5.r
-- Overlays (piel) muestra hand: Annular ligament(A1) of 1st finger, Annular ligament(A2) of 1st finger, Annular ligaments of 2nd finger A1-A5, Annular ligaments of 3rd finger A1-A5, Annular ligaments of 4th finger A1-A5, Annular ligaments of 5th finger A1-A5
+- Overlays (piel) muestra lower-limb: Adductor_canalr, Adductor_hiatusr, Adductor_minimus_overlayr, Annular_ligaments_of_1st_toe_A1-A5r, Annular_ligaments_of_2nd_toe_A1-A5r, Annular_ligaments_of_3rd_toe_A1-A5r
+- Overlays (piel) muestra hand: Annular_ligament(A1)_of_1st_finger, Annular_ligament(A2)_of_1st_finger, Annular_ligaments_of_2nd_finger_A1-A5, Annular_ligaments_of_3rd_finger_A1-A5, Annular_ligaments_of_4th_finger_A1-A5, Annular_ligaments_of_5th_finger_A1-A5

@@ -1,5 +1,14 @@
 # STATUS — AG-ANATOM (rama `agent/anatomia`)
 
+> Ciclo 5 COMPLETO (2026-08-24): **MODELO COMPUESTO + EXPERIENCIA DE PRIMERA**.
+> Mandato usuario: merge de los 5 GLB en un solo visor con focus por región,
+> capas multi-seleccionables (12 tipos), selección por fases (estructura →
+> cabeza), aislamiento múltiple, ocultar/desocultar, color por tipo, árbol
+> categorías/subcategorías, ficha rica y slider de explosión del cráneo.
+> Ejecutado con análisis geométrico previo (AABB mundial: Δ=0 en todas las
+> piezas comunes → superposición directa). 250 tests verdes, astro check 0/0,
+> verificado headless end-to-end con capturas. Sin push; commits locales.
+
 > Ciclo 4 COMPLETO (2026-08-24): CORRECCIÓN DE BUGS CRÍTICOS DEL VISOR
 > (reportados por validación visual del usuario tras el merge del ciclo 3) +
 > pendiente #4 (ROM articular con cita). El ciclo 3 dejó el mapping al 0%
@@ -21,6 +30,65 @@
 `rag/anatomy/**`, `public/models/anatomy/**`, `docs` propios. NO tocado:
 resto de fitness (TodayRoutineStack y restaurados de main), nutrition,
 ui/tokens/nav (ticket AG-CORE).
+
+## Ciclo 5 — modelo compuesto + experiencia de primera
+
+**Análisis previo** (`rag/anatomy/scripts/analyze-merge.mjs` → `merge-analysis.json/.md`):
+parsea los 8 GLB, compone TRS mundo y compara. Hallazgos clave:
+- **Δtraducción = 0 en TODAS las piezas comunes de TODOS los pares** → los GLB
+  comparten espacio mundial: el merge es superposición directa, sin transforms.
+- Los nombres difieren entre modelos (typos del export "boner"/"bones",
+  plurales) → el dedup es **geométrico por AABB mundial** (±1 cm), no por nombre.
+- El exploded-skull NO es la misma malla (vértices distintos, desplazamiento
+  horneado en vértices) → el slider de explosión es cross-fade con alineamiento
+  por centroide (no lerp de transforms). Pares por nombre tolerante a plural: 28/29 + 1.
+
+**Datos generados** (`src/data/fitness/anatomy/compositePlan.ts`, generado —
+1380 piezas con model/name RUNTIME (sanitizado+uniquificado como GLTFLoader),
+región (hand > skull > lower > upper > axial), kind por contenedor GLB (12
+tipos: bone 305, ligament 277, muscle 191, nerve 113, artery 120, vein 81,
+cartilage 174, bursa 51, tendon 44, fascia 17…), hiddenByDup (63 skeleton +
+204 upper representadas por especialistas geométricamente idénticas)).
+
+**Sistema nuevo** (`composite.ts` lógica pura +21 tests; `AnatomyViewer.tsx` reescrito):
+- **Carga progresiva** de 5 GLB con barra (esqueleto base → lower → upper →
+  hand → cráneo). Loader PROPIO del compuesto: gltfCache comparte escenas con
+  las miniaturas y el compuesto se apropia de las mallas — mutarlas las rompería.
+- **Focus**: Completo / Cráneo / Mano / Miembro superior / inferior / Vértebras
+  aisladas, con auto-encuadre de cámara sobre la región visible. Deep-link
+  legacy `?model=` mapeado a focus (compatibilidad con URLs de Músculos).
+- **Capas multi-seleccionables**: 12 chips con color de identidad + contador de
+  piezas + Todas/Ninguna + toggle "Colorear por tipo" (tinte 55% sobre el color
+  original; el highlight usa el color del tipo, no un cian uniforme).
+- **Selección por fases**: 1er click = estructura entera (hint "2º click sobre
+  una cabeza…" si es multi-pieza); 2º click = solo esa cabeza (fase 2); click en
+  la misma pieza = volver a la estructura. Dueño por especificidad
+  (hueso > articulación que lo mapea).
+- **Aislamiento MÚLTIPLE** (acumulable, chips + Esc) y **OCULTAR/DESOCULTAR**
+  (contador + botón desocultar todo).
+- **Panel árbol**: Categoría (tipo, con color) → Subcategoría (zona del grafo
+  en español) → estructuras, con buscador.
+- **Ficha rica**: TODOS los campos de la BD por tipo (músculo: anatomía,
+  función, entrenamiento, relaciones; articulación: ROM citado + clínica;
+  tendón/nervio/ligamento/hueso) + sinónimos, zonas, wiki y trazabilidad
+  (fuente · locator · ✓verificado/pendiente).
+- **Cráneo**: toggle Coloreado/Vista general (carga diferida) + slider de
+  explosión 0-100% (cross-fade + alineamiento por centroide por pieza).
+
+**Bugs cazados durante la ejecución** (todos verificados por stack headless):
+1. Reparentar mallas DENTRO de `traverse` (`group.add()` hace
+   `parent.remove()`) muta el array iterado → crash "reading 'traverse'".
+   FIX: recolectar primero, re-parentar después.
+2. Nombres del plan crudos vs runtime sanitizados → plan vacío en runtime.
+   FIX: replicar sanitizeNodeName+createUniqueName en el generador (ciclo 3).
+3. Apóstrofes sin escapar en el TS generado ("Boyd's veins").
+4. Round-trip PowerShell (Get-Content|Set-Content) corrompió el encoding UTF-8
+   del viewer → archivo reescrito limpio (lección: no editar con PowerShell
+   archivos UTF-8 sin BOM).
+5. `StructureFicha` no renderizaba para articulaciones (gate por 'origin').
+
+**Rendimiento**: 1380 piezas × materiales por mesh — fluido en desktop
+headless; móvil pendiente de validar (documentado en pendientes).
 
 ## Ciclo 4 — bugs críticos del visor: causas raíz y correcciones
 
@@ -308,9 +376,9 @@ del workspace restaurado y NO se toca):
 
 ## Pendientes
 
-1. **Validación visual del usuario** (ciclo 4: los 6 fixes del visor en los
-   8 modelos; ciclo 3: selección/aislamiento/filtros) — orquestador tras
-   merge.
+1. **Validación visual del usuario** (ciclo 5: compuesto, focus, capas,
+   fases, aislamiento múltiple, colores, explosión; ciclos 3-4 acumulados) —
+   orquestador tras merge.
 2. **Verificación bibliográfica del grafo** (`pending` → citado, 267
    estructuras). La mitad 1 (lotes Moore/MacIntosh/Enoka → fuentes → RAG)
    quedó resuelta externamente en `9bfd5b3` (LOTE 2: 7 fuentes / 407
@@ -328,3 +396,9 @@ del workspace restaurado y NO se toca):
    mapean y filtran bien (y el hover ya los muestra limpios vía
    `prettyMeshName`), pero si se regeneran los GLB conviene
    limpiarlos en origen.
+7. **Ciclo 5 — pulidos futuros**: rendimiento móvil del compuesto (1380
+   piezas; validar en dispositivo real, considerar LOD/culling por región);
+   el hover obsoleto persiste al cambiar FOCUS (limpiado al cambiar modelo);
+   la vista "Vista general" del cráneo no soporta slider de explosión (el
+   exploded solo empareja con el coloreado); enriquecer LibraryMuscles con
+   los mismos bloques ricos de la ficha del visor.
