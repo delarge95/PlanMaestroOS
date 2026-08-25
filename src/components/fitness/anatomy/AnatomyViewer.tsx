@@ -330,10 +330,15 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const hit = pickAt(e.clientX, e.clientY);
       setHoverName(hit ? String(hit.userData.__pieceName ?? hit.name ?? '') : null);
       if (hit !== lastHover) {
-        if (lastHover) restorePristine(lastHover as THREE.Mesh);
+        // NO restaurar la pieza si pertenece a la selección actual (borraría el highlight)
+        const selKeys = selectedKeysNow();
+        if (lastHover) {
+          const lastKey = String((lastHover as THREE.Mesh).userData?.__pieceKey ?? '');
+          if (!selKeys.has(lastKey)) restorePristine(lastHover as THREE.Mesh);
+        }
         lastHover = hit;
         const key = hit ? String(hit.userData.__pieceKey) : null;
-        if (hit && key && !selectedKeysNow().has(key)) {
+        if (hit && key && !selKeys.has(key)) {
           const mat = (hit as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
           if (mat?.emissive) {
             const p = piecesRef.current.get(key);
@@ -378,14 +383,18 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       if (loadingRef.current) return;
       const hit = pickAt(e.clientX, e.clientY);
       if (!hit) { setIsolation(null); return; }
-      // Doble click = aislar la estructura dueña de la pieza golpeada,
-      // INDEPENDIENTE de los clicks simples que lo precedieron (los dos clicks
-      // del doble click ciclan la selección; el dblclick aísla el CONJUNTO).
+      // Doble click = aislar la unidad del NIVEL ACTUAL del path (conjunto,
+      // subconjunto o pieza). Permite nidificación: primer dblclick aísla el
+      // conjunto, luego dblclick en un subconjunto re-aisla el subconjunto.
       const key = String(hit.userData.__pieceKey);
       const ownerId = structureByPieceRef.current.get(key);
       if (!ownerId) { setIsolation(null); return; }
+      // asegurar que el path apunte a esta estructura
+      const p = stateRef.current.path?.structureId === ownerId
+        ? stateRef.current.path
+        : { structureId: ownerId, groupKey: null, pieceKey: null };
       const g = ensureGroups(ownerId);
-      const keys = [...new Set([...g.groups.values()].flat())];
+      const keys = unitPieceKeys(p, g.groups);
       const box = new THREE.Box3();
       for (const k of keys) {
         const entry = piecesRef.current.get(k);
@@ -395,13 +404,15 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const size = box.getSize(new THREE.Vector3());
       const margin = Math.max(size.x, size.y, size.z) * 0.12;
       box.expandByVector(new THREE.Vector3(margin, margin, margin));
-      // sincronizar la selección con el conjunto aislado
-      setPath({ structureId: ownerId, groupKey: null, pieceKey: null });
+      const unitLabel = p.pieceKey ? phaseLabel(p.pieceKey.split(':').slice(1).join(':'))
+        : p.groupKey ? (p.groupKey === '(estructura)' ? (getStructureById(ownerId)?.nameEs ?? p.groupKey) : phaseLabel(p.groupKey))
+        : (getStructureById(ownerId)?.nameEs ?? '');
+      setPath(p);
       setSelectedId(ownerId);
       setIsolation({
         box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
         kinds: new Set(stateRef.current.selectable),
-        label: getStructureById(ownerId)?.nameEs ?? '',
+        label: unitLabel,
       });
     };
     const onDrag = (e: PointerEvent) => {
