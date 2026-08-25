@@ -1,187 +1,190 @@
-# Catálogo de servicios — Familia C (integración web, experiencias 3D, apps)
+# Catálogo de servicios — Familia C (integración web 3D y experiencias)
 
 > v1.0 · 2026-08-25 · Owner: AG-SERV · Moneda USD.
-> Mismo contrato de lectura que [`02_catalogo_render_assets_rt.md`](02_catalogo_render_assets_rt.md):
-> horas por nivel `N1 a–b · N2 c–d · N3 e–f · N4 g–h`; presupuesto derivado de la fórmula del
-> [`01_modelo_cobro.md`](01_modelo_cobro.md) §3 (N1 25–30 · N2 28–35 · N3 35–45 · N4 45–55 USD/h +
-> redondeo min↓/max↑ a múltiplos de 10/50/100 USD según tramo).
-> Los assets 3D NO están incluidos salvo mención expresa: si hay que producirlos, se cotizan por
-> Familia B/F1 y se suman como línea separada del SOW.
-> Superficie pública: toda entrega que viva en el sitio público se coordina con AG-PORT vía ticket
-> (ficha §3.10); este catálogo cubre el trabajo técnico sobre entregables del cliente o rutas internas.
+> Convenciones de lectura y fórmula: ver [`01_modelo_cobro.md`](01_modelo_cobro.md).
+> Los assets 3D que estas integraciones consumen se cotizan con la Familia B
+> ([`02_catalogo_render_assets_rt.md`](02_catalogo_render_assets_rt.md)) o los provee el cliente.
 
 ---
 
-## C1 · Integración visor embebido low-code (Spline / model-viewer / Sketchfab)
+### C1 · Visor 3D embebido ligero (Spline / Sketchfab / model-viewer tuneado)
 
-**Qué es:** publicar un asset 3D dentro de un visor gestionado (Spline, `<model-viewer>`, Sketchfab u
-equivalente): optimización y upload, embed responsive en la página del cliente, lazy-load, ajuste de
-interacción permitida por el visor y QA multi-navegador.
-**Drivers:** visor elegido (licencia/plan), nº de escenas, hotspots soportados por el visor,
-personalización de UI posible.
-**Confidence por defecto:** `explicit`.
-**Límite honesto:** la interacción queda limitada a lo que el visor permite; si el brief pide más,
-escalar a C2.
+**Qué es:** integrar y pulir un visor de plataforma existente dentro del sitio del cliente (sin motor propio).
+**Drivers:** plataforma elegida, adaptación del asset a specs, nivel de customización de interacción.
+**Confidence:** `explicit`.
 
 | Subtarea | Horas por nivel |
 |---|---|
-| Intake + QC del asset y del plan del visor | N1 0,5–1 · N2 1–2 · N3 2–3 · N4 3–4 |
-| Optimización/upload + setup del visor | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–12 |
-| Embed responsive + lazy-load | N1 0,5–1 · N2 1–2 · N3 2–3 · N4 3–5 |
-| Tuning de interacción + QA browsers | N1 0,5–1 · N2 1–2 · N3 2–4 · N4 4–6 |
-| **Total horas** | **N1 2,5–5 · N2 5–10 · N3 10–18 · N4 18–27** |
+| Selección plataforma + setup cuenta (plan lo paga el cliente) | N1 0,5–1 · N2 1–2 · N3 2–3 · N4 3–5 |
+| Adaptación asset a specs de plataforma | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
+| Embed responsive + lazy load | N1 1–2 · N2 2–3 · N3 3–5 · N4 5–8 |
+| Config interacción (autorotate, hotspots nativos, AR) | N1 0,5–1 · N2 1–2 · N3 2–5 · N4 5–10 |
+| QA cross-browser + entrega | N1 0,5–1 · N2 1–2 · N3 2–3 · N4 3–6 |
+| **Total horas** | **N1 3,5–7 · N2 7–13 · N3 13–24 · N4 24–44** |
 
-**Presupuesto por nivel:** N1 **$60–150** · N2 **$140–350** · N3 **$350–850** · N4 **$800–1500**
-Entrega típica: N1 1 día · N2 1–2 días · N3 3–4 días · N4 ~1 semana.
-Modificadores de ficha: escena adicional del mismo visor **−40%** sobre subtotal; hotspot extra sujeto
-al límite del visor (a cotización).
+**Presupuesto:** N1 **$80–210** · N2 **$190–460** · N3 **$450–1100** · N4 **$1050–2500**
+Entrega: N1 1 día · N2 2 días · N3 ~1 semana · N4 1–2 semanas.
 
 ---
 
-## C2 · Visor 3D custom (three.js / Babylon.js)
+### C2 · Visor custom three.js / Babylon.js
 
-**Qué es:** visor a medida embebible en cualquier sitio: órbita/zoom/pan, hotspots con panel de
-información, presets de cámara, gestor de carga con progreso, presupuesto de performance móvil-first,
-eventos de analytics. Opcional: modo AR (USDZ/Quick Look), i18n.
-**Drivers:** nº de hotspots/features, datos dinámicos (JSON/CMS) vs hardcode, AR, i18n, UI provista
-por el cliente o incluida.
-**Confidence por defecto:** `explicit`.
+**Qué es:** visor a medida sobre engine JS: órbita con límites, hotspots, resaltado, panel info, loading UX, perf móvil.
+**Drivers:** nº interacciones, fuentes de datos (CMS/API), target móvil, integración al stack del cliente.
+**Confidence:** `explicit` tras definir lista de interacciones; si hay API externa → `inferred`.
 
 | Subtarea | Horas por nivel |
 |---|---|
-| Intake/spec técnica + criterios de aceptación | N1 1–2 · N2 2–3 · N3 3–5 · N4 5–8 |
-| Setup proyecto + pipeline de carga (GLB + Draco/KTX2) | N1 2–4 · N2 4–8 · N3 8–14 · N4 14–24 |
-| Interacción núcleo (orbit/hotspots/selección) | N1 3–6 · N2 6–12 · N3 12–24 · N4 24–45 |
-| UI overlay (info, controles, responsive) | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–30 |
-| Perf pass móvil + QA browsers | N1 1–3 · N2 3–6 · N3 6–12 · N4 12–20 |
-| Entrega/integración en el sitio del cliente | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–12 |
-| **Total horas** | **N1 10–21 · N2 21–39 · N3 41–79 · N4 79–139** |
+| Scaffold proyecto + tooling (Vite bundler, loaders) | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–30 |
+| Carga de asset + pipeline (GLB/Draco/KTX2) | N1 1–3 · N2 3–6 · N3 6–12 · N4 12–25 |
+| Controles cámara/orbit + límites | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–16 |
+| Interacciones (hotspots, highlight, secciones) | N1 1–3 · N2 3–8 · N3 8–20 · N4 20–45 |
+| UI overlay (labels, panel info, loading UX) | N1 1–3 · N2 3–6 · N3 6–12 · N4 12–25 |
+| Performance móvil + QA | N1 1–3 · N2 3–6 · N3 6–12 · N4 12–25 |
+| Deploy/integración al sitio del cliente | N1 0,5–2 · N2 2–4 · N3 4–8 · N4 8–15 |
+| **Total horas** | **N1 7,5–20 · N2 20–40 · N3 42–88 · N4 88–181** |
 
-**Presupuesto por nivel:** N1 **$250–650** · N2 **$550–1400** · N3 **$1400–3600** · N4 **$3500–7700**
-Entrega: N1 2–3 días · N2 ~1 semana · N3 2 semanas · N4 3–5 semanas.
-Modificadores: modo AR (USDZ + Quick Look) **+15%**; i18n **+10%**; hotspot adicional **+2–4 h** c/u.
-
----
-
-## C3 · Experiencia web 3D (scrollytelling / minijuego / catálogo interactivo)
-
-**Qué es:** pieza web donde el 3D es protagonista: narrativa guiada por scroll, micro-mecánica jugable
-o catálogo navegable. Incluye dirección técnica, escena(s), binding de scroll/eventos y layout con el
-contenido del cliente. **Requiere fase discovery (G1)** — no admite urgencia crítica (doc 01 §4).
-Estructura de precio: BASE + delta del MODO.
-
-**Base común:**
-
-| Subtarea (base) | Horas por nivel |
-|---|---|
-| Discovery/scoping (obligatorio) | N1 3–5 · N2 5–8 · N3 8–14 · N4 14–24 |
-| Arquitectura + setup (build, loading, estados) | N1 3–6 · N2 6–10 · N3 10–18 · N4 18–32 |
-| Escena 3D base + montaje de assets | N1 6–12 · N2 12–25 · N3 25–50 · N4 50–90 |
-| Binding de interacción (scroll/touch/input) | N1 4–8 · N2 8–16 · N3 16–30 · N4 30–55 |
-| Layout/UI + responsive | N1 3–6 · N2 6–12 · N3 12–22 · N4 22–40 |
-| Perf budget + QA dispositivos | N1 2–5 · N2 5–10 · N3 10–18 · N4 18–30 |
-| Deploy + handoff | N1 1–2 · N2 2–4 · N3 4–6 · N4 6–10 |
-| **Total base horas** | **N1 22–44 · N2 44–85 · N3 85–158 · N4 158–281** |
-
-**Presupuesto base por nivel:** N1 **$550–1350** · N2 **$1200–3000** · N3 **$2900–7200** · N4 **$7100–15500**
-
-**Deltas por modo (se SUMAN a la base):**
-
-| Delta modo | Horas por nivel |
-|---|---|
-| Scrollytelling (timeline por secciones + sync scroll) | N1 4–8 · N2 8–16 · N3 16–32 · N4 32–60 |
-| Minijuego (gameplay loop, score, estados) | N1 8–16 · N2 16–35 · N3 35–70 · N4 70–130 |
-| Catálogo interactivo (datos, filtros, fichas) | N1 6–12 · N2 12–24 · N3 24–48 · N4 48–90 |
-
-Entrega típica (base+modo): N1 1–2 semanas · N2 2–4 semanas · N3 4–8 semanas · N4 8–16 semanas.
-Modificadores: producción de assets RT **no incluida** (cotizar Familia B/F1); segundo idioma **+10%**;
-contenido editable vía CMS **+15%**.
+**Presupuesto:** N1 **$180–600** · N2 **$550–1400** · N3 **$1450–4000** · N4 **$3900–10000**
+Entrega: N1 2–4 días · N2 ~1 semana · N3 2–3 semanas · N4 4–8 semanas.
 
 ---
 
-## C4 · Web App 3D (configurador de producto / herramienta técnica)
+### C3 · Web App 3D
 
-**Qué es:** aplicación web con estado real: configuradores (variantes, materiales, medidas),
-herramientas técnicas con 3D, visualizadores con lógica de negocio. Incluye arquitectura, gestión de
-estado, export de resultado (captura/link/PDF-resumen) y QA. **Requiere discovery (G1)**.
-Integraciones API/e-commerce se cotizan como línea aparte.
+**Qué es:** aplicación web completa con escena 3D como núcleo (SPA), datos desde CMS/API, múltiples vistas. Base sin auth/admin (opcional marcado).
+**Drivers:** nº vistas/módulos, complejidad de datos, auth, plataformas objetivo.
+**Confidence:** `qualitative` hasta discovery; todo proyecto C3 incluye fase discovery obligatoria en el SOW.
 
 | Subtarea | Horas por nivel |
 |---|---|
-| Discovery/spec funcional + flujo/wireframe | N1 4–8 · N2 8–16 · N3 16–30 · N4 30–60 |
-| Arquitectura app (estado, routing, build) | N1 3–6 · N2 6–12 · N3 12–24 · N4 24–45 |
-| Escena 3D configurable (variantes/materiales) | N1 8–16 · N2 16–35 · N3 35–70 · N4 70–130 |
-| Panels de configuración + reglas de negocio | N1 6–14 · N2 14–30 · N3 30–60 · N4 60–110 |
-| Export/share (captura, link, PDF resumen) | N1 3–6 · N2 6–14 · N3 14–28 · N4 28–50 |
-| QA/E2E + perf + accesibilidad base | N1 3–6 · N2 6–14 · N3 14–28 · N4 28–55 |
-| Deploy/docs/handoff | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–30 |
-| **Total horas (sin integraciones)** | **N1 29–56 · N2 66–129 · N3 141–256 · N4 306–480** |
+| Discovery/spec técnico | N1 3–6 · N2 6–12 · N3 12–24 · N4 24–40 |
+| Setup proyecto + CI + deploy pipeline | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–30 |
+| Escena 3D core (extensión de C2) | N1 8–15 · N2 15–35 · N3 35–80 · N4 80–160 |
+| Capa datos (CMS/API, estado) | N1 2–5 · N2 5–12 · N3 12–25 · N4 25–50 |
+| UI/UX páginas + responsive | N1 4–10 · N2 10–25 · N3 25–50 · N4 50–100 |
+| Auth/admin básico (opcional) | N1 — · N2 0–10 · N3 10–25 · N4 25–50 |
+| Testing + QA + documentación | N1 2–5 · N2 5–12 · N3 12–25 · N4 25–50 |
+| **Total horas** | **N1 21–45 · N2 45–114 · N3 114–245 · N4 245–480** |
 
-**Presupuesto por nivel:** N1 **$700–1700** · N2 **$1800–4600** · N3 **$4900–11600** · N4 **$13700–26400**
-Línea aparte — integración API/e-commerce: N2 **+$150–400** · N3 **+$400–1250** · N4 **+$1250–3300**
-(N1 no contempla integraciones; si el brief las pide, es otro alcance).
-Entrega: N1 2–3 semanas · N2 3–6 semanas · N3 6–12 semanas · N4 12–24 semanas.
-Modificadores: assets RT no incluidos (Familia B/F1); auth multiusuario **a cotización**; hosting del
-cliente desde el día 1 (passthrough doc 01 §3).
+**Presupuesto:** N1 **$520–1350** · N2 **$1250–4000** · N3 **$3900–11100** · N4 **$11000–26400**
+Entrega: N1 1–2 semanas · N2 3–5 semanas · N3 6–10 semanas · N4 10–20 semanas.
+Proyectos N3/N4 SIEMPRE por hitos (§7 del modelo de cobro).
 
 ---
 
-## C5 · Build Unity WebGL + bridge JS↔Unity
+### C4 · Scrollytelling 3D
 
-**Qué es:** llevar un proyecto Unity existente a WebGL productivo: auditoría de build, settings de
-calidad/compresión (Brotli), loader optimizado, comunicación bidireccional JS↔Unity, embed responsive
-con fallbacks y QA de dispositivos.
-**Fuera de alcance:** desarrollar gameplay/mechanics nuevas dentro de Unity (se cotiza aparte).
-**Drivers:** tamaño/complejidad del proyecto, volumen de datos que cruzan el puente, restricciones del
-hosting destino.
-**Confidence por defecto:** `inferred` hasta auditoría del proyecto.
+**Qué es:** experiencia narrativa donde el scroll controla la escena (secciones sincronizadas, timeline bound al progreso).
+**Drivers:** nº secciones, complejidad de coreografía, assets provistos vs incluidos, fallback móvil.
+**Confidence:** `explicit` con storyboard cerrado.
 
 | Subtarea | Horas por nivel |
 |---|---|
-| Auditoría del proyecto + settings de build | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–28 |
-| Pipeline compresión + loading screen | N1 2–4 · N2 4–8 · N3 8–14 · N4 14–24 |
-| Bridge JS↔Unity (API bidireccional) | N1 3–6 · N2 6–14 · N3 14–30 · N4 30–60 |
-| Embed responsive + fallbacks | N1 1–3 · N2 3–6 · N3 6–12 · N4 12–20 |
-| QA dispositivos/perf | N1 1–3 · N2 3–6 · N3 6–12 · N4 12–20 |
-| **Total horas** | **N1 9–20 · N2 20–42 · N3 42–84 · N4 94–152** |
+| Guion visual + storyboard de scroll | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–30 |
+| Escena(s) + timeline scroll-binding | N1 4–10 · N2 10–25 · N3 25–60 · N4 60–120 |
+| Copy/layout secciones + tipografía | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–30 |
+| Perf móvil + fallback estático | N1 1–3 · N2 3–8 · N3 8–18 · N4 18–35 |
+| QA dispositivos + deploy | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
+| **Total horas** | **N1 10–23 · N2 23–53 · N3 53–118 · N4 118–230** |
 
-**Presupuesto por nivel:** N1 **$220–600** · N2 **$550–1500** · N3 **$1450–3800** · N4 **$4200–8400**
-Entrega: N1 2–3 días · N2 ~1 semana · N3 2 semanas · N4 3–5 semanas.
-Modificadores: streaming de Addressables **+10–20%**; proyecto sin control de fuentes/CI **+auditoría
-previa G1**.
+**Presupuesto:** N1 **$250–700** · N2 **$600–1900** · N3 **$1850–5400** · N4 **$5300–12700**
+Assets 3D cotizados aparte (Familia B). Entrega: N1 3–5 días · N2 1–2 semanas · N3 3–5 semanas · N4 6–10 semanas.
 
 ---
 
-## C6 · Presentación web interactiva
+### C5 · Catálogo interactivo / Configurador de producto
 
-**Qué es:** presentación/deck web a medida para pitch o reporte corporativo: navegación por slides,
-gráficos animados, video embebido y bloque 3D opcional (visor simple C1/C2). Unidad base: hasta 15
-slides con plantilla propia.
-**Drivers:** nº de slides, densidad de elementos ricos, 3D sí/no, datos dinámicos vs estáticos.
-**Confidence por defecto:** `explicit` (slides contables).
+**Qué es:** visualizador configurable (materiales/partes/accesorios) con precio dinámico y share de configuración.
+**Drivers:** nº variantes reales, integración e-commerce, persistencia/share, rendimiento con muchos swaps.
+**Confidence:** `explicit` con matriz de variantes cerrada.
 
 | Subtarea | Horas por nivel |
 |---|---|
-| Estructura narrativa + plantilla visual | N1 2–4 · N2 4–8 · N3 8–14 · N4 14–22 |
-| Maquetación slides + navegación | N1 3–6 · N2 6–12 · N3 12–22 · N4 22–38 |
-| Elementos ricos (3D/video/gráficos) | N1 2–5 · N2 5–12 · N3 12–26 · N4 26–50 |
-| QA responsive + entrega | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–12 |
-| **Total horas** | **N1 8–17 · N2 17–36 · N3 36–70 · N4 70–122** |
+| Modelo de datos producto + variantes | N1 2–4 · N2 4–8 · N3 8–18 · N4 18–40 |
+| Escena de configuración (swap materiales/partes) | N1 3–8 · N2 8–20 · N3 20–45 · N4 45–90 |
+| UI selector + precio dinámico | N1 2–5 · N2 5–12 · N3 12–25 · N4 25–50 |
+| Persistencia/share config (URL/hook carrito) | N1 1–3 · N2 3–8 · N3 8–18 · N4 18–40 |
+| Perf + QA + deploy | N1 1–3 · N2 3–6 · N3 6–14 · N4 14–30 |
+| **Total horas** | **N1 9–23 · N2 23–54 · N3 54–120 · N4 120–250** |
 
-**Presupuesto por nivel:** N1 **$200–550** · N2 **$450–1300** · N3 **$1250–3200** · N4 **$3100–6800**
-Entrega: N1 2–3 días · N2 ~1 semana · N3 2 semanas · N4 3–4 semanas.
-Modificadores: bloque adicional +5 slides **+20–35%**; modo self-hosted del cliente incluido; datos en
-vivo (API) **a cotización**.
+**Presupuesto:** N1 **$220–700** · N2 **$600–1900** · N3 **$1800–5400** · N4 **$5400–13800**
+Modificador: integración e-commerce real (Shopify/Woo/custom) **+15–30 h** según plataforma, cotizado aparte tras discovery.
+Entrega: N1 3–4 días · N2 1–2 semanas · N3 3–5 semanas · N4 6–10 semanas.
 
 ---
 
-### Matriz resumen Familia C
+### C6 · Minijuego WebGL
 
-| Servicio | N1 | N2 | N3 | N4 | Discovery |
-|---|---|---|---|---|---|
-| C1 Visor low-code | $60–150 | $140–350 | $350–850 | $800–1500 | No |
-| C2 Visor custom | $250–650 | $550–1400 | $1400–3600 | $3500–7700 | No |
-| C3 Experiencia web 3D (base) | $550–1350 | $1200–3000 | $2900–7200 | $7100–15500 | **Sí (G1)** |
-| C4 Web App 3D | $700–1700 | $1800–4600 | $4900–11600 | $13700–26400 | **Sí (G1)** |
-| C5 Unity WebGL + bridge | $220–600 | $550–1500 | $1450–3800 | $4200–8400 | Auditoría |
-| C6 Presentación web | $200–550 | $450–1300 | $1250–3200 | $3100–6800 | No |
+**Qué es:** juego web simple de una mecánica (branding engagement, lead capture). Base: 1 mecánica, 1 nivel/nodo, branding aplicado. Assets artísticos pesados cotizados aparte.
+**Drivers:** mecánica (runner/puzzle/quiz 3D/shooter on-rails), progresión, leaderboard/backend, plataformas.
+**Confidence:** `inferred`; game design cierra el alcance antes de comprometer N3/N4.
+
+| Subtarea | Horas por nivel |
+|---|---|
+| Game design doc corto | N1 2–4 · N2 4–8 · N3 8–16 · N4 16–30 |
+| Core loop + input | N1 6–12 · N2 12–30 · N3 30–70 · N4 70–150 |
+| Integración arte/escena (assets aparte o provistos) | N1 2–4 · N2 4–10 · N3 10–25 · N4 25–50 |
+| UI/HUD + score + estados | N1 2–4 · N2 4–10 · N3 10–20 · N4 20–45 |
+| Audio hookup | N1 0,5–1 · N2 1–3 · N3 3–6 · N4 6–12 |
+| Build optimizada + QA + deploy | N1 2–4 · N2 4–10 · N3 10–20 · N4 20–40 |
+| **Total horas** | **N1 14,5–29 · N2 29–71 · N3 71–157 · N4 157–327** |
+
+**Presupuesto:** N1 **$360–870** · N2 **$800–2500** · N3 **$2400–7100** · N4 **$7000–18000**
+
+---
+
+### C7 · Build & optimización Unity WebGL
+
+**Qué es:** llevar un proyecto Unity existente a web usable: loading, memoria, compresión, gates móviles.
+**Drivers:** peso actual del build, dependencias pesadas, requisitos móviles.
+**Confidence:** `inferred` hasta auditoría inicial (subtarea 1).
+
+| Subtarea | Horas por nivel |
+|---|---|
+| Auditoría build settings/targets | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
+| Compresión assets/addressables/loading screen | N1 2–5 · N2 5–12 · N3 12–25 · N4 25–50 |
+| Memoria/heap tuning + Brotli | N1 1–3 · N2 3–6 · N3 6–14 · N4 14–30 |
+| Fallback/perf gates móvil | N1 0–2 · N2 2–6 · N3 6–15 · N4 15–35 |
+| QA browsers + deploy CDN | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
+| **Total horas** | **N1 5–14 · N2 14–32 · N3 32–70 · N4 70–145** |
+
+**Presupuesto:** N1 **$120–420** · N2 **$390–1120** · N3 **$1100–3150** · N4 **$3100–8000**
+
+---
+
+### C8 · Presentaciones web interactivas
+
+**Qué es:** pitch deck/report web (slides navegables, animaciones, opcional data-driven). Base: 10 slides.
+**Drivers:** nº slides, data en vivo, branding system existente.
+**Confidence:** `explicit`.
+
+| Subtarea | Horas por nivel |
+|---|---|
+| Sistema de slides + plantilla | N1 2–4 · N2 4–8 · N3 8–15 · N4 15–30 |
+| Implementación slides (base 10) | N1 2–4 · N2 4–10 · N3 10–20 · N4 20–40 |
+| Animaciones/transiciones + navegación | N1 1–3 · N2 3–6 · N3 6–12 · N4 12–25 |
+| Data binding (si aplica) | N1 — · N2 0–6 · N3 6–15 · N4 15–30 |
+| Deploy + analytics opcional | N1 0,5–1 · N2 1–2 · N3 2–4 · N4 4–8 |
+| **Total horas** | **N1 5,5–12 · N2 12–32 · N3 32–66 · N4 66–133** |
+
+**Presupuesto:** N1 **$130–360** · N2 **$330–1120** · N3 **$1100–3000** · N4 **$2900–7400**
+Bloque adicional de 5 slides: +20–30%.
+
+---
+
+### C9 · AR web ligero (model-viewer / WebXR básico)
+
+**Qué es:** ver el producto a escala real en el espacio del usuario (AR Quick Look iOS / Scene Viewer Android) con flujo QR.
+**Drivers:** preparación AR del asset, flujos custom, testing en dispositivos físicos.
+**Confidence:** `explicit` (checklist de compatibilidad conocida).
+
+| Subtarea | Horas por nivel |
+|---|---|
+| Asset AR-compliant (usdz/glb, escala real) | N1 1–3 · N2 3–8 · N3 8–16 · N4 16–35 |
+| Embed AR Quick Look / Scene Viewer | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
+| UI de lanzamiento + flujo QR | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
+| QA en dispositivos reales | N1 0,5–1 · N2 1–3 · N3 3–6 · N4 6–12 |
+| **Total horas** | **N1 3,5–8 · N2 8–19 · N3 19–38 · N4 38–77** |
+
+**Presupuesto:** N1 **$80–240** · N2 **$220–700** · N3 **$650–1700** · N4 **$1700–4300**
+Nota: AR con tracking avanzado (image tracking, occlusion, WebXR profundo) NO está en esta ficha — se estima como proyecto a medida tras discovery.
