@@ -1,12 +1,36 @@
 // src/data/career/portfolioChecklist.ts — AG-PORT
-// Pending asset checklist derived from doc 33 (33_portfolio_asset_production_sprint.md).
-// Rule (PLAN_MULTIAGENTE §3.7): no invented metrics/URLs; every pending asset is
-// traceable to a doc-33 section. Status starts as "pending" and is updated only
-// when the real asset exists.
+// Sprint production board derived from doc 33 (33_portfolio_asset_production_sprint.md).
+// Rule (PLAN_MULTIAGENTE §3.7): no invented metrics/URLs; every item is
+// traceable to a doc-33 section (cited `source`), carries a visual owner and a
+// production status. The dataset records the BASELINE state ("pending": the
+// sprint has not been executed); live board state is user-tracked via
+// portfolioBoardStore.ts and falls back to these defaults for unknown ids.
 
 export type PortfolioAssetPlatform = "artstation" | "github" | "linkedin" | "web";
 
-export type PortfolioAssetStatus = "pending" | "in_progress" | "done";
+export type PortfolioAssetStatus = "pending" | "in_progress" | "review" | "done";
+
+export const PORTFOLIO_ASSET_STATUSES: readonly PortfolioAssetStatus[] = [
+  "pending",
+  "in_progress",
+  "review",
+  "done"
+] as const;
+
+export const PORTFOLIO_ASSET_STATUS_LABELS: Record<PortfolioAssetStatus, string> = {
+  pending: "Pendiente",
+  in_progress: "En curso",
+  review: "Revisión",
+  done: "Hecho"
+};
+
+/** Who is visually responsible for the item on the sprint board (doc-33 §3, §4). */
+export type PortfolioAssetOwner = "alex" | "ag-port";
+
+export const PORTFOLIO_ASSET_OWNER_LABELS: Record<PortfolioAssetOwner, string> = {
+  alex: "Alex · producción",
+  "ag-port": "AG-PORT · integración"
+};
 
 export interface PortfolioAssetItem {
   id: string;
@@ -14,6 +38,8 @@ export interface PortfolioAssetItem {
   detail: string;
   platform: PortfolioAssetPlatform;
   status: PortfolioAssetStatus;
+  /** Visual responsible for producing/integrating this asset. */
+  owner: PortfolioAssetOwner;
   /** Citation of the doc-33 section that requires this asset. */
   source: string;
   /** Keys in src/data/links.ts that this asset unblocks when published. */
@@ -28,6 +54,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "twinsight_x500_demo_90s.mp4 (90–120 s) for portfolio, LinkedIn Featured and GitHub.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.1",
     unblocksLinkKeys: ["twinsightDemo"]
   },
@@ -37,6 +64,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "twinsight_x500_teaser_30s.mp4 (30–45 s) for LinkedIn post and homepage.",
     platform: "linkedin",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.1"
   },
   {
@@ -45,6 +73,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "twinsight_x500_technical_breakdown_5min.mp4 for interviews, GitHub and technical review.",
     platform: "github",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.1"
   },
   {
@@ -53,6 +82,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "twinsight_x500_preview.gif (5–8 s).",
     platform: "github",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.1"
   },
 
@@ -63,6 +93,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "twinsight_x500_thumbnail.jpg — exploded drone + UI panel + title, readable at small size.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §15"
   },
   {
@@ -71,6 +102,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "01_hero_view.jpg — drone centered, UI visible, understandable at thumbnail size.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §7.1"
   },
   {
@@ -79,6 +111,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "02_browser_webgl_view.jpg — browser frame visible to prove no-install WebGL delivery.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §7.2"
   },
   {
@@ -87,6 +120,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "03_component_selection.jpg — hover/select with highlight and technical panel.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §7.3"
   },
   {
@@ -95,6 +129,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "04_technical_panel.jpg — UI proof with part metadata.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2"
   },
   {
@@ -103,6 +138,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "05_exploded_view.jpg — assembly hierarchy proof.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §7.4"
   },
   {
@@ -111,6 +147,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "06_cross_section.jpg — clipping plane with internal structures visible.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §7.5"
   },
   {
@@ -119,6 +156,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "07_visual_modes_grid.jpg — same camera/crop across 9 modes, with thermal-style disclaimer.",
     platform: "artstation",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §9"
   },
   {
@@ -127,6 +165,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "08_cad_optimization_before_after.jpg — high-poly source vs optimized wireframe.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §7.7"
   },
   {
@@ -135,6 +174,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "09_metrics_card.jpg — triangles, SUS, NASA-TLX values with academic-eval footer.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §10"
   },
   {
@@ -143,6 +183,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "10_pipeline_diagram.jpg — CAD → conversion → Blender → Unity → WebGL → evaluation.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §11"
   },
   {
@@ -151,6 +192,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "11_architecture_diagram.jpg — input → interaction controller → visualization systems → UI → WebGL runtime.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §12"
   },
   {
@@ -159,6 +201,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "12_blender_cleanup.jpg — process proof of the optimization workflow.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2"
   },
   {
@@ -167,6 +210,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "13_unity_editor.jpg — implementation proof of scene and systems.",
     platform: "web",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2"
   },
   {
@@ -175,6 +219,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "14_github_readme_preview.jpg — proof loop between repo and portfolio.",
     platform: "github",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2"
   },
 
@@ -185,6 +230,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "media/ with demo thumbnail, 8 numbered screenshots and preview GIF (doc-33 §4.2 names).",
     platform: "github",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §4.2, §18.1",
     unblocksLinkKeys: ["twinsightGithub"]
   },
@@ -194,6 +240,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "Apply 19B final README; acceptance: first screen explains project, media visible, limitations visible, topics added.",
     platform: "github",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §18.2, §18.3"
   },
 
@@ -204,6 +251,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "15_artstation_cover.jpg — full drone with technical UI, or exploded view with labels.",
     platform: "artstation",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §3.2, §16.1"
   },
   {
@@ -212,6 +260,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "12-image set (cover, final views, feature breakdown, CAD optimization, modes grid, UI, metrics, tools) in doc-33 §16.2 order.",
     platform: "artstation",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §16.1, §16.2"
   },
   {
@@ -220,6 +269,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "Technical breakdown post for the Blender study (sculpt, topology, UVs, materials, groom, lighting) with CG Cookie context.",
     platform: "artstation",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §2.1, §16.3",
     unblocksLinkKeys: ["humanArtStation"]
   },
@@ -231,6 +281,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "Teaser 30s, thumbnail, metrics card, visual modes grid + portfolio/GitHub links ready to feature.",
     platform: "linkedin",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §17.1"
   },
   {
@@ -239,6 +290,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "1) TwinSight case study 2) 90s demo 3) GitHub repo 4) ArtStation breakdown.",
     platform: "linkedin",
     status: "pending",
+    owner: "alex",
     source: "doc-33 §17.3"
   },
 
@@ -249,6 +301,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "portfolio/projects/twinsight-x500/: hero.jpg, demo, teaser, thumbnail, feature shots, grids, diagrams, metrics card.",
     platform: "web",
     status: "pending",
+    owner: "ag-port",
     source: "doc-33 §4.3, §19.1"
   },
   {
@@ -257,6 +310,7 @@ export const portfolioAssetChecklist: PortfolioAssetItem[] = [
     detail: "Export the selected CV variant to PDF and publish behind links.cv so the CV link works.",
     platform: "web",
     status: "pending",
+    owner: "ag-port",
     source: "doc-33 §20.4",
     unblocksLinkKeys: ["cv"]
   }
@@ -270,6 +324,10 @@ export const portfolioAssetsByPlatform = (platform: PortfolioAssetPlatform) =>
   pendingPortfolioAssets.filter((item) => item.platform === platform);
 
 export const pendingPortfolioAssetCount = pendingPortfolioAssets.length;
+
+/** Baseline grouping by production status (dataset defaults, not live board state). */
+export const portfolioAssetsByStatus = (status: PortfolioAssetStatus) =>
+  portfolioAssetChecklist.filter((item) => item.status === status);
 
 // ── ArtStation breakdown structure (doc 29C) ────────────────────────────────
 // Paraphrased structure for the simulated ArtStation tab. Rule (PLAN_MULTIAGENTE

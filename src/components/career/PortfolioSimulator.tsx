@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { initialPortfolioProjects, type PortfolioProjectItem } from '../../data/career/portfolioProjects';
 import {
-  pendingPortfolioAssetCount,
-  pendingPortfolioAssets,
   artstationBreakdownSpecs,
   artstationProfileChecklist,
   artstationChecklistAreas,
+  PORTFOLIO_ASSET_STATUSES,
+  PORTFOLIO_ASSET_STATUS_LABELS,
+  PORTFOLIO_ASSET_OWNER_LABELS,
   type PortfolioAssetPlatform,
+  type PortfolioAssetStatus,
   type ArtStationBreakdownSpec
 } from '../../data/career/portfolioChecklist';
+import {
+  selectBoardCards,
+  selectBoardColumns,
+  usePortfolioBoardStore
+} from '../../data/career/portfolioBoardStore';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
 import { AlertCircle, Copy, Check, Palette, Share2, Code2, Globe, ListChecks, Layers } from 'lucide-react';
@@ -18,6 +25,13 @@ const PLATFORM_LABEL: Record<PortfolioAssetPlatform, string> = {
   github: 'GitHub',
   linkedin: 'LinkedIn',
   web: 'Web'
+};
+
+const STATUS_ACCENT: Record<PortfolioAssetStatus, string> = {
+  pending: 'var(--text-tertiary)',
+  in_progress: 'var(--color-accent-primary)',
+  review: 'var(--color-accent-warning)',
+  done: 'var(--color-accent-success, #34c759)'
 };
 
 const KIND_BADGE: Partial<Record<string, string>> = {
@@ -35,10 +49,19 @@ const REQUIREMENT_LABEL: Record<string, string> = {
 };
 
 export default function PortfolioSimulator() {
-  const [activeTab, setActiveTab] = useState<'artstation' | 'linkedin' | 'github' | 'web'>('artstation');
+  const [activeTab, setActiveTab] = useState<'board' | 'artstation' | 'linkedin' | 'github' | 'web'>('board');
   const [projects, setProjects] = useState<PortfolioProjectItem[]>(initialPortfolioProjects);
   const [copied, setCopied] = useState(false);
   const [selectedSpecId, setSelectedSpecId] = useState<ArtStationBreakdownSpec['id']>('twinsight-x500');
+
+  const boardStatuses = usePortfolioBoardStore((state) => state.statuses);
+  const setAssetStatus = usePortfolioBoardStore((state) => state.setAssetStatus);
+  const resetBoard = usePortfolioBoardStore((state) => state.resetBoard);
+
+  const boardCards = selectBoardCards(boardStatuses);
+  const boardColumns = selectBoardColumns(boardStatuses);
+  const doneCount = boardColumns.done.length;
+  const notDoneCount = boardCards.length - doneCount;
 
   const selectedSpec = artstationBreakdownSpecs.find((spec) => spec.id === selectedSpecId) ?? artstationBreakdownSpecs[0];
 
@@ -65,6 +88,15 @@ export default function PortfolioSimulator() {
         `\n\nCHECKLIST DE PERFIL (doc-28E):\n` +
         artstationProfileChecklist.map((item) => `- [${artstationChecklistAreas.find((a) => a.area === item.area)?.label ?? item.area}] ${item.title}: ${item.detail} (${item.source})`).join('\n');
     }
+
+    text +=
+      `\n\nTABLERO SPRINT (doc-33):\n` +
+      selectBoardCards(usePortfolioBoardStore.getState().statuses)
+        .map(
+          (card) =>
+            `- [${PORTFOLIO_ASSET_STATUS_LABELS[card.effectiveStatus]}] ${card.title} — ${PLATFORM_LABEL[card.platform]} · ${PORTFOLIO_ASSET_OWNER_LABELS[card.owner]} (${card.source})`
+        )
+        .join('\n');
 
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -99,7 +131,7 @@ export default function PortfolioSimulator() {
           </Button>
         </div>
 
-        {/* CUENTA DE ASSETS PENDIENTES (doc-33 sprint) */}
+        {/* CUENTA DE ASSETS DEL SPRINT doc-33 (estado vivo del tablero) */}
         <div style={{
           background: 'rgba(255,255,255,0.02)',
           border: '1px solid var(--color-border-subtle)',
@@ -112,13 +144,16 @@ export default function PortfolioSimulator() {
         }}>
           <ListChecks size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
           <strong style={{ fontSize: '0.82rem', color: 'var(--text)' }}>
-            Assets pendientes (doc-33): {pendingPortfolioAssetCount}
+            Assets pendientes (doc-33): {notDoneCount} de {boardCards.length}
           </strong>
+          <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-success, #34c759)', fontWeight: 700 }}>
+            Hechos: {doneCount}
+          </span>
           <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
             {(['artstation', 'github', 'linkedin', 'web'] as PortfolioAssetPlatform[])
               .map(
                 (platform) =>
-                  `${PLATFORM_LABEL[platform]}: ${pendingPortfolioAssets.filter((item) => item.platform === platform).length}`
+                  `${PLATFORM_LABEL[platform]}: ${boardCards.filter((card) => card.platform === platform && card.effectiveStatus !== 'done').length}`
               )
               .join(' · ')}
           </span>
@@ -130,7 +165,27 @@ export default function PortfolioSimulator() {
             Portafolio y CV
           </h2>
 
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '3px', borderRadius: '10px', border: '1px solid var(--color-border-subtle)' }}>
+          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '3px', borderRadius: '10px', border: '1px solid var(--color-border-subtle)', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => setActiveTab('board')}
+              style={{
+                background: activeTab === 'board' ? 'var(--color-accent-primary)' : 'transparent',
+                color: activeTab === 'board' ? '#000000' : 'var(--text-secondary)',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: '7px',
+                fontSize: '0.78rem',
+                fontWeight: activeTab === 'board' ? 700 : 500,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              <ListChecks size={14} /> Tablero Sprint
+            </button>
+
             <button
               type="button"
               onClick={() => setActiveTab('artstation')}
@@ -213,7 +268,137 @@ export default function PortfolioSimulator() {
           </div>
         </div>
 
+        {/* TABLERO SPRINT (doc-33): estado por ítem con responsable visual y fuente citada */}
+        {activeTab === 'board' && (
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+                Tablero de producción de assets — doc-33
+              </span>
+              <button
+                type="button"
+                onClick={resetBoard}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid var(--color-border-subtle)',
+                  borderRadius: '7px',
+                  padding: '4px 10px',
+                  fontSize: '0.68rem',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer'
+                }}
+              >
+                Reiniciar tablero
+              </button>
+            </div>
+
+            <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>
+              Estado vivo del sprint (se guarda en este navegador). El baseline del dataset arranca todo en «Pendiente»: un ítem solo avanza cuando el asset real existe. Cada tarjeta muestra su responsable y cita la sección de doc-33 que exige el asset.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 'var(--space-sm)', alignItems: 'start' }}>
+              {PORTFOLIO_ASSET_STATUSES.map((status) => (
+                <div
+                  key={status}
+                  style={{
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid var(--color-border-subtle)',
+                    borderTop: `2px solid ${STATUS_ACCENT[status]}`,
+                    borderRadius: 'var(--radius-md)',
+                    padding: '8px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '6px',
+                    minHeight: '110px'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.68rem', fontWeight: 700, color: STATUS_ACCENT[status], textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                      {PORTFOLIO_ASSET_STATUS_LABELS[status]}
+                    </span>
+                    <span style={{ fontSize: '0.65rem', color: 'var(--text-tertiary)', fontWeight: 700 }}>
+                      {boardColumns[status].length}
+                    </span>
+                  </div>
+
+                  {boardColumns[status].length === 0 && (
+                    <span style={{ fontSize: '0.64rem', color: 'var(--text-tertiary)', fontStyle: 'italic', padding: '6px 2px' }}>
+                      Sin ítems
+                    </span>
+                  )}
+
+                  {boardColumns[status].map((card) => (
+                    <div
+                      key={card.id}
+                      style={{
+                        background: 'rgba(255,255,255,0.02)',
+                        border: '1px solid var(--color-border-subtle)',
+                        borderRadius: '8px',
+                        padding: '8px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '4px'
+                      }}
+                    >
+                      <strong style={{ fontSize: '0.73rem', color: 'var(--text)' }}>{card.title}</strong>
+                      <p style={{ fontSize: '0.65rem', color: 'var(--text-tertiary)', margin: 0 }}>{card.detail}</p>
+
+                      <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '0.6rem', background: 'rgba(255,255,255,0.05)', padding: '1px 5px', borderRadius: '4px', color: 'var(--text-secondary)' }}>
+                          {PLATFORM_LABEL[card.platform]}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '0.6rem',
+                            padding: '1px 5px',
+                            borderRadius: '4px',
+                            fontWeight: 700,
+                            background: card.owner === 'ag-port' ? 'rgba(10,132,255,0.12)' : 'rgba(255,255,255,0.05)',
+                            color: card.owner === 'ag-port' ? 'var(--color-accent-primary)' : 'var(--text-secondary)'
+                          }}
+                        >
+                          {PORTFOLIO_ASSET_OWNER_LABELS[card.owner]}
+                        </span>
+                        {card.unblocksLinkKeys?.map((key) => (
+                          <span key={key} style={{ fontSize: '0.6rem', background: 'rgba(255,159,10,0.08)', padding: '1px 5px', borderRadius: '4px', color: 'var(--text-secondary)' }}>
+                            desbloquea: [{key}]
+                          </span>
+                        ))}
+                      </div>
+
+                      <span style={{ fontSize: '0.58rem', color: 'var(--text-tertiary)' }}>[{card.source}]</span>
+
+                      <select
+                        value={card.effectiveStatus}
+                        onChange={(event) => setAssetStatus(card.id, event.target.value as PortfolioAssetStatus)}
+                        aria-label={`Estado de: ${card.title}`}
+                        style={{
+                          background: 'rgba(255,255,255,0.04)',
+                          color: 'var(--text)',
+                          border: '1px solid var(--color-border-subtle)',
+                          borderRadius: '6px',
+                          fontSize: '0.64rem',
+                          padding: '3px 6px',
+                          cursor: 'pointer',
+                          alignSelf: 'flex-start'
+                        }}
+                      >
+                        {PORTFOLIO_ASSET_STATUSES.map((option) => (
+                          <option key={option} value={option}>
+                            {PORTFOLIO_ASSET_STATUS_LABELS[option]}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* ORDEN DE PROYECTOS Y SIMULADOR */}
+        {activeTab !== 'board' && (
         <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
             Orden de proyectos ({activeTab.toUpperCase()})
@@ -272,6 +457,7 @@ export default function PortfolioSimulator() {
             ))}
           </div>
         </div>
+        )}
 
         {/* PESTAÑA ARTSTATION: ESTRUCTURA DE BREAKDOWN (doc 29C) + CHECKLIST DE PERFIL (doc 28E) */}
         {activeTab === 'artstation' && (

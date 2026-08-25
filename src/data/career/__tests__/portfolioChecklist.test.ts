@@ -4,6 +4,8 @@ import {
   pendingPortfolioAssetCount,
   pendingPortfolioAssets,
   portfolioAssetsByPlatform,
+  portfolioAssetsByStatus,
+  PORTFOLIO_ASSET_STATUSES,
   artstationBreakdownSpecs,
   artstationProfileChecklist,
   artstationChecklistAreas
@@ -49,6 +51,41 @@ describe("portfolioChecklist (doc-33 asset sprint)", () => {
 
   it("starts fully pending (sprint not executed yet)", () => {
     expect(portfolioAssetChecklist.every((item) => item.status === "pending")).toBe(true);
+  });
+
+  it("exposes exactly the four board states", () => {
+    expect(PORTFOLIO_ASSET_STATUSES).toEqual(["pending", "in_progress", "review", "done"]);
+  });
+
+  it("every item has a valid visual owner (alex production or AG-PORT integration)", () => {
+    const owners = new Set(["alex", "ag-port"]);
+    for (const item of portfolioAssetChecklist) {
+      expect(owners.has(item.owner)).toBe(true);
+    }
+    // Both responsibilities must be represented on the board.
+    expect(new Set(portfolioAssetChecklist.map((item) => item.owner)).size).toBe(2);
+    // Asset production (capture/edit/export) belongs to the human owner.
+    const producedIds = [
+      "video-demo-90s",
+      "image-thumbnail",
+      "artstation-twinsight-breakdown",
+      "linkedin-featured-media"
+    ];
+    for (const id of producedIds) {
+      expect(portfolioAssetChecklist.find((item) => item.id === id)?.owner).toBe("alex");
+    }
+    // Site integration items belong to AG-PORT.
+    for (const id of ["web-portfolio-media", "web-cv-pdf"]) {
+      expect(portfolioAssetChecklist.find((item) => item.id === id)?.owner).toBe("ag-port");
+    }
+  });
+
+  it("groups by status without losing items", () => {
+    const total = PORTFOLIO_ASSET_STATUSES.reduce(
+      (sum, status) => sum + portfolioAssetsByStatus(status).length,
+      0
+    );
+    expect(total).toBe(portfolioAssetChecklist.length);
   });
 
   it("unblocks link keys reference known placeholder keys", () => {
