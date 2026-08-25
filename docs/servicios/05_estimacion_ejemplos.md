@@ -76,19 +76,19 @@ Derivación: `16 × $28 = $448` · `34 × $40 = $1.360` → **USD 440–1.400**.
 | Extras | target móvil exigente + base para vista explosionada |
 | **Nivel** | **N3 o N4 según profundidad** |
 
-Horas F1 @N3: **38–67 h** · @N4: **56–111 h**. Entrega: N3 2–3 semanas · N4 4–9 semanas.
+Horas F1 @N3: **34–67 h** · @N4: **56–111 h**. Entrega: N3 2–3 semanas · N4 4–9 semanas.
 
-Derivación N3: `38 × $40 = $1.520` · `67 × $60 = $4.020` → **USD 1.500–4.100**.
+Derivación N3: `34 × $40 = $1.360` · `67 × $60 = $4.020` → **USD 1.350–4.100**.
 Derivación N4: `56 × $60 = $3.360` · `111 × $85 = $9.435` → **USD 3.300–9.500**.
-Si el cliente acepta nivel de detalle medio con LOD agresivo, baja a N3 (ahorro ≈55 % en el techo).
+Si el cliente acepta nivel de detalle medio con LOD agresivo, baja a N3 (reduce el techo ~57 %).
 
 ### Tabla comparativa (insumo directo del slider futuro)
 
 | | A · Simple | B · Medio | C · Industrial (N3 / N4) |
 |---|---|---|---|
 | Piezas | ~10 | ~40 | 150+ |
-| Horas F1 | 7–16 | 16–34 | 38–67 / 56–111 |
-| Presupuesto* | **$140–450** | **$440–1.400** | **$1.500–4.100 / $3.300–9.500** |
+| Horas F1 | 7–16 | 16–34 | 34–67 / 56–111 |
+| Presupuesto* | **$140–450** | **$440–1.400** | **$1.350–4.100 / $3.300–9.500** |
 | Entrega | 1–2 días | 3–6 días | 2–3 sem / 4–9 sem |
 | Confidence | explicit | explicit | inferred |
 
