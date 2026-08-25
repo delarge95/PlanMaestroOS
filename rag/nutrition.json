@@ -3547,9 +3547,9 @@
         "female-athletes"
       ],
       "locator": {
-        "page": 2025
+        "section": "Revision meta-analitica 2025 (Benton 2020, n=318; ensayos calorimetria indirecta 2024)"
       },
-      "summary": "menstrual-rmr-luteal-elevation: Fluctuaciones del Gasto Energético en Reposo (RMR) y Necesidades Calóricas por Fase del Ciclo: 1) **Magnitud Cuantitativa del Gasto en Reposo (RMR / REE):** los meta-análisis (Benton 2020, 26 estudios, $n=318$; y ensayos de calorimetría indirecta 2024) demuestran un **incremento pequeño pero estadísticamente significativo del RMR en fase lútea de solo $+40\\text{ a }+50\\ \\text{kcal/día}$** ($d = 0.22$, $p = 0.007$, con elevación de leptina $d = 0.35$ e ingesta lipídica $d = 0.48$). 2) **Coste Energético del Ejercicio:** el gasto calórico durante el ejercicio (medido al $35\\%\\text{ y }75\\%\\ \\dot{V}\\text{O}_2\\max$) es idéntico entre fases folicular y lútea, sin efecto de fase. 3) **Consenso Práctico:** no existe justificación fisiológica para fluctuaciones calóricas masivas sistemáticas; ajustes menores de $+50\\text{ a }100\\ \\text{kcal/día}$ en fase lútea son opcionales según apetito subjetivo.",
+      "summary": "menstrual-rmr-luteal-elevation: Fluctuaciones del Gasto EnergÃ©tico en Reposo (RMR) y Necesidades CalÃ³ricas por Fase del Ciclo: 1) **Magnitud Cuantitativa del Gasto en Reposo (RMR / REE):** los meta-anÃ¡lisis (Benton 2020, 26 estudios, $n=318$; y ensayos de calorimetrÃ­a indirecta 2024) demuestran un **incremento pequeÃ±o pero estadÃ­sticamente significativo del RMR en fase lÃºtea de solo $+40\\text{ a }+50\\ \\text{kcal/dÃ­a}$** ($d = 0.22$, $p = 0.007$, con elevaciÃ³n de leptina $d = 0.35$ e ingesta lipÃ­dica $d = 0.48$). 2) **Coste EnergÃ©tico del Ejercicio:** el gasto calÃ³rico durante el ejercicio (medido al $35\\%\\text{ y }75\\%\\ \\dot{V}\\text{O}_2\\max$) es idÃ©ntico entre fases folicular y lÃºtea, sin efecto de fase. 3) **Consenso PrÃ¡ctico:** no existe justificaciÃ³n fisiolÃ³gica para fluctuaciones calÃ³ricas masivas sistemÃ¡ticas; ajustes menores de $+50\\text{ a }100\\ \\text{kcal/dÃ­a}$ en fase lÃºtea son opcionales segÃºn apetito subjetivo.",
       "entities": [
         "hormone:estrogen",
         "hormone:progesterone",
@@ -3572,9 +3572,9 @@
         "resistance-training"
       ],
       "locator": {
-        "page": 2025
+        "section": "Revision meta-analitica 2025 (Wolf 2025; meta-analisis sarcopenia 2024-2025)"
       },
-      "summary": "menopause-protein-sarcopenia-target: Requerimientos Proteicos y Salud Musculoesquelética en Peri/Menopausia: 1) **Dosificación Proteica Anti-Sarcopénica:** en la transición menopáusica y posmenopausia, la caída de estrógenos acelera la resistencia anabólica y la pérdida de masa muscular: la evidencia de meta-análisis (13 RCTs, $n=1057$; 10 RCTs, $n=1154$) respalda **elevar la ingesta proteica total de la RDA ($0.8\\ \\text{g/kg}$) hacia $1.2\\text{ a }1.5\\ \\text{g/kg/día}$** distribuida en $\\ge 3\\ \\text{tomas}$ enriquecidas con leucina/suero lácteo. 2) **Sinergia con Fuerza:** proteína + entrenamiento de fuerza produce incrementos significativos del índice de masa muscular apendicular (ASMI $SMD = 0.47$) y fuerza de prensión manual ($+2.64\\ \\text{kg}$). 3) **Densidad Ósea (BMD/BMC):** la proteína sola tiene un efecto prácticamente nulo en densidad ósea ($WMD = 0.03\\ \\text{kg}$); el estímulo mecánico de carga e impacto óseo es el factor determinante.",
+      "summary": "menopause-protein-sarcopenia-target: Requerimientos Proteicos y Salud MusculoesquelÃ©tica en Peri/Menopausia: 1) **DosificaciÃ³n Proteica Anti-SarcopÃ©nica:** en la transiciÃ³n menopÃ¡usica y posmenopausia, la caÃ­da de estrÃ³genos acelera la resistencia anabÃ³lica y la pÃ©rdida de masa muscular: la evidencia de meta-anÃ¡lisis (13 RCTs, $n=1057$; 10 RCTs, $n=1154$) respalda **elevar la ingesta proteica total de la RDA ($0.8\\ \\text{g/kg}$) hacia $1.2\\text{ a }1.5\\ \\text{g/kg/dÃ­a}$** distribuida en $\\ge 3\\ \\text{tomas}$ enriquecidas con leucina/suero lÃ¡cteo. 2) **Sinergia con Fuerza:** proteÃ­na + entrenamiento de fuerza produce incrementos significativos del Ã­ndice de masa muscular apendicular (ASMI $SMD = 0.47$) y fuerza de prensiÃ³n manual ($+2.64\\ \\text{kg}$). 3) **Densidad Ã“sea (BMD/BMC):** la proteÃ­na sola tiene un efecto prÃ¡cticamente nulo en densidad Ã³sea ($WMD = 0.03\\ \\text{kg}$); el estÃ­mulo mecÃ¡nico de carga e impacto Ã³seo es el factor determinante.",
       "entities": [
         "hormone:estrogen",
         "muscle:skeletal-muscle",
@@ -3597,9 +3597,9 @@
         "menstrual-periodization"
       ],
       "locator": {
-        "page": 2025
+        "section": "Revision sistematica PRISMA-2020 y meta-analisis (Elsevier 2023; PRISMA review 2026)"
       },
-      "summary": "cycle-based-training-scientific-consensus: Evidencia Científica y Consenso sobre el Entrenamiento Basado en Fases del Ciclo Menstrual (*Cycle-Based Training*): 1) **Rendimiento Físico Objetivo:** las revisiones sistemáticas PRISMA-2020 (21 estudios) y meta-análisis de $\\dot{V}\\text{O}_2\\max$ demuestran que **las diferencias en fuerza máxima ($1\\text{RM}$), velocidad, potencia y consumo de oxígeno entre fases folicular y lútea son triviales a nulas** ($\\Delta \\dot{V}\\text{O}_2\\max = -0.03\\ \\text{mL/kg/min}$). 2) **Variabilidad Subjetiva y Daño Muscular:** sí se observan peores sensaciones de esfuerzo percibido (RPE) y recuperación durante la menstruación / folicular temprana, junto con mayor dolor muscular tardío (DOMS). 3) **Directriz de Aplicación:** el *Cycle-Based Training* debe utilizarse como una herramienta de **autorregulación basada en síntomas individuales**, no como una periodización rígida obligatoria.\n\n<!-- stats: 3 chunks, 7 entidades cubiertas -->",
+      "summary": "cycle-based-training-scientific-consensus: Evidencia CientÃ­fica y Consenso sobre el Entrenamiento Basado en Fases del Ciclo Menstrual (*Cycle-Based Training*): 1) **Rendimiento FÃ­sico Objetivo:** las revisiones sistemÃ¡ticas PRISMA-2020 (21 estudios) y meta-anÃ¡lisis de $\\dot{V}\\text{O}_2\\max$ demuestran que **las diferencias en fuerza mÃ¡xima ($1\\text{RM}$), velocidad, potencia y consumo de oxÃ­geno entre fases folicular y lÃºtea son triviales a nulas** ($\\Delta \\dot{V}\\text{O}_2\\max = -0.03\\ \\text{mL/kg/min}$). 2) **Variabilidad Subjetiva y DaÃ±o Muscular:** sÃ­ se observan peores sensaciones de esfuerzo percibido (RPE) y recuperaciÃ³n durante la menstruaciÃ³n / folicular temprana, junto con mayor dolor muscular tardÃ­o (DOMS). 3) **Directriz de AplicaciÃ³n:** el *Cycle-Based Training* debe utilizarse como una herramienta de **autorregulaciÃ³n basada en sÃ­ntomas individuales**, no como una periodizaciÃ³n rÃ­gida obligatoria.\n\n<!-- stats: 3 chunks, 7 entidades cubiertas -->",
       "entities": [
         "hormone:estrogen",
         "hormone:progesterone",

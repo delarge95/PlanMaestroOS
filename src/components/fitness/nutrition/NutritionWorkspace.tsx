@@ -1,7 +1,7 @@
-// src/components/fitness/nutrition/NutritionWorkspace.tsx — Módulo UI de nutrición deportiva (AG-NUTRI, Fase 1)
-// Calculadora personal + targets citados + día tipo + suplementos con evidencia + disclaimer.
+﻿// src/components/fitness/nutrition/NutritionWorkspace.tsx â€” MÃ³dulo UI de nutriciÃ³n deportiva (AG-NUTRI, Fase 1)
+// Calculadora personal + targets citados + dÃ­a tipo + suplementos con evidencia + disclaimer.
 import React from 'react';
-import { AlertTriangle, Calculator, Droplets, Flame, Pill, Sunrise } from 'lucide-react';
+import { AlertTriangle, Calculator, Droplets, Flame, Pill, Sunrise, Venus } from 'lucide-react';
 import { useNutritionStore, NUTRITION_STORAGE_KEY } from './nutritionStore';
 import {
   buildDayType,
@@ -13,13 +13,14 @@ import type { Goal } from '../../../data/fitness/nutrition/types';
 import TargetCard from './TargetCard';
 import DayTypeGrid from './DayTypeGrid';
 import KcalBurnPanel from './KcalBurnPanel';
+import FemaleHormonesPanel from './FemaleHormonesPanel';
 import Disclosure from '../../ui/Disclosure';
 import StatusBadge from '../../ui/StatusBadge';
 
 const GOALS: Array<{ value: Goal; label: string; hint: string }> = [
-  { value: 'deficit', label: 'Déficit', hint: '−500 kcal/día · perder grasa' },
+  { value: 'deficit', label: 'DÃ©ficit', hint: 'âˆ’500 kcal/dÃ­a Â· perder grasa' },
   { value: 'maintenance', label: 'Mantenimiento', hint: 'kcal de equilibrio' },
-  { value: 'surplus', label: 'Superávit', hint: '+500 kcal/día · ganar masa' },
+  { value: 'surplus', label: 'SuperÃ¡vit', hint: '+500 kcal/dÃ­a Â· ganar masa' },
 ];
 
 function SectionTitle({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
@@ -49,26 +50,26 @@ function SupplementPanel() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-2)' }}>
         <div style={{ background: 'var(--surface-elevated, var(--color-surface-raised))', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md, 16px)' }}>
-          <StatusBadge label="Evidencia sólida (NSCA + IOC)" variant="success" />
+          <StatusBadge label="Evidencia sÃ³lida (NSCA + IOC)" variant="success" />
           <p style={{ margin: 'var(--space-2) 0 0', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
-            <strong>Monohidrato de creatina</strong>: carga 20–25 g/día × 5 días (o 0.3 g/kg), luego 2 g/día. +0.5–2 kg de masa magra esperables.
+            <strong>Monohidrato de creatina</strong>: carga 20â€“25 g/dÃ­a Ã— 5 dÃ­as (o 0.3 g/kg), luego 2 g/dÃ­a. +0.5â€“2 kg de masa magra esperables.
           </p>
           <p style={{ margin: 'var(--space-1) 0 0', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-            {creatine.source} · {creatine.locator} · <code>nutri-nsca-creatine-protocol</code>
+            {creatine.source} Â· {creatine.locator} Â· <code>nutri-nsca-creatine-protocol</code>
           </p>
         </div>
         <div style={{ background: 'var(--surface-elevated, var(--color-surface-raised))', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md, 16px)' }}>
-          <StatusBadge label="Evidencia sólida (NSCA + IOC)" variant="success" />
+          <StatusBadge label="Evidencia sÃ³lida (NSCA + IOC)" variant="success" />
           <p style={{ margin: 'var(--space-2) 0 0', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
-            <strong>Cafeína</strong>: 3–9 mg/kg ~60 min antes del ejercicio. Sin beneficio extra ≥9 mg/kg y más efectos adversos (ansiedad, insomnio, GI).
+            <strong>CafeÃ­na</strong>: 3â€“9 mg/kg ~60 min antes del ejercicio. Sin beneficio extra â‰¥9 mg/kg y mÃ¡s efectos adversos (ansiedad, insomnio, GI).
           </p>
           <p style={{ margin: 'var(--space-1) 0 0', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-            {caffeine.source} · {caffeine.locator} · <code>nutri-nsca-caffeine-protocol</code> · riesgo: {caffeineRisk.locator}
+            {caffeine.source} Â· {caffeine.locator} Â· <code>nutri-nsca-caffeine-protocol</code> Â· riesgo: {caffeineRisk.locator}
           </p>
         </div>
       </div>
       <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-        Solo se listan suplementos con evidencia documentada en las fuentes del RAG (ver rag/nutrition.json, tema "supplements"). Nada de consejos médicos.
+        Solo se listan suplementos con evidencia documentada en las fuentes del RAG (ver rag/nutrition.json, tema "supplements"). Nada de consejos mÃ©dicos.
       </p>
     </div>
   );
@@ -111,8 +112,8 @@ export function NutritionWorkspace() {
       >
         <AlertTriangle size={16} aria-hidden="true" style={{ flexShrink: 0, marginTop: 2, color: 'var(--color-accent-warning, var(--warning))' }} />
         <span>
-          <strong>Información educativa</strong> basada en fuentes citadas (NSCA 2016, IOC/Maughan 2000). No es consejo médico ni dietas terapéuticas.
-          Embarazo, diabetes, TCA, enfermedad renal u otra condición → consulta a un profesional sanitario antes de cambiar tu dieta o tomar suplementos.
+          <strong>InformaciÃ³n educativa</strong> basada en fuentes citadas (NSCA 2016, IOC/Maughan 2000). No es consejo mÃ©dico ni dietas terapÃ©uticas.
+          Embarazo, diabetes, TCA, enfermedad renal u otra condiciÃ³n â†’ consulta a un profesional sanitario antes de cambiar tu dieta o tomar suplementos.
         </span>
       </div>
 
@@ -145,7 +146,7 @@ export function NutritionWorkspace() {
           <label style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
             Sexo (tabla kcal/kg)
             <select value={sex} onChange={(e) => setInputs({ sex: e.target.value as 'male' | 'female' })} style={inputStyle}>
-              <option value="male">Varón</option>
+              <option value="male">VarÃ³n</option>
               <option value="female">Mujer</option>
             </select>
           </label>
@@ -211,14 +212,14 @@ export function NutritionWorkspace() {
 
       {/* Targets diarios */}
       <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <SectionTitle icon={<Sunrise size={16} />}>Targets del día</SectionTitle>
+        <SectionTitle icon={<Sunrise size={16} />}>Targets del dÃ­a</SectionTitle>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-2)' }}>
           {targets.map((t) => (
             <TargetCard key={t.label} target={t} />
           ))}
         </div>
         <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-          Cada target muestra su "¿por qué?" con la regla y la cita (libro · capítulo · página) que lo sustenta.
+          Cada target muestra su "Â¿por quÃ©?" con la regla y la cita (libro Â· capÃ­tulo Â· pÃ¡gina) que lo sustenta.
         </p>
       </section>
 
@@ -228,12 +229,12 @@ export function NutritionWorkspace() {
         <KcalBurnPanel />
       </section>
 
-      {/* Día tipo */}
+      {/* DÃ­a tipo */}
       <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <SectionTitle icon={<Droplets size={16} />}>Día tipo (franjas, sin recetas)</SectionTitle>
+        <SectionTitle icon={<Droplets size={16} />}>DÃ­a tipo (franjas, sin recetas)</SectionTitle>
         <DayTypeGrid slots={daySlots} />
         <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-          Franjas alineadas al grid semanal. Los alimentos concretos y recetas pertenecen al módulo de gastronomía (puente por contrato de macros).
+          Franjas alineadas al grid semanal. Los alimentos concretos y recetas pertenecen al mÃ³dulo de gastronomÃ­a (puente por contrato de macros).
         </p>
       </section>
 
@@ -243,13 +244,19 @@ export function NutritionWorkspace() {
         <SupplementPanel />
       </section>
 
-      {/* Detalle de proteína post-entreno según edad */}
-      <Disclosure label={`Dosis de proteína post-entreno: ${post.grams}`} summary={ageYears ? `${ageYears} años` : 'edad no informada (pauta general)'}>
+      {/* Perfil hormonal femenino (opcional, ciclo 2) */}
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+        <SectionTitle icon={<Venus size={16} />}>Perfil hormonal femenino (ajustes opcionales citados)</SectionTitle>
+        <FemaleHormonesPanel />
+      </section>
+
+      {/* Detalle de proteÃ­na post-entreno segÃºn edad */}
+      <Disclosure label={`Dosis de proteÃ­na post-entreno: ${post.grams}`} summary={ageYears ? `${ageYears} aÃ±os` : 'edad no informada (pauta general)'}>
         <p style={{ margin: 0, fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
           {toCitation(post.ruleId).statement}
           <br />
           <span style={{ color: 'var(--text-tertiary)' }}>
-            {toCitation(post.ruleId).source} · {toCitation(post.ruleId).locator} · <code>{post.ruleId}</code>
+            {toCitation(post.ruleId).source} Â· {toCitation(post.ruleId).locator} Â· <code>{post.ruleId}</code>
           </span>
         </p>
       </Disclosure>
