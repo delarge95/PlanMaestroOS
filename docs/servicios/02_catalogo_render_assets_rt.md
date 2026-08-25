@@ -2,7 +2,7 @@
 
 > v1.0 · 2026-08-25 · Owner: AG-SERV · Moneda USD.
 > Cómo leer las tablas: cada subtarea muestra el rango de horas **por nivel** como `N1 a–b · N2 c–d · N3 e–f · N4 g–h`.
-> El presupuesto total por nivel deriva de la fórmula del [`01_modelo_cobro.md`](01_modelo_cobro.md) §3
+> El presupuesto total por nivel deriva de la fórmula del [`01_modelo_cobro.md`](01_modelo_cobro.md) §4
 > (horas × banda del nivel: N1 25–30 · N2 28–35 · N3 35–45 · N4 45–55 USD/h, con su regla de redondeo).
 > Salvo indicación contrario, el precio asume **modo creación desde referencia**; si el cliente entrega el asset
 > base ya modelado, aplicar modificador de ficha (típicamente −40–60% sobre las subtareas de modelado).
@@ -47,11 +47,11 @@ Modificadores de ficha: pack +3 vistas adicionales mismo setup **+30%**; resoluc
 | FX/simulaciones (opcional*) | N1 — · N2 0–6 · N3 6–20 · N4 20–50 |
 | Render + QC técnico | N1 1–2 · N2 2–5 · N3 5–12 · N4 12–30 |
 | Edición/post/entrega | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–16 |
-| **Total horas (con FX)** | **N1 7–15 · N2 18–41 · N3 41–97 · N4 107–220** |
+| **Total horas (con FX)** | **N1 7–15 · N2 16–41 · N3 41–97 · N4 97–220** |
 
 \* N1 no incluye simulaciones; N2–N4 las incluyen cuando el brief las pide.
 
-**Presupuesto por nivel:** N1 **$170–450** · N2 **$500–1450** · N3 **$1400–4400** · N4 **$4800–12100**
+**Presupuesto por nivel:** N1 **$170–450** · N2 **$400–1450** · N3 **$1400–4400** · N4 **$4300–12100**
 Variantes sin FX: N3 **$1200–3500** · N4 **$3900–9400**
 Entrega típica: N1 2–4 días · N2 ~1 semana · N3 2–3 semanas · N4 4–8 semanas.
 Modificadores de ficha: bloque adicional de +10 s **+40–60%** del subtotal (economía de escena ya montada); versión vertical 9:16 +10%.
@@ -73,7 +73,7 @@ Todos los assets RT comparten este núcleo; las variantes suman sus deltas sobre
 | Texturizado PBR | N1 1–3 · N2 3–6 · N3 6–14 · N4 14–30 |
 | Optimización (LODs, draw calls, Draco/meshopt) | N1 0,5–1 · N2 1–3 · N3 3–6 · N4 6–12 |
 | QA en motor target + export final | N1 0,5–1 · N2 1–2 · N3 2–4 · N4 4–8 |
-| **Total núcleo** | **N1 6–13 · N2 14–30 · N3 34–68 · N4 81–173** |
+| **Total núcleo** | **N1 6–13 · N2 13–30 · N3 30–66 · N4 66–163** |
 
 Deltas por variante (se SUMAN al núcleo):
 
@@ -86,16 +86,16 @@ Deltas por variante (se SUMAN al núcleo):
 Target por defecto: WebGL móvil-first (presupuesto poligonal y texturas acordados en intake).
 Motor target declarable: three.js / Babylon.js / Unity / Unreal / Godot.
 
-#### B1 · Asset RT estático no interactuable — **$150–400 / $390–1050 / $1150–3100 / $3600–9600**
+#### B1 · Asset RT estático no interactuable — **$150–390 / $360–1050 / $1050–3000 / $2900–9000**
 Props, escenografía, hero object para visor pasivo. Entrega típica: N1 1–2 días · N2 3–5 días · N3 1–2 semanas · N4 3–6 semanas.
 
-#### B2 · Asset RT estático interactuable — **$200–520 / $500–1350 / $1450–3800 / $4300–11300**
+#### B2 · Asset RT estático interactuable — **$200–550 / $470–1350 / $1300–3700 / $3600–10800**
 Inspección con hotspots, corte por selección, info por parte. Entrega: N1 2 días · N2 ~1 semana · N3 2 semanas · N4 4–7 semanas.
 
-#### B3 · Asset RT animado no interactuable — **$250–640 / $600–1650 / $1750–4700 / $5200–14000**
+#### B3 · Asset RT animado no interactuable — **$250–650 / $550–1650 / $1600–4600 / $4500–13400**
 Loops (idle/giro/funcionamiento) para vitrina web o juego NPC pasivo. Entrega: N1 2–3 días · N2 ~1 semana · N3 2–3 semanas · N4 5–8 semanas.
 
-#### B4 · Asset RT animado interactuable — **$350–850 / $800–2100 / $2200–6300 / $6700–17800**
+#### B4 · Asset RT animado interactuable — **$350–850 / $750–2100 / $2100–6200 / $6100–17300**
 Control directo del usuario (personaje simple, vehículo controlable, máquina operable). Entrega: N1 3–4 días · N2 1–2 semanas · N3 3–5 semanas · N4 6–12 semanas.
 
 ---
@@ -115,7 +115,7 @@ Control directo del usuario (personaje simple, vehículo controlable, máquina o
 | Documentación + escena ejemplo | N1 0,5–1 · N2 1–3 · N3 3–6 · N4 6–12 |
 | **Total horas** | **N1 5–12 · N2 12–27 · N3 27–63 · N4 63–135** |
 
-**Presupuesto por nivel:** N1 **$130–360** · N2 **$330–950** · N3 **$900–2850** · N4 **$2800–7500**
+**Presupuesto por nivel:** N1 **$120–360** · N2 **$330–950** · N3 **$900–2900** · N4 **$2800–7500**
 Entrega: N1 1–2 días · N2 2–4 días · N3 1–2 semanas · N4 3–6 semanas.
 Modificador: shader adicional del MISMO sistema/familia **−30%**.
 
@@ -136,7 +136,7 @@ Modificador: shader adicional del MISMO sistema/familia **−30%**.
 | Integración motor + perf | N1 1–2 · N2 2–5 · N3 5–12 · N4 12–25 |
 | **Total horas** | **N1 6–13 · N2 13–29 · N3 29–70 · N4 70–165** |
 
-**Presupuesto por nivel:** N1 **$150–390** · N2 **$360–1050** · N3 **$1000–3150** · N4 **$3100–9100**
+**Presupuesto por nivel:** N1 **$150–390** · N2 **$360–1050** · N3 **$1000–3200** · N4 **$3100–9100**
 Asset NO incluido. Entrega: N1 2 días · N2 ~1 semana · N3 2 semanas · N4 4–8 semanas.
 
 ---
@@ -156,7 +156,7 @@ Asset NO incluido. Entrega: N1 2 días · N2 ~1 semana · N3 2 semanas · N4 4�
 | QA motor | N1 0,5–1 · N2 1–2 · N3 2–3 · N4 3–6 |
 | **Total horas** | **N1 2–7 · N2 7–17 · N3 17–39 · N4 39–89** |
 
-**Presupuesto por nivel:** N1 **$50–210** · N2 **$190–600** · N3 **$550–1800** · N4 **$1700–4900**
+**Presupuesto por nivel:** N1 **$50–210** · N2 **$190–600** · N3 **$550–1800** · N4 **$1750–4900**
 
 ---
 
@@ -173,7 +173,7 @@ Asset NO incluido. Entrega: N1 2 días · N2 ~1 semana · N3 2 semanas · N4 4�
 | Clips de animación (lote de 2) | N1 2–6 · N2 6–12 · N3 12–24 · N4 24–50 |
 | **Total horas** | **N1 5–14 · N2 14–32 · N3 32–74 · N4 74–165** |
 
-**Presupuesto por nivel:** N1 **$125–420** · N2 **$390–1120** · N3 **$1100–3350** · N4 **$3300–9100**
+**Presupuesto por nivel:** N1 **$120–420** · N2 **$390–1150** · N3 **$1100–3400** · N4 **$3300–9100**
 Clip adicional: +25–50% del precio del lote inicial por clip, según complejidad.
 
 ---
@@ -205,7 +205,7 @@ N3 60–150 piezas o freeform moderado · N4 150+ piezas, freeform masivo, cable
 | QA visor web + reporte de performance | N1 0,5–1 · N2 1–2 · N3 2–5 · N4 5–12 |
 | **Total horas** | **N1 5–12 · N2 12–35 · N3 35–92 · N4 92–250** |
 
-**Presupuesto por nivel:** N1 **$130–360** · N2 **$330–1230** · N3 **$1200–4200** · N4 **$4100–13800**
+**Presupuesto por nivel:** N1 **$120–360** · N2 **$330–1250** · N3 **$1200–4200** · N4 **$4100–13800**
 Entrega: N1 1–2 días · N2 3–6 días · N3 2–3 semanas · N4 4–10 semanas.
 Modificadores: **lote de múltiples modelos −15–25%**; entrega también en USDZ (AR) +10%; reporte perf firmado +5%.
 
@@ -222,7 +222,7 @@ Modificadores: **lote de múltiples modelos −15–25%**; entrega también en U
 | Diseño/generación del set + calibración PBR (incluye check seamless + preview en contexto) | N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15 |
 | **Total horas/set** | **N1 1–2 · N2 2–4 · N3 4–8 · N4 8–15** |
 
-**Presupuesto por set:** N1 **$30–60** · N2 **$50–140** · N3 **$140–360** · N4 **$360–830**
+**Presupuesto por set:** N1 **$20–60** · N2 **$50–140** · N3 **$140–360** · N4 **$360–850**
 Modificadores: pack 10 sets **−20%**; variante de color del mismo set +0,5 h; NoAI obligatorio → solo procedural (sin cambio de precio, cambia método).
 
 ---
@@ -231,7 +231,7 @@ Modificadores: pack 10 sets **−20%**; variante de color del mismo set +0,5 h; 
 
 > Los totales B1–B4 pre-componen núcleo + un solo delta. Para cotizar **combinaciones de deltas** o
 > **niveles mixtos** (p. ej. asset N3 con interacción N2), usar esta tabla: cada delta con su presupuesto
-> independiente, derivado con la misma fórmula §3 del modelo (horas × banda del nivel, redondeo reglamentario).
+> independiente, derivado con la misma fórmula §4 del modelo (horas × banda del nivel, redondeo reglamentario).
 > Complementa, no reemplaza, las tablas anteriores. B5–B8 son servicios standalone (sus secciones), no deltas.
 
 | Delta sobre núcleo B | N1 | N2 | N3 | N4 | Presupuesto del delta (USD) |
@@ -245,6 +245,6 @@ los totales B1–B4 publicados arriba siguen siendo el precio canónico pre-comp
 históricos del documento base — unificar en la revisión v2 del catálogo).
 
 **Composición típica (ejemplo):** asset animado interactuable con vista explosionada en N3 =
-servicio B4 (`$2200–6300`) + servicio B6 (`$1000–3150`) ≈ **$3200–9450** (aprox. por suma de rangos ya
+servicio B4 (`$2100–6200`) + servicio B6 (`$1000–3200`) ≈ **$3100–9400** (aprox. por suma de rangos ya
 redondeados; la cifra firme sale de re-derivar horas totales por la fórmula). En niveles mixtos sumar horas
 y aplicar la banda de cada nivel — nunca sumar rangos redondeados para comprometer.
