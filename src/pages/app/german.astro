@@ -1,8 +1,23 @@
 ---
-import PlanMaestroLayout from '../../layouts/PlanMaestroLayout.astro';
-import GermanTabWorkspace from '../../components/german/GermanTabWorkspace.tsx';
+// Página LEGADO /app/german — redirige a la experiencia real de alemán.
+// Los componentes huérfanos (GermanTabWorkspace/GermanLearningHub) fueron
+// eliminados tras migrar lo útil (SR-2 persistido, racha real, cola de repaso)
+// al hub /app/languages/german. Referencias externas que aún apuntan aquí
+// (ClinicalCurrentBlockPanel, DailyOperatingView) quedan cubiertas por este
+// redirect hasta su ticket correspondiente.
+const target = '/app/languages/german';
 ---
-
-<PlanMaestroLayout title="Dominio Idiomas (Alemán A1)" activeDomain="german" activePhase="fase-1">
-  <GermanTabWorkspace client:load />
-</PlanMaestroLayout>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={target} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>Alemán — Plan Maestro OS</title>
+  </head>
+  <body>
+    <script is:inline>{`window.location.replace(${JSON.stringify(target)});`}</script>
+    <a href={target}>Ir a Alemán</a>
+  </body>
+</html>
