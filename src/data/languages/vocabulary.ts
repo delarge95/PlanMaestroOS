@@ -1,6 +1,14 @@
+// src/data/languages/vocabulary.ts - Banco de Vocabulario para Repetición Espaciada
+// Semilla original (v1–v5, preservada) + vocabulario del currículo A1.1 por unidades.
+//
+// NOTA AG-EN (reparación ciclo 1): el banco EN NO vive aquí — su catálogo
+// (`englishTechnicalVocabulary`, src/data/languages/english/vocabulary.ts) se
+// inyecta por props en <VocabularySession catalogItems={...}> desde
+// EnglishCourseView. Mantener este archivo solo-DE preserva el contrato de
+// germanCurriculum.test.ts (initialVocabulary ⊆ 'de') y el ownership de AG-DE.
+
 import type { VocabularyItem } from './types';
 import { germanUnitsVocabulary } from './german/units';
-import { englishTechnicalVocabulary } from './english/vocabulary';
 
 export const initialVocabulary: VocabularyItem[] = [
   { id: 'v1', language: 'de', term: 'die Anforderung', translation: 'el requisito / requerimiento', example: 'Das ist eine wichtige Anforderung.', topic: 'Tech/Work', level: 'A2', easeFactor: 2.5, intervalDays: 1 },
@@ -8,6 +16,5 @@ export const initialVocabulary: VocabularyItem[] = [
   { id: 'v3', language: 'de', term: 'entscheiden', translation: 'decidir', example: 'Wir müssen jetzt entscheiden.', topic: 'General', level: 'A1', easeFactor: 2.5, intervalDays: 1 },
   { id: 'v4', language: 'de', term: 'der Speicher', translation: 'la memoria / almacenamiento', example: 'Der Arbeitsspeicher ist voll.', topic: 'Tech/Work', level: 'A2', easeFactor: 2.5, intervalDays: 1 },
   { id: 'v5', language: 'de', term: 'die Vorbereitung', translation: 'la preparación', example: 'Die Vorbereitung dauert 10 Minuten.', topic: 'General', level: 'A2', easeFactor: 2.5, intervalDays: 1 },
-  ...germanUnitsVocabulary,
-  ...englishTechnicalVocabulary
+  ...germanUnitsVocabulary
 ];
