@@ -1,8 +1,8 @@
 import type { LegacyRateCard, RateCard } from './types';
 
 export const RATE_CARD_V1: RateCard = {
-  version: 'v1-draft-2026-08-25',
-  status: 'draft-pending-user-validation',
+  version: 'v1-corredor-calibracion-draft-2026-08-25',
+  status: 'not-operativo-corredor-amplio-de-calibracion-ver-01-v1.1',
   bands: {
     N1: { minUsdPerHour: 20, maxUsdPerHour: 28 },
     N2: { minUsdPerHour: 28, maxUsdPerHour: 40 },
@@ -16,8 +16,8 @@ export const RATE_CARD_V1: RateCard = {
 };
 
 export const LEGACY_RATE_CARD_V0: LegacyRateCard = {
-  version: 'v0-legacy-2026-08-25',
-  status: 'deprecated-superseded-by-v1-pending-regeneration',
+  version: 'v0-operativa-2026-08-25',
+  status: 'operativa-per-01-v1.1-bandas-de-todos-los-precios-publicados',
   bands: {
     N1: { minUsdPerHour: 25, maxUsdPerHour: 30 },
     N2: { minUsdPerHour: 28, maxUsdPerHour: 35 },
