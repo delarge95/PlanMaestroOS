@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ErrorBoundary from '../ErrorBoundary';
-import type { EnergyLevel } from '../../data/canonicalDomainModel';
+import ErrorBoundary from '../../ErrorBoundary';
+import type { EnergyLevel } from '../../../data/canonicalDomainModel';
 
 interface Props {
   mode: 'morning' | 'evening' | null;
@@ -56,10 +56,10 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <span style={{ fontSize: '0.72rem', color: mode === 'morning' ? 'var(--color-state-done)' : 'var(--color-accent-primary)', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
-                {mode === 'morning' ? '🌅 MODO INICIO RÁPIDO (60 SEGUNDOS)' : '🌙 MODO CIERRE DEL DÍA (3 MINUTOS)'}
+                {mode === 'morning' ? 'ðŸŒ… MODO INICIO RÃPIDO (60 SEGUNDOS)' : 'ðŸŒ™ MODO CIERRE DEL DÃA (3 MINUTOS)'}
               </span>
               <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
-                {mode === 'morning' ? 'Arranque del Día Sin Fricción' : 'Balance & Desconexión Nocturna'}
+                {mode === 'morning' ? 'Arranque del DÃ­a Sin FricciÃ³n' : 'Balance & DesconexiÃ³n Nocturna'}
               </h3>
             </div>
 
@@ -68,7 +68,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
               onClick={onClose}
               style={{ background: 'rgba(255,255,255,0.08)', border: 'none', color: 'var(--color-text-secondary)', borderRadius: '50%', width: '32px', height: '32px', cursor: 'pointer', fontWeight: 700 }}
             >
-              ✕
+              âœ•
             </button>
           </div>
 
@@ -78,7 +78,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
               {morningStep === 1 && (
                 <>
                   <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                    <strong>Paso 1/2:</strong> ¿Cuál es tu nivel de energía real esta mañana? El sistema adaptará los bloques automáticamente.
+                    <strong>Paso 1/2:</strong> Â¿CuÃ¡l es tu nivel de energÃ­a real esta maÃ±ana? El sistema adaptarÃ¡ los bloques automÃ¡ticamente.
                   </p>
 
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
@@ -95,9 +95,9 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                         color: 'var(--color-text-primary)'
                       }}
                     >
-                      <span style={{ fontSize: '1.4rem' }}>🟢</span>
-                      <strong style={{ display: 'block', fontSize: '0.92rem', margin: '4px 0 2px' }}>Energía Alta</strong>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Sesión completa 45m + TwinSight</span>
+                      <span style={{ fontSize: '1.4rem' }}>ðŸŸ¢</span>
+                      <strong style={{ display: 'block', fontSize: '0.92rem', margin: '4px 0 2px' }}>EnergÃ­a Alta</strong>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>SesiÃ³n completa 45m + TwinSight</span>
                     </button>
 
                     <button
@@ -113,9 +113,9 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                         color: 'var(--color-text-primary)'
                       }}
                     >
-                      <span style={{ fontSize: '1.4rem' }}>🩵</span>
-                      <strong style={{ display: 'block', fontSize: '0.92rem', margin: '4px 0 2px' }}>Energía Normal</strong>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Ritmo estándar sin forzar</span>
+                      <span style={{ fontSize: '1.4rem' }}>ðŸ©µ</span>
+                      <strong style={{ display: 'block', fontSize: '0.92rem', margin: '4px 0 2px' }}>EnergÃ­a Normal</strong>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Ritmo estÃ¡ndar sin forzar</span>
                     </button>
 
                     <button
@@ -131,9 +131,9 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                         color: 'var(--color-text-primary)'
                       }}
                     >
-                      <span style={{ fontSize: '1.4rem' }}>🟧</span>
-                      <strong style={{ display: 'block', fontSize: '0.92rem', margin: '4px 0 2px' }}>Energía Baja</strong>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Degrada a versión mínima de 15m</span>
+                      <span style={{ fontSize: '1.4rem' }}>ðŸŸ§</span>
+                      <strong style={{ display: 'block', fontSize: '0.92rem', margin: '4px 0 2px' }}>EnergÃ­a Baja</strong>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Degrada a versiÃ³n mÃ­nima de 15m</span>
                     </button>
 
                     <button
@@ -149,7 +149,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                         color: 'var(--color-text-primary)'
                       }}
                     >
-                      <span style={{ fontSize: '1.4rem' }}>🚨</span>
+                      <span style={{ fontSize: '1.4rem' }}>ðŸš¨</span>
                       <strong style={{ display: 'block', fontSize: '0.92rem', margin: '4px 0 2px' }}>Modo Crisis / Dolor</strong>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Solo 3 micro-acciones de rescate</span>
                     </button>
@@ -160,7 +160,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                     onClick={() => setMorningStep(2)}
                     style={{ background: 'var(--color-state-done)', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', marginTop: '10px' }}
                   >
-                    Siguiente → Confirmar Prioridades
+                    Siguiente â†’ Confirmar Prioridades
                   </button>
                 </>
               )}
@@ -168,13 +168,13 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
               {morningStep === 2 && (
                 <>
                   <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                    <strong>Paso 2/2:</strong> Se ha aplicado el <strong>Reset Clínico Sin Culpa</strong>. Tu día inicia libre de deudas anteriores.
+                    <strong>Paso 2/2:</strong> Se ha aplicado el <strong>Reset ClÃ­nico Sin Culpa</strong>. Tu dÃ­a inicia libre de deudas anteriores.
                   </p>
 
                   <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(48,209,88,0.3)', padding: '14px', borderRadius: '14px', fontSize: '0.84rem', color: 'var(--color-state-done)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <strong>✅ Tus 3 tareas elegidas para hoy:</strong>
+                    <strong>âœ… Tus 3 tareas elegidas para hoy:</strong>
                     <span>1. TwinSight MVP & Tesis (Bloque A)</span>
-                    <span>2. Hábito 13:30 Alemán A1 (25 min)</span>
+                    <span>2. HÃ¡bito 13:30 AlemÃ¡n A1 (25 min)</span>
                     <span>3. Ejercicio FitApp / Movilidad HSR</span>
                   </div>
 
@@ -183,7 +183,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                     onClick={handleFinishMorning}
                     style={{ background: 'var(--color-state-done)', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer', marginTop: '10px' }}
                   >
-                    🚀 ¡Listo! Arrancar el Día
+                    ðŸš€ Â¡Listo! Arrancar el DÃ­a
                   </button>
                 </>
               )}
@@ -196,7 +196,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
               {eveningStep === 1 && (
                 <>
                   <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                    <strong>Paso 1/2:</strong> Registra la primera acción exacta de 2 minutos para mañana antes de apagar las pantallas.
+                    <strong>Paso 1/2:</strong> Registra la primera acciÃ³n exacta de 2 minutos para maÃ±ana antes de apagar las pantallas.
                   </p>
 
                   <input
@@ -212,7 +212,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                     onClick={() => setEveningStep(2)}
                     style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
                   >
-                    Siguiente → Activar Higiene de Sueño
+                    Siguiente â†’ Activar Higiene de SueÃ±o
                   </button>
                 </>
               )}
@@ -220,14 +220,14 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
               {eveningStep === 2 && (
                 <>
                   <p style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-                    <strong>Paso 2/2:</strong> Activa el protocolo de desconexión CBT-I (21:00).
+                    <strong>Paso 2/2:</strong> Activa el protocolo de desconexiÃ³n CBT-I (21:00).
                   </p>
 
                   <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(191,90,242,0.3)', padding: '14px', borderRadius: '14px', fontSize: '0.84rem', color: 'var(--color-accent-primary)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <strong>🌙 Checklist de Desconexión Nocturna:</strong>
-                    <span>✓ Pantallas apagadas / modo noche activado</span>
-                    <span>✓ Habitación ventilada y fresca</span>
-                    <span>✓ Criterio de corte: "Suficientemente Terminado"</span>
+                    <strong>ðŸŒ™ Checklist de DesconexiÃ³n Nocturna:</strong>
+                    <span>âœ“ Pantallas apagadas / modo noche activado</span>
+                    <span>âœ“ HabitaciÃ³n ventilada y fresca</span>
+                    <span>âœ“ Criterio de corte: "Suficientemente Terminado"</span>
                   </div>
 
                   <button
@@ -235,7 +235,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                     onClick={onClose}
                     style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
                   >
-                    😴 Cerrar Día & A Descansar
+                    ðŸ˜´ Cerrar DÃ­a & A Descansar
                   </button>
                 </>
               )}

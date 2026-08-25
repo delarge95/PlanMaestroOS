@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import SectionNav from '../ui/SectionNav';
 import UnblockPanel from './UnblockPanel';
+import StaleTaskCard from './StaleTaskCard';
+import { detectStaleTask } from '../../lib/clinical/staleTasksDetector';
 import { initialClinicalTasks } from '../../data/clinical/clinicalTasks';
 import type { Task } from '../../data/contracts/task';
 import Button from '../ui/Button';
@@ -13,6 +15,9 @@ export interface ClinicalTodayProps {
 
 export default function ClinicalToday({ currentPath = '/app/clinical' }: ClinicalTodayProps) {
   const [tasks, setTasks] = useState<Task[]>(initialClinicalTasks.slice(0, 3));
+  const [unblockTaskTitle, setUnblockTaskTitle] = useState<string>(initialClinicalTasks[0]?.title || 'Tarea activa');
+
+  const staleDetection = useMemo(() => detectStaleTask(tasks), [tasks]);
 
   const toggleTaskDone = (id: string) => {
     setTasks((prev) =>
@@ -81,8 +86,15 @@ export default function ClinicalToday({ currentPath = '/app/clinical' }: Clinica
           </div>
         </div>
 
+        {staleDetection.isStale && staleDetection.staleTask && (
+          <StaleTaskCard
+            task={staleDetection.staleTask}
+            onSplit={() => setUnblockTaskTitle(staleDetection.staleTask!.title)}
+          />
+        )}
+
         {/* PANEL ¿BLOQUEADO? */}
-        <UnblockPanel currentTaskTitle={tasks[0]?.title || 'Tarea activa'} />
+        <UnblockPanel currentTaskTitle={unblockTaskTitle} />
 
       </div>
     </ErrorBoundary>

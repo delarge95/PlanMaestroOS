@@ -1,8 +1,8 @@
-﻿import React, { useState } from 'react';
-import ErrorBoundary from '../ErrorBoundary';
+import React, { useState } from 'react';
+import ErrorBoundary from '../../ErrorBoundary';
 import ClinicalExecutionHub from './ClinicalExecutionHub';
-import DomainDocAccordion from '../docs/DomainDocAccordion';
-import ragData from '../../data/rag_index.json';
+import DomainDocAccordion from '../../docs/DomainDocAccordion';
+import ragData from '../../../data/rag_index.json';
 
 const clinicalMods = ragData.clinical_modules;
 
