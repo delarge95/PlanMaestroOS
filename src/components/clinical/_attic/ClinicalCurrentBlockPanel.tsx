@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ErrorBoundary from '../ErrorBoundary';
-import InertiaRescueModal from './InertiaRescueModal';
-import Button from '../ui/Button';
-import { withBase } from '../../utils/url';
+import ErrorBoundary from '../../ErrorBoundary';
+import InertiaRescueModal from '../InertiaRescueModal';
+import Button from '../../ui/Button';
+import { withBase } from '../../../utils/url';
 
 interface Props {
   onToggleFocusMode?: () => void;
@@ -23,13 +23,13 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
   // Determine current active block details
   const getActiveBlockInfo = () => {
     return {
-      time: "09:20 – 11:40",
+      time: "09:20 â€“ 11:40",
       activity: "BLOQUE A: Trabajo Profundo (TwinSight MVP & Tesis)",
       domain: "career",
-      startAction: "Abrir el archivo exacto y escribir 3 líneas de borrador imperfecto en 10 minutos.",
-      clinicalRule: "Versión Mala > Perfección. Celular fuera del alcance. 3 tareas máximas hoy.",
-      contextualBanner: "🧠 Trabajo Profundo TDAH: Si sientes parálisis, activa la Regla de los 10 Minutos. Estás autorizado a parar tras 10 min.",
-      rescueTip: "Si estás atascado en perfeccionismo, escribe sólo en formato de viñetas desordenadas."
+      startAction: "Abrir el archivo exacto y escribir 3 lÃ­neas de borrador imperfecto en 10 minutos.",
+      clinicalRule: "VersiÃ³n Mala > PerfecciÃ³n. Celular fuera del alcance. 3 tareas mÃ¡ximas hoy.",
+      contextualBanner: "ðŸ§  Trabajo Profundo TDAH: Si sientes parÃ¡lisis, activa la Regla de los 10 Minutos. EstÃ¡s autorizado a parar tras 10 min.",
+      rescueTip: "Si estÃ¡s atascado en perfeccionismo, escribe sÃ³lo en formato de viÃ±etas desordenadas."
     };
   };
 
@@ -62,7 +62,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               display: 'inline-block'
             }} />
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              AHORA EN EJECUCIÓN • {activeBlock.time} (Hora Local: {currentHour || '18:57'})
+              AHORA EN EJECUCIÃ“N â€¢ {activeBlock.time} (Hora Local: {currentHour || '18:57'})
             </span>
           </div>
 
@@ -73,7 +73,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               size="sm"
               onClick={() => setIsRescueModalOpen(true)}
             >
-              🚨 No puedo empezar
+              ðŸš¨ No puedo empezar
             </Button>
 
             {/* FOCUS MODE TOGGLE (PRIMARY CTA OF THE VIEW) */}
@@ -83,7 +83,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
                 size="sm"
                 onClick={onToggleFocusMode}
               >
-                {isFocusModeActive ? '✓ Modo Foco Activo' : '⚡ Activar Modo Foco Zen'}
+                {isFocusModeActive ? 'âœ“ Modo Foco Activo' : 'âš¡ Activar Modo Foco Zen'}
               </Button>
             )}
           </div>
@@ -95,7 +95,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             {activeBlock.activity}
           </h2>
           <p style={{ fontSize: '0.92rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-            <strong style={{ color: 'var(--color-accent-primary)' }}>Acción de Inicio (10 Min):</strong> {activeBlock.startAction}
+            <strong style={{ color: 'var(--color-accent-primary)' }}>AcciÃ³n de Inicio (10 Min):</strong> {activeBlock.startAction}
           </p>
         </div>
 
@@ -111,7 +111,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
         }}>
           <div>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
-              Regla Clínica Vigente
+              Regla ClÃ­nica Vigente
             </span>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)', margin: '4px 0 0', fontWeight: 600 }}>
               {activeBlock.clinicalRule}
@@ -119,7 +119,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
           </div>
           <div>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-warning)', textTransform: 'uppercase', fontWeight: 700 }}>
-              Mínimo Viable de Entrada
+              MÃ­nimo Viable de Entrada
             </span>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: '4px 0 0' }}>
               {activeBlock.rescueTip}
@@ -161,7 +161,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               gap: '6px'
             }}
           >
-            💪 Iniciar Entrenar en FitApp
+            ðŸ’ª Iniciar Entrenar en FitApp
           </a>
 
           <a
@@ -180,7 +180,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               gap: '6px'
             }}
           >
-            🇩🇪 Hábito 13:30 Alemán
+            ðŸ‡©ðŸ‡ª HÃ¡bito 13:30 AlemÃ¡n
           </a>
 
           <a
@@ -199,7 +199,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               gap: '6px'
             }}
           >
-            🧠 Tareas Clínicas & Ansiedad
+            ðŸ§  Tareas ClÃ­nicas & Ansiedad
           </a>
 
           <a
@@ -218,7 +218,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
               gap: '6px'
             }}
           >
-            🚀 Entregable TwinSight MVP
+            ðŸš€ Entregable TwinSight MVP
           </a>
         </div>
 

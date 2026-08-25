@@ -1,71 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import styles from './ClinicalExecutionHub.module.css';
-
-interface BioFeedbackLog {
-  date: string;
-  energy: number;
-  anxiety: number;
-  pain: number;
-  sleepHours: number;
-}
-
-interface ExposureTask {
-  id: string;
-  title: string;
-  hierarchyLevel: 'Baja' | 'Media' | 'Alta';
-  description: string;
-  preAnxiety: number;
-  postAnxiety: number;
-  completed: boolean;
-  notes: string;
-}
-
-const DEFAULT_EXPOSURES: ExposureTask[] = [
-  {
-    id: 'exp_1',
-    title: 'Sustentación de 3 Ideas Principales en Llamada / Reunión',
-    hierarchyLevel: 'Baja',
-    description: 'Presentar 3 conceptos estructurados sin disculparse por pausas ni justificar el silencio.',
-    preAnxiety: 5,
-    postAnxiety: 3,
-    completed: false,
-    notes: ''
-  },
-  {
-    id: 'exp_2',
-    title: 'Demostración de Caso de Estudio TwinSight a Reclutador / Colega',
-    hierarchyLevel: 'Media',
-    description: 'Mostrar demo interactiva o capturas de TwinSight enfocándote en valor técnico sin subestimar el trabajo.',
-    preAnxiety: 7,
-    postAnxiety: 4,
-    completed: false,
-    notes: ''
-  },
-  {
-    id: 'exp_3',
-    title: 'Solicitud de Feedback Técnico Directo sin Actitud Defensiva',
-    hierarchyLevel: 'Alta',
-    description: 'Recibir críticas técnicas sobre código o portafolio aceptando observaciones con apertura.',
-    preAnxiety: 8,
-    postAnxiety: 5,
-    completed: false,
-    notes: ''
-  }
-];
+import {
+  useClinicalStore,
+  migrateLegacyLocalStorage,
+  formatDateLabel
+} from '../../data/clinical/clinicalStore';
 
 export default function ClinicalExecutionHub() {
   const [activeTab, setActiveTab] = useState<'checkin' | 'exposure' | 'rescue' | 'sleep'>('checkin');
 
-  // 1. Bio-Feedback State
+  const biofeedback = useClinicalStore((s) => s.biofeedback);
+  const exposures = useClinicalStore((s) => s.exposures);
+  const saveBioFeedback = useClinicalStore((s) => s.saveBioFeedback);
+  const toggleExposureCompleted = useClinicalStore((s) => s.toggleExposureCompleted);
+  const updateExposureFieldStore = useClinicalStore((s) => s.updateExposureField);
+
+  // 1. Bio-Feedback Draft State (valores del formulario del día)
   const [energy, setEnergy] = useState(7);
   const [anxiety, setAnxiety] = useState(4);
   const [pain, setPain] = useState(2);
   const [sleepHours, setSleepHours] = useState(7.5);
-  const [feedbackLogs, setFeedbackLogs] = useState<BioFeedbackLog[]>([]);
 
-  // 2. Exposure Tasks State
-  const [exposures, setExposures] = useState<ExposureTask[]>(DEFAULT_EXPOSURES);
+  // 2. Rumination Timer
   const [activeRuminationTimer, setActiveRuminationTimer] = useState<number | null>(null);
   const [isRuminationActive, setIsRuminationActive] = useState(false);
 
@@ -83,13 +40,12 @@ export default function ClinicalExecutionHub() {
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const savedBio = localStorage.getItem('clinical_biofeedback_logs');
-      if (savedBio) setFeedbackLogs(JSON.parse(savedBio));
-      const savedExp = localStorage.getItem('clinical_exposures');
-      if (savedExp) setExposures(JSON.parse(savedExp));
-    } catch (e) {
-      console.error(e);
+    const result = migrateLegacyLocalStorage();
+    if (result.biofeedbackMigrated > 0 || result.exposuresMigrated > 0 || result.biofeedbackSkipped > 0) {
+      showToast(
+        `↩️ Migración: ${result.biofeedbackMigrated} registros de bio-feedback y ${result.exposuresMigrated} exposiciones importados` +
+        (result.biofeedbackSkipped > 0 ? ` (${result.biofeedbackSkipped} sin fecha legible, omitidos)` : '') + '.'
+      );
     }
   }, []);
 
@@ -127,50 +83,14 @@ export default function ClinicalExecutionHub() {
   };
 
   const handleSaveBioFeedback = () => {
-    const newLog: BioFeedbackLog = {
-      date: new Date().toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' }),
-      energy,
-      anxiety,
-      pain,
-      sleepHours
-    };
-    const updated = [newLog, ...feedbackLogs.slice(0, 14)];
-    setFeedbackLogs(updated);
-    try {
-      localStorage.setItem('clinical_biofeedback_logs', JSON.stringify(updated));
-      showToast('✓ Evaluacion de Estado Diario guardada correctamente.');
-    } catch (e) {
-      console.error(e);
-    }
+    saveBioFeedback({ energy, anxiety, pain, sleepHours });
+    showToast('✓ Evaluacion de Estado Diario guardada correctamente.');
   };
 
   const handleToggleExposure = (id: string) => {
-    const updated = exposures.map((exp) => {
-      if (exp.id === id) {
-        const isDone = !exp.completed;
-        if (isDone) {
-          // Trigger 10-minute rumination limit
-          startRuminationTimer();
-        }
-        return { ...exp, completed: isDone };
-      }
-      return exp;
-    });
-    setExposures(updated);
-    try {
-      localStorage.setItem('clinical_exposures', JSON.stringify(updated));
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const handleUpdateExposureField = (id: string, field: keyof ExposureTask, value: any) => {
-    const updated = exposures.map((exp) => (exp.id === id ? { ...exp, [field]: value } : exp));
-    setExposures(updated);
-    try {
-      localStorage.setItem('clinical_exposures', JSON.stringify(updated));
-    } catch (e) {
-      console.error(e);
+    const nowCompleted = toggleExposureCompleted(id);
+    if (nowCompleted) {
+      startRuminationTimer();
     }
   };
 
@@ -380,15 +300,15 @@ export default function ClinicalExecutionHub() {
             </div>
 
             {/* HISTORIAL RECIENTE */}
-            {feedbackLogs.length > 0 && (
+            {biofeedback.length > 0 && (
               <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px' }}>
                 <strong style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', fontFamily: 'Azeret Mono, monospace' }}>
                   REGISTROS RECIENTES:
                 </strong>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px', marginTop: '10px' }}>
-                  {feedbackLogs.map((log, idx) => (
+                  {biofeedback.map((log, idx) => (
                     <div key={idx} style={{ background: 'rgba(0,0,0,0.4)', padding: '10px', borderRadius: '10px', fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <span style={{ color: '#d946ef', fontWeight: 700 }}>{log.date}</span>
+                      <span style={{ color: '#d946ef', fontWeight: 700 }}>{formatDateLabel(log.dateIso)}</span>
                       <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--color-text-secondary)' }}>
                         <span>⚡ {log.energy}/10</span>
                         <span>🧠 Ans: {log.anxiety}/10</span>
@@ -476,7 +396,7 @@ export default function ClinicalExecutionHub() {
                           max="10"
                           min="0"
                           value={exp.preAnxiety}
-                          onChange={(e) => handleUpdateExposureField(exp.id, 'preAnxiety', parseInt(e.target.value) || 0)}
+                          onChange={(e) => updateExposureFieldStore(exp.id, 'preAnxiety', parseInt(e.target.value) || 0)}
                           style={{ width: '45px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', borderRadius: '4px', textAlign: 'center' }}
                         />
                       </label>
@@ -488,7 +408,7 @@ export default function ClinicalExecutionHub() {
                           max="10"
                           min="0"
                           value={exp.postAnxiety}
-                          onChange={(e) => handleUpdateExposureField(exp.id, 'postAnxiety', parseInt(e.target.value) || 0)}
+                          onChange={(e) => updateExposureFieldStore(exp.id, 'postAnxiety', parseInt(e.target.value) || 0)}
                           style={{ width: '45px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', borderRadius: '4px', textAlign: 'center' }}
                         />
                       </label>

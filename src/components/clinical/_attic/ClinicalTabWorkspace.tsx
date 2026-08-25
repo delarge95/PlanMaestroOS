@@ -1,8 +1,8 @@
-﻿import React, { useState } from 'react';
-import ErrorBoundary from '../ErrorBoundary';
-import ClinicalExecutionHub from './ClinicalExecutionHub';
-import DomainDocAccordion from '../docs/DomainDocAccordion';
-import ragData from '../../data/rag_index.json';
+import React, { useState } from 'react';
+import ErrorBoundary from '../../ErrorBoundary';
+import ClinicalExecutionHub from '../ClinicalExecutionHub';
+import DomainDocAccordion from '../../docs/DomainDocAccordion';
+import ragData from '../../../data/rag_index.json';
 
 const clinicalMods = ragData.clinical_modules;
 
@@ -11,7 +11,7 @@ const clinicalDocsList = [
   { name: 'plan_accion_tdah_ansiedad_social-1.pdf', type: 'PDF', path: '_pdf_biblia/...', description: 'Módulos A-F de TDAH y A-F de Ansiedad Social con 9 Niveles de Exposición' }
 ];
 
-import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
+import ClinicalUncompletedTaskProtocol from '../ClinicalUncompletedTaskProtocol';
 
 const TABS = [
   { id: 'hub', label: '🧠 Tareas & Bio' },

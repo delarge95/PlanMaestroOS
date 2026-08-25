@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { Settings2, ArrowLeft, ShieldAlert, BookOpen, Leaf } from 'lucide-react';
 import FocusCard from './FocusCard';
-import SecondBrainInspector from '../docs/SecondBrainInspector';
+import SecondBrainInspector from '../../docs/SecondBrainInspector';
 import FocusModeShell from './FocusModeShell';
-import ErrorBoundary from '../ErrorBoundary';
-import { useAppStore } from '../../store/appStore';
-import Button from '../ui/Button';
-import ListRow from '../ui/ListRow';
-import Sheet from '../ui/Sheet';
-import Disclosure from '../ui/Disclosure';
-import Toast from '../ui/Toast';
-import ClinicalUncompletedTaskProtocol from './ClinicalUncompletedTaskProtocol';
+import ErrorBoundary from '../../ErrorBoundary';
+import { useAppStore } from '../../../store/appStore';
+import Button from '../../ui/Button';
+import ListRow from '../../ui/ListRow';
+import Sheet from '../../ui/Sheet';
+import Disclosure from '../../ui/Disclosure';
+import Toast from '../../ui/Toast';
+import ClinicalUncompletedTaskProtocol from '../ClinicalUncompletedTaskProtocol';
 import MorningEveningWorkflowsModal from './MorningEveningWorkflowsModal';
 import styles from './HomeClinicalDashboard.module.css';
 
@@ -40,15 +40,15 @@ export default function HomeClinicalDashboard() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const [nextTasks, setNextTasks] = useState<NextTask[]>([
-    { id: 'cbt', title: 'Ensayo Sustentación CBT', meta: 'Exposición · 14:00 - 14:40', done: false },
-    { id: 'german', title: 'Alemán A1 Diario', meta: '13:30 - 14:00 · 25 min', done: false }
+    { id: 'cbt', title: 'Ensayo SustentaciÃ³n CBT', meta: 'ExposiciÃ³n Â· 14:00 - 14:40', done: false },
+    { id: 'german', title: 'AlemÃ¡n A1 Diario', meta: '13:30 - 14:00 Â· 25 min', done: false }
   ]);
 
   const handleTaskToggle = (taskId: string) => {
     setNextTasks((prev) => prev.map((t) => {
       if (t.id === taskId) {
         const nextDone = !t.done;
-        if (nextDone) setToastMessage('✓ Tarea completada sin culpa.');
+        if (nextDone) setToastMessage('âœ“ Tarea completada sin culpa.');
         return { ...t, done: nextDone };
       }
       return t;
@@ -60,7 +60,7 @@ export default function HomeClinicalDashboard() {
     const formatted = reentryAt.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
     setDeferredUntil(formatted);
     setIsFocusActive(false);
-    setToastMessage(`⏳ Tarea pospuesta ${minutes} min. Reentrada a las ${formatted}.`);
+    setToastMessage(`â³ Tarea pospuesta ${minutes} min. Reentrada a las ${formatted}.`);
   };
 
   const handleCloseToolsSheet = () => {
@@ -84,24 +84,24 @@ export default function HomeClinicalDashboard() {
       <FocusModeShell isActive={isFocusActive} onExit={() => setIsFocusActive(false)}>
         <div className={styles.wrapper}>
 
-          {/* META CONTEXTUAL PEQUEÑA */}
+          {/* META CONTEXTUAL PEQUEÃ‘A */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-sm)' }}>
             <div>
               <span className={styles.breadcrumb}>
-                {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short' })} · Bloque A (09:20 - 11:40)
+                {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short' })} Â· Bloque A (09:20 - 11:40)
               </span>
               <h1 style={{ fontSize: 'var(--font-size-title)', fontWeight: 700, margin: 'var(--space-1) 0 0', color: 'var(--text)' }}>
                 Ahora
               </h1>
             </div>
 
-            {/* BOTÓN HERRAMIENTAS MODERNO CON ICONO LUCIDE Settings2 */}
+            {/* BOTÃ“N HERRAMIENTAS MODERNO CON ICONO LUCIDE Settings2 */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
               <button
                 ref={toolsButtonRef}
                 type="button"
                 onClick={() => { setSheetSubView('main'); setShowToolsSheet(true); }}
-                aria-label="Abrir herramientas del día"
+                aria-label="Abrir herramientas del dÃ­a"
                 style={{
                   background: 'var(--surface-elevated)',
                   border: '1px solid var(--color-border-visible)',
@@ -129,7 +129,7 @@ export default function HomeClinicalDashboard() {
           {/* BANNER APLAZAMIENTO NEUTRAL */}
           {deferredUntil && (
             <div className={styles.deferBanner}>
-              ⏳ Tarea pausada sin culpa. Reentrada sugerida a las <strong>{deferredUntil}</strong>.
+              â³ Tarea pausada sin culpa. Reentrada sugerida a las <strong>{deferredUntil}</strong>.
             </div>
           )}
 
@@ -142,10 +142,10 @@ export default function HomeClinicalDashboard() {
             deferredUntil={deferredUntil}
           />
 
-          {/* 2. SECCIÓN "DESPUÉS" (MÁXIMO 2 ÍTEMS COMPACTOS) */}
+          {/* 2. SECCIÃ“N "DESPUÃ‰S" (MÃXIMO 2 ÃTEMS COMPACTOS) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
             <span style={{ fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)', fontWeight: 600 }}>
-              Después (Siguientes 2 pasos)
+              DespuÃ©s (Siguientes 2 pasos)
             </span>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
@@ -154,7 +154,7 @@ export default function HomeClinicalDashboard() {
                   key={task.id}
                   title={task.title}
                   meta={task.meta}
-                  icon={task.done ? '✓' : '○'}
+                  icon={task.done ? 'âœ“' : 'â—‹'}
                   done={task.done}
                   badge={task.done ? 'Hecha' : 'Siguiente'}
                   badgeTone={task.done ? 'success' : 'default'}
@@ -164,45 +164,45 @@ export default function HomeClinicalDashboard() {
             </div>
           </div>
 
-          {/* 3. RECORDATORIOS (TITULOS DE 1 LÍNEA CON DETALLE EN DISCLOSURE) */}
+          {/* 3. RECORDATORIOS (TITULOS DE 1 LÃNEA CON DETALLE EN DISCLOSURE) */}
           {!isSimpleMode && (
-            <Disclosure label="Recordatorios de regulación cognitiva" summary="3 principios">
+            <Disclosure label="Recordatorios de regulaciÃ³n cognitiva" summary="3 principios">
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
                 <Disclosure label="Terminado es suficiente">
                   <p style={{ margin: 0, fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                    Cierra la entrega cuando cumpla el criterio mínimo acordado, sin refinar ni sobre-analizar indefinidamente.
+                    Cierra la entrega cuando cumpla el criterio mÃ­nimo acordado, sin refinar ni sobre-analizar indefinidamente.
                   </p>
                 </Disclosure>
 
-                <Disclosure label="Descansar también cuenta">
+                <Disclosure label="Descansar tambiÃ©n cuenta">
                   <p style={{ margin: 0, fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                    El descanso es un requisito fisiológico para la regulación ejecutiva y la memoria, no un premio al rendimiento.
+                    El descanso es un requisito fisiolÃ³gico para la regulaciÃ³n ejecutiva y la memoria, no un premio al rendimiento.
                   </p>
                 </Disclosure>
 
-                <Disclosure label="Deja el próximo paso">
+                <Disclosure label="Deja el prÃ³ximo paso">
                   <p style={{ margin: 0, fontSize: 'var(--font-size-label)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                    Antes de levantarte de la mesa, deja escrita la primera acción exacta de 2 minutos para cuando retomes.
+                    Antes de levantarte de la mesa, deja escrita la primera acciÃ³n exacta de 2 minutos para cuando retomes.
                   </p>
                 </Disclosure>
               </div>
             </Disclosure>
           )}
 
-          {/* SHEET DE HERRAMIENTAS CON NAVEGACIÓN INTERNA ANIDADA */}
+          {/* SHEET DE HERRAMIENTAS CON NAVEGACIÃ“N INTERNA ANIDADA */}
           <Sheet
             isOpen={showToolsSheet}
             onClose={handleCloseToolsSheet}
-            title={sheetSubView === 'main' ? 'Herramientas del Día' : sheetSubView === 'rescue' ? 'Herramientas / Rescate' : 'Herramientas / 2º Cerebro'}
-            description={sheetSubView === 'main' ? 'Recursos de apoyo y regulación ejecutiva' : sheetSubView === 'rescue' ? 'Desbloqueo de inicio en 10 minutos sin compromiso' : 'Bóveda de notas e inspector de Obsidian'}
+            title={sheetSubView === 'main' ? 'Herramientas del DÃ­a' : sheetSubView === 'rescue' ? 'Herramientas / Rescate' : 'Herramientas / 2Âº Cerebro'}
+            description={sheetSubView === 'main' ? 'Recursos de apoyo y regulaciÃ³n ejecutiva' : sheetSubView === 'rescue' ? 'Desbloqueo de inicio en 10 minutos sin compromiso' : 'BÃ³veda de notas e inspector de Obsidian'}
           >
             {sheetSubView === 'main' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
-                {/* NIVEL DE ENERGÍA SOBRIO */}
+                {/* NIVEL DE ENERGÃA SOBRIO */}
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-2)' }}>
                     <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase' }}>
-                      Nivel de Energía Actual
+                      Nivel de EnergÃ­a Actual
                     </span>
                     <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
                       Puedes volver a esto cuando quieras
@@ -236,16 +236,16 @@ export default function HomeClinicalDashboard() {
                       onClick={() => setSheetSubView('rescue')}
                     />
                     <ListRow
-                      title="Segundo Cerebro & Bóveda"
+                      title="Segundo Cerebro & BÃ³veda"
                       meta="Inspector de notas y contexto de Obsidian"
                       icon={<BookOpen size={18} style={{ color: 'var(--color-accent-primary)' }} />}
                       onClick={() => setSheetSubView('second_brain')}
                     />
                     <ListRow
                       title={isSimpleMode ? "Desactivar Modo Simple" : "Activar Modo Simple"}
-                      meta="Reducir interfaz a 1 columna de baja estimulación"
+                      meta="Reducir interfaz a 1 columna de baja estimulaciÃ³n"
                       icon={<Leaf size={18} style={{ color: 'var(--color-state-done)' }} />}
-                      badge={isSimpleMode ? "Activo" : "Baja estimulación"}
+                      badge={isSimpleMode ? "Activo" : "Baja estimulaciÃ³n"}
                       badgeTone={isSimpleMode ? "success" : "default"}
                       onClick={() => { toggleSimpleMode(); handleCloseToolsSheet(); }}
                     />
@@ -283,7 +283,7 @@ export default function HomeClinicalDashboard() {
             )}
           </Sheet>
 
-          {/* MODAL MAÑANA / NOCHE */}
+          {/* MODAL MAÃ‘ANA / NOCHE */}
           <MorningEveningWorkflowsModal
             mode={workflowMode}
             onClose={() => setWorkflowMode(null)}

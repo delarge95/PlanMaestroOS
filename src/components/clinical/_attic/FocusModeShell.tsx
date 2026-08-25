@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ErrorBoundary from '../ErrorBoundary';
+import ErrorBoundary from '../../ErrorBoundary';
 
 interface Props {
   isActive: boolean;
@@ -9,9 +9,9 @@ interface Props {
 
 export default function FocusModeShell({ isActive, onExit, children }: Props) {
   const [tasks, setTasks] = useState<{ id: string; text: string; done: boolean }[]>([
-    { id: 't1', text: 'Tarea 1: TwinSight MVP - Escribir 3 párrafos del Case Study', done: false },
-    { id: 't2', text: 'Tarea 2: Sustentación CBT - Ensayar 3 ideas en voz alta', done: false },
-    { id: 't3', text: 'Tarea 3: Alemán A1 - 5m Duolingo + 20m Lectura A1', done: false }
+    { id: 't1', text: 'Tarea 1: TwinSight MVP - Escribir 3 pÃ¡rrafos del Case Study', done: false },
+    { id: 't2', text: 'Tarea 2: SustentaciÃ³n CBT - Ensayar 3 ideas en voz alta', done: false },
+    { id: 't3', text: 'Tarea 3: AlemÃ¡n A1 - 5m Duolingo + 20m Lectura A1', done: false }
   ]);
   const [reentryNote, setReentryNote] = useState<string>('');
 
@@ -74,7 +74,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
           {/* HEADER BAR */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.75rem', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 12px', borderRadius: '999px', fontWeight: 700 }}>
-              ⚡ MODO FOCO ZEN ACTIVO • CERO DISTRACCIONES
+              âš¡ MODO FOCO ZEN ACTIVO â€¢ CERO DISTRACCIONES
             </span>
             <button
               type="button"
@@ -90,7 +90,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
                 cursor: 'pointer'
               }}
             >
-              ✕ Salir del Modo Foco
+              âœ• Salir del Modo Foco
             </button>
           </div>
 
@@ -104,13 +104,13 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             boxShadow: '0 30px 60px rgba(0, 0, 0, 0.6)'
           }}>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
-              BLOQUE A EN EJECUCIÓN (09:20 – 11:40)
+              BLOQUE A EN EJECUCIÃ“N (09:20 â€“ 11:40)
             </span>
             <h2 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '6px 0 12px', color: 'var(--color-text-primary)' }}>
               Trabajo Profundo: TwinSight MVP & Tesis
             </h2>
             <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', padding: '12px 16px', borderRadius: '12px', fontSize: '0.85rem', color: '#6ee7b7' }}>
-              💡 <strong>Regla Activa:</strong> Produce una Versión Mala en los primeros 10 minutos. No juzgues ni borres nada.
+              ðŸ’¡ <strong>Regla Activa:</strong> Produce una VersiÃ³n Mala en los primeros 10 minutos. No juzgues ni borres nada.
             </div>
           </div>
 
@@ -125,7 +125,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             gap: '16px'
           }}>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', fontWeight: 700 }}>
-              Las 3 tareas principales del día
+              Las 3 tareas principales del dÃ­a
             </span>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -152,7 +152,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
                   }}
                 >
                   <span style={{ fontSize: '1rem', color: t.done ? 'var(--color-state-done)' : 'var(--color-text-secondary)' }}>
-                    {t.done ? '✓' : '○'}
+                    {t.done ? 'âœ“' : 'â—‹'}
                   </span>
                   <span>{t.text}</span>
                 </button>
@@ -171,16 +171,16 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             gap: '12px'
           }}>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
-              📌 Paso de Reentrada Escrito (Al Cierre)
+              ðŸ“Œ Paso de Reentrada Escrito (Al Cierre)
             </span>
             <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0 }}>
-              Antes de cerrar la sesión, escribe la micro-acción exacta de 2 minutos para cuando retomes:
+              Antes de cerrar la sesiÃ³n, escribe la micro-acciÃ³n exacta de 2 minutos para cuando retomes:
             </p>
             <input
               type="text"
               value={reentryNote}
               onChange={(e) => handleNoteChange(e.target.value)}
-              placeholder="Ejemplo: Escribir el segundo párrafo de la solución técnica en TwinSight..."
+              placeholder="Ejemplo: Escribir el segundo pÃ¡rrafo de la soluciÃ³n tÃ©cnica en TwinSight..."
               style={{
                 width: '100%',
                 background: 'rgba(0, 0, 0, 0.4)',

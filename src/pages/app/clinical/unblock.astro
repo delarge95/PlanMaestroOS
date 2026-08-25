@@ -1,29 +1,21 @@
 ---
 import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
-import ProtocolCard from '../../../components/clinical/ProtocolCard.tsx';
+import UnblockPanel from '../../../components/clinical/UnblockPanel.tsx';
 import ClinicalDisclaimerNote from '../../../components/clinical/ClinicalDisclaimerNote.tsx';
-import { clinicalProtocols } from '../../../data/clinical/protocols.ts';
-import Button from '../../../components/ui/Button.tsx';
 ---
 
-<PlanMaestroLayout title="Clínico - Protocolos" activeDomain="clinical">
+<PlanMaestroLayout title="Clínico - Desbloqueo" activeDomain="clinical">
   <div style="display: flex; flex-direction: column; gap: var(--space-md); max-width: 850px; margin: 0 auto; width: 100%;">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: var(--space-xs);">
       <h2 style="font-size: 1.2rem; font-weight: 700; margin: 0; color: var(--text);">
-        Protocolos
+        Desbloqueo
       </h2>
       <a href="/app/clinical" style="text-decoration: none;">
-        <Button variant="ghost" size="sm">
-          Volver a Hoy
-        </Button>
+        Volver a Hoy
       </a>
     </div>
 
-    <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
-      {clinicalProtocols.map((p) => (
-        <ProtocolCard client:load protocol={p} />
-      ))}
-    </div>
+    <UnblockPanel client:load currentTaskTitle="Tarea activa de hoy" />
 
     <ClinicalDisclaimerNote compact client:load />
   </div>

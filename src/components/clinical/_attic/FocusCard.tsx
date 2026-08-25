@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Play, Clock, Check } from 'lucide-react';
-import Button from '../ui/Button';
-import { typo } from '../../styles/typography';
+import Button from '../../ui/Button';
+import { typo } from '../../../styles/typography';
 
 interface FocusCardProps {
   taskName?: string;
@@ -45,7 +45,7 @@ export function FocusCard({
       {/* Bloque + estado */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ ...typo.micro, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-          Bloque actual · Hasta las {blockEndsAt}
+          Bloque actual Â· Hasta las {blockEndsAt}
         </span>
         {isStarted && !deferredUntil && (
           <span style={{ ...typo.micro, color: 'var(--color-state-done)', background: 'var(--color-state-done-soft)', padding: '4px 10px', borderRadius: '999px', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -59,14 +59,14 @@ export function FocusCard({
         )}
       </div>
 
-      {/* Título de máximo 6 palabras */}
+      {/* TÃ­tulo de mÃ¡ximo 6 palabras */}
       <h2 style={{ ...typo.display, color: 'var(--text)', margin: 0, fontSize: '1.4rem', fontWeight: 700 }}>
         {taskName}
       </h2>
 
-      {/* Micro-paso de 1 línea */}
+      {/* Micro-paso de 1 lÃ­nea */}
       <p style={{ ...typo.body, color: 'var(--text-secondary)', margin: 0, fontSize: '0.9rem' }}>
-        Primer paso de 10 min: Escribir el primer borrador sin corregir ortografía.
+        Primer paso de 10 min: Escribir el primer borrador sin corregir ortografÃ­a.
       </p>
 
       {/* Dos acciones claras */}
@@ -75,7 +75,7 @@ export function FocusCard({
           variant={isStarted && !deferredUntil ? 'secondary' : 'primary'}
           size="md"
           onClick={handleStart}
-          aria-label={isStarted ? 'Sesión en curso' : 'Iniciar tarea actual'}
+          aria-label={isStarted ? 'SesiÃ³n en curso' : 'Iniciar tarea actual'}
         >
           {isStarted && !deferredUntil ? (
             <>
@@ -91,7 +91,7 @@ export function FocusCard({
           variant="ghost"
           size="md"
           onClick={handleDefer}
-          aria-label="Posponer esta tarea 30 minutos sin penalización"
+          aria-label="Posponer esta tarea 30 minutos sin penalizaciÃ³n"
         >
           <Clock size={16} aria-hidden="true" /> Posponer 30 min
         </Button>
