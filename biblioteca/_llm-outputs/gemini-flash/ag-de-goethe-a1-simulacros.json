@@ -1,0 +1,1385 @@
+{
+  "metadata": {
+    "title": "Goethe-Zertifikat A1 (Start Deutsch 1) — Módulo de Simulacros",
+    "level": "A1.1",
+    "framework": "CEFR / Goethe-Institut",
+    "scopeAlignment": "Unidades 1-4 de Plan Maestro OS (sein/haben, der/die/das/ein/kein, Zahlen 0-100, W-Fragen, Präsens regular)",
+    "totalExams": 2,
+    "partsPerExam": [
+      "Hören",
+      "Lesen",
+      "Schreiben",
+      "Sprechen"
+    ],
+    "maxScorePerPart": 25,
+    "totalMaxScore": 100,
+    "passingScore": 60
+  },
+  "scoringCriteria": {
+    "hoeren": {
+      "weight": 25,
+      "items": 15,
+      "pointsPerItem": 1.6667
+    },
+    "lesen": {
+      "weight": 25,
+      "items": 15,
+      "pointsPerItem": 1.6667
+    },
+    "schreiben": {
+      "weight": 25,
+      "teil1_formular": {
+        "points": 10,
+        "items": 5,
+        "pointsPerItem": 2
+      },
+      "teil2_text": {
+        "points": 15,
+        "rubric": {
+          "taskCompletion": "3 puntos por cada uno de los 3 ítems requeridos (total 9)",
+          "communicativeEffectiveness": "3 puntos por cohesión, adecuación y comprensión",
+          "grammaticalAndLexicalCorrectness": "3 puntos por precisión morfosintáctica y ortografía A1"
+        }
+      }
+    },
+    "sprechen": {
+      "weight": 25,
+      "teil1_vorstellen": {
+        "points": 5,
+        "description": "Presentación personal, deletreo de nombre/apellido y dictado de número telefónico"
+      },
+      "teil2_bitten_fragen": {
+        "points": 10,
+        "description": "Formular y responder preguntas sobre temas cotidianos con tarjetas de palabras clave"
+      },
+      "teil3_bitten_reagieren": {
+        "points": 10,
+        "description": "Formular peticiones/instrucciones con tarjetas de imágenes y reaccionar adecuadamente"
+      }
+    }
+  },
+  "simulacro1": {
+    "id": "sim-goethe-a1-01",
+    "title": "Goethe-Zertifikat A1 — Übungssatz 1",
+    "hoeren": {
+      "title": "Teil 1: Hören (Comprensión Auditiva)",
+      "totalTimeMinutes": 20,
+      "totalQuestions": 15,
+      "instructions": "Sie hören kurze Gespräche und Durchsagen. Zu jedem Text gibt es eine Aufgabe. Kreuzen Sie die richtige Antwort an (a, b oder c) oder markieren Sie richtig/falsch.",
+      "teil1": {
+        "description": "Kurze Alltagsgespräche. Sie hören jeden Text zweimal.",
+        "questions": [
+          {
+            "id": "h1-q1",
+            "audioTranscript": "A: Guten Tag! Ich suche Herrn Müller. Ist er im Büro?\nB: Nein, Herr Müller ist heute nicht da. Er arbeitet von zu Hause aus.\nA: Wann kommt er wieder?\nB: Er kommt morgen um neun Uhr.",
+            "prompt": "Wann ist Herr Müller wieder im Büro?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Heute um neun Uhr"
+              },
+              {
+                "key": "b",
+                "text": "Morgen um neun Uhr"
+              },
+              {
+                "key": "c",
+                "text": "Heute nicht und morgen nicht"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Herr Müller arbeitet heute zu Hause und kommt 'morgen um neun Uhr' ins Büro."
+          },
+          {
+            "id": "h1-q2",
+            "audioTranscript": "A: Hallo Maria! Was möchtest du trinken? Kaffee oder Tee?\nB: Ich trinke gern Tee mit Zitrone. Und du?\nA: Ich nehme einen Kaffee mit Milch.",
+            "prompt": "Was trinkt Maria gern?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Kaffee mit Milch"
+              },
+              {
+                "key": "b",
+                "text": "Wasser"
+              },
+              {
+                "key": "c",
+                "text": "Tee mit Zitrone"
+              }
+            ],
+            "correctAnswer": "c",
+            "explanation": "Maria responde explícitamente: 'Ich trinke gern Tee mit Zitrone'."
+          },
+          {
+            "id": "h1-q3",
+            "audioTranscript": "A: Entschuldigung, wie viel kostet das Buch hier?\nB: Das Buch hier kostet fünfzehn Euro.\nA: Und das Wörterbuch?\nB: Das Wörterbuch kostet vierundzwanzig Euro.",
+            "prompt": "Wie viel kostet das Buch?",
+            "options": [
+              {
+                "key": "a",
+                "text": "15 Euro"
+              },
+              {
+                "key": "b",
+                "text": "24 Euro"
+              },
+              {
+                "key": "c",
+                "text": "50 Euro"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "El libro normal cuesta 15 Euro ('fünfzehn Euro'); el diccionario cuesta 24 Euro."
+          },
+          {
+            "id": "h1-q4",
+            "audioTranscript": "A: Hallo David! Wo wohnst du jetzt?\nB: Ich wohne in Köln, in der Schillerstraße.\nA: Welche Hausnummer?\nB: Hausnummer zweiundvierzig.",
+            "prompt": "Welche Hausnummer hat David?",
+            "options": [
+              {
+                "key": "a",
+                "text": "24"
+              },
+              {
+                "key": "b",
+                "text": "42"
+              },
+              {
+                "key": "c",
+                "text": "40"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "'Zweiundvierzig' equivale a 42 (inversión de unidades y decenas en alemán)."
+          },
+          {
+            "id": "h1-q5",
+            "audioTranscript": "A: Guten Tag, wie heißen Sie, bitte?\nB: Ich heiße Stefan Weber.\nA: Können Sie Ihren Familiennamen buchstabieren?\nB: Ja gern: W - E - B - E - R.",
+            "prompt": "Wie ist der Familienname?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Weller"
+              },
+              {
+                "key": "b",
+                "text": "Wener"
+              },
+              {
+                "key": "c",
+                "text": "Weber"
+              }
+            ],
+            "correctAnswer": "c",
+            "explanation": "El apellido deletreado es W-E-B-E-R."
+          },
+          {
+            "id": "h1-q6",
+            "audioTranscript": "A: Wann beginnt unser Deutschkurs heute?\nB: Der Kurs beginnt um vierzehn Uhr dreißig.\nA: Und wo ist der Kursraum?\nB: Im Raum Nummer drei.",
+            "prompt": "Um wie viel Uhr beginnt der Kurs?",
+            "options": [
+              {
+                "key": "a",
+                "text": "14:00 Uhr"
+              },
+              {
+                "key": "b",
+                "text": "14:30 Uhr"
+              },
+              {
+                "key": "c",
+                "text": "13:30 Uhr"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "'Vierzehn Uhr dreißig' es 14:30."
+          }
+        ]
+      },
+      "teil2": {
+        "description": "Durchsagen an öffentlichen Orten (Bahnhof, Kaufhaus). Sie hören jeden Text einmal.",
+        "questions": [
+          {
+            "id": "h1-q7",
+            "audioTranscript": "Durchsage am Bahnhof: 'Achtung an Gleis vier: Der Zug nach München kommt heute um zehn Minuten später. Bitte beachten Sie die Durchsagen.'",
+            "prompt": "Der Zug nach München hat Verspätung.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "El tren viene 'zehn Minuten später' (con 10 minutos de retraso)."
+          },
+          {
+            "id": "h1-q8",
+            "audioTranscript": "Durchsage im Kaufhaus: 'Liebe Kunden, unser Café im dritten Stock schließt heute um achtzehn Uhr. Wir danken für Ihren Besuch.'",
+            "prompt": "Das Café ist im ersten Stock.",
+            "type": "true_false",
+            "correctAnswer": "falsch",
+            "explanation": "El anuncio indica 'im dritten Stock' (tercer piso), no en el primero."
+          },
+          {
+            "id": "h1-q9",
+            "audioTranscript": "Durchsage im Sprachinstitut: 'Guten Tag, alle Studentinnen und Studenten: Der Deutschkurs A1 findet heute nicht in Raum zwei statt, sondern in Raum fünf.'",
+            "prompt": "Der Kurs ist heute in Raum fünf.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "Se anuncia claramente el cambio a 'Raum fünf'."
+          },
+          {
+            "id": "h1-q10",
+            "audioTranscript": "Durchsage im Elektronikmarkt: 'Heute im Angebot: Laptops und Monitore zwanzig Prozent billiger. Das Angebot gilt nur heute!'",
+            "prompt": "Die Computer sind heute billiger.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Zwanzig Prozent billiger' confirma la rebaja de precio."
+          }
+        ]
+      },
+      "teil3": {
+        "description": "Nachrichten auf dem Anrufbeantworter / Telefon. Sie hören jeden Text zweimal.",
+        "questions": [
+          {
+            "id": "h1-q11",
+            "audioTranscript": "Telefonansage: 'Hallo Alex, hier ist Martin. Unser Meeting ist nicht am Mittwoch, sondern am Donnerstag um zehn Uhr. Ruf mich bitte zurück!'",
+            "prompt": "Wann ist das Meeting?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Am Mittwoch"
+              },
+              {
+                "key": "b",
+                "text": "Am Donnerstag um zehn Uhr"
+              },
+              {
+                "key": "c",
+                "text": "Heute um zehn Uhr"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Martin corrige: 'nicht am Mittwoch, sondern am Donnerstag um zehn Uhr'."
+          },
+          {
+            "id": "h1-q12",
+            "audioTranscript": "Telefonansage: 'Guten Tag Herr Rojas, hier spricht die Praxis Dr. Becker. Ihr Termin ist am Freitag um elf Uhr fünfzehn. Bitte bringen Sie Ihre Dokumente mit.'",
+            "prompt": "Um wie viel Uhr ist der Termin?",
+            "options": [
+              {
+                "key": "a",
+                "text": "11:15 Uhr"
+              },
+              {
+                "key": "b",
+                "text": "11:50 Uhr"
+              },
+              {
+                "key": "c",
+                "text": "10:15 Uhr"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "'Elf Uhr fünfzehn' corresponde a las 11:15."
+          },
+          {
+            "id": "h1-q13",
+            "audioTranscript": "Telefonansage: 'Hallo Laura, ich bin es, Sarah. Meine neue Telefonnummer ist 0176 - 34 52 89. Bitte speichere meine Nummer!'",
+            "prompt": "Welche Telefonnummer hat Sarah?",
+            "options": [
+              {
+                "key": "a",
+                "text": "0176 - 43 52 89"
+              },
+              {
+                "key": "b",
+                "text": "0176 - 34 52 89"
+              },
+              {
+                "key": "c",
+                "text": "0176 - 34 25 89"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "'Vierunddreißig zweiundfünfzig neunundachtzig' -> 34 52 89."
+          },
+          {
+            "id": "h1-q14",
+            "audioTranscript": "Telefonansage: 'Hallo Thomas, hier ist Lisa. Ich habe das Buch für den Deutschkurs gekauft. Es kostet dreizehn Euro. Bis morgen im Kurs!'",
+            "prompt": "Was hat Lisa gekauft?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Einen Laptop"
+              },
+              {
+                "key": "b",
+                "text": "Ein Buch"
+              },
+              {
+                "key": "c",
+                "text": "Ein Wörterbuch"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Lisa dice: 'Ich habe das Buch für den Deutschkurs gekauft'."
+          },
+          {
+            "id": "h1-q15",
+            "audioTranscript": "Telefonansage: 'Guten Tag, hier ist der Kundenservice. Ihr neuer Computer ist fertig und abholbereit im Geschäft. Wir haben bis zwanzig Uhr geöffnet.'",
+            "prompt": "Bis wann ist das Geschäft geöffnet?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Bis 12:00 Uhr"
+              },
+              {
+                "key": "b",
+                "text": "Bis 18:00 Uhr"
+              },
+              {
+                "key": "c",
+                "text": "Bis 20:00 Uhr"
+              }
+            ],
+            "correctAnswer": "c",
+            "explanation": "'Zwanzig Uhr' equivale a las 20:00 (8:00 PM)."
+          }
+        ]
+      }
+    },
+    "lesen": {
+      "title": "Teil 2: Lesen (Comprensión de Lectura)",
+      "totalTimeMinutes": 25,
+      "totalQuestions": 15,
+      "instructions": "Lesen Sie kurze Texte, E-Mails, Anzeigen und Schilder. Lösen Sie die Aufgaben dazu.",
+      "teil1": {
+        "description": "E-Mails und persönliche Nachrichten. Wählen Sie Richtig oder Falsch.",
+        "texts": [
+          {
+            "textId": "l1-t1",
+            "content": "Lieber Alex,\n\nvielen Dank für deine E-Mail! Ich bin jetzt in Berlin und lerne jeden Tag Deutsch. Mein Deutschkurs ist super. Wir sind zwölf Studenten im Kurs. Meine Lehrerin heißt Frau Weber und sie ist sehr freundlich. Am Wochenende habe ich frei. Hast du Zeit am Samstag?\n\nViele Grüße,\nDaniel",
+            "questions": [
+              {
+                "id": "l1-q1",
+                "prompt": "Daniel wohnt jetzt in Deutschland.",
+                "type": "true_false",
+                "correctAnswer": "richtig",
+                "explanation": "Daniel indica: 'Ich bin jetzt in Berlin' (Berlín está en Alemania)."
+              },
+              {
+                "id": "l1-q2",
+                "prompt": "Im Deutschkurs sind zwanzig Studenten.",
+                "type": "true_false",
+                "correctAnswer": "falsch",
+                "explanation": "El texto dice: 'Wir sind zwölf Studenten' (12 estudiantes, no 20)."
+              },
+              {
+                "id": "l1-q3",
+                "prompt": "Daniel arbeitet am Samstag.",
+                "type": "true_false",
+                "correctAnswer": "falsch",
+                "explanation": "El texto dice: 'Am Wochenende habe ich frei' (tiene el fin de semana libre)."
+              }
+            ]
+          },
+          {
+            "textId": "l1-t2",
+            "content": "Hallo Sarah,\n\nmein Laptop ist kaputt. Ich brauche einen Computer für mein Projekt. Arbeitest du heute im Büro? Kann ich deinen Computer am Nachmittag benutzen? Mein Meeting ist um 15:00 Uhr.\n\nDanke und tschüss,\nMarkus",
+            "questions": [
+              {
+                "id": "l1-q4",
+                "prompt": "Markus hat einen funktionierenden Laptop.",
+                "type": "true_false",
+                "correctAnswer": "falsch",
+                "explanation": "Markus escribe: 'mein Laptop ist kaputt' (está estropeado/no funciona)."
+              },
+              {
+                "id": "l1-q5",
+                "prompt": "Das Meeting von Markus ist um drei Uhr am Nachmittag.",
+                "type": "true_false",
+                "correctAnswer": "richtig",
+                "explanation": "15:00 Uhr equivale a las 3 de la tarde."
+              }
+            ]
+          }
+        ]
+      },
+      "teil2": {
+        "description": "Internet-Websites und Anzeigen. Wählen Sie für jede Situation die passende Website (a oder b).",
+        "questions": [
+          {
+            "id": "l1-q6",
+            "situation": "Sie möchten Deutsch online in einem Abendkurs lernen.",
+            "adA": "Sprachschule Lingua: Intensivkurse am Vormittag (09:00 - 12:00 Uhr) im Stadtzentrum.",
+            "adB": "Online-Akademie Deutsch: Abendkurse online von 18:30 bis 20:00 Uhr für Anfänger A1.",
+            "prompt": "Wo finden Sie den passenden Kurs?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a (Sprachschule Lingua)"
+              },
+              {
+                "key": "b",
+                "text": "Website b (Online-Akademie Deutsch)"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "La opción B ofrece exactamente 'Abendkurse online' en horario de 18:30 a 20:00."
+          },
+          {
+            "id": "l1-q7",
+            "situation": "Sie suchen eine Wohnung in München mit zwei Zimmern.",
+            "adA": "Wohnung frei: 2-Zimmer-Wohnung in München, 65 qm, ruhig, frei ab sofort.",
+            "adB": "Büroraum zu vermieten: Großer Büroraum im Zentrum von München für Firmen.",
+            "prompt": "Welche Anzeige passt?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a (Wohnung frei)"
+              },
+              {
+                "key": "b",
+                "text": "Website b (Büroraum)"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "La opción A es una vivienda de 2 habitaciones ('2-Zimmer-Wohnung'), mientras que B es una oficina."
+          },
+          {
+            "id": "l1-q8",
+            "situation": "Sie möchten einen neuen Computermonitor (Bildschirm) kaufen.",
+            "adA": "Buchhandlung Gutenberg: Bücher, Wörterbücher und Schreibmaterial.",
+            "adB": "TechStore 24: Monitore, Tastaturen, Mäuse und Laptops mit Garantie.",
+            "prompt": "Wo kaufen Sie den Bildschirm?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a"
+              },
+              {
+                "key": "b",
+                "text": "Website b"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "TechStore 24 vende hardware y periféricos ('Monitore, Tastaturen, Mäuse')."
+          },
+          {
+            "id": "l1-q9",
+            "situation": "Sie möchten am Samstagabend in einem Café sitzen und Kaffee trinken.",
+            "adA": "Café Central: Geöffnet täglich von 08:00 bis 22:00 Uhr. Kaffee, Kuchen und Getränke.",
+            "adB": "Fitnessstudio Aktiv: Geöffnet von Montag bis Freitag von 06:00 bis 21:00 Uhr.",
+            "prompt": "Wohin gehen Sie am Samstagabend?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a (Café Central)"
+              },
+              {
+                "key": "b",
+                "text": "Website b (Fitnessstudio)"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "Café Central abre todos los días hasta las 22:00, cubriendo el sábado noche."
+          },
+          {
+            "id": "l1-q10",
+            "situation": "Sie möchten wissen, wie viel ein Wörterbuch Deutsch-Spanisch kostet.",
+            "adA": "Buchladen Modern: Großes Wörterbuch Deutsch-Spanisch für 19,90 Euro.",
+            "adB": "Möbelhaus West: Schreibtische und Lampen für Ihr Büro.",
+            "prompt": "Welche Anzeige ist richtig?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a"
+              },
+              {
+                "key": "b",
+                "text": "Website b"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "El anuncio A muestra el diccionario Deutsch-Spanisch con su precio."
+          }
+        ]
+      },
+      "teil3": {
+        "description": "Schilder, Hinweistafeln und Mitteilungen. Wählen Sie Richtig oder Falsch.",
+        "questions": [
+          {
+            "id": "l1-q11",
+            "signText": "Eingang nur für Personal und Mitarbeiter. Besucher bitte Eingang Nord benutzen.",
+            "prompt": "Besucher dürfen hier hineingehen.",
+            "type": "true_false",
+            "correctAnswer": "falsch",
+            "explanation": "La entrada es solo para personal ('nur für Personal'); visitantes deben usar 'Eingang Nord'."
+          },
+          {
+            "id": "l1-q12",
+            "signText": "Bibliothek: Bitte Ruhe! Handys bitte ausschalten.",
+            "prompt": "Sie dürfen in der Bibliothek nicht laut sprechen und das Handy muss aus sein.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Bitte Ruhe' y 'Handys ausschalten' exigen silencio y teléfono apagado."
+          },
+          {
+            "id": "l1-q13",
+            "signText": "Arztpraxis Dr. Schmidt: Sprechstunde von Montag bis Freitag von 08:00 bis 12:00 Uhr. Am Wochenende geschlossen.",
+            "prompt": "Die Praxis ist am Sonntag geöffnet.",
+            "type": "falsch",
+            "correctAnswer": "falsch",
+            "explanation": "El cartel señala explícitamente: 'Am Wochenende geschlossen' (cerrado el fin de semana)."
+          },
+          {
+            "id": "l1-q14",
+            "signText": "Sprachschule Info: Raum 102 ist heute frei. Sie können hier lernen.",
+            "prompt": "Studenten können heute in Raum 102 lernen.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Raum 102 ist heute frei. Sie können hier lernen' autoriza el estudio en esa aula."
+          },
+          {
+            "id": "l1-q15",
+            "signText": "Aufzug defekt! Bitte benutzen Sie die Treppe.",
+            "prompt": "Der Aufzug funktioniert nicht.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Aufzug defekt' significa que el ascensor está averiado/no funciona."
+          }
+        ]
+      }
+    },
+    "schreiben": {
+      "title": "Teil 3: Schreiben (Expresión Escrita)",
+      "totalTimeMinutes": 20,
+      "totalPoints": 25,
+      "instructions": "Dieser Prüfungsteil besteht aus zwei Teilen: Im Teil 1 füllen Sie ein Formular aus (5 Informationen). Im Teil 2 schreiben Sie eine kurze E-Mail (ca. 30 Wörter) zu drei Leitpunkten.",
+      "teil1_formular": {
+        "title": "Teil 1: Formular ausfüllen",
+        "points": 10,
+        "situationText": "Ihre Kollegin Eva Gómez möchte an der Sprachschule Bonn einen Deutschkurs A1 besuchen. Sie ist 28 Jahre alt, kommt aus Spanien und wohnt in der Rheinstraße 14 in 53111 Bonn. Ihre Telefonnummer ist 0152 - 44 78 12. Sie möchte am Dienstagabend um 18:30 Uhr lernen.",
+        "formularFields": [
+          {
+            "fieldNumber": 1,
+            "label": "Familienname",
+            "correctAnswer": "Gómez",
+            "points": 2,
+            "explanation": "El apellido de Eva es Gómez."
+          },
+          {
+            "fieldNumber": 2,
+            "label": "Herkunftsland",
+            "correctAnswer": "Spanien",
+            "points": 2,
+            "explanation": "Eva proviene de España ('Spanien')."
+          },
+          {
+            "fieldNumber": 3,
+            "label": "Wohnort (mit PLZ)",
+            "correctAnswer": "53111 Bonn",
+            "points": 2,
+            "explanation": "Código postal y ciudad de residencia: 53111 Bonn."
+          },
+          {
+            "fieldNumber": 4,
+            "label": "Straße und Hausnummer",
+            "correctAnswer": "Rheinstraße 14",
+            "points": 2,
+            "explanation": "Dirección exacta: Rheinstraße 14."
+          },
+          {
+            "fieldNumber": 5,
+            "label": "Telefonnummer",
+            "correctAnswer": "0152 - 44 78 12 (oder 0152447812)",
+            "points": 2,
+            "explanation": "Número telefónico de contacto proporcionado en el texto."
+          }
+        ]
+      },
+      "teil2_textproduktion": {
+        "title": "Teil 2: Kurze Mitteilung / E-Mail verfassen",
+        "points": 15,
+        "promptSituation": "Sie können heute nicht zum Deutschkurs kommen. Schreiben Sie eine E-Mail an Ihre Lehrerin, Frau Weber.",
+        "wordCountTarget": "ca. 30 Wörter",
+        "leitpunkte": [
+          "1. Warum schreiben Sie? (Grund: heute nicht kommen)",
+          "2. Erklärung / Entschuldigung (z.B. viel Arbeit / krank)",
+          "3. Wann kommen Sie wieder? (nächster Termin)"
+        ],
+        "musterloesung": "Liebe Frau Weber,\n\nich kann heute leider nicht zum Deutschkurs kommen. Ich habe viel Arbeit im Büro und ein wichtiges Meeting um 15:00 Uhr. Ich lerne die Lektion zu Hause. Am Donnerstag bin ich wieder im Kurs.\n\nViele Grüße,\nAlexander Woodcock",
+        "musterloesungWordCount": 38,
+        "evaluationRubric": {
+          "leitpunkt1_eval": "Erfüllt (3/3): Comunica claramente que no puede asistir al curso hoy.",
+          "leitpunkt2_eval": "Erfüllt (3/3): Justifica con vocabulario A1 adecuado (viel Arbeit / Meeting).",
+          "leitpunkt3_eval": "Erfüllt (3/3): Indica con precisión temporal cuándo regresa (am Donnerstag).",
+          "formalitaet_anrede_gruss": "Erfüllt (3/3): Saludo formal apropiado ('Liebe Frau Weber,') y despedida correcta ('Viele Grüße,').",
+          "sprachliche_richtigkeit": "Erfüllt (3/3): Sintaxis correcta con verbo en posición 2, ortografía y concordancia de género precisas."
+        }
+      }
+    },
+    "sprechen": {
+      "title": "Teil 4: Sprechen (Expresión Oral)",
+      "totalTimeMinutes": 15,
+      "totalPoints": 25,
+      "format": "Gruppenprüfung (3-4 Teilnehmer) mit zwei Prüfern.",
+      "teil1_vorstellung": {
+        "title": "Teil 1: Sich vorstellen und buchstabieren",
+        "points": 5,
+        "prompts": [
+          "Name (Ich heiße / Ich bin...)",
+          "Alter (Ich bin ... Jahre alt)",
+          "Land (Ich komme aus...)",
+          "Wohnort (Ich wohne in...)",
+          "Sprachen (Ich spreche...)",
+          "Beruf (Ich bin ... von Beruf / Ich arbeite als...)"
+        ],
+        "modelTranscript": "Guten Tag! Ich heiße Alexander Woodcock. Ich bin 30 Jahre alt und komme aus Kolumbien. Jetzt wohne ich in Medellín. Ich spreche Spanisch, Englisch und ein bisschen Deutsch. Von Beruf bin ich Technical Artist und Softwareentwickler.",
+        "followUpQuestions": [
+          {
+            "examinerPrompt": "Können Sie bitte Ihren Nachnamen buchstabieren?",
+            "candidateResponse": "Ja, natürlich: W - O - O - D - C - O - C - K."
+          },
+          {
+            "examinerPrompt": "Und wie ist Ihre Telefonnummer oder Postleitzahl?",
+            "candidateResponse": "Meine Telefonnummer ist: null - eins - sieben - sechs, vier - fünf - zwei - acht - neun."
+          }
+        ]
+      },
+      "teil2_fragen_antworten": {
+        "title": "Teil 2: Um Informationen bitten und Informationen geben",
+        "points": 10,
+        "description": "Themenkarten mit einem Wort. Der Prüfling formuliert eine W-Frage oder Ja/Nein-Frage und der Partner antwortet.",
+        "cards": [
+          {
+            "cardId": "s1-t2-c1",
+            "thema": "Arbeit und Beruf",
+            "wort": "Computer",
+            "beispielFrage": "Arbeiten Sie jeden Tag mit dem Computer?",
+            "beispielAntwort": "Ja, ich arbeite acht Stunden am Tag mit dem Computer.",
+            "grammarPattern": "Ja/Nein-Frage (Verbo en Posición 1)"
+          },
+          {
+            "cardId": "s1-t2-c2",
+            "thema": "Freizeit und Wochenende",
+            "wort": "Samstag",
+            "beispielFrage": "Was machen Sie am Samstag?",
+            "beispielAntwort": "Am Samstag habe ich frei und lerne Deutsch.",
+            "grammarPattern": "W-Frage mit 'Was' + Zeitangabe"
+          },
+          {
+            "cardId": "s1-t2-c3",
+            "thema": "Sprachen lernen",
+            "wort": "Deutschkurs",
+            "beispielFrage": "Wann beginnt dein Deutschkurs?",
+            "beispielAntwort": "Mein Deutschkurs beginnt um vierzehn Uhr.",
+            "grammarPattern": "W-Frage mit 'Wann' (Posición 2 Verb: beginnt)"
+          },
+          {
+            "cardId": "s1-t2-c4",
+            "thema": "Wohnort",
+            "wort": "Wohnung",
+            "beispielFrage": "Ist deine Wohnung groß oder klein?",
+            "beispielAntwort": "Meine Wohnung ist klein, aber sehr schön.",
+            "grammarPattern": "Ja/Nein-Frage mit 'sein'"
+          }
+        ]
+      },
+      "teil3_bitten_reagieren": {
+        "title": "Teil 3: Bitten formulieren und darauf reagieren",
+        "points": 10,
+        "description": "Bildkarten mit Gegenständen des Alltags. Der Prüfling formuliert eine höfliche Bitte mit 'Bitte' oder Imperativ A1 und der Partner reagiert passend.",
+        "cards": [
+          {
+            "cardId": "s1-t3-c1",
+            "bildGegenstand": "Wörterbuch (das)",
+            "beispielBitte": "Geben Sie mir bitte das Wörterbuch!",
+            "beispielReaktion": "Ja, gern! Hier ist das Buch.",
+            "alternativeBitte": "Kann ich bitte das Wörterbuch haben?"
+          },
+          {
+            "cardId": "s1-t3-c2",
+            "bildGegenstand": "Lampe / Licht (die Lampe / das Licht)",
+            "beispielBitte": "Machen Sie bitte die Lampe an!",
+            "beispielReaktion": "Ja, natürlich, kein Problem!",
+            "alternativeBitte": "Schalten Sie bitte das Licht ein."
+          },
+          {
+            "cardId": "s1-t3-c3",
+            "bildGegenstand": "Handy / Telefon (das)",
+            "beispielBitte": "Schalten Sie bitte das Handy aus!",
+            "beispielReaktion": "Entschuldigung, ich mache das Handy sofort aus.",
+            "alternativeBitte": "Bitte hier nicht telefonieren!"
+          },
+          {
+            "cardId": "s1-t3-c4",
+            "bildGegenstand": "Stift / Bleistift (der)",
+            "beispielBitte": "Haben Sie bitte einen Stift für mich?",
+            "beispielReaktion": "Ja, bitte sehr! Hier ist ein Stift.",
+            "alternativeBitte": "Geben Sie mir bitte den Stift!"
+          }
+        ]
+      }
+    }
+  },
+  "simulacro2": {
+    "id": "sim-goethe-a1-02",
+    "title": "Goethe-Zertifikat A1 — Übungssatz 2",
+    "hoeren": {
+      "title": "Teil 1: Hören (Comprensión Auditiva)",
+      "totalTimeMinutes": 20,
+      "totalQuestions": 15,
+      "instructions": "Sie hören kurze Gespräche und Durchsagen. Zu jedem Text gibt es eine Aufgabe. Kreuzen Sie die richtige Antwort an (a, b oder c) oder markieren Sie richtig/falsch.",
+      "teil1": {
+        "description": "Kurze Alltagsgespräche. Sie hören jeden Text zweimal.",
+        "questions": [
+          {
+            "id": "h2-q1",
+            "audioTranscript": "A: Guten Morgen Herr Fischer! Wann beginnt heute Ihre Arbeit?\nB: Normalerweise beginne ich um acht Uhr, aber heute fange ich um halb neun an.\nA: Also um acht Uhr dreißig?\nB: Ja, genau, um acht Uhr dreißig.",
+            "prompt": "Wann beginnt Herr Fischer heute mit der Arbeit?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Um 08:00 Uhr"
+              },
+              {
+                "key": "b",
+                "text": "Um 08:30 Uhr"
+              },
+              {
+                "key": "c",
+                "text": "Um 09:00 Uhr"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Herr Fischer confirma: 'heute fange ich um halb neun an... um acht Uhr dreißig' (08:30)."
+          },
+          {
+            "id": "h2-q2",
+            "audioTranscript": "A: Entschuldigung, wo ist der Deutschkurs für Anfänger?\nB: Der Kurs ist im zweiten Stock in Raum achtzehn.\nA: In Raum achtzig?\nB: Nein, in Raum achtzehn, eins-acht.",
+            "prompt": "In welchem Raum ist der Deutschkurs?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Raum 80"
+              },
+              {
+                "key": "b",
+                "text": "Raum 8"
+              },
+              {
+                "key": "c",
+                "text": "Raum 18"
+              }
+            ],
+            "correctAnswer": "c",
+            "explanation": "La persona aclara explícitamente: 'in Raum achtzehn, eins-acht' (18)."
+          },
+          {
+            "id": "h2-q3",
+            "audioTranscript": "A: Wie heißen Sie mit Nachnamen, bitte?\nB: Mein Nachname ist Fischer.\nA: Buchstabieren Sie das bitte.\nB: F - I - S - C - H - E - R.",
+            "prompt": "Wie lautet der Nachname?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Fischer"
+              },
+              {
+                "key": "b",
+                "text": "Fincher"
+              },
+              {
+                "key": "c",
+                "text": "Fisser"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "El deletreo corresponde exactamente a F-I-S-C-H-E-R."
+          },
+          {
+            "id": "h2-q4",
+            "audioTranscript": "A: Ein Kaffee und ein Mineralwasser, bitte. Was kostet das zusammen?\nB: Der Kaffee kostet drei Euro und das Wasser kostet zwei Euro. Das macht zusammen fünf Euro.\nA: Hier sind zehn Euro.\nB: Und fünf Euro zurück. Danke!",
+            "prompt": "Wie viel kosten der Kaffee und das Wasser zusammen?",
+            "options": [
+              {
+                "key": "a",
+                "text": "3 Euro"
+              },
+              {
+                "key": "b",
+                "text": "5 Euro"
+              },
+              {
+                "key": "c",
+                "text": "10 Euro"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "El total combinado de 3 + 2 euros son 'fünf Euro' (5 Euro)."
+          },
+          {
+            "id": "h2-q5",
+            "audioTranscript": "A: Hallo Elena, was bist du von Beruf?\nB: Ich bin Softwareentwicklerin. Und du?\nA: Ich studiere Informatik an der Universität Bonn.",
+            "prompt": "Was ist Elena von Beruf?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Studentin"
+              },
+              {
+                "key": "b",
+                "text": "Softwareentwicklerin"
+              },
+              {
+                "key": "c",
+                "text": "Lehrerin"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Elena responde: 'Ich bin Softwareentwicklerin'."
+          },
+          {
+            "id": "h2-q6",
+            "audioTranscript": "A: Wo wohnt dein Bruder jetzt?\nB: Er wohnt in Hamburg in der Goethestraße 56.\nA: Wohnt er allein?\nB: Nein, er wohnt mit einem Kollegen zusammen.",
+            "prompt": "Welche Hausnummer hat die Wohnung?",
+            "options": [
+              {
+                "key": "a",
+                "text": "65"
+              },
+              {
+                "key": "b",
+                "text": "56"
+              },
+              {
+                "key": "c",
+                "text": "50"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "'Sechsundfünfzig' equivale a 56."
+          }
+        ]
+      },
+      "teil2": {
+        "description": "Durchsagen an öffentlichen Orten. Sie hören jeden Text einmal.",
+        "questions": [
+          {
+            "id": "h2-q7",
+            "audioTranscript": "Durchsage am Hauptbahnhof: 'Achtung Fahrgäste: Der Intercity-Zug nach Frankfurt fährt heute nicht von Gleis zwei, sondern von Gleis sieben ab.'",
+            "prompt": "Der Zug nach Frankfurt fährt von Gleis sieben.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "La megafonía indica el cambio a 'Gleis sieben' (vía 7)."
+          },
+          {
+            "id": "h2-q8",
+            "audioTranscript": "Durchsage im Computergeschäft: 'Sonderangebot am Wochenende: Alle Computermäuse und Tastaturen sind heute um dreißig Prozent reduziert.'",
+            "prompt": "Tastaturen und Mäuse sind heute billiger.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Um dreißig Prozent reduziert' confirma la rebaja de precio."
+          },
+          {
+            "id": "h2-q9",
+            "audioTranscript": "Durchsage in der Stadtbibliothek: 'Liebe Besucherinnen und Besucher, die Bibliothek schließt heute wegen Umbauarbeiten bereits um 16:00 Uhr.'",
+            "prompt": "Die Bibliothek ist heute bis 20:00 Uhr geöffnet.",
+            "type": "true_false",
+            "correctAnswer": "falsch",
+            "explanation": "La biblioteca cierra hoy temprano a las 16:00, no a las 20:00."
+          },
+          {
+            "id": "h2-q10",
+            "audioTranscript": "Durchsage in der Sprachschule: 'Wichtige Information: Die Anmeldung für die Deutschprüfung A1 endet am Freitag um zwölf Uhr.'",
+            "prompt": "Man kann sich bis Freitagmittag anmelden.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Freitag um zwölf Uhr' corresponde al mediodía del viernes."
+          }
+        ]
+      },
+      "teil3": {
+        "description": "Nachrichten auf dem Anrufbeantworter / Telefon. Sie hören jeden Text zweimal.",
+        "questions": [
+          {
+            "id": "h2-q11",
+            "audioTranscript": "Telefonansage: 'Hallo Christian, hier ist Nicole. Unser Deutsch-Tandem am Dienstag fällt leider aus. Können wir uns am Mittwoch um 17:00 Uhr treffen? Bitte gib mir Bescheid!'",
+            "prompt": "Wann möchte Nicole sich treffen?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Am Dienstag"
+              },
+              {
+                "key": "b",
+                "text": "Am Mittwoch um 17:00 Uhr"
+              },
+              {
+                "key": "c",
+                "text": "Am Freitag"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Nicole propone: 'am Mittwoch um 17:00 Uhr'."
+          },
+          {
+            "id": "h2-q12",
+            "audioTranscript": "Telefonansage: 'Guten Tag Frau Meyer, hier ist die Volkshochschule. Ihre Kursnummer für den Sprachkurs ist A-1-0-4. Der Kurs beginnt nächste Woche.'",
+            "prompt": "Wie lautet die Kursnummer?",
+            "options": [
+              {
+                "key": "a",
+                "text": "A-1-0-4"
+              },
+              {
+                "key": "b",
+                "text": "A-1-4-0"
+              },
+              {
+                "key": "c",
+                "text": "B-1-0-4"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "La locución indica claramente 'A-1-0-4'."
+          },
+          {
+            "id": "h2-q13",
+            "audioTranscript": "Telefonansage: 'Hallo Marc! Ich habe eine super Nachricht: Der neue Schreibtisch für dein Büro ist abholbereit. Das Geschäft hat heute bis 19:00 Uhr auf.'",
+            "prompt": "Was kann Marc heute abholen?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Einen Computer"
+              },
+              {
+                "key": "b",
+                "text": "Einen Schreibtisch"
+              },
+              {
+                "key": "c",
+                "text": "Eine Lampe"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "El mensaje confirma: 'Der neue Schreibtisch für dein Büro ist abholbereit'."
+          },
+          {
+            "id": "h2-q14",
+            "audioTranscript": "Telefonansage: 'Guten Tag Herr Woodcock, hier ist das Sekretariat. Bitte rufen Sie uns unter der Nummer 0228 - 73 91 40 zurück.'",
+            "prompt": "Welche Telefonnummer soll Herr Woodcock anrufen?",
+            "options": [
+              {
+                "key": "a",
+                "text": "0228 - 73 19 40"
+              },
+              {
+                "key": "b",
+                "text": "0228 - 73 91 40"
+              },
+              {
+                "key": "c",
+                "text": "0228 - 37 91 40"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "'Dreiundsiebzig einundneunzig vierzig' -> 73 91 40."
+          },
+          {
+            "id": "h2-q15",
+            "audioTranscript": "Telefonansage: 'Hallo David, hier spricht Julia. Die Präsentation am Montag ist im Konferenzraum drei im Erdgeschoss. Bis Montag!'",
+            "prompt": "Wo findet die Präsentation statt?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Im dritten Stock"
+              },
+              {
+                "key": "b",
+                "text": "Im Konferenzraum drei im Erdgeschoss"
+              },
+              {
+                "key": "c",
+                "text": "Im Café"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Julia precisa: 'im Konferenzraum drei im Erdgeschoss'."
+          }
+        ]
+      }
+    },
+    "lesen": {
+      "title": "Teil 2: Lesen (Comprensión de Lectura)",
+      "totalTimeMinutes": 25,
+      "totalQuestions": 15,
+      "instructions": "Lesen Sie kurze Texte, E-Mails, Anzeigen und Schilder. Lösen Sie die Aufgaben dazu.",
+      "teil1": {
+        "description": "E-Mails und persönliche Mitteilungen. Wählen Sie Richtig oder Falsch.",
+        "texts": [
+          {
+            "textId": "l2-t1",
+            "content": "Hallo Thomas,\n\nich habe eine neue Wohnung in Köln gefunden! Die Wohnung hat zwei Zimmer, eine kleine Küche und ein schönes Bad. Sie liegt im Stadtzentrum und ist sehr ruhig. Ich brauche noch ein paar Möbel: einen Schreibtisch und eine Lampe. Hast du am Samstag Zeit und kannst mir helfen?\n\nHerzliche Grüße,\nLaura",
+            "questions": [
+              {
+                "id": "l2-q1",
+                "prompt": "Laura wohnt jetzt in Köln.",
+                "type": "true_false",
+                "correctAnswer": "richtig",
+                "explanation": "Laura escribe: 'ich habe eine neue Wohnung in Köln gefunden'."
+              },
+              {
+                "id": "l2-q2",
+                "prompt": "Die Wohnung von Laura hat vier Zimmer.",
+                "type": "true_false",
+                "correctAnswer": "falsch",
+                "explanation": "El texto especifica: 'Die Wohnung hat zwei Zimmer' (2 habitaciones, no 4)."
+              },
+              {
+                "id": "l2-q3",
+                "prompt": "Laura hat schon alle Möbel für die Wohnung.",
+                "type": "true_false",
+                "correctAnswer": "falsch",
+                "explanation": "Laura aclara: 'Ich brauche noch ein paar Möbel: einen Schreibtisch und eine Lampe'."
+              }
+            ]
+          },
+          {
+            "textId": "l2-t2",
+            "content": "Lieber Herr Schmidt,\n\nich schreibe Ihnen wegen unseres Meetings am Freitag. Ich habe das technische Dokument fertig. Wir können die Präsentation um 11:00 Uhr in Raum 4 machen. Bitte bringen Sie Ihren Laptop mit.\n\nMit freundlichen Grüßen,\nAlexander Woodcock",
+            "questions": [
+              {
+                "id": "l2-q4",
+                "prompt": "Das Dokument für das Meeting ist noch nicht fertig.",
+                "type": "true_false",
+                "correctAnswer": "falsch",
+                "explanation": "Alexander dice: 'Ich habe das technische Dokument fertig' (ya está listo/terminado)."
+              },
+              {
+                "id": "l2-q5",
+                "prompt": "Das Meeting ist am Freitag um elf Uhr.",
+                "type": "true_false",
+                "correctAnswer": "richtig",
+                "explanation": "El texto confirma: 'Meeting am Freitag... um 11:00 Uhr'."
+              }
+            ]
+          }
+        ]
+      },
+      "teil2": {
+        "description": "Internet-Websites und Anzeigen. Wählen Sie für jede Situation die passende Website (a oder b).",
+        "questions": [
+          {
+            "id": "l2-q6",
+            "situation": "Sie möchten am Samstagvormittag Deutsch in einer Gruppe sprechen und üben.",
+            "adA": "Sprachcafé International: Samstag von 10:00 bis 13:00 Uhr. Deutsch sprechen für Anfänger und Fortgeschrittene.",
+            "adB": "Buchhandlung Wissen: Große Auswahl an deutschen Grammatikbüchern und Wörterbüchern.",
+            "prompt": "Welches Angebot passt für Sie?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a (Sprachcafé International)"
+              },
+              {
+                "key": "b",
+                "text": "Website b (Buchhandlung Wissen)"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "El Sprachcafé ofrece práctica oral en grupo los sábados por la mañana."
+          },
+          {
+            "id": "l2-q7",
+            "situation": "Sie suchen einen gebrauchten, billigen Schreibtisch für Ihr Arbeitszimmer.",
+            "adA": "Designermöbel Exklusiv: Neue Luxusmöbel für große Firmen und Büros.",
+            "adB": "Möbelbörse Köln: Gebrauchte Schreibtische, Stühle und Lampen in gutem Zustand ab 25 Euro.",
+            "prompt": "Wo finden Sie den passenden Schreibtisch?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a"
+              },
+              {
+                "key": "b",
+                "text": "Website b"
+              }
+            ],
+            "correctAnswer": "b",
+            "explanation": "Möbelbörse vende mobiliario usado y asequible ('Gebrauchte Schreibtische... ab 25 Euro')."
+          },
+          {
+            "id": "l2-q8",
+            "situation": "Sie möchten wissen, wann der nächste Intensivkurs Deutsch A1.1 am Vormittag beginnt.",
+            "adA": "Goethe-Institut Kurse: Intensivkurs A1.1, Montag bis Freitag 09:00 - 12:30 Uhr. Start: 01. September.",
+            "adB": "Abendkurs Spanisch: Spanisch lernen für Anfänger jeden Donnerstag um 19:00 Uhr.",
+            "prompt": "Welche Anzeige enthält die Information?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a"
+              },
+              {
+                "key": "b",
+                "text": "Website b"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "El anuncio A especifica el curso intensivo A1.1 matutino (09:00 - 12:30)."
+          },
+          {
+            "id": "l2-q9",
+            "situation": "Sie suchen ein ruhiges Café mit kostenlosem Internet (WLAN), um mit Ihrem Laptop zu arbeiten.",
+            "adA": "Café NetzWerk: Schnelles WLAN, ruhige Arbeitsplätze und guter Kaffee. Täglich geöffnet.",
+            "adB": "Sportbar Arena: Live-Fußball und laute Musik jeden Abend ab 18:00 Uhr.",
+            "prompt": "Wohin gehen Sie?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a (Café NetzWerk)"
+              },
+              {
+                "key": "b",
+                "text": "Website b (Sportbar Arena)"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "Café NetzWerk ofrece Wi-Fi y puestos de trabajo tranquilos para portátiles."
+          },
+          {
+            "id": "l2-q10",
+            "situation": "Sie suchen eine Stelle als Programmierer oder Techniker in Teilzeit.",
+            "adA": "Jobportal Tech: Entwickler und Techniker gesucht (Vollzeit oder Teilzeit, 20 Std./Woche).",
+            "adB": "Sprachschule Global: Englischlehrer gesucht für Kinderkurse.",
+            "prompt": "Welche Stellenanzeige passt?",
+            "options": [
+              {
+                "key": "a",
+                "text": "Website a"
+              },
+              {
+                "key": "b",
+                "text": "Website b"
+              }
+            ],
+            "correctAnswer": "a",
+            "explanation": "Jobportal Tech busca desarrolladores y técnicos con opción a tiempo parcial."
+          }
+        ]
+      },
+      "teil3": {
+        "description": "Schilder, Hinweistafeln und Mitteilungen. Wählen Sie Richtig oder Falsch.",
+        "questions": [
+          {
+            "id": "l2-q11",
+            "signText": "Notausgang: Bitte Tür immer freihalten! Keine Gegenstände abstellen.",
+            "prompt": "Man darf vor diese Tür keine Tische oder Kisten stellen.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Bitte Tür immer freihalten' prohíbe obstaculizar la salida de emergencia."
+          },
+          {
+            "id": "l2-q12",
+            "signText": "Sprachschule Sekretariat: Öffnungszeiten Montag bis Donnerstag 09:00 - 15:00 Uhr. Freitag geschlossen.",
+            "prompt": "Das Sekretariat ist am Freitag geöffnet.",
+            "type": "true_false",
+            "correctAnswer": "falsch",
+            "explanation": "El cartel indica expresamente: 'Freitag geschlossen' (cerrado los viernes)."
+          },
+          {
+            "id": "l2-q13",
+            "signText": "Im gesamten Gebäude gilt absolutes Rauchverbot!",
+            "prompt": "Hier darf man rauchen.",
+            "type": "true_false",
+            "correctAnswer": "falsch",
+            "explanation": "'Absolutes Rauchverbot' significa que está estrictamente prohibido fumar."
+          },
+          {
+            "id": "l2-q14",
+            "signText": "Computerraum 3: Geöffnet für freies Arbeiten von 13:00 bis 18:00 Uhr.",
+            "prompt": "Studenten können ab 13:00 Uhr an den Computern arbeiten.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "El aula está abierta para trabajo libre a partir de las 13:00."
+          },
+          {
+            "id": "l2-q15",
+            "signText": "Geschäft wegen Inventur heute geschlossen. Ab morgen sind wir wieder für Sie da!",
+            "prompt": "Das Geschäft ist heute nicht geöffnet.",
+            "type": "true_false",
+            "correctAnswer": "richtig",
+            "explanation": "'Heute geschlossen' confirma que la tienda está cerrada hoy."
+          }
+        ]
+      }
+    },
+    "schreiben": {
+      "title": "Teil 3: Schreiben (Expresión Escrita)",
+      "totalTimeMinutes": 20,
+      "totalPoints": 25,
+      "instructions": "Dieser Prüfungsteil besteht aus zwei Teilen: Im Teil 1 füllen Sie ein Formular aus (5 Informationen). Im Teil 2 schreiben Sie eine kurze E-Mail (ca. 30 Wörter) zu drei Leitpunkten.",
+      "teil1_formular": {
+        "title": "Teil 1: Formular ausfüllen",
+        "points": 10,
+        "situationText": "Ihr Kollege Julian Becker (34 Jahre alt, aus Deutschland) wohnt in München in der Leopoldstraße 88, 80802 München. Seine Telefonnummer ist 0171 - 88 92 31. Er möchte sich bei der Volkshochschule für den Samstagskurs 'Web-Entwicklung für Anfänger' anmelden.",
+        "formularFields": [
+          {
+            "fieldNumber": 1,
+            "label": "Familienname",
+            "correctAnswer": "Becker",
+            "points": 2,
+            "explanation": "El apellido de Julian es Becker."
+          },
+          {
+            "fieldNumber": 2,
+            "label": "Vorname",
+            "correctAnswer": "Julian",
+            "points": 2,
+            "explanation": "El nombre de pila es Julian."
+          },
+          {
+            "fieldNumber": 3,
+            "label": "PLZ und Wohnort",
+            "correctAnswer": "80802 München",
+            "points": 2,
+            "explanation": "Código postal y ciudad: 80802 München."
+          },
+          {
+            "fieldNumber": 4,
+            "label": "Straße und Hausnummer",
+            "correctAnswer": "Leopoldstraße 88",
+            "points": 2,
+            "explanation": "Calle y número: Leopoldstraße 88."
+          },
+          {
+            "fieldNumber": 5,
+            "label": "Gewünschter Kurs",
+            "correctAnswer": "Web-Entwicklung für Anfänger (oder Web-Entwicklung)",
+            "points": 2,
+            "explanation": "El curso solicitado es 'Web-Entwicklung für Anfänger'."
+          }
+        ]
+      },
+      "teil2_textproduktion": {
+        "title": "Teil 2: Kurze Mitteilung / E-Mail verfassen",
+        "points": 15,
+        "promptSituation": "Sie möchten ein Treffen mit Ihrem neuen Kollegen, Herrn Thomas Richter, vereinbaren, um über ein gemeinsames Projekt zu sprechen.",
+        "wordCountTarget": "ca. 30 Wörter",
+        "leitpunkte": [
+          "1. Warum schreiben Sie? (Grund: über das neue Projekt sprechen)",
+          "2. Terminvorschlag (Tag und Uhrzeit)",
+          "3. Ort / Raum für das Meeting"
+        ],
+        "musterloesung": "Lieber Herr Richter,\n\nich möchte mit Ihnen über unser neues Projekt sprechen. Haben Sie am Freitag Zeit? Wir können uns um 14:00 Uhr im Konferenzraum 2 treffen. Bitte geben Sie mir kurz Bescheid.\n\nMit freundlichen Grüßen,\nAlexander Woodcock",
+        "musterloesungWordCount": 36,
+        "evaluationRubric": {
+          "leitpunkt1_eval": "Erfüllt (3/3): Comunica el objetivo de la reunión (über das neue Projekt sprechen).",
+          "leitpunkt2_eval": "Erfüllt (3/3): Propone un horario y día concretos (am Freitag um 14:00 Uhr).",
+          "leitpunkt3_eval": "Erfüllt (3/3): Especifica la sala o lugar (im Konferenzraum 2).",
+          "formalitaet_anrede_gruss": "Erfüllt (3/3): Encabezado formal ('Lieber Herr Richter,') y fórmula de despedida adecuada ('Mit freundlichen Grüßen,').",
+          "sprachliche_richtigkeit": "Erfüllt (3/3): Sintaxis rigurosa, verbos en posición 2, ortografía y concordancia gramatical correctas."
+        }
+      }
+    },
+    "sprechen": {
+      "title": "Teil 4: Sprechen (Expresión Oral)",
+      "totalTimeMinutes": 15,
+      "totalPoints": 25,
+      "format": "Gruppenprüfung mit zwei Prüfern und 3-4 Teilnehmern.",
+      "teil1_vorstellung": {
+        "title": "Teil 1: Sich vorstellen und buchstabieren",
+        "points": 5,
+        "prompts": [
+          "Name (Ich heiße...)",
+          "Alter (Ich bin ... Jahre alt)",
+          "Land (Ich komme aus...)",
+          "Wohnort (Ich wohne in...)",
+          "Sprachen (Ich spreche...)",
+          "Beruf (Ich arbeite als...)"
+        ],
+        "modelTranscript": "Guten Tag! Mein Name ist Alexander Woodcock. Ich bin dreißig Jahre alt und komme aus Kolumbien. Zurzeit wohne ich in Medellín. Meine Muttersprache ist Spanisch, außerdem spreche ich fließend Englisch und lerne fleißig Deutsch. Ich arbeite als Real-Time 3D Developer.",
+        "followUpQuestions": [
+          {
+            "examinerPrompt": "Buchstabieren Sie bitte Ihren Wohnort oder Ihr Herkunftsland.",
+            "candidateResponse": "K - O - L - U - M - B - I - E - N."
+          },
+          {
+            "examinerPrompt": "Wie alt sind Sie genau?",
+            "candidateResponse": "Ich bin dreißig Jahre alt: d - r - e - i - ß - i - g (30)."
+          }
+        ]
+      },
+      "teil2_fragen_antworten": {
+        "title": "Teil 2: Um Informationen bitten und Informationen geben",
+        "points": 10,
+        "description": "Wortkarten zu Alltagsthemen. Frage stellen und auf Partnerfrage antworten.",
+        "cards": [
+          {
+            "cardId": "s2-t2-c1",
+            "thema": "Wohnen",
+            "wort": "Zimmer",
+            "beispielFrage": "Wie viele Zimmer hat deine Wohnung?",
+            "beispielAntwort": "Meine Wohnung hat zwei Zimmer und eine Küche.",
+            "grammarPattern": "W-Frage mit 'Wie viele' + Plural"
+          },
+          {
+            "cardId": "s2-t2-c2",
+            "thema": "Sprachen",
+            "wort": "Englisch",
+            "beispielFrage": "Sprechen Sie auch Englisch?",
+            "beispielAntwort": "Ja, ich spreche Englisch im Beruf.",
+            "grammarPattern": "Ja/Nein-Frage (Sprechen Sie...)"
+          },
+          {
+            "cardId": "s2-t2-c3",
+            "thema": "Arbeit / Büro",
+            "wort": "Kollege",
+            "beispielFrage": "Wie heißt dein Kollege im Büro?",
+            "beispielAntwort": "Mein Kollege heißt Martin und ist sehr nett.",
+            "grammarPattern": "W-Frage mit 'Wie' + Possessiv 'dein'"
+          },
+          {
+            "cardId": "s2-t2-c4",
+            "thema": "Einkaufen",
+            "wort": "Buch",
+            "beispielFrage": "Kaufst du das Buch heute?",
+            "beispielAntwort": "Ja, ich kaufe das Buch im Buchladen.",
+            "grammarPattern": "Ja/Nein-Frage mit 'kaufen'"
+          }
+        ]
+      },
+      "teil3_bitten_reagieren": {
+        "title": "Teil 3: Bitten formulieren und darauf reagieren",
+        "points": 10,
+        "description": "Bildkarten für Alltagsbitten mit 'Bitte' oder Imperativ A1.",
+        "cards": [
+          {
+            "cardId": "s2-t3-c1",
+            "bildGegenstand": "Computer / Laptop (der)",
+            "beispielBitte": "Schalten Sie bitte den Computer ein!",
+            "beispielReaktion": "Ja, mache ich sofort!",
+            "alternativeBitte": "Können Sie bitte den Laptop starten?"
+          },
+          {
+            "cardId": "s2-t3-c2",
+            "bildGegenstand": "Tür (die)",
+            "beispielBitte": "Schließen Sie bitte die Tür!",
+            "beispielReaktion": "Ja, natürlich, gern!",
+            "alternativeBitte": "Machen Sie bitte die Tür zu!"
+          },
+          {
+            "cardId": "s2-t3-c3",
+            "bildGegenstand": "Glas Wasser (das)",
+            "beispielBitte": "Bringen Sie mir bitte ein Glas Wasser!",
+            "beispielReaktion": "Ja, bitte sehr! Hier ist das Wasser.",
+            "alternativeBitte": "Haben Sie bitte ein Glas Wasser für mich?"
+          },
+          {
+            "cardId": "s2-t3-c4",
+            "bildGegenstand": "Telefonnummer / Visitenkarte",
+            "beispielBitte": "Geben Sie mir bitte Ihre Telefonnummer!",
+            "beispielReaktion": "Ja, sehr gern! Meine Nummer ist 0176 - 98 76 54.",
+            "alternativeBitte": "Schreiben Sie bitte Ihre Nummer hier auf!"
+          }
+        ]
+      }
+    }
+  }
+}
