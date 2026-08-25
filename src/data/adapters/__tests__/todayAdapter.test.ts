@@ -56,8 +56,8 @@ describe('todayAdapter (AG-ORQ)', () => {
   it('mapea tareas de Notion cuando se suministran', () => {
     const mapped = mapNotionTasksToTodayView(
       [
-        { Titulo: 'Preparar demo reel', AreaId: 'Carrera', Prioridad: 'Alta' },
-        { Titulo: 'Entrenar piernas', AreaId: 'Fitness', Prioridad: 'Media' },
+        { Titulo: 'Preparar demo reel', AreaId: 'Carrera', Estado: 'PorHacer', Prioridad: 'Alta', Regla10Min: false, SuficientementeBueno: false, Creado: '2026-08-25', Actualizado: '2026-08-25' },
+        { Titulo: 'Entrenar piernas', AreaId: 'Fitness', Estado: 'PorHacer', Prioridad: 'Media', Regla10Min: false, SuficientementeBueno: false, Creado: '2026-08-25', Actualizado: '2026-08-25' },
       ],
       { BloqueA: 'Bloque A · Testing Notion' }
     );

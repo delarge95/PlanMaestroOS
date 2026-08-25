@@ -275,6 +275,21 @@
         "disclaimer-visible-obligatorio": true,
         "chunking": "pendiente — puente Gemini Flash"
       }
+    },
+    {
+      "id": "clinical-protocols-routines",
+      "title": "clinical protocols routines",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "clinical"
+        ],
+        "priority": 5
+      }
     }
   ],
   "chunks": [
@@ -339,6 +354,124 @@
       ],
       "rules": [
         "clin:sueno-plan-minimo"
+      ]
+    },
+    {
+      "id": "clin-cbt-rumination-timebox-protocol",
+      "sourceId": "clinical-protocols-routines",
+      "topic": "cbt",
+      "tags": [
+        "rumination-control",
+        "cbt-technique",
+        "thought-dumping",
+        "executive-function",
+        "adhd-support"
+      ],
+      "locator": {
+        "section": "/docs/plan_accion_tdah_ansiedad_social.pdf, §Protocolo Control de Rumia"
+      },
+      "summary": "clin-rumination-10min-limit: Protocolo de Control de Rumia Cognitiva — Límite de 10 Minutos y Volcado Físico: 1) **Mecanismo Operativo:** la rumiación mental y el sobreanálisis recursivo consumen ancho de banda en la memoria de trabajo y la corteza prefrontal sin generar resolución práctica de problemas; ante la detección de un bucle de pensamiento improductivo: **activar un temporizador estricto de máximo $10\\ \\text{minutos}$**. 2) **Volcado por Escrito y Ruptura de Entorno:** registrar el contenido del pensamiento en una libreta de papel físico para externalizar la carga cognitiva; una vez transcurrido el tiempo o completado el volcado: **cambiar físicamente de habitación o entorno espacial e iniciar de inmediato una micro-tarea motora/física de activación conductual** (caminar, beber agua, ordenar un espacio) para interrumpir el bucle de activación dopaminérgica disfuncional.",
+      "entities": [
+        "clinical:cbt-rumination-control",
+        "organ:brain"
+      ],
+      "rules": [
+        "clin-rumination-10min-limit"
+      ]
+    },
+    {
+      "id": "clin-cbt-good-enough-anti-perfectionism",
+      "sourceId": "clinical-protocols-routines",
+      "topic": "cbt",
+      "tags": [
+        "anti-perfectionism",
+        "good-enough-standard",
+        "executive-dysfunction",
+        "task-completion",
+        "adhd-strategy"
+      ],
+      "locator": {
+        "section": "/docs/reporte_clinico_neurodesarrollo_ansiedad.pdf, §Estándares Ejecutivos"
+      },
+      "summary": "clin-good-enough-standard: Estándar \"Suficientemente Bueno\" y Gestión del Perfeccionismo Paralizante: 1) **Definición de Umbral de Finalización:** el perfeccionismo clínico y el miedo a la evaluación externa inducen parálisis por análisis y procrastinación evitativa; la regla de oro conductual establece que **un entregable funcional y publicado a tiempo supera infinitamente un borrador hipotéticamente perfecto sin publicar**. 2) **Criterios de Aceptación Pre-Ejecución:** definir explícitamente los 3 criterios indispensables (*Minimum Viable Product / Definition of Done*) antes de comenzar la tarea; **en el instante en que el trabajo cumple con los criterios mínimos especificados, marcar la tarea como completada y prohibir la adición de capas secundarias de pulido estético o sobre-optimización no solicitada**.",
+      "entities": [
+        "clinical:cbt-perfectionism-management"
+      ],
+      "rules": [
+        "clin-good-enough-standard"
+      ]
+    },
+    {
+      "id": "clin-sleep-cbt-i-nighttime-digital-curfew",
+      "sourceId": "clinical-protocols-routines",
+      "topic": "sleep",
+      "tags": [
+        "cbt-i",
+        "sleep-hygiene",
+        "circadian-rhythm",
+        "melatonin-regulation",
+        "blue-light-block"
+      ],
+      "locator": {
+        "section": "/docs/reporte_clinico_neurodesarrollo_ansiedad.pdf, §Higiene del Sueño CBT-I"
+      },
+      "summary": "clin-cbt-i-nighttime-curfew: Protocolo de Higiene de Sueño y Desconexión Digital Nocturna (CBT-I): 1) **Restricción de Pantallas Interactivas ($60\\ \\text{Minutos Pre-Sueño}$):** la exposición a luz azul de onda corta ($460\\text{--}480\\ \\text{nm}$) y el consumo pasivo de redes sociales/noticias activan la corteza visual y suprimen la secreción endógena de melatonina por la glándula pineal: **apagar pantallas interactivas a las 21:00 o mínimo $60\\ \\text{minutos}$ antes de acostarse**. 2) **Transición Lumínica y Descarga Cognitiva:** transicionar a iluminación ambiental tenue de tono cálido ($<2700\\ \\text{K}$); sustituir la navegación digital por lectura física en papel o música instrumental; **realizar una sesión de 5 minutos de volcado de pendientes del día siguiente en papel** para reducir la latencia de inicio del sueño y prevenir despertares por hiperalerta.",
+      "entities": [
+        "hormone:melatonin",
+        "hormone:cortisol",
+        "organ:eyes",
+        "clinical:cbt-i-protocol"
+      ],
+      "rules": [
+        "clin-cbt-i-nighttime-curfew"
+      ]
+    },
+    {
+      "id": "clin-anxiety-graded-social-exposure-routine",
+      "sourceId": "clinical-protocols-routines",
+      "topic": "anxiety",
+      "tags": [
+        "graded-exposure",
+        "social-anxiety",
+        "micro-interactions",
+        "distress-tolerance",
+        "cbt-hierarchy"
+      ],
+      "locator": {
+        "section": "/docs/plan_accion_tdah_ansiedad_social.pdf, §Exposición Gradual"
+      },
+      "summary": "clin-graded-social-microsteps: Rutina Diaria de Exposición Social Gradual y Tolerancia a la Incertidumbre: 1) **Micro-Interacciones de Bajo Riesgo:** para desensibilizar la respuesta fóbica y la ansiedad de evaluación interpersonal: **programar $1\\ \\text{micro-paso social diario}$ ($10\\ \\text{minutos}$)**: a) Enviar un mensaje profesional o comentario breve sin releerlo ni sobre-editarlo más de una vez; b) Realizar una pregunta o interacción directa en entorno presencial o videollamada corta. 2) **Monitorización de Ansiedad Subjetiva (*SUDs 0–10*):** registrar la puntuación de malestar percibido antes de la acción, en el pico de exposición y a los 5 minutos posteriores; **comprobar empíricamente que la ansiedad decae de forma natural sin consecuencias catastróficas reales**, reforzando la autoeficacia y la habituación neuromotora.",
+      "entities": [
+        "hormone:epinephrine",
+        "clinical:cbt-exposure-protocol"
+      ],
+      "rules": [
+        "clin-graded-social-microsteps"
+      ]
+    },
+    {
+      "id": "clin-anxiety-somatic-vagal-regulation-breathing",
+      "sourceId": "clinical-protocols-routines",
+      "topic": "routine",
+      "tags": [
+        "vagal-tone",
+        "somatic-regulation",
+        "physiological-sigh",
+        "4-7-8-breathing",
+        "autonomic-nervous-system"
+      ],
+      "locator": {
+        "section": "/docs/plan_accion_tdah_ansiedad_social.pdf, §Regulación Somática"
+      },
+      "summary": "clin-somatic-vagal-reset: Pausa Somática de Regulación y Activación Vagal Inmediata: 1) **Modulación del Tono Parasimpático Vagal:** en estados agudos de sobrecarga sensorial, ansiedad o hiperreactividad simpática (taquicardia, respiración torácica superficial): **ejecutar $3\\text{ a }5\\ \\text{ciclos de respiración pautada}$ ($5\\ \\text{minutos}$)**: a) *Técnica 4-7-8:* Inhalación nasal en $4\\ \\text{segundos}$, retención pulmonar en $7\\ \\text{s}$, y exhalación oral lenta y resistida en $8\\ \\text{s}$; o b) *Suspiro Fisiológico:* doble inhalación nasal consecutiva seguida de exhalación oral prolongada completa. 2) **Anclaje Propioceptivo Somático:** focalizar la atención táctil en los puntos de contacto de la planta de los pies con el suelo y soltar la tensión mandibular y trapecios; reanudar la actividad ejecutiva a un ritmo motor pausado y deliberado.\n\n<!-- stats: 5 chunks, 8 entidades cubiertas -->",
+      "entities": [
+        "nerve:vagus-nerve",
+        "organ:heart",
+        "organ:lungs",
+        "clinical:somatic-regulation-tool"
+      ],
+      "rules": [
+        "clin-somatic-vagal-reset"
       ]
     },
     {
@@ -530,7 +663,9 @@
         "male-health"
       ],
       "locator": {
-        "page": 1
+        "chapter": 1,
+        "page": 1,
+        "section": "\"también Cap. 3, pp. 29-34; Cap. 4, pp. 47-56\""
       },
       "summary": "pe-control-assessment: Definición Clínica, Baremos Normativos de Duración y Cribado PESI: 1) **Definición Biopsicosocial de Eyaculación Precoz (EP):** la EP no se define por un cronómetro arbitrario, sino como la **incapacidad persistente de ejercer un control voluntario sobre el momento de la eyaculación**, generando angustia personal o insatisfacción en la pareja. 2) **Baremos Normativos de Duración (IELT):** la duración media normativo-fisiológica de la penetración intravaginal en la población general es de **$4\\text{ a }7\\ \\text{minutos}$** (desmitificando expectativas irreales de $>20\\text{--}30\\ \\text{min}$). 3) **Bandas de Severidad PESI (*Premature Ejaculation Severity Index* — $0\\text{ a }100$):** Muy Leve ($0\\text{--}20$), Leve ($21\\text{--}40$), Moderada ($41\\text{--}60$), Alta ($61\\text{--}80$) y Extrema ($81\\text{--}100$). 4) **Criterios de Derivación Médica Inmediata:** la EP adquirida de inicio repentino tras años de función normal exige evaluación urológica/endocrinológica para descartar prostatitis crónica, hiper/hipotiroidismo o neuropatía.",
       "entities": [
@@ -557,7 +692,9 @@
         "neuromotor-control"
       ],
       "locator": {
-        "page": 2
+        "chapter": 2,
+        "page": 18,
+        "section": "\"también Cap. 8, pp. 115-130\""
       },
       "summary": "pelvic-muscle-basic-training: Escala de Excitación ($0\\text{--}10$) y Habilidad de Relajación del Suelo Pélvico: 1) **Escala Subjetiva de Excitación Sexual ($0\\text{ a }10$):** Nivel 0 (cero excitación) $\\to$ Nivel 5 (excitación moderada/placer) $\\to$ Nivel 7 (alta excitación placentera / \"zona de control activo\") $\\to$ **Nivel 8.5 a 9.0: Punto de Inevitabilidad Eyaculatoria (PEI)**, donde se dispara el reflejo espinal involuntario simpático e irreversible. 2) **La Paradoja de la Relajación Pélvica (*Reverse Kegel*):** aunque el fortalecimiento del suelo pélvico es útil, **la habilidad neuromuscular cardinal para retrasar la eyaculación es la capacidad de RELAJAR conscientemente el suelo pélvico (músculos pubococcígeo y bulboesponjoso)** al alcanzar un nivel de excitación 6–7; contraer o tensar el periné en alta excitación acelera el reflejo eyaculatorio; relajar el diafragma pélvico con respiración diafragmática lenta estabiliza la excitación.",
       "entities": [
@@ -584,7 +721,8 @@
         "behavioral-training"
       ],
       "locator": {
-        "page": 8
+        "chapter": 8,
+        "page": 115
       },
       "summary": "individual-stop-start-dose: Protocolo Conductual Graduado de Parada-Arranque (*Stop-Start*) Individual: 1) **Protocolo Canónico Individual (Semann-Master & Johnson modificado):** durante la autoestimulación manual con lubricante (para simular fricción real y desaconsejar el agarre seco rápido): **estimular hasta alcanzar un nivel 7 de excitación $\\to$ detener completamente la estimulación manual o reducir la velocidad a caricias suaves $\\to$ relajar conscientemente el suelo pélvico y respirar profundamente hasta que la excitación baje a nivel 4–5 $\\to$ reanudar la estimulación**. 2) **Dosificación:** realizar **$3\\ \\text{ciclos de parada-arranque}$ antes de permitir la eyaculación en el 4.º ciclo**, practicado **$2\\text{ a }4\\ \\text{veces por semana}$**. 3) **Desensibilización:** contraindicar el uso de cremas anestésicas o preservativos triples como solución definitiva, ya que impiden el aprendizaje de las señales propioceptivas corporales.",
       "entities": [
@@ -610,7 +748,9 @@
         "transition-intercourse"
       ],
       "locator": {
-        "page": 8
+        "chapter": 8,
+        "page": 125,
+        "section": "\"también Cap. 9, pp. 140-155\""
       },
       "summary": "couple-stop-start-session-structure: Transición a la Pareja: Enfoque Sensorial (*Sensate Focus*) e Inserción Inmóvil: 1) **Focalización Sensorial Sin Coito ($1\\text{ a }2\\ \\text{semanas}$):** caricias corporales no genitales para extinguir la ansiedad de rendimiento anticipatoria. 2) **Parada-Arranque Asistido por la Pareja:** la pareja estimula manualmente al hombre con lubricante, deteniéndose ante la señal verbal del hombre al nivel 7. 3) **Técnica de Inserción Inmóvil (*Quiet / Motionless Insertion*):** durante el coito (preferiblemente posición superior de la mujer o lateral para reducir tono muscular): **introducir el pene y permanecer totalmente inmóviles durante $30\\text{ a }60\\ \\text{segundos}$**, enfocándose exclusivamente en la respiración diafragmática profunda y la relajación total del suelo pélvico; una vez que la excitación inicial baja a nivel 4–5, iniciar movimientos pélvicos lentos y rítmicos.",
       "entities": [
@@ -636,7 +776,9 @@
         "stress-management"
       ],
       "locator": {
-        "page": 10
+        "chapter": 10,
+        "page": 160,
+        "section": "\"también Cap. 12, pp. 195-210\""
       },
       "summary": "lapse-adaptive-response: Prevención de Recaídas, Gestión de Deslices (*Lapses*) y Comunicación Asertiva: 1) **Diferenciación entre Desliz (*Lapse*) y Recaída (*Relapse*):** un episodio aislado de eyaculación rápida tras periodos de estrés, fatiga o abstinencia prolongada es un **evento fisiológico normal (*lapse*)**, no el fracaso del tratamiento; la reacción catastrófica ante un desliz reactiva el círculo vicioso de ansiedad. 2) **Cadencia de Mantenimiento:** mantener una frecuencia sexual regular ($1\\text{--}2\\times/\\text{sem}$) y realizar una sesión de revisión mensual de pareja de $20\\text{--}30\\ \\text{min}$ para evaluar la satisfacción mutua. 3) **Protocolo de Comunicación Asertiva:** utilizar la técnica de paráfrasis empática sin culpas (\"hablar desde el yo\" y escuchar sin defensividad) para disipar tensiones relacionales que elevan el tono simpático.\n\n<!-- stats: 5 chunks, 12 entidades cubiertas -->",
       "entities": [
@@ -1547,7 +1689,8 @@
         "male-sexuality"
       ],
       "locator": {
-        "page": 15
+        "chapter": 1,
+        "page": 5
       },
       "summary": "pf-kegel-entry-volume: Protocolo de Entrenamiento y Progresión del Suelo Pélvico Masculino (Zilbergeld): 1) **Doble Modalidad de Contracción (Fibras Rápidas y Lentas):** a) *Contracciones Rápidas (*Quick Flicks*):* contracciones máximas instantáneas de $1\\ \\text{segundo}$ para reclutar unidades motoras fásicas; b) *Contracciones Sostenidas (*Holds*):* contracciones continuas de **$3\\ \\text{segundos}$ con $3\\ \\text{s de relajación completa}$** para resistencia tónica. 2) **Volumen y Progresión Diaria:** iniciar con $1\\text{ a }2\\ \\text{series de }10\\text{ a }20\\ \\text{reps}$ de cada modalidad, progresando a lo largo de 4 semanas hasta **$3\\ \\text{series de }20\\ \\text{repeticiones con }3\\ \\text{segundos de hold}$ ($60\\ \\text{contracciones diarias}$)**. 3) **Plazo de Adaptación:** se requiere un **mínimo estricto de $6\\text{ a }8\\ \\text{semanas}$ de práctica diaria constante** antes de que el control neuromuscular sea transferible y funcional durante la excitación sexual y el coito.",
       "entities": [
@@ -1573,7 +1716,8 @@
         "behavioral-desensitization"
       ],
       "locator": {
-        "page": 20
+        "chapter": 2,
+        "page": 0
       },
       "summary": "ejac-control-stop-threshold: Programa de Dominio de Parada-Arranque (*Stop-Start*) y Criterios de Avance: 1) **Estructura de la Sesión:** **$3\\text{ a }5\\ \\text{sesiones semanales}$ de $15\\text{ a }20\\ \\text{minutos}$** de autoestimulación. 2) **Umbral de Parada y Respiración:** detener la estimulación al alcanzar el **Nivel 7 de excitación (en escala $0\\text{--}10$)**; realizar una **pausa de $30\\text{ a }60\\ \\text{segundos}$ respirando profundamente desde el abdomen** hasta que la excitación descienda a nivel 4–5 antes de reiniciar. 3) **Criterio Estricto de Avance de Nivel:** para avanzar entre etapas (1.º Masturbación seca $\\to$ 2.º Con lubricante $\\to$ 3.º Manual por la pareja $\\to$ 4.º Inserción inmóvil $\\to$ 5.º Coito con empuje lento), el usuario debe lograr **$15\\ \\text{minutos de estimulación con }3\\text{ a }4\\ \\text{paradas}$ sin eyaculación involuntaria en $3\\ \\text{sesiones consecutivas}$**.",
       "entities": [
@@ -1601,7 +1745,8 @@
         "spectatoring"
       ],
       "locator": {
-        "page": 18
+        "chapter": 1,
+        "page": 8
       },
       "summary": "erection-therapy-intercourse-ban: Terapia de Ansiedad de Desempeño Eréctil y Regla de Prohibición del Coito: 1) **Mecanismo de la Ansiedad de Desempeño (*Spectatoring*):** la auto-observación crítica y la presión por mantener una erección rígida activan descargas adrenérgicas simpáticas que colapsan el flujo sanguíneo arteriolar de los cuerpos cavernosos. 2) **Regla Mandatoria de Prohibición del Coito (*The Intercourse Ban*):** durante las primeras fases de la terapia de pareja y focalización sensorial, **está terminantemente prohibido cualquier intento de penetración o coito**; eliminar la expectativa de erección y penetración extingue la respuesta de alarma simpática, permitiendo que la respuesta eréctil parasimpática reaparezca de forma espontánea y natural. 3) **Frecuencia:** $2\\text{ a }3\\ \\text{sesiones semanales}$ de caricias no genitales.",
       "entities": [
@@ -1628,7 +1773,8 @@
         "contraindications"
       ],
       "locator": {
-        "page": 21
+        "chapter": 2,
+        "page": 1
       },
       "summary": "viagra-nitrate-contraindication: Banderas Rojas de Triage Médico y Contraindicación Absoluta de Nitratos con PDE5: 1) **Triage Clínico de Causa Orgánica vs Psicógena:** si un hombre presenta **pérdida total y global de erecciones (incluyendo ausencia absoluta de erecciones nocturnas y matutinas)** o disfunción eréctil tras cirugía pélvica/trauma, se requiere derivación urológica inmediata para evaluar etiología vascular, neurológica o endocrina (testosterona, prolactina). 2) **Contraindicación Letal Absoluta:** **está terminantemente prohibida la administración de inhibidores de la PDE-5 (Sildenafil / Viagra, Tadalafil, Vardenafil) en pacientes que utilicen cualquier fármaco a base de nitratos (nitroglicerina, mononitrato de isosorbida)** o drogas recreativas de nitrito de amilo (\"poppers\"); la sinergia en la vía NO-GMPc provoca una vasodilatación masiva con hipotensión refractaria potencialmente mortal e infarto.",
       "entities": [
@@ -1656,7 +1802,8 @@
         "body-rubs"
       ],
       "locator": {
-        "page": 12
+        "chapter": 1,
+        "page": 2
       },
       "summary": "conflict-timeout-pulse: Regulación Fisiológica de Conflictos de Pareja y Rituales de Conexión: 1) **Regla del Tiempo Fuera Fisiológico (*The 100 BPM Timeout Rule*):** cuando una discusión de pareja eleva la **frecuencia cardíaca de cualquiera de los dos por encima de $100\\ \\text{latidos por minuto}$**, se produce un secuestro autonómico (\"inundación emocional / *diffuse physiological arousal*\") que bloquea la empatía cortical y la escucha: **mandato de tiempo fuera obligatorio de $20\\text{ a }30\\ \\text{minutos}$ en soledad**, respirando con el abdomen y sin rumiación cognitiva hostil, antes de retomar el diálogo. 2) **Rituales de Contacto (*Body Rubs*):** sesiones no demandantes de masajes y caricias de $20\\text{ a }30\\ \\text{minutos}$ sin expectativa genital para regular el sistema nervioso.\n\n<!-- stats: 5 chunks, 12 entidades cubiertas -->",
       "entities": [

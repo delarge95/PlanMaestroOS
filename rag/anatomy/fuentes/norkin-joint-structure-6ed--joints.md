@@ -1,7 +1,7 @@
 <!-- chunk
 id: norkin-tissue-viscoelasticity-and-stress-strain
-chapter: 2
 page: 45
+chapter: 2
 section: "también Cap. 2, pp. 45"
 topic: clinical
 tags: viscoelasticity, stress-strain, toe-region, plastic-region, immobilization, ligament-healing
@@ -12,8 +12,8 @@ ligament-tendon-strain-limits: Biomecánica Viscoelástica, Curva Tensión-Defor
 
 <!-- chunk
 id: norkin-tissue-bone-and-cartilage-loading-mechanics
-chapter: 2
 page: 68
+chapter: 2
 section: "también Cap. 2, pp. 68"
 topic: clinical
 tags: wolffs-law, bone-remodeling, hyaline-cartilage, cyclic-compression, synovial-diffusion
@@ -24,8 +24,8 @@ bone-wolff-law-loading: Mecánica de Carga del Tejido Óseo (Ley de Wolff) y Car
 
 <!-- chunk
 id: norkin-muscle-length-tension-and-force-velocity
-chapter: 3
 page: 86
+chapter: 3
 section: "también Cap. 3, pp. 86"
 topic: muscle
 tags: length-tension, force-velocity, active-insufficiency, passive-insufficiency, moment-arm
@@ -36,8 +36,8 @@ muscle-length-tension-optimum: Relaciones Tensión-Longitud y Fuerza-Velocidad e
 
 <!-- chunk
 id: norkin-shoulder-scapulohumeral-rhythm-and-kinematics
-chapter: 7
 page: 245
+chapter: 7
 section: "también Cap. 7, pp. 245"
 topic: joint
 tags: scapulohumeral-rhythm, shoulder-elevation, glenohumeral, clavicle-rotation, setting-phase
@@ -48,8 +48,8 @@ shoulder-scapulohumeral-rhythm: Ritmo Escapulohumeral y Cinemática Compleja de 
 
 <!-- chunk
 id: norkin-elbow-carrying-angle-and-radioulnar-rom
-chapter: 8
 page: 299
+chapter: 8
 section: "también Cap. 8, pp. 299"
 topic: joint
 tags: carrying-angle, cubitus-valgus, cubitus-varus, supination, pronation, elbow-kinematics
@@ -60,8 +60,8 @@ elbow-carrying-angle-normal: Alineación Frontal del Codo (Carrying Angle) y Cin
 
 <!-- chunk
 id: norkin-wrist-hand-kinematics-and-functional-arches
-chapter: 9
 page: 336
+chapter: 9
 section: "también Cap. 9, pp. 336"
 topic: joint
 tags: wrist-rom, functional-position, carpal-arches, radial-deviation, ulnar-deviation, grasp
@@ -72,8 +72,8 @@ wrist-forearm-rom-norms: Cinemática de la Muñeca, Posición Funcional y Arcos 
 
 <!-- chunk
 id: norkin-hip-angles-and-joint-reaction-forces
-chapter: 10
 page: 391
+chapter: 10
 section: "también Cap. 10, pp. 391"
 topic: joint
 tags: angle-of-inclination, femoral-anteversion, coxa-valga, coxa-vara, hip-joint-forces, jrf
@@ -84,8 +84,8 @@ hip-angle-normal-ranges: Ángulos Femorales y Fuerzas de Reacción Articular en 
 
 <!-- chunk
 id: norkin-knee-q-angle-valgus-varum-and-adductor-moment
-chapter: 11
 page: 446
+chapter: 11
 section: "también Cap. 11, pp. 446"
 topic: joint
 tags: q-angle, genu-valgum, genu-varum, kam, knee-adduction-moment, osteoarthritis
@@ -96,8 +96,8 @@ knee-q-angle-normal: Alineación Frontal de la Rodilla (Q-Angle, Varo/Valgo) y M
 
 <!-- chunk
 id: norkin-ankle-foot-dorsiflexion-and-windlass-mechanism
-chapter: 12
 page: 511
+chapter: 12
 section: "también Cap. 12, pp. 511"
 topic: joint
 tags: ankle-dorsiflexion, plantarflexion, windlass-mechanism, plantar-fascia, tie-rod, medial-arch
@@ -108,8 +108,8 @@ ankle-dorsiflexion-functional-minimum: Cinemática del Tobillo, Arcos Plantares 
 
 <!-- chunk
 id: norkin-spine-sagittal-angles-and-intradiscal-pressure
-chapter: 4
 page: 121
+chapter: 4
 section: "también Cap. 4, pp. 121; Cap. 13, pp. 571"
 topic: joint
 tags: spine-curvatures, lordosis, kyphosis, intradiscal-pressure, disc-loading, lumbar-spine
@@ -120,8 +120,8 @@ spine-sagittal-angles-norms: Curvaturas Sagitales de la Columna y Biomecánica d
 
 <!-- chunk
 id: norkin-tmj-arthrokinematics-and-mandibular-rom
-chapter: 6
 page: 215
+chapter: 6
 section: "también Cap. 6, pp. 215"
 topic: joint
 tags: tmj, mandibular-depression, protrusion, lateral-excursion, articular-disc, chewing
@@ -132,8 +132,8 @@ tmj-normal-rom: Cinemática y Rangos de Movimiento de la Articulación Temporoma
 
 <!-- chunk
 id: norkin-posture-plumb-line-and-ideal-alignment
-chapter: 13
 page: 571
+chapter: 13
 section: "también Cap. 13, pp. 571"
 topic: clinical
 tags: ideal-posture, plumb-line, line-of-gravity, postural-deviations, ground-reaction
@@ -144,8 +144,8 @@ postural-alignment-plumb-line: Alineación Postural Ideal y Trayectoria de la L�
 
 <!-- chunk
 id: norkin-gait-spatiotemporal-norms-and-aging-decline
-chapter: 13
 page: 600
+chapter: 13
 section: "también Cap. 13, pp. 600; Cap. 14, pp. 616"
 topic: clinical
 tags: gait-cycle, stance-phase, swing-phase, double-support, gait-speed, community-ambulation
@@ -156,8 +156,8 @@ gait-spatiotemporal-norms: Parámetros Espaciotemporales de la Marcha Humana y U
 
 <!-- chunk
 id: norkin-arthrokinematics-convex-concave-rule
-chapter: 2
 page: 35
+chapter: 2
 section: "también Cap. 2, pp. 35"
 topic: joint
 tags: arthrokinematics, convex-concave-rule, joint-mobilization, roll, slide, spin

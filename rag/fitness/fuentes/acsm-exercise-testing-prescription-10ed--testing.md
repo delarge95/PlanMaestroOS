@@ -1,7 +1,7 @@
 <!-- chunk
 id: acsm-preparticipation-screening-algorithm
-chapter: 2
 page: 28
+chapter: 2
 section: "también Cap. 2, pp. 28"
 topic: clinical
 tags: preparticipation-screening, medical-clearance, risk-stratification, cvd-signs, physical-activity
@@ -12,8 +12,8 @@ preparticipation-screening-algorithm: Algoritmo de Cribado Preparticipación ACS
 
 <!-- chunk
 id: acsm-aerobic-fitt-vp-prescription
-chapter: 6
 page: 143
+chapter: 6
 section: "también Cap. 6, pp. 143"
 topic: clinical
 tags: aerobic-exercise, fitt-vp, met-minutes, step-count, volume, progression
@@ -24,8 +24,8 @@ aerobic-fitt-vp-prescription: Prescripción del Ejercicio Aeróbico para Adultos
 
 <!-- chunk
 id: acsm-resistance-fitt-vp-prescription
-chapter: 6
 page: 163
+chapter: 6
 section: "también Cap. 6, pp. 163"
 topic: muscle
 tags: resistance-training, 1rm, strength, hypertrophy, sets-and-reps, rest-intervals
@@ -36,8 +36,8 @@ resistance-fitt-vp-prescription: Prescripción del Entrenamiento de Fuerza y Res
 
 <!-- chunk
 id: acsm-flexibility-and-neuromotor-fitt-vp
-chapter: 6
 page: 177
+chapter: 6
 section: "también Cap. 6, pp. 177"
 topic: clinical
 tags: flexibility, stretching, neuromotor-exercise, balance, fall-prevention, pnf
@@ -48,8 +48,8 @@ flexibility-volume: Prescripción de Flexibilidad y Ejercicio Neuromotor: 1) **E
 
 <!-- chunk
 id: acsm-intensity-calculation-and-metabolic-equations
-chapter: 6
 page: 147
+chapter: 6
 section: "también Cap. 6, pp. 147; Cap. 7, pp. 187"
 topic: clinical
 tags: hrr, vo2r, hrmax-equations, metabolic-calculations, mets, tanaka
@@ -60,8 +60,8 @@ intensity-calculation-methods: Métodos de Cálculo de Intensidad y Ecuaciones M
 
 <!-- chunk
 id: acsm-clinical-exercise-testing-termination-criteria
-chapter: 5
 page: 129
+chapter: 5
 section: "también Cap. 5, pp. 129"
 topic: clinical
 tags: gxt-termination, exercise-testing, absolute-indications, relative-indications, st-segment, ecg
@@ -72,8 +72,8 @@ exercise-test-termination-absolute: Criterios de Detención de Pruebas de Esfuer
 
 <!-- chunk
 id: acsm-ecg-ischemia-and-duke-treadmill-score
-chapter: 5
 page: 135
+chapter: 5
 section: "también Cap. 5, pp. 135"
 topic: clinical
 tags: ecg-ischemia, st-depression, duke-treadmill-score, prognosis, coronary-artery-disease
@@ -84,8 +84,8 @@ duke-treadmill-score: Criterios ECG de Isquemia Miocárdica y Puntuación de Cin
 
 <!-- chunk
 id: acsm-cardiac-rehabilitation-inpatient-outpatient-fitt
-chapter: 9
 page: 231
+chapter: 9
 section: "también Cap. 9, pp. 231"
 topic: clinical
 tags: cardiac-rehabilitation, sternotomy-precautions, icd-threshold, phase-i-ii, heart-failure
@@ -96,8 +96,8 @@ cr-exercise-prescription: Prescripción en Rehabilitación Cardíaca Intrahospit
 
 <!-- chunk
 id: acsm-metabolic-diseases-diabetes-hypertension-obesity-fitt
-chapter: 10
 page: 259
+chapter: 10
 section: "también Cap. 10, pp. 259"
 topic: clinical
 tags: type-2-diabetes, hypertension, obesity, metabolic-syndrome, blood-glucose, postexercise-hypotension
@@ -108,8 +108,8 @@ diabetes-exercise: Prescripción de Ejercicio en Enfermedades Metabólicas (Diab
 
 <!-- chunk
 id: acsm-special-populations-older-adults-pregnancy-children-fitt
-chapter: 7
 page: 187
+chapter: 7
 section: "también Cap. 7, pp. 187"
 topic: clinical
 tags: older-adults, pregnancy, children-adolescents, sarcopenia, supine-avoidance, bone-loading
@@ -120,8 +120,8 @@ older-adults-exercise: Prescripción en Poblaciones Especiales: Adultos Mayores,
 
 <!-- chunk
 id: acsm-chronic-conditions-arthritis-osteoporosis-cancer-fitt
-chapter: 10
 page: 287
+chapter: 10
 section: "también Cap. 10, pp. 287"
 topic: clinical
 tags: osteoporosis, arthritis, cancer-exercise, low-back-pain, neutropenia, spinal-flexion
@@ -132,8 +132,8 @@ osteoporosis-exercise: Prescripción en Condiciones Crónicas: Osteoporosis, Art
 
 <!-- chunk
 id: acsm-environmental-exercise-altitude-heat-cold-fitt
-chapter: 8
 page: 211
+chapter: 8
 section: "también Cap. 8, pp. 211"
 topic: clinical
 tags: altitude, heat-illness, cold-injury, wbgt, acclimatization, hypothermia, dehydration

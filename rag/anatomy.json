@@ -108,9 +108,364 @@
         ],
         "priority": 4
       }
+    },
+    {
+      "id": "bookey-physiology-of-yoga-resumen",
+      "title": "bookey physiology of yoga resumen",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "clippinger-dance-anatomy-kinesiology-2ed",
+      "title": "clippinger dance anatomy kinesiology 2ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "haas-dance-anatomy-2ed",
+      "title": "haas dance anatomy 2ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "howse-dance-technique-3ed",
+      "title": "howse dance technique 3ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "lott-biomechanics-of-dance",
+      "title": "lott biomechanics of dance",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "mitchell-yoga-biomechanics",
+      "title": "mitchell yoga biomechanics",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-russell-2013-preventing-dance-injuries",
+      "title": "paper russell 2013 preventing dance injuries",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
     }
   ],
   "chunks": [
+    {
+      "id": "bookey-yoga-autonomic-parasympathetic-breath-rate",
+      "sourceId": "bookey-physiology-of-yoga-resumen",
+      "topic": "clinical",
+      "tags": [
+        "pranayama",
+        "slow-breathing",
+        "vagal-tone",
+        "hrv",
+        "parasympathetic-nervous-system",
+        "tier-2-summary"
+      ],
+      "locator": {
+        "page": 2
+      },
+      "summary": "yoga-autonomic-parasympathetic-breath-rate: Fisiología de la Respiración Lenta en Yoga (*Pranayama*), Tono Vagal y Modulación del SNA [TIER 2 - RESUMEN]: 1) **Frecuencia Respiratoria Óptima en Pranayama:** la reducción voluntaria de la frecuencia ventilatoria a **$5\\text{ a }6\\ \\text{respiraciones por minuto}$** (con una fase espiratoria prolongada respecto a la inspiratoria, ej. ratio 1:2 o $4\\ \\text{s}$ inhalación : $8\\ \\text{s}$ exhalación) estimula los barorreceptores arteriales en el seno carotídeo y cayado aórtico. 2) **Activación Eferente del Nervio Vago (NC X):** este patrón induce un cambio del tono simpático hacia el **parasimpático**, produciendo: a) **Elevación inmediata de la Variabilidad de la Frecuencia Cardíaca (*Heart Rate Variability - HRV*)**; b) Disminución de la presión arterial media y de la resistencia vascular periférica; c) Supresión de la secreción de cortisol y catecolaminas suprarrenales, facilitando el aclaramiento metabólico y la recuperación somática.",
+      "entities": [
+        "nerve:vagus-nerve",
+        "hormone:cortisol",
+        "clinical:heart-rate-variability"
+      ],
+      "rules": [
+        "yoga-autonomic-parasympathetic-breath-rate"
+      ]
+    },
+    {
+      "id": "bookey-yoga-fascial-mechanics-and-anatomical-variability",
+      "sourceId": "bookey-physiology-of-yoga-resumen",
+      "topic": "joint",
+      "tags": [
+        "anatomical-variability",
+        "alignment-myths",
+        "fascial-viscoelasticity",
+        "ligament-laxity",
+        "tier-2-summary"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "Desmitificación Fisiológica, Variabilidad Anatómica Individual y Cuidado Ligamentoso en Asanas [TIER 2 - RESUMEN]: 1) **Desmitificación de Afirmaciones Clásicas:** las posturas de torsión e inversión no \"exprimen ni desintoxican los órganos internos\" (el filtrado y detoxificación corresponden exclusivamente al hígado y riñones mediante perfusión vascular y enzimática). 2) **Variabilidad Anatómica Ósea vs Alineación Universal Rígida:** el tope del rango articular en asanas complejas (ej. *Lotus*, *Baddha Konasana*) está determinado por la orientación del acetábulo y el ángulo del cuello femoral; **forzar alineaciones estéticas \"ideales\" contra el tope óseo genera pinzamiento femoroacetabular, daño labral y estrés de cizallamiento en ligamentos de la rodilla**. 3) **Respuesta Fascial y Viscoelástica:** evitar colapsar pasivamente el peso en ligamentos e hipermovilidad articular para prevenir inestabilidad crónica.\n\n<!-- stats: 2 chunks, 6 entidades cubiertas -->",
+      "entities": [
+        "joint:hip-joint",
+        "protein:collagen",
+        "clinical:individual-bone-morphology"
+      ],
+      "rules": []
+    },
+    {
+      "id": "clippinger-dance-spinal-kinesiology-rom-and-deviations",
+      "sourceId": "clippinger-dance-anatomy-kinesiology-2ed",
+      "topic": "anatomy",
+      "tags": [
+        "spine-kinesiology",
+        "spinal-rom",
+        "lordosis",
+        "kyphosis",
+        "scoliosis",
+        "core-stability"
+      ],
+      "locator": {
+        "chapter": 3,
+        "page": 81
+      },
+      "summary": "spine_flexion_rom_normal: Cinesiología de la Columna Vertebral, Rangos de Movimiento (ROM) y Desviaciones Posturales: 1) **Rangos de Movimiento Fisiológicos de la Columna (Combinada):** **Flexión anterior:** $0^\\circ\\text{ a }80^\\circ$ (columna lumbar aporta $50^\\circ\\text{--}60^\\circ$); **Extensión:** $0^\\circ\\text{ a }30^\\circ$ (lumbar aporta $20^\\circ\\text{--}25^\\circ$); **Flexión lateral:** $0^\\circ\\text{ a }35^\\circ$; **Rotación axial:** $0^\\circ\\text{ a }45^\\circ$ (predominio en columna torácica por orientación coronal de las carillas articulares). 2) **Desviaciones Posturales:** a) *Hiperlordosis lumbar:* ángulo lumbosacro $>30^\\circ$ asociado a anteversión pélvica, acortamiento de psoas/erectores y debilidad abdominal; b) *Hipercifosis torácica:* curvatura posterior $>40^\\circ$; c) *Espalda plana (*Flat Back*):* pérdida de curvaturas fisiológicas que reduce la resistencia axial a la compresión en un $50\\%$. 3) **Estabilidad del Core:** co-contracción del transverso abdominal, multífidos y oblicuos para estabilizar la pelvis durante extensiones de pierna (*developpé*, *grand battement*).",
+      "entities": [
+        "joint:lumbar-spine",
+        "joint:thoracic-spine",
+        "muscle:transversus-abdominis",
+        "muscle:erector-spinae"
+      ],
+      "rules": [
+        "spine_flexion_rom_normal",
+        "spine_extension_rom_normal",
+        "back_pain_recovery_timeline"
+      ]
+    },
+    {
+      "id": "clippinger-dance-hip-kinesiology-turnout-and-arabesque",
+      "sourceId": "clippinger-dance-anatomy-kinesiology-2ed",
+      "topic": "joint",
+      "tags": [
+        "hip-kinesiology",
+        "turnout-mechanics",
+        "arabesque",
+        "deep-rotators",
+        "hip-rom"
+      ],
+      "locator": {
+        "chapter": 4,
+        "page": 185
+      },
+      "summary": "hip_external_rotation_minimum_ballet: Cinesiología de la Cadera, *Turn-Out* y Biomecánica Multisegmentaria del *Arabesque*: 1) **Rangos de Movimiento de Cadera en Danza:** **Rotación externa pasiva:** $0^\\circ\\text{ a }45^\\circ$ en población general, requiriendo **$\\approx 60^\\circ$ en bailarines de élite** (el resto de los $90^\\circ$ de la primera posición se obtiene de la torsión tibial fisiológica $\\sim 15^\\circ$ y abducción del pie $\\sim 15^\\circ$); **Flexión funcional:** $0^\\circ\\text{ a }135^\\circ\\text{--}150^\\circ$ (*developpé devant*); **Extensión coxofemoral pura:** $0^\\circ\\text{ a }20^\\circ\\text{--}30^\\circ$. 2) **Mecanismo Articular del *Arabesque* (Extensión $\\ge 90^\\circ$):** la extensión visual de $90^\\circ\\text{ a }120^\\circ$ de la pierna hacia atrás no ocurre exclusivamente en la cadera (limitada a $20^\\circ\\text{--}30^\\circ$ por el ligamento iliofemoral), sino por una **secuencia coordinada de anteversión pélvica controlada ($20^\\circ\\text{--}30^\\circ$) y extensión de la columna lumbar y torácica baja ($40^\\circ\\text{--}60^\\circ$)**. 3) **Músculos Motores del Turn-Out:** los 6 rotadores externos profundos (piriforme, obturador interno/externo, géminos, […]",
+      "entities": [
+        "joint:hip-joint",
+        "muscle:piriformis",
+        "muscle:obturator-internus",
+        "muscle:adductor-magnus",
+        "muscle:iliopsoas"
+      ],
+      "rules": [
+        "hip_external_rotation_minimum_ballet",
+        "hip_flexion_functional_ballet",
+        "hip_extension_rom_ballet"
+      ]
+    },
+    {
+      "id": "clippinger-dance-knee-biomechanics-q-angle-and-grand-plie",
+      "sourceId": "clippinger-dance-anatomy-kinesiology-2ed",
+      "topic": "joint",
+      "tags": [
+        "knee-biomechanics",
+        "q-angle",
+        "grand-plie",
+        "patellofemoral-stress",
+        "quad-hamstring-ratio"
+      ],
+      "locator": {
+        "chapter": 5,
+        "page": 250
+      },
+      "summary": "q_angle_normal: Biomecánica de Rodilla, Ángulo Q y Fuerzas Compresivas en el *Grand Plié*: 1) **Ángulo Q Normativo y Riesgo Patelofemoral:** medido entre la espina ilíaca anterosuperior (EIAS), el centro de la rótula y la tuberosidad tibial: **Hombres: $10^\\circ\\text{ a }14^\\circ$; Mujeres: $15^\\circ\\text{ a }17^\\circ$**. Valores $>20^\\circ$ aumentan el vector lateral de tracción sobre la rótula, incrementando el riesgo de subluxación patelar y condromalacia. 2) **Ratio de Fuerza Cuádriceps:Isquiotibiales (Ratio Q:H):** ratio isocinético óptimo de **$3:2$ ($60\\%\\text{ a }75\\%$ de fuerza de isquios respecto a cuádriceps)** para estabilizar la translación anterior tibial y proteger el LCA. 3) **Fuerzas Patelofemorales en *Grand Plié*:** en *demi-plié* ($60^\\circ\\text{--}70^\\circ$ flexión), la fuerza de compresión patelofemoral es de **$1\\text{ a }3\\times\\ \\text{el peso corporal}$**; en *grand plié* profundo ($>120^\\circ$), la fuerza compresiva se eleva a **$3\\text{ a }7\\times\\ \\text{el peso corporal}$**, con máximo estrés de cizallamiento en los meniscos posteriores (prescribir uso moderado y controlado en bailarines).",
+      "entities": [
+        "joint:knee-joint",
+        "joint:patellofemoral-joint",
+        "muscle:quadriceps-femoris",
+        "muscle:hamstrings"
+      ],
+      "rules": [
+        "q_angle_normal",
+        "strength_ratio_quad_hamstring",
+        "knee_flexion_rom_normal",
+        "grand_plie_depth_caution",
+        "patellofemoral_compression_force_levels"
+      ]
+    },
+    {
+      "id": "clippinger-dance-ankle-foot-kinesiology-fhl-and-os-trigonum",
+      "sourceId": "clippinger-dance-anatomy-kinesiology-2ed",
+      "topic": "joint",
+      "tags": [
+        "ankle-kinesiology",
+        "plantarflexion",
+        "fhl-tendinitis",
+        "os-trigonum",
+        "posterior-impingement",
+        "en-pointe"
+      ],
+      "locator": {
+        "chapter": 6,
+        "page": 324
+      },
+      "summary": "ankle_plantarflexion_rom_ballet: Cinesiología del Complejo Tobillo-Pie, Tendinopatía del FHL y Pinzamiento Posterior (*Os Trigonum*): 1) **Rangos Articulares Talocrurales:** Dorsiflexión: $0^\\circ\\text{ a }20^\\circ$; Flexión plantar: $0^\\circ\\text{ a }50^\\circ$ en población general, requiriendo **$90^\\circ\\text{ a }113^\\circ$ en bailarinas de ballet de élite** para colocarse *en pointe* sobre la punta de los dedos. 2) **Tendinopatía del Flexor Largo del Dedo Gordo (*FHL Tendinitis / \"Dancer's Tendinitis\"*):** el tendón del FHL discurre por un estrecho túnel fibroóseo detrás del maléolo medial y bajo el sustentaculum tali; la flexión plantar forzada repetida genera fricción y tenosinovitis estenosante con chasquido doloroso (*trigger toe*) al extender el primer dedo. 3) **Síndrome de Pinzamiento Posterior del Tobillo (*Os Trigonum*):** compresión mecánica del proceso posterior del astrágalo o de un huesecillo accesorio no fusionado (*os trigonum*) entre la tibia posterior y el calcáneo en la flexión plantar máxima *en pointe*.",
+      "entities": [
+        "joint:talocrural-joint",
+        "tendon:flexor-hallucis-longus",
+        "bone:talus",
+        "bone:calcaneus"
+      ],
+      "rules": [
+        "ankle_plantarflexion_rom_ballet",
+        "ankle_dorsiflexion_rom_normal"
+      ]
+    },
+    {
+      "id": "clippinger-dance-shoulder-kinesiology-and-scapulohumeral-rhythm",
+      "sourceId": "clippinger-dance-anatomy-kinesiology-2ed",
+      "topic": "joint",
+      "tags": [
+        "shoulder-kinesiology",
+        "scapulohumeral-rhythm",
+        "rotator-cuff",
+        "port-de-bras",
+        "partnering"
+      ],
+      "locator": {
+        "chapter": 7,
+        "page": 395
+      },
+      "summary": "shoulder_flexion_rom_normal: Cinesiología del Hombro, Ritmo Escapulohumeral y Mecánica de Elevación (*Port de Bras* / *Partnering*): 1) **Rangos Fisiológicos:** Flexión y Abducción: $0^\\circ\\text{ a }180^\\circ$; Extensión: $0^\\circ\\text{ a }60^\\circ$; Rotación externa: $0^\\circ\\text{ a }90^\\circ$; Rotación interna: $0^\\circ\\text{ a }70^\\circ$. 2) **Ritmo Escapulohumeral (Ratio 2:1):** durante la elevación del brazo de $0^\\circ\\text{ a }180^\\circ$, por cada **$2^\\circ$ de movimiento en la articulación glenohumeral, la escápula rota hacia arriba $1^\\circ$ sobre la caja torácica** (los primeros $30^\\circ$ son principalmente glenohumerales; de $30^\\circ\\text{ a }180^\\circ$, $120^\\circ$ son glenohumerales y $60^\\circ$ escapulotorácicos). 3) **Pares de Fuerza Escapulares (*Force Couples*):** el serrato anterior y el trapecio (fibras superiores e inferiores) forman un par de fuerza indispensable para rotar la escápula hacia arriba y abrir el espacio subacromial, evitando el pinzamiento del supraespinoso durante el *port de bras* y los levantamientos (*partnering* en bailarines masculinos).",
+      "entities": [
+        "joint:glenohumeral-joint",
+        "joint:scapulothoracic-joint",
+        "muscle:serratus-anterior",
+        "muscle:trapezius"
+      ],
+      "rules": [
+        "shoulder_flexion_rom_normal"
+      ]
+    },
+    {
+      "id": "clippinger-dance-landing-forces-and-stretch-shortening-cycle",
+      "sourceId": "clippinger-dance-anatomy-kinesiology-2ed",
+      "topic": "clinical",
+      "tags": [
+        "ground-reaction-forces",
+        "jump-landings",
+        "ssc",
+        "stretch-shortening-cycle",
+        "stress-fractures"
+      ],
+      "locator": {
+        "chapter": 1,
+        "page": 29,
+        "section": "\"también Cap. 5, pp. 279-281; Cap. 8, pp. 497-505\""
+      },
+      "summary": "stretch_shortening_cycle_params: Fuerzas de Reacción del Suelo en Saltos y Ciclo Estiramiento-Acortamiento (SSC): 1) **Magnitud de las Fuerzas de Impacto:** el aterrizaje de saltos de gran amplitud (*grand jeté*, saltos con desplazamiento) genera fuerzas verticales de reacción del suelo de **$3\\text{ a }6\\times\\ \\text{el peso corporal}$** (y hasta $9\\text{--}12\\times\\ \\text{BW}$ en aterrizajes rígidos sin amortiguación en plié). 2) **Ciclo Estiramiento-Acortamiento (SSC):** para maximizar la altura del salto mediante energía elástica pasiva almacenada en el tendón de Aquiles y la aponeurosis plantar, la **fase de amortiguación (tiempo de transición entre la fase excéntrica y concéntrica en el plié) debe ser inferior a $<0.25\\ \\text{segundos}$**; pausas prolongadas en el fondo disipan la energía elástica en forma de calor. 3) **Factores de Riesgo de Fracturas por Estrés:** suelos duros no amortiguados (*non-sprung floors*), fatiga muscular y amenorrea.",
+      "entities": [
+        "joint:talocrural-joint",
+        "bone:metatarsal-bones",
+        "bone:tibia",
+        "clinical:jump-landing-mechanics"
+      ],
+      "rules": [
+        "stretch_shortening_cycle_params",
+        "ankle_landing_forces_jump",
+        "stress_fracture_risk_factors",
+        "stress_fracture_return_timeline"
+      ]
+    },
+    {
+      "id": "clippinger-dance-conditioning-stretching-and-calcium-guidelines",
+      "sourceId": "clippinger-dance-anatomy-kinesiology-2ed",
+      "topic": "clinical",
+      "tags": [
+        "conditioning",
+        "static-stretching",
+        "pnf-stretching",
+        "calcium-intake",
+        "bone-density",
+        "red-s"
+      ],
+      "locator": {
+        "chapter": 2,
+        "page": 54,
+        "section": "\"también Cap. 8, pp. 510-525\""
+      },
+      "summary": "stretch_duration_static: Pautas de Acondicionamiento Físico, Flexibilidad PNF y Nutrición Ósea: 1) **Dosificación de Flexibilidad:** a) *Estiramiento Estático:* $3\\text{ a }6\\ \\text{series}$ de **$30\\text{ a }60\\ \\text{segundos}$** ejecutados con los tejidos calientes post-clase; b) *Estiramiento PNF Contract-Relax:* **$6\\text{ a }10\\ \\text{segundos}$ de contracción isométrica submáxima ($\\approx 50\\%\\text{--}75\\%$ MVIC)** del músculo diana, seguida de **$20\\text{ a }30\\ \\text{segundos}$ de estiramiento pasivo relajado asistido** (2 a 4 repeticiones). 2) **Descanso en Entrenamiento de Fuerza:** $2\\text{ a }3\\ \\text{minutos}$ entre series pesadas multiarticulares. 3) **Requerimiento de Calcio en Bailarinas Jóvenes:** ingesta recomendada de **$1300\\text{ a }1500\\ \\text{mg/día}$ de calcio elemental** (junto con vitamina D) para optimizar el pico de masa ósea en la adolescencia y prevenir la osteopenia y fracturas por estrés en el contexto de la Tríada de la Atleta / RED-S.\n\n<!-- stats: 7 chunks, 18 entidades cubiertas -->",
+      "entities": [
+        "molecule:calcium",
+        "bone:trabecular-bone",
+        "clinical:dance-conditioning"
+      ],
+      "rules": [
+        "stretch_duration_static",
+        "stretch_pnf_contract_relax",
+        "recovery_between_strength_sets",
+        "calcium_intake_young_dancers",
+        "hamstring_flexibility_for_floor_sitting"
+      ]
+    },
     {
       "id": "enoka-ch01-02-impulse-momentum-jump-propulsion",
       "sourceId": "enoka-neuromechanics-4ed",
@@ -4744,6 +5099,601 @@
       "rules": []
     },
     {
+      "id": "haas-dance-core-stability-and-lateral-breathing",
+      "sourceId": "haas-dance-anatomy-2ed",
+      "topic": "clinical",
+      "tags": [
+        "core-stability",
+        "lateral-breathing",
+        "transversus-abdominis",
+        "pelvic-floor",
+        "diaphragm",
+        "intra-abdominal-pressure"
+      ],
+      "locator": {
+        "chapter": 4,
+        "page": 42,
+        "section": "\"también Cap. 5, pp. 63-82; Cap. 6, pp. 83-91\""
+      },
+      "summary": "core-brace-before-limb-movement: Estabilidad Central del Core, Cilindro Abdominal y Respiración Costal Lateral: 1) **El Cilindro de Estabilidad Profunda del Core:** co-activación sinérgica del diafragma (techo), suelo pélvico (base), transverso abdominal (pared anterior y lateral en faja) y multífidos lumbares (soporte posterior segmentario). Este cilindro debe activarse **fracciones de segundo antes de iniciar cualquier movimiento balístico de extremidades** (*feed-forward control*). 2) **Patrón de Respiración Costal Lateral Tridimensional:** inhalar expandiendo las costillas en $360^\\circ$ (lateralmente hacia afuera y hacia la espalda) manteniendo el abdomen inferior suavemente conectado; **evitar la elevación del pecho superior y la tensión en trapecios/escalenos**. 3) **Exhalación Forzada para Control Motor (*Forced Exhalation*):** exhalar profundamente durante la fase de máximo esfuerzo (despegue de saltos, extensiones de pierna o giros) para reclutar los oblicuos internos y el transverso, estabilizando la columna lumbopélvica sin alterar la línea de la cintura.",
+      "entities": [
+        "muscle:transversus-abdominis",
+        "muscle:multifidus",
+        "muscle:diaphragm",
+        "muscle:pelvic-floor"
+      ],
+      "rules": [
+        "core-brace-before-limb-movement",
+        "forced-exhalation-core",
+        "breath-rhythm-training"
+      ]
+    },
+    {
+      "id": "haas-dance-hip-dissociation-and-functional-turnout",
+      "sourceId": "haas-dance-anatomy-2ed",
+      "topic": "joint",
+      "tags": [
+        "hip-dissociation",
+        "functional-turnout",
+        "patella-alignment",
+        "pelvic-neutral",
+        "grand-battement"
+      ],
+      "locator": {
+        "chapter": 8,
+        "page": 144,
+        "section": "\"también Cap. 9, pp. 165-175\""
+      },
+      "summary": "turnout-functional-alignment: Disociación Coxofemoral, Rotación Externa Funcional y Alineación Patelar: 1) **Disociación de Cadera (*Hip-Pelvis Dissociation*):** capacidad neuromotora de movilizar la cabeza femoral libremente en el acetábulo en flexión, abducción o extensión (*developpé*, *grand battement*) **sin permitir inclinación anterior/posterior ni torsión compensatoria de la pelvis o la columna lumbar**. 2) **Alineación del Turn-Out Funcional:** la rotación externa debe originarse en la articulación coxofemoral; la regla biomecánica cardinal de seguridad exige que **el centro de la rótula se mantenga en una línea vertical continua proyectada directamente sobre el 2.º y 3.er dedo del pie** durante todo el recorrido del *plié* y las caídas de saltos. Si el pie rota hacia afuera más que la rodilla, se produce torsión tibial y pronación patológica. 3) **Profundidad de Flexión:** en sentadillas paralelas de acondicionamiento, mantener un ángulo de $90^\\circ$ protegiendo la columna lumbar neutra.",
+      "entities": [
+        "joint:hip-joint",
+        "joint:knee-joint",
+        "muscle:iliopsoas",
+        "muscle:gluteus-medius"
+      ],
+      "rules": [
+        "turnout-functional-alignment",
+        "knee-squat-depth-limit"
+      ]
+    },
+    {
+      "id": "haas-dance-foot-intrinsic-muscles-and-doming",
+      "sourceId": "haas-dance-anatomy-2ed",
+      "topic": "anatomy",
+      "tags": [
+        "intrinsic-foot-muscles",
+        "foot-doming",
+        "short-foot",
+        "longitudinal-arch",
+        "pronation-control"
+      ],
+      "locator": {
+        "chapter": 10,
+        "page": 193
+      },
+      "summary": "foot-intrinsic-alignment: Musculatura Intrínseca del Pie, Ejercicio de Bóveda Podal (*Doming*) y Estabilidad del Arco: 1) **Soporte del Arco Longitudinal Medial:** la estabilidad del pie en danza clásica (*relevé*, saltos y giros) depende de la co-activación de los músculos intrínsecos de la planta (abductor del dedo gordo, flexor corto de los dedos, cuadrado plantar y lumbricales) asistidos por el tibial posterior. 2) **Ejercicio de Bóveda Podal / Pie Corto (*Doming / Short Foot*):** con el pie plano apoyado en el suelo y los dedos totalmente extendidos y relajados, traccionar la cabeza de los metatarsianos hacia el calcáneo acortando la longitud del pie y elevando el arco medial **sin flexionar ni engarrar los dedos (*no curling/clawing*)**. 3) **Corrección del *Sickling*:** el fortalecimiento intrínseco previene el desvío en inversión (*sickling in*) o eversión forzada (*sickling out*), asegurando que el peso en *relevé* se descargue perpendicularmente entre el 1.er y 2.º metatarsiano.",
+      "entities": [
+        "joint:talocrural-joint",
+        "muscle:abductor-hallucis",
+        "muscle:flexor-digitorum-brevis",
+        "muscle:tibialis-posterior"
+      ],
+      "rules": [
+        "foot-intrinsic-alignment"
+      ]
+    },
+    {
+      "id": "haas-dance-tri-system-balance-and-spotting",
+      "sourceId": "haas-dance-anatomy-2ed",
+      "topic": "clinical",
+      "tags": [
+        "balance-systems",
+        "proprioception",
+        "vestibular-system",
+        "visual-spotting",
+        "balance-training"
+      ],
+      "locator": {
+        "chapter": 2,
+        "page": 20,
+        "section": "\"también Cap. 11, pp. 244-255\""
+      },
+      "summary": "balance-training-frequency: Integración del Sistema Triple de Equilibrio y Técnica de *Spotting*: 1) **Los Tres Sistemas de Equilibrio Dinámico:** a) *Sistema Visual:* proporciona orientación espacial respecto a referencias verticales; en giros (*pirouettes*, *chaînés*), el **fijar un punto visual (*Spotting*)** con rotación y latigazo rápido de la cabeza minimiza la desorientación; b) *Sistema Vestibular:* conductos semicirculares y otolitos en el oído interno que detectan aceleración angular y lineal; c) *Sistema Somatosensorial / Propioceptivo:* mecanorreceptores en cápsulas articulares, husos musculares y fascia plantar. 2) **Dosificación del Entrenamiento de Equilibrio:** prescribir sesiones de **$3\\text{ a }5\\ \\text{días por semana}$ ($10\\text{--}15\\ \\text{minutos}$)** con sobrecarga propioceptiva progresiva: a) Apoyo bipodal $\\to$ unipodal en suelo firme; b) Variación del input visual (ojos abiertos $\\to$ fijar mirada $\\to$ ojos cerrados); c) Superficies inestables (cojín de aire, *balance board*).",
+      "entities": [
+        "nerve:vestibulocochlear-nerve",
+        "nerve:proprioceptors",
+        "clinical:balance-training"
+      ],
+      "rules": [
+        "balance-training-frequency"
+      ]
+    },
+    {
+      "id": "haas-dance-scapulohumeral-rhythm-and-port-de-bras",
+      "sourceId": "haas-dance-anatomy-2ed",
+      "topic": "joint",
+      "tags": [
+        "scapulohumeral-rhythm",
+        "port-de-bras",
+        "serratus-anterior",
+        "scapular-winging",
+        "shoulder-alignment"
+      ],
+      "locator": {
+        "chapter": 7,
+        "page": 112
+      },
+      "summary": "scapulohumeral-rhythm: Control Escapulotorácico, Ritmo Escapulohumeral y Mecánica del *Port de Bras*: 1) **Estabilidad Escapular en Reposo y Movimiento:** la escápula debe descansar plana sobre la parrilla costal dorsal (entre la 2.ª y 7.ª costilla). La debilidad del serrato anterior o del trapecio medio/inferior provoca escápula alada (*scapular winging*) y protracción anterior de hombros (*rolled shoulders*). 2) **Coordinación en el *Port de Bras*:** al elevar los brazos hacia las posiciones clásicas (1.ª, 2.ª o 5.ª posición *en haut*), el bailarín debe activar el serrato anterior y la porción inferior del trapecio para **deprimir la escápula (\"mantener los hombros lejos de las orejas\") y rotarla hacia arriba**, ensanchando la clavícula y estabilizando el húmero en la cavidad glenoidea sin arquear la columna torácica ni elevar las costillas anteriores (*rib flare*).",
+      "entities": [
+        "joint:glenohumeral-joint",
+        "joint:scapulothoracic-joint",
+        "muscle:serratus-anterior",
+        "muscle:rhomboids",
+        "muscle:trapezius"
+      ],
+      "rules": [
+        "scapulohumeral-rhythm"
+      ]
+    },
+    {
+      "id": "haas-dance-tissue-healing-and-adolescent-growth-management",
+      "sourceId": "haas-dance-anatomy-2ed",
+      "topic": "clinical",
+      "tags": [
+        "tissue-healing",
+        "adolescent-dancer",
+        "growth-spurts",
+        "apophyseal-injuries",
+        "load-management"
+      ],
+      "locator": {
+        "chapter": 3,
+        "page": 27,
+        "section": "\"también Cap. 12, pp. 260-275\""
+      },
+      "summary": "tissue-healing-timeline: Fases Biológicas de Curación Tisular y Gestión de Cargas en el Bailarín Adolescente: 1) **Cronología de Curación Tisular:** a) *Fase Inflamatoria:* **$0\\text{ a }3\\ \\text{días}$** (vasodilatación, edema, fagocitosis de detritos celulares); b) *Fase de Reparación / Proliferación:* **$3\\ \\text{días a }3\\ \\text{semanas}$** (angiogénesis, síntesis inicial de colágeno Tipo III inmaduro y fibroplasia); c) *Fase de Remodelación:* **$3\\ \\text{semanas a }1\\text{--}2\\ \\text{años}$** (reorganización tensil de colágeno Tipo I según las líneas de fuerza). 2) **Vulnerabilidad en el Estirón de Crecimiento Adolescente (*Growth Spurt*):** el crecimiento óseo longitudinal precede a la elongación viscoelástica de la unidad musculotendinosa, generando una **pérdida transitoria de flexibilidad, rigidez muscular extrema y desequilibrios propioceptivos**. Se deben modular las cargas de impacto repetitivo (saltos *allegro*) para prevenir avulsiones apofisarias en las placas de crecimiento (tuberosidad tibial / Osgood-Schlatter, espinas ilíacas y calcáneo / Sever).",
+      "entities": [
+        "bone:growth-plates",
+        "tendon:collagen-fibers",
+        "clinical:adolescent-growth-risk"
+      ],
+      "rules": [
+        "tissue-healing-timeline",
+        "growth-plate-load-management",
+        "acute-ankle-care-ice-caution"
+      ]
+    },
+    {
+      "id": "haas-dance-conditioning-volume-and-female-athlete-triad",
+      "sourceId": "haas-dance-anatomy-2ed",
+      "topic": "clinical",
+      "tags": [
+        "dance-conditioning",
+        "training-frequency",
+        "female-athlete-triad",
+        "red-s",
+        "calcium-intake"
+      ],
+      "locator": {
+        "chapter": 3,
+        "page": 33,
+        "section": "\"también Cap. 12, pp. 276-290\""
+      },
+      "summary": "dance-conditioning-frequency: Dosificación del Acondicionamiento Complementario y Monitoreo de la Tríada de la Atleta: 1) **Programación Suplementaria:** prescribir sesiones de acondicionamiento neuromuscular de **$2\\text{ a }3\\ \\text{días por semana}$ con una duración de $20\\text{ a }30\\ \\text{minutos}$** por sesión, enfocadas en fuerza funcional de core, glúteo medio, peroneos e intrínsecos de pie (series de $10\\text{--}15\\ \\text{reps}$ con alineación perfecta). 2) **Monitoreo de la Tríada de la Atleta Femenina / RED-S:** vigilar activamente la combinación de **baja disponibilidad energética, disfunción menstrual (amenorrea/oligomenorrea) y baja densidad mineral ósea (osteopenia/osteoporosis)**. 3) **Pautas Nutricionales y Fisiológicas:** asegurar una ingesta de **$1300\\ \\text{mg/día}$ de calcio elemental** y mantener un porcentaje de grasa corporal saludable (**$\\ge 12\\%\\text{--}14\\%$ en mujeres**) para sostener la producción de estrógenos y evitar fracturas por estrés recurrentes.\n\n<!-- stats: 7 chunks, 15 entidades cubiertas -->",
+      "entities": [
+        "molecule:calcium",
+        "hormone:estrogen",
+        "bone:trabecular-bone",
+        "clinical:female-athlete-triad"
+      ],
+      "rules": [
+        "dance-conditioning-frequency",
+        "supplemental-session-duration",
+        "calcium-intake",
+        "female-athlete-triad-monitoring",
+        "body-fat-health-range"
+      ]
+    },
+    {
+      "id": "howse-dance-turnout-biomechanics-and-overturning-fault",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "joint",
+      "tags": [
+        "turnout",
+        "en-dehors",
+        "overturning",
+        "hip-external-rotation",
+        "medial-meniscus",
+        "pronation"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "turnout-minimum-threshold: Biomecánica del *Turn-Out* (*En Dehors*) y Patología por Forzamiento (*Over-Turning*): 1) **Umbral Anatómico No Modificable:** la rotación externa de la cadera depende de factores óseos congénitos (ángulo de anteversión femoral, orientación del acetábulo y longitud del ligamento iliofemoral de Bertin). Se requiere un mínimo de **$\\approx 45^\\circ\\text{ a }50^\\circ$ de rotación externa pasiva en cada cadera** para alcanzar los $90^\\circ$ funcionales por pierna ($180^\\circ$ totales de primera posición). Los aductores (especialmente el aductor mayor) y el iliopsoas actúan como los principales rotadores externos dinámicos. 2) **Patología por Forzar el Turn-Out (*No Over-Turning*):** intentar compensar el déficit de cadera forzando la rotación desde el suelo transmite un torque torsional destructivo a través de la tibia, provocando: a) **Desgarros del menisco medial y distensión del ligamento colateral medial (LCM)**; b) **Bursitis anserina y tendinopatía rotuliana**; c) **Colapso del arco plantar en pronación (*rolling inward*)** con predisposición a fascitis plantar y *hallux valgus*.",
+      "entities": [
+        "joint:hip-joint",
+        "joint:knee-joint",
+        "muscle:adductor-magnus",
+        "muscle:iliopsoas"
+      ],
+      "rules": [
+        "turnout-minimum-threshold",
+        "no-overturning"
+      ]
+    },
+    {
+      "id": "howse-dance-weight-placement-and-line-of-gravity",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "clinical",
+      "tags": [
+        "weight-placement",
+        "weight-back",
+        "line-of-gravity",
+        "posture",
+        "hyperlordosis",
+        "technical-fault"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "Alineación Postural, Línea de Gravedad y el Fallo Técnico de \"Peso Atrás\" (*Weight Back*): 1) **Línea Canónica de Gravedad:** la postura vertical correcta se define por una plomada continua que desciende desde la **apófisis mastoides $\\to$ acromion del hombro $\\to$ trocánter mayor de la cadera $\\to$ centro de la rodilla $\\to$ maléolo externo del tobillo $\\to$ borde anterior del calcáneo (apoyo sobre mediopié y cabezas metatarsianas)**. 2) **El Fallo Técnico de \"Peso Atrás\" (*Weight Back*):** desplazar el peso hacia los talones es la causa raíz aislada más común de patología en danza: a) Genera hiperlordosis lumbar compensatoria por inclinación anterior de la pelvis; b) Sobrecarga excéntricamente los isquiotibiales provocando roturas miofasciales crónicas; c) Aumenta la tracción tensil sobre el tendón de Aquiles desencadenando peritendinitis y bursitis retrocalcánea; d) Dificulta la velocidad del trabajo de pies (*petit allegro*) al bloquear el despegue metatarsiano.",
+      "entities": [
+        "joint:lumbar-spine",
+        "joint:talocrural-joint",
+        "muscle:hamstrings",
+        "tendon:achilles-tendon"
+      ],
+      "rules": [
+        "weight-placement"
+      ]
+    },
+    {
+      "id": "howse-dance-pointe-readiness-and-foot-ossification",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "joint",
+      "tags": [
+        "pointe-work",
+        "pointe-readiness",
+        "bone-ossification",
+        "plantarflection",
+        "ankle-stability"
+      ],
+      "locator": {
+        "page": 2
+      },
+      "summary": "pointe-readiness-criteria: Criterios Biomecánicos y Madurativos de Preparación para Puntas (*Pointe Readiness*): 1) **Criterios de Maduración Ósea y Edad Cronológica:** el trabajo en puntas está estrictamente contraindicado antes de los **$11\\text{ a }12\\ \\text{años}$ de edad**, momento en que los centros de osificación epifisaria de los huesos del tarso y metatarsianos han alcanzado la fusión estructural suficiente para tolerar las fuerzas axiales compresivas sin deformación plástica articular permanente. 2) **Prerrequisitos Técnicos y de Fuerza:** a) Mínimo de **$3\\text{ a }4\\ \\text{años}$ de entrenamiento clásico regular consistente** ($>3\\text{--}4\\ \\text{clases/semana}$); b) Control estricto de la estabilidad pélvica y del core (evitar colapso en lordosis en relevé); c) Rango completo de flexión plantar talocrural que forme una **línea recta vertical perfecta de $180^\\circ$ entre la cara anterior de la tibia, el astrágalo y los metatarsianos** (*straight line of the foot*); si el pie no alcanza la vertical completa, el bailarín se apoyará \"por detrás de la punta\" (*under-pointed*), […]",
+      "entities": [
+        "joint:talocrural-joint",
+        "bone:tarsal-bones",
+        "bone:metatarsal-bones",
+        "clinical:pointe-readiness"
+      ],
+      "rules": [
+        "pointe-readiness-criteria"
+      ]
+    },
+    {
+      "id": "howse-dance-knee-biomechanics-and-vastus-medialis-vmo",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "joint",
+      "tags": [
+        "vastus-medialis",
+        "vmo",
+        "knee-rotation",
+        "patellar-tracking",
+        "anterior-knee-pain",
+        "plie"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "vastus-medialis-priority: Biomecánica de la Rodilla, Rol del Vasto Medial (VMO) y Límites de Rotación: 1) **Prioridad del Vasto Medial Oblicuo (VMO):** el VMO es el estabilizador dinámico medial crítico de la rótula y el músculo responsable de los **últimos $15^\\circ$ de extensión terminal completa de la rodilla**. La debilidad o retraso en la activación del VMO frente al vasto lateral provoca desalineación patelofemoral lateral, condromalacia rotuliana y dolor anterior de rodilla. 2) **Límites Fisiológicos de Rotación Tibial:** en extensión completa ($0^\\circ$), la rodilla tiene **$0^\\circ$ de rotación axial** debido al mecanismo de atornillamiento (*screw-home mechanism*) y la tensión de los ligamentos colaterales y cruzados; solo con la rodilla flexionada a $90^\\circ$ se permiten **$30^\\circ\\text{ a }40^\\circ$ de rotación axial combinada**. Forzar la rotación con la rodilla extendida o en semiflexión durante el *plié* comprime y desgarra los cuernos posteriores meniscales.",
+      "entities": [
+        "joint:knee-joint",
+        "joint:patellofemoral-joint",
+        "muscle:vastus-medialis",
+        "ligament:medial-collateral-ligament"
+      ],
+      "rules": [
+        "vastus-medialis-priority",
+        "knee-rotation-limit"
+      ]
+    },
+    {
+      "id": "howse-dance-lumbar-spondylolysis-and-stress-fractures",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "clinical",
+      "tags": [
+        "spondylolysis",
+        "pars-interarticularis",
+        "stress-fracture",
+        "arabesque",
+        "hyperlordosis",
+        "spine"
+      ],
+      "locator": {
+        "page": 3
+      },
+      "summary": "stress-fracture-clinical-diagnosis: Espondilólisis Lumbar, Fracturas por Estrés y Mecánica del *Arabesque*: 1) **Etiología de la Espondilólisis en Danza:** fractura por fatiga de la *pars interarticularis* vertebral (típicamente en **L5 o L4**), desencadenada por microtraumatismos repetitivos en hiperextensión lumbar forzada con rotación (*arabesque*, *cambré* o recepción de saltos con pelvis antevertida). 2) **Diagnóstico Clínico Precoz:** el diagnóstico debe ser puramente clínico ante la presencia de dolor focal lumbar a la extensión unilateral con hipersensibilidad a la palpación espinosa; las radiografías simples iniciales son frecuentemente negativas durante las primeras 3 a 6 semanas (requiriendo gammagrafía ósea SPECT o resonancia magnética). 3) **Protocolo de Inmovilización Estricta:** ante sospecha clínica, **inmovilizar con corsé lumbosacro rígido durante $6\\text{ a }12\\ \\text{semanas}$** con cese total de saltos e hiperextensiones para permitir la consolidación ósea de la fractura y prevenir la espondilolistesis (desplazamiento vertebral).",
+      "entities": [
+        "joint:lumbar-spine",
+        "bone:vertebrae",
+        "muscle:erector-spinae",
+        "clinical:spondylolysis-rehab"
+      ],
+      "rules": [
+        "stress-fracture-clinical-diagnosis",
+        "lumbar-stress-fracture-immobilization"
+      ]
+    },
+    {
+      "id": "howse-dance-immobilization-kinetics-and-proprioception-rehab",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "rehab-tendon",
+      "tags": [
+        "immobilization-kinetics",
+        "muscle-wasting",
+        "proprioception",
+        "wobble-board",
+        "ankle-sprain"
+      ],
+      "locator": {
+        "page": 2
+      },
+      "summary": "immobilization-recovery-geometric: Cinética de Inmovilización, Atrofia Muscular y Reeducación Propioceptiva: 1) **Inicio Temprano de la Atrofia:** la atrofia muscular miofibrilar y la pérdida de fuerza neural se inician de forma mensurable a las **$48\\text{ a }72\\ \\text{horas}$ de inmovilización absoluta**. 2) **Progresión Geométrica del Tiempo de Recuperación:** por cada semana de inmovilización total en escayola o bota, se requieren de **$2\\text{ a }4\\ \\text{semanas}$ de rehabilitación activa estructurada** para restaurar la masa muscular, el ROM capsular y la densidad trabecular ósea. 3) **Rehabilitación Propioceptiva Inmediata:** tras un esguince de tobillo (ligamento peroneoastragalino anterior), los mecanorreceptores neurales articulares quedan denervados funcionalmente; es obligatorio prescribir **entrenamiento propioceptivo progresivo en tabla basculante (*Wobble/Balancing Board*)**: apoyo bipodal $\\to$ unipodal con ojos abiertos $\\to$ unipodal con ojos cerrados $\\to$ equilibrio sobre relevé para prevenir la inestabilidad crónica de tobillo.",
+      "entities": [
+        "joint:talocrural-joint",
+        "muscle:gastrocnemius",
+        "nerve:proprioceptors",
+        "clinical:wobble-board-rehab"
+      ],
+      "rules": [
+        "rehabilitation-starts-immediately",
+        "immobilization-recovery-geometric",
+        "muscle-wasting-onset",
+        "balance-training-progression"
+      ]
+    },
+    {
+      "id": "howse-dance-jump-landing-mechanics-and-plie-shock-absorption",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "joint",
+      "tags": [
+        "jump-landing",
+        "plie",
+        "ground-reaction-forces",
+        "shock-absorption",
+        "shin-splints",
+        "petit-allegro"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "jump-landing-forces: Biomecánica del Aterrizaje de Saltos, Amortiguación en *Plié* y Fuerzas de Impacto: 1) **Fuerzas de Reacción del Suelo:** el aterrizaje de saltos en danza clásica (*grand jeté*, *sauté*, *assemblé*) genera fuerzas de impacto equivalentes a **$3\\text{ a }5\\times\\ \\text{el peso corporal}$** transmitidas verticalmente a través del esqueleto apendicular. 2) **Mecánica Secuencial de Amortiguación:** la disipación elástica de energía exige una absorción secuencial estricta: **contacto de dedos $\\to$ apoyo de metatarsos $\\to$ descenso del talón hasta el contacto pleno con el suelo $\\to$ flexión profunda de tobillo y rodilla en *demi-plié***. 3) **Patología por Aterrizaje Rígido o Talón Levantado:** no apoyar el talón en el suelo al final del plié anula el trabajo excéntrico del sóleo y gastrocnemio, transmitiendo el impacto directamente como ondas de choque a la tibia y periostio, causando periostitis tibial (*shin splints*), fracturas por estrés de tibia y microtraumatismos discales lumbares.",
+      "entities": [
+        "joint:talocrural-joint",
+        "joint:knee-joint",
+        "bone:tibia",
+        "tendon:achilles-tendon"
+      ],
+      "rules": [
+        "jump-landing-forces"
+      ]
+    },
+    {
+      "id": "howse-dance-environmental-temperature-and-conditioning-parameters",
+      "sourceId": "howse-dance-technique-3ed",
+      "topic": "clinical",
+      "tags": [
+        "studio-temperature",
+        "engram-learning",
+        "low-resistance-conditioning",
+        "muscle-bulk",
+        "cold-injuries"
+      ],
+      "locator": {
+        "page": 1
+      },
+      "summary": "ambient-temperature-minimum: Temperatura Ambiental del Estudio, Formación de Engramas y Parámetros de Acondicionamiento: 1) **Temperatura Ambiental Mínima:** la temperatura de las salas de danza debe mantenerse en un **mínimo estricto de $\\ge 20^\\circ\\text{C}$ ($68^\\circ\\text{F}$)**; el entrenamiento o estiramiento en ambientes fríos incrementa drásticamente la viscosidad del colágeno y la tasa de desgarros musculares y tendinopatías agudas. 2) **Consolidación de Engramas Motores:** la automatización neuromuscular de un patrón técnico correcto (engrama) exige **cientos de miles de repeticiones biomecánicamente perfectas**; ejecutar repeticiones con técnica defectuosa por fatiga fija malos hábitos motores que resultan extremadamente difíciles de erradicar. 3) **Acondicionamiento Muscular sin Hipertrofia Excesiva:** prescribir ejercicios de **baja resistencia y altas repeticiones ($15\\text{--}30\\ \\text{reps}$)** para desarrollar resistencia y tono sin hipertrofia voluminosa desproporcionada que eleve el centro de masa o limite la flexibilidad articular.\n\n<!-- stats: 8 chunks, 17 entidades cubiertas -->",
+      "entities": [
+        "muscle:skeletal-muscle",
+        "nerve:motor-units",
+        "clinical:dance-conditioning"
+      ],
+      "rules": [
+        "ambient-temperature-minimum",
+        "stretching-conditions",
+        "strengthening-exercise-parameters",
+        "engram-repetition-count"
+      ]
+    },
+    {
+      "id": "lott-dance-grf-landing-kinetics-and-plie-absorption",
+      "sourceId": "lott-biomechanics-of-dance",
+      "topic": "joint",
+      "tags": [
+        "ground-reaction-forces",
+        "grf",
+        "landing-kinetics",
+        "impulse-momentum",
+        "plie-absorption",
+        "shock-dissipation"
+      ],
+      "locator": {
+        "page": 3
+      },
+      "summary": "grf-landing-ballet: Fuerzas de Reacción del Suelo (GRF), Teorema Impulso-Momento y Amortiguación en *Plié*: 1) **Magnitud de las Fuerzas de Reacción del Suelo Verticales ($F_z$):** en aterrizajes de saltos de danza clásica (*sissonne*, *grand jeté*), las fuerzas pico de impacto alcanzan **$4.0\\text{ a }4.5\\times\\ \\text{el peso corporal}$** en aterrizajes bipodales y hasta **$5.5\\times\\ \\text{BW}$** en aterrizajes unipodales (llegando a $5\\text{--}10\\times\\ \\text{BW}$ en zapateados de danza irlandesa/flamenco). 2) **Física del *Plié* y Duración del Impacto ($\\Delta t$):** por el teorema de impulso-momento ($J = \\int F\\,dt = \\Delta p$), ejecutar una flexión profunda y progresiva de rodillas y tobillos (*plié*) **extiende el tiempo de frenado de $\\Delta t \\approx 0.05\\ \\text{s}$ (aterrizaje rígido) a $\\Delta t \\ge 0.15\\text{--}0.20\\ \\text{s}$**, reduciendo las fuerzas pico transmitidas al cartílago articular y periostio tibial en más de un **$50\\%\\text{ a }70\\%$**. 3) **Rigidez del Suelo:** bailar sobre suelos de concreto no amortiguados (*unsprung floors*) incrementa la tasa de carga ($dF/dt$) y la incidencia de fracturas por estrés en un $300\\%$.",
+      "entities": [
+        "joint:talocrural-joint",
+        "joint:knee-joint",
+        "bone:tibia",
+        "clinical:landing-biomechanics"
+      ],
+      "rules": [
+        "grf-landing-ballet",
+        "landing-impact-time",
+        "floor-stiffness-injury"
+      ]
+    },
+    {
+      "id": "lott-dance-countermovement-jump-and-ssc-physics",
+      "sourceId": "lott-biomechanics-of-dance",
+      "topic": "joint",
+      "tags": [
+        "countermovement-jump",
+        "cmj",
+        "ssc",
+        "elastic-strain-energy",
+        "aponeurosis",
+        "vertical-jump"
+      ],
+      "locator": {
+        "page": 3
+      },
+      "summary": "countermovement-jump-advantage: Física del Salto con Contramovimiento (CMJ) y Almacenamiento de Energía Elástica: 1) **Ventaja Mecánica del Salto con Contramovimiento:** iniciar el salto con un descenso excéntrico rápido previo (*plié* dinámico) genera un incremento del **$+10\\%\\text{ al }+15\\%$ en la velocidad de despegue y la altura del salto** en comparación con un salto iniciado desde una sentadilla estática isométrica. 2) **Mecanismo Físico del Ciclo Estiramiento-Acortamiento (SSC):** el alargamiento forzado de la unidad musculotendinosa (gastrocnemio-sóleo y tendón de Aquiles) durante la fase excéntrica almacena **energía de deformación elástica ($U_{\\text{elástica}} = \\frac{1}{2} k \\Delta x^2$)** en los tendones y en las proteínas titina de los sarcómeros; si la transición excéntrica-concéntrica es instantánea ($<250\\ \\text{ms}$), esta energía potencial elástica se restituye pasivamente al inicio del despegue sin costo adicional de ATP.",
+      "entities": [
+        "tendon:achilles-tendon",
+        "tendon:plantar-aponeurosis",
+        "muscle:gastrocnemius",
+        "clinical:stretch-shortening-cycle"
+      ],
+      "rules": [
+        "countermovement-jump-advantage",
+        "stretch-shortening-cycle"
+      ]
+    },
+    {
+      "id": "lott-dance-inverted-pendulum-balance-and-topple-time",
+      "sourceId": "lott-biomechanics-of-dance",
+      "topic": "clinical",
+      "tags": [
+        "balance-mechanics",
+        "inverted-pendulum",
+        "topple-time",
+        "center-of-mass",
+        "ankle-strategy",
+        "hip-strategy"
+      ],
+      "locator": {
+        "page": 4
+      },
+      "summary": "balance-topple-time: Modelo del Péndulo Invertido, Tiempo de Caída (*Topple Time*) y Estrategias de Equilibrio: 1) **Dinámica del Péndulo Invertido:** el cuerpo humano en bipedestación se modela mecánicamente como un péndulo invertido donde el centro de masa (CM) se sitúa a una altura $L \\approx 1\\ \\text{metro}$ sobre la base de soporte. La ecuación diferencial de movimiento linealizada $\\ddot{\\theta} - (g/L)\\theta = 0$ define una escala temporal intrínseca de caída (*toppling time constant*): **$\\tau = \\sqrt{L/g} \\approx 0.32\\ \\text{segundos}$ ($320\\ \\text{ms}$)**. El sistema de control neuromuscular dispone de menos de $\\sim 300\\ \\text{ms}$ para generar un momento correctivo antes de que el CM sobrepase la base de soporte y ocurra la pérdida de equilibrio. 2) **Estrategias Cinemáticas:** a) *Estrategia de Tobillo:* para perturbaciones pequeñas y lentas sobre base firme, modulando el centro de presión (CP) mediante los flexo-extensores del tobillo; b) *Estrategia de Cadera:* para perturbaciones rápidas, grandes o sobre bases reducidas (*relevé* / *en pointe*), generando momentos de inercia rotacionales en la pelvis.",
+      "entities": [
+        "joint:talocrural-joint",
+        "joint:hip-joint",
+        "clinical:inverted-pendulum-model"
+      ],
+      "rules": [
+        "balance-topple-time",
+        "dynamic-balance-condition",
+        "proprioception-training"
+      ]
+    },
+    {
+      "id": "lott-dance-rotational-mechanics-pirouettes-and-angular-momentum",
+      "sourceId": "lott-biomechanics-of-dance",
+      "topic": "technique",
+      "tags": [
+        "rotational-mechanics",
+        "pirouette",
+        "angular-momentum",
+        "moment-of-inertia",
+        "torque-impulse",
+        "friction"
+      ],
+      "locator": {
+        "page": 5
+      },
+      "summary": "rotational-impulse-increase: Mecánica Rotacional, Conservación del Momento Angular y Física de la *Pirouette*: 1) **Conservación del Momento Angular ($L = I \\cdot \\omega = \\text{constante}$):** durante la fase libre de giro de una pirueta (tras perder contacto con el suelo), el momento angular se conserva. Al replegar los brazos y la pierna de *passé* pegados al eje vertical del torso, el bailarín reduce drásticamente su **momento de inercia ($I = \\sum m_i r_i^2$) en un factor de $3\\times\\text{ a }4\\times$**, provocando una aceleración instantánea y automática de la velocidad angular ($\\omega$) sin aplicar fuerzas externas adicionales. 2) **Impulso de Torque Inicial ($J_{\\text{rot}} = \\tau \\cdot \\Delta t = (F \\cdot d) \\cdot \\Delta t$):** para maximizar el número de rotaciones, el bailarín debe maximizar el par de fuerzas (*couple*) aplicado contra el suelo en la 4.ª posición preparatoria aumentando la distancia entre pies ($d$) y la fuerza de empuje ($F$). 3) **Fricción del Suelo:** coeficiente de fricción estática óptimo de **$\\mu_s \\approx 0.4\\text{ a }0.6$**; valores $<0.3$ causan deslizamiento incontrolado, […]",
+      "entities": [
+        "joint:glenohumeral-joint",
+        "joint:hip-joint",
+        "clinical:rotational-biomechanics"
+      ],
+      "rules": [
+        "rotational-impulse-increase",
+        "pirouette-friction-limit"
+      ]
+    },
+    {
+      "id": "lott-dance-inverse-dynamics-and-joint-contact-forces",
+      "sourceId": "lott-biomechanics-of-dance",
+      "topic": "joint",
+      "tags": [
+        "inverse-dynamics",
+        "joint-contact-forces",
+        "internal-moments",
+        "patellofemoral-load",
+        "hip-joint"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "muscle-force-joint-relation: Dinámica Inversa y Fuerzas de Contacto Articular Internas vs Cargas Externas: 1) **Desventaja Mecánica y Fuerzas Internas Musculares:** debido a que los brazos de momento internos de los tendones musculares son extremadamente cortos ($d_{\\text{músculo}} \\approx 3\\text{ a }5\\ \\text{cm}$) comparados con los brazos de momento de las cargas externas o de la masa corporal ($d_{\\text{externo}} \\approx 20\\text{ a }40\\ \\text{cm}$), los músculos esqueléticos deben generar **fuerzas de tracción internas de $3\\text{ a }6\\times\\ \\text{la magnitud de la carga externa}$** para equilibrar los momentos articulares ($\\sum M = 0$). 2) **Fuerzas de Contacto Articular ($F_{\\text{contacto}} = \\vec{F}_{\\text{músculo}} + \\vec{F}_{\\text{externa}}$):** en la articulación patelofemoral durante una sentadilla profunda o *grand plié*, la compresión neta del fémur contra la rótula alcanza **$5\\text{ a }7\\times\\ \\text{el peso corporal}$**; en la articulación coxofemoral, las fuerzas compresivas durante la postura monopodal dinámica alcanzan **$3.5\\text{ a }5.0\\times\\ \\text{BW}$**.",
+      "entities": [
+        "joint:patellofemoral-joint",
+        "joint:hip-joint",
+        "muscle:quadriceps-femoris",
+        "muscle:gluteus-maximus"
+      ],
+      "rules": [
+        "muscle-force-joint-relation",
+        "2d-jump-distance-knee-force"
+      ]
+    },
+    {
+      "id": "lott-dance-metabolic-demands-met-values-and-vo2max",
+      "sourceId": "lott-biomechanics-of-dance",
+      "topic": "clinical",
+      "tags": [
+        "metabolic-cost",
+        "met-values",
+        "vo2max",
+        "energy-systems",
+        "aerobic-fitness",
+        "intermittent-demands"
+      ],
+      "locator": {
+        "page": 7
+      },
+      "summary": "met-values-dance: Demanda Energética, Equivalentes Metabólicos (MET) y Capacidad Aeróbica en Danza: 1) **Equivalentes Metabólicos (METs) por Segmento de Clase:** a) *Barra y Calentamiento:* **$3.5\\text{ a }5.0\\ \\text{METs}$** (metabolismo oxidativo lipídico y glucolítico suave); b) *Centro y Trabajo Adagio:* **$5.0\\text{ a }7.0\\ \\text{METs}$**; c) *Grand Allegro y Variaciones de Competición/Escenario:* **$8.0\\text{ a }10.0+\\ \\text{METs}$** (máxima demanda glucolítica anaeróbica con acumulación de lactato $[La] > 6\\text{--}10\\ \\text{mM}$). 2) **Perfil Fisiológico Intermitente:** la danza clásica y contemporánea se caracteriza por ráfagas cortas de intensidad supramáxima intercaladas con pausas coreográficas pasivas. 3) **Capacidad Aeróbica ($\\dot{V}\\text{O}_2\\max$):** los bailarines profesionales presentan valores normativos de **$45\\text{ a }55\\ \\text{mL/kg/min}$**; un acondicionamiento aeróbico suplementario acelera la tasa de resíntesis de fosfocreatina y el aclaramiento de lactato entre variaciones coreográficas.",
+      "entities": [
+        "molecule:atp-phosphocreatine",
+        "molecule:lactate",
+        "clinical:energy-expenditure-dance"
+      ],
+      "rules": [
+        "met-values-dance",
+        "vo2max-dance-fitness",
+        "energy-efficiency-coactivation"
+      ]
+    },
+    {
+      "id": "lott-dance-bone-adaptation-and-fatigue-kinetics",
+      "sourceId": "lott-biomechanics-of-dance",
+      "topic": "clinical",
+      "tags": [
+        "bone-remodeling",
+        "wolffs-law",
+        "landing-fatigue",
+        "stress-fractures",
+        "kinematics-decay"
+      ],
+      "locator": {
+        "page": 2
+      },
+      "summary": "bone-loading-adaptation: Adaptación Ósea Mecánica (Ley de Wolff) y Deterioro Cinemático por Fatiga: 1) **Remodelación Ósea por Carga Mecánica:** el tejido óseo cortical y trabecular responde a gradientes de deformación mecánica (*strain* $\\mu\\varepsilon$) generados por impactos y tracciones musculares dinámicas de alta velocidad, estimulando la osteogénesis y aumentando la densidad mineral ósea (BMD) local en el calcáneo, tibia y fémur. 2) **Deterioro de la Mecánica de Aterrizaje por Fatiga Neuromuscular:** a medida que los músculos flexores plantares y cuádriceps se fatigan hacia el final de un ensayo o función: a) **El rango de flexión de rodilla en el aterrizaje disminuye un $15\\%\\text{--}25\\%$** (aterrizajes más rígidos); b) **La tasa de aplicación de fuerza ($dF/dt$) se duplica**, transmitiendo mayor impacto directamente a la estructura ósea y multiplicando el riesgo agudo de periostitis y fracturas por estrés metatarsianas.\n\n<!-- stats: 7 chunks, 14 entidades cubiertas -->",
+      "entities": [
+        "bone:cortical-bone",
+        "bone:trabecular-bone",
+        "clinical:fatigue-landing-mechanics"
+      ],
+      "rules": [
+        "bone-loading-adaptation",
+        "fatigue-landing-kinetics"
+      ]
+    },
+    {
       "id": "macintosh-exphys-intensity-domains-and-thresholds",
       "sourceId": "macintosh-open-textbook-exphys",
       "topic": "clinical",
@@ -6943,6 +7893,205 @@
       ],
       "rules": [
         "sarcopenia-dynapenia-power-loss-hierarchy"
+      ]
+    },
+    {
+      "id": "mitchell-yoga-tensile-loading-and-stretch-tolerance",
+      "sourceId": "mitchell-yoga-biomechanics",
+      "topic": "mobility",
+      "tags": [
+        "stretching-redefined",
+        "tensile-load",
+        "stretch-tolerance",
+        "passive-resistive-torque",
+        "prt",
+        "sensory-theory"
+      ],
+      "locator": {
+        "chapter": 2,
+        "page": 25,
+        "section": "\"también Cap. 4, pp. 75-90\""
+      },
+      "summary": "stretch-tolerance-sensory: El Estiramiento Redefinido como Carga Tensil y la Teoría de Tolerancia Sensorial: 1) **Mecánica del Estiramiento:** el estiramiento convencional no es un acto pasivo neutro, sino la **aplicación de una carga mecánica tensil** sobre la unidad musculotendinosa y el tejido conectivo. 2) **Teoría de la Tolerancia Sensorial (*Sensory Theory of Stretching*):** los aumentos agudos y crónicos en el rango de movimiento (ROM) logrados mediante estiramientos estáticos pasivos convencionales **no se deben a una elongación plástica permanente del tejido ni a un aumento de la longitud de reposo del músculo**, sino a una **modificación en la tolerancia sensorial del sistema nervioso central (SNC)** (el individuo tolera mayores niveles de tensión y molestia antes de activar la respuesta nociceptiva y el reflejo miotático). 3) **Torque Pasivo Resistivo (PRT):** la resistencia pasiva a la deformación disminuye temporalmente durante la sesión por relajación de estrés viscoelástica, retornando a los valores basales en cuestión de minutos u horas.",
+      "entities": [
+        "muscle:skeletal-muscle",
+        "tendon:collagen-fibers",
+        "nerve:nociceptors",
+        "clinical:tensile-loading-model"
+      ],
+      "rules": [
+        "stretch-dose-general",
+        "stretch-tolerance-sensory",
+        "prt-short-term",
+        "chronic-stretch-prt",
+        "passive-stretch-not-enough-muscle-architecture"
+      ]
+    },
+    {
+      "id": "mitchell-yoga-viscoelastic-phenomena-and-collagen-strain",
+      "sourceId": "mitchell-yoga-biomechanics",
+      "topic": "clinical",
+      "tags": [
+        "viscoelasticity",
+        "creep",
+        "stress-relaxation",
+        "hysteresis",
+        "collagen-strain-curve",
+        "yield-point"
+      ],
+      "locator": {
+        "page": 3
+      },
+      "summary": "collagen-strain-safety: Fenómenos Viscoelásticos y Curva de Deformación del Colágeno: 1) **Zonas de Deformación Tensil del Colágeno (*Stress-Strain Curve*):** a) *Región Toe ($1\\%\\text{ a }2\\%$ de deformación):* eliminación del ondulamiento natural (*crimp*) de las fibrillas de colágeno sin resistencia elástica apreciable; b) *Región Elástica Lineal ($3\\%\\text{ a }4\\%$ de deformación):* deformación fisiológica reversible donde la energía se almacena elásticamente; c) *Punto de Fluencia (*Yield Point* $\\sim 4\\%$):* inicio de microdaño estructural; d) *Región Plástica ($4\\%\\text{ a }6\\%$):* daño permanente e irreversibilidad; e) *Fallo Último / Rotura ($\\sim 8\\%\\text{ a }10\\%$)*. El movimiento yóguico seguro opera en un **$2\\%\\text{ a }5\\%$ de deformación**. 2) **Fenómenos Viscoelásticos:** a) *Creep:* deformación continua progresiva bajo carga constante a lo largo del tiempo; b) *Stress-Relaxation:* caída de la tensión interna cuando el tejido se mantiene a una longitud fija; c) *Sensibilidad a la Tasa de Deformación:* entrar lentamente a las posturas reduce la rigidez dinámica inicial.",
+      "entities": [
+        "protein:collagen-type-i",
+        "tendon:collagen-fibers",
+        "clinical:viscoelastic-mechanics"
+      ],
+      "rules": [
+        "collagen-strain-safety",
+        "creep-recovery",
+        "stress-relaxation-hold",
+        "strain-rate-entry",
+        "hysteresis-training"
+      ]
+    },
+    {
+      "id": "mitchell-yoga-sarcomerogenesis-eccentrics-and-long-lengths",
+      "sourceId": "mitchell-yoga-biomechanics",
+      "topic": "hypertrophy",
+      "tags": [
+        "sarcomerogenesis",
+        "sarcomeres-in-series",
+        "eccentric-loading",
+        "muscle-architecture",
+        "long-lengths"
+      ],
+      "locator": {
+        "chapter": 4,
+        "page": 85,
+        "section": "\"también Cap. 5, pp. 110-125\""
+      },
+      "summary": "eccentric-long-fascicle: Sarcomerogénesis Longitudinal mediante Carga Excéntrica e Isométricos en Longitud: 1) **Mecanismo Estructural de la Sarcomerogénesis:** la única forma fisiológicamente demostrada de incrementar la longitud anatómica del vientre muscular y los fascículos es mediante la **adición de sarcómeros en serie (sarcomerogénesis longitudinal)**, mediada por la deformación y señalización mecánica de la proteína gigante titina. 2) **Ineficacia del Estiramiento Pasivo Convencional:** el estiramiento pasivo a intensidades normales de yoga no genera la tensión mecánica requerida para estimular la adición de sarcómeros. 3) **Protocolos de Carga Activa:** a) *Entrenamiento Excéntrico Pesado:* elongación activa bajo carga que fuerza la adición de sarcómeros en serie (ej. deslizamientos excéntricos de isquiotibiales); b) *Isométricos en Longitudes Musculares Extremas:* contracciones mantenidas cerca del rango final articular estimulan la remodelación arquitectónica y la fuerza específica en ángulos terminales.",
+      "entities": [
+        "muscle:sarcomeres",
+        "protein:titin",
+        "clinical:sarcomerogenesis-loading"
+      ],
+      "rules": [
+        "eccentric-long-fascicle",
+        "isometric-long-length",
+        "high-intensity-passive-stretch-architecture"
+      ]
+    },
+    {
+      "id": "mitchell-yoga-tendon-adaptation-and-underloading-paradox",
+      "sourceId": "mitchell-yoga-biomechanics",
+      "topic": "rehab-tendon",
+      "tags": [
+        "tendon-mechanotransduction",
+        "underloading-paradox",
+        "collagen-synthesis",
+        "mvic",
+        "tensile-strength"
+      ],
+      "locator": {
+        "page": 5
+      },
+      "summary": "tendon-high-load: Mecanotransducción del Tendón y la Paradoja del \"Sub-Entrenamiento\" (*Underloading*) en Yoga: 1) **Umbral de Carga para Adaptación Tendinosa:** los tenocitos requieren deformaciones tensiles de alta magnitud (**$\\ge 70\\%\\ \\text{MVIC}$ o cargas que induzcan deformación del $4.5\\%\\text{--}6.5\\%$ en el tendón**) para estimular la expresión de factores de crecimiento (TGF-$\\beta$, IGF-1) y la síntesis neta de colágeno Tipo I. 2) **La Paradoja del Sub-Entrenamiento (*Underloading*):** mantener posturas estáticas pasivas de yoga somete a los tendones a cargas tensiles submínimas ($<30\\%\\ \\text{MVIC}$) que resultan **insuficientes para aumentar la rigidez tendinosa (*tendon stiffness*) ni la capacidad de carga**. Muchas tendinopatías en practicantes no se deben a \"sobre-estiramiento\" (*overstretching*), sino a una falta crónica de capacidad del tendón para tolerar cargas dinámicas por ausencia de estímulos pesados progresivos. 3) **Recuperación:** respetar **$48\\text{ a }72\\ \\text{horas}$** entre estímulos tensiles pesados.",
+      "entities": [
+        "tendon:collagen-fibers",
+        "protein:collagen-type-i",
+        "clinical:tendon-mechanotransduction"
+      ],
+      "rules": [
+        "tendon-high-load",
+        "tendon-contraction-type",
+        "tendon-variable-loading",
+        "tendon-collagen-turnover-recovery",
+        "underloading-risk"
+      ]
+    },
+    {
+      "id": "mitchell-yoga-proximal-hamstring-insertional-compression",
+      "sourceId": "mitchell-yoga-biomechanics",
+      "topic": "tendon",
+      "tags": [
+        "proximal-hamstring-tendinopathy",
+        "yoga-butt",
+        "insertional-compression",
+        "forward-bends",
+        "uttansana"
+      ],
+      "locator": {
+        "page": 5
+      },
+      "summary": "hamstring-insertional-compression: Tendinopatía Isquiática Proximal (\"Yoga Butt\") y Fuerzas Compresivas Insercionales: 1) **Etiología Compresiva en la Tuberosidad Isquiática:** en posturas de flexión extrema de cadera con rodilla extendida (*Uttanasana*, *Paschimottanasana*, *Prasarita Padottanasana*), el tendón común de los isquiotibiales no solo experimenta alta tensión longitudinal, sino una **fuerza compresiva directa aplastante contra el borde óseo de la tuberosidad isquiática**. La combinación de tensión máxima y compresión sobre la entesis induce metaplasia condroide y tendinopatía reactiva/degenerativa. 2) **Modificación Inmediata:** **suprimir el estiramiento pasivo profundo en flexión de cadera** (evitar flexiones hacia adelante con rodillas bloqueadas); flexionar ligeramente las rodillas para reducir el brazo de palanca y la compresión ósea. 3) **Rehabilitación Progresiva:** prescribir isométricos de isquiotibiales en ángulos de cadera abiertos ($0^\\circ\\text{--}45^\\circ$, ej. *Bridge holds*) progresando a deslizamientos excéntricos (*Hamstring Slides*).",
+      "entities": [
+        "tendon:hamstrings-origin",
+        "bone:ischial-tuberosity",
+        "muscle:biceps-femoris",
+        "muscle:semimembranosus"
+      ],
+      "rules": [
+        "hamstring-insertional-compression",
+        "forward-bend-tension",
+        "hamstring-isometric-capacity",
+        "hamstring-eccentric-slides"
+      ]
+    },
+    {
+      "id": "mitchell-yoga-hypermobility-and-end-range-active-control",
+      "sourceId": "mitchell-yoga-biomechanics",
+      "topic": "clinical",
+      "tags": [
+        "hypermobility",
+        "active-control",
+        "co-contraction",
+        "end-range-stability",
+        "proprioception"
+      ],
+      "locator": {
+        "page": 5
+      },
+      "summary": "hypermobility-end-range-control: Manejo del Espectro de Hipermovilidad y Control Activo de Rango Terminal: 1) **Contraindicación de la Laxitud Pasiva (\"Colgarse en las Articulaciones\"):** los individuos en el espectro de hiperlaxitud articular presentan menor rigidez pasiva de colágeno y propiocepción articular alterada; **está contraindicado permitir que \"descansen\" pasivamente en el tope ligamentoso/óseo al final del rango** (ej. hiperextensión de rodillas en *Trikonasana* o colapso lumbar en *Urdhva Mukha Svanasana*). 2) **Prescripción de Co-Contracción Activa:** cada postura debe ejecutarse con una **activación muscular voluntaria isométrica consciente del $20\\%\\text{ al }40\\%$** que rodee la articulación (co-contracción de agonistas y antagonistas), utilizando microflexión articular y generando fuerza hacia la línea media (*hugging to the midline*) para desarrollar control neuromuscular en rangos amplios.",
+      "entities": [
+        "joint:glenohumeral-joint",
+        "joint:knee-joint",
+        "muscle:skeletal-muscle",
+        "clinical:hypermobility-management"
+      ],
+      "rules": [
+        "hypermobility-end-range-control",
+        "hypermobile-co-contraction-required",
+        "hypermobile-tools"
+      ]
+    },
+    {
+      "id": "mitchell-yoga-spinal-flexion-mechanics-and-creep-recovery",
+      "sourceId": "mitchell-yoga-biomechanics",
+      "topic": "joint",
+      "tags": [
+        "spinal-flexion",
+        "lumbar-spine",
+        "disc-compression",
+        "creep-deformation",
+        "core-bracing"
+      ],
+      "locator": {
+        "page": 6
+      },
+      "summary": "spinal-flexion-progressive: Biomecánica de la Flexión Espinal, Adaptabilidad y Recuperación del *Creep*: 1) **Seguridad Fisiológica de la Flexión Espinal:** la columna vertebral humana está evolutivamente diseñada para flexionarse, extenderse y rotar; la flexión lumbar en posturas de yoga no es intrínsecamente patológica ni lesiva si se introduce con **progresión gradual de carga que permita la adaptación biológica de los discos intervertebrales y ligamentos posteriores**. 2) **Fenómeno de *Creep* en Flexiones Prolongadas:** mantener flexiones espinales pasivas durante periodos largos ($>2\\text{ a }5\\ \\text{minutos}$ en estilos como Yin Yoga) provoca la deformación viscoelástica temporal (*creep*) de los ligamentos interespinales y supraespinales, reduciendo transitoriamente la rigidez pasiva protectora; **se debe evitar levantar cargas pesadas inmediatamente después de una flexión pasiva prolongada**, permitiendo $10\\text{ a }20\\ \\text{min}$ para la recuperación viscoelástica del tejido.\n\n<!-- stats: 7 chunks, 16 entidades cubiertas -->",
+      "entities": [
+        "joint:lumbar-spine",
+        "bone:vertebrae",
+        "muscle:erector-spinae",
+        "clinical:spinal-biomechanics"
+      ],
+      "rules": [
+        "spinal-flexion-progressive",
+        "prolonged-flexion-creep",
+        "core-bracing-light-load"
       ]
     },
     {
@@ -9851,6 +11000,88 @@
         "ligament:atfl"
       ],
       "rules": []
+    },
+    {
+      "id": "russell-dance-supplemental-fitness-and-aerobic-deficit",
+      "sourceId": "paper-russell-2013-preventing-dance-injuries",
+      "topic": "volume",
+      "tags": [
+        "dance-medicine",
+        "supplemental-conditioning",
+        "aerobic-deficit",
+        "injury-prevention",
+        "dancers-strength"
+      ],
+      "locator": {
+        "page": 2013
+      },
+      "summary": "dance_classes_insufficient_aerobic_stimulus: La Paradoja del Acondicionamiento en Danza y Necesidad de Entrenamiento Suplementario: 1) **Déficit Aeróbico y de Fuerza en la Clase Tradicional:** la estructura intermitente y técnica de la clase tradicional de danza proporciona un estímulo cardiovascular y de fuerza neuromuscular insuficiente para soportar las demandas metabólicas y mecánicas de los ensayos generales y actuaciones en vivo; los bailarines muestran con frecuencia una capacidad aeróbica ($\\dot{V}\\text{O}_2\\max$) y fuerza relativa comparables a sujetos sedentarios, lo que induce fatiga prematura y desestabilización articular. 2) **Entrenamiento Físico Complementario Obligatorio:** prescribir **$2\\text{ a }3\\ \\text{sesiones semanales de acondicionamiento físico suplementario fuera del escenario}$** (fuerza del tren superior/core, saltos pliométricos y entrenamiento por intervalos de alta intensidad) para reducir significativamente la tasa de lesiones por sobreuso en extremidades inferiores.",
+      "entities": [
+        "organ:heart",
+        "muscle:skeletal-muscle",
+        "clinical:dance-supplemental-training"
+      ],
+      "rules": [
+        "dance_classes_insufficient_aerobic_stimulus",
+        "supplemental_fitness_training_recommended",
+        "core_stability_foundation_for_dance",
+        "lower_body_strength_power_injury_association",
+        "upper_body_training_needed_for_modern_dance"
+      ]
+    },
+    {
+      "id": "russell-dance-functional-pointe-readiness-criteria",
+      "sourceId": "paper-russell-2013-preventing-dance-injuries",
+      "topic": "clinical",
+      "tags": [
+        "pointe-readiness",
+        "en-pointe",
+        "airplane-test",
+        "ankle-plantarflexion",
+        "releve-endurance",
+        "ballet-safety"
+      ],
+      "locator": {
+        "page": 2013
+      },
+      "summary": "pointe_readiness_not_age_based: Criterios Funcionales Objetivos de Preparación para el Trabajo en Puntas (*En Pointe*): 1) **Evaluación Basada en Función y No en Edad Cronológica:** la iniciación en zapatillas de punta no debe determinarse por una edad arbitraria (ej. 12 años), sino mediante una **batería estandarizada de preparación neuromotora y maduración esquelética**: a) *Test del Avión (*Airplane Test*):* capacidad de mantener la pelvis y columna neutras en flexión de cadera monopodal sin colapso en valgo de rodilla ni pérdida del arco plantar; b) *Test de Resistencia en Relevé:* ejecutar **$\\ge 15\\text{ a }20\\ \\text{relevés unípodales completos consecutivos}$** con perfecta alineación vertical; c) *Rango de Flexión Plantar de Tobillo:* $\\ge 90^\\circ\\text{--}100^\\circ$ (alineación recta de $180^\\circ$ entre la diáfisis tibial y el dorso del pie/metatarsos).",
+      "entities": [
+        "joint:talocrural-joint",
+        "bone:metatarsals",
+        "muscle:triceps-surae",
+        "clinical:pointe-readiness-screening"
+      ],
+      "rules": [
+        "pointe_readiness_not_age_based",
+        "floor_surface_safety_check"
+      ]
+    },
+    {
+      "id": "russell-dance-floor-surfaces-and-pain-underreporting",
+      "sourceId": "paper-russell-2013-preventing-dance-injuries",
+      "topic": "clinical",
+      "tags": [
+        "sprung-floors",
+        "ground-reaction-forces",
+        "stress-fractures",
+        "pain-underreporting",
+        "dancer-psychology"
+      ],
+      "locator": {
+        "page": 2013
+      },
+      "summary": "floor_surface_safety_check: Biomecánica del Suelo de Danza (*Sprung Floors*) y Subnotificación del Dolor: 1) **Exigencia Mecánica del Suelo Amortiguado (*Sprung Floor*):** bailar sobre suelos rígidos o de concreto con linóleo superficial transfiere íntegramente las fuerzas de impacto de aterrizaje ($3\\text{ a }5\\times\\ \\text{BW}$) a las estructuras óseas y ligamentosas del bailarín, multiplicando la incidencia de fracturas por estrés tibial/metatarsal, periostitis y fascitis plantar; es obligatorio el uso de tarimas suspendidas con elastómeros absorbentes de impacto. 2) **Psicología y Subnotificación Sistemática del Dolor:** la cultura de la danza fomenta la tolerancia estoica al dolor y el miedo a perder papeles; los sistemas de salud y monitoreo deben realizar cribados proactivos periódicos de fatiga y molestias tempranas antes de que deriven en patología estructural incapacitante.\n\n<!-- stats: 3 chunks, 8 entidades cubiertas -->",
+      "entities": [
+        "bone:tibia",
+        "tendon:plantar-aponeurosis",
+        "clinical:dance-injury-epidemiology"
+      ],
+      "rules": [
+        "floor_surface_safety_check",
+        "psychosocial_stress_injury_risk",
+        "dancer_pain_underreporting",
+        "fatigue_and_rest_monitoring"
+      ]
     }
   ]
 }

@@ -1,0 +1,110 @@
+{
+  "domain": "nutrition",
+  "sources": [
+    {
+      "id": "bibliotex-sport-nutrition-2022",
+      "title": "bibliotex sport nutrition 2022",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "inda-fuerza-female-strength",
+      "title": "inda fuerza female strength",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "maughan-nutrition-in-sport",
+      "title": "maughan nutrition in sport",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-aragon-2017-issn-diets-body-composition",
+      "title": "paper aragon 2017 issn diets body composition",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-ricci-2021-issn-weight-cut-mma",
+      "title": "paper ricci 2021 issn weight cut mma",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "papers-hormonas-femeninas",
+      "title": "papers hormonas femeninas",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "rp-renaissance-kitchen",
+      "title": "rp renaissance kitchen",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "nutrition"
+        ],
+        "priority": 5
+      }
+    }
+  ]
+}

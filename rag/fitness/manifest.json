@@ -1,6 +1,396 @@
 {
   "domain": "fitness",
   "sources": [
-    { "id": "acsm-exercise-testing-prescription-10ed", "title": "ACSM's Guidelines for Exercise Testing and Prescription", "author": "ACSM", "year": 2022, "edition": "10th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["testing", "prescription"], "priority": 1 } }
+    {
+      "id": "acsm-exercise-testing-prescription-10ed",
+      "title": "ACSM's Guidelines for Exercise Testing and Prescription",
+      "author": "ACSM",
+      "year": 2022,
+      "edition": "10th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "testing",
+          "prescription"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "blahnik-full-body-flexibility-2ed",
+      "title": "blahnik full body flexibility 2ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "delp-muay-thai-2013",
+      "title": "delp muay thai 2013",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "dias-training-conditioning-mma",
+      "title": "dias training conditioning mma",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "haff-essentials-strength-4ed",
+      "title": "haff essentials strength 4ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "horschig-rebuilding-milo-2021",
+      "title": "horschig rebuilding milo 2021",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "horschig-squat-bible",
+      "title": "horschig squat bible",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "israetel-scientific-principles-hypertrophy",
+      "title": "israetel scientific principles hypertrophy",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "israetel-scientific-principles-strength",
+      "title": "israetel scientific principles strength",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "low-overcoming-gravity-2ed",
+      "title": "low overcoming gravity 2ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "low-overcoming-poor-posture",
+      "title": "low overcoming poor posture",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "low-overcoming-tendonitis-2019",
+      "title": "low overcoming tendonitis 2019",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "nippard-body-recomposition",
+      "title": "nippard body recomposition",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "nippard-fundamentals-hypertrophy",
+      "title": "nippard fundamentals hypertrophy",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "nippard-glute-hypertrophy-program",
+      "title": "nippard glute hypertrophy program",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "nippard-min-max",
+      "title": "nippard min max",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "nippard-muscle-ladder-2024",
+      "title": "nippard muscle ladder 2024",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "nippard-powerbuilding-4x",
+      "title": "nippard powerbuilding 4x",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "nippard-tbts-intermediate-advanced",
+      "title": "nippard tbts intermediate advanced",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-james-bjj-evidence-based-training-plan",
+      "title": "paper james bjj evidence based training plan",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-kostikiadis-2018-mma-specific-sc-training",
+      "title": "paper kostikiadis 2018 mma specific sc training",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-lenetsky-punching-forces-combat",
+      "title": "paper lenetsky punching forces combat",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-prabowo-combat-physical-conditioning",
+      "title": "paper prabowo combat physical conditioning",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-ruddock-2021-hiit-conditioning-combat",
+      "title": "paper ruddock 2021 hiit conditioning combat",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "tomlinson-evolution-martial-arts",
+      "title": "tomlinson evolution martial arts",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "wilson-exercise-therapy-msk",
+      "title": "wilson exercise therapy msk",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "fitness"
+        ],
+        "priority": 5
+      }
+    }
   ]
 }

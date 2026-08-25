@@ -8,7 +8,14 @@
       "year": 2026,
       "type": "pdf",
       "evidenceTier": "internal-doc",
-      "authority": { "domains": ["tdah", "ansiedad-social", "sueno-cbti"], "priority": 1 }
+      "authority": {
+        "domains": [
+          "tdah",
+          "ansiedad-social",
+          "sueno-cbti"
+        ],
+        "priority": 1
+      }
     },
     {
       "id": "reporte-clinico-neurodesarrollo",
@@ -17,7 +24,13 @@
       "year": 2026,
       "type": "pdf",
       "evidenceTier": "internal-doc",
-      "authority": { "domains": ["psicoeducacion", "formulacion-funcional"], "priority": 2 }
+      "authority": {
+        "domains": [
+          "psicoeducacion",
+          "formulacion-funcional"
+        ],
+        "priority": 2
+      }
     },
     {
       "id": "clinical-protocols-dataset",
@@ -26,7 +39,12 @@
       "year": null,
       "type": "dataset",
       "evidenceTier": "internal-doc",
-      "authority": { "domains": ["protocolos-app"], "priority": 1 }
+      "authority": {
+        "domains": [
+          "protocolos-app"
+        ],
+        "priority": 1
+      }
     },
     {
       "id": "clinical-routines-dataset",
@@ -35,7 +53,12 @@
       "year": null,
       "type": "dataset",
       "evidenceTier": "internal-doc",
-      "authority": { "domains": ["rutinas-app"], "priority": 1 }
+      "authority": {
+        "domains": [
+          "rutinas-app"
+        ],
+        "priority": 1
+      }
     },
     {
       "id": "metz-coping-pe-2003",
@@ -45,7 +68,12 @@
       "edition": "1st",
       "type": "book",
       "evidenceTier": "expert-book",
-      "authority": { "domains": ["salud-sexual"], "priority": 2 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 2
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -62,7 +90,13 @@
       "edition": "1st",
       "type": "book",
       "evidenceTier": "expert-book",
-      "authority": { "domains": ["salud-sexual", "suelo-pelvico"], "priority": 3 },
+      "authority": {
+        "domains": [
+          "salud-sexual",
+          "suelo-pelvico"
+        ],
+        "priority": 3
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -79,7 +113,12 @@
       "edition": "revised",
       "type": "book",
       "evidenceTier": "expert-book",
-      "authority": { "domains": ["salud-sexual"], "priority": 3 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 3
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -96,7 +135,12 @@
       "edition": "1st",
       "type": "book",
       "evidenceTier": "expert-book",
-      "authority": { "domains": ["salud-sexual"], "priority": 4 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 4
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -112,7 +156,12 @@
       "year": 2015,
       "type": "paper",
       "evidenceTier": "meta-analysis",
-      "authority": { "domains": ["salud-sexual"], "priority": 1 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 1
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -128,7 +177,12 @@
       "year": 2021,
       "type": "paper",
       "evidenceTier": "observational",
-      "authority": { "domains": ["salud-sexual"], "priority": 2 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 2
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -144,7 +198,12 @@
       "year": 2015,
       "type": "paper",
       "evidenceTier": "observational",
-      "authority": { "domains": ["salud-sexual"], "priority": 3 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 3
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -160,7 +219,12 @@
       "year": 2015,
       "type": "paper",
       "evidenceTier": "observational",
-      "authority": { "domains": ["salud-sexual"], "priority": 3 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 3
+      },
       "gates": {
         "nivel-permitido": "solo contextual/farmacológico-informativo — JAMÁS pauta ni dosificación; derivación obligatoria a urólogo/endocrino",
         "intervencion-medica": false,
@@ -176,7 +240,12 @@
       "year": 2015,
       "type": "paper",
       "evidenceTier": "observational",
-      "authority": { "domains": ["salud-sexual"], "priority": 4 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 4
+      },
       "gates": {
         "nivel-permitido": "info-basada-en-fuentes + derivación a profesional",
         "intervencion-medica": false,
@@ -192,13 +261,33 @@
       "year": 2015,
       "type": "paper",
       "evidenceTier": "observational",
-      "authority": { "domains": ["salud-sexual"], "priority": 4 },
+      "authority": {
+        "domains": [
+          "salud-sexual"
+        ],
+        "priority": 4
+      },
       "gates": {
         "nivel-permitido": "psicoeducativo — contenido sensible de imagen corporal; nunca screening diagnóstico desde la app; derivación a profesional",
         "intervencion-medica": false,
         "consejo-medico-directo": false,
         "disclaimer-visible-obligatorio": true,
         "chunking": "pendiente — puente Gemini Flash"
+      }
+    },
+    {
+      "id": "clinical-protocols-routines",
+      "title": "clinical protocols routines",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "clinical"
+        ],
+        "priority": 5
       }
     }
   ]

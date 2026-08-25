@@ -3,13 +3,13 @@
   "domains": {
     "anatomy": {
       "version": "4.0.0",
-      "sources": 7,
-      "chunks": 407
+      "sources": 14,
+      "chunks": 448
     },
     "cardio": {
       "version": "4.0.0",
-      "sources": 3,
-      "chunks": 29
+      "sources": 5,
+      "chunks": 41
     },
     "career": {
       "version": "4.0.0",
@@ -18,13 +18,13 @@
     },
     "clinical": {
       "version": "4.0.0",
-      "sources": 14,
-      "chunks": 56
+      "sources": 15,
+      "chunks": 61
     },
     "fitness": {
       "version": "4.0.0",
-      "sources": 1,
-      "chunks": 12
+      "sources": 26,
+      "chunks": 138
     },
     "german": {
       "version": "4.0.0",
@@ -33,7 +33,7 @@
     },
     "nutrition": {
       "version": "4.0.0",
-      "sources": 6,
+      "sources": 7,
       "chunks": 36
     },
     "portfolio": {

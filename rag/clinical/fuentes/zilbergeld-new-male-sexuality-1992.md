@@ -1,8 +1,9 @@
 <!-- chunk
 id: zilbergeld-sex-pelvic-floor-kegel-progression-and-adaptation
+chapter: 1
+page: 5
 topic: muscle
 tags: pelvic-floor-kegel, quick-flicks, sustained-holds, pc-muscle, motor-control, male-sexuality
-page: Cap. 15, "Arousal and the Pelvic Muscles", Ex. 15-2
 entities: muscle:pubococcygeus, muscle:bulbospongiosus, clinical:zilbergeld-kegel-protocol
 rules: pf-kegel-entry-volume, pf-kegel-hold-progression, pf-kegel-min-duration
 -->
@@ -10,9 +11,10 @@ pf-kegel-entry-volume: Protocolo de Entrenamiento y Progresión del Suelo Pélvi
 
 <!-- chunk
 id: zilbergeld-sex-ejaculatory-control-stop-start-progression
+chapter: 2
+page: 0
 topic: progression
 tags: stop-start-mastery, ejaculatory-control, arousal-level-7, advance-criteria, behavioral-desensitization
-page: Cap. 20, "Ejaculatory Control", pp. 280-310
 entities: organ:penis, nerve:pudendal-nerve, clinical:stop-start-mastery-program
 rules: ejac-control-frequency, ejac-control-session-duration, ejac-control-stop-threshold, ejac-control-stop-length, ejac-control-advance-criterion
 -->
@@ -20,9 +22,10 @@ ejac-control-stop-threshold: Programa de Dominio de Parada-Arranque (*Stop-Start
 
 <!-- chunk
 id: zilbergeld-sex-erectile-performance-anxiety-and-coital-ban
+chapter: 1
+page: 8
 topic: clinical
 tags: erection-therapy, performance-anxiety, coital-ban, sensate-focus, spectatoring
-page: Cap. 18; Cap. 22, "Erection Difficulties", "The Sensate Focus Program"
 entities: organ:penis, hormone:epinephrine, clinical:coital-ban-protocol
 rules: erection-therapy-frequency, erection-therapy-intercourse-ban, sexual-selfhelp-program-duration
 -->
@@ -30,9 +33,10 @@ erection-therapy-intercourse-ban: Terapia de Ansiedad de Desempeño Eréctil y R
 
 <!-- chunk
 id: zilbergeld-sex-medical-triage-and-nitrate-contraindication
+chapter: 2
+page: 1
 topic: clinical
 tags: medical-triage, organic-ed, pde5-inhibitors, nitrate-warning, severe-hypotension, contraindications
-page: Cap. 21; Apéndice, "Medical Options and Drugs"
 entities: drug:sildenafil, drug:nitroglycerin, molecule:nitric-oxide, clinical:pde5-nitrate-fatal-interaction
 rules: medical-referral-global-erectile-failure, medical-referral-low-desire, viagra-nitrate-contraindication, substance-vascular-sexual-flag
 -->
@@ -40,9 +44,10 @@ viagra-nitrate-contraindication: Banderas Rojas de Triage Médico y Contraindica
 
 <!-- chunk
 id: zilbergeld-sex-conflict-timeout-and-communication-rituals
+chapter: 1
+page: 2
 topic: clinical
 tags: conflict-timeout, heart-rate-threshold, emotional-flooding, couple-communication, body-rubs
-page: Cap. 12; Cap. 13; Cap. 14, "Conflict", "Touch and Body Rubs"
 entities: organ:heart, hormone:cortisol, clinical:conflict-timeout-rule
 rules: conflict-timeout-pulse, body-rub-duration, communication-listening-frequency, feeling-checkin-frequency
 -->

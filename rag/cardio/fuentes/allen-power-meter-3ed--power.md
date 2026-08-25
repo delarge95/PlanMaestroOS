@@ -1,7 +1,7 @@
 <!-- chunk
 id: allen-ftp-testing-protocol-20min
-chapter: 3
 page: 30
+chapter: 3
 section: "también Cap. 3, pp. 30; Cap. 10, pp. 187"
 topic: clinical
 tags: ftp, functional-threshold-power, 20-min-test, power-meter, frc-depletion, cycling
@@ -12,8 +12,8 @@ ftp-test-protocol: Protocolo de Evaluación del Umbral de Potencia Funcional (FT
 
 <!-- chunk
 id: allen-coggan-classic-power-training-zones
-chapter: 3
 page: 32
+chapter: 3
 section: "también Cap. 3, pp. 32; Cap. 5, pp. 58"
 topic: clinical
 tags: power-zones, coggan-zones, sweet-spot, ftp-percentages, intensity-domains, cycling
@@ -24,8 +24,8 @@ training-zones-classic: Sistema Clásico de 7 Zonas de Entrenamiento por Potenci
 
 <!-- chunk
 id: allen-interval-stop-criterion-dropoff
-chapter: 5
 page: 55
+chapter: 5
 section: "también Cap. 5, pp. 55"
 topic: clinical
 tags: interval-training, drop-off-criterion, fatigue-threshold, vo2max-intervals, quality-control
@@ -36,8 +36,8 @@ interval-stop-criterion: Criterio de Detención de Intervalos por Caída de Pote
 
 <!-- chunk
 id: allen-normalized-power-and-variability-index
-chapter: 7
 page: 107
+chapter: 7
 section: "también Cap. 7, pp. 107"
 topic: clinical
 tags: normalized-power, variability-index, np-algorithm, pacing-steadiness, rolling-average
@@ -48,8 +48,8 @@ normalized-power-calculation: Algoritmo de Potencia Normalizada (NP) e Índice d
 
 <!-- chunk
 id: allen-training-stress-score-and-intensity-factor
-chapter: 7
 page: 111
+chapter: 7
 section: "también Cap. 7, pp. 111"
 topic: clinical
 tags: tss, intensity-factor, training-stress-score, workload-quantification, session-load
@@ -60,8 +60,8 @@ tss-calculation: Factor de Intensidad (IF) y Training Stress Score (TSS): 1) **F
 
 <!-- chunk
 id: allen-performance-management-chart-pmc
-chapter: 9
 page: 153
+chapter: 9
 section: "también Cap. 9, pp. 153"
 topic: clinical
 tags: pmc, ctl, atl, tsb, chronic-training-load, acute-training-load, training-stress-balance
@@ -72,8 +72,8 @@ performance-manager-defaults: Modelo del Performance Management Chart (PMC: CTL,
 
 <!-- chunk
 id: allen-tsb-peaking-and-tapering-guidelines
-chapter: 9
 page: 167
+chapter: 9
 section: "también Cap. 9, pp. 167"
 topic: clinical
 tags: tsb, peaking, tapering, race-readiness, form-status, personal-best
@@ -84,8 +84,8 @@ tsb-peaking-guidelines: Pautas de Puesta a Punto (Peaking y Tapering) según Val
 
 <!-- chunk
 id: allen-functional-reserve-capacity-and-matches
-chapter: 6
 page: 99
+chapter: 6
 section: "también Cap. 6, pp. 99; Cap. 8, pp. 139"
 topic: clinical
 tags: frc, matches, matchbook, anaerobic-capacity, power-duration, tactical-pacing
@@ -96,8 +96,8 @@ match-definition: Capacidad de Reserva Funcional (FRC) y Gestión Táctica de "F
 
 <!-- chunk
 id: allen-triathlon-and-time-trial-pacing-budget
-chapter: 12
 page: 241
+chapter: 12
 section: "también Cap. 12, pp. 241"
 topic: clinical
 tags: triathlon-pacing, time-trial, ironman-pacing, intensity-budget, cycling-efficiency
@@ -108,8 +108,8 @@ triathlon-pacing-if-budget: Presupuesto de Intensidad (IF) y Pacing en Triatlón
 
 <!-- chunk
 id: allen-quadrant-analysis-force-velocity
-chapter: 7
 page: 114
+chapter: 7
 section: "también Cap. 7, pp. 114"
 topic: muscle
 tags: quadrant-analysis, aepf, cpv, pedal-force, cadence, neuromuscular-specificity
@@ -120,8 +120,8 @@ quadrant-analysis-thresholds: Análisis de Cuadrantes (Fuerza Efectiva de Pedale
 
 <!-- chunk
 id: allen-kilojoule-caloric-expenditure-equivalence
-chapter: 1
 page: 11
+chapter: 1
 section: "también Cap. 1, p. 11"
 topic: clinical
 tags: kilojoules, calories, mechanical-work, thermodynamic-efficiency, energy-budget

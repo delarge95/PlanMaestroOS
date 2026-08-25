@@ -1,7 +1,7 @@
 <!-- chunk
 id: bibliotex-nutrition-carbohydrate-guidelines-and-loading
-chapter: 1
 page: 28
+chapter: 1
 section: "también Cap. 1, pp. 28; Cap. 2, pp. 60"
 topic: clinical
 tags: carbohydrates, sports-nutrition, carb-loading, glycogen-resynthesis, intra-workout, endurance
@@ -12,8 +12,8 @@ carb-endurance-training: Pautas de Ingesta de Carbohidratos para Rendimiento Dep
 
 <!-- chunk
 id: bibliotex-nutrition-protein-requirements-and-timing
-chapter: 1
 page: 31
+chapter: 1
 section: "también Cap. 1, pp. 31; Cap. 5, pp. 196"
 topic: clinical
 tags: protein-intake, mps, protein-timing, leucine, weight-loss-deficit, nitrogen-balance
@@ -24,8 +24,8 @@ protein-general-athlete: Requerimientos Proteicos Diarios, Temporización y Pres
 
 <!-- chunk
 id: bibliotex-nutrition-fat-intake-and-metabolic-crossover
-chapter: 1
 page: 35
+chapter: 1
 section: "también Cap. 1, pp. 35; Cap. 2, pp. 68"
 topic: clinical
 tags: dietary-fats, lipid-metabolism, saturated-fats, fatmax, energy-substrate, crossover
@@ -36,8 +36,8 @@ fat-intake-health: Ingesta de Grasas Dietarias, Calidad Lipídica y Oxidación M
 
 <!-- chunk
 id: bibliotex-nutrition-hydration-and-electrolyte-replacement
-chapter: 1
 page: 36
+chapter: 1
 section: "también Cap. 1, pp. 36; Cap. 6, pp. 285"
 topic: clinical
 tags: hydration, sweat-rate, electrolytes, sodium, dehydration, rehydration
@@ -48,8 +48,8 @@ hydration-pre: Protocolos de Hidratación Pre, Durante y Post-Ejercicio y Reposi
 
 <!-- chunk
 id: bibliotex-nutrition-recovery-3r-framework
-chapter: 1
 page: 38
+chapter: 1
 section: "también Cap. 1, pp. 38; Cap. 6, p. 290"
 topic: clinical
 tags: recovery-3r, rehydrate, refuel, rebuild, post-workout, glycogen-synthesis
@@ -60,8 +60,8 @@ recovery-3r: El Marco de las 3R para la Recuperación Nutricional Post-Entrenami
 
 <!-- chunk
 id: bibliotex-nutrition-evidence-based-ergogenics-caffeine-creatine
-chapter: 6
 page: 275
+chapter: 6
 section: "también Cap. 6, pp. 275"
 topic: clinical
 tags: caffeine, creatine-monohydrate, ergogenic-aids, sports-performance, supplementation
@@ -72,8 +72,8 @@ caffeine-ergogenic: Protocolos de Suplementación Basada en Evidencia: Cafeína 
 
 <!-- chunk
 id: bibliotex-nutrition-body-composition-and-energy-balance
-chapter: 3
 page: 102
+chapter: 3
 section: "también Cap. 3, pp. 102; Cap. 4, pp. 145"
 topic: clinical
 tags: body-composition, bia, waist-to-hip, body-fat-percentage, energy-expenditure, eer
@@ -84,8 +84,8 @@ body-comp-method-selection: Evaluación de la Composición Corporal, Rangos Salu
 
 <!-- chunk
 id: bibliotex-nutrition-weight-loss-and-energy-deficit-rate
-chapter: 4
 page: 160
+chapter: 4
 section: "también Cap. 4, pp. 160"
 topic: clinical
 tags: weight-loss, energy-deficit, lean-mass-preservation, dynamic-energy-balance, red-s

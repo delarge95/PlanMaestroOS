@@ -1,9 +1,9 @@
 <!-- chunk
 id: macintosh-exphys-intensity-domains-and-thresholds
+page: 144
 topic: clinical
 tags: intensity-domains, anaerobic-threshold, critical-power, critical-speed, vo2max, endurance
 chapter: 6A
-page: 144
 section: "también Cap. 16, pp. 276"
 entities: clinical:intensity-domains, clinical:critical-speed
 rules: intensity-domain-classification
@@ -12,8 +12,8 @@ intensity-domain-classification: Clasificación de la Intensidad por Dominios Me
 
 <!-- chunk
 id: macintosh-exphys-vo2-kinetics-and-oxygen-deficit
-chapter: 1
 page: 36
+chapter: 1
 section: "también Cap. 1, p. 36; Cap. 16, pp. 292"
 topic: clinical
 tags: vo2-kinetics, oxygen-deficit, steady-state, phase-ii-tau, slow-component
@@ -24,10 +24,10 @@ vo2-kinetics-steady-state: Cinética de $\dot{V}\text{O}_2$, Constante de Tiempo
 
 <!-- chunk
 id: macintosh-exphys-critical-speed-and-anaerobic-capacity
+page: 166
 topic: clinical
 tags: critical-speed, critical-power, anaerobic-capacity, d-prime, w-prime, pacing
 chapter: 6A
-page: 166
 section: "también Cap. 16, pp. 275"
 entities: clinical:critical-speed, clinical:pacing-strategy
 rules: critical-speed-testing, anaerobic-energy-budget, pacing-even-split
@@ -36,8 +36,8 @@ critical-speed-testing: Modelo de Velocidad Crítica y Capacidad Anaeróbica Fin
 
 <!-- chunk
 id: macintosh-exphys-warmup-pap-balance-and-temperature
-chapter: 5
 page: 126
+chapter: 5
 section: "también Cap. 5, p. 126; Cap. 13, pp. 237"
 topic: muscle
 tags: warm-up, pap, pape, rlc-phosphorylation, muscle-temperature, q10
@@ -48,8 +48,8 @@ warmup-pap-balance: Balance entre Potenciación y Fatiga en el Calentamiento y E
 
 <!-- chunk
 id: macintosh-exphys-low-frequency-fatigue-recovery
-chapter: 13
 page: 235
+chapter: 13
 section: "también Cap. 13, pp. 235"
 topic: clinical
 tags: low-frequency-fatigue, plffd, excitation-contraction-coupling, triad, rest-intervals
@@ -60,8 +60,8 @@ low-frequency-fatigue-recovery: Recuperación de la Fatiga Muscular de Baja Frec
 
 <!-- chunk
 id: macintosh-exphys-daily-carbohydrate-and-protein-athletes
-chapter: 11
 page: 196
+chapter: 11
 section: "también Cap. 11, pp. 196"
 topic: clinical
 tags: sports-nutrition, carbohydrates, protein-intake, athletes, macronutrient-ratios
@@ -72,8 +72,8 @@ daily-carbohydrate-athletes: Pautas Diarias de Ingesta de Carbohidratos y Prote�
 
 <!-- chunk
 id: macintosh-exphys-pre-during-post-competition-nutrition
-chapter: 11
 page: 189
+chapter: 11
 section: "también Cap. 11, pp. 189"
 topic: clinical
 tags: nutrient-timing, pre-event-meal, during-event-carbs, post-event-recovery, glycogen-resynthesis
@@ -84,8 +84,8 @@ pre-event-meal: Temporización de Nutrientes en Competición (Pre, Durante y Pos
 
 <!-- chunk
 id: macintosh-exphys-carbohydrate-loading-and-water-storage
-chapter: 11
 page: 201
+chapter: 11
 section: "también Cap. 11, pp. 201"
 topic: clinical
 tags: carbohydrate-loading, glycogen-supercompensation, endurance-events, water-retention
@@ -96,8 +96,8 @@ carbohydrate-loading: Protocolo de Carga de Carbohidratos y Retención Hídrica:
 
 <!-- chunk
 id: macintosh-exphys-hydration-sweat-rate-and-electrolytes
-chapter: 11
 page: 189
+chapter: 11
 section: "también Cap. 11, pp. 189"
 topic: clinical
 tags: hydration, sweat-rate, dehydration-threshold, hyponatremia, rehydration
@@ -108,8 +108,8 @@ hydration-pre: Protocolos de Hidratación, Cálculo de Tasa de Sudor y Riesgo de
 
 <!-- chunk
 id: macintosh-exphys-energy-availability-and-female-triad
-chapter: 11
 page: 214
+chapter: 11
 section: "también Cap. 11, pp. 214"
 topic: clinical
 tags: energy-availability, female-athlete-triad, red-s, amenorrhea, bone-density, stress-fractures
@@ -120,10 +120,10 @@ energy-availability-risk: Baja Disponibilidad Energética (LEA) y Tríada de la 
 
 <!-- chunk
 id: macintosh-exphys-heat-budget-and-evaporative-cooling
+page: 144
 topic: clinical
 tags: thermoregulation, heat-production, evaporative-cooling, sweat-cooling, hyperthermia
 chapter: 6A
-page: 144
 section: "también Cap. 16, pp. 300-303"
 entities: clinical:heat-thermoregulation-budget
 rules: heat-evaporation-budget
@@ -132,8 +132,8 @@ heat-evaporation-budget: Balance Térmico, Calor Metabólico y Presupuesto de En
 
 <!-- chunk
 id: macintosh-exphys-running-and-cycling-economy
-chapter: 5
 page: 132
+chapter: 5
 section: "también Cap. 5, pp. 132; Cap. 16, pp. 274"
 topic: clinical
 tags: running-economy, cycling-economy, rolling-resistance, aerodynamic-drag, cadence
@@ -144,10 +144,10 @@ running-economy-reference: Determinantes de la Economía de Carrera y Ciclismo d
 
 <!-- chunk
 id: macintosh-exphys-rer-substrate-and-energy-equivalent
+page: 144
 topic: clinical
 tags: rer, rq, indirect-calorimetry, caloric-equivalent, substrate-oxidation, crossover
 chapter: 6A
-page: 144
 entities: clinical:indirect-calorimetry-rer
 rules: substrate-estimation-guard, oxygen-energy-equivalent
 -->
@@ -155,8 +155,8 @@ substrate-estimation-guard: Cociente Respiratorio (RER / RQ) y Equivalentes Ener
 
 <!-- chunk
 id: macintosh-exphys-tendon-stiffness-and-running-economy
-chapter: 16
 page: 281
+chapter: 16
 section: "también Cap. 16, pp. 281"
 topic: tendon
 tags: tendon-stiffness, achilles-tendon, patellar-tendon, compliance, elastic-strain-energy
@@ -167,8 +167,8 @@ tendon-stiffness-economy: Rigidez Tendinosa Regional y Modulación del Costo Ene
 
 <!-- chunk
 id: macintosh-exphys-evidence-based-ergogenics-and-antioxidants
-chapter: 11
 page: 210
+chapter: 11
 section: "también Cap. 11, pp. 210"
 topic: clinical
 tags: ergogenic-aids, creatine, caffeine, sodium-bicarbonate, nitrates, antioxidants, anti-doping

@@ -1,8 +1,10 @@
 <!-- chunk
 id: metz-pe-definition-realistic-norms-and-pesi-screening
+chapter: 1
+page: 1
+section: "también Cap. 3, pp. 29-34; Cap. 4, pp. 47-56"
 topic: clinical
 tags: premature-ejaculation, pesi-index, ielt-norms, medical-triage, sexual-health, male-health
-page: Cap. 1, p. 1; Cap. 3, pp. 29-34; Cap. 4, pp. 47-56
 entities: organ:prostate, hormone:thyroid-hormone, clinical:pesi-assessment
 rules: pe-control-assessment, pesi-severity-bands, medical-referral-acquired-pe, realistic-sex-duration-expectations
 -->
@@ -10,9 +12,11 @@ pe-control-assessment: Definición Clínica, Baremos Normativos de Duración y C
 
 <!-- chunk
 id: metz-pe-arousal-scale-and-pelvic-floor-relaxation-skill
+chapter: 2
+page: 18
+section: "también Cap. 8, pp. 115-130"
 topic: muscle
 tags: arousal-scale, pelvic-relaxation, reverse-kegel, ejaculatory-inevitability, neuromotor-control
-page: Cap. 2, pp. 18-20; Cap. 8, pp. 115-130
 entities: muscle:bulbospongiosus, muscle:levator-ani, nerve:pudendal-nerve, clinical:pelvic-down-training
 rules: pelvic-muscle-basic-training, pelvic-muscle-relaxed-insertion, relaxation-attention-threshold
 -->
@@ -20,9 +24,10 @@ pelvic-muscle-basic-training: Escala de Excitación ($0\text{--}10$) y Habilidad
 
 <!-- chunk
 id: metz-pe-graduated-stop-start-individual-protocol
+chapter: 8
+page: 115
 topic: progression
 tags: stop-start-technique, masturbation-protocol, sensory-awareness, arousal-pacing, behavioral-training
-page: Cap. 8, pp. 115-125
 entities: organ:penis, nerve:dorsal-nerve-of-penis, clinical:stop-start-protocol
 rules: individual-stop-start-dose, arousal-continuum-step-size, avoid-desensitization-as-primary-strategy
 -->
@@ -30,9 +35,11 @@ individual-stop-start-dose: Protocolo Conductual Graduado de Parada-Arranque (*S
 
 <!-- chunk
 id: metz-pe-partner-sensate-focus-and-motionless-insertion
+chapter: 8
+page: 125
+section: "también Cap. 9, pp. 140-155"
 topic: technique
 tags: sensate-focus, couple-protocol, motionless-insertion, slow-thrusting, transition-intercourse
-page: Cap. 8, pp. 125-135; Cap. 9, pp. 140-155
 entities: muscle:pubococcygeus, clinical:sensate-focus-couple
 rules: couple-stop-start-session-structure, intercourse-acclimation-duration, relaxed-pleasuring-no-sex-window, genital-exploration-minimum-repetitions
 -->
@@ -40,9 +47,11 @@ couple-stop-start-session-structure: Transición a la Pareja: Enfoque Sensorial 
 
 <!-- chunk
 id: metz-pe-relapse-prevention-and-couple-communication
+chapter: 10
+page: 160
+section: "también Cap. 12, pp. 195-210"
 topic: clinical
 tags: relapse-prevention, sexual-communication, lapse-vs-relapse, couple-checkin, stress-management
-page: Cap. 10, pp. 160-175; Cap. 12, pp. 195-210
 entities: hormone:cortisol, clinical:relapse-prevention-pe
 rules: lapse-adaptive-response, relapse-prevention-cadence, paraphrase-communication-protocol, healthy-lifestyle-support
 -->

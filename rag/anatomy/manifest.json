@@ -1,12 +1,217 @@
 {
   "domain": "anatomy",
   "sources": [
-    { "id": "grays-anatomy-students-4ed", "title": "Gray's Anatomy for Students", "author": "Drake, Vogl, Mitchell", "year": 2020, "edition": "4th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["anatomy"], "priority": 1 } },
-    { "id": "njs6-levangie-norkin", "title": "Joint Structure and Function (Levangie & Norkin)", "author": "Levangie, Norkin", "year": 2019, "edition": "6th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["anatomy", "joints"], "priority": 2 } },
-    { "id": "moore-clinically-oriented-6ed", "title": "Clinically Oriented Anatomy", "author": "Moore, Dalley, Agur", "year": 2010, "edition": "6th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["anatomy", "clinical-anatomy"], "priority": 2 } },
-    { "id": "macintosh-skeletal-muscle-2ed", "title": "Skeletal Muscle: Form and Function", "author": "MacIntosh, Gardiner, McComas", "year": 2006, "edition": "2nd", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["muscle-physiology"], "priority": 1 } },
-    { "id": "enoka-neuromechanics-4ed", "title": "Neuromechanics of Human Movement", "author": "Roger Enoka", "year": 2008, "edition": "4th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["neuro-motor-control"], "priority": 1 } },
-    { "id": "norkin-joint-structure-6ed", "title": "Joint Structure and Function (extracto curado Gemini)", "author": "Levangie, Norkin", "year": 2019, "edition": "6th", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["joints"], "priority": 3 } },
-    { "id": "macintosh-open-textbook-exphys", "title": "Open Textbook of Exercise Physiology", "author": "varios", "year": null, "edition": "n/d", "type": "book", "evidenceTier": "expert-book", "authority": { "domains": ["exercise-physiology"], "priority": 4 } }
+    {
+      "id": "grays-anatomy-students-4ed",
+      "title": "Gray's Anatomy for Students",
+      "author": "Drake, Vogl, Mitchell",
+      "year": 2020,
+      "edition": "4th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "njs6-levangie-norkin",
+      "title": "Joint Structure and Function (Levangie & Norkin)",
+      "author": "Levangie, Norkin",
+      "year": 2019,
+      "edition": "6th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy",
+          "joints"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "moore-clinically-oriented-6ed",
+      "title": "Clinically Oriented Anatomy",
+      "author": "Moore, Dalley, Agur",
+      "year": 2010,
+      "edition": "6th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy",
+          "clinical-anatomy"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "id": "macintosh-skeletal-muscle-2ed",
+      "title": "Skeletal Muscle: Form and Function",
+      "author": "MacIntosh, Gardiner, McComas",
+      "year": 2006,
+      "edition": "2nd",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "muscle-physiology"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "enoka-neuromechanics-4ed",
+      "title": "Neuromechanics of Human Movement",
+      "author": "Roger Enoka",
+      "year": 2008,
+      "edition": "4th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "neuro-motor-control"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "norkin-joint-structure-6ed",
+      "title": "Joint Structure and Function (extracto curado Gemini)",
+      "author": "Levangie, Norkin",
+      "year": 2019,
+      "edition": "6th",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "joints"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "id": "macintosh-open-textbook-exphys",
+      "title": "Open Textbook of Exercise Physiology",
+      "author": "varios",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "exercise-physiology"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "id": "bookey-physiology-of-yoga-resumen",
+      "title": "bookey physiology of yoga resumen",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "clippinger-dance-anatomy-kinesiology-2ed",
+      "title": "clippinger dance anatomy kinesiology 2ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "haas-dance-anatomy-2ed",
+      "title": "haas dance anatomy 2ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "howse-dance-technique-3ed",
+      "title": "howse dance technique 3ed",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "lott-biomechanics-of-dance",
+      "title": "lott biomechanics of dance",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "mitchell-yoga-biomechanics",
+      "title": "mitchell yoga biomechanics",
+      "author": "",
+      "year": null,
+      "edition": "n/d",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "id": "paper-russell-2013-preventing-dance-injuries",
+      "title": "paper russell 2013 preventing dance injuries",
+      "author": "",
+      "year": null,
+      "edition": "",
+      "type": "paper",
+      "evidenceTier": "observational",
+      "authority": {
+        "domains": [
+          "anatomy"
+        ],
+        "priority": 5
+      }
+    }
   ]
 }
