@@ -1,7 +1,94 @@
 # STATUS — AG-FIT (rama `agent/fitness`)
 
-> Ciclo consolidación + B1-B8 COMPLETO (2026-08-23). Merge de main al día
-> (checkpoint docs + rag fix incluidos). Sin push; commits locales.
+> Ciclo 2 COMPLETO (2026-08-25): contrato de sesión NUTRI + B9 Modo Guiado.
+> Merge de main al día (cardio/, anatomy/, restauración UX incluidos). Sin
+> push; commits locales. Ciclo 1 (consolidación + B1-B8) abajo.
+
+## Ciclo 2 — Contrato de sesión para AG-NUTRI
+
+`src/lib/fitness/sessionExport.ts` — puente que NUTRI consumirá para su
+estimador kcal (TAREAS_USUARIO: `kcal = f(METs o trabajo mecánico
+serie×rep×carga, duración, masa corporal, intensidad)`).
+
+**CONTRATO PARA AG-NUTRI (consumir esto, no reimplementar):**
+
+| Término acordado | Identificador |
+|---|---|
+| fecha | `SessionSnapshot.dateIso` ('' si la fuente no lo permite) |
+| programa | `SessionSnapshot.program` |
+| día | `SessionSnapshot.day` |
+| ejercicios[] | `SessionSnapshot.exercises[]` |
+| id / series / reps | `.id` / `.sets` / `.reps` (media real, 1 decimal) |
+| carga? / rpe? / duraciónMin? | `.loadKg?` / `.rpe?` / `.durationMin?` |
+| duraciónTotalMin | `SessionSnapshot.durationTotalMin` |
+
+- `buildSessionSnapshot(input)` es PURO y acepta las DOS formas reales del
+  historial: logger (`completedSets`, fuente principal) y legacy de
+  TodayRoutineStack (`weightsPerSet` + `repRange`; sin RPE posible).
+- Agregación honesta: medias reales por ejercicio; carga bodyweight →
+  `loadKg: undefined` (nunca 0 fabricado); RPE solo si se registró; ejercicios
+  sin series no se exportan; duración total no medida → 0. Regla dura B8
+  heredada: **NUTRI NO debe inventar los campos ausentes.**
+- IDs con precedencia performed > prescribed > name. Fecha display es-ES del
+  logger ("vie 22 ago") → ISO vía `esDisplayDateToIso` (año inferido; dic→ene
+  retrocede año; heurística documentada). `durationSec` en sets reservado para
+  series por tiempo.
+- 11 tests en `src/lib/fitness/__tests__/sessionExport.test.ts`.
+
+## Ciclo 2 — B9 Modo entrenamiento guiado (TAREAS_USUARIO)
+
+Pantalla completa set-a-set que SE AÑADE a Hoy (REGLA DE ORO respetada:
+TodayRoutineStack y todo lo restaurado intactos — diff verificado: solo
+import + elemento `<GuidedModeLauncher/>` en FitnessToday.tsx).
+
+| Pieza | Rol |
+|---|---|
+| `src/lib/fitness/guidedSessionEngine.ts` | Motor puro (sin DOM/storage): `parseRestPeriodSeconds` ("3-5 min"→300s, extremo alto, clamp [15,600]), `buildGuidedPlan` desde prescripciones+overrides (video/cues/effortPerSet resueltos una vez), máquina de estados serie→ejercicio→fin con descanso automático (inter-serie e inter-ejercicio usa el restPeriod del ejercicio recién terminado), extras de serie, finishEarly, exportes finales. 14 tests. |
+| `src/components/fitness/guided/GuidedModeLauncher.tsx` | Entrada en Hoy: banner "Modo guiado set a set" junto a la rutina del día (mismo selectedDayIndex que TodayRoutineStack); deshabilitado honesto en descanso/día vacío. Construye el plan con las mismas fuentes READ (activeProgramStore + getProgramById + getExerciseDetails). |
+| `guided/GuidedSessionRunner.tsx` | Overlay pantalla completa mobile-first: ejercicio actual con YouTubePlayer (READ exerciseDatabase) + cues de techniquePoints + objetivo reps/esfuerzo por serie; inputs grandes peso/reps/RPE con prefill de la última serie REAL registrada; descanso cronometrado configurable (−15s/+30s/Saltar) con beep AudioContext + vibración al acabar; "+ Añadir serie extra"; Escape/salir con confirmación si hay registros. |
+
+Resumen final:
+- **Guardar sesión** → append en `fitapp_workout_history` en la FORMA REAL del
+  logger (`CompletedWorkout`: completedSets con peso/reps/rpe, duración medida,
+  volumen real). Así la sesión guiada aparece en Progreso/B8 con datos
+  legítimos — mismo contrato que FitAppWorkoutLogger.
+- **Snapshot NUTRI** → JSON visible + copiable construido con
+  `buildSessionSnapshot(sessionExportInputFromState(...))` (contrato arriba).
+- Series basura (todo a cero) se descartan; sesión sin registros no guarda
+  nada.
+
+## Verificación al cierre ciclo 2 (todo verde)
+
+- `npm run validate:fitness` ✅ · `npx tsx scripts/validateFitnessPrograms.ts`
+  ✅ (20 programas, 1494 prescripciones) · `npx tsx scripts/validateSkills.ts`
+  ✅ (13 rutas, 44 pasos, 13 enlaces).
+- `npx astro check` ✅ 0 errores / 0 warnings (con
+  `NODE_OPTIONS=--max-old-space-size=8192` en esta máquina).
+- `npm test` ✅ 286 tests (28 archivos), +25 nuevos respecto al ciclo 1
+  (sessionExport 11, guidedSessionEngine 14).
+
+## Pendientes → PRÓXIMO ciclo
+
+1. **Curación de biblioteca/extracciones para RAG Fase 1** (fitness):
+   thenx technique guides, min-max y Nippard aún no tienen dominio RAG propio
+   (hablar con AG-CORE para `rag/fitness.json` si procede).
+2. **Consumo NUTRI del contrato**: cuando AG-NUTRI monte el estimador kcal,
+   leerá snapshots desde el historial (ambas formas ya soportadas). Si prefiere
+   endpoint/bridge dedicado, coordinar firma.
+3. **Fases 2-3 del Plan Maestro** (reglas DomainRule, pre-workout gate,
+   guardarraíles intra-sesión, debrief): el motor guiado deja el estado de
+   sesión aislado donde engancharlas.
+
+## Notas de territorio (ciclo 2)
+
+- Intocable verificado: `anatomy/**`, `nutrition/**`, `cardio/**`,
+  LibraryMuscles/muscles.astro, ui/tokens/nav. Única edición fuera de archivos
+  nuevos: FitnessToday.tsx (+3 líneas aditivas).
+- Worktree SIEMPRE limpio entre tareas (commits inmediatos por paso).
+
+---
+
+# HISTÓRICO — Ciclo 1 (consolidación + B1-B8, 2026-08-23)
 
 ## Bloque A (refactor) — COMPLETO
 
@@ -72,17 +159,11 @@
   `src/data/fitness/__tests__/progressionPathLinks.test.ts` (4) y
   `volumeStats.test.ts` extendido (B8, 3 nuevos).
 
-## Pendientes → PRÓXIMO ciclo (TAREAS_USUARIO, ya aprobadas por el usuario)
+## Pendientes del ciclo 1 → RESUELTOS en ciclo 2
 
-1. **B9 — Modo entrenamiento guiado**: pantalla completa set-a-set con video,
-   descansos cronometrados y avance de serie.
-2. **Contrato export de sesión para NUTRI**: exponer datos reales de sesión
-   (series/reps/carga/duración/RPE por ejercicio) consumibles por el estimador
-   kcal de AG-NUTRI (ciclo 2). La fuente ya existe: `fitapp_workout_history`
-   con `completedSets` — falta formalizar el contrato y el endpoint/bridge.
-3. **Curación de biblioteca/extracciones para RAG Fase 1** (fitness):
-   entoncesx technique guides, min-max y Nippard aún no tienen dominio RAG
-   propio (hablar con AG-CORE para `rag/fitness.json` si procede).
+1. ~~B9 — Modo entrenamiento guiado~~ ✅ (ver ciclo 2).
+2. ~~Contrato export de sesión para NUTRI~~ ✅ `sessionExport.ts` (ver ciclo 2).
+3. Curación de biblioteca/extracciones para RAG Fase 1 (fitness):
 
 ## Notas de territorio
 
