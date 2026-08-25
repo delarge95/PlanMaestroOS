@@ -1,6 +1,6 @@
 # 01 · Modelo de cobro AG-SERV
 
-> v1 interna · 2026-08-25 · Estado: **propuesta pendiente de validación del usuario**. Este documento es la fuente de verdad de las bandas tarifarias, la fórmula de presupuesto y los términos comerciales. Todo catálogo (`02`–`04`) expresa **solo horas**; todo precio deriva de aquí por fórmula visible. Ningún número sin origen.
+> v1.1 interna · 2026-08-25 · Estado: **propuesta pendiente de validación del usuario**. Este documento es la fuente de verdad de las bandas tarifarias, la fórmula de presupuesto y los términos comerciales. Todo catálogo (`02`–`04`) expresa **solo horas**; todo precio deriva de aquí por fórmula visible. Ningún número sin origen.
 
 ---
 
@@ -34,14 +34,27 @@ Regla: las bandas de §3 deben quedar **dentro del corredor** formado por estas 
 
 Cuatro niveles transversales a todos los servicios. La banda es la **tarifa efectiva USD/hora** aplicada a las horas de ese nivel.
 
-| Nivel | Nombre | Definición operativa | Banda USD/h | Ancla principal |
-|---|---|---|---|---|
-| **N1** | Rutina | Bajo juicio técnico: setups repetibles, conversiones simples, QA, exports, tareas guiadas. Reversible y poco riesgosa. | **20–28** | Plataforma LATAM 15–30/h (research_00) · piso freelance global (doc-03) |
-| **N2** | Estándar | Trabajo profesional típico del perfil: modelado/optimización media, integración web convencional, shading PBR, animación básica. | **28–40** | Middle Unity Colombia 27–35/h (doc-03 · Lemon.io) |
-| **N3** | Especializada | Requiere criterio experto: shaders custom, arquitectura de web apps 3D, tracking/recon complejo, pipelines, performance crítica. | **40–60** | Interpolación LATAM-senior: 35/h (Lemon.io LATAM) → 57/h (mediana US, doc-03) |
-| **N4** | Muy especializada / I+D | Territorio digital twin, simulación, IA integrada a medida, problemas sin receta. Alto riesgo y alto valor de negocio. | **60–85** | Strong senior SF 72–89/h descontado ubicación COL (~0.85×); day rate US 75–100/h (research_13/04) |
+> **v1.1 — Reconciliación de bandas:** los precios publicados en los catálogos `02`/`03`/`05` fueron calculados con la **banda operativa** (columna principal). El corredor amplio se conserva como referencia de techo/piso para la calibración trimestral (§8) y no debe usarse para presupuestar hasta que un cierre real lo justifique. Detalle del hallazgo: la v1 definía solo el corredor amplio, pero toda la aritmética publicada usaba la banda operativa — se documenta aquí para restaurar la trazabilidad (regla REGLAS §3.5).
+
+| Nivel | Nombre | Definición operativa | **Banda operativa USD/h (presupuesta)** | Corredor amplio (ref. calibración) | Ancla principal |
+|---|---|---|---|---|---|
+| **N1** | Rutina | Bajo juicio técnico: setups repetibles, conversiones simples, QA, exports, tareas guiadas. Reversible y poco riesgosa. | **25–30** | 20–28 | Plataforma LATAM 15–30/h (research_00) · piso freelance global (doc-03) |
+| **N2** | Estándar | Trabajo profesional típico del perfil: modelado/optimización media, integración web convencional, shading PBR, animación básica. | **28–35** | 28–40 | Middle Unity Colombia 27–35/h (doc-03 · Lemon.io) |
+| **N3** | Especializada | Requiere criterio experto: shaders custom, arquitectura de web apps 3D, tracking/recon complejo, pipelines, performance crítica. | **35–45** | 40–60 | Interpolación LATAM-senior: 35/h (Lemon.io LATAM) → 57/h (mediana US, doc-03) |
+| **N4** | Muy especializada / I+D | Territorio digital twin, simulación, IA integrada a medida, problemas sin receta. Alto riesgo y alto valor de negocio. | **45–55** | 60–85 | Strong senior SF 72–89/h descontado ubicación COL (~0.85×); day rate US 75–100/h (research_13/04) |
+
+Nota v1.1: el corredor amplio N3/N4 supera a la operativa (40–60 vs 35–45 · 60–85 vs 45–55): es intencional — la banda operativa es conservadora mientras no haya cierres propios que validen tarifa premium. Tras 3 proyectos cerrados (§8) se decide si la operativa sube hacia el corredor.
 
 Confianza del conjunto: `inferred` — derivada de benchmarks públicos citados; **no validada aún contra cierres reales propios**. Primera calibración: tras los primeros 3 proyectos cerrados (ver §8).
+
+### 3.1 Regla de redondeo operativa (extraída de los catálogos ya calculados)
+
+```text
+redondear(min) = floor al múltiplo de:  10 si subtotal < 500 · 50 si 500–1999 · 100 si ≥ 2000
+redondear(max) = ceil  al múltiplo de:  10 si subtotal < 2000 · 100 si ≥ 2000
+```
+
+Los mínimos redondean hacia abajo con granularidad gruesa (conservador) y los máximos hacia arriba con granularidad fina (precisos): así el rango nunca sobre-vende el piso ni sub-cobra el techo. Tolerancia de auditoría: ±10 USD por extremo (único caso frontera detectado: F1-N1 min 125→130).
 
 ## 4. Fórmula de presupuesto
 
@@ -54,7 +67,7 @@ presupuesto   = [ redondear_a_50(subtotal_min) , redondear_a_50(subtotal_max) ] 
 Reglas de la fórmula:
 
 1. **Siempre dos cifras** (min–max). Prohibido publicar punto medio como "el precio".
-2. Redondeo hacia arriba a múltiplos de USD 50 (min y max por separado).
+2. Redondeo según §3.1 (min hacia abajo, max hacia arriba).
 3. Las horas provienen SIEMPRE del catálogo (`02`–`04`); prohibido inventar horas fuera de catálogo sin registrar el nuevo ítem primero.
 4. La gestión de proyecto/comunicación está incluida hasta el **10 % de las horas totales**; el excedente se agrega como subtarea explícita (N2).
 5. Cada estimación registra: fecha, versión de catálogo usada, nivel elegido por subtarea, confidence (`explicit | inferred | qualitative`) y supuestos del brief. Sin registro, la estimación no existe.
@@ -63,10 +76,10 @@ Ejemplo mínimo (trazabilidad completa):
 
 ```text
 Servicio A1 Render estático, subtarea "Setup escena/iluminación", nivel N2, 6–10 h
-  → min 6×28=168 · max 10×40=400
+  → min 6×28=168 · max 10×35=350
 Subtarea "Render + post por imagen" (lote 3 imágenes), N1, 4–7 h
-  → min 4×20=80 · max 7×28=196
-Subtotal: 248–596 → redondeado: 250–600 USD (antes de modificadores)
+  → min 4×25=100 · max 7×30=210
+Subtotal: 268–560 → redondeado: 260–600 USD (antes de modificadores)
 ```
 
 ## 5. Modificadores
@@ -132,3 +145,4 @@ Prohibido acumular urgencia × crítico (elige el mayor). Los modificadores nunc
 | Versión | Fecha | Cambio |
 |---|---|---|
 | v1 | 2026-08-25 | Creación. Bandas N1–N4 derivadas de anclas doc-03/research. Pendiente validación usuario. |
+| v1.1 | 2026-08-25 | **Reconciliación de bandas**: se separa banda operativa (25–30/28–35/35–45/45–55, la que usan todos los precios ya publicados en 02/03/05) del corredor amplio de referencia (20–28/28–40/40–60/60–85, queda para calibración). Se añade §3.1 regla de redondeo operativa con tolerancia ±10. Ejemplo §4 recalculado con bandas operativas. Sin cambio en ningún precio publicado. |
