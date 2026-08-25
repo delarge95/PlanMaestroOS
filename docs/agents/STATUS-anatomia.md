@@ -1,5 +1,39 @@
 # STATUS — AG-ANATOM (rama `agent/anatomia`)
 
+> Ciclo 7 COMPLETO (2026-08-24): **REDESIGN UX + FIXES DE SELECCIÓN +
+> COBERTURA 3D** (mandato usuario tras validar el ciclo 6).
+> - FIX selección: 1er click SIEMPRE selecciona el CONJUNTO (antes saltaba a
+>   la pieza por grupos hoja de 1) — clicks siguientes descienden: subconjunto
+>   → pieza; click en la misma pieza sube un nivel.
+> - FIX pantalla en negro al aislar: el caché de AABB por pieza nunca se
+>   poblaba (calculado perezosamente que nunca llegaba a ejecutarse) → todas
+>   las piezas fallaban el test de aislamiento. FIX: AABB por pieza en carga.
+> - FIX cráneo duplicado: dedup por REGIÓN skull completa usando las ZONAS
+>   DEL GRAFO (bones.ts → zone head-jaw → skull; regex corregida: backticks y
+>   overview-skeleton en cualquier posición de modelMeshes) + fallback
+>   tolerante a typos del export (r pegada, plural, teeth/tooth). El cráneo
+>   coloreado es el único visible en vista Completo.
+> - FIX highlight residual: estado PRÍSTINO de materiales guardado en carga
+>   (__origColor/__origEmissive/__origEmissiveIntensity); hover y highlight
+>   restauran desde prístino; el hover no pisa la selección.
+> - FIX clasificación de capas: fascias y retináculos por NOMBRE (Brachial_
+>   fasciar estaba en ligamentos — el contenedor "capsules, ligaments,
+>   fasciae" los mezclaba); vainas tendinosas (vaginae tendinum) → tendón;
+>   zona orbicularis y fibrous sheaths → ligamento. Fascia: 17→28.
+> - **Rediseño UX**: layout 2 columnas (visor izquierda + panel derecho con
+>   pestañas Estructuras/Ficha y scroll propio — la ficha ya no obliga a
+>   scrollear la página); lista con click=seleccionar+enfocar y doble
+>   click=+aislar; Ocultar/Mostrar TOGGLE en sitio (ficha + barra de estado);
+>   controles "Capas y filtros" colapsables con resumen; barra de estado bajo
+>   el visor con breadcrumb jerárquico y acciones rápidas.
+> - **Reporte cobertura 3D** (cobertura-3d.md/json): 211/267 mapeadas, 56 sin
+>   equivalente directo con motivo (sin GLB de torso/cabeza/cuello) y
+>   candidato parcial por nombre (pieza que podría contenerla).
+> 254 tests verdes (31 de composite), astro check 0/0.
+> NOTA verificación: el dblclick no se sintetiza vía CDP headless — la
+> interacción de doble click requiere validación en navegador real.
+> Sin push; commits locales.
+
 > Ciclo 6 COMPLETO (2026-08-24): **SELECCIÓN JERÁRQUICA + FILTROS DE
 > SELECCIÓN + AUDIT UX** (mandato usuario tras validar el ciclo 5).
 > - Selección por fases N niveles: conjunto → subconjunto(s) → pieza, con
