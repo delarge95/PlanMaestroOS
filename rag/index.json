@@ -21,11 +21,6 @@
       "sources": 15,
       "chunks": 61
     },
-    "english": {
-      "version": "4.0.0",
-      "sources": 2,
-      "chunks": 7
-    },
     "fitness": {
       "version": "4.0.0",
       "sources": 26,
