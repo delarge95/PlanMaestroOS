@@ -1,5 +1,27 @@
 # STATUS — AG-ANATOM (rama `agent/anatomia`)
 
+> Ciclo 6 COMPLETO (2026-08-24): **SELECCIÓN JERÁRQUICA + FILTROS DE
+> SELECCIÓN + AUDIT UX** (mandato usuario tras validar el ciclo 5).
+> - Selección por fases N niveles: conjunto → subconjunto(s) → pieza, con
+>   breadcrumb navegable; los subconjuntos se derivan del nombre de pieza
+>   (tokens menos los de la estructura) — p.ej. tríceps → cada cabeza.
+> - Doble click = aislar la unidad actual; doble click fuera = desaislar.
+> - FILTROS DE SELECCIÓN (fila propia): qué tipos son clickeables/aislables —
+>   kinds no seleccionables son transparentes al ray (click-through).
+> - Aislamiento ESPACIAL: incluye las piezas de los kinds seleccionados cuyo
+>   AABB cruza la caja de la unidad (p.ej. aislar rodilla con
+>   huesos+ligamentos+cartílagos las incluye todas).
+> - FIX cráneo duplicado: dedup por REGIÓN skull completa (zonas del grafo,
+>   no solo AABB) — el cráneo coloreado es el único visible; también
+>   clasificación fina del contenedor Overlays (ligamentos/bursas/tendones
+>   superficiales, NO piel — no existe malla de piel en los GLB).
+> - FIX highlight residual: estado PRÍSTINO de materiales guardado en carga
+>   (el hover mutaba antes del highlight y el "original" guardado era el
+>   hover → restauración sucia). Hover y highlight restauran desde prístino.
+> - FIX click-through: piezas hiddenByDup ya no son raycasteables (antes
+>   interceptaban el click y el walk las rechazaba → "no pasa nada").
+> 254 tests verdes (31 de composite), astro check 0/0, verificado headless.
+
 > Ciclo 5 COMPLETO (2026-08-24): **MODELO COMPUESTO + EXPERIENCIA DE PRIMERA**.
 > Mandato usuario: merge de los 5 GLB en un solo visor con focus por región,
 > capas multi-seleccionables (12 tipos), selección por fases (estructura →
@@ -30,6 +52,44 @@
 `rag/anatomy/**`, `public/models/anatomy/**`, `docs` propios. NO tocado:
 resto de fitness (TodayRoutineStack y restaurados de main), nutrition,
 ui/tokens/nav (ticket AG-CORE).
+
+## Ciclo 6 — selección jerárquica, filtros de selección, audit UX
+
+**Modelo de interacción (mandato usuario)**:
+- **Click = profundizar**: conjunto → subconjunto → pieza (N niveles; los
+  subconjuntos derivan de `buildSubgroups`: tokens del nombre de pieza menos
+  los de la estructura). Click en la misma pieza = subir un nivel.
+- **Doble click = aislar** la unidad del nivel actual; **doble click fuera =
+  desaislar**. El aislamiento NIDIFICA: aislar conjunto → doble click en
+  subconjunto → re-aisla el subconjunto.
+- **Filtros de selección** (fila "Selección", chips discontinuos): qué kinds
+  son clickeables. Kinds no seleccionables son transparentes al ray.
+  **El aislamiento es ESPACIAL**: caja de la unidad (AABB +12%) ∩ piezas de
+  los kinds seleccionados — aislar la rodilla con huesos+ligamentos+cartílagos
+  las incluye todas; con solo músculos, solo las que cruzan la caja.
+
+**Fixes**:
+- **Cráneo duplicado**: las piezas de cráneo del skeleton quedaban visibles
+  (la asignación de región por nombre fallaba con los typos del export:
+  "Temporal_boner" vs "Temporal_bones"). FIX: región del skeleton asignada
+  por ZONA DEL GRAFO (bones.ts → zone → región; regex corregida: backticks y
+  overview-skeleton en cualquier posición de modelMeshes) + fallback tolerante
+  (r pegada, plural, teeth/tooth) + dedup por REGIÓN skull completa.
+- **Highlight residual**: el hover mutaba emissive ANTES del highlight; el
+  "original" guardado era el hover → restauración sucia. FIX: estado prístino
+  por material en carga (__origColor/__origEmissive/__origEmissiveIntensity);
+  hover y highlight restauran desde prístino; el hover no pisa la selección.
+- **Click-through de piezas dedup**: las hiddenByDup interceptaban el ray y el
+  walk las rechazaba → clicks sin efecto sobre zonas con doble copia. FIX:
+  `mesh.raycast = () => {}` para ocultas por dedup.
+
+**Audit UX aplicado**: filas de control separadas y etiquetadas (Focus /
+Capas visibles / Selección) con estilos distintos (relleno=visibilidad,
+discontinuo=seleccionable); breadcrumb jerárquico clickeable (Nielsen:
+libertad del usuario + visibilidad del estado); hints contextuales por nivel
+("Conjunto de N piezas — click… doble click para aislar"); badges de estado
+siempre visibles; desocultar todo con un botón; Esc como salida universal;
+etiquetas de grupo legibles ("(estructura)" → nombre de la estructura).
 
 ## Ciclo 5 — modelo compuesto + experiencia de primera
 
