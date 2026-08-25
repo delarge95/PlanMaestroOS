@@ -1,0 +1,563 @@
+{
+  "businessVocabulary": [
+    {
+      "term": "Deliverables",
+      "register": "Formal / Professional",
+      "definition": "The tangible products, code milestones, or documentation that must be delivered upon project completion.",
+      "example": "All Q3 deliverables have been reviewed and approved by the technical lead.",
+      "typicalMistakeES": "Avoid translating as 'entregaciones'; the standard technical term in English is always 'deliverables'."
+    },
+    {
+      "term": "Scope Creep",
+      "register": "Professional",
+      "definition": "The uncontrolled growth or addition of features in a project without adjustments to time, cost, and resources.",
+      "example": "We need to push back on adding multiplayer support to avoid scope creep in this sprint.",
+      "typicalMistakeES": "Do not say 'scope enlargement'; use 'scope creep' for uncontrolled requirement expansion."
+    },
+    {
+      "term": "Bandwidth",
+      "register": "Semi-formal",
+      "definition": "Individual or team capacity and mental availability to take on additional tasks.",
+      "example": "I would love to help optimize those shaders, but I do not have the bandwidth this week.",
+      "typicalMistakeES": "Saying 'I do not have time' is common, but 'I do not have the bandwidth' is more idiomatic in tech teams."
+    },
+    {
+      "term": "Trade-off",
+      "register": "Professional",
+      "definition": "A balance achieved between two desirable but incompatible technical features or constraints.",
+      "example": "We made a conscious trade-off between visual fidelity and WebGL loading performance.",
+      "typicalMistakeES": "Do not translate literally as 'compromise' if you mean technical balancing; use 'trade-off'."
+    },
+    {
+      "term": "Blocker",
+      "register": "Professional",
+      "definition": "An obstacle or impediment that prevents progress on a specific task or workflow.",
+      "example": "The missing API authentication token is currently a critical blocker for our backend integration.",
+      "typicalMistakeES": "Avoid saying 'impediment' or 'obstacle' in daily agile standups; 'blocker' is universal."
+    },
+    {
+      "term": "Action Item",
+      "register": "Formal / Professional",
+      "definition": "A specific, documented task assigned to an individual during a meeting to be completed by a deadline.",
+      "example": "Let's capture this action item and assign it to Alex before wrapping up the call.",
+      "typicalMistakeES": "Do not say 'pending task'; 'action item' is the standard meeting terminology."
+    },
+    {
+      "term": "Bottleneck",
+      "register": "Professional",
+      "definition": "A point of congestion in a system or workflow that slows down overall performance or production.",
+      "example": "Draw calls on the CPU thread were the primary rendering bottleneck on mobile devices.",
+      "typicalMistakeES": "Often confused with 'problem'; 'bottleneck' specifically refers to throughput restriction."
+    },
+    {
+      "term": "Sign-off",
+      "register": "Formal",
+      "definition": "Official written agreement, approval, or validation on a completed project phase or document.",
+      "example": "We cannot deploy the build to production until we receive formal sign-off from QA.",
+      "typicalMistakeES": "Do not say 'firm' or 'signature' for digital software approval; use 'sign-off'."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scenario-1",
+      "title": "Daily Agile Standup",
+      "objective": "Concise daily update covering yesterday's accomplishments, today's planned tasks, and raising blockers without rambling.",
+      "dialog": [
+        {
+          "speaker": "Scrum Master",
+          "text": "Good morning team, let's start the standup. Alex, you're up."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Morning everyone. Yesterday, I finished optimizing the drone propeller rotation logic and closed issue 142."
+        },
+        {
+          "speaker": "Scrum Master",
+          "text": "Great. What's on your radar for today?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Today I'm integrating the exploded view lerp interpolation and hooking up the technical metadata UI panels."
+        },
+        {
+          "speaker": "Scrum Master",
+          "text": "Any blockers in your way?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "No hard blockers, but I'll need a quick 5-minute sync with Elena later regarding the WebGL canvas resize event."
+        },
+        {
+          "speaker": "Elena (Frontend Lead)",
+          "text": "Sure thing Alex, ping me right after this call and we'll knock it out."
+        },
+        {
+          "speaker": "Scrum Master",
+          "text": "Awesome, thanks Alex. Let's move over to David."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "Yesterday I wrapped up / closed [Task]",
+          "register": "Semi-formal"
+        },
+        {
+          "en": "Today I am focusing on / tackling [Task]",
+          "register": "Semi-formal"
+        },
+        {
+          "en": "No blockers on my end",
+          "register": "Professional"
+        },
+        {
+          "en": "Let's take this offline to keep the standup concise",
+          "register": "Professional"
+        }
+      ],
+      "variations": [
+        "I'm currently blocked on [X] because the API endpoint is returning a 500 status code.",
+        "My primary objective today is getting the pull request ready for review."
+      ],
+      "typicalMistakesES": "Saying 'I am working in...' instead of 'I am working on...', or using 'I have a problem' instead of 'I have a blocker'."
+    },
+    {
+      "id": "scenario-2",
+      "title": "Sprint Planning & Capacity Estimation",
+      "objective": "Clarifying requirements, challenging unrealistic estimates, and confirming team velocity.",
+      "dialog": [
+        {
+          "speaker": "Product Owner",
+          "text": "For this sprint, we'd like to include the cross-section slicing tool and full VR headset support."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Looking at our velocity and available bandwidth, committing to both might stretch us too thin."
+        },
+        {
+          "speaker": "Product Owner",
+          "text": "Why do you think VR support adds that much overhead?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Implementing cross-section shaders is roughly a 5-point story, but VR requires custom input controllers and a 90 FPS budget guarantee."
+        },
+        {
+          "speaker": "Lead Architect",
+          "text": "I agree with Alex. If we prioritize the slicing tool first, we can guarantee delivery by Friday."
+        },
+        {
+          "speaker": "Product Owner",
+          "text": "Fair point. Let's descoping VR to the next sprint and refine the acceptance criteria for cross-sections."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Sounds like a solid plan. That puts our total sprint commitment at 32 story points, right within our comfortable range."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "That might stretch our bandwidth too thin",
+          "register": "Professional"
+        },
+        {
+          "en": "Let's break this down into smaller sub-tasks",
+          "register": "Professional"
+        },
+        {
+          "en": "What are the core acceptance criteria for this story?",
+          "register": "Formal"
+        },
+        {
+          "en": "I suggest we descope [X] to safeguard the core milestone",
+          "register": "Professional"
+        }
+      ],
+      "variations": [
+        "Could you clarify the edge cases for this user story?",
+        "Based on past sprint velocity, 8 points is a safer estimate."
+      ],
+      "typicalMistakesES": "Translating 'puntos de historia' as 'history points' instead of 'story points', or saying 'we are compromised' instead of 'we have committed'."
+    },
+    {
+      "id": "scenario-3",
+      "title": "Code Review & PR Technical Feedback",
+      "objective": "Providing constructive, empathetic, and actionable code feedback without sounding accusatory.",
+      "dialog": [
+        {
+          "speaker": "Reviewer (Alex)",
+          "text": "Thanks for opening this PR! The architecture for the asset loader looks very clean."
+        },
+        {
+          "speaker": "Author",
+          "text": "Thanks Alex! I tried to follow the factory pattern we discussed."
+        },
+        {
+          "speaker": "Reviewer (Alex)",
+          "text": "I left a non-blocking suggestion on line 45 regarding caching the texture references."
+        },
+        {
+          "speaker": "Author",
+          "text": "Good catch. Do you think instantiating them inside the loop causes unnecessary GC allocations?"
+        },
+        {
+          "speaker": "Reviewer (Alex)",
+          "text": "Exactly. Moving the array allocation outside the Update loop will prevent garbage collection hitches on low-end hardware."
+        },
+        {
+          "speaker": "Author",
+          "text": "Makes total sense. I'll push an updated commit in 10 minutes."
+        },
+        {
+          "speaker": "Reviewer (Alex)",
+          "text": "Awesome. Once that's in and CI passes, I'll hit approve and merge."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "Nit: [minor suggestion]",
+          "register": "Informal / Tech"
+        },
+        {
+          "en": "Non-blocking question / thought:",
+          "register": "Professional"
+        },
+        {
+          "en": "Consider refactoring this to avoid GC pressure",
+          "register": "Professional"
+        },
+        {
+          "en": "LGTM (Looks good to me), approved!",
+          "register": "Tech standard"
+        }
+      ],
+      "variations": [
+        "Could we extract this helper method into a separate utility class for better testability?",
+        "This approach works well, but have we considered thread safety when writing to the cache?"
+      ],
+      "typicalMistakesES": "Writing harsh commands like 'Change this' instead of collaborative suggestions like 'Consider changing this' or 'What do you think about...'."
+    },
+    {
+      "id": "scenario-4",
+      "title": "Respectful Disagreement & Technical Pushback",
+      "objective": "Pushing back on an architectural decision or deadline using data, benchmarks, and objective trade-offs.",
+      "dialog": [
+        {
+          "speaker": "Tech Lead",
+          "text": "I think we should switch from glTF format to raw OBJ files to speed up mesh parsing."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "I see where you're coming from regarding parser simplicity, but I have concerns about binary payload size."
+        },
+        {
+          "speaker": "Tech Lead",
+          "text": "Is the payload difference really that significant for our drone models?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "In our benchmarks, binary glTF (.glb) with Draco compression reduced asset download size by 70% compared to raw OBJ text files."
+        },
+        {
+          "speaker": "Tech Lead",
+          "text": "That's a substantial difference for WebGL first load times."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Exactly. If network latency is our primary bottleneck, sticking with glTF protects our under-3-second load target."
+        },
+        {
+          "speaker": "Tech Lead",
+          "text": "You've convinced me with the benchmark data. Let's keep glTF."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "I understand your rationale, but my concern is [X]",
+          "register": "Formal"
+        },
+        {
+          "en": "The benchmark data indicates that [X] performs significantly better",
+          "register": "Professional"
+        },
+        {
+          "en": "What are the specific trade-offs we're willing to accept here?",
+          "register": "Professional"
+        },
+        {
+          "en": "Let's evaluate the impact on end-user latency",
+          "register": "Professional"
+        }
+      ],
+      "variations": [
+        "I agree with the end goal, but I'd suggest an alternative implementation to minimize technical debt.",
+        "Could we benchmark both approaches before locking in the decision?"
+      ],
+      "typicalMistakesES": "Saying 'I am not agree' instead of 'I disagree' or 'I have a different perspective'."
+    },
+    {
+      "id": "scenario-5",
+      "title": "Stakeholder Negotiation & Scope Control",
+      "objective": "Managing client expectations, presenting viable trade-offs, and negotiating delivery milestones.",
+      "dialog": [
+        {
+          "speaker": "Client",
+          "text": "We need the 3D configurator live next Monday, and we also want animated assembly step videos included."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "We can certainly deliver the interactive 3D configurator by Monday, but adding high-fidelity animations would compromise QA testing."
+        },
+        {
+          "speaker": "Client",
+          "text": "Both features are very important for our upcoming product demo."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Here is what I propose: we ship Phase 1 with full interactive part inspection on Monday, and roll out the animated sequences in Phase 2 the following week."
+        },
+        {
+          "speaker": "Client",
+          "text": "Will Phase 1 be fully stable and mobile-responsive?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Yes, 100%. Phasing it this way ensures zero glitches during your executive demo."
+        },
+        {
+          "speaker": "Client",
+          "text": "That sounds sensible. Let's proceed with that phased rollout."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "To guarantee stability, I propose a phased rollout",
+          "register": "Formal / Professional"
+        },
+        {
+          "en": "We can commit to [Feature A] for the upcoming milestone",
+          "register": "Professional"
+        },
+        {
+          "en": "Adding this scope will require shifting the delivery timeline by [X] days",
+          "register": "Professional"
+        },
+        {
+          "en": "Let's align on what constitutes the MVP (Minimum Viable Product)",
+          "register": "Professional"
+        }
+      ],
+      "variations": [
+        "If the deadline is fixed, we need to reduce the scope of secondary animations.",
+        "Let's prioritize the mission-critical workflows first."
+      ],
+      "typicalMistakesES": "Saying 'It is impossible' instead of framing constructive alternatives like 'To deliver on that date, we recommend focusing on...'"
+    },
+    {
+      "id": "scenario-6",
+      "title": "Remote Video Call Troubleshooting & Sync",
+      "objective": "Handling screen sharing, audio troubleshooting, and establishing an effective pair programming flow.",
+      "dialog": [
+        {
+          "speaker": "Colleague",
+          "text": "Hey Alex, thanks for hopping on the call. Can you hear me clearly?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Loud and clear! Let me go ahead and share my screen to show you the shader issue."
+        },
+        {
+          "speaker": "Colleague",
+          "text": "Got it, I can see your Unity editor now."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Notice how the depth buffer clips when we zoom into the drone flight controller here?"
+        },
+        {
+          "speaker": "Colleague",
+          "text": "Ah, looks like the near clipping plane on the main camera is set too high."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Let me adjust it from 0.3 to 0.01 and re-run... Perfect, the clipping is gone."
+        },
+        {
+          "speaker": "Colleague",
+          "text": "Nice work! I'll let you get back to it. Thanks for the quick sync."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Appreciate your eyes on this! Have a great afternoon."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "You're coming through loud and clear",
+          "register": "Casual / Professional"
+        },
+        {
+          "en": "Let me share my screen / Can you see my display?",
+          "register": "Professional"
+        },
+        {
+          "en": "Thanks for hopping on this quick sync",
+          "register": "Semi-formal"
+        },
+        {
+          "en": "I'll let you get back to your focus time",
+          "register": "Polite / Professional"
+        }
+      ],
+      "variations": [
+        "You cut out for a second there, could you repeat that last point?",
+        "I'm going to drop the meeting link in the team Slack channel."
+      ],
+      "typicalMistakesES": "Saying 'I am seeing your screen' instead of 'I can see your screen', or 'You are muted' without specifying."
+    },
+    {
+      "id": "scenario-7",
+      "title": "Technical Small Talk & Networking",
+      "objective": "Building natural rapport with international colleagues before diving into technical agendas.",
+      "dialog": [
+        {
+          "speaker": "Engineering Manager",
+          "text": "Morning Alex! How was your weekend?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Pretty good, thanks! I spent some time experimenting with the new WebGPU compute shader samples."
+        },
+        {
+          "speaker": "Engineering Manager",
+          "text": "Oh really? How do you find WebGPU compared to WebGL 2.0?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "The compute capabilities are fantastic. The API is definitely more verbose, but the multithreading advantages are huge."
+        },
+        {
+          "speaker": "Engineering Manager",
+          "text": "That's exciting for our roadmap. How's the weather down in Colombia today?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Nice and warm, around 24 degrees. How are things on your side?"
+        },
+        {
+          "speaker": "Engineering Manager",
+          "text": "A bit rainy here in Seattle, as usual! Alright, let's dive into our sprint review."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "How was your weekend? / How are things on your side?",
+          "register": "Casual / Friendly"
+        },
+        {
+          "en": "I spent some time checking out [Tech]",
+          "register": "Casual"
+        },
+        {
+          "en": "It's definitely more verbose, but the upside is [X]",
+          "register": "Technical"
+        },
+        {
+          "en": "Alright, let's dive into the agenda",
+          "register": "Transition phrase"
+        }
+      ],
+      "variations": [
+        "Did you catch the keynote from the developer conference yesterday?",
+        "Keeping busy with the new release, but making solid headway."
+      ],
+      "typicalMistakesES": "Answering 'Fine' with no elaboration, which shuts down rapport building; always add a short interesting hook."
+    },
+    {
+      "id": "scenario-8",
+      "title": "Salary Negotiation & Compensation Opener",
+      "objective": "Articulating market rate expectations, establishing total compensation scope, and maintaining a collaborative stance.",
+      "dialog": [
+        {
+          "speaker": "Recruiter",
+          "text": "We're very impressed by your Unity WebGL portfolio, Alex. What are your salary expectations for this remote role?"
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "Based on my research for international remote Real-Time 3D and Technical Art roles, I am targeting a base range of $3,500 to $4,500 USD per month."
+        },
+        {
+          "speaker": "Recruiter",
+          "text": "Our budgeted range for this position is currently between $3,200 and $3,800 USD."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "I appreciate the transparency. $3,800 is within my viable range, provided the overall package includes standard equipment stipends and flexible time off."
+        },
+        {
+          "speaker": "Recruiter",
+          "text": "Yes, we offer an annual hardware allowance and unlimited PTO."
+        },
+        {
+          "speaker": "Developer (Alex)",
+          "text": "That sounds very competitive. Given the strong alignment with my CAD-to-realtime optimization background, I'm confident we can find a mutually beneficial figure."
+        },
+        {
+          "speaker": "Recruiter",
+          "text": "Excellent, I'll prepare the formal offer letter reflecting that discussion."
+        }
+      ],
+      "keyPhrases": [
+        {
+          "en": "Based on current market benchmarks for remote technical art roles...",
+          "register": "Formal"
+        },
+        {
+          "en": "I am targeting a base range of [X to Y] USD",
+          "register": "Professional"
+        },
+        {
+          "en": "I am open to discussing the total compensation package, including benefits and equity",
+          "register": "Formal"
+        },
+        {
+          "en": "I am confident we can arrive at a mutually rewarding agreement",
+          "register": "Professional"
+        }
+      ],
+      "variations": [
+        "Could you share the budgeted range for this position?",
+        "My primary focus is finding the right technical fit, but my salary target reflects my specialized WebGL background."
+      ],
+      "typicalMistakesES": "Saying 'I want to win $4,000' (literal translation of 'quiero ganar') instead of 'I am targeting a salary of $4,000' or 'My rate expectation is $4,000'."
+    }
+  ],
+  "starAnswers": [
+    {
+      "id": "star-1",
+      "title": "STAR 1 — WebGL Performance Optimization (TwinSight X500)",
+      "sourceCitation": "doc-23 §4 (TwinSight X500 Deep-Dive) & §7 (Technical Challenges)",
+      "situation": "In the TwinSight X500 drone assembly inspection prototype, initial WebGL builds on low-tier laptops suffered from frame rate drops down to 22 FPS, long 15-second loading screens, and over 1,200 draw calls due to unoptimized CAD-derived mesh parts.",
+      "task": "My objective was to optimize the entire rendering and asset pipeline to guarantee stable 60 FPS in standard browser tabs with an initial download payload of under 25MB and zero stutter during interactive camera navigation.",
+      "action": "I established a multi-stage optimization pipeline: First, in Blender, I cleaned up CAD geometry, welded duplicate vertices, and baked normal maps from high-poly components to maintain crisp mechanical chamfers while slashing polygon count by 75%. Second, in Unity, I configured static and dynamic GPU instancing, combined mesh materials to reduce unique shader states, and configured custom texture compression (ASTC/DXT5). Third, I implemented custom WebGL memory heap constraints and lazy-loaded technical documentation panels.",
+      "result": "The final WebGL build maintained rock-solid 60 FPS performance across tested browsers, slashed total draw calls by over 80% (down to under 180 per frame), and cut initial load time to under 4 seconds. Usability evaluations confirmed zero interaction lag during complex exploded view transitions."
+    },
+    {
+      "id": "star-2",
+      "title": "STAR 2 — CAD-to-Realtime Pipeline & Asset Preparation",
+      "sourceCitation": "doc-23 §1 & §4 (CAD-to-Realtime Optimization Workflow)",
+      "situation": "Technical drone assembly documentation often relies on dense parametric CAD files containing internal screw threads, microscopic chamfers, and non-manifold topology that completely crash real-time game engines if imported directly.",
+      "task": "I needed to design a repeatable, lossless asset transformation pipeline that preserves engineering visual accuracy while making assemblies completely performant for interactive real-time inspection.",
+      "action": "I authored a structured Python-assisted cleanup workflow in Blender. I stripped internal unseen geometric volumes, resolved non-manifold edges, established consistent naming conventions matching engineering Bills of Materials (BOM), and set up automated pivot point alignment for articulated parts (rotors, gimbal mounts, battery latches). I then configured modular PBR materials sharing unified texture atlases.",
+      "result": "Transformed an unwieldy 450MB CAD dataset into a lightweight, modular 18MB real-time asset hierarchy. Every single part retained its engineering accuracy and hierarchy, allowing instant programmatic exploded views and cross-section clipping in Unity."
+    },
+    {
+      "id": "star-3",
+      "title": "STAR 3 — AI Tooling, Automation & Systems Thinking (ARA Framework)",
+      "sourceCitation": "doc-23 §2 & §6 (ARA Framework & Systems Automation)",
+      "situation": "When conducting deep research and data ingestion across hundreds of technical papers and documentation files, manual processing was slow, error-prone, and failed to maintain relational links between concepts.",
+      "task": "I wanted to build a structured research automation framework (ARA Framework) in Python to automate knowledge ingestion, extract structured schemas, and validate rule contracts autonomously.",
+      "action": "I developed a modular Python automation suite that parses unstructured text, extracts quantitative parameters using strict regex and LLM prompting schemas, and validates outputs against predefined TypeScript data contracts. I implemented automated test fixtures and token usage tracking to ensure high efficiency and deterministic outputs.",
+      "result": "Accelerated knowledge processing throughput by over 10x, enabling reliable ingestion of over 100 technical sources into structured RAG knowledge bases with zero human transcription errors."
+    }
+  ]
+}

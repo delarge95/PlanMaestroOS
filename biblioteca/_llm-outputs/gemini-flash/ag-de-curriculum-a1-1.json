@@ -1,0 +1,884 @@
+[
+  {
+    "unitId": "unit-de-a1-1",
+    "title": "Einheit 1: Begrüßung, Kennenlernen und die Verben 'sein' und 'haben'",
+    "lessons": [
+      {
+        "id": "les-de-1-1",
+        "title": "1.1 Begrüßung und Verabschiedung (Saludos y Despedidas)",
+        "theoryMd": "### Begrüßung und Verabschiedung im Deutschen\n\nEn alemán distinguimos entre el registro formal (*Sie*) e informal (*du*):\n\n- **Formal:** *Guten Morgen* (hasta las 11:00), *Guten Tag* (durante el día), *Guten Abend* (a partir de las 18:00). Despedida: *Auf Wiedersehen* (personalmente) o *Auf Wiederhören* (por teléfono).\n- **Informal:** *Hallo!*, *Hi!*, *Tschüss!*, *Bis bald!* (¡Hasta pronto!), *Bis später!* (¡Hasta luego!).\n- **Estructura básica de presentación:** *Ich heiße...* (Me llamo...), *Ich bin...* (Soy...), *Wie heißen Sie?* (¿Cómo se llama usted?), *Wie heißt du?* (¿Cómo te llamas?).",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 10,
+        "vocabulary": [
+          {
+            "de": "Guten Morgen",
+            "es": "Buenos días",
+            "example": "Guten Morgen, Herr Müller!",
+            "topic": "Greetings"
+          },
+          {
+            "de": "Guten Tag",
+            "es": "Buenas tardes / Buen día",
+            "example": "Guten Tag! Wie geht es Ihnen?",
+            "topic": "Greetings"
+          },
+          {
+            "de": "Guten Abend",
+            "es": "Buenas noches (al llegar)",
+            "example": "Guten Abend allerseits!",
+            "topic": "Greetings"
+          },
+          {
+            "de": "Gute Nacht",
+            "es": "Buenas noches (al ir a dormir)",
+            "example": "Gute Nacht, schlaf gut!",
+            "topic": "Greetings"
+          },
+          {
+            "de": "Auf Wiedersehen",
+            "es": "Adiós (formal)",
+            "example": "Auf Wiedersehen und einen schönen Tag!",
+            "topic": "Greetings"
+          },
+          {
+            "de": "Tschüss",
+            "es": "Chao / Adiós (informal)",
+            "example": "Tschüss, bis morgen!",
+            "topic": "Greetings"
+          },
+          {
+            "de": "Wie heißen Sie?",
+            "es": "¿Cómo se llama usted?",
+            "example": "Wie heißen Sie, bitte?",
+            "topic": "Introduction"
+          },
+          {
+            "de": "Ich heiße",
+            "es": "Me llamo",
+            "example": "Ich heiße Alexander.",
+            "topic": "Introduction"
+          },
+          {
+            "de": "Freut mich",
+            "es": "Mucho gusto",
+            "example": "Freut mich, Sie kennenzulernen.",
+            "topic": "Politeness"
+          },
+          {
+            "de": "Danke schön",
+            "es": "Muchas gracias",
+            "example": "Danke schön für Ihre Hilfe.",
+            "topic": "Politeness"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Hallo! Ich bin Lukas. Und wer bist du? B: Hallo Lukas, ich heiße Maria. Freut mich! A: Freut mich auch, Maria. Woher kommst du? B: Ich komme aus Spanien.",
+          "exercise": "¿De dónde es María? (a) Aus Deutschland, (b) Aus Spanien, (c) Aus Österreich. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "Hallo, ich bin [Name]. Ich komme aus [Land] und ich wohne in [Stadt].",
+          "prompt": "Escribe un breve párrafo de presentación personal en alemán indicando tu nombre, tu país de origen y tu ciudad de residencia."
+        },
+        "exercises": [
+          {
+            "type": "fill_in_blank",
+            "question": "Guten ______! (al llegar por la mañana a la oficina)",
+            "options": [
+              "Morgen",
+              "Nacht",
+              "Tschüss"
+            ],
+            "answer": "Morgen"
+          },
+          {
+            "type": "multiple_choice",
+            "question": "¿Cuál es la despedida formal correcta por teléfono?",
+            "options": [
+              "Auf Wiederhören",
+              "Tschüss",
+              "Bis gleich"
+            ],
+            "answer": "Auf Wiederhören"
+          },
+          {
+            "type": "order_sentence",
+            "question": "Ordena la oración: [Alexander] [heiße] [Ich]",
+            "options": [
+              "Ich heiße Alexander",
+              "Alexander Ich heiße"
+            ],
+            "answer": "Ich heiße Alexander"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Wie ______ du? (heißen)",
+            "options": [
+              "heißt",
+              "heiße",
+              "heißen"
+            ],
+            "answer": "heißt"
+          }
+        ]
+      },
+      {
+        "id": "les-de-1-2",
+        "title": "1.2 Das Verb 'sein' und 'haben' im Präsens (Verbos Ser/Estar y Tener)",
+        "theoryMd": "### Konjugation von 'sein' (ser/estar) und 'haben' (tener)\n\nLos verbos *sein* y *haben* son los verbos auxiliares e irregulares fundamentales del idioma alemán:\n\n| Personalpronomen | Verb 'sein' | Verb 'haben' |\n|---|---|---|\n| **ich** | bin (soy/estoy) | habe (tengo) |\n| **du** | bist (eres/estás) | hast (tienes) |\n| **er/sie/es** | ist (es/está) | hat (tiene) |\n| **wir** | sind (somos/estamos) | haben (tenemos) |\n| **ihr** | seid (sois/estáis) | habt (tenéis) |\n| **sie / Sie** | sind (son/están / es Ud.) | haben (tienen / tiene Ud.) |\n\n**Regla de Posición del Verbo:** En oraciones afirmativas principales, el verbo conjugado ocupa **siempre la Posición 2** (*Ich bin Softwareentwickler*).",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 12,
+        "vocabulary": [
+          {
+            "de": "ich bin",
+            "es": "yo soy / estoy",
+            "example": "Ich bin Entwickler.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "du bist",
+            "es": "tú eres / estás",
+            "example": "Du bist sehr pünktlich.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "er ist",
+            "es": "él es / está",
+            "example": "Er ist im Büro.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "wir sind",
+            "es": "nosotros somos / estamos",
+            "example": "Wir sind bereit für das Meeting.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "ich habe",
+            "es": "yo tengo",
+            "example": "Ich habe eine Frage.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "du hast",
+            "es": "tú tienes",
+            "example": "Hast du Zeit?",
+            "topic": "Grammar"
+          },
+          {
+            "de": "er hat",
+            "es": "él tiene",
+            "example": "Er hat viel Erfahrung.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "wir haben",
+            "es": "nosotros tenemos",
+            "example": "Wir haben heute einen Sprint.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "die Zeit",
+            "es": "el tiempo",
+            "example": "Ich habe keine Zeit.",
+            "topic": "Work"
+          },
+          {
+            "de": "die Frage",
+            "es": "la pregunta",
+            "example": "Haben Sie Fragen?",
+            "topic": "Work"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Hallo Thomas, bist du heute im Büro? B: Nein, ich bin heute im Homeoffice. Hast du das Dokument? A: Ja, ich habe das PDF auf meinem Laptop.",
+          "exercise": "¿Dónde está Thomas hoy? (a) Im Büro, (b) Im Homeoffice, (c) Im Urlaub. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "Ich bin [Beruf] von Beruf und ich habe [X] Jahre Erfahrung.",
+          "prompt": "Escribe una frase describiendo tu profesión y cuántos años de experiencia tienes utilizando las formas de 'sein' y 'haben'."
+        },
+        "exercises": [
+          {
+            "type": "fill_in_blank",
+            "question": "Er ______ (sein) Softwareingenieur.",
+            "options": [
+              "ist",
+              "bin",
+              "sind"
+            ],
+            "answer": "ist"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Wir ______ (haben) heute viel Arbeit.",
+            "options": [
+              "haben",
+              "hat",
+              "habt"
+            ],
+            "answer": "haben"
+          },
+          {
+            "type": "multiple_choice",
+            "question": "¿Cuál es la conjugación correcta de 'sein' para 'ihr'?",
+            "options": [
+              "seid",
+              "sind",
+              "bist"
+            ],
+            "answer": "seid"
+          },
+          {
+            "type": "order_sentence",
+            "question": "Ordena: [Zeit] [keine] [habe] [Ich]",
+            "options": [
+              "Ich habe keine Zeit",
+              "Keine Zeit Ich habe"
+            ],
+            "answer": "Ich habe keine Zeit"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "unitId": "unit-de-a1-2",
+    "title": "Einheit 2: Bestimmte und unbestimmte Artikel & der Nominativ",
+    "lessons": [
+      {
+        "id": "les-de-2-1",
+        "title": "2.1 Der, Die, Das & Ein, Eine (Artículos Definidos e Indefinidos)",
+        "theoryMd": "### Das grammatische Geschlecht (Género Gramatical en Alemán)\n\nEn alemán existen tres géneros gramaticales con sus respectivos artículos en caso Nominativo:\n\n- **Maskulinum (Masculino):** *der* (definido) / *ein* (indefinido) / *kein* (negación). Ej: *der Tisch* (la mesa), *der Computer* (el ordenador).\n- **Femininum (Femenino):** *die* (definido) / *eine* (indefinido) / *keine* (negación). Ej: *die Tastatur* (el teclado), *die Lampe* (la lámpara).\n- **Neutrum (Neutro):** *das* (definido) / *ein* (indefinido) / *kein* (negación). Ej: *das Buch* (el libro), *das Display* (la pantalla).\n- **Plural (Todos los géneros):** *die* (definido) / *--* (sin artículo indefinido) / *keine* (negación). Ej: *die Computer*, *die Bücher*.\n\n*Regla Clave:* Aprende siempre cada sustantivo junto con su artículo definido y su forma de plural (*der Tisch, -e*).",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 16,
+        "vocabulary": [
+          {
+            "de": "der Tisch",
+            "es": "la mesa (m)",
+            "example": "Der Tisch ist neu.",
+            "topic": "Objects"
+          },
+          {
+            "de": "der Computer",
+            "es": "el ordenador / computadora (m)",
+            "example": "Der Computer ist schnell.",
+            "topic": "Tech"
+          },
+          {
+            "de": "die Tastatur",
+            "es": "el teclado (f)",
+            "example": "Die Tastatur ist kabellos.",
+            "topic": "Tech"
+          },
+          {
+            "de": "die Maus",
+            "es": "el ratón / mouse (f)",
+            "example": "Die Maus funktioniert gut.",
+            "topic": "Tech"
+          },
+          {
+            "de": "das Buch",
+            "es": "el libro (n)",
+            "example": "Das Buch ist interessant.",
+            "topic": "Objects"
+          },
+          {
+            "de": "das Display",
+            "es": "la pantalla / monitor (n)",
+            "example": "Das Display hat 4K-Auflösung.",
+            "topic": "Tech"
+          },
+          {
+            "de": "ein / eine",
+            "es": "un / una",
+            "example": "Das ist ein Laptop und eine Maus.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "kein / keine",
+            "es": "ningún / ninguna",
+            "example": "Das ist kein Problem.",
+            "topic": "Grammar"
+          },
+          {
+            "de": "der Bildschirm",
+            "es": "el monitor / pantalla (m)",
+            "example": "Der Bildschirm ist groß.",
+            "topic": "Tech"
+          },
+          {
+            "de": "das Büro",
+            "es": "la oficina (n)",
+            "example": "Das Büro ist modern.",
+            "topic": "Work"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Entschuldigung, ist das ein Laptop? B: Nein, das ist kein Laptop, das ist ein Tablet. Aber hier ist die Tastatur dazu.",
+          "exercise": "¿Qué dispositivo tiene B? (a) Ein Laptop, (b) Ein Tablet mit Tastatur, (c) Ein Buch. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "Auf meinem Schreibtisch stehen der [m], die [f] und das [n].",
+          "prompt": "Escribe qué objetos hay en tu mesa de trabajo utilizando al menos un sustantivo masculino (der), uno femenino (die) y uno neutro (das)."
+        },
+        "exercises": [
+          {
+            "type": "multiple_choice",
+            "question": "¿Cuál es el artículo definido correcto para 'Bildschirm' (monitor)?",
+            "options": [
+              "der",
+              "die",
+              "das"
+            ],
+            "answer": "der"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Das ist ______ (indefinido femenino) Maus.",
+            "options": [
+              "eine",
+              "ein",
+              "einen"
+            ],
+            "answer": "eine"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Das ist ______ (negación neutro) Problem.",
+            "options": [
+              "kein",
+              "keine",
+              "nicht"
+            ],
+            "answer": "kein"
+          },
+          {
+            "type": "multiple_choice",
+            "question": "¿Cuál es el artículo indefinido para un sustantivo neutro en Nominativo?",
+            "options": [
+              "ein",
+              "eine",
+              "eines"
+            ],
+            "answer": "ein"
+          }
+        ]
+      },
+      {
+        "id": "les-de-2-2",
+        "title": "2.2 Der Nominativ: Das Subjekt im Satz (El Caso Nominativo)",
+        "theoryMd": "### Der Nominativ als Subjekt und Prädikativ\n\nEl **Nominativo** es el caso base del alemán y responde a las preguntas **Wer?** (¿Quién?) para personas o **Was?** (¿Qué?) para objetos/conceptos.\n\n1. **Función de Sujeto:** Realiza la acción del verbo conjugado.\n   - *Der Entwickler arbeitet heute.* (¿Quién trabaja? -> *Der Entwickler* = Nominativo).\n2. **Complemento con verbos de estado (*sein*, *werden*, *bleiben*):**\n   - *Das ist ein moderner Rechner.* (Sujeto y predicativo van en Nominativo).\n\n*Tabla Resumen de Nominativo:*\n- Maskulin: **der / ein / kein / mein**\n- Feminin: **die / eine / keine / meine**\n- Neutrum: **das / ein / kein / mein**\n- Plural: **die / -- / keine / meine**",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 18,
+        "vocabulary": [
+          {
+            "de": "der Entwickler",
+            "es": "el desarrollador (m)",
+            "example": "Der Entwickler schreibt Code.",
+            "topic": "Work"
+          },
+          {
+            "de": "die Entwicklerin",
+            "es": "la desarrolladora (f)",
+            "example": "Die Entwicklerin leitet das Team.",
+            "topic": "Work"
+          },
+          {
+            "de": "wer",
+            "es": "quién",
+            "example": "Wer ist das?",
+            "topic": "Questions"
+          },
+          {
+            "de": "was",
+            "es": "qué",
+            "example": "Was ist das?",
+            "topic": "Questions"
+          },
+          {
+            "de": "das Projekt",
+            "es": "el proyecto (n)",
+            "example": "Das Projekt ist erfolgreich.",
+            "topic": "Work"
+          },
+          {
+            "de": "die Aufgabe",
+            "es": "la tarea (f)",
+            "example": "Die Aufgabe ist einfach.",
+            "topic": "Work"
+          },
+          {
+            "de": "mein / meine",
+            "es": "mi / mis",
+            "example": "Mein Kollege ist da.",
+            "topic": "Possessives"
+          },
+          {
+            "de": "dein / deine",
+            "es": "tu / tus",
+            "example": "Ist das deine Tasche?",
+            "topic": "Possessives"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Wer ist der Mann dort drüben? B: Das ist Herr Schmidt. Er ist unser neuer Projektleiter.",
+          "exercise": "¿Quién es el señor Schmidt? (a) Ein Kunde, (b) Der neue Projektleiter, (c) Der Praktikant. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "Wer ist das? Das ist mein [m/n] / meine [f] [Bezeichnung].",
+          "prompt": "Escribe dos preguntas y respuestas identificando a una persona y a un objeto utilizando el pronombre interrogativo 'Wer' o 'Was'."
+        },
+        "exercises": [
+          {
+            "type": "fill_in_blank",
+            "question": "______ (Wer/Was) ist der neue Kollege?",
+            "options": [
+              "Wer",
+              "Was",
+              "Wo"
+            ],
+            "answer": "Wer"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Das ist ______ (mein / posesivo femenino) Kollegin.",
+            "options": [
+              "meine",
+              "mein",
+              "meinen"
+            ],
+            "answer": "meine"
+          },
+          {
+            "type": "order_sentence",
+            "question": "Ordena: [Der] [neu] [ist] [Computer]",
+            "options": [
+              "Der Computer ist neu",
+              "Neu ist der Computer"
+            ],
+            "answer": "Der Computer ist neu"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "unitId": "unit-de-a1-3",
+    "title": "Einheit 3: Zahlen, W-Fragen und Personalpronomen",
+    "lessons": [
+      {
+        "id": "les-de-3-1",
+        "title": "3.1 Zahlen von 0 bis 100 und Uhrzeit (Números y Horarios)",
+        "theoryMd": "### Zahlen im Deutschen (0 bis 100)\n\n- **0 bis 12 (Irregulares):** 0 *null*, 1 *eins*, 2 *zwei*, 3 *drei*, 4 *vier*, 5 *fünf*, 6 *sechs*, 7 *sieben*, 8 *acht*, 9 *neun*, 10 *zehn*, 11 *elf*, 12 *zwölf*.\n- **13 bis 19:** Raíz + *zehn* (z.B. 13 *dreizehn*, 14 *vierzehn*).\n- **Decenas (20 bis 90):** 20 *zwanzig*, 30 *dreißig*, 40 *vierzig*, 50 *fünfzig*, 60 *sechzig*, 70 *siebzig*, 80 *achtzig*, 90 *neunzig*, 100 *hundert*.\n- **Regla de Unión (21 bis 99):** Se leen primero las unidades, luego la conjunción *und* y finalmente la decena (*Einer + und + Zehner*):\n  - 21: *einundzwanzig* (uno y veinte)\n  - 45: *fünfundvierzig* (cinco y cuarenta)\n  - 99: *neunundneunzig* (nueve y noventa)",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 22,
+        "vocabulary": [
+          {
+            "de": "eins, zwei, drei",
+            "es": "uno, dos, tres",
+            "example": "Eins, zwei, drei, los!",
+            "topic": "Numbers"
+          },
+          {
+            "de": "zehn, zwanzig, dreißig",
+            "es": "diez, veinte, treinta",
+            "example": "Das Meeting dauert dreißig Minuten.",
+            "topic": "Numbers"
+          },
+          {
+            "de": "einundzwanzig",
+            "es": "veintiuno",
+            "example": "Er ist einundzwanzig Jahre alt.",
+            "topic": "Numbers"
+          },
+          {
+            "de": "hundert",
+            "es": "cien",
+            "example": "Hundert Prozent fertig.",
+            "topic": "Numbers"
+          },
+          {
+            "de": "die Telefonnummer",
+            "es": "el número de teléfono",
+            "example": "Meine Telefonnummer ist 0176...",
+            "topic": "Communication"
+          },
+          {
+            "de": "die Uhrzeit",
+            "es": "la hora",
+            "example": "Wie spät ist es? Wie viel Uhr ist es?",
+            "topic": "Time"
+          },
+          {
+            "de": "um ... Uhr",
+            "es": "a las ... horas",
+            "example": "Das Daily Standup ist um neun Uhr.",
+            "topic": "Time"
+          },
+          {
+            "de": "die Minute",
+            "es": "el minuto",
+            "example": "Ich brauche fünf Minuten.",
+            "topic": "Time"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Um wie viel Uhr beginnt die Präsentation? B: Die Präsentation beginnt genau um zehn Uhr dreißig im Konferenzraum zwei.",
+          "exercise": "¿A qué hora comienza la presentación? (a) 10:00, (b) 10:30, (c) 11:30. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "Ich bin [Alter in Zahlen] Jahre alt und mein Arbeitstag beginnt um [Uhrzeit] Uhr.",
+          "prompt": "Escribe en texto (con letras, no dígitos) tu edad y la hora a la que comienzas a trabajar."
+        },
+        "exercises": [
+          {
+            "type": "multiple_choice",
+            "question": "¿Cómo se escribe el número 42 en alemán?",
+            "options": [
+              "zweiundvierzig",
+              "vierzigundzwei",
+              "zweiundzwanzig"
+            ],
+            "answer": "zweiundvierzig"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "15 se escribe en alemán: ______",
+            "options": [
+              "fünfzehn",
+              "fünfzig",
+              "fünfzehnundzehn"
+            ],
+            "answer": "fünfzehn"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Das Meeting beginnt ______ (Preposición para horas) 14:00 Uhr.",
+            "options": [
+              "um",
+              "am",
+              "im"
+            ],
+            "answer": "um"
+          }
+        ]
+      },
+      {
+        "id": "les-de-3-2",
+        "title": "3.2 W-Fragen und Personalpronomen (Preguntas con 'W' y Pronombres)",
+        "theoryMd": "### W-Fragen (Preguntas Abiertas con Pronombres Interrogativos)\n\nLas preguntas abiertas en alemán comienzan con una palabra interrogativa que empieza por **W-** seguida inmediatamente por el **verbo conjugado en Posición 2**:\n\n- **Wo?** (¿Dónde? - Ubicación estática): *Wo wohnen Sie?* -> *Ich wohne in Berlin.*\n- **Woher?** (¿De dónde? - Procedencia): *Woher kommst du?* -> *Ich komme aus Kolumbien.*\n- **Wohin?** (¿Adónde? - Dirección/Destino): *Wohin gehst du?* -> *Ich gehe ins Büro.*\n- **Wie?** (¿Cómo?): *Wie heißen Sie?* / *Wie geht es dir?*\n- **Was?** (¿Qué?): *Was machen Sie beruflich?*\n- **Wann?** (¿Cuándo?): *Wann ist das Release?*\n\n**Personalpronomen (Pronombres Personales):**\n`ich` (yo), `du` (tú), `er` (él), `sie` (ella), `es` (ello/neutro), `wir` (nosotros), `ihr` (vosotros), `sie` (ellos/ellas), `Sie` (usted/ustedes con mayúscula de cortesía).",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 24,
+        "vocabulary": [
+          {
+            "de": "wo",
+            "es": "dónde",
+            "example": "Wo arbeitest du?",
+            "topic": "Questions"
+          },
+          {
+            "de": "woher",
+            "es": "de dónde",
+            "example": "Woher kommen Sie?",
+            "topic": "Questions"
+          },
+          {
+            "de": "wohin",
+            "es": "adónde",
+            "example": "Wohin reisen wir?",
+            "topic": "Questions"
+          },
+          {
+            "de": "wann",
+            "es": "cuándo",
+            "example": "Wann ist die Deadline?",
+            "topic": "Questions"
+          },
+          {
+            "de": "warum",
+            "es": "por qué",
+            "example": "Warum funktioniert der Build nicht?",
+            "topic": "Questions"
+          },
+          {
+            "de": "Deutschland",
+            "es": "Alemania",
+            "example": "Ich lerne Deutsch für Deutschland.",
+            "topic": "Countries"
+          },
+          {
+            "de": "Spanien",
+            "es": "España",
+            "example": "Er kommt aus Spanien.",
+            "topic": "Countries"
+          },
+          {
+            "de": "Kolumbien",
+            "es": "Colombia",
+            "example": "Sie wohnt in Kolumbien.",
+            "topic": "Countries"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Woher kommst du, David? B: Ich komme aus Kolumbien, aber ich wohne jetzt in München. Und was machst du hier? A: Ich arbeite als 3D-Artist.",
+          "exercise": "¿Dónde vive David actualmente? (a) In Kolumbien, (b) In München, (c) In Berlin. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "Woher kommst du? -> Ich komme aus [...]. Wo wohnst du? -> Ich wohne in [...].",
+          "prompt": "Escribe un diálogo de 4 líneas respondiendo a preguntas de procedencia y residencia."
+        },
+        "exercises": [
+          {
+            "type": "fill_in_blank",
+            "question": "______ (Woher/Wo) kommst du? - Aus Kolumbien.",
+            "options": [
+              "Woher",
+              "Wo",
+              "Wohin"
+            ],
+            "answer": "Woher"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "______ (Wann/Was) machst du heute beruflich?",
+            "options": [
+              "Was",
+              "Wann",
+              "Woher"
+            ],
+            "answer": "Was"
+          },
+          {
+            "type": "order_sentence",
+            "question": "Ordena la pregunta: [du] [Wo] [wohnst] [?]",
+            "options": [
+              "Wo wohnst du?",
+              "Du wohnst wo?"
+            ],
+            "answer": "Wo wohnst du?"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "unitId": "unit-de-a1-4",
+    "title": "Einheit 4: Regelmäßige Verben im Präsens & Alltagsgespräche",
+    "lessons": [
+      {
+        "id": "les-de-4-1",
+        "title": "4.1 Die Konjugation der regelmäßigen Verben (Conjugación Regular)",
+        "theoryMd": "### Regelmäßige Verben im Präsens (Presente de Indicativo Regular)\n\nPara conjugar un verbo regular en presente, se toma la raíz del verbo (infinitivo sin *-en* o *-n*) y se le añaden las terminaciones estándar:\n\n**Ejemplo: *lernen* (aprender) -> Raíz: *lern-***\n- `ich` lern-**e**\n- `du` lern-**st**\n- `er/sie/es` lern-**t**\n- `wir` lern-**en**\n- `ihr` lern-**t**\n- `sie/Sie` lern-**en**\n\n**Particularidades Fonéticas:**\n- Si la raíz termina en *-t* o *-d* (z.B. *arbeiten*, *finden*), se inserta una **-e-** de apoyo para facilitar la pronunciación en *du*, *er/sie/es*, e *ihr*: `du arbeit-e-st`, `er arbeit-e-t`, `ihr arbeit-e-t`.\n- Si la raíz termina en *-s*, *-ss*, *-z* (z.B. *heißen*), la forma de *du* toma solo **-t**: `du heißt`.",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 28,
+        "vocabulary": [
+          {
+            "de": "lernen",
+            "es": "aprender / estudiar",
+            "example": "Ich lerne jeden Tag Deutsch.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "arbeiten",
+            "es": "trabajar",
+            "example": "Er arbeitet bei einem Tech-Startup.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "wohnen",
+            "es": "vivir / residir",
+            "example": "Wir wohnen in einer Wohnung.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "machen",
+            "es": "hacer",
+            "example": "Was machst du am Wochenende?",
+            "topic": "Verbs"
+          },
+          {
+            "de": "schreiben",
+            "es": "escribir",
+            "example": "Sie schreibt sauberen Code.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "spielen",
+            "es": "jugar / tocar instrumento",
+            "example": "Wir spielen Computerspiele.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "fragen",
+            "es": "preguntar",
+            "example": "Ich frage den Teamleiter.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "kaufen",
+            "es": "comprar",
+            "example": "Er kauft eine neue Grafikkarte.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "verstehen",
+            "es": "entender / comprender",
+            "example": "Ich verstehe die Fehlermeldung.",
+            "topic": "Verbs"
+          },
+          {
+            "de": "entwickeln",
+            "es": "desarrollar",
+            "example": "Wir entwickeln eine WebGL-Applikation.",
+            "topic": "Work"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Hallo Sarah! Was machst du gerade? B: Ich arbeite an einem neuen 3D-Modell in Blender und danach lerne ich Deutsch mit einer App.",
+          "exercise": "¿Qué hace Sarah primero? (a) Deutsch lernen, (b) An einem 3D-Modell in Blender arbeiten, (c) Kochen. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "Ich [Verb 1] und mein Kollege [Verb 2]. Zusammen [Verb 3] wir [Projekt].",
+          "prompt": "Escribe tres oraciones utilizando tres verbos regulares diferentes conjugados correctamente en primera y tercera persona."
+        },
+        "exercises": [
+          {
+            "type": "fill_in_blank",
+            "question": "Du ______ (arbeiten) sehr konzentriert.",
+            "options": [
+              "arbeitest",
+              "arbeitst",
+              "arbeitet"
+            ],
+            "answer": "arbeitest"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Wir ______ (entwickeln) innovative Software.",
+            "options": [
+              "entwickeln",
+              "entwickelt",
+              "entwickle"
+            ],
+            "answer": "entwickeln"
+          },
+          {
+            "type": "multiple_choice",
+            "question": "¿Cuál es la terminación regular para 'er / sie / es'?",
+            "options": [
+              "-t",
+              "-st",
+              "-en"
+            ],
+            "answer": "-t"
+          },
+          {
+            "type": "order_sentence",
+            "question": "Ordena: [Deutsch] [wir] [fleißig] [lernen]",
+            "options": [
+              "Wir lernen fleißig Deutsch",
+              "Deutsch lernen wir fleißig"
+            ],
+            "answer": "Wir lernen fleißig Deutsch"
+          }
+        ]
+      },
+      {
+        "id": "les-de-4-2",
+        "title": "4.2 Satzbau: Aussagesatz und Ja/Nein-Frage (Estructura de la Oración)",
+        "theoryMd": "### Satzbau im Hauptsatz und Satzfragen (Ja/Nein-Fragen)\n\nEn alemán existen dos estructuras oracionales básicas fundamentales:\n\n1. **Aussagesatz (Oración Enunciativa):**\n   - El verbo conjugado ocupa **siempre la Posición 2**.\n   - En la Posición 1 puede ir el Sujeto (*Ich lerne heute*) o un Complemento Temporal/Local (*Heute lerne ich Deutsch*). Si un complemento ocupa la Posición 1, se produce **inversión** (Sujeto pasa a Posición 3).\n\n2. **Ja/Nein-Frage (Pregunta Cerrada Sí/No):**\n   - El verbo conjugado ocupa **la Posición 1** al inicio de la pregunta.\n   - *Lernst du Deutsch?* -> *Ja, ich lerne Deutsch.* / *Nein, ich lerne Englisch.*",
+        "sourcePdfUrl": "/docs/Grammatik_Aktiv_A1_A2.pdf",
+        "page": 30,
+        "vocabulary": [
+          {
+            "de": "ja",
+            "es": "sí",
+            "example": "Ja, das stimmt.",
+            "topic": "Communication"
+          },
+          {
+            "de": "nein",
+            "es": "no",
+            "example": "Nein, leider nicht.",
+            "topic": "Communication"
+          },
+          {
+            "de": "doch",
+            "es": "¡al contrario! / ¡sí que sí! (para responder a preguntas negativas)",
+            "example": "Arbeitest du nicht heute? - Doch, ich arbeite!",
+            "topic": "Communication"
+          },
+          {
+            "de": "heute",
+            "es": "hoy",
+            "example": "Heute haben wir ein Meeting.",
+            "topic": "Time"
+          },
+          {
+            "de": "morgen",
+            "es": "mañana",
+            "example": "Morgen ist das Release.",
+            "topic": "Time"
+          },
+          {
+            "de": "gern / gerne",
+            "es": "con gusto / me gusta",
+            "example": "Ich programmiere gern in C#.",
+            "topic": "Adverbs"
+          },
+          {
+            "de": "zusammen",
+            "es": "juntos",
+            "example": "Wir arbeiten zusammen im Team.",
+            "topic": "Adverbs"
+          },
+          {
+            "de": "fertig",
+            "es": "listo / terminado",
+            "example": "Der Task ist fertig.",
+            "topic": "Work"
+          }
+        ],
+        "listening": {
+          "transcript": "A: Arbeitest du heute im Büro? B: Nein, heute arbeite ich von zu Hause aus. Aber morgen bin ich im Büro.",
+          "exercise": "¿Trabaja B hoy en la oficina? (a) Ja, (b) Nein, heute arbeitet er von zu Hause aus. Respuesta correcta: (b)"
+        },
+        "writing": {
+          "template": "A: [Ja/Nein-Frage]? B: Ja, ich [Verb]... / Nein, ich [Verb] nicht...",
+          "prompt": "Escribe una pregunta de Sí/No en alemán y respóndela en forma afirmativa y negativa."
+        },
+        "exercises": [
+          {
+            "type": "order_sentence",
+            "question": "Ordena la pregunta Sí/No: [du] [Deutsch] [Lernst] [?]",
+            "options": [
+              "Lernst du Deutsch?",
+              "Du lernst Deutsch?"
+            ],
+            "answer": "Lernst du Deutsch?"
+          },
+          {
+            "type": "fill_in_blank",
+            "question": "Heute ______ (arbeiten) ich im Homeoffice. (Atención a la inversión)",
+            "options": [
+              "arbeite",
+              "arbeitest",
+              "arbeiten"
+            ],
+            "answer": "arbeite"
+          },
+          {
+            "type": "multiple_choice",
+            "question": "En una oración enunciativa principal, ¿qué posición ocupa SIEMPRE el verbo conjugado?",
+            "options": [
+              "Posición 2",
+              "Posición 1",
+              "Al final de la oración"
+            ],
+            "answer": "Posición 2"
+          }
+        ]
+      }
+    ]
+  }
+]

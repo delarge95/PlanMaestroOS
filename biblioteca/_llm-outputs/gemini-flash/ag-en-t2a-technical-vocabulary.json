@@ -1,0 +1,1026 @@
+[
+  {
+    "term": "Shader",
+    "definition": "A specialized program that runs on the GPU to calculate rendering effects, transformations, and pixel coloring.",
+    "example": "We wrote a custom compute shader to simulate water ripples efficiently in real time.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Draw Call",
+    "definition": "A command issued by the CPU to the GPU to render a specific group of primitives.",
+    "example": "Batching static meshes significantly reduced our draw calls from 1200 to under 300 per frame.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "GPU Instancing",
+    "definition": "A rendering technique that draws multiple copies of the same mesh simultaneously using a single draw call.",
+    "example": "Enabling GPU instancing allowed us to render thousands of dynamic grass blades without CPU bottlenecking.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "LOD (Level of Detail)",
+    "definition": "A technique that decreases geometric complexity for 3D models as they move farther from the camera.",
+    "example": "Configuring aggressive LOD transitions helped maintain a steady 60 FPS in dense open-world environments.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Frustum Culling",
+    "definition": "The process of discarding objects that fall outside the camera viewing pyramid before rasterization.",
+    "example": "The engine performs frustum culling automatically to avoid submitting out-of-frame geometry to the pipeline.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Occlusion Culling",
+    "definition": "Disabling the rendering of objects that are obscured by other opaque objects in front of them.",
+    "example": "Baking occlusion culling data was essential for optimizing indoor corridor scenes with heavy architectural occluders.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Mipmapping",
+    "definition": "Pre-calculating optimized sequences of downscaled textures to improve rendering speed and eliminate aliasing artifacts.",
+    "example": "Without mipmaps, distant high-frequency textures produce noticeable moiré patterns and shimmer during camera motion.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Frame Budget",
+    "definition": "The maximum time allocated per frame (e.g., 16.6ms for 60 FPS or 11.1ms for 90 FPS) to maintain target refresh rate.",
+    "example": "The post-processing pass exceeded our 16.6ms frame budget, requiring downsampling of the bloom buffer.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Rasterization",
+    "definition": "The task of converting vector graphics or 3D primitives into a raster image (pixels or dots) for display.",
+    "example": "The hardware rasterizer interpolates vertex attributes across triangle fragments to feed the pixel shader.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Deferred Shading",
+    "definition": "A rendering technique where lighting computations are deferred to a second pass operating on a geometric buffer (G-buffer).",
+    "example": "Deferred shading decouples scene complexity from light count, allowing dozens of dynamic point lights at minimal cost.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Forward Rendering",
+    "definition": "A standard rendering pipeline where each object is shaded completely in a single pass for every light affecting it.",
+    "example": "We chose forward rendering with MSAA support because our VR target platform demanded low memory bandwidth.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "PBR (Physically Based Rendering)",
+    "definition": "A shading methodology that models the physical behavior of light interacting with surfaces accurately.",
+    "example": "Standardizing our asset pipeline around metallic-roughness PBR workflows ensured consistent look under all lighting conditions.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Ray Tracing",
+    "definition": "An algorithm that traces the physical paths of light rays as they interact with virtual optical surfaces.",
+    "example": "Real-time ray tracing provides physically accurate global illumination and contact reflections at high computational cost.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Anti-Aliasing (AA)",
+    "definition": "Software and hardware techniques used to minimize jagged edges and spatial distortion in computer-rendered images.",
+    "example": "Switching from FXAA to Temporal Anti-Aliasing (TAA) eliminated geometric crawl at the cost of slight motion blur.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Tone Mapping",
+    "definition": "The process of mapping high dynamic range (HDR) color values into a lower dynamic range suitable for display monitors.",
+    "example": "The ACES tone mapping curve preserves highlight details without clipping bright specular reflections.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Depth Buffer (Z-Buffer)",
+    "definition": "A 2D buffer storing depth information for each pixel to ensure correct front-to-back geometric occlusion.",
+    "example": "Z-fighting occurs when two coplanar surfaces have nearly identical values in the depth buffer.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Stencil Buffer",
+    "definition": "An auxiliary buffer used alongside the depth buffer to mask out specific pixels and control rendering flow.",
+    "example": "We utilized the stencil buffer to render portal views and outline selected game entities.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Backface Culling",
+    "definition": "An optimization that skips rendering geometric triangles whose surface normal faces away from the camera.",
+    "example": "Enabling backface culling instantly halved the number of processed fragments for closed solid meshes.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Normal Mapping",
+    "definition": "A texture technique that fakes fine surface bumps and indentations by perturbing surface normals during lighting calculation.",
+    "example": "Normal maps allow low-poly game models to appear intricately sculpted without inflating vertex count.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Compute Shader",
+    "definition": "A shader stage executed on the GPU outside of the standard graphics rendering pipeline for general-purpose parallel computing.",
+    "example": "Flock simulation and particle physics are calculated entirely inside asynchronous compute shaders.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Vertex Buffer",
+    "definition": "A block of GPU memory holding vertex attribute data (positions, normals, UVs, tangents) for geometry rendering.",
+    "example": "Interleaved vertex buffer layouts improve cache locality when transferring vertex data to the graphics pipeline.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Index Buffer",
+    "definition": "A buffer array containing pointers to vertex indices, allowing vertices to be reused across adjacent triangles.",
+    "example": "Using an index buffer reduced mesh memory footprint by over 60% compared to raw unindexed triangle lists.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Tessellation",
+    "definition": "A graphics pipeline stage that dynamically subdivides coarse polygons into finer geometry on the GPU.",
+    "example": "Distance-based tessellation creates detailed terrain displacement near the player while conserving memory far away.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Shadow Cascades (CSM)",
+    "definition": "Partitioning the camera frustum into multiple depth zones, each mapped to a separate shadow map resolution.",
+    "example": "Cascaded Shadow Maps provide crisp close-up contact shadows while maintaining performance for horizon vistas.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Screen-Space Reflections (SSR)",
+    "definition": "A technique that calculates mirror reflections by ray marching across depth and color buffers in screen space.",
+    "example": "SSR creates realistic glossy reflections on wet floors but fails when reflective objects are occluded off-screen.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Ambient Occlusion (AO)",
+    "definition": "A shading method that calculates how exposed each point in a scene is to ambient environmental lighting.",
+    "example": "Screen Space Ambient Occlusion (SSAO) adds soft contact shadows in crevices and corners where surfaces meet.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Bloom",
+    "definition": "A post-processing artifact that produces fringes of light extending from the borders of bright areas in an image.",
+    "example": "Setting a proper HDR luminance threshold prevents bloom from washing out entire lit indoor rooms.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "V-Sync (Vertical Synchronization)",
+    "definition": "A display feature that synchronizes the frame rate of the GPU with the refresh rate of the monitor to prevent screen tearing.",
+    "example": "Disabling V-Sync reduced input latency for competitive players at the expense of occasional horizontal screen tearing.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Screen Tearing",
+    "definition": "A visual artifact where a display device shows information from multiple frames in a single screen draw.",
+    "example": "Screen tearing became prominent because the GPU was pushing frames faster than the 60Hz panel refresh cycle.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Overdraw",
+    "definition": "The situation where the same pixel is rendered multiple times within a single frame due to overlapping geometry.",
+    "example": "High particle density in alpha-blended smoke caused severe overdraw and dragged GPU fillrate down.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Fillrate",
+    "definition": "The rate at which a graphics processing unit can render pixels or fragments to memory buffers.",
+    "example": "Mobile devices are heavily fillrate-limited, making full-screen transparent post-effects prohibitively expensive.",
+    "category": "realtime/graphics",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Alpha Blending",
+    "definition": "The mathematical process of combining a translucent foreground color with a background color to yield transparency.",
+    "example": "Alpha blending requires sorting transparent objects back-to-front to avoid depth sorting artifacts.",
+    "category": "realtime/graphics",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Prefab",
+    "definition": "A reusable asset template in Unity that stores a complete GameObject with all components and property values.",
+    "example": "Modifying the master enemy prefab propagates behavior changes to all instances across every game scene.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Blend Tree",
+    "definition": "A node inside an animation state machine used for smoothly blending multiple related animation clips based on input parameters.",
+    "example": "We configured a 2D Freeform Directional Blend Tree to interpolate between walking, strafing, and sprinting animations.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "NavMesh (Navigation Mesh)",
+    "definition": "A spatial data structure that defines the walkable surfaces of a 3D environment for AI pathfinding.",
+    "example": "The AI agent queries the baked NavMesh to calculate the shortest path around static physical obstacles.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Rigging",
+    "definition": "The process of creating a skeletal structure of bones and joints to control 3D character deformation.",
+    "example": "Proper finger rigging was crucial for realistic hand poses and weapon manipulation in first-person view.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Skinning (Weight Painting)",
+    "definition": "Binding a 3D mesh to an underlying skeleton by assigning influence weights per vertex to each bone.",
+    "example": "Smooth skinning weights around the shoulder joint prevented unsightly mesh pinching during overhead reaches.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Inverse Kinematics (IK)",
+    "definition": "A procedural animation method that calculates joint rotations from the desired position of an end-effector (such as a foot or hand).",
+    "example": "Two-bone IK dynamically aligns character feet with uneven terrain slopes to prevent floating.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Raycast",
+    "definition": "Projecting an invisible straight ray from a 3D origin point along a vector to detect intersecting colliders.",
+    "example": "Weapon hit detection casts a physics raycast from the gun muzzle to register exact bullet impact points.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Collider",
+    "definition": "A shape component that defines the physical boundary of a GameObject for collision detection.",
+    "example": "Using compound primitive colliders rather than complex mesh colliders improved physics evaluation speed tenfold.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Rigidbody",
+    "definition": "A physics component that enables a GameObject to act under the control of physics forces, gravity, and mass.",
+    "example": "Setting the Rigidbody interpolation to Interpolate eliminated visual stutter when moving fast objects.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "FixedUpdate (Physics Step)",
+    "definition": "A frame-rate independent MonoBehaviour lifecycle method called at discrete, regular intervals for physics simulation.",
+    "example": "All velocity modifications and torque applications must occur inside FixedUpdate rather than Update.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "ScriptableObject",
+    "definition": "A data container in Unity used to store large amounts of shared, independent data outside of scene instances.",
+    "example": "Item attributes and weapon balancing numbers are stored in modular ScriptableObject assets for easy designer tuning.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Coroutine",
+    "definition": "A method that can pause its execution and yield control back to Unity before resuming on subsequent frames.",
+    "example": "We implemented a coroutine to handle the smooth fade-to-black sequence over a duration of two seconds.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Addressables",
+    "definition": "A Unity asset management system that makes it easy to load, build, and deploy assets asynchronously by address.",
+    "example": "Migrating level textures to Addressables enabled dynamic remote content delivery and reduced the initial APK download size.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Asset Bundle",
+    "definition": "An archive file containing platform-specific non-code assets that Unity can load at run-time.",
+    "example": "Seasonal character skins are packaged into compressed Asset Bundles and downloaded on demand.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Job System (C# Job System)",
+    "definition": "A multithreaded architecture that lets developers write safe, performant parallel code utilizing all available CPU cores.",
+    "example": "Moving our pathfinding broadphase into the C# Job System boosted processing speed by four times.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Burst Compiler",
+    "definition": "An LLVM-based compiler backend that transforms Unity C# Jobs and math code into highly optimized native machine instructions.",
+    "example": "Enabling the Burst Compiler vectorized our vector math operations, drastically lowering per-frame calculation times.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "DOTS (Data-Oriented Technology Stack)",
+    "definition": "A modular architecture consisting of ECS, the C# Job System, and the Burst Compiler designed for high performance.",
+    "example": "Architecting the massive RTS simulation using DOTS allowed rendering ten thousand simultaneous units without lag.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Entity Component System (ECS)",
+    "definition": "A software architectural pattern that separates data (Components) from logic (Systems) operating on unique IDs (Entities).",
+    "example": "ECS avoids object-oriented overhead and cache misses by storing component data contiguously in memory chunks.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Lightmap Baking",
+    "definition": "Pre-calculating static direct and indirect lighting information into texture maps overlaid on scene geometry.",
+    "example": "Baking high-resolution lightmaps gave our architectural walkthrough photorealistic global illumination at 60 FPS.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Particle System",
+    "definition": "A component that simulates and renders numerous small, moving 2D/3D images to create chaotic effects like fire, smoke, and sparks.",
+    "example": "The explosion effect employs sub-emitters in the particle system to generate secondary trailing shrapnel.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Audio Spatialization (3D Audio)",
+    "definition": "Simulating the acoustic properties and directional orientation of sound sources relative to the listener in 3D space.",
+    "example": "Enabling binaural audio spatialization allowed players to pinpoint enemy footsteps behind walls accurately.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Unity Profiler",
+    "definition": "An analysis tool that records execution timing, memory allocations, rendering bottlenecks, and audio overhead.",
+    "example": "Profiling the garbage collection spikes revealed repeated string concatenations in our health bar UI loop.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Canvas Scaler",
+    "definition": "A UI component that controls the overall scale and pixel density of UI elements across varying screen resolutions.",
+    "example": "Setting the Canvas Scaler to Scale With Screen Size ensured our HUD looks identical on phones, tablets, and 4K monitors.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Mesh Renderer",
+    "definition": "A component that takes geometry from the Mesh Filter and renders it at the position defined by the Transform.",
+    "example": "Disabling the Mesh Renderer hides the object visually while leaving its attached collider active for triggers.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "UV Unwrapping",
+    "definition": "The process of flattening a 3D model surface into 2D coordinates (U and V) for texture mapping.",
+    "example": "Proper UV unwrapping minimizes texture stretching and optimizes UV island packing space.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Sockets / Attach Points",
+    "definition": "Specific child transform nodes linked to character bones used to attach equipment, weapons, and accessories.",
+    "example": "The sword was parented to the RightHandSocket transform to follow wrist rotation during attack swings.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "State Machine Behaviour",
+    "definition": "A script attached to an Animator state that hooks into enter, update, and exit lifecycle callbacks.",
+    "example": "We used a StateMachineBehaviour script to disable player movement input during the heavy landing recovery animation.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Root Motion",
+    "definition": "Applying the position and rotation translation stored in an animation clip directly to the GameObject Transform.",
+    "example": "Enabling Root Motion ensured that the character movement speed matched the visual stride of the run animation.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Serialization",
+    "definition": "The automatic process of converting C# data structures and object states into a format Unity can store and reload.",
+    "example": "Custom structs must be decorated with [System.Serializable] to expose their fields in the Unity Inspector.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Garbage Collection (GC Alloc)",
+    "definition": "The automatic memory management process that frees memory on the managed heap that is no longer referenced.",
+    "example": "Eliminating LINQ allocations inside the gameplay loop avoided GC hitches that were dropping frames.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Occlusion Portal",
+    "definition": "A component that can be opened or closed dynamically at runtime to control occlusion culling through doors and windows.",
+    "example": "Closing the occlusion portal when the dungeon door shut immediately culled the entire adjoining chamber.",
+    "category": "unity/3d",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Skybox",
+    "definition": "A 6-sided cube or panoramic sphere wrapped around the scene to simulate distant backgrounds, horizons, and ambient sky lighting.",
+    "example": "A custom HDR skybox was plugged into the environment settings to drive reflection probes across shiny car surfaces.",
+    "category": "unity/3d",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Hydration",
+    "definition": "The process where client-side JavaScript attaches event listeners and state to server-rendered static HTML markup.",
+    "example": "Partial hydration frameworks reduce Time to Interactive by only hydrating interactive components on the page.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Server-Side Rendering (SSR)",
+    "definition": "Rendering web pages on the server upon each client request before sending fully constructed HTML to the browser.",
+    "example": "Implementing SSR improved our search engine indexing and delivered faster First Contentful Paint times.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Static Site Generation (SSG)",
+    "definition": "Pre-rendering web pages into static HTML, CSS, and JS files during the build phase ahead of client requests.",
+    "example": "Our documentation portal uses SSG to serve lightning-fast pages directly from global CDN edge servers.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Incremental Static Regeneration (ISR)",
+    "definition": "A hybrid rendering mechanism that updates static pages in the background as new requests arrive without rebuilding the entire site.",
+    "example": "With ISR configured at a 60-second revalidation interval, e-commerce catalog prices stay fresh without bogging down servers.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Tree Shaking",
+    "definition": "Dead-code elimination performed by modern module bundlers by statically analyzing ES6 module imports and exports.",
+    "example": "Tree shaking stripped out unused utility functions from Lodash, reducing our production bundle size by 45KB.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Code Splitting",
+    "definition": "Splitting application code into separate bundles loaded dynamically on demand when specific routes or components are requested.",
+    "example": "Dynamic imports with React.lazy allowed us to code-split the heavy analytics dashboard from the main landing page.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Virtual DOM",
+    "definition": "An in-memory representation of real DOM elements used by UI libraries to compute minimal visual update differences.",
+    "example": "The virtual DOM compares previous and next states during reconciliation to batch DOM mutations efficiently.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Reconciliation",
+    "definition": "The recursive algorithm used by frameworks to diff two virtual DOM trees and determine which real DOM parts must change.",
+    "example": "Providing unique key props to list items prevents the reconciliation engine from re-rendering the entire list.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Memoization",
+    "definition": "An optimization technique that caches the return values of expensive function calls corresponding to given inputs.",
+    "example": "Wrapping complex filtering operations in useMemo avoided recomputations on unrelated component state changes.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Layout Thrashing",
+    "definition": "Occurs when JavaScript repeatedly writes and reads to the DOM, forcing the browser to recalculate layouts synchronously.",
+    "example": "Reading element offsetHeight immediately after modifying class styles triggered severe layout thrashing and dropped frames.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Critical Rendering Path (CRP)",
+    "definition": "The sequence of steps the browser takes from receiving HTML, CSS, and JS to painting actual pixels on the screen.",
+    "example": "Inlining critical CSS and deferring non-essential scripts unblocked the Critical Rendering Path.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Repaint & Reflow",
+    "definition": "Reflow recalculates geometric positions and dimensions of elements; Repaint redraws pixel buffers without altering geometry.",
+    "example": "Modifying transform and opacity properties triggers only compositing, bypassing costly reflow and repaint passes.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Event Loop",
+    "definition": "The runtime mechanism in JavaScript that constantly coordinates task queues, microtasks, and the execution call stack.",
+    "example": "Understanding the event loop is crucial to explain why Promise microtasks resolve prior to setTimeout callbacks.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Microtask Queue",
+    "definition": "A prioritized queue in the event loop reserved for Promise resolutions, queueMicrotask, and MutationObserver callbacks.",
+    "example": "Microtasks are processed completely until the queue is empty before the browser yields to the next rendering frame.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Service Worker",
+    "definition": "A client-side script running in the background separate from web pages, intercepting network requests and handling offline caching.",
+    "example": "The service worker implements a cache-first strategy to serve static web assets when users go offline.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Web Worker",
+    "definition": "A background script execution thread allowing intensive computational work to run without blocking the main UI thread.",
+    "example": "Offloading 3D mesh parsing to a dedicated Web Worker kept the user interface snappy and responsive.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "CORS (Cross-Origin Resource Sharing)",
+    "definition": "A security mechanism using HTTP headers that tells browsers whether a web application can access resources from another domain.",
+    "example": "The API server returned a 403 error because our staging origin was missing from the Access-Control-Allow-Origin header.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Content Security Policy (CSP)",
+    "definition": "An HTTP response header layer that restricts which resources (scripts, styles, images) a browser is allowed to load.",
+    "example": "A strict CSP prevents cross-site scripting (XSS) attacks by disallowing inline scripts and untrusted domains.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "WebSockets",
+    "definition": "A persistent, full-duplex communication protocol operating over a single TCP connection for low-latency data exchange.",
+    "example": "We switched from HTTP polling to WebSockets to broadcast live cursor movements between collaborating designers.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "IndexedDB",
+    "definition": "A low-level, client-side transactional database in modern browsers for storing significant amounts of structured data.",
+    "example": "User drafts and large 3D scene files are saved locally into IndexedDB for persistent offline editing.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Debounce",
+    "definition": "A programming pattern that delays executing a function until a specified time has elapsed since the last time it was called.",
+    "example": "Debouncing the search input handler to 300ms prevented unnecessary API queries on every individual keystroke.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Throttle",
+    "definition": "A technique that limits the rate at which a function is executed over a given duration, ensuring regular calls.",
+    "example": "We throttled the window resize and scroll event listeners to fire at most once every 50 milliseconds.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "ARIA (Accessible Rich Internet Applications)",
+    "definition": "A set of HTML attributes that make web content and interactive applications accessible to assistive technologies.",
+    "example": "Adding aria-expanded and role=\"dialog\" ensured screen reader users can navigate custom modal overlays comfortably.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Core Web Vitals",
+    "definition": "A set of specific metrics standardized by Google (LCP, INP, CLS) to quantify real-world user experience on web pages.",
+    "example": "Optimizing hero image compression improved our Largest Contentful Paint (LCP) score to under 2.5 seconds.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Cumulative Layout Shift (CLS)",
+    "definition": "A Core Web Vital metric measuring visual stability and unexpected geometric layout shifts during page loading.",
+    "example": "Setting explicit width and height dimensions on responsive images lowered our CLS score from 0.28 to zero.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Interaction to Next Paint (INP)",
+    "definition": "A metric that measures overall page responsiveness to user clicks, taps, and keyboard interactions.",
+    "example": "Refactoring heavy synchronous calculations out of click listeners helped our web app pass the 200ms INP threshold.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Edge Rendering / Edge Functions",
+    "definition": "Executing server-side compute logic in geographically distributed edge server locations closest to the end user.",
+    "example": "Edge middleware inspects geographic headers and redirects users to regional subdomains in under 10 milliseconds.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Bundle Analyzer",
+    "definition": "A visual diagnostic tool that creates an interactive treemap representation of package dependencies inside a JavaScript bundle.",
+    "example": "Running webpack-bundle-analyzer revealed duplicate dependencies that had inadvertently leaked into vendor chunks.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "CSS Container Queries",
+    "definition": "CSS media capabilities that apply styles based on the size of a parent container rather than the overall viewport width.",
+    "example": "Using container queries enabled card widgets to adapt seamlessly between single-column and multi-column layouts.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "WebAssembly (WASM)",
+    "definition": "A binary instruction format for a stack-based virtual machine, executing native-speed code within web browsers.",
+    "example": "We compiled our C++ physics engine to WebAssembly to achieve near-native simulation frame rates inside the browser.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "WebGPU",
+    "definition": "A modern web API providing low-level, high-performance hardware acceleration for 3D graphics and general-purpose GPU compute.",
+    "example": "WebGPU offers significantly lower CPU driver overhead and superior compute shader capabilities than WebGL 2.0.",
+    "category": "web",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "State Management Store",
+    "definition": "A centralized pattern and library (e.g. Zustand, Redux) for managing global reactive data across decoupled components.",
+    "example": "Zustand was selected for client-side state management because of its minimal footprint and subscription selector model.",
+    "category": "web",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Fine-Tuning",
+    "definition": "The process of taking a pre-trained model and further training it on a specialized, domain-specific dataset with backpropagation.",
+    "example": "Fine-tuning a small open-weight LLM on our codebase allowed it to output idiomatic internal API calls consistently.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Embeddings",
+    "definition": "High-dimensional vector representations of text, images, or audio that capture underlying semantic meaning and relationships.",
+    "example": "Generating 1536-dimensional embeddings allows the search engine to match queries based on semantic intent rather than exact keywords.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "RAG (Retrieval-Augmented Generation)",
+    "definition": "An architecture that retrieves relevant documents from an external knowledge base to augment an LLM prompt before generating answers.",
+    "example": "Our RAG pipeline queries a vector database for clinical protocols before the model drafts recommendations.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Prompt Engineering",
+    "definition": "The practice of structuring, refining, and optimizing text prompts to guide AI models toward accurate and reliable outputs.",
+    "example": "Adding negative constraints and strict schema instructions is a staple technique in production prompt engineering.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Zero-Shot Learning",
+    "definition": "A machine learning setup where a model performs a task without having received any prior explicit training examples for that task.",
+    "example": "The foundation model classified clinical triage flags in a zero-shot setting with impressive accuracy.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Few-Shot Prompting",
+    "definition": "Providing a small number of input-output demonstrations inside the prompt to guide the model on formatting and logic.",
+    "example": "Including three few-shot examples eliminated JSON formatting errors when parsing messy resume text.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Chain-of-Thought (CoT)",
+    "definition": "A prompting technique that encourages the model to generate intermediate reasoning steps before arriving at a final conclusion.",
+    "example": "Enabling Chain-of-Thought reasoning dramatically improved the agent performance on multi-step mathematical calculations.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Hallucination",
+    "definition": "A phenomenon where a generative AI model produces factually incorrect, misleading, or fabricated information with high confidence.",
+    "example": "Grounded RAG architectures with strict source citations help eliminate model hallucinations in high-stakes domains.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Context Window",
+    "definition": "The maximum number of tokens (input plus output) an AI model can process and retain in memory during a single interaction.",
+    "example": "A 128k token context window allowed us to pass entire codebase repositories into a single analysis request.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Tokenization",
+    "definition": "The process of breaking down raw text strings into smaller numerical sub-word units or tokens for neural network ingestion.",
+    "example": "Byte-Pair Encoding (BPE) tokenization splits rare technical words into common subword tokens.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Vector Database",
+    "definition": "A specialized database engineered to store, index, and query high-dimensional vector embeddings using approximate nearest neighbor algorithms.",
+    "example": "We deployed Pinecone as our vector database to perform sub-10ms semantic searches across millions of documents.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Cosine Similarity",
+    "definition": "A mathematical metric that measures the cosine of the angle between two multi-dimensional vectors to determine semantic closeness.",
+    "example": "Cosine similarity scores above 0.85 indicate that two technical documents share strong contextual relevance.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Temperature",
+    "definition": "A hyperparameter that controls the randomness and creativity of generated text by scaling token logit probabilities.",
+    "example": "We set temperature to 0.0 for deterministic JSON extraction and 0.7 for creative brainstorming tasks.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Top-P Sampling (Nucleus Sampling)",
+    "definition": "A decoding strategy that chooses tokens only from the smallest set whose cumulative probability reaches threshold P.",
+    "example": "Setting top-p to 0.9 discards low-probability tail tokens while preserving natural conversational flow.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Quantization",
+    "definition": "Compressing model weights from high precision (e.g. 16-bit float) to lower precision (e.g. 4-bit or 8-bit integer) to save memory.",
+    "example": "4-bit quantization allowed running a 70B parameter model locally on consumer hardware with negligible quality loss.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "LoRA (Low-Rank Adaptation)",
+    "definition": "A parameter-efficient fine-tuning technique that freezes base model weights and trains small low-rank adapter matrices.",
+    "example": "Using LoRA reduced our fine-tuning VRAM requirements by 80% while matching full fine-tuning benchmark accuracy.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "RLHF (Reinforcement Learning from Human Feedback)",
+    "definition": "Training machine learning models using reward models trained on human preferences to align AI behavior with human values.",
+    "example": "RLHF alignment significantly decreased toxic outputs and made the model more helpful for end users.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Function Calling / Tool Use",
+    "definition": "The capability of an LLM to generate structured arguments to invoke external APIs, tools, and databases autonomously.",
+    "example": "The agent leveraged function calling to look up user calendar slots and query weather APIs in real time.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "System Prompt",
+    "definition": "A foundational directive provided to an AI model that establishes its overarching persona, behavioral boundaries, and output format.",
+    "example": "The system prompt instructs the assistant to respond concisely using GitHub-flavored markdown without conversational filler.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Agentic Loop",
+    "definition": "An autonomous execution cycle where an AI perceives state, plans actions, calls tools, inspects outputs, and iterates until completion.",
+    "example": "The agentic loop automatically ran unit tests, identified compiler errors, and edited source code until the build passed.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Attention Mechanism",
+    "definition": "A neural network component that calculates dynamic weighting scores between all pairs of input tokens across sequence positions.",
+    "example": "Self-attention allows the transformer to correlate pronouns with their correct antecedents across long paragraphs.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Transformer Architecture",
+    "definition": "A deep learning architecture relying on self-attention mechanisms rather than recurrence or convolutions to process sequential data.",
+    "example": "The transformer architecture parallelizes sequence processing during training far more effectively than legacy RNNs.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Perplexity",
+    "definition": "A statistical measurement of how well a probability model or language model predicts a sample of text (lower is better).",
+    "example": "The language model achieved a perplexity score of 4.2 on the standardized technical validation dataset.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Cross-Encoder (Reranker)",
+    "definition": "A neural model that processes a query and document together to compute an accurate relevance score for reranking search results.",
+    "example": "Passing the top-50 vector search candidates through a cross-encoder reranker boosted retrieval precision by 18%.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Latency & Throughput",
+    "definition": "Latency is the time taken to process a single request (or first token); Throughput is the number of tokens or requests processed per second.",
+    "example": "Speculative decoding reduced time-to-first-token latency while boosting overall generation throughput.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Model Drift",
+    "definition": "The degradation of machine learning model performance over time due to shifting real-world data distributions.",
+    "example": "Continuous monitoring pipelines detect model drift by comparing production inference distributions with training baselines.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Inference Engine",
+    "definition": "Optimized runtime software (e.g. vLLM, TensorRT-LLM) designed to execute neural network models efficiently in production.",
+    "example": "Deploying on vLLM enabled PagedAttention, allowing continuous batching and doubling our GPU serving capacity.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Guardrails",
+    "definition": "Programmable safety layers and validation rules wrapped around AI inputs and outputs to prevent policy violations and data leakage.",
+    "example": "Input guardrails sanitize user prompts for prompt injection attacks before sending them to the core LLM.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Instruction Tuning",
+    "definition": "Training a base foundation model on paired datasets of explicit human instructions and desired responses.",
+    "example": "Instruction tuning transformed the autocomplete base model into an interactive dialog assistant capable of following complex rules.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Multi-Modal Model",
+    "definition": "An AI model capable of understanding, processing, and generating multiple types of input modalities (text, images, audio, video).",
+    "example": "We fed the architectural blueprint image directly into the multi-modal LLM to extract room dimensions.",
+    "category": "ai/tooling",
+    "level": "B2",
+    "lang": "en"
+  },
+  {
+    "term": "Context Distillation",
+    "definition": "A technique where a large model summarizes long prompts or knowledge into smaller, specialized prompt prefixes or student weights.",
+    "example": "Context distillation enabled us to encode hundred-page API references into dense system prompt instructions.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  },
+  {
+    "term": "Semantic Chunking",
+    "definition": "Splitting text into chunks based on natural semantic boundaries and topic shifts rather than fixed character counts.",
+    "example": "Semantic chunking preserved complete medical protocol definitions without splitting crucial dosage numbers across blocks.",
+    "category": "ai/tooling",
+    "level": "C1",
+    "lang": "en"
+  }
+]
