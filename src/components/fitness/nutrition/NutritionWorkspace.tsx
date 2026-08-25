@@ -1,7 +1,7 @@
 // src/components/fitness/nutrition/NutritionWorkspace.tsx — Módulo UI de nutrición deportiva (AG-NUTRI, Fase 1)
 // Calculadora personal + targets citados + día tipo + suplementos con evidencia + disclaimer.
 import React from 'react';
-import { AlertTriangle, Calculator, Droplets, Pill, Sunrise } from 'lucide-react';
+import { AlertTriangle, Calculator, Droplets, Flame, Pill, Sunrise } from 'lucide-react';
 import { useNutritionStore, NUTRITION_STORAGE_KEY } from './nutritionStore';
 import {
   buildDayType,
@@ -12,6 +12,7 @@ import { toCitation } from '../../../data/fitness/nutrition/rules';
 import type { Goal } from '../../../data/fitness/nutrition/types';
 import TargetCard from './TargetCard';
 import DayTypeGrid from './DayTypeGrid';
+import KcalBurnPanel from './KcalBurnPanel';
 import Disclosure from '../../ui/Disclosure';
 import StatusBadge from '../../ui/StatusBadge';
 
@@ -219,6 +220,12 @@ export function NutritionWorkspace() {
         <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
           Cada target muestra su "¿por qué?" con la regla y la cita (libro · capítulo · página) que lo sustenta.
         </p>
+      </section>
+
+      {/* Quemado estimado hoy vs objetivo (ciclo 2) */}
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+        <SectionTitle icon={<Flame size={16} />}>Quemado estimado hoy vs objetivo</SectionTitle>
+        <KcalBurnPanel />
       </section>
 
       {/* Día tipo */}
