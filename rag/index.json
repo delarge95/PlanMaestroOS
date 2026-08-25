@@ -21,6 +21,11 @@
       "sources": 1,
       "chunks": 12
     },
+    "german": {
+      "version": "4.0.0",
+      "sources": 1,
+      "chunks": 12
+    },
     "nutrition": {
       "version": "4.0.0",
       "sources": 6,

@@ -7,12 +7,22 @@ import { ExternalLink, CheckCircle } from 'lucide-react';
 export interface LessonViewProps {
   lesson: Lesson;
   onLessonCompleted?: () => void;
+  /** Ejercicios mostrados (compatibilidad: el comportamiento histórico es 3). */
+  maxExercises?: number;
+  /** Marca la lección como ya completada (progreso persistido del store). */
+  initiallyCompleted?: boolean;
 }
 
-export default function LessonView({ lesson, onLessonCompleted }: LessonViewProps) {
+/** Comparación tolerante de respuestas (trim, minúsculas, espacios colapsados). */
+function answersMatch(user: string, correct: string): boolean {
+  const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ');
+  return norm(user) === norm(correct);
+}
+
+export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3, initiallyCompleted = false }: LessonViewProps) {
   const [activeTab, setActiveTab] = useState<'theory' | 'exercises'>('theory');
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(initiallyCompleted);
 
   const handleAnswerChange = (exId: string, val: string) => {
     setUserAnswers((prev) => ({ ...prev, [exId]: val }));
@@ -99,8 +109,11 @@ export default function LessonView({ lesson, onLessonCompleted }: LessonViewProp
         {/* PESTAÑA EJERCICIOS (MÁXIMO 3) */}
         {activeTab === 'exercises' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-            {lesson.exercises.slice(0, 3).map((ex, idx) => (
-              <div key={ex.id} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-sm)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {lesson.exercises.slice(0, maxExercises).map((ex, idx) => {
+              const answered = (userAnswers[ex.id] ?? '').trim() !== '';
+              const isCorrect = answered && answersMatch(userAnswers[ex.id], ex.correctAnswer);
+              return (
+              <div key={ex.id} style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${answered ? (isCorrect ? 'var(--color-state-done)' : 'var(--color-state-error, var(--color-accent-warning))') : 'var(--color-border-subtle)'}`, borderRadius: 'var(--radius-sm)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
                   Ejercicio {idx + 1}: {ex.prompt}
                 </span>
@@ -136,8 +149,15 @@ export default function LessonView({ lesson, onLessonCompleted }: LessonViewProp
                     style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px 12px', color: 'var(--text)', fontSize: '0.85rem' }}
                   />
                 )}
+
+                {answered && (
+                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: isCorrect ? 'var(--color-state-done)' : 'var(--color-accent-warning)' }}>
+                    {isCorrect ? '✓ Correcto' : `✗ Revisa — solución: ${ex.correctAnswer}`}
+                  </span>
+                )}
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
