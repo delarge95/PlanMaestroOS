@@ -121,3 +121,25 @@ el recosteo es mecánico (regenerar columnas USD desde la tarjeta elegida).
 Pendiente post-decisión: consolidar estrategia editorial de los DOS catálogos coexistentes
 (monolítico `CATALOGO_SERVICIOS.md` vs granular C1–C7 — o espejo mutuo con IDs estables),
 espejo TS commiteado cuando la instancia paralela termine, y regeneración de rangos desde el motor.
+
+---
+
+## Adenda — sesión paralela (motor determinista v1) · 2026-08-25 15:40
+
+Otra instancia AG-SERV (esta entrada) trabajó en el mismo worktree de forma intercalada hoy. Registro por transparencia:
+
+**Commits de esta sesión:**
+- c657cad docs(agents): ficha §3.10 AG-SERV en PLAN_MULTIAGENTE.md (tabla §1.1 + ficha completa, aditiva) + prompt de arranque §13 en PROMPTS_INICIALES.md.
+- ecd6cb docs(services): CATALOGO_SERVICIOS.md v1 monolítico (familias A–F, IDs estables A1/B1–B7/C1–C8/D1/E1–E3/F1–F5, rate card ART/RT/AI/TL derivada del doc-03, políticas §2, paquetes PK-01…10).
+- bb6169 feat(services): espejo TS completo (	ypes/rateCard/serviceCatalog/estimator/packages + tests 13/13) con subtareas opcionales, excedente por pieza CAD con descuentos por volumen, estimatePackage() (bundle −10 % ⇒ ×0.95 extremos), y sincronización de TODOS los totales del doc contra el motor.
+
+**Sobre la interleaving de commits:**  3b50f6 y 9f1a72 fueron creados por la instancia anterior mientras esta sesión editaba;  3b50f6 absorbió los archivos TS en edición de esta sesión (por eso types.ts muestra solo +2: la adición optional). No se perdió trabajo de ninguna de las dos partes; HEAD bb6169 verifica limpio: 
+px astro check 0 errores / 
+pm test 274/274 (incluye los 13 nuevos).
+
+**Estado de la consolidación pendiente (coincide con la sección anterior):**
+1. Dos taxonomías conviven: monolítico (A/B/C/D/E/F) vs granular (REND/ASRT/WEB/EXP/IA/VFX/CAD/TEX/TRA). El README ya fija la regla: **gana el código**; el motor actual usa IDs del monolítico. Requiere mapeo de IDs o migración — decisión del usuario.
+2. Rate card: el motor tiene codificada la Opción A (ART 25–38 / RT 28–45 / AI 35–55 / TL 32–48). Si el usuario elige la Opción B (RC-*) o la vía intermedia, el recosteo es mecánico: cambiar ateCard.ts, regenerar totales del doc (los tests ancla se recalculan).
+3. Redondeo propuesto por auditoría (5 USD subtarea / 50 USD paquete) no aplicado aún — el motor usa floor5/ceil5 por subtarea sin redondeo de paquete.
+
+Sin push. Sin merge a main. Trabajo queda en gent/services para PR.
