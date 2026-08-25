@@ -49,11 +49,11 @@ Segundo incidente del mismo día: una segunda instancia AG-SERV sobrescribió ac
 | 5 | Catálogo C2 Assets realtime WebGL (`02_assets_realtime_webgl.md`) | ✅ `97e98b7` |
 | 6 | Catálogo C3 Integración web 3D (`03_integracion_web_3d.md`) | ✅ `29c1d86` |
 | 7 | Catálogo C4 IA y automatización (`04_ia_automatizacion.md`) | ✅ `c6889c7` |
-| 8 | Catálogo C5 VFX/compositing (`05_vfx_compositing.md`) | ⏳ |
-| 9 | Catálogo C6 CAD/texturas/pipeline (`06_cad_texturas_pipeline.md`) | ⏳ |
-| 10 | Catálogo C7 transversales/retainers (`07_transversales_retainers.md`) | ⏳ |
+| 8 | Catálogo C5 VFX/compositing (`05_vfx_compositing.md`) | ✅ `2e467c6` |
+| 9 | Catálogo C6 CAD/texturas/pipeline (`06_cad_texturas_pipeline.md`) | ✅ `222e0b1` |
+| 10 | Catálogo C7 transversales/retainers (`07_transversales_retainers.md`) | ✅ `1464c83` |
 | 11 | Auditoría de consistencia v1 (`VERIFICACION_v1.md`) | ✅ `ac5a40f` |
-| 12 | STATUS ciclo 1 cerrado | ⏳ |
+| 12 | STATUS ciclo 1 cerrado | ✅ (ver cierre al final) |
 
 ## Pendientes / notas
 
@@ -83,3 +83,41 @@ independientes de esta decisión y quedan validadas.
 
 Estado al cierre de esta adenda: C1–C4 detallados entregados por la sesión principal; espejo TS
 en progreso (sin commitear); catálogo maestro v1.0 estable; auditoría v1 entregada.
+
+---
+
+## Cierre de ciclo 1 — sesión principal (catálogos granulares C1–C7)
+
+Entregables propios completados tras la adenda anterior:
+
+| Commit | Contenido |
+|---|---|
+| `2e467c6` | C5 VFX: VFX-01 (3D sobre footage, por shot S/M/L), VFX-02 (sims por complejidad), VFX-03 (motion graphics) |
+| `222e0b1` | C6: CAD-01 con criterios de tier POR TIPOS DE PIEZA (≤8 / 9–30 / 31–100 / >100) + ejemplo drone S/M/L explícito, TEX-01, PIPE-01 |
+| `1464c83` | C7: CON-01 consultoría, RET-01 retainers (Lite/Pro/Full), BND-01..05 bundles de composición con descuento |
+
+Cobertura total del mandato del usuario: **28 servicios + 2 módulos + 5 bundles**, cada uno con
+subtareas × tier (horas) → rango USD → plazo. Trazabilidad RC-* citada por archivo.
+
+### Recomendación de esta sesión sobre la decisión de rate card (complementa la adenda anterior)
+
+La instancia de verificación recomienda Tarjeta A; esta sesión deja constancia de la alternativa,
+para que el usuario decida con ambas postas:
+
+- **Opción B (RC-*, vigente en metodología y C1–C7)**: pisos más bajos, alineada a la estrategia
+  documentada de ENTRADA competitiva del doc-03 (§9.1 piso 1.5k, §13 "no presentarse como senior",
+  objetivo 3k/mes a 3–6 meses). Menor riesgo de quedar fuera por precio mientras el portafolio
+  freelance acumula evidencia.
+- **Opción A (ART/RT/AI/TL)**: bandas más altas, ya codificada en el espejo TS; coherente con la
+  ruta de USD 6k/mes (doc-03 §9.3) pero adelanta ese posicionamiento sin evidencia comercial previa.
+- **Vía intermedia sugerida**: adoptar B como v1 operativa + cláusula de revisión programada
+  (tras 3–5 proyectos cerrados con horas reales registradas) para escalar hacia bandas tipo A con
+  datos, no con intuición. Unificar redondeo: 5 USD por subtarea, 50 USD por paquete (propuesta de
+  la auditoría §1, correcta).
+
+Sea cual fuere la decisión, las HORAS quedan validadas por la auditoría y son independientes;
+el recosteo es mecánico (regenerar columnas USD desde la tarjeta elegida).
+
+Pendiente post-decisión: consolidar estrategia editorial de los DOS catálogos coexistentes
+(monolítico `CATALOGO_SERVICIOS.md` vs granular C1–C7 — o espejo mutuo con IDs estables),
+espejo TS commiteado cuando la instancia paralela termine, y regeneración de rangos desde el motor.
