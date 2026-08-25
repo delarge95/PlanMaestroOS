@@ -33,8 +33,8 @@
     },
     "nutrition": {
       "version": "4.0.0",
-      "sources": 7,
-      "chunks": 36
+      "sources": 9,
+      "chunks": 155
     },
     "portfolio": {
       "version": "4.0.0",
