@@ -1,3 +1,7 @@
+> ⚠ ARCHIVADO en `_historico/` (ciclo de unificació v2, 2026-08-25). Contenido promovido/absorbido por
+> [04_catalogo_footage_ia_soporte.md](../04_catalogo_footage_ia_soporte.md) v2 y/o [01_modelo_cobro.md](../01_modelo_cobro.md) v1.2.
+> Se conserva por Regla de Oro como referencia histórica. **NO USAR para cotizar.**
+
 # Catálogo de servicios — Familias D (VFX/3D sobre footage real) y E (integración de IA)
 
 > ⚠️ **SUPERSEDED (pendiente de unificación)** · Los precios de este archivo fueron calculados con las

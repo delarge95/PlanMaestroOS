@@ -1,3 +1,7 @@
+> ⚠ ARCHIVADO en `_historico/` (ciclo de unificació v2, 2026-08-25). Contenido promovido/absorbido por
+> [04_catalogo_footage_ia_soporte.md](../04_catalogo_footage_ia_soporte.md) v2 y/o [01_modelo_cobro.md](../01_modelo_cobro.md) v1.2.
+> Se conserva por Regla de Oro como referencia histórica. **NO USAR para cotizar.**
+
 # Catálogo 04 — VFX sobre footage, IA, visualización con datos y consultoría
 
 > v1.0 · 2026-08-25 · Owner: AG-SERV · Estado: interno. Fórmula y bandas: `01_modelo_cobro.md` §2–§3.

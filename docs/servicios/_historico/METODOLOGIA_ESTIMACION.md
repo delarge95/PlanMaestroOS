@@ -1,3 +1,7 @@
+> ⚠ ARCHIVADO en `_historico/` (ciclo de unificació v2, 2026-08-25). Contenido promovido/absorbido por
+> [04_catalogo_footage_ia_soporte.md](../04_catalogo_footage_ia_soporte.md) v2 y/o [01_modelo_cobro.md](../01_modelo_cobro.md) v1.2.
+> Se conserva por Regla de Oro como referencia histórica. **NO USAR para cotizar.**
+
 # Metodología de estimación y métodos de cobro — AG-SERV
 
 > Fuente de verdad económica del agente. Todo número publicado deriva de este documento (principio §0.1 del plan maestro).
