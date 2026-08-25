@@ -9,8 +9,9 @@ import { useActiveProgramStore } from "../fitness/activeProgramStore";
 import { getProgramById } from "../fitness/programs";
 import { buildProgramCalendar, workoutDayLabel } from "../../lib/fitness/programCalendar";
 import { useCareerStore } from "../career/careerStore";
-import { useVocabularyStore } from "../../lib/languages/vocabularyStore";
-import { useClinicalStore } from "../clinical/clinicalStore";
+import { useVocabularyStore, getDueQueue } from "../../lib/languages/vocabularyStore";
+import { germanUnitsVocabulary } from "../languages/german/units";
+import { useClinicalStore, todayLocalIso } from "../clinical/clinicalStore";
 import type {
   NotionTaskPropertyMap,
   NotionDailyPlanPropertyMap,
@@ -74,20 +75,21 @@ export function getTodayDomainView(
   const careerState = ssrSafe ? null : useCareerStore.getState();
   const applications = careerState?.applications || [];
   const activeApps = applications.filter((a) => a.stage !== "Cerrado");
-  const pendingFollowUps = applications.filter(
-    (a) => a.trackerStatus === "needs_follow_up",
+  const todayIso = now.toISOString().split("T")[0];
+  const pendingFollowUps = activeApps.filter(
+    (a) => Boolean(a.followUpDateIso) && a.followUpDateIso <= todayIso,
   );
 
   // Buscar la fecha de seguimiento más próxima
   const followUpDates = activeApps
-    .map((a) => a.nextFollowUpDate)
+    .map((a) => a.followUpDateIso)
     .filter((d): d is string => Boolean(d))
     .sort();
-  const nextFollowUpDate = followUpDates[0] || now.toISOString().split("T")[0];
+  const nextFollowUpDate = followUpDates[0] || todayIso;
 
   const topCareerApp = activeApps[0];
   const careerActionTitle = topCareerApp
-    ? `${topCareerApp.company}: ${topCareerApp.singleNextAction}`
+    ? `${topCareerApp.companyName}: ${topCareerApp.singleNextAction}`
     : "Revisar pipeline de postulaciones";
 
   // --- 3. Languages Domain (Consumo de vocabularyStore) ---
@@ -95,7 +97,10 @@ export function getTodayDomainView(
   if (!ssrSafe) {
     try {
       const vocabState = useVocabularyStore.getState();
-      germanDueCount = vocabState.getItemsDueToday("de").length;
+      germanDueCount = getDueQueue(
+        germanUnitsVocabulary,
+        vocabState.byLanguage["de"],
+      ).length;
     } catch {
       germanDueCount = 0;
     }
@@ -106,8 +111,11 @@ export function getTodayDomainView(
   if (!ssrSafe) {
     try {
       const clinState = useClinicalStore.getState();
-      const todayLog = clinState.getTodayLog(now);
-      if (todayLog && todayLog.perceivedEnergy <= 4) {
+      const todayIsoClinical = todayLocalIso(now);
+      const todayLog = [...clinState.biofeedback]
+        .reverse()
+        .find((e) => e.dateIso === todayIsoClinical);
+      if (todayLog && todayLog.energy <= 4) {
         clinicalNote = " (Modo Energía Reducida)";
       }
     } catch {
@@ -198,19 +206,19 @@ export function getCareerPipelineView(): CareerPipelineView {
 
   const mappedApplications: CareerPipelineItem[] = applications.map((app) => {
     let mappedStatus: CareerPipelineItem["status"] = "Prospecto";
-    if (app.stage === "applied") mappedStatus = "Aplicado";
-    else if (app.stage === "interview" || app.stage === "technical_test") mappedStatus = "Entrevista";
-    else if (app.stage === "offer") mappedStatus = "Oferta";
-    else if (app.stage === "rejected") mappedStatus = "Rechazado";
+    if (app.stage === "Aplicado") mappedStatus = "Aplicado";
+    else if (app.stage === "Entrevista" || app.stage === "Seguimiento") mappedStatus = "Entrevista";
+    else if (app.trackerStatus === "Offer") mappedStatus = "Oferta";
+    else if (app.stage === "Cerrado" && (app.trackerStatus === "Rejected" || app.trackerStatus === "No Fit")) mappedStatus = "Rechazado";
 
     return {
       id: app.id,
-      company: app.company,
-      role: app.role,
+      company: app.companyName,
+      role: app.roleTitle,
       status: mappedStatus,
       nextAction: app.singleNextAction,
-      followUpDateIso: app.nextFollowUpDate,
-      remoteType: app.remoteType || "Remoto Global",
+      followUpDateIso: app.followUpDateIso,
+      remoteType: "Remoto Global",
     };
   });
 
