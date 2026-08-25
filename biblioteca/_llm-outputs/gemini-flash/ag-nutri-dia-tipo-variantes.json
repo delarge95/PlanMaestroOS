@@ -1,0 +1,464 @@
+{
+  "metadata": {
+    "title": "Variantes de Distribución Nutricional de Día Tipo (Omnívoro vs. Vegetariano)",
+    "domain": "fitness/nutrition",
+    "author": "Plan Maestro OS — AG-NUTRI",
+    "level": "Sports Nutrition & Body Recomposition",
+    "nature": "Distribución cuantitativa de macronutrientes por grupos genéricos de alimentos (SIN recetas de gastronomía)",
+    "scientificSources": [
+      {
+        "citation": "NSCA Essentials of Strength Training and Conditioning, 4th ed., Ch. 10 (Nutrition Strategies)",
+        "locator": "pp. 201-224",
+        "ruleId": "nutri-nsca-protein-timing-leucine"
+      },
+      {
+        "citation": "Aragon AA et al. International society of sports nutrition position stand: diets and body composition. JISSN 2017 14:16",
+        "locator": "pp. 1-14",
+        "ruleId": "aragon-issn-protein-intake-in-hypocaloric-training"
+      },
+      {
+        "citation": "Kerksick CM et al. International society of sports nutrition position stand: nutrient timing. JISSN 2017 14:33",
+        "locator": "pp. 1-22",
+        "ruleId": "nutri-issn-nutrient-timing-anabolic-window"
+      },
+      {
+        "citation": "Maughan RJ et al. IOC consensus statement: dietary supplements and the high-performance athlete. BJSM 2018 52(7):439-455",
+        "locator": "pp. 439-445",
+        "ruleId": "nutri-ioc-creatine-caffeine-dosing"
+      }
+    ]
+  },
+  "referenceAthleteProfile": {
+    "bodyWeightKg": 70.0,
+    "sex": "neutral_reference",
+    "dailyTargetKcal": 2400,
+    "macronutrientTargets": {
+      "protein": {
+        "gramsTotal": 154.0,
+        "gramsPerKg": 2.2,
+        "kcalContribution": 616,
+        "percentageOfKcal": 25.7
+      },
+      "carbohydrate": {
+        "gramsTotal": 280.0,
+        "gramsPerKg": 4.0,
+        "kcalContribution": 1120,
+        "percentageOfKcal": 46.7
+      },
+      "fat": {
+        "gramsTotal": 74.0,
+        "gramsPerKg": 1.06,
+        "kcalContribution": 666,
+        "percentageOfKcal": 27.8
+      }
+    },
+    "hydrationTargetLiters": 3.2,
+    "sodiumTargetMg": 2400
+  },
+  "varianteOmnivora": {
+    "name": "Arquetipo Omnívoro Isocalórico / Isoproteico",
+    "description": "Distribución basada en fuentes animales y vegetales completas de alta biodisponibilidad (DIAAS > 1.15), optimizando el umbral de leucina (≥2.7g) por pulso proteico.",
+    "dailyTotals": {
+      "kcal": 2402,
+      "proteinGrams": 155.0,
+      "carbsGrams": 281.0,
+      "fatGrams": 73.5,
+      "fiberGrams": 34.0
+    },
+    "meals": [
+      {
+        "mealId": "omni-m1-desayuno",
+        "name": "Comida 1: Desayuno / Primer Pulso Proteico",
+        "timing": "07:30 - 08:30",
+        "targetKcal": 560,
+        "macroSplit": {
+          "proteinG": 38.0,
+          "carbsG": 65.0,
+          "fatG": 16.0
+        },
+        "leucineContentG": 3.1,
+        "genericFoodGroups": [
+          {
+            "group": "Cereales enteros / Copos de avena integral",
+            "amountGrams": 75,
+            "pG": 10.0,
+            "cG": 45.0,
+            "fG": 5.2
+          },
+          {
+            "group": "Huevos enteros pasteurizados (Grado A)",
+            "amountGrams": 110,
+            "unitDescription": "2 unidades medianas",
+            "pG": 13.5,
+            "cG": 0.8,
+            "fG": 10.2
+          },
+          {
+            "group": "Claras de huevo líquidas pasteurizadas",
+            "amountGrams": 100,
+            "pG": 11.0,
+            "cG": 0.7,
+            "fG": 0.2
+          },
+          {
+            "group": "Fruta fresca entera (Plátano / Frutos rojos)",
+            "amountGrams": 120,
+            "pG": 1.2,
+            "cG": 24.0,
+            "fG": 0.3
+          }
+        ],
+        "physiologicalObjective": "Corte de ayuno nocturno, elevación de síntesis proteica muscular (MPS) mediante leucina de huevo y avena, provisión de glucosa sostenida por almidón de bajo índice glucémico."
+      },
+      {
+        "mealId": "omni-m2-almuerzo",
+        "name": "Comida 2: Almuerzo / Carga Previa",
+        "timing": "13:00 - 14:00",
+        "targetKcal": 680,
+        "macroSplit": {
+          "proteinG": 44.0,
+          "carbsG": 80.0,
+          "fatG": 20.0
+        },
+        "leucineContentG": 3.8,
+        "genericFoodGroups": [
+          {
+            "group": "Carne magra de ave (Pechuga de pollo o pavo)",
+            "amountGrams": 180,
+            "pG": 40.0,
+            "cG": 0.0,
+            "fG": 3.6
+          },
+          {
+            "group": "Cereales / Arroz blanco o jazmín (peso en seco)",
+            "amountGrams": 85,
+            "pG": 6.5,
+            "cG": 67.0,
+            "fG": 0.8
+          },
+          {
+            "group": "Aceite de oliva virgen extra (AOVE prensado en frío)",
+            "amountGrams": 15,
+            "pG": 0.0,
+            "cG": 0.0,
+            "fG": 15.0
+          },
+          {
+            "group": "Hortalizas y verduras de hoja verde (Brócoli / Espinacas)",
+            "amountGrams": 200,
+            "pG": 3.5,
+            "cG": 8.0,
+            "fG": 0.5
+          }
+        ],
+        "physiologicalObjective": "Reposición de glucógeno hepático y muscular, provisión de micronutrientes antioxidantes y matriz lipídica monoinsaturada para soporte hormonal."
+      },
+      {
+        "mealId": "omni-m3-peri-workout",
+        "name": "Comida 3: Peri-Entrenamiento (Pre + Post-Esfuerzo Inmediato)",
+        "timing": "17:00 - 18:30 (Ventana de Sesión)",
+        "targetKcal": 510,
+        "macroSplit": {
+          "proteinG": 32.0,
+          "carbsG": 85.0,
+          "fatG": 4.5
+        },
+        "leucineContentG": 3.4,
+        "genericFoodGroups": [
+          {
+            "group": "Aislado de proteína de suero lácteo (Whey Isolate 90%)",
+            "amountGrams": 30,
+            "pG": 27.0,
+            "cG": 1.0,
+            "fG": 0.5
+          },
+          {
+            "group": "Cereales instantáneos / Harina de arroz o maltodextrina",
+            "amountGrams": 50,
+            "pG": 3.5,
+            "cG": 42.0,
+            "fG": 0.5
+          },
+          {
+            "group": "Fruta desecada o fresca de rápida absorción (Dátiles / Plátano)",
+            "amountGrams": 80,
+            "pG": 1.5,
+            "cG": 40.0,
+            "fG": 0.2
+          },
+          {
+            "group": "Agua con electrolitos (Sodio 500mg, Potasio 200mg)",
+            "amountGrams": 750,
+            "pG": 0.0,
+            "cG": 0.0,
+            "fG": 0.0
+          }
+        ],
+        "physiologicalObjective": "Hiperaminoacidemia rápida post-esfuerzo, activación de la vía mTORC1, aceleración de la resíntesis de glucógeno mediante transportadores GLUT4 estimulados por la contracción."
+      },
+      {
+        "mealId": "omni-m4-cena",
+        "name": "Comida 4: Cena / Síntesis Proteica Nocturna",
+        "timing": "21:00 - 22:00",
+        "targetKcal": 652,
+        "macroSplit": {
+          "proteinG": 41.0,
+          "carbsG": 51.0,
+          "fatG": 33.0
+        },
+        "leucineContentG": 3.3,
+        "genericFoodGroups": [
+          {
+            "group": "Pescado azul rico en Omega-3 (Salmón / Caballa / Trucha)",
+            "amountGrams": 170,
+            "pG": 35.0,
+            "cG": 0.0,
+            "fG": 21.0
+          },
+          {
+            "group": "Tubérculos cocidos (Patata / Boniato al vapor)",
+            "amountGrams": 220,
+            "pG": 4.0,
+            "cG": 42.0,
+            "fG": 0.3
+          },
+          {
+            "group": "Aceite de oliva virgen extra",
+            "amountGrams": 10,
+            "pG": 0.0,
+            "cG": 0.0,
+            "fG": 10.0
+          },
+          {
+            "group": "Verduras mixtas cocidas (Calabacín, Judías verdes)",
+            "amountGrams": 200,
+            "pG": 2.5,
+            "cG": 7.0,
+            "fG": 0.4
+          }
+        ],
+        "physiologicalObjective": "Aporte de ácidos grasos EPA/DHA antiinflamatorios, digestión más lenta para sostener el balance nitrogenado positivo durante las 7-8 horas de sueño reparador."
+      }
+    ]
+  },
+  "varianteVegetariana": {
+    "name": "Arquetipo Ovo-Lácteo-Vegetariano / Plant-Forward Isocalórico",
+    "description": "Distribución basada en fuentes vegetales combinadas y derivados lácteos/huevo para garantizar un aminograma completo y compensar la menor concentración basal de leucina vegetal.",
+    "dailyTotals": {
+      "kcal": 2405,
+      "proteinGrams": 154.5,
+      "carbsGrams": 279.0,
+      "fatGrams": 74.0,
+      "fiberGrams": 42.0
+    },
+    "meals": [
+      {
+        "mealId": "veg-m1-desayuno",
+        "name": "Comida 1: Desayuno / Primer Pulso Proteico Vegetal-Lácteo",
+        "timing": "07:30 - 08:30",
+        "targetKcal": 565,
+        "macroSplit": {
+          "proteinG": 38.5,
+          "carbsG": 64.0,
+          "fatG": 17.0
+        },
+        "leucineContentG": 3.2,
+        "genericFoodGroups": [
+          {
+            "group": "Cereales enteros / Copos de avena integral",
+            "amountGrams": 70,
+            "pG": 9.5,
+            "cG": 42.0,
+            "fG": 4.8
+          },
+          {
+            "group": "Queso fresco batido 0% / Yogur griego desnatado / Skyr",
+            "amountGrams": 200,
+            "pG": 22.0,
+            "cG": 8.0,
+            "fG": 0.4
+          },
+          {
+            "group": "Semillas oleaginosas (Chía / Semillas de lino trituradas)",
+            "amountGrams": 15,
+            "pG": 3.0,
+            "cG": 1.0,
+            "fG": 6.0
+          },
+          {
+            "group": "Frutos secos (Nueces de nogal)",
+            "amountGrams": 10,
+            "pG": 1.5,
+            "cG": 1.5,
+            "fG": 6.5
+          },
+          {
+            "group": "Fruta entera (Frutos rojos / Arándanos)",
+            "amountGrams": 100,
+            "pG": 1.0,
+            "cG": 12.0,
+            "fG": 0.3
+          }
+        ],
+        "physiologicalObjective": "Combinación láctea rica en caseína y suero natural con fibra prebiótica soluble de la avena y ácidos grasos alfa-linolénicos (ALA) de las semillas."
+      },
+      {
+        "mealId": "veg-m2-almuerzo",
+        "name": "Comida 2: Almuerzo / Matriz Legumbre-Cereal Complementaria",
+        "timing": "13:00 - 14:00",
+        "targetKcal": 675,
+        "macroSplit": {
+          "proteinG": 43.0,
+          "carbsG": 81.0,
+          "fatG": 18.5
+        },
+        "leucineContentG": 3.3,
+        "genericFoodGroups": [
+          {
+            "group": "Derivados de soja no transgénica (Tofu firme o Tempeh fermentado)",
+            "amountGrams": 180,
+            "pG": 28.0,
+            "cG": 4.0,
+            "fG": 11.0
+          },
+          {
+            "group": "Legumbres cocidas (Lentejas o garbanzos en conserva/hervidos)",
+            "amountGrams": 150,
+            "pG": 13.0,
+            "cG": 30.0,
+            "fG": 1.2
+          },
+          {
+            "group": "Pseudocereales / Quinoa o arroz integral (peso en seco)",
+            "amountGrams": 50,
+            "pG": 6.0,
+            "cG": 38.0,
+            "fG": 1.5
+          },
+          {
+            "group": "Aceite de oliva virgen extra",
+            "amountGrams": 10,
+            "pG": 0.0,
+            "cG": 0.0,
+            "fG": 10.0
+          },
+          {
+            "group": "Hortalizas crucíferas (Brócoli / Coliflor / Col rizada)",
+            "amountGrams": 200,
+            "pG": 4.0,
+            "cG": 8.0,
+            "fG": 0.4
+          }
+        ],
+        "physiologicalObjective": "Complementación de aminoácidos limitantes (lisina de las legumbres + metionina/cisteína del arroz/quinoa) para alcanzar un valor biológico equiparable a la proteína animal."
+      },
+      {
+        "mealId": "veg-m3-peri-workout",
+        "name": "Comida 3: Peri-Entrenamiento (Aislado Vegetal + Carbohidrato Rápido)",
+        "timing": "17:00 - 18:30",
+        "targetKcal": 505,
+        "macroSplit": {
+          "proteinG": 32.0,
+          "carbsG": 84.0,
+          "fatG": 4.0
+        },
+        "leucineContentG": 3.0,
+        "genericFoodGroups": [
+          {
+            "group": "Proteína vegetal en polvo aislada (Blend Guisante 70% + Arroz 30%)",
+            "amountGrams": 35,
+            "pG": 28.0,
+            "cG": 2.0,
+            "fG": 1.2
+          },
+          {
+            "group": "Harina de avena o amilopectina / Ciclodextrina",
+            "amountGrams": 50,
+            "pG": 4.0,
+            "cG": 40.0,
+            "fG": 2.5
+          },
+          {
+            "group": "Plátano maduro o puré de manzana",
+            "amountGrams": 150,
+            "pG": 1.5,
+            "cG": 35.0,
+            "fG": 0.3
+          },
+          {
+            "group": "Agua con sales electrolíticas",
+            "amountGrams": 750,
+            "pG": 0.0,
+            "cG": 0.0,
+            "fG": 0.0
+          }
+        ],
+        "physiologicalObjective": "Aislado vegetal microfiltrado con perfil de aminoácidos ramificados (BCAA) equilibrado para inducir el pico plasmático de síntesis post-entrenamiento."
+      },
+      {
+        "mealId": "veg-m4-cena",
+        "name": "Comida 4: Cena / Concentrado Proteico y Fibra Digestiva",
+        "timing": "21:00 - 22:00",
+        "targetKcal": 660,
+        "macroSplit": {
+          "proteinG": 41.0,
+          "carbsG": 50.0,
+          "fatG": 34.5
+        },
+        "leucineContentG": 3.2,
+        "genericFoodGroups": [
+          {
+            "group": "Proteína de trigo lavada (Seitán natural) o Soja texturizada",
+            "amountGrams": 120,
+            "pG": 29.0,
+            "cG": 5.0,
+            "fG": 1.8
+          },
+          {
+            "group": "Huevos enteros camperos",
+            "amountGrams": 110,
+            "unitDescription": "2 unidades",
+            "pG": 13.5,
+            "cG": 0.8,
+            "fG": 10.2
+          },
+          {
+            "group": "Tubérculos (Boniato o patata al horno)",
+            "amountGrams": 200,
+            "pG": 3.5,
+            "cG": 40.0,
+            "fG": 0.2
+          },
+          {
+            "group": "Aceite de oliva virgen extra",
+            "amountGrams": 15,
+            "pG": 0.0,
+            "cG": 0.0,
+            "fG": 15.0
+          },
+          {
+            "group": "Frutos secos (Almendras o nueces)",
+            "amountGrams": 15,
+            "pG": 3.0,
+            "cG": 1.5,
+            "fG": 8.0
+          },
+          {
+            "group": "Verduras de hoja verde variadas",
+            "amountGrams": 150,
+            "pG": 2.0,
+            "cG": 4.0,
+            "fG": 0.3
+          }
+        ],
+        "physiologicalObjective": "Carga lipídica saludable con vitamina E y antioxidantes, combinando fuentes de liberación sostenida para asegurar cobertura nocturna completa."
+      }
+    ]
+  },
+  "nutrientTimingPrinciples": {
+    "proteinDistribution": "Fraccionamiento en 4 tomas de ~0.40 - 0.55 g/kg cada 3.5 a 4.5 horas para maximizar las áreas bajo la curva de MPS (Muscle Protein Synthesis).",
+    "leucineThreshold": "Cada ingesta asegura ≥ 2.7 - 3.5 g de leucina pura, superando el umbral de activación del complejo mTORC1 en deportistas.",
+    "carbohydratePeriodization": "Mayor densidad glucídica en el peri-entrenamiento (Comidas 2 y 3) para soporte de intensidad de sesión y recarga inmediata de glucógeno.",
+    "fatDistribution": "Concentrada en comidas alejadas del entrenamiento (Desayuno y Cena) para no demorar el vaciamiento gástrico intra/post-ejercicio."
+  }
+}
