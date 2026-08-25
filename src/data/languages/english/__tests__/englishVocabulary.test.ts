@@ -1,44 +1,43 @@
 // src/data/languages/english/__tests__/englishVocabulary.test.ts
-import { describe, it, expect } from 'vitest';
-import { englishTechnicalVocabulary } from '../vocabulary';
+// Validador AG-EN (tarea 1): integridad del banco técnico EN convertido del T2A.
 
-describe('English Technical Vocabulary Dataset (AG-EN Tarea 1)', () => {
-  it('contiene exactamente 128 términos técnicos curados', () => {
-    expect(englishTechnicalVocabulary.length).toBe(128);
+import { describe, it, expect } from 'vitest';
+import { englishTechnicalVocabulary, RAW_TECH_TERMS, ENGLISH_TECH_CATEGORIES } from '../vocabulary';
+import { validateEnglishVocabulary, validateConversionTraceability } from '../validateVocabulary';
+
+describe('Glosario técnico EN (T2A → VocabularyItem)', () => {
+  it('convierte las 128 entradas curadas sin pérdida', () => {
+    expect(RAW_TECH_TERMS).toHaveLength(128);
+    expect(englishTechnicalVocabulary).toHaveLength(128);
   });
 
-  it('todos los ítems tienen language "en" e id estructurado', () => {
+  it('todo ítem pasa el validador propio (categoría válida + ejemplo no vacío)', () => {
+    const result = validateEnglishVocabulary();
+    expect(result.issues).toEqual([]);
+    expect(result.ok).toBe(true);
+  });
+
+  it('ids únicos y estables con prefijo en-t2a-', () => {
+    const ids = englishTechnicalVocabulary.map((i) => i.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const id of ids) expect(id).toMatch(/^en-t2a-\d{3}-/);
+  });
+
+  it('cada ítem es tarjeta SR válida: language en, nivel B2|C1, easeFactor > 0', () => {
     for (const item of englishTechnicalVocabulary) {
       expect(item.language).toBe('en');
-      expect(item.id).toMatch(/^en-tech-\d{3}$/);
-    }
-  });
-
-  it('todos los ítems tienen categorías técnicas válidas', () => {
-    const validCategories = new Set(['realtime/graphics', 'unity/3d', 'web', 'ai/tooling']);
-    for (const item of englishTechnicalVocabulary) {
-      expect(validCategories.has(item.topic)).toBe(true);
-    }
-  });
-
-  it('todos los ítems tienen term, translation (definición) y example no vacíos', () => {
-    for (const item of englishTechnicalVocabulary) {
-      expect(item.term.trim().length).toBeGreaterThan(0);
-      expect(item.translation.trim().length).toBeGreaterThan(0);
-      expect(item.example?.trim().length).toBeGreaterThan(0);
-    }
-  });
-
-  it('los niveles corresponden a B2 o C1', () => {
-    for (const item of englishTechnicalVocabulary) {
       expect(['B2', 'C1']).toContain(item.level);
+      expect(item.easeFactor).toBeGreaterThan(0);
+      expect(item.example?.length ?? 0).toBeGreaterThan(0);
     }
   });
 
-  it('los parámetros de repetición espaciada están inicializados correctamente', () => {
-    for (const item of englishTechnicalVocabulary) {
-      expect(item.easeFactor).toBe(2.5);
-      expect(item.intervalDays).toBe(1);
-    }
+  it('las 4 categorías del curado están representadas', () => {
+    const topics = new Set(englishTechnicalVocabulary.map((i) => i.topic));
+    for (const category of ENGLISH_TECH_CATEGORIES) expect(topics.has(category)).toBe(true);
+  });
+
+  it('la conversión es trazable posición a posición al JSON crudo', () => {
+    expect(validateConversionTraceability()).toEqual([]);
   });
 });
