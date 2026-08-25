@@ -37,6 +37,7 @@ export interface ServiceDefinition {
   confidence: Confidence;
   subtasks: Subtask[];
   sourceDoc: string;
+  cotizador?: CotizadorMeta;
 }
 
 export interface Band {
@@ -60,6 +61,22 @@ export interface LegacyRateCard extends RateCard {
   roundingMode: 'tramos-floor-min-ceil-max';
 }
 
+
+export interface DriverPrincipal {
+  nombre: string;
+  umbrales: string[];
+}
+
+export interface AddOnCotizador {
+  id: string;
+  refServicio?: string;
+  delta?: string;
+}
+
+export interface CotizadorMeta {
+  driverPrincipal: DriverPrincipal;
+  addOns: AddOnCotizador[];
+}
 export interface EstimateLine {
   subtaskId: string;
   hoursMin: number;
