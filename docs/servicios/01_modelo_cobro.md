@@ -1,6 +1,6 @@
 # 01 · Modelo de cobro AG-SERV
 
-> v1.1 interna · 2026-08-25 · Estado: **propuesta pendiente de validación del usuario**. Este documento es la fuente de verdad de las bandas tarifarias, la fórmula de presupuesto y los términos comerciales. Todo catálogo (`02`–`04`) expresa **solo horas**; todo precio deriva de aquí por fórmula visible. Ningún número sin origen.
+> v1.2 interna · 2026-08-25 · Estado: **propuesta pendiente de validación del usuario**. Este documento es la fuente de verdad de las bandas tarifarias, la fórmula de presupuesto y los términos comerciales. Todo catálogo (`02`–`04`) expresa **solo horas**; todo precio deriva de aquí por fórmula visible. Ningún número sin origen.
 
 ---
 
@@ -10,10 +10,15 @@ Define cómo se estima, se cobra y se contrata el trabajo freelance del perfil (
 
 - **Cobro por paquetes de servicio** con rangos claros de precio y tiempo (nunca precio puntual suelto).
 - Cada servicio se desglosa en **subtareas**; cada subtarea se estima en **niveles de complejidad** con rangos de horas.
-- El presupuesto es `Σ (horas × banda tarifaria del nivel)` + modificadores. Siempre min–max.
-- La cifra final de un proyecto real se cierra en un **SOW (Statement of Work)** tras brief documentado. Los rangos de este sistema son orientativos y alimentan esa conversación.
+- El presupuesto es `Σ (horas × banda tarifaria del nivel)` + directos + modificadores. Siempre min–max.
+- La cifra final de un proyecto real se cierra en un **SOW (Statement of Work)** tras brief documentado (plantilla §9). Los rangos de este sistema son orientativos y alimentan esa conversación.
 
 Fase futura (aprobación pendiente): web visualizadora que consuma estos catálogos (`docs/servicios/05_estimacion_ejemplos.md` §spec-slider).
+
+### 1.5 Regla anti-ciegas
+
+Si un driver no es medible en el intake, el servicio se cotiza como **fase discovery corta (G1)** o se declara
+rango amplio con confidence `qualitative`. Nunca precio fijo "a ojo".
 
 ## 2. Anclas de mercado (fuentes citadas)
 
@@ -28,13 +33,13 @@ Fase futura (aprobación pendiente): web visualizadora que consuma estos catálo
 | Day rate contractor EE. UU. (cliente prioridad A) | USD 600–800/día ≈ 75–100/h | `Research/deep-research-report_13.md` | Media |
 | Piso propio aceptable (contrato C-prioridad LATAM) | ≥ USD 2k/mes netos | doc-13 §prioridades + doc-27 §targeting | Estratégica |
 
-Regla: las bandas de §3 deben quedar **dentro del corredor** formado por estas anclas (piso LATAM plataforma ↔ techo senior US descontado por ubicación Colombia). Si una revisión futura rompe el corredor, se documenta el motivo en este archivo (changelog §9).
+Regla: las bandas de §3 deben quedar **dentro del corredor** formado por estas anclas (piso LATAM plataforma ↔ techo senior US descontado por ubicación Colombia). Si una revisión futura rompe el corredor, se documenta el motivo en este archivo (changelog §12).
 
 ## 3. Niveles de complejidad y bandas tarifarias
 
 Cuatro niveles transversales a todos los servicios. La banda es la **tarifa efectiva USD/hora** aplicada a las horas de ese nivel.
 
-> **v1.1 — Reconciliación de bandas:** los precios publicados en los catálogos `02`/`03`/`05` fueron calculados con la **banda operativa** (columna principal). El corredor amplio se conserva como referencia de techo/piso para la calibración trimestral (§8) y no debe usarse para presupuestar hasta que un cierre real lo justifique. Detalle del hallazgo: la v1 definía solo el corredor amplio, pero toda la aritmética publicada usaba la banda operativa — se documenta aquí para restaurar la trazabilidad (regla REGLAS §3.5).
+> **v1.1 — Reconciliación de bandas:** los precios publicados en los catálogos `02`/`03`/`04` fueron calculados con la **banda operativa** (columna principal). El corredor amplio se conserva como referencia de techo/piso para la calibración trimestral (§10) y no debe usarse para presupuestar hasta que un cierre real lo justifique. Detalle del hallazgo: la v1 definía solo el corredor amplio, pero toda la aritmética publicada usaba la banda operativa — se documenta aquí para restaurar la trazabilidad (regla REGLAS §3.5).
 
 | Nivel | Nombre | Definición operativa | **Banda operativa USD/h (presupuesta)** | Corredor amplio (ref. calibración) | Ancla principal |
 |---|---|---|---|---|---|
@@ -43,31 +48,35 @@ Cuatro niveles transversales a todos los servicios. La banda es la **tarifa efec
 | **N3** | Especializada | Requiere criterio experto: shaders custom, arquitectura de web apps 3D, tracking/recon complejo, pipelines, performance crítica. | **35–45** | 40–60 | Interpolación LATAM-senior: 35/h (Lemon.io LATAM) → 57/h (mediana US, doc-03) |
 | **N4** | Muy especializada / I+D | Territorio digital twin, simulación, IA integrada a medida, problemas sin receta. Alto riesgo y alto valor de negocio. | **45–55** | 60–85 | Strong senior SF 72–89/h descontado ubicación COL (~0.85×); day rate US 75–100/h (research_13/04) |
 
-Nota v1.1: el corredor amplio N3/N4 supera a la operativa (40–60 vs 35–45 · 60–85 vs 45–55): es intencional — la banda operativa es conservadora mientras no haya cierres propios que validen tarifa premium. Tras 3 proyectos cerrados (§8) se decide si la operativa sube hacia el corredor.
+Nota v1.1: el corredor amplio N3/N4 supera a la operativa (40–60 vs 35–45 · 60–85 vs 45–55): es intencional — la banda operativa es conservadora mientras no haya cierres propios que validen tarifa premium. Tras 3 proyectos cerrados (§10) se decide si la operativa sube hacia el corredor.
 
-Confianza del conjunto: `inferred` — derivada de benchmarks públicos citados; **no validada aún contra cierres reales propios**. Primera calibración: tras los primeros 3 proyectos cerrados (ver §8).
+Confianza del conjunto: `inferred` — derivada de benchmarks públicos citados; **no validada aún contra cierres reales propios**. Primera calibración: tras los primeros 3 proyectos cerrados (ver §10).
 
-### 3.1 Regla de redondeo operativa (extraída de los catálogos ya calculados)
+### 3.1 Regla de redondeo operativa (ÚNICA para todo el sistema)
 
 ```text
-redondear(min) = floor al múltiplo de:  10 si subtotal < 500 · 50 si 500–1999 · 100 si ≥ 2000
-redondear(max) = ceil  al múltiplo de:  10 si subtotal < 2000 · 100 si ≥ 2000
+tramo(v)       = 10 si v < 500  ·  50 si 500 ≤ v ≤ 2000  ·  100 si v > 2000
+redondear(min) = floor al múltiplo de tramo(min)
+redondear(max) = ceil  al múltiplo de tramo(max)
 ```
 
-Los mínimos redondean hacia abajo con granularidad gruesa (conservador) y los máximos hacia arriba con granularidad fina (precisos): así el rango nunca sobre-vende el piso ni sub-cobra el techo. Tolerancia de auditoría: ±10 USD por extremo (único caso frontera detectado: F1-N1 min 125→130).
+Un solo par de escaleras para mínimos y máximos, aplicado por el motor determinista (`src/data/services/formula.ts`,
+`roundLegacy`). Los presupuestos publicados en `02`–`06` fueron **regenerados con esta regla** en el ciclo de
+unificación (v1.2): las desviaciones menores (≤ $50) frente a ediciones anteriores eran drift de redondeo manual
+y quedaron normalizadas. Tolerancia de auditoría: ±10 USD por extremo.
 
 ## 4. Fórmula de presupuesto
 
 ```text
 subtotal_min = Σ_subtareas( horas_min_del_nivel_elegido × banda_min_del_nivel )
 subtotal_max = Σ_subtareas( horas_max_del_nivel_elegido × banda_max_del_nivel )
-presupuesto   = [ redondear_a_50(subtotal_min) , redondear_a_50(subtotal_max) ]  + modificadores (§5)
+presupuesto   = [ redondear(min) , redondear(max) ]  (§3.1)  + directos (§4.1) + modificadores (§5)
 ```
 
 Reglas de la fórmula:
 
 1. **Siempre dos cifras** (min–max). Prohibido publicar punto medio como "el precio".
-2. Redondeo según §3.1 (min hacia abajo, max hacia arriba).
+2. Redondeo según §3.1 (min hacia abajo, max hacia arriba, mismos tramos).
 3. Las horas provienen SIEMPRE del catálogo (`02`–`04`); prohibido inventar horas fuera de catálogo sin registrar el nuevo ítem primero.
 4. La gestión de proyecto/comunicación está incluida hasta el **10 % de las horas totales**; el excedente se agrega como subtarea explícita (N2).
 5. Cada estimación registra: fecha, versión de catálogo usada, nivel elegido por subtarea, confidence (`explicit | inferred | qualitative`) y supuestos del brief. Sin registro, la estimación no existe.
@@ -79,70 +88,107 @@ Servicio A1 Render estático, subtarea "Setup escena/iluminación", nivel N2, 6�
   → min 6×28=168 · max 10×35=350
 Subtarea "Render + post por imagen" (lote 3 imágenes), N1, 4–7 h
   → min 4×25=100 · max 7×30=210
-Subtotal: 268–560 → redondeado: 260–600 USD (antes de modificadores)
+Subtotal: 268–560 → redondeado §3.1: 260–560 USD (antes de directos y modificadores)
 ```
 
-## 5. Modificadores
+### 4.1 Costos directos traspasados (passthrough)
+
+Conceptos que el cliente paga a costo + recibo, sin ocultarlos en horas:
+
+| Concepto | Regla |
+|---|---|
+| Render farm / compute GPU cloud | costo real + recibo (markup 0 %; si gestionamos cuenta propia: markup 10 % declarado) |
+| Assets/stock de terceros (texturas, HDRIs, modelos, música, plugins) | licencia elegida con el cliente; costo directo + recibo |
+| APIs de IA (LLM, embeddings, TTS) | **BYOK por defecto** (cuenta del cliente); si corre en nuestra infra: estimado mensual aparte |
+| Hosting/dominio/CDN | cuenta del cliente desde el día 1 |
+
+## 5. Modificadores globales
+
+Aplican sobre el subtotal calculado (tras directos). Se listan explícitamente en toda propuesta (SOW §9).
 
 | Modificador | Efecto | Cuándo aplica |
 |---|---|---|
 | Urgencia (arranque < 72 h o timeline comprimido vs. plan normal) | ×1.25 sobre subtotal | Solo si compromete otros proyectos; se declara en SOW |
-| Crítico (< 24 h de entrega o fin de semana) | ×1.50 sobre subtotal | Excepcional, máx 1 vez por cliente cada 90 días |
+| Crítico (< 24 h de entrega o fin de semana) | ×1.50 sobre subtotal | Excepcional, máx 1 vez por cliente cada 90 días. Prohibido en servicios que exigen discovery (C3/C4/E4/G1) |
 | Ronda extra de revisión (más allá de las 2 incluidas) | +horas N1 del servicio (típico 2–6 h) o 8–12 % del subtotal | Por ronda; feedback consolidado en un solo documento |
 | Fuente editable (.blend/.max/.unity/.ai) | +30–50 % del subtotal | Solo si el cliente pide archivos fuente |
 | Exclusividad de diseño/asset | Cotización aparte (referencia ×2–3 del valor del asset) | Negociada caso a caso; nunca implícita |
 | Idioma del entregable (EN nativo-level copy) | Incluido | El perfil opera bilingüe (doc-05 READ) |
-| Retainer (≥ 3 meses) | −5–10 % en horas N1/N2 del scope recurrente | Ver `06_paquetes.md` G2 |
+| Retainer activo (≥ 3 meses, G3) | −5–10 % en horas N1/N2 del scope recurrente | Ver `06_paquetes.md` §Retainers y catálogo 04 §G3 |
+| **Lote/batch** (múltiples unidades del mismo servicio en un encargo) | **−15 % a −25 %** (lo fija cada ficha: F1 lote CADs, F2 pack sets, packs de renders) | Descuento sobre las unidades posteriores a la primera |
+| **Cliente recurrente** (2.º proyecto cerrado y pagado) | **−5 %** (−10 % si además tiene retainer activo) | Sobre subtotal; acumulable con lote, no con urgencia |
 
 Prohibido acumular urgencia × crítico (elige el mayor). Los modificadores nunca bajan el piso de USD 100 por proyecto.
 
-## 6. Términos comerciales estándar
+## 6. Revisiones, alcance y cambios
 
-### 6.1 Pagos
+1. **2 rondas de revisión incluidas** por entregable (feedback consolidado en un solo documento). Feedback en goteo se acumula como una ronda cuando sume el equivalente.
+2. Fuera de alcance detectado → **adendum** con re-estimación por niveles (misma fórmula §4). Nunca absorción silenciosa de scope.
+3. Cancelación por parte del cliente: kill fee proporcional — se paga el trabajo realizado hasta el hito en curso.
+4. **Mora de pago**: a los 10 días corridos del vencimiento el trabajo se pausa; a los 20, se cancela conservando los pagos realizados.
+5. Pausa por causa del cliente > 10 días hábiles: re-agendamiento sujeto a disponibilidad; precio congelado 60 días, después se re-cotiza.
 
-| Concepto | Término |
-|---|---|
-| Anticipo | 40 % para proyectos ≤ USD 3k · 50 % si es primer proyecto con el cliente |
-| Hitos | Proyectos > USD 3k: 40/30/30 (inicio/avance/entrega) o por entregable |
-| Vencimiento | Neto 7–15 días desde factura |
-| Métodos | Wise/Payoneer preferidos por comisiones (`Research/deep-research-report_03.md` §medios de pago). PayPal/Stripe solo con recargo de comisión transparente (~3 %). ⚠️ Cuentas reales por confirmar — placeholder hasta validación del usuario (ticket abierto) |
-| Moneda | USD base. Conversiones COP/EUR informativas, marcadas como tales |
-
-### 6.2 Alcance y cambios
-
-1. **SOW obligatorio** antes de arrancar: alcance, entregables, supuestos, exclusiones, cronograma, número de esta estimación.
-2. **2 rondas de revisión incluidas** por entregable (feedback consolidado).
-3. Fuera de alcance detectado → **adendum** con re-estimación por niveles (misma fórmula §4). Nunca absorción silenciosa de scope.
-4. Cancelación por parte del cliente: se paga el trabajo realizado hasta el hito en curso (kill fee proporcional).
-
-### 6.3 Propiedad y licencias
+## 7. Licencias y propiedad intelectual
 
 - Salvo pacto distinto en SOW: el cliente recibe **licencia de uso comercial** del entregable final; el portfolio del perfil conserva derecho a mostrar el trabajo (salvo NDA explícito).
-- Archivos fuente y exclusividad: solo vía modificadores §5.
+- Los **archivos fuente** (.blend/.max/.c4d/.unity/.ai) se **retienen por defecto**; su entrega es el modificador "Fuente editable" (§5).
+- Assets de terceros se trasladan según su licencia, con costo directo (§4.1).
+- Nota NoAI: si el cliente exige assets libres de herramientas generativas, se declara en intake — cambia pipeline (prohibido AI-assisted) y puede cambiar nivel/precio.
 
-### 6.4 Nota fiscal Colombia (informativa, no asesoría)
+## 8. Pagos
+
+| Tamaño del proyecto | Esquema |
+|---|---|
+| < USD 2.000 | **50 % anticipo / 50 % entrega** |
+| USD 2.000–8.000 | **40 % inicio / 30 % hito intermedio / 30 % entrega** |
+| > USD 8.000 | **30 % inicio + hitos semanales/quincenales** contra avance demostrable (último tramo contra aceptación) |
+
+- Primer proyecto absoluto con un cliente: anticipo mínimo **50 %** independiente del tamaño.
+- Proyectos N3/N4 SIEMPRE por hitos (nunca 50/50 de una sola vez).
+- Vencimiento: neto 7–15 días desde factura. Mora: §6.4.
+- Métodos: Wise/Payoneer preferidos por comisiones (`Research/deep-research-report_03.md`). PayPal/Stripe solo con recargo transparente (~3 %). ⚠️ Cuentas reales por confirmar — placeholder hasta validación del usuario (ticket abierto).
+- Moneda USD base. Conversiones COP/EUR informativas, marcadas como tales.
+- Retainers (G3): cobro mensual anticipado.
+- Garantía: defectos de los entregables se corrigen sin costo durante 30 días post-entrega (no cubre cambios de alcance ni features nuevas).
+
+### 8.1 Nota fiscal Colombia (informativa, no asesoría)
 
 - Exportación de servicios: el cliente extranjero no retiene IVA; la renta local tributa sobre utilidad neta con tarifa progresiva (~19–39 %) (`Research/deep-research-report_03.md` §impuestos).
 - Aportes como independiente (EPS ~12.5 % y pensión ~16 % sobre 40 % del IBC, ARL) están **dentro del cálculo de las bandas**: las tarifas de §3 son brutas, no netas.
 - Confirmar régimen (simple/común) con contador antes de facturar. Placeholder hasta decisión del usuario.
 
-## 7. Reglas de estimación
+## 9. Plantilla de SOW (toda propuesta se arma así)
 
-1. **Drivers antes que intuición**: cada subtarea del catálogo lista sus drivers (p. ej. CAD→WebGL: nº piezas, calidad de malla origen, materiales, exploded). El nivel se elige leyendo los drivers contra el brief, nunca "por feeling".
-2. Ante duda entre dos niveles: estimar en ambos y presentar el rango combinado (min del bajo – max del alto) marcando el driver que decidirá.
-3. Buffer de riesgo: ya embebido en el ancho min–max de cada subtarea. No se suman buffers adicionales encima.
-4. Proyectos multi-servicio: estimar cada familia por separado y luego aplicar descuento de paquete si aplica (`06_paquetes.md`), nunca antes.
-5. Toda estimación vence a los 30 días (los catálogos evolucionan).
+1. Servicio(s) del catálogo con nivel por subtarea y drivers detectados en intake.
+2. Tabla de horas por subtarea + presupuesto por nivel (fórmula §4, sin ocultar nada).
+3. Directos traspasados listados (§4.1).
+4. Modificadores aplicados con su % (§5).
+5. Entregables exactos + formatos + criterio de aceptación.
+6. Calendario con hitos de pago (§8).
+7. Revisiones incluidas y política de change requests (§6).
+8. Licencia aplicable (§7) + número de versión de catálogo usado.
 
-## 8. Calibración continua
+## 10. Calibración continua
 
 - Tras cada proyecto cerrado: registrar horas reales por subtarea vs. estimadas en `docs/servicios/bitacora_calibracion.md` (se crea con el primer cierre).
-- Regla de ajuste: si 3 proyectos consecutivos cierran > 20 % fuera de rango en una familia, se recalibran sus horas (y se versiona el catálogo, changelog §9).
+- Regla de ajuste: si 3 proyectos consecutivos cierran > 20 % fuera de rango en una familia, se recalibran sus horas (y se versiona el catálogo, changelog §12).
 - Las bandas §3 se revisan trimestralmente contra nuevos benchmarks y contra la meta de ingreso mensual (doc-03 §3: 1.5k → 3k → 6k).
 
-## 9. Changelog
+## 11. Confianza de las estimaciones
+
+| Etiqueta | Significado | Uso |
+|---|---|---|
+| `explicit` | driver medible en intake (nº piezas, minutos, vistas) | rango estrecho, compromiso firme |
+| `inferred` | driver deducido de material similar | rango medio, margen ±20 % declarado |
+| `qualitative` | solo descripción verbal del cliente | rango amplio; suele requerir mini-discovery (G1) |
+
+Toda ficha declara su confidence por defecto; el intake puede mejorarla. Drivers-first: ante duda entre dos
+niveles, gana el peor caso gobernante para las subtareas afectadas y se documenta en el SOW.
+
+## 12. Changelog
 
 | Versión | Fecha | Cambio |
 |---|---|---|
 | v1 | 2026-08-25 | Creación. Bandas N1–N4 derivadas de anclas doc-03/research. Pendiente validación usuario. |
 | v1.1 | 2026-08-25 | **Reconciliación de bandas**: se separa banda operativa (25–30/28–35/35–45/45–55, la que usan todos los precios ya publicados en 02/03/05) del corredor amplio de referencia (20–28/28–40/40–60/60–85, queda para calibración). Se añade §3.1 regla de redondeo operativa con tolerancia ±10. Ejemplo §4 recalculado con bandas operativas. Sin cambio en ningún precio publicado. |
+| v1.2 | 2026-08-25 | **Completamiento por unificación**: §3.1 pasa a ser la regla ÚNICA (dos tramos simétricos min-floor/max-ceil, ejecutada por el motor TS) y todos los presupuestos de 02–06 se regeneran con ella (drift manual ≤$50 normalizado; error real corregido en B4). Se añaden: §1.5 anti-ciegas, §4.1 directos traspasados, lote/batch y cliente recurrente en §5, mora y pausa en §6, retención de fuentes por defecto en §7, esquemas de pago por tamaño + garantía en §8, plantilla SOW §9, confianza §11. Referencias cruzadas de los catálogos re-mapeadas a esta numeración. |
