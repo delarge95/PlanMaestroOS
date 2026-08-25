@@ -103,8 +103,8 @@ export interface VisibilityState {
   layers: ReadonlySet<CompositeKind>;
   /** claves de pieza ocultas manualmente (model:name). */
   hidden: ReadonlySet<string>;
-  /** aislamiento activo: caja de la unidad + kinds incluidos (filtros de selección). */
-  isolation: { box: Aabb; kinds: ReadonlySet<CompositeKind> } | null;
+  /** aislamiento: claves EXPLÍCITAS de las piezas aisladas (sin test espacial). */
+  isolation: { keys: ReadonlySet<string>; label: string } | null;
 }
 
 /**
@@ -115,23 +115,17 @@ export interface VisibilityState {
 export function pieceVisible(
   piece: { model: string; name: string; region: CompositeRegion; kind: CompositeKind; hiddenByDup?: string },
   state: VisibilityState,
-  aabb?: Aabb,
 ): boolean {
-  // aislamiento: solo piezas de kinds seleccionables que cruzan la caja de la unidad
-  if (state.isolation) {
-    if (!state.isolation.kinds.has(piece.kind)) return false;
-    if (!aabb || !aabbIntersects(aabb, state.isolation.box)) return false;
-  }
-  if (state.hidden.has(pieceKey(piece.model, piece.name))) return false;
-  // focus: región del focus; vertebrae = solo las 3 vértebras del modelo aislado
+  const key = pieceKey(piece.model, piece.name);
+  // aislamiento: SOLO las claves explícitas de la unidad aislada
+  if (state.isolation) return state.isolation.keys.has(key);
+  if (state.hidden.has(key)) return false;
   if (state.focus !== 'full') {
     if (state.focus === 'vertebrae') {
       if (!VERTEBRAE_PIECES.has(piece.name.toLowerCase())) return false;
     } else if (piece.region !== state.focus) return false;
   }
-  // capas
   if (!state.layers.has(piece.kind)) return false;
-  // dedup: representada por un especialista
   if (piece.hiddenByDup) return false;
   return true;
 }

@@ -154,7 +154,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     layers: new Set<CompositeKind>(DEFAULT_LAYERS),
     selectable: new Set<CompositeKind>(LAYER_DEFS.map((l) => l.kind)),
     hidden: new Set<string>(),
-    isolation: null as { box: Aabb; kinds: ReadonlySet<CompositeKind>; label: string } | null,
+    isolation: null as { keys: ReadonlySet<string>; label: string } | null,
     path: null as SelectionPath | null,
     colorByKind: true,
     skullVersion: 'colored' as 'colored' | 'general',
@@ -182,7 +182,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
   const [explodeT, setExplodeT] = useState(0);
   const [selectedId, setSelectedId] = useState<string | null>(initialStructure ?? queryParam('structure'));
   const [path, setPath] = useState<SelectionPath | null>(null);
-  const [isolation, setIsolation] = useState<{ box: Aabb; kinds: ReadonlySet<CompositeKind>; label: string } | null>(null);
+  const [isolation, setIsolation] = useState<{ keys: ReadonlySet<string>; label: string } | null>(null);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [panelTab, setPanelTab] = useState<'arbol' | 'ficha'>('arbol');
   const [panelOpen, setPanelOpen] = useState(!isMobile);
@@ -416,34 +416,22 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const hit = pickAt(e.clientX, e.clientY);
       if (!hit) { setIsolation(null); return; }
       // Doble click = aislar la unidad del NIVEL ACTUAL del path (conjunto,
-      // subconjunto o pieza). Permite nidificación: primer dblclick aísla el
-      // conjunto, luego dblclick en un subconjunto re-aisla el subconjunto.
+      // subconjunto o pieza) usando CLAVES EXPLÍCITAS — sin test espacial.
       const key = String(hit.userData.__pieceKey);
       const ownerId = structureByPieceRef.current.get(key);
       if (!ownerId) { setIsolation(null); return; }
-      // asegurar que el path apunte a esta estructura
       const p = stateRef.current.path?.structureId === ownerId
         ? stateRef.current.path
         : { structureId: ownerId, groupKey: null, pieceKey: null };
       const g = ensureGroups(ownerId);
       const keys = unitPieceKeys(p, g.groups);
-      const box = new THREE.Box3();
-      for (const k of keys) {
-        const entry = piecesRef.current.get(k);
-        if (entry) box.expandByObject(entry.mesh);
-      }
-      if (box.isEmpty()) return;
-      const size = box.getSize(new THREE.Vector3());
-      const margin = Math.max(size.x, size.y, size.z) * 0.12;
-      box.expandByVector(new THREE.Vector3(margin, margin, margin));
       const unitLabel = p.pieceKey ? phaseLabel(p.pieceKey.split(':').slice(1).join(':'))
         : p.groupKey ? (p.groupKey === '(estructura)' ? (getStructureById(ownerId)?.nameEs ?? p.groupKey) : phaseLabel(p.groupKey))
         : (getStructureById(ownerId)?.nameEs ?? '');
       setPath(p);
       setSelectedId(ownerId);
       setIsolation({
-        box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
-        kinds: new Set(stateRef.current.selectable),
+        keys: new Set(keys),
         label: unitLabel,
       });
     };
@@ -626,7 +614,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         layers: st.layers,
         hidden: st.hidden,
         isolation: st.isolation,
-      }, aabbRef.current.get(key));
+      });
       if (st.focus === 'skull' && st.skullVersion === 'general' && piece.model === 'colored-skull-base' && piece.region === 'skull') {
         mesh.visible = false;
       }
@@ -1081,8 +1069,11 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         const margin = Math.max(size.x, size.y, size.z) * 0.12;
         box.expandByVector(new THREE.Vector3(margin, margin, margin));
         setIsolation({
-          box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
-          kinds: new Set(stateRef.current.selectable),
+          keys: new Set(
+            (s.modelMeshes[COMPOSITE_MODELS[0]] ?? []).length > 0
+              ? COMPOSITE_MODELS.flatMap((m) => (s.modelMeshes[m] ?? []).map((n) => pieceKey(m, n)))
+              : []
+          ),
           label: s.nameEs,
         });
       });
@@ -1318,18 +1309,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                   type="button"
                   onClick={() => {
                     if (!currentPieceKeys.length) return;
-                    const box = new THREE.Box3();
-                    for (const k of currentPieceKeys) {
-                      const e = piecesRef.current.get(k);
-                      if (e) box.expandByObject(e.mesh);
-                    }
-                    if (box.isEmpty()) return;
-                    const size = box.getSize(new THREE.Vector3());
-                    const margin = Math.max(size.x, size.y, size.z) * 0.12;
-                    box.expandByVector(new THREE.Vector3(margin, margin, margin));
                     setIsolation({
-                      box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
-                      kinds: new Set(stateRef.current.selectable),
+                      keys: new Set(currentPieceKeys),
                       label: path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : path?.groupKey ? (path.groupKey === '(estructura)' ? (selectedStructure?.nameEs ?? path.groupKey) : phaseLabel(path.groupKey)) : (selectedStructure?.nameEs ?? ''),
                     });
                   }}
@@ -1467,19 +1448,8 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                       type="button"
                       onClick={() => {
                         if (isolation) { setIsolation(null); return; }
-                        if (!currentPieceKeys.length) return;
-                        const box = new THREE.Box3();
-                        for (const k of currentPieceKeys) {
-                          const e = piecesRef.current.get(k);
-                          if (e) box.expandByObject(e.mesh);
-                        }
-                        if (box.isEmpty()) return;
-                        const size = box.getSize(new THREE.Vector3());
-                        const margin = Math.max(size.x, size.y, size.z) * 0.12;
-                        box.expandByVector(new THREE.Vector3(margin, margin, margin));
                         setIsolation({
-                          box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
-                          kinds: new Set(stateRef.current.selectable),
+                          keys: new Set(currentPieceKeys),
                           label: path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : (selectedStructure.nameEs ?? ''),
                         });
                       }}

@@ -73,23 +73,15 @@ describe('pieceVisible', () => {
     expect(pieceVisible(piece({}), { ...base(), hidden: new Set([key]) }, NO_BOX)).toBe(false);
   });
 
-  it('aislamiento: solo kinds seleccionables que cruzan la caja de la unidad', () => {
+  it('aislamiento: solo las claves explícitas de la unidad son visibles', () => {
     const st = {
       ...base(),
-      isolation: {
-        box: { min: [0, 0, 0], max: [1, 1, 1] } as Aabb,
-        kinds: new Set<CompositeKind>(['muscle']),
-      },
+      isolation: { keys: new Set([pieceKey('upper-limb', 'Triceps')]), label: 'Triceps' },
     };
-    const dentro = piece({ kind: 'muscle', model: 'upper-limb', name: 'Triceps' });
-    const fuera = piece({ kind: 'muscle', model: 'lower-limb', name: 'Soleus' });
-    const boneDentro = piece({ kind: 'bone' });
-    // dentro de la caja (AABB que cruza [0..1])
-    expect(pieceVisible(dentro, st, { min: [0.2, 0.2, 0.2], max: [0.8, 0.8, 0.8] })).toBe(true);
-    // fuera de la caja
-    expect(pieceVisible(fuera, st, { min: [-5, -5, -5], max: [-4, -4, -4] })).toBe(false);
-    // kind NO incluido en los filtros de selección → no se aísla aunque cruce
-    expect(pieceVisible(boneDentro, st, { min: [0.2, 0.2, 0.2], max: [0.8, 0.8, 0.8] })).toBe(false);
+    expect(pieceVisible(piece({ kind: 'muscle', model: 'upper-limb', name: 'Triceps' }), st)).toBe(true);
+    expect(pieceVisible(piece({ kind: 'muscle', model: 'lower-limb', name: 'Soleus' }), st)).toBe(false);
+    // kind NO incluido → no visible aunque la clave esté
+    expect(pieceVisible(piece({ kind: 'bone' }), { ...base(), isolation: { keys: new Set(['m:bone-x']), label: 'x' } })).toBe(false);
   });
 });
 
