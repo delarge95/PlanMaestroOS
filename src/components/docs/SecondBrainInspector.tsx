@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -67,7 +68,7 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidEmbedUrl(savedNotion)) setNotionEmbedUrl(savedNotion);
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +77,13 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed || !isValidEmbedUrl(trimmed)) {
+      return;
+    }
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -285,18 +289,27 @@ export default function SecondBrainInspector({
                   <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-state-done)' }} />
                 </div>
                 <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontFamily: 'SF Mono, monospace' }}>
-                  Notion In-App Live Inspector • {notionEmbedUrl}
+                  Notion In-App Live Inspector • {isValidEmbedUrl(notionEmbedUrl) ? notionEmbedUrl : 'URL no válida'}
                 </span>
-                <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
-                  ↗ Abrir Web
-                </a>
+                {isValidEmbedUrl(notionEmbedUrl) && (
+                  <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
+                    ↗ Abrir Web
+                  </a>
+                )}
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                />
+              ) : (
+                <div style={{ padding: '24px', color: 'var(--color-accent-danger, #ff453a)', textAlign: 'center' }}>
+                  URL de embed no válida o no autorizada.
+                </div>
+              )}
             </div>
           </div>
         )}
