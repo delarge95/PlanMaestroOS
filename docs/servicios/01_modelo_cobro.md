@@ -1,6 +1,6 @@
 # 01 · Modelo de cobro AG-SERV
 
-> v1.2 interna · 2026-08-25 · Estado: **propuesta pendiente de validación del usuario**. Este documento es la fuente de verdad de las bandas tarifarias, la fórmula de presupuesto y los términos comerciales. Todo catálogo (`02`–`04`) expresa **solo horas**; todo precio deriva de aquí por fórmula visible. Ningún número sin origen.
+> v1.3 interna · 2026-08-25 · Estado: **propuesta pendiente de validación del usuario**. Este documento es la fuente de verdad de las bandas tarifarias, la fórmula de presupuesto y los términos comerciales. Todo catálogo (`02`–`04`) expresa **solo horas**; todo precio deriva de aquí por fórmula visible. Ningún número sin origen.
 
 ---
 
@@ -41,15 +41,21 @@ Cuatro niveles transversales a todos los servicios. La banda es la **tarifa efec
 
 > **v1.1 — Reconciliación de bandas:** los precios publicados en los catálogos `02`/`03`/`04` fueron calculados con la **banda operativa** (columna principal). El corredor amplio se conserva como referencia de techo/piso para la calibración trimestral (§10) y no debe usarse para presupuestar hasta que un cierre real lo justifique. Detalle del hallazgo: la v1 definía solo el corredor amplio, pero toda la aritmética publicada usaba la banda operativa — se documenta aquí para restaurar la trazabilidad (regla REGLAS §3.5).
 
-| Nivel | Nombre | Definición operativa | **Banda operativa USD/h (presupuesta)** | Corredor amplio (ref. calibración) | Ancla principal |
-|---|---|---|---|---|---|
-| **N1** | Rutina | Bajo juicio técnico: setups repetibles, conversiones simples, QA, exports, tareas guiadas. Reversible y poco riesgosa. | **25–30** | 20–28 | Plataforma LATAM 15–30/h (research_00) · piso freelance global (doc-03) |
-| **N2** | Estándar | Trabajo profesional típico del perfil: modelado/optimización media, integración web convencional, shading PBR, animación básica. | **28–35** | 28–40 | Middle Unity Colombia 27–35/h (doc-03 · Lemon.io) |
-| **N3** | Especializada | Requiere criterio experto: shaders custom, arquitectura de web apps 3D, tracking/recon complejo, pipelines, performance crítica. | **35–45** | 40–60 | Interpolación LATAM-senior: 35/h (Lemon.io LATAM) → 57/h (mediana US, doc-03) |
-| **N4** | Muy especializada / I+D | Territorio digital twin, simulación, IA integrada a medida, problemas sin receta. Alto riesgo y alto valor de negocio. | **45–55** | 60–85 | Strong senior SF 72–89/h descontado ubicación COL (~0.85×); day rate US 75–100/h (research_13/04) |
+| Nivel | Nombre | Definición operativa | **Banda operativa USD/h** | **Banda nacional COP/h** | Corredor USD (ref. calibración) | Ancla principal |
+|---|---|---|---|---|---|---|
+| **XS** | Micro | Alcance mínimo: micro-loops de 2–3 s, vistas thumbnail, props mini (≤2k tris), embeds simples. Puerta de entrada accesible. | **18–24** | **25–35 k** | 15–20 | Piso plataformas LATAM (research_00) · volumen |
+| **N1** | Simple (S) | Bajo juicio técnico: setups repetibles, conversiones simples, QA, exports, tareas guiadas. Reversible y poco riesgosa. | **25–30** | **35–50 k** | 20–28 | Plataforma LATAM 15–30/h (research_00) · piso freelance global (doc-03) |
+| **N2** | Estándar (M) | Trabajo profesional típico del perfil: modelado/optimización media, integración web convencional, shading PBR, animación básica. | **28–35** | **50–70 k** | 28–40 | Middle Unity Colombia 27–35/h (doc-03 · Lemon.io) |
+| **N3** | Complejo (L) | Requiere criterio experto: shaders custom, arquitectura de web apps 3D, tracking/recon complejo, pipelines, performance crítica. | **35–45** | **70–95 k** | 40–60 | Interpolación LATAM-senior: 35/h (Lemon.io LATAM) → 57/h (mediana US, doc-03) |
+| **N4** | Crítico (XL) | Territorio digital twin, simulación, IA integrada a medida, problemas sin receta. Alto riesgo y alto valor de negocio. | **45–55** | **95–130 k** | 60–85 | Strong senior SF 72–89/h descontado ubicación COL (~0.85×); day rate US 75–100/h (research_13/04) |
 
-Nota v1.1: el corredor amplio N3/N4 supera a la operativa (40–60 vs 35–45 · 60–85 vs 45–55): es intencional — la banda operativa es conservadora mientras no haya cierres propios que validen tarifa premium. Tras 3 proyectos cerrados (§10) se decide si la operativa sube hacia el corredor.
+COP = pesos colombianos por hora para contratación NACIONAL, fijados contra el mercado local (significativamente
+más económico que el internacional — ver §3.2). El corredor amplio se conserva como referencia de techo/piso para
+la calibración trimestral (§10); no debe usarse para presupuestar hasta que un cierre real lo justifique.
 
+Nota v1.3: se añade el nivel **XS** (demanda real de piezas pequeñas: micro-loops, thumbnails, embeds ligeros) y
+la columna COP. La escala cualitativa que decide entre niveles vive en [`07_matriz_complejidad_cualitativa.md`](07_matriz_complejidad_cualitativa.md)
+y su implementación `src/data/services/complexityRubric.ts`.
 Confianza del conjunto: `inferred` — derivada de benchmarks públicos citados; **no validada aún contra cierres reales propios**. Primera calibración: tras los primeros 3 proyectos cerrados (ver §10).
 
 ### 3.1 Regla de redondeo operativa (ÚNICA para todo el sistema)
@@ -65,6 +71,17 @@ Un solo par de escaleras para mínimos y máximos, aplicado por el motor determi
 unificación (v1.2): las desviaciones menores (≤ $50) frente a ediciones anteriores eran drift de redondeo manual
 y quedaron normalizadas. Tolerancia de auditoría: ±10 USD por extremo.
 
+### 3.2 Moneda y mercados
+
+| Mercado | Moneda | Base de fijación | Regla |
+|---|---|---|---|
+| Internacional | **USD** | Bandas operativas §3 (anclas doc-03/Research) | Tarifa plena |
+| Nacional (Colombia) | **COP** | Mercado laboral local (salarios doc-03 §empleo local; competencia freelance nacional) | **Significativamente más económico que la conversión TRM** — se fija contra el mercado, nunca se deriva del USD |
+
+- TRM de referencia SOLO informativa para presentación: **USD 1 ≈ COP 4.000** (2026-08-25, actualizable). Jamás se usa para calcular precios locales (`TRM_REFERENCIA.reglaEs` en `rateCard.ts`).
+- Redondeo COP: múltiplos de **1.000** (min-floor / max-ceil). Piso por proyecto: **COP 400.000** (equivalente operativo del piso USD 100).
+- Confianza de las bandas COP: `inferred` — pendiente validar contra ofertas/contratos locales reales (misma regla de calibración §10).
+- Descuento **Lanzamiento primeros clientes −25 %** (§5) aplica en ambas monedas mientras el programa esté activo.
 ## 4. Fórmula de presupuesto
 
 ```text
@@ -117,6 +134,8 @@ Aplican sobre el subtotal calculado (tras directos). Se listan explícitamente e
 | Retainer activo (≥ 3 meses, G3) | −5–10 % en horas N1/N2 del scope recurrente | Ver `06_paquetes.md` §Retainers y catálogo 04 §G3 |
 | **Lote/batch** (múltiples unidades del mismo servicio en un encargo) | **−15 % a −25 %** (lo fija cada ficha: F1 lote CADs, F2 pack sets, packs de renders) | Descuento sobre las unidades posteriores a la primera |
 | **Cliente recurrente** (2.º proyecto cerrado y pagado) | **−5 %** (−10 % si además tiene retainer activo) | Sobre subtotal; acumulable con lote, no con urgencia |
+
+| **Lanzamiento primeros clientes** | **−25 %** sobre subtotal | Programa activo: primeros 5 proyectos cerrados o hasta 2026-12-31. Acumulable SOLO con lote/batch; no acumula con urgencia ni recurrente. Motivo: cartera inicial — captar casos de estudio. |
 
 Prohibido acumular urgencia × crítico (elige el mayor). Los modificadores nunca bajan el piso de USD 100 por proyecto.
 
@@ -192,3 +211,4 @@ niveles, gana el peor caso gobernante para las subtareas afectadas y se document
 | v1 | 2026-08-25 | Creación. Bandas N1–N4 derivadas de anclas doc-03/research. Pendiente validación usuario. |
 | v1.1 | 2026-08-25 | **Reconciliación de bandas**: se separa banda operativa (25–30/28–35/35–45/45–55, la que usan todos los precios ya publicados en 02/03/05) del corredor amplio de referencia (20–28/28–40/40–60/60–85, queda para calibración). Se añade §3.1 regla de redondeo operativa con tolerancia ±10. Ejemplo §4 recalculado con bandas operativas. Sin cambio en ningún precio publicado. |
 | v1.2 | 2026-08-25 | **Completamiento por unificación**: §3.1 pasa a ser la regla ÚNICA (dos tramos simétricos min-floor/max-ceil, ejecutada por el motor TS) y todos los presupuestos de 02–06 se regeneran con ella (drift manual ≤$50 normalizado; error real corregido en B4). Se añaden: §1.5 anti-ciegas, §4.1 directos traspasados, lote/batch y cliente recurrente en §5, mora y pausa en §6, retención de fuentes por defecto en §7, esquemas de pago por tamaño + garantía en §8, plantilla SOW §9, confianza §11. Referencias cruzadas de los catálogos re-mapeadas a esta numeración. |
+| v1.3 | 2026-08-25 | **Dual moneda + nivel XS + lanzamiento**: banda nacional COP (mercado local más económico; redondeo 1.000; piso 400k) y nivel **XS/Micro** (18–24 USD · 25–35k COP). Nuevo modificador **Lanzamiento primeros clientes −25 %** (programa acotado a primeros 5 proyectos o 2026-12-31). Se publica §3.2 Moneda y mercados (regla anti-TRM) y la escala cualitativa vive ahora en `07_matriz_complejidad_cualitativa.md` + `complexityRubric.ts`. Motor: `estimateService/computeQuote` aceptan `currency`; paquetes pregenerados computables (`packages.ts`, incluye PK-CAD-WEBGL corporativo). Tests 44/44. |
