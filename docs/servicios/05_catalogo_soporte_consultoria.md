@@ -1,5 +1,12 @@
 # Catálogo de servicios — Familia G (soporte, consultoría y retainers)
 
+> ⚠️ **SUPERSEDED (pendiente de unificación)** · Los precios de este archivo fueron calculados con las
+> bandas legacy v0 (N1 25–30 · N2 28–35 · N3 35–45 · N4 45–55 USD/h), NO con las bandas canónicas del
+> [`01_modelo_cobro.md`](01_modelo_cobro.md) v1 (N1 20–28 · N2 28–40 · N3 40–60 · N4 60–85).
+> Cobertura equivalente en [`04_catalogo_vfx_ia_consultoria.md`](04_catalogo_vfx_ia_consultoria.md) §G y
+> [`06_paquetes.md`](06_paquetes.md) (retainers). Se conserva por Regla de Oro como referencia histórica;
+> **NO USAR para cotizar** hasta que el usuario resuelva la unificación (README §Estado).
+
 > v1.0 · 2026-08-25 · Owner: AG-SERV · Moneda USD.
 > Mismo contrato de lectura que [`02_catalogo_render_assets_rt.md`](02_catalogo_render_assets_rt.md).
 > Esta familia es TRANSVERSAL: no produce un asset sino certeza (G1), diagnóstico (G2) o continuidad
