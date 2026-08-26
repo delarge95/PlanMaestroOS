@@ -4,7 +4,7 @@ import { useQuoteResult } from '../state/selectors';
 import { useQuoteStore } from '../state/useQuoteStore';
 import { DronePieces } from '../visuals/DronePieces';
 
-const btn: React.CSSProperties = {
+const btn: React.CSSProperties = { /* styled by cotizador.css */
   padding: '12px 18px',
   borderRadius: 10,
   border: '1px solid var(--border, #d8d8de)',

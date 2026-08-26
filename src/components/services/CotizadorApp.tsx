@@ -2,9 +2,11 @@ import { CurrencyToggle } from './steps/PresetConfig';
 import { CatalogStep, EntryScreen, PresetConfig, PresetGallery, SummaryStep } from './steps/Screens';
 import { WizardFlow } from './steps/wizard/WizardFlow';
 import { QuotePanel } from './panels/QuotePanel';
+import { ChatWidget } from './chat/ChatWidget';
 import { useQuoteResult } from './state/selectors';
 import { useQuoteStore } from './state/useQuoteStore';
 import { formatMoney } from '../../lib/services/ui';
+import './cotizador.css';
 
 const screenMap = {
   entry: EntryScreen,
@@ -23,28 +25,39 @@ export function CotizadorApp() {
   const Screen = screenMap[screen as keyof typeof screenMap] ?? EntryScreen;
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '32px 20px 140px', fontFamily: 'inherit' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
-        <strong>AG-SERV · Cotizador</strong>
-        <CurrencyToggle />
+    <div className="cotizador-root" style={{ minHeight: '100vh', paddingBottom: result ? 180 : 40 }}>
+      <header className="cx-header">
+        <span className="cx-brand">AG-SERV · Cotizador</span>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          {launch && <span className="cx-launch">✨ −25 % Lanzamiento</span>}
+          <CurrencyToggle />
+        </div>
       </header>
 
-      {launch && (
-        <p style={{ background: 'var(--accent-soft,#eef4ff)', color: 'var(--accent,#0a84ff)', padding: '8px 14px', borderRadius: 8, fontSize: 13 }}>
-          −25 % · Lanzamiento primeros clientes
-        </p>
-      )}
-
-      <Screen />
+      <main style={{ maxWidth: 680, margin: '0 auto', padding: '32px 20px' }}>
+        <Screen />
+      </main>
 
       {result && screen !== 'summary' && (
-        <div style={{ position: 'fixed', insetInline: 0, bottom: 0, background: '#fff', borderTop: '1px solid #e5e5ea', padding: '12px 20px', boxShadow: '0 -2px 10px rgba(0,0,0,.06)' }}>
-          <QuotePanel result={result} currency={currency} />
-          <button onClick={() => useQuoteStore.getState().go('summary')} style={{ marginTop: 8, width: '100%', padding: '10px 16px', borderRadius: 8, border: 'none', background: 'var(--accent,#0a84ff)', color: '#fff', cursor: 'pointer', font: 'inherit' }}>
-            Ver desglose →
-          </button>
+        <div className="cx-quote-bar">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+            <QuotePanel result={result} currency={currency} />
+            <button
+              className="cx-btn-primary"
+              onClick={() => useQuoteStore.getState().go('summary')}
+              style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
+            >
+              Ver desglose →
+            </button>
+          </div>
         </div>
       )}
+
+      <ChatWidget
+        onQuote={({ id }) => {
+          useQuoteStore.setState({ presetId: id, screen: 'preset-config' });
+        }}
+      />
     </div>
   );
 }
