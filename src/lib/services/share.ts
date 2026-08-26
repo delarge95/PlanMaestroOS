@@ -97,6 +97,7 @@ export interface SummaryArgs {
   entregables: string[];
   noIncluye: string[];
   url: string;
+  adjuntos?: string;
 }
 
 export function buildSummary(a: SummaryArgs): string {
@@ -110,6 +111,7 @@ export function buildSummary(a: SummaryArgs): string {
   if (a.entrega) lines.push(`Entrega: ${a.entrega}`);
   if (a.entregables.length > 0) lines.push(`Incluye: ${a.entregables.slice(0, 6).join(' · ')}`);
   if (a.noIncluye.length > 0) lines.push(`No incluye: ${a.noIncluye.slice(0, 3).join(' · ')}`);
+  if (a.adjuntos) lines.push(a.adjuntos);
   lines.push(`Ver cotización: ${a.url}`);
   lines.push('(Rango orientativo, no cotización formal.)');
   return lines.join('\n');

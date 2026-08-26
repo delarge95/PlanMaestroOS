@@ -18,7 +18,10 @@ import { QuoteCta } from './QuoteCta';
 import { ProcesoFaq } from './ProcesoFaq';
 import { TierGallery } from './TierGallery';
 import { PriceWhy } from './PriceWhy';
+import { RefDropzone } from './RefDropzone';
+import { CotizadorChat } from './chat/CotizadorChat';
 import { computePriceDrivers } from '../../lib/services/priceWhy';
+import { inventoryLine } from '../../lib/services/fileChecklist';
 import {
   buildSummary,
   decodeShare,
@@ -66,6 +69,7 @@ export function DirectCotizador() {
   const [firstClient, setFirstClient] = useState(true);
   const [urgency, setUrgency] = useState<Urgency>('none');
   const [quantity, setQuantity] = useState(1);
+  const [adjuntos, setAdjuntos] = useState<string[]>([]);
   const hydratedRef = useRef(false);
 
   useEffect(() => {
@@ -164,8 +168,11 @@ export function DirectCotizador() {
         entregables: quote.entregables,
         noIncluye: quote.noIncluye,
         url: shareUrl,
+        adjuntos: inventoryLine(adjuntos),
       })
     : '';
+
+  const chatSection = !serviceId ? 'inicio' : !quote ? 'variables' : 'resultado';
 
   const toggleUnsure = (v: ServiceVariable) => {
     setUnsure((p) => {
@@ -406,6 +413,9 @@ export function DirectCotizador() {
             </div>
           </details>
 
+          {/* S9: referencias/archivos con checklist local */}
+          <RefDropzone onInventory={setAdjuntos} />
+
           <QuoteCta summary={summary} url={shareUrl} />
 
           <p style={{ fontWeight: 600, fontSize: 13, marginTop: 12, color: '#1a1d29' }}>
@@ -415,6 +425,18 @@ export function DirectCotizador() {
       )}
 
       <ProcesoFaq />
+
+      {/* S12: asistente contextual */}
+      <span data-noprint>
+        <CotizadorChat
+          section={chatSection}
+          serviceName={svc?.nameEs}
+          tier={tier ?? undefined}
+          totalRange={quote && svc ? `${fmt(currency, quote.totalMin)} – ${fmt(currency, quote.totalMax)}` : undefined}
+          entrega={svc?.entregaDiasEs ? `${svc.entregaDiasEs[0]}–${svc.entregaDiasEs[1]} días hábiles` : undefined}
+          contactEmail="contacto@ag-serv.com"
+        />
+      </span>
     </div>
   );
 }
