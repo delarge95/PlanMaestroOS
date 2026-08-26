@@ -253,6 +253,18 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         }
         if (keys.length) groups.set(sId, keys);
       }
+      // INCLUIR PIEZAS PADRE de overlays en el mismo subconjunto:
+      // p.ej. Deltoid_muscler (sólido) se añade a cada subconjunto que
+      // contenga un overlay del deltoide → el highlight cubre sólido + overlay
+      for (const [subKey, keys] of groups) {
+        for (const k of [...keys]) {
+          const parent = OVERLAY_PARENT[k];
+          if (parent && piecesRef.current.has(parent) && !keys.includes(parent)) {
+            keys.push(parent);
+            groupOf.set(parent, subKey);
+          }
+        }
+      }
       g = { groups, groupOf };
       groupsByStructureRef.current.set(structureId, g);
       return g;
