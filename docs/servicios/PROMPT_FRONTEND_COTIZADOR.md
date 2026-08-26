@@ -181,3 +181,19 @@ confidence) con tabla XS–XL de horas y presupuesto derivado en vivo (moneda ac
 
 Al terminar, deja `docs/servicios/PROMPT_FRONTEND_NOTAS.md` con: decisiones tomadas, desviaciones de esta
 spec (si las hubo y por qué), y screenshots/rutas para QA humano.
+
+---
+
+## ESTADO DEL SCAFFOLD (actualizado por AG-SERV antes de esta sesión)
+
+Los siguientes archivos YA EXISTEN y son FUNCIONALES (motor conectado, flujo navegable, dual moneda,
+badge lanzamiento, SliderPiezas con DronePieces SVG, resumen con desglose y CTA):
+
+`cotizador.astro` · `CotizadorApp.tsx` · `state/useQuoteStore.ts` · `state/selectors.ts` ·
+`steps/Screens.tsx` (Entry/PresetGallery/PresetConfig/Summary/Catalog) · `steps/PresetConfig.tsx`
+(Entry + CurrencyToggle) · `visuals/DronePieces.tsx` · `lib/services/ui.ts` (+tests)
+
+Tu alcance entonces: **(a)** diseño/estilo sobre este esqueleto (tokens, tipografía, motion, layout),
+**(b)** completar los pasos separados del wizard (ServiceStep/ConfigureStep/ContextStep — hoy
+GoalStep está simplificado dentro de Screens), **(c)** OrganicCards/SliderDetalle visuales,
+**(d)** persist opcional del store. NO reescribas la lógica de quotes ni toques `src/data/services/**`.

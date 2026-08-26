@@ -129,6 +129,7 @@ export interface ServiceQuoteInput extends QuoteInputBase {
 export interface PackageQuoteInput extends QuoteInputBase {
   kind: 'package';
   packageId: string;
+  componentesOverride?: { serviceId: string; nivel: LevelId; cantidad?: number }[];
   levelByComponent?: Record<string, LevelId>;
   defaultLevel?: LevelId;
   quantity?: number;

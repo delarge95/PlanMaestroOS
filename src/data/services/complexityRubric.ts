@@ -4,7 +4,7 @@ const LEVEL_ORDER: readonly LevelId[] = ['XS', 'N1', 'N2', 'N3', 'N4'];
 
 export interface RubricOption {
   valorEs: string;
-  deltaNiveles: 0 | 1;
+  deltaNiveles: -1 | 0 | 1;
   notaEs?: string;
 }
 

@@ -1,4 +1,4 @@
-import { LAUNCH_PROGRAM, LEGACY_RATE_CARD_V0, RATE_CARD_COP_V1 } from './rateCard';
+import { LAUNCH_PROGRAM, LEGACY_RATE_CARD_V0, RATE_CARD_COP_V1, RATE_CARD_V1 } from './rateCard';
 import { PACKAGES } from './packages';
 import {
   LEVEL_IDS,
@@ -226,8 +226,9 @@ export function computeQuote(input: QuoteInput, opts: ComputeQuoteOptions): Quot
     if (!svc) throw new Error(`servicio desconocido: ${input.serviceId}`);
     accumulate(svc.id, svc.nameEs, estimateService(svc, input.level, { currency }), qty);
   } else {
-    const pkg = PACKAGES.find((p) => p.id === input.packageId);
-    if (!pkg) throw new Error(`paquete desconocido: ${input.packageId}`);
+    const pkgBase = PACKAGES.find((p) => p.id === input.packageId);
+    if (!pkgBase) throw new Error(`paquete desconocido: ${input.packageId}`);
+    const pkg = input.componentesOverride?.length ? { ...pkgBase, componentes: input.componentesOverride } : pkgBase;
     for (const comp of pkg.componentes) {
       const svc = opts.getService(comp.serviceId);
       if (!svc) throw new Error(`servicio desconocido en paquete: ${comp.serviceId}`);
