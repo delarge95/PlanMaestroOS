@@ -34,6 +34,7 @@ export function computeQuote(
     rawMax += range.max * rate.max;
   }
 
+  const notes: string[] = ['Rango orientativo, no cotizacion.'];
   const step = card.roundStep(rawMin);
   const subtotalMin = floorTo(rawMin, step);
   const subtotalMax = ceilTo(rawMax, step);
@@ -56,6 +57,7 @@ export function computeQuote(
     totalMin, totalMax,
     entregaDias: svc.entregaDiasEs,
     entregables: svc.entregablesEs ?? [],
+    notesEs: notes,
     noIncluye: svc.noIncluyeEs ?? [],
   };
 }

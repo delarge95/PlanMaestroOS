@@ -58,6 +58,7 @@ export interface QuoteResult {
   entregaDias?: [number, number];
   entregables: string[];
   noIncluye: string[];
+  notesEs: string[];
 }
 
 export interface ComponentePaquete {
