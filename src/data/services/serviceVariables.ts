@@ -623,14 +623,23 @@ export function derivarTier(
     const val = valores[v.id];
     if (val === undefined || val === null) continue;
 
-    if (v.type === 'number' && v.tierMap) {
+    if (v.type === 'number' && v.tierMap && v.tierMap.length > 0) {
       const numVal = Number(val);
+      let matched = false;
       for (const tm of v.tierMap) {
         if (numVal <= tm.maxVal) {
           const idx = order.indexOf(tm.tier);
           if (idx > maxTierIdx) maxTierIdx = idx;
+          matched = true;
           break;
         }
+      }
+      // FIX: si el valor excede todos los umbrales, usar el ULTIMO tier del map
+      // (que siempre es el mas alto). Sin esto, valores muy altos BAJABAN el nivel.
+      if (!matched) {
+        const lastEntry = v.tierMap[v.tierMap.length - 1];
+        const lastIdx = order.indexOf(lastEntry.tier);
+        if (lastIdx > maxTierIdx) maxTierIdx = lastIdx;
       }
     }
 

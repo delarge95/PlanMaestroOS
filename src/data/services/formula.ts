@@ -22,9 +22,31 @@ export function computeQuote(
   const card = getRateCard(currency);
   let hMin = 0, hMax = 0, rawMin = 0, rawMax = 0;
 
+  // Si el servicio no soporta el nivel pedido (ej: noXs => XS con 0h),
+  // escalar al nivel minimo soportado para que el precio nunca sea 0.
+  const LEVEL_ORDER: LevelId[] = ['XS', 'S', 'M', 'L', 'XL'];
+  let effLevel: LevelId = level;
+  const totalHoursAt = (lv: LevelId): number =>
+    svc.subtasks.reduce((acc, st) => {
+      if (st.optional) return acc;
+      const r = st.hours[lv];
+      return acc + (r ? r.min : 0);
+    }, 0);
+  if (totalHoursAt(effLevel) === 0) {
+    let i = LEVEL_ORDER.indexOf(effLevel);
+    while (i < LEVEL_ORDER.length - 1 && totalHoursAt(LEVEL_ORDER[i]) === 0) i++;
+    if (totalHoursAt(LEVEL_ORDER[i]) === 0) {
+      let j = LEVEL_ORDER.indexOf(effLevel);
+      while (j > 0 && totalHoursAt(LEVEL_ORDER[j]) === 0) j--;
+      effLevel = LEVEL_ORDER[j];
+    } else {
+      effLevel = LEVEL_ORDER[i];
+    }
+  }
+
   for (const st of svc.subtasks) {
     if (st.optional) continue;
-    const range = st.hours[level];
+    const range = st.hours[effLevel];
     if (!range) continue;
     const rate = card.rates[st.rateClass as RateClass];
     if (!rate) continue;
