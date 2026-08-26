@@ -244,3 +244,4 @@ function StatBox({ label, value, highlight }: { label: string; value: string; hi
 function formatMoney(currency: Currency, v: number): string {
   return new Intl.NumberFormat(currency === 'COP' ? 'es-CO' : 'en-US', { style: 'currency', currency, maximumFractionDigits: 0 }).format(v);
 }
+export default DirectCotizador;
