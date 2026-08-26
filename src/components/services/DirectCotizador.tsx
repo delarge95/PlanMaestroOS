@@ -4,13 +4,21 @@ import type { ServiceDef } from '../../data/services/catalogCore';
 import { computeQuote } from '../../data/services/formula';
 import { LAUNCH_DISCOUNT } from '../../data/services/rateCard';
 import type { Currency, LevelId, Subtask } from '../../data/services/types';
-import { SERVICE_VARIABLES, derivarTier } from '../../data/services/serviceVariables';
+import {
+  SERVICE_VARIABLES,
+  derivarTier,
+  recommendedValue,
+} from '../../data/services/serviceVariables';
 import type { ServiceVariable } from '../../data/services/serviceVariables';
 import { groupSubtasksByPhase, PHASES } from '../../data/services/rateLabels';
 import { unitToTerm } from '../../data/services/glossary';
+import { GOALS, servicesForGoal, minPriceOf } from '../../data/services/goals';
 import { Term } from './Term';
 import { QuoteCta } from './QuoteCta';
 import { ProcesoFaq } from './ProcesoFaq';
+import { TierGallery } from './TierGallery';
+import { PriceWhy } from './PriceWhy';
+import { computePriceDrivers } from '../../lib/services/priceWhy';
 import {
   buildSummary,
   decodeShare,
@@ -30,7 +38,6 @@ const box: React.CSSProperties = { background: '#fff', border: '1px solid #dde0e
 const lbl: React.CSSProperties = { display: 'block', fontSize: 15, fontWeight: 600, marginBottom: 8, color: '#1a1d29' };
 const help: React.CSSProperties = { fontSize: 12.5, color: '#5a5e6e', marginTop: 4 };
 
-// Estilos de tooltip (.cx-term) + impresión/PDF: solo el resultado sale en el PDF.
 const CX_CSS = `
 @media print {
   [data-noprint] { display: none !important; }
@@ -51,15 +58,16 @@ const CX_CSS = `
 // ─── Componente principal ───
 export function DirectCotizador() {
   const [currency, setCurrency] = useState<Currency>('USD');
+  const [goal, setGoalRaw] = useState('');
   const [serviceId, setServiceId] = useState('');
   const [familyFilter, setFamilyFilter] = useState('');
   const [vals, setVals] = useState<Record<string, Val>>({});
+  const [unsure, setUnsure] = useState<Record<string, boolean>>({});
   const [firstClient, setFirstClient] = useState(true);
   const [urgency, setUrgency] = useState<Urgency>('none');
   const [quantity, setQuantity] = useState(1);
   const hydratedRef = useRef(false);
 
-  // Hidratación una sola vez: link compartido > localStorage > defaults (SSR-safe).
   useEffect(() => {
     const shared = decodeShare(window.location.search);
     const local = shared ?? loadLocal();
@@ -74,14 +82,16 @@ export function DirectCotizador() {
     hydratedRef.current = true;
   }, []);
 
-  // Autosave local (S5).
   useEffect(() => {
     if (!hydratedRef.current) return;
     saveLocal({ serviceId, vals, currency, firstClient, urgency, quantity });
   }, [serviceId, vals, currency, firstClient, urgency, quantity]);
 
+  const setGoal = (g: string) => { setGoalRaw(g); setUnsure({}); };
+
   const svc: ServiceDef | undefined = serviceId ? SERVICES.find((s) => s.id === serviceId) : undefined;
-  const variables = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
+  const variables: ServiceVariable[] = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
+  const goalLabel = GOALS.find((g) => g.id === goal)?.labelEs ?? '';
 
   const tier = useMemo(() => {
     if (!serviceId) return null;
@@ -90,25 +100,49 @@ export function DirectCotizador() {
 
   const urgencyPct = urgency === '72h' ? 25 : urgency === '24h' ? 50 : 0;
 
+  const quoteOpts = useMemo(() => ({
+    firstClientLaunch: firstClient,
+    batchUnits: quantity > 1 ? quantity : undefined,
+    urgencyPct,
+  }), [firstClient, quantity, urgencyPct]);
+
   const quote = useMemo(() => {
     if (!svc || !tier) return null;
     try {
-      return computeQuote(svc.id, tier, currency, {
-        firstClientLaunch: firstClient,
-        batchUnits: quantity > 1 ? quantity : undefined,
-        urgencyPct,
-      });
+      return computeQuote(svc.id, tier, currency, quoteOpts);
     } catch { return null; }
-  }, [svc, tier, currency, firstClient, urgencyPct, quantity]);
+  }, [svc, tier, currency, quoteOpts]);
 
   const phaseGroups = useMemo(() => {
     if (!svc || !tier) return [];
     return groupSubtasksByPhase(svc.subtasks as Subtask[], tier);
   }, [svc, tier]);
 
-  const filtered = familyFilter ? SERVICES.filter((s) => s.family === familyFilter) : SERVICES;
+  // S6: lista por objetivo; chips de familia siguen funcionando dentro.
+  const priceMap = useMemo(() => {
+    const base = goal ? servicesForGoal(goal) : SERVICES;
+    const list = familyFilter ? base.filter((s) => s.family === familyFilter) : base;
+    const m = new Map<string, number | null>();
+    for (const s of list) m.set(s.id, minPriceOf(s.id, currency));
+    return { list, m };
+  }, [goal, familyFilter, currency]);
+  const filtered = priceMap.list;
 
-  // Datos para compartir (S1/S5): solo existen en cliente, tras interactuar.
+  // S10: drivers de precio
+  const drivers = useMemo(() => {
+    if (!svc || variables.length === 0) return [];
+    try { return computePriceDrivers(svc.id, currency, quoteOpts, variables, vals); }
+    catch { return []; }
+  }, [svc, variables, currency, quoteOpts, vals]);
+
+  const conditions = useMemo(() => {
+    const c: string[] = [];
+    if (firstClient && LAUNCH_DISCOUNT.activo) c.push(`Lanzamiento −${LAUNCH_DISCOUNT.defaultPct}%`);
+    if (urgencyPct > 0) c.push(`Urgencia +${urgencyPct}%`);
+    if (quantity > 1) c.push(`Lote ×${quantity} −15%`);
+    return c;
+  }, [firstClient, urgencyPct, quantity]);
+
   const shareState: ShareState | null = svc && tier
     ? { serviceId: svc.id, vals, currency, firstClient, urgency, quantity }
     : null;
@@ -133,6 +167,17 @@ export function DirectCotizador() {
       })
     : '';
 
+  const toggleUnsure = (v: ServiceVariable) => {
+    setUnsure((p) => {
+      const next = { ...p };
+      if (next[v.id]) { delete next[v.id]; return next; }
+      const rec = recommendedValue(v, goal);
+      if (rec !== null) setVals((pv) => ({ ...pv, [v.id]: rec }));
+      next[v.id] = true;
+      return next;
+    });
+  };
+
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
       <style dangerouslySetInnerHTML={{ __html: CX_CSS }} />
@@ -146,10 +191,26 @@ export function DirectCotizador() {
         <Term id="moneda" />
       </p>
 
-      {/* 1: Seleccionar servicio */}
+      {/* 0+1: Objetivo y servicio */}
       <div style={box} data-noprint>
-        <span style={lbl}>1 · ¿Qué necesitas?</span>
-        <p style={{ ...help, marginTop: 0 }}>Si no estás seguro, pruébalo con cualquiera: el nivel y el precio se calculan solos.</p>
+        <span style={lbl}>¿Qué quieres lograr?</span>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(190px,1fr))', gap: 8, marginBottom: 14 }}>
+          {GOALS.map((g) => (
+            <button key={g.id} onClick={() => setGoal(goal === g.id ? '' : g.id)}
+              title={g.descEs}
+              style={{
+                textAlign: 'left', padding: '10px 12px', borderRadius: 10, font: 'inherit',
+                border: goal === g.id ? '2px solid #0a84ff' : '1px solid #dde0e8',
+                background: goal === g.id ? '#e8f0fe' : '#fff', cursor: 'pointer',
+              }}>
+              <span style={{ fontSize: 17 }}>{g.icon}</span>
+              <span style={{ display: 'block', fontSize: 12.5, fontWeight: 600, color: '#1a1d29', marginTop: 2 }}>{g.labelEs}</span>
+              <span style={{ display: 'block', fontSize: 10.5, color: '#5a5e6e' }}>{g.descEs}</span>
+            </button>
+          ))}
+        </div>
+
+        <span style={lbl}>Selecciona el servicio {goal && goal !== 'no-se' ? `(para ${goalLabel.toLowerCase()})` : ''}</span>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
           <FilterChip active={familyFilter === ''} onClick={() => setFamilyFilter('')} label="Todos" />
           {[
@@ -164,30 +225,54 @@ export function DirectCotizador() {
             <FilterChip key={f.id} active={familyFilter === f.id} onClick={() => setFamilyFilter(f.id)} label={f.label} />
           ))}
         </div>
-        <div style={{ display: 'grid', gap: 6, maxHeight: 280, overflowY: 'auto' }}>
-          {filtered.map((s) => (
-            <button key={s.id} onClick={() => { setServiceId(s.id); setVals({}); }}
-              style={{
-                padding: 12, borderRadius: 10, cursor: 'pointer', font: 'inherit', textAlign: 'left',
-                border: serviceId === s.id ? '2px solid #0a84ff' : '1px solid #dde0e8',
-                background: serviceId === s.id ? '#e8f0fe' : '#fff', color: '#1a1d29',
-              }}>
-              <div style={{ fontWeight: 600, fontSize: 14 }}>{s.nameEs}</div>
-              <div style={{ fontSize: 12, opacity: 0.6 }}>{s.unitEs}</div>
-            </button>
-          ))}
+        <div style={{ display: 'grid', gap: 6, maxHeight: 300, overflowY: 'auto' }}>
+          {filtered.length === 0 && (
+            <p style={{ ...help, margin: 0 }}>Ningún servicio de este objetivo en esta familia. Prueba con “Todos”.</p>
+          )}
+          {filtered.map((s) => {
+            const desde = priceMap.m.get(s.id);
+            return (
+              <button key={s.id} onClick={() => { setServiceId(s.id); setVals({}); setUnsure({}); }}
+                style={{
+                  padding: 12, borderRadius: 10, cursor: 'pointer', font: 'inherit', textAlign: 'left',
+                  border: serviceId === s.id ? '2px solid #0a84ff' : '1px solid #dde0e8',
+                  background: serviceId === s.id ? '#e8f0fe' : '#fff', color: '#1a1d29',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8,
+                }}>
+                <span>
+                  <span style={{ display: 'block', fontWeight: 600, fontSize: 14 }}>{s.nameEs}</span>
+                  <span style={{ display: 'block', fontSize: 12, opacity: 0.6 }}>{s.unitEs}</span>
+                </span>
+                {desde != null && (
+                  <span style={{ flexShrink: 0, fontSize: 11.5, fontWeight: 700, color: '#166534', whiteSpace: 'nowrap' }}>
+                    desde {fmt(currency, desde)}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* 2: Variables del servicio */}
+      {/* 2: Variables */}
       {svc && variables.length > 0 && (
         <div style={box} data-noprint>
           <span style={lbl}>2 · Configura lo que sabes</span>
           <p style={{ ...help, marginTop: 0, marginBottom: 12 }}>
-            No necesitas saber términos técnicos: mueve los controles y observa cómo cambia el nivel.
+            ¿No sabes qué poner? Usa <strong>“No sé”</strong> en cada pregunta y ponemos un valor típico por ti.
           </p>
-          {variables.map((v: ServiceVariable) => (
-            <VariableControl key={v.id} v={v} value={vals[v.id]} onChange={(nv) => setVals((p) => ({ ...p, [v.id]: nv }))} />
+          {variables.map((v) => (
+            <VariableControl key={v.id}
+              v={v}
+              value={vals[v.id]}
+              unsure={!!unsure[v.id]}
+              recReason={goalLabel ? `recomendado para “${goalLabel}”` : 'valor típico'}
+              onChange={(nv) => {
+                setVals((p) => ({ ...p, [v.id]: nv }));
+                setUnsure((p) => { const n = { ...p }; delete n[v.id]; return n; });
+              }}
+              onToggleUnsure={() => toggleUnsure(v)}
+            />
           ))}
         </div>
       )}
@@ -287,7 +372,14 @@ export function DirectCotizador() {
             </p>
           )}
 
-          {/* S2: desglose legible por fases (sin códigos RC) */}
+          {/* S7: comparador de niveles */}
+          <TierGallery svc={svc} tier={tier} currency={currency} quoteOpts={quoteOpts} />
+
+          {/* S10: transparencia del precio */}
+          <PriceWhy drivers={drivers} conditions={conditions}
+            onLower={(varId, minValue) => setVals((p) => ({ ...p, [varId]: minValue }))} />
+
+          {/* S2: desglose por fases */}
           <details style={{ marginTop: 8 }} open>
             <summary style={{ cursor: 'pointer', fontSize: 13, color: '#0a84ff' }}>¿Cómo se calcula? ({variables.length} variables)</summary>
             <div style={{ fontSize: 12.5, marginTop: 8, color: '#1a1d29' }}>
@@ -314,7 +406,6 @@ export function DirectCotizador() {
             </div>
           </details>
 
-          {/* S1+S5: CTA sin dead-end */}
           <QuoteCta summary={summary} url={shareUrl} />
 
           <p style={{ fontWeight: 600, fontSize: 13, marginTop: 12, color: '#1a1d29' }}>
@@ -323,7 +414,6 @@ export function DirectCotizador() {
         </div>
       )}
 
-      {/* S11: proceso + FAQ */}
       <ProcesoFaq />
     </div>
   );
@@ -331,23 +421,41 @@ export function DirectCotizador() {
 
 // ─── Sub-componentes ───
 
-function VariableControl({ v, value, onChange }: { v: ServiceVariable; value: Val | undefined; onChange: (v: Val) => void }) {
+function VariableControl({ v, value, unsure, recReason, onChange, onToggleUnsure }: {
+  v: ServiceVariable;
+  value: Val | undefined;
+  unsure: boolean;
+  recReason: string;
+  onChange: (nv: Val) => void;
+  onToggleUnsure: () => void;
+}) {
+  const head = (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
+      <span>{v.preguntaEs}{v.type === 'number' && unitToTerm(v.unidadEs) && <Term id={unitToTerm(v.unidadEs)!} />}</span>
+      <button onClick={onToggleUnsure} aria-pressed={unsure}
+        style={{
+          flexShrink: 0, font: 'inherit', fontSize: 11.5, cursor: 'pointer',
+          border: unsure ? '1px solid #0a84ff' : '1px solid #dde0e8', borderRadius: 999,
+          padding: '2px 10px', background: unsure ? '#e8f0fe' : '#fff', color: unsure ? '#0a84ff' : '#5a5e6e',
+        }}>
+        {unsure ? '✓ Usando recomendado' : 'No sé'}
+      </button>
+    </div>
+  );
+
   if (v.type === 'number') {
     const current = typeof value === 'number' ? value : v.min ?? 0;
-    const termId = unitToTerm(v.unidadEs);
     return (
-      <div style={{ marginBottom: 18 }}>
-        <label style={{ ...lbl, fontSize: 15 }}>
-          {v.preguntaEs}
-          {termId && <Term id={termId} />}
-        </label>
+      <div style={{ marginBottom: 18, opacity: unsure ? 0.72 : 1 }}>
+        <label style={{ ...lbl, fontSize: 15 }}>{head}</label>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
           <strong style={{ fontSize: 22, color: '#0a84ff' }}>{current} {v.unidadEs}</strong>
         </div>
         <input type="range" min={v.min} max={v.max} step={v.step ?? 1} value={current}
           onChange={(e) => onChange(Number(e.target.value))}
           style={{ width: '100%', accentColor: '#0a84ff', height: 28 }} />
-        {v.tierMap && (
+        {unsure && <p style={help}>✔ {recReason}. Mueve el control para ajustarlo tú.</p>}
+        {!unsure && v.tierMap && (
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10.5, opacity: 0.55, marginTop: 2, color: '#5a5e6e' }}>
             {v.tierMap.map((tm: { maxVal: number; tier: LevelId }) => <span key={tm.tier}>≤{tm.maxVal}={tm.tier}</span>)}
           </div>
@@ -359,20 +467,21 @@ function VariableControl({ v, value, onChange }: { v: ServiceVariable; value: Va
   if (v.type === 'toggle') {
     const active = value === true;
     return (
-      <div style={{ marginBottom: 16 }}>
+      <div style={{ marginBottom: 16, opacity: unsure ? 0.72 : 1 }}>
         <label style={{ display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer' }}>
           <input type="checkbox" checked={active} onChange={(e) => onChange(e.target.checked)} />
-          <span style={{ fontSize: 14.5, color: '#1a1d29' }}>{v.preguntaEs}</span>
+          <span style={{ fontSize: 14.5, color: '#1a1d29', flex: 1 }}>{head}</span>
           {v.tierSiActivo && active && <span className="cx-chip" style={{ fontSize: 11 }}>→ {v.tierSiActivo}</span>}
         </label>
+        {unsure && <p style={help}>✔ {recReason}.</p>}
       </div>
     );
   }
 
   if (v.type === 'select' && v.opciones) {
     return (
-      <div style={{ marginBottom: 16 }}>
-        <span style={lbl}>{v.preguntaEs}</span>
+      <div style={{ marginBottom: 16, opacity: unsure ? 0.72 : 1 }}>
+        <span style={lbl}>{head}</span>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {v.opciones.map((o: { valorEs: string; tierHint?: LevelId }) => {
             const active = value === o.valorEs;
@@ -390,6 +499,7 @@ function VariableControl({ v, value, onChange }: { v: ServiceVariable; value: Va
             );
           })}
         </div>
+        {unsure && <p style={help}>✔ {recReason}.</p>}
       </div>
     );
   }
@@ -443,7 +553,6 @@ function CurrencyToggle({ currency, onChange }: { currency: Currency; onChange: 
   );
 }
 
-// DronePieces inline (autocontenido, sin imports externos)
 function DronePieces({ pieces }: { pieces: number }) {
   const groups: Array<{ min: number; nodes: React.ReactNode[] }> = [
     { min: 1, nodes: [<rect key="f" x="70" y="60" width="100" height="40" rx="10" />, <circle key="m1" cx="50" cy="55" r="12" />, <circle key="m2" cx="190" cy="55" r="12" />] },

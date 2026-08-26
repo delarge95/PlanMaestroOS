@@ -21,6 +21,8 @@ export interface ServiceVariable {
   tierMap?: Array<{ maxVal: number; tier: LevelId }>;
   /** Si es toggle=true, qué nivel sugiere */
   tierSiActivo?: LevelId;
+  /** Valor recomendado por objetivo (wizard/modo no-sé): clave = goal id o 'default' */
+  recommendedFor?: Record<string, number | string | boolean>;
 }
 
 export interface ServiceConfig {
@@ -658,4 +660,20 @@ export function derivarTier(
   }
 
   return order[maxTierIdx];
+}
+
+/** Valor sugerido para modo "No estoy seguro": override por goal > default > punto medio/primera opción. */
+export function recommendedValue(v: ServiceVariable, goalId: string): number | string | boolean | null {
+  const rec = v.recommendedFor;
+  if (rec) {
+    const hit = rec[goalId] ?? rec['default'];
+    if (hit !== undefined) return hit;
+  }
+  if (v.type === 'number' && v.min !== undefined && v.max !== undefined) {
+    const step = v.step && v.step > 0 ? v.step : 1;
+    return Math.round((v.min + v.max) / 2 / step) * step;
+  }
+  if (v.type === 'select') return v.opciones?.[0]?.valorEs ?? null;
+  if (v.type === 'toggle') return false;
+  return null;
 }
