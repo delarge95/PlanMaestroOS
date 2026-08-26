@@ -789,8 +789,16 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       if (!e || !e.mesh.visible) continue;
       const mat = e.mesh.material as THREE.MeshStandardMaterial | undefined;
       if (!mat?.emissive) continue;
+      // OVERLAY seleccionado → boost fuerte + opacidad alta para que se vea
+      // sobre el músculo sólido que está detrás
+      const isOverlayPiece = !!OVERLAY_PARENT[k];
       mat.emissive.set(hc);
-      mat.emissiveIntensity = 1.6;
+      mat.emissiveIntensity = isOverlayPiece ? 2.5 : 1.6;
+      if (isOverlayPiece) {
+        mat.transparent = true;
+        mat.opacity = 0.85;
+        mat.depthWrite = true;
+      }
       if (mat.color) mat.color.lerp(new THREE.Color(hc), 0.4);
     }
     for (const k of parentNames) {
@@ -800,7 +808,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const mat = e.mesh.material as THREE.MeshStandardMaterial | undefined;
       if (!mat?.emissive) continue;
       mat.emissive.set(hc);
-      mat.emissiveIntensity = 0.3;
+      mat.emissiveIntensity = 0.25;
     }
     if (isJoint) {
       const unitKeys = [...unitNames].map((n) => pieceKey(selectedId, n));
@@ -1440,7 +1448,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                         {selectedStructure.kind}
                       </span>
                       <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                        {path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : selectedStructure.nameEs}
+                        {path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : (primaryGroup(selectedStructure.id)?.label ?? selectedStructure.nameEs)}
                       </h4>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
                         {path?.pieceKey ? `— dentro de ${selectedStructure.nameEs}` : selectedStructure.nameEn}
