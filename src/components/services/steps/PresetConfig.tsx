@@ -1,6 +1,6 @@
 import type { Currency } from '../../../data/services';
 import { LEVEL_SHORT, GOALS, formatMoney, suggestedLevelFromPieces, suggestedLevelFromSeconds } from '../../../lib/services/ui';
-import { useQuoteResult } from '../state/selectors';
+import { useQuote } from '../state/selectors';
 import { useQuoteStore } from '../state/useQuoteStore';
 import { DronePieces } from '../visuals/DronePieces';
 
@@ -20,7 +20,7 @@ export function PresetConfig() {
   const setPieces = useQuoteStore((s) => s.setPieces);
   const setQuantity = useQuoteStore((s) => s.setQuantity);
   const go = useQuoteStore((s) => s.go);
-  const result = useQuoteResult();
+  const result = useQuote();
 
   const isCad = presetId === 'PK-CAD-WEBGL' || presetId === 'PK-CAD-TWIN';
   const isMicro = presetId === 'PK-MICRO-LOOP';

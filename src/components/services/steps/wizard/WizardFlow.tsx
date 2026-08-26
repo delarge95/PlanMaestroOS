@@ -1,307 +1,201 @@
 import { useState } from 'react';
-import { SERVICE_CATALOG, getServiceById } from '../../../../data/services';
+import { SERVICE_CATALOG } from '../../../../data/services';
 import type { LevelId } from '../../../../data/services';
 import { LEVEL_SHORT, GOALS } from '../../../../lib/services/ui';
-import { getUxSpec, PREGUNTAS_RUBRICA, DISCLAIMER_ESTIMACION } from '../../../../lib/services/ux';
-import type { ControlSpec, RubricQuestion } from '../../../../lib/services/ux';
+import { getUxSpec, PREGUNTAS_RUBRICA } from '../../../../lib/services/ux';
 import { useQuoteStore } from '../../state/useQuoteStore';
 import { DronePieces } from '../../visuals/DronePieces';
-import { PolyDetail, ImageSequence } from '../../visuals/VisualAids';
+import { PolyDetail } from '../../visuals/VisualAids';
 import { SmartSlider } from '../../controls/SmartSlider';
-import { ChoiceCards, Segmented } from '../../controls/Segmented';
+import { ChoiceCards } from '../../controls/Segmented';
 
-const PASOS = ['Tu objetivo', 'El servicio', 'Configúralo', 'Contexto'] as const;
+const btnSec = 'cx-btn-secondary';
+const btnPri = 'cx-btn-primary';
 
-function Progreso({ paso }: { paso: number }) {
+function Nav({ onBack, onNext, nextDisabled, nextLabel = 'Siguiente' }: { onBack: () => void; onNext: () => void; nextDisabled?: boolean; nextLabel?: string }) {
   return (
-    <div style={{ marginBlock: 18 }}>
-      <div style={{ fontSize: 13, opacity: 0.65, marginBottom: 4 }}>Paso {paso} de 4</div>
-      <div style={{ height: 4, background: '#e5e5ea', borderRadius: 999 }}>
-        <div
-          style={{
-            height: '100%',
-            width: `${(paso / 4) * 100}%`,
-            background: 'var(--accent,#0a84ff)',
-            borderRadius: 999,
-            transition: 'width 220ms',
-          }}
-        />
-      </div>
+    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 28 }}>
+      <button className={btnSec} onClick={onBack}>← Atrás</button>
+      <button className={btnPri} onClick={onNext} disabled={nextDisabled}
+        style={{ opacity: nextDisabled ? 0.5 : 1, cursor: nextDisabled ? 'not-allowed' : 'pointer' }}>
+        Siguiente →
+      </button>
     </div>
   );
 }
 
-function Nav({
-  onBack,
-  onNext,
-  nextLabel = 'Siguiente',
-  nextDisabled,
-}: {
-  onBack: () => void;
-  onNext: () => void;
-  nextLabel?: string;
-  nextDisabled?: boolean;
-}) {
+function Bar({ paso }: { paso: number }) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 28 }}>
-      <button onClick={onBack} style={{ padding: '12px 18px', borderRadius: 10, border: '1px solid #d8d8de', background: '#fff', cursor: 'pointer', font: 'inherit' }}>
-        ← Atrás
-      </button>
-      <button
-        onClick={onNext}
-        disabled={nextDisabled}
-        style={{
-          padding: '12px 22px',
-          borderRadius: 10,
-          border: 'none',
-          background: nextDisabled ? '#c7c7cc' : 'var(--accent,#0a84ff)',
-          color: '#fff',
-          cursor: nextDisabled ? 'not-allowed' : 'pointer',
-          font: 'inherit',
-          fontWeight: 600,
-        }}
-      >
-        {nextLabel} →
-      </button>
+    <div style={{ marginBlock: 16 }}>
+      <div style={{ fontSize: 12, opacity: 0.6 }}>Paso {paso} de 4 — {['Tu objetivo', 'El servicio', 'Configúralo', 'Contexto'][paso - 1]}</div>
+      <div style={{ height: 3, background: '#e0e0e6', borderRadius: 99 }}>
+        <div style={{ height: '100%', width: `${(paso / 4) * 100}%`, background: 'var(--c-accent,#0a84ff)', borderRadius: 99, transition: 'width 200ms' }} />
+      </div>
     </div>
   );
 }
 
 export function WizardFlow() {
   const [paso, setPaso] = useState(1);
-  const store = useQuoteStore();
-  const family = store.wizard.family;
+  const st = useQuoteStore();
+  const family = st.family ?? '';
 
-  const serviciosFamilia = family
-    ? SERVICE_CATALOG.filter((s) => s.family === family)
-    : [];
+  // Paso 1: objetivo
+  const serviciosFamilia = family ? SERVICE_CATALOG.filter((svc) => svc.family === family) : [];
 
-  const spec = store.wizard.serviceId ? getUxSpec(store.wizard.serviceId) : undefined;
-  const svc = store.wizard.serviceId ? getServiceById(store.wizard.serviceId) : undefined;
-
-  const renderControl = (c: ControlSpec) => {
-    if (c.kind === 'slider-piezas') {
-      return (
-        <div key={c.kind}>
-          <SmartSlider
-            spec={c}
-            value={store.pieces}
-            onChange={(v) => {
-              store.setPieces(v);
-              const order: LevelId[] = ['XS', 'N1', 'N2', 'N3', 'N4'];
-              const sugerido = v <= 15 ? 'N1' : v <= 60 ? 'N2' : v <= 150 ? 'N3' : 'N4';
-              store.setWizard({ levelBase: order[order.indexOf(sugerido as LevelId)] ?? 'N2' });
-            }}
-            nivelSugerido={LEVEL_SHORT[store.wizard.levelBase]}
-          />
-          <DronePieces pieces={store.pieces} />
-        </div>
-      );
-    }
-    if (c.kind === 'slider-detalle') {
-      return (
-        <div key={c.kind}>
-          <PolyDetail estado={store.detail} onEstado={(e) => { store.setDetail(e); }} />
-        </div>
-      );
-    }
-    if (c.kind === 'slider-segundos') {
-      const frames = [0, 1, 2, 3, 4, 5].map((i) => (
-        <svg viewBox="0 0 120 120" width="120" height="120" key={i}>
-          <circle cx="60" cy="60" r="34" fill="#5b5bd6" opacity={0.85} />
-          <rect x="56" y="10" width="8" height="16" rx="4" fill="#0a84ff" transform={`rotate(${i * 60} 60 60)`} />
-          <text x="60" y="66" textAnchor="middle" fontSize="13" fill="#fff">{i * 15}°</text>
-        </svg>
-      ));
-      return (
-        <div key={c.kind}>
-          <SmartSlider
-            spec={c}
-            value={store.seconds}
-            onChange={(v) => { store.setSeconds(v); }}
-            nivelSugerido={LEVEL_SHORT[store.wizard.levelBase]}
-          />
-          <ImageSequence frames={frames} value={store.seconds} max={90} />
-        </div>
-      );
-    }
-    if (c.kind === 'stepper-cantidad') {
-      return (
-        <div key={c.kind} style={{ marginBlock: 20 }}>
-          <span style={{ fontSize: 18 }}>{c.preguntaEs}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 8 }}>
-            <button onClick={() => store.setQuantity(store.quantity - 1)} style={{ width: 40, height: 40, borderRadius: 10, border: '1px solid #d8d8de', background: '#fff', cursor: 'pointer', font: 'inherit' }}>−</button>
-            <strong style={{ fontSize: 26 }}>{store.quantity}</strong>
-            <button onClick={() => store.setQuantity(store.quantity + 1)} style={{ width: 40, height: 40, borderRadius: 10, border: '1px solid #d8d8de', background: '#fff', cursor: 'pointer', font: 'inherit' }}>+</button>
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
-
-  const renderRubrica = () => {
-    if (!spec) return null;
-    return spec.preguntasRubrica.map((dimId) => {
-      const q: RubricQuestion | undefined = PREGUNTAS_RUBRICA[dimId];
-      if (!q) return null;
-      const actual = store.wizard.qualitativeDeltas[dimId] ?? 0;
-      return (
-        <ChoiceCards
-          key={dimId}
-          preguntaEs={q.preguntaEs}
-          value={actual}
-          onChange={(v) => store.toggleQualitative(dimId, v)}
-          opciones={q.opciones.map((o) => ({
-            valor: o.delta,
-            etiquetaEs: o.valorEs,
-            ayudaEs: o.ayudaEs,
-          }))}
-        />
-      );
-    });
-  };
+  // Paso 3: spec del servicio seleccionado
+  const uxSpec = st.serviceId ? getUxSpec(st.serviceId) : undefined;
 
   return (
     <section>
-      <Progreso paso={paso} />
+      <Bar paso={paso} />
 
       {paso === 1 && (
         <>
           <h2>¿Qué quieres lograr?</h2>
-          <div style={{ display: 'grid', gap: 12, marginBlock: 18 }}>
+          <div style={{ display: 'grid', gap: 10, marginBlock: 16 }}>
             {GOALS.map((g) => (
-              <button
-                key={g.id}
-                onClick={() => {
-                  if (g.pushPresetId) {
-                    store.selectPreset(g.pushPresetId);
-                    return;
-                  }
-                  const primerServicio = SERVICE_CATALOG.find((s) => g.familyIds.includes(s.family));
-                  store.setWizard({ family: g.familyIds[0], serviceId: primerServicio?.id });
-                }}
+              <button key={g.id} className="cx-card"
                 style={{
-                  padding: '14px 18px',
-                  borderRadius: 12,
-                  border: family && g.familyIds.includes(family) ? '2px solid var(--accent,#0a84ff)' : '1px solid #d8d8de',
-                  background: family && g.familyIds.includes(family) ? 'var(--accent-soft,#eef4ff)' : '#fff',
-                  cursor: 'pointer',
-                  font: 'inherit',
-                  textAlign: 'left',
+                  borderColor: family && g.familyIds.includes(family) ? 'var(--c-accent,#0a84ff)' : undefined,
+                  borderWidth: family && g.familyIds.includes(family) ? 2 : 1,
+                  background: family && g.familyIds.includes(family) ? 'var(--c-accent-soft,#e8f0fe)' : undefined,
+                }}
+                onClick={() => {
+                  if (g.pushPresetId) { st.selectPreset(g.pushPresetId); return; }
+                  const first = SERVICE_CATALOG.find((x) => g.familyIds.includes(x.family));
+                  if (first) st.setService(first.id, 'N2');
+                  else st.setService('f1-cad-webgl-ready', 'N2');
                 }}
               >
-                {g.labelEs}
+                <strong>{g.labelEs}</strong>
               </button>
             ))}
           </div>
-          <Nav
-            onBack={() => store.go('entry')}
-            onNext={() => setPaso(2)}
-            nextDisabled={!family || serviciosFamilia.length === 0}
-          />
+          <Nav onBack={() => st.go('entry')} onNext={() => setPaso(2)} nextDisabled={!st.serviceId} />
         </>
       )}
 
       {paso === 2 && (
         <>
-          <h2>Este servicio encaja con tu objetivo</h2>
-          <div style={{ display: 'grid', gap: 12, marginBlock: 18 }}>
-            {serviciosFamilia.map((s) => {
-              const activo = store.wizard.serviceId === s.id;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => store.setWizard({ serviceId: s.id })}
-                  style={{
-                    padding: 16,
-                    borderRadius: 12,
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    font: 'inherit',
-                    border: activo ? '2px solid var(--accent,#0a84ff)' : '1px solid #d8d8de',
-                    background: activo ? 'var(--accent-soft,#eef4ff)' : '#fff',
-                  }}
-                >
-                  <strong>{s.nameEs}</strong>
-                  <div style={{ fontSize: 12.5, opacity: 0.65, marginTop: 4 }}>{s.driversEs.join(' · ')}</div>
-                </button>
-              );
-            })}
+          <h2>Elige el servicio específico</h2>
+          <div style={{ display: 'grid', gap: 10, marginBlock: 14 }}>
+            {serviciosFamilia.map((svc) => (
+              <button key={svc.id} className="cx-card"
+                style={{
+                  borderColor: st.serviceId === svc.id ? 'var(--c-accent,#0a84ff)' : undefined,
+                  borderWidth: st.serviceId === svc.id ? 2 : 1,
+                  background: st.serviceId === svc.id ? 'var(--c-accent-soft,#e8f0fe)' : undefined,
+                }}
+                onClick={() => st.setService(svc.id, 'N2')}
+              >
+                <strong>{svc.nameEs}</strong>
+                <div style={{ fontSize: 12, opacity: 0.6 }}>{svc.driversEs.join(' · ')}</div>
+              </button>
+            ))}
           </div>
-          <Nav onBack={() => setPaso(1)} onNext={() => setPaso(3)} nextDisabled={!store.wizard.serviceId} />
+          <Nav onBack={() => setPaso(1)} onNext={() => setPaso(3)} nextDisabled={!st.serviceId} />
         </>
       )}
 
-      {paso === 3 && spec && svc && (
+      {paso === 3 && (
         <>
-          <h2>Configúralo</h2>
-          {spec.controles.map(renderControl)}
-          {renderRubrica()}
-          {svc.cotizador && svc.cotizador.addOns.length > 0 && (
-            <div style={{ marginBlock: 22 }}>
-              <span style={{ display: 'block', fontSize: 18, marginBottom: 10 }}>Extras opcionales</span>
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                {svc.cotizador.addOns.map((a) => (
-                  <button
-                    key={a.id}
-                    onClick={() => store.toggleAddon(a.id)}
-                    title={a.delta}
-                    style={{
-                      padding: '8px 14px',
-                      borderRadius: 999,
-                      cursor: 'pointer',
-                      font: 'inherit',
-                      fontSize: 13,
-                      border: store.wizard.addons.includes(a.id) ? '2px solid var(--accent,#0a84ff)' : '1px solid #d8d8de',
-                      background: store.wizard.addons.includes(a.id) ? 'var(--accent-soft,#eef4ff)' : '#fff',
-                    }}
-                  >
-                    {a.id} {a.delta ? `· ${a.delta}` : ''}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-          <p style={{ fontSize: 12.5, opacity: 0.65 }}>{DISCLAIMER_ESTIMACION}</p>
+          <h2>Ajusta los detalles</h2>
+          {(() => {
+            const spec = st.serviceId ? getUxSpec(st.serviceId) : undefined;
+            if (!spec) return null;
+
+            return (
+              <>
+                {spec.controles.map((c) => {
+                  if (c.kind === 'slider-piezas') {
+                    const sugerido = st.pieces <= 15 ? 'N1' : st.pieces <= 60 ? 'N2' : st.pieces <= 150 ? 'N3' : 'N4';
+                    return (
+                      <div key={c.kind}>
+                        <SmartSlider spec={c} value={st.pieces} nivelSugerido={LEVEL_SHORT[sugerido as LevelId]}
+                          onChange={(v) => { st.setPieces(v); }} />
+                        <DronePieces pieces={st.pieces} />
+                      </div>
+                    );
+                  }
+                  if (c.kind === 'slider-detalle') {
+                    return <PolyDetail key="pd" estado={st.detail} onEstado={(e) => st.setDetail(e)} />;
+                  }
+                  return null;
+                })}
+                {spec.preguntasRubrica.map((dimId) => {
+                  const q = PREGUNTAS_RUBRICA[dimId];
+                  if (!q) return null;
+                  const actual = st.qualitativeDeltas[dimId] ?? 0;
+                  return (
+                    <ChoiceCards key={dimId} preguntaEs={q.preguntaEs} value={actual}
+                      onChange={(v) => st.setQualitative(dimId, v)}
+                      opciones={q.opciones.map((o) => ({ valor: o.delta as -1 | 0 | 1, etiquetaEs: o.valorEs, ayudaEs: o.ayudaEs }))} />
+                  );
+                })}
+                {!spec.controles.length && !spec.preguntasRubrica.length && (
+                  <p style={{ opacity: 0.65 }}>Este servicio no requiere configuración adicional. Continúa al siguiente paso.</p>
+                )}
+              </>
+            );
+          })()}
           <Nav onBack={() => setPaso(2)} onNext={() => setPaso(4)} />
         </>
       )}
 
       {paso === 4 && (
         <>
-          <h2>Contexto</h2>
-          <Segmented
-            preguntaEs="¿Con qué urgencia lo necesitas?"
-            value={
-              store.modifiers.critical24h ? 'critico' : store.modifiers.urgent72h ? 'alta' : 'normal'
-            }
-            onChange={(v) => {
-              if (v === 'critico') { store.setModifier('critical24h', true); store.setModifier('urgent72h', false); }
-              else if (v === 'alta') { store.setModifier('urgent72h', true); store.setModifier('critical24h', false); }
-              else { store.setModifier('urgent72h', false); store.setModifier('critical24h', false); }
-            }}
-            opciones={[
-              { valor: 'normal', etiquetaEs: 'Sin apuro', ayudaEs: 'Precio normal' },
-              { valor: 'alta', etiquetaEs: 'Pronto (<72 h)', ayudaEs: '+25 %' },
-              {
-                valor: 'critico',
-                etiquetaEs: 'Crítico (<24 h)',
-                ayudaEs: '+50 % · máx 1 vez por cliente',
-              },
-            ]}
-            deshabilitarValores={['critico']}
-            razonDeshabilitado="No disponible en servicios que requieren discovery"
-          />
-          <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginBlock: 14 }}>
-            <input
-              type="checkbox"
-              checked={store.modifiers.firstClientLaunch}
-              onChange={(e) => store.setModifier('firstClientLaunch', e.target.checked)}
-            />
-            Aplicar descuento Lanzamiento primeros clientes (−25 %)
+          <h2>Últimos detalles</h2>
+
+          <div style={{ marginBlock: 16 }}>
+            <span style={{ fontSize: 15, fontWeight: 600 }}>¿Con qué urgencia?</span>
+            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+              {[
+                { id: 'none', label: 'Sin apuro' },
+                { id: '72h', label: '<72 h (+25 %)' },
+                { id: '24h', label: '<24 h (+50 %)', disabled: true, reason: 'Requiere discovery previo' },
+              ].map((o) => {
+                const active =
+                  (o.id === 'none' && !st.urgent72h && !st.critical24h) ||
+                  (o.id === '72h' && st.urgent72h) ||
+                  (o.id === '24h' && st.critical24h);
+                return (
+                  <button key={o.id} className="cx-card"
+                    style={{
+                      flex: 1, padding: '10px 14px',
+                      borderColor: active ? 'var(--c-accent,#0a84ff)' : undefined,
+                      borderWidth: active ? 2 : 1,
+                      background: active ? 'var(--c-accent-soft,#e8f0fe)' : undefined,
+                      cursor: o.disabled ? 'not-allowed' : 'pointer',
+                      opacity: (o as { disabled?: boolean }).disabled ? 0.45 : 1,
+                    }}
+                    disabled={(o as { disabled?: boolean }).disabled}
+                    onClick={() => st.setUrgency(o.id as 'none' | '72h' | '24h')}>
+                    <strong style={{ fontSize: 13 }}>{o.label}</strong>
+                    {(o as { reason?: string }).reason && (
+                      <div style={{ fontSize: 11, opacity: 0.6 }}>{(o as { reason?: string }).reason}</div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginBlock: 12 }}>
+            <input type="checkbox" checked={st.firstClientLaunch} onChange={() => st.toggleLaunch()} />
+            <span>Aplicar descuento Lanzamiento primeros clientes (<strong>−25 %</strong>)</span>
           </label>
-          <Nav onBack={() => setPaso(3)} onNext={() => store.go('summary')} nextLabel="Ver resumen" />
+
+          <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginBlock: 12 }}>
+            <input type="checkbox" checked={st.recurringClient} onChange={() => st.toggleRecurring()} />
+            <span>Soy cliente recurrente (−5 % adicional)</span>
+          </label>
+
+          <p style={{ fontSize: 12.5, opacity: 0.65, marginBlock: 16 }}>
+            Rango orientativo, no cotización. La cifra firme se cierra en un SOW tras discovery.
+          </p>
+
+          <Nav onBack={() => setPaso(3)} onNext={() => st.go('summary')} nextLabel="Ver resumen" />
         </>
       )}
     </section>

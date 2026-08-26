@@ -9,12 +9,11 @@ export interface ControlSpec {
   max: number;
   step: number;
   unidadEs: (v: number) => string;
-  /** Umbrales donde cambia el nivel sugerido (para ticks y snap) */
   umbrales?: Array<{ hasta: number; nivel: LevelId; etiquetaEs: string }>;
   visual:
-    | { kind: 'svg-layers'; assetId: 'drone' }
+    | { kind: 'svg-layers'; assetId: string }
     | { kind: 'poly-detail' }
-    | { kind: 'image-sequence'; secuencia: 'turntable' | 'explode' };
+    | { kind: 'image-sequence'; secuencia: string };
 }
 
 export interface RubricQuestion {
@@ -26,24 +25,24 @@ export interface RubricQuestion {
 export interface ServiceUxSpec {
   serviceId: string;
   controles: ControlSpec[];
-  preguntasRubrica: string[]; // ids de RUBRICA_CUALITATIVA aplicables, en orden de aparición
+  preguntasRubrica: string[];
 }
 
-const PIEZAS: ControlSpec = {
+const PIEZAS = (max = 150): ControlSpec => ({
   kind: 'slider-piezas',
-  preguntaEs: '¿Cuántos modelos necesitas convertir?',
+  preguntaEs: '¿Cuántas piezas tiene el ensamblaje?',
   min: 1,
-  max: 150,
+  max,
   step: 1,
-  unidadEs: (v) => `≈ ${v} ${v === 1 ? 'modelo' : 'modelos'}`,
+  unidadEs: (v) => `${v} ${v === 1 ? 'pieza' : 'piezas'}`,
   umbrales: [
-    { hasta: 15, nivel: 'N1', etiquetaEs: 'sencillos' },
-    { hasta: 60, nivel: 'N2', etiquetaEs: 'mixtos' },
-    { hasta: 150, nivel: 'N3', etiquetaEs: 'complejos' },
-    { hasta: 9999, nivel: 'N4', etiquetaEs: 'industrial' },
+    { hasta: 15, nivel: 'N1', etiquetaEs: 'sencillas' },
+    { hasta: 60, nivel: 'N2', etiquetaEs: 'mixtas' },
+    { hasta: 150, nivel: 'N3', etiquetaEs: 'complejas' },
+    { hasta: 99999, nivel: 'N4', etiquetaEs: 'masivo' },
   ],
   visual: { kind: 'svg-layers', assetId: 'drone' },
-};
+});
 
 const DETALLE: ControlSpec = {
   kind: 'slider-detalle',
@@ -61,77 +60,63 @@ const SEGUNDOS: ControlSpec = {
   min: 2,
   max: 90,
   step: 1,
-  unidadEs: (v) => `${v} s`,
+  unidadEs: (v) => `${v} segundos`,
   umbrales: [
-    { hasta: 3, nivel: 'XS', etiquetaEs: 'micro-loop' },
-    { hasta: 12, nivel: 'N1', etiquetaEs: 'corto' },
-    { hasta: 35, nivel: 'N2', etiquetaEs: 'estándar' },
-    { hasta: 70, nivel: 'N3', etiquetaEs: 'extendido' },
-    { hasta: 999, nivel: 'N4', etiquetaEs: 'cinemático' },
+    { hasta: 3, nivel: 'XS', etiquetaEs: 'micro-loop 2–3 s' },
+    { hasta: 12, nivel: 'N1', etiquetaEs: 'corto ~10 s' },
+    { hasta: 35, nivel: 'N2', etiquetaEs: 'estándar ~30 s' },
+    { hasta: 70, nivel: 'N3', etiquetaEs: 'extendido ~60 s' },
+    { hasta: 9999, nivel: 'N4', etiquetaEs: 'cinemático 90+ s' },
   ],
   visual: { kind: 'image-sequence', secuencia: 'turntable' },
 };
 
-const CANTIDAD_MICRO = (max: number): ControlSpec => ({
-  kind: 'stepper-cantidad',
-  preguntaEs: '¿Cuántos necesitas?',
-  min: 1,
-  max,
-  step: 1,
-  unidadEs: (v) => `${v} unidades`,
-  visual: { kind: 'image-sequence', secuencia: 'explode' },
-});
+function spec(id: string, controles: ControlSpec[], rubrica: string[]): ServiceUxSpec {
+  return { serviceId: id, controles, preguntasRubrica: rubrica };
+}
+
+const R_GEOM = ['geometria-pieza'];
+const R_ACAB = ['acabado-visual'];
+const R_TECH = ['dependencia-tecnica'];
+const R_DENS = ['densidad-funcional'];
+const R_FULL = ['geometria-pieza', 'acabado-visual'];
+const R_COMP = ['geometria-pieza', 'dependencia-tecnica'];
 
 export const UX_SPECS: Record<string, ServiceUxSpec> = {
-  'f1-cad-webgl-ready': {
-    serviceId: 'f1-cad-webgl-ready',
-    controles: [PIEZAS],
-    preguntasRubrica: ['geometria-pieza', 'densidad-funcional', 'dependencia-tecnica'],
-  },
-  'a2-render-animacion': {
-    serviceId: 'a2-render-animacion',
-    controles: [SEGUNDOS],
-    preguntasRubrica: ['acabado-visual'],
-  },
-  'b1-asset-rt-estatico': {
-    serviceId: 'b1-asset-rt-estatico',
-    controles: [DETALLE],
-    preguntasRubrica: ['geometria-pieza', 'acabado-visual'],
-  },
-  'b2-asset-rt-estatico-interactuable': {
-    serviceId: 'b2-asset-rt-estatico-interactuable',
-    controles: [DETALLE],
-    preguntasRubrica: ['geometria-pieza', 'acabado-visual'],
-  },
-  'b3-asset-rt-animado-no-interactuable': {
-    serviceId: 'b3-asset-rt-animado-no-interactuable',
-    controles: [DETALLE],
-    preguntasRubrica: ['geometria-pieza'],
-  },
-  'b4-asset-rt-animado-interactuable': {
-    serviceId: 'b4-asset-rt-animado-interactuable',
-    controles: [DETALLE],
-    preguntasRubrica: ['geometria-pieza', 'dependencia-tecnica'],
-  },
-  'c2-visor-custom': {
-    serviceId: 'c2-visor-custom',
-    controles: [],
-    preguntasRubrica: ['dependencia-tecnica'],
-  },
-  'c3-webapp-3d': {
-    serviceId: 'c3-webapp-3d',
-    controles: [],
-    preguntasRubrica: ['dependencia-tecnica'],
-  },
+  'a1-render-estatico':      spec('a1-render-estatico', [], [...R_ACAB]),
+  'a2-render-animacion':     spec('a2-render-animacion', [SEGUNDOS], R_ACAB),
+  'b1-asset-rt-estatico':    spec('b1-asset-rt-estatico', [DETALLE], R_FULL),
+  'b2-asset-rt-estatico-interactuable': spec('b2-asset-rt-estatico-interactuable', [DETALLE], R_FULL),
+  'b3-asset-rt-animado-no-interactuable': spec('b3-asset-rt-animado-no-interactuable', [DETALLE], R_GEOM),
+  'b4-asset-rt-animado-interactuable': spec('b4-asset-rt-animado-interactuable', [DETALLE], R_COMP),
+  'b5-shaders-estilizados':  spec('b5-shaders-estilizados', [], []),
+  'b6-mecanicas-especificas':spec('b6-mecanicas-especificas', [PIEZAS(200)], R_DENS),
+  'b7-optimizacion-rt-ready':spec('b7-optimizacion-rt-ready', [], []),
+  'b8-rigging-animacion':    spec('b8-rigging-animacion', [], []),
+  'f1-cad-webgl-ready':      spec('f1-cad-webgl-ready', [PIEZAS()], R_COMP),
+  'f2-generacion-texturas':  spec('f2-generacion-texturas', [], []),
+  'c1-visor-embebido':       spec('c1-visor-embebido', [], []),
+  'c2-visor-custom':         spec('c2-visor-custom', [], R_TECH),
+  'c3-webapp-3d':            spec('c3-webapp-3d', [], R_TECH),
+  'c4-scrollytelling':       spec('c4-scrollytelling', [], R_TECH),
+  'c6-minijuego':            spec('c6-minijuego', [], R_TECH),
+  'c7-unity-webgl':          spec('c7-unity-webgl', [], []),
+  'd1-compositing-foto':     spec('d1-compositing-foto', [], R_ACAB),
+  'e1-chat-rag-web':         spec('e1-chat-rag-web', [], []),
+  'e3-ia-procesos-internos': spec('e3-ia-procesos-internos', [], []),
+  'f3-digital-twin':         spec('f3-digital-twin', [], R_TECH),
+  'g1-discovery-scoping':    spec('g1-discovery-scoping', [], []),
 };
+
+// aliases para IDs alternativos usados en intent matcher
+UX_SPECS['e2-ia-indirecta-web'] = spec('e2-ia-indirecta-web', [], []);
+UX_SPECS['b6-despiece'] = UX_SPECS['b6-mecanicas-especificas'];
 
 export function getUxSpec(serviceId: string): ServiceUxSpec | undefined {
   return UX_SPECS[serviceId];
 }
 
-export const DISCLAIMER_ESTIMACION =
-  'Rango orientativo, no cotización. La cifra firme se cierra en un SOW.';
-
+export const DISCLAIMER_ESTIMACION = 'Rango orientativo, no cotización. La cifra firme se cierra en un SOW.';
 export const DISCLAIMER_BYOK = 'Consumo de APIs por cuenta del cliente (BYOK).';
 
 export const PREGUNTAS_RUBRICA: Record<string, RubricQuestion> = {
