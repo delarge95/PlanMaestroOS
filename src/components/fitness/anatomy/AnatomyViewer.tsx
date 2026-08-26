@@ -38,6 +38,7 @@ import {
   type CompositePiece,
 } from '../../../data/fitness/anatomy/compositePlan';
 import type { JointEntry } from '../../../data/fitness/anatomy/types';
+import { overlayParent, OVERLAY_PARENT } from '../../../data/fitness/anatomy/overlayMarkers';
 import {
   DEFAULT_LAYERS,
   FOCUS_LABELS,
