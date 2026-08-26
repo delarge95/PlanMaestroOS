@@ -127,3 +127,16 @@ de tramo alguno; B7@N4 $1700 ÔåÆ $1750). Los tests codifican estos valores co
 4. **Fase web del cotizador** (spec completa en 05 §3): autorizar o dejar en backlog.
 5. Auditoría fina fila-a-fila de familias C/D/E/G contra el motor (hoy el espejo cubre A/B/F1/F2;
    C–G se regeneraron desde sus totales declarados — migrarlos al espejo es la siguiente tarea natural).
+
+---
+
+## Ciclo 5 · 2026-08-25 — Capa UX completa + plan de diseño delegado
+
+- **Plan UX**: `09_plan_ux.md` — 9 principios anti-carga-cognitiva, inventario de controles S1–S9,
+  matriz de ayudas visuales (implementado hoy vs delegado a diseño).
+- **Implementación**: `src/lib/services/ux.ts` (specs por servicio, copy humanizado, preguntas rúbrica),
+  componentes `SmartSlider`, `Segmented`, `ChoiceCards`, visuales `PolyDetail`/`ImageSequence`/
+  `Model3DFrame`, wizard separado en 4 pasos con progreso/gating, `QuotePanel` agrupado.
+- **Verificación**: astro check 0 errores · vitest 304/304 (incluye 6 tests UX nuevos).
+- **Dev server**: corriendo en puerto 4400 para QA manual.
+- **Delegación al agente de diseño**: documentada en PROMPT_FRONTEND_COTIZADOR §Actualización ciclo 5.

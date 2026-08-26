@@ -197,3 +197,19 @@ Tu alcance entonces: **(a)** diseño/estilo sobre este esqueleto (tokens, tipogr
 **(b)** completar los pasos separados del wizard (ServiceStep/ConfigureStep/ContextStep — hoy
 GoalStep está simplificado dentro de Screens), **(c)** OrganicCards/SliderDetalle visuales,
 **(d)** persist opcional del store. NO reescribas la lógica de quotes ni toques `src/data/services/**`.
+
+---
+
+## ACTUALIZACIÓN CICLO 5 — CAPA UX IMPLEMENTADA
+
+La capa UX ya está construida e integrada. Tu alcance de diseño se REDUCE a:
+
+1. **Estética final**: paleta/tipografía/marca sobre los componentes existentes (`controls/*`, `visuals/*`,
+   `steps/wizard/*`, `panels/QuotePanel`). Los estilos inline actuales son deliberadamente neutros.
+2. **Assets demo reales** para sustituir placeholders: drone low/mid/high renders, strip turntable,
+   pictogramas de cards orgánicas (sprint doc-33).
+3. **`<model-viewer>`** para `Model3DFrame` cuando haya GLB (requiere aprobar script CDN — ticket AG-CORE).
+4. Responsive fino >1080 px y auditoría de contraste.
+
+NO toques: `src/lib/services/ux.ts` (specs/copy/preguntas), `src/components/services/state/*`,
+`src/components/services/steps/wizard/WizardFlow.tsx` (lógica de flujo), ni `src/data/services/**`.
