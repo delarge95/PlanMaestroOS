@@ -1,5 +1,7 @@
 import { CurrencyToggle } from './steps/PresetConfig';
 import { CatalogStep, EntryScreen, PresetConfig, PresetGallery, SummaryStep } from './steps/Screens';
+import { WizardFlow } from './steps/wizard/WizardFlow';
+import { QuotePanel } from './panels/QuotePanel';
 import { useQuoteResult } from './state/selectors';
 import { useQuoteStore } from './state/useQuoteStore';
 import { formatMoney } from '../../lib/services/ui';
@@ -10,6 +12,7 @@ const screenMap = {
   'preset-config': PresetConfig,
   summary: SummaryStep,
   catalog: CatalogStep,
+  wizard: WizardFlow,
 } as const;
 
 export function CotizadorApp() {
@@ -35,12 +38,9 @@ export function CotizadorApp() {
       <Screen />
 
       {result && screen !== 'summary' && (
-        <div style={{ position: 'fixed', insetInline: 0, bottom: 0, background: '#fff', borderTop: '1px solid #e5e5ea', padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 -2px 10px rgba(0,0,0,.06)' }}>
-          <span>
-            <strong>{formatMoney(currency, result.totalMin)} – {formatMoney(currency, result.totalMax)}</strong>
-            <span style={{ opacity: 0.6 }}> · estimado</span>
-          </span>
-          <button onClick={() => useQuoteStore.getState().go('summary')} style={{ padding: '10px 16px', borderRadius: 8, border: 'none', background: 'var(--accent,#0a84ff)', color: '#fff', cursor: 'pointer', font: 'inherit' }}>
+        <div style={{ position: 'fixed', insetInline: 0, bottom: 0, background: '#fff', borderTop: '1px solid #e5e5ea', padding: '12px 20px', boxShadow: '0 -2px 10px rgba(0,0,0,.06)' }}>
+          <QuotePanel result={result} currency={currency} />
+          <button onClick={() => useQuoteStore.getState().go('summary')} style={{ marginTop: 8, width: '100%', padding: '10px 16px', borderRadius: 8, border: 'none', background: 'var(--accent,#0a84ff)', color: '#fff', cursor: 'pointer', font: 'inherit' }}>
             Ver desglose →
           </button>
         </div>

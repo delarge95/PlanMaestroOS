@@ -19,7 +19,7 @@ export function EntryScreen() {
           <strong>Empezar con un paquete</strong><br />
           <span style={{ opacity: 0.7 }}>Soluciones listas para necesidades comunes (recomendado)</span>
         </button>
-        <button style={card} onClick={() => go('summary')}>
+        <button style={card} onClick={() => go('wizard')}>
           <strong>Cotizar un servicio</strong><br />
           <span style={{ opacity: 0.7 }}>Configura pieza por pieza (CAD→WebGL para empezar)</span>
         </button>
