@@ -14,7 +14,7 @@ export function computeQuote(
   serviceId: string,
   level: LevelId,
   currency: Currency,
-  opts: { firstClientLaunch?: boolean; recurringClient?: boolean; batchUnits?: number; launchPct?: number } = {},
+  opts: { firstClientLaunch?: boolean; recurringClient?: boolean; batchUnits?: number; launchPct?: number; urgencyPct?: number } = {},
 ): QuoteResult | null {
   const svc = SERVICES.find((s) => s.id === serviceId);
   if (!svc) return null;
@@ -67,6 +67,7 @@ export function computeQuote(
   }
   if (opts.recurringClient) pct -= 5;
   if (opts.batchUnits && opts.batchUnits > 1) pct -= 15;
+  if (opts.urgencyPct && opts.urgencyPct > 0) pct += opts.urgencyPct;
 
   const factor = 1 + pct / 100;
   const totalMin = Math.max(floorTo(subtotalMin * factor, step), card.minProject);

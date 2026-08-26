@@ -1,28 +1,52 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { SERVICES } from '../../data/services/catalogCore';
 import type { ServiceDef } from '../../data/services/catalogCore';
 import { computeQuote } from '../../data/services/formula';
-import { getRateCard, LAUNCH_DISCOUNT } from '../../data/services/rateCard';
+import { LAUNCH_DISCOUNT } from '../../data/services/rateCard';
 import type { Currency, LevelId, Subtask } from '../../data/services/types';
 import { SERVICE_VARIABLES, derivarTier } from '../../data/services/serviceVariables';
 import type { ServiceVariable } from '../../data/services/serviceVariables';
+import { groupSubtasksByPhase, PHASES } from '../../data/services/rateLabels';
+import { unitToTerm } from '../../data/services/glossary';
+import { Term } from './Term';
+import { QuoteCta } from './QuoteCta';
+import { ProcesoFaq } from './ProcesoFaq';
+import {
+  buildSummary,
+  decodeShare,
+  encodeShare,
+  loadLocal,
+  quoteId,
+  saveLocal,
+} from '../../lib/services/share';
+import type { ShareState } from '../../lib/services/share';
 
 // ─── Tipos locales ───
-type Detail = 0 | 1 | 2;
 type Urgency = 'none' | '72h' | '24h';
 type Val = number | string | boolean;
-
-interface VarState {
-  values: Record<string, Val>;
-  set: (id: string, v: Val) => void;
-}
 
 // ─── Estilos ───
 const box: React.CSSProperties = { background: '#fff', border: '1px solid #dde0e8', borderRadius: 12, padding: 20, marginBottom: 16 };
 const lbl: React.CSSProperties = { display: 'block', fontSize: 15, fontWeight: 600, marginBottom: 8, color: '#1a1d29' };
 const help: React.CSSProperties = { fontSize: 12.5, color: '#5a5e6e', marginTop: 4 };
-const btnPri: React.CSSProperties = { padding: '12px 22px', borderRadius: 10, border: 'none', cursor: 'pointer', background: '#0a84ff', color: '#fff', font: 'inherit', fontWeight: 600, fontSize: 15 };
-const btnSec: React.CSSProperties = { padding: '12px 18px', borderRadius: 10, border: '1px solid #dde0e8', background: '#fff', cursor: 'pointer', font: 'inherit', fontSize: 14, color: '#1a1d29' };
+
+// Estilos de tooltip (.cx-term) + impresión/PDF: solo el resultado sale en el PDF.
+const CX_CSS = `
+@media print {
+  [data-noprint] { display: none !important; }
+  body { background: #fff !important; }
+  #cotizador-resultado { border: none !important; padding: 0 !important; }
+}
+.cx-term { position: relative; display: inline-flex; align-items: center; margin-left: 6px; cursor: help; color: #0a84ff; font-style: normal; font-weight: 400; }
+.cx-term:focus-visible { outline: 2px solid #0a84ff; border-radius: 4px; }
+.cx-term-pop {
+  position: absolute; bottom: 135%; left: 50%; transform: translateX(-50%);
+  width: min(270px, 74vw); background: #1a1d29; color: #fff; font-size: 12px; line-height: 1.45;
+  padding: 10px 12px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .12s;
+  z-index: 40; text-align: left; font-weight: 400;
+}
+.cx-term:hover .cx-term-pop, .cx-term:focus .cx-term-pop { opacity: 1; }
+`;
 
 // ─── Componente principal ───
 export function DirectCotizador() {
@@ -33,8 +57,30 @@ export function DirectCotizador() {
   const [firstClient, setFirstClient] = useState(true);
   const [urgency, setUrgency] = useState<Urgency>('none');
   const [quantity, setQuantity] = useState(1);
+  const hydratedRef = useRef(false);
 
-  const svc = serviceId ? SERVICES.find((s) => s.id === serviceId) : undefined;
+  // Hidratación una sola vez: link compartido > localStorage > defaults (SSR-safe).
+  useEffect(() => {
+    const shared = decodeShare(window.location.search);
+    const local = shared ?? loadLocal();
+    if (local) {
+      setServiceId(local.serviceId);
+      setVals(local.vals ?? {});
+      setCurrency(local.currency === 'COP' ? 'COP' : 'USD');
+      setFirstClient(local.firstClient !== false);
+      if (['none', '72h', '24h'].includes(String(local.urgency))) setUrgency(local.urgency as Urgency);
+      setQuantity(Math.max(1, Number(local.quantity) || 1));
+    }
+    hydratedRef.current = true;
+  }, []);
+
+  // Autosave local (S5).
+  useEffect(() => {
+    if (!hydratedRef.current) return;
+    saveLocal({ serviceId, vals, currency, firstClient, urgency, quantity });
+  }, [serviceId, vals, currency, firstClient, urgency, quantity]);
+
+  const svc: ServiceDef | undefined = serviceId ? SERVICES.find((s) => s.id === serviceId) : undefined;
   const variables = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
 
   const tier = useMemo(() => {
@@ -42,28 +88,68 @@ export function DirectCotizador() {
     return derivarTier(serviceId, vals);
   }, [serviceId, vals]);
 
+  const urgencyPct = urgency === '72h' ? 25 : urgency === '24h' ? 50 : 0;
+
   const quote = useMemo(() => {
     if (!svc || !tier) return null;
     try {
       return computeQuote(svc.id, tier, currency, {
         firstClientLaunch: firstClient,
         batchUnits: quantity > 1 ? quantity : undefined,
+        urgencyPct,
       });
     } catch { return null; }
-  }, [svc, tier, currency, firstClient, urgency, quantity]);
+  }, [svc, tier, currency, firstClient, urgencyPct, quantity]);
+
+  const phaseGroups = useMemo(() => {
+    if (!svc || !tier) return [];
+    return groupSubtasksByPhase(svc.subtasks as Subtask[], tier);
+  }, [svc, tier]);
 
   const filtered = familyFilter ? SERVICES.filter((s) => s.family === familyFilter) : SERVICES;
 
+  // Datos para compartir (S1/S5): solo existen en cliente, tras interactuar.
+  const shareState: ShareState | null = svc && tier
+    ? { serviceId: svc.id, vals, currency, firstClient, urgency, quantity }
+    : null;
+  const shareUrl = shareState && typeof window !== 'undefined'
+    ? `${window.location.origin}${window.location.pathname}?${encodeShare(shareState)}`
+    : '';
+  const qid = shareState ? quoteId(shareState) : '';
+
+  const summary = shareState && quote && tier
+    ? buildSummary({
+        id: qid,
+        serviceName: svc!.nameEs,
+        serviceCode: svc!.id,
+        tier,
+        currency,
+        totalRange: `${fmt(currency, quote.totalMin)} – ${fmt(currency, quote.totalMax)}`,
+        hoursRange: `${quote.hoursMin}–${quote.hoursMax} h`,
+        entrega: svc!.entregaDiasEs ? `${svc!.entregaDiasEs[0]}–${svc!.entregaDiasEs[1]} días hábiles` : undefined,
+        entregables: quote.entregables,
+        noIncluye: quote.noIncluye,
+        url: shareUrl,
+      })
+    : '';
+
   return (
     <div style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+      <style dangerouslySetInnerHTML={{ __html: CX_CSS }} />
+
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
         <strong style={{ fontSize: 16, color: '#1a1d29' }}>AG-SERV · Cotizador</strong>
-        <CurrencyToggle currency={currency} onChange={setCurrency} />
+        <span data-noprint><CurrencyToggle currency={currency} onChange={setCurrency} /></span>
       </header>
+      <p style={{ margin: '0 0 18px', fontSize: 12, color: '#5a5e6e' }}>
+        Precios en {currency === 'USD' ? 'dólares (tarifa internacional)' : 'pesos colombianos (mercado local)'}
+        <Term id="moneda" />
+      </p>
 
       {/* 1: Seleccionar servicio */}
-      <div style={box}>
-        <span style={lbl}>1 · Selecciona el servicio</span>
+      <div style={box} data-noprint>
+        <span style={lbl}>1 · ¿Qué necesitas?</span>
+        <p style={{ ...help, marginTop: 0 }}>Si no estás seguro, pruébalo con cualquiera: el nivel y el precio se calculan solos.</p>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
           <FilterChip active={familyFilter === ''} onClick={() => setFamilyFilter('')} label="Todos" />
           {[
@@ -95,10 +181,10 @@ export function DirectCotizador() {
 
       {/* 2: Variables del servicio */}
       {svc && variables.length > 0 && (
-        <div style={box}>
-          <span style={lbl}>2 · Configura las variables</span>
+        <div style={box} data-noprint>
+          <span style={lbl}>2 · Configura lo que sabes</span>
           <p style={{ ...help, marginTop: 0, marginBottom: 12 }}>
-            Estas variables determinan el nivel de complejidad y por tanto el precio.
+            No necesitas saber términos técnicos: mueve los controles y observa cómo cambia el nivel.
           </p>
           {variables.map((v: ServiceVariable) => (
             <VariableControl key={v.id} v={v} value={vals[v.id]} onChange={(nv) => setVals((p) => ({ ...p, [v.id]: nv }))} />
@@ -108,8 +194,8 @@ export function DirectCotizador() {
 
       {/* 3: Nivel derivado */}
       {tier && (
-        <div style={box}>
-          <span style={lbl}>3 · Nivel derivado</span>
+        <div style={box} data-noprint>
+          <span style={lbl}>3 · Nivel calculado automáticamente</span>
           <div style={{ display: 'flex', gap: 6 }}>
             {(['XS', 'S', 'M', 'L', 'XL'] as LevelId[]).map((l) => (
               <div key={l} style={{
@@ -121,35 +207,36 @@ export function DirectCotizador() {
               </div>
             ))}
           </div>
-          <p style={help}>El nivel se calcula automáticamente de tus respuestas arriba.</p>
+          <p style={help}>Tú nunca eliges el nivel: se deriva de tus respuestas de arriba.</p>
         </div>
       )}
 
       {/* 4: Condiciones */}
       {svc && (
-        <div style={box}>
+        <div style={box} data-noprint>
           <span style={lbl}>4 · Condiciones</span>
           <div style={{ marginBottom: 14 }}>
             <span style={{ ...lbl, fontSize: 14 }}>Urgencia</span>
             <div style={{ display: 'flex', gap: 8 }}>
               {([
-                { id: 'none' as Urgency, label: 'Sin apuro', desc: '' },
+                { id: 'none' as Urgency, label: 'Sin apuro', desc: 'Cola normal' },
                 { id: '72h' as Urgency, label: 'Pronto', desc: '+25%' },
-                { id: '24h' as Urgency, label: 'Crítico', desc: '+50%', disabled: true },
-              ]).map((o: { id: Urgency; label: string; desc: string; disabled?: boolean }) => (
-                <button key={o.id} onClick={() => !o.disabled && setUrgency(o.id)} disabled={o.disabled}
+                { id: '24h' as Urgency, label: 'Crítico', desc: '+50% · según disponibilidad' },
+              ]).map((o) => (
+                <button key={o.id} onClick={() => setUrgency(o.id)}
                   style={{
                     flex: 1, padding: '10px 12px', borderRadius: 10,
-                    cursor: o.disabled ? 'not-allowed' : 'pointer', font: 'inherit', textAlign: 'left',
+                    cursor: 'pointer', font: 'inherit', textAlign: 'left',
                     border: urgency === o.id ? '2px solid #0a84ff' : '1px solid #dde0e8',
                     background: urgency === o.id ? '#e8f0fe' : '#fff',
-                    color: '#1a1d29', opacity: o.disabled ? 0.45 : 1,
+                    color: '#1a1d29',
                   }}>
                   <strong style={{ fontSize: 13.5 }}>{o.label}</strong>
-                  {o.desc && <div style={{ fontSize: 11, opacity: 0.65 }}>{o.desc}</div>}
+                  <div style={{ fontSize: 11, opacity: 0.65 }}>{o.desc}</div>
                 </button>
               ))}
             </div>
+            <p style={{ ...help, marginTop: 6 }}>Los plazos urgentes se confirman por chat antes de iniciar.</p>
           </div>
           <label style={{ display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer' }}>
             <input type="checkbox" checked={firstClient} onChange={(e) => setFirstClient(e.target.checked)} />
@@ -162,7 +249,7 @@ export function DirectCotizador() {
 
       {/* 5: Resultado */}
       {svc && tier && quote && (
-        <div style={{ background: '#f8f9fb', border: '1px solid #dde0e8', borderRadius: 12, padding: 20 }}>
+        <div id="cotizador-resultado" style={{ background: '#f8f9fb', border: '1px solid #dde0e8', borderRadius: 12, padding: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
             <strong style={{ fontSize: 16, color: '#1a1d29' }}>{svc.nameEs}</strong>
             <span style={{ background: '#dcfce7', color: '#166534', padding: '4px 12px', borderRadius: 8, fontSize: 16, fontWeight: 800, fontFamily: 'monospace' }}>
@@ -194,32 +281,50 @@ export function DirectCotizador() {
             <StatBox label="Total" value={`${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)}`} highlight />
           </div>
 
-          {quote.entregaDias && quote.entregaDias[1] > 0 && (
+          {svc.entregaDiasEs && svc.entregaDiasEs[1] > 0 && (
             <p style={{ fontSize: 13, color: '#5a5e6e', marginBottom: 8 }}>
-              ⏱ Entrega: {quote.entregaDias[0]}–{quote.entregaDias[1]} días hábiles
+              ⏱ Entrega: {svc.entregaDiasEs[0]}–{svc.entregaDiasEs[1]} días hábiles
             </p>
           )}
 
-          <details style={{ marginTop: 8 }}>
-            <summary style={{ cursor: 'pointer', fontSize: 13, color: '#0a84ff' }}>¿Cómo se calcula?</summary>
-            <div style={{ fontSize: 12.5, marginTop: 6, color: '#1a1d29' }}>
-              <p>Tier: <strong>{tier}</strong> (derivado de {variables.length} variables)</p>
-              <ul style={{ paddingLeft: 16 }}>
-                {svc.subtasks.filter((st: Subtask) => !st.optional).map((st: Subtask) => {
-                  const range = st.hours[tier];
-                  if (!range) return null;
-                  return <li key={st.id}>{st.nameEs}: {range.min}–{range.max} h ({st.rateClass})</li>;
-                })}
-              </ul>
+          {/* S2: desglose legible por fases (sin códigos RC) */}
+          <details style={{ marginTop: 8 }} open>
+            <summary style={{ cursor: 'pointer', fontSize: 13, color: '#0a84ff' }}>¿Cómo se calcula? ({variables.length} variables)</summary>
+            <div style={{ fontSize: 12.5, marginTop: 8, color: '#1a1d29' }}>
+              {PHASES.map(({ id, label, icon }) => {
+                const g = phaseGroups.find((gr) => gr.phase === id);
+                if (!g) return null;
+                return (
+                  <div key={id} style={{ marginBottom: 10 }}>
+                    <strong style={{ fontSize: 13 }}>{icon} {label}</strong>
+                    <span style={{ opacity: 0.65, marginLeft: 6, fontSize: 12 }}>{g.hoursLabel}</span>
+                    <ul style={{ paddingLeft: 18, margin: '4px 0 0' }}>
+                      {g.items.map((it) => (
+                        <li key={it.id} style={{ marginBottom: 2 }}>
+                          {it.nameEs} · <span style={{ opacity: 0.7 }}>{it.hoursLabel}</span>
+                          {' '}
+                          <span style={{ opacity: 0.55, fontSize: 11.5 }}>({it.classLabel})</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
               <p style={{ marginTop: 6, opacity: 0.65 }}>{quote.notesEs?.join(' ')}</p>
             </div>
           </details>
+
+          {/* S1+S5: CTA sin dead-end */}
+          <QuoteCta summary={summary} url={shareUrl} />
 
           <p style={{ fontWeight: 600, fontSize: 13, marginTop: 12, color: '#1a1d29' }}>
             ⚠️ Rango orientativo, no cotización.
           </p>
         </div>
       )}
+
+      {/* S11: proceso + FAQ */}
+      <ProcesoFaq />
     </div>
   );
 }
@@ -229,9 +334,13 @@ export function DirectCotizador() {
 function VariableControl({ v, value, onChange }: { v: ServiceVariable; value: Val | undefined; onChange: (v: Val) => void }) {
   if (v.type === 'number') {
     const current = typeof value === 'number' ? value : v.min ?? 0;
+    const termId = unitToTerm(v.unidadEs);
     return (
       <div style={{ marginBottom: 18 }}>
-        <label style={{ ...lbl, fontSize: 15 }}>{v.preguntaEs}</label>
+        <label style={{ ...lbl, fontSize: 15 }}>
+          {v.preguntaEs}
+          {termId && <Term id={termId} />}
+        </label>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
           <strong style={{ fontSize: 22, color: '#0a84ff' }}>{current} {v.unidadEs}</strong>
         </div>
