@@ -1,170 +1,67 @@
-export type LevelId = 'XS' | 'N1' | 'N2' | 'N3' | 'N4';
-
-export const LEVEL_IDS: readonly LevelId[] = ['XS', 'N1', 'N2', 'N3', 'N4'] as const;
-
-export const LEVEL_LABELS: Record<LevelId, string> = {
-  XS: 'Micro',
-  N1: 'Simple (S)',
-  N2: 'Estándar (M)',
-  N3: 'Complejo (L)',
-  N4: 'Crítico (XL)',
-};
-
+export type LevelId = 'XS' | 'S' | 'M' | 'L' | 'XL';
 export type Currency = 'USD' | 'COP';
-
-export interface HourRange {
-  min: number;
-  max: number;
-}
-
-export type HoursByLevel = Record<LevelId, HourRange>;
-
+export type RateClass = 'RC-ART' | 'RC-RTA' | 'RC-WEB' | 'RC-AI' | 'RC-CON';
 export type Confidence = 'explicit' | 'inferred' | 'qualitative';
 
-export type FamilyId =
-  | 'render'
-  | 'asset-rt'
-  | 'web-3d'
-  | 'vfx'
-  | 'ia'
-  | 'datos'
-  | 'soporte';
+export const LEVEL_IDS: LevelId[] = ['XS', 'S', 'M', 'L', 'XL'];
+export const LEVEL_LABELS: Record<LevelId, string> = {
+  XS: 'Micro', S: 'Simple', M: 'Estándar', L: 'Complejo', XL: 'Crítico',
+};
+
+export interface HourRange { min: number; max: number }
+export type HoursByTier = Record<LevelId, HourRange>;
 
 export interface Subtask {
   id: string;
   nameEs: string;
-  hours: HoursByLevel;
+  hours: HoursByTier;
   optional?: boolean;
   appliesFrom?: LevelId;
+  rateClass: RateClass;
 }
 
-export interface ServiceDefinition {
+export interface ServiceDef {
   id: string;
-  family: FamilyId;
+  catalogId: string;
+  family: string;
   nameEs: string;
   unitEs: string;
+  descripcionEs: string;
+  entregablesEs: string[];
+  noIncluyeEs?: string[];
   driversEs: string[];
   confidence: Confidence;
   subtasks: Subtask[];
-  sourceDoc: string;
-  entregablesEs?: string[];
-  noIncluyeEs?: string[];
   entregaDiasEs?: [number, number];
-  cotizador?: CotizadorMeta;
 }
 
-export interface Band {
-  minUsdPerHour: number;
-  maxUsdPerHour: number;
-}
-
-export type BandsByLevel = Record<LevelId, Band>;
-
-export interface RateCard {
-  version: string;
-  status: string;
+export interface RateBand { min: number; max: number }
+export interface RateCardDef {
   currency: Currency;
-  bands: BandsByLevel;
-  roundingStepUsd: number;
-  roundingMode: 'ceil-both' | 'tramos-floor-min-ceil-max';
-  minProjectUsd: number;
-  sourceRef: string;
-}
-
-export interface LegacyRateCard extends RateCard {
-  roundingMode: 'tramos-floor-min-ceil-max';
-}
-
-export interface EstimateLine {
-  subtaskId: string;
-  hoursMin: number;
-  hoursMax: number;
-  costMin: number;
-  costMax: number;
-}
-
-export interface EstimateResult {
-  serviceId: string;
-  level: LevelId | 'mixed';
-  hoursMin: number;
-  hoursMax: number;
-  costMin: number;
-  costMax: number;
-  lines: EstimateLine[];
-}
-
-export interface DriverPrincipal {
-  nombre: string;
-  umbrales: string[];
-}
-
-export interface AddOnCotizador {
-  id: string;
-  refServicio?: string;
-  delta?: string;
-}
-
-export interface CotizadorMeta {
-  driverPrincipal: DriverPrincipal;
-  addOns: AddOnCotizador[];
-}
-
-export interface QuoteModifiers {
-  firstClientLaunch?: boolean;
-  recurringClient?: boolean;
-  batchUnits?: number;
-  urgent72h?: boolean;
-  critical24h?: boolean;
-}
-
-export interface QuoteInputBase {
-  currency: Currency;
-  modifiers?: QuoteModifiers;
-}
-
-export interface ServiceQuoteInput extends QuoteInputBase {
-  kind: 'service';
-  serviceId: string;
-  level: LevelId;
-  quantity?: number;
-}
-
-export interface PackageQuoteInput extends QuoteInputBase {
-  kind: 'package';
-  packageId: string;
-  componentesOverride?: { serviceId: string; nivel: LevelId; cantidad?: number }[];
-  levelByComponent?: Record<string, LevelId>;
-  defaultLevel?: LevelId;
-  quantity?: number;
-}
-
-export type QuoteInput = ServiceQuoteInput | PackageQuoteInput;
-
-export interface QuoteLine {
-  refId: string;
-  labelEs: string;
-  hoursMin: number;
-  hoursMax: number;
-  costMin: number;
-  costMax: number;
+  rates: Record<RateClass, RateBand>;
+  roundStep: (v: number) => number;
+  minProject: number;
 }
 
 export interface QuoteResult {
-  input: QuoteInput;
+  serviceId: string;
+  serviceName: string;
+  level: LevelId;
   currency: Currency;
   hoursMin: number;
   hoursMax: number;
   subtotalMin: number;
   subtotalMax: number;
-  discountPctApplied: number;
+  discountPct: number;
   totalMin: number;
   totalMax: number;
-  lines: QuoteLine[];
-  notesEs: string[];
+  entregaDias?: [number, number];
+  entregables: string[];
+  noIncluye: string[];
 }
 
 export interface ComponentePaquete {
   serviceId: string;
-  nivel: LevelId;
+  nivel: string;
   cantidad?: number;
 }

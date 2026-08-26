@@ -1,29 +1,4 @@
-export { RATE_CARD_V1, LEGACY_RATE_CARD_V0, RATE_CARD_COP_V1, TRM_REFERENCIA, LAUNCH_PROGRAM } from './rateCard';
-export {
-  estimateService,
-  estimateWithLevels,
-  computeQuote,
-  cardFor,
-  ceilTo,
-  floorTo,
-  roundLegacy,
-} from './formula';
-export { PACKAGES } from './packages';
-export { RUBRICA_CUALITATIVA, aplicarRubrica } from './complexityRubric';
-export {
-  CATALOG_CORE,
-  B_CORE_SUBTASKS,
-  DELTA_INTERACTIVIDAD,
-  DELTA_ANIM_LOOP,
-  DELTA_ANIM_INTERACTIVA,
-} from './catalogCore';
+export { SERVICES, getServiceById } from './catalogCore';
+export { computeQuote, getRateCard } from './formula';
+export { LAUNCH_PROGRAM, TRM_REFERENCIA, RATE_CLASSES } from './rateCard';
 export * from './types';
-
-import type { ServiceDefinition } from './types';
-import { CATALOG_CORE } from './catalogCore';
-
-export const SERVICE_CATALOG: readonly ServiceDefinition[] = CATALOG_CORE;
-
-export function getServiceById(id: string): ServiceDefinition | undefined {
-  return SERVICE_CATALOG.find((service) => service.id === id);
-}
