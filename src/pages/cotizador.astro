@@ -1,6 +1,6 @@
 ---
-import '../styles/tokens.css';
-import { CotizadorApp } from '../components/services/CotizadorApp';
+import '../../styles/tokens.css';
+import { EstimatorApp } from '../components/services/EstimatorApp';
 ---
 <!doctype html>
 <html lang="es">
@@ -10,7 +10,7 @@ import { CotizadorApp } from '../components/services/CotizadorApp';
     <title>Cotizador — AG-SERV · 3D para agencias e industria</title>
     <meta name="description" content="Rango orientativo de costo y tiempo para tus proyectos 3D: CAD→WebGL, renders, experiencias web y más." />
   </head>
-  <body>
-    <CotizadorApp client:only="react" />
+  <body style="margin:0; background:#f8f9fb; font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;">
+    <EstimatorApp client:only="react" />
   </body>
 </html>

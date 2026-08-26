@@ -1,5 +1,5 @@
+catalogCore.ts:
 import type { HoursByLevel, ServiceDefinition, Subtask } from './types';
-
 
 const h = (min: number, max: number) => ({ min, max });
 
@@ -520,3 +520,472 @@ export const CATALOG_CORE: ServiceDefinition[] = [
     ], DOC_04,
     undefined, [0, 0]),
 ];
+
+
+formula.ts:
+import { LAUNCH_PROGRAM, LEGACY_RATE_CARD_V0, RATE_CARD_COP_V1, RATE_CARD_V1 } from './rateCard';
+import { PACKAGES } from './packages';
+import {
+  LEVEL_IDS,
+  type Currency,
+  type EstimateResult,
+  type LevelId,
+  type QuoteInput,
+  type QuoteLine,
+  type QuoteResult,
+  type RateCard,
+  type ServiceDefinition,
+} from './types';
+
+export function ceilTo(value: number, step: number): number {
+  return Math.ceil(value / step) * step;
+}
+
+export function floorTo(value: number, step: number): number {
+  return Math.floor(value / step) * step;
+}
+
+function tramoStepUsd(value: number): number {
+  if (value < 500) return 10;
+  if (value <= 2000) return 50;
+  return 100;
+}
+
+function tramoStepCop(): number {
+  return 1000;
+}
+
+export function roundLegacy(value: number, isMax: boolean, currency: Currency = 'USD'): number {
+  const step = currency === 'COP' ? tramoStepCop() : tramoStepUsd(value);
+  return isMax ? ceilTo(value, step) : floorTo(value, step);
+}
+
+export function cardFor(currency: Currency): RateCard {
+  return currency === 'COP' ? RATE_CARD_COP_V1 : LEGACY_RATE_CARD_V0;
+}
+
+export interface EstimateOptions {
+  card?: RateCard;
+  includeOptionalIds?: string[];
+  currency?: Currency;
+}
+
+export function estimateService(
+  service: ServiceDefinition,
+  level: LevelId,
+  options: EstimateOptions = {},
+): EstimateResult {
+  const currency = options.currency ?? 'USD';
+  const card = options.card ?? cardFor(currency);
+  const included = new Set(options.includeOptionalIds ?? []);
+  const band = card.bands[level];
+
+  let hoursMin = 0;
+  let hoursMax = 0;
+  const lines = [];
+
+  for (const subtask of service.subtasks) {
+    if (subtask.optional && !included.has(subtask.id)) continue;
+    if (subtask.appliesFrom && LEVEL_IDS.indexOf(level) < LEVEL_IDS.indexOf(subtask.appliesFrom)) {
+      continue;
+    }
+    const range = subtask.hours[level];
+    hoursMin += range.min;
+    hoursMax += range.max;
+
+    const rawCostMin = range.min * band.minUsdPerHour;
+    const rawCostMax = range.max * band.maxUsdPerHour;
+    const costMin =
+      card.roundingMode === 'ceil-both'
+        ? ceilTo(rawCostMin, card.roundingStepUsd)
+        : roundLegacy(rawCostMin, false, currency);
+    const costMax =
+      card.roundingMode === 'ceil-both'
+        ? ceilTo(rawCostMax, card.roundingStepUsd)
+        : roundLegacy(rawCostMax, true, currency);
+
+    lines.push({
+      subtaskId: subtask.id,
+      hoursMin: range.min,
+      hoursMax: range.max,
+      costMin,
+      costMax,
+    });
+  }
+
+  return finalize(hoursMin, hoursMax, band, card, {
+    serviceId: service.id,
+    level,
+    lines,
+  });
+}
+
+export function estimateWithLevels(
+  service: ServiceDefinition,
+  levelBySubtaskId: Record<string, LevelId>,
+  options: EstimateOptions = {},
+): EstimateResult {
+  const currency = options.currency ?? 'USD';
+  const card = options.card ?? cardFor(currency);
+  const included = new Set(options.includeOptionalIds ?? []);
+
+  let hoursMin = 0;
+  let hoursMax = 0;
+  let rawMin = 0;
+  let rawMax = 0;
+  const lines = [];
+
+  for (const subtask of service.subtasks) {
+    if (subtask.optional && !included.has(subtask.id)) continue;
+    const level = levelBySubtaskId[subtask.id];
+    if (!level) continue;
+    const range = subtask.hours[level];
+    const band = card.bands[level];
+    hoursMin += range.min;
+    hoursMax += range.max;
+    rawMin += range.min * band.minUsdPerHour;
+    rawMax += range.max * band.maxUsdPerHour;
+    lines.push({
+      subtaskId: subtask.id,
+      hoursMin: range.min,
+      hoursMax: range.max,
+      costMin:
+        card.roundingMode === 'ceil-both'
+          ? ceilTo(range.min * band.minUsdPerHour, card.roundingStepUsd)
+          : roundLegacy(range.min * band.minUsdPerHour, false, currency),
+      costMax:
+        card.roundingMode === 'ceil-both'
+          ? ceilTo(range.max * band.maxUsdPerHour, card.roundingStepUsd)
+          : roundLegacy(range.max * band.maxUsdPerHour, true, currency),
+    });
+  }
+
+  const costMin =
+    card.roundingMode === 'ceil-both' ? ceilTo(rawMin, card.roundingStepUsd) : roundLegacy(rawMin, false, currency);
+  const costMax =
+    card.roundingMode === 'ceil-both' ? ceilTo(rawMax, card.roundingStepUsd) : roundLegacy(rawMax, true, currency);
+
+  return {
+    serviceId: service.id,
+    level: 'mixed',
+    hoursMin,
+    hoursMax,
+    costMin: Math.max(costMin, card.minProjectUsd),
+    costMax: Math.max(costMax, card.minProjectUsd),
+    lines,
+  };
+}
+
+function finalize(
+  hoursMin: number,
+  hoursMax: number,
+  band: { minUsdPerHour: number; maxUsdPerHour: number },
+  card: RateCard,
+  base: { serviceId: string; level: LevelId | 'mixed'; lines: EstimateResult['lines'] },
+): EstimateResult {
+  const currency = card.currency;
+  const subtotalMin =
+    card.roundingMode === 'ceil-both'
+      ? ceilTo(hoursMin * band.minUsdPerHour, card.roundingStepUsd)
+      : roundLegacy(hoursMin * band.minUsdPerHour, false, currency);
+  const subtotalMax =
+    card.roundingMode === 'ceil-both'
+      ? ceilTo(hoursMax * band.maxUsdPerHour, card.roundingStepUsd)
+      : roundLegacy(hoursMax * band.maxUsdPerHour, true, currency);
+
+  return {
+    ...base,
+    hoursMin,
+    hoursMax,
+    costMin: Math.max(subtotalMin, card.minProjectUsd),
+    costMax: Math.max(subtotalMax, card.minProjectUsd),
+  };
+}
+
+export { LEGACY_RATE_CARD_V0, RATE_CARD_COP_V1, RATE_CARD_V1 };
+
+export interface ComputeQuoteOptions {
+  getService(id: string): ServiceDefinition | undefined;
+  batchDiscountPct?: (units: number) => number;
+}
+
+const PISO_PROYECTO: Record<Currency, number> = { USD: 100, COP: 400000 };
+
+export function computeQuote(input: QuoteInput, opts: ComputeQuoteOptions): QuoteResult {
+  const notesEs: string[] = [];
+  const currency = input.currency;
+  const card = cardFor(currency);
+  const qty = Math.max(1, input.quantity ?? 1);
+  const lines: QuoteLine[] = [];
+  let hoursMin = 0;
+  let hoursMax = 0;
+  let rawSubMin = 0;
+  let rawSubMax = 0;
+
+  const accumulate = (refId: string, labelEs: string, est: EstimateResult, times: number) => {
+    const levelKey = est.level === 'mixed' ? null : est.level;
+    const band = levelKey ? card.bands[levelKey] : null;
+    for (let u = 1; u <= times; u++) {
+      for (const l of est.lines) {
+        const rawM = l.hoursMin * (band?.minUsdPerHour ?? 0);
+        const rawX = l.hoursMax * (band?.maxUsdPerHour ?? 0);
+        rawSubMin += rawM;
+        rawSubMax += rawX;
+        lines.push({
+          refId: `${refId}#${u}`,
+          labelEs: `${labelEs} · ${l.subtaskId}`,
+          hoursMin: l.hoursMin,
+          hoursMax: l.hoursMax,
+          costMin: l.costMin,
+          costMax: l.costMax,
+        });
+      }
+    }
+    hoursMin += est.hoursMin * times;
+    hoursMax += est.hoursMax * times;
+    if (times > 1) notesEs.push(`Lote ${refId}: ×${times} — descuento aplicado sobre el subtotal global (01 §5), nunca dentro de las horas.`);
+  };
+
+  if (input.kind === 'service') {
+    const svc = opts.getService(input.serviceId);
+    if (!svc) throw new Error(`servicio desconocido: ${input.serviceId}`);
+    accumulate(svc.id, svc.nameEs, estimateService(svc, input.level, { currency }), qty);
+  } else {
+    const pkgBase = PACKAGES.find((p) => p.id === input.packageId);
+    if (!pkgBase) throw new Error(`paquete desconocido: ${input.packageId}`);
+    const pkg = input.componentesOverride?.length ? { ...pkgBase, componentes: input.componentesOverride } : pkgBase;
+    for (const comp of pkg.componentes) {
+      const svc = opts.getService(comp.serviceId);
+      if (!svc) throw new Error(`servicio desconocido en paquete: ${comp.serviceId}`);
+      const level = input.levelByComponent?.[comp.serviceId] ?? input.defaultLevel ?? comp.nivel;
+      accumulate(svc.id, svc.nameEs, estimateService(svc, level, { currency }), comp.cantidad ?? 1);
+    }
+  }
+
+  const subtotalMin = roundLegacy(rawSubMin, false, currency);
+  const subtotalMax = roundLegacy(rawSubMax, true, currency);
+
+  const m = input.modifiers ?? {};
+  let pct = 0;
+  if (m.firstClientLaunch && LAUNCH_PROGRAM.activo) {
+    pct -= LAUNCH_PROGRAM.discountPct;
+    notesEs.push(`Lanzamiento primeros clientes −${LAUNCH_PROGRAM.discountPct}%. ${LAUNCH_PROGRAM.alcanceEs}`);
+  }
+  if (m.recurringClient) pct -= 5;
+  if (m.batchUnits && m.batchUnits > 1) {
+    pct += opts.batchDiscountPct ? opts.batchDiscountPct(m.batchUnits) : -15;
+  }
+  if (m.critical24h) pct += 50;
+  else if (m.urgent72h) pct += 25;
+
+  const factor = 1 + pct / 100;
+  const totalMin = Math.max(roundLegacy(subtotalMin * factor, false, currency), PISO_PROYECTO[currency]);
+  const totalMax = Math.max(roundLegacy(subtotalMax * factor, true, currency), totalMin);
+
+  if (m.firstClientLaunch) notesEs.push(`Programa primeros clientes activo: −${LAUNCH_PROGRAM.discountPct}% aplicado al subtotal.`);
+  notesEs.push('Rango orientativo, no cotización. La cifra firme se cierra en SOW (01 §9).');
+
+  return {
+    input,
+    currency,
+    hoursMin,
+    hoursMax,
+    subtotalMin,
+    subtotalMax,
+    discountPctApplied: pct,
+    totalMin,
+    totalMax,
+    lines,
+    notesEs,
+  };
+}
+
+index.ts:
+export { RATE_CARD_V1, LEGACY_RATE_CARD_V0, RATE_CARD_COP_V1, TRM_REFERENCIA, LAUNCH_PROGRAM } from './rateCard';
+export {
+  estimateService,
+  estimateWithLevels,
+  computeQuote,
+  cardFor,
+  ceilTo,
+  floorTo,
+  roundLegacy,
+} from './formula';
+export { PACKAGES } from './packages';
+export { RUBRICA_CUALITATIVA, aplicarRubrica } from './complexityRubric';
+export {
+  CATALOG_CORE,
+  B_CORE_SUBTASKS,
+  DELTA_INTERACTIVIDAD,
+  DELTA_ANIM_LOOP,
+  DELTA_ANIM_INTERACTIVA,
+} from './catalogCore';
+export * from './types';
+
+import type { ServiceDefinition } from './types';
+import { CATALOG_CORE } from './catalogCore';
+
+export const SERVICE_CATALOG: readonly ServiceDefinition[] = CATALOG_CORE;
+
+export function getServiceById(id: string): ServiceDefinition | undefined {
+  return SERVICE_CATALOG.find((service) => service.id === id);
+}
+
+ux.ts:
+import type { LevelId } from '../../data/services';
+
+export type ControlKind = 'slider-piezas' | 'slider-detalle' | 'slider-segundos' | 'stepper-cantidad';
+
+export interface ControlSpec {
+  kind: ControlKind;
+  preguntaEs: string;
+  min: number;
+  max: number;
+  step: number;
+  unidadEs: (v: number) => string;
+  umbrales?: Array<{ hasta: number; nivel: LevelId; etiquetaEs: string }>;
+  visual:
+    | { kind: 'svg-layers'; assetId: string }
+    | { kind: 'poly-detail' }
+    | { kind: 'image-sequence'; secuencia: string };
+}
+
+export interface RubricQuestion {
+  dimId: string;
+  preguntaEs: string;
+  opciones: Array<{ valorEs: string; delta: -1 | 0 | 1; ayudaEs?: string }>;
+}
+
+export interface ServiceUxSpec {
+  serviceId: string;
+  controles: ControlSpec[];
+  preguntasRubrica: string[];
+}
+
+const PIEZAS = (max = 150): ControlSpec => ({
+  kind: 'slider-piezas',
+  preguntaEs: '¿Cuántas piezas tiene el ensamblaje?',
+  min: 1,
+  max,
+  step: 1,
+  unidadEs: (v) => `${v} ${v === 1 ? 'pieza' : 'piezas'}`,
+  umbrales: [
+    { hasta: 15, nivel: 'N1', etiquetaEs: 'sencillas' },
+    { hasta: 60, nivel: 'N2', etiquetaEs: 'mixtas' },
+    { hasta: 150, nivel: 'N3', etiquetaEs: 'complejas' },
+    { hasta: 99999, nivel: 'N4', etiquetaEs: 'masivo' },
+  ],
+  visual: { kind: 'svg-layers', assetId: 'drone' },
+});
+
+const DETALLE: ControlSpec = {
+  kind: 'slider-detalle',
+  preguntaEs: '¿Cuánto detalle debe verse al acercarte?',
+  min: 0,
+  max: 2,
+  step: 1,
+  unidadEs: (v) => ['Low poly', 'Detalle medio', 'High poly'][v] ?? '',
+  visual: { kind: 'poly-detail' },
+};
+
+const SEGUNDOS: ControlSpec = {
+  kind: 'slider-segundos',
+  preguntaEs: '¿De cuántos segundos necesita la animación?',
+  min: 2,
+  max: 90,
+  step: 1,
+  unidadEs: (v) => `${v} segundos`,
+  umbrales: [
+    { hasta: 3, nivel: 'XS', etiquetaEs: 'micro-loop 2–3 s' },
+    { hasta: 12, nivel: 'N1', etiquetaEs: 'corto ~10 s' },
+    { hasta: 35, nivel: 'N2', etiquetaEs: 'estándar ~30 s' },
+    { hasta: 70, nivel: 'N3', etiquetaEs: 'extendido ~60 s' },
+    { hasta: 9999, nivel: 'N4', etiquetaEs: 'cinemático 90+ s' },
+  ],
+  visual: { kind: 'image-sequence', secuencia: 'turntable' },
+};
+
+function spec(id: string, controles: ControlSpec[], rubrica: string[]): ServiceUxSpec {
+  return { serviceId: id, controles, preguntasRubrica: rubrica };
+}
+
+const R_GEOM = ['geometria-pieza'];
+const R_ACAB = ['acabado-visual'];
+const R_TECH = ['dependencia-tecnica'];
+const R_DENS = ['densidad-funcional'];
+const R_FULL = ['geometria-pieza', 'acabado-visual'];
+const R_COMP = ['geometria-pieza', 'dependencia-tecnica'];
+
+export const UX_SPECS: Record<string, ServiceUxSpec> = {
+  'a1-render-estatico':      spec('a1-render-estatico', [], [...R_ACAB]),
+  'a2-render-animacion':     spec('a2-render-animacion', [SEGUNDOS], R_ACAB),
+  'b1-asset-rt-estatico':    spec('b1-asset-rt-estatico', [DETALLE], R_FULL),
+  'b2-asset-rt-estatico-interactuable': spec('b2-asset-rt-estatico-interactuable', [DETALLE], R_FULL),
+  'b3-asset-rt-animado-no-interactuable': spec('b3-asset-rt-animado-no-interactuable', [DETALLE], R_GEOM),
+  'b4-asset-rt-animado-interactuable': spec('b4-asset-rt-animado-interactuable', [DETALLE], R_COMP),
+  'b5-shaders-estilizados':  spec('b5-shaders-estilizados', [], []),
+  'b6-mecanicas-especificas':spec('b6-mecanicas-especificas', [PIEZAS(200)], R_DENS),
+  'b7-optimizacion-rt-ready':spec('b7-optimizacion-rt-ready', [], []),
+  'b8-rigging-animacion':    spec('b8-rigging-animacion', [], []),
+  'f1-cad-webgl-ready':      spec('f1-cad-webgl-ready', [PIEZAS()], R_COMP),
+  'f2-generacion-texturas':  spec('f2-generacion-texturas', [], []),
+  'c1-visor-embebido':       spec('c1-visor-embebido', [], []),
+  'c2-visor-custom':         spec('c2-visor-custom', [], R_TECH),
+  'c3-webapp-3d':            spec('c3-webapp-3d', [], R_TECH),
+  'c4-scrollytelling':       spec('c4-scrollytelling', [], R_TECH),
+  'c6-minijuego':            spec('c6-minijuego', [], R_TECH),
+  'c7-unity-webgl':          spec('c7-unity-webgl', [], []),
+  'd1-compositing-foto':     spec('d1-compositing-foto', [], R_ACAB),
+  'e1-chat-rag-web':         spec('e1-chat-rag-web', [], []),
+  'e3-ia-procesos-internos': spec('e3-ia-procesos-internos', [], []),
+  'f3-digital-twin':         spec('f3-digital-twin', [], R_TECH),
+  'g1-discovery-scoping':    spec('g1-discovery-scoping', [], []),
+};
+
+// aliases para IDs alternativos usados en intent matcher
+UX_SPECS['e2-ia-indirecta-web'] = spec('e2-ia-indirecta-web', [], []);
+UX_SPECS['b6-despiece'] = UX_SPECS['b6-mecanicas-especificas'];
+
+export function getUxSpec(serviceId: string): ServiceUxSpec | undefined {
+  return UX_SPECS[serviceId];
+}
+
+export const DISCLAIMER_ESTIMACION = 'Rango orientativo, no cotización. La cifra firme se cierra en un SOW.';
+export const DISCLAIMER_BYOK = 'Consumo de APIs por cuenta del cliente (BYOK).';
+
+export const PREGUNTAS_RUBRICA: Record<string, RubricQuestion> = {
+  'geometria-pieza': {
+    dimId: 'geometria-pieza',
+    preguntaEs: '¿Cómo son tus piezas, en general?',
+    opciones: [
+      { valorEs: 'Mayormente rectas y simples', delta: 0 },
+      { valorEs: 'Varias con curvas o detalles', delta: 1, ayudaEs: 'Si dominan más del 30 % del conjunto' },
+      { valorEs: 'Orgánicas (tela, cableado, esculpido)', delta: 1 },
+    ],
+  },
+  'densidad-funcional': {
+    dimId: 'densidad-funcional',
+    preguntaEs: '¿Las piezas tienen mecánica real?',
+    opciones: [
+      { valorEs: 'No, son pasivas', delta: 0 },
+      { valorEs: 'Sí: roscas, engranajes o articulaciones', delta: 1, ayudaEs: 'Cada rosca real añade 2–4 h aunque el nivel no cambie' },
+    ],
+  },
+  'acabado-visual': {
+    dimId: 'acabado-visual',
+    preguntaEs: '¿Desde qué distancia se verá?',
+    opciones: [
+      { valorEs: 'Lejos / thumbnail / viewport', delta: -1 },
+      { valorEs: 'Marketing estándar', delta: 0 },
+      { valorEs: 'Muy de cerca (hero, macro, cristal)', delta: 1 },
+    ],
+  },
+  'dependencia-tecnica': {
+    dimId: 'dependencia-tecnica',
+    preguntaEs: '¿Dónde va a correr?',
+    opciones: [
+      { valorEs: 'Desktop web estándar', delta: 0 },
+      { valorEs: 'Móvil exigente / peso muy limitado', delta: 1 },
+    ],
+  },
+};
