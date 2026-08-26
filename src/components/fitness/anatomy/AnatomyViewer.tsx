@@ -1448,7 +1448,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                         {selectedStructure.kind}
                       </span>
                       <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                        {path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : (primaryGroup(selectedStructure.id)?.label ?? selectedStructure.nameEs)}
+                        {path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : selectedStructure.nameEs}
                       </h4>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
                         {path?.pieceKey ? `— dentro de ${selectedStructure.nameEs}` : selectedStructure.nameEn}

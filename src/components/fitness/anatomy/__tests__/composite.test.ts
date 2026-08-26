@@ -147,9 +147,9 @@ describe('resolveClick — máquina de fases', () => {
     expect(next).toEqual({ structureId: S, groupKey: 'head', pieceKey: K('a2') });
   });
 
-  it('click en la misma pieza → sube al subconjunto', () => {
+  it('click en la misma pieza → mantiene la selección (subir vía breadcrumb)', () => {
     const next = resolveClick({ current: { structureId: S, groupKey: 'head', pieceKey: K('a1') }, clickedPieceKey: K('a1'), clickedStructureId: S, groups: multiGroups, clickedGroupKey: 'head' });
-    expect(next).toEqual({ structureId: S, groupKey: 'head', pieceKey: null });
+    expect(next).toEqual({ structureId: S, groupKey: 'head', pieceKey: K('a1') });
   });
 
   it('click en subconjunto hermano cambia de subconjunto', () => {

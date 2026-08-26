@@ -211,10 +211,8 @@ export function resolveClick(args: {
       ? { ...p, groupKey: clickedGroupKey, pieceKey: null }
       : { ...p, groupKey: clickedGroupKey, pieceKey: args.clickedPieceKey };
   }
-  // subconjunto → pieza
-  if (p.pieceKey === null) return { ...p, pieceKey: args.clickedPieceKey };
-  // misma pieza → subir a subconjunto
-  if (p.pieceKey === args.clickedPieceKey) return { ...p, pieceKey: null };
+  // misma pieza → mantener selección (no subir; usar breadcrumb para subir)
+  if (p.pieceKey === args.clickedPieceKey) return { ...p };
   return { ...p, pieceKey: args.clickedPieceKey };
 }
 
