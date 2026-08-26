@@ -339,6 +339,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     let downX = 0;
     let downY = 0;
     let moved = false;
+    let clickTimer: ReturnType<typeof setTimeout> | null = null;
 
     const selectedKeysNow = (): Set<string> => {
       const p = stateRef.current.path;
@@ -388,7 +389,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           if (mat?.emissive) {
             const p = piecesRef.current.get(key);
             mat.emissive.set(p ? highlightColor(p.piece.kind) : 0x0e7fa8);
-            mat.emissiveIntensity = 0.25;
+            mat.emissiveIntensity = 0.08;
           }
         }
         if (staticModeRef.current) renderer.render(scene, camera);
@@ -402,51 +403,69 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
     const onClick = (e: PointerEvent) => {
       if (loadingRef.current) return;
       if (moved || Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
-      const hit = pickAt(e.clientX, e.clientY);
-      if (!hit) {
-        setSelectedId(null);
-        setPath(null);
-        return;
-      }
-      const key = String(hit.userData.__pieceKey);
-      const ownerId = structureByPieceRef.current.get(key);
-      if (!ownerId) { setSelectedId(null); setPath(null); return; }
-      const g = ensureGroups(ownerId);
-      const groupKey = g.groupOf.get(key) ?? '(estructura)';
-      const next = resolveClick({
-        current: stateRef.current.path?.structureId === ownerId ? stateRef.current.path : null,
-        clickedPieceKey: key,
-        clickedStructureId: ownerId,
-        groups: g.groups,
-        clickedGroupKey: groupKey,
-      });
-      setPath(next);
-      setSelectedId(ownerId);
-      setPanelTab('ficha');
+      // DEBOUNCE 220ms: distinguir click simple de doble click.
+      // Si llega un dblclick dentro de la ventana, cancela el timer pendiente
+      // y el dblclick handler toma el control (aislamiento jerárquico).
+      const cx = e.clientX, cy = e.clientY;
+      if (clickTimer) clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => {
+        const hit = pickAt(cx, cy);
+        if (!hit) {
+          setSelectedId(null);
+          setPath(null);
+          return;
+        }
+        const key = String(hit.userData.__pieceKey);
+        const ownerId = structureByPieceRef.current.get(key);
+        if (!ownerId) { setSelectedId(null); setPath(null); return; }
+        const g = ensureGroups(ownerId);
+        const groupKey = g.groupOf.get(key) ?? '(estructura)';
+        const next = resolveClick({
+          current: stateRef.current.path?.structureId === ownerId ? stateRef.current.path : null,
+          clickedPieceKey: key,
+          clickedStructureId: ownerId,
+          groups: g.groups,
+          clickedGroupKey: groupKey,
+        });
+        setPath(next);
+        setSelectedId(ownerId);
+        setPanelTab('ficha');
+      }, 220);
     };
     const onDblClick = (e: MouseEvent) => {
       if (loadingRef.current) return;
+      // Cancelar el click pendiente (el dblclick toma el control)
+      if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; }
       const hit = pickAt(e.clientX, e.clientY);
       if (!hit) { setIsolation(null); return; }
       const key = String(hit.userData.__pieceKey);
-      // si ya hay aislamiento activo → re-aislar SOLO la pieza clickeada
-      if (stateRef.current.isolation) {
-        setIsolation({ keys: new Set([key]), label: phaseLabel(key.split(':').slice(1).join(':')) });
-        return;
-      }
-      // sin aislamiento previo → aislar la estructura completa de la pieza
       const ownerId = structureByPieceRef.current.get(key);
       if (!ownerId) { setIsolation(null); return; }
-      const p = { structureId: ownerId, groupKey: null, pieceKey: null };
       const g = ensureGroups(ownerId);
-      const keys = unitPieceKeys(p, g.groups);
-      const unitLabel = getStructureById(ownerId)?.nameEs ?? '';
-      setPath(p);
+      // AISLAMIENTO JERÁRQUICO: desciende según el nivel actual
+      // conjunto → subconjunto → pieza
+      const currentPath = stateRef.current.path?.structureId === ownerId
+        ? stateRef.current.path
+        : null;
+      let nextPath: SelectionPath;
+      if (!currentPath || currentPath.pieceKey) {
+        // sin selección previa o ya a nivel pieza → aislar conjunto
+        nextPath = { structureId: ownerId, groupKey: null, pieceKey: null };
+      } else if (!currentPath.groupKey) {
+        // conjunto seleccionado → bajar a subconjunto
+        nextPath = { structureId: ownerId, groupKey: g.groupOf.get(key) ?? null, pieceKey: null };
+      } else {
+        // subconjunto seleccionado → bajar a pieza
+        nextPath = { structureId: ownerId, groupKey: currentPath.groupKey, pieceKey: key };
+      }
+      const keys = unitPieceKeys(nextPath, g.groups);
+      const st = getStructureById(ownerId);
+      let label = st?.nameEs ?? '';
+      if (nextPath.groupKey) label += ` · ${phaseLabel(nextPath.groupKey)}`;
+      if (nextPath.pieceKey) label += ` · ${phaseLabel(nextPath.pieceKey.split(':').slice(1).join(':'))}`;
+      setPath(nextPath);
       setSelectedId(ownerId);
-      setIsolation({
-        keys: new Set(keys),
-        label: unitLabel,
-      });
+      setIsolation({ keys: new Set(keys), label });
     };
     const onDrag = (e: PointerEvent) => {
       if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) moved = true;
