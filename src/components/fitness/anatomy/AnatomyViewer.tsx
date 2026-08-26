@@ -388,7 +388,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           if (mat?.emissive) {
             const p = piecesRef.current.get(key);
             mat.emissive.set(p ? highlightColor(p.piece.kind) : 0x0e7fa8);
-            mat.emissiveIntensity = 0.7;
+            mat.emissiveIntensity = 0.25;
           }
         }
         if (staticModeRef.current) renderer.render(scene, camera);
@@ -428,19 +428,19 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       if (loadingRef.current) return;
       const hit = pickAt(e.clientX, e.clientY);
       if (!hit) { setIsolation(null); return; }
-      // Doble click = aislar la unidad del NIVEL ACTUAL del path (conjunto,
-      // subconjunto o pieza) usando CLAVES EXPLÍCITAS — sin test espacial.
       const key = String(hit.userData.__pieceKey);
+      // si ya hay aislamiento activo → re-aislar SOLO la pieza clickeada
+      if (stateRef.current.isolation) {
+        setIsolation({ keys: new Set([key]), label: phaseLabel(key.split(':').slice(1).join(':')) });
+        return;
+      }
+      // sin aislamiento previo → aislar la estructura completa de la pieza
       const ownerId = structureByPieceRef.current.get(key);
       if (!ownerId) { setIsolation(null); return; }
-      const p = stateRef.current.path?.structureId === ownerId
-        ? stateRef.current.path
-        : { structureId: ownerId, groupKey: null, pieceKey: null };
+      const p = { structureId: ownerId, groupKey: null, pieceKey: null };
       const g = ensureGroups(ownerId);
       const keys = unitPieceKeys(p, g.groups);
-      const unitLabel = p.pieceKey ? phaseLabel(p.pieceKey.split(':').slice(1).join(':'))
-        : p.groupKey ? (p.groupKey === '(estructura)' ? (getStructureById(ownerId)?.nameEs ?? p.groupKey) : phaseLabel(p.groupKey))
-        : (getStructureById(ownerId)?.nameEs ?? '');
+      const unitLabel = getStructureById(ownerId)?.nameEs ?? '';
       setPath(p);
       setSelectedId(ownerId);
       setIsolation({
@@ -792,14 +792,17 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       // OVERLAY seleccionado → boost fuerte + opacidad alta para que se vea
       // sobre el músculo sólido que está detrás
       const isOverlayPiece = !!OVERLAY_PARENT[k];
+      const isExactPiece = path.pieceKey === k;
+      // highlight SUTIL: emissive moderado + shift de color hacia el tipo
       mat.emissive.set(hc);
-      mat.emissiveIntensity = isOverlayPiece ? 2.5 : 1.6;
+      mat.emissiveIntensity = isOverlayPiece ? 0.8 : 0.5;
+      if (mat.color) mat.color.lerp(new THREE.Color(hc), 0.5);
+      // overlay seleccionado → aumentar opacidad para visibilidad clara
       if (isOverlayPiece) {
         mat.transparent = true;
-        mat.opacity = 0.85;
+        mat.opacity = isExactPiece ? 0.92 : 0.7;
         mat.depthWrite = true;
       }
-      if (mat.color) mat.color.lerp(new THREE.Color(hc), 0.4);
     }
     for (const k of parentNames) {
       if (unitNames.has(k)) continue;
@@ -808,7 +811,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       const mat = e.mesh.material as THREE.MeshStandardMaterial | undefined;
       if (!mat?.emissive) continue;
       mat.emissive.set(hc);
-      mat.emissiveIntensity = 0.25;
+      mat.emissiveIntensity = 0.15;
     }
     if (isJoint) {
       const unitKeys = [...unitNames].map((n) => pieceKey(selectedId, n));
