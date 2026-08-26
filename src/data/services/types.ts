@@ -47,6 +47,9 @@ export interface ServiceDefinition {
   confidence: Confidence;
   subtasks: Subtask[];
   sourceDoc: string;
+  entregablesEs?: string[];
+  noIncluyeEs?: string[];
+  entregaDiasEs?: [number, number];
   cotizador?: CotizadorMeta;
 }
 
@@ -158,4 +161,10 @@ export interface QuoteResult {
   totalMax: number;
   lines: QuoteLine[];
   notesEs: string[];
+}
+
+export interface ComponentePaquete {
+  serviceId: string;
+  nivel: LevelId;
+  cantidad?: number;
 }

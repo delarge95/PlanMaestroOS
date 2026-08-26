@@ -25,12 +25,6 @@ const DOC_02 = 'docs/servicios/02_catalogo_render_assets_rt.md';
 const DOC_03 = 'docs/servicios/03_catalogo_web_experiencias.md';
 const DOC_04 = 'docs/servicios/04_catalogo_footage_ia_soporte.md';
 
-export interface ServiceWithClarity extends ServiceDefinition {
-  entregablesEs?: string[];
-  noIncluyeEs?: string[];
-  entregaDiasEs?: [number, number];
-}
-
 const a1Subtasks: Subtask[] = [
   st('a1-intake', 'Intake/brief + referencias', lvl(null, [0.5, 1], [1, 2], [2, 3], [3, 5])),
   st('a1-setup', 'Setup escena (cámara, luz, HDRI, composición)', lvl(null, [1, 2], [2, 4], [4, 8], [8, 16])),
@@ -89,14 +83,14 @@ function svc(
   sourceDoc: string,
   noIncluyeEs?: string[],
   entregaDiasEs?: [number, number],
-): ServiceWithClarity {
+): ServiceDefinition {
   return {
     id, family, nameEs, unitEs, driversEs, confidence, subtasks, sourceDoc,
     entregablesEs, noIncluyeEs, entregaDiasEs,
   };
 }
 
-export const CATALOG_CORE: ServiceWithClarity[] = [
+export const CATALOG_CORE: ServiceDefinition[] = [
   svc('a1-render-estatico', 'render',
     'Render 3D estático',
     'imagen',
