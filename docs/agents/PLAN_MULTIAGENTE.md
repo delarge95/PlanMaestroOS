@@ -39,6 +39,7 @@ Estos principios son vinculantes para TODOS los agentes:
 | AG-EN | `agent/english` |
 | AG-PORT | `agent/portfolio` |
 | AG-ORQ | `agent/orquestador` |
+| AG-SERV | `agent/servicios` |
 | AG-SERV | `agent/services` |
 | AG-GASTRO (opcional) | `agent/gastronomy` |
 
