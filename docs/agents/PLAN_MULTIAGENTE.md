@@ -460,3 +460,20 @@ Dependencias duras: AG-EN Fase 0 → AG-DE Fase 0/1 (motor SR). AG-ORQ Fase 2 �
 ## 7. Tickets
 
 `docs/agents/tickets.md` — formato: `[AGENTE-ORIGEN] archivo → owner → cambio pedido → estado`. AG-CORE atiende tickets de archivos compartidos; los tickets entre agentes de dominio los media AG-CORE.
+
+---
+
+### 3.10 AG-SERV — Cotizador interactivo freelance (añadido 2026-08-25)
+
+**Objetivo:** cotizador interactivo público para clientes freelance: wizard por objetivo, comparador de niveles, modo "no sé", panel why-price, dropzone de referencias local, asistente chat proactivo, CTA WhatsApp/email/PDF. Conexión futura con la sección laboral (career) para trazabilidad de oportunidades.
+
+| | |
+|---|---|
+| **Rama** | `agent/servicios` (worktree `.worktrees/servicios`) |
+| **OWN** | `src/components/services/**`, `src/data/services/**`, `src/lib/services/**`, `src/pages/cotizador.astro`, `docs/cotizador/**`, `rag/services/**` (futuro) |
+| **READ** | contratos CORE, ui/**, docs laborales de pricing si aplica |
+| **FORBIDDEN** | career (la conexión futura va por contrato de eventos, no por import directo), resto de dominios, ui/tokens/nav (el cotizador es ruta pública raíz `/cotizador`) |
+
+**Fases:** F1 UX base ✅ · F2 entender qué se compra (wizard/galería/no-sé/why-price) ✅ · F3 autoservicio (dropzone/chat proactivo) ✅ · F4 (futuro): conexión con career (oportunidad → cotización → pipeline), RAG de pricing.
+
+**Limitaciones:** pricing determinista y auditable (fórmulas en código, no inventadas por IA); assets visuales reales pendientes de producción humana (`galleryManifest.ts` listo); email real de contacto pendiente del usuario en `share.ts`.
