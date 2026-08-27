@@ -1,6 +1,50 @@
 # STATUS — AG-NUTRI (rama agent/nutricion)
 
-> Ciclo 1 · 2026-08-22. Estado: **Fase 0 (extracción + RAG) y Fase 1 (UI) completadas.**
+> **CICLO 2 — 2026-08-25. Estado: migración rules→chunks completada + estimador kcal + perfil hormonal femenino entregados.** El ciclo 1 (extracción PyMuPDF 119 reglas + RAG v4 + Fase 1 UI) queda resumido al final de este documento.
+
+## Verificación al corte (ciclo 2)
+
+| Gate | Resultado |
+|---|---|
+| `npx astro check` (NODE_OPTIONS=8192) | **0 errores** (421 archivos) |
+| `npm test` | **34 tests del dominio verdes** (16 calculator + 11 kcalEstimator + 7 femalePhysiology) |
+| Builder `--domain nutrition` | OK: 9 sources, 155 chunks, SIN array rules[] legacy |
+| Diff vs OWN | Solo `src/data/fitness/nutrition/**`, `src/components/fitness/nutrition/**`, `rag/nutrition*` |
+
+## Commits del ciclo 2
+
+1. `feat(nutricion)` — **T1 Migración rules[]→chunks v4** (desbloquea rebuilds): script propio `rag/nutrition/scripts/migrate-rules-to-chunks.ts` convierte las 119 reglas legacy a bloques chunk en `fuentes/{nsca-est-4ed,maughan-nutrition-in-sport,sportnutrition-3g-2022}--rules.md`; los valores numéricos van codificados en `entities` (`num:ruta=valor`, anidados con puntos: `num:male.light=38`) junto a `unit:`/`confidence:`/`tier:`/`cond:`. `rules.ts` compila un índice derivado chunks→RagRule al cargar; API idéntica (`getRule/requireRule/toCitation/ruleNumber`). Manifest actualizado declarando las fuentes que el legacy usaba sin declarar. Alias resuelto automáticamente: `maughan-nis-2000` → canónico `maughan-nutrition-in-sport`. **El array rules[] ya no existe en rag/nutrition.json** (155 chunks, 0 reglas sueltas).
+2. `feat(nutricion)` — **T2 Estimador kcal quemadas** (mandato usuario, TAREAS_USUARIO): `kcalEstimator.ts` puro + 11 tests + sección "Quemado estimado hoy vs objetivo" en la página.
+3. `feat(nutricion)` — **T3 Perfil hormonal femenino** (mandato usuario): `femalePhysiology.ts` + panel opcional en la página.
+4. (este) docs.
+
+## Cómo consumir kcalEstimator desde otros dominios (contrato público)
+
+```ts
+import {
+  estimateKcalFromMetActivity,      // a) METs × kg × h — REQUIERE cita del MET
+  estimateKcalFromStrengthSession,  // b) trabajo mecánico cota inferior + EPOC +5–15% citado (inferred)
+  estimateDayBurn,                  // suma del día → { totalKcal, minKcal, maxKcal, hasUnsourcedEntries }
+  dailyBalance,                     // objetivo − quemado, con contexto TDEE citado (Aragon ISSN 2017)
+} from 'src/data/fitness/nutrition/kcalEstimator';
+```
+
+- **AG-CARDIO**: ya integrado vía `getPresetsWithMet()` (READ). Cada preset aporta `avgMets` + `citation{sourceId, locator}`; la UI los pasa tal cual.
+- **AG-FIT**: cuando entregue el logger real de sesiones (mandato TAREAS_USUARIO), llamar `estimateActivity({ kind:'strength', label, series, repsPerSeries, loadKg }, pesoKgActual)`. El peso se aplica AL ESTIMAR (no vive en la entrada persistida). Distancia por rep: default documentado 0.5 m (sobreescribible).
+- Entradas manuales sin cita → `confidence:'qualitative'`, `why:[]` y el total se etiqueta "~" orientativo: ninguna cifra aparece sin fuente o sin marca explícita.
+- **AG-ORQ**: puede leer `activities` desde `useNutritionStore` para el briefing diario; si falta un export agregado, ticket.
+
+## Decisiones del ciclo 2
+
+1. **Valores estructurales dentro del esquema v4** vía `entities` en vez de parseo de prosa: determinista, validable y sobrevive rebuilds. Los ids de regla legacy se conservan como chunk.id (son la referencia citada en UI/tests).
+2. **Fuerza = cota inferior honesta**: J→kcal directo (1 kcal = 4.184 kJ exactos) SIN factor de eficiencia muscular inventado (no había fuente en el RAG); se declara piso deliberado y se suma EPOC +5–15% sí citado (Maughan `nutri-mau-epoc`, inferred).
+3. **Perfil femenino display-only**: los ajustes (+50–100 kcal lútea; proteína 1.2–1.5 g/kg menopausia) se MUESTRAN con cita y aviso de "efecto pequeño", jamás auto-aplicados al target; ciclo irregular → derivación a profesional. Fix de cita en la fuente curada: campo `page:` con prosa de años generaba locator engañoso ("p. 2025") → movido a `section:` y rebuild.
+4. **Store `nutrition-local-v1` v3**: añade `activities` (log diario con fecha local ISO) y `femaleProfile`; migración v1/v2→v3 preservando datos; TODO de migración a UserState mantenido.
+5. Helper nueva `toChunkCitation()` en rules.ts para citar chunks que NO son reglas (locator tolerante cap/p./§) — usada por el balance TDEE (chunk aragon).
+
+---
+
+# Histórico — Ciclo 1 · 2026-08-22. Estado: **Fase 0 (extracción + RAG) y Fase 1 (UI) completadas.**
 
 ## Commits del ciclo
 
