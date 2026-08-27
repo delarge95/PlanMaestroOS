@@ -28,6 +28,7 @@ import { BONES } from './anatomy/bones';
 import { LIGAMENTS } from './anatomy/ligaments';
 import { ANATOMY_MODELS } from './anatomy/modelCatalog';
 import { MESH_INDEX } from './anatomy/meshIndex';
+import { JOINT_ROM } from './anatomy/jointRom';
 import { exerciseDatabase } from '../exercises/exerciseData';
 
 export { BODY_ZONES, BODY_ZONE_LABELS_ES, ANATOMY_MODELS, MESH_INDEX };
@@ -41,6 +42,12 @@ export type {
 export const ANATOMY_STRUCTURES: AnatomyStructure[] = [
   ...MUSCLES, ...TENDONS, ...NERVES, ...JOINTS, ...BONES, ...LIGAMENTS,
 ];
+
+// ROM articular verificado (ciclo 4): se fusiona en la entrada para que toda
+// superficie (visor, Músculos) lo lea del propio JointEntry con sus citas.
+for (const s of ANATOMY_STRUCTURES) {
+  if (s.kind === 'joint' && JOINT_ROM[s.id]?.length) (s as JointEntry).rom = JOINT_ROM[s.id];
+}
 
 const byId = new Map<string, AnatomyStructure>(ANATOMY_STRUCTURES.map((s) => [s.id, s]));
 const byLegacy = new Map<string, AnatomyStructure>(
@@ -89,6 +96,11 @@ export function getBones(zone?: BodyZone): BoneEntry[] {
 export function getStructuresForModel(modelKey: string): AnatomyStructure[] {
   return ANATOMY_STRUCTURES.filter((s) => (s.modelMeshes[modelKey]?.length ?? 0) > 0);
 }
+
+// ── ROM articular verificado (ciclo 4 — pendiente #4 del STATUS) ─────────────
+// Dataset con cita por movimiento en jointRom.ts; se re-exporta para que las
+// superficies (visor, Músculos) consuman por id sin importar el módulo interno.
+export { JOINT_ROM, getJointRom, jointIdsWithRom } from './anatomy/jointRom';
 
 /** Nombres de nodo/mesh a resaltar para una estructura en un modelo. */
 export function resolveHighlightNames(structure: AnatomyStructure, modelKey: string): string[] {

@@ -145,6 +145,22 @@ export interface NerveEntry extends AnatomyStructureBase {
   wikiEn?: string;
 }
 
+/**
+ * Rango de movimiento de UN movimiento/eje articular, verificado contra fuente
+ * (Levangie & Norkin 6ª ed — pendiente #4 del STATUS, ciclo 4). La capa de
+ * texto del PDF no conserva páginas estables: el locator cita capítulo (y
+ * sección cuando aplica), convención ya usada por los chunks `njs6-*` del RAG.
+ */
+export interface JointRomEntry {
+  /** Movimiento (p.ej. "Flexión", "Rotación externa", "Apertura bucal"). */
+  motion: string;
+  /** Valor con unidad tal cual la fuente (p.ej. "100°–120°", "40–50 mm"). */
+  value: string;
+  /** Condición de medición (p.ej. "con rodilla flexionada", "codo a 90°"). */
+  condition?: string;
+  sourceRefs: SourceRef[];
+}
+
 export interface JointEntry extends AnatomyStructureBase {
   kind: 'joint';
   jointType: string;
@@ -152,6 +168,8 @@ export interface JointEntry extends AnatomyStructureBase {
   movements: string;
   /** ROM numérico por eje: pendiente de verificación Norkin/Levangie (TODO-cita). */
   romNote?: string;
+  /** ROM verificado por movimiento con cita (jointRom.ts; ciclo 4). */
+  rom?: JointRomEntry[];
   stabilizers: string;
   lesions: string;
   rehab: string[];

@@ -331,7 +331,21 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
           {s.kind === 'joint' && row('Tipo articular', (s as JointEntry).jointType)}
           {s.kind === 'joint' && row('Huesos', (s as JointEntry).bones)}
           {s.kind === 'joint' && row('Movimientos / ROM por eje', (s as JointEntry).movements)}
-          {s.kind === 'joint' && (s as JointEntry).romNote && row('ROM numérico (estado)', (s as JointEntry).romNote)}
+          {s.kind === 'joint' && (s as JointEntry).rom?.length ? (
+            <div>
+              <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
+              <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {(s as JointEntry).rom!.map((r) => (
+                  <li key={r.motion} style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                    <strong style={{ color: 'var(--text-primary)' }}>{r.motion}:</strong> {r.value}
+                    {r.condition ? ` — ${r.condition}` : ''}
+                    <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)' }}> ({r.sourceRefs.map((sr) => sr.locator).join('; ')})</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : undefined}
+          {s.kind === 'joint' && !(s as JointEntry).rom?.length && (s as JointEntry).romNote && row('ROM numérico (estado)', (s as JointEntry).romNote)}
           {s.kind === 'joint' && row('Estabilizadores', (s as JointEntry).stabilizers)}
           {s.kind === 'joint' && row('Lesiones', (s as JointEntry).lesions)}
           {s.kind === 'joint' && row('Riesgo bajo carga', (s as JointEntry).riskyUnderLoad)}
