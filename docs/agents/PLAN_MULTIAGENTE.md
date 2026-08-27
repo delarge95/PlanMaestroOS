@@ -39,6 +39,7 @@ Estos principios son vinculantes para TODOS los agentes:
 | AG-EN | `agent/english` |
 | AG-PORT | `agent/portfolio` |
 | AG-ORQ | `agent/orquestador` |
+| AG-SERV | `agent/services` |
 | AG-GASTRO (opcional) | `agent/gastronomy` |
 
 - Todas nacen de `main` y se sincronizan con `main` por rebase semanal.
@@ -371,6 +372,30 @@ Primarias:
 ### 3.9 AG-GASTRO — Gastronomía (OPCIONAL, no dotar inicialmente)
 
 Estado: esqueleto (2 recetas, nav roto). **Recomendación:** AG-CORE repara solo el nav roto (`recipes/queue` → `library/plans/saved`) en su Fase B; AG-GASTRO queda en backlog hasta que los 8 agentes principales entreguen sus Fases 0-1. Si se activa: OWN `src/components/gastronomy/**`, `src/data/gastronomy/**`, `src/pages/app/gastronomy/**`, `rag/gastronomy.json` (libros Nosrat/Kenji como fuentes).
+
+---
+
+### 3.10 AG-SERV — Servicios freelance: catálogo, estimación y pricing
+
+**Objetivo:** convertir la oferta freelance (render 3D offline, assets realtime para WebGL/videojuegos, web 3D e integraciones three.js/babylon/Unity WebGL, VFX con 3D sobre footage real, integración de IA en sitios y procesos empresariales, conversión CAD→WebGL, texturas/FX) en un catálogo versionado y determinista: cada tarea desglosada en subtareas con niveles de complejidad operativos, rangos de horas y costos trazables a una rate card documentada (anclada al benchmark salarial doc 03). Es la base del estimador/cotizador interno y, en fase futura coordinada con AG-PORT, de la web pública de precios con ejemplos visuales por tier.
+
+| | |
+|---|---|
+| **Rama** | `agent/services` |
+| **OWN** | `docs/servicios/**` (catálogo maestro, políticas, tarifas), `src/data/services/**` (catálogo TS determinista + motor de estimación + tests), `src/components/services/**` (nuevos), `src/pages/app/services/**` (nuevos), `rag/services.json` |
+| **READ** | docs 00–36 raíz — especialmente 01 (perfil/claims), 02 (posicionamiento), **03 (salary benchmark: ancla de la rate card)**, 07/20 (portafolio: ejemplos futuros), 22 (outreach: cotizaciones como material), `PLAN_MULTIAGENTE.md` |
+| **FORBIDDEN** | `src/pages/*.astro` público (AG-PORT), `PortfolioSimulator.tsx` / `portfolioProjects.ts` / sitio público y CV (AG-PORT), resto de `career/**` (AG-CAREER), archivos compartidos globales §1.2 (TICKET a AG-CORE), app interna de otros dominios |
+
+**Fases:**
+1. **Fase 0 — Catálogo maestro v1:** desglose completo de familias/tareas/subtareas con tiers S/M/L/XL, rangos de horas min/max, rate card derivada del doc 03, políticas transversales (revisiones, rush, licencias, pagos) y paquetes bundle; espejo TypeScript determinista + motor de estimación puro + tests de consistencia matemática.
+2. **Fase 1 — Estimador interactivo interno:** vista `/app/services` que permite seleccionar tarea, asignar tier por subtarea y ver rango tiempo/costo agregado en vivo; export de cotización borradora (markdown/print) marcada como estimación, no compromiso.
+3. **Fase 2 — Ejemplos visuales por tier:** cada tarea ancla ejemplos S/M/L/XL documentados (el patrón "slider de drone CAD" del usuario); placeholders explícitos hasta contar con assets reales del sprint doc-33 (AG-PORT).
+4. **Fase 3 — Web pública de precios:** página pública con rangos y ejemplos interactivos. Coordinación dura con AG-PORT: la superficie pública es territorio AG-PORT o ticket; AG-SERV entrega los datos vía exports públicos versionados del catálogo.
+5. **Fase 4 — RAG servicios:** `rag/services.json` — catálogo chunked (tareas/subtareas/drivers/tiers citables) + cotizaciones cerradas anonimizadas cuando existan, para responder "¿cuánto cuesta X y por qué?" con trazabilidad.
+
+**Limitaciones:** ninguna cifra visible en UI sin trazabilidad (`serviceId → subtaskId → tier → rateClass` citada); no inventa URLs, assets ni ejemplos visuales inexistentes (placeholders explícitos); los rangos son estimación operativa para scoping, no cotización cerrada (la cotización se emite por proyecto tras discovery); no toca el sitio público ni el simulador de portafolio (coordinación vía ticket con AG-PORT); cambios de tarifa solo con nueva versión de la rate card citando su fuente.
+
+**RAG:** `rag/services.json`.
 
 ---
 

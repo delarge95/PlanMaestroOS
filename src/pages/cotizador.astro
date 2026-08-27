@@ -1,0 +1,16 @@
+---
+import '../styles/tokens.css';
+import { DirectCotizador } from '../components/services/DirectCotizador';
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cotizador — AG-SERV</title>
+    <meta name="description" content="Rango orientativo de costo y tiempo para tus proyectos 3D." />
+  </head>
+  <body style="margin:0; background:#f8f9fb; font-family:'Inter','Segoe UI',system-ui,sans-serif;">
+    <DirectCotizador client:load {...{ currency: 'USD' as const }} />
+  </body>
+</html>
