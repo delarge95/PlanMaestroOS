@@ -40,7 +40,7 @@ Estos principios son vinculantes para TODOS los agentes:
 | AG-PORT | `agent/portfolio` |
 | AG-ORQ | `agent/orquestador` |
 | AG-SERV | `agent/servicios` |
-| AG-SERV | `agent/services` |
+
 | AG-GASTRO (opcional) | `agent/gastronomy` |
 
 - Todas nacen de `main` y se sincronizan con `main` por rebase semanal.
@@ -382,7 +382,7 @@ Estado: esqueleto (2 recetas, nav roto). **Recomendación:** AG-CORE repara solo
 
 | | |
 |---|---|
-| **Rama** | `agent/services` |
+| **Rama** | `agent/servicios` |
 | **OWN** | `docs/servicios/**` (catálogo maestro, políticas, tarifas), `src/data/services/**` (catálogo TS determinista + motor de estimación + tests), `src/components/services/**` (nuevos), `src/pages/app/services/**` (nuevos), `rag/services.json` |
 | **READ** | docs 00–36 raíz — especialmente 01 (perfil/claims), 02 (posicionamiento), **03 (salary benchmark: ancla de la rate card)**, 07/20 (portafolio: ejemplos futuros), 22 (outreach: cotizaciones como material), `PLAN_MULTIAGENTE.md` |
 | **FORBIDDEN** | `src/pages/*.astro` público (AG-PORT), `PortfolioSimulator.tsx` / `portfolioProjects.ts` / sitio público y CV (AG-PORT), resto de `career/**` (AG-CAREER), archivos compartidos globales §1.2 (TICKET a AG-CORE), app interna de otros dominios |
@@ -463,18 +463,3 @@ Dependencias duras: AG-EN Fase 0 → AG-DE Fase 0/1 (motor SR). AG-ORQ Fase 2 �
 `docs/agents/tickets.md` — formato: `[AGENTE-ORIGEN] archivo → owner → cambio pedido → estado`. AG-CORE atiende tickets de archivos compartidos; los tickets entre agentes de dominio los media AG-CORE.
 
 ---
-
-### 3.10 AG-SERV — Cotizador interactivo freelance (añadido 2026-08-25)
-
-**Objetivo:** cotizador interactivo público para clientes freelance: wizard por objetivo, comparador de niveles, modo "no sé", panel why-price, dropzone de referencias local, asistente chat proactivo, CTA WhatsApp/email/PDF. Conexión futura con la sección laboral (career) para trazabilidad de oportunidades.
-
-| | |
-|---|---|
-| **Rama** | `agent/servicios` (worktree `.worktrees/servicios`) |
-| **OWN** | `src/components/services/**`, `src/data/services/**`, `src/lib/services/**`, `src/pages/cotizador.astro`, `docs/cotizador/**`, `rag/services/**` (futuro) |
-| **READ** | contratos CORE, ui/**, docs laborales de pricing si aplica |
-| **FORBIDDEN** | career (la conexión futura va por contrato de eventos, no por import directo), resto de dominios, ui/tokens/nav (el cotizador es ruta pública raíz `/cotizador`) |
-
-**Fases:** F1 UX base ✅ · F2 entender qué se compra (wizard/galería/no-sé/why-price) ✅ · F3 autoservicio (dropzone/chat proactivo) ✅ · F4 (futuro): conexión con career (oportunidad → cotización → pipeline), RAG de pricing.
-
-**Limitaciones:** pricing determinista y auditable (fórmulas en código, no inventadas por IA); assets visuales reales pendientes de producción humana (`galleryManifest.ts` listo); email real de contacto pendiente del usuario en `share.ts`.
