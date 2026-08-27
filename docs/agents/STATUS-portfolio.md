@@ -1,52 +1,47 @@
 # STATUS — AG-PORT (rama agent/portfolio)
 
-> Ciclo de reanudación · 2026-08-22. Estado: **Fase 4 (RAG) completa, CV→PDF v1 entregado, foco verificado contra doc 20.** Fases 0–3 se completaron en ciclos anteriores (borrador archivado, checklist doc-33, CV completo, pestaña ArtStation).
+> Ciclo 2 · 2026-08-25. Estado: **Fase 3 (sprint de assets y launch) operativa** — tablero de producción doc-33 y checklist de launch doc-36 sincronizados en el simulador. Fase 4 (RAG) completa desde el ciclo anterior; CV→PDF v1 entregado.
 
-## Commits del ciclo
+## Commits del ciclo 2
 
 | Commit | Contenido |
 |---|---|
-| `393be35` | rag(portfolio): manifest del dominio + fuente doc-20 |
-| `25c8710` | rag(portfolio): fuente doc-08B (case study TwinSight) |
-| `44028ab` | rag(portfolio): fuente doc-17 (CV base + variantes) |
-| `ff55ac3` | rag(portfolio): fuente doc-19B (README GitHub) |
-| `cf8c251` | rag(portfolio): fuente doc-28E (perfil ArtStation) |
-| `1bcebf2` | rag(portfolio): fuente doc-29C (benchmark breakdowns) |
-| `19aa314` | rag(portfolio): build `rag/portfolio.json` (6 fuentes, 36 chunks) |
-| `6f8938b` | fix(portfolio): hero home alineado con doc-20 + 4 focus routes enlazadas desde /work |
-| `3bd8920` | feat(cv): botón "Descargar PDF (A4)" — mandato TAREAS_USUARIO |
-| (este) | docs: STATUS-portfolio |
+| `62455e5` | feat(portfolio): tablero sprint doc-33 con estados, responsable y fuente por ítem |
+| `49a84f9` | feat(portfolio): checklist de launch doc-36 sincronizado con el tablero doc-33 |
+| (este) | docs: STATUS-portfolio ciclo 2 |
 
-## RAG portafolio (Fase 4) — completado
+Arranque del ciclo: `git merge main --no-edit` (trajo DESPACHO 2, RAGs EN/NUTRI/FIT, career c2) sin conflictos; baseline verde antes de tocar nada.
 
-- `rag/portfolio.json`: **6 fuentes, 36 chunks**, build v4 OK (`npx tsx scripts/build_rag/index.ts --domain portfolio`). Manifest con evidenceTier `internal-doc` y authority por dominio (portfolio-site, case-study, cv, readme, artstation).
-- Fuentes parafraseadas con locator `section`: doc-20 (10 chunks: objetivo, estructura MVP, hero, orden de cards, consistencia de términos, SEO, criterios de aceptación MVP, dirección visual), doc-08B (7: posicionamiento, orden de página, métricas con lenguaje seguro, checklists, integraciones), doc-17 (6: identidad, claims prohibidos, base ATS, bullets, variantes, confirmaciones pendientes), doc-19B (3), doc-28E (5: headline/resume, software con niveles, job preferences, links/freelance, NoAI), doc-29C (5: taxonomía de breakdowns, posts TwinSight/retrato, checklists, tools/tags/orden).
-- Consulta prevista desde PortfolioSimulator ("¿por qué este orden de proyectos?" → spec citado).
+## Tablero sprint doc-33 (Fase 3a) — completado
 
-## Verificación focus variants (doc 20) — corregido
+- `portfolioChecklist.ts` evoluciona de lista pending a **tablero de producción**: `PortfolioAssetStatus` ahora `pending | in_progress | review | done` (+ labels ES), campo `owner` visual por ítem (`alex` = producción manual: captura/edición/publicación; `ag-port` = integración en sitio: carpeta media del portafolio y CV PDF), y cita `doc-33 §…` por ítem (28 ítems).
+- Nuevo `portfolioBoardStore.ts`: estado vivo persistido (`portapp-sprint-board-v1`, zustand persist siguiendo la convención de `prehabStateStore`; migrará al adaptador IndexedDB de CORE sin cambiar interfaz). El dataset conserva el baseline honesto (todo «Pendiente»: el sprint no se ha ejecutado); los ids ausentes caen al default vía `withBoardDefaults`. Selectores puros: `selectBoardCards`, `selectBoardColumns`.
+- UI en el simulador: pestaña **Tablero Sprint** (kanban de 4 columnas con color por estado), tarjeta con título, detalle, chips de plataforma/responsable/links-desbloqueados, fuente citada y selector de estado. Banner de progreso ahora lee estado vivo («pendientes X de N · Hechos: Y» por plataforma). El export al portapapeles incluye snapshot completo del tablero.
+- REGLA DE ORO: exports previos intactos (`pendingPortfolioAssets`, `portfolioAssetsByPlatform`, `pendingPortfolioAssetCount`, specs 29C, checklist 28E); las demás pestañas del simulador no cambian.
 
-- Las 4 variantes de `src/data/focusVariants.ts` (technical-visualization, unity-webgl, unity-technical-artist, 3d-pipeline) estaban enlazadas desde home (FocusVariantSwitcher) pero **no desde /work** → añadida sección "Focus routes" en `work.astro` con las 4 rutas.
-- Copy de variantes verificado contra las reglas de consistencia de doc-20 §18: sin términos prohibidos (multimedia, creative, generalist, full-stack, AI expert, game developer, graphic design); wording "digital-twin-adjacent" cauteloso correcto.
-- **Desviación corregida en home**: el h1 estilizado ("Realtime 3D Systems / Unity WebGL") no seguía la headline recomendada de doc-20 §4 → ahora "Real-Time 3D / Developer / Unity Technical Artist" + subheadline y línea de ubicación/disponibilidad exactas del spec ("Based in Colombia. Available for remote contractor/B2B roles.").
-- Orden de proyectos (TwinSight → Human → ARA): se mantiene. Doc-20 §6 (MVP) ponía ARA 2º, pero doc-29C §19 (más reciente) ordena TwinSight → retrato como pilares 1-2 y la home ya declara esa decisión ("Two anchors"); ARA nunca aparece como principal (regla dura §1 intacta).
+## Checklist launch doc-36 (Fase 3b) — completado
 
-## CV → PDF (mandato usuario) — v1 entregado
-
-- Botón **"Descargar PDF (A4)"** en `/cv` (label exacto del mandato), con tooltip que explica "Save as PDF" en el diálogo de impresión.
-- **Decisión documentada**: v1 = `window.print()` + hoja de estilos print dedicada (bloque `@media print` por página en `cv.astro`: A4, chrome del sitio oculto, citas de procedencia ocultas). Sin librería de PDF (jsPDF/puppeteer): coste de bundle cero y tipografía pixel-perfect; todo navegador moderno ofrece "Guardar como PDF" en el diálogo. **v2** (si se necesita archivo adjunto sin interacción): render headless.
-- Extra v1: `document.title` se fija al `fileName` de la variante activa antes de imprimir → el PDF sugerido por el navegador se nombra correctamente (p.ej. `Alexander_Woodcock_RealTime3D_Unity_CV`); se restaura en `afterprint`.
-- Nota doc-28B §9.4 se respeta en UI: los placeholders en corchetes siguen visibles y el panel "Pending confirmations" bloquea conceptualmente el export final.
+- Nuevo `portfolioLaunchChecklist.ts`: los 10 pasos de la secuencia §4.1 agrupados por día (§16, D1–D6), cada uno con `requiresAssetIds` (ids reales del tablero doc-33), `requiresStepIds` (orden duro solo donde §4.2 lo justifica: homepage→case study, LinkedIn→hub terminado, Featured→perfil, CV→links existentes, tracker→CV, post→Featured) y placeholders de URL **explícitos** `[DEMO_VIDEO_URL]`, `[GITHUB_URL]`, `[PORTFOLIO_URL]`, etc. — cero URLs inventadas (test lo garantiza: ningún `https?://` en el módulo).
+- Gating puro y testeable: `isLaunchStepEnabled` (assets «done» + pasos previos completos), `getLaunchBlockers` (razón legible del bloqueo). Sincronía real con el tablero: marcar un asset como Hecho habilita sus pasos de launch al instante.
+- **Puerta final pre-aplicaciones (§21)** derivada automáticamente de los pasos completados (6 condiciones), con la excepción Priority A documentada.
+- `usePortfolioLaunchStore` (`portapp-launch-v1`) persiste completados; toggle bloqueado si el paso aún no está habilitado.
+- UI: pestaña **Launch** con pasos por día, badges Completado/Listo/Bloqueado, chips de assets requeridos con su estado vivo, placeholders visibles con tooltip, y panel de puerta final. Nota de ownership en el paso tracker: registrar el evento es AG-CAREER, AG-PORT entrega el asset (plan §3.7 F3).
 
 ## Validación
 
-- `npx astro check` → **0 errores, 0 warnings** (37 hints preexistentes del repo).
-- `npm test` → **139/139 verdes** (15 archivos; incluye 12 de `src/data/cv/__tests__/cvCompose.test.ts`).
-- `npx tsx scripts/build_rag/index.ts --domain portfolio` → OK.
-- No se tocó ningún archivo fuera del OWN de §3.7.
+- `npm test` → **284/284 verdes** (29 archivos; +14 de launch, +8 de board store, +5 nuevos en checklist).
+- `npx astro check` → **0 errores, 0 warnings**, hints en el baseline del repo tras el merge (50).
+- Diff verificado contra §1.2: solo archivos OWN de §3.7 (`PortfolioSimulator.tsx`, datos/tests de portfolio en `src/data/career/`). Sin push.
+- Tests cubren: estados/owner válidos y representados, gating por assets, dependencias solo hacia atrás, ausencia de URLs absolutas, formato de placeholders, gate §21 mapea a pasos reales.
+
+## Estado heredado (ciclo 1, resumen)
+
+RAG `rag/portfolio.json` (6 fuentes/36 chunks, build v4 OK); hero home corregido contra doc-20 §4; focus routes enlazadas desde /work; CV con variantes + botón «Descargar PDF (A4)» v1 (print A4, filename por variante).
 
 ## Pendientes / tickets
 
-1. **`rag/index.json` global no se reconstruye** — `--index` falla por chunks inválidos de OTRO dominio (fitness: `maughan-ch47-strength`, `3g-ch2-6-selected` — `entities` debe ser array de strings no vacíos). **Ticket para AG-CORE/propietario de fitness**; portfolio.json es válido por sí mismo.
-2. Confirmaciones del usuario antes del CV final (doc-17 §2): email, teléfono, ubicación exacta, URL portafolio, fechas de defensa/graduación/freelance, métricas finales TwinSight, URL demo WebGL — placeholders explícitos en `/cv`.
-3. URL real de ArtStation Human breakdown cuando exista (placeholder en checklist visible, no hardcode).
-4. v2 del export PDF (render headless) solo si el usuario necesita archivo sin diálogo.
+1. **`rag/index.json` global** — resuelto por otro agente en el merge de este ciclo: el índice existe y ya no contiene los chunks inválidos de fitness (`maughan-ch47-strength`, etc.). Verificado con búsqueda sobre el archivo; no requiere acción.
+2. Confirmaciones del usuario antes del CV final (doc-17 §2): email, teléfono, ubicación exacta, URL portafolio, fechas, métricas finales TwinSight, URL demo WebGL — placeholders explícitos en `/cv`.
+3. Ejecutar el sprint físico (captura/edición/export): es trabajo humano — el tablero ya permite seguirlo ítem a ítem; los pasos de launch se irán habilitando solos.
+4. Persistencia de stores portfolio en adaptador IndexedDB de CORE cuando esté disponible (swap interno, misma interfaz).
+5. v2 del export PDF (render headless) solo si el usuario necesita archivo sin diálogo.
