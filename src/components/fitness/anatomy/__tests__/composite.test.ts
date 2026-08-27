@@ -15,7 +15,6 @@ import {
   unitPieceKeys,
   highlightColor,
   layerDef,
-  type Aabb,
   type CompositeKind,
   type SelectionPath,
 } from '../composite';
@@ -30,7 +29,6 @@ const piece = (over: Partial<Parameters<typeof pieceVisible>[0]>) => ({
   ...over,
 });
 
-const NO_BOX: Aabb = { min: [-10, -10, -10], max: [10, 10, 10] };
 
 describe('pieceVisible', () => {
   const base = () => ({
@@ -41,36 +39,36 @@ describe('pieceVisible', () => {
   });
 
   it('vista completa + capa activa + sin dedup → visible', () => {
-    expect(pieceVisible(piece({}), base(), NO_BOX)).toBe(true);
+    expect(pieceVisible(piece({}), base())).toBe(true);
   });
 
   it('capa inactiva → oculto (p.ej. mostrar solo músculo y tendón)', () => {
-    expect(pieceVisible(piece({ kind: 'artery' }), base(), NO_BOX)).toBe(false);
+    expect(pieceVisible(piece({ kind: 'artery' }), base())).toBe(false);
     const st = { ...base(), layers: new Set<CompositeKind>(['muscle', 'tendon'] as CompositeKind[]) };
-    expect(pieceVisible(piece({ kind: 'muscle' }), st, NO_BOX)).toBe(true);
-    expect(pieceVisible(piece({ kind: 'bone' }), st, NO_BOX)).toBe(false);
+    expect(pieceVisible(piece({ kind: 'muscle' }), st)).toBe(true);
+    expect(pieceVisible(piece({ kind: 'bone' }), st)).toBe(false);
   });
 
   it('focus por región filtra las demás regiones', () => {
     const upper = { ...base(), focus: 'upper' as const };
-    expect(pieceVisible(piece({ region: 'upper' }), upper, NO_BOX)).toBe(true);
-    expect(pieceVisible(piece({ region: 'lower' }), upper, NO_BOX)).toBe(false);
+    expect(pieceVisible(piece({ region: 'upper' }), upper)).toBe(true);
+    expect(pieceVisible(piece({ region: 'lower' }), upper)).toBe(false);
   });
 
   it('focus vértebras: solo las 3 piezas del modelo vertebrae', () => {
     const vert = { ...base(), focus: 'vertebrae' as const };
-    expect(pieceVisible(piece({ name: 'Cervical vertebra (C4)', region: 'upper' }), vert, NO_BOX)).toBe(true);
-    expect(pieceVisible(piece({ name: 'Femurr', region: 'lower' }), vert, NO_BOX)).toBe(false);
+    expect(pieceVisible(piece({ name: 'Cervical vertebra (C4)', region: 'upper' }), vert)).toBe(true);
+    expect(pieceVisible(piece({ name: 'Femurr', region: 'lower' }), vert)).toBe(false);
     expect(VERTEBRAE_PIECES.size).toBe(3);
   });
 
   it('hiddenByDup (representada por especialista) → oculta por defecto', () => {
-    expect(pieceVisible(piece({ hiddenByDup: 'lower-limb:Femurr' }), base(), NO_BOX)).toBe(false);
+    expect(pieceVisible(piece({ hiddenByDup: 'lower-limb:Femurr' }), base())).toBe(false);
   });
 
   it('oculta manual', () => {
     const key = pieceKey('overview-skeleton', 'X');
-    expect(pieceVisible(piece({}), { ...base(), hidden: new Set([key]) }, NO_BOX)).toBe(false);
+    expect(pieceVisible(piece({}), { ...base(), hidden: new Set([key]) })).toBe(false);
   });
 
   it('aislamiento: solo las claves explícitas de la unidad son visibles', () => {
