@@ -61,3 +61,17 @@ ORQUESTADOR: revisa anti-slop → integra → commitea
 - **OX Alpha** (OpenRouter stealth): contexto 1.048.576 tokens, salida 131.072, multimodal (texto/imagen/video), tool calling, orientado a agentes de código. Fuerte en largo alcance y contexto visual. Calidad variable → verificación anti-slop obligatoria.
 - **Zed Student**: 12 meses, $10/mes en créditos de tokens, todos los modelos hosted excepto Claude Opus (incl. Claude Sonnet 5, GPT-5.6, Gemini 3), edit predictions ilimitadas.
 - (Los demás entornos según descripción del usuario; se calibrarán con la primera tarea de cada uno.)
+
+---
+
+## ACTUALIZACIÓN 2026-08-26 — nueva matriz tras baja de OX Alpha
+
+**Herramientas vigentes:** GLM 5.3 web (chat ilimitado) y Kimi K3 (Perplexity web) como **diseñadores** (consulta, arquitectura con contexto de archivos, redacción de instrucciones); **GLM 5 Turbo y Gemini 3.7 Flash** como **ejecutores** (IDE local, instrucciones paso a paso de los diseñadores); **Autoclaw (créditos GLM 5.3)** como **reserva estratégica** para trabajo local indispensable (p.ej. sistema de reglas); **misión control (Zcode GLM 5.3 max)** para verificación, integración, merges y cirugía crítica.
+
+**Flujo canónico de tarea compleja:**
+1. Misión control define el encargo + paquete de contexto (rutas de archivos exactas).
+2. Diseñador web (GLM 5.3/Kimi) produce arquitectura + instrucciones ejecutables con ese contexto (el usuario pega archivos).
+3. Ejecutor barato (GLM 5 Turbo/Gemini Flash) implementa en el worktree con las instrucciones.
+4. Misión control verifica (check+tests+ownership) y mergea.
+
+**Regla de respaldo (lección de esta sesión):** el contexto de transferencia NO es la conversación — es un documento de handoff en el repo (ENCARGO/HANDOFF con contratos, decisiones y estado), actualizado por quien trabaja. Cualquier continuación (Autoclaw u otro) arranca desde ese documento, no desde el chat.
