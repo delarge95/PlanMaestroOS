@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -76,10 +77,14 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed || !isValidEmbedUrl(trimmed)) {
+      alert('Por favor ingrese una URL HTTPS válida de una fuente permitida (Notion, YouTube, Vimeo).');
+      return;
+    }
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -292,11 +297,18 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                />
+              ) : (
+                <div style={{ padding: '24px', color: 'var(--color-accent-danger, #ff453a)', textAlign: 'center' }}>
+                  ⚠️ URL de Notion no válida o no permitida por razones de seguridad.
+                </div>
+              )}
             </div>
           </div>
         )}
