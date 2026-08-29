@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CONTACT_EMAIL } from '../../lib/services/share';
+import { BRAND } from '../../data/services/branding';
 
 /**
  * S1+S5: CTA post-presupuesto sin dead-end.
@@ -19,7 +20,7 @@ export function QuoteCta({ summary, url }: { summary: string; url: string }) {
   };
 
   const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Cotización de proyecto 3D`)}&body=${encodeURIComponent(summary)}`;
-  const whatsapp = `https://wa.me/?text=${encodeURIComponent(summary)}`;
+  const whatsapp = `https://wa.me/${BRAND.whatsappNumber}?text=${encodeURIComponent(summary)}`;
 
   return (
     <div style={{ marginTop: 16 }}>
