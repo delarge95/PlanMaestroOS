@@ -20,6 +20,7 @@ import { TierGallery } from './TierGallery';
 import { PriceWhy } from './PriceWhy';
 import { RefDropzone } from './RefDropzone';
 import { CotizadorChat } from './chat/CotizadorChat';
+import { BRAND, HOW_IT_WORKS } from '../../data/services/branding';
 import { computePriceDrivers } from '../../lib/services/priceWhy';
 import { inventoryLine } from '../../lib/services/fileChecklist';
 import {
@@ -46,8 +47,13 @@ const CX_CSS = `
   [data-noprint] { display: none !important; }
   body { background: #fff !important; }
   #cotizador-resultado { border: none !important; padding: 0 !important; }
+  /* Encabezado formal del PDF: marca + contacto + validez (visible SOLO al imprimir) */
+  #print-header { display: flex !important; justify-content: space-between; align-items: flex-start;
+    border-bottom: 2px solid #0a84ff; padding-bottom: 8px; margin-bottom: 14px; }
+  .cx-page { max-width: 100% !important; padding: 0 !important; }
 }
-.cx-term { position: relative; display: inline-flex; align-items: center; margin-left: 6px; cursor: help; color: #0a84ff; font-style: normal; font-weight: 400; }
+#print-header { display: none; }
+.cx-term { position: relative; display: inline-flex; align-items: center; margin-left:  6px; cursor: help; color: #0a84ff; font-style: normal; font-weight: 400; }
 .cx-term:focus-visible { outline: 2px solid #0a84ff; border-radius: 4px; }
 .cx-term-pop {
   position: absolute; bottom: 135%; left: 50%; transform: translateX(-50%);
@@ -186,13 +192,61 @@ export function DirectCotizador() {
   };
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
+    <div className="cx-page" style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
       <style dangerouslySetInnerHTML={{ __html: CX_CSS }} />
 
+      {/* Encabezado formal visible solo al imprimir/PDF (cotización) */}
+      <div id="print-header">
+        <div>
+          <strong style={{ fontSize: 15, color: '#1a1d29' }}>{BRAND.name}</strong>
+          <span style={{ display: 'block', fontSize: 11, color: '#5a5e6e' }}>{BRAND.role}</span>
+        </div>
+        <div style={{ textAlign: 'right', fontSize: 11, color: '#5a5e6e' }}>
+          <span style={{ display: 'block' }}>{BRAND.contactEmail}</span>
+          <span style={{ display: 'block' }}>{BRAND.links.portfolio}</span>
+          <span style={{ display: 'block', marginTop: 4 }}>Cotización orientativa · válida 15 días</span>
+        </div>
+      </div>
+
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-        <strong style={{ fontSize: 16, color: '#1a1d29' }}>AG-SERV · Cotizador</strong>
+        <strong style={{ fontSize: 16, color: '#1a1d29' }}>{BRAND.name} · Cotizador</strong>
         <span data-noprint><CurrencyToggle currency={currency} onChange={setCurrency} /></span>
       </header>
+      <p style={{ margin: '0 0 4px', fontSize: 13, color: '#3c4152', fontWeight: 600 }}>{BRAND.role}</p>
+      <p style={{ margin: '0 0 18px', fontSize: 12.5, color: '#5a5e6e', lineHeight: 1.55, maxWidth: 560 }}>
+        {BRAND.valueProp}
+      </p>
+
+      {/* Cómo funciona (no-engineer) + garantías — colapsable tras primera interacción */}
+      {!serviceId && (
+        <div data-noprint style={{ ...box, marginBottom: 14 }}>
+          <span style={lbl}>Cómo funciona</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 10, marginBottom: 12 }}>
+            {HOW_IT_WORKS.map((s) => (
+              <div key={s.n} style={{ display: 'flex', gap: 8 }}>
+                <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: 11, background: '#0a84ff', color: '#fff', font: '700 11.5px/22px inherit', textAlign: 'center' }}>{s.n}</span>
+                <div>
+                  <div style={{ fontSize: 12.5, fontWeight: 700, color: '#1a1d29' }}>{s.title}</div>
+                  <div style={{ fontSize: 11, color: '#5a5e6e', lineHeight: 1.45 }}>{s.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, paddingTop: 10, borderTop: '1px solid #eef0f5' }}>
+            {BRAND.trustPoints.map((t) => (
+              <span key={t.text} style={{ fontSize: 11, color: '#3c4152', background: '#f2f4f9', borderRadius: 999, padding: '4px 10px' }}>
+                {t.icon} {t.text}
+              </span>
+            ))}
+          </div>
+          <div style={{ marginTop: 10, fontSize: 11, color: '#8a8fa3' }}>
+            Ver trabajo real:{' '}
+            <a href={BRAND.links.portfolio} target="_blank" rel="noopener noreferrer" style={{ color: '#0a84ff' }}>portafolio</a>
+            {' · '}
+            <a href={BRAND.links.artstation} target="_blank" rel="noopener noreferrer" style={{ color: '#0a84ff' }}>ArtStation</a>
+          </div>
+        </div>
+      )}
       <p style={{ margin: '0 0 18px', fontSize: 12, color: '#5a5e6e' }}>
         Precios en {currency === 'USD' ? 'dólares (tarifa internacional)' : 'pesos colombianos (mercado local)'}
         <Term id="moneda" />

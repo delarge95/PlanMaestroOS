@@ -18,6 +18,18 @@ export function getGalleryAsset(serviceId: string, tier: string): GalleryAsset |
   return GALLERY_ASSETS[`${serviceId}:${tier}`] ?? null;
 }
 
+/**
+ * Arte ilustrativo por FAMILIA (demo público): se usa cuando un servicio×nivel
+ * no tiene asset real registrado. Dibujo vectorial propio — sin copyright.
+ * Sustituible por renders reales vía GALLERY_ASSETS sin tocar la UI.
+ */
+export function familyIllustration(family: string, tier: string): GalleryAsset {
+  return {
+    src: `/cotizador/gallery/family/${family}.svg`,
+    alt: `Ilustración orientativa de trabajos de tipo ${family} (nivel ${tier})`,
+  };
+}
+
 /** Qué cambia entre niveles (lenguaje humano, sin horas). */
 export const TIER_SCOPE: Record<string, { label: string; desc: string }> = {
   XS: { label: 'Prueba rápida', desc: 'Alcance mínimo para validar la idea' },
