@@ -7,11 +7,13 @@
 import { useState, useMemo, useRef } from 'react';
 import { ROOT_OPTIONS, WEB3D_LEVEL2, WEB3D_BRANCHES } from '../../data/services/decisionTree';
 import type { TreeQuestion, TreeBranch } from '../../data/services/decisionTree';
+import { planFromTreeAnswers } from '../../data/services/treeToQuote';
+import type { WizardQuotePlan } from '../../data/services/treeToQuote';
 import { BRAND } from '../../data/services/branding';
 
 type Answers = Record<string, string | number | boolean>;
 
-export function GuidedWizard() {
+export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePlan) => void }) {
   const [level, setLevel] = useState(1);
   const [rootChoice, setRootChoice] = useState('');
   const [subChoice, setSubChoice] = useState('');
@@ -149,8 +151,9 @@ export function GuidedWizard() {
             )}
           </div>
 
-          {/* Ver precio → navega al resultado */}
+          {/* Ver precio → mapea respuestas a servicios y cotiza */}
           <button
+            onClick={() => onComplete?.(planFromTreeAnswers(rootChoice, subChoice, answers))}
             style={{
               marginTop: 32, width: '100%', padding: '16px', borderRadius: 999,
               background: '#0071e3', color: '#fff', border: 'none',
@@ -162,6 +165,9 @@ export function GuidedWizard() {
           >
             Ver precio estimado →
           </button>
+          <p style={{ fontSize: 12, color: '#aeaeb2', textAlign: 'center', margin: '10px 0 0' }}>
+            Si algo quedó sin responder usamos un valor recomendado — después lo ajustas.
+          </p>
         </div>
       )}
 

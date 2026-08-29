@@ -13,6 +13,7 @@ import { SERVICE_VARIABLES, derivarTier, recommendedValue } from '../../data/ser
 import type { ServiceVariable } from '../../data/services/serviceVariables';
 import { BRAND } from '../../data/services/branding';
 import type { Currency, LevelId } from '../../data/services/types';
+import type { WizardPick, WizardQuotePlan } from '../../data/services/treeToQuote';
 import { QuoteCta } from './QuoteCta';
 import { GuidedWizard } from './GuidedWizard';
 import { RefDropzone } from './RefDropzone';
@@ -202,6 +203,8 @@ export function CotizadorRedesign() {
   const [quantity, setQuantity] = useState(1);
   const [adjuntos, setAdjuntos] = useState<string[]>([]);
   const [mode, setMode] = useState<'guided' | 'catalog'>('guided');
+  /** Complementos del plan del wizard (ej: el modelo 3D cuando hay que crearlo). */
+  const [extras, setExtras] = useState<WizardPick[]>([]);
 
   const svc = WEB3D.find(s => s.id === serviceId);
   const variables: ServiceVariable[] = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
@@ -215,7 +218,37 @@ export function CotizadorRedesign() {
     try { return computeQuote(svc.id, tier, currency, quoteOpts); } catch { return null; }
   }, [svc, tier, currency, quoteOpts]);
 
-  const summary = svc && quote ? `${svc.nameEs} — ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)} (${tier})` : '';
+  /** Aplica el plan del wizard: principal en configuración, resto como líneas extra. */
+  const applyPlan = (plan: WizardQuotePlan) => {
+    const principal = plan.picks[0];
+    if (!principal) return;
+    setServiceId(principal.serviceId);
+    setVals(principal.vals);
+    setExtras(plan.picks.slice(1));
+  };
+
+  /** Cotización de cada complemento del wizard. */
+  const extraQuotes = useMemo(() => extras.map(p => {
+    try {
+      const t = derivarTier(p.serviceId, p.vals);
+      const q = computeQuote(p.serviceId, t, currency, quoteOpts);
+      return q ? { pick: p, tier: t, quote: q } : null;
+    } catch { return null; }
+  }).filter((x): x is NonNullable<typeof x> => x !== null), [extras, currency, quoteOpts]);
+
+  const totalProyecto = extraQuotes.length > 0 && quote
+    ? {
+      min: quote.totalMin + extraQuotes.reduce((a, e) => a + e.quote.totalMin, 0),
+      max: quote.totalMax + extraQuotes.reduce((a, e) => a + e.quote.totalMax, 0),
+    }
+    : null;
+
+  const summary = svc && quote
+    ? [`${svc.nameEs} (${tier}): ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)}`,
+       ...extraQuotes.map(e => `${e.pick.labelEs} — ${e.quote.serviceName} (${e.tier}): ${fmt(currency, e.quote.totalMin)}–${fmt(currency, e.quote.totalMax)}`),
+       totalProyecto ? `Total proyecto: ${fmt(currency, totalProyecto.min)}–${fmt(currency, totalProyecto.max)}` : '',
+      ].filter(Boolean).join('\n')
+    : '';
 
   return (
     <div style={{ minHeight: '100vh', background: '#fbfbfd', position: 'relative' }}>
@@ -260,14 +293,14 @@ export function CotizadorRedesign() {
 
       <div className="cx-content">
         {/* ═══ MODO GUIADO ═══ */}
-        {mode === 'guided' && !svc && <GuidedWizard />}
+        {mode === 'guided' && !svc && <GuidedWizard onComplete={applyPlan} />}
 
         {/* ═══ CONFIGURACIÓN (cuando hay servicio) ═══ */}
         {svc && (
           <section style={{ paddingTop: 40, paddingBottom: 60, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,380px)', gap: 32, alignItems: 'start' }} className="cx-desktop-only">
             {/* Panel izquierdo: configuración */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <button onClick={() => setServiceId('')} data-noprint
+              <button onClick={() => { setServiceId(''); setExtras([]); }} data-noprint
                 style={{ alignSelf: 'flex-start', font: '600 14px inherit', color: '#0071e3', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 8 }}>
                 ← Cambiar servicio
               </button>
@@ -372,6 +405,29 @@ export function CotizadorRedesign() {
                       </div>
                     </div>
                   </div>
+                  {extraQuotes.length > 0 && (
+                    <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+                      <div style={{ fontSize: 12, fontWeight: 600, color: '#86868b', marginBottom: 10 }}>Tu proyecto también incluye</div>
+                      {extraQuotes.map(e => (
+                        <div key={e.pick.serviceId} style={{ padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.04)' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
+                            <span style={{ fontSize: 13.5, color: '#1d1d1f' }}>{e.pick.labelEs}</span>
+                            <span style={{ fontSize: 13.5, fontWeight: 600, color: '#1d1d1f', whiteSpace: 'nowrap' }}>
+                              {fmt(currency, e.quote.totalMin)}–{fmt(currency, e.quote.totalMax)}
+                            </span>
+                          </div>
+                          <div style={{ fontSize: 11, color: '#aeaeb2', marginTop: 2 }}>{e.quote.serviceName} · nivel {e.tier}</div>
+                          {e.pick.notaEs && <div style={{ fontSize: 11, color: '#86868b', marginTop: 3, lineHeight: 1.4 }}>{e.pick.notaEs}</div>}
+                        </div>
+                      ))}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 12 }}>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: '#86868b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Total proyecto</span>
+                        <span style={{ fontSize: 17, fontWeight: 700, color: '#0071e3', letterSpacing: '-0.02em' }}>
+                          {fmt(currency, totalProyecto!.min)}–{fmt(currency, totalProyecto!.max)}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                   {quote.entregables.length > 0 && (
                     <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(0,0,0,0.06)' }}>
                       <div style={{ fontSize: 12, fontWeight: 600, color: '#86868b', marginBottom: 8 }}>Incluye</div>
@@ -407,7 +463,7 @@ export function CotizadorRedesign() {
             }}>
               {SERVICES.map((s, i) => (
                 <ServiceCard key={s.id} svc={s} currency={currency} index={i}
-                  onPick={() => { setMode('guided'); setServiceId(s.id); setVals({}); }} />
+                  onPick={() => { setMode('guided'); setServiceId(s.id); setVals({}); setExtras([]); }} />
               ))}
             </div>
           </section>
