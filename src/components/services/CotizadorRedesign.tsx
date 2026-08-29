@@ -321,8 +321,8 @@ export function CotizadorRedesign() {
         {/* ═══ MODO GUIADO ═══ */}
         {mode === 'guided' && !svc && <GuidedWizard onComplete={applyPlan} />}
 
-        {/* ═══ CONFIGURACIÓN (cuando hay servicio) ═══ */}
-        {svc && (
+        {/* ═══ CONFIGURACIÓN (modo guiado, con servicio) ═══ */}
+        {mode === 'guided' && svc && (
           <section style={{ paddingTop: 40, paddingBottom: 60, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,380px)', gap: 32, alignItems: 'start' }} className="cx-config">
             {/* Panel izquierdo: configuración */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
