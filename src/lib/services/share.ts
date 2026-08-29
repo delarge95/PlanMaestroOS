@@ -1,6 +1,9 @@
 import type { Currency, LevelId } from '../../data/services/types';
 
-export const CONTACT_EMAIL = 'contacto@ag-serv.com';
+import { BRAND } from '../../data/services/branding';
+
+/** Fuente única del email público: branding.ts (PENDIENTE usuario: confirmar real). */
+export const CONTACT_EMAIL = BRAND.contactEmail;
 const LS_KEY = 'agserv-quote-v1';
 
 type UrgencyId = 'none' | '72h' | '24h';
@@ -102,7 +105,7 @@ export interface SummaryArgs {
 
 export function buildSummary(a: SummaryArgs): string {
   const lines = [
-    `Cotización AG-SERV · ${a.id}`,
+    `Cotización de proyecto 3D · ${a.id}`,
     `Servicio: ${a.serviceName} (${a.serviceCode})`,
     `Nivel calculado: ${a.tier}`,
     `Horas estimadas: ${a.hoursRange}`,

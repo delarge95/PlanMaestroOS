@@ -59,7 +59,7 @@ export function CotizadorChat(props: ChatContext) {
         </button>
       )}
       {open && (
-        <div role="dialog" aria-label="Asistente AG-SERV" data-noprint
+        <div role="dialog" aria-label="Asistente de cotización" data-noprint
           style={{
             position: 'fixed', right: 18, bottom: 18, zIndex: 61, width: 'min(360px, calc(100vw - 36px))',
             height: 460, maxHeight: '70vh', display: 'flex', flexDirection: 'column',
@@ -67,7 +67,7 @@ export function CotizadorChat(props: ChatContext) {
             boxShadow: '0 12px 32px rgba(20,24,40,.18)',
           }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderBottom: '1px solid #eceef3' }}>
-            <strong style={{ fontSize: 13.5, color: '#1a1d29' }}>Asistente AG-SERV</strong>
+            <strong style={{ fontSize: 13.5, color: '#1a1d29' }}>Asistente de cotización</strong>
             <button onClick={() => setOpen(false)} aria-label="Cerrar asistente"
               style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: 16, color: '#5a5e6e' }}>×</button>
           </div>

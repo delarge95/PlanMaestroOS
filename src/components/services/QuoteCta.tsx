@@ -18,7 +18,7 @@ export function QuoteCta({ summary, url }: { summary: string; url: string }) {
     setTimeout(() => setFeedback(''), 3500);
   };
 
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Cotización AG-SERV`)}&body=${encodeURIComponent(summary)}`;
+  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Cotización de proyecto 3D`)}&body=${encodeURIComponent(summary)}`;
   const whatsapp = `https://wa.me/?text=${encodeURIComponent(summary)}`;
 
   return (

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { computeQuote } from '../../data/services/formula';
-import { getGalleryAsset, TIER_SCOPE, familyIcon } from '../../data/services/galleryManifest';
+import { getGalleryAsset, familyIllustration, TIER_SCOPE, familyIcon } from '../../data/services/galleryManifest';
 import type { ServiceDef } from '../../data/services/catalogCore';
 import type { Currency, LevelId } from '../../data/services/types';
 
@@ -76,7 +76,7 @@ export function TierGallery({ svc, tier, currency, quoteOpts }: {
 }
 
 function LevelMedia({ svc, tier }: { svc: ServiceDef; tier: LevelId }) {
-  const asset = getGalleryAsset(svc.id, tier);
+  const asset = getGalleryAsset(svc.id, tier) ?? familyIllustration(svc.family, tier);
   if (asset) {
     return (
       <figure style={{ margin: '4px 0 0' }}>
@@ -96,8 +96,8 @@ function LevelMedia({ svc, tier }: { svc: ServiceDef; tier: LevelId }) {
     }}>
       <span style={{ fontSize: 22 }}>{familyIcon(svc.family)}</span>
       <span style={{ fontSize: 12, lineHeight: 1.45, color: '#44485a' }}>
-        Nivel <strong>{tier}</strong> ({TIER_SCOPE[tier]?.label}). Estamos subiendo ejemplos visuales de este
-        servicio; mientras tanto el desglose de arriba describe exactamente qué recibes.
+        Nivel <strong>{tier}</strong> ({TIER_SCOPE[tier]?.label}). El desglose de arriba describe
+        exactamente qué recibes en este nivel.
       </span>
     </div>
   );
