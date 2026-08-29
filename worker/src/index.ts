@@ -10,7 +10,7 @@ import {
   type AiExtractRequestOptions,
   type AiChatRequestOptions,
 } from './ai/client';
-import { getAuditLogs, logAiCall, type LogAiCallOptions } from './lib/audit';
+import { getAuditLogs, logAiCall, clearAuditLogs, type LogAiCallOptions } from './lib/audit';
 import type { AiActionName } from './ai/actions';
 
 export interface WorkerEnv {
@@ -151,6 +151,7 @@ export async function handleWorkerRequest(req: WorkerRequestOptions) {
   return result;
 }
 
-export { getAuditLogs, logAiCall, processAiDraft, processAiExtract, processAiChat, getWorkerHealth };
+export { getAuditLogs, logAiCall, clearAuditLogs, processAiDraft, processAiExtract, processAiChat, getWorkerHealth };
+
 
 
