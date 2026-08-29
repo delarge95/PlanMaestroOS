@@ -11,11 +11,11 @@
 |---|---|---|---|---|---|---|
 | `colored-skull-base` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
 | `exploded-skull` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
-| `hand` | 235 | 4 | **231** | **63** | 168 | **27.3%** |
-| `lower-limb` | 462 | 40 | **422** | **117** | 305 | **27.7%** |
+| `hand` | 235 | 4 | **231** | **86** | 145 | **37.2%** |
+| `lower-limb` | 462 | 40 | **422** | **136** | 286 | **32.2%** |
 | `overview-colored-skull` | 31 | 0 | **31** | **29** | 2 | **93.5%** |
-| `overview-skeleton` | 147 | 0 | **147** | **92** | 55 | **62.6%** |
-| `upper-limb` | 575 | 27 | **548** | **164** | 384 | **29.9%** |
+| `overview-skeleton` | 147 | 0 | **147** | **144** | 3 | **98%** |
+| `upper-limb` | 575 | 27 | **548** | **183** | 365 | **33.4%** |
 | `vertebrae` | 4 | 0 | **4** | **3** | 1 | **75%** |
 
 > **Criterio de Aceptación Ciclo 4 (Tarea A2):** Llevar las piezas visibles sin dueño al **< 10%** por modelo mediante enriquecimiento del grafo o alias.
@@ -36,15 +36,10 @@
 |---|---|---|---|
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
 
-### 🔹 Modelo: `hand` (168 piezas sin dueño)
+### 🔹 Modelo: `hand` (145 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
-| `1st_metacarpal_bone` | `bone` | *Sin candidato claro* | — |
-| `2nd_metacarpal_bone` | `bone` | *Sin candidato claro* | — |
-| `3rd_metacarpal_bone` | `bone` | *Sin candidato claro* | — |
-| `4th_metacarpal_bone` | `bone` | *Sin candidato claro* | — |
-| `5th_metacarpal_bone` | `bone` | *Sin candidato claro* | — |
 | `Adductor_pollicis` | `muscle` | `mus-flexor-pollicis-longus` (Flexor Largo del Pulgar) | 50% |
 | `Annular_ligament(A1)_of_1st_finger` | `ligament` | *Sin candidato claro* | — |
 | `Annular_ligament(A2)_of_1st_finger` | `ligament` | *Sin candidato claro* | — |
@@ -65,16 +60,16 @@
 | `Articular_cartilage_of_capitate_bone​` | `cartilage` | `bone-capitate` (Grande (carpo)) | 50% |
 | `Articular_cartilage_of_hamate_bone​` | `cartilage` | `bone-hamate` (Ganchoso) | 50% |
 | `Articular_cartilage_of_lunate_bone` | `cartilage` | `bone-lunate-bone` (Semilunar) | 50% |
-| `Articular_cartilage_of_pisiform_bone_​` | `cartilage` | *Sin candidato claro* | — |
+| `Articular_cartilage_of_pisiform_bone_​` | `cartilage` | `bone-pisiform-bone` (Hueso pisiforme) | 50% |
 | `Articular_cartilage_of_radius_distal_end​` | `cartilage` | *Sin candidato claro* | — |
 | `Articular_cartilage_of_scaphoid_bone​` | `cartilage` | `bone-scaphoid` (Escafoides (carpo)) | 50% |
 | `Articular_cartilage_of_trapezium_bone​` | `cartilage` | `bone-trapezium` (Trapecio (carpo)) | 50% |
-| `Articular_cartilage_of_trapezoid_bone​` | `cartilage` | *Sin candidato claro* | — |
-| `Articular_cartilage_of_triquetrum_bone` | `cartilage` | *Sin candidato claro* | — |
-| `Articular_cartilages_of_distal_phalanges` | `cartilage` | *Sin candidato claro* | — |
-| `Articular_cartilages_of_metacarpal_bones` | `cartilage` | *Sin candidato claro* | — |
-| `Articular_cartilages_of_middle_phalanges` | `cartilage` | *Sin candidato claro* | — |
-| `Articular_cartilages_of_proximal_phalanges` | `cartilage` | *Sin candidato claro* | — |
+| `Articular_cartilage_of_trapezoid_bone​` | `cartilage` | `bone-trapezoid-bone` (Hueso trapezoide (carpo)) | 50% |
+| `Articular_cartilage_of_triquetrum_bone` | `cartilage` | `bone-triquetrum-bone` (Hueso piramidal (carpo)) | 50% |
+| `Articular_cartilages_of_distal_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
+| `Articular_cartilages_of_metacarpal_bones` | `cartilage` | `bone-metacarpal-bones` (Metacarpianos (1.º - 5.º)) | 50% |
+| `Articular_cartilages_of_middle_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
+| `Articular_cartilages_of_proximal_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
 | `Basilic_vein` | `vessel` | *Sin candidato claro* | — |
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
 | `Capitohamate_interosseus_ligament` | `ligament` | *Sin candidato claro* | — |
@@ -95,11 +90,6 @@
 | `Deep_transverse_metacarpal_ligament` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 50% |
 | `Deep_veins_of_the_arm` | `vessel` | *Sin candidato claro* | — |
 | `Deep_venous_palmar_arch` | `vessel` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_1st_finger` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_2d_finger` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_3d_finger` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_4th_finger` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_5th_finger` | `bone` | *Sin candidato claro* | — |
 | `Dorsal_carpal_arch` | `vessel` | *Sin candidato claro* | — |
 | `Dorsal_carpal_network` | `vessel` | *Sin candidato claro* | — |
 | `Dorsal_carpometacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
@@ -141,10 +131,6 @@
 | `Ligaments` | `ligament` | *Sin candidato claro* | — |
 | `Lunotriquetral_interosseous_ligament` | `ligament` | *Sin candidato claro* | — |
 | `Median_antebrachial_vein` | `vessel` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_2d_finger` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_3rd_finger` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_4th_finger` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_5th_finger` | `bone` | *Sin candidato claro* | — |
 | `Muscles` | `muscle` | `mus-extraocular-muscles` (Músculos Extraoculares) | 100% |
 | `Nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 100% |
 | `Oblique_ligament_of_1st_finger` | `ligament` | *Sin candidato claro* | — |
@@ -165,7 +151,6 @@
 | `Palmar_ulnocarpal_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
 | `Palmar_venous_network_of_hand` | `vessel` | *Sin candidato claro* | — |
 | `Perforating_arteries_of_hand` | `vessel` | *Sin candidato claro* | — |
-| `Pisiform` | `bone` | *Sin candidato claro* | — |
 | `Pisohamate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Pisometacarpal_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Pisotriquetral_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
@@ -173,11 +158,6 @@
 | `Posterior_interosseous_veins` | `vessel` | `ner-posterior-interosseous-nerve` (Nervio Interóseo Posterior (PIN)) | 67% |
 | `Princeps_pollicis_artery` | `vessel` | *Sin candidato claro* | — |
 | `Proper_palmar_digital_arteries` | `vessel` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_1st_finger` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_2d_finger` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_3rd_finger` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_4th_finger` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_5th_finger` | `bone` | *Sin candidato claro* | — |
 | `Radial_artery` | `vessel` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 50% |
 | `Radial_collateral_ligament` | `ligament` | `lig-fibular-collateral-ligament` (Ligamento colateral lateral (LCL)) | 67% |
 | `Radial_veins` | `vessel` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 50% |
@@ -187,7 +167,6 @@
 | `Scaphocapitate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Scapholunate_interosseus_ligament` | `ligament` | *Sin candidato claro* | — |
 | `Scaphotrapeziotrapezoidal_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Sesamoid_bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 | `Superficial_palmar_arch` | `vessel` | *Sin candidato claro* | — |
 | `Superficial_palmar_venous_arch` | `vessel` | *Sin candidato claro* | — |
 | `Superficial_transverse_metacarpal_ligament` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 50% |
@@ -195,12 +174,10 @@
 | `Synovial_sheaths_of_fingers` | `tendon` | *Sin candidato claro* | — |
 | `Transverse_carpal_ligament` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 67% |
 | `Trapeziotrapezoidal_interosseous_ligament` | `ligament` | *Sin candidato claro* | — |
-| `Trapezoid` | `bone` | `lig-trapezoid-ligament` (Ligamento trapezoide (coracoclavicular)) | 100% |
 | `Trapezoideocapitate_interosseous_ligament` | `ligament` | *Sin candidato claro* | — |
 | `Triangular_fibro_cartilage_disc` | `cartilage` | *Sin candidato claro* | — |
 | `Triquetrocapitate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Triquetrohamate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Triquetrum` | `bone` | *Sin candidato claro* | — |
 | `Ulnar_artery` | `vessel` | `ner-ulnar-nerve` (Nervio Ulnar) | 50% |
 | `Ulnar_artery_(dorsal_carpal_br)` | `vessel` | `lig-dorsal-radio-ulnar-ligament` (Ligamento radio-ulnar dorsal) | 50% |
 | `Ulnar_collateral_ligament` | `ligament` | `lig-ulnar-collateral-ligament-of-elbow` (Ligamento colateral cubital del codo) | 100% |
@@ -209,7 +186,7 @@
 | `Ulnotriquetral_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Veins` | `vessel` | *Sin candidato claro* | — |
 
-### 🔹 Modelo: `lower-limb` (305 piezas sin dueño)
+### 🔹 Modelo: `lower-limb` (286 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
@@ -255,9 +232,9 @@
 | `Art_cart_of_fibula_proximal_tibiofibular_jointr` | `cartilage` | *Sin candidato claro* | — |
 | `Art_cart_of_fibula_talofibular_jointr` | `cartilage` | *Sin candidato claro* | — |
 | `Art_cart_of_hip_bone_pubisr_` | `cartilage` | `art-hip-joint` (Coxofemoral (Cadera)) | 40% |
-| `Art_cart_of_intermediate_cuneiform_boner` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_lateral_cuneiform_boner` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_medial_cuneiform_boner_` | `cartilage` | *Sin candidato claro* | — |
+| `Art_cart_of_intermediate_cuneiform_boner` | `cartilage` | `bone-cuneiform-bones` (Huesos cuneiformes (medial, intermedio, lateral)) | 40% |
+| `Art_cart_of_lateral_cuneiform_boner` | `cartilage` | `bone-cuneiform-bones` (Huesos cuneiformes (medial, intermedio, lateral)) | 40% |
+| `Art_cart_of_medial_cuneiform_boner_` | `cartilage` | `bone-cuneiform-bones` (Huesos cuneiformes (medial, intermedio, lateral)) | 40% |
 | `Art_cart_of_navicular_boner` | `cartilage` | *Sin candidato claro* | — |
 | `Art_cart_of_patellar` | `cartilage` | *Sin candidato claro* | — |
 | `Art_cart_of_sacrococcygeal_joint_on_coccyx` | `cartilage` | `art-shoulder-joint` (Glenohumeral (Hombro)) | 40% |
@@ -270,7 +247,7 @@
 | `Art_cart_of_tibia_proximal_tibiofibular_jointr​` | `cartilage` | *Sin candidato claro* | — |
 | `Art_carts_of_distal_phalanges_of_footr` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 40% |
 | `Art_carts_of_metatarsal_bonesr` | `bone` | *Sin candidato claro* | — |
-| `Art_carts_of_middle_phalanges_of_footr` | `cartilage` | *Sin candidato claro* | — |
+| `Art_carts_of_middle_phalanges_of_footr` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 40% |
 | `Art_carts_of_proximal_phalanges_of_footr` | `cartilage` | `art-radioulnar-articulation` (Radioulnar Proximal) | 40% |
 | `Arteries` | `vessel` | *Sin candidato claro* | — |
 | `Articular_capsule_of_knee_jointr` | `joint` | *Sin candidato claro* | — |
@@ -298,7 +275,6 @@
 | `Cruciform_ligaments_or_4th_toer` | `ligament` | *Sin candidato claro* | — |
 | `Cruciform_ligaments_or_5th_toer` | `ligament` | *Sin candidato claro* | — |
 | `Crural_fasciar` | `fascia` | *Sin candidato claro* | — |
-| `Cuboid_boner` | `bone` | *Sin candidato claro* | — |
 | `Cuneometatarsal_interosseus_ligamentsr` | `ligament` | *Sin candidato claro* | — |
 | `Deep_artery_of_the_thighr` | `vessel` | *Sin candidato claro* | — |
 | `Deep_branch_of_Lateral_plantar_nerver` | `nerve` | *Sin candidato claro* | — |
@@ -311,11 +287,6 @@
 | `Descending_branch_of_lateral_circumflex_femoral_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Descending_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Descending_part_of_Iliofemoral_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_fifth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_first_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Dorsal_calcaneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Dorsal_cuboidonavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Dorsal_cuneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
@@ -371,7 +342,6 @@
 | `Intercapitular_veins_of_footr` | `vessel` | *Sin candidato claro* | — |
 | `Intercornual_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Intercuneiform_interosseus_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Intermediate_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
 | `Interossea__Posterior_sacro-iliac_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Interosseous_membrane_of_legr` | `fascia` | *Sin candidato claro* | — |
 | `Interosseus_talocalcaneal_ligamentr` | `ligament` | *Sin candidato claro* | — |
@@ -383,7 +353,6 @@
 | `Lateral_calcaneal_nervesr` | `nerve` | *Sin candidato claro* | — |
 | `Lateral_circumflex_femoral_arteryr` | `vessel` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
 | `Lateral_circumflex_femoral_veinr` | `vessel` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
-| `Lateral_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
 | `Lateral_cutaneous_branch_of_Iliohypogaticus_nerver` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 40% |
 | `Lateral_dorsal_cutaneous_nerve_(Sural_n)r` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 60% |
 | `Lateral_dorsal_cutaneous_nerver` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
@@ -406,7 +375,6 @@
 | `Medial_circumflex_femoral_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Medial_circumflex_femoral_veinr` | `vessel` | *Sin candidato claro* | — |
 | `Medial_collatertal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Medial_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
 | `Medial_dorsal_cutaneous_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Medial_femoral_intermuscular_septumr` | `fascia` | *Sin candidato claro* | — |
 | `Medial_malleolar_artery_of_Posterior_tibial_arteryr` | `vessel` | *Sin candidato claro* | — |
@@ -423,10 +391,6 @@
 | `Metatarsal_interosseous_ligamentsr` | `ligament` | *Sin candidato claro* | — |
 | `Middle_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Middle_genicular_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_fifth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Muscles` | `muscle` | `mus-extraocular-muscles` (Músculos Extraoculares) | 100% |
 | `Muscular_branches_of_the_Femoral_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 100% |
@@ -471,16 +435,10 @@
 | `Posterior_tibiotalar_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Proper_plantar_digital_branches_(Lateral_plantar_nerve)r` | `nerve` | *Sin candidato claro* | — |
 | `Proper_plantar_digital_branches_(Medial_plantar_nerve)r` | `nerve` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_fifth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_first_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Pubofemoral_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Saphenous_branch_of_Femoralis_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Saphenous_nerve_(Medial_crural_cutaneous_branches)r` | `nerve` | *Sin candidato claro* | — |
 | `Semimembranosus_bursa_deep_to_tendonr` | `tendon` | *Sin candidato claro* | — |
-| `Sesamoid_bones_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Small_saphenous_veinr` | `vessel` | *Sin candidato claro* | — |
 | `Sup,_Inf,_Ant,_Post,_Pubic_ligaments` | `ligament` | *Sin candidato claro* | — |
 | `Superficial_branch_of_Lateral_plantar_nerver` | `nerve` | *Sin candidato claro* | — |
@@ -526,67 +484,15 @@
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
 | `Bones_right` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 
-### 🔹 Modelo: `overview-skeleton` (55 piezas sin dueño)
+### 🔹 Modelo: `overview-skeleton` (3 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
-| `1st_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
-| `2nd_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
-| `3rd_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
-| `4th_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
-| `5th_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
 | `Bones_right` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 | `Cartilages_right` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_10th_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_1st_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_2nd_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_3rd_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_4th_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_5th_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_6th_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_7th_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_8th_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Costal_cart_of_9th_ribr` | `cartilage` | *Sin candidato claro* | — |
-| `Cuboid_boner` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_1st_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_3d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_4th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_5th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_fifth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_first_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Intermediate_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
-| `Lateral_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
-| `Medial_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_3rd_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_4th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_5th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_fifth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Pisiformr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_1st_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_3rd_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_4th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_5th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_fifth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_first_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Sesamoid_bones_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Sesamoid_bones_of_handr` | `bone` | *Sin candidato claro* | — |
-| `Trapezoidr` | `bone` | *Sin candidato claro* | — |
-| `Triquetrumr` | `bone` | *Sin candidato claro* | — |
 
-### 🔹 Modelo: `upper-limb` (384 piezas sin dueño)
+### 🔹 Modelo: `upper-limb` (365 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
@@ -594,19 +500,14 @@
 | `10th_rib_art_cart_of_tubercler` | `cartilage` | *Sin candidato claro* | — |
 | `11th_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
 | `12th_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
-| `1st_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
 | `1st_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
 | `1st_rib_art_cart_of_tubercler` | `cartilage` | *Sin candidato claro* | — |
-| `2nd_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
 | `2nd_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
 | `2nd_rib_art_cart_of_tubercler` | `cartilage` | *Sin candidato claro* | — |
-| `3rd_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
 | `3rd_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
 | `3rd_rib_art_cart_of_tubercler` | `cartilage` | *Sin candidato claro* | — |
-| `4th_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
 | `4th_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
 | `4th_rib_art_cart_of_tubercler` | `cartilage` | *Sin candidato claro* | — |
-| `5th_metacarpal_boner` | `bone` | *Sin candidato claro* | — |
 | `5th_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
 | `5th_rib_art_cart_of_tubercler` | `cartilage` | *Sin candidato claro* | — |
 | `6th_rib_art_cart_of_headr` | `cartilage` | *Sin candidato claro* | — |
@@ -667,18 +568,18 @@
 | `Art_cart_of_humerus_distal_endr​` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 40% |
 | `Art_cart_of_humerus_head​r` | `cartilage` | *Sin candidato claro* | — |
 | `Art_cart_of_lunate_bone` | `cartilage` | `bone-lunate-bone` (Semilunar) | 50% |
-| `Art_cart_of_pisiform_bone_​` | `cartilage` | *Sin candidato claro* | — |
+| `Art_cart_of_pisiform_bone_​` | `cartilage` | `bone-pisiform-bone` (Hueso pisiforme) | 50% |
 | `Art_cart_of_radius_distal_end​r` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 40% |
 | `Art_cart_of_radius_head​r` | `cartilage` | *Sin candidato claro* | — |
 | `Art_cart_of_scaphoid_bone​` | `cartilage` | `bone-scaphoid` (Escafoides (carpo)) | 50% |
 | `Art_cart_of_trapezium_bone​` | `cartilage` | `bone-trapezium` (Trapecio (carpo)) | 50% |
-| `Art_cart_of_trapezoid_bone​` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_triquetrum_bone` | `cartilage` | *Sin candidato claro* | — |
+| `Art_cart_of_trapezoid_bone​` | `cartilage` | `bone-trapezoid-bone` (Hueso trapezoide (carpo)) | 50% |
+| `Art_cart_of_triquetrum_bone` | `cartilage` | `bone-triquetrum-bone` (Hueso piramidal (carpo)) | 50% |
 | `Art_cart_of_ulna_(distal_end)r` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 40% |
 | `Art_cart_of_ulna_(proximal_end)r` | `cartilage` | `art-radioulnar-articulation` (Radioulnar Proximal) | 40% |
 | `Art_carts_of_distal_phalanges` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 50% |
-| `Art_carts_of_metacarpal_bones` | `bone` | *Sin candidato claro* | — |
-| `Art_carts_of_middle_phalanges` | `cartilage` | *Sin candidato claro* | — |
+| `Art_carts_of_metacarpal_bones` | `bone` | `bone-metacarpal-bones` (Metacarpianos (1.º - 5.º)) | 50% |
+| `Art_carts_of_middle_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
 | `Art_carts_of_proximal_phalanges` | `cartilage` | `art-radioulnar-articulation` (Radioulnar Proximal) | 50% |
 | `Articular_capsule_of_elbow_jointr` | `joint` | *Sin candidato claro* | — |
 | `Articular_capsule_of_glenohumeral_jointr` | `joint` | *Sin candidato claro* | — |
@@ -743,11 +644,6 @@
 | `Deep_veins_of_the_armr` | `vessel` | *Sin candidato claro* | — |
 | `Deep_venous_palmar_arch` | `vessel` | *Sin candidato claro* | — |
 | `Deltoid_muscler` | `muscle` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_1st_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_3d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_4th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Distal_phalanx_of_5th_fingerr` | `bone` | *Sin candidato claro* | — |
 | `Dorsal_carpal_archr` | `vessel` | *Sin candidato claro* | — |
 | `Dorsal_carpal_networkr` | `vessel` | *Sin candidato claro* | — |
 | `Dorsal_carpometacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
@@ -789,15 +685,15 @@
 | `Forearm_-_nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 50% |
 | `Forearm_-_veins` | `vessel` | *Sin candidato claro* | — |
 | `Glenoid_labrumr` | `cartilage` | *Sin candidato claro* | — |
-| `Hand_and_wrist_-_arteries` | `vessel` | *Sin candidato claro* | — |
-| `Hand_and_wrist_-_bones` | `bone` | *Sin candidato claro* | — |
+| `Hand_and_wrist_-_arteries` | `vessel` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 50% |
+| `Hand_and_wrist_-_bones` | `bone` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 75% |
 | `Hand_and_wrist_-_capsules,_ligaments,_fasciae` | `fascia` | *Sin candidato claro* | — |
-| `Hand_and_wrist_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
+| `Hand_and_wrist_-_cartilages` | `cartilage` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 50% |
 | `Hand_and_wrist_-_muscles` | `muscle` | `mus-lumbrical-muscles-of-hand` (Lumbricales de la Mano) | 50% |
-| `Hand_and_wrist_-_nerves` | `nerve` | *Sin candidato claro* | — |
-| `Hand_and_wrist_-_veins` | `vessel` | *Sin candidato claro* | — |
+| `Hand_and_wrist_-_nerves` | `nerve` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 50% |
+| `Hand_and_wrist_-_veins` | `vessel` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 50% |
 | `Head_and_neck_-_arteries` | `vessel` | *Sin candidato claro* | — |
-| `Head_and_neck_-_bones` | `bone` | *Sin candidato claro* | — |
+| `Head_and_neck_-_bones` | `bone` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 50% |
 | `Head_and_neck_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
 | `Head_and_neck_-_nerves` | `nerve` | *Sin candidato claro* | — |
 | `Inferior_glenohumeral_ligamentr` | `ligament` | *Sin candidato claro* | — |
@@ -825,10 +721,6 @@
 | `Medial_intermuscular_septum_of_armr` | `fascia` | *Sin candidato claro* | — |
 | `Middle_collateral_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Middle_glenohumeral_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_3rd_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_4th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Middle_phalanx_of_5th_fingerr` | `bone` | *Sin candidato claro* | — |
 | `Middle_trunk_of_brachial_plexusr` | `nerve` | *Sin candidato claro* | — |
 | `Musculocutaneus_nerve__-_lateral_antebrachial_cutaneous_nerver` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
 | `Nucleus_pulposus_C2-T1` | `cartilage` | *Sin candidato claro* | — |
@@ -873,11 +765,6 @@
 | `Posterior_ulnar_recurrent_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Princeps_pollicis_arteriesr` | `vessel` | *Sin candidato claro* | — |
 | `Proper_palmar_digital_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_1st_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_3rd_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_4th_fingerr` | `bone` | *Sin candidato claro* | — |
-| `Proximal_phalanx_of_5th_fingerr` | `bone` | *Sin candidato claro* | — |
 | `Quadrate_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Radial_annular_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Radial_arteryr` | `vessel` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 50% |
@@ -892,7 +779,7 @@
 | `Scaphocapitate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Scapholunate_interosseus_ligament` | `ligament` | *Sin candidato claro* | — |
 | `Scaphotrapeziotrapezoidal_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Sesamoid_bones_of_handr` | `bone` | *Sin candidato claro* | — |
+| `Sesamoid_bones_of_handr` | `bone` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 67% |
 | `Sternoclavicular_capsuler` | `joint` | `art-sternoclavicular-joint` (Esternoclavicular) | 50% |
 | `Subclavian_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Subclavian_nerver` | `nerve` | *Sin candidato claro* | — |
@@ -985,9 +872,9 @@
 
 ## 3. Estructuras del Grafo SIN Mallas 3D (`modelMeshes` Vacío)
 
-Total de estructuras en el grafo: **272**
-- Estructuras con mallas 3D: **216** (79.4%)
-- Estructuras sin mallas 3D: **56** (20.6%)
+Total de estructuras en el grafo: **281**
+- Estructuras con mallas 3D: **225** (80.1%)
+- Estructuras sin mallas 3D: **56** (19.9%)
 
 ### Detalle de Estructuras sin Mallas 3D:
 
