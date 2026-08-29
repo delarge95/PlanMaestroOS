@@ -12,7 +12,7 @@ import { LAUNCH_DISCOUNT } from '../../data/services/rateCard';
 import { SERVICE_VARIABLES, derivarTier, recommendedValue } from '../../data/services/serviceVariables';
 import type { ServiceVariable } from '../../data/services/serviceVariables';
 import { BRAND } from '../../data/services/branding';
-import type { Currency, LevelId } from '../../data/services/types';
+import type { Currency } from '../../data/services/types';
 import type { WizardPick, WizardQuotePlan } from '../../data/services/treeToQuote';
 import { QuoteCta } from './QuoteCta';
 import { GuidedWizard } from './GuidedWizard';
@@ -170,6 +170,13 @@ function ServiceCard({ svc, currency, onPick, index }: {
 // ═══════════════════════════════════════════════════════════════
 function LuxeSlider({ v, value, onChange }: { v: ServiceVariable; value: number; onChange: (n: number) => void }) {
   const pct = v.max != null && v.min != null && v.max !== v.min ? ((value - v.min) / (v.max - v.min)) * 100 : 50;
+  const applyFromClientX = (clientX: number, el: HTMLDivElement) => {
+    const r = el.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
+    const min = v.min ?? 0, max = v.max ?? 1;
+    const step = v.step && v.step > 0 ? v.step : 1;
+    onChange(Math.round((min + p * (max - min)) / step) * step);
+  };
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -178,11 +185,14 @@ function LuxeSlider({ v, value, onChange }: { v: ServiceVariable; value: number;
           {value}<span style={{ fontSize: 13, color: '#86868b', fontWeight: 400, marginLeft: 4 }}>{v.unidadEs}</span>
         </strong>
       </div>
-      <div style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(0,0,0,0.06)', cursor: 'pointer' }}
-        onClick={(e) => {
-          const r = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
-          const pct2 = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-          onChange(Math.round((v.min ?? 0) + pct2 * ((v.max ?? 1) - (v.min ?? 0))));
+      <div style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(0,0,0,0.06)', cursor: 'pointer', touchAction: 'none' }}
+        onPointerDown={(e) => {
+          e.currentTarget.setPointerCapture(e.pointerId);
+          applyFromClientX(e.clientX, e.currentTarget);
+        }}
+        onPointerMove={(e) => {
+          if (e.buttons !== 1) return;
+          applyFromClientX(e.clientX, e.currentTarget);
         }}>
         <div style={{
           position: 'absolute', left: 0, top: 0, height: '100%', borderRadius: 3,
@@ -195,11 +205,6 @@ function LuxeSlider({ v, value, onChange }: { v: ServiceVariable; value: number;
           boxShadow: '0 2px 8px rgba(0,0,0,0.15)', transition: 'left 0.25s cubic-bezier(0.25,0.8,0.4,1)',
         }} />
       </div>
-      {v.tierMap && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: '#aeaeb2', marginTop: 2 }}>
-          {v.tierMap.map((tm: { maxVal: number; tier: LevelId }) => <span key={tm.tier}>≤{tm.maxVal} → {tm.tier}</span>)}
-        </div>
-      )}
     </div>
   );
 }
@@ -279,7 +284,8 @@ export function CotizadorRedesign() {
         }
         @media (min-width: 769px) { .cx-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; max-width: 1200px !important; } }
         @media print { [data-noprint] { display: none !important; } body { background: #fff !important; } }
-        .cx-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .cx-content { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        @media (min-width: 1440px) { .cx-content { max-width: 1400px; } }
       `}</style>
 
       {/* NAV minimal */}

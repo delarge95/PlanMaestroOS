@@ -11,6 +11,7 @@ import { planFromTreeAnswers } from '../../data/services/treeToQuote';
 import type { WizardQuotePlan } from '../../data/services/treeToQuote';
 import { BRAND } from '../../data/services/branding';
 import { ModelPreview } from './ModelPreview';
+import { TreeIcon, ChatIcon, MailIcon, GearIcon } from './icons';
 
 type Answers = Record<string, string | number | boolean>;
 
@@ -57,7 +58,9 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.06)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
               >
-                <span style={{ fontSize: 28, lineHeight: 1 }}>{o.icon}</span>
+                <span style={{ color: '#0071e3', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+                  <TreeIcon name={o.icon ?? ''} size={26} />
+                </span>
                 <div>
                   <div style={{ fontSize: 17, fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.01em' }}>{o.label}</div>
                   <div style={{ fontSize: 13, color: '#86868b', marginTop: 3, lineHeight: 1.4 }}>{o.desc}</div>
@@ -80,13 +83,13 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
           <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 8px' }}>Cuéntame tu idea</h2>
           <p style={{ fontSize: 15, color: '#86868b', margin: '0 0 40px' }}>No necesitas saber cómo se llama — describe lo que imaginas.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 14, maxWidth: 520, margin: '0 auto' }}>
-            <a href='https://wa.me/573054396581' target='_blank' rel='noopener noreferrer' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
-              <span style={{ fontSize: 32 }}>💬</span>
+            <a href='https://wa.me/573054396581' target='_blank' rel='noopener noreferrer' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: '#0071e3', display: 'flex' }}><ChatIcon size={30} /></span>
               <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>WhatsApp</strong>
               <span style={{ fontSize: 13, color: '#86868b' }}>Describe tu idea y te respondo</span>
             </a>
-            <a href='mailto:alexwssonn@hotmail.com?subject=Idea%20de%20proyecto' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
-              <span style={{ fontSize: 32 }}>📧</span>
+            <a href='mailto:alexwssonn@hotmail.com?subject=Idea%20de%20proyecto' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: '#0071e3', display: 'flex' }}><MailIcon size={30} /></span>
               <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>Correo</strong>
               <span style={{ fontSize: 13, color: '#86868b' }}>Adjunta archivos si los tienes</span>
             </a>
@@ -115,7 +118,9 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
                   cursor: 'pointer', font: 'inherit', textAlign: 'left',
                   animation: `cardIn 0.4s ${i * 0.06}s both`,
                 }}>
-                <span style={{ fontSize: 26 }}>{o.icon}</span>
+                <span style={{ color: '#0071e3', display: 'flex', marginBottom: 8 }}>
+                  <TreeIcon name={o.icon ?? ''} size={24} />
+                </span>
                 <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.01em' }}>{o.label}</strong>
                 <span style={{ fontSize: 13, color: '#86868b', lineHeight: 1.45 }}>{o.desc}</span>
               </button>
@@ -143,11 +148,12 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
             {branch.questions.some(q => q.advanced) && !showAdvanced && (
               <button onClick={() => setShowAdvanced(true)}
                 style={{
-                  alignSelf: 'center', padding: '10px 24px', borderRadius: 999,
+                  alignSelf: 'center', display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '10px 24px', borderRadius: 999,
                   font: '600 14px inherit', color: '#0071e3',
                   background: 'none', border: '1px solid rgba(0,113,227,0.3)', cursor: 'pointer',
                 }}>
-                ⚙️ Opciones técnicas
+                <GearIcon size={16} /> Opciones técnicas
               </button>
             )}
           </div>
