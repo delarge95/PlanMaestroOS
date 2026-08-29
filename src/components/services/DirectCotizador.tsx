@@ -20,6 +20,7 @@ import { TierGallery } from './TierGallery';
 import { PriceWhy } from './PriceWhy';
 import { RefDropzone } from './RefDropzone';
 import { CotizadorChat } from './chat/CotizadorChat';
+import { Cotizador3DDemo } from './Cotizador3DDemo';
 import { BRAND, HOW_IT_WORKS } from '../../data/services/branding';
 import { computePriceDrivers } from '../../lib/services/priceWhy';
 import { inventoryLine } from '../../lib/services/fileChecklist';
@@ -247,6 +248,8 @@ export function DirectCotizador() {
           </div>
         </div>
       )}
+      <Cotizador3DDemo />
+
       <p style={{ margin: '0 0 18px', fontSize: 12, color: '#5a5e6e' }}>
         Precios en {currency === 'USD' ? 'dólares (tarifa internacional)' : 'pesos colombianos (mercado local)'}
         <Term id="moneda" />

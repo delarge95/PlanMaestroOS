@@ -12,10 +12,8 @@ export const BRAND = {
   /** Una línea para un visitante B2B que no sabe qué es render ni pipeline. */
   valueProp:
     'Convierto productos y datos industriales en experiencias 3D interactivas: desde renders fotorrealistas hasta configuradores web que tu cliente puede usar sin instalar nada.',
-  /** PENDIENTE(usuario): email real de contacto. */
-  contactEmail: 'contacto@ag-serv.com',
-  /** PENDIENTE(usuario): WhatsApp internacional sin '+' ni espacios. Vacío = se oculta el botón. */
-  whatsappNumber: '',
+  contactEmail: 'alexwssonn@hotmail.com',
+  whatsappNumber: '573054396581',
   links: {
     portfolio: 'https://delarge95.github.io/PlanMaestroOS/',
     artstation: 'https://www.artstation.com/alexanderwoodcocksalomon3',
