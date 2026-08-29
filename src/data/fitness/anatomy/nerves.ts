@@ -270,7 +270,7 @@ export const NERVES: NerveEntry[] = [
     "thigh",
     "lower-leg"
   ],
-  modelMeshes: {"lower-limb":["Schiatic_nerver"]},
+  modelMeshes: {"lower-limb": ["Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr", "Posterior_cutaneous_nerve_of_the_thighr", "Schiatic_nerver", "Sciatic_bursa_of_gluteus_maximus_(Ischiogluteal_bursa)r", "Sciatic_bursa_of_obturator_internusr", "Superior_clunial_nerve_(posterior_rami)r"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -309,7 +309,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "thigh"
   ],
-  modelMeshes: {"lower-limb":["Anterior_cutaneous_branches_of_Femoral_nerver","Femoral_nerver"]},
+  modelMeshes: {"lower-limb": ["Accessory_saphenous_veinr", "Anterior_cutaneous_branches_of_Femoral_nerver", "Femoral_branch_of_Genitofemoral_nerver", "Femoral_nerver", "Genital_branch_of_Genitofemoral_nerver", "Great_saphenous_veinr", "Infrapatellar_branch_of_Saphenous_nerver", "Muscular_branches_of_the_Femoral_nerver", "Saphenous_branch_of_Femoralis_nerver", "Saphenous_nerve_(Medial_crural_cutaneous_branches)r", "Saphenous_openingr", "Small_saphenous_veinr", "Tributary_veins_of_Great_and_small_saphenous_veinsr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -343,7 +343,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Common_fibular_nerver"]},
+  modelMeshes: {"lower-limb": ["Anterior_ligament_of_fibular_headr", "Anterior_talofibular_ligamentr", "Anterior_tibiofibular_ligamentr", "Art_cart_of_fibula_proximal_tibiofibular_jointr", "Art_cart_of_fibula_talofibular_jointr", "Art_cart_of_tibia_proximal_tibiofibular_jointr​", "Calcaneofibular_ligamentr", "Common_fibular_nerver", "Common_tendon_sheath_of_fibularis_musclesr", "Deep_fibular_nerver", "Dorsal_digital_branches_of_deep_fibular_nerver", "Dorsal_digital_branches_of_superficial_fibular_nerver", "Extensor_digitorum_longus-fibularis_tertius_vaginae_tendinumr", "Fibular", "Fibular_arteryr", "Fibular_collateral_ligamentr", "Fibular_veinr", "Fibularis_brevis_muscler", "Fibularis_longus_muscler", "Fibularis_tertius_muscler", "Inferior_fibular_retinaculumr", "Lateral_branch_of_deep_fibular_nerver", "Lateral_calcaneal_branch_of_fibular_arteryr", "Lateral_dorsal_cutaneous_nerve_(Sural_n)r", "Lateral_dorsal_cutaneous_nerver", "Lateral_malleolar_branches_of_Fibular_arteryr", "Lateral_plantar_cutaneous_nerve_(Sural_n)r", "Lateral_sural_cutaneous_nerver", "Ligaments_of_fibular_headr", "Medial_branch_of_deep_fibular_nerver", "Medial_dorsal_cutaneous_nerver", "Medial_sural_cutaneous_nerver", "Perforating_branches_of_fibular_arteryr", "Plantar_tendinous_sheath_of_fibularis_longusr", "Posterior_ligament_of_fibular_headr", "Posterior_talofibular_ligamentr", "Posterior_tibiofibular_ligamentr", "Superficial_fibular_nerver", "Superior_fibular_retinaculumr", "Sural_arteryr", "Sural_nerver", "Sural_veinr", "Transverse_tibiofibular_ligamentr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -380,7 +380,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Medial_calcaneal_branches_of_Tibial_nerver","Tibial_nerver"]},
+  modelMeshes: {"lower-limb": ["Common_plantar_digital_nervesr", "Deep_branch_of_Lateral_plantar_nerver", "Deep_branch_of_Medial_plantar_arteryr", "Lateral_calcaneal_nervesr", "Lateral_plantar_arteryr", "Lateral_plantar_cutaneous_nerve_(Sural_n)r", "Lateral_plantar_nerver", "Lateral_plantar_veinr", "Medial_calcaneal_branches_of_Tibial_nerver", "Medial_plantar_arteryr", "Medial_plantar_nerver", "Medial_plantar_veinr", "Plantar_digital_veinsr", "Proper_plantar_digital_branches_(Lateral_plantar_nerve)r", "Proper_plantar_digital_branches_(Medial_plantar_nerve)r", "Superficial_branch_of_Lateral_plantar_nerver", "Tibial_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -414,7 +414,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus cutaneus femoris lateralis"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Lateral_femoral_cuteneous_nerver"]},
+  modelMeshes: {"lower-limb": ["Anterior_branch_of_Iliohypogastric_nerver", "Femoral_branch_of_Genitofemoral_nerver", "Genital_branch_of_Genitofemoral_nerver", "Ilioinguinal_nerver", "Lateral_cutaneous_branch_of_Iliohypogaticus_nerver", "Lateral_femoral_cuteneous_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

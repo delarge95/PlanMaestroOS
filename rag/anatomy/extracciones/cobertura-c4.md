@@ -12,7 +12,7 @@
 | `colored-skull-base` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
 | `exploded-skull` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
 | `hand` | 235 | 4 | **231** | **223** | 8 | **96.5%** |
-| `lower-limb` | 462 | 40 | **422** | **136** | 286 | **32.2%** |
+| `lower-limb` | 462 | 40 | **422** | **416** | 6 | **98.6%** |
 | `overview-colored-skull` | 31 | 0 | **31** | **29** | 2 | **93.5%** |
 | `overview-skeleton` | 147 | 0 | **147** | **144** | 3 | **98%** |
 | `upper-limb` | 575 | 27 | **548** | **185** | 363 | **33.8%** |
@@ -47,298 +47,18 @@
 | `Ligaments` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 100% |
 | `Muscles` | `muscle` | `mus-extraocular-muscles` (Músculos Extraoculares) | 100% |
 | `Nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 100% |
-| `Veins` | `vessel` | *Sin candidato claro* | — |
+| `Veins` | `vessel` | `ves-lower-limb-venous-network` (Sistema venoso del miembro inferior (safenas, femoral, poplítea y tibiales)) | 100% |
 
-### 🔹 Modelo: `lower-limb` (286 piezas sin dueño)
+### 🔹 Modelo: `lower-limb` (6 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
-| `1th_to_4th_perforating_branches_of_the_deep_femoral_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `1th_to_4th_perforating_branches_of_the_deep_femoral_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Accessory_saphenous_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Accompanying_veins_of_arcuate_and_dorsal_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Accompanying_veins_of_dorsal_digital_metatarsal_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Acetabular_labrumr` | `cartilage` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 50% |
-| `Annular_ligaments_of_1st_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
-| `Annular_ligaments_of_2nd_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
-| `Annular_ligaments_of_3rd_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
-| `Annular_ligaments_of_4th_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
-| `Annular_ligaments_of_5th_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
-| `Annulus_fibrosus_L1_L2` | `cartilage` | *Sin candidato claro* | — |
-| `Annulus_fibrosus_L2_L3` | `cartilage` | *Sin candidato claro* | — |
-| `Annulus_fibrosus_L3_L4` | `cartilage` | *Sin candidato claro* | — |
-| `Annulus_fibrosus_L4_L5` | `cartilage` | *Sin candidato claro* | — |
-| `Annulus_fibrosus_L5_S1` | `cartilage` | *Sin candidato claro* | — |
-| `Annulus_fibrosus_T12_L1` | `cartilage` | *Sin candidato claro* | — |
-| `Anterior_branch_of_Iliohypogastric_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Anterior_femoral_cutaneous_veinr` | `vessel` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
-| `Anterior_horn_of_Lateral_meniscusr` | `cartilage` | *Sin candidato claro* | — |
-| `Anterior_horn_of_Medial_meniscusr` | `cartilage` | *Sin candidato claro* | — |
-| `Anterior_intermuscular_septum_of_legr` | `fascia` | *Sin candidato claro* | — |
-| `Anterior_lateral_malleolar_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Anterior_ligament_of_fibular_headr` | `ligament` | `lig-anterior-cruciate-ligament` (Ligamento cruzado anterior (LCA)) | 50% |
-| `Anterior_medial_malleolar_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Anterior_pubic_ligament` | `ligament` | `lig-anterior-cruciate-ligament` (Ligamento cruzado anterior (LCA)) | 67% |
-| `Anterior_sacro-iliac_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Anterior_talocalcaneal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Anterior_tibial_arteryr` | `vessel` | `mus-tibialis-anterior` (Tibial Anterior) | 67% |
-| `Anterior_tibial_recurrent_arteryr` | `vessel` | `mus-tibialis-anterior` (Tibial Anterior) | 50% |
-| `Anterior_tibial_veinr` | `vessel` | `mus-tibialis-anterior` (Tibial Anterior) | 67% |
-| `Anterior_tibiotalar_ligament_(Tibiospring_lig)r` | `ligament` | `lig-anterior-cruciate-ligament` (Ligamento cruzado anterior (LCA)) | 60% |
-| `Arcuate_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Arcuate_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Art_cart_of_Sesamoid_bonesr` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_calcaneusr_` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_cuboid_boner` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_femur_distal_endr` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 40% |
-| `Art_cart_of_femur_headr` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_fibula_proximal_tibiofibular_jointr` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_fibula_talofibular_jointr` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_hip_bone_pubisr_` | `cartilage` | `art-hip-joint` (Coxofemoral (Cadera)) | 40% |
-| `Art_cart_of_intermediate_cuneiform_boner` | `cartilage` | `bone-cuneiform-bones` (Huesos cuneiformes (medial, intermedio, lateral)) | 40% |
-| `Art_cart_of_lateral_cuneiform_boner` | `cartilage` | `bone-cuneiform-bones` (Huesos cuneiformes (medial, intermedio, lateral)) | 40% |
-| `Art_cart_of_medial_cuneiform_boner_` | `cartilage` | `bone-cuneiform-bones` (Huesos cuneiformes (medial, intermedio, lateral)) | 40% |
-| `Art_cart_of_navicular_boner` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_patellar` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_sacrococcygeal_joint_on_coccyx` | `cartilage` | `art-shoulder-joint` (Glenohumeral (Hombro)) | 40% |
-| `Art_cart_of_sacrococcygeal_joint_on_sacrum` | `cartilage` | `art-shoulder-joint` (Glenohumeral (Hombro)) | 40% |
-| `Art_cart_of_sacroiliac_joint_on_hip_bone` | `cartilage` | `art-sacroiliac-joint` (Sacroilíaca) | 50% |
-| `Art_cart_of_sacroiliac_joint_on_sacrum` | `cartilage` | `art-sacroiliac-joint` (Sacroilíaca) | 60% |
-| `Art_cart_of_talusr_​` | `cartilage` | *Sin candidato claro* | — |
-| `Art_cart_of_tibia_distal_endr_` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 40% |
-| `Art_cart_of_tibia_proximal_endr` | `cartilage` | `art-radioulnar-articulation` (Radioulnar Proximal) | 40% |
-| `Art_cart_of_tibia_proximal_tibiofibular_jointr​` | `cartilage` | *Sin candidato claro* | — |
-| `Art_carts_of_distal_phalanges_of_footr` | `cartilage` | `art-radioulnar-articulation-art-druj` (Radioulnar Distal) | 40% |
-| `Art_carts_of_metatarsal_bonesr` | `bone` | *Sin candidato claro* | — |
-| `Art_carts_of_middle_phalanges_of_footr` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 40% |
-| `Art_carts_of_proximal_phalanges_of_footr` | `cartilage` | `art-radioulnar-articulation` (Radioulnar Proximal) | 40% |
-| `Arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 100% |
-| `Articular_capsule_of_knee_jointr` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsules_of_distal_interphalangeal_joints` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsules_of_metatarsophalangeal_jointsr` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsules_of_proximal_interphalangealr` | `joint` | *Sin candidato claro* | — |
-| `Articular_cartilage_of_hip_bone_acetabulumr` | `cartilage` | `bone-hip-bone` (Hueso coxal) | 40% |
-| `Ascending_branch_of_lateral_circumflex_femoral_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Bifurcatum_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
-| `Calcaneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Calcaneonavicular_ligamentr` | `ligament` | `lig-plantar-calcaneonavicular-ligament` (Ligamento calcaneonavicular plantar) | 50% |
-| `Capsule_of_talocrural_jointr` | `joint` | *Sin candidato claro* | — |
 | `Cartilages` | `cartilage` | *Sin candidato claro* | — |
-| `Cervical_ligament_(anterior_talocalcaneal_ligament)r` | `ligament` | `lig-anterior-cruciate-ligament` (Ligamento cruzado anterior (LCA)) | 60% |
-| `Collateral_ligament_of_proximal_interphalangeal_jointsr` | `ligament` | `lig-fibular-collateral-ligament` (Ligamento colateral lateral (LCL)) | 40% |
-| `Collateral_ligaments_of_distal_interphalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 40% |
-| `Collateral_ligaments_of_metatarsophalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
-| `Common_plantar_digital_nervesr` | `nerve` | *Sin candidato claro* | — |
-| `Common_tendon_of_biceps_femorisr` | `tendon` | `ten-long-head-of-biceps-tendon` (Tendón Cabeza Larga del Bíceps) | 50% |
-| `Communicating_brof_Posterior_tibial_a_and_Femoral_ar` | `bone` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_1st_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
-| `Cruciform_ligaments_or_2nd_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
-| `Cruciform_ligaments_or_3rd_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
-| `Cruciform_ligaments_or_4th_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
-| `Cruciform_ligaments_or_5th_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
-| `Crural_fasciar` | `fascia` | *Sin candidato claro* | — |
-| `Cuneometatarsal_interosseus_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Deep_artery_of_the_thighr` | `vessel` | *Sin candidato claro* | — |
-| `Deep_branch_of_Lateral_plantar_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Deep_branch_of_Medial_plantar_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Deep_femoral_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Deep_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Deep_plantar_archr` | `vessel` | *Sin candidato claro* | — |
-| `Deep_plantar_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Deep_transverse_metatarsal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Descending_branch_of_lateral_circumflex_femoral_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Descending_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Descending_part_of_Iliofemoral_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_calcaneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_cuboidonavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_cuneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_cuneonavicular_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_digital_arteries_of_footr` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 50% |
-| `Dorsal_digital_branches_of_deep_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Dorsal_digital_branches_of_superficial_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Dorsal_digital_vein_of_medial_side_of_great_toer` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_digital_veinsr` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_intercuneiform_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_metatarsal_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_metatarsal_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_metatarsal_veinsr` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_pedis_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_tarsometatarsal_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_venous_arch_of_footr` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_venous_network_of_footr` | `vessel` | `ves-hand-venous-network` (Red venosa de la mano y miembro superior (cefálica, basílica y arcos)) | 50% |
-| `Extensor_apparatus_of_1st_toer` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_apparatus_of_2nd_toer` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_apparatus_of_3rd_toer` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_apparatus_of_4th_toer` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_apparatus_of_5th_toer` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_digitorum_longus-fibularis_tertius_vaginae_tendinumr` | `tendon` | `mus-extensor-digitorum-longus` (Extensor Largo de los Dedos) | 43% |
-| `Extensor_digitorum_longus_tendonsr` | `tendon` | `mus-extensor-digitorum-longus` (Extensor Largo de los Dedos) | 75% |
-| `Extensor_hallucis_longus_tendon_sheathr` | `tendon` | `mus-extensor-hallucis-longus` (Extensor Largo del Hallux) | 60% |
-| `Fascia` | `fascia` | `mus-tensor-fasciae-latae` (Tensor de la Fascia Lata) | 100% |
-| `Fascia_latar` | `fascia` | `mus-tensor-fasciae-latae` (Tensor de la Fascia Lata) | 50% |
-| `Femoral_arteryr` | `vessel` | `mus-quadratus-femoris` (Cuadrado Femoral) | 50% |
-| `Femoral_branch_of_Genitofemoral_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Femoral_neck_vesselsr` | `vessel` | *Sin candidato claro* | — |
-| `Femoral_veinr` | `vessel` | `mus-quadratus-femoris` (Cuadrado Femoral) | 50% |
-| `Fibrous_sheath_of_toesr` | `tendon` | *Sin candidato claro* | — |
-| `Fibular_arteryr` | `vessel` | `mus-fibularis-tertius` (Fibular Tercero) | 50% |
-| `Fibular_veinr` | `vessel` | `mus-fibularis-tertius` (Fibular Tercero) | 50% |
 | `Flexor_digiti_minimi_brevis_of_footr` | `muscle` | `mus-extensor-digiti-minimi` (Extensor del Meñique) | 40% |
-| `Flexor_digitorum_longus_tendon_sheathr` | `tendon` | `mus-flexor-digitorum-longus` (Flexor Largo de los Dedos) | 60% |
-| `Flexor_hallucis_longus_tendon_sheathr` | `tendon` | `mus-flexor-hallucis-longus` (Flexor Largo del Hallux) | 60% |
-| `Genital_branch_of_Genitofemoral_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Gluteal_aponeurosisr` | `fascia` | `ner-superior-gluteal-nerve` (Nervio Glúteo Superior) | 50% |
-| `Great_saphenous_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Hip_joint_capsuler` | `joint` | `art-hip-joint` (Coxofemoral (Cadera)) | 67% |
-| `Ilioinguinal_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Iliotibial_tractr` | `fascia` | *Sin candidato claro* | — |
-| `Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr` | `nerve` | *Sin candidato claro* | — |
-| `Inferior_extensor_retinaculumr` | `ligament` | *Sin candidato claro* | — |
-| `Inferior_fibular_retinaculumr` | `ligament` | *Sin candidato claro* | — |
-| `Inferior_lateral_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Inferior_lateral_genicular_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Inferior_medial_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Inferior_medial_genicular_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Infrapatellar_branch_of_Saphenous_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Infrapatellar_fat_padr` | `muscle` | *Sin candidato claro* | — |
-| `Intercapitular_veins_of_footr` | `vessel` | *Sin candidato claro* | — |
-| `Intercornual_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Intercuneiform_interosseus_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Interossea__Posterior_sacro-iliac_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Interosseous_membrane_of_legr` | `fascia` | *Sin candidato claro* | — |
-| `Interosseus_talocalcaneal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Interpubic_disc` | `cartilage` | *Sin candidato claro* | — |
-| `Intersesamoid_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Ishciofemoral_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Lateral_branch_of_deep_fibular_nerver` | `nerve` | `lig-fibular-collateral-ligament` (Ligamento colateral lateral (LCL)) | 40% |
-| `Lateral_calcaneal_branch_of_fibular_arteryr` | `vessel` | `lig-fibular-collateral-ligament` (Ligamento colateral lateral (LCL)) | 40% |
-| `Lateral_calcaneal_nervesr` | `nerve` | *Sin candidato claro* | — |
-| `Lateral_circumflex_femoral_arteryr` | `vessel` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
-| `Lateral_circumflex_femoral_veinr` | `vessel` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
-| `Lateral_cutaneous_branch_of_Iliohypogaticus_nerver` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 40% |
-| `Lateral_dorsal_cutaneous_nerve_(Sural_n)r` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 60% |
-| `Lateral_dorsal_cutaneous_nerver` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
-| `Lateral_femoral_intermuscular_septumr` | `fascia` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
-| `Lateral_malleolar_branches_of_Fibular_arteryr` | `vessel` | `lig-fibular-collateral-ligament` (Ligamento colateral lateral (LCL)) | 40% |
-| `Lateral_marginal_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Lateral_meniscusr` | `cartilage` | `mus-lateral-pterygoid` (Pterigoideo Lateral) | 50% |
-| `Lateral_patellar_retinaculum_(horizontal_part)r` | `ligament` | *Sin candidato claro* | — |
-| `Lateral_patellar_retinaculum_(vertical_part)r` | `ligament` | *Sin candidato claro* | — |
-| `Lateral_plantar_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Lateral_plantar_cutaneous_nerve_(Sural_n)r` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 60% |
-| `Lateral_plantar_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Lateral_plantar_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Lateral_sural_cutaneous_nerver` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
-| `Lateral_tarsal_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Ligaments` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 100% |
-| `Ligaments_of_fibular_headr` | `ligament` | *Sin candidato claro* | — |
-| `Medial_branch_of_deep_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Medial_calcaneal_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Medial_circumflex_femoral_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Medial_circumflex_femoral_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Medial_collatertal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Medial_dorsal_cutaneous_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Medial_femoral_intermuscular_septumr` | `fascia` | *Sin candidato claro* | — |
-| `Medial_malleolar_artery_of_Posterior_tibial_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Medial_marginal_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Medial_meniscusr` | `cartilage` | `mus-medial-pterygoid` (Pterigoideo Medial) | 50% |
-| `Medial_patellar_retinaculum_(horizontal_part)r` | `ligament` | *Sin candidato claro* | — |
-| `Medial_patellar_retinaculum_(vertical_part)r` | `ligament` | *Sin candidato claro* | — |
-| `Medial_plantar_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Medial_plantar_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Medial_plantar_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Medial_sural_cutaneous_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Medial_talocalcaneal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Medial_tarsal_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Metatarsal_interosseous_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Middle_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Middle_genicular_veinr` | `vessel` | *Sin candidato claro* | — |
 | `Muscles` | `muscle` | `mus-extraocular-muscles` (Músculos Extraoculares) | 100% |
-| `Muscular_branches_of_the_Femoral_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 100% |
-| `Oblique_popliteal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Obturator_membraner` | `fascia` | `mus-obturator-internus` (Obturador Interno) | 50% |
 | `Opponens_digiti_minimi_muscle_of_footr` | `muscle` | `mus-extensor-digiti-minimi` (Extensor del Meñique) | 40% |
-| `Palmar_ligament_of_proximal_interphalangeal_jointsr` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 40% |
-| `Palmar_ligaments_of_distal_interphalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 40% |
-| `Palmar_ligaments_of_metatarsophalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
-| `Perforating_br_between_Arcuate_a_and_Deep_plantar_archr` | `vessel` | *Sin candidato claro* | — |
-| `Perforating_branches_(Boyd's_veins)r` | `vessel` | *Sin candidato claro* | — |
-| `Perforating_branches_(Cockett's_veins)r` | `vessel` | *Sin candidato claro* | — |
-| `Perforating_branches_(Dodd's_veins)r` | `vessel` | *Sin candidato claro* | — |
-| `Perforating_branches_of_fibular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Plantar_calcaneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Plantar_cuboideonavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Plantar_cuneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Plantar_cuneonavicular_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Plantar_digital_veinsr` | `vessel` | *Sin candidato claro* | — |
-| `Plantar_intercuneiform_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Plantar_metatarsal_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Plantar_metatarsal_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Plantar_metatarsal_veinsr` | `vessel` | *Sin candidato claro* | — |
-| `Plantar_tarsometatarsal_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Plantar_venous_archr` | `vessel` | *Sin candidato claro* | — |
-| `Popliteal_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Popliteal_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Posterior_arch_veinsr` | `vessel` | *Sin candidato claro* | — |
-| `Posterior_cutaneous_nerve_of_the_thighr` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 40% |
-| `Posterior_horn_of_Lateral_meniscusr` | `cartilage` | *Sin candidato claro* | — |
-| `Posterior_horn_of_Medial_meniscusr` | `cartilage` | *Sin candidato claro* | — |
-| `Posterior_intermuscular_septum_of_legr` | `fascia` | *Sin candidato claro* | — |
-| `Posterior_ligament_of_fibular_headr` | `ligament` | `lig-posterior-cruciate-ligament` (Ligamento cruzado posterior (LCP)) | 50% |
-| `Posterior_meniscofemoral_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Posterior_pubic_ligament` | `ligament` | `lig-posterior-cruciate-ligament` (Ligamento cruzado posterior (LCP)) | 67% |
-| `Posterior_talocalcaneal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Posterior_talofibular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Posterior_tibial_arteryr` | `vessel` | `mus-tibialis-posterior` (Tibial Posterior) | 67% |
-| `Posterior_tibial_recurrent_arteryr` | `vessel` | `mus-tibialis-posterior` (Tibial Posterior) | 50% |
-| `Posterior_tibial_veinr` | `vessel` | `mus-tibialis-posterior` (Tibial Posterior) | 67% |
-| `Posterior_tibiofibular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Posterior_tibiotalar_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Proper_plantar_digital_branches_(Lateral_plantar_nerve)r` | `nerve` | *Sin candidato claro* | — |
-| `Proper_plantar_digital_branches_(Medial_plantar_nerve)r` | `nerve` | *Sin candidato claro* | — |
-| `Pubofemoral_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Saphenous_branch_of_Femoralis_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Saphenous_nerve_(Medial_crural_cutaneous_branches)r` | `nerve` | *Sin candidato claro* | — |
-| `Semimembranosus_bursa_deep_to_tendonr` | `tendon` | *Sin candidato claro* | — |
-| `Small_saphenous_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Sup,_Inf,_Ant,_Post,_Pubic_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Superficial_branch_of_Lateral_plantar_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Superficial_branch_of_Medial_planter_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_circumflex_iliac_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_circumflex_iliac_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_epigastric_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_epigastric_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_external_pudendal_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_external_pudendal_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Superficial_transverse_metatarsal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Superior_clunial_nerve_(posterior_rami)r` | `nerve` | `mus-serratus-posterior-superior` (Serrato Posterior Superior) | 40% |
-| `Superior_extensor_retinaculum_of_ankler` | `ligament` | `lig-extensor-retinaculum-of-wrist` (Retináculo extensor de la muñeca) | 50% |
-| `Superior_fibular_retinaculumr` | `ligament` | *Sin candidato claro* | — |
-| `Superior_lateral_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Superior_lateral_genicular_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Superior_medial_genicular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Superior_medial_genicular_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Sural_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Sural_nerver` | `nerve` | *Sin candidato claro* | — |
-| `Sural_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Symphysis_of_sacrococcygeal_joint` | `joint` | *Sin candidato claro* | — |
-| `Synovial_membranes_of_kneer` | `cartilage` | *Sin candidato claro* | — |
-| `Synovial_sheaths_of_toesr` | `tendon` | *Sin candidato claro* | — |
-| `Talonavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Tensor_fasciae_lataer` | `fascia` | `mus-tensor-fasciae-latae` (Tensor de la Fascia Lata) | 67% |
-| `Tibialis_anterior_tendon_sheathr` | `tendon` | `mus-tibialis-anterior` (Tibial Anterior) | 50% |
-| `Tibiocalcaneal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Tibionavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Transverse_intermuscular_septum_of_legr` | `fascia` | *Sin candidato claro* | — |
-| `Transverse_ligament_of_kneer` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 67% |
-| `Transverse_part_of_Iliofemoral_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Transverse_tibiofibular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Tributary_veins_of_Great_and_small_saphenous_veinsr` | `vessel` | *Sin candidato claro* | — |
-| `Veins` | `vessel` | *Sin candidato claro* | — |
-| `Zona_orbicularis_of_hip_jointr` | `joint` | *Sin candidato claro* | — |
 
 ### 🔹 Modelo: `overview-colored-skull` (2 piezas sin dueño)
 
@@ -419,7 +139,7 @@
 | `Arm_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
 | `Arm_-_muscles` | `muscle` | `mus-extraocular-muscles` (Músculos Extraoculares) | 50% |
 | `Arm_-_nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 50% |
-| `Arm_-_veins` | `vessel` | *Sin candidato claro* | — |
+| `Arm_-_veins` | `vessel` | `ves-lower-limb-venous-network` (Sistema venoso del miembro inferior (safenas, femoral, poplítea y tibiales)) | 50% |
 | `Arm_superficial_vein-Basilic_veinr` | `vessel` | *Sin candidato claro* | — |
 | `Arm_superficial_vein-Cephalic_veinr` | `vessel` | *Sin candidato claro* | — |
 | `Arm_superficial_vein-Median_antebrachial_veinr` | `vessel` | *Sin candidato claro* | — |
@@ -442,9 +162,9 @@
 | `Art_carts_of_metacarpal_bones` | `bone` | `bone-metacarpal-bones` (Metacarpianos (1.º - 5.º)) | 50% |
 | `Art_carts_of_middle_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
 | `Art_carts_of_proximal_phalanges` | `cartilage` | `art-radioulnar-articulation` (Radioulnar Proximal) | 50% |
-| `Articular_capsule_of_elbow_jointr` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsule_of_glenohumeral_jointr` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsule_of_radiocarpal_joint` | `joint` | *Sin candidato claro* | — |
+| `Articular_capsule_of_elbow_jointr` | `joint` | `lig-menisci-and-knee-capsule` (Meniscos y cápsula articular de la rodilla) | 50% |
+| `Articular_capsule_of_glenohumeral_jointr` | `joint` | `lig-menisci-and-knee-capsule` (Meniscos y cápsula articular de la rodilla) | 50% |
+| `Articular_capsule_of_radiocarpal_joint` | `joint` | `lig-menisci-and-knee-capsule` (Meniscos y cápsula articular de la rodilla) | 75% |
 | `Articular_capsules_of_distal_interphalangeal_joints` | `joint` | *Sin candidato claro* | — |
 | `Articular_capsules_of_metacarpophalangeal_joints` | `joint` | *Sin candidato claro* | — |
 | `Articular_capsules_of_proximal_interphalangeal_joints` | `joint` | *Sin candidato claro* | — |
@@ -544,7 +264,7 @@
 | `Forearm_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
 | `Forearm_-_muscles` | `muscle` | `mus-extraocular-muscles` (Músculos Extraoculares) | 50% |
 | `Forearm_-_nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 50% |
-| `Forearm_-_veins` | `vessel` | *Sin candidato claro* | — |
+| `Forearm_-_veins` | `vessel` | `ves-lower-limb-venous-network` (Sistema venoso del miembro inferior (safenas, femoral, poplítea y tibiales)) | 50% |
 | `Glenoid_labrumr` | `cartilage` | *Sin candidato claro* | — |
 | `Hand_and_wrist_-_arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 75% |
 | `Hand_and_wrist_-_bones` | `bone` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 75% |
@@ -561,7 +281,7 @@
 | `Inferior_transverse_scapular_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Inferior_trunk_of_brachial_plexusr` | `nerve` | *Sin candidato claro* | — |
 | `Inferior_ulnar_collateral_arteryr` | `vessel` | `lig-ulnar-collateral-ligament-of-elbow` (Ligamento colateral cubital del codo) | 50% |
-| `Intercapitular_veins` | `vessel` | *Sin candidato claro* | — |
+| `Intercapitular_veins` | `vessel` | `ves-lower-limb-venous-network` (Sistema venoso del miembro inferior (safenas, femoral, poplítea y tibiales)) | 50% |
 | `Intercarpal_articulationsr` | `joint` | *Sin candidato claro* | — |
 | `Interclavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Internal_thoracic_arteryr` | `vessel` | *Sin candidato claro* | — |
@@ -668,7 +388,7 @@
 | `Thorax_-_bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 | `Thorax_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
 | `Thorax_-_nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 50% |
-| `Thorax_-_veins` | `vessel` | *Sin candidato claro* | — |
+| `Thorax_-_veins` | `vessel` | `ves-lower-limb-venous-network` (Sistema venoso del miembro inferior (safenas, femoral, poplítea y tibiales)) | 50% |
 | `Thyrocervical_trunkr` | `vessel` | *Sin candidato claro* | — |
 | `Transverse_cervical_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Transverse_head_of_adductor_pollicisr` | `muscle` | *Sin candidato claro* | — |
@@ -733,9 +453,9 @@
 
 ## 3. Estructuras del Grafo SIN Mallas 3D (`modelMeshes` Vacío)
 
-Total de estructuras en el grafo: **286**
-- Estructuras con mallas 3D: **231** (80.8%)
-- Estructuras sin mallas 3D: **55** (19.2%)
+Total de estructuras en el grafo: **291**
+- Estructuras con mallas 3D: **236** (81.1%)
+- Estructuras sin mallas 3D: **55** (18.9%)
 
 ### Detalle de Estructuras sin Mallas 3D:
 
@@ -743,22 +463,22 @@ Total de estructuras en el grafo: **286**
 |---|---|---|---|---|
 | `mus-masseter`<br>**Masetero** (*Masseter*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-temporalis`<br>**Temporal** (*Temporalis*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
-| `mus-lateral-pterygoid`<br>**Pterigoideo Lateral** (*Lateral Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Anterior_horn_of_Lateral_meniscusr` |
-| `mus-medial-pterygoid`<br>**Pterigoideo Medial** (*Medial Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Anterior_horn_of_Medial_meniscusr` |
+| `mus-lateral-pterygoid`<br>**Pterigoideo Lateral** (*Lateral Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `upper-limb:Lateral_cord_of_brachial_plexusr` |
+| `mus-medial-pterygoid`<br>**Pterigoideo Medial** (*Medial Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `upper-limb:Medial_antebrachial_cutaneous_nerver` |
 | `mus-occipitofrontalis`<br>**Occipitofrontal** (*Occipitofrontalis*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
-| `mus-orbicularis-oculi`<br>**Orbicular de los Párpados** (*Orbicularis Oculi*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Zona_orbicularis_of_hip_jointr` |
-| `mus-orbicularis-oris`<br>**Orbicular de la Boca** (*Orbicularis Oris*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Zona_orbicularis_of_hip_jointr` |
+| `mus-orbicularis-oculi`<br>**Orbicular de los Párpados** (*Orbicularis Oculi*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
+| `mus-orbicularis-oris`<br>**Orbicular de la Boca** (*Orbicularis Oris*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-buccinator`<br>**Buccinador** (*Buccinator*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-zygomaticus-major`<br>**Cigomático Mayor** (*Zygomaticus Major*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-extraocular-muscles`<br>**Músculos Extraoculares** (*Extraocular Muscles*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `hand:Muscles` |
 | `mus-sternocleidomastoid`<br>**Esternocleidomastoideo** (*Sternocleidomastoid*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-platysma`<br>**Platisma** (*Platysma*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-scalenus-anterior`<br>**Escaleno Anterior** (*Scalenus Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Anterior_branch_of_Iliohypogastric_nerver` |
+| `mus-scalenus-anterior`<br>**Escaleno Anterior** (*Scalenus Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Anterior_circumflex_humeral_arteryr` |
 | `mus-scalenus-medius`<br>**Escaleno Medio** (*Scalenus Medius*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-scalenus-posterior`<br>**Escaleno Posterior** (*Scalenus Posterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Communicating_brof_Posterior_tibial_a_and_Femoral_ar` |
-| `mus-longus-colli`<br>**Largo del Cuello** (*Longus Colli*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Extensor_digitorum_longus-fibularis_tertius_vaginae_tendinumr` |
-| `mus-longus-capitis`<br>**Largo de la Cabeza** (*Longus Capitis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Extensor_digitorum_longus-fibularis_tertius_vaginae_tendinumr` |
-| `mus-rectus-capitis-anterior`<br>**Recto Anterior de la Cabeza** (*Rectus Capitis Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Anterior_branch_of_Iliohypogastric_nerver` |
+| `mus-scalenus-posterior`<br>**Escaleno Posterior** (*Scalenus Posterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Posterior_Sternoclavicular_ligamentr` |
+| `mus-longus-colli`<br>**Largo del Cuello** (*Longus Colli*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Extensor_carpi_radialis_longus_tendon_sheath` |
+| `mus-longus-capitis`<br>**Largo de la Cabeza** (*Longus Capitis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Extensor_carpi_radialis_longus_tendon_sheath` |
+| `mus-rectus-capitis-anterior`<br>**Recto Anterior de la Cabeza** (*Rectus Capitis Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Anterior_circumflex_humeral_arteryr` |
 | `mus-rectus-capitis-lateralis`<br>**Recto Lateral de la Cabeza** (*Rectus Capitis Lateralis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-splenius-capitis`<br>**Esplenio de la Cabeza** (*Splenius Capitis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-splenius-cervicis`<br>**Esplenio del Cuello** (*Splenius Cervicis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
@@ -766,15 +486,15 @@ Total de estructuras en el grafo: **286**
 | `mus-suprahyoid-muscles`<br>**Suprahioideos** (*Suprahyoid Muscles*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Muscles` |
 | `mus-infrahyoid-muscles`<br>**Infrahioideos** (*Infrahyoid Muscles*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Muscles` |
 | `mus-diaphragm`<br>**Diafragma** (*Diaphragm*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-external-intercostals`<br>**Intercostales Externos** (*External Intercostals*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Superficial_external_pudendal_arteryr` |
+| `mus-external-intercostals`<br>**Intercostales Externos** (*External Intercostals*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:External_jugular_veinr` |
 | `mus-internal-intercostals`<br>**Intercostales Internos** (*Internal Intercostals*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Internal_thoracic_arteryr` |
 | `mus-innermost-intercostals`<br>**Intercostales Íntimos** (*Innermost Intercostals*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-transversus-thoracis`<br>**Transverso del Tórax** (*Transversus Thoracis*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-subcostal-muscles`<br>**Subcostales** (*Subcostal Muscles*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Muscles` |
 | `mus-levatores-costarum`<br>**Elevadores de las Costillas** (*Levatores Costarum*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-rectus-abdominis`<br>**Recto Abdominal** (*Rectus Abdominis*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-external-oblique`<br>**Oblicuo Externo** (*External Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Oblique_popliteal_ligamentr` |
-| `mus-internal-oblique`<br>**Oblicuo Interno** (*Internal Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Oblique_popliteal_ligamentr` |
+| `mus-external-oblique`<br>**Oblicuo Externo** (*External Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:External_jugular_veinr` |
+| `mus-internal-oblique`<br>**Oblicuo Interno** (*Internal Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Internal_thoracic_arteryr` |
 | `mus-transversus-abdominis`<br>**Transverso Abdominal** (*Transversus Abdominis*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-pyramidalis`<br>**Piramidal** (*Pyramidalis*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-quadratus-lumborum`<br>**Cuadrado Lumbar** (*Quadratus Lumborum*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
@@ -784,18 +504,18 @@ Total de estructuras en el grafo: **286**
 | `mus-rotatores`<br>**Rotadores** (*Rotatores*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-interspinales`<br>**Interespinosos** (*Interspinales*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-intertransversarii`<br>**Intertransversos** (*Intertransversarii*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-serratus-posterior-superior`<br>**Serrato Posterior Superior** (*Serratus Posterior Superior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Communicating_brof_Posterior_tibial_a_and_Femoral_ar` |
-| `mus-serratus-posterior-inferior`<br>**Serrato Posterior Inferior** (*Serratus Posterior Inferior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Communicating_brof_Posterior_tibial_a_and_Femoral_ar` |
+| `mus-serratus-posterior-superior`<br>**Serrato Posterior Superior** (*Serratus Posterior Superior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Posterior_Sternoclavicular_ligamentr` |
+| `mus-serratus-posterior-inferior`<br>**Serrato Posterior Inferior** (*Serratus Posterior Inferior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Inferior_glenohumeral_ligamentr` |
 | `mus-sternalis`<br>**Esternal** (*Sternalis*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-tensor-fasciae-latae`<br>**Tensor de la Fascia Lata** (*Tensor Fasciae Latae*) | `muscle` | `hip` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Tensor_fasciae_lataer` |
+| `mus-tensor-fasciae-latae`<br>**Tensor de la Fascia Lata** (*Tensor Fasciae Latae*) | `muscle` | `hip` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Arm_-_capsules,_ligaments,_fasciae` |
 | `mus-levator-ani`<br>**Elevador del Ano** (*Levator Ani*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `ten-long-head-of-biceps-tendon`<br>**Tendón Cabeza Larga del Bíceps** (*Long head of biceps tendon*) | `tendon` | `shoulder` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Common_tendon_of_biceps_femorisr` |
-| `ten-common-flexor-tendon`<br>**Tendón Common Flexor** (*Common flexor tendon*) | `tendon` | `arm` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Common_plantar_digital_nervesr` |
-| `ten-pectoralis-major-tendon`<br>**Tendón del Pectoral Mayor** (*Pectoralis major tendon*) | `tendon` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Common_tendon_of_biceps_femorisr` |
-| `ner-accessory-nerve`<br>**Nervio Accesorio (XI)** (*Accessory nerve*) | `nerve` | `cervical` | Nervio no modelado en los atlas 3D de extremidades | `lower-limb:Accessory_saphenous_veinr` |
-| `ner-pudendal-nerve`<br>**Nervio Pudendo** (*Pudendal nerve*) | `nerve` | `core` | Nervio no modelado en los atlas 3D de extremidades | `lower-limb:Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr` |
-| `ner-thoracodorsal-nerve`<br>**Nervio Toracodorsal** (*Thoracodorsal nerve*) | `nerve` | `back` | Nervio no modelado en los atlas 3D de extremidades | `lower-limb:Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr` |
-| `ner-mandibular-nerve`<br>**Nervio Mandibular (V3)** (*Mandibular nerve*) | `nerve` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr` |
+| `ten-long-head-of-biceps-tendon`<br>**Tendón Cabeza Larga del Bíceps** (*Long head of biceps tendon*) | `tendon` | `shoulder` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Common_flexor_tendon_sheath` |
+| `ten-common-flexor-tendon`<br>**Tendón Common Flexor** (*Common flexor tendon*) | `tendon` | `arm` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Flexor_digiti_minimi_brevis_of_footr` |
+| `ten-pectoralis-major-tendon`<br>**Tendón del Pectoral Mayor** (*Pectoralis major tendon*) | `tendon` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `upper-limb:Common_flexor_tendon_sheath` |
+| `ner-accessory-nerve`<br>**Nervio Accesorio (XI)** (*Accessory nerve*) | `nerve` | `cervical` | Nervio no modelado en los atlas 3D de extremidades | `upper-limb:Musculocutaneus_nerve__-_lateral_antebrachial_cutaneous_nerver` |
+| `ner-pudendal-nerve`<br>**Nervio Pudendo** (*Pudendal nerve*) | `nerve` | `core` | Nervio no modelado en los atlas 3D de extremidades | `upper-limb:Musculocutaneus_nerve__-_lateral_antebrachial_cutaneous_nerver` |
+| `ner-thoracodorsal-nerve`<br>**Nervio Toracodorsal** (*Thoracodorsal nerve*) | `nerve` | `back` | Nervio no modelado en los atlas 3D de extremidades | `upper-limb:Musculocutaneus_nerve__-_lateral_antebrachial_cutaneous_nerver` |
+| `ner-mandibular-nerve`<br>**Nervio Mandibular (V3)** (*Mandibular nerve*) | `nerve` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `upper-limb:Musculocutaneus_nerve__-_lateral_antebrachial_cutaneous_nerver` |
 
 ---
 

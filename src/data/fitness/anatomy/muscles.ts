@@ -3611,7 +3611,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Sartorius"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Sartorius_muscler"]},
+  modelMeshes: {"lower-limb": ["Sartorius_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3651,7 +3651,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Pectineus"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Pectineus_muscler"]},
+  modelMeshes: {"lower-limb": ["Pectineus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3689,7 +3689,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Gluteus Maximus"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Gluteus_maximus_muscler"]},
+  modelMeshes: {"lower-limb": ["Gluteus_maximus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3730,7 +3730,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Gluteus Medius"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Gluteus_medius_muscler"]},
+  modelMeshes: {"lower-limb": ["Gluteus_medius_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3772,7 +3772,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Gluteus Minimus"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Gluteus_minimus_muscler"]},
+  modelMeshes: {"lower-limb": ["Gluteus_minimus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3853,7 +3853,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Piriformis"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Piriformis_muscler"]},
+  modelMeshes: {"lower-limb": ["Piriformis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3965,7 +3965,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Superior Gemellus"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Superior_gemellus_muscler"]},
+  modelMeshes: {"lower-limb": ["Superior_gemellus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4000,7 +4000,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Inferior Gemellus"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Inferior_gemellus_muscler"]},
+  modelMeshes: {"lower-limb": ["Inferior_gemellus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4035,7 +4035,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Quadratus Femoris"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Quadratus_femoris_muscler"]},
+  modelMeshes: {"lower-limb": ["Quadratus_femoris_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4120,7 +4120,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "hip"
   ],
-  modelMeshes: {"lower-limb":["Vastus_lateralis_muscler"]},
+  modelMeshes: {"lower-limb": ["Vastus_lateralis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4209,7 +4209,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "hip"
   ],
-  modelMeshes: {"lower-limb":["Vastus_intermedius_muscler"]},
+  modelMeshes: {"lower-limb": ["Vastus_intermedius_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4377,7 +4377,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "hip"
   ],
-  modelMeshes: {"lower-limb":["Semitendinosus_muscler"]},
+  modelMeshes: {"lower-limb": ["Semitendinosus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4423,7 +4423,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "hip"
   ],
-  modelMeshes: {"lower-limb":["Semimembranosus_muscler"]},
+  modelMeshes: {"lower-limb": ["Semimembranosus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4628,7 +4628,7 @@ export const MUSCLES: MuscleEntry[] = [
   zones: [
     "thigh"
   ],
-  modelMeshes: {"lower-limb":["Gracilis_muscler"]},
+  modelMeshes: {"lower-limb": ["Gracilis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4670,7 +4670,7 @@ export const MUSCLES: MuscleEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Tibialis_anterior_muscler"]},
+  modelMeshes: {"lower-limb": ["Tibialis_anterior_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4791,7 +4791,7 @@ export const MUSCLES: MuscleEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Fibularis_tertius_muscler"]},
+  modelMeshes: {"lower-limb": ["Fibularis_tertius_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4828,7 +4828,7 @@ export const MUSCLES: MuscleEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Fibularis_longus_muscler"]},
+  modelMeshes: {"lower-limb": ["Fibularis_longus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4871,7 +4871,7 @@ export const MUSCLES: MuscleEntry[] = [
   zones: [
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Fibularis_brevis_muscler"]},
+  modelMeshes: {"lower-limb": ["Fibularis_brevis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4957,7 +4957,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Soleus_muscler"]},
+  modelMeshes: {"lower-limb": ["Soleus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -4999,7 +4999,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Plantaris_muscler"]},
+  modelMeshes: {"lower-limb": ["Plantaris_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -5036,7 +5036,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Popliteus_muscler"]},
+  modelMeshes: {"lower-limb": ["Popliteus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -5163,7 +5163,7 @@ export const MUSCLES: MuscleEntry[] = [
     "knee",
     "ankle-foot"
   ],
-  modelMeshes: {"lower-limb":["Tibialis_posterior_muscler"]},
+  modelMeshes: {"lower-limb": ["Tibialis_posterior_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -5382,7 +5382,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Quadratus Plantae"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Quadratus_plantae_muscler"]},
+  modelMeshes: {"lower-limb": ["Quadratus_plantae_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

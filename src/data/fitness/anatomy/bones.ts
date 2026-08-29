@@ -560,7 +560,7 @@ export const BONES: BoneEntry[] = [
     "Metatarsal bones"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb": ["Fifth_metatarsal_boner", "First_metatarsal_boner", "Fourth_metatarsal_boner", "Second_metatarsal_boner", "Third_metatarsal_boner"], "overview-skeleton": ["First_metatarsal_boner", "Second_metatarsal_boner", "Third_metatarsal_boner", "Fourth_metatarsal_boner", "Fifth_metatarsal_boner"]},
+  modelMeshes: {"lower-limb": ["First_metatarsal_boner", "Second_metatarsal_boner", "Third_metatarsal_boner", "Fourth_metatarsal_boner", "Fifth_metatarsal_boner"], "overview-skeleton": ["First_metatarsal_boner", "Second_metatarsal_boner", "Third_metatarsal_boner", "Fourth_metatarsal_boner", "Fifth_metatarsal_boner"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}

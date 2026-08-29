@@ -460,7 +460,7 @@ export const TENDONS: TendonEntry[] = [
     "Fascia Plantaris"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Plantar_aponeurosisr"]},
+  modelMeshes: {"lower-limb": ["Plantar_aponeurosisr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
