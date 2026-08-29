@@ -145,7 +145,7 @@ Ubicación de la preview: **cabecera del panel izquierdo**, entre el título del
 
 **3.6 `numProductos` (WEB-07: 1–100)**
 - **A (rec.): "Showroom orbital"** — la parrilla de 3.4.A pero con variedad: 4 primitivas de producto (caja, cilindro, esfera, cápsula) alternadas con colores de catálogo, en parrilla 3D con profundidad; dolly-out logarítmico. *Integración*: 4 InstancedMesh (uno por primitiva). Coste S.
-- **B: "Zoom a la ficha"** — 1 producto hero en primer plano con tarjeta flotante de ficha (nombre+precio mock), los demás products se ven desenfocados detrás en cantidad N — comunica "catálogo navegables con visor compartido". Coste M (DOF simulado con opacidad/blur de instancias lejanas).
+- **B: "Zoom a la ficha"** — 1 producto hero en primer plano con tarjeta flotante de ficha (nombre+precio mock), los demás products se ven desenfocados detrás en cantidad N — comunica "catálogo navegable con visor compartido". Coste M (DOF simulado con opacidad/blur de instancias lejanas).
 - **C: "Filtros vivos"** — productos se re-agrupan por color/familia en clústeres al mover el slider (cuenta = tamaño de catálogo, agrupación = el toggle de filtros del servicio). Coste M.
 
 **3.7 `numSlides` (WEB-08: 3–30)**
