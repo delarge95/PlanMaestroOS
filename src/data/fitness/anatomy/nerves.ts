@@ -126,7 +126,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus axillaris"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Axillary_nerve_-_superior_lateral_br_cutaneous_nerver"]},
+  modelMeshes: {"upper-limb": ["Axillary_nerve_-_superior_lateral_br_cutaneous_nerver", "Radial_nerve_(inferior_lateral_brachial_cutaneous_n)r"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -162,7 +162,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "back"
   ],
-  modelMeshes: {"upper-limb":["Suprascapular_nerver"]},
+  modelMeshes: {"upper-limb": ["Suprascapular_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -199,7 +199,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "back"
   ],
-  modelMeshes: {"upper-limb":["Long_thoracic_nerver"]},
+  modelMeshes: {"upper-limb": ["Long_thoracic_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -234,7 +234,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "back"
   ],
-  modelMeshes: {},
+  modelMeshes: {"upper-limb": []},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -659,7 +659,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus musculocutaneus"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Musculocutaneus_nerver"]},
+  modelMeshes: {"upper-limb": ["Musculocutaneus_nerve__-_lateral_antebrachial_cutaneous_nerver", "Musculocutaneus_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -694,7 +694,7 @@ export const NERVES: NerveEntry[] = [
     "Nervus thoracodorsalis"
   ],
   zone: `back`,
-  modelMeshes: {},
+  modelMeshes: {"upper-limb": ["Lower_subscapular_nerver", "Upper_subscapular_nerver"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -729,7 +729,7 @@ export const NERVES: NerveEntry[] = [
   zones: [
     "shoulder"
   ],
-  modelMeshes: {"upper-limb":["Lateral_pectoral_nerver","Medial_pectoral_nerver"]},
+  modelMeshes: {"upper-limb": ["Annulus_fibrosus_T10_T11", "Annulus_fibrosus_T11_T12", "Annulus_fibrosus_T12_L1", "Annulus_fibrosus_T1_T2", "Annulus_fibrosus_T9_T10", "Anterior_divisions_of_brachial_plexusr", "Arm_-_nerves", "Axillary_nerve_-_superior_lateral_br_cutaneous_nerver", "C5_rootr", "C6_rootr", "C7_rootr", "C8_rootr", "Cervical_vertebra_(C5)", "Cervical_vertebra_(C6)", "Cervical_vertebra_(C7)", "Costocervical_trunkr", "Dorsal_scapular_nerver", "Forearm_-_nerves", "Hand_and_wrist_-_nerves", "Head_and_neck_-_nerves", "Inferior_trunk_of_brachial_plexusr", "Lateral_cord_of_brachial_plexusr", "Lateral_pectoral_nerver", "Lateral_root_of_median_nerver", "Long_thoracic_nerver", "Lower_subscapular_nerver", "Medial_antebrachial_cutaneous_nerver", "Medial_brachial_cutaneous_nerver", "Medial_cord_of_brachial_plexusr", "Medial_pectoral_nerver", "Medial_root_of_median_nerver", "Median_nerve_Common_palmar_digital_nerve_of_the_thumb", "Median_nerve_Common_palmar_digital_nerves", "Median_nerve_Palmar_br", "Median_nerve_Proper_palmar_digital_nerves", "Median_nerve_Proper_palmar_digital_nerves_of_the_thumb", "Median_nerve_Recurrent_br", "Median_nerver", "Middle_trunk_of_brachial_plexusr", "Musculocutaneus_nerve__-_lateral_antebrachial_cutaneous_nerver", "Musculocutaneus_nerver", "Nucleus_pulposus_C2-T1", "Nucleus_pulposus_T1-L1", "Oblique_cord_or_radio-ulnar_syndesmosisr", "Pectoral_girdle_-_nerves", "Posterior_cord_of_brachial_plexusr", "Posterior_divisions_of_brachial_plexusr", "Radial_nerve_(deep_branch)r", "Radial_nerve_(dorsal_digital_nn)r", "Radial_nerve_(inferior_lateral_brachial_cutaneous_n)r", "Radial_nerve_(posterior_antebrachial_cutaneous_n)r", "Radial_nerve_(posterior_brachial_cutaneous_n)r", "Radial_nerve_(posterior_interosseus_n)r", "Radial_nerve_(superficial_br)r", "Radial_nerver", "Subclavian_nerver", "Superior_trunk_of_brachial_plexusr", "Suprascapular_nerver", "T1_rootr", "Thoracic_vertebra_(T1)", "Thoracic_vertebra_(T10)", "Thoracic_vertebra_(T11)", "Thoracic_vertebra_(T12)", "Thorax_-_nerves", "Thyrocervical_trunkr", "Ulnar_nerve_Communicating_br", "Ulnar_nerve_Deep_br", "Ulnar_nerve_Dorsal_cutaneous_br", "Ulnar_nerve_Palmar_cutaneous_br", "Ulnar_nerve_Superficial_br_Common_palmar_digital_n", "Ulnar_nerve_Superficial_br_Proper_palmar_digital_nn", "Ulnar_nerver", "Upper_subscapular_nerver", "Vertebra_C5_art_cart", "Vertebra_C6_art_cart", "Vertebra_C7_art_cart", "Vertebra_T10_art_cart", "Vertebra_T11_art_cart", "Vertebra_T12_art_cart", "Vertebra_T1_art_cart", "annulus_fibrosus_C4_C5", "annulus_fibrosus_C5_C6", "annulus_fibrosus_C6_C7", "annulus_fibrosus_C7_T1"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

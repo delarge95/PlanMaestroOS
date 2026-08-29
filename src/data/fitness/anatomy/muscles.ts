@@ -1671,7 +1671,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Rhomboid Major"
   ],
   zone: `back`,
-  modelMeshes: {"upper-limb":["Rhomboid_major_muscler"]},
+  modelMeshes: {"upper-limb": ["Rhomboid_major_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -1712,7 +1712,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Rhomboid Minor"
   ],
   zone: `back`,
-  modelMeshes: {"upper-limb":["Rhomboid_minor_muscler"]},
+  modelMeshes: {"upper-limb": ["Rhomboid_minor_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -1837,7 +1837,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Teres Major"
   ],
   zone: `back`,
-  modelMeshes: {"upper-limb":["Teres_major_muscler"]},
+  modelMeshes: {"upper-limb": ["Teres_major_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -1926,7 +1926,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Pectoralis Minor"
   ],
   zone: `chest`,
-  modelMeshes: {"upper-limb":["Pectoralis_minor_muscler"]},
+  modelMeshes: {"upper-limb": ["Pectoralis_minor_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2002,7 +2002,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Serratus Anterior"
   ],
   zone: `back`,
-  modelMeshes: {"upper-limb":["Serratus_anterior_muscler"]},
+  modelMeshes: {"upper-limb": ["Serratus_anterior_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2145,7 +2145,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Supraspinatus"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Supraspinatus_muscler"]},
+  modelMeshes: {"upper-limb": ["Supraspinatus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2188,7 +2188,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Infraspinatus"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Infraspinatus_muscler"]},
+  modelMeshes: {"upper-limb": ["Infraspinatus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2228,7 +2228,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Teres Minor"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Teres_minor_muscler"]},
+  modelMeshes: {"upper-limb": ["Teres_minor_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2267,7 +2267,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Subscapularis"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Subscapularis_muscler"]},
+  modelMeshes: {"upper-limb": ["Subscapularis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2306,7 +2306,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Deltoideus Anterior"
   ],
   zone: `shoulder`,
-  modelMeshes: {"upper-limb":["Clavicular_part_of_deltoid_muscler"]},
+  modelMeshes: {"upper-limb": ["Clavicular_part_of_deltoid_muscler", "Deltoid_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2429,7 +2429,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Biceps Brachii"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Long_head_of_biceps_brachiir","Short_head_of_biceps_brachiir"]},
+  modelMeshes: {"upper-limb": ["Bicipital_aponeurosisr", "Long_head_of_biceps_brachiir", "Short_head_of_biceps_brachiir"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2472,7 +2472,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Brachialis"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Brachialis_muscler"]},
+  modelMeshes: {"upper-limb": ["Brachialis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2511,7 +2511,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Coracobrachialis"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Coracobrachialis_muscler"]},
+  modelMeshes: {"upper-limb": ["Coracobrachialis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2591,7 +2591,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Anconeus"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Anconeus_muscler"]},
+  modelMeshes: {"upper-limb": ["Anconeus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

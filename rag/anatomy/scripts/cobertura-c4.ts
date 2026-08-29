@@ -154,7 +154,7 @@ for (const s of ANATOMY_STRUCTURES) {
     // Clasificar motivo
     let reason = 'Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello)';
     if (s.zone === 'head-jaw') reason = 'Cráneo/mandíbula (estructuras no desglosadas en malla individual)';
-    else if (s.zone === 'hip-pelvis' || s.zone === 'lumbar') reason = 'Región pélvica/lumbar profunda sin despiece individual en GLB';
+    else if (s.zone === 'hip' || s.zone === 'spine') reason = 'Región pélvica/lumbar profunda sin despiece individual en GLB';
     else if (s.kind === 'nerve') reason = 'Nervio no modelado en los atlas 3D de extremidades';
     else if (s.kind === 'ligament') reason = 'Ligamento ligamentario menor o articular interno';
 
