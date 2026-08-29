@@ -11,11 +11,11 @@
 |---|---|---|---|---|---|---|
 | `colored-skull-base` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
 | `exploded-skull` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
-| `hand` | 235 | 4 | **231** | **86** | 145 | **37.2%** |
+| `hand` | 235 | 4 | **231** | **223** | 8 | **96.5%** |
 | `lower-limb` | 462 | 40 | **422** | **136** | 286 | **32.2%** |
 | `overview-colored-skull` | 31 | 0 | **31** | **29** | 2 | **93.5%** |
 | `overview-skeleton` | 147 | 0 | **147** | **144** | 3 | **98%** |
-| `upper-limb` | 575 | 27 | **548** | **183** | 365 | **33.4%** |
+| `upper-limb` | 575 | 27 | **548** | **185** | 363 | **33.8%** |
 | `vertebrae` | 4 | 0 | **4** | **3** | 1 | **75%** |
 
 > **Criterio de Aceptación Ciclo 4 (Tarea A2):** Llevar las piezas visibles sin dueño al **< 10%** por modelo mediante enriquecimiento del grafo o alias.
@@ -36,154 +36,17 @@
 |---|---|---|---|
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
 
-### 🔹 Modelo: `hand` (145 piezas sin dueño)
+### 🔹 Modelo: `hand` (8 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
 | `Adductor_pollicis` | `muscle` | `mus-flexor-pollicis-longus` (Flexor Largo del Pulgar) | 50% |
-| `Annular_ligament(A1)_of_1st_finger` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligament(A2)_of_1st_finger` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_2nd_finger_A1-A5` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_3rd_finger_A1-A5` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_4th_finger_A1-A5` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_5th_finger_A1-A5` | `ligament` | *Sin candidato claro* | — |
-| `Antebrachial_fascia` | `fascia` | `mus-tensor-fasciae-latae` (Tensor de la Fascia Lata) | 50% |
-| `Anterior_interosseous_artery` | `vessel` | *Sin candidato claro* | — |
-| `Anterior_interosseous_veins` | `vessel` | *Sin candidato claro* | — |
-| `Aponeurosis_palmaris` | `fascia` | `mus-palmaris-longus` (Palmar Largo) | 50% |
-| `Arteries` | `vessel` | *Sin candidato claro* | — |
-| `Articular_capsule_of_radiocarpal_joint` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsules_of_distal_interphalangeal_joints` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsules_of_metacarpophalangeal_joints` | `joint` | *Sin candidato claro* | — |
-| `Articular_capsules_of_proximal_interphalangeal_joints` | `joint` | *Sin candidato claro* | — |
-| `Articular_cartiage_of_ulna_distal_end` | `bone` | *Sin candidato claro* | — |
-| `Articular_cartilage_of_capitate_bone​` | `cartilage` | `bone-capitate` (Grande (carpo)) | 50% |
-| `Articular_cartilage_of_hamate_bone​` | `cartilage` | `bone-hamate` (Ganchoso) | 50% |
-| `Articular_cartilage_of_lunate_bone` | `cartilage` | `bone-lunate-bone` (Semilunar) | 50% |
-| `Articular_cartilage_of_pisiform_bone_​` | `cartilage` | `bone-pisiform-bone` (Hueso pisiforme) | 50% |
-| `Articular_cartilage_of_radius_distal_end​` | `cartilage` | *Sin candidato claro* | — |
-| `Articular_cartilage_of_scaphoid_bone​` | `cartilage` | `bone-scaphoid` (Escafoides (carpo)) | 50% |
-| `Articular_cartilage_of_trapezium_bone​` | `cartilage` | `bone-trapezium` (Trapecio (carpo)) | 50% |
-| `Articular_cartilage_of_trapezoid_bone​` | `cartilage` | `bone-trapezoid-bone` (Hueso trapezoide (carpo)) | 50% |
-| `Articular_cartilage_of_triquetrum_bone` | `cartilage` | `bone-triquetrum-bone` (Hueso piramidal (carpo)) | 50% |
-| `Articular_cartilages_of_distal_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
-| `Articular_cartilages_of_metacarpal_bones` | `cartilage` | `bone-metacarpal-bones` (Metacarpianos (1.º - 5.º)) | 50% |
-| `Articular_cartilages_of_middle_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
-| `Articular_cartilages_of_proximal_phalanges` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 50% |
-| `Basilic_vein` | `vessel` | *Sin candidato claro* | — |
+| `Arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 100% |
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
-| `Capitohamate_interosseus_ligament` | `ligament` | *Sin candidato claro* | — |
-| `Cartilages` | `cartilage` | *Sin candidato claro* | — |
-| `Cephalic_vein` | `vessel` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_distal_phalangeal_joints` | `ligament` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_interphalangeal_joint` | `ligament` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_metacarpal_joints` | `ligament` | *Sin candidato claro* | — |
-| `Common_flexor_tendon_sheath` | `tendon` | `ten-common-flexor-tendon` (Tendón Common Flexor) | 75% |
-| `Common_palmar_digital_arteries` | `vessel` | *Sin candidato claro* | — |
-| `Common_tendon_of_extensor_carpi_ulnaris` | `tendon` | `mus-extensor-carpi-ulnaris` (Extensor Cubital del Carpo) | 60% |
-| `Common_tendon_of_flexor_carpi_ulnaris` | `tendon` | `mus-flexor-carpi-ulnaris` (Flexor Cubital del Carpo) | 60% |
-| `Cruciform_ligaments_of_2nd_finger` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_3rd_finger` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_4th_finger` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_5th_finger` | `ligament` | *Sin candidato claro* | — |
-| `Deep_palmar_arch` | `vessel` | *Sin candidato claro* | — |
-| `Deep_transverse_metacarpal_ligament` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 50% |
-| `Deep_veins_of_the_arm` | `vessel` | *Sin candidato claro* | — |
-| `Deep_venous_palmar_arch` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_carpal_arch` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_carpal_network` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_carpometacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_digital_arteries_of_hand` | `vessel` | `mus-dorsal-interossei-of-hand` (Interóseos Dorsales de la Mano) | 50% |
-| `Dorsal_digital_veins` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_intercarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_intercarpal_ligaments001` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_metacarpal_artery` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_metacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_metatarsal_veins` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_radiocarpal_ligament` | `ligament` | `lig-dorsal-radio-ulnar-ligament` (Ligamento radio-ulnar dorsal) | 67% |
-| `Dorsal_scaphotriquetral_ligament` | `ligament` | `lig-dorsal-radio-ulnar-ligament` (Ligamento radio-ulnar dorsal) | 67% |
-| `Dorsal_ulnocarpal_ligament` | `ligament` | `lig-dorsal-radio-ulnar-ligament` (Ligamento radio-ulnar dorsal) | 67% |
-| `Dorsal_venous_network_of_hand` | `vessel` | `mus-dorsal-interossei-of-hand` (Interóseos Dorsales de la Mano) | 50% |
-| `Dorsalis_indicis` | `vessel` | `mus-extensor-indicis` (Extensor del Índice) | 50% |
-| `Dorsalis_pollicis` | `vessel` | `mus-flexor-pollicis-longus` (Flexor Largo del Pulgar) | 50% |
-| `Extensor_carpi_radialis_brevis_tendon_sheath` | `tendon` | `mus-extensor-carpi-radialis-brevis` (Extensor Radial Corto del Carpo) | 67% |
-| `Extensor_carpi_radialis_longus_tendon_sheath` | `tendon` | `mus-extensor-carpi-radialis-longus` (Extensor Radial Largo del Carpo) | 67% |
-| `Extensor_carpi_ulnaris_tendon_sheath` | `tendon` | `mus-extensor-carpi-ulnaris` (Extensor Cubital del Carpo) | 60% |
-| `Extensor_digiti_minimi_tendon_sheath` | `tendon` | `mus-extensor-digiti-minimi` (Extensor del Meñique) | 60% |
-| `Extensor_digitorum_-_Extensor_indicis_tendon_sheath` | `tendon` | `mus-extensor-digitorum` (Extensor de los Dedos) | 50% |
-| `Extensor_hood_of_2nd_finger` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_hood_of_3rd_finger` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_hood_of_4th_finger` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_hood_of_5th_finger` | `ligament` | *Sin candidato claro* | — |
-| `Extensor_pollicis_longus_tendon_sheath` | `tendon` | `mus-extensor-pollicis-longus` (Extensor Largo del Pulgar) | 60% |
 | `Fascia` | `fascia` | `mus-tensor-fasciae-latae` (Tensor de la Fascia Lata) | 100% |
-| `Fibrous_sheath_of_digits_of_hand` | `tendon` | *Sin candidato claro* | — |
-| `Fibrous_sheath_of_digits_of_hand_thumb` | `tendon` | *Sin candidato claro* | — |
-| `Flexor_carpi_radialis_tendon_sheath` | `tendon` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 60% |
-| `Flexor_pollicis_longus_tendon_sheath` | `tendon` | `mus-flexor-pollicis-longus` (Flexor Largo del Pulgar) | 60% |
-| `Intercapitular_veins_of_hand` | `vessel` | *Sin candidato claro* | — |
-| `Interosseous_metacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Intertendinous_connections_of_extensor_digitorum` | `ligament` | `mus-extensor-digitorum` (Extensor de los Dedos) | 50% |
-| `Lateral_band_of_2nd_finger` | `ligament` | *Sin candidato claro* | — |
-| `Lateral_band_of_3rd_finger` | `ligament` | *Sin candidato claro* | — |
-| `Lateral_band_of_4th_finger` | `ligament` | *Sin candidato claro* | — |
-| `Lateral_band_of_5th_finger` | `ligament` | *Sin candidato claro* | — |
-| `Ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Lunotriquetral_interosseous_ligament` | `ligament` | *Sin candidato claro* | — |
-| `Median_antebrachial_vein` | `vessel` | *Sin candidato claro* | — |
+| `Ligaments` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 100% |
 | `Muscles` | `muscle` | `mus-extraocular-muscles` (Músculos Extraoculares) | 100% |
 | `Nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 100% |
-| `Oblique_ligament_of_1st_finger` | `ligament` | *Sin candidato claro* | — |
-| `Palmal_digital_veins` | `vessel` | *Sin candidato claro* | — |
-| `Palmar_capitohamate_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
-| `Palmar_carpal_branches` | `vessel` | *Sin candidato claro* | — |
-| `Palmar_carpometacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_ligaments_of_distal_phalangeal_joints` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_ligaments_of_interphalangeal_joints` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_ligaments_of_metacarpophalangeal_joints` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_lunotriquetral_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
-| `Palmar_metacarpal_arteries` | `vessel` | *Sin candidato claro* | — |
-| `Palmar_metacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_metacarpal_veins` | `vessel` | *Sin candidato claro* | — |
-| `Palmar_radiocarpal_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
-| `Palmar_scaphotriquetral_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
-| `Palmar_trapezoideocapitate_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
-| `Palmar_ulnocarpal_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
-| `Palmar_venous_network_of_hand` | `vessel` | *Sin candidato claro* | — |
-| `Perforating_arteries_of_hand` | `vessel` | *Sin candidato claro* | — |
-| `Pisohamate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Pisometacarpal_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Pisotriquetral_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Posterior_interosseous_artery` | `vessel` | `ner-posterior-interosseous-nerve` (Nervio Interóseo Posterior (PIN)) | 67% |
-| `Posterior_interosseous_veins` | `vessel` | `ner-posterior-interosseous-nerve` (Nervio Interóseo Posterior (PIN)) | 67% |
-| `Princeps_pollicis_artery` | `vessel` | *Sin candidato claro* | — |
-| `Proper_palmar_digital_arteries` | `vessel` | *Sin candidato claro* | — |
-| `Radial_artery` | `vessel` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 50% |
-| `Radial_collateral_ligament` | `ligament` | `lig-fibular-collateral-ligament` (Ligamento colateral lateral (LCL)) | 67% |
-| `Radial_veins` | `vessel` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 50% |
-| `Radialis_indicis` | `vessel` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 50% |
-| `Radiate_carpal_ligament` | `ligament` | *Sin candidato claro* | — |
-| `Radioscaphocapitate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Scaphocapitate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Scapholunate_interosseus_ligament` | `ligament` | *Sin candidato claro* | — |
-| `Scaphotrapeziotrapezoidal_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Superficial_palmar_arch` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_palmar_venous_arch` | `vessel` | *Sin candidato claro* | — |
-| `Superficial_transverse_metacarpal_ligament` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 50% |
-| `Superficial_veins_of_upper_limb` | `vessel` | *Sin candidato claro* | — |
-| `Synovial_sheaths_of_fingers` | `tendon` | *Sin candidato claro* | — |
-| `Transverse_carpal_ligament` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 67% |
-| `Trapeziotrapezoidal_interosseous_ligament` | `ligament` | *Sin candidato claro* | — |
-| `Trapezoideocapitate_interosseous_ligament` | `ligament` | *Sin candidato claro* | — |
-| `Triangular_fibro_cartilage_disc` | `cartilage` | *Sin candidato claro* | — |
-| `Triquetrocapitate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Triquetrohamate_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Ulnar_artery` | `vessel` | `ner-ulnar-nerve` (Nervio Ulnar) | 50% |
-| `Ulnar_artery_(dorsal_carpal_br)` | `vessel` | `lig-dorsal-radio-ulnar-ligament` (Ligamento radio-ulnar dorsal) | 50% |
-| `Ulnar_collateral_ligament` | `ligament` | `lig-ulnar-collateral-ligament-of-elbow` (Ligamento colateral cubital del codo) | 100% |
-| `Ulnar_veins` | `vessel` | `ner-ulnar-nerve` (Nervio Ulnar) | 50% |
-| `Ulnopisiform_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
-| `Ulnotriquetral_ligament` | `ligament` | `ten-patellar-ligament` (Tendón Patelar) | 50% |
 | `Veins` | `vessel` | *Sin candidato claro* | — |
 
 ### 🔹 Modelo: `lower-limb` (286 piezas sin dueño)
@@ -196,11 +59,11 @@
 | `Accompanying_veins_of_arcuate_and_dorsal_arteriesr` | `vessel` | *Sin candidato claro* | — |
 | `Accompanying_veins_of_dorsal_digital_metatarsal_arteriesr` | `vessel` | *Sin candidato claro* | — |
 | `Acetabular_labrumr` | `cartilage` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 50% |
-| `Annular_ligaments_of_1st_toe_A1-A5r` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_2nd_toe_A1-A5r` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_3rd_toe_A1-A5r` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_4th_toe_A1-A5r` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_5th_toe_A1-A5r` | `ligament` | *Sin candidato claro* | — |
+| `Annular_ligaments_of_1st_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
+| `Annular_ligaments_of_2nd_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
+| `Annular_ligaments_of_3rd_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
+| `Annular_ligaments_of_4th_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
+| `Annular_ligaments_of_5th_toe_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
 | `Annulus_fibrosus_L1_L2` | `cartilage` | *Sin candidato claro* | — |
 | `Annulus_fibrosus_L2_L3` | `cartilage` | *Sin candidato claro* | — |
 | `Annulus_fibrosus_L3_L4` | `cartilage` | *Sin candidato claro* | — |
@@ -249,7 +112,7 @@
 | `Art_carts_of_metatarsal_bonesr` | `bone` | *Sin candidato claro* | — |
 | `Art_carts_of_middle_phalanges_of_footr` | `cartilage` | `bone-phalanges-hand` (Falanges de la mano (proximales, medias, distales)) | 40% |
 | `Art_carts_of_proximal_phalanges_of_footr` | `cartilage` | `art-radioulnar-articulation` (Radioulnar Proximal) | 40% |
-| `Arteries` | `vessel` | *Sin candidato claro* | — |
+| `Arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 100% |
 | `Articular_capsule_of_knee_jointr` | `joint` | *Sin candidato claro* | — |
 | `Articular_capsules_of_distal_interphalangeal_joints` | `joint` | *Sin candidato claro* | — |
 | `Articular_capsules_of_metatarsophalangeal_jointsr` | `joint` | *Sin candidato claro* | — |
@@ -264,16 +127,16 @@
 | `Cartilages` | `cartilage` | *Sin candidato claro* | — |
 | `Cervical_ligament_(anterior_talocalcaneal_ligament)r` | `ligament` | `lig-anterior-cruciate-ligament` (Ligamento cruzado anterior (LCA)) | 60% |
 | `Collateral_ligament_of_proximal_interphalangeal_jointsr` | `ligament` | `lig-fibular-collateral-ligament` (Ligamento colateral lateral (LCL)) | 40% |
-| `Collateral_ligaments_of_distal_interphalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_metatarsophalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
+| `Collateral_ligaments_of_distal_interphalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 40% |
+| `Collateral_ligaments_of_metatarsophalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
 | `Common_plantar_digital_nervesr` | `nerve` | *Sin candidato claro* | — |
 | `Common_tendon_of_biceps_femorisr` | `tendon` | `ten-long-head-of-biceps-tendon` (Tendón Cabeza Larga del Bíceps) | 50% |
 | `Communicating_brof_Posterior_tibial_a_and_Femoral_ar` | `bone` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_1st_toer` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_2nd_toer` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_3rd_toer` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_4th_toer` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_or_5th_toer` | `ligament` | *Sin candidato claro* | — |
+| `Cruciform_ligaments_or_1st_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Cruciform_ligaments_or_2nd_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Cruciform_ligaments_or_3rd_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Cruciform_ligaments_or_4th_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Cruciform_ligaments_or_5th_toer` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
 | `Crural_fasciar` | `fascia` | *Sin candidato claro* | — |
 | `Cuneometatarsal_interosseus_ligamentsr` | `ligament` | *Sin candidato claro* | — |
 | `Deep_artery_of_the_thighr` | `vessel` | *Sin candidato claro* | — |
@@ -291,7 +154,7 @@
 | `Dorsal_cuboidonavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Dorsal_cuneocuboid_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Dorsal_cuneonavicular_ligamentsr` | `ligament` | *Sin candidato claro* | — |
-| `Dorsal_digital_arteries_of_footr` | `vessel` | *Sin candidato claro* | — |
+| `Dorsal_digital_arteries_of_footr` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 50% |
 | `Dorsal_digital_branches_of_deep_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Dorsal_digital_branches_of_superficial_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Dorsal_digital_vein_of_medial_side_of_great_toer` | `vessel` | *Sin candidato claro* | — |
@@ -303,7 +166,7 @@
 | `Dorsal_pedis_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Dorsal_tarsometatarsal_ligamentsr` | `ligament` | *Sin candidato claro* | — |
 | `Dorsal_venous_arch_of_footr` | `vessel` | *Sin candidato claro* | — |
-| `Dorsal_venous_network_of_footr` | `vessel` | *Sin candidato claro* | — |
+| `Dorsal_venous_network_of_footr` | `vessel` | `ves-hand-venous-network` (Red venosa de la mano y miembro superior (cefálica, basílica y arcos)) | 50% |
 | `Extensor_apparatus_of_1st_toer` | `ligament` | *Sin candidato claro* | — |
 | `Extensor_apparatus_of_2nd_toer` | `ligament` | *Sin candidato claro* | — |
 | `Extensor_apparatus_of_3rd_toer` | `ligament` | *Sin candidato claro* | — |
@@ -368,7 +231,7 @@
 | `Lateral_plantar_veinr` | `vessel` | *Sin candidato claro* | — |
 | `Lateral_sural_cutaneous_nerver` | `nerve` | `ner-lateral-femoral-cutaneous-nerve` (N. Cutáneo Femoral Lateral) | 50% |
 | `Lateral_tarsal_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Ligaments` | `ligament` | *Sin candidato claro* | — |
+| `Ligaments` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 100% |
 | `Ligaments_of_fibular_headr` | `ligament` | *Sin candidato claro* | — |
 | `Medial_branch_of_deep_fibular_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Medial_calcaneal_arteryr` | `vessel` | *Sin candidato claro* | — |
@@ -398,8 +261,8 @@
 | `Obturator_membraner` | `fascia` | `mus-obturator-internus` (Obturador Interno) | 50% |
 | `Opponens_digiti_minimi_muscle_of_footr` | `muscle` | `mus-extensor-digiti-minimi` (Extensor del Meñique) | 40% |
 | `Palmar_ligament_of_proximal_interphalangeal_jointsr` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 40% |
-| `Palmar_ligaments_of_distal_interphalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_ligaments_of_metatarsophalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
+| `Palmar_ligaments_of_distal_interphalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 40% |
+| `Palmar_ligaments_of_metatarsophalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
 | `Perforating_br_between_Arcuate_a_and_Deep_plantar_archr` | `vessel` | *Sin candidato claro* | — |
 | `Perforating_branches_(Boyd's_veins)r` | `vessel` | *Sin candidato claro* | — |
 | `Perforating_branches_(Cockett's_veins)r` | `vessel` | *Sin candidato claro* | — |
@@ -492,7 +355,7 @@
 | `Bones_right` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 | `Cartilages_right` | `cartilage` | *Sin candidato claro* | — |
 
-### 🔹 Modelo: `upper-limb` (365 piezas sin dueño)
+### 🔹 Modelo: `upper-limb` (363 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
@@ -523,10 +386,10 @@
 | `Adductor_pollicisr` | `muscle` | `mus-adductor-magnus` (Aductor Mayor) | 50% |
 | `Annular_ligament(A1)_of_1st_fingerr` | `ligament` | *Sin candidato claro* | — |
 | `Annular_ligament(A2)_of_1st_fingerr` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_2nd_finger_A1-A5r` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_3rd_finger_A1-A5r` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_4th_finger_A1-A5r` | `ligament` | *Sin candidato claro* | — |
-| `Annular_ligaments_of_5th_finger_A1-A5r` | `ligament` | *Sin candidato claro* | — |
+| `Annular_ligaments_of_2nd_finger_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
+| `Annular_ligaments_of_3rd_finger_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
+| `Annular_ligaments_of_4th_finger_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
+| `Annular_ligaments_of_5th_finger_A1-A5r` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
 | `Annulus_fibrosus_L1_L20` | `cartilage` | *Sin candidato claro* | — |
 | `Annulus_fibrosus_L2_L3` | `cartilage` | *Sin candidato claro* | — |
 | `Annulus_fibrosus_L3_L4` | `cartilage` | *Sin candidato claro* | — |
@@ -544,15 +407,13 @@
 | `Annulus_fibrosus_T7_T8` | `cartilage` | *Sin candidato claro* | — |
 | `Annulus_fibrosus_T8_T9` | `cartilage` | *Sin candidato claro* | — |
 | `Annulus_fibrosus_T9_T10` | `cartilage` | *Sin candidato claro* | — |
-| `Antebrachial_fasciar` | `fascia` | *Sin candidato claro* | — |
 | `Anterior_circumflex_humeral_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Anterior_divisions_of_brachial_plexusr` | `nerve` | *Sin candidato claro* | — |
 | `Anterior_interosseous_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Anterior_interosseous_veinsr` | `vessel` | *Sin candidato claro* | — |
 | `Anterior_sternoclavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Anterior_ulnar_recurrent_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Aponeurosis_palmarisr` | `fascia` | *Sin candidato claro* | — |
-| `Arm_-_arteries` | `vessel` | *Sin candidato claro* | — |
+| `Arm_-_arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 50% |
 | `Arm_-_bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 | `Arm_-_capsules,_ligaments,_fasciae` | `fascia` | *Sin candidato claro* | — |
 | `Arm_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
@@ -606,14 +467,14 @@
 | `C8_rootr` | `nerve` | *Sin candidato claro* | — |
 | `Capitohamate_interosseus_ligament` | `ligament` | *Sin candidato claro* | — |
 | `Circumflex_scapular_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_distal_phalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_interphalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_metacarpal_jointsr` | `ligament` | *Sin candidato claro* | — |
-| `Collateral_ligaments_of_metacarpophalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
+| `Collateral_ligaments_of_distal_phalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 40% |
+| `Collateral_ligaments_of_interphalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
+| `Collateral_ligaments_of_metacarpal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
+| `Collateral_ligaments_of_metacarpophalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
 | `Common_carotid_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Common_flexor_tendon_sheath` | `tendon` | `ten-common-flexor-tendon` (Tendón Common Flexor) | 75% |
 | `Common_interosseous_arteryr` | `vessel` | *Sin candidato claro* | — |
-| `Common_palmar_digital_arteriesr` | `vessel` | *Sin candidato claro* | — |
+| `Common_palmar_digital_arteriesr` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 50% |
 | `Common_tendon_of_extensor_carpi_ulnarisr` | `tendon` | `ten-common-extensor-tendon` (Tendón Common Extensor) | 60% |
 | `Common_tendon_of_flexor_carpi_ulnarisr` | `tendon` | `ten-common-flexor-tendon` (Tendón Common Flexor) | 60% |
 | `Conoid_ligament_(part_of_coracoclavicular_ligament)r` | `ligament` | `lig-trapezoid-ligament` (Ligamento trapezoide (coracoclavicular)) | 60% |
@@ -634,15 +495,15 @@
 | `Costal_cart_of_9thribr` | `cartilage` | *Sin candidato claro* | — |
 | `Costocervical_trunkr` | `vessel` | *Sin candidato claro* | — |
 | `Costoclavicular_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_of_2nd_fingerr` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_of_3rd_fingerr` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_of_4th_fingerr` | `ligament` | *Sin candidato claro* | — |
-| `Cruciform_ligaments_of_5th_fingerr` | `ligament` | *Sin candidato claro* | — |
+| `Cruciform_ligaments_of_2nd_fingerr` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Cruciform_ligaments_of_3rd_fingerr` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Cruciform_ligaments_of_4th_fingerr` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Cruciform_ligaments_of_5th_fingerr` | `ligament` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
 | `Deep_artery_of_armr` | `vessel` | *Sin candidato claro* | — |
 | `Deep_palmar_archr` | `vessel` | *Sin candidato claro* | — |
 | `Deep_transverse_metacarpal_ligament` | `ligament` | `lig-transverse-acetabular-ligament` (Ligamento transverso del acetábulo) | 50% |
 | `Deep_veins_of_the_armr` | `vessel` | *Sin candidato claro* | — |
-| `Deep_venous_palmar_arch` | `vessel` | *Sin candidato claro* | — |
+| `Deep_venous_palmar_arch` | `vessel` | `ves-hand-venous-network` (Red venosa de la mano y miembro superior (cefálica, basílica y arcos)) | 50% |
 | `Deltoid_muscler` | `muscle` | *Sin candidato claro* | — |
 | `Dorsal_carpal_archr` | `vessel` | *Sin candidato claro* | — |
 | `Dorsal_carpal_networkr` | `vessel` | *Sin candidato claro* | — |
@@ -658,7 +519,7 @@
 | `Dorsal_scapular_artery_(Deep_br_of_transverse_cervical_a)r` | `vessel` | *Sin candidato claro* | — |
 | `Dorsal_scapular_nerver` | `nerve` | *Sin candidato claro* | — |
 | `Dorsal_ulnocarpal_ligament` | `ligament` | `lig-dorsal-radio-ulnar-ligament` (Ligamento radio-ulnar dorsal) | 67% |
-| `Dorsal_venous_network` | `vessel` | *Sin candidato claro* | — |
+| `Dorsal_venous_network` | `vessel` | `ves-hand-venous-network` (Red venosa de la mano y miembro superior (cefálica, basílica y arcos)) | 67% |
 | `Dorsalis_indicisr` | `vessel` | *Sin candidato claro* | — |
 | `Dorsalis_pollicisr` | `vessel` | *Sin candidato claro* | — |
 | `Extensor_carpi_radialis_brevis_tendon_sheath` | `tendon` | `mus-extensor-carpi-radialis-brevis` (Extensor Radial Corto del Carpo) | 67% |
@@ -672,12 +533,12 @@
 | `Extensor_hood_of_5th_fingerr` | `muscle` | *Sin candidato claro* | — |
 | `Extensor_pollicis_longus_tendon_sheath` | `tendon` | `mus-extensor-pollicis-longus` (Extensor Largo del Pulgar) | 60% |
 | `External_jugular_veinr` | `vessel` | *Sin candidato claro* | — |
-| `Fibrous_sheath_of_digits_of_hand` | `tendon` | *Sin candidato claro* | — |
-| `Fibrous_sheath_of_digits_of_hand_thumb` | `tendon` | *Sin candidato claro* | — |
+| `Fibrous_sheath_of_digits_of_hand` | `tendon` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 50% |
+| `Fibrous_sheath_of_digits_of_hand_thumb` | `tendon` | `lig-digital-apparatus-hand` (Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)) | 40% |
 | `Flexor_carpi_radialis_tendon_sheath` | `tendon` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 60% |
 | `Flexor_pollicis_longus_tendon_sheath` | `tendon` | `mus-flexor-pollicis-longus` (Flexor Largo del Pulgar) | 60% |
 | `Flexor_retinaculum` | `ligament` | `lig-flexor-retinaculum-of-wrist` (Retináculo flexor de la muñeca) | 100% |
-| `Forearm_-_arteries` | `vessel` | *Sin candidato claro* | — |
+| `Forearm_-_arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 50% |
 | `Forearm_-_bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 | `Forearm_-_capsules,_ligaments,_fasciae` | `fascia` | *Sin candidato claro* | — |
 | `Forearm_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
@@ -685,7 +546,7 @@
 | `Forearm_-_nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 50% |
 | `Forearm_-_veins` | `vessel` | *Sin candidato claro* | — |
 | `Glenoid_labrumr` | `cartilage` | *Sin candidato claro* | — |
-| `Hand_and_wrist_-_arteries` | `vessel` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 50% |
+| `Hand_and_wrist_-_arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 75% |
 | `Hand_and_wrist_-_bones` | `bone` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 75% |
 | `Hand_and_wrist_-_capsules,_ligaments,_fasciae` | `fascia` | *Sin candidato claro* | — |
 | `Hand_and_wrist_-_cartilages` | `cartilage` | `bone-sesamoids` (Huesos sesamoideos (mano y pie)) | 50% |
@@ -731,19 +592,19 @@
 | `Palmal_digital_veins` | `vessel` | *Sin candidato claro* | — |
 | `Palmar_capitohamate_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
 | `Palmar_carpal_branchesr` | `vessel` | *Sin candidato claro* | — |
-| `Palmar_carpometacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_ligaments_of_distal_phalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_ligaments_of_interphalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_ligaments_of_metacarpophalangeal_jointsr` | `ligament` | *Sin candidato claro* | — |
+| `Palmar_carpometacarpal_ligaments` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 67% |
+| `Palmar_ligaments_of_distal_phalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 40% |
+| `Palmar_ligaments_of_interphalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
+| `Palmar_ligaments_of_metacarpophalangeal_jointsr` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 50% |
 | `Palmar_lunotriquetral_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
 | `Palmar_metacarpal_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Palmar_metacarpal_ligaments` | `ligament` | *Sin candidato claro* | — |
+| `Palmar_metacarpal_ligaments` | `ligament` | `lig-collateral-and-palmar-finger-ligaments` (Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos) | 67% |
 | `Palmar_metacarpal_veins` | `vessel` | *Sin candidato claro* | — |
 | `Palmar_radiocarpal_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Palmar_scaphotriquetral_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
 | `Palmar_trapezoideocapitate_ligament` | `ligament` | `lig-palmar-radio-ulnar-ligament` (Ligamento radio-ulnar palmar) | 67% |
 | `Palmar_ulnocarpal_ligamentr` | `ligament` | *Sin candidato claro* | — |
-| `Palmar_venous_network` | `vessel` | *Sin candidato claro* | — |
+| `Palmar_venous_network` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 67% |
 | `Pectoral_girdle_-_arteries` | `vessel` | *Sin candidato claro* | — |
 | `Pectoral_girdle_-_bones` | `bone` | *Sin candidato claro* | — |
 | `Pectoral_girdle_-_capsules,_ligaments,_fasciae` | `fascia` | *Sin candidato claro* | — |
@@ -764,7 +625,7 @@
 | `Posterior_interosseous_veinsr` | `vessel` | `ner-posterior-interosseous-nerve` (Nervio Interóseo Posterior (PIN)) | 67% |
 | `Posterior_ulnar_recurrent_arteryr` | `vessel` | *Sin candidato claro* | — |
 | `Princeps_pollicis_arteriesr` | `vessel` | *Sin candidato claro* | — |
-| `Proper_palmar_digital_arteriesr` | `vessel` | *Sin candidato claro* | — |
+| `Proper_palmar_digital_arteriesr` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 50% |
 | `Quadrate_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Radial_annular_ligamentr` | `ligament` | *Sin candidato claro* | — |
 | `Radial_arteryr` | `vessel` | `mus-flexor-carpi-radialis` (Flexor Radial del Carpo) | 50% |
@@ -798,12 +659,12 @@
 | `Suprascapular_arteryr` | `vessel` | `ner-suprascapular-nerve` (Nervio Supraescapular) | 50% |
 | `Synovial_sheaths_of_fingers` | `tendon` | *Sin candidato claro* | — |
 | `T1_rootr` | `nerve` | *Sin candidato claro* | — |
-| `Thickened_part_of_antebrachial_fascia` | `fascia` | *Sin candidato claro* | — |
+| `Thickened_part_of_antebrachial_fascia` | `fascia` | `fas-palmar-aponeurosis` (Aponeurosis palmar y fascia antebraquial) | 50% |
 | `Thoracoacromial_artery_Acromial_brr` | `vessel` | *Sin candidato claro* | — |
 | `Thoracoacromial_artery_Deltoid_brr` | `vessel` | *Sin candidato claro* | — |
 | `Thoracoacromial_artery_Pectoral_brr` | `vessel` | *Sin candidato claro* | — |
 | `Thoracodorsal_arteryr` | `vessel` | `ner-thoracodorsal-nerve` (Nervio Toracodorsal) | 50% |
-| `Thorax_-_arteries` | `vessel` | *Sin candidato claro* | — |
+| `Thorax_-_arteries` | `vessel` | `ves-hand-arterial-network` (Red arterial de la mano y muñeca (arcos palmares y arterias digitales)) | 50% |
 | `Thorax_-_bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
 | `Thorax_-_cartilages` | `cartilage` | *Sin candidato claro* | — |
 | `Thorax_-_nerves` | `nerve` | `ner-pectoral-nerves` (Nervios Pectorales) | 50% |
@@ -872,9 +733,9 @@
 
 ## 3. Estructuras del Grafo SIN Mallas 3D (`modelMeshes` Vacío)
 
-Total de estructuras en el grafo: **281**
-- Estructuras con mallas 3D: **225** (80.1%)
-- Estructuras sin mallas 3D: **56** (19.9%)
+Total de estructuras en el grafo: **286**
+- Estructuras con mallas 3D: **231** (80.8%)
+- Estructuras sin mallas 3D: **55** (19.2%)
 
 ### Detalle de Estructuras sin Mallas 3D:
 
@@ -882,7 +743,7 @@ Total de estructuras en el grafo: **281**
 |---|---|---|---|---|
 | `mus-masseter`<br>**Masetero** (*Masseter*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-temporalis`<br>**Temporal** (*Temporalis*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
-| `mus-lateral-pterygoid`<br>**Pterigoideo Lateral** (*Lateral Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `hand:Lateral_band_of_2nd_finger` |
+| `mus-lateral-pterygoid`<br>**Pterigoideo Lateral** (*Lateral Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Anterior_horn_of_Lateral_meniscusr` |
 | `mus-medial-pterygoid`<br>**Pterigoideo Medial** (*Medial Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Anterior_horn_of_Medial_meniscusr` |
 | `mus-occipitofrontalis`<br>**Occipitofrontal** (*Occipitofrontalis*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-orbicularis-oculi`<br>**Orbicular de los Párpados** (*Orbicularis Oculi*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Zona_orbicularis_of_hip_jointr` |
@@ -892,12 +753,12 @@ Total de estructuras en el grafo: **281**
 | `mus-extraocular-muscles`<br>**Músculos Extraoculares** (*Extraocular Muscles*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `hand:Muscles` |
 | `mus-sternocleidomastoid`<br>**Esternocleidomastoideo** (*Sternocleidomastoid*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-platysma`<br>**Platisma** (*Platysma*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-scalenus-anterior`<br>**Escaleno Anterior** (*Scalenus Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Anterior_interosseous_artery` |
+| `mus-scalenus-anterior`<br>**Escaleno Anterior** (*Scalenus Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Anterior_branch_of_Iliohypogastric_nerver` |
 | `mus-scalenus-medius`<br>**Escaleno Medio** (*Scalenus Medius*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-scalenus-posterior`<br>**Escaleno Posterior** (*Scalenus Posterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Posterior_interosseous_artery` |
-| `mus-longus-colli`<br>**Largo del Cuello** (*Longus Colli*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Extensor_carpi_radialis_longus_tendon_sheath` |
-| `mus-longus-capitis`<br>**Largo de la Cabeza** (*Longus Capitis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Extensor_carpi_radialis_longus_tendon_sheath` |
-| `mus-rectus-capitis-anterior`<br>**Recto Anterior de la Cabeza** (*Rectus Capitis Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Anterior_interosseous_artery` |
+| `mus-scalenus-posterior`<br>**Escaleno Posterior** (*Scalenus Posterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Communicating_brof_Posterior_tibial_a_and_Femoral_ar` |
+| `mus-longus-colli`<br>**Largo del Cuello** (*Longus Colli*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Extensor_digitorum_longus-fibularis_tertius_vaginae_tendinumr` |
+| `mus-longus-capitis`<br>**Largo de la Cabeza** (*Longus Capitis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Extensor_digitorum_longus-fibularis_tertius_vaginae_tendinumr` |
+| `mus-rectus-capitis-anterior`<br>**Recto Anterior de la Cabeza** (*Rectus Capitis Anterior*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Anterior_branch_of_Iliohypogastric_nerver` |
 | `mus-rectus-capitis-lateralis`<br>**Recto Lateral de la Cabeza** (*Rectus Capitis Lateralis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-splenius-capitis`<br>**Esplenio de la Cabeza** (*Splenius Capitis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-splenius-cervicis`<br>**Esplenio del Cuello** (*Splenius Cervicis*) | `muscle` | `cervical` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
@@ -912,8 +773,8 @@ Total de estructuras en el grafo: **281**
 | `mus-subcostal-muscles`<br>**Subcostales** (*Subcostal Muscles*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Muscles` |
 | `mus-levatores-costarum`<br>**Elevadores de las Costillas** (*Levatores Costarum*) | `muscle` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-rectus-abdominis`<br>**Recto Abdominal** (*Rectus Abdominis*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-external-oblique`<br>**Oblicuo Externo** (*External Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Oblique_ligament_of_1st_finger` |
-| `mus-internal-oblique`<br>**Oblicuo Interno** (*Internal Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Oblique_ligament_of_1st_finger` |
+| `mus-external-oblique`<br>**Oblicuo Externo** (*External Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Oblique_popliteal_ligamentr` |
+| `mus-internal-oblique`<br>**Oblicuo Interno** (*Internal Oblique*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Oblique_popliteal_ligamentr` |
 | `mus-transversus-abdominis`<br>**Transverso Abdominal** (*Transversus Abdominis*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-pyramidalis`<br>**Piramidal** (*Pyramidalis*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-quadratus-lumborum`<br>**Cuadrado Lumbar** (*Quadratus Lumborum*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
@@ -923,15 +784,14 @@ Total de estructuras en el grafo: **281**
 | `mus-rotatores`<br>**Rotadores** (*Rotatores*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-interspinales`<br>**Interespinosos** (*Interspinales*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-intertransversarii`<br>**Intertransversos** (*Intertransversarii*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `mus-serratus-posterior-superior`<br>**Serrato Posterior Superior** (*Serratus Posterior Superior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Posterior_interosseous_artery` |
-| `mus-serratus-posterior-inferior`<br>**Serrato Posterior Inferior** (*Serratus Posterior Inferior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Posterior_interosseous_artery` |
+| `mus-serratus-posterior-superior`<br>**Serrato Posterior Superior** (*Serratus Posterior Superior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Communicating_brof_Posterior_tibial_a_and_Femoral_ar` |
+| `mus-serratus-posterior-inferior`<br>**Serrato Posterior Inferior** (*Serratus Posterior Inferior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Communicating_brof_Posterior_tibial_a_and_Femoral_ar` |
 | `mus-sternalis`<br>**Esternal** (*Sternalis*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-tensor-fasciae-latae`<br>**Tensor de la Fascia Lata** (*Tensor Fasciae Latae*) | `muscle` | `hip` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Tensor_fasciae_lataer` |
 | `mus-levator-ani`<br>**Elevador del Ano** (*Levator Ani*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
-| `ten-long-head-of-biceps-tendon`<br>**Tendón Cabeza Larga del Bíceps** (*Long head of biceps tendon*) | `tendon` | `shoulder` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Common_flexor_tendon_sheath` |
-| `ten-common-extensor-tendon`<br>**Tendón Common Extensor** (*Common extensor tendon*) | `tendon` | `arm` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Common_flexor_tendon_sheath` |
-| `ten-common-flexor-tendon`<br>**Tendón Common Flexor** (*Common flexor tendon*) | `tendon` | `arm` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Common_flexor_tendon_sheath` |
-| `ten-pectoralis-major-tendon`<br>**Tendón del Pectoral Mayor** (*Pectoralis major tendon*) | `tendon` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Common_flexor_tendon_sheath` |
+| `ten-long-head-of-biceps-tendon`<br>**Tendón Cabeza Larga del Bíceps** (*Long head of biceps tendon*) | `tendon` | `shoulder` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Common_tendon_of_biceps_femorisr` |
+| `ten-common-flexor-tendon`<br>**Tendón Common Flexor** (*Common flexor tendon*) | `tendon` | `arm` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Common_plantar_digital_nervesr` |
+| `ten-pectoralis-major-tendon`<br>**Tendón del Pectoral Mayor** (*Pectoralis major tendon*) | `tendon` | `chest` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Common_tendon_of_biceps_femorisr` |
 | `ner-accessory-nerve`<br>**Nervio Accesorio (XI)** (*Accessory nerve*) | `nerve` | `cervical` | Nervio no modelado en los atlas 3D de extremidades | `lower-limb:Accessory_saphenous_veinr` |
 | `ner-pudendal-nerve`<br>**Nervio Pudendo** (*Pudendal nerve*) | `nerve` | `core` | Nervio no modelado en los atlas 3D de extremidades | `lower-limb:Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr` |
 | `ner-thoracodorsal-nerve`<br>**Nervio Toracodorsal** (*Thoracodorsal nerve*) | `nerve` | `back` | Nervio no modelado en los atlas 3D de extremidades | `lower-limb:Inferior_clunial_br_of_post_cutaneous_nerve_of_the_thighr` |

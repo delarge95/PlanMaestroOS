@@ -224,7 +224,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Dorsal radio-ulnar ligament"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Dorsal_radio-ulnar_ligament"],"upper-limb":["Dorsal_radio-ulnar_ligamentr"]},
+  modelMeshes: {"hand": ["Dorsal_radio-ulnar_ligament", "Dorsal_radiocarpal_ligament", "Dorsal_ulnocarpal_ligament", "Dorsal_intercarpal_ligaments", "Dorsal_intercarpal_ligaments001", "Dorsal_scaphotriquetral_ligament", "Scaphocapitate_ligament", "Scapholunate_interosseus_ligament", "Scaphotrapeziotrapezoidal_ligament", "Capitohamate_interosseus_ligament", "Lunotriquetral_interosseous_ligament", "Trapeziotrapezoidal_interosseous_ligament", "Trapezoideocapitate_interosseous_ligament", "Pisohamate_ligament", "Pisometacarpal_ligament", "Pisotriquetral_ligament"], "upper-limb": ["Dorsal_radio-ulnar_ligamentr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -241,7 +241,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Palmar radio-ulnar ligament"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Palmar_radio-ulnar_ligament"],"upper-limb":["Palmar_radio-ulnar_ligament"]},
+  modelMeshes: {"hand": ["Palmar_radio-ulnar_ligament", "Palmar_radiocarpal_ligament", "Palmar_ulnocarpal_ligament", "Radioscaphocapitate_ligament", "Palmar_capitohamate_ligament", "Palmar_lunotriquetral_ligament", "Palmar_scaphotriquetral_ligament", "Palmar_trapezoideocapitate_ligament", "Radiate_carpal_ligament", "Triquetrocapitate_ligament", "Triquetrohamate_ligament", "Ulnopisiform_ligament", "Ulnotriquetral_ligament"], "upper-limb": ["Palmar_radio-ulnar_ligament"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -295,7 +295,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Flexor retinaculum of wrist"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Flexor_retinaculum_of_wrist"]},
+  modelMeshes: {"hand": ["Flexor_retinaculum_of_wrist", "Transverse_carpal_ligament"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -313,7 +313,7 @@ export const LIGAMENTS: LigamentEntry[] = [
     "Extensor retinaculum of wrist"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_retinaculum_of_wrist"],"upper-limb":["Extensor_retinaculum_of_wrist"]},
+  modelMeshes: {"hand": ["Extensor_retinaculum_of_wrist"], "upper-limb": ["Extensor_retinaculum_of_wrist"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
@@ -373,5 +373,75 @@ export const LIGAMENTS: LigamentEntry[] = [
     {"sourceId":"TODO-cita","note":"Ligamento identificado en el modelo GLB; ficha Gray's/Moore pendiente."}
   ],
   jointId: `art-subtalar-joint`,
+  },
+  {
+    id: `lig-digital-apparatus-hand`,
+    kind: `ligament`,
+    nameEn: `Digital fibrous apparatus of hand (Annular & Cruciform ligaments)`,
+    nameEs: `Aparato fibroso digital de la mano (ligamentos anulares y cruciformes)`,
+    synonyms: ["Poleas digitales", "Ligamentos anulares de la mano", "Annular ligaments of fingers", "Poleas A1-A5"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Annular_ligament(A1)_of_1st_finger", "Annular_ligament(A2)_of_1st_finger", "Annular_ligaments_of_2nd_finger_A1-A5", "Annular_ligaments_of_3rd_finger_A1-A5", "Annular_ligaments_of_4th_finger_A1-A5", "Annular_ligaments_of_5th_finger_A1-A5", "Cruciform_ligaments_of_2nd_finger", "Cruciform_ligaments_or_3rd_finger", "Cruciform_ligaments_or_4th_finger", "Cruciform_ligaments_or_5th_finger", "Extensor_hood_of_2nd_finger", "Extensor_hood_of_3rd_finger", "Extensor_hood_of_4th_finger", "Extensor_hood_of_5th_finger", "Lateral_band_of_2nd_finger", "Lateral_band_of_3rd_finger", "Lateral_band_of_4th_finger", "Lateral_band_of_5th_finger", "Intertendinous_connections_of_extensor_digitorum", "Oblique_ligament_of_1st_finger"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "chapter": 7, "note": "Sistema de poleas anulares (A1-A5) y cruciformes (C1-C3) que previene el efecto cuerda de arco (bowstringing) de los tendones flexores profundos y superficiales."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Polea A1 implicada en dedo en resorte / tenosinovitis estenosante.`,
+  },
+  {
+    id: `lig-collateral-and-palmar-finger-ligaments`,
+    kind: `ligament`,
+    nameEn: `Collateral and Palmar ligaments of MCP, PIP and DIP joints`,
+    nameEs: `Ligamentos colaterales y palmares metacarpofalángicos e interfalángicos`,
+    synonyms: ["Ligamentos colaterales de los dedos", "Ligamentos palmares", "Placas volares"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Collateral_ligaments_of_distal_phalangeal_joints", "Collateral_ligaments_of_interphalangeal_joint", "Collateral_ligaments_of_metacarpal_joints", "Palmar_ligaments_of_distal_phalangeal_joints", "Palmar_ligaments_of_interphalangeal_joints", "Palmar_ligaments_of_metacarpophalangeal_joints", "Deep_transverse_metacarpal_ligament", "Superficial_transverse_metacarpal_ligament", "Palmar_metacarpal_ligaments", "Dorsal_metacarpal_ligaments", "Interosseous_metacarpal_ligaments", "Palmar_carpometacarpal_ligaments", "Dorsal_carpometacarpal_ligaments", "Radial_collateral_ligament", "Ulnar_collateral_ligament"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "chapter": 7, "note": "Ligamentos colaterales primarios que restringen la desviación varo/valgo en las articulaciones interfalángicas y MCF."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Estabilidad lateral en agarres de pinza y fuerza.`,
+  },
+  {
+    id: `fas-palmar-aponeurosis`,
+    kind: `ligament`,
+    nameEn: `Palmar aponeurosis & Antebrachial fascia`,
+    nameEs: `Aponeurosis palmar y fascia antebraquial`,
+    synonyms: ["Aponeurosis palmar", "Fascia palmar", "Fascia antebraquial", "Palmar aponeurosis"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Aponeurosis_palmaris", "Antebrachial_fascia"], "upper-limb": ["Aponeurosis_palmarisr", "Antebrachial_fasciar"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "chapter": 7, "note": "Estructura fascial triangular densa en el centro de la palma; protege vasos y nervios subyacentes."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Afectada en contractura de Dupuytren.`,
+  },
+  {
+    id: `ves-hand-arterial-network`,
+    kind: `ligament`,
+    nameEn: `Arterial network of hand & wrist (Palmar arches & Digital arteries)`,
+    nameEs: `Red arterial de la mano y muñeca (arcos palmares y arterias digitales)`,
+    synonyms: ["Arterias de la mano", "Arco palmar profundo", "Arco palmar superficial", "Hand arteries"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Radial_artery", "Ulnar_artery", "Deep_palmar_arch", "Superficial_palmar_arch", "Common_palmar_digital_arteries", "Proper_palmar_digital_arteries", "Palmar_metacarpal_arteries", "Dorsal_carpal_arch", "Dorsal_carpal_network", "Dorsal_digital_arteries_of_hand", "Dorsal_metacarpal_artery", "Dorsalis_indicis", "Dorsalis_pollicis", "Perforating_arteries_of_hand", "Princeps_pollicis_artery", "Radialis_indicis", "Anterior_interosseous_artery", "Posterior_interosseous_artery", "Palmar_carpal_branches", "Ulnar_artery_(dorsal_carpal_br)"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "chapter": 7, "note": "Anastomosis de las arterias radial y ulnar formando los arcos palmares superficial y profundo."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Irrigación completa de los dígitos y músculos intrínsecos.`,
+  },
+  {
+    id: `ves-hand-venous-network`,
+    kind: `ligament`,
+    nameEn: `Venous network of hand & upper limb (Cephalic, Basilic & Deep arches)`,
+    nameEs: `Red venosa de la mano y miembro superior (cefálica, basílica y arcos)`,
+    synonyms: ["Venas de la mano", "Red venosa dorsal", "Basilic vein", "Cephalic vein"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Basilic_vein", "Cephalic_vein", "Median_antebrachial_vein", "Deep_veins_of_the_arm", "Deep_venous_palmar_arch", "Superficial_palmar_venous_arch", "Superficial_veins_of_upper_limb", "Dorsal_venous_network_of_hand", "Palmar_venous_network_of_hand", "Palmar_metacarpal_veins", "Dorsal_digital_veins", "Dorsal_metatarsal_veins", "Palmal_digital_veins", "Radial_veins", "Ulnar_veins", "Anterior_interosseous_veins", "Posterior_interosseous_veins", "Intercapitular_veins_of_hand"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "chapter": 7, "note": "Drenaje venoso superficial (red dorsal que origina las venas basílica y cefálica) y profundo."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Drenaje venoso de retorno de la mano.`,
   },
 ];

@@ -2666,7 +2666,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Flexor Carpi Radialis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Flexor_carpi_radialis"],"upper-limb":["Flexor_carpi_radialisr"]},
+  modelMeshes: {"hand": ["Flexor_carpi_radialis"], "upper-limb": ["Flexor_carpi_radialisr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2703,7 +2703,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Palmaris Longus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Palmaris_longus_muscle"],"upper-limb":["Palmaris_longus_muscler"]},
+  modelMeshes: {"hand": ["Palmaris_longus_muscle"], "upper-limb": ["Palmaris_longus_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2773,7 +2773,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Flexor Digitorum Superficialis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Flexor_digitorum_superficialis_humeral_head"],"upper-limb":["Flexor_digitorum_superficialis_humero-ulnar_headr","Flexor_digitorum_superficialis_radial_headr"]},
+  modelMeshes: {"hand": ["Flexor_digitorum_superficialis_humeral_head"], "upper-limb": ["Flexor_digitorum_superficialis_humero-ulnar_headr", "Flexor_digitorum_superficialis_radial_headr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2810,7 +2810,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Flexor Digitorum Profundus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Flexor_digitorum_profundus"],"upper-limb":["Flexor_digitorum_profundusr"]},
+  modelMeshes: {"hand": ["Flexor_digitorum_profundus"], "upper-limb": ["Flexor_digitorum_profundusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2847,7 +2847,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Flexor Pollicis Longus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Flexor_pollicis_longus"],"upper-limb":["Flexor_pollicis_longusr"]},
+  modelMeshes: {"hand": ["Flexor_pollicis_longus"], "upper-limb": ["Flexor_pollicis_longusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2884,7 +2884,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Pronator Quadratus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Pronator_quadratus"],"upper-limb":["Pronator_quadratusr"]},
+  modelMeshes: {"hand": ["Pronator_quadratus"], "upper-limb": ["Pronator_quadratusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2919,7 +2919,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Brachioradialis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Brachioradialis_muscle"],"upper-limb":["Brachioradialis_muscler"]},
+  modelMeshes: {"hand": ["Brachioradialis_muscle"], "upper-limb": ["Brachioradialis_muscler"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2957,7 +2957,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Extensor Carpi Radialis Longus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_carpi_radialis_longus"],"upper-limb":["Extensor_carpi_radialis_longusr"]},
+  modelMeshes: {"hand": ["Extensor_carpi_radialis_longus"], "upper-limb": ["Extensor_carpi_radialis_longusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -2994,7 +2994,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Extensor Carpi Radialis Brevis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_carpi_radialis_brevis"],"upper-limb":["Extensor_carpi_radialis_brevisr"]},
+  modelMeshes: {"hand": ["Extensor_carpi_radialis_brevis"], "upper-limb": ["Extensor_carpi_radialis_brevisr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3031,7 +3031,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Extensor Digitorum"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_digitorum"],"upper-limb":["Extensor_digitorumr"]},
+  modelMeshes: {"hand": ["Extensor_digitorum"], "upper-limb": ["Extensor_digitorumr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3068,7 +3068,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Extensor Digiti Minimi"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_digiti_minimi"],"upper-limb":["Extensor_digiti_minimir"]},
+  modelMeshes: {"hand": ["Extensor_digiti_minimi"], "upper-limb": ["Extensor_digiti_minimir"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3173,7 +3173,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Abductor Pollicis Longus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Abductor_pollicis_longus"],"upper-limb":["Abductor_pollicis_longusr"]},
+  modelMeshes: {"hand": ["Abductor_pollicis_longus"], "upper-limb": ["Abductor_pollicis_longusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3208,7 +3208,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Extensor Pollicis Brevis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_pollicis_brevis"],"upper-limb":["Extensor_pollicis_brevisr"]},
+  modelMeshes: {"hand": ["Extensor_pollicis_brevis"], "upper-limb": ["Extensor_pollicis_brevisr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3243,7 +3243,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Extensor Pollicis Longus"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_pollicis_longus"],"upper-limb":["Extensor_pollicis_longusr"]},
+  modelMeshes: {"hand": ["Extensor_pollicis_longus"], "upper-limb": ["Extensor_pollicis_longusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3276,7 +3276,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Extensor Indicis"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Extensor_indicis"],"upper-limb":["Extensor_indicisr"]},
+  modelMeshes: {"hand": ["Extensor_indicis"], "upper-limb": ["Extensor_indicisr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -3425,7 +3425,7 @@ export const MUSCLES: MuscleEntry[] = [
     "Palmar Interossei"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["1st_palmar_interosseus_of_hand","2nd_palmar_interosseus_of_hand","3rd_palmar_interosseus_of_hand"],"upper-limb":["1st_palmar_interosseus_of_handr","2nd_palmar_interosseus_of_handr","3rd_palmar_interosseus_of_handr"]},
+  modelMeshes: {"hand": ["1st_palmar_interosseus_of_hand", "2nd_palmar_interosseus_of_hand", "3rd_palmar_interosseus_of_hand"], "upper-limb": ["1st_palmar_interosseus_of_handr", "2nd_palmar_interosseus_of_handr", "3rd_palmar_interosseus_of_handr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

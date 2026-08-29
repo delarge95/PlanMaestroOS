@@ -126,7 +126,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio radiocarpea"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Lunate_bone","Radius","Scaphoid","Ulna"],"overview-skeleton":["Lunate_boner","Radiusr","Scaphoidr","Ulnar"],"upper-limb":["Lunate_boner","Radiusr","Scaphoidr","Ulnar"]},
+  modelMeshes: {"hand": ["Articular_capsule_of_radiocarpal_joint", "Articular_capsules_of_distal_interphalangeal_joints", "Articular_capsules_of_metacarpophalangeal_joints", "Articular_capsules_of_proximal_interphalangeal_joints", "Articular_cartiage_of_ulna_distal_end", "Articular_cartilage_of_capitate_bone​", "Articular_cartilage_of_hamate_bone​", "Articular_cartilage_of_lunate_bone", "Articular_cartilage_of_pisiform_bone_​", "Articular_cartilage_of_radius_distal_end​", "Articular_cartilage_of_scaphoid_bone​", "Articular_cartilage_of_trapezium_bone​", "Articular_cartilage_of_trapezoid_bone​", "Articular_cartilage_of_triquetrum_bone", "Articular_cartilages_of_distal_phalanges", "Articular_cartilages_of_metacarpal_bones", "Articular_cartilages_of_middle_phalanges", "Articular_cartilages_of_proximal_phalanges", "Cartilages", "Lunate_bone", "Radius", "Scaphoid", "Triangular_fibro_cartilage_disc", "Ulna"], "overview-skeleton": ["Lunate_boner", "Radiusr", "Scaphoidr", "Ulnar"], "upper-limb": ["Lunate_boner", "Radiusr", "Scaphoidr", "Ulnar"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
