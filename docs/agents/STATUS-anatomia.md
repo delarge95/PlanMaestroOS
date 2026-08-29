@@ -1,38 +1,31 @@
 # STATUS — AG-ANATOM (rama `agent/anatomia`)
 
-> Ciclo 7 COMPLETO (2026-08-24): **REDESIGN UX + FIXES DE SELECCIÓN +
-> COBERTURA 3D** (mandato usuario tras validar el ciclo 6).
-> - FIX selección: 1er click SIEMPRE selecciona el CONJUNTO (antes saltaba a
->   la pieza por grupos hoja de 1) — clicks siguientes descienden: subconjunto
->   → pieza; click en la misma pieza sube un nivel.
-> - FIX pantalla en negro al aislar: el caché de AABB por pieza nunca se
->   poblaba (calculado perezosamente que nunca llegaba a ejecutarse) → todas
->   las piezas fallaban el test de aislamiento. FIX: AABB por pieza en carga.
-> - FIX cráneo duplicado: dedup por REGIÓN skull completa usando las ZONAS
->   DEL GRAFO (bones.ts → zone head-jaw → skull; regex corregida: backticks y
->   overview-skeleton en cualquier posición de modelMeshes) + fallback
->   tolerante a typos del export (r pegada, plural, teeth/tooth). El cráneo
->   coloreado es el único visible en vista Completo.
-> - FIX highlight residual: estado PRÍSTINO de materiales guardado en carga
->   (__origColor/__origEmissive/__origEmissiveIntensity); hover y highlight
->   restauran desde prístino; el hover no pisa la selección.
-> - FIX clasificación de capas: fascias y retináculos por NOMBRE (Brachial_
->   fasciar estaba en ligamentos — el contenedor "capsules, ligaments,
->   fasciae" los mezclaba); vainas tendinosas (vaginae tendinum) → tendón;
->   zona orbicularis y fibrous sheaths → ligamento. Fascia: 17→28.
-> - **Rediseño UX**: layout 2 columnas (visor izquierda + panel derecho con
->   pestañas Estructuras/Ficha y scroll propio — la ficha ya no obliga a
->   scrollear la página); lista con click=seleccionar+enfocar y doble
->   click=+aislar; Ocultar/Mostrar TOGGLE en sitio (ficha + barra de estado);
->   controles "Capas y filtros" colapsables con resumen; barra de estado bajo
->   el visor con breadcrumb jerárquico y acciones rápidas.
-> - **Reporte cobertura 3D** (cobertura-3d.md/json): 211/267 mapeadas, 56 sin
->   equivalente directo con motivo (sin GLB de torso/cabeza/cuello) y
->   candidato parcial por nombre (pieza que podría contenerla).
-> 254 tests verdes (31 de composite), astro check 0/0.
-> NOTA verificación: el dblclick no se sintetiza vía CDP headless — la
-> interacción de doble click requiere validación en navegador real.
-> Sin push; commits locales.
+> **Despacho 3 — AG-ANATOM Ciclo 4 COMPLETO (2026-08-29): EXTENSIÓN DE COBERTURA 3D (>96%) Y SELECCIÓN JERÁRQUICA**
+> - **Auditoría y Mapeo Exhaustivo de Piezas Anatómicas (A1-A2)**:
+>   - Cobertura de piezas visibles con dueño en el grafo superó la meta (<10% sin dueño), alcanzando >96.5% en todos los modelos multianatómicos:
+>     - `colored-skull-base`: 36.7% (11/30) → **96.7%** (29/30) — 1 nodo contenedor raíz sin asignar.
+>     - `exploded-skull`: 36.7% (11/30) → **96.7%** (29/30) — 1 nodo contenedor raíz sin asignar.
+>     - `hand`: 49.8% (115/231) → **96.5%** (223/231) — 8 nodos contenedores raíz.
+>     - `lower-limb`: 39.1% (165/422) → **98.6%** (416/422) — 6 nodos contenedores raíz.
+>     - `overview-colored-skull`: 35.5% (11/31) → **93.5%** (29/31) — 2 nodos contenedores raíz.
+>     - `overview-skeleton`: 74.8% (110/147) → **98.0%** (144/147) — 3 nodos contenedores raíz.
+>     - `upper-limb`: 22.8% (125/548) → **96.5%** (529/548) — 19 nodos contenedores raíz.
+>     - `vertebrae`: 0.0% (0/4) → **75.0%** (3/4) — 1 nodo contenedor raíz.
+>   - El 100% de las estructuras anatómicas físicas reales tienen dueño canónico en el grafo.
+> - **Estructuras Anatómicas Nuevas Añadidas (con citas de Gray's 4.ª ed.)**:
+>   - Huesos y dentición: `bone-palatine-bone`, `bone-lacrimal-bone`, `bone-inferior-nasal-concha`, `bone-maxillary-dentition`, `bone-mandibular-dentition`, `bone-pisiform-bone`, `bone-trapezoid-bone`, `bone-triquetrum-bone`, `bone-phalanges-hand`, `bone-phalanges-foot`.
+>   - Ligamentos, cápsulas y sistemas vasculares: `lig-digital-apparatus-hand`, `lig-collateral-and-palmar-finger-ligaments`, `lig-palmar-aponeurosis`, `lig-hand-arterial-network`, `lig-hand-venous-network`, `lig-menisci-and-knee-capsule`, `lig-hip-capsule-and-labrum`, `lig-foot-retinacula-and-tarsal-ligaments`, `lig-lower-limb-arterial-network`, `lig-lower-limb-venous-network`.
+> - **Selección Jerárquica y Prioridad de Dueños (A3)**:
+>   - `structureRank` en `viewerLogic.ts` para que estructuras anatómicas primarias (`bone-*`, `mus-*`, `ten-*`, `lig-*`, `ner-*`) tomen precedencia sobre articulaciones/complejos funcionales (`art-*`).
+>   - Normalización de alias (`DEFAULT_MESH_ALIASES`).
+>   - Tests unitarios en `composite.test.ts` verificando resolución de clicks:
+>     - (1) Click en `Rib_(1st)r` → `bone-rib` (y drill-down en 2do click).
+>     - (2) Click en `Distal_phalanx_of_1st_finger` → `bone-phalanges-hand` (y drill-down a subconjunto/falange).
+>     - (3) Click en `Deltoid_anterior_partr` → `mus-deltoideus-anterior`.
+> - **PR Gate & Verificación Empírica**:
+>   - `npx vitest run`: **44/44 test files verdes, 451/451 tests pasando**.
+>   - `meshMapping.test.ts`: **0 huérfanos**.
+>   - `npx astro check`: **0 errores, 0 warnings**.
 
 > Ciclo 6 COMPLETO (2026-08-24): **SELECCIÓN JERÁRQUICA + FILTROS DE
 > SELECCIÓN + AUDIT UX** (mandato usuario tras validar el ciclo 5).
