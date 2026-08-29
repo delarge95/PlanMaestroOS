@@ -94,6 +94,57 @@ describe('treeToQuote: web-app', () => {
   });
 });
 
+describe('treeToQuote: ramas expandidas', () => {
+  it('interactivo: nivel-detalle y piezas alimentan RTA-01 cuando no hay modelo', () => {
+    const plan = planFromTreeAnswers('web-3d', 'interactivo', {
+      'tipo-interactividad': 'rotar',
+      'modelo-existente': 'no-crear',
+      'nivel-detalle': 5,
+      'cantidad-piezas': 3,
+    });
+    const rta = plan.picks.find(p => p.serviceId === 'RTA-01');
+    expect(rta).toBeDefined();
+    expect(rta!.vals['polyCount']).toBe(300000);
+    expect(rta!.vals['numPiezas']).toBe(3);
+  });
+
+  it('scrollytelling: nivel-detalle del árbol sobreescribe el default del modelo', () => {
+    const plan = planFromTreeAnswers('web-3d', 'scrollytelling', {
+      'escenas': 5,
+      'modelo-para-scroll': 'no',
+      'nivel-detalle': 2,
+    });
+    const rta = plan.picks.find(p => p.serviceId === 'RTA-01');
+    expect(rta!.vals['polyCount']).toBe(9000);
+  });
+
+  it('web-app: slider de variantes, usuarios internos → auth y CMS → fuenteDatos', () => {
+    const plan = planFromTreeAnswers('web-3d', 'web-app', {
+      'tipo-app': 'configurador',
+      'num-variantes': 30,
+      'usuarios': 'equipo-interno',
+      'datos': 'cms',
+      'modelo-existente': 'si-tengo',
+      'formato-archivo': 'gltf',
+    });
+    const web4 = plan.picks[0];
+    expect(web4.serviceId).toBe('WEB-04');
+    expect(web4.vals['numVariantes']).toBe(30);
+    expect(web4.vals['auth']).toBe(true);
+    expect(web4.vals['fuenteDatos']).toBe('CMS');
+    expect(plan.picks).toHaveLength(1); // glTF web-ready: sin extras
+  });
+
+  it('web-app catalogo con CAD existente → WEB-07 + CAD-01', () => {
+    const plan = planFromTreeAnswers('web-3d', 'web-app', {
+      'tipo-app': 'catalogo',
+      'modelo-existente': 'si-tengo',
+      'formato-archivo': 'step',
+    });
+    expect(plan.picks.map(p => p.serviceId)).toEqual(['WEB-07', 'CAD-01']);
+  });
+});
+
 describe('treeToQuote: consistencia con el motor de cotización', () => {
   const escenarios: Array<[string, string, Record<string, string | number | boolean>]> = [
     ['ver-modelo', 'ver-modelo', { 'modelo-existente': 'si-tengo', 'formato-archivo': 'step', 'cantidad-piezas': 25, 'interfaz': 'hotspots', 'donde-mostrar': 'feria' }],

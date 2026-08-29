@@ -53,8 +53,7 @@ const clampa = (v: number, min: number, max: number) => Math.min(max, Math.max(m
 
 // ─── Helpers de picks ───
 
-const pickVisor = (a: Answers, hotspots: number, notaEs?: string): WizardPick => {
-  const donde = str(a, 'donde-mostrar');
+const pickVisor = (a: Answers, hotspots: number, notaEs?: string): WizardPick => {  const donde = str(a, 'donde-mostrar');
   return {
     serviceId: 'WEB-01',
     role: 'principal',
@@ -134,18 +133,6 @@ function extrasPorModeloExistente(a: Answers): WizardPick | null {
   return null;
 }
 
-const pickWeb04 = (variantes: number, skus: number): WizardPick => ({
-  serviceId: 'WEB-04',
-  role: 'principal',
-  labelEs: 'La aplicación web 3D',
-  vals: {
-    numVariantes: variantes,
-    numSKUs: skus,
-    fuenteDatos: 'Estáticos (JSON local)',
-    auth: false,
-  },
-});
-
 // ─── Mapeo por rama ───
 
 function planVerModelo(a: Answers): WizardQuotePlan {
@@ -165,7 +152,12 @@ function planInteractivo(a: Answers): WizardQuotePlan {
   const appCompleta = plataforma === 'app' || tipo === 'configurar';
   const picks: WizardPick[] = [];
   if (appCompleta) {
-    picks.push(pickWeb04(10, 1));
+    picks.push({
+      serviceId: 'WEB-04',
+      role: 'principal',
+      labelEs: 'La aplicación web 3D',
+      vals: { numVariantes: 10, numSKUs: 1, fuenteDatos: 'Estáticos (JSON local)', auth: false },
+    });
   } else {
     const hotspots = tipo === 'hotspots' ? 8 : tipo === 'desarmar' ? 4 : 0;
     picks.push(pickVisor(a, hotspots,
@@ -187,7 +179,14 @@ function planScrollytelling(a: Answers): WizardQuotePlan {
     labelEs: 'La experiencia de scrollytelling',
     vals: { numSecciones: escenas },
   }];
-  if (str(a, 'modelo-para-scroll') === 'no') picks.push(pickModeloDesdeCero({ ...a, 'nivel-detalle': 3, 'cantidad-piezas': 8, 'materiales-acabado': 'variado' }));
+  if (str(a, 'modelo-para-scroll') === 'no') {
+    // nivel-detalle/cantidad-piezas/materiales se toman del árbol si existen
+    // (pickModeloDesdeCero aplica defaults documentados si faltan).
+    picks.push(pickModeloDesdeCero(a));
+  } else {
+    const extra = extrasPorModeloExistente(a);
+    if (extra) picks.push(extra);
+  }
   return { rootChoice: 'web-3d', subChoice: 'scrollytelling', picks };
 }
 
@@ -210,10 +209,31 @@ function planWebApp(a: Answers): WizardQuotePlan {
     };
   } else {
     // configurador y herramienta técnica comparten WEB-04
-    principal = pickWeb04(tipo === 'configurador' ? 10 : 8, tipo === 'configurador' ? 5 : 1);
+    const variantes = has(a, 'num-variantes') ? clampa(num(a, 'num-variantes'), 2, 50) : 10;
+    const datosMap: Record<string, string> = {
+      estaticos: 'Estáticos (JSON local)',
+      cms: 'CMS',
+      api: 'API externa',
+    };
+    const datos = datosMap[str(a, 'datos')];
+    principal = {
+      serviceId: 'WEB-04',
+      role: 'principal',
+      labelEs: 'La aplicación web 3D',
+      vals: {
+        numVariantes: variantes,
+        numSKUs: tipo === 'configurador' ? 5 : 1,
+        fuenteDatos: datos ?? 'Estáticos (JSON local)',
+        auth: str(a, 'usuarios') === 'equipo-interno',
+      },
+    };
   }
   const picks: WizardPick[] = [principal];
   if (str(a, 'modelo-existente') === 'no-crear') picks.push(pickModeloDesdeCero(a));
+  else {
+    const extra = extrasPorModeloExistente(a);
+    if (extra) picks.push(extra);
+  }
   return { rootChoice: 'web-3d', subChoice: 'web-app', picks };
 }
 
