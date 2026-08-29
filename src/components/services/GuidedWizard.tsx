@@ -98,7 +98,30 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
         </div>
       )}
 
-      {/* ═══ NIVEL 2: Sub-categoría (ej: web-3d → tipo de experiencia) ═══ */}
+      {/* RAMAS PRÓXIMAMENTE (video / imágenes / IA): contacto directo, sin dead-end */}
+      {level === 2 && rootChoice !== 'web-3d' && (
+        <div style={{ paddingTop: 60, textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 8px' }}>Te cotizo esto personalmente</h2>
+          <p style={{ fontSize: 15, color: '#86868b', margin: '0 auto 40px', maxWidth: 440, lineHeight: 1.5 }}>
+            El cotizador guiado cubre webs con 3D. Para video, imágenes o IA escríbeme directamente y te respondo con una propuesta en menos de 24 h.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 14, maxWidth: 520, margin: '0 auto' }}>
+            <a href='https://wa.me/573054396581' target='_blank' rel='noopener noreferrer' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: '#0071e3', display: 'flex' }}><ChatIcon size={30} /></span>
+              <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>WhatsApp</strong>
+              <span style={{ fontSize: 13, color: '#86868b' }}>Cuéntame tu proyecto</span>
+            </a>
+            <a href='mailto:alexwssonn@hotmail.com?subject=Cotizaci%C3%B3n%20de%20proyecto' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: '#0071e3', display: 'flex' }}><MailIcon size={30} /></span>
+              <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>Correo</strong>
+              <span style={{ fontSize: 13, color: '#86868b' }}>Con referencias si tienes</span>
+            </a>
+          </div>
+          <button onClick={() => setLevel(1)} style={{ marginTop: 20, font: '600 14px inherit', color: '#0071e3', background: 'none', border: 'none', cursor: 'pointer' }}>← Volver</button>
+        </div>
+      )}
+
+      {/* ═══ NIVEL 2 (web-3d): bloque original ═══ */}
       {level === 2 && rootChoice === 'web-3d' && (
         <div style={{ paddingTop: 40 }}>
           <button onClick={() => setLevel(1)}
