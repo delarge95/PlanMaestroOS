@@ -35,6 +35,7 @@ export interface TreeQuestion {
   };
   /** Si es expandible como "opciones avanzadas". */
   advanced?: boolean;
+  advancedOptions?: AdvancedOption[];
 }
 
 export interface TreeBranch {
