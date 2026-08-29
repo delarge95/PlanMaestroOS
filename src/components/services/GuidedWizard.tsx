@@ -10,6 +10,7 @@ import type { TreeQuestion, TreeBranch } from '../../data/services/decisionTree'
 import { planFromTreeAnswers } from '../../data/services/treeToQuote';
 import type { WizardQuotePlan } from '../../data/services/treeToQuote';
 import { BRAND } from '../../data/services/branding';
+import { ModelPreview } from './ModelPreview';
 
 type Answers = Record<string, string | number | boolean>;
 
@@ -286,47 +287,21 @@ function SliderWithPreview({ questionId, config, value, onChange }: {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {/* Preview visual conceptual (CSS, no WebGL para simplicidad) */}
+      {/* Preview WebGL procedural — gira con el slider, se puede arrastrar */}
       {config.preview === 'detail-level' && (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '16px 0' }}>
-          <svg width="200" height="80" viewBox="0 0 200 80">
-            {value === 1 && (
-              <polygon points="100,10 150,40 100,70 50,40" fill="none" stroke="#0071e3" strokeWidth="2" strokeDasharray="4,4" />
-            )}
-            {value === 2 && (
-              <>
-                <polygon points="100,10 150,40 100,70 50,40" fill="#e8f0fe" stroke="#0071e3" strokeWidth="1.5" />
-                <line x1="100" y1="10" x2="100" y2="70" stroke="#0071e3" strokeWidth="0.8" opacity="0.5" />
-                <line x1="50" y1="40" x2="150" y2="40" stroke="#0071e3" strokeWidth="0.8" opacity="0.5" />
-              </>
-            )}
-            {value === 3 && (
-              <>
-                <polygon points="100,8 155,38 100,72 45,38" fill="#0071e3" opacity="0.15" stroke="#0071e3" strokeWidth="1" />
-                {Array.from({ length: 8 }, (_, i) => {
-                  const cx = 100 + Math.cos(i * Math.PI / 4) * 40;
-                  const cy = 40 + Math.sin(i * Math.PI / 4) * 25;
-                  return <circle key={i} cx={cx} cy={cy} r="3" fill="#0071e3" opacity="0.6" />;
-                })}
-                <circle cx="100" cy="40" r="4" fill="#0071e3" />
-              </>
-            )}
-            <text x="100" y="79" textAnchor="middle" fontSize="9" fill="#86868b" fontFamily="inherit">
-              {value === 1 ? 'Boceto — solo geometría' : value === 2 ? 'Medio — materiales simples' : 'Detalle — realista'}
-            </text>
-          </svg>
+        <div>
+          <ModelPreview mode="detail" detail={value} height={150} />
+          <div style={{ textAlign: 'center', fontSize: 12, color: '#86868b', marginTop: 2 }}>
+            {value === 1 ? 'Boceto — solo geometría' : value === 2 ? 'Base — formas simples' : value === 3 ? 'Web — listo para producción' : value === 4 ? 'Alto — detalles finos' : 'Máximo — nivel fotorrealista'}
+          </div>
         </div>
       )}
       {config.preview === 'piece-count' && (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6, padding: '16px 0', flexWrap: 'wrap' }}>
-          {Array.from({ length: Math.min(value, 12) }, (_, i) => (
-            <div key={i} style={{
-              width: 20, height: 20, borderRadius: 5,
-              background: `hsl(${211 + i * 12}, 80%, ${65 - i * 2}%)`,
-              opacity: 0.8, animation: `pieceIn 0.3s ${i * 0.03}s both`,
-            }} />
-          ))}
-          {value > 12 && <span style={{ fontSize: 12, color: '#86868b' }}>+{value - 12} más</span>}
+        <div>
+          <ModelPreview mode="pieces" pieces={value} height={150} />
+          <div style={{ textAlign: 'center', fontSize: 12, color: '#86868b', marginTop: 2 }}>
+            {value} {value === 1 ? 'pieza en el ensamblaje' : 'piezas en el ensamblaje'}
+          </div>
         </div>
       )}
 
