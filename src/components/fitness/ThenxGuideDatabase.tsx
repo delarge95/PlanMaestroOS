@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import thenxGuidesData from '../../data/fitness/thenx_technique_guides.json';
 import { BookOpen, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
 
 export interface ThenxGuideDatabaseProps {
   selectedGuideId?: string;
@@ -43,19 +44,21 @@ export default function ThenxGuideDatabase({
 
   const getEmbedUrl = (url?: string) => {
     if (!url) return null;
+    let embedUrl: string | null = null;
     if (url.includes('vimeo.com')) {
       const match = url.match(/video\/(\d+)/);
       if (match && match[1]) {
-        return `https://player.vimeo.com/video/${match[1]}?autoplay=0`;
+        embedUrl = `https://player.vimeo.com/video/${match[1]}?autoplay=0`;
+      } else if (isValidEmbedUrl(url)) {
+        embedUrl = url;
       }
-      return url;
-    }
-    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
       const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
       const match = url.match(regExp);
-      return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
+      embedUrl = match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
     }
-    return null;
+
+    return embedUrl && isValidEmbedUrl(embedUrl) ? embedUrl : null;
   };
 
   const introEmbedUrl = getEmbedUrl(selectedGuide?.introVideo);
@@ -128,6 +131,7 @@ export default function ThenxGuideDatabase({
               <iframe
                 src={introEmbedUrl}
                 title={selectedGuide.title}
+                sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"
                 style={{ width: '100%', height: '100%', border: 'none' }}
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen

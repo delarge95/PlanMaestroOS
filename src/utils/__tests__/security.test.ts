@@ -1,0 +1,40 @@
+// src/utils/__tests__/security.test.ts
+import { describe, it, expect } from 'vitest';
+import { isValidEmbedUrl } from '../security';
+
+describe('isValidEmbedUrl', () => {
+  it('allows valid HTTPS Notion URLs', () => {
+    expect(isValidEmbedUrl('https://v1.embednotion.com/embed/plan-maestro')).toBe(true);
+    expect(isValidEmbedUrl('https://myworkspace.notion.site/page-123')).toBe(true);
+    expect(isValidEmbedUrl('https://www.notion.so/my-database')).toBe(true);
+  });
+
+  it('allows valid HTTPS YouTube URLs', () => {
+    expect(isValidEmbedUrl('https://www.youtube.com/embed/dQw4w9WgXcQ')).toBe(true);
+    expect(isValidEmbedUrl('https://youtu.be/dQw4w9WgXcQ')).toBe(true);
+  });
+
+  it('allows valid HTTPS Vimeo URLs', () => {
+    expect(isValidEmbedUrl('https://player.vimeo.com/video/12345678')).toBe(true);
+    expect(isValidEmbedUrl('https://vimeo.com/12345678')).toBe(true);
+  });
+
+  it('rejects HTTP (non-secure) URLs', () => {
+    expect(isValidEmbedUrl('http://v1.embednotion.com/embed/plan-maestro')).toBe(false);
+    expect(isValidEmbedUrl('http://www.youtube.com/embed/dQw4w9WgXcQ')).toBe(false);
+  });
+
+  it('rejects untrusted domains and spoofed subdomains', () => {
+    expect(isValidEmbedUrl('https://evil.com/phishing')).toBe(false);
+    expect(isValidEmbedUrl('https://notion.so.evil.com/page')).toBe(false);
+    expect(isValidEmbedUrl('https://v1.embednotion.com.attacker.com')).toBe(false);
+  });
+
+  it('rejects invalid or dangerous protocol schemes and malformed input', () => {
+    expect(isValidEmbedUrl('javascript:alert(1)')).toBe(false);
+    expect(isValidEmbedUrl('data:text/html,<script>alert(1)</script>')).toBe(false);
+    expect(isValidEmbedUrl('')).toBe(false);
+    expect(isValidEmbedUrl(null)).toBe(false);
+    expect(isValidEmbedUrl(undefined)).toBe(false);
+  });
+});
