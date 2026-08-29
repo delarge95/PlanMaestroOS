@@ -14,6 +14,7 @@ import type { ServiceVariable } from '../../data/services/serviceVariables';
 import { BRAND } from '../../data/services/branding';
 import type { Currency, LevelId } from '../../data/services/types';
 import { QuoteCta } from './QuoteCta';
+import { GuidedWizard } from './GuidedWizard';
 import { RefDropzone } from './RefDropzone';
 
 type Val = number | string | boolean;
@@ -259,33 +260,7 @@ export function CotizadorRedesign() {
 
       <div className="cx-content">
         {/* ═══ MODO GUIADO ═══ */}
-        {mode === 'guided' && !svc && (
-          <section style={{ paddingTop: 80, paddingBottom: 60, textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, letterSpacing: '-0.03em',
-              color: '#1d1d1f', margin: '0 0 16px', lineHeight: 1.05,
-            }}>
-              Tu visión,<br />en 3D.
-            </h1>
-            <p style={{
-              fontSize: 'clamp(1rem, 2vw, 1.25rem)', color: '#86868b', fontWeight: 400,
-              maxWidth: 480, margin: '0 auto 48px', lineHeight: 1.5,
-            }}>
-              Configuradores web, visores interactivos y experiencias 3D que funcionan en cualquier navegador.
-            </p>
-
-            {/* Grid de servicios — full width en desktop */}
-            <div className="cx-grid" style={{
-              display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: 16, textAlign: 'left',
-            }}>
-              {WEB3D.map((s, i) => (
-                <ServiceCard key={s.id} svc={s} currency={currency} index={i}
-                  onPick={() => { setServiceId(s.id); setVals({}); setUnsure({}); }} />
-              ))}
-            </div>
-          </section>
-        )}
+        {mode === 'guided' && !svc && <GuidedWizard />}
 
         {/* ═══ CONFIGURACIÓN (cuando hay servicio) ═══ */}
         {svc && (
