@@ -1,5 +1,5 @@
 import './cotizador.css';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { SERVICES } from '../../data/services/catalogCore';
 import type { ServiceDef } from '../../data/services/catalogCore';
 import { computeQuote } from '../../data/services/formula';
@@ -100,6 +100,7 @@ export function DirectCotizador() {
     saveLocal({ serviceId, vals, currency, firstClient, urgency, quantity });
   }, [serviceId, vals, currency, firstClient, urgency, quantity]);
 
+  
   const setGoal = (g: string) => { setGoalRaw(g); setUnsure({}); };
 
   const svc: ServiceDef | undefined = serviceId ? SERVICES.find((s) => s.id === serviceId) : undefined;
@@ -125,6 +126,9 @@ export function DirectCotizador() {
       return computeQuote(svc.id, tier, currency, quoteOpts);
     } catch { return null; }
   }, [svc, tier, currency, quoteOpts]);
+
+  // Progressive disclosure: un paso visible a la vez (Apple-style)
+  const step = !goal ? 1 : !serviceId ? 2 : !quote ? 3 : 4;
 
   const phaseGroups = useMemo(() => {
     if (!svc || !tier) return [];
@@ -211,17 +215,40 @@ export function DirectCotizador() {
         </div>
       </div>
 
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-        <strong style={{ fontSize: 15, color: '#1d1d1f', letterSpacing: '-0.01em' }}>{BRAND.name}</strong>
-        <span data-noprint><CurrencyToggle currency={currency} onChange={setCurrency} /></span>
+      <header data-noprint style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, paddingBottom: 12 }}>
+        <strong style={{ fontSize: 15, fontWeight: 600, color: 'var(--cx-text)', letterSpacing: '-0.01em' }}>{BRAND.name}</strong>
+        <span><CurrencyToggle currency={currency} onChange={setCurrency} /></span>
       </header>
-      <h1 className="cx-hero-title" style={{ marginTop: 28 }}>Cotiza tu proyecto 3D en minutos</h1>
-      <p className="cx-hero-sub">{BRAND.valueProp}</p>
+
+      {/* Step indicator — siempre visible, muestra dónde estás */}
+      <div data-noprint style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: 36, padding: '0 4px' }}>
+        {['Objetivo', 'Servicio', 'Configura', 'Resultado'].map((label, i) => (
+          <React.Fragment key={label}>
+            {i > 0 && <span className="cx-step-sep" style={{ opacity: step > i ? 1 : 0.3 }} />}
+            <span className="cx-step" data-active={step === i + 1 || step > i + 1}>
+              <span className="cx-step-dot" style={step > i + 1 ? { background: 'var(--cx-accent)', borderColor: 'var(--cx-accent)', color: '#fff' } : undefined}>
+                {step > i + 1 ? '✓' : i + 1}
+              </span>
+              <span style={{ display: window.innerWidth > 480 ? 'inline' : 'none' }}>{label}</span>
+            </span>
+          </React.Fragment>
+        ))}
+      </div>
+      {!serviceId && (
+        <>
+          <h1 className="cx-hero-title" style={{ marginTop: 8, textAlign: 'center' }}>Cotiza tu proyecto 3D<br />en minutos</h1>
+          <p className="cx-hero-sub" style={{ textAlign: 'center', margin: '0 auto 32px' }}>{BRAND.valueProp}</p>
+        </>
+      )}
       
 
       {/* Cómo funciona (no-engineer) + garantías — colapsable tras primera interacción */}
       {!serviceId && (
-        <div data-noprint style={{ ...box, marginBottom: 14 }}>
+        <details data-noprint className="cx-card cx-anim" style={{ marginBottom: 14, padding: '20px 24px' }}>
+        <summary style={{ cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: 'var(--cx-text-2)', listStyle: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontSize: 16 }}>ⓘ</span> Cómo funciona y garantías
+        </summary>
+        <div style={{ marginTop: 16 }}>
           <span className="cx-section-label">Cómo funciona</span>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 10, marginBottom: 12 }}>
             {HOW_IT_WORKS.map((s) => (
@@ -248,6 +275,7 @@ export function DirectCotizador() {
             <a href={BRAND.links.artstation} target="_blank" rel="noopener noreferrer" style={{ color: '#0a84ff' }}>ArtStation</a>
           </div>
         </div>
+        </details>
       )}
       <Cotizador3DDemo />
 
@@ -265,14 +293,14 @@ export function DirectCotizador() {
               title={g.descEs}
               className="cx-service-card"
               data-selected={goal === g.id}>
-              <span style={{ fontSize: 17 }}>{g.icon}</span>
+              <span style={{ fontSize: 22, lineHeight: 1 }}>{g.icon}</span>
               <span style={{ display: 'block', fontSize: 12.5, fontWeight: 600, color: '#1a1d29', marginTop: 2 }}>{g.labelEs}</span>
               <span style={{ display: 'block', fontSize: 10.5, color: '#5a5e6e' }}>{g.descEs}</span>
             </button>
           ))}
         </div>
 
-        <span className="cx-section-label">Selecciona el servicio {goal && goal !== 'no-se' ? `(para ${goalLabel.toLowerCase()})` : ''}</span>
+        <span className="cx-section-label">{step === 2 ? 'Elige tu servicio' : 'Cambia servicio'}</span>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
           <FilterChip active={familyFilter === ''} onClick={() => setFamilyFilter('')} label="Todos" />
           {[
@@ -489,7 +517,7 @@ export function DirectCotizador() {
           tier={tier ?? undefined}
           totalRange={quote && svc ? `${fmt(currency, quote.totalMin)} – ${fmt(currency, quote.totalMax)}` : undefined}
           entrega={svc?.entregaDiasEs ? `${svc.entregaDiasEs[0]}–${svc.entregaDiasEs[1]} días hábiles` : undefined}
-          contactEmail="contacto@ag-serv.com"
+          contactEmail={BRAND.contactEmail}
         />
       </span>
     </div>
