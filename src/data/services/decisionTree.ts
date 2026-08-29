@@ -16,6 +16,15 @@ export interface TreeOption {
   children?: TreeQuestion[];
 }
 
+export interface AdvancedOption {
+  id: string;
+  label: string;
+  help?: string;
+  type: 'slider' | 'select';
+  min?: number; max?: number; step?: number; unit?: string; defaultValue?: number;
+  options?: Array<{ id: string; label: string }>;
+}
+
 export interface TreeQuestion {
   id: string;
   /** Pregunta en lenguaje humano. */
