@@ -1,4 +1,4 @@
-﻿// src/components/fitness/anatomy/__tests__/composite.test.ts
+// src/components/fitness/anatomy/__tests__/composite.test.ts
 // AG-ANATOM — lógica pura del modelo compuesto y la selección jerárquica.
 
 import { describe, it, expect } from 'vitest';
@@ -19,6 +19,8 @@ import {
   type SelectionPath,
 } from '../composite';
 import { COMPOSITE_PIECES, COMPOSITE_STATS, EXPLODE_PAIRS } from '../../../../data/fitness/anatomy/compositePlan';
+import { ANATOMY_STRUCTURES } from '../../../../data/fitness/anatomyGraph';
+import { buildOwnerIndex } from '../viewerLogic';
 
 const piece = (over: Partial<Parameters<typeof pieceVisible>[0]>) => ({
   model: 'overview-skeleton',
@@ -231,3 +233,103 @@ describe('phaseLabel', () => {
     expect(phaseLabel('Adductor_minimus_overlay.r')).toBe('Adductor minimus overlay');
   });
 });
+
+describe('selección jerárquica — resolución de clicks y subconjuntos (A3)', () => {
+  const skeletonOwners = buildOwnerIndex(ANATOMY_STRUCTURES, 'overview-skeleton');
+  const handOwners = buildOwnerIndex(ANATOMY_STRUCTURES, 'hand');
+  const upperOwners = buildOwnerIndex(ANATOMY_STRUCTURES, 'upper-limb');
+
+  it('(1) clic en "Rib_(1st)r" resuelve estructura padre "bone-rib"', () => {
+    const ownerId = skeletonOwners.get('Rib_(1st)r');
+    expect(ownerId).toBe('bone-rib');
+
+    const ribSt = ANATOMY_STRUCTURES.find((s) => s.id === 'bone-rib')!;
+    const pieces: Array<[string, string]> = (ribSt.modelMeshes['overview-skeleton'] ?? []).map((n) => [
+      pieceKey('overview-skeleton', n),
+      n,
+    ]);
+    const groups = buildSubgroups(ribSt.nameEn, pieces);
+    const key = pieceKey('overview-skeleton', 'Rib_(1st)r');
+    const groupKey = [...groups.entries()].find(([, keys]) => keys.includes(key))?.[0] ?? '(estructura)';
+
+    // 1er click: resuelve el conjunto completo (estructura padre 'bone-rib')
+    const firstClick = resolveClick({
+      current: null,
+      clickedPieceKey: key,
+      clickedStructureId: ownerId!,
+      groups,
+      clickedGroupKey: groupKey,
+    });
+    expect(firstClick).toEqual({ structureId: 'bone-rib', groupKey: null, pieceKey: null });
+
+    // 2do click (drill-down): desciende al subgrupo o pieza hoja
+    const secondClick = resolveClick({
+      current: firstClick,
+      clickedPieceKey: key,
+      clickedStructureId: ownerId!,
+      groups,
+      clickedGroupKey: groupKey,
+    });
+    expect(secondClick.structureId).toBe('bone-rib');
+    expect(secondClick.pieceKey === key || secondClick.groupKey === groupKey).toBe(true);
+  });
+
+  it('(2) clic en "Distal_phalanx_of_1st_finger" resuelve "bone-phalanges-hand"', () => {
+    const ownerId = handOwners.get('Distal_phalanx_of_1st_finger');
+    expect(ownerId).toBe('bone-phalanges-hand');
+
+    const phalanxSt = ANATOMY_STRUCTURES.find((s) => s.id === 'bone-phalanges-hand')!;
+    const pieces: Array<[string, string]> = (phalanxSt.modelMeshes['hand'] ?? []).map((n) => [
+      pieceKey('hand', n),
+      n,
+    ]);
+    const groups = buildSubgroups(phalanxSt.nameEn, pieces);
+    const key = pieceKey('hand', 'Distal_phalanx_of_1st_finger');
+    const groupKey = [...groups.entries()].find(([, keys]) => keys.includes(key))?.[0] ?? '(estructura)';
+
+    // 1er click: selecciona el conjunto completo de falanges
+    const firstClick = resolveClick({
+      current: null,
+      clickedPieceKey: key,
+      clickedStructureId: ownerId!,
+      groups,
+      clickedGroupKey: groupKey,
+    });
+    expect(firstClick).toEqual({ structureId: 'bone-phalanges-hand', groupKey: null, pieceKey: null });
+
+    // 2do click (drill-down): desciende al subgrupo/falange individual
+    const secondClick = resolveClick({
+      current: firstClick,
+      clickedPieceKey: key,
+      clickedStructureId: ownerId!,
+      groups,
+      clickedGroupKey: groupKey,
+    });
+    expect(secondClick.structureId).toBe('bone-phalanges-hand');
+    expect(secondClick.pieceKey === key || secondClick.groupKey === groupKey).toBe(true);
+  });
+
+  it('(3) clic en "Deltoid_anterior_partr" resuelve "mus-deltoideus-anterior"', () => {
+    const ownerId = upperOwners.get('Deltoid_anterior_partr');
+    expect(ownerId).toBe('mus-deltoideus-anterior');
+
+    const deltSt = ANATOMY_STRUCTURES.find((s) => s.id === 'mus-deltoideus-anterior')!;
+    const pieces: Array<[string, string]> = (deltSt.modelMeshes['upper-limb'] ?? []).map((n) => [
+      pieceKey('upper-limb', n),
+      n,
+    ]);
+    const groups = buildSubgroups(deltSt.nameEn, pieces);
+    const key = pieceKey('upper-limb', 'Deltoid_anterior_partr');
+    const groupKey = [...groups.entries()].find(([, keys]) => keys.includes(key))?.[0] ?? '(estructura)';
+
+    const firstClick = resolveClick({
+      current: null,
+      clickedPieceKey: key,
+      clickedStructureId: ownerId!,
+      groups,
+      clickedGroupKey: groupKey,
+    });
+    expect(firstClick).toEqual({ structureId: 'mus-deltoideus-anterior', groupKey: null, pieceKey: null });
+  });
+});
+

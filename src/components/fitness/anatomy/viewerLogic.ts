@@ -22,38 +22,62 @@ export interface OwnerIndexInput {
   modelMeshes: Record<string, string[]>;
 }
 
+export const DEFAULT_MESH_ALIASES: ReadonlyMap<string, string> = new Map([
+  ['Deltoid_anterior_partr', 'Clavicular_part_of_deltoid_muscler'],
+  ['Deltoid_lateral_partr', 'Acromial_part_of_deltoid_muscler'],
+  ['Deltoid_posterior_partr', 'Spinal_part_of_deltoid_muscler'],
+  ['Flexor_retinaculum_of_wrist', 'Flexor_retinaculum_of_wristr'],
+]);
+
+function structureRank(id: string): number {
+  // Entidades anatómicas primarias tienen rango 1; articulaciones compuestas (art-*) rango 2
+  if (id.startsWith('art-')) return 2;
+  return 1;
+}
+
 /**
  * Índice nombre-runtime → id de estructura dueña, para el click en el visor.
  *
- * Dos correcciones del ciclo 4:
+ * Correcciones:
  * 1. Normaliza alias: si un mapping apunta a un nombre de GEOMETRÍA en vez del
- *    de nodo (p.ej. 'Flexor_retinaculum_of_wrist' en upper-limb), resuelve al
- *    nombre de nodo vía `aliasToPrimary` (geometryName → nodeName) para que el
- *    click sobre la pieza (que devuelve nombre de NODO) encuentre al dueño.
- * 2. Dueño MÁS ESPECÍFICO: ante varias estructuras que mapean la misma pieza
- *    (el hueso 'Femurr' lo mapean también la cadera y la rodilla), gana el
- *    mapping más pequeño (el hueso, 1 pieza < articulación, 2-3 piezas).
- *    Empate → orden del grafo (músculos antes que tendones, huesos antes que
- *    ligamentos).
+ *    de nodo (o viceversa), resuelve al nombre primario vía `aliasToPrimary`.
+ * 2. Dueño PRIMARIO Y ESPECÍFICO: entidades primarias (huesos, músculos, ligamentos, tendones, nervios)
+ *    tienen prioridad sobre articulaciones compuestas (art-*). Ante igual rango, gana la más específica
+ *    (menor número de mallas), y en empate el orden del grafo.
  */
 export function buildOwnerIndex(
   structures: OwnerIndexInput[],
   modelKey: string,
-  aliasToPrimary: ReadonlyMap<string, string> = new Map(),
+  aliasToPrimary: ReadonlyMap<string, string> = DEFAULT_MESH_ALIASES,
 ): Map<string, string> {
-  const best = new Map<string, { id: string; specificity: number; order: number }>();
+  const best = new Map<string, { id: string; rank: number; specificity: number; order: number }>();
   structures.forEach((s, order) => {
     const names = s.modelMeshes[modelKey] ?? [];
+    const rank = structureRank(s.id);
     for (const raw of names) {
       const primary = aliasToPrimary.get(raw) ?? raw;
       for (const name of new Set([raw, primary])) {
         const prev = best.get(name);
-        if (!prev || names.length < prev.specificity) {
-          best.set(name, { id: s.id, specificity: names.length, order });
+        if (
+          !prev ||
+          rank < prev.rank ||
+          (rank === prev.rank && names.length < prev.specificity) ||
+          (rank === prev.rank && names.length === prev.specificity && order < prev.order)
+        ) {
+          best.set(name, { id: s.id, rank, specificity: names.length, order });
         }
       }
     }
   });
+
+  // Mapear alias que apunten a una malla conocida
+  for (const [alias, target] of aliasToPrimary) {
+    if (!best.has(alias) && best.has(target)) {
+      const targetOwner = best.get(target)!;
+      best.set(alias, { ...targetOwner });
+    }
+  }
+
   const out = new Map<string, string>();
   for (const [name, v] of best) out.set(name, v.id);
   return out;

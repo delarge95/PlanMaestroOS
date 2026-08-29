@@ -177,7 +177,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo Bicipitis (Distal)"
   ],
   zone: `arm`,
-  modelMeshes: {"upper-limb":["Common_tendon_of_biceps_brachiir"]},
+  modelMeshes: {"upper-limb": ["Common_tendon_of_biceps_brachiir"], "hand": ["Common_tendon_of_flexor_carpi_ulnaris"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -205,7 +205,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendo Communis Extensorius"
   ],
   zone: `arm`,
-  modelMeshes: {},
+  modelMeshes: {"hand": ["Common_tendon_of_extensor_carpi_ulnaris", "Extensor_digitorum_-_Extensor_indicis_tendon_sheath", "Extensor_carpi_radialis_brevis_tendon_sheath", "Extensor_carpi_radialis_longus_tendon_sheath", "Extensor_carpi_ulnaris_tendon_sheath", "Extensor_digiti_minimi_tendon_sheath", "Extensor_pollicis_longus_tendon_sheath", "Extensor_pollicis_brevis_tendon_sheath"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -429,7 +429,7 @@ export const TENDONS: TendonEntry[] = [
     "Tendines Mm. Flexorum Digitorum"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Flexor_digitorum_profundus"],"upper-limb":["Flexor_digitorum_profundusr"]},
+  modelMeshes: {"hand": ["Common_flexor_tendon_sheath", "Fibrous_sheath_of_digits_of_hand", "Fibrous_sheath_of_digits_of_hand_thumb", "Synovial_sheaths_of_fingers", "Flexor_carpi_radialis_tendon_sheath", "Flexor_pollicis_longus_tendon_sheath"], "upper-limb": ["Flexor_digitorum_profundusr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -460,7 +460,7 @@ export const TENDONS: TendonEntry[] = [
     "Fascia Plantaris"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Plantar_aponeurosisr"]},
+  modelMeshes: {"lower-limb": ["Plantar_aponeurosisr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

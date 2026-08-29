@@ -17,7 +17,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio glenohumeralis"
   ],
   zone: `shoulder`,
-  modelMeshes: {"overview-skeleton":["Humerusr","Scapular"],"upper-limb":["Humerusr","Scapular"]},
+  modelMeshes: {"overview-skeleton": ["Humerusr", "Scapular"], "upper-limb": ["Art_cart_of_humerus_head​r", "Articular_capsule_of_glenohumeral_jointr", "Articular_cartilage_of_glenohumeral_joint_on_scapular", "Coracohumeral_ligamentr", "Glenoid_labrumr", "Humerusr", "Inferior_glenohumeral_ligamentr", "Middle_glenohumeral_ligamentr", "Scapular", "Superior_glenohumeral_ligamentr", "Transverse_humeral_ligamentr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -57,7 +57,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio acromioclavicularis"
   ],
   zone: `shoulder`,
-  modelMeshes: {"overview-skeleton":["Clavicler","Scapular"],"upper-limb":["Acromioclavicular_discr","Clavicler","Scapular"]},
+  modelMeshes: {"overview-skeleton": ["Clavicler", "Scapular"], "upper-limb": ["Acromioclavicular_capsuler", "Acromioclavicular_discr", "Acromioclavicular_ligamentr", "Articular_cartilage_of_acromioclavicular_joint_on_clavicler", "Articular_cartilage_of_acromioclavicular_joint_on_scapular", "Clavicler", "Conoid_ligament_(part_of_coracoclavicular_ligament)r", "Coraco-acromial_ligamentr", "Coracoclavicular_ligamentr", "Scapular", "Trapezoid_ligament_(part_of_coracoclavicular_ligament)r"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -91,7 +91,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio cubiti"
   ],
   zone: `arm`,
-  modelMeshes: {"hand":["Radius","Ulna"],"overview-skeleton":["Humerusr","Radiusr","Ulnar"],"upper-limb":["Humerusr","Radiusr","Ulnar"]},
+  modelMeshes: {"hand": ["Radius", "Ulna"], "overview-skeleton": ["Humerusr", "Radiusr", "Ulnar"], "upper-limb": ["Art_cart_of_humerus_distal_endr​", "Art_cart_of_radius_head​r", "Art_cart_of_ulna_(distal_end)r", "Art_cart_of_ulna_(proximal_end)r", "Articular_capsule_of_elbow_jointr", "Articular_disc_of_steroclavicular_jointr", "Humerusr", "Quadrate_ligamentr", "Radial_collateral_ligament_of_elbowr", "Radiusr", "Ulnar", "Ulnar_collateral_ligament_of_elbowr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -126,7 +126,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio radiocarpea"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Lunate_bone","Radius","Scaphoid","Ulna"],"overview-skeleton":["Lunate_boner","Radiusr","Scaphoidr","Ulnar"],"upper-limb":["Lunate_boner","Radiusr","Scaphoidr","Ulnar"]},
+  modelMeshes: {"hand": ["Articular_capsule_of_radiocarpal_joint", "Articular_capsules_of_distal_interphalangeal_joints", "Articular_capsules_of_metacarpophalangeal_joints", "Articular_capsules_of_proximal_interphalangeal_joints", "Articular_cartiage_of_ulna_distal_end", "Articular_cartilage_of_capitate_bone​", "Articular_cartilage_of_hamate_bone​", "Articular_cartilage_of_lunate_bone", "Articular_cartilage_of_pisiform_bone_​", "Articular_cartilage_of_radius_distal_end​", "Articular_cartilage_of_scaphoid_bone​", "Articular_cartilage_of_trapezium_bone​", "Articular_cartilage_of_trapezoid_bone​", "Articular_cartilage_of_triquetrum_bone", "Articular_cartilages_of_distal_phalanges", "Articular_cartilages_of_metacarpal_bones", "Articular_cartilages_of_middle_phalanges", "Articular_cartilages_of_proximal_phalanges", "Cartilages", "Lunate_bone", "Radius", "Scaphoid", "Triangular_fibro_cartilage_disc", "Ulna"], "overview-skeleton": ["Lunate_boner", "Radiusr", "Scaphoidr", "Ulnar"], "upper-limb": ["Art_cart_of_capitate_bone​", "Art_cart_of_hamate_bone​", "Art_cart_of_lunate_bone", "Art_cart_of_pisiform_bone_​", "Art_cart_of_radius_distal_end​r", "Art_cart_of_scaphoid_bone​", "Art_cart_of_trapezium_bone​", "Art_cart_of_trapezoid_bone​", "Art_cart_of_triquetrum_bone", "Art_carts_of_distal_phalanges", "Art_carts_of_metacarpal_bones", "Art_carts_of_middle_phalanges", "Art_carts_of_proximal_phalanges", "Articular_capsule_of_radiocarpal_joint", "Articular_capsules_of_distal_interphalangeal_joints", "Articular_capsules_of_metacarpophalangeal_joints", "Articular_capsules_of_proximal_interphalangeal_joints", "Collateral_ligaments_of_interphalangeal_jointsr", "Collateral_ligaments_of_metacarpophalangeal_jointsr", "Dorsal_carpometacarpal_ligaments", "Dorsal_intercarpal_ligament", "Dorsal_radiocarpal_ligamentr", "Intercarpal_articulationsr", "Lunate_boner", "Palmar_carpometacarpal_ligaments", "Palmar_ligaments_of_interphalangeal_jointsr", "Palmar_ligaments_of_metacarpophalangeal_jointsr", "Palmar_radiocarpal_ligamentr", "Radiusr", "Scaphoidr", "Sesamoid_bones_of_handr", "Triangular_fibro_cartilage_disc", "Ulnar"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -160,7 +160,7 @@ export const JOINTS: JointEntry[] = [
     "Vertebrae cervicales"
   ],
   zone: `cervical`,
-  modelMeshes: {"overview-skeleton":["Atlas_(C1)","Axis_(C2)","Cervical_vertebrae_(C3)","Cervical_vertebrae_(C4)","Cervical_vertebrae_(C5)","Cervical_vertebrae_(C6)","Cervical_vertebrae_(C7)"],"upper-limb":["Atlas_(C1)","Axis_(C2)","Cervical_vertebra_(C3)","Cervical_vertebra_(C4)","Cervical_vertebra_(C5)","Cervical_vertebra_(C6)","Cervical_vertebra_(C7)"],"vertebrae":["Cervical_vertebra_(C4)"]},
+  modelMeshes: {"overview-skeleton": ["Atlas_(C1)", "Axis_(C2)", "Cervical_vertebrae_(C3)", "Cervical_vertebrae_(C4)", "Cervical_vertebrae_(C5)", "Cervical_vertebrae_(C6)", "Cervical_vertebrae_(C7)"], "upper-limb": ["Atlas_(C1)", "Axis_(C2)", "C5_rootr", "C6_rootr", "C7_rootr", "Cervical_vertebra_(C3)", "Cervical_vertebra_(C4)", "Cervical_vertebra_(C5)", "Cervical_vertebra_(C6)", "Cervical_vertebra_(C7)", "Costocervical_trunkr", "Dorsal_scapular_artery_(Deep_br_of_transverse_cervical_a)r", "Nucleus_pulposus_C2-T1", "Superficial_branch_of_Transverse_cervical_arteryr", "Thyrocervical_trunkr", "Transverse_cervical_arteryr", "Vertebra_C3_art_cart", "Vertebra_C4_art_cart", "Vertebra_C5_art_cart", "Vertebra_C6_art_cart", "Vertebra_C7_art_cart", "annulus_fibrosus_C2_C3", "annulus_fibrosus_C3_C4", "annulus_fibrosus_C4_C5", "annulus_fibrosus_C5_C6", "annulus_fibrosus_C6_C7", "annulus_fibrosus_C7_T1", "art_cart_of_Atlas__C1", "art_cart_of_Axis__C2"], "vertebrae": ["Cervical_vertebra_(C4)"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -196,7 +196,7 @@ export const JOINTS: JointEntry[] = [
     "Vertebrae lumbales"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Lumbar_vertebra_(L1)","Lumbar_vertebra_(L2)","Lumbar_vertebra_(L3)","Lumbar_vertebra_(L4)","Lumbar_vertebra_(L5)","Sacrum"],"overview-skeleton":["Lumbar_vertebrae_(L1)","Lumbar_vertebrae_(L2)","Lumbar_vertebrae_(L3)","Lumbar_vertebrae_(L4)","Lumbar_vertebrae_(L5)","Sacrum"],"upper-limb":["Lumbar_vertebra_(L1)","Lumbar_vertebra_(L2)","Lumbar_vertebra_(L3)","Lumbar_vertebra_(L4)","Lumbar_vertebra_(L5)","Sacrum"],"vertebrae":["Lumbar_vertebra_(L3)"]},
+  modelMeshes: {"lower-limb": ["Annulus_fibrosus_L1_L2", "Annulus_fibrosus_L2_L3", "Annulus_fibrosus_L3_L4", "Annulus_fibrosus_L4_L5", "Annulus_fibrosus_L5_S1", "Annulus_fibrosus_T12_L1", "Lumbar_vertebra_(L1)", "Lumbar_vertebra_(L2)", "Lumbar_vertebra_(L3)", "Lumbar_vertebra_(L4)", "Lumbar_vertebra_(L5)", "Sacrum"], "overview-skeleton": ["Lumbar_vertebrae_(L1)", "Lumbar_vertebrae_(L2)", "Lumbar_vertebrae_(L3)", "Lumbar_vertebrae_(L4)", "Lumbar_vertebrae_(L5)", "Sacrum"], "upper-limb": ["Annulus_fibrosus_L1_L20", "Annulus_fibrosus_L2_L3", "Annulus_fibrosus_L3_L4", "Annulus_fibrosus_L4_L5", "Annulus_fibrosus_L5_S1", "Annulus_fibrosus_T10_T11", "Annulus_fibrosus_T11_T12", "Annulus_fibrosus_T12_L1", "Annulus_fibrosus_T1_T2", "Annulus_fibrosus_T2_T3", "Annulus_fibrosus_T3_T4", "Annulus_fibrosus_T4_T5", "Annulus_fibrosus_T5_T6", "Annulus_fibrosus_T6_T7", "Annulus_fibrosus_T7_T8", "Annulus_fibrosus_T8_T9", "Annulus_fibrosus_T9_T10", "Internal_thoracic_arteryr", "Lateral_thoracic_arteryr", "Lateral_thoracic_veinr", "Long_thoracic_nerver", "Lumbar_vertebra_(L1)", "Lumbar_vertebra_(L2)", "Lumbar_vertebra_(L3)", "Lumbar_vertebra_(L4)", "Lumbar_vertebra_(L5)", "Nucleus_pulposus_C2-T1", "Nucleus_pulposus_L1-S1", "Nucleus_pulposus_T1-L1", "Sacrum", "Sternocostal_head_of_pectoralis_major_muscler", "Superior_thoracic_arteryr", "T1_rootr", "Thoracic_vertebra_(T1)", "Thoracic_vertebra_(T10)", "Thoracic_vertebra_(T11)", "Thoracic_vertebra_(T12)", "Thoracic_vertebra_(T2)", "Thoracic_vertebra_(T3)", "Thoracic_vertebra_(T4)", "Thoracic_vertebra_(T5)", "Thoracic_vertebra_(T6)", "Thoracic_vertebra_(T7)", "Thoracic_vertebra_(T8)", "Thoracic_vertebra_(T9)", "Vertebra_L1_art_cart", "Vertebra_L2_art_cart", "Vertebra_L3_art_cart", "Vertebra_L4_art_cart", "Vertebra_L5_art_cart", "Vertebra_T10_art_cart", "Vertebra_T11_art_cart", "Vertebra_T12_art_cart", "Vertebra_T1_art_cart", "Vertebra_T2_art_cart", "Vertebra_T3_art_cart", "Vertebra_T4_art_cart", "Vertebra_T5_art_cart", "Vertebra_T6_art_cart", "Vertebra_T7_art_cart", "Vertebra_T8_art_cart", "Vertebra_T9_art_cart", "annulus_fibrosus_C2_C3", "annulus_fibrosus_C3_C4", "annulus_fibrosus_C4_C5", "annulus_fibrosus_C5_C6", "annulus_fibrosus_C6_C7", "annulus_fibrosus_C7_T1", "art_cart_of_sacrum_art_processr", "art_cart_of_sacrum_lumbosacral_joint", "art_cart_of_sternocostal_joint_on_manubriumr", "art_cart_of_sternocostal_joints_on_sternal_bodyr"], "vertebrae": ["Lumbar_vertebra_(L3)"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -272,7 +272,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio coxae"
   ],
   zone: `hip`,
-  modelMeshes: {"lower-limb":["Femurr","Hip_boner"],"overview-skeleton":["Femurr","Hip_boner"]},
+  modelMeshes: {"lower-limb": ["Art_cart_of_femur_headr", "Art_cart_of_hip_bone_pubisr_", "Art_cart_of_sacrococcygeal_joint_on_coccyx", "Art_cart_of_sacrococcygeal_joint_on_sacrum", "Art_cart_of_sacroiliac_joint_on_hip_bone", "Art_cart_of_sacroiliac_joint_on_sacrum", "Articular_cartilage_of_hip_bone_acetabulumr", "Femurr", "Hip_boner", "Interpubic_disc", "Symphysis_of_sacrococcygeal_joint", "Zona_orbicularis_of_hip_jointr"], "overview-skeleton": ["Femurr", "Hip_boner"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -310,7 +310,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio genus"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Femurr","Patellar","Tibiar"],"overview-skeleton":["Femurr","Patellar","Tibiar"]},
+  modelMeshes: {"lower-limb": ["Anterior_tibiofibular_ligamentr", "Art_cart_of_femur_distal_endr", "Art_cart_of_fibula_proximal_tibiofibular_jointr", "Art_cart_of_patellar", "Art_cart_of_tibia_distal_endr_", "Art_cart_of_tibia_proximal_endr", "Art_cart_of_tibia_proximal_tibiofibular_jointr​", "Articular_capsule_of_knee_jointr", "Deep_Infrapatellar_bursar", "Femurr", "Infrapatellar_branch_of_Saphenous_nerver", "Infrapatellar_fat_padr", "Lateral_patellar_retinaculum_(horizontal_part)r", "Lateral_patellar_retinaculum_(vertical_part)r", "Medial_patellar_retinaculum_(horizontal_part)r", "Medial_patellar_retinaculum_(vertical_part)r", "Patellar", "Posterior_tibiofibular_ligamentr", "Quadriceps_common_tendon_and_patellar_ligament", "Quadriceps_common_tendon_and_patellar_ligamentr", "Subcutaneous_Infrapatellar_bursar", "Subcutaneous_prepatellar_bursar", "Subfascial_prepatellar_bursar", "Subtendinous_prepatellar_bursar", "Suprapatellar_bursa_overlayr", "Tibiar", "Transverse_tibiofibular_ligamentr"], "overview-skeleton": ["Femurr", "Patellar", "Tibiar"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -351,7 +351,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio talocruralis"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Fibular","Talusr","Tibiar"],"overview-skeleton":["Fibular","Talusr","Tibiar"]},
+  modelMeshes: {"lower-limb": ["Art_cart_of_Sesamoid_bonesr", "Art_cart_of_calcaneusr_", "Art_cart_of_cuboid_boner", "Art_cart_of_femur_distal_endr", "Art_cart_of_femur_headr", "Art_cart_of_fibula_proximal_tibiofibular_jointr", "Art_cart_of_fibula_talofibular_jointr", "Art_cart_of_hip_bone_pubisr_", "Art_cart_of_intermediate_cuneiform_boner", "Art_cart_of_lateral_cuneiform_boner", "Art_cart_of_medial_cuneiform_boner_", "Art_cart_of_navicular_boner", "Art_cart_of_patellar", "Art_cart_of_sacrococcygeal_joint_on_coccyx", "Art_cart_of_sacrococcygeal_joint_on_sacrum", "Art_cart_of_sacroiliac_joint_on_hip_bone", "Art_cart_of_sacroiliac_joint_on_sacrum", "Art_cart_of_talusr_​", "Art_cart_of_tibia_distal_endr_", "Art_cart_of_tibia_proximal_endr", "Art_cart_of_tibia_proximal_tibiofibular_jointr​", "Art_carts_of_distal_phalanges_of_footr", "Art_carts_of_metatarsal_bonesr", "Art_carts_of_middle_phalanges_of_footr", "Art_carts_of_proximal_phalanges_of_footr", "Articular_capsules_of_distal_interphalangeal_joints", "Articular_capsules_of_metatarsophalangeal_jointsr", "Articular_capsules_of_proximal_interphalangealr", "Calcaneocuboid_ligamentr", "Calcaneonavicular_ligamentr", "Calcaneusr", "Capsule_of_talocrural_jointr", "Collateral_ligament_of_proximal_interphalangeal_jointsr", "Collateral_ligaments_of_distal_interphalangeal_jointsr", "Collateral_ligaments_of_metatarsophalangeal_jointsr", "Cuboid_boner", "Distal_phalanx_of_fifth_finger_of_footr", "Distal_phalanx_of_first_finger_of_footr", "Distal_phalanx_of_fourth_finger_of_footr", "Distal_phalanx_of_second_finger_of_footr", "Distal_phalanx_of_third_finger_of_footr", "Dorsal_calcaneocuboid_ligamentr", "Dorsal_cuboidonavicular_ligamentr", "Dorsal_cuneocuboid_ligamentr", "Dorsal_cuneonavicular_ligamentsr", "Dorsal_intercuneiform_ligamentsr", "Dorsal_tarsometatarsal_ligamentsr", "Fibular", "Intercuneiform_interosseus_ligamentsr", "Intermediate_cuneiform_boner", "Intersesamoid_ligamentr", "Lateral_cuneiform_boner", "Medial_cuneiform_boner", "Middle_phalanx_of_fifth_finger_of_footr", "Middle_phalanx_of_fourth_finger_of_footr", "Middle_phalanx_of_second_finger_of_footr", "Middle_phalanx_of_third_finger_of_footr", "Navicular_boner", "Palmar_ligament_of_proximal_interphalangeal_jointsr", "Palmar_ligaments_of_distal_interphalangeal_jointsr", "Palmar_ligaments_of_metatarsophalangeal_jointsr", "Plantar_calcaneocuboid_ligamentr", "Plantar_calcaneonavicular_ligamentr", "Plantar_cuboideonavicular_ligamentr", "Plantar_cuneocuboid_ligamentr", "Plantar_cuneonavicular_ligamentsr", "Plantar_intercuneiform_ligamentsr", "Plantar_tarsometatarsal_ligamentsr", "Proximal_phalanx_of_fifth_finger_of_footr", "Proximal_phalanx_of_first_finger_of_footr", "Proximal_phalanx_of_fourth_finger_of_footr", "Proximal_phalanx_of_second_finger_of_footr", "Proximal_phalanx_of_third_finger_of_footr", "Sesamoid_bones_of_footr", "Talonavicular_ligamentr", "Talusr", "Tibiar", "Tibionavicular_ligamentr"], "overview-skeleton": ["Fibular", "Talusr", "Tibiar"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -490,7 +490,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio sternoclavicularis"
   ],
   zone: `shoulder`,
-  modelMeshes: {"overview-skeleton":["Body_of_sternum","Clavicler","Manubrium_of_sternum"],"upper-limb":["Body_of_sternum","Clavicler","Manubrium_of_sternum"]},
+  modelMeshes: {"overview-skeleton": ["Body_of_sternum", "Clavicler", "Manubrium_of_sternum"], "upper-limb": ["Anterior_sternoclavicular_ligamentr", "Articular_cartilage_of_sternoclavicular_joint_on_clavicler", "Body_of_sternum", "Clavicler", "Costoclavicular_ligamentr", "Interclavicular_ligamentr", "Manubrium_of_sternum", "Posterior_Sternoclavicular_ligamentr", "Sternoclavicular_capsuler", "art_cart_of_sternoclavicular_joint_on_manubriumr"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],
@@ -568,7 +568,7 @@ export const JOINTS: JointEntry[] = [
     "Articulatio radioulnaris proximalis"
   ],
   zone: `arm`,
-  modelMeshes: {"hand":["Radius","Ulna"],"overview-skeleton":["Radiusr","Ulnar"],"upper-limb":["Radiusr","Ulnar"]},
+  modelMeshes: {"hand": ["Radius", "Ulna"], "overview-skeleton": ["Radiusr", "Ulnar"], "upper-limb": ["Interosseous_membrane_of_forearmr", "Oblique_cord_or_radio-ulnar_syndesmosisr", "Radiusr", "Ulnar"]},
   sourceRefs: [
     {"sourceId":"chat-1787414859303-atlas-anatomico-fichas","pending":true,"note":"Fichas JSON recuperadas por AG-BIB (biblioteca/extracciones/); verificación contra Gray's/Moore PENDIENTE (plan-extraccion.md)"}
   ],

@@ -193,7 +193,7 @@ export const BONES: BoneEntry[] = [
     "Atlas"
   ],
   zone: `cervical`,
-  modelMeshes: {"overview-skeleton":["Atlas_(C1)"],"upper-limb":["Atlas_(C1)"]},
+  modelMeshes: {"overview-skeleton": ["Atlas_(C1)"], "upper-limb": ["Atlas_(C1)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -210,7 +210,7 @@ export const BONES: BoneEntry[] = [
     "Axis"
   ],
   zone: `cervical`,
-  modelMeshes: {"overview-skeleton":["Axis_(C2)"],"upper-limb":["Axis_(C2)"]},
+  modelMeshes: {"overview-skeleton": ["Axis_(C2)"], "upper-limb": ["Axis_(C2)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -227,7 +227,7 @@ export const BONES: BoneEntry[] = [
     "Cervical vertebrae"
   ],
   zone: `cervical`,
-  modelMeshes: {"overview-skeleton":["Cervical_vertebrae_(C3)","Cervical_vertebrae_(C4)","Cervical_vertebrae_(C5)","Cervical_vertebrae_(C6)","Cervical_vertebrae_(C7)"],"upper-limb":["Cervical_vertebra_(C3)","Cervical_vertebra_(C4)","Cervical_vertebra_(C5)","Cervical_vertebra_(C6)","Cervical_vertebra_(C7)"],"vertebrae":["Cervical_vertebra_(C4)"]},
+  modelMeshes: {"overview-skeleton": ["Cervical_vertebrae_(C3)", "Cervical_vertebrae_(C4)", "Cervical_vertebrae_(C5)", "Cervical_vertebrae_(C6)", "Cervical_vertebrae_(C7)"], "upper-limb": ["Atlas_(C1)", "Axis_(C2)", "Cervical_vertebra_(C3)", "Cervical_vertebra_(C4)", "Cervical_vertebra_(C5)", "Cervical_vertebra_(C6)", "Cervical_vertebra_(C7)"], "vertebrae": ["Cervical_vertebra_(C4)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -243,7 +243,7 @@ export const BONES: BoneEntry[] = [
     "Thoracic vertebra"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Thoracic_vertebra_(T12)"],"overview-skeleton":["Thoracic_vertebrae_(T1)","Thoracic_vertebrae_(T10)","Thoracic_vertebrae_(T11)","Thoracic_vertebrae_(T12)","Thoracic_vertebrae_(T2)","Thoracic_vertebrae_(T3)","Thoracic_vertebrae_(T4)","Thoracic_vertebrae_(T5)","Thoracic_vertebrae_(T6)","Thoracic_vertebrae_(T7)","Thoracic_vertebrae_(T8)","Thoracic_vertebrae_(T9)"],"upper-limb":["Thoracic_vertebra_(T1)","Thoracic_vertebra_(T10)","Thoracic_vertebra_(T11)","Thoracic_vertebra_(T12)","Thoracic_vertebra_(T2)","Thoracic_vertebra_(T3)","Thoracic_vertebra_(T4)","Thoracic_vertebra_(T5)","Thoracic_vertebra_(T6)","Thoracic_vertebra_(T7)","Thoracic_vertebra_(T8)","Thoracic_vertebra_(T9)"],"vertebrae":["Thoracic_vertebra_(T7)"]},
+  modelMeshes: {"lower-limb": ["Thoracic_vertebra_(T12)"], "overview-skeleton": ["Thoracic_vertebrae_(T1)", "Thoracic_vertebrae_(T2)", "Thoracic_vertebrae_(T3)", "Thoracic_vertebrae_(T4)", "Thoracic_vertebrae_(T5)", "Thoracic_vertebrae_(T6)", "Thoracic_vertebrae_(T7)", "Thoracic_vertebrae_(T8)", "Thoracic_vertebrae_(T9)", "Thoracic_vertebrae_(T10)", "Thoracic_vertebrae_(T11)", "Thoracic_vertebrae_(T12)"], "upper-limb": ["Thoracic_vertebra_(T1)", "Thoracic_vertebra_(T10)", "Thoracic_vertebra_(T11)", "Thoracic_vertebra_(T12)", "Thoracic_vertebra_(T2)", "Thoracic_vertebra_(T3)", "Thoracic_vertebra_(T4)", "Thoracic_vertebra_(T5)", "Thoracic_vertebra_(T6)", "Thoracic_vertebra_(T7)", "Thoracic_vertebra_(T8)", "Thoracic_vertebra_(T9)"], "vertebrae": ["Thoracic_vertebra_(T7)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -259,7 +259,7 @@ export const BONES: BoneEntry[] = [
     "Lumbar vertebra"
   ],
   zone: `spine`,
-  modelMeshes: {"lower-limb":["Lumbar_vertebra_(L1)","Lumbar_vertebra_(L2)","Lumbar_vertebra_(L3)","Lumbar_vertebra_(L4)","Lumbar_vertebra_(L5)"],"overview-skeleton":["Lumbar_vertebrae_(L1)","Lumbar_vertebrae_(L2)","Lumbar_vertebrae_(L3)","Lumbar_vertebrae_(L4)","Lumbar_vertebrae_(L5)"],"upper-limb":["Lumbar_vertebra_(L1)","Lumbar_vertebra_(L2)","Lumbar_vertebra_(L3)","Lumbar_vertebra_(L4)","Lumbar_vertebra_(L5)"],"vertebrae":["Lumbar_vertebra_(L3)"]},
+  modelMeshes: {"lower-limb": ["Lumbar_vertebra_(L1)", "Lumbar_vertebra_(L2)", "Lumbar_vertebra_(L3)", "Lumbar_vertebra_(L4)", "Lumbar_vertebra_(L5)"], "overview-skeleton": ["Lumbar_vertebrae_(L1)", "Lumbar_vertebrae_(L2)", "Lumbar_vertebrae_(L3)", "Lumbar_vertebrae_(L4)", "Lumbar_vertebrae_(L5)"], "upper-limb": ["Lumbar_vertebra_(L1)", "Lumbar_vertebra_(L2)", "Lumbar_vertebra_(L3)", "Lumbar_vertebra_(L4)", "Lumbar_vertebra_(L5)"], "vertebrae": ["Lumbar_vertebra_(L3)"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -309,7 +309,7 @@ export const BONES: BoneEntry[] = [
     "Sternum"
   ],
   zone: `chest`,
-  modelMeshes: {"overview-skeleton":["Body_of_sternum","Manubrium_of_sternum"],"upper-limb":["Body_of_sternum","Manubrium_of_sternum","Xiphoid_process"]},
+  modelMeshes: {"overview-skeleton": ["Body_of_sternum", "Manubrium_of_sternum"], "upper-limb": ["Body_of_sternum", "Manubrium_of_sternum", "Xiphoid_process"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -326,7 +326,7 @@ export const BONES: BoneEntry[] = [
     "Rib"
   ],
   zone: `chest`,
-  modelMeshes: {"overview-skeleton":["Rib_(10th)r","Rib_(11th)r","Rib_(12th)r","Rib_(1st)r","Rib_(2nd)r","Rib_(3rd)r","Rib_(4th)r","Rib_(5th)r","Rib_(6th)r","Rib_(7th)r","Rib_(8th)r","Rib_(9th)r"],"upper-limb":["Rib_(10th)r","Rib_(11th)r","Rib_(12th)r","Rib_(1st)r","Rib_(2nd)r","Rib_(3rd)r","Rib_(4th)r","Rib_(5th)r","Rib_(6th)r","Rib_(7th)r","Rib_(8th)r","Rib_(9th)r"]},
+  modelMeshes: {"overview-skeleton": ["Rib_(1st)r", "Rib_(2nd)r", "Rib_(3rd)r", "Rib_(4th)r", "Rib_(5th)r", "Rib_(6th)r", "Rib_(7th)r", "Rib_(8th)r", "Rib_(9th)r", "Rib_(10th)r", "Rib_(11th)r", "Rib_(12th)r", "Costal_cart_of_1st_ribr", "Costal_cart_of_2nd_ribr", "Costal_cart_of_3rd_ribr", "Costal_cart_of_4th_ribr", "Costal_cart_of_5th_ribr", "Costal_cart_of_6th_ribr", "Costal_cart_of_7th_ribr", "Costal_cart_of_8th_ribr", "Costal_cart_of_9th_ribr", "Costal_cart_of_10th_ribr"], "upper-limb": ["10th_rib_art_cart_of_headr", "10th_rib_art_cart_of_tubercler", "11th_rib_art_cart_of_headr", "12th_rib_art_cart_of_headr", "1st_rib_art_cart_of_headr", "1st_rib_art_cart_of_tubercler", "2nd_rib_art_cart_of_headr", "2nd_rib_art_cart_of_tubercler", "3rd_rib_art_cart_of_headr", "3rd_rib_art_cart_of_tubercler", "4th_rib_art_cart_of_headr", "4th_rib_art_cart_of_tubercler", "5th_rib_art_cart_of_headr", "5th_rib_art_cart_of_tubercler", "6th_rib_art_cart_of_headr", "6th_rib_art_cart_of_tubercler", "7th_rib_art_cart_of_headr", "7th_rib_art_cart_of_tubercler", "8th_rib_art_cart_of_headr", "8th_rib_art_cart_of_tubercler", "9th_rib_art_cart_of_headr", "9th_rib_art_cart_of_tubercler", "Costal_cart_of_10thribr", "Costal_cart_of_11thribr", "Costal_cart_of_12thribr", "Costal_cart_of_1stribr", "Costal_cart_of_2ndribr", "Costal_cart_of_3rdribr", "Costal_cart_of_4thribr", "Costal_cart_of_5thribr", "Costal_cart_of_6thribr", "Costal_cart_of_7thribr", "Costal_cart_of_8thribr", "Costal_cart_of_9thribr", "Rib_(10th)r", "Rib_(11th)r", "Rib_(12th)r", "Rib_(1st)r", "Rib_(2nd)r", "Rib_(3rd)r", "Rib_(4th)r", "Rib_(5th)r", "Rib_(6th)r", "Rib_(7th)r", "Rib_(8th)r", "Rib_(9th)r"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -342,7 +342,7 @@ export const BONES: BoneEntry[] = [
     "Clavicle"
   ],
   zone: `shoulder`,
-  modelMeshes: {"overview-skeleton":["Clavicler"],"upper-limb":["Clavicler"]},
+  modelMeshes: {"overview-skeleton": ["Clavicler"], "upper-limb": ["Clavicler"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -359,7 +359,7 @@ export const BONES: BoneEntry[] = [
     "Scapula"
   ],
   zone: `shoulder`,
-  modelMeshes: {"overview-skeleton":["Scapular"],"upper-limb":["Scapular"]},
+  modelMeshes: {"overview-skeleton": ["Scapular"], "upper-limb": ["Scapular"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -376,7 +376,7 @@ export const BONES: BoneEntry[] = [
     "Humerus"
   ],
   zone: `arm`,
-  modelMeshes: {"overview-skeleton":["Humerusr"],"upper-limb":["Humerusr"]},
+  modelMeshes: {"overview-skeleton": ["Humerusr"], "upper-limb": ["Humerusr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -393,7 +393,7 @@ export const BONES: BoneEntry[] = [
     "Radius"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Radius"],"overview-skeleton":["Radiusr"],"upper-limb":["Radiusr"]},
+  modelMeshes: {"hand": ["Radius"], "overview-skeleton": ["Radiusr"], "upper-limb": ["Radiusr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -409,7 +409,7 @@ export const BONES: BoneEntry[] = [
     "Ulna"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Ulna"],"overview-skeleton":["Ulnar"],"upper-limb":["Ulnar"]},
+  modelMeshes: {"hand": ["Ulna"], "overview-skeleton": ["Ulnar"], "upper-limb": ["Ulnar"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -425,7 +425,7 @@ export const BONES: BoneEntry[] = [
     "Patella"
   ],
   zone: `knee`,
-  modelMeshes: {"lower-limb":["Patellar"],"overview-skeleton":["Patellar"]},
+  modelMeshes: {"lower-limb": ["Patellar"], "overview-skeleton": ["Patellar"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -459,7 +459,7 @@ export const BONES: BoneEntry[] = [
     "Femur"
   ],
   zone: `thigh`,
-  modelMeshes: {"lower-limb":["Femurr"],"overview-skeleton":["Femurr"]},
+  modelMeshes: {"lower-limb": ["Femurr"], "overview-skeleton": ["Femurr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -476,7 +476,7 @@ export const BONES: BoneEntry[] = [
     "Tibia"
   ],
   zone: `lower-leg`,
-  modelMeshes: {"lower-limb":["Tibiar"],"overview-skeleton":["Tibiar"]},
+  modelMeshes: {"lower-limb": ["Tibiar"], "overview-skeleton": ["Tibiar"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -493,7 +493,7 @@ export const BONES: BoneEntry[] = [
     "Fibula"
   ],
   zone: `lower-leg`,
-  modelMeshes: {"lower-limb":["Fibular"],"overview-skeleton":["Fibular"]},
+  modelMeshes: {"lower-limb": ["Fibular"], "overview-skeleton": ["Fibular"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -510,7 +510,7 @@ export const BONES: BoneEntry[] = [
     "Talus"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Talusr"],"overview-skeleton":["Talusr"]},
+  modelMeshes: {"lower-limb": ["Talusr"], "overview-skeleton": ["Talusr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -526,7 +526,7 @@ export const BONES: BoneEntry[] = [
     "Calcaneus"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Calcaneusr"],"overview-skeleton":["Calcaneusr"]},
+  modelMeshes: {"lower-limb": ["Calcaneusr"], "overview-skeleton": ["Calcaneusr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -543,7 +543,7 @@ export const BONES: BoneEntry[] = [
     "Navicular bone"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Navicular_boner"],"overview-skeleton":["Navicular_boner"]},
+  modelMeshes: {"lower-limb": ["Navicular_boner"], "overview-skeleton": ["Navicular_boner"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -560,7 +560,7 @@ export const BONES: BoneEntry[] = [
     "Metatarsal bones"
   ],
   zone: `ankle-foot`,
-  modelMeshes: {"lower-limb":["Fifth_metatarsal_boner","First_metatarsal_boner","Fourth_metatarsal_boner","Second_metatarsal_boner","Third_metatarsal_boner"],"overview-skeleton":["Fifth_metatarsal_boner","First_metatarsal_boner","Fourth_metatarsal_boner","Second_metatarsal_boner","Third_metatarsal_boner"]},
+  modelMeshes: {"lower-limb": ["First_metatarsal_boner", "Second_metatarsal_boner", "Third_metatarsal_boner", "Fourth_metatarsal_boner", "Fifth_metatarsal_boner"], "overview-skeleton": ["First_metatarsal_boner", "Second_metatarsal_boner", "Third_metatarsal_boner", "Fourth_metatarsal_boner", "Fifth_metatarsal_boner"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -576,7 +576,7 @@ export const BONES: BoneEntry[] = [
     "Scaphoid"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Scaphoid"],"overview-skeleton":["Scaphoidr"],"upper-limb":["Scaphoidr"]},
+  modelMeshes: {"hand": ["Scaphoid"], "overview-skeleton": ["Scaphoidr"], "upper-limb": ["Scaphoidr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -592,7 +592,7 @@ export const BONES: BoneEntry[] = [
     "Lunate bone"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Lunate_bone"],"overview-skeleton":["Lunate_boner"],"upper-limb":["Lunate_boner"]},
+  modelMeshes: {"hand": ["Lunate_bone"], "overview-skeleton": ["Lunate_boner"], "upper-limb": ["Lunate_boner"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -608,7 +608,7 @@ export const BONES: BoneEntry[] = [
     "Hamate"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Hamate"],"overview-skeleton":["Hamater"],"upper-limb":["Hamater"]},
+  modelMeshes: {"hand": ["Hamate"], "overview-skeleton": ["Hamater"], "upper-limb": ["Hamater"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -624,7 +624,7 @@ export const BONES: BoneEntry[] = [
     "Trapezium"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Trapezium"],"overview-skeleton":["Trapeziumr"],"upper-limb":["Trapeziumr"]},
+  modelMeshes: {"hand": ["Trapezium"], "overview-skeleton": ["Trapeziumr"], "upper-limb": ["Trapeziumr"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
@@ -641,10 +641,206 @@ export const BONES: BoneEntry[] = [
     "Capitate"
   ],
   zone: `forearm-hand`,
-  modelMeshes: {"hand":["Capitate"],"overview-skeleton":["Capitater"],"upper-limb":["Capitater"]},
+  modelMeshes: {"hand": ["Capitate"], "overview-skeleton": ["Capitater"], "upper-limb": ["Capitater"]},
   sourceRefs: [
     {"sourceId":"rag-anatomy-modelos-inventario","note":"Inventario GLB tarea 1 (nombres de nodo/mesh del modelo)"},
     {"sourceId":"TODO-cita","note":"Ficha descriptiva del hueso pendiente — Gray's for Students 4th ed."}
   ],
+  },
+  {
+    id: `bone-palatine-bone`,
+    kind: `bone`,
+    nameEn: `Palatine bone`,
+    nameEs: `Hueso palatino`,
+    synonyms: ["Hueso palatino", "Palatine bone", "Paladar óseo"],
+    zone: `head-jaw`,
+    modelMeshes: {"colored-skull-base": ["Palatine_bone"], "exploded-skull": ["Palatine_bone"], "overview-colored-skull": ["Palatine_boner"], "overview-skeleton": ["Palatine_boner"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--cabeza-cuello", "locator": "Capítulo 8", "note": "Hueso par en forma de L que forma la porción posterior del paladar duro y la pared lateral de la cavidad nasal."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Contribuye al suelo de la órbita y pared nasal lateral.`,
+  },
+  {
+    id: `bone-lacrimal-bone`,
+    kind: `bone`,
+    nameEn: `Lacrimal bone`,
+    nameEs: `Hueso lagrimal`,
+    synonyms: ["Hueso lagrimal", "Lacrimal bone", "Unguis"],
+    zone: `head-jaw`,
+    modelMeshes: {"colored-skull-base": ["Lacrimal_bones"], "exploded-skull": ["Lacrimal_bones"], "overview-colored-skull": ["Lacrimal_boner"], "overview-skeleton": ["Lacrimal_boner"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--cabeza-cuello", "locator": "Capítulo 8", "note": "Hueso facial laminar más pequeño que alberga la fosa del saco lagrimal."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Pared medial de la fosa orbitaria.`,
+  },
+  {
+    id: `bone-inferior-nasal-concha`,
+    kind: `bone`,
+    nameEn: `Inferior nasal concha`,
+    nameEs: `Cornete nasal inferior`,
+    synonyms: ["Cornete nasal inferior", "Inferior nasal concha", "Concha nasal inferior"],
+    zone: `head-jaw`,
+    modelMeshes: {"colored-skull-base": ["Inferior_nasal_concha_bones"], "exploded-skull": ["Inferior_nasal_concha_bones"], "overview-colored-skull": ["Inferior_nasal_concha_boner"], "overview-skeleton": ["Inferior_nasal_concha_boner"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--cabeza-cuello", "locator": "Capítulo 8", "note": "Hueso par independiente que se proyecta horizontalmente en la cavidad nasal inferior."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Acondicionamiento y turbulencia del flujo aéreo inspiratorio.`,
+  },
+  {
+    id: `bone-maxillary-dentition`,
+    kind: `bone`,
+    nameEn: `Maxillary dentition (Upper teeth)`,
+    nameEs: `Dientes superiores (arcada maxilar)`,
+    synonyms: ["Dientes superiores", "Arcada dental superior", "Upper teeth", "Maxillary dentition"],
+    zone: `head-jaw`,
+    modelMeshes: {"colored-skull-base": ["Upper_canines", "Upper_first_molar_teeth", "Upper_first_premolars", "Upper_lateral_incisors", "Upper_medial_incisors", "Upper_second_molar_teeth", "Upper_second_premolars"], "exploded-skull": ["Upper_canines", "Upper_first_molar_teeth", "Upper_first_premolars", "Upper_lateral_incisors", "Upper_medial_incisors", "Upper_second_molar_teeth", "Upper_second_premolars"], "overview-colored-skull": ["Upper_caniner", "Upper_first_molar_toothr", "Upper_first_premolarr", "Upper_lateral_incisorr", "Upper_medial_incisorr", "Upper_second_molar_toothr", "Upper_second_premolarr"], "overview-skeleton": ["Upper_caniner", "Upper_first_molar_toothr", "Upper_first_premolarr", "Upper_lateral_incisorr", "Upper_medial_incisorr", "Upper_second_molar_toothr", "Upper_second_premolarr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--cabeza-cuello", "locator": "Capítulo 8", "note": "Piezas dentarias maxilares articuladas en las cavidades alveolares del maxilar (gonfosis)."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Incisivos, caninos, premolares y molares superiores.`,
+  },
+  {
+    id: `bone-mandibular-dentition`,
+    kind: `bone`,
+    nameEn: `Mandibular dentition (Lower teeth)`,
+    nameEs: `Dientes inferiores (arcada mandibular)`,
+    synonyms: ["Dientes inferiores", "Arcada dental mandibular", "Lower teeth", "Mandibular dentition"],
+    zone: `head-jaw`,
+    modelMeshes: {"colored-skull-base": ["Lower_canines", "Lower_first_molar_teeth", "Lower_first_premolars", "Lower_lateral_incisors", "Lower_medial_incisors", "Lower_second_molar_teeth", "Lower_second_premolars"], "exploded-skull": ["Lower_canines", "Lower_first_molar_teeth", "Lower_first_premolar", "Lower_lateral_incisors", "Lower_medial_incisors", "Lower_second_molar_teeth", "Lower_second_premolars"], "overview-colored-skull": ["Lower_caniner", "Lower_first_molar_toothr", "Lower_first_premolarr", "Lower_lateral_incisorr", "Lower_medial_incisorr", "Lower_second_molar_toothr", "Lower_second_premolarr"], "overview-skeleton": ["Lower_caniner", "Lower_first_molar_toothr", "Lower_first_premolarr", "Lower_lateral_incisorr", "Lower_medial_incisorr", "Lower_second_molar_toothr", "Lower_second_premolarr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--cabeza-cuello", "locator": "Capítulo 8", "note": "Piezas dentarias mandibulares articuladas en el borde alveolar de la mandíbula."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Incisivos, caninos, premolares y molares inferiores.`,
+  },
+  {
+    id: `bone-pisiform-bone`,
+    kind: `bone`,
+    nameEn: `Pisiform bone`,
+    nameEs: `Hueso pisiforme`,
+    synonyms: ["Pisiforme", "Pisiform bone"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Pisiform"], "overview-skeleton": ["Pisiformr"], "upper-limb": ["Pisiformr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "locator": "Capítulo 7", "note": "Hueso sesamoideo en el tendón del flexor cubital del carpo."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Pared medial del canal de Guyon.`,
+  },
+  {
+    id: `bone-trapezoid-bone`,
+    kind: `bone`,
+    nameEn: `Trapezoid bone`,
+    nameEs: `Hueso trapezoide (carpo)`,
+    synonyms: ["Trapezoide", "Trapezoid bone"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Trapezoid"], "overview-skeleton": ["Trapezoidr"], "upper-limb": ["Trapezoidr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "locator": "Capítulo 7", "note": "Hueso carpiano de la fila distal entre trapecio y hueso grande."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Articulación con el 2.º metacarpiano.`,
+  },
+  {
+    id: `bone-triquetrum-bone`,
+    kind: `bone`,
+    nameEn: `Triquetrum bone`,
+    nameEs: `Hueso piramidal (carpo)`,
+    synonyms: ["Piramidal", "Triquetrum", "Triquetral bone"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Triquetrum"], "overview-skeleton": ["Triquetrumr"], "upper-limb": ["Triquetrumr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "locator": "Capítulo 7", "note": "Hueso carpiano de la fila proximal medial al semilunar."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Articulación con pisiforme y complejo fibrocartílago triangular.`,
+  },
+  {
+    id: `bone-metacarpal-bones`,
+    kind: `bone`,
+    nameEn: `Metacarpal bones (1st-5th)`,
+    nameEs: `Metacarpianos (1.º - 5.º)`,
+    synonyms: ["Metacarpianos", "Huesos metacarpianos", "Metacarpals", "Metacarpal bones"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["1st_metacarpal_bone", "2nd_metacarpal_bone", "3rd_metacarpal_bone", "4th_metacarpal_bone", "5th_metacarpal_bone"], "overview-skeleton": ["1st_metacarpal_boner", "2nd_metacarpal_boner", "3rd_metacarpal_boner", "4th_metacarpal_boner", "5th_metacarpal_boner"], "upper-limb": ["1st_metacarpal_boner", "2nd_metacarpal_boner", "3rd_metacarpal_boner", "4th_metacarpal_boner", "5th_metacarpal_boner"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "locator": "Capítulo 7", "note": "5 huesos largos que componen el esqueleto de la palma."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Base articular con carpo y cabeza con falanges proximales.`,
+  },
+  {
+    id: `bone-phalanges-hand`,
+    kind: `bone`,
+    nameEn: `Phalanges of the hand (Proximal, Middle, Distal)`,
+    nameEs: `Falanges de la mano (proximales, medias, distales)`,
+    synonyms: ["Falanges de la mano", "Phalanges of hand", "Dedos de la mano"],
+    zone: `forearm-hand`,
+    modelMeshes: {"hand": ["Proximal_phalanx_of_1st_finger", "Proximal_phalanx_of_2d_finger", "Proximal_phalanx_of_3rd_finger", "Proximal_phalanx_of_4th_finger", "Proximal_phalanx_of_5th_finger", "Middle_phalanx_of_2d_finger", "Middle_phalanx_of_3rd_finger", "Middle_phalanx_of_4th_finger", "Middle_phalanx_of_5th_finger", "Distal_phalanx_of_1st_finger", "Distal_phalanx_of_2d_finger", "Distal_phalanx_of_3d_finger", "Distal_phalanx_of_4th_finger", "Distal_phalanx_of_5th_finger"], "overview-skeleton": ["Proximal_phalanx_of_1st_fingerr", "Proximal_phalanx_of_2d_fingerr", "Proximal_phalanx_of_3rd_fingerr", "Proximal_phalanx_of_4th_fingerr", "Proximal_phalanx_of_5th_fingerr", "Middle_phalanx_of_2d_fingerr", "Middle_phalanx_of_3rd_fingerr", "Middle_phalanx_of_4th_fingerr", "Middle_phalanx_of_5th_fingerr", "Distal_phalanx_of_1st_fingerr", "Distal_phalanx_of_2d_fingerr", "Distal_phalanx_of_3d_fingerr", "Distal_phalanx_of_4th_fingerr", "Distal_phalanx_of_5th_fingerr"], "upper-limb": ["Proximal_phalanx_of_1st_fingerr", "Proximal_phalanx_of_2d_fingerr", "Proximal_phalanx_of_3rd_fingerr", "Proximal_phalanx_of_4th_fingerr", "Proximal_phalanx_of_5th_fingerr", "Middle_phalanx_of_2d_fingerr", "Middle_phalanx_of_3rd_fingerr", "Middle_phalanx_of_4th_fingerr", "Middle_phalanx_of_5th_fingerr", "Distal_phalanx_of_1st_fingerr", "Distal_phalanx_of_2d_fingerr", "Distal_phalanx_of_3d_fingerr", "Distal_phalanx_of_4th_fingerr", "Distal_phalanx_of_5th_fingerr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--codo-muneca", "locator": "Capítulo 7", "note": "14 falanges por mano (2 en pulgar, 3 en dedos 2-5)."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Inserción de flexores y extensores digitales.`,
+  },
+  {
+    id: `bone-cuboid-bone`,
+    kind: `bone`,
+    nameEn: `Cuboid bone`,
+    nameEs: `Hueso cuboides`,
+    synonyms: ["Cuboides", "Cuboid bone"],
+    zone: `ankle-foot`,
+    modelMeshes: {"lower-limb": ["Cuboid_boner"], "overview-skeleton": ["Cuboid_boner"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--tobillo-pie", "locator": "Capítulo 6", "note": "Hueso tarsiano lateral que articula con calcáneo y metatarsianos 4 y 5."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Polea lateral para el tendón del peroneo largo.`,
+  },
+  {
+    id: `bone-cuneiform-bones`,
+    kind: `bone`,
+    nameEn: `Cuneiform bones (Medial, Intermediate, Lateral)`,
+    nameEs: `Huesos cuneiformes (medial, intermedio, lateral)`,
+    synonyms: ["Cuneiformes", "Cuñas del tarso", "Cuneiform bones"],
+    zone: `ankle-foot`,
+    modelMeshes: {"lower-limb": ["Medial_cuneiform_boner", "Intermediate_cuneiform_boner", "Lateral_cuneiform_boner"], "overview-skeleton": ["Medial_cuneiform_boner", "Intermediate_cuneiform_boner", "Lateral_cuneiform_boner"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--tobillo-pie", "locator": "Capítulo 6", "note": "Tres huesos cuneiformes que forman la clave de bóveda del arco plantar transverso."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Inserciones de tibial anterior y tibial posterior.`,
+  },
+  {
+    id: `bone-phalanges-foot`,
+    kind: `bone`,
+    nameEn: `Phalanges of the foot (Proximal, Middle, Distal)`,
+    nameEs: `Falanges del pie (proximales, medias, distales)`,
+    synonyms: ["Falanges del pie", "Phalanges of foot", "Dedos del pie"],
+    zone: `ankle-foot`,
+    modelMeshes: {"lower-limb": ["Proximal_phalanx_of_first_finger_of_footr", "Proximal_phalanx_of_second_finger_of_footr", "Proximal_phalanx_of_third_finger_of_footr", "Proximal_phalanx_of_fourth_finger_of_footr", "Proximal_phalanx_of_fifth_finger_of_footr", "Middle_phalanx_of_second_finger_of_footr", "Middle_phalanx_of_third_finger_of_footr", "Middle_phalanx_of_fourth_finger_of_footr", "Middle_phalanx_of_fifth_finger_of_footr", "Distal_phalanx_of_first_finger_of_footr", "Distal_phalanx_of_second_finger_of_footr", "Distal_phalanx_of_third_finger_of_footr", "Distal_phalanx_of_fourth_finger_of_footr", "Distal_phalanx_of_fifth_finger_of_footr"], "overview-skeleton": ["Proximal_phalanx_of_first_finger_of_footr", "Proximal_phalanx_of_second_finger_of_footr", "Proximal_phalanx_of_third_finger_of_footr", "Proximal_phalanx_of_fourth_finger_of_footr", "Proximal_phalanx_of_fifth_finger_of_footr", "Middle_phalanx_of_second_finger_of_footr", "Middle_phalanx_of_third_finger_of_footr", "Middle_phalanx_of_fourth_finger_of_footr", "Middle_phalanx_of_fifth_finger_of_footr", "Distal_phalanx_of_first_finger_of_footr", "Distal_phalanx_of_second_finger_of_footr", "Distal_phalanx_of_third_finger_of_footr", "Distal_phalanx_of_fourth_finger_of_footr", "Distal_phalanx_of_fifth_finger_of_footr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--tobillo-pie", "locator": "Capítulo 6", "note": "14 falanges podálicas que transmiten las fuerzas de despegue durante la marcha y carrera."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Inserción de flexores y extensores de los dedos del pie.`,
+  },
+  {
+    id: `bone-sesamoids`,
+    kind: `bone`,
+    nameEn: `Sesamoid bones (Hand and Foot)`,
+    nameEs: `Huesos sesamoideos (mano y pie)`,
+    synonyms: ["Sesamoideos", "Sesamoid bones", "Sesamoides"],
+    zone: `ankle-foot`,
+    modelMeshes: {"hand": ["Sesamoid_bones"], "lower-limb": ["Sesamoid_bones_of_footr"], "overview-skeleton": ["Sesamoid_bones_of_handr", "Sesamoid_bones_of_footr"]},
+    sourceRefs: [
+      {"sourceId": "grays-anatomy-students-4ed--tobillo-pie", "locator": "Capítulo 6", "note": "Huesos sesamoideos bajo la 1.ª cabeza metatarsiana y articulación metacarpofalángica del pulgar."},
+      {"sourceId": "rag-anatomy-modelos-inventario", "note": "Inventario GLB runtime"},
+    ],
+    note: `Aumentan la ventaja mecánica de los tendones flexores cortos.`,
   },
 ];
