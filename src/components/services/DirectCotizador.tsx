@@ -1,3 +1,4 @@
+import './cotizador.css';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { SERVICES } from '../../data/services/catalogCore';
 import type { ServiceDef } from '../../data/services/catalogCore';
@@ -39,6 +40,7 @@ type Urgency = 'none' | '72h' | '24h';
 type Val = number | string | boolean;
 
 // ─── Estilos ───
+// Sistema Apple-like: usar .cx-card en vez de box inline
 const box: React.CSSProperties = { background: '#fff', border: '1px solid #dde0e8', borderRadius: 12, padding: 20, marginBottom: 16 };
 const lbl: React.CSSProperties = { display: 'block', fontSize: 15, fontWeight: 600, marginBottom: 8, color: '#1a1d29' };
 const help: React.CSSProperties = { fontSize: 12.5, color: '#5a5e6e', marginTop: 4 };
@@ -193,7 +195,7 @@ export function DirectCotizador() {
   };
 
   return (
-    <div className="cx-page" style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
+    <div className="cx-root" style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
       <style dangerouslySetInnerHTML={{ __html: CX_CSS }} />
 
       {/* Encabezado formal visible solo al imprimir/PDF (cotización) */}
@@ -210,18 +212,17 @@ export function DirectCotizador() {
       </div>
 
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-        <strong style={{ fontSize: 16, color: '#1a1d29' }}>{BRAND.name} · Cotizador</strong>
+        <strong style={{ fontSize: 15, color: '#1d1d1f', letterSpacing: '-0.01em' }}>{BRAND.name}</strong>
         <span data-noprint><CurrencyToggle currency={currency} onChange={setCurrency} /></span>
       </header>
-      <p style={{ margin: '0 0 4px', fontSize: 13, color: '#3c4152', fontWeight: 600 }}>{BRAND.role}</p>
-      <p style={{ margin: '0 0 18px', fontSize: 12.5, color: '#5a5e6e', lineHeight: 1.55, maxWidth: 560 }}>
-        {BRAND.valueProp}
-      </p>
+      <h1 className="cx-hero-title" style={{ marginTop: 28 }}>Cotiza tu proyecto 3D en minutos</h1>
+      <p className="cx-hero-sub">{BRAND.valueProp}</p>
+      
 
       {/* Cómo funciona (no-engineer) + garantías — colapsable tras primera interacción */}
       {!serviceId && (
         <div data-noprint style={{ ...box, marginBottom: 14 }}>
-          <span style={lbl}>Cómo funciona</span>
+          <span className="cx-section-label">Cómo funciona</span>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 10, marginBottom: 12 }}>
             {HOW_IT_WORKS.map((s) => (
               <div key={s.n} style={{ display: 'flex', gap: 8 }}>
@@ -256,17 +257,14 @@ export function DirectCotizador() {
       </p>
 
       {/* 0+1: Objetivo y servicio */}
-      <div style={box} data-noprint>
-        <span style={lbl}>¿Qué quieres lograr?</span>
+      <div className="cx-card cx-anim" data-noprint>
+        <span className="cx-section-label">¿Qué quieres lograr?</span>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(190px,1fr))', gap: 8, marginBottom: 14 }}>
           {GOALS.map((g) => (
             <button key={g.id} onClick={() => setGoal(goal === g.id ? '' : g.id)}
               title={g.descEs}
-              style={{
-                textAlign: 'left', padding: '10px 12px', borderRadius: 10, font: 'inherit',
-                border: goal === g.id ? '2px solid #0a84ff' : '1px solid #dde0e8',
-                background: goal === g.id ? '#e8f0fe' : '#fff', cursor: 'pointer',
-              }}>
+              className="cx-service-card"
+              data-selected={goal === g.id}>
               <span style={{ fontSize: 17 }}>{g.icon}</span>
               <span style={{ display: 'block', fontSize: 12.5, fontWeight: 600, color: '#1a1d29', marginTop: 2 }}>{g.labelEs}</span>
               <span style={{ display: 'block', fontSize: 10.5, color: '#5a5e6e' }}>{g.descEs}</span>
@@ -274,7 +272,7 @@ export function DirectCotizador() {
           ))}
         </div>
 
-        <span style={lbl}>Selecciona el servicio {goal && goal !== 'no-se' ? `(para ${goalLabel.toLowerCase()})` : ''}</span>
+        <span className="cx-section-label">Selecciona el servicio {goal && goal !== 'no-se' ? `(para ${goalLabel.toLowerCase()})` : ''}</span>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
           <FilterChip active={familyFilter === ''} onClick={() => setFamilyFilter('')} label="Todos" />
           {[
@@ -320,8 +318,8 @@ export function DirectCotizador() {
 
       {/* 2: Variables */}
       {svc && variables.length > 0 && (
-        <div style={box} data-noprint>
-          <span style={lbl}>2 · Configura lo que sabes</span>
+        <div className="cx-card cx-anim" data-noprint>
+          <span className="cx-section-label">2 · Configura lo que sabes</span>
           <p style={{ ...help, marginTop: 0, marginBottom: 12 }}>
             ¿No sabes qué poner? Usa <strong>“No sé”</strong> en cada pregunta y ponemos un valor típico por ti.
           </p>
@@ -343,8 +341,8 @@ export function DirectCotizador() {
 
       {/* 3: Nivel derivado */}
       {tier && (
-        <div style={box} data-noprint>
-          <span style={lbl}>3 · Nivel calculado automáticamente</span>
+        <div className="cx-card cx-anim" data-noprint>
+          <span className="cx-section-label">3 · Nivel calculado automáticamente</span>
           <div style={{ display: 'flex', gap: 6 }}>
             {(['XS', 'S', 'M', 'L', 'XL'] as LevelId[]).map((l) => (
               <div key={l} style={{
@@ -356,14 +354,14 @@ export function DirectCotizador() {
               </div>
             ))}
           </div>
-          <p style={help}>Tú nunca eliges el nivel: se deriva de tus respuestas de arriba.</p>
+          <p className="cx-caption">Tú nunca eliges el nivel: se deriva de tus respuestas de arriba.</p>
         </div>
       )}
 
       {/* 4: Condiciones */}
       {svc && (
-        <div style={box} data-noprint>
-          <span style={lbl}>4 · Condiciones</span>
+        <div className="cx-card cx-anim" data-noprint>
+          <span className="cx-section-label">4 · Condiciones</span>
           <div style={{ marginBottom: 14 }}>
             <span style={{ ...lbl, fontSize: 14 }}>Urgencia</span>
             <div style={{ display: 'flex', gap: 8 }}>
@@ -533,7 +531,7 @@ function VariableControl({ v, value, unsure, recReason, onChange, onToggleUnsure
         <input type="range" min={v.min} max={v.max} step={v.step ?? 1} value={current}
           onChange={(e) => onChange(Number(e.target.value))}
           style={{ width: '100%', accentColor: '#0a84ff', height: 28 }} />
-        {unsure && <p style={help}>✔ {recReason}. Mueve el control para ajustarlo tú.</p>}
+        {unsure && <p className="cx-caption">✔ {recReason}. Mueve el control para ajustarlo tú.</p>}
         {!unsure && v.tierMap && (
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10.5, opacity: 0.55, marginTop: 2, color: '#5a5e6e' }}>
             {v.tierMap.map((tm: { maxVal: number; tier: LevelId }) => <span key={tm.tier}>≤{tm.maxVal}={tm.tier}</span>)}
@@ -552,7 +550,7 @@ function VariableControl({ v, value, unsure, recReason, onChange, onToggleUnsure
           <span style={{ fontSize: 14.5, color: '#1a1d29', flex: 1 }}>{head}</span>
           {v.tierSiActivo && active && <span className="cx-chip" style={{ fontSize: 11 }}>→ {v.tierSiActivo}</span>}
         </label>
-        {unsure && <p style={help}>✔ {recReason}.</p>}
+        {unsure && <p className="cx-caption">✔ {recReason}.</p>}
       </div>
     );
   }
@@ -560,7 +558,7 @@ function VariableControl({ v, value, unsure, recReason, onChange, onToggleUnsure
   if (v.type === 'select' && v.opciones) {
     return (
       <div style={{ marginBottom: 16, opacity: unsure ? 0.72 : 1 }}>
-        <span style={lbl}>{head}</span>
+        <span className="cx-section-label">{head}</span>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {v.opciones.map((o: { valorEs: string; tierHint?: LevelId }) => {
             const active = value === o.valorEs;
@@ -578,7 +576,7 @@ function VariableControl({ v, value, unsure, recReason, onChange, onToggleUnsure
             );
           })}
         </div>
-        {unsure && <p style={help}>✔ {recReason}.</p>}
+        {unsure && <p className="cx-caption">✔ {recReason}.</p>}
       </div>
     );
   }
