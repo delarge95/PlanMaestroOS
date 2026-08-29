@@ -9,12 +9,12 @@
 
 | Modelo | Total Piezas | Aux/Otros (Ocultos) | Piezas Visibles | Piezas con Dueño (Grafo) | Piezas SIN Dueño | % Cobertura Visible |
 |---|---|---|---|---|---|---|
-| `colored-skull-base` | 30 | 0 | **30** | **12** | 18 | **40%** |
-| `exploded-skull` | 30 | 0 | **30** | **12** | 18 | **40%** |
+| `colored-skull-base` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
+| `exploded-skull` | 30 | 0 | **30** | **29** | 1 | **96.7%** |
 | `hand` | 235 | 4 | **231** | **63** | 168 | **27.3%** |
 | `lower-limb` | 462 | 40 | **422** | **117** | 305 | **27.7%** |
-| `overview-colored-skull` | 31 | 0 | **31** | **12** | 19 | **38.7%** |
-| `overview-skeleton` | 147 | 0 | **147** | **75** | 72 | **51%** |
+| `overview-colored-skull` | 31 | 0 | **31** | **29** | 2 | **93.5%** |
+| `overview-skeleton` | 147 | 0 | **147** | **92** | 55 | **62.6%** |
 | `upper-limb` | 575 | 27 | **548** | **164** | 384 | **29.9%** |
 | `vertebrae` | 4 | 0 | **4** | **3** | 1 | **75%** |
 
@@ -24,51 +24,17 @@
 
 ## 2. Inventario de Piezas Visibles SIN Dueño en el Grafo (por Modelo)
 
-### 🔹 Modelo: `colored-skull-base` (18 piezas sin dueño)
+### 🔹 Modelo: `colored-skull-base` (1 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
-| `Inferior_nasal_concha_bones` | `bone` | *Sin candidato claro* | — |
-| `Lacrimal_bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
-| `Lower_canines` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_premolars` | `bone` | *Sin candidato claro* | — |
-| `Lower_lateral_incisors` | `bone` | *Sin candidato claro* | — |
-| `Lower_medial_incisors` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_premolars` | `bone` | *Sin candidato claro* | — |
-| `Palatine_bone` | `bone` | `bone-frontal-bone` (Hueso frontal) | 50% |
-| `Upper_canines` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_premolars` | `bone` | *Sin candidato claro* | — |
-| `Upper_lateral_incisors` | `bone` | *Sin candidato claro* | — |
-| `Upper_medial_incisors` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_premolars` | `bone` | *Sin candidato claro* | — |
 
-### 🔹 Modelo: `exploded-skull` (18 piezas sin dueño)
+### 🔹 Modelo: `exploded-skull` (1 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
-| `Inferior_nasal_concha_bones` | `bone` | *Sin candidato claro* | — |
-| `Lacrimal_bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
-| `Lower_canines` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_premolar` | `bone` | *Sin candidato claro* | — |
-| `Lower_lateral_incisors` | `bone` | *Sin candidato claro* | — |
-| `Lower_medial_incisors` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_premolars` | `bone` | *Sin candidato claro* | — |
-| `Palatine_bone` | `bone` | `bone-frontal-bone` (Hueso frontal) | 50% |
-| `Upper_canines` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_premolars` | `bone` | *Sin candidato claro* | — |
-| `Upper_lateral_incisors` | `bone` | *Sin candidato claro* | — |
-| `Upper_medial_incisors` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_molar_teeth` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_premolars` | `bone` | *Sin candidato claro* | — |
 
 ### 🔹 Modelo: `hand` (168 piezas sin dueño)
 
@@ -553,31 +519,14 @@
 | `Veins` | `vessel` | *Sin candidato claro* | — |
 | `Zona_orbicularis_of_hip_jointr` | `joint` | *Sin candidato claro* | — |
 
-### 🔹 Modelo: `overview-colored-skull` (19 piezas sin dueño)
+### 🔹 Modelo: `overview-colored-skull` (2 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
 | `Bones` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 100% |
 | `Bones_right` | `bone` | `bone-metatarsal-bones` (Metatarsianos) | 50% |
-| `Inferior_nasal_concha_boner` | `bone` | *Sin candidato claro* | — |
-| `Lacrimal_boner` | `bone` | *Sin candidato claro* | — |
-| `Lower_caniner` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_premolarr` | `bone` | *Sin candidato claro* | — |
-| `Lower_lateral_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Lower_medial_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_premolarr` | `bone` | *Sin candidato claro* | — |
-| `Palatine_boner` | `bone` | *Sin candidato claro* | — |
-| `Upper_caniner` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_premolarr` | `bone` | *Sin candidato claro* | — |
-| `Upper_lateral_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Upper_medial_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_premolarr` | `bone` | *Sin candidato claro* | — |
 
-### 🔹 Modelo: `overview-skeleton` (72 piezas sin dueño)
+### 🔹 Modelo: `overview-skeleton` (55 piezas sin dueño)
 
 | Pieza Runtime (GLB) | Tipo (Catalog) | Candidato en Grafo (`anatomyGraph`) | Similitud |
 |---|---|---|---|
@@ -610,17 +559,8 @@
 | `Distal_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Distal_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Distal_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Inferior_nasal_concha_boner` | `bone` | *Sin candidato claro* | — |
 | `Intermediate_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
-| `Lacrimal_boner` | `bone` | *Sin candidato claro* | — |
 | `Lateral_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
-| `Lower_caniner` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Lower_first_premolarr` | `bone` | *Sin candidato claro* | — |
-| `Lower_lateral_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Lower_medial_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Lower_second_premolarr` | `bone` | *Sin candidato claro* | — |
 | `Medial_cuneiform_boner` | `bone` | *Sin candidato claro* | — |
 | `Middle_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
 | `Middle_phalanx_of_3rd_fingerr` | `bone` | *Sin candidato claro* | — |
@@ -630,7 +570,6 @@
 | `Middle_phalanx_of_fourth_finger_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Middle_phalanx_of_second_finger_of_footr` | `bone` | *Sin candidato claro* | — |
 | `Middle_phalanx_of_third_finger_of_footr` | `bone` | *Sin candidato claro* | — |
-| `Palatine_boner` | `bone` | *Sin candidato claro* | — |
 | `Pisiformr` | `bone` | *Sin candidato claro* | — |
 | `Proximal_phalanx_of_1st_fingerr` | `bone` | *Sin candidato claro* | — |
 | `Proximal_phalanx_of_2d_fingerr` | `bone` | *Sin candidato claro* | — |
@@ -646,13 +585,6 @@
 | `Sesamoid_bones_of_handr` | `bone` | *Sin candidato claro* | — |
 | `Trapezoidr` | `bone` | *Sin candidato claro* | — |
 | `Triquetrumr` | `bone` | *Sin candidato claro* | — |
-| `Upper_caniner` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Upper_first_premolarr` | `bone` | *Sin candidato claro* | — |
-| `Upper_lateral_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Upper_medial_incisorr` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_molar_toothr` | `bone` | *Sin candidato claro* | — |
-| `Upper_second_premolarr` | `bone` | *Sin candidato claro* | — |
 
 ### 🔹 Modelo: `upper-limb` (384 piezas sin dueño)
 
@@ -1053,9 +985,9 @@
 
 ## 3. Estructuras del Grafo SIN Mallas 3D (`modelMeshes` Vacío)
 
-Total de estructuras en el grafo: **267**
-- Estructuras con mallas 3D: **211** (79.0%)
-- Estructuras sin mallas 3D: **56** (21.0%)
+Total de estructuras en el grafo: **272**
+- Estructuras con mallas 3D: **216** (79.4%)
+- Estructuras sin mallas 3D: **56** (20.6%)
 
 ### Detalle de Estructuras sin Mallas 3D:
 
@@ -1063,8 +995,8 @@ Total de estructuras en el grafo: **267**
 |---|---|---|---|---|
 | `mus-masseter`<br>**Masetero** (*Masseter*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-temporalis`<br>**Temporal** (*Temporalis*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
-| `mus-lateral-pterygoid`<br>**Pterigoideo Lateral** (*Lateral Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `colored-skull-base:Lower_lateral_incisors` |
-| `mus-medial-pterygoid`<br>**Pterigoideo Medial** (*Medial Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `colored-skull-base:Lower_medial_incisors` |
+| `mus-lateral-pterygoid`<br>**Pterigoideo Lateral** (*Lateral Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `hand:Lateral_band_of_2nd_finger` |
+| `mus-medial-pterygoid`<br>**Pterigoideo Medial** (*Medial Pterygoid*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Anterior_horn_of_Medial_meniscusr` |
 | `mus-occipitofrontalis`<br>**Occipitofrontal** (*Occipitofrontalis*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | — |
 | `mus-orbicularis-oculi`<br>**Orbicular de los Párpados** (*Orbicularis Oculi*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Zona_orbicularis_of_hip_jointr` |
 | `mus-orbicularis-oris`<br>**Orbicular de la Boca** (*Orbicularis Oris*) | `muscle` | `head-jaw` | Cráneo/mandíbula (estructuras no desglosadas en malla individual) | `lower-limb:Zona_orbicularis_of_hip_jointr` |
@@ -1105,7 +1037,7 @@ Total de estructuras en el grafo: **267**
 | `mus-interspinales`<br>**Interespinosos** (*Interspinales*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-intertransversarii`<br>**Intertransversos** (*Intertransversarii*) | `muscle` | `spine` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-serratus-posterior-superior`<br>**Serrato Posterior Superior** (*Serratus Posterior Superior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Posterior_interosseous_artery` |
-| `mus-serratus-posterior-inferior`<br>**Serrato Posterior Inferior** (*Serratus Posterior Inferior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `colored-skull-base:Inferior_nasal_concha_bones` |
+| `mus-serratus-posterior-inferior`<br>**Serrato Posterior Inferior** (*Serratus Posterior Inferior*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `hand:Posterior_interosseous_artery` |
 | `mus-sternalis`<br>**Esternal** (*Sternalis*) | `muscle` | `back` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
 | `mus-tensor-fasciae-latae`<br>**Tensor de la Fascia Lata** (*Tensor Fasciae Latae*) | `muscle` | `hip` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | `lower-limb:Tensor_fasciae_lataer` |
 | `mus-levator-ani`<br>**Elevador del Ano** (*Levator Ani*) | `muscle` | `core` | Región sin modelo GLB específico (ej. musculatura de tronco/tórax/cuello) | — |
