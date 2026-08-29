@@ -46,6 +46,7 @@ const lbl: React.CSSProperties = { display: 'block', fontSize: 15, fontWeight: 6
 const help: React.CSSProperties = { fontSize: 12.5, color: '#5a5e6e', marginTop: 4 };
 
 const CX_CSS = `
+@media (max-width: 480px) { .cx-step-label { display: none; } }
 @media print {
   [data-noprint] { display: none !important; }
   body { background: #fff !important; }
@@ -79,6 +80,7 @@ export function DirectCotizador() {
   const [urgency, setUrgency] = useState<Urgency>('none');
   const [quantity, setQuantity] = useState(1);
   const [adjuntos, setAdjuntos] = useState<string[]>([]);
+  const [showAll, setShowAll] = useState(false);
   const hydratedRef = useRef(false);
 
   useEffect(() => {
@@ -229,7 +231,7 @@ export function DirectCotizador() {
               <span className="cx-step-dot" style={step > i + 1 ? { background: 'var(--cx-accent)', borderColor: 'var(--cx-accent)', color: '#fff' } : undefined}>
                 {step > i + 1 ? '✓' : i + 1}
               </span>
-              <span style={{ display: window.innerWidth > 480 ? 'inline' : 'none' }}>{label}</span>
+              <span className="cx-step-label">{label}</span>
             </span>
           </React.Fragment>
         ))}
@@ -319,7 +321,7 @@ export function DirectCotizador() {
           {filtered.length === 0 && (
             <p style={{ ...help, margin: 0 }}>Ningún servicio de este objetivo en esta familia. Prueba con “Todos”.</p>
           )}
-          {filtered.map((s) => {
+          {filtered.slice(0, showAll ? filtered.length : 8).map((s) => {
             const desde = priceMap.m.get(s.id);
             return (
               <button key={s.id} onClick={() => { setServiceId(s.id); setVals({}); setUnsure({}); }}
@@ -342,6 +344,16 @@ export function DirectCotizador() {
             );
           })}
         </div>
+          {filtered.length > 8 && (
+            <button onClick={() => setShowAll(!showAll)}
+              style={{
+                marginTop: 10, width: '100%', padding: '10px', borderRadius: 10,
+                border: '1px dashed #d5dbe8', background: 'transparent',
+                cursor: 'pointer', font: 'inherit', fontSize: 13, color: '#0071e3',
+              }}>
+              {showAll ? 'Ver menos ↑' : `Ver ${filtered.length - 8} servicios más ↓`}
+            </button>
+          )}
       </div>
 
       {/* 2: Variables */}
@@ -424,10 +436,13 @@ export function DirectCotizador() {
 
       {/* 5: Resultado */}
       {svc && tier && quote && (
-        <div id="cotizador-resultado" style={{ background: '#f8f9fb', border: '1px solid #dde0e8', borderRadius: 12, padding: 20 }}>
+        <div id="cotizador-resultado" className="cx-card" data-noprint={false}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
             <strong style={{ fontSize: 16, color: '#1a1d29' }}>{svc.nameEs}</strong>
-            <span style={{ background: '#dcfce7', color: '#166534', padding: '4px 12px', borderRadius: 8, fontSize: 16, fontWeight: 800, fontFamily: 'monospace' }}>
+            <span style={{
+              background: '#0071e3', color: '#fff', padding: '4px 14px',
+              borderRadius: 999, fontSize: 14, fontWeight: 700, letterSpacing: '0.02em',
+            }}>
               {tier}
             </span>
           </div>
@@ -558,7 +573,7 @@ function VariableControl({ v, value, unsure, recReason, onChange, onToggleUnsure
         </div>
         <input type="range" min={v.min} max={v.max} step={v.step ?? 1} value={current}
           onChange={(e) => onChange(Number(e.target.value))}
-          style={{ width: '100%', accentColor: '#0a84ff', height: 28 }} />
+          className="cx-slider" style={{ width: '100%' }} />
         {unsure && <p className="cx-caption">✔ {recReason}. Mueve el control para ajustarlo tú.</p>}
         {!unsure && v.tierMap && (
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10.5, opacity: 0.55, marginTop: 2, color: '#5a5e6e' }}>
@@ -614,23 +629,19 @@ function VariableControl({ v, value, unsure, recReason, onChange, onToggleUnsure
 
 function FilterChip({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
   return (
-    <button onClick={onClick} style={{
-      padding: '5px 12px', borderRadius: 999, cursor: 'pointer', font: 'inherit', fontSize: 12.5,
-      border: active ? '2px solid #0a84ff' : '1px solid #dde0e8',
-      background: active ? '#e8f0fe' : '#fff', color: '#1a1d29', fontWeight: active ? 600 : 400,
-    }}>{label}</button>
+    <button onClick={onClick} className="cx-chip" data-active={active}>{label}</button>
   );
 }
 
 function StatBox({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div style={{
-      background: highlight ? '#e8f0fe' : '#f0f4ff',
-      border: highlight ? '1px solid #0a84ff' : '1px solid #c7d7fe',
-      borderRadius: 10, padding: 12, textAlign: 'center',
+      background: highlight ? '#f0f7ff' : '#fafafa',
+      border: highlight ? '1px solid rgba(0,113,227,0.2)' : '1px solid var(--cx-border, rgba(0,0,0,0.06))',
+      borderRadius: 14, padding: '14px 12px', textAlign: 'center',
     }}>
-      <div style={{ fontSize: 11, opacity: 0.65, color: '#5a5e6e' }}>{label}</div>
-      <div style={{ fontSize: highlight ? 16 : 14, fontWeight: highlight ? 800 : 700, color: highlight ? '#0a6cf5' : '#1a1d29' }}>{value}</div>
+      <div style={{ fontSize: 11, fontWeight: 500, color: '#86868b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</div>
+      <div style={{ fontSize: highlight ? 18 : 15, fontWeight: 700, color: highlight ? '#0071e3' : '#1d1d1f', marginTop: 4, letterSpacing: '-0.01em' }}>{value}</div>
     </div>
   );
 }
@@ -641,13 +652,13 @@ function fmt(currency: Currency, v: number): string {
 
 function CurrencyToggle({ currency, onChange }: { currency: Currency; onChange: (c: Currency) => void }) {
   return (
-    <div role="group" aria-label="Moneda" style={{ display: 'inline-flex', border: '1px solid var(--c-border,#dde0e8)', borderRadius: 999, overflow: 'hidden' }}>
+    <div role="group" aria-label="Moneda" style={{ display: 'inline-flex', border: '1px solid var(--cx-border, rgba(0,0,0,0.08))', borderRadius: 999, overflow: 'hidden', background: '#fff' }}>
       {(['USD', 'COP'] as Currency[]).map((c) => (
         <button key={c}
           style={{
             padding: '6px 14px', border: 'none', cursor: 'pointer', font: 'inherit',
             fontWeight: currency === c ? 700 : 400,
-            background: currency === c ? 'var(--c-accent,#0a84ff)' : 'transparent',
+            background: currency === c ? '#0071e3' : 'transparent',
             color: currency === c ? '#fff' : 'inherit',
           }}
           onClick={() => onChange(c)}>
