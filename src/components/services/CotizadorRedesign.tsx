@@ -28,6 +28,20 @@ const WEB3D_IDS = [
 
 const WEB3D = SERVICES.filter(s => WEB3D_IDS.includes(s.id));
 
+/** Familias del catálogo con etiqueta humana (para los filtros). */
+const FAMILY_LABELS: Record<string, string> = {
+  'web-3d': 'Web 3D',
+  'asset-rt': 'Assets Realtime',
+  'render': 'Render 3D',
+  'ia': 'IA',
+  'vfx': 'VFX',
+  'datos': 'CAD → Web',
+  'texturas': 'Texturas',
+  'pipeline': 'Pipeline',
+  'soporte': 'Soporte',
+};
+const CATALOG_FAMILIES = Array.from(new Set(SERVICES.map(s => s.family)));
+
 const fmt = (cur: Currency, v: number) =>
   new Intl.NumberFormat(cur === 'COP' ? 'es-CO' : 'en-US', { style: 'currency', currency: cur, maximumFractionDigits: 0 }).format(v);
 
@@ -205,6 +219,8 @@ export function CotizadorRedesign() {
   const [mode, setMode] = useState<'guided' | 'catalog'>('guided');
   /** Complementos del plan del wizard (ej: el modelo 3D cuando hay que crearlo). */
   const [extras, setExtras] = useState<WizardPick[]>([]);
+  /** Filtro activo del catálogo ('todas' = sin filtrar). */
+  const [familyFilter, setFamilyFilter] = useState<string>('todas');
 
   const svc = WEB3D.find(s => s.id === serviceId);
   const variables: ServiceVariable[] = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
@@ -257,6 +273,10 @@ export function CotizadorRedesign() {
         * { box-sizing: border-box; }
         body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Inter, system-ui, sans-serif; }
         @media (max-width: 768px) { .cx-desktop-only { display: none !important; } }
+        @media (max-width: 768px) {
+          .cx-config { display: flex !important; flex-direction: column; }
+          .cx-config-aside { position: static !important; width: 100% !important; }
+        }
         @media (min-width: 769px) { .cx-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; max-width: 1200px !important; } }
         @media print { [data-noprint] { display: none !important; } body { background: #fff !important; } }
         .cx-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -297,7 +317,7 @@ export function CotizadorRedesign() {
 
         {/* ═══ CONFIGURACIÓN (cuando hay servicio) ═══ */}
         {svc && (
-          <section style={{ paddingTop: 40, paddingBottom: 60, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,380px)', gap: 32, alignItems: 'start' }} className="cx-desktop-only">
+          <section style={{ paddingTop: 40, paddingBottom: 60, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,380px)', gap: 32, alignItems: 'start' }} className="cx-config">
             {/* Panel izquierdo: configuración */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <button onClick={() => { setServiceId(''); setExtras([]); }} data-noprint
@@ -376,7 +396,7 @@ export function CotizadorRedesign() {
             </div>
 
             {/* Panel derecho: resultado STICKY */}
-            <aside style={{
+            <aside className="cx-config-aside" style={{
               position: 'sticky', top: 24,
               background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(16px)',
               border: '1px solid rgba(0,0,0,0.04)', borderRadius: 24, padding: 32,
@@ -456,12 +476,25 @@ export function CotizadorRedesign() {
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 8px' }}>
               Todos los servicios
             </h2>
-            <p style={{ fontSize: 16, color: '#86868b', margin: '0 0 40px' }}>Web 3D, visores, configuradores, herramientas.</p>
+            <p style={{ fontSize: 16, color: '#86868b', margin: '0 0 28px' }}>Web 3D, visores, configuradores, herramientas.</p>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32 }}>
+              {['todas', ...CATALOG_FAMILIES].map(f => (
+                <button key={f} onClick={() => setFamilyFilter(f)}
+                  style={{
+                    padding: '8px 18px', borderRadius: 999, font: `500 13.5px inherit`, cursor: 'pointer',
+                    border: familyFilter === f ? '2px solid #0071e3' : '1px solid rgba(0,0,0,0.08)',
+                    background: familyFilter === f ? '#e8f0fe' : 'rgba(255,255,255,0.9)',
+                    color: familyFilter === f ? '#0071e3' : '#1d1d1f',
+                  }}>
+                  {f === 'todas' ? 'Todos' : FAMILY_LABELS[f] ?? f}
+                </button>
+              ))}
+            </div>
             <div style={{
               display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
               gap: 16,
-            }}>
-              {SERVICES.map((s, i) => (
+            }} className="cx-grid">
+              {SERVICES.filter(s => familyFilter === 'todas' || s.family === familyFilter).map((s, i) => (
                 <ServiceCard key={s.id} svc={s} currency={currency} index={i}
                   onPick={() => { setMode('guided'); setServiceId(s.id); setVals({}); setExtras([]); }} />
               ))}
