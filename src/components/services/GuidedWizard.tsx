@@ -264,6 +264,16 @@ function QuestionCard({ q, answers, onAnswer, lang, branchId }: {
       <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--cx-text)', marginBottom: 4 }}>{qEn?.question ?? q.question}</div>
       {(qEn?.help ?? q.help) && <div style={{ fontSize: 13, color: 'var(--cx-muted)', marginBottom: 14, lineHeight: 1.45 }}>{qEn?.help ?? q.help}</div>}
 
+      {/* Preview de tarjetas: acabados con el modelo real (HolyBro X500) */}
+      {q.type === 'cards' && q.preview === 'finish' && (
+        <div style={{ marginBottom: 14 }}>
+          <ModelPreview mode="finish" finish={(typeof current === 'string' && ['simple', 'variado', 'detallado'].includes(current) ? current : 'variado') as 'simple' | 'variado' | 'detallado'} lang={lang} height={160} />
+          <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)', marginTop: 2 }}>
+            {en ? 'Real model (HolyBro X500) with the selected finish' : 'Modelo real (HolyBro X500) con el acabado elegido'}
+          </div>
+        </div>
+      )}
+
       {/* CARDS */}
       {q.type === 'cards' && q.options && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 10 }}>
@@ -424,6 +434,17 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
       : `Tu página reproducirá ${value} momento${value === 1 ? '' : 's'} animado${value === 1 ? '' : 's'} — se reproducen en secuencia`;
   } else if (preview === 'variant-swirl') {
     mode = 'variants';
+  } else if (preview === 'assembly') {
+    mode = 'assembly';
+    caption = en
+      ? 'Real model (HolyBro X500): big parts first, instances count once'
+      : 'Modelo real (HolyBro X500): primero las piezas grandes; las instancias cuentan una vez';
+  } else if (preview === 'shader-dial') {
+    mode = 'shader-dial';
+    const caps = en
+      ? ['Photoreal (PBR)', 'Product — clean studio', 'Semi-real grading', 'Toon / stylized', 'Hologram — full effect']
+      : ['Fotorrealista (PBR)', 'Producto — estudio limpio', 'Semirrealista', 'Toon / estilizado', 'Holograma — efecto completo'];
+    caption = caps[Math.round(Math.min(5, Math.max(1, value))) - 1];
   } else if (preview === 'surface-morph') {
     mode = 'surface';
     const caps = en
@@ -444,41 +465,52 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
         </div>
       )}
 
-      {/* 1.4 rework: configurador interactivo de verdad — los chips se clickean */}
-      {mode === 'variants' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ fontSize: 12.5, color: 'var(--cx-accent)', fontWeight: 600, textAlign: 'center' }}>
-            {en ? 'Try it — this is how your customer will configure the product' : 'Pruébalo — así configurará tu cliente el producto'}
-          </div>
-          {([
-            { label: en ? 'Color' : 'Color', opts: en ? EN.variantes.colores : VARIANT_AXIS_ES.colores, selIdx: sel.c, colors: VARIANTES.colores, set: (i: number) => setSel(s => ({ ...s, c: i })) },
-            { label: en ? 'Material' : 'Material', opts: en ? EN.variantes.materiales : VARIANT_AXIS_ES.materiales, selIdx: sel.m, colors: undefined, set: (i: number) => setSel(s => ({ ...s, m: i })) },
-            { label: en ? 'Accessory' : 'Accesorio', opts: en ? EN.variantes.accesorios : VARIANT_AXIS_ES.accesorios, selIdx: sel.a, colors: undefined, set: (i: number) => setSel(s => ({ ...s, a: i })) },
-          ] as const).map(axis => (
-            <div key={axis.label} style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
-              <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--cx-faint)', textTransform: 'uppercase', letterSpacing: '0.05em', width: 74, textAlign: 'right' }}>{axis.label}</span>
-              {axis.opts.map((o, i) => (
-                <button key={o} onClick={() => axis.set(i)}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 500, cursor: 'pointer',
-                    padding: '4px 12px', borderRadius: 999, font: 'inherit',
-                    border: axis.selIdx === i ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)',
-                    background: axis.selIdx === i ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)',
-                    color: axis.selIdx === i ? 'var(--cx-accent)' : 'var(--cx-muted)',
-                  }}>
-                  {axis.colors && <span style={{ width: 10, height: 10, borderRadius: '50%', background: axis.colors[i], display: 'inline-block' }} />}
-                  {o}
-                </button>
-              ))}
+      {/* 1.4 rework: configurador interactivo — chips clickeables con DESBLOQUEO progresivo */}
+      {mode === 'variants' && (() => {
+        // orden de desbloqueo: colores 0..5, material 1, material 2, accesorio 1, accesorio 2
+        const unlocked = Math.max(0, value - 1); // slot 0 de cada eje siempre activo
+        const orderOf = (axis: number, i: number) => (i === 0 ? -1 : axis === 0 ? i - 1 : axis === 1 ? 5 + i : 7 + i);
+        const locked = (axis: number, i: number) => orderOf(axis, i) >= unlocked;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <div style={{ fontSize: 12.5, color: 'var(--cx-accent)', fontWeight: 600, textAlign: 'center' }}>
+              {en ? 'Try it — this is how your customer will configure the product' : 'Pruébalo — así configurará tu cliente el producto'}
             </div>
-          ))}
-          <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)' }}>
-            {en
-              ? `Your app would have ${value} configuration variants like these`
-              : `Tu app tendría ${value} variantes de configuración como estas`}
+            {([
+              { axis: 0, label: en ? 'Color' : 'Color', opts: en ? EN.variantes.colores : VARIANT_AXIS_ES.colores, selIdx: sel.c, colors: VARIANTES.colores, set: (i: number) => setSel(s => ({ ...s, c: i })) },
+              { axis: 1, label: en ? 'Material' : 'Material', opts: en ? EN.variantes.materiales : VARIANT_AXIS_ES.materiales, selIdx: sel.m, colors: undefined, set: (i: number) => setSel(s => ({ ...s, m: i })) },
+              { axis: 2, label: en ? 'Accessory' : 'Accesorio', opts: en ? EN.variantes.accesorios : VARIANT_AXIS_ES.accesorios, selIdx: sel.a, colors: undefined, set: (i: number) => setSel(s => ({ ...s, a: i })) },
+            ] as const).map(axis => (
+              <div key={axis.label} style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+                <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--cx-faint)', textTransform: 'uppercase', letterSpacing: '0.05em', width: 74, textAlign: 'right' }}>{axis.label}</span>
+                {axis.opts.map((o, i) => {
+                  const isLocked = locked(axis.axis, i);
+                  return (
+                    <button key={o} onClick={() => !isLocked && axis.set(i)} disabled={isLocked} title={isLocked ? (en ? 'Unlocks with more variants' : 'Se desbloquea con más variantes') : undefined}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 500,
+                        cursor: isLocked ? 'not-allowed' : 'pointer',
+                        padding: '4px 12px', borderRadius: 999, font: 'inherit',
+                        border: !isLocked && axis.selIdx === i ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)',
+                        background: !isLocked && axis.selIdx === i ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)',
+                        color: isLocked ? 'var(--cx-faint)' : !isLocked && axis.selIdx === i ? 'var(--cx-accent)' : 'var(--cx-muted)',
+                        opacity: isLocked ? 0.45 : 1,
+                      }}>
+                      {axis.colors && <span style={{ width: 10, height: 10, borderRadius: '50%', background: axis.colors[i], display: 'inline-block' }} />}
+                      {o}
+                    </button>
+                  );
+                })}
+              </div>
+            ))}
+            <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)' }}>
+              {en
+                ? `With ${value} variants, ${Math.min(value, 12)} of the 12 base combinations unlock — more variants, more options for your customer`
+                : `Con ${value} variantes se desbloquean ${Math.min(value, 12)} de las 12 combinaciones base — más variantes, más opciones para tu cliente`}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Valor actual */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>

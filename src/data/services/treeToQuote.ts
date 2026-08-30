@@ -147,6 +147,18 @@ function extrasPorModeloExistente(a: Answers): WizardPick | null {
   return null;
 }
 
+/** RTA-05 cuando el cliente busca look estilizado (estilo >= 4): shaders custom. */
+const pickShaders = (a: Answers): WizardPick => ({
+  serviceId: 'RTA-05',
+  role: 'complemento',
+  labelEs: 'El look estilizado (shaders)',
+  notaEs: 'El look estilizado se implementa con shaders custom sobre el asset (RTA-05).',
+  vals: {
+    numShaders: 1,
+    target: str(a, 'donde-mostrar') === 'feria' || str(a, 'donde-mostrar') === 'movil' || str(a, 'plataforma') === 'app' ? 'Desktop + móvil' : 'Desktop',
+  },
+});
+
 // ─── Mapeo por rama ───
 
 function planVerModelo(a: Answers): WizardQuotePlan {
@@ -157,6 +169,7 @@ function planVerModelo(a: Answers): WizardQuotePlan {
   const picks: WizardPick[] = [visor];
   if (creaModelo) picks.push(pickModeloDesdeCero(a));
   else if (extra) picks.push(extra);
+  if (num(a, 'estilo') >= 4) picks.push(pickShaders(a));
   return { rootChoice: 'web-3d', subChoice: 'ver-modelo', picks };
 }
 
@@ -182,6 +195,7 @@ function planInteractivo(a: Answers): WizardQuotePlan {
     const extra = extrasPorModeloExistente(a);
     if (extra) picks.push(extra);
   }
+  if (num(a, 'estilo') >= 4) picks.push(pickShaders(a));
   return { rootChoice: 'web-3d', subChoice: 'interactivo', picks };
 }
 

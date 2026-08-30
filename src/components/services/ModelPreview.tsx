@@ -20,9 +20,11 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { EN, TRIS_ETIQUETAS } from '../../data/services/i18n';
+import { loadHolybro, applyFinish, tagAssemblySteps, revealSteps, HOLYBRO_STEPS } from './holybro';
+import type { FinishKind } from './holybro';
 import type { Lang } from '../../data/services/i18n';
 
-export type PreviewMode = 'detail' | 'pieces' | 'story' | 'variants' | 'surface';
+export type PreviewMode = 'detail' | 'pieces' | 'story' | 'variants' | 'surface' | 'finish' | 'assembly' | 'hotspots' | 'shader-dial';
 
 /** Catálogo de animaciones del modo story (1.3 replante). */
 export const STORY_ANIMS = [
@@ -53,18 +55,24 @@ const smooth = (x: number) => { const t = Math.max(0, Math.min(1, x)); return t 
 /** Escala de un grupo cuya ventana de aparición es [a, b] sobre el slider d. */
 const grow = (d: number, a: number, b: number) => smooth((d - a) / (b - a));
 
-export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface = 1, variantSel, lang = 'es', height = 150 }: {
+export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface = 1, variantSel, finish = 'detallado', estilo = 2, hotspots = 0, lang = 'es', height = 150 }: {
   mode: PreviewMode;
   /** Slider continuo 1–5 (detail). */
   detail?: number;
-  /** Slider piezas 1–50 (pieces). */
+  /** Slider piezas 1–50 (pieces / assembly). */
   pieces?: number;
   /** Nº de animaciones en la línea de tiempo 1–10 (story). */
   story?: number;
-  /** Slider superficie 1–5 (surface): 1 = cubo duro, 5 = esfera orgánica. */
+  /** Slider superficie 1–5 continuo (surface): 1 = cubo duro, 5 = esfera orgánica. */
   surface?: number;
   /** Selección del configurador (variants): índices de color/material/accesorio. */
   variantSel?: { c: number; m: number; a: number };
+  /** Acabado con el HolyBro X500 real (finish). */
+  finish?: FinishKind;
+  /** Estilo de shader 1–5 (shader-dial): 1 fotorrealista → 5 holograma. */
+  estilo?: number;
+  /** Nº de hotspots (hotspots, sección 3). */
+  hotspots?: number;
   lang?: Lang;
   height?: number;
 }) {
@@ -72,8 +80,8 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
   const uiRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const stateRef = useRef({ mode, detail, pieces, story, surface, variantSel, lang });
-  stateRef.current = { mode, detail, pieces, story, surface, variantSel, lang };
+  const stateRef = useRef({ mode, detail, pieces, story, surface, variantSel, finish, estilo, hotspots, lang });
+  stateRef.current = { mode, detail, pieces, story, surface, variantSel, finish, estilo, hotspots, lang };
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -87,7 +95,8 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     mount.appendChild(renderer.domElement);
 
-    scene.add(new THREE.HemisphereLight(0xffffff, 0xdde4ee, 1.05));
+    const hemi = new THREE.HemisphereLight(0xffffff, 0xdde4ee, 1.05);
+    scene.add(hemi);
     const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(3, 5, 4); scene.add(key);
     const rim = new THREE.DirectionalLight(0x9ecbff, 0.8); rim.position.set(-4, 2, -3); scene.add(rim);
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -105,7 +114,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     const wireMat = new THREE.MeshBasicMaterial({ color: 0x0071e3, wireframe: true, transparent: true, opacity: 0.9 });
     const setEnv = (v: number) => { bodyMat.envMapIntensity = v; accentMat.envMapIntensity = v; darkMat.envMapIntensity = v; };
 
-    // ═══ detail (1.1): grupos con ventana de aparición — crecimiento continuo ═══
+    // ═══ detail (1.1): MORPH real — edges → sólido → cuerpo suave en UNA malla ═══
     const detailRoot = new THREE.Group();
     group.add(detailRoot);
     type Part = { obj: THREE.Object3D; a: number; b: number; shrinkAt?: [number, number] };
@@ -115,29 +124,59 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       detailParts.push({ obj, a, b });
       detailRoot.add(obj);
     };
-    // Etapa base (1): bloqueo de cajas en wireframe (siempre presente, se desvanece en [1,2])
-    const block = new THREE.Group();
-    for (const [w, h, dp, y] of [[2.0, 0.18, 1.4, -0.5], [1.3, 0.9, 1.0, 0.15], [0.7, 0.35, 0.7, 0.78]] as const) {
-      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, dp), wireMat);
-      m.position.y = y; block.add(m);
-    }
-    detailRoot.add(block);
-    // Etapa 2: cajas sólidas flat-shaded (crecen [1.35, 2.2], se encogen cuando llega lo suave)
-    for (const [w, h, dp, y] of [[2.0, 0.18, 1.4, -0.5], [1.3, 0.9, 1.0, 0.15], [0.7, 0.35, 0.7, 0.78]] as const) {
-      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, dp), y < -0.2 ? darkMat : solidMat);
-      m.position.y = y;
-      const part: Part = { obj: m, a: 1.35, b: 2.2, shrinkAt: [2.0, 2.9] };
-      detailParts.push(part);
-      detailRoot.add(m);
-    }
-    // Etapa 3: superficies suaves
-    const smoothBody = new THREE.Group();
-    const bBase = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.15, 0.2, 40), darkMat); bBase.position.y = -0.5;
-    const bBody = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.8, 1.0, 48), bodyMat); bBody.position.y = 0.15;
-    const bCap = new THREE.Mesh(new THREE.SphereGeometry(0.72, 40, 20, 0, Math.PI * 2, 0, Math.PI / 2), bodyMat); bCap.position.y = 0.65;
-    smoothBody.add(bBase, bBody, bCap);
-    addPart(smoothBody, 2.1, 3.0);
-    // Etapa 4: detalles
+    // Malla única: caja merged (20 seg) que se MORPHEA a píldora en [2,3]
+    const detailGeo = new THREE.BoxGeometry(1.3, 0.9, 1.0, 16, 12, 12);
+    detailGeo.translate(0, 0.15, 0);
+    const detailMesh = new THREE.Mesh(detailGeo, solidMat);
+    detailMesh.material = solidMat.clone();
+    (detailMesh.material as THREE.MeshStandardMaterial).transparent = true;
+    (detailMesh.material as THREE.MeshStandardMaterial).opacity = 0;
+    detailRoot.add(detailMesh);
+    const detailPos0 = (detailGeo.getAttribute('position') as THREE.BufferAttribute).array.slice();
+    // Aristas azules (etapa 1): el wireframe ES esta malla
+    const edges = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(1.3, 0.9, 1.0).translate(0, 0.15, 0)),
+      new THREE.LineBasicMaterial({ color: 0x0071e3, transparent: true, opacity: 1 }),
+    );
+    detailRoot.add(edges);
+    // Base placa (aparece rellenando en [1.5, 2.2], permanece)
+    const plate = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.18, 1.4), darkMat);
+    plate.position.y = -0.5;
+    addPart(plate, 1.5, 2.2);
+    // Tapa superior (etapa 1–2): se funde en el morph hacia la píldora
+    const topBox = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.35, 0.7), solidMat);
+    topBox.position.y = 0.78;
+    addPart(topBox, 1.35, 2.0);
+    topBox.userData.shrinkWindow = [2.0, 2.7] as [number, number];
+    detailParts[detailParts.length - 1].shrinkAt = [2.0, 2.7];
+    // Morph box → píldora (cuerpo suave de la etapa 3)
+    const pillR = 0.52, pillHC = 0.18, pillCY = 0.32;
+    const morphToPill = (t: number) => {
+      const posAttr = detailMesh.geometry.getAttribute('position') as THREE.BufferAttribute;
+      const arr = posAttr.array as Float32Array;
+      for (let i = 0; i < arr.length; i += 3) {
+        const sx = detailPos0[i], sy = detailPos0[i + 1], sz = detailPos0[i + 2];
+        const yl = sy - pillCY;
+        const lxz = Math.sqrt(sx * sx + sz * sz) || 1;
+        let tx: number, ty: number, tz: number;
+        if (Math.abs(yl) <= pillHC) {
+          tx = (sx / lxz) * pillR; ty = sy; tz = (sz / lxz) * pillR;
+        } else {
+          const sgn = Math.sign(yl);
+          const vx = sx, vy = Math.abs(yl) - pillHC, vz = sz;
+          const vl = Math.sqrt(vx * vx + vy * vy + vz * vz) || 1;
+          tx = (vx / vl) * pillR; ty = pillCY + sgn * (pillHC + (vy / vl) * pillR); tz = (vz / vl) * pillR;
+        }
+        arr[i] = sx + (tx - sx) * t;
+        arr[i + 1] = sy + (ty - sy) * t;
+        arr[i + 2] = sz + (tz - sz) * t;
+      }
+      posAttr.needsUpdate = true;
+      detailMesh.geometry.computeVertexNormals();
+    };
+    let lastFlat = true;
+    let builtDetailMode = true;
+    // Etapa 4: detalles — anillo, pernos, asa
     const ring4 = new THREE.Mesh(new THREE.TorusGeometry(0.82, 0.055, 14, 52), accentMat);
     ring4.rotation.x = Math.PI / 2; ring4.position.y = -0.32;
     addPart(ring4, 2.9, 3.5);
@@ -224,6 +263,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     morphRoot.add(morph);
     let cubePos: ArrayLike<number> = (boxGeo.getAttribute('position') as THREE.BufferAttribute).array;
     const tmpV = new THREE.Vector3();
+    let lastMorphT = -1;
     const applyMorph = (t01: number) => {
       const t = smooth(t01);
       const posAttr = morph.geometry.getAttribute('position') as THREE.BufferAttribute;
@@ -272,14 +312,121 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     const applyModeVisibility = (m: PreviewMode) => {
       detailRoot.visible = m === 'detail';
       hub.visible = satRoot.visible = m === 'pieces';
-      prod.visible = m === 'story' || m === 'variants';
+      prod.visible = m === 'story' || m === 'variants' || m === 'hotspots' || m === 'shader-dial';
       morphRoot.visible = m === 'surface';
       prod.children.forEach((c, i) => { if (i >= 4) c.visible = m === 'story'; });
-      if (m === 'variants') { pRing.visible = true; pCap.visible = true; }
-      if (m !== 'detail') setEnv(m === 'surface' ? 0.6 : 0.9);
+      if (m === 'variants' || m === 'shader-dial') { pRing.visible = true; pCap.visible = true; }
+      if (m === 'detail') setEnv(0.9);
+      if (m === 'finish' || m === 'assembly') {
+        setEnv(2.4);
+        key.intensity = 3.2;
+        hemi.intensity = 1.6;
+        renderer.toneMappingExposure = 1.45;
+        startHolybro();
+      } else {
+        key.intensity = 1.4;
+        hemi.intensity = 1.05;
+        renderer.toneMappingExposure = 1.0;
+      }
     };
-    applyModeVisibility(st.mode);
-    if (st.mode === 'variants') applyVariant(st.variantSel);
+
+    // ═══ HolyBro X500 real: finish (acabados) + assembly (piezas progresivas) ═══
+    const holybroRoot = new THREE.Group();
+    group.add(holybroRoot);
+    let holybroStarted = false;
+    let holybroReady: THREE.Group | null = null;
+    let lastFinish: FinishKind | null = null;
+    let lastStepCount = -1;
+    function startHolybro() {
+      if (holybroStarted) return;
+      holybroStarted = true;
+      loadHolybro()
+        .then(root => {
+          tagAssemblySteps(root);
+          holybroRoot.add(root);
+          holybroReady = root;
+          revealSteps(root, 99);
+          applyFinish(root, stateRef.current.mode === "assembly" ? "variado" : (stateRef.current.finish ?? "detallado"));
+          applyFinish(root, stateRef.current.finish ?? 'detallado');
+          lastFinish = stateRef.current.finish ?? 'detallado';
+          lastStepCount = -1;
+        })
+        .catch(() => { holybroStarted = false; });
+    }
+
+    // ── Hotspots (sección 3): marcadores que pulsan sobre el producto ──
+    const markerGroup = new THREE.Group();
+    group.add(markerGroup);
+    const ANCHORS: Array<[number, number, number]> = [
+      [0, 1.05, 0], [0.55, 0.45, 0.35], [-0.55, 0.45, 0.35], [0.55, 0.45, -0.35], [-0.55, 0.45, -0.35],
+      [0.7, -0.5, 0.45], [-0.7, -0.5, 0.45], [0.7, -0.5, -0.45], [-0.7, -0.5, -0.45], [0, -0.35, 0.72],
+      [0, -0.35, -0.72], [0.62, 0.1, 0], [-0.62, 0.1, 0],
+    ];
+    const markers = ANCHORS.map((pos, i) => {
+      const m = new THREE.Mesh(new THREE.SphereGeometry(0.075, 14, 10), accentMat);
+      m.position.set(...pos);
+      m.userData.i = i;
+      markerGroup.add(m);
+      return m;
+    });
+    markerGroup.visible = false;
+
+    // ── shader-dial: presets de material sobre el producto ──
+    let toonMat: THREE.MeshToonMaterial | null = null;
+    let holoMat: THREE.ShaderMaterial | null = null;
+    let lastEstilo = -1;
+    const stdSaved: Array<{ mesh: THREE.Mesh; mat: THREE.Material }> = [];
+    const saveStd = () => {
+      if (stdSaved.length) return;
+      for (const m of [pBase, pBody, pRing, pCap]) stdSaved.push({ mesh: m, mat: m.material });
+    };
+    const gradientMap = (() => {
+      const data = new Uint8Array([80, 160, 255]);
+      const tex = new THREE.DataTexture(data, 3, 1, THREE.RedFormat);
+      tex.needsUpdate = true;
+      return tex;
+    })();
+    const applyEstilo = (e: number) => {
+      const estilo = Math.max(1, Math.min(5, Math.round(e)));
+      if (estilo === lastEstilo) return;
+      lastEstilo = estilo;
+      saveStd();
+      if (estilo <= 3) {
+        for (const { mesh, mat } of stdSaved) mesh.material = mat;
+        setEnv(estilo === 1 ? 1.3 : estilo === 2 ? 0.9 : 0.7);
+        bodyMat.metalness = estilo === 1 ? 0.6 : 0.3;
+        bodyMat.roughness = estilo === 1 ? 0.25 : 0.45;
+        bodyMat.color.setHex(estilo === 3 ? 0xf3e9d6 : 0xeef0f2);
+        accentMat.emissiveIntensity = 0;
+        return;
+      }
+      if (estilo === 4) {
+        if (!toonMat) {
+          toonMat = new THREE.MeshToonMaterial({ color: 0xf2f4f8, gradientMap });
+        }
+        const tMat = toonMat as unknown as THREE.MeshStandardMaterial;
+        pBody.material = tMat; pCap.material = tMat; pBase.material = tMat;
+        setEnv(0);
+        return;
+      }
+      if (!holoMat) {
+        holoMat = new THREE.ShaderMaterial({
+          transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending,
+          uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color(0x2997ff) } },
+          vertexShader: `varying vec3 vN; varying vec3 vP; void main(){ vN = normalize(normalMatrix * normal); vec4 wp = modelViewMatrix * vec4(position,1.0); vP = wp.xyz; gl_Position = projectionMatrix * wp; }`,
+          fragmentShader: `uniform float uTime; uniform vec3 uColor; varying vec3 vN; varying vec3 vP;
+            void main(){
+              float fres = pow(1.0 - abs(normalize(vN).z), 2.2);
+              float scan = 0.55 + 0.45 * sin((vP.y + uTime * 40.0) * 14.0);
+              float a = fres * (0.35 + 0.65 * scan);
+              gl_FragColor = vec4(uColor * (0.7 + fres), a * 0.9);
+            }`,
+        });
+      }
+      const hM = holoMat as unknown as THREE.MeshStandardMaterial;
+      pBody.material = hM; pCap.material = hM; pBase.material = hM; pRing.material = hM;
+      setEnv(0);
+    };
 
     // ── Interacción: arrastrar para rotar + inercia ──
     let dragging = false, lastX = 0, lastY = 0;
@@ -312,6 +459,10 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
     io.observe(mount);
 
+    // Inicialización de modo (tras declarar TODO lo que usa)
+    applyModeVisibility(st.mode);
+    if (st.mode === 'variants') applyVariant(st.variantSel);
+
     // ── Overlays HTML ──
     let storyActive = 0;
     let storyT0 = performance.now() / 1000;
@@ -343,7 +494,13 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
             tl.replaceChildren();
             for (let i = 0; i < n; i++) {
               const chip = document.createElement('span');
-              chip.style.cssText = 'display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--cx-border);background:var(--cx-card-solid);color:var(--cx-muted);white-space:nowrap;transition:all .25s;';
+              chip.style.cssText = 'display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--cx-border);background:var(--cx-card-solid);color:var(--cx-muted);white-space:nowrap;transition:all .25s;pointer-events:auto;cursor:pointer;';
+              chip.addEventListener('click', () => {
+                // seleccionar momento: salta a reproducirlo; el ciclo continúa desde ahí
+                storyActive = i;
+                storyT0 = performance.now() / 1000 - i * STORY_DURATION;
+                lastStoryCount = n;
+              });
               tl.appendChild(chip);
             }
           }
@@ -372,23 +529,80 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     const loop = () => {
       raf = requestAnimationFrame(loop);
       if (!visible || document.hidden) return;
+      const t = (performance.now() - start) / 1000;
       const cur = stateRef.current;
 
       if (cur.mode !== group.userData.mode) { group.userData.mode = cur.mode; applyModeVisibility(cur.mode); }
 
       if (cur.mode === 'detail') {
         const d = Math.max(1, Math.min(5, cur.detail));
-        for (const p of detailParts) {
-          let s = grow(d, p.a, p.b);
-          if (p.shrinkAt) s *= 1 - grow(d, p.shrinkAt[0], p.shrinkAt[1]);
-          p.obj.scale.setScalar(Math.max(0.0001, s));
+        // [1,2] la malla se RELLENA dentro de sus aristas; edges se desvanecen después
+        const fill = grow(d, 1.0, 2.0);
+        detailMesh.scale.setScalar(0.9 + 0.1 * fill);
+        (detailMesh.material as THREE.MeshStandardMaterial).opacity = fill;
+        (edges.material as THREE.LineBasicMaterial).opacity = 1 - grow(d, 1.7, 2.6);
+        // [2,3] MORPH box → píldora (la MISMA malla se transforma)
+        const mt = grow(d, 2.0, 3.0);
+        morphToPill(mt);
+        const wantFlat = mt < 0.45;
+        if (wantFlat !== lastFlat) {
+          lastFlat = wantFlat;
+          const mm = detailMesh.material as THREE.MeshStandardMaterial;
+          mm.flatShading = wantFlat;
+          mm.needsUpdate = true;
         }
-        wireMat.opacity = 0.9 * (1 - grow(d, 1.4, 2.3));
+        for (const p of detailParts) {
+          let sc = grow(d, p.a, p.b);
+          if (p.shrinkAt) sc *= 1 - grow(d, p.shrinkAt[0], p.shrinkAt[1]);
+          p.obj.scale.setScalar(Math.max(0.0001, sc));
+        }
         setEnv(grow(d, 3.4, 5));
         accentMat.emissive.setHex(0x0071e3);
         accentMat.emissiveIntensity = grow(d, 4.0, 5) * 0.35;
-        // el cuerpo suave usa bodyMat compartido: restaurar tras el morph
         if (bodyMat.metalness > 0.5 || bodyMat.roughness < 0.3) { bodyMat.metalness = 0.3; bodyMat.roughness = 0.4; }
+      }
+      if (cur.mode === 'finish') {
+        if (holybroReady && cur.finish !== lastFinish) { applyFinish(holybroReady, cur.finish); lastFinish = cur.finish; }
+        holybroRoot.rotation.y = t * 0.25;
+      }
+      if (cur.mode === 'assembly') {
+        if (holybroReady) {
+          const stepCount = Math.max(1, Math.min(HOLYBRO_STEPS.length, Math.ceil(cur.pieces / 5)));
+          if (stepCount !== lastStepCount) { revealSteps(holybroReady, stepCount - 1); lastStepCount = stepCount; }
+          const stepName = HOLYBRO_STEPS[Math.min(stepCount, HOLYBRO_STEPS.length) - 1];
+          if (uiRef.current) {
+            uiRef.current.textContent = cur.lang === 'es' ? stepName.es : stepName.en;
+            uiRef.current.style.opacity = '1';
+          }
+          holybroRoot.rotation.y = t * 0.25;
+        }
+      } else if (cur.mode !== 'detail' && uiRef.current && uiRef.current.textContent && uiRef.current.textContent.startsWith('≈') === false && cur.mode !== 'hotspots') {
+        // limpia la etiqueta de paso si salimos de assembly (el resto lo gestiona renderUi)
+      }
+      if (cur.mode === 'hotspots') {
+        markerGroup.visible = true;
+        const n = Math.max(0, Math.min(markers.length, Math.round(cur.hotspots)));
+        markers.forEach((m, i) => {
+          m.visible = i < n;
+          if (m.visible) {
+            const k = 1 + 0.35 * Math.sin(t * 3 + i * 1.4);
+            m.scale.setScalar(k);
+          }
+        });
+        if (uiRef.current) {
+          uiRef.current.textContent = cur.hotspots > markers.length ? `+${cur.hotspots - markers.length}` : '';
+          uiRef.current.style.opacity = cur.hotspots > markers.length ? '1' : '0';
+        }
+      } else {
+        markerGroup.visible = false;
+      }
+      if (cur.mode === 'shader-dial') {
+        applyEstilo(cur.estilo);
+        if (holoMat) holoMat.uniforms.uTime.value = t;
+        prod.rotation.y = t * 0.3;
+      } else if (lastEstilo > 0) {
+        applyEstilo(1);
+        lastEstilo = -1;
       }
       if (cur.mode === 'pieces') {
         if (cur.pieces !== builtPieces) { syncParts(Math.min(MAX_VISIBLE, Math.max(1, cur.pieces))); builtPieces = cur.pieces; }
@@ -442,7 +656,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       }
       if (cur.mode === 'surface') {
         const t05 = (Math.max(1, Math.min(5, cur.surface)) - 1) / 4;
-        if (t05 !== morph.userData.last) { applyMorph(t05); morph.userData.last = t05; }
+        if (Math.abs(t05 - lastMorphT) > 0.0005) { applyMorph(t05); lastMorphT = t05; }
       }
       if (cur.mode === 'variants' && cur.variantSel) {
         applyVariant(cur.variantSel);

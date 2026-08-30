@@ -21,6 +21,8 @@ import { QuoteCta } from './QuoteCta';
 import { GuidedWizard } from './GuidedWizard';
 import { RefDropzone } from './RefDropzone';
 import { SunIcon, MoonIcon } from './icons';
+import { ModelPreview } from './ModelPreview';
+import type { PreviewMode } from './ModelPreview';
 
 /** Etiqueta/nota de un pick en el idioma activo (fallback: español). */
 const pickLabel = (p: WizardPick, lang: Lang) => (lang === 'en' ? EXTRA_LABELS_EN[p.labelEs] ?? p.labelEs : p.labelEs);
@@ -271,6 +273,22 @@ export function CotizadorRedesign() {
   }, [svc, tier, currency, quoteOpts]);
 
   /** Aplica el plan del wizard: principal en configuración, resto como líneas extra. */
+  /** Sección 3: qué preview mostrar en el panel de configuración según el servicio. */
+  const configPreview: { mode: PreviewMode; detail?: number; story?: number; hotspots?: number; variantSel?: { c: number; m: number; a: number } } | null = (() => {
+    if (!svc) return null;
+    switch (svc.id) {
+      case 'WEB-01':
+      case 'RTA-02':
+        return { mode: 'hotspots' as const, hotspots: typeof vals.numHotspots === 'number' ? vals.numHotspots : 0 };
+      case 'WEB-05':
+        return { mode: 'story' as const, story: typeof vals.numSecciones === 'number' ? vals.numSecciones : 5 };
+      case 'WEB-04':
+        return { mode: 'variants' as const, variantSel: { c: 2, m: 1, a: 1 } };
+      default:
+        return { mode: 'detail' as const, detail: 3 };
+    }
+  })();
+
   const applyPlan = (plan: WizardQuotePlan) => {
     const principal = plan.picks[0];
     if (!principal) return;
@@ -422,6 +440,20 @@ export function CotizadorRedesign() {
                 {lang === 'es' ? '← Cambiar servicio' : EN.changeService}
               </button>
               <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: 0 }}>{lang === 'en' ? (CATALOG_EN[svc.id]?.name ?? svc.nameEs) : svc.nameEs}</h2>
+
+              {/* Sección 3: el preview del servicio reacciona a los sliders de configuración */}
+              {configPreview && (
+                <div style={{
+                  background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
+                  border: '1px solid var(--cx-border)', borderRadius: 20, padding: '16px 20px 10px',
+                }}>
+                  <ModelPreview mode={configPreview.mode} detail={configPreview.detail} story={configPreview.story}
+                    hotspots={configPreview.hotspots} variantSel={configPreview.variantSel} lang={lang} height={150} />
+                  <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)', marginTop: 2 }}>
+                    {lang === 'es' ? 'El modelo reacciona en vivo a tus sliders' : 'The model reacts live to your sliders'}
+                  </div>
+                </div>
+              )}
 
               {variables.length > 0 && (
                 <div style={{

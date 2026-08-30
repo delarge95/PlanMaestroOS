@@ -40,10 +40,12 @@ export interface TreeQuestion {
     /** Slider progresivo con puntos de snapping en los enteros (1.1). */
     continuous?: boolean;
     /** Preview 3D: qué modelo mostrar que cambie con el valor. */
-    preview?: 'detail-level' | 'piece-count' | 'complexity' | 'story' | 'variant-swirl' | 'surface-morph';
+    preview?: 'detail-level' | 'piece-count' | 'complexity' | 'story' | 'variant-swirl' | 'surface-morph' | 'assembly' | 'shader-dial';
     /** Mapeo valor → tier. */
     tierMap?: Array<{ max: number; tier: string }>;
   };
+  /** Preview para preguntas de tarjetas (no slider). */
+  preview?: 'finish';
   /** Si es expandible como "opciones avanzadas". */
   advanced?: boolean;
   advancedOptions?: AdvancedOption[];
@@ -137,15 +139,22 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         question: '¿Cómo es la superficie de tu producto?',
         help: 'De formas duras y prismáticas a curvas orgánicas. El extremo esculpido se acota en una sesión de discovery.',
         type: 'slider',
-        slider: { min: 1, max: 5, step: 1, unit: 'superficie', preview: 'surface-morph',
+        slider: { min: 1, max: 5, step: 0.1, unit: 'superficie', preview: 'surface-morph', continuous: true,
           tierMap: [{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
+      },
+      {
+        id: 'estilo',
+        question: '¿Qué estilo visual buscas?',
+        help: 'De materiales físicamente realistas a looks estilizados con shaders.',
+        type: 'slider',
+        slider: { min: 1, max: 5, step: 1, unit: 'estilo', preview: 'shader-dial' },
       },
       {
         id: 'cantidad-piezas',
         question: '¿Cuántas piezas o partes tiene tu producto?',
-        help: 'Una pieza es más simple que un ensamblaje de 20.',
+        help: 'Las instancias de una misma pieza cuentan una vez (40 tornillos = 1 tipo).',
         type: 'slider',
-        slider: { min: 1, max: 50, step: 1, unit: 'piezas', preview: 'piece-count',
+        slider: { min: 1, max: 50, step: 1, unit: 'piezas', preview: 'assembly',
           tierMap: [{max:5,tier:'S'},{max:15,tier:'M'},{max:30,tier:'L'},{max:50,tier:'XL'}] },
         advancedOptions: [
           { id: 'piezas-moviles', label: '¿Hay piezas móviles o articuladas?', help: 'Articulaciones requieren rigging.', type: 'select',
@@ -157,6 +166,8 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
       {
         id: 'materiales-acabado',
         question: '¿Qué acabados tiene tu producto?',
+        help: 'Compara en el modelo real: clay simple, materiales variados o texturizado completo.',
+        preview: 'finish',
         type: 'cards',
         options: [
           { id: 'simple', label: 'Simple', desc: 'Un solo color o material uniforme' },
@@ -253,8 +264,15 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         question: '¿Cómo es la superficie de tu producto?',
         help: 'De formas duras y prismáticas a curvas orgánicas. El extremo esculpido se acota en una sesión de discovery.',
         type: 'slider',
-        slider: { min: 1, max: 5, step: 1, unit: 'superficie', preview: 'surface-morph',
+        slider: { min: 1, max: 5, step: 0.1, unit: 'superficie', preview: 'surface-morph', continuous: true,
           tierMap: [{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
+      },
+      {
+        id: 'estilo',
+        question: '¿Qué estilo visual buscas?',
+        help: 'De materiales físicamente realistas a looks estilizados con shaders.',
+        type: 'slider',
+        slider: { min: 1, max: 5, step: 1, unit: 'estilo', preview: 'shader-dial' },
       },
       {
         id: 'cantidad-piezas',

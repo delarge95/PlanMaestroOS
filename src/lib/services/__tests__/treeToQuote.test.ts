@@ -182,6 +182,30 @@ describe('treeToQuote: ciclo 3 — superficie y slider continuo', () => {
   });
 });
 
+describe('treeToQuote: ciclo 4 — shaders (estilo >= 4)', () => {
+  it('estilo 5 añade RTA-05 como complemento', () => {
+    const plan = planFromTreeAnswers('web-3d', 'ver-modelo', {
+      'modelo-existente': 'si-tengo',
+      'formato-archivo': 'gltf',
+      'estilo': 5,
+    });
+    expect(plan.picks.map(p => p.serviceId)).toEqual(['WEB-01', 'RTA-05']);
+    const rta5 = plan.picks[1];
+    expect(rta5.labelEs).toContain('shaders');
+    const tier = derivarTier('RTA-05', rta5.vals);
+    expect(computeQuote('RTA-05', tier, 'USD', {})?.totalMin ?? 0).toBeGreaterThan(0);
+  });
+
+  it('estilo 3 (semirrealista) NO añade shaders', () => {
+    const plan = planFromTreeAnswers('web-3d', 'ver-modelo', {
+      'modelo-existente': 'si-tengo',
+      'formato-archivo': 'gltf',
+      'estilo': 3,
+    });
+    expect(plan.picks.map(p => p.serviceId)).toEqual(['WEB-01']);
+  });
+});
+
 describe('treeToQuote: consistencia con el motor de cotización', () => {
   const escenarios: Array<[string, string, Record<string, string | number | boolean>]> = [
     ['ver-modelo', 'ver-modelo', { 'modelo-existente': 'si-tengo', 'formato-archivo': 'step', 'cantidad-piezas': 25, 'interfaz': 'hotspots', 'donde-mostrar': 'feria' }],

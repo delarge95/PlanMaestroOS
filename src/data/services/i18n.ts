@@ -149,6 +149,11 @@ export const TREE_EN = {
           help: 'More detail = more modeling hours. For the web, level 3 is usually enough.',
           unit: 'level',
         },
+        estilo: {
+          question: 'What visual style are you after?',
+          help: 'From physically realistic materials to fully stylized shader looks.',
+          unit: 'style',
+        },
         'cantidad-piezas': {
           question: 'How many parts or pieces does your product have?',
           help: 'One part is simpler than a 20-part assembly.',
@@ -229,6 +234,11 @@ export const TREE_EN = {
           question: 'What level of detail do you need?',
           help: 'More detail = more modeling hours. For the web, level 3 is usually enough.',
           unit: 'level',
+        },
+        estilo: {
+          question: 'What visual style are you after?',
+          help: 'From physically realistic materials to fully stylized shader looks.',
+          unit: 'style',
         },
         'cantidad-piezas': {
           question: 'How many parts or pieces does your product have?',
@@ -346,6 +356,10 @@ export const VARS_EN: Record<string, Record<string, { question: string; unit?: s
   'WEB-08': {
     numSlides: { question: 'How many slides or sections?', unit: 'slides' },
     tiene3D: { question: 'Does it include an interactive 3D block?' },
+  },
+  'RTA-05': {
+    numShaders: { question: 'How many shaders or effects do you need?', unit: 'shaders' },
+    target: { question: 'Where does it run?', opciones: { 'Desktop': 'Desktop', 'Desktop + móvil': 'Desktop + mobile' } },
   },
   'RTA-01': {
     polyCount: { question: 'What polygon budget does it need?', unit: 'tris' },
