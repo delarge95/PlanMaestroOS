@@ -198,3 +198,56 @@ La revisión completa de los 9 docs arrojó **74 variables/drivers**; ~40 ya est
 8. **Nuevo slider `estiloShader`**: propuesta 5.A dial de realidad + `numShaders` con 5.C zonas; postpro separado (toggle avanzado en WEB-01).
 9. **Variables**: priorizar V1–V3 (superficie, estilo, línea de discovery tarifado) y la reformulación V4 (piezas únicas). Discrepancias D1 (urgencia +25 vs +30) y D2 (bundle −5 %) esperan tu decisión.
 10. **Blender**: sin MCP; CLI 4.3 disponible; protocolo de reporte definido en §7.
+
+---
+
+## 9. Ciclo 2.1 — decisiones finales de Alexander (2026-08-29, segunda ronda) y arranque de desarrollo
+
+> Estas decisiones completan y cierran las pendientes de §2, §4, §5, §6.2 y §8. Donde esta sección precise algo de §8, manda esta.
+
+### 9.1 Decisiones de previews
+
+| # | Decisión |
+|---|---|
+| 2.1 escenas | ✅ Aprobada la síntesis: **mini-scroll real (C) como carcasa + dolly por estaciones (A) como motor** |
+| 2.2 variantes | ✅ Aprobada (A + chips de causa + contador), **con requisito nuevo**: las variantes NO se limitan a color/material — mostrar todas las opciones de variante que pueden existir (tamaño, accesorios, módulos, acabados, grabados, componentes, configuración de piezas…). Los ejes de combinación deben representar esa variedad |
+| 4 superficie | ✅ **Morph (4.A) confirmado**. Alexander propone el **yunque** como héroe del extremo "curvas complejas sin llegar a escultura" — opinión de AG-SERV: **de acuerdo, es mejor que mi propuesta original** (análisis completo en 9.2). Queda pendiente el visto bueno final de Alexander a mi análisis |
+| 5 shaders | ✅ **Aprobadas A (dial de realidad) + C (zonas multi-shader)** |
+
+### 9.2 El yunque como héroe del slider `superficie` — opinión de AG-SERV
+
+**Me parece una elección excelente, mejor que mi propuesta original (el grip de un producto).** Razones:
+
+1. **Es el objeto canónico de "hard-surface con curvas complejas"**: cuerna cónica (superficie de revolución), cuello con entallado de fillets generosos, talón escalonado, cara plana de trabajo. Exactamente el punto medio del slider que hay que representar.
+2. **Reconocible al instante** para la audiencia del negocio (industrial B2B): no hay que explicarlo.
+3. **Tiene narrativa**: el yunque se FORJA — comunica trabajo artesanal de superficie, que es justo lo que el slider está tarifando.
+4. **Es viable proceduralmente por etapas** desde algo muy simple, que es lo que pide el morph: 1 bloque rectangular de caras planas → 2 biseles → 3 entallado del cuello + arranque de cuerna → 4 yunque completo (patrón London) con cuerna curva pulida. Cada etapa añade exactamente el tipo de trabajo que el valor del slider representa. Los agujeros (hardy/pritchel) entran como detalle en la etapa 4 (insets oscuros, sin CSG).
+5. **Nivel 5 (escultura)**: el yunque no llega ahí — y eso es correcto. Solución: cross-dissolve a una forma esculpida orgánica (abstracta, material clay) manteniendo el mismo material para que la transición se lea como "el objeto se vuelve escultura" + la nota de discovery ya definida.
+
+Alternativas consideradas si se prefiriera un objeto "más producto": ratón ergonómico, panel de carrocería, pala de turbina (morphs hard→orgánico con topología continua). Ninguna tiene la narrativa ni la iconicidad del yunque. **Recomendación: yunque, con la progresión por etapas del punto 4.**
+
+### 9.3 Decisiones comerciales (cierran §6.2)
+
+| # | Decisión final |
+|---|---|
+| D1 urgencia | **Alinear a +30 % / +50 %** (Pronto/Crítico). **Se conserva el descuento de lanzamiento −25 %** |
+| D2 bundle | **2 servicios ⇒ −5 % · 3+ servicios ⇒ −10 %** (no acumula con urgencia, según docs) |
+| D3 rondas | Se negocian por chat, **pero se muestran en el cotizador**: "2 rondas de ajuste incluidas · ronda adicional ≈ +10 %" |
+| D4 gestión proyecto | **No añadir** |
+| D5 pago | **Mostrar esquema de pago sugerido** en el panel (≤500 USD 100 % anticipado · 500–2k 50/50 · 2k–8k 40/30/30 · >8k hitos quincenales) |
+| D6 validez | ✅ Ya visible (15 días) |
+| 6.3 umbrales | **De cara al cliente se usa el esquema XS–XL** (más digerible) — ya implementado en el panel. Internamente, v2 es fuente de verdad; catálogo v1 queda histórico |
+
+### 9.4 Regla de gobernanza para generación de modelos 3D (obligatoria)
+
+> **Antes de generar CUALQUIER modelo 3D, por cualquier método (three.js procedural, Blender headless, Blender MCP), AG-SERV debe preguntar a Alexander: "¿lo genero yo con el workflow X, o lo generas tú?"** Alexander puede generar él los modelos más complejos. Esto aplica también a los héroes procedurales de los previews.
+
+Estado del puente Blender MCP: se activa solo cuando haga falta trabajo interactivo complejo — AG-SERV avisa y Alexander activa el puente. Para el resto: Blender headless + Python.
+
+### 9.5 Desarrollo arrancado en este ciclo (lo no dependiente de modelos 3D)
+
+- ✅ D1: urgencia +30/+50 en el cotizador (lanzamiento −25 % intacto).
+- ✅ D2: bundle −5 %/−10 % aplicado al total proyecto del wizard (no acumula con urgencia).
+- ✅ D3: línea visible de rondas de ajuste incluidas + coste de ronda extra.
+- ✅ D5: esquema de pago sugerido según el total (con conversión TRM para COP).
+- Pendiente de la pregunta de quién genera cada modelo (9.4): previews 1.1, 1.2, escenas, variantes, yunque, shaders.
