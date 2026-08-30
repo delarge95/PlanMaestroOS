@@ -3,6 +3,7 @@
 > **Fuente**: feedback acumulado del usuario (HANDOFF #3, #12, #17): *"las configuraciones de tris, hagámoslo algo más intuitivo, podemos usar modelos 3D existentes"*, *"incluyas WebGL en toda la web"*, *"que se integren de forma natural, sin marco"*.
 > **Alcance**: cada slider del cotizador (wizard + panel de configuración) con 1–3 propuestas de qué ve el cliente mover el slider, cómo reacciona el modelo 3D y cómo se integra en el código actual.
 > **Estado del sistema hoy**: `ModelPreview.tsx` ya renderiza un producto procedural (cuerpo + anillo azul + piezas satélite) que reacciona a `detail` (1–5) y `pieces` (1–50) vía `stateRef` sin reconstruir el contexto WebGL. Los sliders del wizard lo usan; los del panel de configuración (LuxeSlider) aún no tienen preview.
+> **ACTUALIZACIÓN ciclo 2**: las decisiones sobre estas propuestas, las aclaraciones pedidas y los 2 sliders nuevos (complejidad de superficie, shaders) están en el [Doc 05 — ciclo 2](./05-ciclo2-retro-nuevas-propuestas.md). En caso de contradicción, manda el doc 05.
 
 ---
 
