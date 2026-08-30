@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import { CONTACT_EMAIL } from '../../lib/services/share';
 import { BRAND } from '../../data/services/branding';
+import { EN } from '../../data/services/i18n';
+import type { Lang } from '../../data/services/i18n';
 
 /**
  * S1+S5: CTA post-presupuesto sin dead-end.
  * WhatsApp/email con resumen prellenado · copiar enlace compartible · imprimir/PDF.
  */
-export function QuoteCta({ summary, url }: { summary: string; url: string }) {
+export function QuoteCta({ summary, url, lang = 'es' }: { summary: string; url: string; lang?: Lang }) {
   const [feedback, setFeedback] = useState('');
+  const en = lang === 'en';
 
   const copy = async (text: string, msg: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setFeedback(msg);
     } catch {
-      setFeedback('No se pudo copiar automáticamente; selecciona el texto manualmente.');
+      setFeedback(en ? EN.cta.copyFail : 'No se pudo copiar automáticamente; selecciona el texto manualmente.');
     }
     setTimeout(() => setFeedback(''), 3500);
   };
 
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Cotización de proyecto 3D`)}&body=${encodeURIComponent(summary)}`;
+  const subject = encodeURIComponent(en ? EN.cta.subject : 'Cotización de proyecto 3D');
+  const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${encodeURIComponent(summary)}`;
   const whatsapp = `https://wa.me/${BRAND.whatsappNumber}?text=${encodeURIComponent(summary)}`;
 
   return (
@@ -30,33 +34,33 @@ export function QuoteCta({ summary, url }: { summary: string; url: string }) {
             padding: '12px 20px', borderRadius: 10, textDecoration: 'none', fontWeight: 600, fontSize: 14,
             background: '#128c4b', color: '#fff', border: 'none', cursor: 'pointer',
           }}>
-          Enviar por WhatsApp
+          {en ? EN.cta.whatsapp : 'Enviar por WhatsApp'}
         </a>
         <a href={mailto}
           style={{
             padding: '12px 20px', borderRadius: 10, textDecoration: 'none', fontWeight: 600, fontSize: 14,
-            background: '#fff', color: '#1a1d29', border: '1px solid #dde0e8', cursor: 'pointer',
+            background: 'var(--cx-card-solid)', color: 'var(--cx-text)', border: '1px solid var(--cx-border-strong)', cursor: 'pointer',
           }}>
-          Enviar por email
+          {en ? EN.cta.email : 'Enviar por email'}
         </a>
-        <button onClick={() => copy(url, '✓ Enlace copiado: puedes pegarlo para compartir esta cotización exacta.')}
+        <button onClick={() => copy(url, en ? EN.cta.copyOk : '✓ Enlace copiado: puedes pegarlo para compartir esta cotización exacta.')}
           style={{
             padding: '12px 20px', borderRadius: 10, font: 'inherit', fontSize: 14,
-            background: '#fff', color: '#1a1d29', border: '1px solid #dde0e8', cursor: 'pointer',
+            background: 'var(--cx-card-solid)', color: 'var(--cx-text)', border: '1px solid var(--cx-border-strong)', cursor: 'pointer',
           }}>
-          Copiar enlace
+          {en ? EN.cta.copy : 'Copiar enlace'}
         </button>
         <button onClick={() => window.print()}
           style={{
             padding: '12px 20px', borderRadius: 10, font: 'inherit', fontSize: 14,
-            background: '#fff', color: '#1a1d29', border: '1px solid #dde0e8', cursor: 'pointer',
+            background: 'var(--cx-card-solid)', color: 'var(--cx-text)', border: '1px solid var(--cx-border-strong)', cursor: 'pointer',
           }}>
-          Imprimir / PDF
+          {en ? EN.cta.print : 'Imprimir / PDF'}
         </button>
       </div>
       <p aria-live="polite" style={{ minHeight: 18, margin: '8px 0 0', fontSize: 12.5, color: '#166534' }}>{feedback}</p>
-      <p style={{ margin: 0, fontSize: 12, color: '#5a5e6e' }}>
-        Respuesta en menos de 24 h · Sin compromiso · Tus referencias/archivos los envías después si quieres.
+      <p style={{ margin: 0, fontSize: 12, color: 'var(--cx-muted)' }}>
+        {en ? EN.cta.promise : 'Respuesta en menos de 24 h · Sin compromiso · Tus referencias/archivos los envías después si quieres.'}
       </p>
     </div>
   );

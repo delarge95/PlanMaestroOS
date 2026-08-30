@@ -1,26 +1,44 @@
 /**
  * GuidedWizard.tsx — Cotizador guiado por árbol de decisión.
  * Nivel 1: ¿Qué quieres lograr? → Nivel 2: tipo de experiencia → Nivel 3: detalles.
- * Preview 3D interactiva que cambia con los sliders.
+ * Preview 3D interactiva que cambia con los sliders + i18n ES/EN (ciclo 2.1).
  */
 
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo } from 'react';
+import type { CSSProperties } from 'react';
 import { ROOT_OPTIONS, WEB3D_LEVEL2, WEB3D_BRANCHES } from '../../data/services/decisionTree';
-import type { TreeQuestion, TreeBranch } from '../../data/services/decisionTree';
+import type { TreeQuestion, TreeBranch, TreeOption } from '../../data/services/decisionTree';
 import { planFromTreeAnswers } from '../../data/services/treeToQuote';
 import type { WizardQuotePlan } from '../../data/services/treeToQuote';
+import { EN, TREE_EN, VARIANTES } from '../../data/services/i18n';
+import type { Lang } from '../../data/services/i18n';
 import { BRAND } from '../../data/services/branding';
 import { ModelPreview } from './ModelPreview';
+import type { PreviewMode } from './ModelPreview';
 import { TreeIcon, ChatIcon, MailIcon, GearIcon } from './icons';
 
 type Answers = Record<string, string | number | boolean>;
 
-export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePlan) => void }) {
+/** Espejo EN de una rama (tipado laxo: ids dinámicos, fallback a ES). */
+type BranchEn = {
+  title?: string; subtitle?: string;
+  questions?: Record<string, {
+    question?: string; help?: string; unit?: string;
+    options?: Record<string, { label: string; desc?: string }>;
+    advanced?: Record<string, { label?: string; help?: string; options?: Record<string, string> }>;
+  }>;
+};
+const branchEn = (id: string): BranchEn | undefined =>
+  (TREE_EN.branches as Record<string, BranchEn | undefined>)[id];
+
+export function GuidedWizard({ onComplete, lang = 'es' }: { onComplete?: (plan: WizardQuotePlan) => void; lang?: Lang }) {
   const [level, setLevel] = useState(1);
   const [rootChoice, setRootChoice] = useState('');
   const [subChoice, setSubChoice] = useState('');
   const [answers, setAnswers] = useState<Answers>({});
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const en = lang === 'en';
+  const W = EN.wizard;
 
   const branch: TreeBranch | null = useMemo(() => {
     if (rootChoice === 'web-3d' && subChoice) return WEB3D_BRANCHES[subChoice] ?? null;
@@ -30,6 +48,20 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
   const set = (id: string, val: string | number | boolean) =>
     setAnswers(p => ({ ...p, [id]: val }));
 
+  /** Texto ES/EN de una opción del árbol (raíz, nivel 2 o pregunta de rama). */
+  const optText = (scope: '__root' | '__level2' | { branchId: string; qId: string }, o: TreeOption): { label: string; desc?: string } => {
+    if (!en) return { label: o.label, desc: o.desc };
+    if (typeof scope === 'string') {
+      const table = scope === '__root'
+        ? (TREE_EN.root as Record<string, { label: string; desc?: string }>)
+        : (TREE_EN.level2 as Record<string, { label: string; desc?: string }>);
+      const t = table[o.id];
+      return { label: t?.label ?? o.label, desc: t?.desc ?? o.desc };
+    }
+    const t = branchEn(scope.branchId)?.questions?.[scope.qId]?.options?.[o.id];
+    return { label: t?.label ?? o.label, desc: t?.desc ?? o.desc };
+  };
+
   return (
     <div style={{ maxWidth: 680, margin: '0 auto', padding: '0 20px 80px' }}>
       {/* ═══ NIVEL 1: ¿Qué quieres lograr? ═══ */}
@@ -37,41 +69,44 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
         <div style={{ paddingTop: 60 }}>
           <h1 style={{
             fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 700,
-            letterSpacing: '-0.03em', color: '#1d1d1f', textAlign: 'center',
+            letterSpacing: '-0.03em', color: 'var(--cx-text)', textAlign: 'center',
             margin: '0 0 12px', lineHeight: 1.1,
-          }}>¿Qué quieres lograr?</h1>
-          <p style={{ fontSize: 17, color: '#86868b', textAlign: 'center', margin: '0 0 48px' }}>
-            Elige una opción y te guiamos paso a paso.
+          }}>{en ? W.l1Title : '¿Qué quieres lograr?'}</h1>
+          <p style={{ fontSize: 17, color: 'var(--cx-muted)', textAlign: 'center', margin: '0 0 48px' }}>
+            {en ? W.l1Sub : 'Elige una opción y te guiamos paso a paso.'}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 14 }}>
-            {ROOT_OPTIONS.filter(o => o.id !== 'no-se').map((o, i) => (
-              <button key={o.id}
-                onClick={() => { setRootChoice(o.id); setLevel(o.id === 'no-se' ? 1 : 2); }}
-                style={{
-                  display: 'flex', alignItems: 'flex-start', gap: 14, padding: '20px 22px',
-                  background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20,
-                  cursor: 'pointer', font: 'inherit', textAlign: 'left',
-                  transition: 'transform 0.25s cubic-bezier(0.25,0.8,0.4,1), box-shadow 0.25s',
-                  animation: `cardIn 0.4s ${i * 0.06}s cubic-bezier(0.25,0.8,0.4,1) both`,
-                }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.06)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
-              >
-                <span style={{ color: '#0071e3', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-                  <TreeIcon name={o.icon ?? ''} size={26} />
-                </span>
-                <div>
-                  <div style={{ fontSize: 17, fontWeight: 600, color: '#1d1d1f', letterSpacing: '-0.01em' }}>{o.label}</div>
-                  <div style={{ fontSize: 13, color: '#86868b', marginTop: 3, lineHeight: 1.4 }}>{o.desc}</div>
-                </div>
-              </button>
-            ))}
+            {ROOT_OPTIONS.filter(o => o.id !== 'no-se').map((o, i) => {
+              const t = optText('__root', o);
+              return (
+                <button key={o.id}
+                  onClick={() => { setRootChoice(o.id); setLevel(o.id === 'no-se' ? 1 : 2); }}
+                  style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 14, padding: '20px 22px',
+                    background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
+                    border: '1px solid var(--cx-border)', borderRadius: 20,
+                    cursor: 'pointer', font: 'inherit', textAlign: 'left',
+                    transition: 'transform 0.25s cubic-bezier(0.25,0.8,0.4,1), box-shadow 0.25s',
+                    animation: `cardIn 0.4s ${i * 0.06}s cubic-bezier(0.25,0.8,0.4,1) both`,
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--cx-shadow-hover)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
+                >
+                  <span style={{ color: 'var(--cx-accent)', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+                    <TreeIcon name={o.icon ?? ''} size={26} />
+                  </span>
+                  <div>
+                    <div style={{ fontSize: 17, fontWeight: 600, color: 'var(--cx-text)', letterSpacing: '-0.01em' }}>{t.label}</div>
+                    <div style={{ fontSize: 13, color: 'var(--cx-muted)', marginTop: 3, lineHeight: 1.4 }}>{t.desc}</div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
           <div style={{ textAlign: 'center', marginTop: 24 }}>
             <button onClick={() => setRootChoice('no-se')}
-              style={{ font: '500 15px inherit', color: '#86868b', background: 'none', border: 'none', cursor: 'pointer', padding: '8px 20px' }}>
-              No estoy seguro — ayúdame a decidir →
+              style={{ font: '500 15px inherit', color: 'var(--cx-muted)', background: 'none', border: 'none', cursor: 'pointer', padding: '8px 20px' }}>
+              {en ? W.notSure : 'No estoy seguro — ayúdame a decidir →'}
             </button>
           </div>
         </div>
@@ -80,74 +115,77 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
       {/* NO ESTOY SEGURO */}
       {level === 1 && rootChoice === 'no-se' && (
         <div style={{ paddingTop: 60, textAlign: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 8px' }}>Cuéntame tu idea</h2>
-          <p style={{ fontSize: 15, color: '#86868b', margin: '0 0 40px' }}>No necesitas saber cómo se llama — describe lo que imaginas.</p>
+          <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 8px' }}>{en ? W.ideaTitle : 'Cuéntame tu idea'}</h2>
+          <p style={{ fontSize: 15, color: 'var(--cx-muted)', margin: '0 0 40px' }}>{en ? W.ideaSub : 'No necesitas saber cómo se llama — describe lo que imaginas.'}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 14, maxWidth: 520, margin: '0 auto' }}>
-            <a href='https://wa.me/573054396581' target='_blank' rel='noopener noreferrer' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
-              <span style={{ color: '#0071e3', display: 'flex' }}><ChatIcon size={30} /></span>
-              <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>WhatsApp</strong>
-              <span style={{ fontSize: 13, color: '#86868b' }}>Describe tu idea y te respondo</span>
+            <a href={`https://wa.me/${BRAND.whatsappNumber}`} target='_blank' rel='noopener noreferrer' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'var(--cx-card)', backdropFilter: 'blur(12px)', border: '1px solid var(--cx-border)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: 'var(--cx-accent)', display: 'flex' }}><ChatIcon size={30} /></span>
+              <strong style={{ fontSize: 17, fontWeight: 700, color: 'var(--cx-text)' }}>{en ? W.whatsapp : 'WhatsApp'}</strong>
+              <span style={{ fontSize: 13, color: 'var(--cx-muted)' }}>{en ? W.ideaWa : 'Describe tu idea y te respondo'}</span>
             </a>
-            <a href='mailto:alexwssonn@hotmail.com?subject=Idea%20de%20proyecto' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
-              <span style={{ color: '#0071e3', display: 'flex' }}><MailIcon size={30} /></span>
-              <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>Correo</strong>
-              <span style={{ fontSize: 13, color: '#86868b' }}>Adjunta archivos si los tienes</span>
+            <a href={`mailto:${BRAND.contactEmail}?subject=${encodeURIComponent(en ? 'Project idea' : 'Idea de proyecto')}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'var(--cx-card)', backdropFilter: 'blur(12px)', border: '1px solid var(--cx-border)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: 'var(--cx-accent)', display: 'flex' }}><MailIcon size={30} /></span>
+              <strong style={{ fontSize: 17, fontWeight: 700, color: 'var(--cx-text)' }}>{en ? W.email : 'Correo'}</strong>
+              <span style={{ fontSize: 13, color: 'var(--cx-muted)' }}>{en ? W.ideaMail : 'Adjunta archivos si los tienes'}</span>
             </a>
           </div>
-          <button onClick={() => setRootChoice('')} style={{ marginTop: 20, font: '600 14px inherit', color: '#0071e3', background: 'none', border: 'none', cursor: 'pointer' }}>← Volver</button>
+          <button onClick={() => setRootChoice('')} style={{ marginTop: 20, font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer' }}>{en ? W.back : '← Volver'}</button>
         </div>
       )}
 
       {/* RAMAS PRÓXIMAMENTE (video / imágenes / IA): contacto directo, sin dead-end */}
       {level === 2 && rootChoice !== 'web-3d' && (
         <div style={{ paddingTop: 60, textAlign: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 8px' }}>Te cotizo esto personalmente</h2>
-          <p style={{ fontSize: 15, color: '#86868b', margin: '0 auto 40px', maxWidth: 440, lineHeight: 1.5 }}>
-            El cotizador guiado cubre webs con 3D. Para video, imágenes o IA escríbeme directamente y te respondo con una propuesta en menos de 24 h.
+          <h2 style={{ fontSize: 'clamp(1.8rem,3vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 8px' }}>{en ? W.comingTitle : 'Te cotizo esto personalmente'}</h2>
+          <p style={{ fontSize: 15, color: 'var(--cx-muted)', margin: '0 auto 40px', maxWidth: 440, lineHeight: 1.5 }}>
+            {en ? W.comingSub : 'El cotizador guiado cubre webs con 3D. Para video, imágenes o IA escríbeme directamente y te respondo con una propuesta en menos de 24 h.'}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 14, maxWidth: 520, margin: '0 auto' }}>
-            <a href='https://wa.me/573054396581' target='_blank' rel='noopener noreferrer' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
-              <span style={{ color: '#0071e3', display: 'flex' }}><ChatIcon size={30} /></span>
-              <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>WhatsApp</strong>
-              <span style={{ fontSize: 13, color: '#86868b' }}>Cuéntame tu proyecto</span>
+            <a href={`https://wa.me/${BRAND.whatsappNumber}`} target='_blank' rel='noopener noreferrer' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'var(--cx-card)', backdropFilter: 'blur(12px)', border: '1px solid var(--cx-border)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: 'var(--cx-accent)', display: 'flex' }}><ChatIcon size={30} /></span>
+              <strong style={{ fontSize: 17, fontWeight: 700, color: 'var(--cx-text)' }}>{en ? W.whatsapp : 'WhatsApp'}</strong>
+              <span style={{ fontSize: 13, color: 'var(--cx-muted)' }}>{en ? W.comingWa : 'Cuéntame tu proyecto'}</span>
             </a>
-            <a href='mailto:alexwssonn@hotmail.com?subject=Cotizaci%C3%B3n%20de%20proyecto' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
-              <span style={{ color: '#0071e3', display: 'flex' }}><MailIcon size={30} /></span>
-              <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f' }}>Correo</strong>
-              <span style={{ fontSize: 13, color: '#86868b' }}>Con referencias si tienes</span>
+            <a href={`mailto:${BRAND.contactEmail}?subject=${encodeURIComponent(en ? 'Project quote' : 'Cotización de proyecto')}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '28px 24px', background: 'var(--cx-card)', backdropFilter: 'blur(12px)', border: '1px solid var(--cx-border)', borderRadius: 20, textDecoration: 'none', font: 'inherit', textAlign: 'center' }}>
+              <span style={{ color: 'var(--cx-accent)', display: 'flex' }}><MailIcon size={30} /></span>
+              <strong style={{ fontSize: 17, fontWeight: 700, color: 'var(--cx-text)' }}>{en ? W.email : 'Correo'}</strong>
+              <span style={{ fontSize: 13, color: 'var(--cx-muted)' }}>{en ? W.comingMail : 'Con referencias si tienes'}</span>
             </a>
           </div>
-          <button onClick={() => setLevel(1)} style={{ marginTop: 20, font: '600 14px inherit', color: '#0071e3', background: 'none', border: 'none', cursor: 'pointer' }}>← Volver</button>
+          <button onClick={() => setLevel(1)} style={{ marginTop: 20, font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer' }}>{en ? W.back : '← Volver'}</button>
         </div>
       )}
 
-      {/* ═══ NIVEL 2 (web-3d): bloque original ═══ */}
+      {/* ═══ NIVEL 2 (web-3d): ¿Qué tipo de experiencia? ═══ */}
       {level === 2 && rootChoice === 'web-3d' && (
         <div style={{ paddingTop: 40 }}>
           <button onClick={() => setLevel(1)}
-            style={{ font: '600 14px inherit', color: '#0071e3', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>← Atrás</button>
-          <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 8px' }}>
-            ¿Qué tipo de web con 3D?
+            style={{ font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>{en ? W.back : '← Atrás'}</button>
+          <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 8px' }}>
+            {en ? W.l2Title : '¿Qué tipo de web con 3D?'}
           </h2>
-          <p style={{ fontSize: 15, color: '#86868b', margin: '0 0 32px' }}>No necesitas saber términos técnicos — describe lo que imaginas.</p>
+          <p style={{ fontSize: 15, color: 'var(--cx-muted)', margin: '0 0 32px' }}>{en ? W.l2Sub : 'No necesitas saber términos técnicos — describe lo que imaginas.'}</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 14 }}>
-            {WEB3D_LEVEL2.map((o, i) => (
-              <button key={o.id}
-                onClick={() => { setSubChoice(o.id); setLevel(3); }}
-                style={{
-                  display: 'flex', flexDirection: 'column', gap: 6, padding: '22px 20px',
-                  background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(0,0,0,0.05)', borderRadius: 20,
-                  cursor: 'pointer', font: 'inherit', textAlign: 'left',
-                  animation: `cardIn 0.4s ${i * 0.06}s both`,
-                }}>
-                <span style={{ color: '#0071e3', display: 'flex', marginBottom: 8 }}>
-                  <TreeIcon name={o.icon ?? ''} size={24} />
-                </span>
-                <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.01em' }}>{o.label}</strong>
-                <span style={{ fontSize: 13, color: '#86868b', lineHeight: 1.45 }}>{o.desc}</span>
-              </button>
-            ))}
+            {WEB3D_LEVEL2.map((o, i) => {
+              const t = optText('__level2', o);
+              return (
+                <button key={o.id}
+                  onClick={() => { setSubChoice(o.id); setLevel(3); }}
+                  style={{
+                    display: 'flex', flexDirection: 'column', gap: 6, padding: '22px 20px',
+                    background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
+                    border: '1px solid var(--cx-border)', borderRadius: 20,
+                    cursor: 'pointer', font: 'inherit', textAlign: 'left',
+                    animation: `cardIn 0.4s ${i * 0.06}s both`,
+                  }}>
+                  <span style={{ color: 'var(--cx-accent)', display: 'flex', marginBottom: 8 }}>
+                    <TreeIcon name={o.icon ?? ''} size={24} />
+                  </span>
+                  <strong style={{ fontSize: 17, fontWeight: 700, color: 'var(--cx-text)', letterSpacing: '-0.01em' }}>{t.label}</strong>
+                  <span style={{ fontSize: 13, color: 'var(--cx-muted)', lineHeight: 1.45 }}>{t.desc}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
@@ -156,15 +194,17 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
       {level === 3 && branch && (
         <div style={{ paddingTop: 40 }}>
           <button onClick={() => setLevel(2)}
-            style={{ font: '600 14px inherit', color: '#0071e3', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>← Atrás</button>
-          <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 6px' }}>
-            {branch.title}
+            style={{ font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>{en ? W.back : '← Atrás'}</button>
+          <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 6px' }}>
+            {en ? branchEn(branch.id)?.title ?? branch.title : branch.title}
           </h2>
-          <p style={{ fontSize: 15, color: '#86868b', margin: '0 0 36px' }}>{branch.subtitle}</p>
+          <p style={{ fontSize: 15, color: 'var(--cx-muted)', margin: '0 0 36px' }}>
+            {en ? branchEn(branch.id)?.subtitle ?? branch.subtitle : branch.subtitle}
+          </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
             {branch.questions.filter(q => !q.advanced || showAdvanced).map((q) => (
-              <QuestionCard key={q.id} q={q} answers={answers} onAnswer={set} />
+              <QuestionCard key={q.id} q={q} answers={answers} onAnswer={set} lang={lang} branchId={branch.id} />
             ))}
 
             {/* Opciones avanzadas */}
@@ -173,10 +213,10 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
                 style={{
                   alignSelf: 'center', display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '10px 24px', borderRadius: 999,
-                  font: '600 14px inherit', color: '#0071e3',
-                  background: 'none', border: '1px solid rgba(0,113,227,0.3)', cursor: 'pointer',
+                  font: '600 14px inherit', color: 'var(--cx-accent)',
+                  background: 'none', border: '1px solid var(--cx-accent-border)', cursor: 'pointer',
                 }}>
-                <GearIcon size={16} /> Opciones técnicas
+                <GearIcon size={16} /> {en ? W.opcionesTecnicas : 'Opciones técnicas'}
               </button>
             )}
           </div>
@@ -190,13 +230,13 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
               font: '700 16px inherit', letterSpacing: '-0.01em', cursor: 'pointer',
               transition: 'background 0.2s',
             }}
-            onMouseEnter={e => e.currentTarget.style.background = '#0077ed'}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--cx-accent-hover)'}
             onMouseLeave={e => e.currentTarget.style.background = '#0071e3'}
           >
-            Ver precio estimado →
+            {en ? W.verPrecio : 'Ver precio estimado →'}
           </button>
-          <p style={{ fontSize: 12, color: '#aeaeb2', textAlign: 'center', margin: '10px 0 0' }}>
-            Si algo quedó sin responder usamos un valor recomendado — después lo ajustas.
+          <p style={{ fontSize: 12, color: 'var(--cx-faint)', textAlign: 'center', margin: '10px 0 0' }}>
+            {en ? W.hint : 'Si algo quedó sin responder usamos un valor recomendado — después lo ajustas.'}
           </p>
         </div>
       )}
@@ -209,58 +249,71 @@ export function GuidedWizard({ onComplete }: { onComplete?: (plan: WizardQuotePl
 }
 
 // ═══ Question Card — renderiza según tipo ═══
-function QuestionCard({ q, answers, onAnswer }: {
-  q: TreeQuestion; answers: Answers; onAnswer: (id: string, val: string | number | boolean) => void;
+function QuestionCard({ q, answers, onAnswer, lang, branchId }: {
+  q: TreeQuestion; answers: Answers; onAnswer: (id: string, val: string | number | boolean) => void; lang: Lang; branchId: string;
 }) {
   const current = answers[q.id];
+  const en = lang === 'en';
+  const qEn = en ? branchEn(branchId)?.questions?.[q.id] : undefined;
 
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)',
-      border: '1px solid rgba(0,0,0,0.04)', borderRadius: 20, padding: 24,
+      background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
+      border: '1px solid var(--cx-border)', borderRadius: 20, padding: 24,
     }}>
-      <div style={{ fontSize: 16, fontWeight: 600, color: '#1d1d1f', marginBottom: 4 }}>{q.question}</div>
-      {q.help && <div style={{ fontSize: 13, color: '#86868b', marginBottom: 14, lineHeight: 1.45 }}>{q.help}</div>}
+      <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--cx-text)', marginBottom: 4 }}>{qEn?.question ?? q.question}</div>
+      {(qEn?.help ?? q.help) && <div style={{ fontSize: 13, color: 'var(--cx-muted)', marginBottom: 14, lineHeight: 1.45 }}>{qEn?.help ?? q.help}</div>}
 
       {/* CARDS */}
       {q.type === 'cards' && q.options && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 10 }}>
-          {q.options.map(o => (
-            <button key={o.id} onClick={() => onAnswer(q.id, o.id)}
-              style={{
-                padding: '16px 18px', borderRadius: 16, font: 'inherit', cursor: 'pointer', textAlign: 'left',
-                border: current === o.id ? '2px solid #0071e3' : '1px solid rgba(0,0,0,0.06)',
-                background: current === o.id ? '#e8f0fe' : '#fff',
-                transition: 'border-color 0.2s, background 0.2s',
-              }}>
-              <div style={{ fontSize: 15, fontWeight: 600, color: '#1d1d1f' }}>{o.label}</div>
-              {o.desc && <div style={{ fontSize: 12, color: '#86868b', marginTop: 2, lineHeight: 1.4 }}>{o.desc}</div>}
-            </button>
-          ))}
+          {q.options.map(o => {
+            const t = en
+              ? { label: qEn?.options?.[o.id]?.label ?? o.label, desc: qEn?.options?.[o.id]?.desc ?? o.desc }
+              : { label: o.label, desc: o.desc };
+            return (
+              <button key={o.id} onClick={() => onAnswer(q.id, o.id)}
+                style={{
+                  padding: '16px 18px', borderRadius: 16, font: 'inherit', cursor: 'pointer', textAlign: 'left',
+                  border: current === o.id ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border)',
+                  background: current === o.id ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)',
+                  color: 'var(--cx-text)',
+                  transition: 'border-color 0.2s, background 0.2s',
+                }}>
+                <div style={{ fontSize: 15, fontWeight: 600 }}>{t.label}</div>
+                {t.desc && <div style={{ fontSize: 12, color: 'var(--cx-muted)', marginTop: 2, lineHeight: 1.4 }}>{t.desc}</div>}
+              </button>
+            );
+          })}
         </div>
       )}
 
       {/* SLIDER */}
       {q.type === 'slider' && q.slider && (
         <SliderWithPreview
+          branchId={branchId}
           questionId={q.id}
           config={q.slider}
           value={typeof current === 'number' ? current : q.slider.min}
           onChange={(n) => onAnswer(q.id, n)}
+          lang={lang}
         />
       )}
 
       {/* SELECT */}
       {q.type === 'select' && q.options && (
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {q.options.map(o => (
-            <button key={o.id} onClick={() => onAnswer(q.id, o.id)}
-              style={{
-                padding: '10px 20px', borderRadius: 999, font: `500 14px inherit`, cursor: 'pointer',
-                border: current === o.id ? '2px solid #0071e3' : '1px solid rgba(0,0,0,0.08)',
-                background: current === o.id ? '#e8f0fe' : '#fff', color: '#1d1d1f',
-              }}>{o.label}</button>
-          ))}
+          {q.options.map(o => {
+            const label = en ? qEn?.options?.[o.id]?.label ?? o.label : o.label;
+            return (
+              <button key={o.id} onClick={() => onAnswer(q.id, o.id)}
+                style={{
+                  padding: '10px 20px', borderRadius: 999, font: `500 14px inherit`, cursor: 'pointer',
+                  border: current === o.id ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                  background: current === o.id ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)', color: 'var(--cx-text)',
+                }}>{label}</button>
+            );
+          })}
         </div>
       )}
 
@@ -269,79 +322,132 @@ function QuestionCard({ q, answers, onAnswer }: {
         <div onClick={() => onAnswer(q.id, !current)}
           style={{
             width: 48, height: 28, borderRadius: 14, cursor: 'pointer', position: 'relative',
-            background: current ? '#30d158' : 'rgba(0,0,0,0.08)', transition: 'background 0.25s',
+            background: current ? '#30d158' : 'var(--cx-soft)', transition: 'background 0.25s',
           }}>
           <div style={{
             position: 'absolute', top: 2, left: current ? 22 : 2, width: 24, height: 24,
-            borderRadius: '50%', background: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+            borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: 'var(--cx-shadow-knob)',
             transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)',
           }} />
         </div>
       )}
       <details style={{ marginTop: 12 }}>
-        <summary style={{ cursor:'pointer', fontSize:12, color:'#aeaeb2', listStyle:'none', userSelect:'none' }}>+ Detalles técnicos (opcional)</summary>
-        <div style={{ marginTop:10, paddingTop:10, borderTop:'1px dashed rgba(0,0,0,0.06)', display:'flex', flexDirection:'column', gap:10 }}>
-          {(q.advancedOptions||[]).map((adv: any) => (
-            <div key={adv.id}>
-              <div style={{ fontSize:13, fontWeight:500, color:'#86868b' }}>{adv.label}</div>
-              {adv.help && <div style={{ fontSize:11, color:'#aeaeb2', marginBottom:4 }}>{adv.help}</div>}
-              {adv.type==='select' && adv.options && (
-                <div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>
-                  {adv.options.map((o: any) => (
-                    <button key={o.id} onClick={()=>onAnswer(adv.id,o.id)} style={{ padding:'5px 12px', borderRadius:8, font:'400 12px inherit', cursor:'pointer', border:answers[adv.id]===o.id?'1.5px solid #0071e3':'1px solid rgba(0,0,0,0.06)', background:answers[adv.id]===o.id?'#e8f0fe':'#fafafa', color:answers[adv.id]===o.id?'#0071e3':'#86868b' }}>{o.label}</button>
-                  ))}
-                </div>
-              )}
-              {adv.type==='slider' && (
-                <input type='range' min={adv.min||1} max={adv.max||5} step={adv.step||1}
-                  value={answers[adv.id]||adv.defaultValue||adv.min||1}
-                  onChange={e=>onAnswer(adv.id,Number(e.target.value))}
-                  style={{ width:'100%', height:4, accentColor:'#0071e3' }} />
-              )}
-            </div>
-          ))}
-          {!(q.advancedOptions||[]).length && <span style={{ fontSize:12, color:'#aeaeb2' }}>Sin opciones para esta pregunta.</span>}
+        <summary style={{ cursor: 'pointer', fontSize: 12, color: 'var(--cx-faint)', listStyle: 'none', userSelect: 'none' }}>
+          {en ? EN.wizard.detalles : '+ Detalles técnicos (opcional)'}
+        </summary>
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px dashed var(--cx-soft)', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {(q.advancedOptions || []).map((adv) => {
+            const aEn = en ? qEn?.advanced?.[adv.id] : undefined;
+            return (
+              <div key={adv.id}>
+                <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--cx-muted)' }}>{aEn?.label ?? adv.label}</div>
+                {(aEn?.help ?? adv.help) && <div style={{ fontSize: 11, color: 'var(--cx-faint)', marginBottom: 4 }}>{aEn?.help ?? adv.help}</div>}
+                {adv.type === 'select' && adv.options && (
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {adv.options.map((o) => (
+                      <button key={o.id} onClick={() => onAnswer(adv.id, o.id)} style={{ padding: '5px 12px', borderRadius: 8, font: '400 12px inherit', cursor: 'pointer', border: answers[adv.id] === o.id ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)', background: answers[adv.id] === o.id ? 'var(--cx-accent-soft)' : 'var(--cx-tile)', color: answers[adv.id] === o.id ? 'var(--cx-accent)' : 'var(--cx-muted)' }}>{aEn?.options?.[o.id] ?? o.label}</button>
+                    ))}
+                  </div>
+                )}
+                {adv.type === 'slider' && (() => {
+                  const av = answers[adv.id];
+                  return (
+                    <input type='range' min={adv.min || 1} max={adv.max || 5} step={adv.step || 1}
+                      value={typeof av === 'number' ? av : adv.defaultValue ?? adv.min ?? 1}
+                      onChange={e => onAnswer(adv.id, Number(e.target.value))}
+                      style={{ width: '100%', height: 4, accentColor: '#0071e3' }} />
+                  );
+                })()}
+              </div>
+            );
+          })}
+          {!(q.advancedOptions || []).length && <span style={{ fontSize: 12, color: 'var(--cx-faint)' }}>{en ? EN.wizard.sinOpciones : 'Sin opciones para esta pregunta.'}</span>}
         </div>
       </details>
     </div>
   );
 }
 
-// ═══ Slider con Preview 3D conceptual ═══
-function SliderWithPreview({ questionId, config, value, onChange }: {
-  questionId: string; config: NonNullable<TreeQuestion['slider']>; value: number; onChange: (n: number) => void;
+// ═══ Slider con Preview 3D procedural ═══
+function SliderWithPreview({ branchId, questionId, config, value, onChange, lang }: {
+  branchId: string; questionId: string; config: NonNullable<TreeQuestion['slider']>;
+  value: number; onChange: (n: number) => void; lang: Lang;
 }) {
   const pct = ((value - config.min) / (config.max - config.min)) * 100;
+  const en = lang === 'en';
+  const qEn = en ? branchEn(branchId)?.questions?.[questionId] : undefined;
   const tierHint = config.tierMap?.find(t => value <= t.max)?.tier ?? '';
+  const preview = config.preview;
+
+  // 1.3: progreso para el dolly de estaciones
+  const progress = config.max > config.min ? (value - config.min) / (config.max - config.min) : 0.5;
+
+  // 1.4: ejes decodificados de la variante actual
+  const vi = Math.max(0, value - 1);
+  const colorIdx = vi % VARIANTES.colores.length;
+  const matIdx = Math.floor(vi / VARIANTES.colores.length) % VARIANTES.materiales.length;
+  const accIdx = Math.floor(vi / (VARIANTES.colores.length * VARIANTES.materiales.length)) % VARIANTES.accesorios.length;
+  const totalCombinaciones = VARIANTES.colores.length * VARIANTES.materiales.length * VARIANTES.accesorios.length;
+
+  const applyValue = (clientX: number, el: HTMLDivElement) => {
+    const r = el.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
+    onChange(Math.round((config.min + p * (config.max - config.min)) / config.step) * config.step);
+  };
+
+  let mode: PreviewMode | undefined;
+  let caption = '';
+  if (preview === 'detail-level') {
+    mode = 'detail';
+    const caps = en ? EN.wizard.detailCaptions : ['Boceto — solo geometría', 'Base — formas simples', 'Web — listo para producción', 'Alto — detalles finos', 'Máximo — nivel fotorrealista'];
+    caption = caps[Math.round(Math.min(5, Math.max(1, value))) - 1];
+  } else if (preview === 'piece-count') {
+    mode = 'pieces';
+    caption = en ? `${value} ${value === 1 ? EN.wizard.pieceSingular : EN.wizard.piecePlural}` : `${value} ${value === 1 ? 'pieza en el ensamblaje' : 'piezas en el ensamblaje'}`;
+  } else if (preview === 'scene-flow') {
+    mode = 'scenes';
+    caption = en ? 'This is how your page will behave on scroll' : 'Así se verá tu página al hacer scroll';
+  } else if (preview === 'variant-swirl') {
+    mode = 'variants';
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {/* Preview WebGL procedural — gira con el slider, se puede arrastrar */}
-      {config.preview === 'detail-level' && (
+      {/* Preview WebGL procedural — reacciona al slider, se puede arrastrar */}
+      {mode && (
         <div>
-          <ModelPreview mode="detail" detail={value} height={150} />
-          <div style={{ textAlign: 'center', fontSize: 12, color: '#86868b', marginTop: 2 }}>
-            {value === 1 ? 'Boceto — solo geometría' : value === 2 ? 'Base — formas simples' : value === 3 ? 'Web — listo para producción' : value === 4 ? 'Alto — detalles finos' : 'Máximo — nivel fotorrealista'}
-          </div>
+          <ModelPreview mode={mode} detail={value} pieces={value} progress={progress} variantIndex={value} lang={lang} height={mode === 'scenes' ? 170 : 150} />
+          {mode !== 'variants' && (
+            <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)', marginTop: 2 }}>{caption}</div>
+          )}
         </div>
       )}
-      {config.preview === 'piece-count' && (
-        <div>
-          <ModelPreview mode="pieces" pieces={value} height={150} />
-          <div style={{ textAlign: 'center', fontSize: 12, color: '#86868b', marginTop: 2 }}>
-            {value} {value === 1 ? 'pieza en el ensamblaje' : 'piezas en el ensamblaje'}
-          </div>
+
+      {/* 1.4: chips de causa — QUÉ cambió en esta variante */}
+      {mode === 'variants' && (
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <span style={chipStyle}>
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: VARIANTES.colores[colorIdx], display: 'inline-block' }} />
+            {en ? EN.variantes.colores[colorIdx] : VARIANT_AXIS_ES.colores[colorIdx]}
+          </span>
+          <span style={chipStyle}>{en ? EN.variantes.materiales[matIdx] : VARIANT_AXIS_ES.materiales[matIdx]}</span>
+          <span style={chipStyle}>{en ? EN.variantes.accesorios[accIdx] : VARIANT_AXIS_ES.accesorios[accIdx]}</span>
+          <span style={{ ...chipStyle, color: 'var(--cx-accent)', borderColor: 'var(--cx-accent-border)' }}>
+            {en
+              ? `Variant ${value} · ${totalCombinaciones} combinations possible`
+              : `Variante ${value} · ${totalCombinaciones} combinaciones posibles`}
+          </span>
         </div>
       )}
 
       {/* Valor actual */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <strong style={{ fontSize: 24, fontWeight: 700, color: '#0071e3', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
+        <strong style={{ fontSize: 24, fontWeight: 700, color: 'var(--cx-accent)', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
           {value}
-          <span style={{ fontSize: 14, color: '#86868b', fontWeight: 400, marginLeft: 6 }}>{config.unit}</span>
+          <span style={{ fontSize: 14, color: 'var(--cx-muted)', fontWeight: 400, marginLeft: 6 }}>{qEn?.unit ?? config.unit}</span>
         </strong>
         {tierHint && (
-          <span style={{ fontSize: 12, fontWeight: 600, color: '#0071e3', background: '#e8f0fe', padding: '2px 10px', borderRadius: 6 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--cx-accent)', background: 'var(--cx-accent-soft)', padding: '2px 10px', borderRadius: 6 }}>
             {tierHint}
           </span>
         )}
@@ -349,19 +455,9 @@ function SliderWithPreview({ questionId, config, value, onChange }: {
 
       {/* Track */}
       <div
-        style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(0,0,0,0.06)', cursor: 'pointer' }}
-        onPointerDown={(e) => {
-          e.currentTarget.setPointerCapture(e.pointerId);
-          const r = e.currentTarget.getBoundingClientRect();
-          const p = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-          onChange(Math.round((config.min + p * (config.max - config.min)) / config.step) * config.step);
-        }}
-        onPointerMove={(e) => {
-          if (e.buttons !== 1) return;
-          const r = e.currentTarget.getBoundingClientRect();
-          const p = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-          onChange(Math.round((config.min + p * (config.max - config.min)) / config.step) * config.step);
-        }}
+        style={{ position: 'relative', height: 6, borderRadius: 3, background: 'var(--cx-soft)', cursor: 'pointer', touchAction: 'none' }}
+        onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); applyValue(e.clientX, e.currentTarget); }}
+        onPointerMove={(e) => { if (e.buttons !== 1) return; applyValue(e.clientX, e.currentTarget); }}
       >
         <div style={{
           position: 'absolute', left: 0, top: 0, height: '100%', borderRadius: 3,
@@ -370,18 +466,42 @@ function SliderWithPreview({ questionId, config, value, onChange }: {
         }} />
         <div style={{
           position: 'absolute', top: -8, left: `calc(${pct}% - 11px)`, width: 22, height: 22,
-          borderRadius: '50%', background: '#fff', border: '0.5px solid rgba(0,0,0,0.04)',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.15)', transition: 'left 0.2s cubic-bezier(0.25,0.8,0.4,1)',
+          borderRadius: '50%', background: 'var(--cx-card-solid)', border: '0.5px solid var(--cx-border)',
+          boxShadow: 'var(--cx-shadow-knob)', transition: 'left 0.2s cubic-bezier(0.25,0.8,0.4,1)',
         }} />
       </div>
 
-      {/* Labels min/max */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#aeaeb2' }}>
-        <span>{config.min} {config.unit}</span>
-        <span>{config.max} {config.unit}</span>
-      </div>
+      {/* 1.3: mini-scroll — la barra que el cliente "scrollea" con el slider */}
+      {preview === 'scene-flow' && (
+        <div style={{ position: 'relative', height: 22, margin: '2px 8px 0' }}>
+          <div style={{ position: 'absolute', top: 9, left: 0, right: 0, height: 4, borderRadius: 2, background: 'var(--cx-soft)' }} />
+          <div style={{ position: 'absolute', top: 9, left: 0, width: `${pct}%`, height: 4, borderRadius: 2, background: 'var(--cx-accent)', transition: 'width 0.2s' }} />
+          {Array.from({ length: Math.round(value) }, (_, i) => {
+            const p = config.max > config.min ? (i + 1 - config.min) / (config.max - config.min) : 0;
+            return <div key={i} style={{ position: 'absolute', top: 6.5, left: `calc(${Math.min(100, Math.max(0, p * 100))}% - 4.5px)`, width: 9, height: 9, borderRadius: '50%', background: 'var(--cx-accent)', border: '2px solid var(--cx-card-solid)' }} />;
+          })}
+          <div style={{ position: 'absolute', top: 3.5, left: `calc(${pct}% - 7.5px)`, width: 15, height: 15, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: 'var(--cx-shadow-knob)', border: '1px solid var(--cx-border)', transition: 'left 0.2s' }} />
+        </div>
+      )}
 
-      <style>{`@keyframes pieceIn { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }`}</style>
+      {/* Labels min/max */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--cx-faint)' }}>
+        <span>{config.min} {qEn?.unit ?? config.unit}</span>
+        <span>{config.max} {qEn?.unit ?? config.unit}</span>
+      </div>
     </div>
   );
 }
+
+const chipStyle: CSSProperties = {
+  display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 500,
+  color: 'var(--cx-text)', background: 'var(--cx-card-solid)', border: '1px solid var(--cx-border)',
+  padding: '4px 12px', borderRadius: 999,
+};
+
+/** Nombres ES de los ejes de variante (los EN viven en i18n). */
+const VARIANT_AXIS_ES = {
+  colores: ['Grafito', 'Blanco ártico', 'Azul océano', 'Coral', 'Verde bosque', 'Arena'],
+  materiales: VARIANTES.materiales.map(m => m.es),
+  accesorios: VARIANTES.accesorios.map(a => a.es),
+};

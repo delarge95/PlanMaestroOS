@@ -120,6 +120,23 @@ export function MailIcon({ size = 24, color }: IconProps) {
   );
 }
 
+export function SunIcon({ size = 24, color }: IconProps) {
+  return (
+    <svg {...base(size)} color={color}>
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3L19 19M19 5l-1.7 1.7M6.7 17.3L5 19" />
+    </svg>
+  );
+}
+
+export function MoonIcon({ size = 24, color }: IconProps) {
+  return (
+    <svg {...base(size)} color={color}>
+      <path d="M20 13.6A8.2 8.2 0 0 1 10.4 4 8.2 8.2 0 1 0 20 13.6z" />
+    </svg>
+  );
+}
+
 /** Mapa nombre→icono para los datos del árbol (decisionTree usa ids, no emojis). */
 const ICONS: Record<string, (p: IconProps) => ReactElement> = {
   globe: GlobeIcon,

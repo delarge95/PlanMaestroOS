@@ -38,7 +38,7 @@ export interface TreeQuestion {
   slider?: {
     min: number; max: number; step: number; unit: string;
     /** Preview 3D: qué modelo mostrar que cambie con el valor. */
-    preview?: 'detail-level' | 'piece-count' | 'complexity';
+    preview?: 'detail-level' | 'piece-count' | 'complexity' | 'scene-flow' | 'variant-swirl';
     /** Mapeo valor → tier. */
     tierMap?: Array<{ max: number; tier: string }>;
   };
@@ -278,7 +278,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         help: 'Cada escena es una "parada" del scroll donde el 3D muestra algo diferente.',
         type: 'slider',
         slider: {
-          min: 3, max: 10, step: 1, unit: 'escenas',
+          min: 3, max: 10, step: 1, unit: 'escenas', preview: 'scene-flow',
           tierMap: [
             { max: 4, tier: 'S' },
             { max: 7, tier: 'L' },
@@ -342,7 +342,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         question: '¿Cuántas variantes u opciones configurables tiene?',
         help: 'Colores, materiales, tamaños, accesorios… cada opción con sus reglas. Una aproximación basta.',
         type: 'slider',
-        slider: { min: 2, max: 50, step: 1, unit: 'variantes',
+        slider: { min: 2, max: 50, step: 1, unit: 'variantes', preview: 'variant-swirl',
           tierMap: [{max:10,tier:'S'},{max:25,tier:'M'},{max:50,tier:'L'}] },
       },
       {

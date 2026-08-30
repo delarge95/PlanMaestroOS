@@ -12,12 +12,24 @@ import { LAUNCH_DISCOUNT } from '../../data/services/rateCard';
 import { SERVICE_VARIABLES, derivarTier, recommendedValue } from '../../data/services/serviceVariables';
 import type { ServiceVariable } from '../../data/services/serviceVariables';
 import { BRAND } from '../../data/services/branding';
+import { EN, LANG_CURRENCY, CATALOG_EN, VARS_EN, EXTRA_LABELS_EN, EXTRA_NOTAS_EN } from '../../data/services/i18n';
+import type { Lang } from '../../data/services/i18n';
 import type { Currency } from '../../data/services/types';
 import type { WizardPick, WizardQuotePlan } from '../../data/services/treeToQuote';
 import { bundlePct, esquemaPago, RONDAS_NOTA } from '../../lib/services/quoteSummary';
 import { QuoteCta } from './QuoteCta';
 import { GuidedWizard } from './GuidedWizard';
 import { RefDropzone } from './RefDropzone';
+import { SunIcon, MoonIcon } from './icons';
+
+/** Etiqueta/nota de un pick en el idioma activo (fallback: español). */
+const pickLabel = (p: WizardPick, lang: Lang) => (lang === 'en' ? EXTRA_LABELS_EN[p.labelEs] ?? p.labelEs : p.labelEs);
+const pickNota = (p: WizardPick, lang: Lang) => (lang === 'en' ? p.notaEs ? EXTRA_NOTAS_EN[p.notaEs] ?? p.notaEs : undefined : p.notaEs);
+
+/** Icono del toggle de tema (sol en oscuro, luna en claro). */
+function ThemeIcon({ dark }: { dark: boolean }) {
+  return dark ? <SunIcon size={16} /> : <MoonIcon size={16} />;
+}
 
 type Val = number | string | boolean;
 type Urgency = 'none' | '72h' | '24h';
@@ -49,7 +61,7 @@ const fmt = (cur: Currency, v: number) =>
 // ═══════════════════════════════════════════════════════════════
 // FONDO WEBGL — campo geométrico sutil que responde al mouse
 // ═══════════════════════════════════════════════════════════════
-function WebGLBackground() {
+function WebGLBackground({ dark = false }: { dark?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const mount = ref.current;
@@ -65,7 +77,7 @@ function WebGLBackground() {
     // Grid de cubos flotantes — minimal, elegante
     const group = new THREE.Group();
     const geo = new THREE.BoxGeometry(0.18, 0.18, 0.18);
-    const mat = new THREE.MeshBasicMaterial({ color: 0x0071e3, transparent: true, opacity: 0.06 });
+    const mat = new THREE.MeshBasicMaterial({ color: dark ? 0x2997ff : 0x0071e3, transparent: true, opacity: dark ? 0.10 : 0.06 });
     const nodes: THREE.Mesh[] = [];
     const N = 14;
     for (let x = 0; x < N; x++) for (let y = 0; y < N; y++) {
@@ -96,15 +108,15 @@ function WebGLBackground() {
     };
     raf = requestAnimationFrame(loop);
     return () => { cancelAnimationFrame(raf); window.removeEventListener('mousemove', onMouse); renderer.dispose(); mount.replaceChildren(); };
-  }, []);
+  }, [dark]);
   return <div ref={ref} style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true" />;
 }
 
 // ═══════════════════════════════════════════════════════════════
 // CARD 3D INTERACTIVA — tilt al hover con WebGL lighting
 // ═══════════════════════════════════════════════════════════════
-function ServiceCard({ svc, currency, onPick, index }: {
-  svc: typeof SERVICES[0]; currency: Currency; onPick: () => void; index: number;
+function ServiceCard({ svc, currency, onPick, index, lang }: {
+  svc: typeof SERVICES[0]; currency: Currency; onPick: () => void; index: number; lang: Lang;
 }) {
   const ref = useRef<HTMLButtonElement>(null);
   const desde = useMemo(() => {
@@ -134,11 +146,11 @@ function ServiceCard({ svc, currency, onPick, index }: {
       style={{
         position: 'relative', display: 'flex', flexDirection: 'column', gap: 6,
         padding: '22px 20px 18px', textAlign: 'left', font: 'inherit',
-        background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)',
-        border: '1px solid rgba(0,0,0,0.04)', borderRadius: 20,
+        background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
+        border: '1px solid var(--cx-border)', borderRadius: 20,
         cursor: 'pointer', overflow: 'hidden',
         transition: 'transform 0.3s cubic-bezier(0.25,0.8,0.4,1), box-shadow 0.3s',
-        boxShadow: '0 2px 16px rgba(0,0,0,0.03)',
+        boxShadow: '0 2px 16px var(--cx-border)',
         animation: `cardIn 0.5s ${index * 0.05}s cubic-bezier(0.25,0.8,0.4,1) both`,
       }}
     >
@@ -148,14 +160,14 @@ function ServiceCard({ svc, currency, onPick, index }: {
         background: 'radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%), rgba(0,113,227,0.08) 0%, transparent 60%)',
         opacity: 0, transition: 'opacity 0.3s',
       }} className="card-glare" />
-      <span style={{ fontSize: 11, fontWeight: 600, color: '#0071e3', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-        {svc.family === 'web-3d' ? 'Web 3D' : svc.family}
+      <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--cx-accent)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        {lang === 'en' ? EN.families[svc.family] ?? svc.family : svc.family === 'web-3d' ? 'Web 3D' : svc.family}
       </span>
-      <strong style={{ fontSize: 17, fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.01em', lineHeight: 1.3 }}>{svc.nameEs}</strong>
-      <span style={{ fontSize: 13, color: '#86868b', lineHeight: 1.4 }}>{svc.unitEs}</span>
+      <strong style={{ fontSize: 17, fontWeight: 700, color: 'var(--cx-text)', letterSpacing: '-0.01em', lineHeight: 1.3 }}>{lang === 'en' ? (CATALOG_EN[svc.id]?.name ?? svc.nameEs) : svc.nameEs}</strong>
+      <span style={{ fontSize: 13, color: 'var(--cx-muted)', lineHeight: 1.4 }}>{lang === 'en' ? (CATALOG_EN[svc.id]?.unit ?? svc.unitEs) : svc.unitEs}</span>
       {desde != null && (
-        <span style={{ fontSize: 14, fontWeight: 600, color: '#1d1d1f', marginTop: 6 }}>
-          desde <strong style={{ fontSize: 18, color: '#0071e3', letterSpacing: '-0.02em' }}>{fmt(currency, desde)}</strong>
+        <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--cx-text)', marginTop: 6 }}>
+          {lang === 'es' ? 'desde' : EN.from} <strong style={{ fontSize: 18, color: 'var(--cx-accent)', letterSpacing: '-0.02em' }}>{fmt(currency, desde)}</strong>
         </span>
       )}
       <style>{`
@@ -169,7 +181,8 @@ function ServiceCard({ svc, currency, onPick, index }: {
 // ═══════════════════════════════════════════════════════════════
 // SLIDER LUXE — segmentos con relleno animado
 // ═══════════════════════════════════════════════════════════════
-function LuxeSlider({ v, value, onChange }: { v: ServiceVariable; value: number; onChange: (n: number) => void }) {
+function LuxeSlider({ v, value, onChange, lang, serviceId }: { v: ServiceVariable; value: number; onChange: (n: number) => void; lang: Lang; serviceId: string }) {
+  const enVar = lang === 'en' ? VARS_EN[serviceId]?.[v.id] : undefined;
   const pct = v.max != null && v.min != null && v.max !== v.min ? ((value - v.min) / (v.max - v.min)) * 100 : 50;
   const applyFromClientX = (clientX: number, el: HTMLDivElement) => {
     const r = el.getBoundingClientRect();
@@ -181,12 +194,12 @@ function LuxeSlider({ v, value, onChange }: { v: ServiceVariable; value: number;
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <span style={{ fontSize: 15, fontWeight: 600, color: '#1d1d1f' }}>{v.preguntaEs}</span>
-        <strong style={{ fontSize: 22, fontWeight: 700, color: '#0071e3', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
-          {value}<span style={{ fontSize: 13, color: '#86868b', fontWeight: 400, marginLeft: 4 }}>{v.unidadEs}</span>
+        <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--cx-text)' }}>{enVar?.question ?? v.preguntaEs}</span>
+        <strong style={{ fontSize: 22, fontWeight: 700, color: 'var(--cx-accent)', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
+          {value}<span style={{ fontSize: 13, color: 'var(--cx-muted)', fontWeight: 400, marginLeft: 4 }}>{enVar?.unit ?? v.unidadEs}</span>
         </strong>
       </div>
-      <div style={{ position: 'relative', height: 6, borderRadius: 3, background: 'rgba(0,0,0,0.06)', cursor: 'pointer', touchAction: 'none' }}
+      <div style={{ position: 'relative', height: 6, borderRadius: 3, background: 'var(--cx-soft)', cursor: 'pointer', touchAction: 'none' }}
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
           applyFromClientX(e.clientX, e.currentTarget);
@@ -197,13 +210,13 @@ function LuxeSlider({ v, value, onChange }: { v: ServiceVariable; value: number;
         }}>
         <div style={{
           position: 'absolute', left: 0, top: 0, height: '100%', borderRadius: 3,
-          width: `${pct}%`, background: 'linear-gradient(90deg, #0071e3 0%, #5ac8fa 100%)',
+          width: `${pct}%`, background: 'linear-gradient(90deg, var(--cx-accent) 0%, #5ac8fa 100%)',
           transition: 'width 0.25s cubic-bezier(0.25,0.8,0.4,1)',
         }} />
         <div style={{
           position: 'absolute', top: -8, left: `calc(${pct}% - 11px)`, width: 22, height: 22,
-          borderRadius: '50%', background: '#fff', border: '0.5px solid rgba(0,0,0,0.04)',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.15)', transition: 'left 0.25s cubic-bezier(0.25,0.8,0.4,1)',
+          borderRadius: '50%', background: 'var(--cx-card-solid)', border: '0.5px solid var(--cx-border)',
+          boxShadow: 'var(--cx-shadow-knob)', transition: 'left 0.25s cubic-bezier(0.25,0.8,0.4,1)',
         }} />
       </div>
     </div>
@@ -214,7 +227,9 @@ function LuxeSlider({ v, value, onChange }: { v: ServiceVariable; value: number;
 // MAIN — Rediseño completo
 // ═══════════════════════════════════════════════════════════════
 export function CotizadorRedesign() {
-  const [currency, setCurrency] = useState<Currency>('USD');
+  const [lang, setLang] = useState<Lang>('es');
+  /** La moneda se deriva del idioma: español ⇒ COP, inglés ⇒ USD (ciclo 2.1). */
+  const currency: Currency = LANG_CURRENCY[lang];
   const [serviceId, setServiceId] = useState('');
   const [vals, setVals] = useState<Record<string, Val>>({});
   const [unsure, setUnsure] = useState<Record<string, boolean>>({});
@@ -227,6 +242,20 @@ export function CotizadorRedesign() {
   const [extras, setExtras] = useState<WizardPick[]>([]);
   /** Filtro activo del catálogo ('todas' = sin filtrar). */
   const [familyFilter, setFamilyFilter] = useState<string>('todas');
+  /** Tema claro/oscuro (persistido; respeta prefers-color-scheme la primera vez). */
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('cx-theme');
+      if (saved === 'dark' || saved === 'light') setTheme(saved);
+      else if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) setTheme('dark');
+    } catch { /* almacenamiento no disponible */ }
+  }, []);
+  useEffect(() => {
+    document.body.style.background = theme === 'dark' ? '#0b0b0f' : '#fbfbfd';
+    try { localStorage.setItem('cx-theme', theme); } catch { /* almacenamiento no disponible */ }
+  }, [theme]);
 
   const svc = WEB3D.find(s => s.id === serviceId);
   const variables: ServiceVariable[] = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
@@ -278,18 +307,59 @@ export function CotizadorRedesign() {
   // D5 ciclo 2.1: esquema de pago sugerido según el total (piso del rango).
   const pagoSugerido = quote ? esquemaPago(totalProyecto ? totalProyecto.min : quote.totalMin, currency) : null;
 
+  const svcName = svc ? (lang === 'en' ? CATALOG_EN[svc.id]?.name ?? svc.nameEs : svc.nameEs) : '';
   const summary = svc && quote
-    ? [`${svc.nameEs} (${tier}): ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)}`,
+    ? [`${svcName} (${tier}): ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)}`,
        ...extraQuotes.map(e => `${e.pick.labelEs} — ${e.quote.serviceName} (${e.tier}): ${fmt(currency, e.quote.totalMin)}–${fmt(currency, e.quote.totalMax)}`),
        totalProyecto ? `Total proyecto${bundle ? ` (incluye −${bundle}% bundle)` : ''}: ${fmt(currency, totalProyecto.min)}–${fmt(currency, totalProyecto.max)}` : '',
-       pagoSugerido ? `Pago sugerido: ${pagoSugerido}` : '',
+       pagoSugerido ? `${lang === 'es' ? 'Pago sugerido' : 'Suggested payment'}: ${pagoSugerido}` : '',
       ].filter(Boolean).join('\n')
     : '';
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fbfbfd', position: 'relative' }}>
-      <WebGLBackground />
+    <div className="cx-root" data-theme={theme} style={{ minHeight: '100vh', background: 'var(--cx-bg)', position: 'relative' }}>
+      <WebGLBackground dark={theme === 'dark'} />
       <style>{`
+        .cx-root {
+          --cx-bg: #fbfbfd;
+          --cx-card: rgba(255,255,255,0.85);
+          --cx-card-solid: #ffffff;
+          --cx-tile: #f5f5f7;
+          --cx-text: #1d1d1f;
+          --cx-muted: #86868b;
+          --cx-faint: #aeaeb2;
+          --cx-border: rgba(0,0,0,0.05);
+          --cx-border-strong: rgba(0,0,0,0.10);
+          --cx-soft: rgba(0,0,0,0.06);
+          --cx-accent: #0071e3;
+          --cx-accent-hover: #0077ed;
+          --cx-accent-soft: #e8f0fe;
+          --cx-accent-border: rgba(0,113,227,0.3);
+          --cx-shadow-card: 0 2px 16px rgba(0,0,0,0.03);
+          --cx-shadow-hover: 0 8px 24px rgba(0,0,0,0.06);
+          --cx-shadow-knob: 0 2px 8px rgba(0,0,0,0.15);
+          --cx-obj-shadow: rgba(29,29,31,0.14);
+        }
+        .cx-root[data-theme='dark'] {
+          --cx-bg: #0b0b0f;
+          --cx-card: rgba(28,28,32,0.82);
+          --cx-card-solid: #1c1c21;
+          --cx-tile: #26262c;
+          --cx-text: #f5f5f7;
+          --cx-muted: #98989d;
+          --cx-faint: #6e6e73;
+          --cx-border: rgba(255,255,255,0.09);
+          --cx-border-strong: rgba(255,255,255,0.16);
+          --cx-soft: rgba(255,255,255,0.12);
+          --cx-accent: #2997ff;
+          --cx-accent-hover: #40a3ff;
+          --cx-accent-soft: rgba(41,151,255,0.16);
+          --cx-accent-border: rgba(41,151,255,0.4);
+          --cx-shadow-card: 0 2px 16px rgba(0,0,0,0.45);
+          --cx-shadow-hover: 0 8px 24px rgba(0,0,0,0.5);
+          --cx-shadow-knob: 0 2px 8px rgba(0,0,0,0.6);
+          --cx-obj-shadow: rgba(0,0,0,0.65);
+        }
         * { box-sizing: border-box; }
         body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Inter, system-ui, sans-serif; }
         @media (max-width: 768px) { .cx-desktop-only { display: none !important; } }
@@ -298,7 +368,7 @@ export function CotizadorRedesign() {
           .cx-config-aside { position: static !important; width: 100% !important; }
         }
         @media (min-width: 769px) { .cx-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; max-width: 1200px !important; } }
-        @media print { [data-noprint] { display: none !important; } body { background: #fff !important; } }
+        @media print { [data-noprint] { display: none !important; } body { background: #fff !important; } .cx-root { background: #fff !important; --cx-text: #000; --cx-muted: #555; --cx-card: #fff; --cx-card-solid: #fff; --cx-tile: #f5f5f7; --cx-accent: #0071e3; } }
         .cx-content { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         @media (min-width: 1440px) { .cx-content { max-width: 1400px; } }
       `}</style>
@@ -307,26 +377,32 @@ export function CotizadorRedesign() {
       <nav data-noprint style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '20px 32px', position: 'relative', zIndex: 2,
-        borderBottom: '1px solid rgba(0,0,0,0.03)',
+        borderBottom: '1px solid var(--cx-border)',
       }}>
-        <strong style={{ fontSize: 16, fontWeight: 700, color: '#1d1d1f', letterSpacing: '-0.02em' }}>{BRAND.name}</strong>
-        <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+        <strong style={{ fontSize: 16, fontWeight: 700, color: 'var(--cx-text)', letterSpacing: '-0.02em' }}>{BRAND.name}</strong>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
           <button onClick={() => { setMode('guided'); setServiceId(''); }}
-            style={{ font: '600 14px inherit', color: mode === 'guided' ? '#0071e3' : '#86868b', background: 'none', border: 'none', cursor: 'pointer' }}>
-            Cotizar
+            style={{ font: '600 14px inherit', color: mode === 'guided' ? 'var(--cx-accent)' : 'var(--cx-muted)', background: 'none', border: 'none', cursor: 'pointer' }}>
+            {lang === 'es' ? 'Cotizar' : EN.navQuote}
           </button>
           <button onClick={() => setMode('catalog')}
-            style={{ font: '600 14px inherit', color: mode === 'catalog' ? '#0071e3' : '#86868b', background: 'none', border: 'none', cursor: 'pointer' }}>
-            Catálogo
+            style={{ font: '600 14px inherit', color: mode === 'catalog' ? 'var(--cx-accent)' : 'var(--cx-muted)', background: 'none', border: 'none', cursor: 'pointer' }}>
+            {lang === 'es' ? 'Catálogo' : EN.navCatalog}
           </button>
-          <div style={{ display: 'inline-flex', borderRadius: 999, overflow: 'hidden', border: '1px solid rgba(0,0,0,0.08)' }}>
-            {(['USD', 'COP'] as Currency[]).map(c => (
-              <button key={c} onClick={() => setCurrency(c)}
+          {/* Tema claro/oscuro */}
+          <button onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} aria-label={theme === 'dark' ? 'Modo claro' : 'Modo oscuro'}
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: '50%', background: 'var(--cx-tile)', border: 'none', cursor: 'pointer', color: 'var(--cx-text)' }}>
+            <ThemeIcon dark={theme === 'dark'} />
+          </button>
+          {/* Idioma: ES ⇒ COP · EN ⇒ USD */}
+          <div style={{ display: 'inline-flex', borderRadius: 999, overflow: 'hidden', border: '1px solid var(--cx-border-strong)' }}>
+            {(['es', 'en'] as Lang[]).map(l => (
+              <button key={l} onClick={() => setLang(l)}
                 style={{
                   padding: '6px 14px', font: `600 13px inherit`, border: 'none', cursor: 'pointer',
-                  background: currency === c ? '#0071e3' : 'transparent',
-                  color: currency === c ? '#fff' : '#86868b',
-                }}>{c}</button>
+                  background: lang === l ? 'var(--cx-accent)' : 'transparent',
+                  color: lang === l ? '#fff' : 'var(--cx-muted)',
+                }}>{l.toUpperCase()}{lang === l ? ` · ${currency}` : ''}</button>
             ))}
           </div>
         </div>
@@ -334,7 +410,7 @@ export function CotizadorRedesign() {
 
       <div className="cx-content">
         {/* ═══ MODO GUIADO ═══ */}
-        {mode === 'guided' && !svc && <GuidedWizard onComplete={applyPlan} />}
+        {mode === 'guided' && !svc && <GuidedWizard onComplete={applyPlan} lang={lang} />}
 
         {/* ═══ CONFIGURACIÓN (modo guiado, con servicio) ═══ */}
         {mode === 'guided' && svc && (
@@ -342,15 +418,15 @@ export function CotizadorRedesign() {
             {/* Panel izquierdo: configuración */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <button onClick={() => { setServiceId(''); setExtras([]); }} data-noprint
-                style={{ alignSelf: 'flex-start', font: '600 14px inherit', color: '#0071e3', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 8 }}>
-                ← Cambiar servicio
+                style={{ alignSelf: 'flex-start', font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 8 }}>
+                {lang === 'es' ? '← Cambiar servicio' : EN.changeService}
               </button>
-              <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: 0 }}>{svc.nameEs}</h2>
+              <h2 style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: 0 }}>{lang === 'en' ? (CATALOG_EN[svc.id]?.name ?? svc.nameEs) : svc.nameEs}</h2>
 
               {variables.length > 0 && (
                 <div style={{
-                  background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(0,0,0,0.04)', borderRadius: 20, padding: 28,
+                  background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
+                  border: '1px solid var(--cx-border)', borderRadius: 20, padding: 28,
                   display: 'flex', flexDirection: 'column', gap: 24,
                 }}>
                   {variables.map(v => {
@@ -358,20 +434,20 @@ export function CotizadorRedesign() {
                     return (
                       <div key={v.id}>
                         {v.type === 'number' && (
-                          <LuxeSlider v={v} value={typeof val === 'number' ? val : v.min ?? 0}
+                          <LuxeSlider v={v} value={typeof val === 'number' ? val : v.min ?? 0} lang={lang} serviceId={serviceId}
                             onChange={(n) => { setVals(p => ({ ...p, [v.id]: n })); setUnsure(p => { const q = { ...p }; delete q[v.id]; return q; }); }} />
                         )}
                         {v.type === 'select' && v.opciones && (
                           <div>
-                            <span style={{ fontSize: 15, fontWeight: 600, color: '#1d1d1f', display: 'block', marginBottom: 10 }}>{v.preguntaEs}</span>
+                            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--cx-text)', display: 'block', marginBottom: 10 }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
                             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                               {v.opciones.map((o: { valorEs: string }) => (
                                 <button key={o.valorEs} onClick={() => setVals(p => ({ ...p, [v.id]: o.valorEs }))}
                                   style={{
                                     padding: '10px 18px', borderRadius: 999, font: `500 14px inherit`, cursor: 'pointer',
-                                    border: vals[v.id] === o.valorEs ? '2px solid #0071e3' : '1px solid rgba(0,0,0,0.08)',
-                                    background: vals[v.id] === o.valorEs ? '#e8f0fe' : '#fff', color: '#1d1d1f',
-                                  }}>{o.valorEs}</button>
+                                    border: vals[v.id] === o.valorEs ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                                    background: vals[v.id] === o.valorEs ? 'var(--cx-accent-soft)' : '#fff', color: 'var(--cx-text)',
+                                  }}>{(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.opciones?.[o.valorEs] : undefined) ?? o.valorEs}</button>
                               ))}
                             </div>
                           </div>
@@ -379,10 +455,10 @@ export function CotizadorRedesign() {
                         {v.type === 'toggle' && (
                           <label style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
                             <div onClick={() => setVals(p => ({ ...p, [v.id]: !vals[v.id] }))}
-                              style={{ width: 44, height: 26, borderRadius: 13, background: vals[v.id] ? '#30d158' : 'rgba(0,0,0,0.08)', position: 'relative', transition: 'background 0.25s', flexShrink: 0 }}>
-                              <div style={{ position: 'absolute', top: 2, left: vals[v.id] ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)' }} />
+                              style={{ width: 44, height: 26, borderRadius: 13, background: vals[v.id] ? '#30d158' : 'var(--cx-border-strong)', position: 'relative', transition: 'background 0.25s', flexShrink: 0 }}>
+                              <div style={{ position: 'absolute', top: 2, left: vals[v.id] ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)' }} />
                             </div>
-                            <span style={{ fontSize: 15, color: '#1d1d1f' }}>{v.preguntaEs}</span>
+                            <span style={{ fontSize: 15, color: 'var(--cx-text)' }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
                           </label>
                         )}
                       </div>
@@ -393,25 +469,25 @@ export function CotizadorRedesign() {
 
               {/* Urgencia + descuento */}
               <div style={{
-                background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(0,0,0,0.04)', borderRadius: 20, padding: 24,
+                background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
+                border: '1px solid var(--cx-border)', borderRadius: 20, padding: 24,
               }}>
                 <div style={{ display: 'flex', gap: 10 }}>
-                  {([['none', 'Normal'], ['72h', 'Pronto +30%'], ['24h', 'Crítico +50%']] as const).map(([id, label]) => (
+                  {([['none', lang === 'es' ? 'Normal' : EN.urgency.normal], ['72h', lang === 'es' ? 'Pronto +30%' : EN.urgency.soon], ['24h', lang === 'es' ? 'Crítico +50%' : EN.urgency.critical]] as const).map(([id, label]) => (
                     <button key={id} onClick={() => setUrgency(id as Urgency)}
                       style={{
                         flex: 1, padding: '12px 16px', borderRadius: 14, font: `600 13px inherit`, cursor: 'pointer',
-                        border: urgency === id ? '2px solid #0071e3' : '1px solid rgba(0,0,0,0.08)',
-                        background: urgency === id ? '#e8f0fe' : '#fff', color: '#1d1d1f',
+                        border: urgency === id ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                        background: urgency === id ? 'var(--cx-accent-soft)' : '#fff', color: 'var(--cx-text)',
                       }}>{label}</button>
                   ))}
                 </div>
                 <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 16, cursor: 'pointer' }}>
                   <div onClick={() => setFirstClient(!firstClient)}
-                    style={{ width: 44, height: 26, borderRadius: 13, background: firstClient ? '#30d158' : 'rgba(0,0,0,0.08)', position: 'relative', flexShrink: 0 }}>
-                    <div style={{ position: 'absolute', top: 2, left: firstClient ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s' }} />
+                    style={{ width: 44, height: 26, borderRadius: 13, background: firstClient ? '#30d158' : 'var(--cx-border-strong)', position: 'relative', flexShrink: 0 }}>
+                    <div style={{ position: 'absolute', top: 2, left: firstClient ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s' }} />
                   </div>
-                  <span style={{ fontSize: 14, color: '#86868b' }}>Descuento lanzamiento −{LAUNCH_DISCOUNT.defaultPct}%</span>
+                  <span style={{ fontSize: 14, color: 'var(--cx-muted)' }}>{lang === 'es' ? 'Descuento lanzamiento' : 'Launch discount'} −{LAUNCH_DISCOUNT.defaultPct}%</span>
                 </label>
               </div>
             </div>
@@ -419,87 +495,89 @@ export function CotizadorRedesign() {
             {/* Panel derecho: resultado STICKY */}
             <aside className="cx-config-aside" style={{
               position: 'sticky', top: 24,
-              background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(0,0,0,0.04)', borderRadius: 24, padding: 32,
-              boxShadow: '0 8px 32px rgba(0,0,0,0.06)',
+              background: 'var(--cx-card)', backdropFilter: 'blur(16px)',
+              border: '1px solid var(--cx-border)', borderRadius: 24, padding: 32,
+              boxShadow: '0 8px 32px var(--cx-soft)',
             }}>
               {quote && tier ? (
                 <>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: '#0071e3', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>
-                    {tier} · Nivel {tier === 'XS' ? 'esencial' : tier === 'S' ? 'estándar' : tier === 'M' ? 'profesional' : tier === 'L' ? 'premium' : 'máximo'}
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--cx-accent)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>
+                    {lang === 'en'
+                      ? `${tier} · ${EN.tierNames[tier] ?? ''} ${EN.tierWord}`
+                      : `${tier} · Nivel ${tier === 'XS' ? 'esencial' : tier === 'S' ? 'estándar' : tier === 'M' ? 'profesional' : tier === 'L' ? 'premium' : 'máximo'}`}
                   </div>
-                  <div style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#1d1d1f', lineHeight: 1 }}>
+                  <div style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--cx-text)', lineHeight: 1 }}>
                     {fmt(currency, quote.totalMin)}
                   </div>
-                  <div style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', fontWeight: 500, color: '#86868b', marginTop: 4 }}>
+                  <div style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', fontWeight: 500, color: 'var(--cx-muted)', marginTop: 4 }}>
                     a {fmt(currency, quote.totalMax)}
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 24 }}>
-                    <div style={{ padding: 14, borderRadius: 14, background: '#fafafa' }}>
-                      <div style={{ fontSize: 11, fontWeight: 500, color: '#86868b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Horas</div>
-                      <div style={{ fontSize: 18, fontWeight: 700, color: '#1d1d1f', marginTop: 2 }}>{quote.hoursMin}–{quote.hoursMax}h</div>
+                    <div style={{ padding: 14, borderRadius: 14, background: 'var(--cx-tile)' }}>
+                      <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--cx-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{lang === 'es' ? 'Horas' : EN.hours}</div>
+                      <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--cx-text)', marginTop: 2 }}>{quote.hoursMin}–{quote.hoursMax}h</div>
                     </div>
-                    <div style={{ padding: 14, borderRadius: 14, background: '#fafafa' }}>
-                      <div style={{ fontSize: 11, fontWeight: 500, color: '#86868b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Entrega</div>
-                      <div style={{ fontSize: 18, fontWeight: 700, color: '#1d1d1f', marginTop: 2 }}>
+                    <div style={{ padding: 14, borderRadius: 14, background: 'var(--cx-tile)' }}>
+                      <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--cx-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{lang === 'es' ? 'Entrega' : EN.delivery}</div>
+                      <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--cx-text)', marginTop: 2 }}>
                         {svc.entregaDiasEs ? `${svc.entregaDiasEs[0]}–${svc.entregaDiasEs[1]}d` : '—'}
                       </div>
                     </div>
                   </div>
                   {extraQuotes.length > 0 && (
-                    <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-                      <div style={{ fontSize: 12, fontWeight: 600, color: '#86868b', marginBottom: 10 }}>Tu proyecto también incluye</div>
+                    <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid var(--cx-soft)' }}>
+                      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--cx-muted)', marginBottom: 10 }}>{lang === 'es' ? 'Tu proyecto también incluye' : EN.alsoIncludes}</div>
                       {extraQuotes.map(e => (
-                        <div key={e.pick.serviceId} style={{ padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.04)' }}>
+                        <div key={e.pick.serviceId} style={{ padding: '10px 0', borderBottom: '1px solid var(--cx-border)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
-                            <span style={{ fontSize: 13.5, color: '#1d1d1f' }}>{e.pick.labelEs}</span>
-                            <span style={{ fontSize: 13.5, fontWeight: 600, color: '#1d1d1f', whiteSpace: 'nowrap' }}>
+                            <span style={{ fontSize: 13.5, color: 'var(--cx-text)' }}>{pickLabel(e.pick, lang)}</span>
+                            <span style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--cx-text)', whiteSpace: 'nowrap' }}>
                               {fmt(currency, e.quote.totalMin)}–{fmt(currency, e.quote.totalMax)}
                             </span>
                           </div>
-                          <div style={{ fontSize: 11, color: '#aeaeb2', marginTop: 2 }}>{e.quote.serviceName} · nivel {e.tier}</div>
-                          {e.pick.notaEs && <div style={{ fontSize: 11, color: '#86868b', marginTop: 3, lineHeight: 1.4 }}>{e.pick.notaEs}</div>}
+                          <div style={{ fontSize: 11, color: 'var(--cx-faint)', marginTop: 2 }}>{e.quote.serviceName} · nivel {e.tier}</div>
+                          {pickNota(e.pick, lang) && <div style={{ fontSize: 11, color: 'var(--cx-muted)', marginTop: 3, lineHeight: 1.4 }}>{pickNota(e.pick, lang)}</div>}
                         </div>
                       ))}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 12 }}>
-                        <span style={{ fontSize: 13, fontWeight: 600, color: '#86868b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Total proyecto</span>
-                        <span style={{ fontSize: 17, fontWeight: 700, color: '#0071e3', letterSpacing: '-0.02em' }}>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--cx-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{lang === 'es' ? 'Total proyecto' : EN.totalProject}</span>
+                        <span style={{ fontSize: 17, fontWeight: 700, color: 'var(--cx-accent)', letterSpacing: '-0.02em' }}>
                           {fmt(currency, totalProyecto!.min)}–{fmt(currency, totalProyecto!.max)}
                         </span>
                       </div>
                       {bundle > 0 && (
                         <div style={{ fontSize: 11.5, color: '#30d158', marginTop: 4, textAlign: 'right' }}>
-                          Incluye −{bundle}% por agrupar {numServicios} servicios
+                          {lang === 'es' ? `Incluye −${bundle}% por agrupar ${numServicios} servicios` : EN.bundleLine(bundle, numServicios)}
                         </div>
                       )}
                     </div>
                   )}
                   {quote.entregables.length > 0 && (
-                    <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-                      <div style={{ fontSize: 12, fontWeight: 600, color: '#86868b', marginBottom: 8 }}>Incluye</div>
-                      {quote.entregables.slice(0, 4).map((e: string) => (
-                        <div key={e} style={{ fontSize: 14, color: '#1d1d1f', padding: '4px 0', display: 'flex', gap: 6 }}>
+                    <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid var(--cx-soft)' }}>
+                      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--cx-muted)', marginBottom: 8 }}>{lang === 'es' ? 'Incluye' : EN.includes}</div>
+                      {(lang === 'en' ? (CATALOG_EN[svc.id]?.entregables ?? quote.entregables) : quote.entregables).slice(0, 4).map((e: string) => (
+                        <div key={e} style={{ fontSize: 14, color: 'var(--cx-text)', padding: '4px 0', display: 'flex', gap: 6 }}>
                           <span style={{ color: '#30d158' }}>✓</span> {e}
                         </div>
                       ))}
                     </div>
                   )}
                   {/* D3+D5 ciclo 2.1: rondas incluidas y esquema de pago sugerido */}
-                  <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px dashed rgba(0,0,0,0.06)' }}>
+                  <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px dashed var(--cx-soft)' }}>
                     {pagoSugerido && (
-                      <div style={{ fontSize: 13, color: '#1d1d1f', padding: '3px 0', display: 'flex', gap: 6 }}>
-                        <span style={{ color: '#0071e3', fontWeight: 600 }}>Pago sugerido:</span> {pagoSugerido}
+                      <div style={{ fontSize: 13, color: 'var(--cx-text)', padding: '3px 0', display: 'flex', gap: 6 }}>
+                        <span style={{ color: 'var(--cx-accent)', fontWeight: 600 }}>{lang === 'es' ? 'Pago sugerido:' : EN.paymentSuggested}</span> {pagoSugerido}
                       </div>
                     )}
-                    <div style={{ fontSize: 13, color: '#1d1d1f', padding: '3px 0' }}>{RONDAS_NOTA}</div>
+                    <div style={{ fontSize: 13, color: 'var(--cx-text)', padding: '3px 0' }}>{lang === 'es' ? RONDAS_NOTA : EN.rondas}</div>
                   </div>
                   <div data-noprint style={{ marginTop: 24 }}>
-                    <QuoteCta summary={summary} url={typeof window !== 'undefined' ? window.location.href : ''} />
+                    <QuoteCta summary={summary} url={typeof window !== 'undefined' ? window.location.href : ''} lang={lang} />
                   </div>
-                  <p style={{ fontSize: 11, color: '#aeaeb2', marginTop: 16, textAlign: 'center' }}>Rango orientativo · válida 15 días</p>
+                  <p style={{ fontSize: 11, color: 'var(--cx-faint)', marginTop: 16, textAlign: 'center' }}>{lang === 'es' ? 'Rango orientativo · válida 15 días' : EN.rangeValidity}</p>
                 </>
               ) : (
-                <p style={{ color: '#86868b', fontSize: 15, textAlign: 'center', padding: 20 }}>Configura las variables para ver el precio</p>
+                <p style={{ color: 'var(--cx-muted)', fontSize: 15, textAlign: 'center', padding: 20 }}>{lang === 'es' ? 'Configura las variables para ver el precio' : EN.configurePrice}</p>
               )}
             </aside>
           </section>
@@ -508,20 +586,20 @@ export function CotizadorRedesign() {
         {/* ═══ MODO CATÁLOGO ═══ */}
         {mode === 'catalog' && (
           <section style={{ paddingTop: 60, paddingBottom: 60 }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#1d1d1f', margin: '0 0 8px' }}>
-              Todos los servicios
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 8px' }}>
+              {lang === 'es' ? 'Todos los servicios' : EN.catalogTitle}
             </h2>
-            <p style={{ fontSize: 16, color: '#86868b', margin: '0 0 28px' }}>Web 3D, visores, configuradores, herramientas.</p>
+            <p style={{ fontSize: 16, color: 'var(--cx-muted)', margin: '0 0 28px' }}>{lang === 'es' ? 'Web 3D, visores, configuradores, herramientas.' : EN.catalogSubtitle}</p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32 }}>
               {['todas', ...CATALOG_FAMILIES].map(f => (
                 <button key={f} onClick={() => setFamilyFilter(f)}
                   style={{
                     padding: '8px 18px', borderRadius: 999, font: `500 13.5px inherit`, cursor: 'pointer',
-                    border: familyFilter === f ? '2px solid #0071e3' : '1px solid rgba(0,0,0,0.08)',
-                    background: familyFilter === f ? '#e8f0fe' : 'rgba(255,255,255,0.9)',
-                    color: familyFilter === f ? '#0071e3' : '#1d1d1f',
+                    border: familyFilter === f ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                    background: familyFilter === f ? 'var(--cx-accent-soft)' : 'var(--cx-card)',
+                    color: familyFilter === f ? 'var(--cx-accent)' : 'var(--cx-text)',
                   }}>
-                  {f === 'todas' ? 'Todos' : FAMILY_LABELS[f] ?? f}
+                  {f === 'todas' ? (lang === 'es' ? 'Todos' : EN.all) : (lang === 'en' ? EN.families[f] ?? f : FAMILY_LABELS[f] ?? f)}
                 </button>
               ))}
             </div>
@@ -530,7 +608,7 @@ export function CotizadorRedesign() {
               gap: 16,
             }} className="cx-grid">
               {SERVICES.filter(s => familyFilter === 'todas' || s.family === familyFilter).map((s, i) => (
-                <ServiceCard key={s.id} svc={s} currency={currency} index={i}
+                <ServiceCard key={s.id} svc={s} currency={currency} index={i} lang={lang}
                   onPick={() => { setMode('guided'); setServiceId(s.id); setVals({}); setExtras([]); }} />
               ))}
             </div>
