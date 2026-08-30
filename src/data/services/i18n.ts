@@ -83,6 +83,7 @@ export const EN = {
     promise: 'Reply within 24 h · No commitment · Send your references/files later if you want.',
     subject: '3D project quote',
   },
+  pago: { '100% anticipado': '100% upfront', '50/50': '50/50', '40/30/30': '40/30/30', 'Hitos quincenales': 'Biweekly milestones' } as Record<string, string>,
   role: 'Real-Time 3D Developer · Unity WebGL · Applied AI',
   variantes: {
     chip: (i: number, total: number) => `Variant ${i} of ${total} combinations`,

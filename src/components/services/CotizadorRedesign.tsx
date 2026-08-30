@@ -566,7 +566,7 @@ export function CotizadorRedesign() {
                   <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px dashed var(--cx-soft)' }}>
                     {pagoSugerido && (
                       <div style={{ fontSize: 13, color: 'var(--cx-text)', padding: '3px 0', display: 'flex', gap: 6 }}>
-                        <span style={{ color: 'var(--cx-accent)', fontWeight: 600 }}>{lang === 'es' ? 'Pago sugerido:' : EN.paymentSuggested}</span> {pagoSugerido}
+                        <span style={{ color: 'var(--cx-accent)', fontWeight: 600 }}>{lang === 'es' ? 'Pago sugerido:' : EN.paymentSuggested}</span> {lang === 'en' ? EN.pago[pagoSugerido] ?? pagoSugerido : pagoSugerido}
                       </div>
                     )}
                     <div style={{ fontSize: 13, color: 'var(--cx-text)', padding: '3px 0' }}>{lang === 'es' ? RONDAS_NOTA : EN.rondas}</div>
