@@ -1,0 +1,30 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - strong [ref=e5]: Alexander Woodcock
+    - generic [ref=e6]:
+      - button "Cotizar" [ref=e7] [cursor=pointer]
+      - button "Catálogo" [ref=e8] [cursor=pointer]
+      - generic [ref=e9]:
+        - button "USD" [ref=e10] [cursor=pointer]
+        - button "COP" [ref=e11] [cursor=pointer]
+  - generic [ref=e14]:
+    - heading "¿Qué quieres lograr?" [level=1] [ref=e15]
+    - paragraph [ref=e16]: Elige una opción y te guiamos paso a paso.
+    - generic [ref=e17]:
+      - button "Una web con 3D Quiero que mi página web tenga elementos 3D interactivos" [ref=e18] [cursor=pointer]:
+        - generic [ref=e23]:
+          - generic [ref=e24]: Una web con 3D
+          - generic [ref=e25]: Quiero que mi página web tenga elementos 3D interactivos
+      - button "Un video o animación Necesito un video 3D, animación de producto o VFX" [ref=e26] [cursor=pointer]:
+        - generic [ref=e31]:
+          - generic [ref=e32]: Un video o animación
+          - generic [ref=e33]: Necesito un video 3D, animación de producto o VFX
+      - button "Imágenes de producto Renders fotorrealistas para e-commerce, print o marketing" [ref=e34] [cursor=pointer]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: Imágenes de producto
+          - generic [ref=e41]: Renders fotorrealistas para e-commerce, print o marketing
+      - button "Inteligencia artificial Chatbot, automatización o integración de IA en mi negocio" [ref=e42] [cursor=pointer]:
+        - generic [ref=e48]:
+          - generic [ref=e49]: Inteligencia artificial
+          - generic [ref=e50]: Chatbot, automatización o integración de IA en mi negocio
+    - button "No estoy seguro — ayúdame a decidir →" [ref=e52] [cursor=pointer]

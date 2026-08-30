@@ -1,0 +1,80 @@
+- generic [ref=f1e3]:
+  - navigation [ref=f1e4]:
+    - strong [ref=f1e5]: Alexander Woodcock
+    - generic [ref=f1e6]:
+      - button "Cotizar" [ref=f1e7] [cursor=pointer]
+      - button "Catálogo" [ref=f1e8] [cursor=pointer]
+      - generic [ref=f1e9]:
+        - button "USD" [ref=f1e10] [cursor=pointer]
+        - button "COP" [ref=f1e11] [cursor=pointer]
+  - generic [ref=f1e53]:
+    - heading "Todos los servicios" [level=2] [ref=f1e54]
+    - paragraph [ref=f1e55]: Web 3D, visores, configuradores, herramientas.
+    - generic [ref=f1e56]:
+      - button "Todos" [ref=f1e57] [cursor=pointer]
+      - button "Render 3D" [ref=f1e58] [cursor=pointer]
+      - button "Assets Realtime" [ref=f1e59] [cursor=pointer]
+      - button "CAD → Web" [ref=f1e60] [cursor=pointer]
+      - button "Web 3D" [active] [ref=f1e61] [cursor=pointer]
+      - button "IA" [ref=f1e62] [cursor=pointer]
+      - button "Soporte" [ref=f1e63] [cursor=pointer]
+      - button "VFX" [ref=f1e64] [cursor=pointer]
+      - button "Texturas" [ref=f1e65] [cursor=pointer]
+      - button "Pipeline" [ref=f1e66] [cursor=pointer]
+    - generic [ref=f1e67]:
+      - button "Web 3D Visor custom three.js / Babylon.js visor web desde $200" [ref=f1e98] [cursor=pointer]:
+        - generic [ref=f1e99]: Web 3D
+        - strong [ref=f1e100]: Visor custom three.js / Babylon.js
+        - generic [ref=f1e101]: visor web
+        - generic [ref=f1e102]:
+          - text: desde
+          - strong [ref=f1e103]: $200
+      - button "Web 3D Web App 3D (configurador/herramienta) aplicacion web desde $550" [ref=f1e104] [cursor=pointer]:
+        - generic [ref=f1e105]: Web 3D
+        - strong [ref=f1e106]: Web App 3D (configurador/herramienta)
+        - generic [ref=f1e107]: aplicacion web
+        - generic [ref=f1e108]:
+          - text: desde
+          - strong [ref=f1e109]: $550
+      - button "Web 3D Visor embebido (Spline/Sketchfab/model-viewer) embed desde $100" [ref=f1e152] [cursor=pointer]:
+        - generic [ref=f1e153]: Web 3D
+        - strong [ref=f1e154]: Visor embebido (Spline/Sketchfab/model-viewer)
+        - generic [ref=f1e155]: embed
+        - generic [ref=f1e156]:
+          - text: desde
+          - strong [ref=f1e157]: $100
+      - 'button "Web 3D Unity WebGL: build y embedding build desde $270" [ref=f1e158] [cursor=pointer]':
+        - generic [ref=f1e159]: Web 3D
+        - strong [ref=f1e160]: "Unity WebGL: build y embedding"
+        - generic [ref=f1e161]: build
+        - generic [ref=f1e162]:
+          - text: desde
+          - strong [ref=f1e163]: $270
+      - button "Web 3D Scrollytelling con 3D pagina/experiencia desde $290" [ref=f1e164] [cursor=pointer]:
+        - generic [ref=f1e165]: Web 3D
+        - strong [ref=f1e166]: Scrollytelling con 3D
+        - generic [ref=f1e167]: pagina/experiencia
+        - generic [ref=f1e168]:
+          - text: desde
+          - strong [ref=f1e169]: $290
+      - button "Web 3D Minijuego web juego desde $650" [ref=f1e170] [cursor=pointer]:
+        - generic [ref=f1e171]: Web 3D
+        - strong [ref=f1e172]: Minijuego web
+        - generic [ref=f1e173]: juego
+        - generic [ref=f1e174]:
+          - text: desde
+          - strong [ref=f1e175]: $650
+      - button "Web 3D Catalogo interactivo 3D catalogo/proyecto desde $480" [ref=f1e176] [cursor=pointer]:
+        - generic [ref=f1e177]: Web 3D
+        - strong [ref=f1e178]: Catalogo interactivo 3D
+        - generic [ref=f1e179]: catalogo/proyecto
+        - generic [ref=f1e180]:
+          - text: desde
+          - strong [ref=f1e181]: $480
+      - button "Web 3D Presentacion web interactiva presentacion desde $180" [ref=f1e182] [cursor=pointer]:
+        - generic [ref=f1e183]: Web 3D
+        - strong [ref=f1e184]: Presentacion web interactiva
+        - generic [ref=f1e185]: presentacion
+        - generic [ref=f1e186]:
+          - text: desde
+          - strong [ref=f1e187]: $180

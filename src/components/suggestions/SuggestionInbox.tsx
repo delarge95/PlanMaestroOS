@@ -114,8 +114,8 @@ export default function SuggestionInbox() {
     >
       <span
         style={{
-          fontSize: 'var(--fs-eyebrow, 0.72rem)',
-          color: 'var(--accent, #0a84ff)',
+          fontSize: 12,
+          color: var(--accent),
           fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: '0.5px',
@@ -136,13 +136,13 @@ export default function SuggestionInbox() {
             border: `1px solid ${s.priority >= 8 ? 'rgba(255,159,10,0.35)' : 'var(--color-border-subtle)'}`,
           }}
         >
-          <strong style={{ fontSize: '0.86rem', color: 'var(--text-primary)' }}>{s.title}</strong>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>{s.body}</span>
+          <strong style={{ fontSize: '0.86rem', color: var(--text-primary) }}>{s.title}</strong>
+          <span style={{ fontSize: '0.78rem', color: var(--text-secondary), lineHeight: 1.45 }}>{s.body}</span>
           <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
             <button
               type="button"
               onClick={() => decide(s.id, 'not-now')}
-              style={{ background: 'transparent', border: '1px solid var(--color-border-subtle)', color: 'var(--text-secondary)', borderRadius: 6, padding: '3px 8px', fontSize: '0.72rem', cursor: 'pointer' }}
+              style={{ background: 'transparent', border: '1px solid var(--color-border-subtle)', color: var(--text-secondary), borderRadius: 6, padding: '3px 8px', fontSize: '0.72rem', cursor: 'pointer' }}
             >
               Ahora no
             </button>

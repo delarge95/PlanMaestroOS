@@ -1,0 +1,272 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - strong [ref=e5]: Alexander Woodcock
+    - group "Moneda" [ref=e7]:
+      - button "$ USD" [ref=e8] [cursor=pointer]
+      - button "$ COP" [ref=e9] [cursor=pointer]
+  - heading "Cotiza tu proyecto 3D en minutos" [level=1] [ref=e10]
+  - paragraph [ref=e11]: "Convierto productos y datos industriales en experiencias 3D interactivas: desde renders fotorrealistas hasta configuradores web que tu cliente puede usar sin instalar nada."
+  - generic [ref=e12]:
+    - generic [ref=e13]: Cómo funciona
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: "1"
+        - generic [ref=e17]:
+          - generic [ref=e18]: Cuéntanos qué necesitas
+          - generic [ref=e19]: Elige tu objetivo y responde 2–4 preguntas. Si no sabes algo, marca “No sé” y usamos el valor recomendado para proyectos como el tuyo.
+      - generic [ref=e20]:
+        - generic [ref=e21]: "2"
+        - generic [ref=e22]:
+          - generic [ref=e23]: Ve el rango al instante
+          - generic [ref=e24]: Obtienes costo y tiempo estimados con el desglose de lo que incluye. Sin registro, sin llamada previa.
+      - generic [ref=e25]:
+        - generic [ref=e26]: "3"
+        - generic [ref=e27]:
+          - generic [ref=e28]: Envíalo y lo confirmamos
+          - generic [ref=e29]: Mandas la cotización por WhatsApp o email. Respondemos con alcance final y fecha — el precio orientativo rara vez cambia más de 10%.
+    - generic [ref=e30]:
+      - generic [ref=e31]: 📦 Entregables definidos por escrito antes de empezar
+      - generic [ref=e32]: 🔁 2 rondas de ajuste incluidas en cada cotización
+      - generic [ref=e33]: 🗓️ Tiempos en días hábiles, con fecha de entrega en el contrato
+      - generic [ref=e34]: 🔒 Tus archivos CAD/modelos no se publican sin autorización
+    - generic [ref=e35]:
+      - text: "Ver trabajo real:"
+      - link "portafolio" [ref=e36] [cursor=pointer]:
+        - /url: https://delarge95.github.io/PlanMaestroOS/
+      - text: ·
+      - link "ArtStation" [ref=e37] [cursor=pointer]:
+        - /url: https://www.artstation.com/alexanderwoodcocksalomon3
+  - generic [ref=e38]:
+    - generic [ref=e39]: ¿Qué significa cada nivel? Verlo en vivo
+    - paragraph [ref=e40]: La misma pieza industrial renderizada en cada nivel de calidad. Arrastra para girar, usa la rueda para acercar.
+    - generic [ref=e41]:
+      - button "XS · Prueba rápida" [ref=e42] [cursor=pointer]
+      - button "S · Esencial" [ref=e43] [cursor=pointer]
+      - button "M · Profesional" [ref=e44] [cursor=pointer]
+      - button "L · Producción completa" [ref=e45] [cursor=pointer]
+      - button "XL · Máximo alcance" [ref=e46] [cursor=pointer]
+    - paragraph [ref=e48]:
+      - strong [ref=e49]: "Profesional:"
+      - text: "Materiales realistas y luz: el estándar para web y catálogo."
+  - paragraph [ref=e50]:
+    - text: Precios en dólares (tarifa internacional)
+    - 'generic "¿Por qué dos precios?: USD es la tarifa internacional completa. COP aplica para mercado local colombiano con costos locales. Misma calidad de trabajo; economías distintas." [ref=e51]':
+      - generic [ref=e52]: ⓘ
+      - 'tooltip "¿Por qué dos precios?: USD es la tarifa internacional completa. COP aplica para mercado local colombiano con costos locales. Misma calidad de trabajo; economías distintas."':
+        - strong: "¿Por qué dos precios?:"
+        - text: USD es la tarifa internacional completa. COP aplica para mercado local colombiano con costos locales. Misma calidad de trabajo; economías distintas.
+  - generic [ref=e53]:
+    - generic [ref=e54]: ¿Qué quieres lograr?
+    - generic [ref=e55]:
+      - button "🌐 Mostrar mi producto en 3D en la web Visores, catálogos, presentaciones" [ref=e56] [cursor=pointer]:
+        - generic [ref=e57]: 🌐
+        - generic [ref=e58]: Mostrar mi producto en 3D en la web
+        - generic [ref=e59]: Visores, catálogos, presentaciones
+      - button "🎬 Video o animación para redes y campañas Renders animados, VFX, motion" [ref=e60] [cursor=pointer]:
+        - generic [ref=e61]: 🎬
+        - generic [ref=e62]: Video o animación para redes y campañas
+        - generic [ref=e63]: Renders animados, VFX, motion
+      - button "📸 Imágenes de producto E-commerce, print, marketing" [ref=e64] [cursor=pointer]:
+        - generic [ref=e65]: 📸
+        - generic [ref=e66]: Imágenes de producto
+        - generic [ref=e67]: E-commerce, print, marketing
+      - button "🕹️ Interactivo para vendedores o ferias Hotspots, configuradores, minijuegos" [ref=e68] [cursor=pointer]:
+        - generic [ref=e69]: 🕹️
+        - generic [ref=e70]: Interactivo para vendedores o ferias
+        - generic [ref=e71]: Hotspots, configuradores, minijuegos
+      - button "🤖 IA en mi web o negocio Chat RAG, automatización, consultoría" [ref=e72] [cursor=pointer]:
+        - generic [ref=e73]: 🤖
+        - generic [ref=e74]: IA en mi web o negocio
+        - generic [ref=e75]: Chat RAG, automatización, consultoría
+      - button "❓ No sé exactamente Ver todo el catálogo con guía" [ref=e76] [cursor=pointer]:
+        - generic [ref=e77]: ❓
+        - generic [ref=e78]: No sé exactamente
+        - generic [ref=e79]: Ver todo el catálogo con guía
+    - generic [ref=e80]: Selecciona el servicio
+    - generic [ref=e81]:
+      - button "Todos" [ref=e82] [cursor=pointer]
+      - button "Render 3D" [ref=e83] [cursor=pointer]
+      - button "Assets RT" [ref=e84] [cursor=pointer]
+      - button "Web 3D" [ref=e85] [cursor=pointer]
+      - button "VFX" [ref=e86] [cursor=pointer]
+      - button "IA" [ref=e87] [cursor=pointer]
+      - button "CAD/Datos" [ref=e88] [cursor=pointer]
+      - button "Soporte" [ref=e89] [cursor=pointer]
+    - generic [ref=e90]:
+      - button "Render 3D estatico imagen desde $100" [ref=e91] [cursor=pointer]:
+        - generic [ref=e92]:
+          - generic [ref=e93]: Render 3D estatico
+          - generic [ref=e94]: imagen
+        - generic [ref=e95]: desde $100
+      - button "Animacion 3D (render offline) clip (XS=loop 2-3s) desde $100" [ref=e96] [cursor=pointer]:
+        - generic [ref=e97]:
+          - generic [ref=e98]: Animacion 3D (render offline)
+          - generic [ref=e99]: clip (XS=loop 2-3s)
+        - generic [ref=e100]: desde $100
+      - button "Asset 3D realtime estatico asset optimizado desde $150" [ref=e101] [cursor=pointer]:
+        - generic [ref=e102]:
+          - generic [ref=e103]: Asset 3D realtime estatico
+          - generic [ref=e104]: asset optimizado
+        - generic [ref=e105]: desde $150
+      - button "Asset RT interactuable (hotspots) asset + interactividad desde $200" [ref=e106] [cursor=pointer]:
+        - generic [ref=e107]:
+          - generic [ref=e108]: Asset RT interactuable (hotspots)
+          - generic [ref=e109]: asset + interactividad
+        - generic [ref=e110]: desde $200
+      - button "CAD a WebGL ready (servicio insignia) ensamblaje CAD desde $100" [ref=e111] [cursor=pointer]:
+        - generic [ref=e112]:
+          - generic [ref=e113]: CAD a WebGL ready (servicio insignia)
+          - generic [ref=e114]: ensamblaje CAD
+        - generic [ref=e115]: desde $100
+      - button "Visor custom three.js / Babylon.js visor web desde $200" [ref=e116] [cursor=pointer]:
+        - generic [ref=e117]:
+          - generic [ref=e118]: Visor custom three.js / Babylon.js
+          - generic [ref=e119]: visor web
+        - generic [ref=e120]: desde $200
+      - button "Web App 3D (configurador/herramienta) aplicacion web desde $550" [ref=e121] [cursor=pointer]:
+        - generic [ref=e122]:
+          - generic [ref=e123]: Web App 3D (configurador/herramienta)
+          - generic [ref=e124]: aplicacion web
+        - generic [ref=e125]: desde $550
+      - button "Asistente IA en sitio web (chat RAG) asistente instalado desde $650" [ref=e126] [cursor=pointer]:
+        - generic [ref=e127]:
+          - generic [ref=e128]: Asistente IA en sitio web (chat RAG)
+          - generic [ref=e129]: asistente instalado
+        - generic [ref=e130]: desde $650
+      - button "Consultoria tecnica 3D / web sesion o informe desde $100" [ref=e131] [cursor=pointer]:
+        - generic [ref=e132]:
+          - generic [ref=e133]: Consultoria tecnica 3D / web
+          - generic [ref=e134]: sesion o informe
+        - generic [ref=e135]: desde $100
+      - button "Retainer mensual bloque horas/mes desde $2,300" [ref=e136] [cursor=pointer]:
+        - generic [ref=e137]:
+          - generic [ref=e138]: Retainer mensual
+          - generic [ref=e139]: bloque horas/mes
+        - generic [ref=e140]: desde $2,300
+      - button "Modelo animado no interactuable asset animado (GLB) desde $220" [ref=e141] [cursor=pointer]:
+        - generic [ref=e142]:
+          - generic [ref=e143]: Modelo animado no interactuable
+          - generic [ref=e144]: asset animado (GLB)
+        - generic [ref=e145]: desde $220
+      - button "Modelo animado interactuable asset animado + control desde $360" [ref=e146] [cursor=pointer]:
+        - generic [ref=e147]:
+          - generic [ref=e148]: Modelo animado interactuable
+          - generic [ref=e149]: asset animado + control
+        - generic [ref=e150]: desde $360
+      - button "Shaders estilizados shader / set desde $100" [ref=e151] [cursor=pointer]:
+        - generic [ref=e152]:
+          - generic [ref=e153]: Shaders estilizados
+          - generic [ref=e154]: shader / set
+        - generic [ref=e155]: desde $100
+      - button "Mecanicas sobre asset realtime mecanica desde $100" [ref=e156] [cursor=pointer]:
+        - generic [ref=e157]:
+          - generic [ref=e158]: Mecanicas sobre asset realtime
+          - generic [ref=e159]: mecanica
+        - generic [ref=e160]: desde $100
+      - button "Visor embebido (Spline/Sketchfab/model-viewer) embed desde $100" [ref=e161] [cursor=pointer]:
+        - generic [ref=e162]:
+          - generic [ref=e163]: Visor embebido (Spline/Sketchfab/model-viewer)
+          - generic [ref=e164]: embed
+        - generic [ref=e165]: desde $100
+      - 'button "Unity WebGL: build y embedding build desde $270" [ref=e166] [cursor=pointer]':
+        - generic [ref=e167]:
+          - generic [ref=e168]: "Unity WebGL: build y embedding"
+          - generic [ref=e169]: build
+        - generic [ref=e170]: desde $270
+      - button "Scrollytelling con 3D pagina/experiencia desde $290" [ref=e171] [cursor=pointer]:
+        - generic [ref=e172]:
+          - generic [ref=e173]: Scrollytelling con 3D
+          - generic [ref=e174]: pagina/experiencia
+        - generic [ref=e175]: desde $290
+      - button "Minijuego web juego desde $650" [ref=e176] [cursor=pointer]:
+        - generic [ref=e177]:
+          - generic [ref=e178]: Minijuego web
+          - generic [ref=e179]: juego
+        - generic [ref=e180]: desde $650
+      - button "Catalogo interactivo 3D catalogo/proyecto desde $480" [ref=e181] [cursor=pointer]:
+        - generic [ref=e182]:
+          - generic [ref=e183]: Catalogo interactivo 3D
+          - generic [ref=e184]: catalogo/proyecto
+        - generic [ref=e185]: desde $480
+      - button "Presentacion web interactiva presentacion desde $180" [ref=e186] [cursor=pointer]:
+        - generic [ref=e187]:
+          - generic [ref=e188]: Presentacion web interactiva
+          - generic [ref=e189]: presentacion
+        - generic [ref=e190]: desde $180
+      - button "IA indirecta en producto web feature/paquete desde $280" [ref=e191] [cursor=pointer]:
+        - generic [ref=e192]:
+          - generic [ref=e193]: IA indirecta en producto web
+          - generic [ref=e194]: feature/paquete
+        - generic [ref=e195]: desde $280
+      - button "Automatizacion interna con LLM paquete workflow desde $800" [ref=e196] [cursor=pointer]:
+        - generic [ref=e197]:
+          - generic [ref=e198]: Automatizacion interna con LLM
+          - generic [ref=e199]: paquete workflow
+        - generic [ref=e200]: desde $800
+      - button "Consultoria y auditoria de IA auditoria/paquete desde $320" [ref=e201] [cursor=pointer]:
+        - generic [ref=e202]:
+          - generic [ref=e203]: Consultoria y auditoria de IA
+          - generic [ref=e204]: auditoria/paquete
+        - generic [ref=e205]: desde $320
+      - button "Modelo 3D integrado en foto/video real shot desde $120" [ref=e206] [cursor=pointer]:
+        - generic [ref=e207]:
+          - generic [ref=e208]: Modelo 3D integrado en foto/video real
+          - generic [ref=e209]: shot
+        - generic [ref=e210]: desde $120
+      - button "FX puro (simulaciones video) shot desde $120" [ref=e211] [cursor=pointer]:
+        - generic [ref=e212]:
+          - generic [ref=e213]: FX puro (simulaciones video)
+          - generic [ref=e214]: shot
+        - generic [ref=e215]: desde $120
+      - button "Motion graphics 3D pieza/paquete desde $100" [ref=e216] [cursor=pointer]:
+        - generic [ref=e217]:
+          - generic [ref=e218]: Motion graphics 3D
+          - generic [ref=e219]: pieza/paquete
+        - generic [ref=e220]: desde $100
+      - button "Generacion de texturas y mapas set/asset desde $150" [ref=e221] [cursor=pointer]:
+        - generic [ref=e222]:
+          - generic [ref=e223]: Generacion de texturas y mapas
+          - generic [ref=e224]: set/asset
+        - generic [ref=e225]: desde $150
+      - button "Automatizacion de pipeline/scripts/tools herramienta desde $100" [ref=e226] [cursor=pointer]:
+        - generic [ref=e227]:
+          - generic [ref=e228]: Automatizacion de pipeline/scripts/tools
+          - generic [ref=e229]: herramienta
+        - generic [ref=e230]: desde $100
+  - generic [ref=e231]:
+    - strong [ref=e232]: Cómo trabajamos
+    - list [ref=e233]:
+      - listitem [ref=e234]:
+        - strong [ref=e235]: 1 · Cotizas aquí
+        - generic [ref=e236]: Configuras lo que sabes; el nivel y el rango se calculan solos.
+      - listitem [ref=e237]:
+        - strong [ref=e238]: 2 · Brief corto
+        - generic [ref=e239]: Por chat o email ajustamos alcance con tus referencias. Respondemos en <24 h.
+      - listitem [ref=e240]:
+        - strong [ref=e241]: 3 · Anticipo 50%
+        - generic [ref=e242]: Precio cerrado por escrito antes de iniciar. El otro 50% contra entrega.
+      - listitem [ref=e243]:
+        - strong [ref=e244]: 4 · Producción
+        - generic [ref=e245]: Avances parciales en hitos acordados; siempre sabes en qué va tu proyecto.
+      - listitem [ref=e246]:
+        - strong [ref=e247]: 5 · 2 rondas de revisión
+        - generic [ref=e248]: Incluidas en el precio. Cambios extra fuera de alcance se cotizan aparte.
+      - listitem [ref=e249]:
+        - strong [ref=e250]: 6 · Entrega + handoff
+        - generic [ref=e251]: Archivos finales organizados y guía de uso. Quedas autónomo.
+    - strong [ref=e252]: Preguntas frecuentes
+    - group [ref=e253]:
+      - generic "¿El precio del cotizador es el precio final?" [ref=e254] [cursor=pointer]
+    - group [ref=e255]:
+      - generic "¿Qué pasa con mis archivos (CAD, modelos, fotos)?" [ref=e256] [cursor=pointer]
+    - group [ref=e257]:
+      - generic "¿Por qué COP es más barato que USD?" [ref=e258] [cursor=pointer]
+    - group [ref=e259]:
+      - generic "¿Puedes facturar a mi agencia en blanco (white label)?" [ref=e260] [cursor=pointer]
+    - group [ref=e261]:
+      - generic "¿Qué pasa si quiero cambios después de las 2 rondas?" [ref=e262] [cursor=pointer]
+    - group [ref=e263]:
+      - generic "¿Cómo empiezo?" [ref=e264] [cursor=pointer]
+  - button "Abrir asistente" [ref=e265] [cursor=pointer]:
+    - text: 💬
+    - generic [ref=e266]: ¿Dudas?
