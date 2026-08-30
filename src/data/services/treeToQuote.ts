@@ -68,11 +68,21 @@ const pickVisor = (a: Answers, hotspots: number, notaEs?: string): WizardPick =>
   };
 };
 
+/** Interpola el presupuesto poligonal entre etapas para sliders continuos (1.1). */
+const polyDeNivel = (nivel: number): number => {
+  const f = Math.max(1, Math.min(5, nivel));
+  const i = Math.min(3, Math.floor(f - 1));
+  const frac = f - 1 - i;
+  const v = POLY_POR_NIVEL[i] + (POLY_POR_NIVEL[i + 1] - POLY_POR_NIVEL[i]) * frac;
+  return Math.round(v / 500) * 500; // paso de RTA-01.polyCount
+};
+
 /** RTA-01 para crear el modelo desde cero (cliente no lo tiene). */
 const pickModeloDesdeCero = (a: Answers): WizardPick => {
   const nivel = has(a, 'nivel-detalle') ? clampa(num(a, 'nivel-detalle'), 1, 5) : 3;
   const acabado = str(a, 'materiales-acabado');
   const piezas = has(a, 'cantidad-piezas') ? clampa(num(a, 'cantidad-piezas'), 1, 200) : 8;
+  const superficie = has(a, 'superficie') ? clampa(num(a, 'superficie'), 1, 5) : 2;
   const fuente = str(a, 'modelo-existente') === 'no-crear' && (str(a, 'formato-archivo') === 'step' || str(a, 'calidad-fuente') === 'cad-limpio')
     ? 'Desde CAD (requiere conversión)'
     : 'Desde fotos (requiere modelado)';
@@ -80,13 +90,16 @@ const pickModeloDesdeCero = (a: Answers): WizardPick => {
     serviceId: 'RTA-01',
     role: 'complemento',
     labelEs: 'La creación del modelo 3D',
-    notaEs: 'Tu producto aún no tiene modelo 3D: hay que construirlo antes de programar el visor.',
     vals: {
       fuente,
-      polyCount: POLY_POR_NIVEL[nivel - 1],
+      polyCount: polyDeNivel(nivel),
       numPiezas: piezas,
       numTexturas: TEXTURAS_POR_ACABADO[acabado] ?? 2,
+      tipoSuperficie: Math.round(superficie),
     },
+    notaEs: superficie >= 4.5
+      ? 'Superficies esculpidas/orgánicas: el alcance exacto se acota en una sesión de discovery.'
+      : 'Tu producto aún no tiene modelo 3D: hay que construirlo antes de programar el visor.',
   };
 };
 
@@ -123,9 +136,10 @@ function extrasPorModeloExistente(a: Answers): WizardPick | null {
       notaEs: 'Tu archivo (escaneo o fotos) se reconstruye como modelo optimizado para web.',
       vals: {
         fuente: 'Desde fotos (requiere modelado)',
-        polyCount: POLY_POR_NIVEL[(has(a, 'nivel-detalle') ? clampa(num(a, 'nivel-detalle'), 1, 5) : 3) - 1],
+        polyCount: polyDeNivel(has(a, 'nivel-detalle') ? clampa(num(a, 'nivel-detalle'), 1, 5) : 3),
         numPiezas: has(a, 'cantidad-piezas') ? clampa(num(a, 'cantidad-piezas'), 1, 200) : 8,
         numTexturas: TEXTURAS_POR_ACABADO[str(a, 'materiales-acabado')] ?? 2,
+        tipoSuperficie: has(a, 'superficie') ? Math.round(clampa(num(a, 'superficie'), 1, 5)) : 2,
       },
     };
   }
@@ -172,7 +186,7 @@ function planInteractivo(a: Answers): WizardQuotePlan {
 }
 
 function planScrollytelling(a: Answers): WizardQuotePlan {
-  const escenas = has(a, 'escenas') ? clampa(num(a, 'escenas'), 2, 15) : 5;
+  const escenas = has(a, 'escenas') ? clampa(num(a, 'escenas'), 1, 15) : 5;
   const picks: WizardPick[] = [{
     serviceId: 'WEB-05',
     role: 'principal',

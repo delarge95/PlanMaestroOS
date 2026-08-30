@@ -446,7 +446,7 @@ export function CotizadorRedesign() {
                                   style={{
                                     padding: '10px 18px', borderRadius: 999, font: `500 14px inherit`, cursor: 'pointer',
                                     border: vals[v.id] === o.valorEs ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
-                                    background: vals[v.id] === o.valorEs ? 'var(--cx-accent-soft)' : '#fff', color: 'var(--cx-text)',
+                                    background: vals[v.id] === o.valorEs ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)', color: 'var(--cx-text)',
                                   }}>{(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.opciones?.[o.valorEs] : undefined) ?? o.valorEs}</button>
                               ))}
                             </div>
@@ -478,7 +478,7 @@ export function CotizadorRedesign() {
                       style={{
                         flex: 1, padding: '12px 16px', borderRadius: 14, font: `600 13px inherit`, cursor: 'pointer',
                         border: urgency === id ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
-                        background: urgency === id ? 'var(--cx-accent-soft)' : '#fff', color: 'var(--cx-text)',
+                        background: urgency === id ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)', color: 'var(--cx-text)',
                       }}>{label}</button>
                   ))}
                 </div>

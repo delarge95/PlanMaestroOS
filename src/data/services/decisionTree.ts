@@ -37,8 +37,10 @@ export interface TreeQuestion {
   /** Configuración si es slider. */
   slider?: {
     min: number; max: number; step: number; unit: string;
+    /** Slider progresivo con puntos de snapping en los enteros (1.1). */
+    continuous?: boolean;
     /** Preview 3D: qué modelo mostrar que cambie con el valor. */
-    preview?: 'detail-level' | 'piece-count' | 'complexity' | 'scene-flow' | 'variant-swirl';
+    preview?: 'detail-level' | 'piece-count' | 'complexity' | 'story' | 'variant-swirl' | 'surface-morph';
     /** Mapeo valor → tier. */
     tierMap?: Array<{ max: number; tier: string }>;
   };
@@ -119,7 +121,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         question: '¿Qué nivel de detalle necesitas?',
         help: 'Más detalle = más horas de modelado. Para web, el nivel 3 suele ser suficiente.',
         type: 'slider',
-        slider: { min: 1, max: 5, step: 1, unit: 'nivel', preview: 'detail-level',
+        slider: { min: 1, max: 5, step: 0.1, unit: 'nivel', preview: 'detail-level', continuous: true,
           tierMap: [{max:1,tier:'XS'},{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
         advancedOptions: [
           { id: 'num-materiales', label: 'Cantidad de materiales', help: 'Cada material único añade trabajo.', type: 'slider', min:1, max:15, step:1, defaultValue:2 },
@@ -129,6 +131,14 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
           { id: 'texturas-res', label: 'Resolución de texturas', help: '1K-2K suficiente para web.', type: 'select',
             options: [{id:'sin-tex',label:'Sin texturas (solo color)'},{id:'1k',label:'1K (1024px) web estandar'},{id:'2k',label:'2K (2048px) detalle medio'},{id:'4k',label:'4K (4096px) maximo'}] },
         ],
+      },
+      {
+        id: 'superficie',
+        question: '¿Cómo es la superficie de tu producto?',
+        help: 'De formas duras y prismáticas a curvas orgánicas. El extremo esculpido se acota en una sesión de discovery.',
+        type: 'slider',
+        slider: { min: 1, max: 5, step: 1, unit: 'superficie', preview: 'surface-morph',
+          tierMap: [{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
       },
       {
         id: 'cantidad-piezas',
@@ -231,12 +241,20 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         question: '¿Qué nivel de detalle necesitas?',
         help: 'Más detalle = más horas de modelado. Para web, el nivel 3 suele ser suficiente.',
         type: 'slider',
-        slider: { min: 1, max: 5, step: 1, unit: 'nivel', preview: 'detail-level',
+        slider: { min: 1, max: 5, step: 0.1, unit: 'nivel', preview: 'detail-level', continuous: true,
           tierMap: [{max:1,tier:'XS'},{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
         advancedOptions: [
           { id: 'carga-poligonal', label: 'Carga poligonal objetivo', help: 'Para web: bajo o medio.', type: 'select',
             options: [{id:'ultra-low',label:'Ultra bajo (<10k) móvil antiguo'},{id:'low',label:'Bajo (10-50k) móvil moderno'},{id:'mid',label:'Medio (50-200k) PC'},{id:'high',label:'Alto (200k+) solo desktop'}] },
         ],
+      },
+      {
+        id: 'superficie',
+        question: '¿Cómo es la superficie de tu producto?',
+        help: 'De formas duras y prismáticas a curvas orgánicas. El extremo esculpido se acota en una sesión de discovery.',
+        type: 'slider',
+        slider: { min: 1, max: 5, step: 1, unit: 'superficie', preview: 'surface-morph',
+          tierMap: [{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
       },
       {
         id: 'cantidad-piezas',
@@ -278,7 +296,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         help: 'Cada escena es una "parada" del scroll donde el 3D muestra algo diferente.',
         type: 'slider',
         slider: {
-          min: 3, max: 10, step: 1, unit: 'escenas', preview: 'scene-flow',
+          min: 1, max: 10, step: 1, unit: 'escenas', preview: 'story',
           tierMap: [
             { max: 4, tier: 'S' },
             { max: 7, tier: 'L' },
@@ -306,7 +324,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         question: '¿Qué nivel de detalle necesita el modelo?',
         help: 'Para scrollytelling el 3D se ve en movimiento: el nivel 2-3 suele bastar.',
         type: 'slider',
-        slider: { min: 1, max: 5, step: 1, unit: 'nivel', preview: 'detail-level',
+        slider: { min: 1, max: 5, step: 0.1, unit: 'nivel', preview: 'detail-level', continuous: true,
           tierMap: [{max:1,tier:'XS'},{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
       },
       {

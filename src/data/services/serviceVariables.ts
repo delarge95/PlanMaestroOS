@@ -113,6 +113,11 @@ export const SERVICE_VARIABLES: Record<string, ServiceConfig> = {
         tierMap: [{ maxVal: 8, tier: 'S' }, { maxVal: 30, tier: 'M' }, { maxVal: 100, tier: 'L' }],
       },
       {
+        id: 'tipoSuperficie', preguntaEs: '¿Cómo es la superficie del producto?',
+        type: 'number', min: 1, max: 5, step: 1, unidadEs: 'superficie',
+        tierMap: [{ maxVal: 2, tier: 'S' }, { maxVal: 3, tier: 'M' }, { maxVal: 4, tier: 'L' }, { maxVal: 5, tier: 'XL' }],
+      },
+      {
         id: 'fuente', preguntaEs: '¿De dónde viene el modelo?',
         type: 'select',
         opciones: [

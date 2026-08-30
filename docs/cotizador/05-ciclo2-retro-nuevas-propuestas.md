@@ -251,3 +251,15 @@ Estado del puente Blender MCP: se activa solo cuando haga falta trabajo interact
 - ✅ D3: línea visible de rondas de ajuste incluidas + coste de ronda extra.
 - ✅ D5: esquema de pago sugerido según el total (con conversión TRM para COP).
 - Pendiente de la pregunta de quién genera cada modelo (9.4): previews 1.1, 1.2, escenas, variantes, yunque, shaders.
+
+---
+
+## 10. Ciclo 3 — feedback de implementación (2026-08-30) y reworks
+
+| # | Feedback | Decisión/implementación |
+|---|---|---|
+| 1.1 | "Bastante bien, pero continuo": geometría que crece entre puntos discretos, con snapping | ✅ Slider progresivo (step 0.1) con puntos de snapping visibles y magnético al soltar (±0.25). Grupos de geometría con ventana de aparición por tramo; tris interpolados continuamente (≈ 80k en 3.5); polyCount de la cotización interpola igual (paso 500) |
+| 1.3 | "Pesimo, no transmite nada": dos barras, no se distinguen escenas, mismo objeto con cámaras | ✅ **Replanteado**: timeline de ANIMACIONES — el slider añade momentos (giro, explosión, primer plano, órbita, salto, despliegue, tumble, presentación, giro inverso, pulso) que se reproducen en secuencia; chips-indicadores con la animación activa; mín 1 escena; barra duplicada eliminada |
+| 1.4 | "Muy débil, no lo entiendo ni yo" | ✅ **Configurador interactivo real**: chips clickeables por eje (Color/Material/Accesorio) que cambian el producto en vivo + copy "Pruébalo — así configurará tu cliente" + "Tu app tendría N variantes como estas" |
+| Superficie | En lugar de yunque: cubo→esfera como placeholder del morph | ✅ Pregunta `superficie` en ver-modelo/interactivo (1–5), morph continuo cubo→esfera, caption con discovery en el extremo; nueva variable `RTA-01.tipoSuperficie` (V1 cerrada) + nota de discovery cuando ≥4.5 |
+| Bug | En oscuro no se leían los botones no seleccionados de urgencia | ✅ `#fff` residual en ternarios → `var(--cx-card-solid)` |

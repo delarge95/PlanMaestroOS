@@ -1,42 +1,79 @@
 /**
  * ModelPreview.tsx — Previews WebGL procedurales para los sliders del cotizador.
- * Un producto 3D generado por código que reacciona en tiempo real al slider.
- * Sin marco: canvas transparente que flota sobre el fondo de la página.
+ * Canvas transparente sin marco; reacciona en tiempo real al slider sin
+ * reconstruir el contexto WebGL (stateRef + render loop).
  *
- * Ciclo 2.1 (docs/cotizador/05):
- * - detail:  fabricaciones (1.1.A: blockout→PBR) + contador de tris (1.1.B)
- * - pieces:  ensamblaje que se construye (1.2.A) + explosión al idle 3 s (1.2.B)
- * - scenes:  dolly de cámara por estaciones (1.3.A) — la carcasa mini-scroll vive en el slider
- * - variants: configurador en vivo (1.4.A) con 3 ejes (color × material × accesorio)
+ * Ciclo 3 (feedback Alexander):
+ * - detail:  slider CONTINUO — la geometría crece progresivamente entre los
+ *            puntos discretos 1–5 (grupos con ventana de aparición) + contador
+ *            de tris interpolado.
+ * - pieces:  ensamblaje + explosión al idle 3 s.
+ * - story:   replante 1.3 — catálogo de ANIMACIONES que se añaden con el slider
+ *            y se reproducen en secuencia (giro, explosión, primer plano, órbita,
+ *            salto, despliegue, tumble, presentación...). Timeline de chips bajo
+ *            el canvas con la animación activa resaltada.
+ * - variants: producto configurable; la selección la manda el chip interactivo.
+ * - surface: morph continuo cubo→esfera (placeholder del yunque de Alexander).
  */
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { EN, VARIANTES, TRIS_ETIQUETAS } from '../../data/services/i18n';
+import { EN, TRIS_ETIQUETAS } from '../../data/services/i18n';
 import type { Lang } from '../../data/services/i18n';
 
-export type PreviewMode = 'detail' | 'pieces' | 'scenes' | 'variants';
+export type PreviewMode = 'detail' | 'pieces' | 'story' | 'variants' | 'surface';
 
-export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, variantIndex = 1, lang = 'es', height = 150 }: {
+/** Catálogo de animaciones del modo story (1.3 replante). */
+export const STORY_ANIMS = [
+  { es: 'Giro', en: 'Spin', glyph: '↻' },
+  { es: 'Explosión', en: 'Explode', glyph: '✦' },
+  { es: 'Primer plano', en: 'Close-up', glyph: '⌕' },
+  { es: 'Órbita', en: 'Orbit', glyph: '◐' },
+  { es: 'Salto', en: 'Hop', glyph: '↑' },
+  { es: 'Despliegue', en: 'Deploy', glyph: '✳' },
+  { es: 'Tumble', en: 'Tumble', glyph: '⟳' },
+  { es: 'Presentación', en: 'Showcase', glyph: '★' },
+  { es: 'Giro inverso', en: 'Reverse spin', glyph: '↺' },
+  { es: 'Pulso', en: 'Pulse', glyph: '◉' },
+] as const;
+const STORY_DURATION = 2.4; // segundos por animación
+
+/** Interpolación del contador de tris entre etapas (trazable a POLY_POR_NIVEL). */
+const POLY = [4000, 9000, 40000, 120000, 300000];
+const polyLabel = (d: number) => {
+  const f = Math.max(1, Math.min(5, d));
+  const i = Math.min(3, Math.floor(f - 1));
+  const frac = f - 1 - i;
+  const v = POLY[i] + (POLY[i + 1] - POLY[i]) * frac;
+  return `≈ ${v >= 1000 ? `${Math.round(v / 1000)}k` : Math.round(v)} tris`;
+};
+
+const smooth = (x: number) => { const t = Math.max(0, Math.min(1, x)); return t * t * (3 - 2 * t); };
+/** Escala de un grupo cuya ventana de aparición es [a, b] sobre el slider d. */
+const grow = (d: number, a: number, b: number) => smooth((d - a) / (b - a));
+
+export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface = 1, variantSel, lang = 'es', height = 150 }: {
   mode: PreviewMode;
-  /** Slider nivel 1–5 (detail). */
+  /** Slider continuo 1–5 (detail). */
   detail?: number;
   /** Slider piezas 1–50 (pieces). */
   pieces?: number;
-  /** Progreso 0–1 del recorrido de escenas (scenes). */
-  progress?: number;
-  /** Índice de variante 1–N (variants). */
-  variantIndex?: number;
+  /** Nº de animaciones en la línea de tiempo 1–10 (story). */
+  story?: number;
+  /** Slider superficie 1–5 (surface): 1 = cubo duro, 5 = esfera orgánica. */
+  surface?: number;
+  /** Selección del configurador (variants): índices de color/material/accesorio. */
+  variantSel?: { c: number; m: number; a: number };
   lang?: Lang;
   height?: number;
 }) {
   const mountRef = useRef<HTMLDivElement>(null);
   const uiRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
-  // Estado de sliders SIN reconstruir el contexto WebGL.
-  const stateRef = useRef({ mode, detail, pieces, progress, variantIndex, lang });
-  stateRef.current = { mode, detail, pieces, progress, variantIndex, lang };
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const stateRef = useRef({ mode, detail, pieces, story, surface, variantSel, lang });
+  stateRef.current = { mode, detail, pieces, story, surface, variantSel, lang };
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -50,9 +87,8 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, var
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     mount.appendChild(renderer.domElement);
 
-    // ── Iluminación de estudio + entorno PBR (para etapas altas de detalle) ──
     scene.add(new THREE.HemisphereLight(0xffffff, 0xdde4ee, 1.05));
-    const key = new THREE.DirectionalLight(0xffffff, 1.5); key.position.set(3, 5, 4); scene.add(key);
+    const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(3, 5, 4); scene.add(key);
     const rim = new THREE.DirectionalLight(0x9ecbff, 0.8); rim.position.set(-4, 2, -3); scene.add(rim);
     const pmrem = new THREE.PMREMGenerator(renderer);
     const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -63,198 +99,187 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, var
 
     // ── Materiales compartidos ──
     const bodyMat = new THREE.MeshStandardMaterial({ color: 0xeef0f2, metalness: 0.3, roughness: 0.4 });
+    const solidMat = new THREE.MeshStandardMaterial({ color: 0xdfe3e8, metalness: 0.1, roughness: 0.7, flatShading: true });
     const accentMat = new THREE.MeshStandardMaterial({ color: 0x0071e3, metalness: 0.5, roughness: 0.3 });
     const darkMat = new THREE.MeshStandardMaterial({ color: 0x3a3f47, metalness: 0.6, roughness: 0.35 });
     const wireMat = new THREE.MeshBasicMaterial({ color: 0x0071e3, wireframe: true, transparent: true, opacity: 0.9 });
+    const setEnv = (v: number) => { bodyMat.envMapIntensity = v; accentMat.envMapIntensity = v; darkMat.envMapIntensity = v; };
 
-    const setEnvIntensity = (v: number) => {
-      bodyMat.envMapIntensity = v; accentMat.envMapIntensity = v; darkMat.envMapIntensity = v;
-    };
-
-    // ═══ MODO detail: 5 fabricaciones del mismo objeto (1.1.A) ═══
-    // StageGeometry = { parts: THREE.Mesh[] }
+    // ═══ detail (1.1): grupos con ventana de aparición — crecimiento continuo ═══
     const detailRoot = new THREE.Group();
     group.add(detailRoot);
-    let builtDetail = -1;
-    const disposeGroup = (g: THREE.Group) => {
-      for (const c of [...g.children]) { g.remove(c); const m = c as THREE.Mesh; if (m.geometry) m.geometry.dispose(); }
+    type Part = { obj: THREE.Object3D; a: number; b: number; shrinkAt?: [number, number] };
+    const detailParts: Part[] = [];
+    const addPart = (obj: THREE.Object3D, a: number, b: number) => {
+      obj.scale.setScalar(a <= 1 ? 1 : 0.0001);
+      detailParts.push({ obj, a, b });
+      detailRoot.add(obj);
     };
-    const buildDetail = (d: number) => {
-      disposeGroup(detailRoot);
-      const parts = new THREE.Group();
-      if (d === 1) {
-        // Blockout: cajas primitivas en wireframe
-        for (const [w, h, dp, y] of [[2.0, 0.18, 1.4, -0.5], [1.3, 0.9, 1.0, 0.15], [0.7, 0.35, 0.7, 0.78]] as const) {
-          const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, dp), wireMat);
-          m.position.y = y; parts.add(m);
-        }
-        setEnvIntensity(0);
-      } else if (d === 2) {
-        // Base: cajas con flat shading
-        bodyMat.flatShading = true;
-        for (const [w, h, dp, y] of [[2.0, 0.18, 1.4, -0.5], [1.3, 0.9, 1.0, 0.15], [0.7, 0.35, 0.7, 0.78]] as const) {
-          const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, dp), y < 0 ? darkMat : bodyMat);
-          m.position.y = y; parts.add(m);
-        }
-        setEnvIntensity(0);
-      } else if (d === 3) {
-        // Suavizado: cuerpo cilíndrico + tapa esférica
-        bodyMat.flatShading = false;
-        const base = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.15, 0.2, 40), darkMat);
-        base.position.y = -0.5;
-        const body = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.8, 1.0, 48), bodyMat);
-        body.position.y = 0.15;
-        const cap = new THREE.Mesh(new THREE.SphereGeometry(0.72, 40, 20, 0, Math.PI * 2, 0, Math.PI / 2), bodyMat);
-        cap.position.y = 0.65;
-        parts.add(base, body, cap);
-        setEnvIntensity(0.15);
-      } else {
-        // Detalles + PBR: anillo, pernos, panel line, asa
-        bodyMat.flatShading = false;
-        const base = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.15, 0.2, 40), darkMat);
-        base.position.y = -0.5;
-        const body = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.8, 1.0, 48), bodyMat);
-        body.position.y = 0.15;
-        const cap = new THREE.Mesh(new THREE.SphereGeometry(0.72, 40, 20, 0, Math.PI * 2, 0, Math.PI / 2), bodyMat);
-        cap.position.y = 0.65;
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(0.82, 0.055, 14, 52), accentMat);
-        ring.rotation.x = Math.PI / 2; ring.position.y = -0.32;
-        parts.add(base, body, cap, ring);
-        if (d >= 4) {
-          for (let i = 0; i < 6; i++) {
-            const a = (i / 6) * Math.PI * 2;
-            const bolt = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.14, 12), darkMat);
-            bolt.position.set(Math.cos(a) * 0.92, -0.42, Math.sin(a) * 0.92);
-            parts.add(bolt);
-          }
-          const handle = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.12, 0.16), darkMat);
-          handle.position.y = 1.34;
-          parts.add(handle);
-          setEnvIntensity(d === 4 ? 0.5 : 0.5);
-        }
-        if (d === 5) {
-          const strip = new THREE.Mesh(new THREE.TorusGeometry(0.76, 0.028, 10, 52), accentMat);
-          strip.rotation.x = Math.PI / 2; strip.position.y = 0.55;
-          const panel = new THREE.Mesh(new THREE.TorusGeometry(0.805, 0.012, 8, 56), darkMat);
-          panel.rotation.x = Math.PI / 2; panel.position.y = 0.1;
-          parts.add(strip, panel);
-          accentMat.emissive = new THREE.Color(0x0071e3); accentMat.emissiveIntensity = 0.35;
-          setEnvIntensity(1.2);
-        }
-      }
-      detailRoot.add(parts);
-      // Pop de entrada
-      detailRoot.scale.setScalar(0.94);
-    };
-    buildDetail(st.detail);
+    // Etapa base (1): bloqueo de cajas en wireframe (siempre presente, se desvanece en [1,2])
+    const block = new THREE.Group();
+    for (const [w, h, dp, y] of [[2.0, 0.18, 1.4, -0.5], [1.3, 0.9, 1.0, 0.15], [0.7, 0.35, 0.7, 0.78]] as const) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, dp), wireMat);
+      m.position.y = y; block.add(m);
+    }
+    detailRoot.add(block);
+    // Etapa 2: cajas sólidas flat-shaded (crecen [1.35, 2.2], se encogen cuando llega lo suave)
+    for (const [w, h, dp, y] of [[2.0, 0.18, 1.4, -0.5], [1.3, 0.9, 1.0, 0.15], [0.7, 0.35, 0.7, 0.78]] as const) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, dp), y < -0.2 ? darkMat : solidMat);
+      m.position.y = y;
+      const part: Part = { obj: m, a: 1.35, b: 2.2, shrinkAt: [2.0, 2.9] };
+      detailParts.push(part);
+      detailRoot.add(m);
+    }
+    // Etapa 3: superficies suaves
+    const smoothBody = new THREE.Group();
+    const bBase = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.15, 0.2, 40), darkMat); bBase.position.y = -0.5;
+    const bBody = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.8, 1.0, 48), bodyMat); bBody.position.y = 0.15;
+    const bCap = new THREE.Mesh(new THREE.SphereGeometry(0.72, 40, 20, 0, Math.PI * 2, 0, Math.PI / 2), bodyMat); bCap.position.y = 0.65;
+    smoothBody.add(bBase, bBody, bCap);
+    addPart(smoothBody, 2.1, 3.0);
+    // Etapa 4: detalles
+    const ring4 = new THREE.Mesh(new THREE.TorusGeometry(0.82, 0.055, 14, 52), accentMat);
+    ring4.rotation.x = Math.PI / 2; ring4.position.y = -0.32;
+    addPart(ring4, 2.9, 3.5);
+    for (let i = 0; i < 6; i++) {
+      const a = (i / 6) * Math.PI * 2;
+      const bolt = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.14, 12), darkMat);
+      bolt.position.set(Math.cos(a) * 0.92, -0.42, Math.sin(a) * 0.92);
+      addPart(bolt, 3.15 + i * 0.06, 3.65 + i * 0.06);
+    }
+    const handle = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.12, 0.16), darkMat);
+    handle.position.y = 1.34;
+    addPart(handle, 3.6, 4.1);
+    // Etapa 5: pulido
+    const strip = new THREE.Mesh(new THREE.TorusGeometry(0.76, 0.028, 10, 52), accentMat);
+    strip.rotation.x = Math.PI / 2; strip.position.y = 0.55;
+    addPart(strip, 4.05, 4.6);
+    const panel = new THREE.Mesh(new THREE.TorusGeometry(0.805, 0.012, 8, 56), darkMat);
+    panel.rotation.x = Math.PI / 2; panel.position.y = 0.1;
+    addPart(panel, 4.3, 4.8);
+    detailRoot.visible = true;
 
-    // ═══ MODO pieces: ensamblaje + explosión al idle (1.2.A + 1.2.B) ═══
+    // ═══ pieces (1.2): hub + ensamblaje + explosión al idle ═══
     const hub = new THREE.Group();
-    const hubBase = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 1.0, 0.4, 36), darkMat);
-    hubBase.position.y = -0.35;
-    const hubBody = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.66, 0.75, 36), bodyMat);
-    hubBody.position.y = 0.2;
-    const hubCap = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), accentMat);
-    hubCap.position.y = 0.575;
+    const hubBase = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 1.0, 0.4, 36), darkMat); hubBase.position.y = -0.35;
+    const hubBody = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.66, 0.75, 36), bodyMat); hubBody.position.y = 0.2;
+    const hubCap = new THREE.Mesh(new THREE.SphereGeometry(0.6, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), accentMat); hubCap.position.y = 0.575;
     hub.add(hubBase, hubBody, hubCap);
     group.add(hub);
-
     const satRoot = new THREE.Group();
     group.add(satRoot);
     const PART_TYPES = [
-      () => new THREE.CylinderGeometry(0.09, 0.09, 0.34, 12),                    // perno
-      () => new THREE.TorusGeometry(0.16, 0.055, 10, 22),                        // anillo
-      () => new THREE.BoxGeometry(0.3, 0.12, 0.2),                               // placa
-      () => new THREE.CylinderGeometry(0.045, 0.045, 0.5, 8),                    // pin
-      () => new THREE.DodecahedronGeometry(0.15),                                // módulo
-      () => new THREE.SphereGeometry(0.11, 14, 10),                              // casquillo
+      () => new THREE.CylinderGeometry(0.09, 0.09, 0.34, 12),
+      () => new THREE.TorusGeometry(0.16, 0.055, 10, 22),
+      () => new THREE.BoxGeometry(0.3, 0.12, 0.2),
+      () => new THREE.CylinderGeometry(0.045, 0.045, 0.5, 8),
+      () => new THREE.DodecahedronGeometry(0.15),
+      () => new THREE.SphereGeometry(0.11, 14, 10),
     ];
     const MAX_VISIBLE = 18;
     type Sat = { mesh: THREE.Mesh; dir: THREE.Vector3; assembled: THREE.Vector3; born: number };
     let sats: Sat[] = [];
     let builtPieces = -1;
     let explode = 0, explodeTarget = 0;
-    let lastChange = performance.now();
-
-    const partMaterial = (i: number) => (i % 3 === 0 ? accentMat : i % 3 === 1 ? darkMat : bodyMat);
-    const syncParts = (pieces: number) => {
-      const n = Math.min(MAX_VISIBLE, Math.max(1, pieces));
-      while (sats.length > n) {
-        const s = sats.pop()!;
-        satRoot.remove(s.mesh); s.mesh.geometry.dispose();
-      }
+    let lastPiecesChange = performance.now();
+    const syncParts = (n: number) => {
+      while (sats.length > n) { const s = sats.pop()!; satRoot.remove(s.mesh); s.mesh.geometry.dispose(); }
       while (sats.length < n) {
         const i = sats.length;
-        const geo = PART_TYPES[i % PART_TYPES.length]();
-        const mesh = new THREE.Mesh(geo, partMaterial(i));
+        const mesh = new THREE.Mesh(PART_TYPES[i % PART_TYPES.length](), i % 3 === 0 ? accentMat : i % 3 === 1 ? darkMat : bodyMat);
         const angle = (i / n) * Math.PI * 2 + i * 0.35;
         const radius = 1.55 + (i % 3) * 0.38;
         const pos = new THREE.Vector3(Math.cos(angle) * radius, -0.25 + (i % 4) * 0.22, Math.sin(angle) * radius);
         mesh.position.copy(pos);
-        const dir = new THREE.Vector3(pos.x, 0.15, pos.z).normalize();
         satRoot.add(mesh);
-        sats.push({ mesh, dir, assembled: pos.clone(), born: performance.now() });
+        sats.push({ mesh, dir: new THREE.Vector3(pos.x, 0.15, pos.z).normalize(), assembled: pos.clone(), born: performance.now() });
       }
-      lastChange = performance.now();
+      lastPiecesChange = performance.now();
       explodeTarget = 0;
     };
-    hub.visible = false;
-    satRoot.visible = false;
 
-    // ═══ MODO scenes: producto en plataforma + dolly por estaciones (1.3.A) ═══
-    const sceneRoot = new THREE.Group();
-    group.add(sceneRoot);
-    sceneRoot.visible = false;
-    const plat = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.7, 0.16, 48), darkMat);
-    plat.position.y = -0.75;
-    const prod = new THREE.Mesh(new THREE.CapsuleGeometry(0.5, 0.7, 8, 24), bodyMat);
-    prod.position.y = 0.35;
-    const prodRing = new THREE.Mesh(new THREE.TorusGeometry(0.53, 0.05, 12, 40), accentMat);
-    prodRing.rotation.x = Math.PI / 2; prodRing.position.y = 0.12;
-    sceneRoot.add(plat, prod, prodRing);
+    // ═══ Producto compartido por story / variants ═══
+    const prod = new THREE.Group();
+    const pBase = new THREE.Mesh(new THREE.CylinderGeometry(0.66, 0.74, 0.2, 36), darkMat); pBase.position.y = -0.62;
+    const pBody = new THREE.Mesh(new THREE.CapsuleGeometry(0.5, 0.72, 8, 28), bodyMat); pBody.position.y = 0.18;
+    const pRing = new THREE.Mesh(new THREE.TorusGeometry(0.54, 0.055, 12, 40), accentMat); pRing.rotation.x = Math.PI / 2; pRing.position.y = -0.1;
+    const pCap = new THREE.Mesh(new THREE.SphereGeometry(0.34, 24, 14, 0, Math.PI * 2, 0, Math.PI / 2), accentMat); pCap.position.y = 0.82;
+    prod.add(pBase, pBody, pRing, pCap);
+    const storySats: THREE.Vector3[] = [];
+    for (let i = 0; i < 5; i++) {
+      const a = (i / 5) * Math.PI * 2;
+      const s = new THREE.Mesh(i % 2 ? new THREE.CylinderGeometry(0.07, 0.07, 0.3, 10) : new THREE.SphereGeometry(0.1, 12, 8), i % 2 ? darkMat : accentMat);
+      s.position.set(Math.cos(a) * 0.72, 0.1 + (i % 2) * 0.35, Math.sin(a) * 0.72);
+      storySats.push(s.position.clone());
+      s.userData.home = s.position.clone();
+      prod.add(s);
+    }
+    group.add(prod);
 
-    const buildCurve = (stations: number) => {
-      const n = Math.max(3, Math.min(10, Math.round(stations)));
-      const pts: THREE.Vector3[] = [];
-      const radii = [4.4, 3.2, 2.3, 2.6, 4.0, 2.5, 3.0, 2.2, 3.6, 2.6];
-      const heights = [1.1, 0.6, 0.3, 1.5, 0.7, 1.2, 0.4, 1.7, 0.8, 1.0];
-      for (let i = 0; i < n; i++) {
-        const t = i / (n - 1);
-        const angle = -1.15 + t * 2.3 + (i % 2) * 0.18;
-        pts.push(new THREE.Vector3(Math.sin(angle) * radii[i % 10], heights[i % 10], Math.cos(angle) * radii[i % 10]));
+    // ═══ surface: morph cubo→esfera ═══
+    const morphRoot = new THREE.Group();
+    group.add(morphRoot);
+    let boxGeo: THREE.BufferGeometry = new THREE.BoxGeometry(1.5, 1.5, 1.5, 20, 20, 20);
+    const morph = new THREE.Mesh(boxGeo, bodyMat);
+    morphRoot.add(morph);
+    let cubePos: ArrayLike<number> = (boxGeo.getAttribute('position') as THREE.BufferAttribute).array;
+    const tmpV = new THREE.Vector3();
+    const applyMorph = (t01: number) => {
+      const t = smooth(t01);
+      const posAttr = morph.geometry.getAttribute('position') as THREE.BufferAttribute;
+      const arr = posAttr.array as Float32Array;
+      const radius = 1.02;
+      for (let i = 0; i < arr.length; i += 3) {
+        const sx = cubePos[i], sy = cubePos[i + 1], sz = cubePos[i + 2];
+        const len = Math.sqrt(sx * sx + sy * sy + sz * sz) || 1;
+        arr[i] = sx + ((sx / len) * radius - sx) * t;
+        arr[i + 1] = sy + ((sy / len) * radius - sy) * t;
+        arr[i + 2] = sz + ((sz / len) * radius - sz) * t;
       }
-      return new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.3);
+      posAttr.needsUpdate = true;
+      morph.geometry.computeVertexNormals();
+      bodyMat.metalness = 0.5 - t * 0.45;
+      bodyMat.roughness = 0.3 + t * 0.5;
     };
-    let curve = buildCurve(st.progress * 8 + 3);
-    let builtStations = -1;
-    let progTarget = st.progress;
-    let prog = progTarget;
+    // Vertices compartidos (merge) para que la esfera final quede suave
+    import('three/examples/jsm/utils/BufferGeometryUtils.js')
+      .then(({ mergeVertices }) => {
+        const merged = mergeVertices(boxGeo);
+        boxGeo.dispose();
+        boxGeo = merged;
+        morph.geometry = merged;
+        cubePos = (merged.getAttribute('position') as THREE.BufferAttribute).array;
+        applyMorph((stateRef.current.surface - 1) / 4);
+      })
+      .catch(() => { /* sin merge, el morph funciona igual con caras separadas */ });
+    applyMorph((st.surface - 1) / 4);
 
-    // ═══ MODO variants: producto configurable 3 ejes (1.4) ═══
-    const varRoot = new THREE.Group();
-    group.add(varRoot);
-    varRoot.visible = false;
-    const vBody = new THREE.Mesh(new THREE.CapsuleGeometry(0.52, 0.75, 8, 28), bodyMat);
-    vBody.position.y = 0.25;
-    const vBase = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.7, 0.18, 36), darkMat);
-    vBase.position.y = -0.55;
-    const vAccRing = new THREE.Mesh(new THREE.TorusGeometry(0.58, 0.06, 12, 40), accentMat);
-    vAccRing.rotation.x = Math.PI / 2; vAccRing.position.y = 0.02;
-    const vAccHandle = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.1, 0.18), darkMat);
-    vAccHandle.position.y = 1.22;
-    varRoot.add(vBody, vBase, vAccRing, vAccHandle);
-    const colorTarget = new THREE.Color(VARIANTES.colores[0]);
-    const matTarget: { roughness: number; metalness: number } = { roughness: VARIANTES.materiales[0].roughness, metalness: VARIANTES.materiales[0].metalness };
-    const applyVariant = (idx: number) => {
-      const i = Math.max(0, Math.round(idx) - 1);
-      colorTarget.set(VARIANTES.colores[i % VARIANTES.colores.length]);
-      const m = VARIANTES.materiales[Math.floor(i / VARIANTES.colores.length) % VARIANTES.materiales.length];
-      matTarget.roughness = m.roughness; matTarget.metalness = m.metalness;
-      const acc = VARIANTES.accesorios[Math.floor(i / (VARIANTES.colores.length * VARIANTES.materiales.length)) % VARIANTES.accesorios.length];
-      vAccRing.visible = acc.kind === 'anillo';
-      vAccHandle.visible = acc.kind === 'asa';
+    // ═══ variants: producto configurable ═══
+    const colorTarget = new THREE.Color(0xeef0f2);
+    const matTarget = { roughness: 0.4, metalness: 0.3 };
+    const VARIANT_HEX = [0x3a3f47, 0xeef0f2, 0x0071e3, 0xff6b57, 0x2e7d4f, 0xc9b99a];
+    const applyVariant = (sel?: { c: number; m: number; a: number }) => {
+      if (!sel) return;
+      colorTarget.setHex(VARIANT_HEX[sel.c % VARIANT_HEX.length]);
+      const mats = [{ r: 0.75, m: 0.05 }, { r: 0.18, m: 0.1 }, { r: 0.35, m: 0.85 }];
+      matTarget.roughness = mats[sel.m % mats.length].r;
+      matTarget.metalness = mats[sel.m % mats.length].m;
+      pRing.visible = sel.a % 3 !== 2;
+      pCap.visible = sel.a % 3 !== 1;
     };
-    applyVariant(st.variantIndex);
+
+    // Visibilidad por modo
+    const applyModeVisibility = (m: PreviewMode) => {
+      detailRoot.visible = m === 'detail';
+      hub.visible = satRoot.visible = m === 'pieces';
+      prod.visible = m === 'story' || m === 'variants';
+      morphRoot.visible = m === 'surface';
+      prod.children.forEach((c, i) => { if (i >= 4) c.visible = m === 'story'; });
+      if (m === 'variants') { pRing.visible = true; pCap.visible = true; }
+      if (m !== 'detail') setEnv(m === 'surface' ? 0.6 : 0.9);
+    };
+    applyModeVisibility(st.mode);
+    if (st.mode === 'variants') applyVariant(st.variantSel);
 
     // ── Interacción: arrastrar para rotar + inercia ──
     let dragging = false, lastX = 0, lastY = 0;
@@ -277,27 +302,26 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, var
 
     // ── Resize + visibilidad ──
     const resize = () => {
-      const w = mount.clientWidth || 260;
-      const h = mount.clientHeight || height;
+      const w = mount.clientWidth || 260, h = mount.clientHeight || height;
       renderer.setSize(w, h, false);
-      cam.aspect = w / h;
-      cam.updateProjectionMatrix();
+      cam.aspect = w / h; cam.updateProjectionMatrix();
     };
     resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(mount);
+    const ro = new ResizeObserver(resize); ro.observe(mount);
     let visible = true;
-    const io = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
     io.observe(mount);
 
-    // ── Overlays HTML (contador de tris / badge explosionado) ──
+    // ── Overlays HTML ──
+    let storyActive = 0;
+    let storyT0 = performance.now() / 1000;
+    let lastStoryCount = -1;
     const renderUi = () => {
       const cur = stateRef.current;
       const ui = uiRef.current, badge = badgeRef.current;
       if (ui) {
         if (cur.mode === 'detail') {
-          const d = Math.round(Math.min(5, Math.max(1, cur.detail)));
-          ui.textContent = TRIS_ETIQUETAS[d - 1];
+          ui.textContent = polyLabel(cur.detail);
           ui.style.opacity = '1';
         } else if (cur.mode === 'pieces' && cur.pieces > MAX_VISIBLE) {
           ui.textContent = `+${cur.pieces - MAX_VISIBLE}`;
@@ -311,6 +335,35 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, var
         badge.textContent = cur.lang === 'es' ? 'Vista explosionada' : EN.wizard.exploded;
         badge.style.opacity = exploded ? '1' : '0';
       }
+      const tl = timelineRef.current;
+      if (tl) {
+        if (cur.mode === 'story') {
+          const n = Math.max(1, Math.min(STORY_ANIMS.length, Math.round(cur.story)));
+          if (tl.childElementCount !== n) {
+            tl.replaceChildren();
+            for (let i = 0; i < n; i++) {
+              const chip = document.createElement('span');
+              chip.style.cssText = 'display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--cx-border);background:var(--cx-card-solid);color:var(--cx-muted);white-space:nowrap;transition:all .25s;';
+              tl.appendChild(chip);
+            }
+          }
+          const kids = Array.from(tl.children) as HTMLElement[];
+          kids.forEach((chip, i) => {
+            const anim = STORY_ANIMS[i];
+            const name = cur.lang === 'es' ? anim.es : anim.en;
+            const text = `${anim.glyph} ${name}`;
+            if (chip.textContent !== text) chip.textContent = text;
+            const active = i === storyActive;
+            chip.style.borderColor = active ? 'var(--cx-accent)' : 'var(--cx-border)';
+            chip.style.color = active ? 'var(--cx-accent)' : 'var(--cx-muted)';
+            chip.style.background = active ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)';
+            chip.style.transform = active ? 'translateY(-1px)' : 'none';
+          });
+          tl.style.opacity = '1';
+        } else {
+          tl.style.opacity = '0';
+        }
+      }
     };
 
     // ── Loop ──
@@ -319,49 +372,31 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, var
     const loop = () => {
       raf = requestAnimationFrame(loop);
       if (!visible || document.hidden) return;
-      const t = (performance.now() - start) / 1000;
       const cur = stateRef.current;
 
-      // Cambios de modo/valores sin reconstruir contexto
-      if (cur.mode !== group.userData.mode) {
-        group.userData.mode = cur.mode;
-        detailRoot.visible = cur.mode === 'detail';
-        hub.visible = satRoot.visible = cur.mode === 'pieces';
-        sceneRoot.visible = cur.mode === 'scenes';
-        varRoot.visible = cur.mode === 'variants';
-      }
-      if (cur.mode === 'detail' && cur.detail !== builtDetail) { buildDetail(cur.detail); builtDetail = cur.detail; }
-      if (cur.mode === 'pieces' && cur.pieces !== builtPieces) { syncParts(cur.pieces); builtPieces = cur.pieces; }
-      if (cur.mode === 'scenes') {
-        if (cur.progress !== progTarget) { progTarget = cur.progress; lastChange = performance.now(); }
-        if (Math.abs(progTarget - prog) > 0.0005) prog += (progTarget - prog) * 0.08;
-        const p = Math.min(1, Math.max(0, prog));
-        const pos = curve.getPoint(p);
-        cam.position.copy(pos);
-        cam.lookAt(0, 0.3, 0);
-      }
-      if (cur.mode === 'variants') applyVariant(cur.variantIndex);
-
-      if (!dragging && cur.mode !== 'scenes') {
-        velY *= 0.94;
-        rotY += 0.0035 + velY;
-      }
-      group.rotation.y += (rotY - group.rotation.y) * 0.12;
-      group.rotation.x += (rotX - group.rotation.x) * 0.12;
+      if (cur.mode !== group.userData.mode) { group.userData.mode = cur.mode; applyModeVisibility(cur.mode); }
 
       if (cur.mode === 'detail') {
-        // Pop suave tras cada rebuild
-        const s = detailRoot.scale.x + (1 - detailRoot.scale.x) * 0.14;
-        detailRoot.scale.setScalar(s);
+        const d = Math.max(1, Math.min(5, cur.detail));
+        for (const p of detailParts) {
+          let s = grow(d, p.a, p.b);
+          if (p.shrinkAt) s *= 1 - grow(d, p.shrinkAt[0], p.shrinkAt[1]);
+          p.obj.scale.setScalar(Math.max(0.0001, s));
+        }
+        wireMat.opacity = 0.9 * (1 - grow(d, 1.4, 2.3));
+        setEnv(grow(d, 3.4, 5));
+        accentMat.emissive.setHex(0x0071e3);
+        accentMat.emissiveIntensity = grow(d, 4.0, 5) * 0.35;
+        // el cuerpo suave usa bodyMat compartido: restaurar tras el morph
+        if (bodyMat.metalness > 0.5 || bodyMat.roughness < 0.3) { bodyMat.metalness = 0.3; bodyMat.roughness = 0.4; }
       }
       if (cur.mode === 'pieces') {
-        // 1.2.B: slider quieto 3 s ⇒ vista explosionada; al mover, re-ensambla
-        const idle = (performance.now() - lastChange) / 1000;
+        if (cur.pieces !== builtPieces) { syncParts(Math.min(MAX_VISIBLE, Math.max(1, cur.pieces))); builtPieces = cur.pieces; }
+        const idle = (performance.now() - lastPiecesChange) / 1000;
         explodeTarget = idle > 3 ? 1 : 0;
         explode += (explodeTarget - explode) * 0.06;
-        const e = explode * explode * (3 - 2 * explode); // smoothstep
+        const e = explode * explode * (3 - 2 * explode);
         for (const part of sats) {
-          // entrada con easeOutBack
           const age = Math.min(1, (performance.now() - part.born) / 380);
           const back = 1 + 2.2 * Math.pow(age - 1, 3) + 1.2 * Math.pow(age - 1, 2);
           const target = part.assembled.clone().add(part.dir.clone().multiplyScalar(1.35 * e));
@@ -370,13 +405,59 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, var
           part.mesh.rotation.y += 0.004;
         }
       }
-      if (cur.mode === 'variants') {
-        vBody.material.color.lerp(colorTarget, 0.12);
-        vBody.material.roughness += (matTarget.roughness - vBody.material.roughness) * 0.12;
-        vBody.material.metalness += (matTarget.metalness - vBody.material.metalness) * 0.12;
+      if (cur.mode === 'story') {
+        const n = Math.max(1, Math.min(STORY_ANIMS.length, Math.round(cur.story)));
+        if (n !== lastStoryCount) {
+          storyActive = n - 1;
+          storyT0 = performance.now() / 1000 - storyActive * STORY_DURATION;
+          lastStoryCount = n;
+        }
+        const elapsed = performance.now() / 1000 - storyT0;
+        const idx = Math.floor(elapsed / STORY_DURATION) % n;
+        storyActive = idx;
+        const p = (elapsed % STORY_DURATION) / STORY_DURATION;
+        const ease = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        // reset base del producto y satélites
+        prod.position.set(0, 0, 0);
+        prod.rotation.set(0, 0, 0);
+        prod.scale.set(1, 1, 1);
+        cam.position.set(0, 1.15, 5.4);
+        cam.lookAt(0, 0.2, 0);
+        prod.children.forEach((c, i) => {
+          if (i >= 4) c.position.lerp(c.userData.home as THREE.Vector3, 0.2);
+        });
+        switch (idx) {
+          case 0: prod.rotation.y = ease * Math.PI * 2; break;
+          case 1: { const k = Math.sin(p * Math.PI); prod.children.forEach((c, i) => { if (i >= 4) { const h = c.userData.home as THREE.Vector3; c.position.set(h.x * (1 + k * 1.1), h.y + k * 0.3, h.z * (1 + k * 1.1)); } }); break; }
+          case 2: cam.position.set(0.5, 0.9, 3.1 - Math.sin(p * Math.PI) * 0.7); cam.lookAt(0, 0.45, 0); break;
+          case 3: { const a = 0.6 + ease * Math.PI; cam.position.set(Math.sin(a) * 4.6, 1.0, Math.cos(a) * 4.6); cam.lookAt(0, 0.2, 0); break; }
+          case 4: { const k = Math.abs(Math.sin(p * Math.PI * 2)); prod.position.y = k * 0.7; prod.scale.set(1 + (1 - k) * 0.12, 1 - (1 - k) * 0.18, 1 + (1 - k) * 0.12); break; }
+          case 5: { const k = Math.sin(p * Math.PI); prod.children.forEach((c, i) => { if (i >= 4) { const h = c.userData.home as THREE.Vector3; c.position.set(h.x * (1 + k * 1.6), h.y * (1 + k * 2), h.z * (1 + k * 1.6)); } }); prod.rotation.y = ease * Math.PI; break; }
+          case 6: prod.rotation.x = ease * Math.PI * 1.6; prod.rotation.y = ease * 0.8; break;
+          case 7: { const k = Math.sin(p * Math.PI); cam.position.set(0, 1.1 + k * 0.6, 5.4 - k * 1.2); prod.position.y = k * 0.35; prod.rotation.y = ease * Math.PI * 2.5; break; }
+          case 8: prod.rotation.y = -ease * Math.PI * 2; break;
+          case 9: { const k = Math.sin(p * Math.PI * 3); accentMat.emissiveIntensity = 0.2 + k * 0.9; prod.scale.setScalar(1 + k * 0.07); break; }
+        }
+        if (idx !== 9) accentMat.emissiveIntensity = 0;
       }
-      if (cur.mode !== 'scenes') {
-        // Cámara fija para los modos no-dolly
+      if (cur.mode === 'surface') {
+        const t05 = (Math.max(1, Math.min(5, cur.surface)) - 1) / 4;
+        if (t05 !== morph.userData.last) { applyMorph(t05); morph.userData.last = t05; }
+      }
+      if (cur.mode === 'variants' && cur.variantSel) {
+        applyVariant(cur.variantSel);
+        pBody.material.color.lerp(colorTarget, 0.12);
+        pBody.material.roughness += (matTarget.roughness - pBody.material.roughness) * 0.12;
+        pBody.material.metalness += (matTarget.metalness - pBody.material.metalness) * 0.12;
+      }
+
+      if (!dragging && cur.mode !== 'story') {
+        velY *= 0.94;
+        rotY += 0.0035 + velY;
+      }
+      group.rotation.y += (rotY - group.rotation.y) * 0.12;
+      group.rotation.x += (rotX - group.rotation.x) * 0.12;
+      if (cur.mode !== 'story') {
         cam.position.set(0, 1.35, 6.1);
         cam.lookAt(0, 0.15, 0);
       }
@@ -398,22 +479,23 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, progress = 0.5, var
     };
   }, [height]);
 
-  const en = lang === 'en';
   return (
     <div style={{ position: 'relative', width: '100%', maxWidth: 320, margin: '0 auto' }}>
       <div ref={mountRef} style={{ width: '100%', height, cursor: 'grab' }} aria-hidden="true" />
-      {/* Contador de tris / badge +N — HTML, accesible y traducible */}
       <div ref={uiRef} style={{
         position: 'absolute', top: 6, right: 6, fontSize: 11, fontWeight: 600, color: 'var(--cx-muted)',
         fontVariantNumeric: 'tabular-nums', opacity: 0, transition: 'opacity 0.3s', pointerEvents: 'none',
       }} />
-      {/* Badge de vista explosionada (1.2.B) */}
       <div ref={badgeRef} style={{
         position: 'absolute', bottom: 8, left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap',
         fontSize: 11, fontWeight: 600, color: 'var(--cx-accent)', background: 'var(--cx-accent-soft)',
         padding: '2px 10px', borderRadius: 999, opacity: 0, transition: 'opacity 0.4s', pointerEvents: 'none',
       }} />
-      {/* Sombra suave bajo el producto — integra el canvas sin marco */}
+      {/* Timeline de animaciones (modo story) — indicadores, no un segundo control */}
+      <div ref={timelineRef} style={{
+        display: 'flex', gap: 5, flexWrap: 'wrap', justifyContent: 'center', marginTop: 6,
+        opacity: 0, transition: 'opacity 0.3s', pointerEvents: 'none', minHeight: 22,
+      }} />
       <div style={{
         width: '58%', height: 12, margin: '-6px auto 0', borderRadius: '50%',
         background: 'radial-gradient(ellipse at center, var(--cx-obj-shadow) 0%, transparent 70%)',

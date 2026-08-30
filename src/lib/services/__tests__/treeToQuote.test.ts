@@ -145,6 +145,43 @@ describe('treeToQuote: ramas expandidas', () => {
   });
 });
 
+describe('treeToQuote: ciclo 3 — superficie y slider continuo', () => {
+  it('superficie 4 mapea tipoSuperficie y sube el tier del asset', () => {
+    const plan = planFromTreeAnswers('web-3d', 'ver-modelo', {
+      'modelo-existente': 'no-crear',
+      'nivel-detalle': 3,
+      'superficie': 4,
+    });
+    const rta = plan.picks.find(p => p.serviceId === 'RTA-01');
+    expect(rta!.vals['tipoSuperficie']).toBe(4);
+    const tier = derivarTier('RTA-01', rta!.vals);
+    expect(tier).toBe('L');
+  });
+
+  it('superficie 5 (esculpidas) anota la nota de discovery', () => {
+    const plan = planFromTreeAnswers('web-3d', 'ver-modelo', {
+      'modelo-existente': 'no-crear',
+      'superficie': 5,
+    });
+    const rta = plan.picks.find(p => p.serviceId === 'RTA-01');
+    expect(rta!.notaEs).toContain('discovery');
+  });
+
+  it('nivel-detalle continuo interpola el poligono (3.5 ≈ 80k, paso 500)', () => {
+    const plan = planFromTreeAnswers('web-3d', 'ver-modelo', {
+      'modelo-existente': 'no-crear',
+      'nivel-detalle': 3.5,
+    });
+    const rta = plan.picks.find(p => p.serviceId === 'RTA-01');
+    expect(rta!.vals['polyCount']).toBe(80000);
+  });
+
+  it('escenas puede ser 1 (sin minimo artificial)', () => {
+    const plan = planFromTreeAnswers('web-3d', 'scrollytelling', { 'escenas': 1, 'modelo-para-scroll': 'si' });
+    expect(plan.picks[0].vals['numSecciones']).toBe(1);
+  });
+});
+
 describe('treeToQuote: consistencia con el motor de cotización', () => {
   const escenarios: Array<[string, string, Record<string, string | number | boolean>]> = [
     ['ver-modelo', 'ver-modelo', { 'modelo-existente': 'si-tengo', 'formato-archivo': 'step', 'cantidad-piezas': 25, 'interfaz': 'hotspots', 'donde-mostrar': 'feria' }],

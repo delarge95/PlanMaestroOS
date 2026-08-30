@@ -4,7 +4,7 @@
  * Preview 3D interactiva que cambia con los sliders + i18n ES/EN (ciclo 2.1).
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { CSSProperties } from 'react';
 import { ROOT_OPTIONS, WEB3D_LEVEL2, WEB3D_BRANCHES } from '../../data/services/decisionTree';
 import type { TreeQuestion, TreeBranch, TreeOption } from '../../data/services/decisionTree';
@@ -373,27 +373,40 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
   branchId: string; questionId: string; config: NonNullable<TreeQuestion['slider']>;
   value: number; onChange: (n: number) => void; lang: Lang;
 }) {
-  const pct = ((value - config.min) / (config.max - config.min)) * 100;
   const en = lang === 'en';
   const qEn = en ? branchEn(branchId)?.questions?.[questionId] : undefined;
   const tierHint = config.tierMap?.find(t => value <= t.max)?.tier ?? '';
   const preview = config.preview;
+  const continuous = config.continuous === true;
+  const shown = continuous ? Math.round(value * 10) / 10 : value;
+  const pct = ((shown - config.min) / (config.max - config.min)) * 100;
+  const unit = qEn?.unit ?? config.unit;
 
-  // 1.3: progreso para el dolly de estaciones
-  const progress = config.max > config.min ? (value - config.min) / (config.max - config.min) : 0.5;
-
-  // 1.4: ejes decodificados de la variante actual
-  const vi = Math.max(0, value - 1);
-  const colorIdx = vi % VARIANTES.colores.length;
-  const matIdx = Math.floor(vi / VARIANTES.colores.length) % VARIANTES.materiales.length;
-  const accIdx = Math.floor(vi / (VARIANTES.colores.length * VARIANTES.materiales.length)) % VARIANTES.accesorios.length;
-  const totalCombinaciones = VARIANTES.colores.length * VARIANTES.materiales.length * VARIANTES.accesorios.length;
+  // 1.1: snapping magnético a los puntos discretos al soltar
+  const snapOnRelease = () => {
+    if (!continuous) return;
+    const snapped = Math.round(value);
+    if (Math.abs(value - snapped) <= 0.25) onChange(snapped);
+  };
 
   const applyValue = (clientX: number, el: HTMLDivElement) => {
     const r = el.getBoundingClientRect();
     const p = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
-    onChange(Math.round((config.min + p * (config.max - config.min)) / config.step) * config.step);
+    const raw = config.min + p * (config.max - config.min);
+    const step = continuous ? 0.1 : config.step;
+    onChange(Math.round(raw / step) * step);
   };
+
+  // 1.4: selección del configurador (interactiva, sembrada por el slider)
+  const [sel, setSel] = useState({ c: 0, m: 0, a: 0 });
+  useEffect(() => {
+    const vi = Math.max(0, value - 1);
+    setSel({
+      c: vi % VARIANTES.colores.length,
+      m: Math.floor(vi / VARIANTES.colores.length) % VARIANTES.materiales.length,
+      a: Math.floor(vi / (VARIANTES.colores.length * VARIANTES.materiales.length)) % VARIANTES.accesorios.length,
+    });
+  }, [value]);
 
   let mode: PreviewMode | undefined;
   let caption = '';
@@ -404,11 +417,19 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
   } else if (preview === 'piece-count') {
     mode = 'pieces';
     caption = en ? `${value} ${value === 1 ? EN.wizard.pieceSingular : EN.wizard.piecePlural}` : `${value} ${value === 1 ? 'pieza en el ensamblaje' : 'piezas en el ensamblaje'}`;
-  } else if (preview === 'scene-flow') {
-    mode = 'scenes';
-    caption = en ? 'This is how your page will behave on scroll' : 'Así se verá tu página al hacer scroll';
+  } else if (preview === 'story') {
+    mode = 'story';
+    caption = en
+      ? `Your page will play ${value} animated moment${value === 1 ? '' : 's'} — they play in sequence`
+      : `Tu página reproducirá ${value} momento${value === 1 ? '' : 's'} animado${value === 1 ? '' : 's'} — se reproducen en secuencia`;
   } else if (preview === 'variant-swirl') {
     mode = 'variants';
+  } else if (preview === 'surface-morph') {
+    mode = 'surface';
+    const caps = en
+      ? ['Hard prismatic', 'Softening edges', 'Curved surfaces', 'Complex freeform', 'Sculpted — quoted via discovery']
+      : ['Prismática dura', 'Bordes suavizándose', 'Curvas complejas', 'Freeform compleja', 'Esculpidas — se acota en discovery'];
+    caption = caps[Math.round(Math.min(5, Math.max(1, value))) - 1];
   }
 
   return (
@@ -416,35 +437,54 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
       {/* Preview WebGL procedural — reacciona al slider, se puede arrastrar */}
       {mode && (
         <div>
-          <ModelPreview mode={mode} detail={value} pieces={value} progress={progress} variantIndex={value} lang={lang} height={mode === 'scenes' ? 170 : 150} />
+          <ModelPreview mode={mode} detail={shown} pieces={value} story={value} surface={value} variantSel={sel} lang={lang} height={mode === 'story' ? 165 : 150} />
           {mode !== 'variants' && (
             <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)', marginTop: 2 }}>{caption}</div>
           )}
         </div>
       )}
 
-      {/* 1.4: chips de causa — QUÉ cambió en esta variante */}
+      {/* 1.4 rework: configurador interactivo de verdad — los chips se clickean */}
       {mode === 'variants' && (
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
-          <span style={chipStyle}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: VARIANTES.colores[colorIdx], display: 'inline-block' }} />
-            {en ? EN.variantes.colores[colorIdx] : VARIANT_AXIS_ES.colores[colorIdx]}
-          </span>
-          <span style={chipStyle}>{en ? EN.variantes.materiales[matIdx] : VARIANT_AXIS_ES.materiales[matIdx]}</span>
-          <span style={chipStyle}>{en ? EN.variantes.accesorios[accIdx] : VARIANT_AXIS_ES.accesorios[accIdx]}</span>
-          <span style={{ ...chipStyle, color: 'var(--cx-accent)', borderColor: 'var(--cx-accent-border)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ fontSize: 12.5, color: 'var(--cx-accent)', fontWeight: 600, textAlign: 'center' }}>
+            {en ? 'Try it — this is how your customer will configure the product' : 'Pruébalo — así configurará tu cliente el producto'}
+          </div>
+          {([
+            { label: en ? 'Color' : 'Color', opts: en ? EN.variantes.colores : VARIANT_AXIS_ES.colores, selIdx: sel.c, colors: VARIANTES.colores, set: (i: number) => setSel(s => ({ ...s, c: i })) },
+            { label: en ? 'Material' : 'Material', opts: en ? EN.variantes.materiales : VARIANT_AXIS_ES.materiales, selIdx: sel.m, colors: undefined, set: (i: number) => setSel(s => ({ ...s, m: i })) },
+            { label: en ? 'Accessory' : 'Accesorio', opts: en ? EN.variantes.accesorios : VARIANT_AXIS_ES.accesorios, selIdx: sel.a, colors: undefined, set: (i: number) => setSel(s => ({ ...s, a: i })) },
+          ] as const).map(axis => (
+            <div key={axis.label} style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+              <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--cx-faint)', textTransform: 'uppercase', letterSpacing: '0.05em', width: 74, textAlign: 'right' }}>{axis.label}</span>
+              {axis.opts.map((o, i) => (
+                <button key={o} onClick={() => axis.set(i)}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 500, cursor: 'pointer',
+                    padding: '4px 12px', borderRadius: 999, font: 'inherit',
+                    border: axis.selIdx === i ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)',
+                    background: axis.selIdx === i ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)',
+                    color: axis.selIdx === i ? 'var(--cx-accent)' : 'var(--cx-muted)',
+                  }}>
+                  {axis.colors && <span style={{ width: 10, height: 10, borderRadius: '50%', background: axis.colors[i], display: 'inline-block' }} />}
+                  {o}
+                </button>
+              ))}
+            </div>
+          ))}
+          <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)' }}>
             {en
-              ? `Variant ${value} · ${totalCombinaciones} combinations possible`
-              : `Variante ${value} · ${totalCombinaciones} combinaciones posibles`}
-          </span>
+              ? `Your app would have ${value} configuration variants like these`
+              : `Tu app tendría ${value} variantes de configuración como estas`}
+          </div>
         </div>
       )}
 
       {/* Valor actual */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <strong style={{ fontSize: 24, fontWeight: 700, color: 'var(--cx-accent)', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em' }}>
-          {value}
-          <span style={{ fontSize: 14, color: 'var(--cx-muted)', fontWeight: 400, marginLeft: 6 }}>{qEn?.unit ?? config.unit}</span>
+          {shown}
+          <span style={{ fontSize: 14, color: 'var(--cx-muted)', fontWeight: 400, marginLeft: 6 }}>{unit}</span>
         </strong>
         {tierHint && (
           <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--cx-accent)', background: 'var(--cx-accent-soft)', padding: '2px 10px', borderRadius: 6 }}>
@@ -453,51 +493,37 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
         )}
       </div>
 
-      {/* Track */}
+      {/* Track — con puntos de snapping visibles en los sliders continuos */}
       <div
         style={{ position: 'relative', height: 6, borderRadius: 3, background: 'var(--cx-soft)', cursor: 'pointer', touchAction: 'none' }}
         onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); applyValue(e.clientX, e.currentTarget); }}
         onPointerMove={(e) => { if (e.buttons !== 1) return; applyValue(e.clientX, e.currentTarget); }}
+        onPointerUp={snapOnRelease}
       >
         <div style={{
           position: 'absolute', left: 0, top: 0, height: '100%', borderRadius: 3,
           width: `${pct}%`, background: 'linear-gradient(90deg, #0071e3, #5ac8fa)',
-          transition: 'width 0.2s cubic-bezier(0.25,0.8,0.4,1)',
         }} />
+        {continuous && Array.from({ length: Math.round(config.max - config.min) + 1 }, (_, i) => {
+          const sp = config.min + i;
+          const spct = ((sp - config.min) / (config.max - config.min)) * 100;
+          return <div key={sp} style={{ position: 'absolute', top: 1, left: `calc(${spct}% - 2.5px)`, width: 5, height: 5, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 0 0 1px var(--cx-border-strong)' }} />;
+        })}
         <div style={{
           position: 'absolute', top: -8, left: `calc(${pct}% - 11px)`, width: 22, height: 22,
           borderRadius: '50%', background: 'var(--cx-card-solid)', border: '0.5px solid var(--cx-border)',
-          boxShadow: 'var(--cx-shadow-knob)', transition: 'left 0.2s cubic-bezier(0.25,0.8,0.4,1)',
+          boxShadow: 'var(--cx-shadow-knob)',
         }} />
       </div>
 
-      {/* 1.3: mini-scroll — la barra que el cliente "scrollea" con el slider */}
-      {preview === 'scene-flow' && (
-        <div style={{ position: 'relative', height: 22, margin: '2px 8px 0' }}>
-          <div style={{ position: 'absolute', top: 9, left: 0, right: 0, height: 4, borderRadius: 2, background: 'var(--cx-soft)' }} />
-          <div style={{ position: 'absolute', top: 9, left: 0, width: `${pct}%`, height: 4, borderRadius: 2, background: 'var(--cx-accent)', transition: 'width 0.2s' }} />
-          {Array.from({ length: Math.round(value) }, (_, i) => {
-            const p = config.max > config.min ? (i + 1 - config.min) / (config.max - config.min) : 0;
-            return <div key={i} style={{ position: 'absolute', top: 6.5, left: `calc(${Math.min(100, Math.max(0, p * 100))}% - 4.5px)`, width: 9, height: 9, borderRadius: '50%', background: 'var(--cx-accent)', border: '2px solid var(--cx-card-solid)' }} />;
-          })}
-          <div style={{ position: 'absolute', top: 3.5, left: `calc(${pct}% - 7.5px)`, width: 15, height: 15, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: 'var(--cx-shadow-knob)', border: '1px solid var(--cx-border)', transition: 'left 0.2s' }} />
-        </div>
-      )}
-
       {/* Labels min/max */}
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--cx-faint)' }}>
-        <span>{config.min} {qEn?.unit ?? config.unit}</span>
-        <span>{config.max} {qEn?.unit ?? config.unit}</span>
+        <span>{config.min} {unit}</span>
+        <span>{config.max} {unit}</span>
       </div>
     </div>
   );
 }
-
-const chipStyle: CSSProperties = {
-  display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 500,
-  color: 'var(--cx-text)', background: 'var(--cx-card-solid)', border: '1px solid var(--cx-border)',
-  padding: '4px 12px', borderRadius: 999,
-};
 
 /** Nombres ES de los ejes de variante (los EN viven en i18n). */
 const VARIANT_AXIS_ES = {

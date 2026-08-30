@@ -349,6 +349,7 @@ export const VARS_EN: Record<string, Record<string, { question: string; unit?: s
   },
   'RTA-01': {
     polyCount: { question: 'What polygon budget does it need?', unit: 'tris' },
+    tipoSuperficie: { question: 'What is the product surface like?', unit: 'surface' },
     numPiezas: { question: 'How many parts does the model have?', unit: 'parts' },
     fuente: { question: 'Where does the model come from?', opciones: { 'Ya tengo el modelo 3D': 'I already have the 3D model', 'Desde CAD (requiere conversión)': 'From CAD (needs conversion)', 'Desde fotos (requiere modelado)': 'From photos (needs modeling)' } },
     numTexturas: { question: 'How many PBR texture sets?', unit: 'sets' },
