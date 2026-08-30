@@ -7,13 +7,14 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { SERVICES } from '../../data/services/catalogCore';
-import { computeQuote } from '../../data/services/formula';
+import { computeQuote, getRateCard } from '../../data/services/formula';
 import { LAUNCH_DISCOUNT } from '../../data/services/rateCard';
 import { SERVICE_VARIABLES, derivarTier, recommendedValue } from '../../data/services/serviceVariables';
 import type { ServiceVariable } from '../../data/services/serviceVariables';
 import { BRAND } from '../../data/services/branding';
 import type { Currency } from '../../data/services/types';
 import type { WizardPick, WizardQuotePlan } from '../../data/services/treeToQuote';
+import { bundlePct, esquemaPago, RONDAS_NOTA } from '../../lib/services/quoteSummary';
 import { QuoteCta } from './QuoteCta';
 import { GuidedWizard } from './GuidedWizard';
 import { RefDropzone } from './RefDropzone';
@@ -230,7 +231,8 @@ export function CotizadorRedesign() {
   const svc = WEB3D.find(s => s.id === serviceId);
   const variables: ServiceVariable[] = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
   const tier = useMemo(() => serviceId ? derivarTier(serviceId, vals) : null, [serviceId, vals]);
-  const urgencyPct = urgency === '72h' ? 25 : urgency === '24h' ? 50 : 0;
+  // D1 ciclo 2.1: urgencia alineada a docs (+30/+50); descuento lanzamiento −25% se conserva.
+  const urgencyPct = urgency === '72h' ? 30 : urgency === '24h' ? 50 : 0;
   const quoteOpts = useMemo(() => ({
     firstClientLaunch: firstClient, batchUnits: quantity > 1 ? quantity : undefined, urgencyPct,
   }), [firstClient, quantity, urgencyPct]);
@@ -257,17 +259,30 @@ export function CotizadorRedesign() {
     } catch { return null; }
   }).filter((x): x is NonNullable<typeof x> => x !== null), [extras, currency, quoteOpts]);
 
+  // D2 ciclo 2.1: bundle por agrupar servicios (no acumula con urgencia).
+  const numServicios = 1 + extraQuotes.length;
+  const bundle = bundlePct(numServicios, urgencyPct);
+
   const totalProyecto = extraQuotes.length > 0 && quote
-    ? {
-      min: quote.totalMin + extraQuotes.reduce((a, e) => a + e.quote.totalMin, 0),
-      max: quote.totalMax + extraQuotes.reduce((a, e) => a + e.quote.totalMax, 0),
-    }
+    ? (() => {
+      const rawMin = quote.totalMin + extraQuotes.reduce((a, e) => a + e.quote.totalMin, 0);
+      const rawMax = quote.totalMax + extraQuotes.reduce((a, e) => a + e.quote.totalMax, 0);
+      if (bundle === 0) return { min: rawMin, max: rawMax };
+      const card = getRateCard(currency);
+      const step = card.roundStep(rawMin);
+      const factor = 1 - bundle / 100;
+      return { min: Math.max(Math.floor((rawMin * factor) / step) * step, card.minProject), max: Math.ceil((rawMax * factor) / step) * step };
+    })()
     : null;
+
+  // D5 ciclo 2.1: esquema de pago sugerido según el total (piso del rango).
+  const pagoSugerido = quote ? esquemaPago(totalProyecto ? totalProyecto.min : quote.totalMin, currency) : null;
 
   const summary = svc && quote
     ? [`${svc.nameEs} (${tier}): ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)}`,
        ...extraQuotes.map(e => `${e.pick.labelEs} — ${e.quote.serviceName} (${e.tier}): ${fmt(currency, e.quote.totalMin)}–${fmt(currency, e.quote.totalMax)}`),
-       totalProyecto ? `Total proyecto: ${fmt(currency, totalProyecto.min)}–${fmt(currency, totalProyecto.max)}` : '',
+       totalProyecto ? `Total proyecto${bundle ? ` (incluye −${bundle}% bundle)` : ''}: ${fmt(currency, totalProyecto.min)}–${fmt(currency, totalProyecto.max)}` : '',
+       pagoSugerido ? `Pago sugerido: ${pagoSugerido}` : '',
       ].filter(Boolean).join('\n')
     : '';
 
@@ -382,7 +397,7 @@ export function CotizadorRedesign() {
                 border: '1px solid rgba(0,0,0,0.04)', borderRadius: 20, padding: 24,
               }}>
                 <div style={{ display: 'flex', gap: 10 }}>
-                  {([['none', 'Normal'], ['72h', 'Pronto +25%'], ['24h', 'Crítico +50%']] as const).map(([id, label]) => (
+                  {([['none', 'Normal'], ['72h', 'Pronto +30%'], ['24h', 'Crítico +50%']] as const).map(([id, label]) => (
                     <button key={id} onClick={() => setUrgency(id as Urgency)}
                       style={{
                         flex: 1, padding: '12px 16px', borderRadius: 14, font: `600 13px inherit`, cursor: 'pointer',
@@ -452,6 +467,11 @@ export function CotizadorRedesign() {
                           {fmt(currency, totalProyecto!.min)}–{fmt(currency, totalProyecto!.max)}
                         </span>
                       </div>
+                      {bundle > 0 && (
+                        <div style={{ fontSize: 11.5, color: '#30d158', marginTop: 4, textAlign: 'right' }}>
+                          Incluye −{bundle}% por agrupar {numServicios} servicios
+                        </div>
+                      )}
                     </div>
                   )}
                   {quote.entregables.length > 0 && (
@@ -464,6 +484,15 @@ export function CotizadorRedesign() {
                       ))}
                     </div>
                   )}
+                  {/* D3+D5 ciclo 2.1: rondas incluidas y esquema de pago sugerido */}
+                  <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px dashed rgba(0,0,0,0.06)' }}>
+                    {pagoSugerido && (
+                      <div style={{ fontSize: 13, color: '#1d1d1f', padding: '3px 0', display: 'flex', gap: 6 }}>
+                        <span style={{ color: '#0071e3', fontWeight: 600 }}>Pago sugerido:</span> {pagoSugerido}
+                      </div>
+                    )}
+                    <div style={{ fontSize: 13, color: '#1d1d1f', padding: '3px 0' }}>{RONDAS_NOTA}</div>
+                  </div>
                   <div data-noprint style={{ marginTop: 24 }}>
                     <QuoteCta summary={summary} url={typeof window !== 'undefined' ? window.location.href : ''} />
                   </div>
