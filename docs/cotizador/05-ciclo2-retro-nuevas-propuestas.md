@@ -167,16 +167,19 @@ La revisión completa de los 9 docs arrojó **74 variables/drivers**; ~40 ya est
 
 ## 7. Workflow Blender (estado y protocolo)
 
-**Estado verificado hoy (2026-08-29):**
-- ❌ **No hay MCP de Blender instalado** en ZCode (revisados `~/.zcode/cli/config.json`, workspace `.mcp.json`, plugins — sin servidores MCP de 3D). Si quieres uno (p. ej. `blender-mcp` de la comunidad), es instalación manual tuya; yo no instalo servidores MCP por mi cuenta.
-- ✅ **Blender 4.3 instalado** en `C:\Program Files\Blender Foundation\Blender 4.3\blender.exe`, operable headless por CLI: `blender.exe --background --python script.py`.
+**Estado verificado (2026-08-29, corregido tras apunte de Alexander: "tenemos Blender 5.2 con el MCP oficial"):**
+- ✅ **Blender 5.2.0 LTS** (build 2026-07-14) instalado en `D:\Program Files\Blender Foundation\Blender 5.2\blender.exe` — mi primera búsqueda solo miró `C:\Program Files` y PATH, por eso dije 4.3; la 5.2 vive en `D:`. *No está en PATH*: se invoca por ruta absoluta (`--background --python script.py` para headless).
+- ✅ **Addon MCP de Blender instalado** en la configuración de la 5.2: `%APPDATA%\Blender Foundation\Blender\5.2\scripts\addons\blender_mcp_addon.py` — abre un servidor socket en `localhost:9876` dentro de una instancia de Blender EN EJECUCIÓN (se activa desde el panel del addon en Blender).
+- ✅ **`uv`/`uvx` 0.10.9** disponibles (puede lanzar el servidor puente `uvx blender-mcp`).
+- ⚠️ **El puente MCP no está registrado en ZCode para este workspace**: en esta sesión no tengo herramientas MCP de Blender (revisados `~/.zcode/cli/config.json`, `.mcp.json` del workspace, `~/.cursor/mcp.json` — el único MCP del lado cliente que vi registrado es de Cursor con notion/chrome/firecrawl/github, sin blender). **Para usarlo desde aquí falta**: (1) registrar el servidor MCP (`uvx blender-mcp`) en la configuración de MCP de ZCode — acción tuya desde la UI o me autorizas a editar el config de usuario — y (2) tener Blender 5.2 abierto con el servidor del addon iniciado (panel BlenderMCP → Start server). Mientras tanto, mi vía operativa es la CLI headless con la 5.2.
 
-**Cuándo entra Blender (y cuándo no):**
+**Cuándo entra cada vía:**
 - Los previews del cotizador corren en el navegador del CLIENTE → generación **procedural en three.js** (sin Blender) sigue siendo la vía para los sliders: es lo que hace el preview en vivo, en el dispositivo, sin descargas pesadas.
-- **Blender entra** cuando un héroe necesite calidad de producción que la geometría paramétrica no da: topología limpia, bevels/booleans complejos, bakes (normal/AO/curvature), o escenas estáticas de galería. Script Python headless → exporta `.glb` (Draco) → `public/cotizador/models/` → `GLTFLoader`+`DRACOLoader` en ModelPreview (el sistema de canales/canvases no cambia: el GLB reemplaza al héroe procedural y los sliders siguen moviendo materiales, piezas, explosión, hotspots).
+- **Blender headless (CLI)** para generar/bakear assets de producción: script Python → exporta `.glb` (Draco) → `public/cotizador/models/` → `GLTFLoader`+`DRACOLoader` en ModelPreview (el sistema de canales no cambia: el GLB reemplaza al héroe procedural y los sliders siguen moviendo materiales, piezas, explosión, hotspots).
+- **Blender vía MCP** (cuando esté registrado) para trabajo interactivo: inspeccionar la escena abierta por Alexander, ejecutar Python en la instancia viva, capturar el viewport para validar looks antes de exportar.
 
 **Protocolo de reporte** — cada vez que genere algo en 3D declararé:
-1. **Herramienta y versión** (three.js r1xx procedural · Blender 4.3 headless + script).
+1. **Herramienta y versión** (three.js r1xx procedural · Blender 5.2.0 LTS headless + script · Blender 5.2 vía MCP).
 2. **Método** (paramétrico en código / script Blender — con el script commiteado en `scripts/blender/`).
 3. **Ficha del asset** (tris, texturas y resolución, peso del GLB, si lleva Draco).
 4. **Ubicación** (archivo fuente .py + .blend si aplica + .glb final) y **cómo se carga** en la web.
