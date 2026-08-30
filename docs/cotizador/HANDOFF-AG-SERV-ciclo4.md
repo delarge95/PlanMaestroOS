@@ -61,3 +61,27 @@
 - Emojis = prohibidos (iconos SVG en `icons.tsx`). Sin marcos en los canvas. Paleta: #0071e3 claro / #2997ff oscuro.
 - El heredoc de bash rompe con scripts largos → escribir script a archivo temporal y ejecutarlo.
 - `astro check` lento (~2 min): usar solo al cierre de cambios, no por paso.
+
+---
+
+## ACTUALIZACIÓN fin de ciclo 4 (2026-08-30, por agotamiento de créditos)
+
+### Implementado y commitado (0 errores astro, 482 tests verdes)
+- **Fix 1** detalle: morph real — una malla merged-box: etapa 1 edges azules, [1,2] se rellena sólida, [2,3] la MISMA malla morphea box→píldora (`morphToPill`, proyección cápsula + computeVertexNormals), [3,5] igual que antes (aprobado). NO verificado visualmente el tramo 2→3.
+- **Fix 2** superficie: sliders `continuous` (step 0.1, con snapping ±0.25 como detalle) y morph bidireccional robusto (`lastMorphT` local con epsilon 0.0005). NO verificado visualmente el reverse.
+- **Fix 3** acabados: modo `finish` con el HolyBro GLB real (`public/cotizador/models/holybro-x500.glb`, 11.6 MB, sirve 200). Simple=clay · Variado=presets metal/plástico/fibra/acento · Detallado=materiales baked originales (son OSCUROS — si se ven negros, subir exposure). Pregunta `materiales-acabado` con `preview: 'finish'` a nivel de pregunta (nuevo campo en TreeQuestion). VERIFICADO en navegador: dron visible con 'variado'.
+- **Fix 4** piezas: modo `assembly` — `holybro.ts` define HOLYBRO_STEPS (10 pasos grandes→pequeñas con regex sobre nombres: motor→hélice→tubo→frame sup ×4→frame inf→aterrizaje→electrónica→batería→plataforma→tornillería). Slider piezas /5 = paso. Usa presets 'variado' (los baked son oscuros). La jerarquía del GLB SÍ es separable (60 meshes nombradas) — no hace falta tarea de Alexander.
+- **Fix 5** story: chips clickeables (pointer-events on; click → salta al momento y el ciclo sigue). NO verificado el click.
+- **Fix 6** variantes: desbloqueo progresivo — orden: colores 1-6, material 2, material 3, accesorio 2, accesorio 3 (12 combos base); chips bloqueados opacidad 0.45 + disabled + tooltip. NO verificado visualmente.
+- **Shaders (sección 5)**: pregunta `estilo` 1–5 en ver-modelo e interactivo, preview `shader-dial` (1 PBR env alto / 2 estudio / 3 semireal / 4 toon MeshToonMaterial / 5 holograma ShaderMaterial fresnel+scanlines). Precio: estilo ≥4 ⇒ pick extra **RTA-05** (numShaders 1) con label "El look estilizado (shaders)". Tests añadidos (25 en treeToQuote). NO verificado visualmente el dial 4/5.
+- **Sección 3**: `configPreview` en CotizadorRedesign — canvas sobre las variables: WEB-01/RTA-02→hotspots (marcadores pulsantes = vals.numHotspots), WEB-05→story, WEB-04→variants, resto→detail 3. NO verificado visualmente.
+
+### Pendiente de verificar (PRÓXIMO AGENTE, en este orden)
+1. Navegador: detalle 1→2→3 (¿morph real?), superficie bajar (¿remorphea?), story click en chips, variantes con slider bajo (¿chips bloqueados?), estilo 4/5 (¿toon/holograma visibles?), sección 3 (config WEB-01: ¿hotspots pulsan?).
+2. **TRAMPA**: `public/cotizador/models/` se sirve en `/cotizador/models/...` (HOLYBRO_URL ya corregido). Si el GLB da 404 tras build, verificar inclusión en el deploy.
+3. **Riesgo rendimiento**: 6 canvases WebGL simultáneos en ver-modelo (5 previews + fondo). IntersectionObserver pausa los fuera de vista, pero si va lento: limitar DPR o montar solo el preview visible.
+4. Captura de Alexander sobreassembly a piezas bajas: solo el motor se ve (correcto pero poco vistoso) — valorar empezar el paso 1 con motor+mount+brazo.
+5. `npm test` (482) y `astro check` (0) al cierre.
+
+### Si me reemplazas
+Lee este archivo + `docs/cotizador/05` §9-10. Territorio OWN, regla de oro aditiva, commits `[wip]` frecuentes. El servidor de dev se arranca con `npm run dev` (puerto 4321). NO generar modelos 3D sin preguntar a Alexander; tareas 3D pesadas → pasarlas a él (GLB listo para Piezas ya sirve; el yunque sigue pendiente de él para sustituir el cubo→esfera).
