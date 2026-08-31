@@ -123,7 +123,7 @@ export function GuidedWizard({ onComplete, lang = 'es', homeSignal = 0 }: { onCo
           </p>
           {/* ciclo 11: prototipo en vivo — la demo real del trabajo (Twinsight X500) */}
           <div style={{ textAlign: 'center', margin: '0 0 44px' }}>
-            <a href={BRAND.prototypeUrl} target="_blank" rel="noopener noreferrer" className="cx-prototype-link"
+            <a href={BRAND.prototypeUrl} target="_blank" rel="noopener noreferrer" className="cx-prototype-link cx-protolink"
               style={{ fontSize: 14.5, fontWeight: 500, color: 'var(--cx-accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
               {en ? W.prototypeLink : 'Mira un prototipo en vivo: Twinsight X500'}
               <ExternalIcon size={13} />
@@ -158,7 +158,7 @@ export function GuidedWizard({ onComplete, lang = 'es', homeSignal = 0 }: { onCo
             })}
           </div>
           <div style={{ textAlign: 'center', marginTop: 24 }}>
-            <button onClick={() => setRootChoice('no-se')}
+            <button onClick={() => setRootChoice('no-se')} className="cx-softbtn"
               style={{ font: '500 15px inherit', color: 'var(--cx-muted)', background: 'none', border: 'none', cursor: 'pointer', padding: '8px 20px' }}>
               {en ? W.notSure : 'No estoy seguro — ayúdame a decidir →'}
             </button>
@@ -213,7 +213,7 @@ export function GuidedWizard({ onComplete, lang = 'es', homeSignal = 0 }: { onCo
       {/* ═══ NIVEL 2 (web-3d): ¿Qué tipo de experiencia? ═══ */}
       {level === 2 && rootChoice === 'web-3d' && (
         <div style={{ paddingTop: 40 }}>
-          <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }}
+          <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }} className="cx-back"
             style={{ font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>{en ? W.back : '← Atrás'}</button>
           <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 8px' }}>
             {en ? W.l2Title : '¿Qué tipo de web con 3D?'}
@@ -247,7 +247,7 @@ export function GuidedWizard({ onComplete, lang = 'es', homeSignal = 0 }: { onCo
       {/* ═══ NIVEL 3: Preguntas específicas de la rama ═══ */}
       {level === 3 && branch && (
         <div style={{ paddingTop: 40 }}>
-          <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }}
+          <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }} className="cx-back"
             style={{ font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>{en ? W.back : '← Atrás'}</button>
           <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 6px' }}>
             {en ? branchEn(branch.id)?.title ?? branch.title : branch.title}
@@ -304,6 +304,15 @@ export function GuidedWizard({ onComplete, lang = 'es', homeSignal = 0 }: { onCo
       <style>{`
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
         .cx-tip:hover .cx-tip-box, .cx-tip:focus .cx-tip-box { opacity: 1 !important; visibility: visible !important; }
+        /* ciclo 12 — área táctil del "?" invisible (16px visual -> 36px de hit
+           area) sin romper el minimalismo; aplica en todos los viewports. */
+        .cx-tip::before { content: ''; position: absolute; inset: -10px; border-radius: 50%; }
+        /* ciclo 12 — móvil: pills de slots del configurador y opciones técnicas
+           alcanzan 36px de alto táctil (antes ~27px). */
+        @media (max-width: 768px) {
+          button[data-slot-id] { min-height: 36px; }
+          .cx-adv-btn { min-height: 36px; }
+        }
       `}</style>
     </div>
   );
@@ -536,7 +545,7 @@ function QuestionCard({ q, answers, onAnswer, lang, branchId, compact = false }:
                 {adv.type === 'select' && adv.options && (
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {adv.options.map((o) => (
-                      <button key={o.id} onClick={() => onAnswer(adv.id, o.id)} style={{ padding: '5px 12px', borderRadius: 8, font: '400 12px inherit', cursor: 'pointer', border: answers[adv.id] === o.id ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)', background: answers[adv.id] === o.id ? 'var(--cx-accent-soft)' : 'var(--cx-tile)', color: answers[adv.id] === o.id ? 'var(--cx-accent)' : 'var(--cx-muted)' }}>{aEn?.options?.[o.id] ?? o.label}</button>
+                      <button key={o.id} onClick={() => onAnswer(adv.id, o.id)} className="cx-adv-btn" style={{ padding: '5px 12px', borderRadius: 8, font: '400 12px inherit', cursor: 'pointer', border: answers[adv.id] === o.id ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)', background: answers[adv.id] === o.id ? 'var(--cx-accent-soft)' : 'var(--cx-tile)', color: answers[adv.id] === o.id ? 'var(--cx-accent)' : 'var(--cx-muted)' }}>{aEn?.options?.[o.id] ?? o.label}</button>
                     ))}
                   </div>
                 )}

@@ -308,16 +308,17 @@ export function CotizadorRedesign() {
   /** Filtro activo del catálogo ('todas' = sin filtrar). */
   const [familyFilter, setFamilyFilter] = useState<string>('todas');
   /** Tema claro/oscuro (persistido; respeta prefers-color-scheme la primera vez).
-   * Lazy init: lee el atributo pre-pintado por el script inline de cotizador.astro
-   * para que la PRIMERA renderización ya use el tema correcto (sin flash blanco
-   * de `.cx-root` claro sobre el body oscuro antes del useEffect de corrección). */
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    try {
-      const attr = document.documentElement.dataset.cxTheme;
-      if (attr === 'dark' || attr === 'light') return attr;
-    } catch { /* SSR: sin DOM */ }
-    return 'light';
-  });
+   *  Ciclo 12: el estado arranca SIEMPRE en 'light' — exactamente lo que SSR
+   *  renderizó (data-theme + icono luna) — para que la hidratación coincida en
+   *  modo dark (antes: el lazy init leía el attr del <html> ANTES del primer
+   *  render, el árbol cliente difería del server y React regeneraba todo con
+   *  un pageerror "Hydration failed"). El tema real pre-pintado por el script
+   *  inline de cotizador.astro se ADOPTA en el efecto de sync de abajo;
+   *  visualmente no hay flash porque el CSS blindado del ciclo 10b
+   *  (html[data-cx-theme] vars a nivel documento) pinta dark desde el primer
+   *  frame, antes de que la isla hidrate. */
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const themeAdopted = useRef(false);
   /** true si se llegó por el wizard (historial con draft) → muestra 'Editar detalles'. */
   const [canEditDetails, setCanEditDetails] = useState(false);
   useEffect(() => {
@@ -326,8 +327,27 @@ export function CotizadorRedesign() {
   }, [serviceId]);
 
   useEffect(() => {
+    // Primera corrida: ADOPTA el atributo pre-pintado por cotizador.astro para
+    // que el estado JS alcance al <html> (icono sol/luna, fondo WebGL). Si ya
+    // coincide, cae al sync de abajo sin escribir nada.
+    if (!themeAdopted.current) {
+      themeAdopted.current = true;
+      try {
+        const attr = document.documentElement.dataset.cxTheme;
+        if ((attr === 'dark' || attr === 'light') && attr !== theme) {
+          setTheme(attr); // re-render; la siguiente corrida sincroniza todo
+          return;
+        }
+      } catch { /* sin DOM */ }
+    }
+    // Sincroniza el atributo del <html> con el estado del toggle: sin esto,
+    // html[data-cx-theme] queda desfasado y el CSS blindado del ciclo 10b
+    // (html[data-cx-theme='dark'] .cx-root) pisa el tema elegido por el usuario.
+    try {
+      document.documentElement.dataset.cxTheme = theme;
+      localStorage.setItem('cx-theme', theme);
+    } catch { /* almacenamiento no disponible */ }
     document.body.style.background = theme === 'dark' ? '#0b0b0f' : '#fbfbfd';
-    try { localStorage.setItem('cx-theme', theme); } catch { /* almacenamiento no disponible */ }
   }, [theme]);
 
   // ── Historial (ciclo 6): restaura config ↔ wizard al navegar atrás/adelante ──
@@ -571,6 +591,31 @@ export function CotizadorRedesign() {
         @media (max-width: 768px) {
           .cx-config { display: flex !important; flex-direction: column; }
           .cx-config-aside { position: static !important; width: 100% !important; max-height: none !important; overflow: visible !important; }
+          /* ciclo 12 — NAV móvil: los switches envuelven en vez de desbordar
+             (scrollWidth <= innerWidth) y todo botón del nav alcanza 40px de
+             alto táctil (antes: 17-32px). El !important solo vence al inline. */
+          .cx-nav { flex-wrap: wrap; row-gap: 8px !important; padding: 14px 16px !important; }
+          .cx-nav-right { flex-wrap: wrap; justify-content: flex-end; row-gap: 6px !important; }
+          .cx-nav button { min-height: 40px; min-width: 40px; }
+          .cx-nav-right button { min-height: 40px; }
+          /* back-links ("← Atrás", "← Cambiar servicio") con área táctil 40px */
+          .cx-back { min-height: 40px; }
+          /* chips de filtro del catálogo: 35px -> 40px de alto táctil */
+          .cx-chip { min-height: 40px; }
+          /* enlaces secundarios y botón fantasma: >=40px de alto táctil */
+          .cx-protolink { min-height: 40px; }
+          .cx-softbtn { min-height: 40px; }
+        }
+        /* ciclo 12 — pantallas táctiles en layout desktop (teléfono landscape,
+           tablet): el nav mantiene el mínimo táctil de 40px; el mouse de
+           escritorio no se ve afectado (pointer: fine). */
+        @media (pointer: coarse) {
+          .cx-nav button { min-height: 40px; min-width: 40px; }
+        }
+        /* ciclo 12 — más aire lateral en móviles estrechos (360px): menos
+           padding del contenedor de contenido, sin tocar desktop. */
+        @media (max-width: 640px) {
+          .cx-content { padding: 0 16px; }
         }
         @media (min-width: 769px) { .cx-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; max-width: 1200px !important; } }
         /* ciclo 11 — PRINT/PDF limpio: documento 1-2 páginas con fondo blanco,
@@ -598,8 +643,10 @@ export function CotizadorRedesign() {
         @media (min-width: 1440px) { .cx-content { max-width: 1400px; } }
       `}</style>
 
-      {/* NAV minimal */}
-      <nav data-noprint style={{
+      {/* NAV minimal — ciclo 12: clases cx-nav/cx-nav-right para que en móvil
+          los switches envuelvan a una segunda línea en vez de desbordar el
+          viewport (425px de grupo no caben en 360-430px). */}
+      <nav data-noprint className="cx-nav" style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '20px 32px', position: 'relative', zIndex: 2,
         borderBottom: '1px solid var(--cx-border)',
@@ -614,7 +661,7 @@ export function CotizadorRedesign() {
             {BRAND.name}
           </button>
         </div>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+        <div className="cx-nav-right" style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
           <button onClick={() => { setMode('guided'); setServiceId(''); }}
             style={{ font: '600 14px inherit', color: mode === 'guided' ? 'var(--cx-accent)' : 'var(--cx-muted)', background: 'none', border: 'none', cursor: 'pointer' }}>
             {lang === 'es' ? 'Cotizar' : EN.navQuote}
@@ -662,7 +709,7 @@ export function CotizadorRedesign() {
           <section style={{ paddingTop: 40, paddingBottom: 60, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,380px)', gap: 32, alignItems: 'start' }} className="cx-config">
             {/* Panel izquierdo: configuración */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }} data-noprint
+              <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }} data-noprint className="cx-back"
                 style={{ alignSelf: 'flex-start', font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 8 }}>
                 {lang === 'es' ? '← Cambiar servicio' : EN.changeService}
               </button>
@@ -846,7 +893,7 @@ export function CotizadorRedesign() {
                   <p style={{ fontSize: 11, color: 'var(--cx-faint)', marginTop: 16, textAlign: 'center' }}>{lang === 'es' ? 'Rango orientativo · válida 15 días' : EN.rangeValidity}</p>
                   {/* ciclo 11: prototipo en vivo junto al CTA — la demo real del trabajo */}
                   <p data-noprint style={{ fontSize: 12, textAlign: 'center', margin: '8px 0 0' }}>
-                    <a href={BRAND.prototypeUrl} target="_blank" rel="noopener noreferrer" className="cx-prototype-link"
+                    <a href={BRAND.prototypeUrl} target="_blank" rel="noopener noreferrer" className="cx-prototype-link cx-protolink"
                       style={{ color: 'var(--cx-accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, justifyContent: 'center' }}>
                       {lang === 'es' ? '¿Dudas del trabajo? Ve el prototipo: Twinsight X500' : EN.prototypeAside}
                       <ExternalIcon size={12} />
@@ -869,7 +916,7 @@ export function CotizadorRedesign() {
             <p style={{ fontSize: 16, color: 'var(--cx-muted)', margin: '0 0 28px' }}>{lang === 'es' ? 'Web 3D, visores, configuradores, herramientas.' : EN.catalogSubtitle}</p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32 }}>
               {['todas', ...CATALOG_FAMILIES].map(f => (
-                <button key={f} onClick={() => setFamilyFilter(f)}
+                <button key={f} onClick={() => setFamilyFilter(f)} className="cx-chip"
                   style={{
                     padding: '8px 18px', borderRadius: 999, font: `500 13.5px inherit`, cursor: 'pointer',
                     border: familyFilter === f ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
