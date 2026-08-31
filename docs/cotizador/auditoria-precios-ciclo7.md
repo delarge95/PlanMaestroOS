@@ -22,6 +22,8 @@
 
 ## 2. Preguntas INFORMATIVAS (hoy no cambian el precio) — decisión pendiente
 
+> **Ciclo 9 (2026-08-31): decisión tomada — las informativas se RETIRAN.** Ver §5.
+
 | Pregunta | Dónde | Recomendación |
 |---|---|---|
 | ¿Cómo se cuenta la historia? (tono) | scrollytelling | **Mantener**: califica el proyecto para el brief y no confunde. Etiquetarla como "(orientativo)" si se quiere ser estricto |
@@ -42,3 +44,24 @@ Ninguna de estas rompe la cotización: todas se envían en el resumen de WhatsAp
 - `derivarTier` + `computeQuote` son las ÚNICAS fuentes de números (un solo motor para wizard, config y catálogo).
 - Los rangos del PDF de la agencia se generaron con el mismo `computeQuote` sobre la rate card COP (script `propuesta-agencia/calc-rangos.ts`).
 - Tests de consistencia: todo pick del wizard verifica que sus variables existan en `SERVICE_VARIABLES` y que coticen > 0 (25 tests en `treeToQuote.test.ts`).
+
+## 5. Ciclo 9 — preguntas informativas retiradas
+
+Decisión de producto con el feedback de Alexander: si una pregunta no mueve el precio, no va en el cotizador. Retiradas (2026-08-31):
+
+| Pregunta retirada | Rama | Razón |
+|---|---|---|
+| ¿Cómo se cuenta la historia? (`tono-historia`) | scrollytelling | La historia se cuenta igual (cámara/transformación/texto es decisión de diseño); no movía el precio |
+| Interacción visual rotar / rotar-zoom / auto (`interaccion-visual`) | ver-modelo | Las tres opciones cotizaban igual; retirada COMPLETA (pregunta y avanzados `fondo`/`interfaz`) |
+| `pbr` + `iluminacion` (avanzados) | ver-modelo · materiales-acabado | Informativas, sin mapeo a variables |
+| `cms` + `rendimiento` (avanzados) | ver-modelo · donde-mostrar | Informativas. La pregunta `donde-mostrar` SE CONSERVA: `feria`/`movil` suben el target a "Desktop + móvil" |
+| `piezas-moviles` + `piezas-desmontables` (avanzados) | ver-modelo · interactivo · cantidad-piezas | Sin mapeo a RTA-03/RTA-06; la vista explosionada se muestra en el preview del slider igualmente |
+| `rendimiento` (avanzado) | interactivo · plataforma | Informativa |
+
+Consecuencias en el motor:
+
+- `planVerModelo` ya no lee `interfaz` → `numHotspots: 0` por defecto; los hotspots se ajustan en el panel de configuración (variable WEB-01 visible).
+- Los avanzados `formato-archivo`/`calidad-fuente` de `modelo-existente` SE CONSERVAN en todas las ramas: sí deciden RTA-01 vs CAD-01.
+- El avanzado `datos` de `usuarios` en web-app SE CONSERVA: define `WEB-04.fuenteDatos`.
+- El ESPEJO EN (`TREE_EN` en i18n.ts) se depuró con los mismos ids. Los ids retirados en respuestas residuales (compartidas por link) se ignoran sin romper la cotización (test del ciclo 9).
+- Los slots `filtros-piezas` y `color-cuaternario` del preview de variantes también se retiraron (misma razón: no aportaban a la cotización ni a la demo).
