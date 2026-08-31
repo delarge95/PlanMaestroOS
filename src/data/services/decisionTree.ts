@@ -142,13 +142,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         slider: { min: 1, max: 5, step: 0.1, unit: 'superficie', preview: 'surface-morph', continuous: true,
           tierMap: [{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
       },
-      {
-        id: 'estilo',
-        question: '¿Qué estilo visual buscas?',
-        help: 'De materiales físicamente realistas a looks estilizados con shaders.',
-        type: 'slider',
-        slider: { min: 1, max: 5, step: 1, unit: 'estilo', preview: 'shader-dial' },
-      },
+      // 'estilo' retirada por decisión de producto (2026-08-30): no aportaba al precio.
       {
         id: 'cantidad-piezas',
         question: '¿Cuántas piezas o partes tiene tu producto?',
@@ -194,7 +188,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
           { id: 'fondo', label: 'Fondo del visor', type: 'select',
             options: [{id:'transparente',label:'Transparente (integrado en tu web)'},{id:'solido',label:'Color solido'},{id:'gradiente',label:'Gradiente suave'},{id:'entorno',label:'Entorno HDRI'}] },
           { id: 'interfaz', label: 'Interfaz del visor', type: 'select',
-            options: [{id:'limpio',label:'Limpio (sin controles)'},{id:'controles',label:'Con controles (zoom, reset)'},{id:'hotspots',label:'Con hotspots (info en partes)'}] },
+            options: [{id:'limpio',label:'Limpio (sin controles)'},{id:'controles',label:'Con controles (zoom, reset)'},{id:'hotspots',label:'Con puntos de información (hotspots)'}] },
         ],
       },
       {
@@ -267,13 +261,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         slider: { min: 1, max: 5, step: 0.1, unit: 'superficie', preview: 'surface-morph', continuous: true,
           tierMap: [{max:2,tier:'S'},{max:3,tier:'M'},{max:4,tier:'L'},{max:5,tier:'XL'}] },
       },
-      {
-        id: 'estilo',
-        question: '¿Qué estilo visual buscas?',
-        help: 'De materiales físicamente realistas a looks estilizados con shaders.',
-        type: 'slider',
-        slider: { min: 1, max: 5, step: 1, unit: 'estilo', preview: 'shader-dial' },
-      },
+      // 'estilo' retirada por decisión de producto (2026-08-30): no aportaba al precio.
       {
         id: 'cantidad-piezas',
         question: '¿Cuántas piezas o partes tiene tu producto?',

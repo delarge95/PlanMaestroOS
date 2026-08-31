@@ -5,16 +5,16 @@
  */
 
 import { useState, useMemo, useEffect } from 'react';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, Dispatch, SetStateAction } from 'react';
 import { ROOT_OPTIONS, WEB3D_LEVEL2, WEB3D_BRANCHES } from '../../data/services/decisionTree';
 import type { TreeQuestion, TreeBranch, TreeOption } from '../../data/services/decisionTree';
 import { planFromTreeAnswers } from '../../data/services/treeToQuote';
 import type { WizardQuotePlan } from '../../data/services/treeToQuote';
-import { EN, TREE_EN, VARIANTES } from '../../data/services/i18n';
+import { EN, TREE_EN } from '../../data/services/i18n';
 import type { Lang } from '../../data/services/i18n';
 import { BRAND } from '../../data/services/branding';
-import { ModelPreview } from './ModelPreview';
-import type { PreviewMode } from './ModelPreview';
+import { ModelPreview, VARIANT_SLOTS, VARIANT_PARTS } from './ModelPreview';
+import type { PreviewMode, VariantSlotsState } from './ModelPreview';
 import { TreeIcon, ChatIcon, MailIcon, GearIcon } from './icons';
 
 type Answers = Record<string, string | number | boolean>;
@@ -385,6 +385,15 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
 }) {
   const en = lang === 'en';
   const qEn = en ? branchEn(branchId)?.questions?.[questionId] : undefined;
+
+  // ciclo 5: estado de SLOTS ADITIVOS del configurador (sin ejes fijos).
+  // Los slots desbloqueados nacen activos; apagar uno quita su efecto en vivo.
+  // Las 3 luces son excluyentes: nace activa solo la primera (luz de estudio).
+  const [slots, setSlots] = useState<VariantSlotsState>({
+    on: VARIANT_SLOTS.map((_, i) => defaultSlotOn(i)),
+    colorPieza: { part: 1, color: '#3a3f47' },
+    colorGlobal: '#eef0f2',
+  });
   const tierHint = config.tierMap?.find(t => value <= t.max)?.tier ?? '';
   const preview = config.preview;
   const continuous = config.continuous === true;
@@ -407,16 +416,8 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
     onChange(Math.round(raw / step) * step);
   };
 
-  // 1.4: selección del configurador (interactiva, sembrada por el slider)
-  const [sel, setSel] = useState({ c: 0, m: 0, a: 0 });
-  useEffect(() => {
-    const vi = Math.max(0, value - 1);
-    setSel({
-      c: vi % VARIANTES.colores.length,
-      m: Math.floor(vi / VARIANTES.colores.length) % VARIANTES.materiales.length,
-      a: Math.floor(vi / (VARIANTES.colores.length * VARIANTES.materiales.length)) % VARIANTES.accesorios.length,
-    });
-  }, [value]);
+  // (ciclo 5: la selección por ejes color/material/accesorio fue sustituida por
+  // los slots aditivos — estado `slots` al inicio del componente)
 
   let mode: PreviewMode | undefined;
   let caption = '';
@@ -458,59 +459,18 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
       {/* Preview WebGL procedural — reacciona al slider, se puede arrastrar */}
       {mode && (
         <div>
-          <ModelPreview mode={mode} detail={shown} pieces={value} story={value} surface={value} variantSel={sel} lang={lang} height={mode === 'story' ? 165 : 150} />
+          <ModelPreview mode={mode} detail={shown} pieces={value} story={value} surface={value}
+            variantSlots={mode === 'variants' ? slots : undefined} estilo={value} lang={lang}
+            height={mode === 'story' ? 165 : 150} />
           {mode !== 'variants' && (
             <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)', marginTop: 2 }}>{caption}</div>
           )}
         </div>
       )}
 
-      {/* 1.4 rework: configurador interactivo — chips clickeables con DESBLOQUEO progresivo */}
-      {mode === 'variants' && (() => {
-        // orden de desbloqueo: colores 0..5, material 1, material 2, accesorio 1, accesorio 2
-        const unlocked = Math.max(0, value - 1); // slot 0 de cada eje siempre activo
-        const orderOf = (axis: number, i: number) => (i === 0 ? -1 : axis === 0 ? i - 1 : axis === 1 ? 5 + i : 7 + i);
-        const locked = (axis: number, i: number) => orderOf(axis, i) >= unlocked;
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <div style={{ fontSize: 12.5, color: 'var(--cx-accent)', fontWeight: 600, textAlign: 'center' }}>
-              {en ? 'Try it — this is how your customer will configure the product' : 'Pruébalo — así configurará tu cliente el producto'}
-            </div>
-            {([
-              { axis: 0, label: en ? 'Color' : 'Color', opts: en ? EN.variantes.colores : VARIANT_AXIS_ES.colores, selIdx: sel.c, colors: VARIANTES.colores, set: (i: number) => setSel(s => ({ ...s, c: i })) },
-              { axis: 1, label: en ? 'Material' : 'Material', opts: en ? EN.variantes.materiales : VARIANT_AXIS_ES.materiales, selIdx: sel.m, colors: undefined, set: (i: number) => setSel(s => ({ ...s, m: i })) },
-              { axis: 2, label: en ? 'Accessory' : 'Accesorio', opts: en ? EN.variantes.accesorios : VARIANT_AXIS_ES.accesorios, selIdx: sel.a, colors: undefined, set: (i: number) => setSel(s => ({ ...s, a: i })) },
-            ] as const).map(axis => (
-              <div key={axis.label} style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
-                <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--cx-faint)', textTransform: 'uppercase', letterSpacing: '0.05em', width: 74, textAlign: 'right' }}>{axis.label}</span>
-                {axis.opts.map((o, i) => {
-                  const isLocked = locked(axis.axis, i);
-                  return (
-                    <button key={o} onClick={() => !isLocked && axis.set(i)} disabled={isLocked} title={isLocked ? (en ? 'Unlocks with more variants' : 'Se desbloquea con más variantes') : undefined}
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 500,
-                        cursor: isLocked ? 'not-allowed' : 'pointer',
-                        padding: '4px 12px', borderRadius: 999, font: 'inherit',
-                        border: !isLocked && axis.selIdx === i ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)',
-                        background: !isLocked && axis.selIdx === i ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)',
-                        color: isLocked ? 'var(--cx-faint)' : !isLocked && axis.selIdx === i ? 'var(--cx-accent)' : 'var(--cx-muted)',
-                        opacity: isLocked ? 0.45 : 1,
-                      }}>
-                      {axis.colors && <span style={{ width: 10, height: 10, borderRadius: '50%', background: axis.colors[i], display: 'inline-block' }} />}
-                      {o}
-                    </button>
-                  );
-                })}
-              </div>
-            ))}
-            <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)' }}>
-              {en
-                ? `With ${value} variants, ${Math.min(value, 12)} of the 12 base combinations unlock — more variants, more options for your customer`
-                : `Con ${value} variantes se desbloquean ${Math.min(value, 12)} de las 12 combinaciones base — más variantes, más opciones para tu cliente`}
-            </div>
-          </div>
-        );
-      })()}
+      {/* ciclo 5: configurador por SLOTS ADITIVOS — cada slot una función única,
+          desbloqueados por el slider, ON/OFF con click, efecto en tiempo real */}
+      {mode === 'variants' && <VariantSlotsPanel value={value} lang={lang} slots={slots} setSlots={setSlots} />}
 
       {/* Valor actual */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -557,9 +517,148 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
   );
 }
 
-/** Nombres ES de los ejes de variante (los EN viven en i18n). */
-const VARIANT_AXIS_ES = {
-  colores: ['Grafito', 'Blanco ártico', 'Azul océano', 'Coral', 'Verde bosque', 'Arena'],
-  materiales: VARIANTES.materiales.map(m => m.es),
-  accesorios: VARIANTES.accesorios.map(a => a.es),
-};
+/** Colores de los swatches de los slots de color (ES/EN iguales, hex). */
+const SLOT_COLORS = ['#3a3f47', '#eef0f2', '#0071e3', '#ff6b57', '#2e7d4f', '#c9b99a'];
+
+/** Estado inicial de un slot: activo, salvo las luces (excluyentes) donde solo la primera nace activa. */
+const defaultSlotOn = (i: number) =>
+  VARIANT_SLOTS[i].kind === 'luz' ? i === VARIANT_SLOTS.findIndex(s => s.kind === 'luz') : true;
+
+/**
+ * Panel de SLOTS ADITIVOS del configurador (ciclo 5).
+ * Regla de desbloqueo (documentada en el reporte): N desbloquea N slots
+ * (con el slider en su mínimo de 2 ya se ven los 2 primeros; N>13 → chip "+N-13").
+ * Los desbloqueados nacen ACTIVOS y se apagan con un click (estado ON/OFF
+ * claro por borde/opacidad, sin emojis). Las 3 luces son excluyentes.
+ */
+function VariantSlotsPanel({ value, lang, slots, setSlots }: {
+  value: number; lang: Lang; slots: VariantSlotsState; setSlots: Dispatch<SetStateAction<VariantSlotsState>>;
+}) {
+  const en = lang === 'en';
+  const N = Math.max(0, Math.round(value));
+  const unlocked = Math.min(VARIANT_SLOTS.length, N);
+
+  // Al subir el slider, los slots nuevos aparecen ACTIVOS (respetando la
+  // exclusividad de las luces); los ya desbloqueados conservan su estado.
+  useEffect(() => {
+    setSlots(s => {
+      const on = VARIANT_SLOTS.map((_, i) => (i < unlocked ? (s.on[i] ?? defaultSlotOn(i)) : false));
+      return { ...s, on };
+    });
+  }, [unlocked, setSlots]);
+
+  const toggleSlot = (i: number) => setSlots(s => {
+    const on = [...s.on];
+    on[i] = !on[i];
+    // luces excluyentes: activar una apaga las otras
+    if (on[i] && VARIANT_SLOTS[i].kind === 'luz') {
+      VARIANT_SLOTS.forEach((sl, j) => { if (sl.kind === 'luz' && j !== i) on[j] = false; });
+    }
+    return { ...s, on };
+  });
+
+  const setColorPieza = (part: number, color: string) => setSlots(s => ({ ...s, colorPieza: { part, color } }));
+  const setColorGlobal = (color: string) => setSlots(s => ({ ...s, colorGlobal: color }));
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ fontSize: 12.5, color: 'var(--cx-accent)', fontWeight: 600, textAlign: 'center' }}>
+        {en ? 'Try it — each slot adds a real capability your customer can toggle' : 'Pruébalo — cada slot añade una capacidad real que tu cliente puede encender o apagar'}
+      </div>
+
+      {/* Chips de slots */}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
+        {VARIANT_SLOTS.slice(0, unlocked).map((slot, i) => {
+          const active = !!slots.on[i];
+          return (
+            <button key={slot.id} onClick={() => toggleSlot(i)}
+              title={active
+                ? (en ? 'Click to turn off' : 'Clic para apagar')
+                : (en ? 'Click to turn on' : 'Clic para encender')}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600,
+                padding: '4px 12px', borderRadius: 999, font: 'inherit', cursor: 'pointer',
+                border: active ? '1.5px solid var(--cx-accent)' : '1px dashed var(--cx-border-strong)',
+                background: active ? 'var(--cx-accent-soft)' : 'transparent',
+                color: active ? 'var(--cx-accent)' : 'var(--cx-faint)',
+                opacity: active ? 1 : 0.55,
+                transition: 'opacity 0.2s, border-color 0.2s',
+              }}>
+              {en ? slot.en : slot.es}
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.05em' }}>{active ? 'ON' : 'OFF'}</span>
+            </button>
+          );
+        })}
+        {/* Más allá de los 13 slots: chip informativo no clicable */}
+        {N > VARIANT_SLOTS.length && (
+          <span title={en ? 'Quoted as additional variants' : 'Se cotizan como variantes adicionales'}
+            style={{
+              display: 'inline-flex', alignItems: 'center', fontSize: 12, fontWeight: 700,
+              padding: '4px 12px', borderRadius: 999,
+              border: '1px dashed var(--cx-border-strong)', color: 'var(--cx-faint)',
+              opacity: 0.8, cursor: 'default',
+            }}>
+            +{N - VARIANT_SLOTS.length}
+          </span>
+        )}
+      </div>
+
+      {/* Controles de color de los slots activos */}
+      {slots.on[0] && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', justifyContent: 'center' }}>
+            {VARIANT_PARTS.map((p, i) => (
+              <button key={p.es} onClick={() => setSlots(s => ({ ...s, colorPieza: { part: i, color: s.colorPieza?.color ?? '#3a3f47' } }))}
+                style={{
+                  fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 999, font: 'inherit', cursor: 'pointer',
+                  border: slots.colorPieza?.part === i ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)',
+                  background: slots.colorPieza?.part === i ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)',
+                  color: slots.colorPieza?.part === i ? 'var(--cx-accent)' : 'var(--cx-muted)',
+                }}>
+                {en ? p.en : p.es}
+              </button>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+            {SLOT_COLORS.map(c => (
+              <button key={c} onClick={() => setColorPieza(slots.colorPieza?.part ?? 1, c)}
+                aria-label={`color ${c}`}
+                style={{
+                  width: 20, height: 20, borderRadius: '50%', cursor: 'pointer', padding: 0,
+                  border: slots.colorPieza?.color === c ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                  background: c,
+                }} />
+            ))}
+            <input type="color" value={slots.colorPieza?.color ?? '#3a3f47'}
+              onChange={e => setColorPieza(slots.colorPieza?.part ?? 1, e.target.value)}
+              style={{ width: 26, height: 26, border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}
+              title={en ? 'Custom color' : 'Color personalizado'} />
+          </div>
+        </div>
+      )}
+      {slots.on[1] && (
+        <div style={{ display: 'flex', gap: 6, alignItems: 'center', justifyContent: 'center' }}>
+          {SLOT_COLORS.map(c => (
+            <button key={c} onClick={() => setColorGlobal(c)}
+              aria-label={`color ${c}`}
+              style={{
+                width: 20, height: 20, borderRadius: '50%', cursor: 'pointer', padding: 0,
+                border: slots.colorGlobal === c ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                background: c,
+              }} />
+          ))}
+          <input type="color" value={slots.colorGlobal ?? '#eef0f2'}
+            onChange={e => setColorGlobal(e.target.value)}
+            style={{ width: 26, height: 26, border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}
+            title={en ? 'Custom color' : 'Color personalizado'} />
+        </div>
+      )}
+
+      <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)' }}>
+        {en
+          ? 'Each variant adds a real capability to the configurator; extras are quoted as additional variants.'
+          : 'Cada variante añade una capacidad real al configurador; las extra se cotizan como variantes adicionales.'}
+      </div>
+    </div>
+  );
+}

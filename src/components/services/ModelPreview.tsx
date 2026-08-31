@@ -12,19 +12,68 @@
  *            y se reproducen en secuencia (giro, explosión, primer plano, órbita,
  *            salto, despliegue, tumble, presentación...). Timeline de chips bajo
  *            el canvas con la animación activa resaltada.
- * - variants: producto configurable; la selección la manda el chip interactivo.
- * - surface: morph continuo cubo→esfera (placeholder del yunque de Alexander).
+ * - variants: producto configurable. Ciclo 5: SLOTS ADITIVOS (variantSlots,
+ *            cada slot una función única, se activan/apagan en vivo); el
+ *            variantSel por ejes queda por compatibilidad.
+ * - surface: yunque REAL (yunke.glb) con morph por influencias; el morph
+ *            procedural cubo→esfera queda como fallback si el GLB falla.
+ * - finish / assembly: HolyBro X500 real — instancia INDEPENDIENTE por canvas
+ *            (loadHolybroInstance → clone(true)) para que el revelado por
+ *            piezas de un canvas no envenene al otro (fix ciclo 5).
  */
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { EN, TRIS_ETIQUETAS } from '../../data/services/i18n';
-import { loadHolybro, applyFinish, tagAssemblySteps, revealSteps, HOLYBRO_STEPS } from './holybro';
-import type { FinishKind } from './holybro';
+import { loadHolybroInstance, applyFinish, buildPieceOrder, revealPieces, ensureVariadoSet, HOLYBRO_STEPS } from './holybro';
+import type { FinishKind, PieceGroup, VariadoSet } from './holybro';
+import { loadAnvilInstance, applySurfaceMorph, ANVIL_MORPH_NODE } from './anvil';
 import type { Lang } from '../../data/services/i18n';
 
 export type PreviewMode = 'detail' | 'pieces' | 'story' | 'variants' | 'surface' | 'finish' | 'assembly' | 'hotspots' | 'shader-dial';
+
+// ═══════════════════════════════════════════════════════════════
+// Variantes (ciclo 5): SLOTS ADITIVOS — cada slot una función única,
+// se desbloquean con el slider, se activan/apagan en vivo.
+// ═══════════════════════════════════════════════════════════════
+export interface VariantSlot {
+  id: string;
+  es: string;
+  en: string;
+  kind: 'color-pieza' | 'color-global' | 'toggle' | 'luz';
+}
+export const VARIANT_SLOTS: VariantSlot[] = [
+  { id: 'color-pieza', es: 'Color por pieza', en: 'Per-part color', kind: 'color-pieza' },
+  { id: 'color-global', es: 'Color global', en: 'Global color', kind: 'color-global' },
+  { id: 'material-metalico', es: 'Material metálico', en: 'Metallic material', kind: 'toggle' },
+  { id: 'material-goma', es: 'Material goma', en: 'Rubber material', kind: 'toggle' },
+  { id: 'accesorio-anillo', es: 'Accesorio: anillo', en: 'Accessory: ring', kind: 'toggle' },
+  { id: 'accesorio-tapa', es: 'Accesorio: tapa', en: 'Accessory: cap', kind: 'toggle' },
+  { id: 'shader-rayos-x', es: 'Shader: rayos X', en: 'Shader: X-ray', kind: 'toggle' },
+  { id: 'shader-clay', es: 'Shader: clay', en: 'Shader: clay', kind: 'toggle' },
+  { id: 'shader-lineart', es: 'Shader: line-art', en: 'Shader: line-art', kind: 'toggle' },
+  { id: 'shader-deform', es: 'Shader: deformación', en: 'Shader: deform', kind: 'toggle' },
+  { id: 'luz-estudio', es: 'Luz de estudio', en: 'Studio lighting', kind: 'luz' },
+  { id: 'luz-natural', es: 'Luz natural', en: 'Natural lighting', kind: 'luz' },
+  { id: 'luz-dramatica', es: 'Luz dramática', en: 'Dramatic lighting', kind: 'luz' },
+];
+/** Piezas seleccionables del slot color-pieza (índice = hijo de prod). */
+export const VARIANT_PARTS = [
+  { es: 'Base', en: 'Base' },
+  { es: 'Cuerpo', en: 'Body' },
+  { es: 'Aro', en: 'Ring' },
+  { es: 'Tapa', en: 'Cap' },
+] as const;
+
+export interface VariantSlotsState {
+  /** ON/OFF por slot (índice = posición en VARIANT_SLOTS). */
+  on: boolean[];
+  /** Slot color-pieza: pieza (0=Base,1=Cuerpo,2=Aro,3=Tapa) + color hex. */
+  colorPieza?: { part: number; color: string };
+  /** Slot color-global: color hex que tiñe todo el modelo. */
+  colorGlobal?: string;
+}
 
 /** Catálogo de animaciones del modo story (1.3 replante). */
 export const STORY_ANIMS = [
@@ -55,7 +104,7 @@ const smooth = (x: number) => { const t = Math.max(0, Math.min(1, x)); return t 
 /** Escala de un grupo cuya ventana de aparición es [a, b] sobre el slider d. */
 const grow = (d: number, a: number, b: number) => smooth((d - a) / (b - a));
 
-export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface = 1, variantSel, finish = 'detallado', estilo = 2, hotspots = 0, lang = 'es', height = 150 }: {
+export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface = 1, variantSel, variantSlots, finish = 'detallado', estilo = 2, hotspots = 0, lang = 'es', height = 150 }: {
   mode: PreviewMode;
   /** Slider continuo 1–5 (detail). */
   detail?: number;
@@ -63,13 +112,15 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
   pieces?: number;
   /** Nº de animaciones en la línea de tiempo 1–10 (story). */
   story?: number;
-  /** Slider superficie 1–5 continuo (surface): 1 = cubo duro, 5 = esfera orgánica. */
+  /** Slider superficie 1–5 continuo (surface): 1 = prismática, 5 = esculpida. */
   surface?: number;
-  /** Selección del configurador (variants): índices de color/material/accesorio. */
+  /** Selección del configurador (variants): índices de color/material/accesorio. Legado. */
   variantSel?: { c: number; m: number; a: number };
+  /** Slots aditivos del configurador (variants, ciclo 5). Camino nuevo. */
+  variantSlots?: VariantSlotsState;
   /** Acabado con el HolyBro X500 real (finish). */
   finish?: FinishKind;
-  /** Estilo de shader 1–5 (shader-dial): 1 fotorrealista → 5 holograma. */
+  /** Estilo de shader 1–5 (shader-dial): 1 fotorrealista → 5 holograma. Sin uso activo. */
   estilo?: number;
   /** Nº de hotspots (hotspots, sección 3). */
   hotspots?: number;
@@ -80,8 +131,8 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
   const uiRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const stateRef = useRef({ mode, detail, pieces, story, surface, variantSel, finish, estilo, hotspots, lang });
-  stateRef.current = { mode, detail, pieces, story, surface, variantSel, finish, estilo, hotspots, lang };
+  const stateRef = useRef({ mode, detail, pieces, story, surface, variantSel, variantSlots, finish, estilo, hotspots, lang });
+  stateRef.current = { mode, detail, pieces, story, surface, variantSel, variantSlots, finish, estilo, hotspots, lang };
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -308,13 +359,150 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       pCap.visible = sel.a % 3 !== 1;
     };
 
+    // ── variants SLOTS ADITIVOS (ciclo 5) ──
+    // Materiales propios del modo (para no mutar los compartidos con detail/story)
+    const prodParts: THREE.Mesh[] = [pBase, pBody, pRing, pCap];
+    const PART_BASE_HEX = [0x3a3f47, 0xeef0f2, 0x0071e3, 0x0071e3];
+    const partMats = [
+      new THREE.MeshStandardMaterial({ color: PART_BASE_HEX[0], metalness: 0.6, roughness: 0.35 }),
+      new THREE.MeshStandardMaterial({ color: PART_BASE_HEX[1], metalness: 0.3, roughness: 0.4 }),
+      new THREE.MeshStandardMaterial({ color: PART_BASE_HEX[2], metalness: 0.5, roughness: 0.3 }),
+      new THREE.MeshStandardMaterial({ color: PART_BASE_HEX[3], metalness: 0.5, roughness: 0.3 }),
+    ];
+    const prodOriginalMats: THREE.MeshStandardMaterial[] = [pBase.material, pBody.material, pRing.material, pCap.material];
+    // slot shader-lineart: overlay de aristas por pieza
+    const edgesOverlays = prodParts.map(p => {
+      const e = new THREE.LineSegments(
+        new THREE.EdgesGeometry(p.geometry, 25),
+        new THREE.LineBasicMaterial({ color: 0x1d1d1f, transparent: true, opacity: 0.85 }),
+      );
+      e.visible = false;
+      p.add(e);
+      return e;
+    });
+    // slot shader-rayos-x: fresnel aditivo semitransparente
+    const xrayMat = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending,
+      uniforms: { uColor: { value: new THREE.Color(0x2997ff) } },
+      vertexShader: `varying vec3 vN; void main(){ vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+      fragmentShader: `uniform vec3 uColor; varying vec3 vN;
+        void main(){ float fres = pow(1.0 - abs(normalize(vN).z), 1.8); gl_FragColor = vec4(uColor * (0.55 + fres), 0.32 + fres * 0.5); }`,
+    });
+    // slot shader-clay: clay plano (facetado legible)
+    const claySlotMat = new THREE.MeshStandardMaterial({ color: 0xd8cfc4, roughness: 0.92, metalness: 0.0, flatShading: true });
+    // slot shader-deform: posiciones base del cuerpo para el twist/wobble
+    const deformBase = (pBody.geometry.getAttribute('position') as THREE.BufferAttribute).array.slice() as Float32Array;
+    let deformOn = false;
+    const applyDeform = (t: number, k: number) => {
+      const posAttr = pBody.geometry.getAttribute('position') as THREE.BufferAttribute;
+      const arr = posAttr.array as Float32Array;
+      for (let i = 0; i < arr.length; i += 3) {
+        const x = deformBase[i], y = deformBase[i + 1], z = deformBase[i + 2];
+        const a = k * 0.85 * y + Math.sin(t * 2.2) * k * 0.05;
+        const c = Math.cos(a), s = Math.sin(a);
+        arr[i] = x * c - z * s + Math.sin(y * 5 + t * 2.6) * k * 0.045;
+        arr[i + 1] = y;
+        arr[i + 2] = x * s + z * c;
+      }
+      posAttr.needsUpdate = true;
+      pBody.geometry.computeVertexNormals();
+    };
+    // Presets de iluminación (slots 11-13, excluyentes entre sí)
+    const applyLuzPreset = (idx: number) => {
+      if (idx === 0) {        // estudio: key + fill + rim equilibrada
+        hemi.intensity = 0.95; hemi.color.setHex(0xffffff); hemi.groundColor.setHex(0xdde4ee);
+        key.intensity = 2.1; key.color.setHex(0xffffff);
+        rim.intensity = 1.15; rim.color.setHex(0xeaf2ff);
+        setEnv(1.0);
+      } else if (idx === 1) { // natural: cálida ambiente
+        hemi.intensity = 1.35; hemi.color.setHex(0xfff1dc); hemi.groundColor.setHex(0xe7dbc8);
+        key.intensity = 1.05; key.color.setHex(0xfff0dd);
+        rim.intensity = 0.25; rim.color.setHex(0xffe8c8);
+        setEnv(1.2);
+      } else if (idx === 2) { // dramática: key fuerte, fill bajo
+        hemi.intensity = 0.28; hemi.color.setHex(0xffffff); hemi.groundColor.setHex(0x2a2d33);
+        key.intensity = 3.6; key.color.setHex(0xffffff);
+        rim.intensity = 0.9; rim.color.setHex(0x9ecbff);
+        setEnv(0.45);
+      } else {                // neutral (sin preset activo)
+        hemi.intensity = 1.05; hemi.color.setHex(0xffffff); hemi.groundColor.setHex(0xdde4ee);
+        key.intensity = 1.4; key.color.setHex(0xffffff);
+        rim.intensity = 0.8; rim.color.setHex(0x9ecbff);
+        setEnv(0.9);
+      }
+    };
+    let lastSlotsKey = '';
+    let slotsDeformWanted = false;
+    const applySlots = (s?: VariantSlotsState) => {
+      if (!s) return;
+      const key = JSON.stringify(s);
+      if (key === lastSlotsKey) return;
+      lastSlotsKey = key;
+      // colores (1: por pieza · 2: global — global gana si ambos activos)
+      partMats.forEach((m, i) => m.color.setHex(PART_BASE_HEX[i]));
+      if (s.on[1] && s.colorGlobal) partMats.forEach(m => m.color.set(s.colorGlobal!));
+      else if (s.on[0] && s.colorPieza) partMats[Math.max(0, Math.min(3, s.colorPieza.part))]!.color.set(s.colorPieza.color);
+      // materiales (3: metálico · 4: goma — metal gana en cuerpo/base)
+      const metallic = s.on[2], goma = s.on[3];
+      for (const i of [0, 1]) {
+        partMats[i].metalness = metallic ? 0.9 : goma ? 0.0 : i === 0 ? 0.6 : 0.3;
+        partMats[i].roughness = metallic ? 0.22 : goma ? 0.95 : i === 0 ? 0.35 : 0.4;
+      }
+      // accesorios (5: anillo · 6: tapa)
+      pRing.visible = s.on[4];
+      pCap.visible = s.on[5];
+      // shaders (7: rayos-x · 8: clay · 9: line-art) — si clay y rayos-x activos, clay gana
+      const clayOn = s.on[7], xrayOn = s.on[6];
+      prodParts.forEach((p, i) => { p.material = clayOn ? claySlotMat : xrayOn ? xrayMat : partMats[i]; });
+      edgesOverlays.forEach(e => { e.visible = s.on[8]; });
+      // deform (10): se aplica continuo en el loop; aquí solo reset si se apagó
+      slotsDeformWanted = s.on[9];
+      if (!slotsDeformWanted && deformOn) { applyDeform(0, 0); deformOn = false; }
+      // luces (11-13, excluyentes)
+      applyLuzPreset(s.on[10] ? 0 : s.on[11] ? 1 : s.on[12] ? 2 : -1);
+    };
+
+    // ── Yunque real (surface, ciclo 5): raíz propia + fallback procedural ──
+    const anvilRoot = new THREE.Group();
+    group.add(anvilRoot);
+    let anvilReady: THREE.Group | null = null;
+    let anvilStarted = false;
+    let lastAnvilT = -1;
+    function startAnvil() {
+      if (anvilStarted) return;
+      anvilStarted = true;
+      loadAnvilInstance()
+        .then(root => {
+          anvilRoot.add(root);
+          anvilReady = root;
+          applySurfaceMorph(root, stateRef.current.surface);
+          // yunque listo: visible en surface (si el modo sigue activo) y el
+          // morph procedural cubo→esfera pasa a fallback oculto
+          anvilRoot.visible = stateRef.current.mode === 'surface';
+          if (stateRef.current.mode === 'surface') morphRoot.visible = false;
+        })
+        .catch(() => { anvilStarted = false; /* fallback: morph procedural cubo→esfera */ });
+    }
+
     // Visibilidad por modo
     const applyModeVisibility = (m: PreviewMode) => {
       detailRoot.visible = m === 'detail';
       hub.visible = satRoot.visible = m === 'pieces';
       prod.visible = m === 'story' || m === 'variants' || m === 'hotspots' || m === 'shader-dial';
-      morphRoot.visible = m === 'surface';
+      // surface: yunque real si ya cargó; mientras carga (o si falla) el morph
+      // procedural cubo→esfera hace de fallback
+      morphRoot.visible = m === 'surface' && !anvilReady;
+      anvilRoot.visible = m === 'surface' && !!anvilReady;
       prod.children.forEach((c, i) => { if (i >= 4) c.visible = m === 'story'; });
+      if (m === 'variants') {
+        // materiales propios del modo variants (no contaminan otros modos)
+        [pBase, pBody, pRing, pCap].forEach((p, i) => { p.material = partMats[i]; });
+        lastSlotsKey = ''; // fuerza re-aplicación del estado de slots al reentrar
+      } else {
+        [pBase, pBody, pRing, pCap].forEach((p, i) => { p.material = prodOriginalMats[i]; });
+        edgesOverlays.forEach(e => { e.visible = false; });
+        if (deformOn) { applyDeform(0, 0); deformOn = false; slotsDeformWanted = false; }
+      }
       if (m === 'variants' || m === 'shader-dial') { pRing.visible = true; pCap.visible = true; }
       if (m === 'detail') setEnv(0.9);
       if (m === 'finish' || m === 'assembly') {
@@ -327,31 +515,52 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         key.intensity = 1.4;
         hemi.intensity = 1.05;
         renderer.toneMappingExposure = 1.0;
+        // luces por defecto (los presets de slots solo viven en variants)
+        hemi.color.setHex(0xffffff); hemi.groundColor.setHex(0xdde4ee);
+        key.color.setHex(0xffffff); rim.color.setHex(0x9ecbff); rim.intensity = 0.8;
       }
+      if (m === 'surface') startAnvil();
     };
 
-    // ═══ HolyBro X500 real: finish (acabados) + assembly (piezas progresivas) ═══
+    // ═══ HolyBro X500 real: finish (acabados) + assembly (piezas) ═══
+    // Cada instancia recibe SU PROPIO clone (fix: root compartido envenenaba
+    // los canvas entre sí — acabados solo se veía si piezas llegaba a 50).
     const holybroRoot = new THREE.Group();
     group.add(holybroRoot);
     let holybroStarted = false;
     let holybroReady: THREE.Group | null = null;
+    let hbOrder: PieceGroup[] = [];
+    let variadoSet: VariadoSet | null = null;
     let lastFinish: FinishKind | null = null;
-    let lastStepCount = -1;
+    let lastPieceCount = -1;
     function startHolybro() {
       if (holybroStarted) return;
       holybroStarted = true;
-      loadHolybro()
+      loadHolybroInstance()
         .then(root => {
-          tagAssemblySteps(root);
           holybroRoot.add(root);
           holybroReady = root;
-          revealSteps(root, 99);
-          applyFinish(root, stateRef.current.mode === "assembly" ? "variado" : (stateRef.current.finish ?? "detallado"));
-          applyFinish(root, stateRef.current.finish ?? 'detallado');
-          lastFinish = stateRef.current.finish ?? 'detallado';
-          lastStepCount = -1;
+          hbOrder = buildPieceOrder(root);
+          revealPieces(hbOrder, hbOrder.length);
+          // UNA sola aplicación inicial: assembly usa presets 'variado',
+          // finish usa el acabado elegido (o 'detallado' por defecto)
+          const finishFor: FinishKind = stateRef.current.mode === 'assembly'
+            ? 'variado'
+            : (stateRef.current.finish ?? 'detallado');
+          applyFinish(root, finishFor, variadoSet);
+          lastFinish = finishFor;
+          lastPieceCount = -1;
+          // presets 'variado' fieles a las texturas originales (async, cacheado)
+          return ensureVariadoSet(root).then(set => {
+            variadoSet = set;
+            const cur = stateRef.current;
+            if ((cur.mode === 'assembly') || (cur.mode === 'finish' && (cur.finish ?? 'detallado') === 'variado')) {
+              applyFinish(root, 'variado', variadoSet);
+              lastFinish = 'variado';
+            }
+          });
         })
-        .catch(() => { holybroStarted = false; });
+        .catch(err => { holybroStarted = false; console.error('[holybro] carga fallida:', err); });
     }
 
     // ── Hotspots (sección 3): marcadores que pulsan sobre el producto ──
@@ -562,14 +771,18 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         if (bodyMat.metalness > 0.5 || bodyMat.roughness < 0.3) { bodyMat.metalness = 0.3; bodyMat.roughness = 0.4; }
       }
       if (cur.mode === 'finish') {
-        if (holybroReady && cur.finish !== lastFinish) { applyFinish(holybroReady, cur.finish); lastFinish = cur.finish; }
+        if (holybroReady && cur.finish !== lastFinish) { applyFinish(holybroReady, cur.finish, variadoSet); lastFinish = cur.finish; }
         holybroRoot.rotation.y = t * 0.25;
       }
       if (cur.mode === 'assembly') {
-        if (holybroReady) {
-          const stepCount = Math.max(1, Math.min(HOLYBRO_STEPS.length, Math.ceil(cur.pieces / 5)));
-          if (stepCount !== lastStepCount) { revealSteps(holybroReady, stepCount - 1); lastStepCount = stepCount; }
-          const stepName = HOLYBRO_STEPS[Math.min(stepCount, HOLYBRO_STEPS.length) - 1];
+        if (holybroReady && hbOrder.length) {
+          // Revelado POR PIEZAS: el slider (1-50) reparte el total de piezas
+          // únicas del GLB de forma progresiva (instancias cuentan una vez y
+          // se revelan juntas). Orden: pasos de montaje grandes → pequeñas.
+          const total = hbOrder.length;
+          const k = Math.max(1, Math.min(total, Math.round((Math.max(1, Math.min(50, cur.pieces)) / 50) * total)));
+          if (k !== lastPieceCount) { revealPieces(hbOrder, k); lastPieceCount = k; }
+          const stepName = HOLYBRO_STEPS[Math.min(hbOrder[Math.min(k, total) - 1].step, HOLYBRO_STEPS.length - 1)];
           if (uiRef.current) {
             uiRef.current.textContent = cur.lang === 'es' ? stepName.es : stepName.en;
             uiRef.current.style.opacity = '1';
@@ -655,14 +868,27 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         if (idx !== 9) accentMat.emissiveIntensity = 0;
       }
       if (cur.mode === 'surface') {
-        const t05 = (Math.max(1, Math.min(5, cur.surface)) - 1) / 4;
-        if (Math.abs(t05 - lastMorphT) > 0.0005) { applyMorph(t05); lastMorphT = t05; }
+        if (anvilReady) {
+          // yunque real: influencias de morph continuas y bidireccionales
+          if (Math.abs(cur.surface - lastAnvilT) > 0.004) { applySurfaceMorph(anvilReady, cur.surface); lastAnvilT = cur.surface; }
+        } else {
+          // fallback procedural cubo→esfera (si el GLB del yunque no carga)
+          const t01 = (Math.max(1, Math.min(5, cur.surface)) - 1) / 4;
+          if (Math.abs(t01 - lastMorphT) > 0.0005) { applyMorph(t01); lastMorphT = t01; }
+        }
       }
-      if (cur.mode === 'variants' && cur.variantSel) {
-        applyVariant(cur.variantSel);
-        pBody.material.color.lerp(colorTarget, 0.12);
-        pBody.material.roughness += (matTarget.roughness - pBody.material.roughness) * 0.12;
-        pBody.material.metalness += (matTarget.metalness - pBody.material.metalness) * 0.12;
+      if (cur.mode === 'variants') {
+        if (cur.variantSlots) {
+          // camino nuevo: slots aditivos (ciclo 5)
+          applySlots(cur.variantSlots);
+          if (slotsDeformWanted) { applyDeform(t, 1); deformOn = true; }
+        } else if (cur.variantSel) {
+          // legado (sección 3 de config): ejes color/material/accesorio
+          applyVariant(cur.variantSel);
+          pBody.material.color.lerp(colorTarget, 0.12);
+          pBody.material.roughness += (matTarget.roughness - pBody.material.roughness) * 0.12;
+          pBody.material.metalness += (matTarget.metalness - pBody.material.metalness) * 0.12;
+        }
       }
 
       if (!dragging && cur.mode !== 'story') {
@@ -672,7 +898,9 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       group.rotation.y += (rotY - group.rotation.y) * 0.12;
       group.rotation.x += (rotX - group.rotation.x) * 0.12;
       if (cur.mode !== 'story') {
-        cam.position.set(0, 1.35, 6.1);
+        // finish/assembly: cámara más cerca → el modelo se ve ~35% más grande
+        const closeUp = cur.mode === 'finish' || cur.mode === 'assembly';
+        cam.position.set(0, closeUp ? 0.95 : 1.35, closeUp ? 4.5 : 6.1);
         cam.lookAt(0, 0.15, 0);
       }
       renderer.render(scene, cam);
@@ -688,7 +916,12 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       el.removeEventListener('pointerup', onUp);
       el.removeEventListener('pointercancel', onUp);
       renderer.dispose(); pmrem.dispose(); envTex.dispose();
-      scene.traverse(o => { const m = o as THREE.Mesh; if (m.geometry) m.geometry.dispose(); });
+      // las geometrías de los GLB (glbShared) se COMPARTEN entre clones vía la
+      // caché del loader — no se disposean aquí o romperían las otras instancias
+      scene.traverse(o => {
+        const m = o as THREE.Mesh;
+        if (m.geometry && !(m.userData && (m.userData as { glbShared?: boolean }).glbShared)) m.geometry.dispose();
+      });
       mount.replaceChildren();
     };
   }, [height]);

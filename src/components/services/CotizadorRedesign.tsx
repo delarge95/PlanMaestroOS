@@ -201,6 +201,9 @@ function LuxeSlider({ v, value, onChange, lang, serviceId }: { v: ServiceVariabl
           {value}<span style={{ fontSize: 13, color: 'var(--cx-muted)', fontWeight: 400, marginLeft: 4 }}>{enVar?.unit ?? v.unidadEs}</span>
         </strong>
       </div>
+      {(enVar?.help ?? v.ayudaEs) && (
+        <div style={{ fontSize: 12.5, color: 'var(--cx-muted)', lineHeight: 1.45, marginTop: -2 }}>{enVar?.help ?? v.ayudaEs}</div>
+      )}
       <div style={{ position: 'relative', height: 6, borderRadius: 3, background: 'var(--cx-soft)', cursor: 'pointer', touchAction: 'none' }}
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
@@ -260,7 +263,11 @@ export function CotizadorRedesign() {
   }, [theme]);
 
   const svc = WEB3D.find(s => s.id === serviceId);
-  const variables: ServiceVariable[] = serviceId ? (SERVICE_VARIABLES[serviceId]?.variables ?? []) : [];
+  // ocultarEnConfig (ciclo 8/WEB-04): la variable existe y su valor viene del
+  // wizard vía planWebApp, pero no se muestra en el panel por redundante.
+  const variables: ServiceVariable[] = serviceId
+    ? (SERVICE_VARIABLES[serviceId]?.variables ?? []).filter(v => !v.ocultarEnConfig)
+    : [];
   const tier = useMemo(() => serviceId ? derivarTier(serviceId, vals) : null, [serviceId, vals]);
   // D1 ciclo 2.1: urgencia alineada a docs (+30/+50); descuento lanzamiento −25% se conserva.
   const urgencyPct = urgency === '72h' ? 30 : urgency === '24h' ? 50 : 0;
@@ -472,6 +479,11 @@ export function CotizadorRedesign() {
                         {v.type === 'select' && v.opciones && (
                           <div>
                             <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--cx-text)', display: 'block', marginBottom: 10 }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
+                            {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs ? (
+                              <div style={{ fontSize: 12.5, color: 'var(--cx-muted)', lineHeight: 1.45, marginTop: -6, marginBottom: 8 }}>
+                                {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs}
+                              </div>
+                            ) : null}
                             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                               {v.opciones.map((o: { valorEs: string }) => (
                                 <button key={o.valorEs} onClick={() => setVals(p => ({ ...p, [v.id]: o.valorEs }))}
@@ -492,6 +504,11 @@ export function CotizadorRedesign() {
                             </div>
                             <span style={{ fontSize: 15, color: 'var(--cx-text)' }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
                           </label>
+                        )}
+                        {v.type === 'toggle' && ((lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs) && (
+                          <div style={{ fontSize: 12.5, color: 'var(--cx-muted)', lineHeight: 1.45, marginTop: 4, marginLeft: 56 }}>
+                            {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs}
+                          </div>
                         )}
                       </div>
                     );

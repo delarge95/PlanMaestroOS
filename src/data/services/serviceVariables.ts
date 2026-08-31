@@ -9,12 +9,16 @@ export type VarType = 'number' | 'toggle' | 'select';
 export interface ServiceVariable {
   id: string;
   preguntaEs: string;
+  /** Texto de ayuda opcional que se muestra bajo la pregunta en la configuración. */
+  ayudaEs?: string;
   type: VarType;
   /** Para type='number' */
   min?: number;
   max?: number;
   step?: number;
   unidadEs?: string;
+  /** No mostrar en el panel de configuración (el valor sigue viniendo del wizard). */
+  ocultarEnConfig?: boolean;
   /** Para type='toggle' o 'select' */
   opciones?: Array<{ valorEs: string; tierHint?: LevelId }>;
   /** Cómo esta variable mapea a tiers (para type='number') */
@@ -237,8 +241,9 @@ export const SERVICE_VARIABLES: Record<string, ServiceConfig> = {
     serviceId: 'WEB-01',
     variables: [
       {
-        id: 'numHotspots', preguntaEs: '¿Cuántos hotspots o puntos interactivos?',
-        type: 'number', min: 0, max: 30, step: 1, unidadEs: 'hotspots',
+        id: 'numHotspots', preguntaEs: '¿Cuántas partes del modelo llevarán punto de información?',
+        ayudaEs: 'Cada punto marca una pieza; al hacer click muestra su nombre o specs. El preview de arriba los muestra en vivo.',
+        type: 'number', min: 0, max: 30, step: 1, unidadEs: 'puntos',
         tierMap: [{ maxVal: 5, tier: 'S' }, { maxVal: 15, tier: 'M' }, { maxVal: 30, tier: 'L' }],
       },
       {
@@ -296,11 +301,13 @@ export const SERVICE_VARIABLES: Record<string, ServiceConfig> = {
     variables: [
       {
         id: 'numVariantes', preguntaEs: '¿Cuántas variantes o reglas de configuración?',
+        ocultarEnConfig: true, // ya se preguntó en el wizard (web-app): redundante aquí
         type: 'number', min: 2, max: 50, step: 1, unidadEs: 'variantes',
         tierMap: [{ maxVal: 10, tier: 'S' }, { maxVal: 25, tier: 'M' }, { maxVal: 50, tier: 'L' }],
       },
       {
-        id: 'numSKUs', preguntaEs: '¿Cuántos SKUs o productos?',
+        id: 'numSKUs', preguntaEs: '¿Para cuántos productos distintos servirá?',
+        ayudaEs: 'Cada producto con su propio modelo 3D dentro de la misma app. Si es uno solo, deja 1.',
         type: 'number', min: 1, max: 100, step: 1, unidadEs: 'SKUs',
         tierMap: [{ maxVal: 5, tier: 'S' }, { maxVal: 20, tier: 'M' }, { maxVal: 100, tier: 'L' }],
       },
@@ -325,7 +332,8 @@ export const SERVICE_VARIABLES: Record<string, ServiceConfig> = {
     serviceId: 'WEB-05',
     variables: [
       {
-        id: 'numSecciones', preguntaEs: '¿Cuántas secciones narrativas?',
+        id: 'numSecciones', preguntaEs: '¿Cuántas paradas de scroll tendrá la historia?',
+        ayudaEs: 'Es el número de escenas que definiste en el wizard; puedes ajustarlo aquí.',
         type: 'number', min: 2, max: 15, step: 1, unidadEs: 'secciones',
         tierMap: [{ maxVal: 4, tier: 'S' }, { maxVal: 8, tier: 'M' }, { maxVal: 15, tier: 'L' }],
       },

@@ -182,27 +182,28 @@ describe('treeToQuote: ciclo 3 — superficie y slider continuo', () => {
   });
 });
 
-describe('treeToQuote: ciclo 4 — shaders (estilo >= 4)', () => {
-  it('estilo 5 añade RTA-05 como complemento', () => {
+describe('treeToQuote: ciclo 5 — pregunta estilo retirada (RTA-05 desacoplado)', () => {
+  it('estilo 5 NO añade RTA-05 (la pregunta se quitó del árbol; no aportaba al precio)', () => {
     const plan = planFromTreeAnswers('web-3d', 'ver-modelo', {
       'modelo-existente': 'si-tengo',
       'formato-archivo': 'gltf',
-      'estilo': 5,
-    });
-    expect(plan.picks.map(p => p.serviceId)).toEqual(['WEB-01', 'RTA-05']);
-    const rta5 = plan.picks[1];
-    expect(rta5.labelEs).toContain('shaders');
-    const tier = derivarTier('RTA-05', rta5.vals);
-    expect(computeQuote('RTA-05', tier, 'USD', {})?.totalMin ?? 0).toBeGreaterThan(0);
-  });
-
-  it('estilo 3 (semirrealista) NO añade shaders', () => {
-    const plan = planFromTreeAnswers('web-3d', 'ver-modelo', {
-      'modelo-existente': 'si-tengo',
-      'formato-archivo': 'gltf',
-      'estilo': 3,
+      'estilo': 5, // respuesta residual: el plan debe ignorarla
     });
     expect(plan.picks.map(p => p.serviceId)).toEqual(['WEB-01']);
+  });
+
+  it('interactivo con estilo alto tampoco añade shaders', () => {
+    const plan = planFromTreeAnswers('web-3d', 'interactivo', {
+      'tipo-interactividad': 'rotar',
+      'plataforma': 'mi-web',
+      'estilo': 4,
+    });
+    expect(plan.picks.map(p => p.serviceId)).toEqual(['WEB-01']);
+  });
+
+  it('RTA-05 sigue existiendo en el catálogo y cotiza (el servicio no se retiró, solo el pick automático)', () => {
+    const tier = derivarTier('RTA-05', { numShaders: 1, target: 'Desktop' });
+    expect(computeQuote('RTA-05', tier, 'USD', {})?.totalMin ?? 0).toBeGreaterThan(0);
   });
 });
 

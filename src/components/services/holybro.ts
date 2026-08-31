@@ -1,7 +1,22 @@
 /**
  * holybro.ts — Carga y utilidades del modelo real HolyBro X500 (GLB del cliente).
  * Se usa en los previews de acabados (finish) y piezas progresivas (assembly).
- * La carga se cachea: un solo fetch para toda la página.
+ *
+ * Ciclo 5 — fix canvas en blanco (acabados/piezas):
+ * La promesa cachea el parse NORMALIZADO en modo "solo lectura" (shared root).
+ * Cada instancia de ModelPreview recibe root.clone(true) vía loadHolybroInstance():
+ * así la visibilidad (revealSteps/revealPieces) y los materiales de un canvas
+ * no envenenan al otro, y el add() de un preview no roba el root al otro.
+ * Las geometrías/texturas son COMPARTIDAS entre clones (una sola subida a GPU);
+ * las meshes se marcan userData.glbShared para que el cleanup NO las dispose.
+ *
+ * Ciclo 5 — acabados:
+ * - simple: clay con flatShading (facetas legibles para leer los bordes).
+ * - variado: presets construidos muestreando el color promedio de las texturas
+ *   originales (canvas offscreen), agrupando materiales similares; el tipo
+ *   metal/rough se infiere del color. Fallback a presets fijos si el muestreo
+ *   no está listo o falla (CORS/textura no imagen).
+ * - detallado: materiales originales.
  */
 
 import * as THREE from 'three';
@@ -36,8 +51,13 @@ export function loadHolybro(): Promise<THREE.Group> {
             root.position.sub(c2);
             root.traverse(o => {
               const m = o as THREE.Mesh;
-              if (m.isMesh) { m.frustumCulled = false; }
+              if (m.isMesh) {
+                m.frustumCulled = false;
+                // marca meshes compartidas entre clones: el cleanup no debe dispose
+                m.userData.glbShared = true;
+              }
             });
+            tagAssemblySteps(root);
             resolve(root);
           }, err => reject(err));
         })
@@ -47,7 +67,16 @@ export function loadHolybro(): Promise<THREE.Group> {
   return cache;
 }
 
-const clayMat = () => new THREE.MeshStandardMaterial({ color: 0xd8cfc4, roughness: 0.92, metalness: 0.0 });
+/**
+ * Copia INDEPENDIENTE por instancia de preview: misma geometría/texturas (una
+ * sola subida a GPU) pero árbol de objetos propio, de modo que la visibilidad
+ * y los materiales que aplica un canvas no afectan a los demás.
+ */
+export function loadHolybroInstance(): Promise<THREE.Group> {
+  return loadHolybro().then(root => root.clone(true));
+}
+
+const clayMat = () => new THREE.MeshStandardMaterial({ color: 0xd8cfc4, roughness: 0.92, metalness: 0.0, flatShading: true });
 const presetMats = () => [
   new THREE.MeshStandardMaterial({ color: 0x2b2b2f, roughness: 0.55, metalness: 0.25 }), // plástico negro
   new THREE.MeshStandardMaterial({ color: 0x8f9297, roughness: 0.35, metalness: 0.85 }), // aluminio
@@ -55,13 +84,97 @@ const presetMats = () => [
   new THREE.MeshStandardMaterial({ color: 0x0071e3, roughness: 0.4, metalness: 0.2 }),  // acento
 ];
 
+// ─── Muestreo de texturas para el acabado 'variado' ───
+
+/** Resultado del muestreo: material de preset por material original + fallback. */
+export interface VariadoSet {
+  byMat: Map<THREE.Material, THREE.MeshStandardMaterial>;
+  fallback: THREE.MeshStandardMaterial[];
+}
+let variadoCache: Promise<VariadoSet | null> | null = null;
+
+/** Color promedio de una textura dibujada en un canvas offscreen 24×24. */
+function avgTextureColor(tex: THREE.Texture | null | undefined): THREE.Color | null {
+  try {
+    const img = tex?.image as { width?: number; height?: number; naturalWidth?: number } | null | undefined;
+    if (!img || (!img.width && !img.naturalWidth)) return null;
+    const W = 24, H = 24;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const ctx = cv.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return null;
+    ctx.drawImage(img as CanvasImageSource, 0, 0, W, H);
+    const d = ctx.getImageData(0, 0, W, H).data;
+    let r = 0, g = 0, b = 0, n = 0;
+    for (let i = 0; i < d.length; i += 4) {
+      if (d[i + 3] < 16) continue;
+      r += d[i]; g += d[i + 1]; b += d[i + 2]; n++;
+    }
+    if (!n) return null;
+    return new THREE.Color(r / n / 255, g / n / 255, b / n / 255);
+  } catch { return null; }
+}
+
+/** Infiere un tipo de material plausible a partir del color promedio. */
+function guessMetal(c: THREE.Color): { metalness: number; roughness: number } {
+  const hsl = { h: 0, s: 0, l: 0 };
+  c.getHSL(hsl);
+  if (hsl.l < 0.12) return { metalness: 0.15, roughness: 0.5 };                 // plástico oscuro
+  if (hsl.s < 0.15 && hsl.l >= 0.3 && hsl.l < 0.72) return { metalness: 0.85, roughness: 0.35 }; // gris → metal
+  if (hsl.h >= 0.55 && hsl.h <= 0.7 && hsl.s > 0.35) return { metalness: 0.2, roughness: 0.35 }; // azul → acento
+  return { metalness: 0.08, roughness: 0.55 };                                  // pintura / plástico
+}
+
+/**
+ * Muestrea los colores promedio de las texturas originales y construye los
+ * presets 'variado' a partir de ellos (agrupa materiales similares). Cachea
+ * el resultado a nivel de módulo. Devuelve null si no hay nada que muestrear.
+ */
+export function ensureVariadoSet(root: THREE.Group): Promise<VariadoSet | null> {
+  if (!variadoCache) {
+    variadoCache = (async () => {
+      try {
+        const byColor = new Map<THREE.Material, THREE.Color>();
+        const seen = new Set<THREE.Material>();
+        root.traverse(o => {
+          const m = o as THREE.Mesh;
+          if (!m.isMesh) return;
+          const mat = m.material as THREE.MeshStandardMaterial;
+          if (!mat || seen.has(mat)) return;
+          seen.add(mat);
+          const c = avgTextureColor(mat.map) ?? (mat.color ? mat.color.clone() : null);
+          if (c) byColor.set(mat, c);
+        });
+        if (!byColor.size) return null;
+        // Cluster simple por distancia de color (agrupa materiales similares)
+        const clusters: Array<{ c: THREE.Color; mats: THREE.Material[] }> = [];
+        for (const [mat, c] of byColor) {
+          const hit = clusters.find(cl =>
+            Math.abs(cl.c.r - c.r) + Math.abs(cl.c.g - c.g) + Math.abs(cl.c.b - c.b) < 0.18);
+          if (hit) hit.mats.push(mat);
+          else clusters.push({ c: c.clone(), mats: [mat] });
+        }
+        const byMat = new Map<THREE.Material, THREE.MeshStandardMaterial>();
+        for (const cl of clusters) {
+          const { metalness, roughness } = guessMetal(cl.c);
+          const preset = new THREE.MeshStandardMaterial({ color: cl.c, metalness, roughness });
+          for (const mat of cl.mats) byMat.set(mat, preset);
+        }
+        return { byMat, fallback: presetMats() };
+      } catch { return null; }
+    })();
+  }
+  return variadoCache;
+}
+
 /**
  * Aplica un nivel de acabado al modelo.
- * - simple: clay uniforme (una pieza, un material plano)
- * - variado: presets metal/plástico/fibra/acento sin texturas
+ * - simple: clay uniforme con flatShading (bordes legibles)
+ * - variado: presets muestreados de las texturas originales (si el set está
+ *   disponible; si no, presets fijos por hash del nombre)
  * - detallado: materiales originales del GLB (con texturas baked)
  */
-export function applyFinish(root: THREE.Group, kind: FinishKind) {
+export function applyFinish(root: THREE.Group, kind: FinishKind, variado?: VariadoSet | null) {
   root.traverse(o => {
     const m = o as THREE.Mesh;
     if (!m.isMesh) return;
@@ -73,7 +186,12 @@ export function applyFinish(root: THREE.Group, kind: FinishKind) {
       m.material = m.userData.clayMat;
     } else {
       if (!m.userData.origMat) m.userData.origMat = m.material;
-      if (!m.userData.preset) m.userData.preset = presetMats();
+      const preset = variado?.byMat.get(m.userData.origMat as THREE.Material);
+      if (preset) {
+        m.material = preset;
+        return;
+      }
+      if (!m.userData.preset) m.userData.preset = (variado?.fallback ?? presetMats()).slice();
       const presets = m.userData.preset as THREE.MeshStandardMaterial[];
       m.material = presets[Math.abs(hash(m.name ?? '')) % presets.length];
     }
@@ -101,7 +219,7 @@ export const HOLYBRO_STEPS: Array<{ match: RegExp; es: string; en: string }> = [
 
 /**
  * Marca cada nodo del GLB con su paso de montaje (userData.step) según HOLYBRO_STEPS.
- * Se llama una vez tras la carga.
+ * Se llama una vez tras la carga (el clone por instancia hereda userData.step).
  */
 export function tagAssemblySteps(root: THREE.Group) {
   root.traverse(o => {
@@ -112,11 +230,56 @@ export function tagAssemblySteps(root: THREE.Group) {
   });
 }
 
-/** Visibilidad progresiva: muestra los pasos 0..n y anima la aparición del último. */
+/** Visibilidad progresiva por pasos: muestra los pasos 0..n y anima la aparición del último. */
 export function revealSteps(root: THREE.Group, n: number) {
   root.traverse(o => {
     if (o.userData.step === undefined) return;
     const visible = (o.userData.step as number) <= n;
     o.visible = visible;
+  });
+}
+
+// ─── Revelado POR PIEZAS (ciclo 5, feedback Alexander) ───
+// "el modelo viene con las piezas separadas, solo debes filtrar cuales mostrar".
+
+/** Normaliza el nombre de nodo para agrupar instancias de la misma pieza. */
+export const piezaKey = (name: string) => {
+  const k = name.replace(/[.\-_]?\d+([.\-_]low)?([.\-_]PRIM)?$/i, '').trim();
+  return k || name;
+};
+
+export interface PieceGroup {
+  /** Todas las instancias de esta pieza (cuentan UNA vez para el slider). */
+  meshes: THREE.Mesh[];
+  /** Índice del paso de montaje (HOLYBRO_STEPS) de la pieza. */
+  step: number;
+}
+
+/**
+ * Agrupa las meshes del GLB en piezas únicas (por nombre de nodo normalizado)
+ * ordenadas por paso de montaje (grandes → pequeñas). Las instancias de una
+ * misma pieza cuentan una vez y se revelan juntas.
+ */
+export function buildPieceOrder(root: THREE.Group): PieceGroup[] {
+  const map = new Map<string, PieceGroup>();
+  root.traverse(o => {
+    const m = o as THREE.Mesh;
+    if (!m.isMesh) return;
+    const key = piezaKey(m.name ?? '');
+    let g = map.get(key);
+    if (!g) {
+      g = { meshes: [], step: (m.userData.step as number) ?? HOLYBRO_STEPS.length - 1 };
+      map.set(key, g);
+    }
+    g.meshes.push(m);
+  });
+  return [...map.values()].sort((a, b) => a.step - b.step);
+}
+
+/** Revelado granular: visibles las primeras k piezas únicas (el resto oculto). */
+export function revealPieces(order: PieceGroup[], k: number) {
+  order.forEach((g, i) => {
+    const vis = i < k;
+    for (const m of g.meshes) m.visible = vis;
   });
 }

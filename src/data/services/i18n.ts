@@ -327,9 +327,9 @@ export const TREE_EN = {
 } as const;
 
 /** EN de variables de servicio (subset alcanzable desde el wizard web-3D). */
-export const VARS_EN: Record<string, Record<string, { question: string; unit?: string; opciones?: Record<string, string> }>> = {
+export const VARS_EN: Record<string, Record<string, { question: string; unit?: string; help?: string; opciones?: Record<string, string> }>> = {
   'WEB-01': {
-    numHotspots: { question: 'How many hotspots or interactive points?', unit: 'hotspots' },
+    numHotspots: { question: 'How many parts of the model will have an info point?', unit: 'points', help: 'Each point marks a part; clicking it shows its name or specs. The preview above shows them live.' },
     datos: { question: 'Do the data come from a CMS/API or are they hard-coded?', opciones: { 'Fijos (hardcode)': 'Hard-coded', 'Dinámicos (CMS/API)': 'Dynamic (CMS/API)' } },
     target: { question: 'Where does it run?', opciones: { 'Desktop': 'Desktop', 'Desktop + móvil': 'Desktop + mobile' } },
   },
@@ -340,11 +340,11 @@ export const VARS_EN: Record<string, Record<string, { question: string; unit?: s
   },
   'WEB-04': {
     numVariantes: { question: 'How many configuration variants or rules?', unit: 'variants' },
-    numSKUs: { question: 'How many SKUs or products?', unit: 'SKUs' },
+    numSKUs: { question: 'How many distinct products will it serve?', unit: 'SKUs', help: 'Each product gets its own 3D model inside the same app. If there is only one, leave it at 1.' },
     fuenteDatos: { question: 'Where does the data come from?', opciones: { 'Estáticos (JSON local)': 'Local JSON file', 'CMS': 'CMS', 'API externa': 'External API' } },
     auth: { question: 'Does it need login/authentication?' },
   },
-  'WEB-05': { numSecciones: { question: 'How many narrative sections?', unit: 'sections' } },
+  'WEB-05': { numSecciones: { question: 'How many scroll stops will the story have?', unit: 'sections', help: 'This is the number of scenes you set in the wizard; you can adjust it here.' } },
   'WEB-06': {
     mecanica: { question: 'What kind of gameplay?', opciones: { 'Simple (quiz, memory, puzzle)': 'Simple (quiz, memory, puzzle)', 'Media (runner, plataforma)': 'Medium (runner, platformer)', 'Compleja (multiplayer, física)': 'Complex (multiplayer, physics)' } },
     scores: { question: 'Does it need a leaderboard/scores?' },
