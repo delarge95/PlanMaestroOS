@@ -85,3 +85,21 @@
 
 ### Si me reemplazas
 Lee este archivo + `docs/cotizador/05` §9-10. Territorio OWN, regla de oro aditiva, commits `[wip]` frecuentes. El servidor de dev se arranca con `npm run dev` (puerto 4321). NO generar modelos 3D sin preguntar a Alexander; tareas 3D pesadas → pasarlas a él (GLB listo para Piezas ya sirve; el yunque sigue pendiente de él para sustituir el cubo→esfera).
+
+---
+
+## CICLO 5 + CICLO 6 — completados y commiteados (2026-08-30/31, AutoCoder + ZCode)
+
+### Ciclo 5 (commit bd0fb37)
+1. Superficie = yunque real (anvil.ts, clone por instancia). 2. Pregunta estilo RETIRADA. 3. Fix raiz canvas en blanco: el loader compartia UN root 3D entre instancias (robo de padre + revealSteps envenenaba acabados) — ahora clone(true) por instancia con geometrias/texturas compartidas (flag glbShared). Piezas granulares (k = N/50 x 60). 4. Acabados: clay flatShading, variado muestreado de texturas originales, modelo +35%. 5-8. Renombres+ayudas config (numHotspots/numSecciones/numSKUs), ocultarEnConfig en numVariantes, slots de variantes aditivos.
+
+### Ciclo 6 (commit d236158)
+1. yunke.glb optimizado 53MB->5.9MB (tools/optimize_yunke.py, solo ANVIL LOW POLI conservada). 2. Morph keys en orden CORRECTO (usuario): t1=Key2 (simple), t3=Key1 (intermedia), t5=base (yunque completo); Key1 pico en t3 (0->1->0), Key2 1->0 en [1,3]. 3. Clay gris (luminancia ~197, visible). 4. Assembly: encuadre por bbox de piezas visibles con ease (zoom cerrado en motor -> full frame). 5. Story = HolyBro real + animacion "Despegue" (11 chips). 6. Camara por bbox en todos los modos (modelos mas grandes). 7. Variantes = HolyBro frame-only (brazos+motores+helices+frames) con 17 slots del usuario (colores por sets, explosion, cortes transversales, filtros, piezas adicionales batería/electronica/plataforma, xray, lineart, vuelo, 3 luces, aislamiento); fix raiz: traverse de visibilidad ocultaba el nodo raiz Scene (solo meshes ahora); defaultSlotOn solo color-base. 8. Explosion idle en assembly (3s). 9. Panel de config con acordion colapsable + re-precio en vivo. 10. Boton atras del navegador = seccion anterior (history API, nivel 1<->2<->3<->config, respuestas preservadas).
+
+### Verificacion ciclo 6 (AutoCoder independiente)
+- qa-ciclo6-verify.mjs: 27/27. npm test: 483. astro check: 0 errores. Post-merge main (e2eb031): 483 + 0 errores re-verificados.
+
+### EXTRACCION a repo independiente (2026-08-31)
+- Repo: https://github.com/delarge95/Services (privado). Solo cotizador: src/pages/cotizador.astro + src/components/services/** + src/data/services/** + src/lib/services/** + styles/tokens.css + env.d.ts + public/cotizador/** + configs propios (package.json reducido, astro.config base=/Services/ en CI, deploy.yml Pages). 78 tests, astro check 0, build OK, deploy Pages verde.
+- URL publica: https://delarge95.github.io/Services/cotizador/ (el portfolio original NO se toca).
+- El worktree agent/servicios sigue siendo la fuente de verdad del desarrollo; el repo Services se re-sincroniza copiando los mismos directorios.
