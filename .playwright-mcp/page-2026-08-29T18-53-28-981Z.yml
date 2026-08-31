@@ -1,0 +1,92 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - strong [ref=e5]: Alexander Woodcock
+    - generic [ref=e6]:
+      - button "Cotizar" [ref=e7] [cursor=pointer]
+      - button "Catálogo" [ref=e8] [cursor=pointer]
+      - generic [ref=e9]:
+        - button "USD" [ref=e10] [cursor=pointer]
+        - button "COP" [ref=e11] [cursor=pointer]
+  - generic [ref=e84]:
+    - button "← Atrás" [ref=e85] [cursor=pointer]
+    - heading "Mostrar un modelo 3D en tu web" [level=2] [ref=e86]
+    - paragraph [ref=e87]: El visitante puede rotarlo y verlo desde todos los ángulos, sin instalar nada.
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e90]: ¿Ya tienes el modelo 3D de tu producto?
+        - generic [ref=e91]:
+          - button "Sí, lo tengo Tengo el archivo en algún formato digital" [active] [ref=e92] [cursor=pointer]:
+            - generic [ref=e93]: Sí, lo tengo
+            - generic [ref=e94]: Tengo el archivo en algún formato digital
+          - button "No, hay que crearlo Necesito que modelen mi producto desde cero o desde referencias" [ref=e95] [cursor=pointer]:
+            - generic [ref=e96]: No, hay que crearlo
+            - generic [ref=e97]: Necesito que modelen mi producto desde cero o desde referencias
+        - group [ref=e98]:
+          - generic "+ Detalles técnicos (opcional)" [ref=e99] [cursor=pointer]
+      - generic [ref=e100]:
+        - generic [ref=e101]: ¿Qué nivel de detalle necesitas?
+        - generic [ref=e102]: Más detalle = más horas de modelado. Para web, el nivel 3 suele ser suficiente.
+        - generic [ref=e103]:
+          - generic [ref=e104]: Boceto — solo geometría
+          - generic [ref=e110]:
+            - strong [ref=e111]: 1nivel
+            - generic [ref=e112]: XS
+          - generic [ref=e113] [cursor=pointer]
+          - generic [ref=e115]:
+            - generic [ref=e116]: 1 nivel
+            - generic [ref=e117]: 5 nivel
+        - group [ref=e118]:
+          - generic "+ Detalles técnicos (opcional)" [ref=e119] [cursor=pointer]
+      - generic [ref=e120]:
+        - generic [ref=e121]: ¿Cuántas piezas o partes tiene tu producto?
+        - generic [ref=e122]: Una pieza es más simple que un ensamblaje de 20.
+        - generic [ref=e123]:
+          - generic [ref=e124]: 1 pieza en el ensamblaje
+          - generic [ref=e130]:
+            - strong [ref=e131]: 1piezas
+            - generic [ref=e132]: S
+          - generic [ref=e133] [cursor=pointer]
+          - generic [ref=e135]:
+            - generic [ref=e136]: 1 piezas
+            - generic [ref=e137]: 50 piezas
+        - group [ref=e138]:
+          - generic "+ Detalles técnicos (opcional)" [ref=e139] [cursor=pointer]
+      - generic [ref=e140]:
+        - generic [ref=e141]: ¿Qué acabados tiene tu producto?
+        - generic [ref=e142]:
+          - button "Simple Un solo color o material uniforme" [ref=e143] [cursor=pointer]:
+            - generic [ref=e144]: Simple
+            - generic [ref=e145]: Un solo color o material uniforme
+          - button "Variado Metal, plástico, goma, pintura" [ref=e146] [cursor=pointer]:
+            - generic [ref=e147]: Variado
+            - generic [ref=e148]: Metal, plástico, goma, pintura
+          - button "Detallado Texturas, logos, grabados, desgaste" [ref=e149] [cursor=pointer]:
+            - generic [ref=e150]: Detallado
+            - generic [ref=e151]: Texturas, logos, grabados, desgaste
+        - group [ref=e152]:
+          - generic "+ Detalles técnicos (opcional)" [ref=e153] [cursor=pointer]
+      - generic [ref=e154]:
+        - generic [ref=e155]: ¿Qué puede hacer el visitante con el modelo?
+        - generic [ref=e156]:
+          - button "Solo rotarlo Vista 360° con mouse o dedo" [ref=e157] [cursor=pointer]:
+            - generic [ref=e158]: Solo rotarlo
+            - generic [ref=e159]: Vista 360° con mouse o dedo
+          - button "Rotar y hacer zoom También acercarse a detalles" [ref=e160] [cursor=pointer]:
+            - generic [ref=e161]: Rotar y hacer zoom
+            - generic [ref=e162]: También acercarse a detalles
+          - button "Rotación automática Gira solo, sin interacción" [ref=e163] [cursor=pointer]:
+            - generic [ref=e164]: Rotación automática
+            - generic [ref=e165]: Gira solo, sin interacción
+        - group [ref=e166]:
+          - generic "+ Detalles técnicos (opcional)" [ref=e167] [cursor=pointer]
+      - generic [ref=e168]:
+        - generic [ref=e169]: ¿Dónde vas a mostrar el modelo 3D?
+        - generic [ref=e170]:
+          - button "En mi página web actual" [ref=e171] [cursor=pointer]
+          - button "En una landing page nueva" [ref=e172] [cursor=pointer]
+          - button "En pantalla táctil (feria)" [ref=e173] [cursor=pointer]
+          - button "En app móvil (WebView)" [ref=e174] [cursor=pointer]
+        - group [ref=e175]:
+          - generic "+ Detalles técnicos (opcional)" [ref=e176] [cursor=pointer]
+    - button "Ver precio estimado →" [ref=e177] [cursor=pointer]
+    - paragraph [ref=e178]: Si algo quedó sin responder usamos un valor recomendado — después lo ajustas.

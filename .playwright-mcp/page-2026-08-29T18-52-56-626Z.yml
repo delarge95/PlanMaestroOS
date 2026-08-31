@@ -1,0 +1,26 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - strong [ref=e5]: Alexander Woodcock
+    - generic [ref=e6]:
+      - button "Cotizar" [ref=e7] [cursor=pointer]
+      - button "Catálogo" [ref=e8] [cursor=pointer]
+      - generic [ref=e9]:
+        - button "USD" [ref=e10] [cursor=pointer]
+        - button "COP" [ref=e11] [cursor=pointer]
+  - generic [ref=e53]:
+    - button "← Atrás" [ref=e54] [cursor=pointer]
+    - heading "¿Qué tipo de web con 3D?" [level=2] [ref=e55]
+    - paragraph [ref=e56]: No necesitas saber términos técnicos — describe lo que imaginas.
+    - generic [ref=e57]:
+      - button "Solo mostrarlo Un modelo 3D que se puede rotar en la web, sin más interacción" [ref=e58] [cursor=pointer]:
+        - strong [ref=e63]: Solo mostrarlo
+        - generic [ref=e64]: Un modelo 3D que se puede rotar en la web, sin más interacción
+      - button "Que sea interactivo Cambiar colores, ver información de partes, configurar el producto" [ref=e65] [cursor=pointer]:
+        - strong [ref=e69]: Que sea interactivo
+        - generic [ref=e70]: Cambiar colores, ver información de partes, configurar el producto
+      - button "Contar una historia El 3D anima y cambia mientras el usuario hace scroll" [ref=e71] [cursor=pointer]:
+        - strong [ref=e75]: Contar una historia
+        - generic [ref=e76]: El 3D anima y cambia mientras el usuario hace scroll
+      - button "Aplicación completa Una herramienta web que usa 3D como interfaz principal" [ref=e77] [cursor=pointer]:
+        - strong [ref=e82]: Aplicación completa
+        - generic [ref=e83]: Una herramienta web que usa 3D como interfaz principal

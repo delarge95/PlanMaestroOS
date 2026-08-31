@@ -1,0 +1,220 @@
+- generic [ref=f1e3]:
+  - navigation [ref=f1e4]:
+    - strong [ref=f1e5]: Alexander Woodcock
+    - generic [ref=f1e6]:
+      - button "Cotizar" [ref=f1e7] [cursor=pointer]
+      - button "Catálogo" [active] [ref=f1e8] [cursor=pointer]
+      - generic [ref=f1e9]:
+        - button "USD" [ref=f1e10] [cursor=pointer]
+        - button "COP" [ref=f1e11] [cursor=pointer]
+  - generic [ref=f1e53]:
+    - heading "Todos los servicios" [level=2] [ref=f1e54]
+    - paragraph [ref=f1e55]: Web 3D, visores, configuradores, herramientas.
+    - generic [ref=f1e56]:
+      - button "Todos" [ref=f1e57] [cursor=pointer]
+      - button "Render 3D" [ref=f1e58] [cursor=pointer]
+      - button "Assets Realtime" [ref=f1e59] [cursor=pointer]
+      - button "CAD → Web" [ref=f1e60] [cursor=pointer]
+      - button "Web 3D" [ref=f1e61] [cursor=pointer]
+      - button "IA" [ref=f1e62] [cursor=pointer]
+      - button "Soporte" [ref=f1e63] [cursor=pointer]
+      - button "VFX" [ref=f1e64] [cursor=pointer]
+      - button "Texturas" [ref=f1e65] [cursor=pointer]
+      - button "Pipeline" [ref=f1e66] [cursor=pointer]
+    - generic [ref=f1e67]:
+      - button "render Render 3D estatico imagen desde $100" [ref=f1e68] [cursor=pointer]:
+        - generic [ref=f1e69]: render
+        - strong [ref=f1e70]: Render 3D estatico
+        - generic [ref=f1e71]: imagen
+        - generic [ref=f1e72]:
+          - text: desde
+          - strong [ref=f1e73]: $100
+      - button "render Animacion 3D (render offline) clip (XS=loop 2-3s) desde $100" [ref=f1e74] [cursor=pointer]:
+        - generic [ref=f1e75]: render
+        - strong [ref=f1e76]: Animacion 3D (render offline)
+        - generic [ref=f1e77]: clip (XS=loop 2-3s)
+        - generic [ref=f1e78]:
+          - text: desde
+          - strong [ref=f1e79]: $100
+      - button "asset-rt Asset 3D realtime estatico asset optimizado desde $150" [ref=f1e80] [cursor=pointer]:
+        - generic [ref=f1e81]: asset-rt
+        - strong [ref=f1e82]: Asset 3D realtime estatico
+        - generic [ref=f1e83]: asset optimizado
+        - generic [ref=f1e84]:
+          - text: desde
+          - strong [ref=f1e85]: $150
+      - button "asset-rt Asset RT interactuable (hotspots) asset + interactividad desde $200" [ref=f1e86] [cursor=pointer]:
+        - generic [ref=f1e87]: asset-rt
+        - strong [ref=f1e88]: Asset RT interactuable (hotspots)
+        - generic [ref=f1e89]: asset + interactividad
+        - generic [ref=f1e90]:
+          - text: desde
+          - strong [ref=f1e91]: $200
+      - button "datos CAD a WebGL ready (servicio insignia) ensamblaje CAD desde $100" [ref=f1e92] [cursor=pointer]:
+        - generic [ref=f1e93]: datos
+        - strong [ref=f1e94]: CAD a WebGL ready (servicio insignia)
+        - generic [ref=f1e95]: ensamblaje CAD
+        - generic [ref=f1e96]:
+          - text: desde
+          - strong [ref=f1e97]: $100
+      - button "Web 3D Visor custom three.js / Babylon.js visor web desde $200" [ref=f1e98] [cursor=pointer]:
+        - generic [ref=f1e99]: Web 3D
+        - strong [ref=f1e100]: Visor custom three.js / Babylon.js
+        - generic [ref=f1e101]: visor web
+        - generic [ref=f1e102]:
+          - text: desde
+          - strong [ref=f1e103]: $200
+      - button "Web 3D Web App 3D (configurador/herramienta) aplicacion web desde $550" [ref=f1e104] [cursor=pointer]:
+        - generic [ref=f1e105]: Web 3D
+        - strong [ref=f1e106]: Web App 3D (configurador/herramienta)
+        - generic [ref=f1e107]: aplicacion web
+        - generic [ref=f1e108]:
+          - text: desde
+          - strong [ref=f1e109]: $550
+      - button "ia Asistente IA en sitio web (chat RAG) asistente instalado desde $650" [ref=f1e110] [cursor=pointer]:
+        - generic [ref=f1e111]: ia
+        - strong [ref=f1e112]: Asistente IA en sitio web (chat RAG)
+        - generic [ref=f1e113]: asistente instalado
+        - generic [ref=f1e114]:
+          - text: desde
+          - strong [ref=f1e115]: $650
+      - button "soporte Consultoria tecnica 3D / web sesion o informe desde $100" [ref=f1e116] [cursor=pointer]:
+        - generic [ref=f1e117]: soporte
+        - strong [ref=f1e118]: Consultoria tecnica 3D / web
+        - generic [ref=f1e119]: sesion o informe
+        - generic [ref=f1e120]:
+          - text: desde
+          - strong [ref=f1e121]: $100
+      - button "soporte Retainer mensual bloque horas/mes desde $2,300" [ref=f1e122] [cursor=pointer]:
+        - generic [ref=f1e123]: soporte
+        - strong [ref=f1e124]: Retainer mensual
+        - generic [ref=f1e125]: bloque horas/mes
+        - generic [ref=f1e126]:
+          - text: desde
+          - strong [ref=f1e127]: $2,300
+      - button "asset-rt Modelo animado no interactuable asset animado (GLB) desde $220" [ref=f1e128] [cursor=pointer]:
+        - generic [ref=f1e129]: asset-rt
+        - strong [ref=f1e130]: Modelo animado no interactuable
+        - generic [ref=f1e131]: asset animado (GLB)
+        - generic [ref=f1e132]:
+          - text: desde
+          - strong [ref=f1e133]: $220
+      - button "asset-rt Modelo animado interactuable asset animado + control desde $360" [ref=f1e134] [cursor=pointer]:
+        - generic [ref=f1e135]: asset-rt
+        - strong [ref=f1e136]: Modelo animado interactuable
+        - generic [ref=f1e137]: asset animado + control
+        - generic [ref=f1e138]:
+          - text: desde
+          - strong [ref=f1e139]: $360
+      - button "asset-rt Shaders estilizados shader / set desde $100" [ref=f1e140] [cursor=pointer]:
+        - generic [ref=f1e141]: asset-rt
+        - strong [ref=f1e142]: Shaders estilizados
+        - generic [ref=f1e143]: shader / set
+        - generic [ref=f1e144]:
+          - text: desde
+          - strong [ref=f1e145]: $100
+      - button "asset-rt Mecanicas sobre asset realtime mecanica desde $100" [ref=f1e146] [cursor=pointer]:
+        - generic [ref=f1e147]: asset-rt
+        - strong [ref=f1e148]: Mecanicas sobre asset realtime
+        - generic [ref=f1e149]: mecanica
+        - generic [ref=f1e150]:
+          - text: desde
+          - strong [ref=f1e151]: $100
+      - button "Web 3D Visor embebido (Spline/Sketchfab/model-viewer) embed desde $100" [ref=f1e152] [cursor=pointer]:
+        - generic [ref=f1e153]: Web 3D
+        - strong [ref=f1e154]: Visor embebido (Spline/Sketchfab/model-viewer)
+        - generic [ref=f1e155]: embed
+        - generic [ref=f1e156]:
+          - text: desde
+          - strong [ref=f1e157]: $100
+      - 'button "Web 3D Unity WebGL: build y embedding build desde $270" [ref=f1e158] [cursor=pointer]':
+        - generic [ref=f1e159]: Web 3D
+        - strong [ref=f1e160]: "Unity WebGL: build y embedding"
+        - generic [ref=f1e161]: build
+        - generic [ref=f1e162]:
+          - text: desde
+          - strong [ref=f1e163]: $270
+      - button "Web 3D Scrollytelling con 3D pagina/experiencia desde $290" [ref=f1e164] [cursor=pointer]:
+        - generic [ref=f1e165]: Web 3D
+        - strong [ref=f1e166]: Scrollytelling con 3D
+        - generic [ref=f1e167]: pagina/experiencia
+        - generic [ref=f1e168]:
+          - text: desde
+          - strong [ref=f1e169]: $290
+      - button "Web 3D Minijuego web juego desde $650" [ref=f1e170] [cursor=pointer]:
+        - generic [ref=f1e171]: Web 3D
+        - strong [ref=f1e172]: Minijuego web
+        - generic [ref=f1e173]: juego
+        - generic [ref=f1e174]:
+          - text: desde
+          - strong [ref=f1e175]: $650
+      - button "Web 3D Catalogo interactivo 3D catalogo/proyecto desde $480" [ref=f1e176] [cursor=pointer]:
+        - generic [ref=f1e177]: Web 3D
+        - strong [ref=f1e178]: Catalogo interactivo 3D
+        - generic [ref=f1e179]: catalogo/proyecto
+        - generic [ref=f1e180]:
+          - text: desde
+          - strong [ref=f1e181]: $480
+      - button "Web 3D Presentacion web interactiva presentacion desde $180" [ref=f1e182] [cursor=pointer]:
+        - generic [ref=f1e183]: Web 3D
+        - strong [ref=f1e184]: Presentacion web interactiva
+        - generic [ref=f1e185]: presentacion
+        - generic [ref=f1e186]:
+          - text: desde
+          - strong [ref=f1e187]: $180
+      - button "ia IA indirecta en producto web feature/paquete desde $280" [ref=f1e188] [cursor=pointer]:
+        - generic [ref=f1e189]: ia
+        - strong [ref=f1e190]: IA indirecta en producto web
+        - generic [ref=f1e191]: feature/paquete
+        - generic [ref=f1e192]:
+          - text: desde
+          - strong [ref=f1e193]: $280
+      - button "ia Automatizacion interna con LLM paquete workflow desde $800" [ref=f1e194] [cursor=pointer]:
+        - generic [ref=f1e195]: ia
+        - strong [ref=f1e196]: Automatizacion interna con LLM
+        - generic [ref=f1e197]: paquete workflow
+        - generic [ref=f1e198]:
+          - text: desde
+          - strong [ref=f1e199]: $800
+      - button "ia Consultoria y auditoria de IA auditoria/paquete desde $320" [ref=f1e200] [cursor=pointer]:
+        - generic [ref=f1e201]: ia
+        - strong [ref=f1e202]: Consultoria y auditoria de IA
+        - generic [ref=f1e203]: auditoria/paquete
+        - generic [ref=f1e204]:
+          - text: desde
+          - strong [ref=f1e205]: $320
+      - button "vfx Modelo 3D integrado en foto/video real shot desde $120" [ref=f1e206] [cursor=pointer]:
+        - generic [ref=f1e207]: vfx
+        - strong [ref=f1e208]: Modelo 3D integrado en foto/video real
+        - generic [ref=f1e209]: shot
+        - generic [ref=f1e210]:
+          - text: desde
+          - strong [ref=f1e211]: $120
+      - button "vfx FX puro (simulaciones video) shot desde $120" [ref=f1e212] [cursor=pointer]:
+        - generic [ref=f1e213]: vfx
+        - strong [ref=f1e214]: FX puro (simulaciones video)
+        - generic [ref=f1e215]: shot
+        - generic [ref=f1e216]:
+          - text: desde
+          - strong [ref=f1e217]: $120
+      - button "vfx Motion graphics 3D pieza/paquete desde $100" [ref=f1e218] [cursor=pointer]:
+        - generic [ref=f1e219]: vfx
+        - strong [ref=f1e220]: Motion graphics 3D
+        - generic [ref=f1e221]: pieza/paquete
+        - generic [ref=f1e222]:
+          - text: desde
+          - strong [ref=f1e223]: $100
+      - button "texturas Generacion de texturas y mapas set/asset desde $150" [ref=f1e224] [cursor=pointer]:
+        - generic [ref=f1e225]: texturas
+        - strong [ref=f1e226]: Generacion de texturas y mapas
+        - generic [ref=f1e227]: set/asset
+        - generic [ref=f1e228]:
+          - text: desde
+          - strong [ref=f1e229]: $150
+      - button "pipeline Automatizacion de pipeline/scripts/tools herramienta desde $100" [ref=f1e230] [cursor=pointer]:
+        - generic [ref=f1e231]: pipeline
+        - strong [ref=f1e232]: Automatizacion de pipeline/scripts/tools
+        - generic [ref=f1e233]: herramienta
+        - generic [ref=f1e234]:
+          - text: desde
+          - strong [ref=f1e235]: $100

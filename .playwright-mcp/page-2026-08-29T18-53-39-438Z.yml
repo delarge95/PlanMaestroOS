@@ -1,0 +1,71 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - strong [ref=e5]: Alexander Woodcock
+    - generic [ref=e6]:
+      - button "Cotizar" [ref=e7] [cursor=pointer]
+      - button "Catálogo" [ref=e8] [cursor=pointer]
+      - generic [ref=e9]:
+        - button "USD" [ref=e10] [cursor=pointer]
+        - button "COP" [ref=e11] [cursor=pointer]
+  - generic [ref=e179]:
+    - generic [ref=e180]:
+      - button "← Cambiar servicio" [ref=e181] [cursor=pointer]
+      - heading "Visor custom three.js / Babylon.js" [level=2] [ref=e182]
+      - generic [ref=e183]:
+        - generic [ref=e185]:
+          - generic [ref=e186]:
+            - generic [ref=e187]: ¿Cuántos hotspots o puntos interactivos?
+            - strong [ref=e188]: 0hotspots
+          - generic [ref=e189] [cursor=pointer]
+        - generic [ref=e192]:
+          - generic [ref=e193]: ¿Los datos vienen de un CMS/API o son fijos?
+          - generic [ref=e194]:
+            - button "Fijos (hardcode)" [ref=e195] [cursor=pointer]
+            - button "Dinámicos (CMS/API)" [ref=e196] [cursor=pointer]
+        - generic [ref=e198]:
+          - generic [ref=e199]: ¿Dónde va a correr?
+          - generic [ref=e200]:
+            - button "Desktop" [ref=e201] [cursor=pointer]
+            - button "Desktop + móvil" [ref=e202] [cursor=pointer]
+      - generic [ref=e203]:
+        - generic [ref=e204]:
+          - button "Normal" [ref=e205] [cursor=pointer]
+          - button "Pronto +25%" [ref=e206] [cursor=pointer]
+          - button "Crítico +50%" [ref=e207] [cursor=pointer]
+        - generic [ref=e208] [cursor=pointer]: Descuento lanzamiento −25%
+    - complementary [ref=e212]:
+      - generic [ref=e213]: S · Nivel estándar
+      - generic [ref=e214]: $150
+      - generic [ref=e215]: a $570
+      - generic [ref=e216]:
+        - generic [ref=e217]:
+          - generic [ref=e218]: Horas
+          - generic [ref=e219]: 7.5–20h
+        - generic [ref=e220]:
+          - generic [ref=e221]: Entrega
+          - generic [ref=e222]: 2–21d
+      - generic [ref=e223]:
+        - generic [ref=e224]: Incluye
+        - generic [ref=e225]:
+          - generic [ref=e226]: ✓
+          - text: Visor web interactivo
+        - generic [ref=e227]:
+          - generic [ref=e228]: ✓
+          - text: Pipeline de carga optimizado
+        - generic [ref=e229]:
+          - generic [ref=e230]: ✓
+          - text: Responsive mobile-first
+        - generic [ref=e231]:
+          - generic [ref=e232]: ✓
+          - text: Analytics events
+      - generic [ref=e234]:
+        - generic [ref=e235]:
+          - link "Enviar por WhatsApp" [ref=e236] [cursor=pointer]:
+            - /url: https://wa.me/573054396581?text=Visor%20custom%20three.js%20%2F%20Babylon.js%20(S)%3A%20%24150%E2%80%93%24570
+          - link "Enviar por email" [ref=e237] [cursor=pointer]:
+            - /url: mailto:alexwssonn@hotmail.com?subject=Cotizaci%C3%B3n%20de%20proyecto%203D&body=Visor%20custom%20three.js%20%2F%20Babylon.js%20(S)%3A%20%24150%E2%80%93%24570
+          - button "Copiar enlace" [ref=e238] [cursor=pointer]
+          - button "Imprimir / PDF" [ref=e239] [cursor=pointer]
+        - paragraph [ref=e240]
+        - paragraph [ref=e241]: Respuesta en menos de 24 h · Sin compromiso · Tus referencias/archivos los envías después si quieres.
+      - paragraph [ref=e242]: Rango orientativo · válida 15 días
