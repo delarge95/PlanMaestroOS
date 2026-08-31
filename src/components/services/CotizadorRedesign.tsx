@@ -17,11 +17,13 @@ import type { Lang } from '../../data/services/i18n';
 import type { Currency } from '../../data/services/types';
 import type { WizardPick, WizardQuotePlan } from '../../data/services/treeToQuote';
 import { bundlePct, esquemaPago, RONDAS_NOTA } from '../../lib/services/quoteSummary';
+import { encodeShare, decodeShare, quoteId } from '../../lib/services/share';
+import type { ShareState } from '../../lib/services/share';
 import { QuoteCta } from './QuoteCta';
 import { GuidedWizard, WizardEditInline } from './GuidedWizard';
 import { planFromTreeAnswers } from '../../data/services/treeToQuote';
 import { RefDropzone } from './RefDropzone';
-import { SunIcon, MoonIcon, HomeIcon, GearIcon } from './icons';
+import { SunIcon, MoonIcon, HomeIcon, GearIcon, ExternalIcon } from './icons';
 
 /** Etiqueta/nota de un pick en el idioma activo (fallback: español). */
 const pickLabel = (p: WizardPick, lang: Lang) => (lang === 'en' ? EXTRA_LABELS_EN[p.labelEs] ?? p.labelEs : p.labelEs);
@@ -118,7 +120,7 @@ function WebGLBackground({ dark = false }: { dark?: boolean }) {
     raf = requestAnimationFrame(loop);
     return () => { cancelAnimationFrame(raf); window.removeEventListener('mousemove', onMouse); renderer.dispose(); mount.replaceChildren(); };
   }, [dark]);
-  return <div ref={ref} style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true" />;
+  return <div ref={ref} className="cx-webgl-bg" style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }} aria-hidden="true" />;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -350,6 +352,23 @@ export function CotizadorRedesign() {
     return () => window.removeEventListener('popstate', onPop);
   }, []);
 
+  // ── Ciclo 11: ENLACE COMPARTIDO CON ESTADO. Al abrir la página con params
+  // (?svc=&cur=&fc=&urg=&qty=&v=), decodeShare restaura la cotización EXACTA:
+  // mismo servicio, valores, moneda, urgencia, descuento y cantidad. Los extras
+  // del wizard no viajan en la URL (encodeShare no los codifica) — se documenta. ──
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const st = decodeShare(window.location.search);
+    if (!st) return;
+    setCurrency(st.currency);
+    setFirstClient(st.firstClient);
+    setUrgency(st.urgency);
+    setQuantity(st.quantity);
+    setServiceId(st.serviceId);
+    setVals(st.vals);
+    setExtras([]);
+  }, []);
+
   /** #15: home real — resetea también al wizard montado (vía homeKey). */
   const [homeKey, setHomeKey] = useState(0);
   const [wizardDraft, setWizardDraft] = useState<{ rootChoice: string; subChoice: string; answers: Record<string, string | number | boolean> } | null>(null);
@@ -420,14 +439,73 @@ export function CotizadorRedesign() {
   // D5 ciclo 2.1: esquema de pago sugerido según el total (piso del rango).
   const pagoSugerido = quote ? esquemaPago(totalProyecto ? totalProyecto.min : quote.totalMin, currency) : null;
 
+  // ── Ciclo 11: estado compartible + ID corto + URL pública con estado.
+  // La URL de compartición SIEMPRE apunta a BRAND.quoteUrl (nunca a
+  // window.location, para no filtrar el dominio del dev). ──
+  const shareState: ShareState = useMemo(
+    () => ({ serviceId, vals, currency, firstClient, urgency, quantity }),
+    [serviceId, vals, currency, firstClient, urgency, quantity],
+  );
+  const qId = useMemo(() => (svc ? quoteId(shareState) : ''), [svc, shareState]);
+  const shareUrl = useMemo(
+    () => (svc ? `${BRAND.quoteUrl}?${encodeShare(shareState)}` : BRAND.quoteUrl),
+    [svc, shareState],
+  );
+
+  // Ciclo 10 — regla de entrega con extras (extraída del aside para
+  // reusarla en el desglose): lo MÁS CONSERVADOR de cada extremo —
+  // min = el mayor de los mínimos, max = el mayor de los máximos.
+  const entregaDias = useMemo<[number, number] | null>(() => {
+    const rangos = [
+      svc?.entregaDiasEs,
+      ...extraQuotes.map(e => SERVICES.find(s => s.id === e.pick.serviceId)?.entregaDiasEs),
+    ].filter((r): r is [number, number] => Array.isArray(r));
+    if (!rangos.length) return null;
+    return extraQuotes.length === 0
+      ? rangos[0]
+      : [Math.max(...rangos.map(r => r[0])), Math.max(...rangos.map(r => r[1]))];
+  }, [svc, extraQuotes]);
+
+  // Ciclo 11: respuestas clave del wizard (nivel de detalle, piezas, acabados)
+  // para la línea "Config: ..." del desglose — solo si existen.
+  const cfgBits = useMemo(() => {
+    const a = wizardDraft?.answers;
+    if (!a) return [] as string[];
+    const es = lang === 'es';
+    const b: string[] = [];
+    if (a['nivel-detalle'] !== undefined) b.push(`${es ? 'nivel de detalle' : 'detail level'}: ${a['nivel-detalle']}`);
+    if (a['cantidad-piezas'] !== undefined) b.push(`${es ? 'piezas' : 'parts'}: ${a['cantidad-piezas']}`);
+    if (a['materiales-acabado'] !== undefined) b.push(`${es ? 'acabado' : 'finish'}: ${a['materiales-acabado']}`);
+    return b;
+  }, [wizardDraft, lang]);
+
   const svcName = svc ? (lang === 'en' ? CATALOG_EN[svc.id]?.name ?? svc.nameEs : svc.nameEs) : '';
-  const summary = svc && quote
-    ? [`${svcName} (${tier}): ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)}`,
-       ...extraQuotes.map(e => `${e.pick.labelEs} — ${e.quote.serviceName} (${e.tier}): ${fmt(currency, e.quote.totalMin)}–${fmt(currency, e.quote.totalMax)}`),
-       totalProyecto ? `Total proyecto${bundle ? ` (incluye −${bundle}% bundle)` : ''}: ${fmt(currency, totalProyecto.min)}–${fmt(currency, totalProyecto.max)}` : '',
-       pagoSugerido ? `${lang === 'es' ? 'Pago sugerido' : 'Suggested payment'}: ${pagoSugerido}` : '',
-      ].filter(Boolean).join('\n')
-    : '';
+  // ── Ciclo 11: DESGLOSE EXACTO para el deep link de WhatsApp (y email) —
+  // encabezado con id, una línea por servicio (nombre, código, nivel, rango
+  // COP/USD), total proyecto con bundle, pago sugerido, entrega conservadora,
+  // config del wizard, enlace con estado y disclaimer. Máx ~15 líneas. ──
+  const summary = useMemo(() => {
+    if (!svc || !quote) return '';
+    const es = lang === 'es';
+    const lines: string[] = [`Cotización ${qId} — ${BRAND.name}`];
+    lines.push(`${svcName} (${svc.id}) · nivel ${tier} · ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)} ${currency}`);
+    for (const e of extraQuotes) {
+      lines.push(`${pickLabel(e.pick, lang)} — ${e.quote.serviceName} (${e.pick.serviceId}) · nivel ${e.tier} · ${fmt(currency, e.quote.totalMin)}–${fmt(currency, e.quote.totalMax)} ${currency}`);
+    }
+    if (totalProyecto) {
+      lines.push(`${es ? 'Total proyecto' : EN.totalProject}${bundle ? ` (−${bundle}% bundle)` : ''}: ${fmt(currency, totalProyecto.min)}–${fmt(currency, totalProyecto.max)} ${currency}`);
+    } else {
+      // servicio único: el total del proyecto ES el rango del principal —
+      // la línea va siempre para que el deep link tenga cierre de total
+      lines.push(`${es ? 'Total proyecto' : EN.totalProject}: ${fmt(currency, quote.totalMin)}–${fmt(currency, quote.totalMax)} ${currency}`);
+    }
+    if (pagoSugerido) lines.push(`${es ? 'Pago sugerido' : 'Suggested payment'}: ${es ? pagoSugerido : EN.pago[pagoSugerido] ?? pagoSugerido}`);
+    if (entregaDias) lines.push(`${es ? 'Entrega' : EN.delivery}: ${entregaDias[0]}–${entregaDias[1]} ${es ? 'días hábiles' : 'business days'}`);
+    if (cfgBits.length) lines.push(`Config: ${cfgBits.join(' · ')}`);
+    lines.push(shareUrl);
+    lines.push(es ? '(Rango orientativo, no cotización formal.)' : '(Indicative range, not a formal quote.)');
+    return lines.join('\n');
+  }, [svc, quote, lang, qId, svcName, tier, currency, extraQuotes, totalProyecto, bundle, pagoSugerido, entregaDias, cfgBits, shareUrl]);
 
   return (
     <div className="cx-root" data-theme={theme} style={{ minHeight: '100vh', background: 'var(--cx-bg)', position: 'relative' }}>
@@ -495,7 +573,27 @@ export function CotizadorRedesign() {
           .cx-config-aside { position: static !important; width: 100% !important; max-height: none !important; overflow: visible !important; }
         }
         @media (min-width: 769px) { .cx-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; max-width: 1200px !important; } }
-        @media print { [data-noprint] { display: none !important; } body { background: #fff !important; } .cx-root { background: #fff !important; --cx-text: #000; --cx-muted: #555; --cx-card: #fff; --cx-card-solid: #fff; --cx-tile: #f5f5f7; --cx-accent: #0071e3; } }
+        /* ciclo 11 — PRINT/PDF limpio: documento 1-2 páginas con fondo blanco,
+           tipografía negra, panel de cotización a ancho completo y cabecera
+           propia (id + fecha + enlace con estado). Se oculta nav, fondo WebGL,
+           wizard, CTA y todo [data-noprint]. */
+        @media print {
+          [data-noprint] { display: none !important; }
+          body { background: #fff !important; }
+          .cx-webgl-bg { display: none !important; }
+          .cx-root { background: #fff !important; --cx-text: #000; --cx-muted: #555; --cx-faint: #777; --cx-card: #fff; --cx-card-solid: #fff; --cx-tile: #f5f5f7; --cx-accent: #0071e3; }
+          .cx-root * { text-shadow: none !important; box-shadow: none !important; }
+          .cx-content { max-width: 100% !important; padding: 0 !important; }
+          .cx-config { display: block !important; }
+          .cx-config-aside {
+            position: static !important; width: 100% !important;
+            max-height: none !important; overflow: visible !important;
+            border: none !important; padding: 0 !important;
+          }
+          .cx-print-header { display: flex !important; flex-direction: column; gap: 2px; margin: 0 0 14px; font-size: 13px; color: #000; }
+          .cx-print-header strong { font-size: 16px; }
+          .cx-prototype-link { color: #000 !important; }
+        }
         .cx-content { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         @media (min-width: 1440px) { .cx-content { max-width: 1400px; } }
       `}</style>
@@ -647,6 +745,13 @@ export function CotizadorRedesign() {
             }}>
               {quote && tier ? (
                 <>
+                  {/* ciclo 11: cabecera SOLO visible en el PDF impreso —
+                      id de la cotización + fecha + enlace con estado */}
+                  <div className="cx-print-header" style={{ display: 'none' }}>
+                    <strong>{lang === 'es' ? 'Cotización' : 'Quote'} {qId} — {BRAND.name}</strong>
+                    <span>{typeof window !== 'undefined' ? new Date().toLocaleDateString(lang === 'es' ? 'es-CO' : 'en-US') : ''}</span>
+                    <span>{shareUrl}</span>
+                  </div>
                   {/* ciclo 10 — precio grande: con extras es EL RANGO DEL PROYECTO
                       (principal + extras, ya con bundle); el tier solo se muestra
                       para un servicio sin extras. */}
@@ -682,15 +787,7 @@ export function CotizadorRedesign() {
                       extremo — min = el mayor de los mínimos, max = el mayor de
                       los máximos (entregaDiasEs[1]) entre principal y extras. */}
                   {(() => {
-                    const rangos = [
-                      svc.entregaDiasEs,
-                      ...extraQuotes.map(e => SERVICES.find(s => s.id === e.pick.serviceId)?.entregaDiasEs),
-                    ].filter((r): r is [number, number] => Array.isArray(r));
-                    const dias: [number, number] | null = !rangos.length
-                      ? null
-                      : extraQuotes.length === 0
-                        ? rangos[0]
-                        : [Math.max(...rangos.map(r => r[0])), Math.max(...rangos.map(r => r[1]))];
+                    const dias = entregaDias;
                     return (
                       <div style={{ marginTop: 24, padding: 14, borderRadius: 14, background: 'var(--cx-tile)' }}>
                         <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--cx-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{lang === 'es' ? 'Entrega' : EN.delivery}</div>
@@ -744,9 +841,17 @@ export function CotizadorRedesign() {
                     <div style={{ fontSize: 13, color: 'var(--cx-text)', padding: '3px 0' }}>{lang === 'es' ? RONDAS_NOTA : EN.rondas}</div>
                   </div>
                   <div data-noprint style={{ marginTop: 24 }}>
-                    <QuoteCta summary={summary} url={typeof window !== 'undefined' ? window.location.href : ''} lang={lang} />
+                    <QuoteCta summary={summary} url={shareUrl} lang={lang} />
                   </div>
                   <p style={{ fontSize: 11, color: 'var(--cx-faint)', marginTop: 16, textAlign: 'center' }}>{lang === 'es' ? 'Rango orientativo · válida 15 días' : EN.rangeValidity}</p>
+                  {/* ciclo 11: prototipo en vivo junto al CTA — la demo real del trabajo */}
+                  <p data-noprint style={{ fontSize: 12, textAlign: 'center', margin: '8px 0 0' }}>
+                    <a href={BRAND.prototypeUrl} target="_blank" rel="noopener noreferrer" className="cx-prototype-link"
+                      style={{ color: 'var(--cx-accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, justifyContent: 'center' }}>
+                      {lang === 'es' ? '¿Dudas del trabajo? Ve el prototipo: Twinsight X500' : EN.prototypeAside}
+                      <ExternalIcon size={12} />
+                    </a>
+                  </p>
                 </>
               ) : (
                 <p style={{ color: 'var(--cx-muted)', fontSize: 15, textAlign: 'center', padding: 20 }}>{lang === 'es' ? 'Configura las variables para ver el precio' : EN.configurePrice}</p>
