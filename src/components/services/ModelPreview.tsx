@@ -26,7 +26,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { EN, TRIS_ETIQUETAS } from '../../data/services/i18n';
-import { loadHolybroInstance, applyFinish, buildPieceOrder, revealPieces, ensureVariadoSet, HOLYBRO_STEPS } from './holybro';
+import { loadHolybroInstance, applyFinish, buildPieceOrder, revealPieces, ensureVariadoSet, revealFrameOnly, droneStepFamily, HOLYBRO_STEPS } from './holybro';
 import type { FinishKind, PieceGroup, VariadoSet } from './holybro';
 import { loadAnvilInstance, applySurfaceMorph, ANVIL_MORPH_NODE } from './anvil';
 import type { Lang } from '../../data/services/i18n';
@@ -34,46 +34,65 @@ import type { Lang } from '../../data/services/i18n';
 export type PreviewMode = 'detail' | 'pieces' | 'story' | 'variants' | 'surface' | 'finish' | 'assembly' | 'hotspots' | 'shader-dial';
 
 // ═══════════════════════════════════════════════════════════════
-// Variantes (ciclo 5): SLOTS ADITIVOS — cada slot una función única,
-// se desbloquean con el slider, se activan/apagan en vivo.
+// Variantes (ciclo 6): 17 SLOTS sobre el DRONE HolyBro (solo el FRAME al
+// inicio; batería/electrónica/plataforma se añaden como piezas desbloqueables).
+// Se desbloquean con el slider, se activan/apagan en vivo.
 // ═══════════════════════════════════════════════════════════════
+export type VariantSlotKind = 'color' | 'toggle' | 'luz';
+export type ColorTarget = 'all' | 'motors' | 'propellers' | 'frames';
+export type SlotFx = 'explode' | 'clip' | 'filter' | 'xray' | 'lineart' | 'flight' | 'isolate' | 'battery' | 'electronics' | 'platform';
+
 export interface VariantSlot {
   id: string;
   es: string;
   en: string;
-  kind: 'color-pieza' | 'color-global' | 'toggle' | 'luz';
+  kind: VariantSlotKind;
+  /** Para kind='color': qué set de meshes tiñe. */
+  colorTarget?: ColorTarget;
+  /** Comportamiento especial del slot. */
+  fx?: SlotFx;
 }
+
 export const VARIANT_SLOTS: VariantSlot[] = [
-  { id: 'color-pieza', es: 'Color por pieza', en: 'Per-part color', kind: 'color-pieza' },
-  { id: 'color-global', es: 'Color global', en: 'Global color', kind: 'color-global' },
-  { id: 'material-metalico', es: 'Material metálico', en: 'Metallic material', kind: 'toggle' },
-  { id: 'material-goma', es: 'Material goma', en: 'Rubber material', kind: 'toggle' },
-  { id: 'accesorio-anillo', es: 'Accesorio: anillo', en: 'Accessory: ring', kind: 'toggle' },
-  { id: 'accesorio-tapa', es: 'Accesorio: tapa', en: 'Accessory: cap', kind: 'toggle' },
-  { id: 'shader-rayos-x', es: 'Shader: rayos X', en: 'Shader: X-ray', kind: 'toggle' },
-  { id: 'shader-clay', es: 'Shader: clay', en: 'Shader: clay', kind: 'toggle' },
-  { id: 'shader-lineart', es: 'Shader: line-art', en: 'Shader: line-art', kind: 'toggle' },
-  { id: 'shader-deform', es: 'Shader: deformación', en: 'Shader: deform', kind: 'toggle' },
+  { id: 'color-base', es: 'Color base', en: 'Base color', kind: 'color', colorTarget: 'all' },
+  { id: 'vista-explosionada', es: 'Vista explosionada', en: 'Exploded view', kind: 'toggle', fx: 'explode' },
+  { id: 'color-secundario', es: 'Color secundario', en: 'Secondary color', kind: 'color', colorTarget: 'motors' },
+  { id: 'color-terciario', es: 'Color terciario', en: 'Tertiary color', kind: 'color', colorTarget: 'propellers' },
+  { id: 'color-cuaternario', es: 'Color cuaternario', en: 'Quaternary color', kind: 'color', colorTarget: 'frames' },
+  { id: 'cortes-transversales', es: 'Corte transversal', en: 'Cross-section', kind: 'toggle', fx: 'clip' },
+  { id: 'filtros-piezas', es: 'Filtros de piezas', en: 'Part filters', kind: 'toggle', fx: 'filter' },
+  { id: 'pieza-adicional-1', es: 'Batería', en: 'Battery', kind: 'toggle', fx: 'battery' },
+  { id: 'pieza-adicional-2', es: 'Electrónica', en: 'Electronics', kind: 'toggle', fx: 'electronics' },
+  { id: 'pieza-adicional-3', es: 'Plataforma superior', en: 'Top platform', kind: 'toggle', fx: 'platform' },
+  { id: 'shader-xray', es: 'Shader rayos X', en: 'Shader X-ray', kind: 'toggle', fx: 'xray' },
+  { id: 'shader-lineart', es: 'Shader line-art', en: 'Shader line-art', kind: 'toggle', fx: 'lineart' },
+  { id: 'animacion-vuelo', es: 'Animación de vuelo', en: 'Flight animation', kind: 'toggle', fx: 'flight' },
   { id: 'luz-estudio', es: 'Luz de estudio', en: 'Studio lighting', kind: 'luz' },
   { id: 'luz-natural', es: 'Luz natural', en: 'Natural lighting', kind: 'luz' },
   { id: 'luz-dramatica', es: 'Luz dramática', en: 'Dramatic lighting', kind: 'luz' },
+  { id: 'aislamiento-piezas', es: 'Aislamiento de piezas', en: 'Part isolation', kind: 'toggle', fx: 'isolate' },
 ];
-/** Piezas seleccionables del slot color-pieza (índice = hijo de prod). */
-export const VARIANT_PARTS = [
-  { es: 'Base', en: 'Base' },
-  { es: 'Cuerpo', en: 'Body' },
-  { es: 'Aro', en: 'Ring' },
-  { es: 'Tapa', en: 'Cap' },
-] as const;
 
 export interface VariantSlotsState {
   /** ON/OFF por slot (índice = posición en VARIANT_SLOTS). */
   on: boolean[];
-  /** Slot color-pieza: pieza (0=Base,1=Cuerpo,2=Aro,3=Tapa) + color hex. */
-  colorPieza?: { part: number; color: string };
-  /** Slot color-global: color hex que tiñe todo el modelo. */
-  colorGlobal?: string;
+  /** Color hex por slot de color (clave = slot.id). */
+  colors: Record<string, string>;
+  /** filtros-piezas: familias visibles. */
+  filterFrame: boolean;
+  filterMotors: boolean;
+  filterPropellers: boolean;
+  /** aislamiento-piezas: familia enfocada (null = ninguna). */
+  isolate: 'frame' | 'motors' | 'propellers' | null;
 }
+
+/** Hex por defecto de cada slot de color. */
+export const SLOT_DEFAULT_COLORS: Record<string, string> = {
+  'color-base': '#eef0f2',
+  'color-secundario': '#3a3f47',
+  'color-terciario': '#0071e3',
+  'color-cuaternario': '#8f9297',
+};
 
 /** Catálogo de animaciones del modo story (1.3 replante). */
 export const STORY_ANIMS = [
@@ -87,6 +106,7 @@ export const STORY_ANIMS = [
   { es: 'Presentación', en: 'Showcase', glyph: '★' },
   { es: 'Giro inverso', en: 'Reverse spin', glyph: '↺' },
   { es: 'Pulso', en: 'Pulse', glyph: '◉' },
+  { es: 'Despegue', en: 'Takeoff', glyph: '▲' },
 ] as const;
 const STORY_DURATION = 2.4; // segundos por animación
 
@@ -410,10 +430,10 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     // Presets de iluminación (slots 11-13, excluyentes entre sí)
     const applyLuzPreset = (idx: number) => {
       if (idx === 0) {        // estudio: key + fill + rim equilibrada
-        hemi.intensity = 0.95; hemi.color.setHex(0xffffff); hemi.groundColor.setHex(0xdde4ee);
-        key.intensity = 2.1; key.color.setHex(0xffffff);
-        rim.intensity = 1.15; rim.color.setHex(0xeaf2ff);
-        setEnv(1.0);
+        hemi.intensity = 0.85; hemi.color.setHex(0xffffff); hemi.groundColor.setHex(0xdde4ee);
+        key.intensity = 1.5; key.color.setHex(0xffffff);
+        rim.intensity = 0.9; rim.color.setHex(0xeaf2ff);
+        setEnv(0.8);
       } else if (idx === 1) { // natural: cálida ambiente
         hemi.intensity = 1.35; hemi.color.setHex(0xfff1dc); hemi.groundColor.setHex(0xe7dbc8);
         key.intensity = 1.05; key.color.setHex(0xfff0dd);
@@ -433,34 +453,6 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     };
     let lastSlotsKey = '';
     let slotsDeformWanted = false;
-    const applySlots = (s?: VariantSlotsState) => {
-      if (!s) return;
-      const key = JSON.stringify(s);
-      if (key === lastSlotsKey) return;
-      lastSlotsKey = key;
-      // colores (1: por pieza · 2: global — global gana si ambos activos)
-      partMats.forEach((m, i) => m.color.setHex(PART_BASE_HEX[i]));
-      if (s.on[1] && s.colorGlobal) partMats.forEach(m => m.color.set(s.colorGlobal!));
-      else if (s.on[0] && s.colorPieza) partMats[Math.max(0, Math.min(3, s.colorPieza.part))]!.color.set(s.colorPieza.color);
-      // materiales (3: metálico · 4: goma — metal gana en cuerpo/base)
-      const metallic = s.on[2], goma = s.on[3];
-      for (const i of [0, 1]) {
-        partMats[i].metalness = metallic ? 0.9 : goma ? 0.0 : i === 0 ? 0.6 : 0.3;
-        partMats[i].roughness = metallic ? 0.22 : goma ? 0.95 : i === 0 ? 0.35 : 0.4;
-      }
-      // accesorios (5: anillo · 6: tapa)
-      pRing.visible = s.on[4];
-      pCap.visible = s.on[5];
-      // shaders (7: rayos-x · 8: clay · 9: line-art) — si clay y rayos-x activos, clay gana
-      const clayOn = s.on[7], xrayOn = s.on[6];
-      prodParts.forEach((p, i) => { p.material = clayOn ? claySlotMat : xrayOn ? xrayMat : partMats[i]; });
-      edgesOverlays.forEach(e => { e.visible = s.on[8]; });
-      // deform (10): se aplica continuo en el loop; aquí solo reset si se apagó
-      slotsDeformWanted = s.on[9];
-      if (!slotsDeformWanted && deformOn) { applyDeform(0, 0); deformOn = false; }
-      // luces (11-13, excluyentes)
-      applyLuzPreset(s.on[10] ? 0 : s.on[11] ? 1 : s.on[12] ? 2 : -1);
-    };
 
     // ── Yunque real (surface, ciclo 5): raíz propia + fallback procedural ──
     const anvilRoot = new THREE.Group();
@@ -488,16 +480,20 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     const applyModeVisibility = (m: PreviewMode) => {
       detailRoot.visible = m === 'detail';
       hub.visible = satRoot.visible = m === 'pieces';
-      prod.visible = m === 'story' || m === 'variants' || m === 'hotspots' || m === 'shader-dial';
+      // ciclo 6: story usa el drone HolyBro real; prod queda para variants/hotspots/shaders
+      prod.visible = m === 'variants' || m === 'hotspots' || m === 'shader-dial';
       // surface: yunque real si ya cargó; mientras carga (o si falla) el morph
       // procedural cubo→esfera hace de fallback
       morphRoot.visible = m === 'surface' && !anvilReady;
       anvilRoot.visible = m === 'surface' && !!anvilReady;
-      prod.children.forEach((c, i) => { if (i >= 4) c.visible = m === 'story'; });
+      storyDroneRoot.visible = m === 'story' && !!storyDroneReady;
+      variantDroneRoot.visible = false;
+      prod.children.forEach((c, i) => { if (i >= 4) c.visible = false; });
       if (m === 'variants') {
         // materiales propios del modo variants (no contaminan otros modos)
         [pBase, pBody, pRing, pCap].forEach((p, i) => { p.material = partMats[i]; });
         lastSlotsKey = ''; // fuerza re-aplicación del estado de slots al reentrar
+        lastVariantKey = ''; // ídem para el drone de variantes
       } else {
         [pBase, pBody, pRing, pCap].forEach((p, i) => { p.material = prodOriginalMats[i]; });
         edgesOverlays.forEach(e => { e.visible = false; });
@@ -506,10 +502,12 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       if (m === 'variants' || m === 'shader-dial') { pRing.visible = true; pCap.visible = true; }
       if (m === 'detail') setEnv(0.9);
       if (m === 'finish' || m === 'assembly') {
-        setEnv(2.4);
-        key.intensity = 3.2;
-        hemi.intensity = 1.6;
-        renderer.toneMappingExposure = 1.45;
+        // ciclo 6: luz más moderada para que el clay no se queme (2.4→1.4 env,
+        // key 3.2→2.4) y exposición 1.0 (antes 1.45/1.18).
+        setEnv(1.4);
+        key.intensity = 2.4;
+        hemi.intensity = 1.2;
+        renderer.toneMappingExposure = 1.0;
         startHolybro();
       } else {
         key.intensity = 1.4;
@@ -520,6 +518,8 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         key.color.setHex(0xffffff); rim.color.setHex(0x9ecbff); rim.intensity = 0.8;
       }
       if (m === 'surface') startAnvil();
+      if (m === 'story') startStoryDrone();
+      if (m === 'variants') startVariantDrone();
     };
 
     // ═══ HolyBro X500 real: finish (acabados) + assembly (piezas) ═══
@@ -533,6 +533,10 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     let variadoSet: VariadoSet | null = null;
     let lastFinish: FinishKind | null = null;
     let lastPieceCount = -1;
+    // ciclo 6 — vista explosionada en assembly (al idle 3s)
+    let hbCenter = new THREE.Vector3(0, 0, 0);
+    let assmExplode = 0;
+    let assmExplodeTarget = 0;
     function startHolybro() {
       if (holybroStarted) return;
       holybroStarted = true;
@@ -542,6 +546,9 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
           holybroReady = root;
           hbOrder = buildPieceOrder(root);
           revealPieces(hbOrder, hbOrder.length);
+          // posición base de cada pieza (para la explosión al idle) y centro del drone
+          hbOrder.forEach(g => g.meshes.forEach(m => { m.userData.assmHome = m.position.clone(); }));
+          hbCenter = new THREE.Box3().setFromObject(root).getCenter(new THREE.Vector3());
           // UNA sola aplicación inicial: assembly usa presets 'variado',
           // finish usa el acabado elegido (o 'detallado' por defecto)
           const finishFor: FinishKind = stateRef.current.mode === 'assembly'
@@ -562,6 +569,184 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         })
         .catch(err => { holybroStarted = false; console.error('[holybro] carga fallida:', err); });
     }
+
+    // ═══ Story drone (ciclo 6): el scrollytelling usa el HolyBro REAL en vez
+    // del producto procedural. Instancia propia (clone) como finish/assembly. ═══
+    const storyDroneRoot = new THREE.Group();
+    group.add(storyDroneRoot);
+    let storyDroneStarted = false;
+    let storyDroneReady: THREE.Group | null = null;
+    let storyDroneVariado: VariadoSet | null = null;
+    function startStoryDrone() {
+      if (storyDroneStarted) return;
+      storyDroneStarted = true;
+      loadHolybroInstance()
+        .then(root => {
+          storyDroneRoot.add(root);
+          storyDroneReady = root;
+          applyFinish(root, 'variado', null);
+          storyDroneRoot.visible = stateRef.current.mode === 'story';
+          if (stateRef.current.mode === 'story') prod.visible = false;
+          return ensureVariadoSet(root).then(set => {
+            storyDroneVariado = set;
+            applyFinish(root, 'variado', set);
+          });
+        })
+        .catch(err => { storyDroneStarted = false; console.error('[story drone] carga fallida:', err); });
+    }
+
+    // ═══ Variants drone (ciclo 6): el configurador usa el FRAME del HolyBro real.
+    // Batería/electrónica/plataforma se añaden como piezas desbloqueables. ═══
+    const variantDroneRoot = new THREE.Group();
+    group.add(variantDroneRoot);
+    let variantDroneStarted = false;
+    let variantDroneReady: THREE.Group | null = null;
+    let variantVariado: VariadoSet | null = null;
+    let lastVariantKey = '';
+    let varExplode = 0;
+    let varFlightT0 = -1;
+    const variantTintCache = new Map<string, THREE.MeshStandardMaterial>();
+    const tintMat = (hex: string) => {
+      let m = variantTintCache.get(hex);
+      if (!m) {
+        m = new THREE.MeshStandardMaterial({ color: hex, metalness: 0.3, roughness: 0.45 });
+        variantTintCache.set(hex, m);
+      }
+      return m;
+    };
+    const dimVariantMat = new THREE.MeshStandardMaterial({ color: 0x2b2b2f, metalness: 0.4, roughness: 0.6 });
+    const variantEdgesGroup = new THREE.Group();
+    variantDroneRoot.add(variantEdgesGroup);
+    const variantEdges: THREE.LineSegments[] = [];
+
+    /** Clasifica una mesh del drone para los targets de color.
+     *  base=todas · secundario=motores · terciario=hélices · cuaternario=frame
+     *  superior/inferior. Tubos y tren de aterrizaje caen en 'other' (solo base). */
+    const colorTargetOf = (step: number | undefined): ColorTarget | 'other' => {
+      if (step === 0) return 'motors';
+      if (step === 1) return 'propellers';
+      if (step === 3 || step === 4) return 'frames';
+      return 'other';
+    };
+
+    function startVariantDrone() {
+      if (variantDroneStarted) return;
+      variantDroneStarted = true;
+      loadHolybroInstance()
+        .then(root => {
+          variantDroneRoot.add(root);
+          variantDroneReady = root;
+          (window as any).__variantReady = root.children.length;
+          (window as any).__variantMeshCount = 0;
+          root.traverse(o => { if ((o as THREE.Mesh).isMesh) (window as any).__variantMeshCount++; });
+          revealFrameOnly(root); // estado inicial: solo el frame
+          root.traverse(o => { if ((o as THREE.Mesh).isMesh) (o as THREE.Mesh).userData.variantHome = (o as THREE.Mesh).position.clone(); });
+          applyFinish(root, 'variado', null);
+          variantDroneRoot.visible = false;
+          return ensureVariadoSet(root).then(set => {
+            variantVariado = set;
+            applyFinish(root, 'variado', set);
+            // snapshot del material 'variado' por mesh (para restaurar al quitar colores)
+            root.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) m.userData.variadoMat = m.material; });
+            // overlays de aristas para shader-lineart (solo meshes principales)
+            root.traverse(o => {
+              const m = o as THREE.Mesh;
+              if (!m.isMesh) return;
+              const e = new THREE.LineSegments(
+                new THREE.EdgesGeometry(m.geometry, 25),
+                new THREE.LineBasicMaterial({ color: 0x1d1d1f, transparent: true, opacity: 0.85 }),
+              );
+              e.visible = false;
+              variantEdgesGroup.add(e);
+              variantEdges.push(e);
+            });
+          });
+        })
+        .catch(err => { variantDroneStarted = false; console.error('[variant drone] carga fallida:', err); });
+    }
+
+    /** Aplica el estado de slots al drone (estático: visibilidad/colores/shaders/luces). */
+    const applyVariantSlots = (root: THREE.Group | null, s: VariantSlotsState) => {
+      if (!root) return;
+      const key = JSON.stringify(s);
+      if (key === lastVariantKey) return;
+      lastVariantKey = key;
+      (window as any).__variantSlotsApplied = key;
+
+      // ── 1. visibilidad: frame + piezas extra + filtros ──
+      // Solo meshes: si tocara grupos, el nodo raíz (paso catch-all de
+      // tornillería) quedaría oculto y arrastraría a TODO el drone.
+      root.traverse(o => {
+        const m = o as THREE.Mesh;
+        if (!m.isMesh) return;
+        const step = m.userData.step as number | undefined;
+        if (step === undefined) return;
+        const fam = droneStepFamily(step);
+        let vis = fam === 'motors' || fam === 'propellers' || fam === 'frame';
+        if (s.on[7]) vis = vis || fam === 'battery';       // pieza-adicional-1
+        if (s.on[8]) vis = vis || fam === 'electronics';   // pieza-adicional-2
+        if (s.on[9]) vis = vis || fam === 'platform';      // pieza-adicional-3
+        // filtros-piezas: si activo, las familias apagadas se ocultan
+        if (s.on[6]) {
+          if (fam === 'frame') vis = vis && s.filterFrame;
+          if (fam === 'motors') vis = vis && s.filterMotors;
+          if (fam === 'propellers') vis = vis && s.filterPropellers;
+        }
+        m.visible = vis;
+      });
+
+      // ── 2. colores (base→secundario→terciario→cuaternario; el último gana) ──
+      const colorOrder: Array<[number, ColorTarget]> = [
+        [0, 'all'], [2, 'motors'], [3, 'propellers'], [4, 'frames'],
+      ];
+      const dbgColors: string[] = [];
+      root.traverse(o => {
+        const m = o as THREE.Mesh;
+        if (!m.isMesh) return;
+        const tgt = colorTargetOf(m.userData.step as number | undefined);
+        let hex: string | null = null;
+        for (const [idx, target] of colorOrder) {
+          if (!s.on[idx]) continue;
+          if (target === 'all' || target === tgt) hex = s.colors[VARIANT_SLOTS[idx].id] ?? null;
+        }
+        m.material = hex ? tintMat(hex) : (m.userData.variadoMat as THREE.Material ?? m.userData.origMat as THREE.Material ?? m.material);
+        if (m.visible && dbgColors.length < 12) dbgColors.push(`${m.name}:step${m.userData.step}:tgt=${tgt}:${hex ?? 'variado'}`);
+      });
+      (window as any).__variantColors = dbgColors;
+
+      // ── 3. shaders ──
+      const xrayOn = s.on[10], lineartOn = s.on[11];
+      if (xrayOn) {
+        root.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) m.material = xrayMat; });
+      }
+      variantEdges.forEach(e => { e.visible = lineartOn; });
+
+      // ── 4. corte transversal (clipping plane) ──
+      if (s.on[5]) {
+        const plane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+        renderer.clippingPlanes = [plane];
+        renderer.localClippingEnabled = true;
+        root.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh && m.material) (m.material as THREE.Material).clippingPlanes = [plane]; });
+      } else {
+        renderer.clippingPlanes = [];
+        root.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh && m.material) (m.material as THREE.Material).clippingPlanes = []; });
+      }
+
+      // ── 5. aislamiento de piezas: atenúa las familias no enfocadas ──
+      const iso = s.on[16] ? s.isolate : null;
+      if (iso) {
+        root.traverse(o => {
+          const m = o as THREE.Mesh;
+          if (!m.isMesh) return;
+          const fam = droneStepFamily(m.userData.step as number | undefined);
+          const focus = (iso === 'frame' && fam === 'frame') || (iso === 'motors' && fam === 'motors') || (iso === 'propellers' && fam === 'propellers');
+          if (!focus && m.visible) m.material = dimVariantMat;
+        });
+      }
+
+      // ── 6. luces (excluyentes) ──
+      applyLuzPreset(s.on[13] ? 0 : s.on[14] ? 1 : s.on[15] ? 2 : -1);
+    };
 
     // ── Hotspots (sección 3): marcadores que pulsan sobre el producto ──
     const markerGroup = new THREE.Group();
@@ -732,6 +917,34 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       }
     };
 
+    // ── Encuadre dinámico (assembly, ciclo 6): bounding sphere de piezas visibles ──
+    const _v = new THREE.Vector3();
+    const _c = new THREE.Vector3();
+    let assmCamDist = 4.5; // distancia actual de cámara en assembly (lerped)
+    const computeVisibleSphere = (root: THREE.Object3D): { center: THREE.Vector3; radius: number } => {
+      const centers: THREE.Vector3[] = [];
+      const radii: number[] = [];
+      let cx = 0, cy = 0, cz = 0;
+      root.traverse(o => {
+        const m = o as THREE.Mesh;
+        if (!m.isMesh || !m.visible) return;
+        const geo = m.geometry;
+        if (!geo.boundingSphere) geo.computeBoundingSphere();
+        const bs = geo.boundingSphere;
+        const s = m.getWorldScale(_v);
+        const r = (bs ? bs.radius : 0.5) * Math.max(s.x, s.y, s.z);
+        m.getWorldPosition(_c);
+        cx += _c.x; cy += _c.y; cz += _c.z;
+        centers.push(_c.clone());
+        radii.push(r);
+      });
+      if (!centers.length) return { center: new THREE.Vector3(0, 0.15, 0), radius: 1.3 };
+      const centroid = new THREE.Vector3(cx / centers.length, cy / centers.length, cz / centers.length);
+      let R = 0;
+      for (let i = 0; i < centers.length; i++) R = Math.max(R, radii[i] + centers[i].distanceTo(centroid));
+      return { center: centroid, radius: R };
+    };
+
     // ── Loop ──
     let raf = 0;
     const start = performance.now();
@@ -781,13 +994,37 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
           // se revelan juntas). Orden: pasos de montaje grandes → pequeñas.
           const total = hbOrder.length;
           const k = Math.max(1, Math.min(total, Math.round((Math.max(1, Math.min(50, cur.pieces)) / 50) * total)));
-          if (k !== lastPieceCount) { revealPieces(hbOrder, k); lastPieceCount = k; }
+          if (k !== lastPieceCount) { revealPieces(hbOrder, k); lastPieceCount = k; lastPiecesChange = performance.now(); }
           const stepName = HOLYBRO_STEPS[Math.min(hbOrder[Math.min(k, total) - 1].step, HOLYBRO_STEPS.length - 1)];
           if (uiRef.current) {
             uiRef.current.textContent = cur.lang === 'es' ? stepName.es : stepName.en;
             uiRef.current.style.opacity = '1';
           }
           holybroRoot.rotation.y = t * 0.25;
+          // ciclo 6 — encuadre dinámico: la cámara AMPLÍA su encuadre según el
+          // bbox de las piezas visibles (zoom cerrado al inicio, conjunto completo
+          // al final). Ease exponencial sobre la distancia objetivo.
+          const sph = computeVisibleSphere(holybroReady);
+          const targetDist = Math.max(1.25, Math.min(4.6, sph.radius * 3.4));
+          assmCamDist += (targetDist - assmCamDist) * 0.055;
+          cam.position.set(0, 0.95, assmCamDist);
+          cam.lookAt(sph.center.x, sph.center.y * 0.6 + 0.15, sph.center.z);
+          // ciclo 6 — vista explosionada: tras ~3s de inactividad las piezas
+          // visibles se separan radialmente (proporcional a su distancia al centro);
+          // se recomponen al volver a mover el slider.
+          const idle = (performance.now() - lastPiecesChange) / 1000;
+          assmExplodeTarget = idle > 3 ? 1 : 0;
+          assmExplode += (assmExplodeTarget - assmExplode) * 0.05;
+          const e = assmExplode * assmExplode * (3 - 2 * assmExplode);
+          for (const g of hbOrder) {
+            for (const m of g.meshes) {
+              const home = m.userData.assmHome as THREE.Vector3 | undefined;
+              if (!home) continue;
+              const dir = home.clone().sub(hbCenter);
+              const target = home.clone().add(dir.clone().normalize().multiplyScalar(dir.length() * 0.85 * e));
+              m.position.lerp(target, 0.12);
+            }
+          }
         }
       } else if (cur.mode !== 'detail' && uiRef.current && uiRef.current.textContent && uiRef.current.textContent.startsWith('≈') === false && cur.mode !== 'hotspots') {
         // limpia la etiqueta de paso si salimos de assembly (el resto lo gestiona renderUi)
@@ -844,26 +1081,34 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         storyActive = idx;
         const p = (elapsed % STORY_DURATION) / STORY_DURATION;
         const ease = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-        // reset base del producto y satélites
-        prod.position.set(0, 0, 0);
-        prod.rotation.set(0, 0, 0);
-        prod.scale.set(1, 1, 1);
-        cam.position.set(0, 1.15, 5.4);
-        cam.lookAt(0, 0.2, 0);
-        prod.children.forEach((c, i) => {
-          if (i >= 4) c.position.lerp(c.userData.home as THREE.Vector3, 0.2);
-        });
+        // reset base del drone HolyBro (ciclo 6: el story usa el drone real)
+        storyDroneRoot.position.set(0, 0, 0);
+        storyDroneRoot.rotation.set(0, 0, 0);
+        storyDroneRoot.scale.set(1, 1, 1);
+        cam.position.set(0, 1.0, 4.8);
+        cam.lookAt(0, 0.15, 0);
         switch (idx) {
-          case 0: prod.rotation.y = ease * Math.PI * 2; break;
-          case 1: { const k = Math.sin(p * Math.PI); prod.children.forEach((c, i) => { if (i >= 4) { const h = c.userData.home as THREE.Vector3; c.position.set(h.x * (1 + k * 1.1), h.y + k * 0.3, h.z * (1 + k * 1.1)); } }); break; }
-          case 2: cam.position.set(0.5, 0.9, 3.1 - Math.sin(p * Math.PI) * 0.7); cam.lookAt(0, 0.45, 0); break;
-          case 3: { const a = 0.6 + ease * Math.PI; cam.position.set(Math.sin(a) * 4.6, 1.0, Math.cos(a) * 4.6); cam.lookAt(0, 0.2, 0); break; }
-          case 4: { const k = Math.abs(Math.sin(p * Math.PI * 2)); prod.position.y = k * 0.7; prod.scale.set(1 + (1 - k) * 0.12, 1 - (1 - k) * 0.18, 1 + (1 - k) * 0.12); break; }
-          case 5: { const k = Math.sin(p * Math.PI); prod.children.forEach((c, i) => { if (i >= 4) { const h = c.userData.home as THREE.Vector3; c.position.set(h.x * (1 + k * 1.6), h.y * (1 + k * 2), h.z * (1 + k * 1.6)); } }); prod.rotation.y = ease * Math.PI; break; }
-          case 6: prod.rotation.x = ease * Math.PI * 1.6; prod.rotation.y = ease * 0.8; break;
-          case 7: { const k = Math.sin(p * Math.PI); cam.position.set(0, 1.1 + k * 0.6, 5.4 - k * 1.2); prod.position.y = k * 0.35; prod.rotation.y = ease * Math.PI * 2.5; break; }
-          case 8: prod.rotation.y = -ease * Math.PI * 2; break;
-          case 9: { const k = Math.sin(p * Math.PI * 3); accentMat.emissiveIntensity = 0.2 + k * 0.9; prod.scale.setScalar(1 + k * 0.07); break; }
+          case 0: storyDroneRoot.rotation.y = ease * Math.PI * 2; break;
+          case 1: { const k = Math.sin(p * Math.PI); storyDroneRoot.scale.setScalar(1 + k * 0.35); break; }
+          case 2: cam.position.set(0.5, 0.9, 3.2 - Math.sin(p * Math.PI) * 0.8); cam.lookAt(0, 0.3, 0); break;
+          case 3: { const a = 0.6 + ease * Math.PI; cam.position.set(Math.sin(a) * 4.6, 1.0, Math.cos(a) * 4.6); cam.lookAt(0, 0.15, 0); break; }
+          case 4: { const k = Math.abs(Math.sin(p * Math.PI * 2)); storyDroneRoot.position.y = k * 0.6; storyDroneRoot.scale.set(1 + (1 - k) * 0.1, 1 - (1 - k) * 0.15, 1 + (1 - k) * 0.1); break; }
+          case 5: { const k = Math.sin(p * Math.PI); storyDroneRoot.scale.setScalar(1 + k * 0.5); storyDroneRoot.rotation.y = ease * Math.PI; break; }
+          case 6: storyDroneRoot.rotation.x = ease * Math.PI * 1.4; storyDroneRoot.rotation.y = ease * 0.8; break;
+          case 7: { const k = Math.sin(p * Math.PI); cam.position.set(0, 1.0 + k * 0.6, 4.8 - k * 1.2); storyDroneRoot.position.y = k * 0.3; storyDroneRoot.rotation.y = ease * Math.PI * 2.5; break; }
+          case 8: storyDroneRoot.rotation.y = -ease * Math.PI * 2; break;
+          case 9: { const k = Math.sin(p * Math.PI * 3); storyDroneRoot.scale.setScalar(1 + k * 0.06); break; }
+          case 10: {
+            // Despegue (ciclo 6): spin-up con vibración → aceleración hacia arriba → levitación estable
+            const spinUp = smooth(Math.min(1, p / 0.35));
+            const climb = smooth(Math.max(0, (p - 0.25) / 0.5));
+            const vibe = spinUp * (1 - climb) * 0.03;
+            const y = climb * climb * 1.1 + Math.sin(t * 55) * vibe;
+            storyDroneRoot.position.y = climb >= 1 ? 1.1 + Math.sin(t * 2.2) * 0.06 : y;
+            storyDroneRoot.rotation.z = Math.sin(t * 40) * vibe * 0.4;
+            storyDroneRoot.rotation.x = Math.sin(t * 33) * vibe * 0.4;
+            break;
+          }
         }
         if (idx !== 9) accentMat.emissiveIntensity = 0;
       }
@@ -879,11 +1124,61 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       }
       if (cur.mode === 'variants') {
         if (cur.variantSlots) {
-          // camino nuevo: slots aditivos (ciclo 5)
-          applySlots(cur.variantSlots);
-          if (slotsDeformWanted) { applyDeform(t, 1); deformOn = true; }
+          // ciclo 6: slots sobre el drone HolyBro (frame + piezas extra desbloqueables)
+          prod.visible = false;
+          variantDroneRoot.visible = !!variantDroneReady;
+          (window as any).__variantRootVisible = variantDroneRoot.visible;
+          (window as any).__variantVisMesh = 0;
+          if (variantDroneReady) variantDroneReady.traverse(o => { if ((o as THREE.Mesh).isMesh && o.visible) (window as any).__variantVisMesh++; });
+          applyVariantSlots(variantDroneReady, cur.variantSlots);
+          // debug: material real de las primeras meshes visibles
+          (window as any).__variantFinalMats = [];
+          if (variantDroneReady) {
+            let cnt = 0;
+            variantDroneReady.traverse(o => {
+              const m = o as THREE.Mesh;
+              if (!m.isMesh || !m.visible) return;
+              if (cnt++ < 5) (window as any).__variantFinalMats.push(`${m.name}:${m.material ? ((m.material as THREE.MeshStandardMaterial).color ? '#'+(m.material as THREE.MeshStandardMaterial).color.getHexString() : 'noColor') : 'null'}:op${m.material ? (m.material as THREE.MeshStandardMaterial).opacity : '?'}`);
+            });
+          }
+          // vista explosionada (slot 1): separación radial continua con ease
+          const wantExplode = cur.variantSlots.on[1] ? 1 : 0;
+          varExplode += (wantExplode - varExplode) * 0.06;
+          const e = varExplode * varExplode * (3 - 2 * varExplode);
+          if (variantDroneReady) {
+            variantDroneReady.traverse(o => {
+              const m = o as THREE.Mesh;
+              if (!m.isMesh || !m.visible) return;
+              const home = m.userData.variantHome as THREE.Vector3 | undefined;
+              if (!home) return;
+              const len = home.length();
+              if (len < 0.001) { m.position.lerp(home, 0.12); return; }
+              const target = home.clone().add(home.clone().normalize().multiplyScalar(len * 0.7 * e));
+              m.position.lerp(target, 0.12);
+            });
+          }
+          // animación de vuelo (slot 12): spin-up de hélices + levitación
+          if (cur.variantSlots.on[12]) {
+            if (varFlightT0 < 0) varFlightT0 = t;
+            const ft = t - varFlightT0;
+            const spin = Math.min(1, ft / 0.8);
+            const rise = smooth(Math.min(1, ft / 1.4));
+            variantDroneRoot.position.y = rise * rise * 0.9 + Math.sin(t * 2) * 0.04;
+            if (variantDroneReady) {
+              variantDroneReady.traverse(o => {
+                const m = o as THREE.Mesh;
+                if (!m.isMesh) return;
+                if (droneStepFamily(m.userData.step as number | undefined) === 'propellers') m.rotation.y += 0.5 * spin;
+              });
+            }
+          } else {
+            varFlightT0 = -1;
+            variantDroneRoot.position.y = 0;
+          }
         } else if (cur.variantSel) {
           // legado (sección 3 de config): ejes color/material/accesorio
+          prod.visible = true;
+          variantDroneRoot.visible = false;
           applyVariant(cur.variantSel);
           pBody.material.color.lerp(colorTarget, 0.12);
           pBody.material.roughness += (matTarget.roughness - pBody.material.roughness) * 0.12;
@@ -897,10 +1192,20 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       }
       group.rotation.y += (rotY - group.rotation.y) * 0.12;
       group.rotation.x += (rotX - group.rotation.x) * 0.12;
-      if (cur.mode !== 'story') {
-        // finish/assembly: cámara más cerca → el modelo se ve ~35% más grande
-        const closeUp = cur.mode === 'finish' || cur.mode === 'assembly';
-        cam.position.set(0, closeUp ? 0.95 : 1.35, closeUp ? 4.5 : 6.1);
+      if (cur.mode !== 'story' && cur.mode !== 'assembly') {
+        // ciclo 6 — presencia global más grande por modo (antes todo a 6.1).
+        // finish se mantiene en 4.5; assembly/story gestionan su propia cámara.
+        const camByMode: Record<string, [number, number]> = {
+          detail: [4.8, 1.0],
+          surface: [4.6, 0.95],
+          finish: [4.3, 0.95],
+          variants: [5.0, 1.1],
+          hotspots: [5.0, 1.1],
+          pieces: [5.0, 1.1],
+          'shader-dial': [5.0, 1.1],
+        };
+        const [dist, cy] = camByMode[cur.mode] ?? [5.0, 1.1];
+        cam.position.set(0, cy, dist);
         cam.lookAt(0, 0.15, 0);
       }
       renderer.render(scene, cam);

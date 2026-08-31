@@ -2,16 +2,17 @@
  * anvil.ts — Carga del yunque real (yunke.glb) para el modo 'surface' del preview.
  * Reemplaza el morph procedural cubo→esfera (que queda como fallback).
  *
- * Estructura del GLB (verificado parseando el JSON embebido):
- * - 8 meshes. Solo 'ANVIL LOW POLI' (mesh 'Plane.005', 1352 verts) tiene morph
- *   targets: targetNames ['Key 1','Key 2'], pesos iniciales [0,0].
- * - Las otras 7 ('anvil', 'Cylinder.002/003', 'Plane'×4) NO morphean: si se
- *   muestran junto al morph quedan congeladas mientras el yunque cambia → se
- *   OCULTAN (decisión documentada en el reporte del ciclo 5).
- * - Key 1 colapsa la malla a ~±0.09 unidades (blob mínimo); Key 2 a ~1.3
- *   unidades (forma compacta). La base (pesos 0) es el yunque completo ~5u.
- *   Por eso las influencias se limitan (SURFACE_*_MAX) para que el modelo no
- *   "explote" ni colapse dentro del frame.
+ * Ciclo 6 — GLB optimizado (53MB → 5.6MB): ya no trae escena del curso de
+ * Blender. Se conserva SOLO el objeto 'ANVIL LOW POLI' con sus 2 shape keys y
+ * su material; texturas re-escaladas a 1024. La normalización por bbox sigue
+ * midiendo únicamente la mesh del yunque (sin suelo ni cylinders alrededor).
+ *
+ * Semántica de las morph keys (corrección del usuario, ciclo 6):
+ * - Key 2 = forma SIMPLE (nivel 1 del slider).
+ * - Key 1 = forma INTERMEDIA (nivel 3).
+ * - Base (ambas keys = 0) = yunque COMPLETO (nivel 5).
+ * Va AL REVÉS de lo que se asumía en el ciclo 5 (antes se leían como
+ * "colapso/compacto" en orden inverso).
  *
  * La promesa cachea el parse normalizado (solo lectura) y cada instancia de
  * ModelPreview recibe root.clone(true) — mismo patrón que holybro.ts.
@@ -23,16 +24,17 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 export const ANVIL_URL = '/cotizador/models/yunke.glb';
 /** Nodo cuya mesh es la que morphea (identificado en el GLB). */
 export const ANVIL_MORPH_NODE = 'ANVIL LOW POLI';
-/** GLTFLoader sanitiza el nombre del nodo ('ANVIL LOW POLI' → 'ANVIL_LOW_POLI'),
- *  así que el match es por forma normalizada, no por el literal con espacios. */
+/** GLTFLoader nombra la mesh con el NOMBRE DEL NODO ('ANVIL LOW POLI'), así que
+ *  el match es por forma normalizada (espacio/guion/barra baja equivalentes). */
 const ANVIL_MORPH_RE = /^ANVIL[\s_\-]?LOW[\s_\-]?POLI$/i;
 /** Nombres de los morph targets del GLB (mesh.extras.targetNames). */
 export const ANVIL_KEYS = ['Key 1', 'Key 2'] as const;
 
-/** Influencia máxima por key: Key 2 (compacta, 1.3u) domina el tramo medio y
- *  Key 1 (blob, 0.2u) solo el final — a peso 1 el modelo colapsaría a un punto. */
-export const SURFACE_KEY2_MAX = 0.6;
-export const SURFACE_KEY1_MAX = 0.35;
+/** Influencia de pico por key. 'A tope' = peso 1: cada morph target es la forma
+ *  final de su nivel (simple o intermedia). La transición es continua y ambas
+ *  caen a 0 en t=5 (yunque base/completo). */
+export const SURFACE_KEY2_MAX = 1.0;
+export const SURFACE_KEY1_MAX = 1.0;
 
 let cache: Promise<THREE.Group> | null = null;
 
@@ -95,14 +97,21 @@ export function loadAnvilInstance(): Promise<THREE.Group> {
 const smooth = (x: number) => { const t = Math.max(0, Math.min(1, x)); return t * t * (3 - 2 * t); };
 
 /**
- * Reparto progresivo del slider superficie t∈[1,5] sobre los dos morph targets:
- * - [1,3]: Key 2 crece 0→SURFACE_KEY2_MAX (el yunque "se compacta", bordes suaves)
- * - [3,5]: Key 1 crece 0→SURFACE_KEY1_MAX (termina escultórico/orgánico)
- * Continuo y bidireccional (las influencias son absolutas, robusto al bajar).
+ * Reparto progresivo del slider superficie t∈[1,5] sobre los dos morph targets
+ * (semántica corregida, ciclo 6 — va al revés del ciclo 5):
+ * - t=1: Key 2 a tope (forma SIMPLE), Key 1 en 0.
+ * - t=3: Key 1 a tope (forma INTERMEDIA), Key 2 en 0.
+ * - t=5: ambas en 0 (yunque BASE / completo).
+ * Curva continua y bidireccional:
+ *   Key2(t) = smooth((3-t)/2) para t∈[1,3], 0 después        (1 → 0)
+ *   Key1(t) = smooth((t-1)/2) para t∈[1,3], smooth((5-t)/2)  (0 → 1 → 0)
+ * Las influencias son absolutas (robusto al subir/bajar el slider).
  */
 export function surfaceWeights(t: number): [number, number] {
   const x = Math.max(1, Math.min(5, t));
-  return [SURFACE_KEY1_MAX * smooth((x - 3) / 2), SURFACE_KEY2_MAX * smooth((x - 1) / 2)];
+  const w2 = x <= 3 ? smooth((3 - x) / 2) : 0;                 // simple: 1→0 en [1,3]
+  const w1 = x <= 3 ? smooth((x - 1) / 2) : smooth((5 - x) / 2); // intermedia: 0→1→0
+  return [SURFACE_KEY1_MAX * w1, SURFACE_KEY2_MAX * w2];
 }
 
 /** Aplica el slider superficie al morph del yunque (por instancia). */

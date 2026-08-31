@@ -4,7 +4,7 @@
  * Preview 3D interactiva que cambia con los sliders + i18n ES/EN (ciclo 2.1).
  */
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import type { CSSProperties, Dispatch, SetStateAction } from 'react';
 import { ROOT_OPTIONS, WEB3D_LEVEL2, WEB3D_BRANCHES } from '../../data/services/decisionTree';
 import type { TreeQuestion, TreeBranch, TreeOption } from '../../data/services/decisionTree';
@@ -13,7 +13,7 @@ import type { WizardQuotePlan } from '../../data/services/treeToQuote';
 import { EN, TREE_EN } from '../../data/services/i18n';
 import type { Lang } from '../../data/services/i18n';
 import { BRAND } from '../../data/services/branding';
-import { ModelPreview, VARIANT_SLOTS, VARIANT_PARTS } from './ModelPreview';
+import { ModelPreview, VARIANT_SLOTS, SLOT_DEFAULT_COLORS } from './ModelPreview';
 import type { PreviewMode, VariantSlotsState } from './ModelPreview';
 import { TreeIcon, ChatIcon, MailIcon, GearIcon } from './icons';
 
@@ -39,6 +39,56 @@ export function GuidedWizard({ onComplete, lang = 'es' }: { onComplete?: (plan: 
   const [showAdvanced, setShowAdvanced] = useState(false);
   const en = lang === 'en';
   const W = EN.wizard;
+
+  // ── Historial del navegador (ciclo 6): el botón atrás del navegador navega
+  // entre pasos del wizard en vez de salir de /cotizador. Solo en cliente. ──
+
+  // Restaura el paso desde history.state al montar (p.ej. volver de config → nivel 3).
+  useEffect(() => {
+    const st = window.history.state;
+    if (st && st.cx === 'cotizador' && st.level && !st.config) {
+      setLevel(st.level);
+      setRootChoice(st.rootChoice ?? '');
+      setSubChoice(st.subChoice ?? '');
+      setAnswers(st.answers ?? {});
+    }
+  }, []);
+
+  // push/replace history al cambiar de paso (y actualiza answers en el nivel 3).
+  useEffect(() => {
+    if (level === 1) return;
+    const state = level === 2
+      ? { cx: 'cotizador', level: 2 }
+      : { cx: 'cotizador', level: 3, rootChoice, subChoice, answers };
+    const cur = window.history.state;
+    if (cur && cur.cx === 'cotizador' && cur.level === state.level && !cur.config) {
+      window.history.replaceState(state, '');
+    } else {
+      window.history.pushState(state, '');
+    }
+  }, [level, rootChoice, subChoice, answers]);
+
+  // Escucha popstate: restaura el paso correspondiente (nivel 1 = base).
+  useEffect(() => {
+    const onPop = () => {
+      const st = window.history.state;
+      if (st && st.cx === 'cotizador') {
+        if (st.level === 2) {
+          setLevel(2); setRootChoice('web-3d'); setSubChoice('');
+        } else if (st.level === 3) {
+          setLevel(3); setRootChoice(st.rootChoice ?? 'web-3d'); setSubChoice(st.subChoice ?? ''); setAnswers(st.answers ?? {});
+        } else if (st.config !== undefined) {
+          // config lo maneja el padre
+        } else {
+          setLevel(1); setRootChoice(''); setSubChoice('');
+        }
+      } else {
+        setLevel(1); setRootChoice(''); setSubChoice('');
+      }
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   const branch: TreeBranch | null = useMemo(() => {
     if (rootChoice === 'web-3d' && subChoice) return WEB3D_BRANCHES[subChoice] ?? null;
@@ -159,7 +209,7 @@ export function GuidedWizard({ onComplete, lang = 'es' }: { onComplete?: (plan: 
       {/* ═══ NIVEL 2 (web-3d): ¿Qué tipo de experiencia? ═══ */}
       {level === 2 && rootChoice === 'web-3d' && (
         <div style={{ paddingTop: 40 }}>
-          <button onClick={() => setLevel(1)}
+          <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }}
             style={{ font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>{en ? W.back : '← Atrás'}</button>
           <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 8px' }}>
             {en ? W.l2Title : '¿Qué tipo de web con 3D?'}
@@ -193,7 +243,7 @@ export function GuidedWizard({ onComplete, lang = 'es' }: { onComplete?: (plan: 
       {/* ═══ NIVEL 3: Preguntas específicas de la rama ═══ */}
       {level === 3 && branch && (
         <div style={{ paddingTop: 40 }}>
-          <button onClick={() => setLevel(2)}
+          <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }}
             style={{ font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 20 }}>{en ? W.back : '← Atrás'}</button>
           <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--cx-text)', margin: '0 0 6px' }}>
             {en ? branchEn(branch.id)?.title ?? branch.title : branch.title}
@@ -223,7 +273,13 @@ export function GuidedWizard({ onComplete, lang = 'es' }: { onComplete?: (plan: 
 
           {/* Ver precio → mapea respuestas a servicios y cotiza */}
           <button
-            onClick={() => onComplete?.(planFromTreeAnswers(rootChoice, subChoice, answers))}
+            onClick={() => {
+              const plan = planFromTreeAnswers(rootChoice, subChoice, answers);
+              if (typeof window !== 'undefined') {
+                window.history.pushState({ cx: 'cotizador', config: plan.picks[0]?.serviceId, draft: { rootChoice, subChoice, answers }, plan }, '');
+              }
+              onComplete?.(plan);
+            }}
             style={{
               marginTop: 32, width: '100%', padding: '16px', borderRadius: 999,
               background: '#0071e3', color: '#fff', border: 'none',
@@ -391,8 +447,11 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
   // Las 3 luces son excluyentes: nace activa solo la primera (luz de estudio).
   const [slots, setSlots] = useState<VariantSlotsState>({
     on: VARIANT_SLOTS.map((_, i) => defaultSlotOn(i)),
-    colorPieza: { part: 1, color: '#3a3f47' },
-    colorGlobal: '#eef0f2',
+    colors: { ...SLOT_DEFAULT_COLORS },
+    filterFrame: true,
+    filterMotors: true,
+    filterPropellers: true,
+    isolate: null,
   });
   const tierHint = config.tierMap?.find(t => value <= t.max)?.tier ?? '';
   const preview = config.preview;
@@ -520,16 +579,32 @@ function SliderWithPreview({ branchId, questionId, config, value, onChange, lang
 /** Colores de los swatches de los slots de color (ES/EN iguales, hex). */
 const SLOT_COLORS = ['#3a3f47', '#eef0f2', '#0071e3', '#ff6b57', '#2e7d4f', '#c9b99a'];
 
-/** Estado inicial de un slot: activo, salvo las luces (excluyentes) donde solo la primera nace activa. */
-const defaultSlotOn = (i: number) =>
-  VARIANT_SLOTS[i].kind === 'luz' ? i === VARIANT_SLOTS.findIndex(s => s.kind === 'luz') : true;
+/** Familias del drone para filtros/aislamiento. */
+const FAMILIES = [
+  { id: 'frame', es: 'Frame', en: 'Frame' },
+  { id: 'motors', es: 'Motores', en: 'Motors' },
+  { id: 'propellers', es: 'Hélices', en: 'Propellers' },
+] as const;
+
+/** Estado inicial de un slot (ciclo 6): el COLOR BASE y el FILTRO nacen activos;
+ *  los colores secundario/terciario/cuaternario (acentos opcionales) y los FX
+ *  (explosión/corte/xray/lineart/vuelo/aislamiento) y las piezas adicionales
+ *  (batería/electrónica/plataforma) nacen APAGADOS — si no, el drone arrancaría
+ *  explotado/cortado/en rayos-X y con batería (contradice el frame inicial).
+ *  Luces excluyentes: solo la primera nace activa. El base es el único color
+ *  activo para que su toggle tiña (o destiña) TODO el drone, no solo los huecos. */
+const defaultSlotOn = (i: number) => {
+  const s = VARIANT_SLOTS[i];
+  if (s.kind === 'luz') return i === VARIANT_SLOTS.findIndex(x => x.kind === 'luz');
+  if (s.kind === 'color') return i === VARIANT_SLOTS.findIndex(x => x.kind === 'color');
+  return s.fx === 'filter';
+};
 
 /**
- * Panel de SLOTS ADITIVOS del configurador (ciclo 5).
- * Regla de desbloqueo (documentada en el reporte): N desbloquea N slots
- * (con el slider en su mínimo de 2 ya se ven los 2 primeros; N>13 → chip "+N-13").
- * Los desbloqueados nacen ACTIVOS y se apagan con un click (estado ON/OFF
- * claro por borde/opacidad, sin emojis). Las 3 luces son excluyentes.
+ * Panel de SLOTS del configurador (ciclo 6, rediseño limpio).
+ * Una FILA por slot: [número] [label] [toggle] — y, debajo de la fila si aplica,
+ * el control específico (swatches de color / chips de familia).
+ * Regla: N desbloquea N slots; N>17 → chip "+N-17". Luces excluyentes.
  */
 function VariantSlotsPanel({ value, lang, slots, setSlots }: {
   value: number; lang: Lang; slots: VariantSlotsState; setSlots: Dispatch<SetStateAction<VariantSlotsState>>;
@@ -538,13 +613,21 @@ function VariantSlotsPanel({ value, lang, slots, setSlots }: {
   const N = Math.max(0, Math.round(value));
   const unlocked = Math.min(VARIANT_SLOTS.length, N);
 
-  // Al subir el slider, los slots nuevos aparecen ACTIVOS (respetando la
-  // exclusividad de las luces); los ya desbloqueados conservan su estado.
+  // Al subir el slider, los slots recién desbloqueados NACEN ACTIVOS; los ya
+  // desbloqueados conservan su estado (el usuario puede haberlos apagado); los
+  // bloqueados quedan OFF. Se usa el unlocked previo para distinguir "nuevo"
+  // de "apagado por el usuario" (el `?? defaultSlotOn` no bastaba: un slot
+  // bloqueado quedaba en `false`, no en `undefined`).
+  const prevUnlockedRef = useRef(unlocked);
   useEffect(() => {
+    const prev = prevUnlockedRef.current;
     setSlots(s => {
-      const on = VARIANT_SLOTS.map((_, i) => (i < unlocked ? (s.on[i] ?? defaultSlotOn(i)) : false));
+      const on = [...s.on];
+      for (let i = prev; i < unlocked; i++) on[i] = defaultSlotOn(i); // recién desbloqueados: nacen activos
+      for (let i = unlocked; i < VARIANT_SLOTS.length; i++) on[i] = false; // bloqueados: OFF
       return { ...s, on };
     });
+    prevUnlockedRef.current = unlocked;
   }, [unlocked, setSlots]);
 
   const toggleSlot = (i: number) => setSlots(s => {
@@ -557,104 +640,128 @@ function VariantSlotsPanel({ value, lang, slots, setSlots }: {
     return { ...s, on };
   });
 
-  const setColorPieza = (part: number, color: string) => setSlots(s => ({ ...s, colorPieza: { part, color } }));
-  const setColorGlobal = (color: string) => setSlots(s => ({ ...s, colorGlobal: color }));
+  const setSlotColor = (slotId: string, color: string) => setSlots(s => ({ ...s, colors: { ...s.colors, [slotId]: color } }));
+  const toggleFamily = (fam: 'frame' | 'motors' | 'propellers') => setSlots(s => ({
+    ...s,
+    filterFrame: fam === 'frame' ? !s.filterFrame : s.filterFrame,
+    filterMotors: fam === 'motors' ? !s.filterMotors : s.filterMotors,
+    filterPropellers: fam === 'propellers' ? !s.filterPropellers : s.filterPropellers,
+  }));
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 12.5, color: 'var(--cx-accent)', fontWeight: 600, textAlign: 'center' }}>
-        {en ? 'Try it — each slot adds a real capability your customer can toggle' : 'Pruébalo — cada slot añade una capacidad real que tu cliente puede encender o apagar'}
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ fontSize: 12.5, color: 'var(--cx-accent)', fontWeight: 600, textAlign: 'center', marginBottom: 4 }}>
+        {en ? 'Each slot is a real capability your customer can toggle' : 'Cada slot es una capacidad real que tu cliente puede encender o apagar'}
       </div>
 
-      {/* Chips de slots */}
-      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
-        {VARIANT_SLOTS.slice(0, unlocked).map((slot, i) => {
-          const active = !!slots.on[i];
-          return (
-            <button key={slot.id} onClick={() => toggleSlot(i)}
-              title={active
-                ? (en ? 'Click to turn off' : 'Clic para apagar')
-                : (en ? 'Click to turn on' : 'Clic para encender')}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600,
-                padding: '4px 12px', borderRadius: 999, font: 'inherit', cursor: 'pointer',
-                border: active ? '1.5px solid var(--cx-accent)' : '1px dashed var(--cx-border-strong)',
-                background: active ? 'var(--cx-accent-soft)' : 'transparent',
+      {/* Filas de slots */}
+      {VARIANT_SLOTS.slice(0, unlocked).map((slot, i) => {
+        const active = !!slots.on[i];
+        const label = en ? slot.en : slot.es;
+        const isColor = slot.kind === 'color';
+        const isFilter = slot.fx === 'filter';
+        const isIsolate = slot.fx === 'isolate';
+        return (
+          <div key={slot.id} data-slot-id={slot.id} data-on={active ? '1' : '0'} style={{
+            display: 'flex', flexDirection: 'column', padding: '9px 0',
+            borderBottom: '1px solid var(--cx-border)',
+            opacity: active ? 1 : 0.55, transition: 'opacity 0.2s',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
+                background: active ? 'var(--cx-accent-soft)' : 'var(--cx-tile)',
                 color: active ? 'var(--cx-accent)' : 'var(--cx-faint)',
-                opacity: active ? 1 : 0.55,
-                transition: 'opacity 0.2s, border-color 0.2s',
-              }}>
-              {en ? slot.en : slot.es}
-              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.05em' }}>{active ? 'ON' : 'OFF'}</span>
-            </button>
-          );
-        })}
-        {/* Más allá de los 13 slots: chip informativo no clicable */}
-        {N > VARIANT_SLOTS.length && (
+                fontSize: 11, fontWeight: 700, fontVariantNumeric: 'tabular-nums',
+              }}>{i + 1}</span>
+              <span style={{ flex: 1, fontSize: 13, fontWeight: 500, color: 'var(--cx-text)', lineHeight: 1.25 }}>{label}</span>
+              <div onClick={() => toggleSlot(i)} data-slot-toggle=""
+                title={active ? (en ? 'Turn off' : 'Apagar') : (en ? 'Turn on' : 'Encender')}
+                style={{
+                  width: 40, height: 24, borderRadius: 12, cursor: 'pointer', position: 'relative', flexShrink: 0,
+                  background: active ? '#30d158' : 'var(--cx-soft)', transition: 'background 0.25s',
+                }}>
+                <div style={{
+                  position: 'absolute', top: 2, left: active ? 18 : 2, width: 20, height: 20, borderRadius: '50%',
+                  background: 'var(--cx-card-solid)', boxShadow: 'var(--cx-shadow-knob)',
+                  transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)',
+                }} />
+              </div>
+            </div>
+
+            {/* Control de color */}
+            {isColor && active && (
+              <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginTop: 8, paddingLeft: 30 }}>
+                {SLOT_COLORS.map(c => (
+                  <button key={c} onClick={() => setSlotColor(slot.id, c)}
+                    aria-label={`color ${c}`}
+                    style={{
+                      width: 20, height: 20, borderRadius: '50%', cursor: 'pointer', padding: 0,
+                      border: slots.colors[slot.id] === c ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                      background: c,
+                    }} />
+                ))}
+                <input type="color" value={slots.colors[slot.id] ?? '#eef0f2'}
+                  onChange={e => setSlotColor(slot.id, e.target.value)}
+                  style={{ width: 26, height: 26, border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}
+                  title={en ? 'Custom color' : 'Color personalizado'} />
+              </div>
+            )}
+
+            {/* Control de filtros de familia */}
+            {isFilter && active && (
+              <div style={{ display: 'flex', gap: 6, marginTop: 8, paddingLeft: 30, flexWrap: 'wrap' }}>
+                {FAMILIES.map(f => {
+                  const on = f.id === 'frame' ? slots.filterFrame : f.id === 'motors' ? slots.filterMotors : slots.filterPropellers;
+                  return (
+                    <button key={f.id} onClick={() => toggleFamily(f.id)}
+                      style={{
+                        fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 999, cursor: 'pointer', font: 'inherit',
+                        border: on ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                        background: on ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)', color: on ? 'var(--cx-accent)' : 'var(--cx-muted)',
+                      }}>{en ? f.en : f.es}</button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Control de aislamiento */}
+            {isIsolate && active && (
+              <div style={{ display: 'flex', gap: 6, marginTop: 8, paddingLeft: 30, flexWrap: 'wrap' }}>
+                {FAMILIES.map(f => {
+                  const selected = slots.isolate === f.id;
+                  return (
+                    <button key={f.id} onClick={() => setSlots(s => ({ ...s, isolate: s.isolate === f.id ? null : f.id }))}
+                      style={{
+                        fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 999, cursor: 'pointer', font: 'inherit',
+                        border: selected ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                        background: selected ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)', color: selected ? 'var(--cx-accent)' : 'var(--cx-muted)',
+                      }}>{en ? f.en : f.es}</button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Más allá de los 17 slots: chip informativo no clicable */}
+      {N > VARIANT_SLOTS.length && (
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 10 }}>
           <span title={en ? 'Quoted as additional variants' : 'Se cotizan como variantes adicionales'}
             style={{
               display: 'inline-flex', alignItems: 'center', fontSize: 12, fontWeight: 700,
               padding: '4px 12px', borderRadius: 999,
               border: '1px dashed var(--cx-border-strong)', color: 'var(--cx-faint)',
-              opacity: 0.8, cursor: 'default',
+              cursor: 'default',
             }}>
             +{N - VARIANT_SLOTS.length}
           </span>
-        )}
-      </div>
-
-      {/* Controles de color de los slots activos */}
-      {slots.on[0] && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', justifyContent: 'center' }}>
-            {VARIANT_PARTS.map((p, i) => (
-              <button key={p.es} onClick={() => setSlots(s => ({ ...s, colorPieza: { part: i, color: s.colorPieza?.color ?? '#3a3f47' } }))}
-                style={{
-                  fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 999, font: 'inherit', cursor: 'pointer',
-                  border: slots.colorPieza?.part === i ? '1.5px solid var(--cx-accent)' : '1px solid var(--cx-border)',
-                  background: slots.colorPieza?.part === i ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)',
-                  color: slots.colorPieza?.part === i ? 'var(--cx-accent)' : 'var(--cx-muted)',
-                }}>
-                {en ? p.en : p.es}
-              </button>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            {SLOT_COLORS.map(c => (
-              <button key={c} onClick={() => setColorPieza(slots.colorPieza?.part ?? 1, c)}
-                aria-label={`color ${c}`}
-                style={{
-                  width: 20, height: 20, borderRadius: '50%', cursor: 'pointer', padding: 0,
-                  border: slots.colorPieza?.color === c ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
-                  background: c,
-                }} />
-            ))}
-            <input type="color" value={slots.colorPieza?.color ?? '#3a3f47'}
-              onChange={e => setColorPieza(slots.colorPieza?.part ?? 1, e.target.value)}
-              style={{ width: 26, height: 26, border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}
-              title={en ? 'Custom color' : 'Color personalizado'} />
-          </div>
-        </div>
-      )}
-      {slots.on[1] && (
-        <div style={{ display: 'flex', gap: 6, alignItems: 'center', justifyContent: 'center' }}>
-          {SLOT_COLORS.map(c => (
-            <button key={c} onClick={() => setColorGlobal(c)}
-              aria-label={`color ${c}`}
-              style={{
-                width: 20, height: 20, borderRadius: '50%', cursor: 'pointer', padding: 0,
-                border: slots.colorGlobal === c ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
-                background: c,
-              }} />
-          ))}
-          <input type="color" value={slots.colorGlobal ?? '#eef0f2'}
-            onChange={e => setColorGlobal(e.target.value)}
-            style={{ width: 26, height: 26, border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}
-            title={en ? 'Custom color' : 'Color personalizado'} />
         </div>
       )}
 
-      <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)' }}>
+      <div style={{ textAlign: 'center', fontSize: 12, color: 'var(--cx-muted)', marginTop: 10 }}>
         {en
           ? 'Each variant adds a real capability to the configurator; extras are quoted as additional variants.'
           : 'Cada variante añade una capacidad real al configurador; las extra se cotizan como variantes adicionales.'}

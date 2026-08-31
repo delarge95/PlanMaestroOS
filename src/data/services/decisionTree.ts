@@ -302,7 +302,7 @@ export const WEB3D_BRANCHES: Record<string, TreeBranch> = {
         help: 'Cada escena es una "parada" del scroll donde el 3D muestra algo diferente.',
         type: 'slider',
         slider: {
-          min: 1, max: 10, step: 1, unit: 'escenas', preview: 'story',
+          min: 1, max: 11, step: 1, unit: 'escenas', preview: 'story',
           tierMap: [
             { max: 4, tier: 'S' },
             { max: 7, tier: 'L' },

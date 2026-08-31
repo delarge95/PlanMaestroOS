@@ -148,6 +148,7 @@ export const SERVICE_VARIABLES: Record<string, ServiceConfig> = {
       },
       {
         id: 'numHotspots', preguntaEs: '¿Cuántos hotspots o partes seleccionables?',
+        ocultarEnConfig: true, // hotspots quedan para integración futura (ciclo 6)
         type: 'number', min: 1, max: 30, step: 1, unidadEs: 'hotspots',
         tierMap: [{ maxVal: 5, tier: 'S' }, { maxVal: 15, tier: 'M' }, { maxVal: 30, tier: 'L' }],
       },
@@ -243,6 +244,7 @@ export const SERVICE_VARIABLES: Record<string, ServiceConfig> = {
       {
         id: 'numHotspots', preguntaEs: '¿Cuántas partes del modelo llevarán punto de información?',
         ayudaEs: 'Cada punto marca una pieza; al hacer click muestra su nombre o specs. El preview de arriba los muestra en vivo.',
+        ocultarEnConfig: true, // hotspots quedan para integración futura (ciclo 6)
         type: 'number', min: 0, max: 30, step: 1, unidadEs: 'puntos',
         tierMap: [{ maxVal: 5, tier: 'S' }, { maxVal: 15, tier: 'M' }, { maxVal: 30, tier: 'L' }],
       },

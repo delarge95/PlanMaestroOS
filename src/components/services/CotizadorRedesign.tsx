@@ -229,6 +229,79 @@ function LuxeSlider({ v, value, onChange, lang, serviceId }: { v: ServiceVariabl
 }
 
 // ═══════════════════════════════════════════════════════════════
+// Control de UNA variable del panel de configuración (ciclo 6: extraído para
+// poder agruparlas en un acordeón colapsable).
+// ═══════════════════════════════════════════════════════════════
+function VariableControl({ v, value, onValue, lang, serviceId }: {
+  v: ServiceVariable; value: Val | undefined; onValue: (n: Val) => void; lang: Lang; serviceId: string;
+}) {
+  const val = value ?? (v.type === 'number' ? (v.min ?? 0) : undefined);
+  return (
+    <div>
+      {v.type === 'number' && (
+        <LuxeSlider v={v} value={typeof val === 'number' ? val : v.min ?? 0} lang={lang} serviceId={serviceId} onChange={onValue} />
+      )}
+      {v.type === 'select' && v.opciones && (
+        <div>
+          <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--cx-text)', display: 'block', marginBottom: 10 }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
+          {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs ? (
+            <div style={{ fontSize: 12.5, color: 'var(--cx-muted)', lineHeight: 1.45, marginTop: -6, marginBottom: 8 }}>
+              {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs}
+            </div>
+          ) : null}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            {v.opciones.map((o: { valorEs: string }) => (
+              <button key={o.valorEs} onClick={() => onValue(o.valorEs)}
+                style={{
+                  padding: '10px 18px', borderRadius: 999, font: `500 14px inherit`, cursor: 'pointer',
+                  border: val === o.valorEs ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
+                  background: val === o.valorEs ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)', color: 'var(--cx-text)',
+                }}>{(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.opciones?.[o.valorEs] : undefined) ?? o.valorEs}</button>
+            ))}
+          </div>
+        </div>
+      )}
+      {v.type === 'toggle' && (
+        <label style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
+          <div onClick={() => onValue(!val)}
+            style={{ width: 44, height: 26, borderRadius: 13, background: val ? '#30d158' : 'var(--cx-border-strong)', position: 'relative', transition: 'background 0.25s', flexShrink: 0 }}>
+            <div style={{ position: 'absolute', top: 2, left: val ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)' }} />
+          </div>
+          <span style={{ fontSize: 15, color: 'var(--cx-text)' }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
+        </label>
+      )}
+      {v.type === 'toggle' && ((lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs) && (
+        <div style={{ fontSize: 12.5, color: 'var(--cx-muted)', lineHeight: 1.45, marginTop: 4, marginLeft: 56 }}>
+          {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Agrupa variables de un servicio en secciones colapsables con título humano. */
+const VAR_GROUP_RULES: Array<{ titleEs: string; titleEn: string; match: RegExp }> = [
+  { titleEs: 'Modelo', titleEn: 'Model', match: /polígono|pieza|parte|superficie|material|geometría|textura|complejidad|calidad|fuente del modelo|de dónde viene el modelo/i },
+  { titleEs: 'Visor', titleEn: 'Viewer', match: /visita|interacción|shader|efecto|animación|estado|loop|rig|hotspot|punto de información/i },
+  { titleEs: 'Entrega', titleEn: 'Delivery', match: /escena|sección|variante|sku|producto|entrega|plataforma|dónde va|dónde va a correr|login|auth|datos|filtro|cms|api|idioma|acción|flujo|proceso|duración|shot|simulación|audio|imagen|resolución|set dressing|tamaño|bridge|scores|leaderboard|mecánica|slide|tiene 3d|presupuesto/i },
+];
+function groupVariables(vars: ServiceVariable[]): Array<{ titleEs: string; titleEn: string; vars: ServiceVariable[] }> {
+  // pocos variables → un único grupo sin desglose
+  if (vars.length <= 3) return [{ titleEs: 'Configuración', titleEn: 'Settings', vars }];
+  const groups = new Map<number, ServiceVariable[]>();
+  for (const v of vars) {
+    const gi = VAR_GROUP_RULES.findIndex(r => r.match.test(v.preguntaEs));
+    const idx = gi < 0 ? VAR_GROUP_RULES.length : gi;
+    if (!groups.has(idx)) groups.set(idx, []);
+    groups.get(idx)!.push(v);
+  }
+  return [...groups.entries()].sort((a, b) => a[0] - b[0]).map(([idx, list]) => {
+    const rule = VAR_GROUP_RULES[idx] ?? { titleEs: 'Configuración', titleEn: 'Settings' };
+    return { titleEs: rule.titleEs, titleEn: rule.titleEn, vars: list };
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
 // MAIN — Rediseño completo
 // ═══════════════════════════════════════════════════════════════
 export function CotizadorRedesign() {
@@ -262,6 +335,28 @@ export function CotizadorRedesign() {
     try { localStorage.setItem('cx-theme', theme); } catch { /* almacenamiento no disponible */ }
   }, [theme]);
 
+  // ── Historial (ciclo 6): restaura config ↔ wizard al navegar atrás/adelante ──
+  useEffect(() => {
+    const onPop = () => {
+      const st = window.history.state;
+      if (!st || st.cx !== 'cotizador') return; // página base / navegación externa
+      if (st.config !== undefined) {
+        const plan = st.plan as WizardQuotePlan | undefined;
+        if (plan && plan.picks?.[0]) {
+          setServiceId(plan.picks[0].serviceId);
+          setVals(plan.picks[0].vals);
+          setExtras(plan.picks.slice(1));
+        } else {
+          setServiceId(st.config as string); setVals({}); setExtras([]);
+        }
+      } else {
+        setServiceId(''); setExtras([]);
+      }
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
   const svc = WEB3D.find(s => s.id === serviceId);
   // ocultarEnConfig (ciclo 8/WEB-04): la variable existe y su valor viene del
   // wizard vía planWebApp, pero no se muestra en el panel por redundante.
@@ -284,9 +379,6 @@ export function CotizadorRedesign() {
   const configPreview: { mode: PreviewMode; detail?: number; story?: number; hotspots?: number; variantSel?: { c: number; m: number; a: number } } | null = (() => {
     if (!svc) return null;
     switch (svc.id) {
-      case 'WEB-01':
-      case 'RTA-02':
-        return { mode: 'hotspots' as const, hotspots: typeof vals.numHotspots === 'number' ? vals.numHotspots : 0 };
       case 'WEB-05':
         return { mode: 'story' as const, story: typeof vals.numSecciones === 'number' ? vals.numSecciones : 5 };
       case 'WEB-04':
@@ -442,7 +534,7 @@ export function CotizadorRedesign() {
           <section style={{ paddingTop: 40, paddingBottom: 60, display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(280px,380px)', gap: 32, alignItems: 'start' }} className="cx-config">
             {/* Panel izquierdo: configuración */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <button onClick={() => { setServiceId(''); setExtras([]); }} data-noprint
+              <button onClick={() => { if (typeof window !== 'undefined') window.history.back(); }} data-noprint
                 style={{ alignSelf: 'flex-start', font: '600 14px inherit', color: 'var(--cx-accent)', background: 'none', border: 'none', cursor: 'pointer', marginBottom: 8 }}>
                 {lang === 'es' ? '← Cambiar servicio' : EN.changeService}
               </button>
@@ -465,54 +557,28 @@ export function CotizadorRedesign() {
               {variables.length > 0 && (
                 <div style={{
                   background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
-                  border: '1px solid var(--cx-border)', borderRadius: 20, padding: 28,
-                  display: 'flex', flexDirection: 'column', gap: 24,
+                  border: '1px solid var(--cx-border)', borderRadius: 20, padding: 20,
+                  display: 'flex', flexDirection: 'column', gap: 6,
                 }}>
-                  {variables.map(v => {
-                    const val = vals[v.id] ?? (v.type === 'number' ? (v.min ?? 0) : undefined);
-                    return (
-                      <div key={v.id}>
-                        {v.type === 'number' && (
-                          <LuxeSlider v={v} value={typeof val === 'number' ? val : v.min ?? 0} lang={lang} serviceId={serviceId}
-                            onChange={(n) => { setVals(p => ({ ...p, [v.id]: n })); setUnsure(p => { const q = { ...p }; delete q[v.id]; return q; }); }} />
-                        )}
-                        {v.type === 'select' && v.opciones && (
-                          <div>
-                            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--cx-text)', display: 'block', marginBottom: 10 }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
-                            {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs ? (
-                              <div style={{ fontSize: 12.5, color: 'var(--cx-muted)', lineHeight: 1.45, marginTop: -6, marginBottom: 8 }}>
-                                {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs}
-                              </div>
-                            ) : null}
-                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                              {v.opciones.map((o: { valorEs: string }) => (
-                                <button key={o.valorEs} onClick={() => setVals(p => ({ ...p, [v.id]: o.valorEs }))}
-                                  style={{
-                                    padding: '10px 18px', borderRadius: 999, font: `500 14px inherit`, cursor: 'pointer',
-                                    border: vals[v.id] === o.valorEs ? '2px solid var(--cx-accent)' : '1px solid var(--cx-border-strong)',
-                                    background: vals[v.id] === o.valorEs ? 'var(--cx-accent-soft)' : 'var(--cx-card-solid)', color: 'var(--cx-text)',
-                                  }}>{(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.opciones?.[o.valorEs] : undefined) ?? o.valorEs}</button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                        {v.type === 'toggle' && (
-                          <label style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
-                            <div onClick={() => setVals(p => ({ ...p, [v.id]: !vals[v.id] }))}
-                              style={{ width: 44, height: 26, borderRadius: 13, background: vals[v.id] ? '#30d158' : 'var(--cx-border-strong)', position: 'relative', transition: 'background 0.25s', flexShrink: 0 }}>
-                              <div style={{ position: 'absolute', top: 2, left: vals[v.id] ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)' }} />
-                            </div>
-                            <span style={{ fontSize: 15, color: 'var(--cx-text)' }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
-                          </label>
-                        )}
-                        {v.type === 'toggle' && ((lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs) && (
-                          <div style={{ fontSize: 12.5, color: 'var(--cx-muted)', lineHeight: 1.45, marginTop: 4, marginLeft: 56 }}>
-                            {(lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.help : undefined) ?? v.ayudaEs}
-                          </div>
-                        )}
+                  {groupVariables(variables).map((g, gi) => (
+                    <details key={g.titleEs} open={gi === 0} style={{ borderRadius: 12, overflow: 'hidden' }}>
+                      <summary style={{
+                        cursor: 'pointer', listStyle: 'none', userSelect: 'none',
+                        padding: '12px 14px', background: 'var(--cx-tile)', borderRadius: 10,
+                        fontSize: 14, fontWeight: 600, color: 'var(--cx-text)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      }}>
+                        <span>{lang === 'en' ? g.titleEn : g.titleEs}</span>
+                        <span style={{ fontSize: 12, color: 'var(--cx-faint)', fontWeight: 500 }}>{g.vars.length}</span>
+                      </summary>
+                      <div style={{ padding: '16px 4px 8px', display: 'flex', flexDirection: 'column', gap: 22 }}>
+                        {g.vars.map(v => (
+                          <VariableControl key={v.id} v={v} value={vals[v.id]} lang={lang} serviceId={serviceId}
+                            onValue={(n) => { setVals(p => ({ ...p, [v.id]: n })); setUnsure(p => { const q = { ...p }; delete q[v.id]; return q; }); }} />
+                        ))}
                       </div>
-                    );
-                  })}
+                    </details>
+                  ))}
                 </div>
               )}
 

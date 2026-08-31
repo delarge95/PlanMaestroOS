@@ -76,7 +76,9 @@ export function loadHolybroInstance(): Promise<THREE.Group> {
   return loadHolybro().then(root => root.clone(true));
 }
 
-const clayMat = () => new THREE.MeshStandardMaterial({ color: 0xd8cfc4, roughness: 0.92, metalness: 0.0, flatShading: true });
+// Ciclo 6: el clay anterior (0xd8cfc4) salía quemado/blanco con el iluminado
+// de finish. Gris medio más oscuro (#847e77) para leer bordes y curvas.
+const clayMat = () => new THREE.MeshStandardMaterial({ color: 0x7a746d, roughness: 0.9, metalness: 0.0, flatShading: true });
 const presetMats = () => [
   new THREE.MeshStandardMaterial({ color: 0x2b2b2f, roughness: 0.55, metalness: 0.25 }), // plástico negro
   new THREE.MeshStandardMaterial({ color: 0x8f9297, roughness: 0.35, metalness: 0.85 }), // aluminio
@@ -281,5 +283,37 @@ export function revealPieces(order: PieceGroup[], k: number) {
   order.forEach((g, i) => {
     const vis = i < k;
     for (const m of g.meshes) m.visible = vis;
+  });
+}
+
+// ─── Familias del drone (ciclo 6, variantes) ───
+// Clasifica una pieza por su paso de montaje para los filtros/colores/aislamiento
+// del configurador web-app. El "frame" agrupa tubos + frames + tren de aterrizaje.
+
+export type DroneFamily = 'motors' | 'propellers' | 'frame' | 'electronics' | 'battery' | 'platform' | 'hardware';
+
+/** Familia del drone a partir del paso de montaje (HOLYBRO_STEPS). */
+export function droneStepFamily(step: number | undefined): DroneFamily {
+  if (step === 0) return 'motors';
+  if (step === 1) return 'propellers';
+  if (step !== undefined && step >= 2 && step <= 5) return 'frame';
+  if (step === 6) return 'electronics';
+  if (step === 7) return 'battery';
+  if (step === 8) return 'platform';
+  return 'hardware';
+}
+
+/** Muestra solo el FRAME del drone (motores + hélices + tubos + frames + tren),
+ *  sin electrónica/batería/plataforma/tornillería. Estado inicial del configurador.
+ *  Solo actúa sobre meshes: si tocara grupos, el nodo raíz (que cae en el paso
+ *  catch-all de tornillería) quedaría oculto y arrastraría a TODO el drone. */
+export function revealFrameOnly(root: THREE.Group) {
+  root.traverse(o => {
+    const m = o as THREE.Mesh;
+    if (!m.isMesh) return;
+    const s = m.userData.step as number | undefined;
+    if (s === undefined) return;
+    const fam = droneStepFamily(s);
+    m.visible = fam === 'motors' || fam === 'propellers' || fam === 'frame';
   });
 }
