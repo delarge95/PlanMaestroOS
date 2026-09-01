@@ -1,6 +1,7 @@
 // src/components/ui/YouTubePlayer.tsx
 import React, { useState } from 'react';
 import { ExternalLink, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
 
 export interface YouTubePlayerProps {
   youtubeLink: string | null | undefined;
@@ -94,6 +95,10 @@ export function YouTubePlayer({
         ? `https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay ? 1 : 0}&title=0&byline=0&portrait=0&badge=0`
         : activeLink;
 
+      if (!isValidEmbedUrl(vimeoEmbedUrl)) {
+        return <div style={{ padding: '16px', color: '#ff6b6b' }}>URL de reproductor no válida o no permitida.</div>;
+      }
+
       return (
         <iframe
           key={vimeoEmbedUrl}
@@ -102,6 +107,7 @@ export function YouTubePlayer({
           title={`Video demo para ${exerciseName}`}
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
           loading="lazy"
         />
       );
@@ -138,6 +144,10 @@ export function YouTubePlayer({
         }
       }
 
+      if (!isValidEmbedUrl(embedUrl)) {
+        return <div style={{ padding: '16px', color: '#ff6b6b' }}>URL de reproductor no válida o no permitida.</div>;
+      }
+
       return (
         <iframe
           key={embedUrl}
@@ -146,6 +156,7 @@ export function YouTubePlayer({
           title={`Video demo para ${exerciseName}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
           loading="lazy"
         />
       );
