@@ -166,10 +166,10 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
   };
 
   return (
-    <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+    <div className="ds-card ds-stack">
       {/* Sub-Header / Mode Toggle */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
-        <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+      <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
+        <div className="ds-row" style={{ gap: 'var(--space-xs)' }}>
           <Button
             variant={activeTab === 'scenarios' ? 'primary' : 'ghost'}
             size="sm"
@@ -186,49 +186,40 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
           </Button>
         </div>
 
-        <span style={{ fontSize: '0.75rem', color: speechSupported ? 'var(--color-success, #10b981)' : 'var(--text-tertiary)' }}>
+        <span className="ds-caption" style={{ color: speechSupported ? 'var(--color-state-done)' : 'var(--text-tertiary)' }}>
           {speechSupported ? '● Micrófono Web Speech disponible' : '○ Modo texto / Fallback'}
         </span>
       </div>
 
       {/* Scenarios Mode */}
       {activeTab === 'scenarios' && currentScenario && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-          <div style={{ display: 'flex', gap: 'var(--space-xs)', overflowX: 'auto', paddingBottom: '4px' }}>
+        <div className="ds-stack-sm">
+          <div className="ds-row" style={{ gap: 'var(--space-xs)', overflowX: 'auto', paddingBottom: '4px' }}>
             {englishScenarios.map((sc: Scenario, i: number) => (
               <button
                 key={sc.id}
                 onClick={() => { setSelectedScenarioIndex(i); setSelectedPhraseIndex(0); setEvaluationResult(null); setTranscript(''); }}
-                style={{
-                  padding: '4px 10px',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.75rem',
-                  fontWeight: selectedScenarioIndex === i ? 700 : 500,
-                  background: selectedScenarioIndex === i ? 'var(--color-accent-primary-soft)' : 'var(--surface-subtle, rgba(255,255,255,0.05))',
-                  color: selectedScenarioIndex === i ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
-                  border: '1px solid ' + (selectedScenarioIndex === i ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'),
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap'
-                }}
+                className="ds-chip"
+                data-active={selectedScenarioIndex === i}
               >
                 {sc.title}
               </button>
             ))}
           </div>
 
-          <div style={{ background: 'var(--surface-raised, rgba(0,0,0,0.2))', padding: 'var(--space-sm)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-subtle)' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-sm)' }}>
+            <span className="ds-eyebrow">
               Objetivo del Escenario
             </span>
-            <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--text)' }}>
+            <p className="ds-body" style={{ margin: '4px 0 0 0' }}>
               {currentScenario.objective}
             </p>
           </div>
 
           {/* Diálogo del escenario */}
-          <div style={{ maxHeight: '180px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px', padding: '6px', background: 'var(--surface)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-subtle)' }}>
+          <div className="ds-card ds-stack-sm" style={{ maxHeight: '180px', overflowY: 'auto', padding: '6px' }}>
             {currentScenario.dialog.map((turn: DialogTurn, tIdx: number) => (
-              <div key={tIdx} style={{ fontSize: '0.8rem', lineHeight: 1.35 }}>
+              <div key={tIdx} className="ds-caption" style={{ lineHeight: 1.35 }}>
                 <strong style={{ color: turn.speaker.includes('Alex') ? 'var(--color-accent-primary)' : 'var(--text-secondary)' }}>
                   {turn.speaker}:
                 </strong>{' '}
@@ -238,30 +229,25 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
           </div>
 
           {/* Frase clave seleccionada para practicar */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
+          <div className="ds-stack-sm" style={{ gap: '6px' }}>
+            <span className="ds-label">
               Frase clave para practicar (Selecciona una):
             </span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div className="ds-stack-sm" style={{ gap: '4px' }}>
               {currentScenario.keyPhrases.map((kp: KeyPhrase, kpIdx: number) => (
                 <div
                   key={kpIdx}
                   onClick={() => { setSelectedPhraseIndex(kpIdx); setEvaluationResult(null); }}
+                  className="ds-card ds-card-clickable ds-row-between"
+                  data-active={selectedPhraseIndex === kpIdx}
                   style={{
-                    padding: '8px 12px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: selectedPhraseIndex === kpIdx ? 'var(--color-accent-primary-soft)' : 'var(--surface-subtle, rgba(255,255,255,0.03))',
-                    border: '1px solid ' + (selectedPhraseIndex === kpIdx ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'),
-                    cursor: 'pointer',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
+                    padding: '8px 12px'
                   }}
                 >
-                  <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text)' }}>
+                  <span className="ds-label">
                     "{kp.en}"
                   </span>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>
+                  <span className="ds-micro" style={{ textTransform: 'uppercase' }}>
                     {kp.register}
                   </span>
                 </div>
@@ -273,39 +259,31 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
 
       {/* STAR Answers Mode */}
       {activeTab === 'star' && currentStar && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-          <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+        <div className="ds-stack-sm">
+          <div className="ds-row-wrap" style={{ gap: 'var(--space-xs)' }}>
             {englishStarAnswers.map((st: StarAnswer, sIdx: number) => (
               <button
                 key={st.id}
                 onClick={() => { setSelectedStarIndex(sIdx); setEvaluationResult(null); setTranscript(''); }}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.78rem',
-                  fontWeight: selectedStarIndex === sIdx ? 700 : 500,
-                  background: selectedStarIndex === sIdx ? 'var(--color-accent-primary-soft)' : 'var(--surface-subtle, rgba(255,255,255,0.05))',
-                  color: selectedStarIndex === sIdx ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
-                  border: '1px solid ' + (selectedStarIndex === sIdx ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'),
-                  cursor: 'pointer'
-                }}
+                className="ds-chip"
+                data-active={selectedStarIndex === sIdx}
               >
                 {st.title.split('—')[0].trim()}
               </button>
             ))}
           </div>
 
-          <div style={{ background: 'var(--surface-raised, rgba(0,0,0,0.2))', padding: 'var(--space-sm)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-subtle)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+          <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-sm)', gap: '6px' }}>
+            <span className="ds-eyebrow">
               Cita: {currentStar.sourceCitation}
             </span>
-            <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text)' }}>
+            <p className="ds-caption" style={{ margin: 0 }}>
               <strong>Situation:</strong> {currentStar.situation}
             </p>
-            <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text)' }}>
+            <p className="ds-caption" style={{ margin: 0 }}>
               <strong>Action:</strong> {currentStar.action}
             </p>
-            <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text)' }}>
+            <p className="ds-caption" style={{ margin: 0 }}>
               <strong>Result:</strong> {currentStar.result}
             </p>
           </div>
@@ -313,8 +291,8 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
       )}
 
       {/* Área de Grabación y Pronunciación Modelo */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)', borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-sm)' }}>
-        <div style={{ display: 'flex', gap: 'var(--space-xs)', flexWrap: 'wrap' }}>
+      <div className="ds-stack-sm" style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-sm)' }}>
+        <div className="ds-row-wrap" style={{ gap: 'var(--space-xs)' }}>
           <Button
             variant="secondary"
             size="sm"
@@ -347,7 +325,7 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
         {/* Input / Transcripción */}
         <div style={{ marginTop: '6px' }}>
           {speechSupported ? (
-            <div style={{ padding: '8px 12px', background: 'var(--surface-raised, rgba(0,0,0,0.15))', borderRadius: 'var(--radius-sm)', minHeight: '40px', fontSize: '0.88rem', color: transcript ? 'var(--text)' : 'var(--text-tertiary)', border: '1px dashed var(--color-border-subtle)' }}>
+            <div className="ds-card ds-body" style={{ padding: '8px 12px', minHeight: '40px', color: transcript ? 'var(--text)' : 'var(--text-tertiary)', border: '1px dashed var(--color-border-subtle)' }}>
               {isListening ? '🎙️ Escuchando... habla ahora en inglés' : (transcript || 'Tu transcripción de audio aparecerá aquí tras hablar...')}
             </div>
           ) : (
@@ -356,26 +334,27 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
               placeholder="Escribe tu respuesta oral aquí para evaluar coincidencia de keywords..."
               value={manualInput}
               onChange={(e) => setManualInput(e.target.value)}
-              style={{ width: '100%', padding: '8px 12px', borderRadius: 'var(--radius-sm)', background: 'var(--surface-raised)', border: '1px solid var(--color-border-subtle)', color: 'var(--text)', fontSize: '0.88rem' }}
+              className="ds-caption"
+              style={{ width: '100%', padding: '8px 12px', borderRadius: 'var(--radius-sm)', background: 'var(--surface-raised)', border: '1px solid var(--color-border-subtle)', color: 'var(--text)' }}
             />
           )}
         </div>
 
         {/* Resultado de Evaluación */}
         {evaluationResult && (
-          <div style={{ marginTop: '8px', padding: '10px 14px', borderRadius: 'var(--radius-sm)', background: 'var(--surface-raised, rgba(0,0,0,0.2))', border: '1px solid var(--color-border-subtle)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text)' }}>
+          <div className="ds-card ds-stack-sm" style={{ marginTop: '8px', padding: '10px 14px' }}>
+            <div className="ds-row-between">
+              <span className="ds-label">
                 {evaluationResult.feedback}
               </span>
-              <span style={{ fontSize: '0.85rem', fontWeight: 800, color: evaluationResult.score >= 70 ? 'var(--color-success, #10b981)' : 'var(--color-accent-primary)' }}>
+              <span className="ds-h3" style={{ margin: 0, color: evaluationResult.score >= 70 ? 'var(--color-state-done)' : 'var(--color-accent-primary)' }}>
                 {evaluationResult.score}% Coincidencia
               </span>
             </div>
 
             {evaluationResult.matchedKeywords.length > 0 && (
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                <span style={{ color: 'var(--color-success, #10b981)', fontWeight: 600 }}>Keywords detectadas:</span> {evaluationResult.matchedKeywords.join(', ')}
+              <div className="ds-micro">
+                <span style={{ color: 'var(--color-state-done)', fontWeight: 600 }}>Keywords detectadas:</span> {evaluationResult.matchedKeywords.join(', ')}
               </div>
             )}
           </div>

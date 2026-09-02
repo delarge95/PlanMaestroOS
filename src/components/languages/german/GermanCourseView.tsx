@@ -27,8 +27,8 @@ export default function GermanCourseView() {
   if (!placementUnitId) {
     return (
       <ErrorBoundary>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+        <div className="ds-stack">
+          <p className="ds-caption" style={{ margin: 0 }}>
             Primera vez aquí: responde 16 preguntas rápidas y te colocamos en la unidad adecuada (≈3 min).
           </p>
           <PlacementTest />
@@ -39,10 +39,10 @@ export default function GermanCourseView() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+      <div className="ds-stack">
 
         {/* SELECTOR DE UNIDAD */}
-        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+        <div className="ds-row-wrap" style={{ gap: '6px' }}>
           {germanCourse.units.map((unit) => {
             const done = unit.lessons.every((l) => completedLessons.has(l.id));
             const active = unit.id === selectedUnit.id;
@@ -51,16 +51,8 @@ export default function GermanCourseView() {
                 key={unit.id}
                 type="button"
                 onClick={() => setSelectedUnitId(unit.id)}
-                style={{
-                  background: active ? 'var(--color-accent-primary-soft)' : 'rgba(255,255,255,0.03)',
-                  color: active ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
-                  border: `1px solid ${active ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
-                  padding: '7px 12px',
-                  borderRadius: '8px',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  cursor: 'pointer'
-                }}
+                className="ds-chip"
+                data-active={active}
               >
                 {unit.title.replace('Unidad ', 'U')}{done ? ' ✓' : ''}
               </button>
@@ -72,9 +64,9 @@ export default function GermanCourseView() {
         {selectedUnit.lessons.map((lesson, idx) => {
           const isNext = !completedLessons.has(lesson.id) && selectedUnit.lessons.slice(0, idx).every((l) => completedLessons.has(l.id));
           return (
-            <div key={lesson.id} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div key={lesson.id} className="ds-stack-sm" style={{ gap: '4px' }}>
               {isNext && (
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+                <span className="ds-eyebrow">
                   ▶ Siguiente lección
                 </span>
               )}
