@@ -1,106 +1,151 @@
 ---
-// SectionNavBar.astro — Submenú de sección, server-side, SIEMPRE arriba.
-// Se coloca en PlanMaestroLayout DESPUÉS de NavigationShell.
-// Determina la sección y el item activo desde Astro.url.pathname.
+// SectionNavBar.astro — Navegación de subsección, server-side, SIEMPRE arriba.
+// Nivel 2: pill chips (estilo original que el usuario aprobó).
+// Nivel 3: links más ligeros debajo, sin competir visualmente con nivel 2.
 import { SECTION_NAV } from '../shell/sectionNavConfig';
 
 interface Props {
-  /** Override del section key (opcional; auto-detecta desde URL si no se pasa). */
   sectionKey?: string;
 }
 
 const { sectionKey: overrideKey } = Astro.props;
 const pathname = Astro.url.pathname;
 
-// Detectar section key desde la URL
-function detectSectionKey(path: string): string | null {
-  // Orden importa: subsecciones más específicas primero
-  const entries: Array<[RegExp, string]> = [
-    [/^\/app\/fitness\/library/, 'fitness.library'],
-    [/^\/app\/fitness/, 'fitness'],
-    [/^\/app\/career/, 'career'],
-    [/^\/app\/clinical/, 'clinical'],
-    [/^\/app\/languages/, 'languages'],
-    [/^\/app\/gastronomy/, 'gastronomy'],
-    [/^\/app\/schedules/, 'today'],
-    [/^\/app\/today/, 'today'],
-  ];
-  for (const [re, key] of entries) {
-    if (re.test(path)) return key;
-  }
-  return null;
+function detectSection(path: string): { level2: string | null; level3: string | null } {
+  if (/^\/app\/fitness\/library/.test(path)) return { level2: 'fitness', level3: 'fitness.library' };
+  if (/^\/app\/fitness/.test(path)) return { level2: 'fitness', level3: null };
+  if (/^\/app\/career/.test(path)) return { level2: 'career', level3: null };
+  if (/^\/app\/clinical/.test(path)) return { level2: 'clinical', level3: null };
+  if (/^\/app\/languages/.test(path)) return { level2: 'languages', level3: null };
+  if (/^\/app\/gastronomy/.test(path)) return { level2: 'gastronomy', level3: null };
+  if (/^\/app\/schedules|^\/app\/today/.test(path)) return { level2: 'today', level3: null };
+  return { level2: null, level3: null };
 }
 
-const key = overrideKey || detectSectionKey(pathname);
-const items = key ? SECTION_NAV[key] : undefined;
+const { level2, level3 } = detectSection(pathname);
 
-// Determinar item activo (la primera coincidencia de pathname gana)
-const activeItem = items?.find(item =>
-  item.end ? pathname === item.href : pathname.startsWith(item.href)
-);
-const activeHref = activeItem?.href ?? '';
+const l2Items = level2 ? SECTION_NAV[level2] : undefined;
+const l3Items = level3 ? SECTION_NAV[level3] : undefined;
 
-const hasItems = items && items.length > 0;
+function activeHref(items: typeof l2Items, path: string): string {
+  if (!items) return '';
+  const exact = items.find(i => i.end && path === i.href);
+  if (exact) return exact.href;
+  const prefix = items.find(i => !i.end && path.startsWith(i.href));
+  if (prefix) return prefix.href;
+  // fallback: first item with end=true
+  return items.find(i => i.end)?.href ?? '';
+}
+
+const l2Active = activeHref(l2Items, pathname);
+const l3Active = activeHref(l3Items, pathname);
+
+// Para level 3: si no hay match exacto, activar el primero
+const l3ActiveFinal = l3Active || (l3Items && l3Items.length > 0 ? l3Items.find(i => i.end)?.href ?? l3Items[0]?.href ?? '' : '');
 ---
 
-{hasItems && (
-  <nav class="section-nav-bar" aria-label={`Navegación de ${key}`}>
-    {items!.map((item) => (
-      <a
-        href={item.href}
-        class:list={['section-nav-link', { 'section-nav-link-active': item.href === activeHref }]}
-        aria-current={item.href === activeHref ? 'page' : undefined}
-      >
-        {item.label}
-      </a>
-    ))}
-  </nav>
+{l2Items && l2Items.length > 0 && (
+  <div class="snb-wrap">
+    {/* ── NIVEL 2: pill chips (el estilo original aprobado) ── */}
+    <nav class="snb-l2" aria-label="Navegación de sección">
+      {l2Items.map(item => (
+        <a
+          href={item.href}
+          class:list={['snb-pill', { 'snb-pill-active': item.href === l2Active }]}
+          aria-current={item.href === l2Active ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+    </nav>
+
+    {/* ── NIVEL 3: links ligeros (solo si la subsección tiene entradas) ── */}
+    {l3Items && l3Items.length > 0 && (
+      <nav class="snb-l3" aria-label="Navegación de subsección">
+        {l3Items.map(item => (
+          <a
+            href={item.href}
+            class:list={['snb-l3-link', { 'snb-l3-link-active': item.href === l3ActiveFinal }]}
+            aria-current={item.href === l3ActiveFinal ? 'page' : undefined}
+          >{item.label}</a>
+        ))}
+      </nav>
+    )}
+  </div>
 )}
 
 <style>
-  .section-nav-bar {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    padding: 8px 16px;
-    background: var(--surface-1, #0d0d0f);
-    border-bottom: 1px solid var(--color-border-subtle, rgba(255,255,255,0.08));
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  .snb-wrap {
     position: sticky;
     top: 0;
     z-index: 30;
+    background: var(--bg, #000);
+    padding: 10px 20px 0;
     -webkit-font-smoothing: antialiased;
   }
-  .section-nav-bar::-webkit-scrollbar { display: none; }
 
-  .section-nav-link {
+  /* ── NIVEL 2: pill bar (idéntico al SectionNav original React) ── */
+  .snb-l2 {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--surface-1, #0d0d0f);
+    border-radius: 999px;
+    padding: 3px 4px;
+    margin: 0 0 var(--space-3, 12px) 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    width: fit-content;
+    max-width: 100%;
+  }
+  .snb-l2::-webkit-scrollbar { display: none; }
+
+  .snb-pill {
     display: inline-flex;
     align-items: center;
-    white-space: nowrap;
-    padding: 6px 14px;
-    border-radius: var(--radius-s, 8px);
-    font: 500 0.8125rem var(--font-family-system, -apple-system, BlinkMacSystemFont, system-ui, sans-serif);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font: 500 var(--fs-meta, 0.8125rem) var(--font-family-system, -apple-system, system-ui, sans-serif);
     color: var(--text-secondary, #98989d);
     text-decoration: none;
+    white-space: nowrap;
     transition: color 0.15s, background 0.15s;
   }
-  .section-nav-link:hover {
+  .snb-pill:hover { color: var(--text-primary, #f5f5f7); }
+  .snb-pill-active {
+    font-weight: 600;
     color: var(--text-primary, #f5f5f7);
     background: var(--surface-2, #161619);
   }
-  .section-nav-link-active {
-    color: var(--text-primary, #f5f5f7);
-    background: var(--surface-3, #1d1d21);
-    font-weight: 600;
+
+  /* ── NIVEL 3: links ligeros, sin caja, solo underline ── */
+  .snb-l3 {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 0 var(--space-3, 12px) 4px;
+    margin: 0 0 var(--space-3, 12px) 0;
+    border-bottom: 1px solid var(--separator, rgba(255,255,255,0.08));
+    overflow-x: auto;
+    scrollbar-width: none;
   }
-  .section-nav-link-active:hover {
-    background: var(--surface-3, #1d1d21);
+  .snb-l3::-webkit-scrollbar { display: none; }
+
+  .snb-l3-link {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font: 400 var(--fs-meta, 0.8125rem) var(--font-family-system, -apple-system, system-ui, sans-serif);
+    color: var(--text-tertiary, #636366);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .snb-l3-link:hover { color: var(--text-primary, #f5f5f7); }
+  .snb-l3-link-active {
+    color: var(--text-primary, #f5f5f7);
+    font-weight: 500;
   }
 
   @media (max-width: 640px) {
-    .section-nav-bar { padding: 6px 12px; }
-    .section-nav-link { padding: 5px 10px; font-size: 0.75rem; }
+    .snb-wrap { padding: 8px 12px 0; }
+    .snb-l3 { flex-wrap: wrap; }
   }
 </style>
