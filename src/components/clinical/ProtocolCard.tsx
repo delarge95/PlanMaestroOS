@@ -11,22 +11,14 @@ export default function ProtocolCard({ protocol }: ProtocolCardProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div style={{
-      background: 'var(--surface)',
-      border: '1px solid var(--color-border-subtle)',
-      borderRadius: 'var(--radius-md)',
-      padding: 'var(--space-md)',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 'var(--space-xs)'
-    }}>
+    <div className="ds-card ds-stack-sm">
       {/* REGLA EN 1 LÍNEA */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
+      <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: '12px' }}>
         <div>
-          <strong style={{ fontSize: '0.92rem', color: 'var(--text)', display: 'block' }}>
+          <strong className="ds-label" style={{ display: 'block' }}>
             {protocol.title}
           </strong>
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginTop: '2px' }}>
+          <span className="ds-caption" style={{ display: 'block', marginTop: '2px' }}>
             {protocol.rule1Line}
           </span>
         </div>
@@ -43,15 +35,13 @@ export default function ProtocolCard({ protocol }: ProtocolCardProps) {
         <button
           type="button"
           onClick={() => setExpanded(!expanded)}
+          className="ds-row ds-caption"
           style={{
             background: 'transparent',
             border: 'none',
             color: 'var(--color-accent-primary)',
-            fontSize: '0.78rem',
             fontWeight: 600,
             cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
             gap: '4px',
             padding: 0
           }}
@@ -61,7 +51,7 @@ export default function ProtocolCard({ protocol }: ProtocolCardProps) {
         </button>
 
         {expanded && (
-          <p style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)', margin: '6px 0 0', lineHeight: 1.5 }}>
+          <p className="ds-caption" style={{ margin: '6px 0 0', lineHeight: 1.5 }}>
             {protocol.detailsParagraph}
           </p>
         )}

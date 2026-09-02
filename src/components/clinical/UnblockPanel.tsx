@@ -68,20 +68,12 @@ export default function UnblockPanel({
   };
 
   return (
-    <div style={{
-      background: 'var(--surface)',
-      border: '1px solid var(--color-border-subtle)',
-      borderRadius: 'var(--radius-md)',
-      padding: 'var(--space-md)',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 'var(--space-sm)'
-    }}>
+    <div className="ds-card ds-stack-sm">
       {/* HEADER PRESCRIPTIVO ¿Bloqueado? */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div className="ds-row-between">
+        <div className="ds-row" style={{ gap: '8px' }}>
           <HelpCircle size={18} style={{ color: 'var(--color-accent-warning)' }} />
-          <strong style={{ fontSize: '0.92rem', color: 'var(--text)' }}>
+          <strong className="ds-label">
             ¿Bloqueado?
           </strong>
         </div>
@@ -92,9 +84,9 @@ export default function UnblockPanel({
       </div>
 
       {isOpen && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', paddingTop: 'var(--space-xs)' }}>
+        <div className="ds-stack" style={{ paddingTop: 'var(--space-xs)' }}>
           {/* BOTONES DE LAS 3 OPCIONES PRINCIPALES */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-xs)' }}>
+          <div className="ds-grid">
             <Button
               variant={activeAction === 'split' ? 'primary' : 'secondary'}
               size="sm"
@@ -122,8 +114,8 @@ export default function UnblockPanel({
 
           {/* OPCIÓN 1: DIVIDIR EN 3 PASOS */}
           {activeAction === 'split' && (
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-sm)', padding: 'var(--space-sm)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+            <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-sm)' }}>
+              <span className="ds-caption" style={{ fontWeight: 600 }}>
                 Desglose micro-accionable para: "{currentTaskTitle}"
               </span>
 
@@ -131,22 +123,22 @@ export default function UnblockPanel({
                 type="text"
                 value={sub1}
                 onChange={(e) => setSub1(e.target.value)}
-                style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', padding: '6px 10px', borderRadius: '4px', color: 'var(--text)', fontSize: '0.8rem' }}
+                style={{ padding: '6px 10px', borderRadius: '4px', fontSize: '0.8rem' }}
               />
               <input
                 type="text"
                 value={sub2}
                 onChange={(e) => setSub2(e.target.value)}
-                style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', padding: '6px 10px', borderRadius: '4px', color: 'var(--text)', fontSize: '0.8rem' }}
+                style={{ padding: '6px 10px', borderRadius: '4px', fontSize: '0.8rem' }}
               />
               <input
                 type="text"
                 value={sub3}
                 onChange={(e) => setSub3(e.target.value)}
-                style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', padding: '6px 10px', borderRadius: '4px', color: 'var(--text)', fontSize: '0.8rem' }}
+                style={{ padding: '6px 10px', borderRadius: '4px', fontSize: '0.8rem' }}
               />
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '4px' }}>
+              <div className="ds-row" style={{ justifyContent: 'flex-end', paddingTop: '4px' }}>
                 <Button variant="primary" size="sm" onClick={handleConfirmSplit}>
                   {splitDone ? '✓ Subtareas añadidas' : 'Confirmar deslose'}
                 </Button>
@@ -156,21 +148,21 @@ export default function UnblockPanel({
 
           {/* OPCIÓN 2: TIMER 10 MIN Y AL FINALIZAR "¿Seguir o soltar?" */}
           {activeAction === 'timer' && (
-            <div style={{ background: 'rgba(10,132,255,0.04)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-sm)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+            <div className="ds-card ds-stack-sm" style={{ alignItems: 'center', borderColor: 'var(--color-accent-primary-soft)' }}>
+              <span className="ds-eyebrow">
                 Foco 10 Minutos
               </span>
 
-              <strong style={{ fontSize: '2rem', fontFamily: 'monospace', color: 'var(--text)' }}>
+              <strong className="ds-h1" style={{ fontFamily: 'monospace' }}>
                 {formatTimer(timeLeftSeconds)}
               </strong>
 
               {timerFinished ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center', width: '100%' }}>
-                  <strong style={{ fontSize: '0.9rem', color: 'var(--text)' }}>
+                <div className="ds-stack-sm" style={{ alignItems: 'center', width: '100%' }}>
+                  <strong className="ds-label">
                     ¿Seguir o soltar?
                   </strong>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div className="ds-row" style={{ gap: '8px' }}>
                     <Button variant="primary" size="sm" onClick={() => handleStartTimer()}>
                       Seguir 10 min más
                     </Button>
@@ -189,9 +181,9 @@ export default function UnblockPanel({
 
           {/* OPCIÓN 3: CAMBIAR DE BLOQUE POR AHORA */}
           {activeAction === 'moved' && (
-            <div style={{ background: 'rgba(48,209,88,0.04)', border: '1px solid var(--color-state-done-soft)', borderRadius: 'var(--radius-sm)', padding: 'var(--space-md)', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div className="ds-card ds-row" style={{ gap: '10px', borderColor: 'var(--color-state-done-soft)' }}>
               <CheckCircle2 size={18} style={{ color: 'var(--color-state-done)' }} />
-              <span style={{ fontSize: '0.85rem', color: 'var(--text)' }}>
+              <span className="ds-caption">
                 La tarea se movió a mañana sin ninguna penalización. Mantén el ritmo en tu bloque actual.
               </span>
             </div>
