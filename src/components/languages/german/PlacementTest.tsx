@@ -99,21 +99,21 @@ export default function PlacementTest({ onPlaced }: PlacementTestProps) {
 
     return (
       <ErrorBoundary>
-        <div style={{ background: 'var(--surface)', border: '1px solid var(--color-state-done)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="ds-card ds-stack" style={{ borderColor: 'var(--color-state-done)' }}>
+          <div className="ds-row" style={{ gap: '8px' }}>
             <CheckCircle2 size={20} style={{ color: 'var(--color-state-done)' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+            <h3 className="ds-h3" style={{ margin: 0 }}>
               Colocación completada
             </h3>
           </div>
 
-          <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+          <div className="ds-body">
             Te colocamos en: <strong style={{ color: 'var(--color-accent-primary)' }}>{unitTitle}</strong>
           </div>
 
-          <div style={{ display: 'grid', gap: '6px' }}>
+          <div className="ds-stack-sm" style={{ gap: '6px' }}>
             {results.map(({ unitId, correct, total }) => (
-              <div key={unitId} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: correct / total >= PASS_THRESHOLD ? 'var(--color-state-done)' : 'var(--text-tertiary)' }}>
+              <div key={unitId} className="ds-row-between ds-caption" style={{ color: correct / total >= PASS_THRESHOLD ? 'var(--color-state-done)' : 'var(--text-tertiary)' }}>
                 <span>{germanCourse.units.find((u) => u.id === unitId)?.title}</span>
                 <strong>{correct}/{total} ({Math.round((correct / total) * 100)}%)</strong>
               </div>
@@ -130,16 +130,16 @@ export default function PlacementTest({ onPlaced }: PlacementTestProps) {
 
   return (
     <ErrorBoundary>
-      <div style={{ background: 'var(--surface)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+      <div className="ds-card ds-stack">
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="ds-row-between">
+          <div className="ds-row" style={{ gap: '8px' }}>
             <ClipboardList size={18} style={{ color: 'var(--color-accent-primary)' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+            <h3 className="ds-h3" style={{ margin: 0 }}>
               Test de nivelación A1.1
             </h3>
           </div>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+          <span className="ds-caption" style={{ color: 'var(--text-tertiary)' }}>
             Pregunta {index + 1} de {ITEMS.length}
           </span>
         </div>
@@ -149,24 +149,19 @@ export default function PlacementTest({ onPlaced }: PlacementTestProps) {
         </div>
 
         <div style={{ padding: 'var(--space-sm) 0' }}>
-          <strong style={{ fontSize: '1rem', color: 'var(--text)' }}>{current.prompt}</strong>
+          <strong className="ds-label" style={{ fontSize: '1rem' }}>{current.prompt}</strong>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div className="ds-stack-sm" style={{ gap: '8px' }}>
           {current.options.map((opt) => (
             <button
               key={opt}
               type="button"
               onClick={() => handleAnswer(opt)}
+              className="ds-card ds-card-clickable ds-body"
               style={{
                 textAlign: 'left',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid var(--color-border-subtle)',
-                borderRadius: 'var(--radius-sm)',
-                padding: '10px 14px',
-                color: 'var(--text-secondary)',
-                fontSize: '0.88rem',
-                cursor: 'pointer'
+                padding: '10px 14px'
               }}
             >
               {opt}
