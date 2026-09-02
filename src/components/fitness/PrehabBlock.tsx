@@ -53,21 +53,15 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
       <button
         type="button"
         onClick={() => setCollapsed(false)}
+        className="ds-row-between ds-card-clickable"
         style={{
           width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          background: 'var(--surface-1, #0d0d0f)',
-          border: '1px solid var(--color-border-subtle)',
-          borderRadius: 'var(--radius-s, 8px)',
           padding: '8px 12px',
           color: 'var(--text-secondary)',
-          cursor: 'pointer',
           fontSize: 'var(--fs-meta, 0.8125rem)'
         }}
       >
-        <span style={{ fontWeight: 600, color: 'var(--success, #30d158)' }}>
+        <span className="ds-label-sm" style={{ color: 'var(--success, #30d158)' }}>
           Prehab — {protocol.zoneTitle} · {getPainText()} (Completado)
         </span>
         <ChevronDown size={14} />
@@ -76,55 +70,55 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
   }
 
   return (
-    <div style={{
-      background: 'var(--surface-1, #0d0d0f)',
-      border: '1px solid var(--warning, #ff9f0a)',
-      borderRadius: 'var(--radius-m, 12px)',
-      padding: 'var(--space-md)',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 'var(--space-sm)'
-    }}>
+    <div
+      className="ds-card ds-stack-sm"
+      style={{
+        border: '1px solid var(--warning, #ff9f0a)',
+      }}
+    >
       {/* CABECERA DE ZONA AFECTADA Y PREHAB DE HOY */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div className="ds-row-between">
+        <div className="ds-row" style={{ gap: '8px' }}>
           <ShieldAlert size={18} style={{ color: 'var(--warning, #ff9f0a)' }} />
           <div>
-            <span style={{ fontSize: '0.68rem', color: 'var(--warning, #ff9f0a)', fontWeight: 700, textTransform: 'uppercase' }}>
+            <span className="ds-eyebrow" style={{ color: 'var(--warning, #ff9f0a)' }}>
               Zona afectada: {protocol.zoneTitle}
             </span>
-            <h3 style={{ fontSize: '0.98rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+            <h3 className="ds-label" style={{ margin: '2px 0 0' }}>
               Prehab de hoy
             </h3>
           </div>
         </div>
 
         {completed && (
-          <span style={{ fontSize: '0.72rem', color: 'var(--success)', background: 'rgba(48,209,88,0.12)', padding: '2px 8px', borderRadius: '4px', fontWeight: 700 }}>
+          <span className="ds-badge ds-badge-success">
             ✓ Completado
           </span>
         )}
       </div>
 
       {/* DETALLE DEL PROTOCOLO */}
-      <div style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
+      <div className="ds-caption">
         <strong>{protocol.protocolTitle}</strong> · {protocol.recommendedDose}
       </div>
 
       {/* CHECK-IN ¿CÓMO LLEGA HOY? */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', flexWrap: 'wrap', paddingTop: '4px' }}>
-        <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)', fontWeight: 600 }}>
+      <div className="ds-row" style={{ flexWrap: 'wrap', paddingTop: '4px' }}>
+        <span className="ds-label-sm">
           ¿Cómo llega hoy?
         </span>
 
-        <div style={{ display: 'flex', gap: '6px' }}>
+        <div className="ds-row" style={{ gap: '6px' }}>
           <button
             type="button"
             onClick={() => setPainLevel('none')}
+            className="ds-btn ds-btn-sm"
             style={{
               background: painLevel === 'none' ? 'rgba(48,209,88,0.12)' : 'rgba(255,255,255,0.04)',
               color: painLevel === 'none' ? 'var(--success)' : 'var(--text-secondary)',
-              border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer'
+              border: 'none',
+              padding: '4px 10px',
+              fontSize: '0.75rem',
             }}
           >
             Sin molestia
@@ -133,10 +127,13 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
           <button
             type="button"
             onClick={() => setPainLevel('mild')}
+            className="ds-btn ds-btn-sm"
             style={{
               background: painLevel === 'mild' ? 'rgba(255,159,10,0.12)' : 'rgba(255,255,255,0.04)',
               color: painLevel === 'mild' ? 'var(--warning)' : 'var(--text-secondary)',
-              border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer'
+              border: 'none',
+              padding: '4px 10px',
+              fontSize: '0.75rem',
             }}
           >
             Leve
@@ -145,10 +142,13 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
           <button
             type="button"
             onClick={() => setPainLevel('notable')}
+            className="ds-btn ds-btn-sm"
             style={{
               background: painLevel === 'notable' ? 'rgba(255,69,58,0.12)' : 'rgba(255,255,255,0.04)',
               color: painLevel === 'notable' ? 'var(--danger, #ff453a)' : 'var(--text-secondary)',
-              border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer'
+              border: 'none',
+              padding: '4px 10px',
+              fontSize: '0.75rem',
             }}
           >
             Notable
@@ -158,13 +158,13 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
 
       {/* ADVERTENCIA DE SEGURIDAD SI AUMENTA EL DOLOR */}
       {painLevel === 'notable' && (
-        <div style={{ fontSize: '0.78rem', color: 'var(--danger, #ff453a)', background: 'rgba(255,69,58,0.08)', padding: '6px 10px', borderRadius: '6px', fontWeight: 600 }}>
+        <div className="ds-badge ds-badge-danger" style={{ width: '100%', padding: '6px 10px', fontSize: '0.78rem' }}>
           Considera reducir rango o pausar hoy
         </div>
       )}
 
       {/* BOTÓN DE CIERRE */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '4px' }}>
+      <div className="ds-row" style={{ justifyContent: 'flex-end', paddingTop: '4px' }}>
         <Button variant="secondary" size="sm" onClick={handleFinish}>
           <Check size={14} /> Listo
         </Button>
