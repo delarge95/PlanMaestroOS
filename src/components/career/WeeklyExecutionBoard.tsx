@@ -76,26 +76,26 @@ export default function WeeklyExecutionBoard({ today = new Date() }: WeeklyExecu
 
   return (
     <ErrorBoundary>
-      <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div className="ds-card ds-stack">
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
+        <div className="ds-row-between" style={{ alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+            <h3 className="ds-h3" style={{ margin: 0 }}>
               Tablero semanal de ejecución
             </h3>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+            <span className="ds-caption" style={{ color: 'var(--text-tertiary)' }}>
               Semana {weekStartIso} → {weekEndIso} · doc-34 §2–§4 · regla: calidad de prueba primero, volumen después
             </span>
           </div>
           {trackerWeek && (
-            <span style={{ fontSize: '0.7rem', color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: '4px 10px', borderRadius: '6px', fontWeight: 700 }}>
+            <span className="ds-badge ds-badge-accent">
               Tracker · Semana {trackerWeek.week}: {trackerWeek.phase} — {trackerWeek.primaryGoal}
             </span>
           )}
         </div>
 
         {/* MÉTRICAS DE CADENCIA (real vs objetivo doc-34) */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '8px' }}>
+        <div className="ds-grid">
           <CadenceMetric
             label="Aplicaciones esta semana"
             value={stats.appliedThisWeek.length}
@@ -131,16 +131,16 @@ export default function WeeklyExecutionBoard({ today = new Date() }: WeeklyExecu
 
         {/* FOLLOW-UPS VENCIDOS (reales del store) */}
         {stats.followUpsDue.length > 0 && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+          <div className="ds-stack-sm" style={{ gap: '4px' }}>
+            <span className="ds-eyebrow">
               Seguimientos pendientes ({stats.followUpsDue.length})
             </span>
             {stats.followUpsDue.slice(0, 5).map((f) => (
-              <div key={f.id} style={{ display: 'flex', justifyContent: 'space-between', gap: '8px', fontSize: '0.78rem', background: 'rgba(255,255,255,0.02)', padding: '4px 8px', borderRadius: '4px' }}>
-                <strong style={{ color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div key={f.id} className="ds-card ds-row-between ds-caption" style={{ padding: '4px 8px' }}>
+                <strong style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {f.companyName} · {f.roleTitle}
                 </strong>
-                <span style={{ color: 'var(--color-accent-warning)', fontWeight: 600, flexShrink: 0 }}>
+                <span className="ds-badge ds-badge-warning" style={{ flexShrink: 0 }}>
                   {f.followUpDateIso === todayIso ? 'Hoy' : f.followUpDateIso}
                 </span>
               </div>
@@ -149,28 +149,26 @@ export default function WeeklyExecutionBoard({ today = new Date() }: WeeklyExecu
         )}
 
         {/* AGENDA SEMANAL doc-34 §4 */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '6px' }}>
+        <div className="ds-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '6px' }}>
           {DAY_PLAN.map((d) => {
             const isToday = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie'][((today.getDay() + 6) % 7)] === d.day;
             return (
               <div
                 key={d.day}
+                className="ds-card ds-stack-sm"
                 style={{
-                  background: isToday ? 'var(--color-accent-primary-soft)' : 'rgba(255,255,255,0.02)',
-                  border: `1px solid ${isToday ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
-                  borderRadius: '6px',
+                  background: isToday ? 'var(--color-accent-primary-soft)' : undefined,
+                  borderColor: isToday ? 'var(--color-accent-primary)' : undefined,
                   padding: '8px',
-                  display: 'flex',
-                  flexDirection: 'column',
                   gap: '3px'
                 }}
               >
-                <span style={{ fontSize: '0.68rem', fontWeight: 700, color: isToday ? 'var(--color-accent-primary)' : 'var(--text-secondary)' }}>
+                <span className="ds-eyebrow" style={{ color: isToday ? 'var(--color-accent-primary)' : undefined }}>
                   {d.day}{isToday ? ' · hoy' : ''}
                 </span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text)', fontWeight: 600 }}>{d.goal}</span>
-                <span style={{ fontSize: '0.64rem', color: 'var(--text-tertiary)' }}>{d.detail}</span>
-                <span style={{ fontSize: '0.58rem', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>{d.ref}</span>
+                <span className="ds-label">{d.goal}</span>
+                <span className="ds-caption" style={{ color: 'var(--text-tertiary)' }}>{d.detail}</span>
+                <span className="ds-micro" style={{ fontStyle: 'italic' }}>{d.ref}</span>
               </div>
             );
           })}
@@ -190,10 +188,10 @@ function CadenceMetric({ label, value, target, ok, warn, ref_ }: {
 }) {
   const color = ok ? 'var(--color-accent-primary)' : warn ? 'var(--color-accent-warning)' : 'var(--text-secondary)';
   return (
-    <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px 10px' }}>
-      <span style={{ fontSize: '0.66rem', color: 'var(--text-tertiary)', fontWeight: 600, display: 'block' }}>{label}</span>
-      <strong style={{ fontSize: '1.5rem', color, display: 'block', lineHeight: 1.2 }}>{value}</strong>
-      <span style={{ fontSize: '0.62rem', color: 'var(--text-tertiary)' }}>objetivo: {target} · {ref_}</span>
+    <div className="ds-card ds-stack-sm" style={{ padding: '8px 10px' }}>
+      <span className="ds-eyebrow">{label}</span>
+      <strong className="ds-h1" style={{ color, lineHeight: 1.2 }}>{value}</strong>
+      <span className="ds-micro">objetivo: {target} · {ref_}</span>
     </div>
   );
 }
