@@ -32,15 +32,16 @@ function Stepper({
   const step = bounds?.step ?? 0.25;
   const clamp = (v: number) => Math.min(max, Math.max(min, Math.round(v / step) * step));
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 150 }}>
-      <span style={{ fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-secondary)' }}>{label}</span>
-      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+    <div className="ds-stack-sm" style={{ gap: 4, minWidth: 150 }}>
+      <span className="ds-micro">{label}</span>
+      <div className="ds-row" style={{ gap: 6 }}>
         <button
           type="button"
           aria-label={`Reducir ${label}`}
           onClick={() => onChange(clamp(value - step))}
           disabled={value <= min}
-          style={{ width: 28, height: 28, borderRadius: 'var(--radius-s, 8px)', border: '1px solid var(--color-border-subtle)', background: 'var(--surface)', color: 'var(--text-primary)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+          className="ds-btn ds-btn-secondary ds-btn-sm"
+          style={{ width: 28, height: 28, padding: 0 }}
         >
           <Minus size={14} aria-hidden="true" />
         </button>
@@ -52,25 +53,26 @@ function Stepper({
           aria-label={`Aumentar ${label}`}
           onClick={() => onChange(clamp(value + step))}
           disabled={value >= max}
-          style={{ width: 28, height: 28, borderRadius: 'var(--radius-s, 8px)', border: '1px solid var(--color-border-subtle)', background: 'var(--surface)', color: 'var(--text-primary)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+          className="ds-btn ds-btn-secondary ds-btn-sm"
+          style={{ width: 28, height: 28, padding: 0 }}
         >
           <Plus size={14} aria-hidden="true" />
         </button>
       </div>
       {bounds && bounds.why.length > 0 && (
         <details>
-          <summary style={{ cursor: 'pointer', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>límite: {min}–{max}</summary>
+          <summary className="ds-micro" style={{ cursor: 'pointer' }}>límite: {min}–{max}</summary>
           <div style={{ marginTop: 4 }}>
-            <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>{bounds.guidance}</p>
+            <p className="ds-micro" style={{ margin: 0, lineHeight: 1.45 }}>{bounds.guidance}</p>
             <CitationList cites={bounds.why} compact />
           </div>
         </details>
       )}
       {bounds && bounds.why.length === 0 && (
-        <span style={{ fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>{bounds.guidance}</span>
+        <span className="ds-micro">{bounds.guidance}</span>
       )}
       {free && bounds && bounds.why.length > 0 && (
-        <span style={{ fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--warning, #f59e0b)' }}>modo libre: límite guía {min}–{max} ampliado ×2</span>
+        <span className="ds-micro" style={{ color: 'var(--warning, #f59e0b)' }}>modo libre: límite guía {min}–{max} ampliado ×2</span>
       )}
     </div>
   );
@@ -88,7 +90,7 @@ function BlockEditor({
   onChange: (b: SessionBlock) => void;
 }) {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', alignItems: 'flex-start' }}>
+    <div className="ds-row-wrap" style={{ gap: 'var(--space-3)', alignItems: 'flex-start' }}>
       {block.repeats !== undefined && (
         <Stepper
           label="Repeticiones"
@@ -152,52 +154,44 @@ export function PresetSheet({ preset, onClose }: { preset: CardioPreset; onClose
     <Sheet isOpen onClose={onClose} title={shown.name} description={`${shown.totalMin} min · ${shown.difficulty} · ${shown.avgMets} METs promedio`} maxWidth="760px">
       {/* Banner edición guardada / activa */}
       {saved && local && editMode === 'off' && (
-        <p style={{ margin: 0, display: 'flex', gap: 6, alignItems: 'center', fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--success, #30d158)' }}>
+        <p className="ds-row ds-caption" style={{ gap: 6, color: 'var(--success, #30d158)', margin: 0 }}>
           <Check size={14} aria-hidden="true" /> Copia local guardada. El preset original permanece intacto.
         </p>
       )}
 
       {editMode === 'off' ? (
         <>
-          <p style={{ margin: 0, fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>{shown.summary}</p>
+          <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{shown.summary}</p>
 
           {/* Desglose de sesión */}
-          <ol style={{ margin: 0, paddingLeft: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+          <ol className="ds-stack-sm" style={{ margin: 0, paddingLeft: 0, listStyle: 'none' }}>
             {shown.blocks.map((b) => (
               <li
                 key={b.id}
-                style={{
-                  background: 'var(--surface-elevated, var(--color-surface-raised))',
-                  border: '1px solid var(--color-border-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: 'var(--space-3)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-2)',
-                }}
+                className="ds-card ds-stack-sm"
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--space-2)', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <strong style={{ color: 'var(--text-primary)', fontSize: 'var(--font-size-meta, 0.8rem)' }}>
+                <div className="ds-row-between" style={{ flexWrap: 'wrap' }}>
+                  <strong className="ds-caption" style={{ color: 'var(--text-primary)' }}>
                     {kindLabel(b.kind)} · {b.name}
                   </strong>
                   <StatusBadge
                     label={b.repeats !== undefined ? `${b.repeats} × ${formatMin(b.durationMin)}${b.restMin !== undefined ? ` / ${formatMin(b.restMin)} rec.` : ''}` : formatMin(b.durationMin)}
                   />
                 </div>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                <div className="ds-row-wrap" style={{ gap: 6, alignItems: 'center' }}>
                   <StatusBadge label={b.intensity.label} variant="active" />
                   {b.intensity.pctHrMax && <StatusBadge label={`${b.intensity.pctHrMax[0]}–${b.intensity.pctHrMax[1]}% HRmax`} />}
                   {b.intensity.pctFtp && <StatusBadge label={`${b.intensity.pctFtp[0]}–${b.intensity.pctFtp[1]}% FTP`} />}
                   {b.intensity.mets !== undefined && <StatusBadge label={`${b.intensity.mets} METs`} />}
                 </div>
                 <details>
-                  <summary style={{ cursor: 'pointer', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>¿Por qué esta intensidad?</summary>
+                  <summary className="ds-micro" style={{ cursor: 'pointer' }}>¿Por qué esta intensidad?</summary>
                   <div style={{ marginTop: 'var(--space-1)' }}>
                     <CitationList cites={b.intensity.why} compact />
                   </div>
                 </details>
                 {b.modification && (
-                  <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  <p className="ds-micro" style={{ margin: 0, lineHeight: 1.5 }}>
                     <strong>Modificación segura:</strong> {b.modification.guidance}
                     <br />
                     <CitationList cites={b.modification.why} compact />
@@ -208,10 +202,10 @@ export function PresetSheet({ preset, onClose }: { preset: CardioPreset; onClose
           </ol>
 
           {/* Estimación kcal (interfaz con AG-NUTRI) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)', background: 'var(--surface-elevated, var(--color-surface-raised))', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-3)' }}>
-            <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center', flexWrap: 'wrap' }}>
-              <strong style={{ color: 'var(--text-primary)', fontSize: 'var(--font-size-meta, 0.8rem)' }}>Estimación de gasto</strong>
-              <label style={{ display: 'inline-flex', gap: 6, alignItems: 'center', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-secondary)' }}>
+          <div className="ds-card ds-stack-sm">
+            <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
+              <strong className="ds-caption" style={{ color: 'var(--text-primary)' }}>Estimación de gasto</strong>
+              <label className="ds-row ds-micro" style={{ gap: 6 }}>
                 peso:
                 <input
                   type="number"
@@ -225,21 +219,21 @@ export function PresetSheet({ preset, onClose }: { preset: CardioPreset; onClose
               </label>
               <StatusBadge label={`≈ ${kcal} kcal / ${totalMin} min`} variant="success" />
             </div>
-            <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+            <p className="ds-micro" style={{ margin: 0, lineHeight: 1.5 }}>
               kcal/min = [(METs × 3.5 × {weightKg} kg) / 1000] × 5, con METs promedio ponderado por bloques ({avgMets}) · {KCAL_FORMULA_CITE.sourceTitle}, {KCAL_FORMULA_CITE.locator} <ConfidenceNote confidence="explicit" />
             </p>
           </div>
 
           {/* ¿Por qué? del preset */}
           <details open>
-            <summary style={{ cursor: 'pointer', fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--text-secondary)' }}>¿Por qué esta sesión?</summary>
+            <summary className="ds-caption" style={{ cursor: 'pointer' }}>¿Por qué esta sesión?</summary>
             <div style={{ marginTop: 'var(--space-1)' }}>
               <CitationList cites={shown.why} />
             </div>
           </details>
 
           {/* Acciones */}
-          <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
             <Button variant="primary" size="sm" onClick={() => startEdit('guided')}>
               <Pencil size={14} aria-hidden="true" /> Editar copia (guiado)
             </Button>
@@ -256,18 +250,18 @@ export function PresetSheet({ preset, onClose }: { preset: CardioPreset; onClose
       ) : (
         <>
           {/* ===== MODO EDICIÓN ===== */}
-          <p style={{ margin: 0, fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+          <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>
             {editMode === 'guided'
               ? 'Edición GUIADA: cada límite de los steppers viene de una regla de las fuentes (despliega "límite" para ver la cita). Guardar crea una copia local; el original no cambia.'
               : 'Edición LIBRE: sin límites guiados. Puedes romper el diseño científico de la sesión — los límites-guía se muestran ampliados ×2 como referencia.'}
           </p>
           {editMode === 'free' && (
-            <p role="warning" style={{ margin: 0, display: 'flex', gap: 6, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--warning, #f59e0b)', alignItems: 'center' }}>
+            <p role="warning" className="ds-row ds-micro" style={{ gap: 6, color: 'var(--warning, #f59e0b)', margin: 0, alignItems: 'center' }}>
               <TriangleAlert size={14} aria-hidden="true" /> Los rangos citados protegen el propósito de la sesión (p.ej. recuperación 2–3× en R, ≤10% semanal a T).
             </p>
           )}
 
-          <label style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-secondary)' }}>
+          <label className="ds-stack-sm ds-micro" style={{ gap: 4 }}>
             Nombre de tu copia
             <input
               type="text"
@@ -278,8 +272,8 @@ export function PresetSheet({ preset, onClose }: { preset: CardioPreset; onClose
           </label>
 
           {draft.blocks.map((b) => (
-            <div key={b.id} style={{ background: 'var(--surface-elevated, var(--color-surface-raised))', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-3)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-              <strong style={{ color: 'var(--text-primary)', fontSize: 'var(--font-size-meta, 0.8rem)' }}>
+            <div key={b.id} className="ds-card ds-stack-sm">
+              <strong className="ds-caption" style={{ color: 'var(--text-primary)' }}>
                 {kindLabel(b.kind)} · {b.name}
               </strong>
               <BlockEditor block={b} preset={draft} free={editMode === 'free'} onChange={(nb) => updateBlock(b.id, nb)} />
@@ -287,13 +281,13 @@ export function PresetSheet({ preset, onClose }: { preset: CardioPreset; onClose
           ))}
 
           {/* Vista en vivo */}
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+          <div className="ds-row-wrap" style={{ gap: 6, alignItems: 'center' }}>
             <StatusBadge label={`Total: ${computeTotalMin(draft)} min`} variant="active" />
             <StatusBadge label={`METs prom.: ${computeAvgMets(draft)}`} />
             <StatusBadge label={`≈ ${Math.round(kcalPerMin(computeAvgMets(draft), weightKg) * computeTotalMin(draft))} kcal (${weightKg} kg)`} variant="success" />
           </div>
 
-          <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
+          <div className="ds-row-wrap">
             <Button variant="primary" size="sm" onClick={save}>
               <Check size={14} aria-hidden="true" /> Guardar copia local
             </Button>

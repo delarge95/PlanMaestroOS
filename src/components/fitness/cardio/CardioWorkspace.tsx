@@ -31,7 +31,8 @@ export function ConfidenceNote({ confidence }: { confidence: Citation['confidenc
   return (
     <span
       title="Valor derivado de las ecuaciones/reglas de la fuente, no literal del libro"
-      style={{ fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', fontStyle: 'italic' }}
+      className="ds-micro"
+      style={{ fontStyle: 'italic' }}
     >
       (derivado: {confidence})
     </span>
@@ -41,18 +42,15 @@ export function ConfidenceNote({ confidence }: { confidence: Citation['confidenc
 export function CitationList({ cites, compact = false }: { cites: Citation[]; compact?: boolean }) {
   if (cites.length === 0) return null;
   return (
-    <ul style={{ margin: 0, paddingLeft: 'var(--space-3)', display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
+    <ul className="ds-stack-sm" style={{ margin: 0, paddingLeft: 'var(--space-3)', gap: 'var(--space-1)' }}>
       {cites.map((c, i) => (
         <li
           key={`${c.sourceId}-${i}`}
-          style={{
-            fontSize: compact ? 'var(--font-size-micro, 0.7rem)' : 'var(--font-size-meta, 0.8rem)',
-            color: 'var(--text-secondary)',
-            lineHeight: 1.5,
-          }}
+          className={compact ? 'ds-micro' : 'ds-caption'}
+          style={{ lineHeight: 1.5 }}
         >
           {c.statement}{' '}
-          <span style={{ color: 'var(--text-tertiary)' }}>
+          <span className="ds-micro">
             — {c.sourceTitle} · {c.locator} <ConfidenceNote confidence={c.confidence} />
           </span>
         </li>
@@ -103,58 +101,42 @@ export function CardioWorkspace() {
   );
   const openPreset = openPresetId ? CARDIO_PRESETS.find((p) => p.id === openPresetId) : undefined;
 
-  const chip = (selected: boolean): React.CSSProperties => ({
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 6,
-    padding: '8px 12px',
-    borderRadius: 'var(--radius-pill, 999px)',
-    border: `1px solid ${selected ? 'var(--color-accent-primary, var(--accent))' : 'var(--color-border-subtle)'}`,
-    background: selected ? 'var(--color-accent-primary-soft, var(--accent-soft))' : 'transparent',
-    color: selected ? 'var(--text-primary)' : 'var(--text-secondary)',
-    fontWeight: 600,
-    fontSize: 'var(--font-size-meta, 0.8rem)',
-    cursor: 'pointer',
-  });
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg, 24px)', maxWidth: 920, margin: '0 auto', width: '100%' }}>
+    <div className="ds-stack-lg" style={{ maxWidth: 920, margin: '0 auto', width: '100%' }}>
       {/* 1) Disciplina */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <h2 style={{ margin: 0, fontSize: 'var(--font-size-title, 1.05rem)', fontWeight: 650, color: 'var(--text-primary)' }}>Disciplina</h2>
-        <div style={{ display: 'flex', gap: 'var(--space-1)', flexWrap: 'wrap' }} role="tablist" aria-label="Disciplina">
+      <section className="ds-stack-sm">
+        <h2 className="ds-h3">Disciplina</h2>
+        <div className="ds-row-wrap" role="tablist" aria-label="Disciplina">
           {DISCIPLINES.map((d) => (
-            <button key={d.id} type="button" role="tab" aria-selected={d.id === discipline} onClick={() => setDiscipline(d.id)} style={chip(d.id === discipline)}>
+            <button
+              key={d.id}
+              type="button"
+              role="tab"
+              aria-selected={d.id === discipline}
+              onClick={() => setDiscipline(d.id)}
+              className="ds-chip"
+              data-active={d.id === discipline}
+            >
               {DISCIPLINE_ICONS[d.id]}
               {d.name}
             </button>
           ))}
         </div>
-        <div
-          style={{
-            background: 'var(--surface-elevated, var(--color-surface-raised))',
-            border: '1px solid var(--color-border-subtle)',
-            borderRadius: 'var(--radius-md)',
-            padding: 'var(--space-3)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--space-2)',
-          }}
-        >
-          <p style={{ margin: 0, fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>{disc.description}</p>
-          <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div className="ds-card ds-stack-sm">
+          <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{disc.description}</p>
+          <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
             <StatusBadge label={`METs típicos: ${disc.typicalMets.value}`} />
-            <span style={{ fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
+            <span className="ds-micro">
               rango {disc.metsRange[0]}–{disc.metsRange[1]} METs
             </span>
           </div>
           <details>
-            <summary style={{ cursor: 'pointer', fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--text-secondary)', display: 'inline-flex', gap: 6, alignItems: 'center' }}>
+            <summary className="ds-caption ds-row" style={{ cursor: 'pointer', gap: 6 }}>
               <Info size={14} aria-hidden="true" /> ¿Por qué? (fuentes)
             </summary>
             <div style={{ marginTop: 'var(--space-2)' }}>
               <CitationList cites={disc.why} compact />
-              <p style={{ margin: 'var(--space-1) 0 0', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>Derivación de los METs típicos:</p>
+              <p className="ds-micro" style={{ margin: 'var(--space-1) 0 0' }}>Derivación de los METs típicos:</p>
               <CitationList cites={disc.typicalMets.why} compact />
             </div>
           </details>
@@ -162,42 +144,43 @@ export function CardioWorkspace() {
       </section>
 
       {/* 2) Enfoques */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <h2 style={{ margin: 0, fontSize: 'var(--font-size-title, 1.05rem)', fontWeight: 650, color: 'var(--text-primary)' }}>Enfoque</h2>
-        <div style={{ display: 'flex', gap: 'var(--space-1)', flexWrap: 'wrap' }}>
-          <button type="button" onClick={() => setApproachFilter('all')} style={chip(approachFilter === 'all')}>
+      <section className="ds-stack-sm">
+        <h2 className="ds-h3">Enfoque</h2>
+        <div className="ds-row-wrap">
+          <button
+            type="button"
+            onClick={() => setApproachFilter('all')}
+            className="ds-chip"
+            data-active={approachFilter === 'all'}
+          >
             Todos
           </button>
           {APPROACHES.map((a) => (
-            <button key={a.id} type="button" onClick={() => setApproachFilter(a.id)} style={chip(approachFilter === a.id)} title={a.whenToUse}>
+            <button
+              key={a.id}
+              type="button"
+              onClick={() => setApproachFilter(a.id)}
+              className="ds-chip"
+              data-active={approachFilter === a.id}
+              title={a.whenToUse}
+            >
               {APPROACH_ICONS[a.id]}
               {a.name}
             </button>
           ))}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fit, minmax(${isMobile ? '100%' : '260px'}, 1fr))`, gap: 'var(--space-2)' }}>
+        <div className="ds-grid">
           {(approachFilter === 'all' ? APPROACHES : APPROACHES.filter((a) => a.id === approachFilter)).map((a) => (
-            <div
-              key={a.id}
-              style={{
-                background: 'var(--surface-elevated, var(--color-surface-raised))',
-                border: '1px solid var(--color-border-subtle)',
-                borderRadius: 'var(--radius-md)',
-                padding: 'var(--space-3)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--space-2)',
-              }}
-            >
-              <strong style={{ display: 'inline-flex', gap: 6, alignItems: 'center', color: 'var(--text-primary)' }}>
+            <div key={a.id} className="ds-card ds-stack-sm">
+              <strong className="ds-row" style={{ gap: 6, color: 'var(--text-primary)' }}>
                 {APPROACH_ICONS[a.id]} {a.name}
               </strong>
-              <p style={{ margin: 0, fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>{a.description}</p>
-              <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+              <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{a.description}</p>
+              <p className="ds-micro" style={{ margin: 0, lineHeight: 1.5 }}>
                 <strong>Cuándo usarlo:</strong> {a.whenToUse}
               </p>
               <details>
-                <summary style={{ cursor: 'pointer', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>¿Por qué? (fuentes)</summary>
+                <summary className="ds-micro" style={{ cursor: 'pointer' }}>¿Por qué? (fuentes)</summary>
                 <div style={{ marginTop: 'var(--space-1)' }}>
                   <CitationList cites={a.why} compact />
                 </div>
@@ -208,11 +191,11 @@ export function CardioWorkspace() {
       </section>
 
       {/* 3) Presets */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <h2 style={{ margin: 0, fontSize: 'var(--font-size-title, 1.05rem)', fontWeight: 650, color: 'var(--text-primary)' }}>
+      <section className="ds-stack-sm">
+        <h2 className="ds-h3">
           Sesiones ({presets.length})
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(${isMobile ? '100%' : '270px'}, 1fr))`, gap: 'var(--space-2)' }}>
+        <div className="ds-grid">
           {presets.map((p) => {
             const edited = localPresets[p.id];
             const shown = edited ?? p;
@@ -222,37 +205,30 @@ export function CardioWorkspace() {
                 key={p.id}
                 type="button"
                 onClick={() => setOpenPresetId(p.id)}
+                className="ds-card ds-card-clickable ds-stack-sm"
                 style={{
                   textAlign: 'left',
-                  cursor: 'pointer',
-                  background: 'var(--surface-elevated, var(--color-surface-raised))',
-                  border: '1px solid var(--color-border-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: 'var(--space-3)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-2)',
                   color: 'inherit',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--space-2)', alignItems: 'flex-start' }}>
+                <div className="ds-row-between" style={{ alignItems: 'flex-start' }}>
                   <strong style={{ color: 'var(--text-primary)', lineHeight: 1.3 }}>{shown.name}</strong>
                   {edited && <StatusBadge label="Editado" variant="active" />}
                 </div>
-                <p style={{ margin: 0, fontSize: 'var(--font-size-meta, 0.8rem)', color: 'var(--text-secondary)', lineHeight: 1.5 }}>{shown.summary}</p>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                <p className="ds-caption" style={{ margin: 0, lineHeight: 1.5 }}>{shown.summary}</p>
+                <div className="ds-row-wrap" style={{ gap: 6, alignItems: 'center' }}>
                   <StatusBadge label={`${shown.totalMin} min`} />
                   <DifficultyBadge difficulty={shown.difficulty} />
                   <StatusBadge label={`${shown.avgMets} METs (prom.)`} />
                 </div>
-                <span style={{ fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+                <span className="ds-micro" style={{ lineHeight: 1.5 }}>
                   {kindLabel(main.kind)}: {main.name} · {main.intensity.label}
                 </span>
               </button>
             );
           })}
         </div>
-        <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
+        <p className="ds-micro" style={{ margin: 0 }}>
           Toca una sesión para ver el desglose bloque a bloque con su cita, y edítala como copia local (los presets originales nunca se sobrescriben).
         </p>
       </section>
