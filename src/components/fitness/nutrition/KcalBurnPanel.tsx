@@ -22,7 +22,7 @@ const inputStyle: React.CSSProperties = {
 };
 
 function AddRow({ children }: { children: React.ReactNode }) {
-  return <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', alignItems: 'center' }}>{children}</div>;
+  return <div className="ds-row-wrap">{children}</div>;
 }
 
 export default function KcalBurnPanel() {
@@ -57,7 +57,7 @@ export default function KcalBurnPanel() {
   const balance = useMemo(() => dailyBalance(objetivoKcal, burn), [objetivoKcal, burn]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+    <div className="ds-stack-sm">
       <AddRow>
         <select
           value={presetId}
@@ -87,7 +87,8 @@ export default function KcalBurnPanel() {
             });
             setPresetId('');
           }}
-          style={{ ...inputStyle, cursor: presetId ? 'pointer' : 'not-allowed' }}
+          className="ds-btn ds-btn-secondary ds-btn-sm"
+          style={{ cursor: presetId ? 'pointer' : 'not-allowed' }}
         >
           Añadir
         </button>
@@ -105,21 +106,21 @@ export default function KcalBurnPanel() {
               minutes: manualMin,
             });
           }}
-          style={{ ...inputStyle, cursor: 'pointer' }}
+          className="ds-btn ds-btn-secondary ds-btn-sm"
           title="Sin cita de fuente: se marca como orientativa (qualitative)"
         >
           + Manual (sin fuente)
         </button>
 
-        <span style={{ color: 'var(--text-tertiary)', fontSize: 'var(--font-size-micro)' }}>Fuerza:</span>
+        <span className="ds-micro" style={{ color: 'var(--text-tertiary)' }}>Fuerza:</span>
         <input type="number" min={1} max={20} value={series} onChange={(e) => setSeries(Number(e.target.value))} title="series" style={{ ...inputStyle, width: 56 }} />
-        <span style={{ color: 'var(--text-tertiary)', fontSize: 'var(--font-size-micro)' }}>×</span>
+        <span className="ds-micro" style={{ color: 'var(--text-tertiary)' }}>×</span>
         <input type="number" min={1} max={50} value={reps} onChange={(e) => setReps(Number(e.target.value))} title="reps" style={{ ...inputStyle, width: 56 }} />
         <input type="number" min={0} max={500} value={load} onChange={(e) => setLoad(Number(e.target.value))} title="kg" style={{ ...inputStyle, width: 70 }} />
         <button
           type="button"
           onClick={() => addActivity({ kind: 'strength', label: `Fuerza ${series}×${reps}@${load}kg`, series, repsPerSeries: reps, loadKg: load })}
-          style={{ ...inputStyle, cursor: 'pointer' }}
+          className="ds-btn ds-btn-secondary ds-btn-sm"
           title="Trabajo mecánico (cota inferior) + EPOC +5–15% citado"
         >
           + Sesión
@@ -127,25 +128,25 @@ export default function KcalBurnPanel() {
       </AddRow>
 
       {burn.items.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
+        <div className="ds-stack-sm" style={{ gap: 'var(--space-1)' }}>
           {burn.items.map((item, i) => {
             const logged = activities.filter((a) => a.dateIso === today)[i];
             return (
-              <div key={`${item.label}-${i}`} style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--space-2)', alignItems: 'center', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-sm)', padding: '6px 10px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-                  <strong style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-primary)' }}>{item.label}</strong>
-                  <span style={{ fontSize: 'var(--font-size-micro)', color: 'var(--text-tertiary)' }}>
+              <div key={`${item.label}-${i}`} className="ds-row-between" style={{ border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-sm)', padding: '6px 10px' }}>
+                <div className="ds-stack-sm" style={{ gap: 2, minWidth: 0 }}>
+                  <strong className="ds-caption" style={{ color: 'var(--text-primary)' }}>{item.label}</strong>
+                  <span className="ds-micro">
                     {item.why.length > 0 ? item.why.map((w) => `${w.source} · ${w.locator}`).join(' | ') : '⚠️ sin fuente'}
                   </span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
                   <StatusBadge
                     label={item.confidence === 'inferred' ? 'inferred' : 'qualitative'}
                     variant={item.confidence === 'inferred' ? 'neutral' : 'warning'}
                   />
-                  <strong style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-primary)' }}>~{item.kcal} kcal</strong>
+                  <strong className="ds-caption" style={{ color: 'var(--text-primary)' }}>~{item.kcal} kcal</strong>
                   {logged && (
-                    <button type="button" onClick={() => removeActivity(logged.id)} aria-label="Quitar" style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer' }}>
+                    <button type="button" onClick={() => removeActivity(logged.id)} aria-label="Quitar" className="ds-btn ds-btn-ghost ds-btn-sm" style={{ padding: '2px 4px' }}>
                       <Trash2 size={14} />
                     </button>
                   )}
@@ -156,22 +157,22 @@ export default function KcalBurnPanel() {
         </div>
       )}
 
-      <div style={{ border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md, 16px)', display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap', alignItems: 'center' }}>
-        <Flame size={18} style={{ color: 'var(--color-accent-danger, var(--accent))' }} />
+      <div className="ds-card ds-row" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+        <Flame size={18} style={{ color: 'var(--danger, var(--accent))' }} />
         <div>
-          <div style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+          <div className="ds-caption">
             Quemado estimado hoy: <strong style={{ color: 'var(--text-primary)' }}>{burn.hasUnsourcedEntries ? '~' : ''}{burn.totalKcal} kcal</strong> (rango {burn.minKcal}–{burn.maxKcal})
           </div>
-          <div style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+          <div className="ds-caption">
             Objetivo del día: <strong style={{ color: 'var(--text-primary)' }}>{balance.targetKcal} kcal</strong> → restan{' '}
-            <strong style={{ color: balance.remainingKcal >= 0 ? 'var(--text-primary)' : 'var(--color-accent-danger, var(--accent))' }}>
+            <strong style={{ color: balance.remainingKcal >= 0 ? 'var(--text-primary)' : 'var(--danger, var(--accent))' }}>
               {balance.remainingKcal} kcal
             </strong>
           </div>
         </div>
       </div>
 
-      <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+      <p className="ds-micro" style={{ margin: 0, lineHeight: 1.5 }}>
         {balance.detail} Fuerza = cota inferior por trabajo mecánico + EPOC +5–15% (Maughan, <code>nutri-mau-epoc</code>, inferred).
         Cuando AG-FIT exponga el logger real de sesiones, este panel consumirá ese contrato en lugar del registro manual.
       </p>

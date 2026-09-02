@@ -9,39 +9,37 @@ export interface DayTypeGridProps {
 
 export function DayTypeGrid({ slots }: DayTypeGridProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2, 8px)' }}>
+    <div className="ds-stack-sm">
       {slots.map((slot) => (
         <div
           key={slot.id}
+          className="ds-card"
           style={{
             display: 'grid',
             gridTemplateColumns: 'minmax(72px, 90px) 1fr',
             gap: 'var(--space-3, 12px)',
-            background: 'var(--surface-elevated, var(--color-surface-raised))',
-            border: '1px solid var(--color-border-subtle)',
-            borderRadius: 'var(--radius-md)',
             padding: 'var(--space-sm, 12px) var(--space-md, 16px)',
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'flex-start' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
+          <div className="ds-stack-sm" style={{ gap: 2, alignItems: 'flex-start' }}>
+            <span className="ds-row ds-caption" style={{ gap: 4, color: 'var(--text-tertiary)' }}>
               <Clock size={12} aria-hidden="true" />
               {slot.time}
             </span>
-            <span style={{ fontSize: 'var(--font-size-label)', fontWeight: 650, color: 'var(--text-primary)' }}>{slot.label}</span>
+            <span className="ds-label" style={{ fontWeight: 650 }}>{slot.label}</span>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>{slot.focus}</span>
-            <ul style={{ margin: 0, paddingLeft: 'var(--space-4)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+          <div className="ds-stack-sm">
+            <span className="ds-caption">{slot.focus}</span>
+            <ul className="ds-stack-sm" style={{ margin: 0, paddingLeft: 'var(--space-4)' }}>
               {slot.lines.map((line, idx) => (
-                <li key={`${slot.id}-${idx}`} style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+                <li key={`${slot.id}-${idx}`} className="ds-caption" style={{ lineHeight: 1.55 }}>
                   {line.text}
                   <details style={{ display: 'inline-block', marginLeft: 6 }}>
                     <summary
+                      className="ds-micro"
                       style={{
                         cursor: 'pointer',
-                        fontSize: 'var(--font-size-micro, 0.7rem)',
-                        color: 'var(--color-accent-primary, var(--accent))',
+                        color: 'var(--accent)',
                         userSelect: 'none',
                         listStyle: 'none',
                         verticalAlign: 'middle',
@@ -49,9 +47,9 @@ export function DayTypeGrid({ slots }: DayTypeGridProps) {
                     >
                       ¿por qué?
                     </summary>
-                    <div style={{ padding: 'var(--space-2)', background: 'var(--surface, var(--color-surface-base))', borderRadius: 'var(--radius-sm)', marginTop: 'var(--space-1)' }}>
+                    <div style={{ padding: 'var(--space-2)', background: 'var(--surface-1)', borderRadius: 'var(--radius-s)', marginTop: 'var(--space-1)' }}>
                       {line.why.map((c) => (
-                        <div key={c.ruleId} style={{ fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+                        <div key={c.ruleId} className="ds-micro" style={{ lineHeight: 1.5 }}>
                           {c.source} · {c.locator} · <code>{c.ruleId}</code>
                           {c.confidence !== 'explicit' ? ` · ${c.confidence}` : ''}
                         </div>

@@ -38,9 +38,9 @@ export default function FemaleHormonesPanel() {
   });
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-      <label style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center', flexWrap: 'wrap' }}>
-        <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>Perfil (opcional, auto-registrado):</span>
+    <div className="ds-stack-sm">
+      <label className="ds-row-wrap">
+        <span className="ds-caption">Perfil (opcional, auto-registrado):</span>
         <select
           value={femaleProfile}
           onChange={(e) => setInputs({ femaleProfile: e.target.value as FemaleProfile })}
@@ -54,14 +54,14 @@ export default function FemaleHormonesPanel() {
       </label>
 
       {notes.map((note) => (
-        <div key={note.title} style={{ border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md, 16px)', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+        <div key={note.title} className="ds-card ds-stack-sm">
           <StatusBadge label="Evidencia de efecto pequeño" variant="neutral" />
-          <strong style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-primary)' }}>{note.title}</strong>
+          <strong className="ds-caption" style={{ color: 'var(--text-primary)' }}>{note.title}</strong>
           {note.lines.map((line) => (
             <div key={line.text.slice(0, 40)}>
-              <p style={{ margin: 0, fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>{line.text}</p>
+              <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{line.text}</p>
               {line.why.length > 0 && (
-                <p style={{ margin: '2px 0 0', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
+                <p className="ds-micro" style={{ margin: '2px 0 0' }}>
                   {line.why.map((w) => `${w.source} · ${w.locator} · ${w.ruleId}`).join(' | ')}
                 </p>
               )}
@@ -70,7 +70,7 @@ export default function FemaleHormonesPanel() {
         </div>
       ))}
 
-      <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', lineHeight: 1.5 }}>
+      <p className="ds-micro" style={{ margin: 0, lineHeight: 1.5 }}>
         {FEMALE_DISCLAIMER}
       </p>
     </div>
