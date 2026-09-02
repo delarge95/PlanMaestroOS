@@ -86,19 +86,18 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
         
         {/* PREHAB CONDICIONAL (SI HAY MOLESTIA/ZONA AFECTADA REGISTRADA, APARECE PRIMERO PER D1) */}
         {showPrehabAlert && activeMainTab === 'today' && (
-          <div style={{
-            background: 'var(--surface)',
-            border: '1px solid var(--color-accent-warning)',
-            borderRadius: 'var(--radius-md)',
-            padding: 'var(--space-sm) var(--space-md)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 'var(--space-sm)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+          <div
+            className="ds-row-between"
+            style={{
+              background: 'var(--surface)',
+              border: '1px solid var(--color-accent-warning)',
+              borderRadius: 'var(--radius-md)',
+              padding: 'var(--space-sm) var(--space-md)',
+            }}
+          >
+            <div className="ds-row" style={{ gap: 'var(--space-xs)' }}>
               <ShieldAlert size={18} style={{ color: 'var(--color-accent-warning)' }} />
-              <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', fontWeight: 600 }}>
+              <span className="ds-label" style={{ color: 'var(--text)' }}>
                 {activePrehabProtocols.length === 1
                   ? `Prehab activo (${activePrehabProtocols[0].zoneTitle}): ${activePrehabProtocols[0].protocolTitle} antes de la sesión — ${activePrehabProtocols[0].recommendedDose}.`
                   : `Prehab activo: ${activePrehabProtocols.map((pr) => `${pr.zoneTitle} → ${pr.protocolTitle}`).join(' · ')}`}
@@ -108,14 +107,8 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
             <button
               type="button"
               onClick={dismissPrehabBanner}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--text-tertiary)',
-                cursor: 'pointer',
-                fontSize: 'var(--font-size-meta)',
-                fontWeight: 600
-              }}
+              className="ds-btn ds-btn-ghost ds-btn-sm"
+              style={{ color: 'var(--text-tertiary)' }}
             >
               Cerrar
             </button>
@@ -124,8 +117,8 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
 
         {/* NAVEGACIÓN PRINCIPAL: desktop botones, móvil desplegable */}
         {isMobile ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label htmlFor="fitness-main-tab" style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
+          <div className="ds-stack-sm">
+            <label htmlFor="fitness-main-tab" className="ds-label-sm">
               Sección
             </label>
             <select
@@ -199,7 +192,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
         {/* CONTENIDO DE LOS DESTINOS */}
         <div className={styles.tabPanel}>
           {activeMainTab === 'today' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+            <div className="ds-stack">
               {/* CRONOGRAMA SEMANAL (fecha real del sistema, sincronizado con el programa activo) */}
               <TodayCalendar selectedDayIndex={todayDayIndex} onSelectDayIndex={setTodayDayIndex} />
               {/* PROGRESIÓN ACTIVA EN TRABAJO */}
@@ -211,10 +204,10 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
           )}
 
           {activeMainTab === 'routines' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+            <div className="ds-stack">
               {isMobile ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label htmlFor="fitness-routines-tab" style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
+                <div className="ds-stack-sm">
+                  <label htmlFor="fitness-routines-tab" className="ds-label-sm">
                     Vista
                   </label>
                   <select
@@ -280,7 +273,7 @@ export default function FitnessTabWorkspace({ initialTab = 'today' }: FitnessTab
           {/* B8: progreso REAL (programas activos / semana / histórico / récords).
               Sustituye al dashboard maqueta con métricas inventadas (94%, 101%…). */}
           {activeMainTab === 'progress' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
+            <div className="ds-stack-lg">
               <RealProgressSections />
               <TendonLoadMonitor />
             </div>
