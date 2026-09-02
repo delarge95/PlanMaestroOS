@@ -36,10 +36,7 @@ export default function FitnessTabWorkspace() {
   });
 
   return (
-    <ErrorBoundary>
-      <SectionNav sectionKey="fitness" currentPath="/app/fitness" level={2} />
-
-      {showPrehabAlert && (
+    <ErrorBoundary>      {showPrehabAlert && (
         <div
           className="ds-row-between"
           style={{

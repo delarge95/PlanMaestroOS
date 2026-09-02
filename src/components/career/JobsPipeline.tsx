@@ -23,10 +23,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
     <ErrorBoundary>
       <div className="ds-stack">
         
-        {/* NAVEGACIÓN NIVEL 2 */}
-        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
-
-        {/* CABECERA DE EMPLEO */}
+        {/* NAVEGACIÓN NIVEL 2 */}        {/* CABECERA DE EMPLEO */}
         <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-xs)', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
           <h2 className="ds-h1" style={{ margin: 0 }}>
             Empleo & Pipeline

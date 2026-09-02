@@ -44,10 +44,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
-        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
-
-      <div style={{
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>      <div style={{
         background: 'rgba(10, 15, 20, 0.65)',
         backdropFilter: 'blur(28px)',
         WebkitBackdropFilter: 'blur(28px)',

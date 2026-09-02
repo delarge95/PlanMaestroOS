@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import ErrorBoundary from "../ErrorBoundary";
 import SuggestionInbox from "../suggestions/SuggestionInbox";
-import SectionNav from "../ui/SectionNav";
 import Disclosure from "../ui/Disclosure";
 import Button from "../ui/Button";
 import { getTodayDomainView } from "../../data/adapters/todayAdapter";
@@ -75,8 +74,6 @@ export default function TodayTabWorkspace({
         }}
       >
         {/* NAVEGACIÓN NIVEL 2 */}
-        <SectionNav sectionKey="today" currentPath={currentPath} level={2} />
-
         {/* SUGERENCIAS DEL SISTEMA — corte vertical reglas Fase 3 (CORE surface) */}
         <SuggestionInbox />
 

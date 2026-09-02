@@ -29,10 +29,7 @@ export default function ClinicalToday({ currentPath = '/app/clinical' }: Clinica
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
 
-        {/* NAVEGACIÓN NIVEL 2 */}
-        <SectionNav sectionKey="clinical" currentPath={currentPath} level={2} />
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* NAVEGACIÓN NIVEL 2 */}        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <HeartPulse size={22} style={{ color: 'var(--color-accent-danger, #ff453a)' }} />
           <div>
             <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>

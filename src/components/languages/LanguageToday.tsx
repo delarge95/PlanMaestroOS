@@ -69,10 +69,7 @@ export default function LanguageToday({
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
 
-        {/* NAVEGACIÓN NIVEL 2 */}
-        <SectionNav sectionKey="languages" currentPath={currentPath} level={2} />
-
-        {/* CABECERA PRESCRIPTIVA DE IDIOMAS */}
+        {/* NAVEGACIÓN NIVEL 2 */}        {/* CABECERA PRESCRIPTIVA DE IDIOMAS */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',

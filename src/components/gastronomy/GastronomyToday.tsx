@@ -1,6 +1,5 @@
 // src/components/gastronomy/GastronomyToday.tsx
 import React from 'react';
-import SectionNav from '../ui/SectionNav';
 import ErrorBoundary from '../ErrorBoundary';
 import { Utensils } from 'lucide-react';
 
@@ -14,8 +13,6 @@ export default function GastronomyToday({ currentPath = '/app/gastronomy' }: Gas
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
 
         {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
-        <SectionNav sectionKey="gastronomy" currentPath={currentPath} level={2} />
-
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Utensils size={22} style={{ color: 'var(--accent, #0a84ff)' }} />
           <div>

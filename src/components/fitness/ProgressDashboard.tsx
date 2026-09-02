@@ -101,10 +101,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
-        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
-        <SectionNav sectionKey="fitness" currentPath={currentPath} level={2} />
-
-        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
+        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
         <h1 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '4px 0 12px 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
           Progreso & Analítica de Cargas
         </h1>

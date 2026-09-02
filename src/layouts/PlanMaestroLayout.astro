@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import NavigationShell from '../components/navigation/NavigationShell.tsx';
+import SectionNavBar from '../components/shell/SectionNavBar.astro';
 import styles from '../components/navigation/NavigationShell.module.css';
 
 interface Props {
@@ -32,6 +33,7 @@ const mappedDomain = (activeDomain === 'general' || activeDomain === 'today')
   <body class="app-body">
     <div class={styles.wrapper}>
       <NavigationShell client:load currentPath={Astro.url.pathname} activeDomain={mappedDomain} breadcrumb={breadcrumb} />
+      <SectionNavBar />
 
       <main class={styles.appMain} id="app-main">
         <slot />

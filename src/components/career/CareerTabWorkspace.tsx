@@ -66,10 +66,7 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
     <ErrorBoundary>
       <div className="ds-stack">
 
-        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
-        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
-
-        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
+        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
         <h1 className="ds-h1" style={{ margin: '4px 0 12px 0' }}>
           Gestión de Carrera & Empleo
         </h1>

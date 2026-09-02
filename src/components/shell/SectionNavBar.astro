@@ -1,0 +1,106 @@
+---
+// SectionNavBar.astro — Submenú de sección, server-side, SIEMPRE arriba.
+// Se coloca en PlanMaestroLayout DESPUÉS de NavigationShell.
+// Determina la sección y el item activo desde Astro.url.pathname.
+import { SECTION_NAV } from '../shell/sectionNavConfig';
+
+interface Props {
+  /** Override del section key (opcional; auto-detecta desde URL si no se pasa). */
+  sectionKey?: string;
+}
+
+const { sectionKey: overrideKey } = Astro.props;
+const pathname = Astro.url.pathname;
+
+// Detectar section key desde la URL
+function detectSectionKey(path: string): string | null {
+  // Orden importa: subsecciones más específicas primero
+  const entries: Array<[RegExp, string]> = [
+    [/^\/app\/fitness\/library/, 'fitness.library'],
+    [/^\/app\/fitness/, 'fitness'],
+    [/^\/app\/career/, 'career'],
+    [/^\/app\/clinical/, 'clinical'],
+    [/^\/app\/languages/, 'languages'],
+    [/^\/app\/gastronomy/, 'gastronomy'],
+    [/^\/app\/schedules/, 'today'],
+    [/^\/app\/today/, 'today'],
+  ];
+  for (const [re, key] of entries) {
+    if (re.test(path)) return key;
+  }
+  return null;
+}
+
+const key = overrideKey || detectSectionKey(pathname);
+const items = key ? SECTION_NAV[key] : undefined;
+
+// Determinar item activo (la primera coincidencia de pathname gana)
+const activeItem = items?.find(item =>
+  item.end ? pathname === item.href : pathname.startsWith(item.href)
+);
+const activeHref = activeItem?.href ?? '';
+
+const hasItems = items && items.length > 0;
+---
+
+{hasItems && (
+  <nav class="section-nav-bar" aria-label={`Navegación de ${key}`}>
+    {items!.map((item) => (
+      <a
+        href={item.href}
+        class:list={['section-nav-link', { 'section-nav-link-active': item.href === activeHref }]}
+        aria-current={item.href === activeHref ? 'page' : undefined}
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+)}
+
+<style>
+  .section-nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 16px;
+    background: var(--surface-1, #0d0d0f);
+    border-bottom: 1px solid var(--color-border-subtle, rgba(255,255,255,0.08));
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    -webkit-font-smoothing: antialiased;
+  }
+  .section-nav-bar::-webkit-scrollbar { display: none; }
+
+  .section-nav-link {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 6px 14px;
+    border-radius: var(--radius-s, 8px);
+    font: 500 0.8125rem var(--font-family-system, -apple-system, BlinkMacSystemFont, system-ui, sans-serif);
+    color: var(--text-secondary, #98989d);
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+  }
+  .section-nav-link:hover {
+    color: var(--text-primary, #f5f5f7);
+    background: var(--surface-2, #161619);
+  }
+  .section-nav-link-active {
+    color: var(--text-primary, #f5f5f7);
+    background: var(--surface-3, #1d1d21);
+    font-weight: 600;
+  }
+  .section-nav-link-active:hover {
+    background: var(--surface-3, #1d1d21);
+  }
+
+  @media (max-width: 640px) {
+    .section-nav-bar { padding: 6px 12px; }
+    .section-nav-link { padding: 5px 10px; font-size: 0.75rem; }
+  }
+</style>

@@ -1,6 +1,5 @@
 // src/components/today/TodayPlanWorkspace.tsx
 import React, { useState } from 'react';
-import SectionNav from '../ui/SectionNav';
 import ErrorBoundary from '../ErrorBoundary';
 import DailyOperatingView from '../schedules/DailyOperatingView';
 import WeeklyGridPlanner from '../schedules/WeeklyGridPlanner';
@@ -17,7 +16,6 @@ export default function TodayPlanWorkspace({ currentPath = '/app/today/plan' }: 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
         
         {/* NAVEGACIÓN NIVEL 2 */}
-        <SectionNav sectionKey="today" currentPath={currentPath} level={2} />
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
           <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>

@@ -33,10 +33,7 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
     <ErrorBoundary>
       <div className="ds-stack">
 
-        {/* NAVEGACIÓN NIVEL 2 */}
-        <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
-
-        {/* CABECERA PRESCRIPTIVA DE SECCIÓN LABORAL */}
+        {/* NAVEGACIÓN NIVEL 2 */}        {/* CABECERA PRESCRIPTIVA DE SECCIÓN LABORAL */}
         <div className="ds-row-between" style={{ paddingBottom: 'var(--space-xs)' }}>
           <div className="ds-row" style={{ gap: '10px' }}>
             <Briefcase size={22} style={{ color: 'var(--color-accent-primary)' }} />
