@@ -124,47 +124,34 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
   });
 
   return (
-    <div
-      style={{
-        background: 'var(--surface-1, #0d0d0f)',
-        border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-        borderRadius: 'var(--radius-m, 12px)',
-        padding: 'var(--space-md)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 'var(--space-md)'
-      }}
-    >
+    <div className="ds-card ds-stack">
       {/* CABECERA: día real + navegador de semanas */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+      <div className="ds-row-between" style={{ flexWrap: 'wrap' }}>
+        <div className="ds-row" style={{ flexWrap: 'wrap' }}>
           <Calendar size={18} style={{ color: 'var(--accent, #0a84ff)' }} />
-          <h3 style={{ fontSize: 'var(--fs-step, 1.0625rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+          <h3 className="ds-h3">
             Hoy es {ctx.todayWeekdayName.toLowerCase()} {formatDateShort(ctx.today)}
           </h3>
           {postponedDays > 0 && (
             <span
               title="Postergaciones acumuladas del plan"
-              style={{ fontSize: '0.7rem', fontWeight: 700, color: '#ff9f0a', background: 'rgba(255,159,10,0.12)', border: '1px solid rgba(255,159,10,0.3)', padding: '2px 8px', borderRadius: '999px' }}
+              className="ds-badge ds-badge-warning"
+              style={{ borderRadius: 'var(--radius-pill)' }}
             >
               Plan corrido {postponedDays} {postponedDays === 1 ? 'día' : 'días'}
             </span>
           )}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="ds-row">
           <button
             type="button"
             disabled={currentWeek <= 1}
             onClick={() => setWeek(currentWeek - 1)}
             title="Semana anterior"
             aria-label="Semana anterior"
+            className="ds-btn ds-btn-secondary ds-btn-sm"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
-              color: 'var(--text-primary)',
-              borderRadius: '6px',
-              padding: '4px 8px',
               cursor: currentWeek <= 1 ? 'not-allowed' : 'pointer',
               opacity: currentWeek <= 1 ? 0.4 : 1
             }}
@@ -172,7 +159,7 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
             <ChevronLeft size={16} />
           </button>
 
-          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+          <span className="ds-label" style={{ display: 'inline' }}>
             Semana {currentWeek} de {program.durationWeeks}
           </span>
 
@@ -182,12 +169,8 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
             onClick={() => setWeek(currentWeek + 1)}
             title="Semana siguiente"
             aria-label="Semana siguiente"
+            className="ds-btn ds-btn-secondary ds-btn-sm"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
-              color: 'var(--text-primary)',
-              borderRadius: '6px',
-              padding: '4px 8px',
               cursor: currentWeek >= program.durationWeeks ? 'not-allowed' : 'pointer',
               opacity: currentWeek >= program.durationWeeks ? 0.4 : 1
             }}
