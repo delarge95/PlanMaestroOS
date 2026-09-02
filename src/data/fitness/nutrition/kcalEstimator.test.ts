@@ -1,4 +1,4 @@
-﻿// src/data/fitness/nutrition/kcalEstimator.test.ts â€” Tests del estimador de kcal quemadas (AG-NUTRI ciclo 2)
+﻿// src/data/fitness/nutrition/kcalEstimator.test.ts — Tests del estimador de kcal quemadas (AG-NUTRI ciclo 2)
 import { describe, expect, it } from 'vitest';
 import {
   DEFAULT_REP_DISTANCE_M,
@@ -14,7 +14,7 @@ import { toChunkCitation } from './rules';
 const PRESET_CITATION = { source: 'acsm-exercise-testing-prescription-10ed', locator: 'Cap. 6, Tabla 6.3 aplicada a 8 km/h (134 m/min)' };
 
 describe('estimateKcalFromMetActivity', () => {
-  it('aplica kcal = METs Ã— kg Ã— horas (8.7 METs, 70 kg, 60 min â†’ 609 kcal)', () => {
+  it('aplica kcal = METs × kg × horas (8.7 METs, 70 kg, 60 min → 609 kcal)', () => {
     const input: MetActivitySource & { weightKg: number } = {
       label: 'Running zona E', mets: 8.7, minutes: 60, weightKg: 70, citation: PRESET_CITATION,
     };
@@ -25,14 +25,14 @@ describe('estimateKcalFromMetActivity', () => {
     expect(est.why[0].locator).toContain('Tabla 6.3');
   });
 
-  it('escala con minutos y peso (8.7 METs, 80 kg, 30 min â†’ 348 kcal)', () => {
+  it('escala con minutos y peso (8.7 METs, 80 kg, 30 min → 348 kcal)', () => {
     const est = estimateKcalFromMetActivity({
       label: 'Trote', mets: 8.7, minutes: 30, weightKg: 80, citation: PRESET_CITATION,
     });
     expect(est.kcal).toBe(348);
   });
 
-  it('entrada manual sin fuente â†’ qualitative y why vacÃ­o (nada de cifras sin cita en UI)', () => {
+  it('entrada manual sin fuente → qualitative y why vacío (nada de cifras sin cita en UI)', () => {
     const est = estimateKcalFromMetActivity({ label: 'Manual', mets: 6, minutes: 45, weightKg: 70 });
     expect(est.confidence).toBe('qualitative');
     expect(est.why).toHaveLength(0);
@@ -41,8 +41,8 @@ describe('estimateKcalFromMetActivity', () => {
 });
 
 describe('estimateKcalFromStrengthSession', () => {
-  it('usa trabajo mecÃ¡nico como cota inferior + EPOC citado (+5â€“15%)', () => {
-    const session = { label: 'Sentadilla 3Ã—10@60', series: 3, repsPerSeries: 10, loadKg: 60 };
+  it('usa trabajo mecánico como cota inferior + EPOC citado (+5–15%)', () => {
+    const session = { label: 'Sentadilla 3×10@60', series: 3, repsPerSeries: 10, loadKg: 60 };
     const est = estimateKcalFromStrengthSession(session);
     const workKj = (3 * 10 * 60 * DEFAULT_REP_DISTANCE_M * 9.81) / 1000;
     const floorKcal = workKj / 4.184;
@@ -57,14 +57,14 @@ describe('estimateKcalFromStrengthSession', () => {
     expect(est.why.some((c) => c.ruleId === 'nutri-mau-epoc')).toBe(true);
   });
 
-  it('documenta la asunciÃ³n de distancia por repeticiÃ³n', () => {
+  it('documenta la asunción de distancia por repetición', () => {
     const est = estimateKcalFromStrengthSession({ label: 'X', series: 1, repsPerSeries: 1, loadKg: 100 });
     expect(est.detail).toContain(`${DEFAULT_REP_DISTANCE_M} m`);
   });
 });
 
 describe('estimateDayBurn / dailyBalance', () => {
-  it('agrega items y rango min/max del dÃ­a', () => {
+  it('agrega items y rango min/max del día', () => {
     const burn = estimateDayBurn([
       { kind: 'met', label: 'Preset running', mets: 8.7, minutes: 60, citation: PRESET_CITATION },
       { kind: 'strength', label: 'Fuerza', series: 3, repsPerSeries: 10, loadKg: 60 },
