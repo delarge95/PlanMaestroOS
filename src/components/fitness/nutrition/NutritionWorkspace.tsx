@@ -1,4 +1,4 @@
-﻿// src/components/fitness/nutrition/NutritionWorkspace.tsx â€” MÃ³dulo UI de nutriciÃ³n deportiva (AG-NUTRI, Fase 1)
+// src/components/fitness/nutrition/NutritionWorkspace.tsx â€” MÃ³dulo UI de nutriciÃ³n deportiva (AG-NUTRI, Fase 1)
 // Calculadora personal + targets citados + dÃ­a tipo + suplementos con evidencia + disclaimer.
 import React from 'react';
 import { AlertTriangle, Calculator, Droplets, Flame, Pill, Sunrise, Venus } from 'lucide-react';
@@ -25,18 +25,8 @@ const GOALS: Array<{ value: Goal; label: string; hint: string }> = [
 
 function SectionTitle({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <h2
-      style={{
-        margin: 0,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 'var(--space-2)',
-        fontSize: 'var(--font-size-title, 1.05rem)',
-        fontWeight: 650,
-        color: 'var(--text-primary)',
-      }}
-    >
-      <span style={{ color: 'var(--color-accent-primary, var(--accent))' }}>{icon}</span>
+    <h2 className="ds-h3 ds-row" style={{ gap: 'var(--space-2)' }}>
+      <span style={{ color: 'var(--accent)' }}>{icon}</span>
       {children}
     </h2>
   );
@@ -47,29 +37,29 @@ function SupplementPanel() {
   const caffeine = toCitation('nutri-nsca-caffeine-protocol');
   const caffeineRisk = toCitation('nutri-nsca-caffeine-risk');
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-2)' }}>
-        <div style={{ background: 'var(--surface-elevated, var(--color-surface-raised))', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md, 16px)' }}>
-          <StatusBadge label="Evidencia sÃ³lida (NSCA + IOC)" variant="success" />
-          <p style={{ margin: 'var(--space-2) 0 0', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
-            <strong>Monohidrato de creatina</strong>: carga 20â€“25 g/dÃ­a Ã— 5 dÃ­as (o 0.3 g/kg), luego 2 g/dÃ­a. +0.5â€“2 kg de masa magra esperables.
+    <div className="ds-stack-sm">
+      <div className="ds-grid">
+        <div className="ds-card ds-stack-sm">
+          <StatusBadge label="Evidencia sólida (NSCA + IOC)" variant="success" />
+          <p className="ds-caption" style={{ lineHeight: 1.55 }}>
+            <strong>Monohidrato de creatina</strong>: carga 20–25 g/día × 5 días (o 0.3 g/kg), luego 2 g/día. +0.5–2 kg de masa magra esperables.
           </p>
-          <p style={{ margin: 'var(--space-1) 0 0', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-            {creatine.source} Â· {creatine.locator} Â· <code>nutri-nsca-creatine-protocol</code>
+          <p className="ds-micro">
+            {creatine.source} · {creatine.locator} · <code>nutri-nsca-creatine-protocol</code>
           </p>
         </div>
-        <div style={{ background: 'var(--surface-elevated, var(--color-surface-raised))', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md, 16px)' }}>
-          <StatusBadge label="Evidencia sÃ³lida (NSCA + IOC)" variant="success" />
-          <p style={{ margin: 'var(--space-2) 0 0', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
-            <strong>CafeÃ­na</strong>: 3â€“9 mg/kg ~60 min antes del ejercicio. Sin beneficio extra â‰¥9 mg/kg y mÃ¡s efectos adversos (ansiedad, insomnio, GI).
+        <div className="ds-card ds-stack-sm">
+          <StatusBadge label="Evidencia sólida (NSCA + IOC)" variant="success" />
+          <p className="ds-caption" style={{ lineHeight: 1.55 }}>
+            <strong>Cafeína</strong>: 3–9 mg/kg ~60 min antes del ejercicio. Sin beneficio extra ≥9 mg/kg y más efectos adversos (ansiedad, insomnio, GI).
           </p>
-          <p style={{ margin: 'var(--space-1) 0 0', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-            {caffeine.source} Â· {caffeine.locator} Â· <code>nutri-nsca-caffeine-protocol</code> Â· riesgo: {caffeineRisk.locator}
+          <p className="ds-micro">
+            {caffeine.source} · {caffeine.locator} · <code>nutri-nsca-caffeine-protocol</code> · riesgo: {caffeineRisk.locator}
           </p>
         </div>
       </div>
-      <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-        Solo se listan suplementos con evidencia documentada en las fuentes del RAG (ver rag/nutrition.json, tema "supplements"). Nada de consejos mÃ©dicos.
+      <p className="ds-micro">
+        Solo se listan suplementos con evidencia documentada en las fuentes del RAG (ver rag/nutrition.json, tema "supplements"). Nada de consejos médicos.
       </p>
     </div>
   );
@@ -94,44 +84,41 @@ export function NutritionWorkspace() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg, 24px)', maxWidth: 920, margin: '0 auto', width: '100%' }}>
+    <div className="ds-stack-lg" style={{ maxWidth: 920, margin: '0 auto', width: '100%' }}>
       {/* Disclaimer visible */}
       <div
         role="note"
+        className="ds-row"
         style={{
-          display: 'flex',
-          gap: 'var(--space-2)',
           padding: 'var(--space-2) var(--space-3)',
-          background: 'var(--color-accent-warning-soft, var(--warning-soft))',
-          border: '1px solid var(--color-accent-warning, var(--warning))',
-          borderRadius: 'var(--radius-md)',
-          fontSize: 'var(--font-size-meta)',
+          background: 'var(--warning-soft)',
+          border: '1px solid var(--warning)',
+          borderRadius: 'var(--radius-m)',
+          fontSize: 'var(--fs-meta)',
           color: 'var(--text-secondary)',
           lineHeight: 1.5,
+          alignItems: 'flex-start',
         }}
       >
-        <AlertTriangle size={16} aria-hidden="true" style={{ flexShrink: 0, marginTop: 2, color: 'var(--color-accent-warning, var(--warning))' }} />
+        <AlertTriangle size={16} aria-hidden="true" style={{ flexShrink: 0, marginTop: 2, color: 'var(--warning)' }} />
         <span>
-          <strong>InformaciÃ³n educativa</strong> basada en fuentes citadas (NSCA 2016, IOC/Maughan 2000). No es consejo mÃ©dico ni dietas terapÃ©uticas.
-          Embarazo, diabetes, TCA, enfermedad renal u otra condiciÃ³n â†’ consulta a un profesional sanitario antes de cambiar tu dieta o tomar suplementos.
+          <strong>Información educativa</strong> basada en fuentes citadas (NSCA 2016, IOC/Maughan 2000). No es consejo médico ni dietas terapéuticas.
+          Embarazo, diabetes, TCA, enfermedad renal u otra condición → consulta a un profesional sanitario antes de cambiar tu dieta o tomar suplementos.
         </span>
       </div>
 
       {/* Calculadora */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+      <section className="ds-stack-sm">
         <SectionTitle icon={<Calculator size={16} />}>Calculadora personal</SectionTitle>
         <div
+          className="ds-card"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
             gap: 'var(--space-3)',
-            background: 'var(--surface-elevated, var(--color-surface-raised))',
-            border: '1px solid var(--color-border-subtle)',
-            borderRadius: 'var(--radius-md)',
-            padding: 'var(--space-md, 16px)',
           }}
         >
-          <label style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+          <label className="ds-stack-sm ds-label-sm">
             Peso (kg)
             <input
               type="number"
@@ -143,14 +130,14 @@ export function NutritionWorkspace() {
               style={inputStyle}
             />
           </label>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+          <label className="ds-stack-sm ds-label-sm">
             Sexo (tabla kcal/kg)
             <select value={sex} onChange={(e) => setInputs({ sex: e.target.value as 'male' | 'female' })} style={inputStyle}>
-              <option value="male">VarÃ³n</option>
+              <option value="male">Varón</option>
               <option value="female">Mujer</option>
             </select>
           </label>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+          <label className="ds-stack-sm ds-label-sm">
             Entrenamiento (h/semana)
             <input
               type="number"
@@ -162,7 +149,7 @@ export function NutritionWorkspace() {
               style={inputStyle}
             />
           </label>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)', fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+          <label className="ds-stack-sm ds-label-sm">
             Edad (opcional)
             <input
               type="number"
@@ -174,25 +161,17 @@ export function NutritionWorkspace() {
               style={inputStyle}
             />
           </label>
-          <fieldset style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)', border: 'none', margin: 0, padding: 0, fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)' }}>
+          <fieldset className="ds-stack-sm ds-label-sm" style={{ border: 'none', margin: 0, padding: 0 }}>
             Objetivo
-            <div style={{ display: 'flex', gap: 'var(--space-1)', flexWrap: 'wrap' }}>
+            <div className="ds-row-wrap" style={{ gap: 'var(--space-1)' }}>
               {GOALS.map((g) => (
                 <button
                   key={g.value}
                   type="button"
                   onClick={() => setInputs({ goal: g.value })}
                   title={g.hint}
-                  style={{
-                    padding: '8px 12px',
-                    borderRadius: 'var(--radius-pill)',
-                    border: `1px solid ${goal === g.value ? 'var(--color-accent-primary, var(--accent))' : 'var(--color-border-subtle)'}`,
-                    background: goal === g.value ? 'var(--color-accent-primary-soft, var(--accent-soft))' : 'transparent',
-                    color: goal === g.value ? 'var(--text-primary)' : 'var(--text-secondary)',
-                    fontSize: 'var(--font-size-meta)',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                  }}
+                  className="ds-chip"
+                  data-active={goal === g.value}
                 >
                   {g.label}
                 </button>
@@ -200,63 +179,63 @@ export function NutritionWorkspace() {
             </div>
           </fieldset>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
+        <div className="ds-row-between ds-micro" style={{ flexWrap: 'wrap', gap: 'var(--space-2)' }}>
           <span>
             Inputs persistidos localmente (localStorage <code>{NUTRITION_STORAGE_KEY}</code>). TODO: migrar a UserState de CORE.
           </span>
-          <button type="button" onClick={reset} style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: 'inherit', textDecoration: 'underline' }}>
+          <button type="button" onClick={reset} className="ds-btn ds-btn-ghost ds-btn-sm" style={{ textDecoration: 'underline', padding: 0 }}>
             Restablecer
           </button>
         </div>
       </section>
 
       {/* Targets diarios */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <SectionTitle icon={<Sunrise size={16} />}>Targets del dÃ­a</SectionTitle>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-2)' }}>
+      <section className="ds-stack-sm">
+        <SectionTitle icon={<Sunrise size={16} />}>Targets del día</SectionTitle>
+        <div className="ds-grid">
           {targets.map((t) => (
             <TargetCard key={t.label} target={t} />
           ))}
         </div>
-        <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-          Cada target muestra su "Â¿por quÃ©?" con la regla y la cita (libro Â· capÃ­tulo Â· pÃ¡gina) que lo sustenta.
+        <p className="ds-micro">
+          Cada target muestra su "¿por qué?" con la regla y la cita (libro · capítulo · página) que lo sustenta.
         </p>
       </section>
 
       {/* Quemado estimado hoy vs objetivo (ciclo 2) */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+      <section className="ds-stack-sm">
         <SectionTitle icon={<Flame size={16} />}>Quemado estimado hoy vs objetivo</SectionTitle>
         <KcalBurnPanel />
       </section>
 
-      {/* DÃ­a tipo */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-        <SectionTitle icon={<Droplets size={16} />}>DÃ­a tipo (franjas, sin recetas)</SectionTitle>
+      {/* Día tipo */}
+      <section className="ds-stack-sm">
+        <SectionTitle icon={<Droplets size={16} />}>Día tipo (franjas, sin recetas)</SectionTitle>
         <DayTypeGrid slots={daySlots} />
-        <p style={{ margin: 0, fontSize: 'var(--font-size-micro, 0.7rem)', color: 'var(--text-tertiary)' }}>
-          Franjas alineadas al grid semanal. Los alimentos concretos y recetas pertenecen al mÃ³dulo de gastronomÃ­a (puente por contrato de macros).
+        <p className="ds-micro">
+          Franjas alineadas al grid semanal. Los alimentos concretos y recetas pertenecen al módulo de gastronomía (puente por contrato de macros).
         </p>
       </section>
 
       {/* Suplementos */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+      <section className="ds-stack-sm">
         <SectionTitle icon={<Pill size={16} />}>Suplementos con evidencia</SectionTitle>
         <SupplementPanel />
       </section>
 
       {/* Perfil hormonal femenino (opcional, ciclo 2) */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+      <section className="ds-stack-sm">
         <SectionTitle icon={<Venus size={16} />}>Perfil hormonal femenino (ajustes opcionales citados)</SectionTitle>
         <FemaleHormonesPanel />
       </section>
 
-      {/* Detalle de proteÃ­na post-entreno segÃºn edad */}
-      <Disclosure label={`Dosis de proteÃ­na post-entreno: ${post.grams}`} summary={ageYears ? `${ageYears} aÃ±os` : 'edad no informada (pauta general)'}>
-        <p style={{ margin: 0, fontSize: 'var(--font-size-meta)', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+      {/* Detalle de proteína post-entreno según edad */}
+      <Disclosure label={`Dosis de proteína post-entreno: ${post.grams}`} summary={ageYears ? `${ageYears} años` : 'edad no informada (pauta general)'}>
+        <p className="ds-caption" style={{ lineHeight: 1.55 }}>
           {toCitation(post.ruleId).statement}
           <br />
-          <span style={{ color: 'var(--text-tertiary)' }}>
-            {toCitation(post.ruleId).source} Â· {toCitation(post.ruleId).locator} Â· <code>{post.ruleId}</code>
+          <span className="ds-micro">
+            {toCitation(post.ruleId).source} · {toCitation(post.ruleId).locator} · <code>{post.ruleId}</code>
           </span>
         </p>
       </Disclosure>
