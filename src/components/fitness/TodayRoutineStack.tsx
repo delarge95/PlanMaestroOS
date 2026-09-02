@@ -104,42 +104,26 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const isRestDay = selectedDayIndex >= 5;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+    <div className="ds-stack">
       {isRestDay ? (
-        <div style={{
-          background: 'var(--surface-1, #0d0d0f)',
-          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-          borderRadius: 'var(--radius-m, 12px)',
-          padding: 'var(--space-lg)',
-          textAlign: 'center',
-          color: 'var(--text-secondary)'
-        }}>
-          <h4 style={{ margin: '0 0 6px', color: 'var(--text-primary)', fontSize: '1.1rem' }}>🌿 Día de Descanso Programado</h4>
-          <p style={{ margin: 0, fontSize: '0.9rem' }}>Aprovecha para hidratación, caminata ligera, movilidad y recuperación neuromuscular.</p>
+        <div className="ds-card ds-stack-sm" style={{ textAlign: 'center', padding: 'var(--space-6)' }}>
+          <h4 className="ds-h3">🌿 Día de Descanso Programado</h4>
+          <p className="ds-caption" style={{ fontSize: 'var(--fs-body)' }}>Aprovecha para hidratación, caminata ligera, movilidad y recuperación neuromuscular.</p>
         </div>
       ) : (
         <Disclosure
           label={`Rutina Principal: ${program.title.replace(/\s*\([^)]*\)/g, '').trim()} — ${activeDay?.name || `Día ${safeDayIndex + 1}`}`}
           summary={`${activeDay?.exercises?.length || 0} ejercicios`}
           actions={
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div className="ds-row" style={{ gap: '6px' }}>
               {/* DESHACER POSTERGACIÓN SI EXISTEN DÍAS POSTERGADOS */}
               {postponedDays > 0 && (
                 <button
                   type="button"
                   onClick={resetPostponedDays}
                   title={`Restablecer días postergados (${postponedDays})`}
-                  style={{
-                    background: 'rgba(255,69,58,0.15)',
-                    border: '1px solid var(--danger, #ff453a)',
-                    color: 'var(--danger, #ff453a)',
-                    padding: '4px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
+                  className="ds-btn ds-btn-danger ds-btn-sm"
+                  style={{ padding: '4px' }}
                 >
                   <RotateCcw size={14} />
                 </button>
@@ -150,17 +134,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                 type="button"
                 onClick={postponeDay}
                 title="Postergar día de entrenamiento (+1 día)"
-                style={{
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
-                  color: 'var(--text-secondary)',
-                  padding: '4px',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
+                className="ds-btn ds-btn-secondary ds-btn-sm"
+                style={{ padding: '4px' }}
               >
                 <Clock size={14} />
               </button>
@@ -169,24 +144,15 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
               <a
                 href={`/app/fitness/library/catalog?routine=${encodeURIComponent(program.id)}`}
                 title="Ver rutina en Base de Datos"
-                style={{
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
-                  color: 'var(--accent, #0a84ff)',
-                  padding: '4px',
-                  borderRadius: '6px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textDecoration: 'none'
-                }}
+                className="ds-btn ds-btn-secondary ds-btn-sm"
+                style={{ padding: '4px', color: 'var(--accent)' }}
               >
                 <ExternalLink size={14} />
               </a>
             </div>
           }
         >
-          <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', background: 'var(--surface-1, #0d0d0f)' }}>
+          <div className="ds-card" style={{ overflowX: 'auto', padding: 0 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--fs-body, 0.9rem)' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-secondary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>
@@ -282,15 +248,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                                 onClick={() => handleResetSingleExercise(pId, warmupCount, workingCount, defaultReps, defaultEffort)}
                                 title="Reestablecer este ejercicio a su prescripción original"
                                 aria-label="Reestablecer este ejercicio a su prescripción original"
-                                style={{
-                                  background: 'transparent',
-                                  border: 'none',
-                                  color: 'var(--accent, #0a84ff)',
-                                  cursor: 'pointer',
-                                  padding: '2px',
-                                  display: 'inline-flex',
-                                  alignItems: 'center'
-                                }}
+                                className="ds-btn ds-btn-ghost ds-btn-sm"
+                                style={{ padding: '2px' }}
                               >
                                 <RotateCcw size={13} />
                               </button>
@@ -308,10 +267,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                               <button
                                 type="button"
                                 onClick={() => toggleNote(pId)}
-                                style={{
-                                  background: 'transparent', border: 'none', color: 'var(--accent, #0a84ff)',
-                                  fontSize: '0.74rem', fontWeight: 600, cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '4px'
-                                }}
+                                className="ds-btn ds-btn-ghost ds-btn-sm"
+                                style={{ padding: 0, gap: '4px', fontSize: '0.74rem' }}
                               >
                                 <span>Nota</span>
                                 {isNoteExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
@@ -446,19 +403,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                               ...(prescription.substituteOptions || [])
                             ]
                           })}
-                          style={{
-                            background: 'transparent',
-                            border: '1px solid var(--color-border-subtle)',
-                            color: 'var(--text-primary)',
-                            padding: '4px 8px',
-                            borderRadius: '6px',
-                            fontSize: '0.75rem',
-                            fontWeight: 600,
-                            cursor: 'pointer',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '4px'
-                          }}
+                          className="ds-btn ds-btn-secondary ds-btn-sm"
+                          style={{ gap: '4px' }}
                         >
                           <ArrowLeftRight size={12} /> Sustituir
                         </button>
@@ -472,7 +418,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
           </div>
 
           {/* BOTÓN PROMINENTE DE FINALIZACIÓN DE SESIÓN */}
-          <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
+          <div className="ds-row" style={{ marginTop: '16px', justifyContent: 'flex-end' }}>
             <button
               type="button"
               onClick={() => {
@@ -518,19 +464,15 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                   console.error(e);
                 }
               }}
+              className="ds-btn ds-btn-lg"
               style={{
                 background: 'linear-gradient(135deg, var(--success, #30d158), #28a745)',
                 color: '#ffffff',
                 border: 'none',
-                padding: '12px 24px',
                 borderRadius: '10px',
-                fontSize: '0.94rem',
+                padding: '12px 24px',
                 fontWeight: 800,
-                cursor: 'pointer',
                 boxShadow: '0 4px 14px rgba(48,209,88,0.3)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px'
               }}
             >
               🎉 Finalizar & Guardar Sesión en Progreso
