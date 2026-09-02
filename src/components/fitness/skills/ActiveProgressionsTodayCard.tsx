@@ -25,19 +25,12 @@ export default function ActiveProgressionsTodayCard() {
 
   if (activeGroups.length === 0) {
     return (
-      <div style={{
-        background: 'var(--surface-1, #0d0d0f)',
-        border: '1px dashed rgba(255, 255, 255, 0.12)',
-        borderRadius: '16px',
-        padding: '20px',
-        textAlign: 'center',
-        color: 'rgba(255, 255, 255, 0.5)',
-        fontSize: '0.84rem'
-      }}>
+      <div className="ds-empty">
         <span>📌 No tienes progresiones activas marcadas. </span>
         <a
           href="/app/fitness/skills"
-          style={{ color: 'var(--accent, #0a84ff)', fontWeight: 700, textDecoration: 'none', marginLeft: '4px' }}
+          className="ds-btn ds-btn-ghost ds-btn-sm"
+          style={{ fontWeight: 700 }}
         >
           Explorar Rutas de Habilidad y Activar una ↗
         </a>
@@ -80,40 +73,28 @@ export default function ActiveProgressionsTodayCard() {
 
   return (
     <div
+      className="ds-card ds-stack"
       style={{
-        background: 'var(--surface-1, #0d0d0f)',
         border: '1px solid rgba(48, 209, 88, 0.3)',
         borderRadius: '18px',
-        padding: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
         boxShadow: '0 8px 30px rgba(0,0,0,0.3), 0 0 20px rgba(48, 209, 88, 0.08)'
       }}
     >
       {/* HEADER WITH GROUP SELECTOR (IF MULTIPLE ACTIVE) */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.74rem', background: 'rgba(48, 209, 88, 0.15)', color: '#30d158', border: '1px solid rgba(48, 209, 88, 0.3)', padding: '3px 10px', borderRadius: '12px', fontWeight: 800 }}>
+      <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: '10px' }}>
+        <div className="ds-row" style={{ flexWrap: 'wrap', gap: '8px' }}>
+          <span className="ds-badge ds-badge-success" style={{ borderRadius: '12px' }}>
             📌 PROGRESIÓN ACTIVA EN TRABAJO
           </span>
           {activeGroups.length > 1 && (
-            <div style={{ display: 'flex', gap: '4px' }}>
+            <div className="ds-row" style={{ gap: '4px' }}>
               {activeGroups.map((grp, idx) => (
                 <button
                   key={grp.id}
                   type="button"
                   onClick={() => setSelectedGroupIdx(idx)}
-                  style={{
-                    background: selectedGroupIdx === idx ? '#30d158' : 'rgba(255,255,255,0.06)',
-                    color: selectedGroupIdx === idx ? '#000000' : 'rgba(255,255,255,0.7)',
-                    border: 'none',
-                    borderRadius: '6px',
-                    padding: '2px 8px',
-                    fontSize: '0.72rem',
-                    fontWeight: selectedGroupIdx === idx ? 700 : 500,
-                    cursor: 'pointer'
-                  }}
+                  className="ds-chip"
+                  data-active={selectedGroupIdx === idx}
                 >
                   {grp.title.split(':')[0] || grp.title.substring(0, 15)}
                 </button>
@@ -129,7 +110,8 @@ export default function ActiveProgressionsTodayCard() {
               : '/app/fitness/skills'
           }
           title="Abrir esta progresión enfocada en las rutas de habilidad"
-          style={{ fontSize: '0.76rem', color: 'var(--accent, #0a84ff)', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+          className="ds-btn ds-btn-ghost ds-btn-sm"
+          style={{ gap: '4px' }}
         >
           <span>Ver esta ruta enfocada</span>
           <ExternalLink size={12} />
@@ -137,33 +119,29 @@ export default function ActiveProgressionsTodayCard() {
       </div>
 
       <div>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: '#ffffff', letterSpacing: '-0.01em' }}>
+        <h3 className="ds-h2">
           {currentGroup.title}
         </h3>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
+        <div className="ds-row" style={{ gap: '6px', marginTop: '4px' }}>
           {currentGroup.source === 'heria' ? (
-            <span style={{ fontSize: '0.7rem', color: '#ff9f0a', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 700 }}>
+            <span className="ds-badge ds-badge-warning" style={{ gap: '4px' }}>
               <Flame size={12} /> Chris Heria / ThenX
             </span>
           ) : (
-            <span style={{ fontSize: '0.7rem', color: '#0a84ff', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 700 }}>
+            <span className="ds-badge ds-badge-accent" style={{ gap: '4px' }}>
               <BookOpen size={12} /> Overcoming Gravity
             </span>
           )}
         </div>
       </div>
-
       {/* STEP CAROUSEL NAVIGATION CONTROLS (FITAPP PARADIGM: PREV / NEXT CARD VIEW) */}
       <div
+        className="ds-row-between"
         style={{
           background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '12px',
+          border: '1px solid var(--color-border-subtle)',
+          borderRadius: 'var(--radius-m)',
           padding: '10px 14px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '8px'
         }}
       >
         {/* PREV STEP BUTTON */}
@@ -171,18 +149,10 @@ export default function ActiveProgressionsTodayCard() {
           type="button"
           onClick={handleStepPrev}
           disabled={!prevEx}
+          className="ds-btn ds-btn-secondary ds-btn-sm"
           style={{
-            background: prevEx ? 'rgba(255,255,255,0.06)' : 'transparent',
-            color: prevEx ? '#ffffff' : 'rgba(255,255,255,0.2)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '8px',
-            padding: '6px 12px',
-            fontSize: '0.76rem',
-            fontWeight: 600,
             cursor: prevEx ? 'pointer' : 'not-allowed',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '4px',
+            opacity: prevEx ? 1 : 0.4,
             maxWidth: '40%'
           }}
           title={prevEx ? `Ver paso anterior: ${prevEx.name}` : 'Primer paso'}
@@ -194,7 +164,7 @@ export default function ActiveProgressionsTodayCard() {
         </button>
 
         {/* STEP COUNTER BADGE */}
-        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#30d158', whiteSpace: 'nowrap' }}>
+        <span className="ds-label" style={{ color: 'var(--success, #30d158)', whiteSpace: 'nowrap' }}>
           Paso {stepIndex + 1} de {currentGroup.exercises.length}
         </span>
 
@@ -203,18 +173,10 @@ export default function ActiveProgressionsTodayCard() {
           type="button"
           onClick={handleStepNext}
           disabled={!nextEx}
+          className="ds-btn ds-btn-secondary ds-btn-sm"
           style={{
-            background: nextEx ? 'rgba(255,255,255,0.06)' : 'transparent',
-            color: nextEx ? '#ffffff' : 'rgba(255,255,255,0.2)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '8px',
-            padding: '6px 12px',
-            fontSize: '0.76rem',
-            fontWeight: 600,
             cursor: nextEx ? 'pointer' : 'not-allowed',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '4px',
+            opacity: nextEx ? 1 : 0.4,
             maxWidth: '40%'
           }}
           title={nextEx ? `Ver paso siguiente: ${nextEx.name}` : 'Último paso'}
@@ -228,22 +190,18 @@ export default function ActiveProgressionsTodayCard() {
 
       {/* CURRENT STEP EXERCISE CARD */}
       <div
+        className="ds-card-elevated ds-stack-sm"
         style={{
           background: 'rgba(0,0,0,0.3)',
-          border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: '14px',
-          padding: '16px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '14px'
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h4 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+        <div className="ds-row-between">
+          <h4 className="ds-h3">
             {currentEx.name}
           </h4>
           {currentEx.level && (
-            <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.8)', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
+            <span className="ds-badge ds-badge-neutral">
               Level {currentEx.level}
             </span>
           )}
@@ -259,7 +217,7 @@ export default function ActiveProgressionsTodayCard() {
         {/* TECHNIQUE POINTS */}
         {technique.length > 0 && (
           <div>
-            <strong style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+            <strong className="ds-eyebrow" style={{ marginBottom: '4px' }}>
               Puntos Clave de Técnica:
             </strong>
             <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#e2e8f0', lineHeight: 1.5 }}>
@@ -273,12 +231,12 @@ export default function ActiveProgressionsTodayCard() {
         {/* PRIMARY MUSCLES */}
         {primaryMuscles.length > 0 && (
           <div>
-            <strong style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+            <strong className="ds-eyebrow" style={{ marginBottom: '6px' }}>
               Músculos Principales:
             </strong>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            <div className="ds-row-wrap">
               {primaryMuscles.map((m: string, idx: number) => (
-                <span key={idx} style={{ fontSize: '0.76rem', background: 'rgba(48, 209, 88, 0.12)', color: '#6ee7b7', border: '1px solid rgba(48, 209, 88, 0.25)', padding: '2px 8px', borderRadius: '6px', fontWeight: 600 }}>
+                <span key={idx} className="ds-badge ds-badge-success">
                   💪 {m}
                 </span>
               ))}
@@ -290,6 +248,7 @@ export default function ActiveProgressionsTodayCard() {
         <button
           type="button"
           onClick={handleLogrado}
+          className="ds-btn ds-btn-lg"
           style={{
             width: '100%',
             background: 'linear-gradient(135deg, #30d158 0%, #28a745 100%)',
@@ -297,13 +256,7 @@ export default function ActiveProgressionsTodayCard() {
             border: 'none',
             borderRadius: '10px',
             padding: '12px 16px',
-            fontSize: '0.9rem',
             fontWeight: 800,
-            cursor: 'pointer',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
             boxShadow: '0 4px 14px rgba(48, 209, 88, 0.3)',
             marginTop: '4px'
           }}
