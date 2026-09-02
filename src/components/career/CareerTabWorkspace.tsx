@@ -64,27 +64,21 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+      <div className="ds-stack">
 
         {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
         <SectionNav sectionKey="career" currentPath={currentPath} level={2} />
 
         {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
-        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '4px 0 12px 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+        <h1 className="ds-h1" style={{ margin: '4px 0 12px 0' }}>
           Gestión de Carrera & Empleo
         </h1>
 
         {/* APPLE SEGMENTED CONTROL BAR (CLEAN & UNENCUMBERED) */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
+        <div className="ds-row-wrap" style={{
           gap: '6px',
           paddingBottom: '6px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-          overflowX: 'auto',
-          maxWidth: '100%',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+          borderBottom: '1px solid rgba(255, 255, 255, 0.06)'
         }}>
           {TABS.map((tab) => {
             const isSelected = activeTab === tab.id;
@@ -93,19 +87,8 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                style={{
-                  background: isSelected ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
-                  color: isSelected ? '#ffffff' : 'rgba(255, 255, 255, 0.55)',
-                  border: 'none',
-                  padding: '6px 14px',
-                  borderRadius: '999px',
-                  fontSize: '0.84rem',
-                  fontWeight: isSelected ? 600 : 500,
-                  fontFamily: 'var(--font-family-system)',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
-                }}
+                className="ds-chip"
+                data-active={isSelected}
               >
                 {tab.label}
               </button>
@@ -114,24 +97,24 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
         </div>
 
         {/* MÉTRICAS ÚTILES NO MORALIZANTES */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-sm)' }}>
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>APLICACIONES ESTA SEMANA</span>
-            <strong style={{ fontSize: '1.4rem', color: 'var(--color-accent-primary)', display: 'block', marginTop: '2px' }}>
+        <div className="ds-grid">
+          <div className="ds-card ds-stack-sm">
+            <span className="ds-eyebrow">APLICACIONES ESTA SEMANA</span>
+            <strong className="ds-h2" style={{ color: 'var(--color-accent-primary)', marginTop: '2px' }}>
               {metrics.applicationsThisWeek} vacantes
             </strong>
           </div>
 
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>DÍAS HASTA SEGUIMIENTO</span>
-            <strong style={{ fontSize: '1.4rem', color: 'var(--color-accent-warning)', display: 'block', marginTop: '2px' }}>
+          <div className="ds-card ds-stack-sm">
+            <span className="ds-eyebrow">DÍAS HASTA SEGUIMIENTO</span>
+            <strong className="ds-h2" style={{ color: 'var(--color-accent-warning)', marginTop: '2px' }}>
               ~{metrics.avgDaysToFollowUp} días promedio
             </strong>
           </div>
 
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>ACTIVOS DE PORTAFOLIO LISTOS</span>
-            <strong style={{ fontSize: '1.4rem', color: 'var(--color-state-done)', display: 'block', marginTop: '2px' }}>
+          <div className="ds-card ds-stack-sm">
+            <span className="ds-eyebrow">ACTIVOS DE PORTAFOLIO LISTOS</span>
+            <strong className="ds-h2" style={{ color: 'var(--color-state-done)', marginTop: '2px' }}>
               {metrics.approvedAssetsCount} aprobados
             </strong>
           </div>
@@ -139,31 +122,26 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
 
         {/* VISTA 1: PIPELINE DE CANDIDATURAS */}
         {activeTab === 'pipeline' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+          <div className="ds-stack">
             {applications.map((app) => (
               <div
                 key={app.id}
+                className="ds-card ds-stack"
                 style={{
-                  background: 'var(--surface)',
-                  border: `1px solid ${selectedAppId === app.id ? 'var(--color-accent-primary)' : 'var(--color-border-visible)'}`,
-                  borderRadius: 'var(--radius-md)',
-                  padding: 'var(--space-md)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--space-sm)'
+                  borderColor: selectedAppId === app.id ? 'var(--color-accent-primary)' : undefined
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
+                <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
                   <div>
-                    <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+                    <span className="ds-eyebrow" style={{ color: 'var(--color-accent-primary)' }}>
                       {app.company} · {app.remoteType}
                     </span>
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--text)' }}>
+                    <h3 className="ds-h3" style={{ margin: '2px 0 0' }}>
                       {app.role}
                     </h3>
                   </div>
 
-                  <div style={{ display: 'flex', gap: 'var(--space-xs)', alignItems: 'center' }}>
+                  <div className="ds-row" style={{ gap: 'var(--space-xs)', alignItems: 'center' }}>
                     <ContextualAIActionButton
                       label="Resumir vacante"
                       actionType="summarize_vacancy"
@@ -181,25 +159,17 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
 
                 {/* PIPELINE STAGE SELECTOR (ESTADIO DEL PIPELINE) */}
                 <div>
-                  <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+                  <span className="ds-eyebrow" style={{ display: 'block', marginBottom: '4px' }}>
                     ESTADIO DEL PIPELINE (SELECCIONAR PASO ACTIVO):
                   </span>
-                  <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                  <div className="ds-row-wrap" style={{ gap: '4px' }}>
                     {PIPELINE_STAGES.map((stg) => (
                       <button
                         key={stg}
                         type="button"
                         onClick={() => handleStageChange(app.id, stg)}
-                        style={{
-                          background: app.stage === stg ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.05)',
-                          color: app.stage === stg ? '#ffffff' : 'var(--text-secondary)',
-                          border: 'none',
-                          padding: '4px 10px',
-                          borderRadius: '6px',
-                          fontSize: 'var(--font-size-meta)',
-                          fontWeight: app.stage === stg ? 700 : 500,
-                          cursor: 'pointer'
-                        }}
+                        className="ds-chip"
+                        data-active={app.stage === stg}
                       >
                         {stg}
                       </button>
@@ -208,14 +178,14 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                 </div>
 
                 {/* ÚNICA SIGUIENTE ACCIÓN PER DOCUMENTO 06 */}
-                <div style={{ background: 'rgba(255, 255, 255, 0.04)', padding: 'var(--space-sm)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)' }}>
+                <div className="ds-card ds-row-between" style={{ padding: 'var(--space-sm)', flexWrap: 'wrap' }}>
+                  <div className="ds-row" style={{ gap: 'var(--space-xs)' }}>
                     <Calendar size={16} style={{ color: 'var(--color-accent-warning)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
+                    <span className="ds-body">
                       <strong>Única siguiente acción:</strong> {app.singleNextAction}
                     </span>
                   </div>
-                  <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)' }}>
+                  <span className="ds-micro">
                     Fecha seguimiento: {app.followUpDateIso}
                   </span>
                 </div>
@@ -226,31 +196,31 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
 
         {/* VISTA 2: DETALLE & ENCAJE */}
         {activeTab === 'detail' && selectedApp && (
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: 'var(--space-lg)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+          <div className="ds-card ds-stack" style={{ padding: 'var(--space-lg)' }}>
             <div>
-              <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+              <span className="ds-eyebrow" style={{ color: 'var(--color-accent-primary)' }}>
                 ANÁLISIS DE MATCH Y ENCAJE DETALLADO
               </span>
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 800, margin: '4px 0 0', color: 'var(--text)' }}>
+              <h2 className="ds-h2" style={{ margin: '4px 0 0' }}>
                 {selectedApp.company} — {selectedApp.role}
               </h2>
             </div>
 
             {selectedApp.fitMatrix && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
-                  <strong style={{ fontSize: '1.1rem', color: 'var(--color-state-done)' }}>
+              <div className="ds-stack-sm">
+                <div className="ds-row" style={{ gap: 'var(--space-sm)' }}>
+                  <strong className="ds-h3" style={{ color: 'var(--color-state-done)' }}>
                     Match estimado: {selectedApp.fitMatrix.matchPercentage}%
                   </strong>
                 </div>
 
                 <div>
-                  <strong style={{ fontSize: 'var(--font-size-label)', color: 'var(--text)', display: 'block', marginBottom: '4px' }}>
+                  <strong className="ds-label" style={{ display: 'block', marginBottom: '4px' }}>
                     Requisitos que encajan perfectamente:
                   </strong>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  <div className="ds-row-wrap" style={{ gap: '6px' }}>
                     {selectedApp.fitMatrix.matchingSkills.map((sk, i) => (
-                      <span key={i} style={{ background: 'var(--color-accent-primary-soft)', color: 'var(--color-accent-primary)', padding: '2px 8px', borderRadius: '4px', fontSize: 'var(--font-size-meta)', fontWeight: 600 }}>
+                      <span key={i} className="ds-badge ds-badge-accent">
                         ✓ {sk}
                       </span>
                     ))}
@@ -258,12 +228,12 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                 </div>
 
                 <div>
-                  <strong style={{ fontSize: 'var(--font-size-label)', color: 'var(--text)', display: 'block', marginBottom: '4px' }}>
+                  <strong className="ds-label" style={{ display: 'block', marginBottom: '4px' }}>
                     Huecos a mitigar en la postulación:
                   </strong>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  <div className="ds-row-wrap" style={{ gap: '6px' }}>
                     {selectedApp.fitMatrix.gapsToAddress.map((gp, i) => (
-                      <span key={i} style={{ background: 'rgba(255, 149, 0, 0.15)', color: 'var(--color-accent-warning)', padding: '2px 8px', borderRadius: '4px', fontSize: 'var(--font-size-meta)', fontWeight: 600 }}>
+                      <span key={i} className="ds-badge ds-badge-warning">
                         ! {gp}
                       </span>
                     ))}
@@ -276,25 +246,25 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
 
         {/* VISTA 3: ACTIVOS & EVIDENCIAS GITHUB */}
         {activeTab === 'assets' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+          <div className="ds-stack">
+            <h3 className="ds-h3" style={{ margin: 0 }}>
               Activos Aprobados de Portafolio & Versiones
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-md)' }}>
+            <div className="ds-grid">
               {assets.map((ast) => (
-                <div key={ast.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+                <div key={ast.id} className="ds-card ds-stack-sm">
+                  <div className="ds-row-between">
+                    <span className="ds-eyebrow">
                       {ast.category} ({ast.version})
                     </span>
                     {ast.isApproved && <CheckCircle2 size={16} style={{ color: 'var(--color-state-done)' }} />}
                   </div>
-                  <strong style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
+                  <strong className="ds-body" style={{ fontWeight: 600 }}>
                     {ast.title}
                   </strong>
                   {ast.githubRepoUrl && (
-                    <a href={ast.githubRepoUrl} target="_blank" rel="noreferrer" style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', marginTop: '4px' }}>
+                    <a href={ast.githubRepoUrl} target="_blank" rel="noreferrer" className="ds-row ds-caption" style={{ color: 'var(--color-accent-primary)', textDecoration: 'none', marginTop: '4px', gap: '4px' }}>
                       <ExternalLink size={13} /> Ver Evidencia en GitHub
                     </a>
                   )}
@@ -303,12 +273,12 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
             </div>
 
             {/* EVIDENCIA GITHUB */}
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', marginTop: 'var(--space-sm)' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 var(--space-xs)', color: 'var(--text)' }}>
+            <div className="ds-card ds-stack-sm" style={{ marginTop: 'var(--space-sm)' }}>
+              <h4 className="ds-label" style={{ margin: '0 0 var(--space-xs)' }}>
                 Integración de Evidencias de GitHub (Permisos Mínimos)
               </h4>
               {githubEvidence.map((ge, i) => (
-                <div key={i} style={{ fontSize: 'var(--font-size-body)', color: 'var(--text-secondary)' }}>
+                <div key={i} className="ds-body" style={{ color: 'var(--text-secondary)' }}>
                   <strong>{ge.repoName}</strong> — {ge.releaseStatus} ({ge.techStack.join(', ')})
                 </div>
               ))}
@@ -318,36 +288,36 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
 
         {/* VISTA 4: BORRADORES IA CON APROBACIÓN OBLIGATORIA */}
         {activeTab === 'drafts' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-            <div style={{ background: 'var(--color-accent-primary-soft)', padding: 'var(--space-md)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-accent-primary)', display: 'flex', alignItems: 'center', gap: 'var(--space-sm)' }}>
+          <div className="ds-stack">
+            <div className="ds-card ds-row" style={{ background: 'var(--color-accent-primary-soft)', borderColor: 'var(--color-accent-primary)', gap: 'var(--space-sm)' }}>
               <ShieldAlert size={20} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
-              <span style={{ fontSize: 'var(--font-size-body)', color: 'var(--text)', fontWeight: 500 }}>
+              <span className="ds-body" style={{ fontWeight: 500 }}>
                 Los borradores de IA permanecen aislados de las aplicaciones enviadas. Todo contenido requiere tu revisión y aprobación manual antes de utilizarse.
               </span>
             </div>
 
             {aiDrafts.map((dft) => (
-              <div key={dft.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-warning)', fontWeight: 700 }}>
+              <div key={dft.id} className="ds-card ds-stack">
+                <div className="ds-row-between">
+                  <span className="ds-eyebrow" style={{ color: 'var(--color-accent-warning)' }}>
                     BORRADOR ASISTIDO · {dft.company} ({dft.role})
                   </span>
-                  <span style={{ background: 'rgba(255, 149, 0, 0.15)', color: 'var(--color-accent-warning)', padding: '2px 8px', borderRadius: '4px', fontSize: 'var(--font-size-meta)', fontWeight: 700 }}>
+                  <span className="ds-badge ds-badge-warning">
                     Estado: {dft.status}
                   </span>
                 </div>
 
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: 'var(--space-md)', borderRadius: 'var(--radius-sm)', fontSize: 'var(--font-size-body)', color: 'var(--text)', whiteSpace: 'pre-wrap' }}>
+                <div className="ds-card ds-body" style={{ background: 'rgba(0,0,0,0.3)', whiteSpace: 'pre-wrap' }}>
                   {dft.draftText}
                 </div>
 
                 {dft.unverifiedClaimsFlagged.length > 0 && (
-                  <div style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-warning)' }}>
+                  <div className="ds-caption" style={{ color: 'var(--color-accent-warning)' }}>
                     ⚠️ Afirmación no verificada para revisión: {dft.unverifiedClaimsFlagged.join(', ')}
                   </div>
                 )}
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 'var(--space-xs)' }}>
+                <div className="ds-row" style={{ justifyContent: 'flex-end', gap: 'var(--space-xs)' }}>
                   <Button variant="primary" size="sm" onClick={() => alert('Borrador Aprobado')}>
                     <CheckCircle2 size={16} /> Aprobar Borrador
                   </Button>
