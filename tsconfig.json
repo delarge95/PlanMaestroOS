@@ -20,6 +20,8 @@
     "deepseek-harness",
     "_pdf_biblia",
     ".kilo",
-    "public/models/anatomy/draco"
+    "public/models/anatomy/draco",
+    "propuesta-agencia",
+    "verificacion-cotizacion"
   ]
 }

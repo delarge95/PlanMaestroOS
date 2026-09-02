@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Servicios 3D Web para agencias — Alexander Woodcock</title>
+<style>
+  @page { size: 210mm 297mm; margin: 0; }
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, 'Segoe UI', Inter, Roboto, sans-serif; color: #1d1d1f; }
+  .page { width: 210mm; height: 297mm; padding: 10mm 14mm; position: relative; page-break-after: always; background: #ffffff; }
+  .page:last-child { page-break-after: auto; }
+
+  .brand { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0071e3; padding-bottom: 3mm; }
+  .brand h1 { font-size: 19pt; margin: 0; letter-spacing: -0.02em; }
+  .brand .role { font-size: 9pt; color: #6e6e73; margin-top: 1mm; }
+  .brand .wl { display: inline-block; margin-top: 2mm; font-size: 7.5pt; font-weight: 700; color: #0071e3;
+    background: #e8f0fe; border-radius: 999px; padding: 1.2mm 3.5mm; letter-spacing: 0.03em; }
+  .brand .contact { text-align: right; font-size: 8.5pt; color: #6e6e73; line-height: 1.55; }
+  .brand .contact b { color: #1d1d1f; }
+
+  .valueprop { font-size: 9pt; color: #3a3a3c; line-height: 1.45; margin: 2mm 0 2.5mm; }
+  .valueprop b { color: #0071e3; }
+
+  h2 { font-size: 11.5pt; margin: 0 0 2mm; letter-spacing: -0.01em; }
+  h2 span { color: #6e6e73; font-weight: 400; font-size: 8.5pt; }
+  table { width: 100%; border-collapse: collapse; margin: 0 auto; font-size: 7.9pt; }
+  th { text-align: left; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.05em; color: #6e6e73; border-bottom: 1.5px solid #1d1d1f; padding: 1.6mm 1.4mm; }
+  td { padding: 1.3mm 1.3mm; border-bottom: 0.5px solid #d2d2d7; vertical-align: top; line-height: 1.3; }
+  td.svc b { font-size: 8.3pt; display: block; }
+  td.svc i { font-style: normal; font-size: 6.8pt; color: #6e6e73; }
+  .tier { font-size: 7.9pt; color: #1d1d1f; white-space: nowrap; }
+  .tier b { font-weight: 700; }
+  .tier i { font-style: normal; font-size: 7pt; color: #6e6e73; display: block; margin-top: 0.5mm; }
+  .tier i b { color: #0071e3; font-weight: 600; display: inline; }
+  tr.insignia td { background: #f0f6ff; }
+  .tag { display: inline-block; font-size: 7pt; font-weight: 700; color: #0071e3; text-transform: uppercase; letter-spacing: 0.06em; }
+  .leyenda { font-size: 7.3pt; color: #6e6e73; margin-top: 1.5mm; line-height: 1.45; }
+
+  .guia { display: flex; gap: 3mm; margin: 2mm 0 2mm; }
+  .gcard { flex: 1; border-radius: 3mm; padding: 2.5mm 3mm; background: #f5f5f7; }
+  .gcard b { font-size: 8.5pt; color: #1d1d1f; display: block; margin-bottom: 1mm; }
+  .gcard b em { font-style: normal; color: #0071e3; }
+  .gcard span { font-size: 7.2pt; color: #6e6e73; line-height: 1.4; display: block; }
+  .guia-titulo { font-size: 8pt; font-weight: 700; color: #0071e3; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 2mm; }
+
+  .proto { display: flex; align-items: center; gap: 3mm; background: #f5f5f7; border-radius: 4mm; padding: 2mm 4.5mm; margin-top: 2mm; }
+  .proto a { color: #0071e3; font-weight: 700; font-size: 9pt; text-decoration: none; }
+  .proto span { font-size: 8pt; color: #6e6e73; }
+  .proto .lbl { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #0071e3; }
+
+  .descuento { background: #0071e3; color: #ffffff; border-radius: 4mm; padding: 3mm 5mm; font-size: 8.5pt; line-height: 1.45; margin: 0; }
+  .descuento b { font-size: 10.5pt; }
+  .page2 { display: flex; flex-direction: column; padding-bottom: 19mm; }
+  .page2 h2 { margin: 3mm 0 3mm; }
+  .page2 h2:first-of-type { margin-top: 2mm; }
+  .closing { margin-top: auto; flex-shrink: 0; }
+  .closing .cta { margin-top: 4mm; }
+
+  .fases { display: flex; gap: 4mm; margin: 4mm 0 5mm; }
+  .fase { flex: 1; background: #f5f5f7; border-radius: 3mm; padding: 3.6mm 4.5mm; }
+  .fase b { font-size: 8.5pt; color: #0071e3; display: block; margin-bottom: 1.2mm; }
+  .fase span { font-size: 7.5pt; color: #3a3a3c; line-height: 1.5; display: block; }
+  .cols { display: flex; gap: 6mm; margin-top: 4mm; }
+  .col { flex: 1; }
+  .card { background: #f5f5f7; border-radius: 4mm; padding: 4mm 4.5mm; margin-bottom: 4mm; }
+  .card h3 { font-size: 9.5pt; margin: 0 0 2mm; }
+  .card ul { margin: 0; padding-left: 5mm; font-size: 8pt; line-height: 1.5; color: #3a3a3c; }
+  .card p { font-size: 8pt; line-height: 1.65; color: #3a3a3c; margin: 0; }
+  .links a { display: block; text-decoration: none; color: #0071e3; font-weight: 700; font-size: 9pt; padding: 3mm 0; border-bottom: 0.5px solid #d2d2d7; }
+  .links a small { display: block; font-weight: 400; color: #6e6e73; font-size: 7.5pt; margin-top: 0.8mm; }
+  .cta { display: block; text-decoration: none; text-align: center; background: #0071e3; color: #ffffff; border-radius: 999px; padding: 4.5mm; font-size: 10pt; font-weight: 700; margin-top: 0; }
+  .cta small { display: block; font-size: 7.5pt; font-weight: 500; color: #d5e9ff; margin-top: 1mm; }
+  .footer { position: absolute; bottom: 7mm; left: 15mm; right: 15mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: #86868b; border-top: 0.5px solid #d2d2d7; padding-top: 3mm; }
+  a { color: #0071e3; }
+</style>
+</head>
+<body>
+
+<!-- ═══ PÁGINA 1 ═══ -->
+<div class="page">
+  <div class="brand">
+    <div>
+      <h1>Alexander Woodcock</h1>
+      <div class="role">Desarrollo 3D en Tiempo Real | Unity &amp; WebGL</div>
+      <span class="wl">Partner Técnico de Marca Blanca para Agencias Digitales</span>
+    </div>
+    <div class="contact">
+      <b>Propuesta de servicios · 2026</b><br>
+      3d@alexwoodcock.me<br>
+      WhatsApp +57 305 439 6581
+    </div>
+  </div>
+
+  <p class="valueprop"><b>Infraestructura 3D interactiva para la oferta digital de tu agencia.</b> Transformo productos, datos y modelos industriales en experiencias 3D web de alto rendimiento (Three.js, WebGL y Unity) que se ejecutan de forma nativa en cualquier navegador, sin instalación de plugins. <b>Tu agencia lidera la relación comercial; yo respaldo la ejecución técnica</b> — bajo acuerdos de confidencialidad (NDA).</p>
+
+  <h2>Servicios y rangos de precio <span>· COP · por nivel de alcance (entrega en días hábiles)</span></h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:28%">Servicio</th>
+        <th style="width:18%">S · Esencial</th>
+        <th style="width:18%">M · Estándar</th>
+        <th style="width:18%">L · Avanzado</th>
+        <th style="width:18%">XL · Insignia / Enterprise</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="insignia">
+        <td class="svc"><span class="tag">Insignia</span><b>CAD a WebGL Ready</b><i>Conversión y optimización de ensamblajes CAD a mallas PBR ligeras para web, con metadatos por pieza, jerarquías limpias y niveles de detalle (LODs).</i></td>
+        <td class="tier"><b>$400K – $600K</b><i><b>1–3 d</b></i></td>
+        <td class="tier"><b>$430K – $1,8M</b><i><b>2–7 d</b></i></td>
+        <td class="tier"><b>$1,3M – $4,6M</b><i><b>5–17 d</b></i></td>
+        <td class="tier"><b>$3,4M – $12,6M</b><i><b>12–46 d</b></i></td>
+      </tr>
+      <tr>
+        <td class="svc"><b>Visor 3D Custom (Three.js)</b><i>Visor interactivo a medida: órbita, hotspots, interfaz desacoplada y rendimiento garantizado en móviles.</i></td>
+        <td class="tier"><b>$400K – $1,1M</b><i><b>1–4 d</b></i></td>
+        <td class="tier"><b>$800K – $2,3M</b><i><b>3–8 d</b></i></td>
+        <td class="tier"><b>$1,7M – $5M</b><i><b>6–16 d</b></i></td>
+        <td class="tier"><b>$3,5M – $10,3M</b><i><b>11–33 d</b></i></td>
+      </tr>
+      <tr>
+        <td class="svc"><b>Web App 3D / Configurador</b><i>Aplicaciones con estado real: configuradores de producto, cotizadores visuales, exportación de especificaciones y despliegue en producción.</i></td>
+        <td class="tier"><b>$840K – $2,6M</b><i><b>3–9 d</b></i></td>
+        <td class="tier"><b>$1,8M – $6,5M</b><i><b>6–21 d</b></i></td>
+        <td class="tier"><b>$4,6M – $13,9M</b><i><b>15–45 d</b></i></td>
+        <td class="tier"><b>$9,8M – $27,4M</b><i><b>31–88 d</b></i></td>
+      </tr>
+      <tr>
+        <td class="svc"><b>Catálogo 3D Interactivo</b><i>Catálogo navegable multicategoría con visor 3D compartido, filtros dinámicos y fichas técnicas integradas.</i></td>
+        <td class="tier"><b>$720K – $2,4M</b><i><b>3–8 d</b></i></td>
+        <td class="tier"><b>$1,6M – $4,9M</b><i><b>5–16 d</b></i></td>
+        <td class="tier"><b>$3,4M – $9,1M</b><i><b>11–30 d</b></i></td>
+        <td class="tier"><b>$4,1M – $10,6M</b><i><b>13–34 d</b></i></td>
+      </tr>
+      <tr>
+        <td class="svc"><b>Scrollytelling 3D</b><i>Narrativa visual interactiva: escena, iluminación y cámaras sincronizadas con el scroll del usuario.</i></td>
+        <td class="tier"><b>$440K – $1,1M</b><i><b>2–4 d</b></i></td>
+        <td class="tier"><b>$760K – $2M</b><i><b>3–7 d</b></i></td>
+        <td class="tier"><b>$1,2M – $3,5M</b><i><b>4–12 d</b></i></td>
+        <td class="tier"><b>$1,5M – $4,2M</b><i><b>5–14 d</b></i></td>
+      </tr>
+      <tr>
+        <td class="svc"><b>Visor Embebido</b><i>Integración rápida de modelos 3D mediante componentes estándar web (Model-Viewer / Spline).</i></td>
+        <td class="tier"><b>desde $400K</b><i><b>1 d</b></i></td>
+        <td class="tier"><b>$400K – $680K</b><i><b>1–3 d</b></i></td>
+        <td class="tier"><b>$480K – $1,4M</b><i><b>2–5 d</b></i></td>
+        <td class="tier"><b>$560K – $1,65M</b><i><b>2–6 d</b></i></td>
+      </tr>
+      <tr>
+        <td class="svc"><b>Unity WebGL</b><i>Compilación, compresión optimizada (Brotli/Gzip) e integración con tiempos de carga mínimos y control de memoria.</i></td>
+        <td class="tier"><b>$400K – $1M</b><i><b>2–4 d</b></i></td>
+        <td class="tier"><b>$680K – $1,8M</b><i><b>3–6 d</b></i></td>
+        <td class="tier"><b>$1M – $2,7M</b><i><b>4–9 d</b></i></td>
+        <td class="tier"><b>$1,3M – $3,1M</b><i><b>4–10 d</b></i></td>
+      </tr>
+      <tr>
+        <td class="svc"><b>Minijuego Web Promocional</b><i>Experiencias interactivas en navegador para campañas de fidelización, con soporte táctil y alto engagement.</i></td>
+        <td class="tier"><b>$1M – $3,1M</b><i><b>4–10 d</b></i></td>
+        <td class="tier"><b>$2,2M – $6,3M</b><i><b>7–20 d</b></i></td>
+        <td class="tier"><b>$4,1M – $10,9M</b><i><b>13–35 d</b></i></td>
+        <td class="tier"><b>$4,9M – $13,1M</b><i><b>16–42 d</b></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="guia">
+    <div style="width: 100%;">
+      <div class="guia-titulo">Guía rápida de selección de alcance</div>
+      <div class="guia" style="margin: 0;">
+        <div class="gcard"><b><em>S</em> · Esencial</b><span>1 producto estático · Giro 360° · Visor web rápido</span></div>
+        <div class="gcard"><b><em>M</em> · Estándar</b><span>1 producto con variantes · Hotspots informativos · Ficha técnica</span></div>
+        <div class="gcard"><b><em>L</em> · Avanzado</b><span>4–10 piezas modulares · Animación/Despiece · Configurador con exportación</span></div>
+        <div class="gcard"><b><em>XL</em> · Enterprise</b><span>+10 piezas / Escena completa · Lógica a medida · Gemelos digitales y simuladores</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="leyenda">Los rangos presentados son orientativos; el presupuesto final se formaliza tras una sesión de brief técnico de 30 minutos. Si el cliente final suministra archivos industriales, se aplica el servicio CAD a WebGL Ready; el modelado desde cero se cotiza como componente adicional. Se incluyen 2 rondas de ajuste en alcances S y M, y 3 rondas en L y XL (ajustes posteriores: +10%).</p>
+
+  <div class="proto">
+    <span class="lbl">Prototipo en vivo</span>
+    <a href="http://alexwoodcock.me/Twinsight-X500/">Twinsight X500 — dron industrial interactivo →</a>
+    <span>valida la optimización y fluidez móvil</span>
+  </div>
+
+  <div class="footer">
+    <span>Alexander Woodcock · Servicios 3D Web para agencias · marca blanca</span>
+    <span>Página 1 de 2</span>
+  </div>
+</div>
+
+<!-- ═══ PÁGINA 2 ═══ -->
+<div class="page page2">
+  <h2>Metodología de trabajo <span>· de la idea a la entrega</span></h2>
+  <div class="fases">
+    <div class="fase"><b>1 · Alineación Técnica y Brief</b><span>Sesión de 30 minutos para definir requerimientos, referencias y especificaciones funcionales en un documento de alcance cerrado.</span></div>
+    <div class="fase"><b>2 · Desarrollo e Iteración Transparente</b><span>Despliegue en entornos de prueba privados con avances semanales funcionales directamente en el navegador.</span></div>
+    <div class="fase"><b>3 · QA, Optimización y Entrega</b><span>Pruebas de rendimiento en dispositivos móviles reales, optimización de FPS, entrega de manual de despliegue y soporte de integración.</span></div>
+  </div>
+
+  <h2>Condiciones comerciales</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="card">
+        <h3>Condiciones</h3>
+        <ul>
+          <li><b>Esquema de pago:</b> 50% anticipo / 50% contra entrega validada (proyectos &gt; $8M COP por hitos).</li>
+          <li><b>Vigencia de la cotización:</b> 15 días calendario.</li>
+          <li><b>Entrega prioritaria:</b> +30% a +50% según capacidad operativa.</li>
+          <li><b>Modelo marca blanca:</b> tu agencia gestiona y factura al cliente final; el desarrollo se ejecuta bajo estricta confidencialidad.</li>
+          <li><b>Archivos fuente:</b> repositorios y proyectos editables bajo acuerdo (+20% a +40%).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>¿Por qué este partner técnico?</h3>
+        <ul>
+          <li><b>Especialización exclusiva:</b> enfoque 100% dedicado a 3D en tiempo real, shaders y rendimiento web.</li>
+          <li><b>Comunicación técnica directa:</b> coordinación ágil sin intermediarios ni demoras de gestión.</li>
+          <li><b>Garantía de rendimiento:</b> prototipos públicos reproducibles en dispositivos de gama media y móvil.</li>
+          <li><b>Soluciones llave en mano:</b> código documentado, arquitectura modular y soporte técnico para tu equipo.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <h3>Cotizador interactivo para agencias</h3>
+        <p>Calcula rangos de inversión y tiempos de entrega en segundos durante tus reuniones de cualificación técnica con clientes — sin fricción ni registros obligatorios.</p>
+      </div>
+      <div class="links">
+        <a href="http://alexwoodcock.me/Services/cotizador/">Cotizador interactivo en línea<small>alexwoodcock.me/Services/cotizador</small></a>
+        <a href="http://alexwoodcock.me/Twinsight-X500/">Prototipo Twinsight X500<small>demo en vivo: dron industrial interactivo</small></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <div class="descuento"><b>Beneficios de lanzamiento y volumen:</b> −25% en el primer proyecto conjunto · −5% agrupando 2 servicios · −10% en 3 o más (no acumulable con entregas prioritarias).</div>
+    <a class="cta" href="https://wa.me/573054396581">Hablemos por WhatsApp<small>+57 305 439 6581 — respuesta técnica en menos de 24 h</small></a>
+    <p style="font-size: 7.5pt; color: #6e6e73; margin: 4mm auto 0; text-align: center; max-width: 160mm; line-height: 1.5;">Diagnóstico de activos 3D sin costo: envía el archivo (STEP, IGES, FBX) y recibe el alcance exacto de preparación antes de comprometerte.</p>
+  </div>
+
+  <div class="footer">
+    <span>Alexander Woodcock · Desarrollo 3D en Tiempo Real · 3d@alexwoodcock.me · +57 305 439 6581</span>
+    <span>Página 2 de 2</span>
+  </div>
+</div>
+
+</body>
+</html>

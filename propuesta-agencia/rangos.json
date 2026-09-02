@@ -1,0 +1,226 @@
+[
+  {
+    "id": "WEB-01",
+    "nombre": "Visor custom three.js / Babylon.js",
+    "desc": "Visor web a medida con orbita, hotspots, UI y perf mobile.",
+    "entrega": "2–21 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "7.5–20 h",
+        "copMin": 400000,
+        "copMax": 1140000
+      },
+      "M": {
+        "horas": "20–40 h",
+        "copMin": 800000,
+        "copMax": 2280000
+      },
+      "L": {
+        "horas": "42–88 h",
+        "copMin": 1680000,
+        "copMax": 5020000
+      },
+      "XL": {
+        "horas": "88–181 h",
+        "copMin": 3520000,
+        "copMax": 10320000
+      }
+    }
+  },
+  {
+    "id": "WEB-02",
+    "nombre": "Visor embebido (Spline/Sketchfab/model-viewer)",
+    "desc": "Visualizacion via plataforma existente: mas barato y rapido, menos control que visor custom.",
+    "entrega": "1–15 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "2–5 h",
+        "copMin": 400000,
+        "copMax": 290000
+      },
+      "M": {
+        "horas": "5–12 h",
+        "copMin": 400000,
+        "copMax": 680000
+      },
+      "L": {
+        "horas": "12–24 h",
+        "copMin": 480000,
+        "copMax": 1370000
+      },
+      "XL": {
+        "horas": "14–29 h",
+        "copMin": 560000,
+        "copMax": 1650000
+      }
+    }
+  },
+  {
+    "id": "WEB-03",
+    "nombre": "Unity WebGL: build y embedding",
+    "desc": "Proyecto Unity corriendo en web con buen loading y presupuesto de memoria movil.",
+    "entrega": "3–70 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "10–18 h",
+        "copMin": 400000,
+        "copMax": 1030000
+      },
+      "M": {
+        "horas": "17–32 h",
+        "copMin": 680000,
+        "copMax": 1820000
+      },
+      "L": {
+        "horas": "26–47 h",
+        "copMin": 1040000,
+        "copMax": 2680000
+      },
+      "XL": {
+        "horas": "32–55 h",
+        "copMin": 1280000,
+        "copMax": 3140000
+      }
+    }
+  },
+  {
+    "id": "WEB-04",
+    "nombre": "Web App 3D (configurador/herramienta)",
+    "desc": "Aplicacion web con estado real: configuradores, herramientas tecnicas.",
+    "entrega": "7–112 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "21–45 h",
+        "copMin": 840000,
+        "copMax": 2570000
+      },
+      "M": {
+        "horas": "45–114 h",
+        "copMin": 1800000,
+        "copMax": 6500000
+      },
+      "L": {
+        "horas": "114–245 h",
+        "copMin": 4560000,
+        "copMax": 13970000
+      },
+      "XL": {
+        "horas": "245–480 h",
+        "copMin": 9800000,
+        "copMax": 27360000
+      }
+    }
+  },
+  {
+    "id": "WEB-05",
+    "nombre": "Scrollytelling con 3D",
+    "desc": "Narrativa controlada por scroll donde la escena 3D evoluciona (camara, estado, secciones DOM).",
+    "entrega": "4–120 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "11–20 h",
+        "copMin": 440000,
+        "copMax": 1140000
+      },
+      "M": {
+        "horas": "19–35 h",
+        "copMin": 760000,
+        "copMax": 2000000
+      },
+      "L": {
+        "horas": "31–62 h",
+        "copMin": 1240000,
+        "copMax": 3530000
+      },
+      "XL": {
+        "horas": "38–73 h",
+        "copMin": 1520000,
+        "copMax": 4160000
+      }
+    }
+  },
+  {
+    "id": "WEB-06",
+    "nombre": "Minijuego web",
+    "desc": "Juego jugable en navegador (three.js o Unity WebGL), score, estados, controles tactiles.",
+    "entrega": "15–180 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "25–55 h",
+        "copMin": 1000000,
+        "copMax": 3140000
+      },
+      "M": {
+        "horas": "55–110 h",
+        "copMin": 2200000,
+        "copMax": 6270000
+      },
+      "L": {
+        "horas": "102–192 h",
+        "copMin": 4080000,
+        "copMax": 10940000
+      },
+      "XL": {
+        "horas": "123–229 h",
+        "copMin": 4920000,
+        "copMax": 13050000
+      }
+    }
+  },
+  {
+    "id": "WEB-07",
+    "nombre": "Catalogo interactivo 3D",
+    "desc": "Catalogo de productos navegable con visor 3D compartido, filtros y fichas JSON/CMS-lite.",
+    "entrega": "10–160 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "18–42 h",
+        "copMin": 720000,
+        "copMax": 2390000
+      },
+      "M": {
+        "horas": "40–85 h",
+        "copMin": 1600000,
+        "copMax": 4850000
+      },
+      "L": {
+        "horas": "85–160 h",
+        "copMin": 3400000,
+        "copMax": 9120000
+      },
+      "XL": {
+        "horas": "102–186 h",
+        "copMin": 4080000,
+        "copMax": 10600000
+      }
+    }
+  },
+  {
+    "id": "CAD-01",
+    "nombre": "CAD a WebGL ready (servicio insignia)",
+    "desc": "Conversion de ensamblajes CAD a assets web optimizados con metadata por pieza.",
+    "entrega": "1–70 días hábiles",
+    "tiers": {
+      "S": {
+        "horas": "5–12 h",
+        "copMin": 400000,
+        "copMax": 600000
+      },
+      "M": {
+        "horas": "12–35 h",
+        "copMin": 430000,
+        "copMax": 1750000
+      },
+      "L": {
+        "horas": "35–92 h",
+        "copMin": 1270000,
+        "copMax": 4610000
+      },
+      "XL": {
+        "horas": "92–250 h",
+        "copMin": 3350000,
+        "copMax": 12610000
+      }
+    }
+  }
+]

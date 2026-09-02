@@ -1,0 +1,4671 @@
+{
+ "services": [
+  {
+   "id": "RND-01",
+   "nombre": "Render 3D estatico",
+   "familia": "render",
+   "entrega": "1-14",
+   "subtasks": [
+    {
+     "nombre": "Brief + moodboard",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.5,
+       1
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       2
+      ],
+      "L": [
+       1,
+       2
+      ],
+      "XL": [
+       2,
+       3
+      ]
+     }
+    },
+    {
+     "nombre": "Setup escena (camara, luz, HDRI)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.5,
+       1
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       1.5,
+       3
+      ],
+      "L": [
+       2,
+       5
+      ],
+      "XL": [
+       4,
+       8
+      ]
+     }
+    },
+    {
+     "nombre": "Materiales y texturizado",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.5,
+       1.5
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       2,
+       6
+      ],
+      "L": [
+       4,
+       10
+      ],
+      "XL": [
+       8,
+       16
+      ]
+     }
+    },
+    {
+     "nombre": "Render + denoise",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.5,
+       0.5
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       2
+      ],
+      "L": [
+       1.5,
+       4
+      ],
+      "XL": [
+       3,
+       6
+      ]
+     }
+    },
+    {
+     "nombre": "Post-produccion",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.25,
+       0.5
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       2
+      ],
+      "L": [
+       2,
+       4
+      ],
+      "XL": [
+       4,
+       8
+      ]
+     }
+    },
+    {
+     "nombre": "QA + export",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.25,
+       0.5
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       0.5,
+       1
+      ],
+      "L": [
+       0.5,
+       1
+      ],
+      "XL": [
+       1,
+       2
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RND-02",
+   "nombre": "Animacion 3D (render offline)",
+   "familia": "render",
+   "entrega": "3-42",
+   "subtasks": [
+    {
+     "nombre": "Storyboard/previs",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.5,
+       1
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       3,
+       6
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       6,
+       12
+      ]
+     }
+    },
+    {
+     "nombre": "Layout escena y camaras",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.5,
+       1
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       2,
+       4
+      ],
+      "L": [
+       3,
+       6
+      ],
+      "XL": [
+       5,
+       8
+      ]
+     }
+    },
+    {
+     "nombre": "Animacion (camara/objetos)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       1,
+       2
+      ],
+      "S": [
+       4,
+       8
+      ],
+      "M": [
+       8,
+       16
+      ],
+      "L": [
+       12,
+       24
+      ],
+      "XL": [
+       20,
+       40
+      ]
+     }
+    },
+    {
+     "nombre": "Iluminacion + lookdev",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       1,
+       2
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       4,
+       7
+      ],
+      "L": [
+       5,
+       10
+      ],
+      "XL": [
+       8,
+       14
+      ]
+     }
+    },
+    {
+     "nombre": "Renders/passes",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       1,
+       1.5
+      ],
+      "S": [
+       2,
+       3
+      ],
+      "M": [
+       3,
+       5
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       6,
+       12
+      ]
+     }
+    },
+    {
+     "nombre": "Composicion, edit, grade",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       1,
+       1.5
+      ],
+      "S": [
+       2,
+       3
+      ],
+      "M": [
+       3,
+       5
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       6,
+       12
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RTA-01",
+   "nombre": "Asset 3D realtime estatico",
+   "familia": "asset-rt",
+   "entrega": "1-42",
+   "subtasks": [
+    {
+     "nombre": "Intake/QC specs",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       2
+      ],
+      "L": [
+       2,
+       3
+      ],
+      "XL": [
+       3,
+       5
+      ]
+     }
+    },
+    {
+     "nombre": "Modelado hi-low",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       4,
+       10
+      ],
+      "L": [
+       10,
+       25
+      ],
+      "XL": [
+       25,
+       80
+      ]
+     }
+    },
+    {
+     "nombre": "UV unwrap",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       2,
+       4
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       8,
+       16
+      ]
+     }
+    },
+    {
+     "nombre": "Baking de mapas",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       3
+      ],
+      "L": [
+       3,
+       6
+      ],
+      "XL": [
+       6,
+       12
+      ]
+     }
+    },
+    {
+     "nombre": "Texturizado PBR",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       3,
+       6
+      ],
+      "L": [
+       6,
+       14
+      ],
+      "XL": [
+       14,
+       30
+      ]
+     }
+    },
+    {
+     "nombre": "Optimizacion LODs/Draco",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       3
+      ],
+      "L": [
+       3,
+       6
+      ],
+      "XL": [
+       6,
+       12
+      ]
+     }
+    },
+    {
+     "nombre": "QA motor target",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       2
+      ],
+      "L": [
+       2,
+       4
+      ],
+      "XL": [
+       4,
+       8
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RTA-02",
+   "nombre": "Asset RT interactuable (hotspots)",
+   "familia": "asset-rt",
+   "entrega": "2-49",
+   "subtasks": [
+    {
+     "nombre": "Pipeline base (ver RTA-01)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       6,
+       13
+      ],
+      "M": [
+       14,
+       30
+      ],
+      "L": [
+       30,
+       66
+      ],
+      "XL": [
+       66,
+       163
+      ]
+     }
+    },
+    {
+     "nombre": "Interactividad basica",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       4,
+       8
+      ],
+      "L": [
+       8,
+       16
+      ],
+      "XL": [
+       16,
+       32
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "CAD-01",
+   "nombre": "CAD a WebGL ready (servicio insignia)",
+   "familia": "datos",
+   "entrega": "1-70",
+   "subtasks": [
+    {
+     "nombre": "Ingesta CAD/QC",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0.5,
+       1
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       3
+      ],
+      "L": [
+       3,
+       6
+      ],
+      "XL": [
+       6,
+       15
+      ]
+     }
+    },
+    {
+     "nombre": "Decimado/retopo por pieza",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0.75,
+       1.5
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       3,
+       10
+      ],
+      "L": [
+       10,
+       30
+      ],
+      "XL": [
+       30,
+       100
+      ]
+     }
+    },
+    {
+     "nombre": "UVs + baking batch",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0.5,
+       1.25
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       2,
+       6
+      ],
+      "L": [
+       6,
+       15
+      ],
+      "XL": [
+       15,
+       40
+      ]
+     }
+    },
+    {
+     "nombre": "Texturas PBR tecnicos",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0.75,
+       1.5
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       3,
+       8
+      ],
+      "L": [
+       8,
+       20
+      ],
+      "XL": [
+       20,
+       45
+      ]
+     }
+    },
+    {
+     "nombre": "Jerarquia/metadata por pieza",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0.25,
+       0.75
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       3
+      ],
+      "L": [
+       3,
+       8
+      ],
+      "XL": [
+       8,
+       20
+      ]
+     }
+    },
+    {
+     "nombre": "LODs + compresion",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0.25,
+       0.75
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       3
+      ],
+      "L": [
+       3,
+       8
+      ],
+      "XL": [
+       8,
+       18
+      ]
+     }
+    },
+    {
+     "nombre": "QA visor + reporte perf",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0.25,
+       0.75
+      ],
+      "S": [
+       0.5,
+       1
+      ],
+      "M": [
+       1,
+       2
+      ],
+      "L": [
+       2,
+       5
+      ],
+      "XL": [
+       5,
+       12
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-01",
+   "nombre": "Visor custom three.js / Babylon.js",
+   "familia": "web-3d",
+   "entrega": "2-21",
+   "subtasks": [
+    {
+     "nombre": "Spec + pipeline de carga",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2.5,
+       6
+      ],
+      "M": [
+       7,
+       13
+      ],
+      "L": [
+       14,
+       28
+      ],
+      "XL": [
+       28,
+       56
+      ]
+     }
+    },
+    {
+     "nombre": "Interaccion + UI overlay",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       3.5,
+       9
+      ],
+      "M": [
+       9,
+       18
+      ],
+      "L": [
+       18,
+       38
+      ],
+      "XL": [
+       38,
+       76
+      ]
+     }
+    },
+    {
+     "nombre": "Perf movil + QA + entrega",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1.5,
+       5
+      ],
+      "M": [
+       4,
+       9
+      ],
+      "L": [
+       10,
+       22
+      ],
+      "XL": [
+       22,
+       49
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-04",
+   "nombre": "Web App 3D (configurador/herramienta)",
+   "familia": "web-3d",
+   "entrega": "7-112",
+   "subtasks": [
+    {
+     "nombre": "Discovery/spec funcional",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       5,
+       11
+      ],
+      "M": [
+       11,
+       26
+      ],
+      "L": [
+       27,
+       57
+      ],
+      "XL": [
+       57,
+       112
+      ]
+     }
+    },
+    {
+     "nombre": "Arquitectura + escena configurable",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       11,
+       23
+      ],
+      "M": [
+       23,
+       58
+      ],
+      "L": [
+       58,
+       124
+      ],
+      "XL": [
+       124,
+       244
+      ]
+     }
+    },
+    {
+     "nombre": "QA/E2E + perf + deploy",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       5,
+       11
+      ],
+      "M": [
+       11,
+       30
+      ],
+      "L": [
+       29,
+       64
+      ],
+      "XL": [
+       64,
+       124
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "AI-01",
+   "nombre": "Asistente IA en sitio web (chat RAG)",
+   "familia": "ia",
+   "entrega": "3-70",
+   "subtasks": [
+    {
+     "nombre": "Discovery/casos de uso",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       3,
+       5
+      ],
+      "M": [
+       5,
+       8
+      ],
+      "L": [
+       8,
+       14
+      ],
+      "XL": [
+       8,
+       14
+      ]
+     }
+    },
+    {
+     "nombre": "Pipeline ingesta/RAG",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       8,
+       16
+      ],
+      "M": [
+       16,
+       30
+      ],
+      "L": [
+       30,
+       60
+      ],
+      "XL": [
+       30,
+       60
+      ]
+     }
+    },
+    {
+     "nombre": "Prompt engineering + guardrails",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       4,
+       8
+      ],
+      "M": [
+       8,
+       14
+      ],
+      "L": [
+       14,
+       26
+      ],
+      "XL": [
+       14,
+       26
+      ]
+     }
+    },
+    {
+     "nombre": "Widget UI + integracion",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       6,
+       12
+      ],
+      "M": [
+       12,
+       24
+      ],
+      "L": [
+       24,
+       44
+      ],
+      "XL": [
+       24,
+       44
+      ]
+     }
+    },
+    {
+     "nombre": "Evaluacion + casos de prueba",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       4,
+       7
+      ],
+      "M": [
+       7,
+       12
+      ],
+      "L": [
+       12,
+       22
+      ],
+      "XL": [
+       12,
+       22
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "CON-01",
+   "nombre": "Consultoria tecnica 3D / web",
+   "familia": "soporte",
+   "entrega": "2-10",
+   "subtasks": [
+    {
+     "nombre": "Intake/analisis/SOW",
+     "clase": "RC-CON",
+     "horas": {
+      "XS": [
+       2,
+       4.5
+      ],
+      "S": [
+       2.5,
+       6
+      ],
+      "M": [
+       6,
+       12
+      ],
+      "L": [
+       12,
+       24
+      ],
+      "XL": [
+       12,
+       24
+      ]
+     }
+    },
+    {
+     "nombre": "Presentacion y revision",
+     "clase": "RC-CON",
+     "horas": {
+      "XS": [
+       0.5,
+       1.5
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       2,
+       4
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       4,
+       8
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RET-01",
+   "nombre": "Retainer mensual",
+   "familia": "soporte",
+   "entrega": "0-0",
+   "subtasks": [
+    {
+     "nombre": "Lite: 4h/mes",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       4,
+       4
+      ],
+      "S": [
+       4,
+       4
+      ],
+      "M": [
+       4,
+       4
+      ],
+      "L": [
+       4,
+       4
+      ],
+      "XL": [
+       4,
+       4
+      ]
+     }
+    },
+    {
+     "nombre": "Standard: 8h/mes",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       8,
+       8
+      ],
+      "S": [
+       8,
+       8
+      ],
+      "M": [
+       8,
+       8
+      ],
+      "L": [
+       8,
+       8
+      ],
+      "XL": [
+       8,
+       8
+      ]
+     }
+    },
+    {
+     "nombre": "Pro: 16h/mes",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       16,
+       16
+      ],
+      "S": [
+       16,
+       16
+      ],
+      "M": [
+       16,
+       16
+      ],
+      "L": [
+       16,
+       16
+      ],
+      "XL": [
+       16,
+       16
+      ]
+     }
+    },
+    {
+     "nombre": "Business: 40h/mes",
+     "clase": "RC-CON",
+     "horas": {
+      "XS": [
+       40,
+       40
+      ],
+      "S": [
+       40,
+       40
+      ],
+      "M": [
+       40,
+       40
+      ],
+      "L": [
+       40,
+       40
+      ],
+      "XL": [
+       40,
+       40
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RTA-03",
+   "nombre": "Modelo animado no interactuable",
+   "familia": "asset-rt",
+   "entrega": "3-60",
+   "subtasks": [
+    {
+     "nombre": "Pipeline base RTA-01",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       6,
+       13
+      ],
+      "M": [
+       14,
+       30
+      ],
+      "L": [
+       30,
+       66
+      ],
+      "XL": [
+       45,
+       99
+      ]
+     }
+    },
+    {
+     "nombre": "Setup animacion mecanica (pivots/jerarquia)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       2,
+       5
+      ],
+      "L": [
+       3,
+       7
+      ],
+      "XL": [
+       4,
+       9
+      ]
+     }
+    },
+    {
+     "nombre": "Clips de animacion (loop -> secuencias)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       5
+      ],
+      "M": [
+       2,
+       7
+      ],
+      "L": [
+       5,
+       13
+      ],
+      "XL": [
+       6,
+       16
+      ]
+     }
+    },
+    {
+     "nombre": "Timeline autoplay + optimizacion clips",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       1,
+       2
+      ],
+      "L": [
+       1,
+       2
+      ],
+      "XL": [
+       1,
+       2
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RTA-04",
+   "nombre": "Modelo animado interactuable",
+   "familia": "asset-rt",
+   "entrega": "5-80",
+   "subtasks": [
+    {
+     "nombre": "Pipeline base RTA-03",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       8,
+       23
+      ],
+      "M": [
+       17,
+       44
+      ],
+      "L": [
+       39,
+       88
+      ],
+      "XL": [
+       55,
+       123
+      ]
+     }
+    },
+    {
+     "nombre": "UI de controles (play/pausa/velocidad)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       2,
+       5
+      ],
+      "L": [
+       3,
+       6
+      ],
+      "XL": [
+       4,
+       8
+      ]
+     }
+    },
+    {
+     "nombre": "Estado + triggers por interaccion",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       3,
+       6
+      ],
+      "M": [
+       4,
+       10
+      ],
+      "L": [
+       6,
+       20
+      ],
+      "XL": [
+       8,
+       25
+      ]
+     }
+    },
+    {
+     "nombre": "QA de estados y combinaciones",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       2,
+       4
+      ],
+      "L": [
+       3,
+       8
+      ],
+      "XL": [
+       4,
+       10
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RTA-05",
+   "nombre": "Shaders estilizados",
+   "familia": "asset-rt",
+   "entrega": "1-30",
+   "subtasks": [
+    {
+     "nombre": "Shader basico (fresnel/emissive/gradiente)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Shader medio (disolucion/holograma/toon rampas)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       4,
+       8
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Pipeline estilizado (outline pass + lighting custom)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       8,
+       16
+      ],
+      "XL": [
+       10,
+       20
+      ]
+     }
+    },
+    {
+     "nombre": "Integracion + tuning por batch",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       6
+      ],
+      "M": [
+       2,
+       6
+      ],
+      "L": [
+       2,
+       6
+      ],
+      "XL": [
+       2,
+       6
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "RTA-06",
+   "nombre": "Mecanicas sobre asset realtime",
+   "familia": "asset-rt",
+   "entrega": "2-40",
+   "subtasks": [
+    {
+     "nombre": "Mecanica S (explosion <=10 pzs / config <=5 opciones / cutaway simple)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       3,
+       9
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Mecanica M (11-40 pzs etiquetas / config 6-15 opciones)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       7,
+       20
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Mecanica L (multi-nivel / multi-eje + share URL)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       18,
+       40
+      ],
+      "XL": [
+       22,
+       50
+      ]
+     }
+    },
+    {
+     "nombre": "Mediciones/cotas en escena (opcional)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       2,
+       5
+      ],
+      "L": [
+       3,
+       7
+      ],
+      "XL": [
+       4,
+       8
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-02",
+   "nombre": "Visor embebido (Spline/Sketchfab/model-viewer)",
+   "familia": "web-3d",
+   "entrega": "1-15",
+   "subtasks": [
+    {
+     "nombre": "Adaptar asset + embed responsive",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       5
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Skin/loading custom + API + analytics",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       5,
+       12
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Multi-escena + contenido via JSON editable",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       12,
+       24
+      ],
+      "XL": [
+       14,
+       29
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-03",
+   "nombre": "Unity WebGL: build y embedding",
+   "familia": "web-3d",
+   "entrega": "3-70",
+   "subtasks": [
+    {
+     "nombre": "Build + compresion + template loading",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       4,
+       6
+      ],
+      "M": [
+       4,
+       7
+      ],
+      "L": [
+       6,
+       10
+      ],
+      "XL": [
+       7,
+       12
+      ]
+     }
+    },
+    {
+     "nombre": "Embed responsive + integracion al sitio",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       3,
+       6
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       5,
+       9
+      ]
+     }
+    },
+    {
+     "nombre": "Puente JS <-> Unity bidireccional",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       4,
+       8
+      ],
+      "L": [
+       8,
+       14
+      ],
+      "XL": [
+       10,
+       17
+      ]
+     }
+    },
+    {
+     "nombre": "Presupuesto memoria/perf movil",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       3,
+       5
+      ],
+      "L": [
+       4,
+       7
+      ],
+      "XL": [
+       5,
+       8
+      ]
+     }
+    },
+    {
+     "nombre": "QA navegadores (iOS Safari incluido)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       3,
+       6
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       5,
+       9
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-05",
+   "nombre": "Scrollytelling con 3D",
+   "familia": "web-3d",
+   "entrega": "4-120",
+   "subtasks": [
+    {
+     "nombre": "Storyboard tecnico + wireframe scroll",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       3
+      ],
+      "M": [
+       3,
+       5
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       5,
+       9
+      ]
+     }
+    },
+    {
+     "nombre": "Timeline scroll-driven (camara/estado)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       5,
+       8
+      ],
+      "M": [
+       8,
+       15
+      ],
+      "L": [
+       15,
+       30
+      ],
+      "XL": [
+       18,
+       36
+      ]
+     }
+    },
+    {
+     "nombre": "Sincronizacion copy/secciones DOM",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       4
+      ],
+      "M": [
+       3,
+       5
+      ],
+      "L": [
+       4,
+       8
+      ],
+      "XL": [
+       5,
+       9
+      ]
+     }
+    },
+    {
+     "nombre": "Perf movil + fallbacks estaticos",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       3,
+       6
+      ],
+      "L": [
+       5,
+       10
+      ],
+      "XL": [
+       6,
+       12
+      ]
+     }
+    },
+    {
+     "nombre": "QA dispositivos",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       2,
+       4
+      ],
+      "L": [
+       3,
+       6
+      ],
+      "XL": [
+       4,
+       7
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-06",
+   "nombre": "Minijuego web",
+   "familia": "web-3d",
+   "entrega": "15-180",
+   "subtasks": [
+    {
+     "nombre": "Mini-GDD + prototipo mecanica",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       5,
+       10
+      ],
+      "M": [
+       8,
+       16
+      ],
+      "L": [
+       12,
+       24
+      ],
+      "XL": [
+       14,
+       28
+      ]
+     }
+    },
+    {
+     "nombre": "Implementacion gameplay + niveles",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       15,
+       35
+      ],
+      "M": [
+       35,
+       70
+      ],
+      "L": [
+       70,
+       130
+      ],
+      "XL": [
+       85,
+       156
+      ]
+     }
+    },
+    {
+     "nombre": "Game-feel, estados, pantalla inicio/fin",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       4,
+       8
+      ],
+      "M": [
+       8,
+       16
+      ],
+      "L": [
+       14,
+       26
+      ],
+      "XL": [
+       17,
+       31
+      ]
+     }
+    },
+    {
+     "nombre": "QA dispositivos + controles tactiles",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       4,
+       8
+      ],
+      "L": [
+       6,
+       12
+      ],
+      "XL": [
+       7,
+       14
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-07",
+   "nombre": "Catalogo interactivo 3D",
+   "familia": "web-3d",
+   "entrega": "10-160",
+   "subtasks": [
+    {
+     "nombre": "Visor 3D compartido + pipeline carga",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       8,
+       18
+      ],
+      "M": [
+       14,
+       32
+      ],
+      "L": [
+       24,
+       50
+      ],
+      "XL": [
+       28,
+       58
+      ]
+     }
+    },
+    {
+     "nombre": "Fichas + plantillas producto",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       6,
+       14
+      ],
+      "M": [
+       12,
+       26
+      ],
+      "L": [
+       24,
+       48
+      ],
+      "XL": [
+       29,
+       56
+      ]
+     }
+    },
+    {
+     "nombre": "Filtros/busqueda/variantes SKU",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       3,
+       8
+      ],
+      "M": [
+       10,
+       20
+      ],
+      "L": [
+       24,
+       44
+      ],
+      "XL": [
+       29,
+       51
+      ]
+     }
+    },
+    {
+     "nombre": "Gestion datos JSON/CMS-lite",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       4,
+       7
+      ],
+      "L": [
+       13,
+       18
+      ],
+      "XL": [
+       16,
+       21
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "WEB-08",
+   "nombre": "Presentacion web interactiva",
+   "familia": "web-3d",
+   "entrega": "3-60",
+   "subtasks": [
+    {
+     "nombre": "Slides + plantilla visual",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       6,
+       12
+      ],
+      "M": [
+       10,
+       20
+      ],
+      "L": [
+       16,
+       30
+      ],
+      "XL": [
+       19,
+       35
+      ]
+     }
+    },
+    {
+     "nombre": "Navegacion (lineal/no lineal) + media",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       4
+      ],
+      "M": [
+       5,
+       9
+      ],
+      "L": [
+       10,
+       18
+      ],
+      "XL": [
+       12,
+       21
+      ]
+     }
+    },
+    {
+     "nombre": "Datos vivos/filtros tiempo real (L+)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       9,
+       12
+      ],
+      "XL": [
+       11,
+       14
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "AI-02",
+   "nombre": "IA indirecta en producto web",
+   "familia": "ia",
+   "entrega": "5-140",
+   "subtasks": [
+    {
+     "nombre": "Feature IA base (busqueda semantica/recomendador)",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       10,
+       24
+      ],
+      "M": [
+       10,
+       24
+      ],
+      "L": [
+       10,
+       24
+      ],
+      "XL": [
+       10,
+       24
+      ]
+     }
+    },
+    {
+     "nombre": "Features adicionales integradas",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       12,
+       30
+      ],
+      "L": [
+       24,
+       60
+      ],
+      "XL": [
+       30,
+       72
+      ]
+     }
+    },
+    {
+     "nombre": "Panel de control ligero",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       8,
+       16
+      ],
+      "XL": [
+       10,
+       19
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "AI-03",
+   "nombre": "Automatizacion interna con LLM",
+   "familia": "ia",
+   "entrega": "10-170",
+   "subtasks": [
+    {
+     "nombre": "Discovery fijo del proceso",
+     "clase": "RC-CON",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       4,
+       8
+      ],
+      "M": [
+       4,
+       8
+      ],
+      "L": [
+       8,
+       16
+      ],
+      "XL": [
+       9,
+       18
+      ]
+     }
+    },
+    {
+     "nombre": "Implementacion workflow(s)",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       20,
+       45
+      ],
+      "M": [
+       45,
+       85
+      ],
+      "L": [
+       85,
+       150
+      ],
+      "XL": [
+       100,
+       170
+      ]
+     }
+    },
+    {
+     "nombre": "Pruebas con datos reales + capacitacion",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       3,
+       6
+      ],
+      "M": [
+       5,
+       10
+      ],
+      "L": [
+       8,
+       14
+      ],
+      "XL": [
+       9,
+       16
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "AI-04",
+   "nombre": "Consultoria y auditoria de IA",
+   "familia": "ia",
+   "entrega": "5-40",
+   "subtasks": [
+    {
+     "nombre": "Auditoria express (1 proceso/departamento)",
+     "clase": "RC-CON",
+     "horas": {
+      "XS": [
+       8,
+       16
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Auditoria empresa/agencia pequena completa",
+     "clase": "RC-CON",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       16,
+       32
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Roadmap + piloto implementado",
+     "clase": "RC-CON",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       24,
+       48
+      ],
+      "L": [
+       29,
+       57
+      ],
+      "XL": [
+       34,
+       68
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "VFX-01",
+   "nombre": "Modelo 3D integrado en foto/video real",
+   "familia": "vfx",
+   "entrega": "2-53",
+   "subtasks": [
+    {
+     "nombre": "Analisis de escena (perspectiva/luz/optica)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2
+      ],
+      "M": [
+       1.5,
+       3
+      ],
+      "L": [
+       2,
+       4
+      ],
+      "XL": [
+       2.5,
+       5
+      ]
+     }
+    },
+    {
+     "nombre": "Tracking de camara/matchmove",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       3,
+       6
+      ],
+      "L": [
+       7,
+       14
+      ],
+      "XL": [
+       8,
+       16
+      ]
+     }
+    },
+    {
+     "nombre": "Geometria proxy/planos segun escena",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       2.5
+      ],
+      "M": [
+       2,
+       5
+      ],
+      "L": [
+       4,
+       9
+      ],
+      "XL": [
+       5,
+       10
+      ]
+     }
+    },
+    {
+     "nombre": "Match iluminacion + sombras/reflejos",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1.5,
+       3.5
+      ],
+      "M": [
+       3,
+       6
+      ],
+      "L": [
+       5,
+       11
+      ],
+      "XL": [
+       6,
+       13
+      ]
+     }
+    },
+    {
+     "nombre": "Render elemento 3D + passes",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0.5,
+       1.5
+      ],
+      "M": [
+       1.5,
+       4
+      ],
+      "L": [
+       3,
+       8
+      ],
+      "XL": [
+       4,
+       9
+      ]
+     }
+    },
+    {
+     "nombre": "Compositing (grain/color match/motion blur)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       3
+      ],
+      "M": [
+       2,
+       4
+      ],
+      "L": [
+       3,
+       7
+      ],
+      "XL": [
+       4,
+       8
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "VFX-02",
+   "nombre": "FX puro (simulaciones video)",
+   "familia": "vfx",
+   "entrega": "1-90",
+   "subtasks": [
+    {
+     "nombre": "FX basico (chispas/polvo/humo ligero)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       6,
+       14
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "FX medio (humo denso/liquido simple/telas)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       14,
+       35
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "FX pesado (fluido hero/destruccion estructural)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       35,
+       80
+      ],
+      "L": [
+       42,
+       96
+      ],
+      "XL": [
+       50,
+       112
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "VFX-03",
+   "nombre": "Motion graphics 3D",
+   "familia": "vfx",
+   "entrega": "2-40",
+   "subtasks": [
+    {
+     "nombre": "Logo reveal (<=5s, 1 estilo)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       4,
+       8
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Set editorial (lowers/transitions/bumpers)",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       8,
+       16
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Branding animado completo + plantilla",
+     "clase": "RC-ART",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       18,
+       40
+      ],
+      "XL": [
+       22,
+       48
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "TEX-01",
+   "nombre": "Generacion de texturas y mapas",
+   "familia": "texturas",
+   "entrega": "1-45",
+   "subtasks": [
+    {
+     "nombre": "Set tileable S (material limpio simple)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       2,
+       5
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Set tileable M (variaciones/desgaste moderado)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       5,
+       10
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Set procedural parametrico (exposables en motor)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       10,
+       20
+      ],
+      "XL": [
+       12,
+       24
+      ]
+     }
+    },
+    {
+     "nombre": "Texturizado asset completo (segun n materiales)",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       3,
+       8
+      ],
+      "M": [
+       8,
+       20
+      ],
+      "L": [
+       20,
+       45
+      ],
+      "XL": [
+       24,
+       54
+      ]
+     }
+    },
+    {
+     "nombre": "Baking standalone high->low",
+     "clase": "RC-RTA",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       1,
+       4
+      ],
+      "M": [
+       1,
+       4
+      ],
+      "L": [
+       1,
+       4
+      ],
+      "XL": [
+       1,
+       4
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "PIPE-01",
+   "nombre": "Automatizacion de pipeline/scripts/tools",
+   "familia": "pipeline",
+   "entrega": "1-80",
+   "subtasks": [
+    {
+     "nombre": "Script utilitario CLI (batch export/rename/conversion)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       4,
+       12
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Tool con UI (panel/presets/validaciones)",
+     "clase": "RC-WEB",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       12,
+       30
+      ],
+      "L": [
+       0,
+       0
+      ],
+      "XL": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "nombre": "Pipeline completo end-to-end documentado + QA auto",
+     "clase": "RC-AI",
+     "horas": {
+      "XS": [
+       0,
+       0
+      ],
+      "S": [
+       0,
+       0
+      ],
+      "M": [
+       0,
+       0
+      ],
+      "L": [
+       30,
+       80
+      ],
+      "XL": [
+       36,
+       96
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "vars": [
+  {
+   "servicio": "RND-01",
+   "id": "numImagenes",
+   "pregunta": "¿Cuántas imágenes necesitas?",
+   "tipo": "number",
+   "min": 1,
+   "max": 20,
+   "step": 1,
+   "unidad": "imágenes",
+   "tierMap": [
+    {
+     "maxVal": 2,
+     "tier": "S"
+    },
+    {
+     "maxVal": 5,
+     "tier": "M"
+    },
+    {
+     "maxVal": 12,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RND-01",
+   "id": "numMateriales",
+   "pregunta": "¿Cuántos materiales diferentes tiene el producto?",
+   "tipo": "number",
+   "min": 1,
+   "max": 20,
+   "step": 1,
+   "unidad": "materiales",
+   "tierMap": [
+    {
+     "maxVal": 3,
+     "tier": "S"
+    },
+    {
+     "maxVal": 6,
+     "tier": "M"
+    },
+    {
+     "maxVal": 99,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RND-01",
+   "id": "setDressing",
+   "pregunta": "¿Necesitas set dressing (props, ambiente)?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "RND-01",
+   "id": "modeloAportado",
+   "pregunta": "¿Tienes el modelo 3D ya hecho?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "RND-01",
+   "id": "resolucion",
+   "pregunta": "¿Qué resolución necesitas?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Web (≤2K)",
+     "tier": "S"
+    },
+    {
+     "valor": "Print (4K+)",
+     "tier": "M"
+    }
+   ]
+  },
+  {
+   "servicio": "RND-02",
+   "id": "duracion",
+   "pregunta": "¿De cuántos segundos necesita el video?",
+   "tipo": "number",
+   "min": 2,
+   "max": 90,
+   "step": 1,
+   "unidad": "segundos",
+   "tierMap": [
+    {
+     "maxVal": 10,
+     "tier": "S"
+    },
+    {
+     "maxVal": 30,
+     "tier": "M"
+    },
+    {
+     "maxVal": 90,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RND-02",
+   "id": "numShots",
+   "pregunta": "¿Cuántos shots o cortes?",
+   "tipo": "number",
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "unidad": "shots",
+   "tierMap": [
+    {
+     "maxVal": 2,
+     "tier": "S"
+    },
+    {
+     "maxVal": 4,
+     "tier": "M"
+    },
+    {
+     "maxVal": 12,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RND-02",
+   "id": "simulaciones",
+   "pregunta": "¿Incluye simulaciones (partículas, fluidos)?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "RND-02",
+   "id": "audioSync",
+   "pregunta": "¿Sincronización con audio?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-01",
+   "id": "polyCount",
+   "pregunta": "¿Qué presupuesto de polígonos necesita?",
+   "tipo": "number",
+   "min": 500,
+   "max": 500000,
+   "step": 500,
+   "unidad": "tris",
+   "tierMap": [
+    {
+     "maxVal": 10000,
+     "tier": "S"
+    },
+    {
+     "maxVal": 50000,
+     "tier": "M"
+    },
+    {
+     "maxVal": 150000,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-01",
+   "id": "numPiezas",
+   "pregunta": "¿Cuántas piezas tiene el modelo?",
+   "tipo": "number",
+   "min": 1,
+   "max": 200,
+   "step": 1,
+   "unidad": "piezas",
+   "tierMap": [
+    {
+     "maxVal": 8,
+     "tier": "S"
+    },
+    {
+     "maxVal": 30,
+     "tier": "M"
+    },
+    {
+     "maxVal": 100,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-01",
+   "id": "tipoSuperficie",
+   "pregunta": "¿Cómo es la superficie del producto?",
+   "tipo": "number",
+   "min": 1,
+   "max": 5,
+   "step": 1,
+   "unidad": "superficie",
+   "tierMap": [
+    {
+     "maxVal": 2,
+     "tier": "S"
+    },
+    {
+     "maxVal": 3,
+     "tier": "M"
+    },
+    {
+     "maxVal": 4,
+     "tier": "L"
+    },
+    {
+     "maxVal": 5,
+     "tier": "XL"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-01",
+   "id": "fuente",
+   "pregunta": "¿De dónde viene el modelo?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Ya tengo el modelo 3D",
+     "tier": "S"
+    },
+    {
+     "valor": "Desde CAD (requiere conversión)",
+     "tier": "M"
+    },
+    {
+     "valor": "Desde fotos (requiere modelado)",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "RTA-01",
+   "id": "numTexturas",
+   "pregunta": "¿Cuántos sets de texturas PBR?",
+   "tipo": "number",
+   "min": 1,
+   "max": 10,
+   "step": 1,
+   "unidad": "sets",
+   "tierMap": [
+    {
+     "maxVal": 2,
+     "tier": "S"
+    },
+    {
+     "maxVal": 4,
+     "tier": "M"
+    },
+    {
+     "maxVal": 10,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-02",
+   "id": "polyCount",
+   "pregunta": "¿Qué presupuesto de polígonos?",
+   "tipo": "number",
+   "min": 500,
+   "max": 500000,
+   "step": 500,
+   "unidad": "tris",
+   "tierMap": [
+    {
+     "maxVal": 10000,
+     "tier": "S"
+    },
+    {
+     "maxVal": 50000,
+     "tier": "M"
+    },
+    {
+     "maxVal": 150000,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-02",
+   "id": "numHotspots",
+   "pregunta": "¿Cuántos hotspots o partes seleccionables?",
+   "tipo": "number",
+   "min": 1,
+   "max": 30,
+   "step": 1,
+   "unidad": "hotspots",
+   "tierMap": [
+    {
+     "maxVal": 5,
+     "tier": "S"
+    },
+    {
+     "maxVal": 15,
+     "tier": "M"
+    },
+    {
+     "maxVal": 30,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-03",
+   "id": "polyCount",
+   "pregunta": "¿Qué presupuesto de polígonos?",
+   "tipo": "number",
+   "min": 500,
+   "max": 500000,
+   "step": 500,
+   "unidad": "tris",
+   "tierMap": [
+    {
+     "maxVal": 10000,
+     "tier": "S"
+    },
+    {
+     "maxVal": 50000,
+     "tier": "M"
+    },
+    {
+     "maxVal": 150000,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-03",
+   "id": "numLoops",
+   "pregunta": "¿Cuántos clips de animación loop?",
+   "tipo": "number",
+   "min": 1,
+   "max": 10,
+   "step": 1,
+   "unidad": "clips",
+   "tierMap": [
+    {
+     "maxVal": 2,
+     "tier": "S"
+    },
+    {
+     "maxVal": 5,
+     "tier": "M"
+    },
+    {
+     "maxVal": 10,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-03",
+   "id": "rig",
+   "pregunta": "¿Necesita rig (esqueleto para animar)?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-04",
+   "id": "polyCount",
+   "pregunta": "¿Qué presupuesto de polígonos?",
+   "tipo": "number",
+   "min": 500,
+   "max": 500000,
+   "step": 500,
+   "unidad": "tris",
+   "tierMap": [
+    {
+     "maxVal": 10000,
+     "tier": "S"
+    },
+    {
+     "maxVal": 50000,
+     "tier": "M"
+    },
+    {
+     "maxVal": 150000,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-04",
+   "id": "numEstados",
+   "pregunta": "¿Cuántos estados o animaciones interactivas?",
+   "tipo": "number",
+   "min": 2,
+   "max": 20,
+   "step": 1,
+   "unidad": "estados",
+   "tierMap": [
+    {
+     "maxVal": 5,
+     "tier": "S"
+    },
+    {
+     "maxVal": 12,
+     "tier": "M"
+    },
+    {
+     "maxVal": 20,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-04",
+   "id": "rig",
+   "pregunta": "¿Necesita rig?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-05",
+   "id": "numShaders",
+   "pregunta": "¿Cuántos shaders o efectos necesitas?",
+   "tipo": "number",
+   "min": 1,
+   "max": 15,
+   "step": 1,
+   "unidad": "shaders",
+   "tierMap": [
+    {
+     "maxVal": 3,
+     "tier": "S"
+    },
+    {
+     "maxVal": 8,
+     "tier": "M"
+    },
+    {
+     "maxVal": 15,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-05",
+   "id": "target",
+   "pregunta": "¿Dónde va a correr?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Desktop",
+     "tier": "S"
+    },
+    {
+     "valor": "Desktop + móvil",
+     "tier": "M"
+    }
+   ]
+  },
+  {
+   "servicio": "RTA-06",
+   "id": "numPartes",
+   "pregunta": "¿Cuántas partes móviles tiene el despiece?",
+   "tipo": "number",
+   "min": 2,
+   "max": 100,
+   "step": 1,
+   "unidad": "partes",
+   "tierMap": [
+    {
+     "maxVal": 10,
+     "tier": "S"
+    },
+    {
+     "maxVal": 40,
+     "tier": "M"
+    },
+    {
+     "maxVal": 100,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RTA-06",
+   "id": "profundidad",
+   "pregunta": "¿Qué tan detallado debe ser el despiece?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Explosión simple (una etapa)",
+     "tier": "S"
+    },
+    {
+     "valor": "Múltiples etapas con etiquetas",
+     "tier": "M"
+    },
+    {
+     "valor": "Completo con cotas y medición",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "WEB-01",
+   "id": "numHotspots",
+   "pregunta": "¿Cuántas partes del modelo llevarán punto de información?",
+   "tipo": "number",
+   "min": 0,
+   "max": 30,
+   "step": 1,
+   "unidad": "puntos",
+   "tierMap": [
+    {
+     "maxVal": 5,
+     "tier": "S"
+    },
+    {
+     "maxVal": 15,
+     "tier": "M"
+    },
+    {
+     "maxVal": 30,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-01",
+   "id": "datos",
+   "pregunta": "¿Los datos vienen de un CMS/API o son fijos?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Fijos (hardcode)",
+     "tier": "S"
+    },
+    {
+     "valor": "Dinámicos (CMS/API)",
+     "tier": "M"
+    }
+   ]
+  },
+  {
+   "servicio": "WEB-01",
+   "id": "target",
+   "pregunta": "¿Dónde va a correr?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Desktop",
+     "tier": "S"
+    },
+    {
+     "valor": "Desktop + móvil",
+     "tier": "M"
+    }
+   ]
+  },
+  {
+   "servicio": "WEB-02",
+   "id": "numEscenas",
+   "pregunta": "¿Cuántas escenas necesitas embeber?",
+   "tipo": "number",
+   "min": 1,
+   "max": 10,
+   "step": 1,
+   "unidad": "escenas",
+   "tierMap": [
+    {
+     "maxVal": 2,
+     "tier": "S"
+    },
+    {
+     "maxVal": 5,
+     "tier": "M"
+    },
+    {
+     "maxVal": 10,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-03",
+   "id": "tamanoProyecto",
+   "pregunta": "¿Qué tan grande es el proyecto Unity?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Pequeño (demo/prototype)",
+     "tier": "S"
+    },
+    {
+     "valor": "Medio (producto funcional)",
+     "tier": "M"
+    },
+    {
+     "valor": "Grande (app completa)",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "WEB-03",
+   "id": "bridge",
+   "pregunta": "¿Necesitas comunicación JS↔Unity?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-04",
+   "id": "numVariantes",
+   "pregunta": "¿Cuántas variantes o reglas de configuración?",
+   "tipo": "number",
+   "min": 2,
+   "max": 50,
+   "step": 1,
+   "unidad": "variantes",
+   "tierMap": [
+    {
+     "maxVal": 10,
+     "tier": "S"
+    },
+    {
+     "maxVal": 25,
+     "tier": "M"
+    },
+    {
+     "maxVal": 50,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-04",
+   "id": "numSKUs",
+   "pregunta": "¿Para cuántos productos distintos servirá?",
+   "tipo": "number",
+   "min": 1,
+   "max": 100,
+   "step": 1,
+   "unidad": "SKUs",
+   "tierMap": [
+    {
+     "maxVal": 5,
+     "tier": "S"
+    },
+    {
+     "maxVal": 20,
+     "tier": "M"
+    },
+    {
+     "maxVal": 100,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-04",
+   "id": "fuenteDatos",
+   "pregunta": "¿De dónde vienen los datos?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Estáticos (JSON local)",
+     "tier": "S"
+    },
+    {
+     "valor": "CMS",
+     "tier": "M"
+    },
+    {
+     "valor": "API externa",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "WEB-04",
+   "id": "auth",
+   "pregunta": "¿Necesita login/autenticación?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-05",
+   "id": "numSecciones",
+   "pregunta": "¿Cuántas paradas de scroll tendrá la historia?",
+   "tipo": "number",
+   "min": 2,
+   "max": 15,
+   "step": 1,
+   "unidad": "secciones",
+   "tierMap": [
+    {
+     "maxVal": 4,
+     "tier": "S"
+    },
+    {
+     "maxVal": 8,
+     "tier": "M"
+    },
+    {
+     "maxVal": 15,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-06",
+   "id": "mecanica",
+   "pregunta": "¿Qué tipo de mecánica?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Simple (quiz, memory, puzzle)",
+     "tier": "S"
+    },
+    {
+     "valor": "Media (runner, plataforma)",
+     "tier": "M"
+    },
+    {
+     "valor": "Compleja (multiplayer, física)",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "WEB-06",
+   "id": "scores",
+   "pregunta": "¿Necesita leaderboard/scores?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-07",
+   "id": "numProductos",
+   "pregunta": "¿Cuántos productos en el catálogo?",
+   "tipo": "number",
+   "min": 1,
+   "max": 100,
+   "step": 1,
+   "unidad": "productos",
+   "tierMap": [
+    {
+     "maxVal": 5,
+     "tier": "S"
+    },
+    {
+     "maxVal": 20,
+     "tier": "M"
+    },
+    {
+     "maxVal": 100,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-07",
+   "id": "filtros",
+   "pregunta": "¿Necesita filtros y búsqueda?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-08",
+   "id": "numSlides",
+   "pregunta": "¿Cuántas slides o secciones?",
+   "tipo": "number",
+   "min": 3,
+   "max": 30,
+   "step": 1,
+   "unidad": "slides",
+   "tierMap": [
+    {
+     "maxVal": 8,
+     "tier": "S"
+    },
+    {
+     "maxVal": 15,
+     "tier": "M"
+    },
+    {
+     "maxVal": 30,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "WEB-08",
+   "id": "tiene3D",
+   "pregunta": "¿Incluye bloque 3D interactivo?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "AI-01",
+   "id": "fuentes",
+   "pregunta": "¿Cuántas fuentes de contenido tiene (docs, FAQs, páginas)?",
+   "tipo": "number",
+   "min": 1,
+   "max": 50,
+   "step": 1,
+   "unidad": "fuentes",
+   "tierMap": [
+    {
+     "maxVal": 5,
+     "tier": "S"
+    },
+    {
+     "maxVal": 15,
+     "tier": "M"
+    },
+    {
+     "maxVal": 50,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "AI-01",
+   "id": "idiomas",
+   "pregunta": "¿En cuántos idiomas?",
+   "tipo": "number",
+   "min": 1,
+   "max": 5,
+   "step": 1,
+   "unidad": "idiomas",
+   "tierMap": [
+    {
+     "maxVal": 1,
+     "tier": "S"
+    },
+    {
+     "maxVal": 2,
+     "tier": "M"
+    },
+    {
+     "maxVal": 5,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "AI-01",
+   "id": "acciones",
+   "pregunta": "¿El chat puede ejecutar acciones (agendar, buscar, etc.)?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "AI-02",
+   "id": "numFlujos",
+   "pregunta": "¿Cuántos flujos quieres automatizar?",
+   "tipo": "number",
+   "min": 1,
+   "max": 15,
+   "step": 1,
+   "unidad": "flujos",
+   "tierMap": [
+    {
+     "maxVal": 3,
+     "tier": "S"
+    },
+    {
+     "maxVal": 8,
+     "tier": "M"
+    },
+    {
+     "maxVal": 15,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "AI-03",
+   "id": "numProcesos",
+   "pregunta": "¿Cuántos procesos quieres automatizar?",
+   "tipo": "number",
+   "min": 1,
+   "max": 20,
+   "step": 1,
+   "unidad": "procesos",
+   "tierMap": [
+    {
+     "maxVal": 3,
+     "tier": "S"
+    },
+    {
+     "maxVal": 8,
+     "tier": "M"
+    },
+    {
+     "maxVal": 20,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "AI-03",
+   "id": "madurez",
+   "pregunta": "¿Qué tan digitalizado está tu equipo?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Muy digitalizado (herramientas cloud)",
+     "tier": "S"
+    },
+    {
+     "valor": "Parcialmente digital",
+     "tier": "M"
+    },
+    {
+     "valor": "Poco digitalizado (papel/excel)",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "AI-04",
+   "id": "tamanoOrg",
+   "pregunta": "¿De qué tamaño es la organización?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Pequeña (<20 personas)",
+     "tier": "S"
+    },
+    {
+     "valor": "Mediana (20–100)",
+     "tier": "M"
+    },
+    {
+     "valor": "Grande (>100)",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "VFX-01",
+   "id": "complejidadFondo",
+   "pregunta": "¿Qué tan complejo es el fondo?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Plano/simple",
+     "tier": "S"
+    },
+    {
+     "valor": "Con profundidad",
+     "tier": "M"
+    },
+    {
+     "valor": "Muy complejo (muchos elementos)",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "VFX-02",
+   "id": "movimientoCamara",
+   "pregunta": "¿Cómo se mueve la cámara?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Estática",
+     "tier": "S"
+    },
+    {
+     "valor": "Handheld",
+     "tier": "M"
+    },
+    {
+     "valor": "Dolly/grúa compleja",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "VFX-02",
+   "id": "numElementosCG",
+   "pregunta": "¿Cuántos elementos CG?",
+   "tipo": "number",
+   "min": 1,
+   "max": 10,
+   "step": 1,
+   "unidad": "elementos",
+   "tierMap": [
+    {
+     "maxVal": 2,
+     "tier": "S"
+    },
+    {
+     "maxVal": 5,
+     "tier": "M"
+    },
+    {
+     "maxVal": 10,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "VFX-02",
+   "id": "tieneFX",
+   "pregunta": "¿Incluye FX (partículas, humo)?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "VFX-03",
+   "id": "tipoSim",
+   "pregunta": "¿Qué tipo de simulación?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Partículas simples",
+     "tier": "S"
+    },
+    {
+     "valor": "Volumétricos (humo/niebla)",
+     "tier": "M"
+    },
+    {
+     "valor": "Fluidos/destrucción RBD",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "VFX-03",
+   "id": "reutilizable",
+   "pregunta": "¿Necesitas setup paramétrico reutilizable?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "TEX-01",
+   "id": "numSets",
+   "pregunta": "¿Cuántos sets de texturas?",
+   "tipo": "number",
+   "min": 1,
+   "max": 30,
+   "step": 1,
+   "unidad": "sets",
+   "tierMap": [
+    {
+     "maxVal": 3,
+     "tier": "S"
+    },
+    {
+     "maxVal": 10,
+     "tier": "M"
+    },
+    {
+     "maxVal": 30,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "TEX-01",
+   "id": "noai",
+   "pregunta": "¿Restricción NoAI (solo procedural)?",
+   "tipo": "toggle",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": null
+  },
+  {
+   "servicio": "PIPE-01",
+   "id": "numScripts",
+   "pregunta": "¿Cuántos scripts o herramientas?",
+   "tipo": "number",
+   "min": 1,
+   "max": 20,
+   "step": 1,
+   "unidad": "scripts",
+   "tierMap": [
+    {
+     "maxVal": 3,
+     "tier": "S"
+    },
+    {
+     "maxVal": 8,
+     "tier": "M"
+    },
+    {
+     "maxVal": 20,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "CON-01",
+   "id": "numSesiones",
+   "pregunta": "¿Cuántas sesiones de consultoría?",
+   "tipo": "number",
+   "min": 1,
+   "max": 20,
+   "step": 1,
+   "unidad": "sesiones",
+   "tierMap": [
+    {
+     "maxVal": 3,
+     "tier": "S"
+    },
+    {
+     "maxVal": 8,
+     "tier": "M"
+    },
+    {
+     "maxVal": 20,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "RET-01",
+   "id": "plan",
+   "pregunta": "¿Qué plan de retainer?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Lite (4 h/mes)",
+     "tier": "S"
+    },
+    {
+     "valor": "Standard (8 h/mes)",
+     "tier": "S"
+    },
+    {
+     "valor": "Pro (16 h/mes)",
+     "tier": "M"
+    },
+    {
+     "valor": "Business (40 h/mes)",
+     "tier": "L"
+    },
+    {
+     "valor": "Enterprise (80 h/mes)",
+     "tier": "XL"
+    }
+   ]
+  },
+  {
+   "servicio": "CAD-01",
+   "id": "numPiezas",
+   "pregunta": "¿Cuántas piezas tiene el ensamblaje CAD?",
+   "tipo": "number",
+   "min": 1,
+   "max": 300,
+   "step": 1,
+   "unidad": "piezas",
+   "tierMap": [
+    {
+     "maxVal": 15,
+     "tier": "S"
+    },
+    {
+     "maxVal": 60,
+     "tier": "M"
+    },
+    {
+     "maxVal": 150,
+     "tier": "M"
+    },
+    {
+     "maxVal": 300,
+     "tier": "L"
+    }
+   ],
+   "opciones": null
+  },
+  {
+   "servicio": "CAD-01",
+   "id": "complejidad",
+   "pregunta": "¿Cómo es la geometría?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Prismática (cajas, placas, tubo recto)",
+     "tier": "S"
+    },
+    {
+     "valor": "Freeform moderada (carenas, fillets)",
+     "tier": "M"
+    },
+    {
+     "valor": "Compleja (roscas, cables, orgánico)",
+     "tier": "L"
+    }
+   ]
+  },
+  {
+   "servicio": "CAD-01",
+   "id": "calidadCAD",
+   "pregunta": "¿Cómo está el CAD de origen?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Limpio (export correcto, unidades ok)",
+     "tier": "S"
+    },
+    {
+     "valor": "Con problemas (tolerancias, geometría sucia)",
+     "tier": "M"
+    }
+   ]
+  },
+  {
+   "servicio": "CAD-01",
+   "id": "target",
+   "pregunta": "¿Para qué plataforma?",
+   "tipo": "select",
+   "min": null,
+   "max": null,
+   "step": null,
+   "unidad": "",
+   "tierMap": null,
+   "opciones": [
+    {
+     "valor": "Desktop web",
+     "tier": "S"
+    },
+    {
+     "valor": "Móvil exigente",
+     "tier": "M"
+    }
+   ]
+  }
+ ],
+ "rates": {
+  "COP": {
+   "RC-ART": {
+    "min": 30000,
+    "max": 42000
+   },
+   "RC-RTA": {
+    "min": 38000,
+    "max": 52000
+   },
+   "RC-WEB": {
+    "min": 40000,
+    "max": 57000
+   },
+   "RC-AI": {
+    "min": 42000,
+    "max": 60000
+   },
+   "RC-CON": {
+    "min": 60000,
+    "max": 82000
+   }
+  },
+  "USD": {
+   "RC-ART": {
+    "min": 20,
+    "max": 28
+   },
+   "RC-RTA": {
+    "min": 25,
+    "max": 35
+   },
+   "RC-WEB": {
+    "min": 27,
+    "max": 38
+   },
+   "RC-AI": {
+    "min": 28,
+    "max": 40
+   },
+   "RC-CON": {
+    "min": 40,
+    "max": 55
+   }
+  },
+  "minProjectCOP": 400000,
+  "minProjectUSD": 100
+ },
+ "TIERS": [
+  "XS",
+  "S",
+  "M",
+  "L",
+  "XL"
+ ]
+}

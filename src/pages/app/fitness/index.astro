@@ -2,14 +2,6 @@
 import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
 import FitnessTabWorkspace from '../../../components/fitness/FitnessTabWorkspace.tsx';
 ---
-{/* 
-  A1 (AG-FIT): /app/fitness monta FitnessTabWorkspace como experiencia oficial
-  (tabs hoy/rutinas/progreso/biblioteca). El árbol viejo (FitnessToday + 
-  TodayCalendar/TodayRoutineStack sueltos) quedó integrado: TodayCalendar y 
-  ActiveProgressionsTodayCard viven ahora dentro del tab "Hoy"; la tabla de 
-  prescripción del día vive en el logger (FitAppWorkoutLogger). 
-  Rutas alias que redirigen aquí: /app/fitness/today y /app/fitness/catalog.
-*/}
-<PlanMaestroLayout title="Fitness" activeDomain="fitness">
-  <FitnessTabWorkspace client:load initialTab="today" />
+<PlanMaestroLayout title="Fitness — Hoy" activeDomain="fitness">
+  <FitnessTabWorkspace client:load />
 </PlanMaestroLayout>
