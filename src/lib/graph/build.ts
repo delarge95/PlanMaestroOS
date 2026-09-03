@@ -17,12 +17,12 @@ export function buildGraph(nodes: KnowledgeGraph['nodes'], edges: KnowledgeGraph
   report: BuildReport;
 } {
   const engine = new LifeGraphEngine();
-  for (const n of nodes) engine.addNode(n);
-  for (const e of edges) engine.addEdge(e);
+  for (const n of nodes as KnowledgeGraph["nodes"]) engine.addNode(n);
+  for (const e of edges as KnowledgeGraph["edges"]) engine.addEdge(e);
   const graph = engine.toJSON();
 
   const touched = new Set<string>();
-  for (const e of edges) {
+  for (const e of edges as KnowledgeGraph["edges"]) {
     touched.add(e.from);
     touched.add(e.to);
   }
@@ -32,7 +32,7 @@ export function buildGraph(nodes: KnowledgeGraph['nodes'], edges: KnowledgeGraph
     .map((e) => `${e.from}->${e.to}`);
 
   const counts: Record<string, number> = {};
-  for (const n of nodes) counts[n.kind] = (counts[n.kind] ?? 0) + 1;
+  for (const n of nodes as KnowledgeGraph["nodes"]) counts[n.kind] = (counts[n.kind] ?? 0) + 1;
 
   const orphanRatio = nodes.length === 0 ? 0 : orphans.length / nodes.length;
   return {
