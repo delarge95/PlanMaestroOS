@@ -398,8 +398,6 @@ ${documentContent}
                   fontSize: '0.75rem',
                   fontFamily: 'Azeret Mono, monospace',
                   color: 'var(--color-text-secondary)',
-                  maxHeight: '140px',
-                  overflowY: 'auto',
                   margin: 0,
                   whiteSpace: 'pre-wrap'
                 }}

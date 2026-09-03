@@ -118,7 +118,7 @@ export default function CompanyDatabase() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: 'var(--space-md)' }}>
               {/* LISTA */}
-              <div className="ds-stack-sm" style={{ gap: '6px', maxHeight: '560px', overflowY: 'auto', paddingRight: '4px' }}>
+              <div className="ds-stack-sm" style={{ gap: '6px' }}>
                 {filtered.map((c) => {
                   const badge = TIER_BADGE[c.tier] ?? TIER_BADGE['Watchlist'];
                   return (
@@ -287,7 +287,7 @@ function ChannelList({ kind }: { kind: 'board' | 'recruiter' | 'community' }) {
     kind === 'board' ? jobBoards : kind === 'recruiter' ? recruiterChannels : communityChannels;
 
   return (
-    <div className="ds-stack-sm" style={{ gap: '6px', maxHeight: '560px', overflowY: 'auto' }}>
+    <div className="ds-stack-sm" style={{ gap: '6px' }}>
       {items.map((it) => (
         <div
           key={`${it.name}-${it.url}`}

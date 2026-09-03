@@ -90,7 +90,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
           />
         </div>
 
-        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '4px', maxHeight: '480px' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
           {filteredDocs.map((doc) => (
             <button
               key={doc.id}

@@ -217,7 +217,7 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
           </div>
 
           {/* Diálogo del escenario */}
-          <div className="ds-card ds-stack-sm" style={{ maxHeight: '180px', overflowY: 'auto', padding: '6px' }}>
+          <div className="ds-card ds-stack-sm" style={{ padding: '6px' }}>
             {currentScenario.dialog.map((turn: DialogTurn, tIdx: number) => (
               <div key={tIdx} className="ds-caption" style={{ lineHeight: 1.35 }}>
                 <strong style={{ color: turn.speaker.includes('Alex') ? 'var(--color-accent-primary)' : 'var(--text-secondary)' }}>

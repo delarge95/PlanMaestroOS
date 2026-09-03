@@ -233,7 +233,7 @@ export default function CustomRoutineBuilder() {
                       fontSize: '0.85rem'
                     }}
                   />
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '200px', overflowY: 'auto' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     {searchResults.map((ex) => (
                       <div
                         key={ex.name}

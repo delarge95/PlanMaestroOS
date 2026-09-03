@@ -318,7 +318,7 @@ export function DirectCotizador() {
             <FilterChip key={f.id} active={familyFilter === f.id} onClick={() => setFamilyFilter(f.id)} label={f.label} />
           ))}
         </div>
-        <div style={{ display: 'grid', gap: 6, maxHeight: 300, overflowY: 'auto' }}>
+        <div style={{ display: 'grid', gap: 6 }}>
           {filtered.length === 0 && (
             <p style={{ ...help, margin: 0 }}>Ningún servicio de este objetivo en esta familia. Prueba con “Todos”.</p>
           )}

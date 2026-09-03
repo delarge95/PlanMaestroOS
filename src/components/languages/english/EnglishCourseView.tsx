@@ -229,7 +229,7 @@ export default function EnglishCourseView() {
                 <h4 className="ds-label" style={{ margin: 0 }}>
                   Workplace Phrasal Verbs
                 </h4>
-                <div className="ds-stack-sm" style={{ gap: '6px', maxHeight: '240px', overflowY: 'auto' }}>
+                <div className="ds-stack-sm" style={{ gap: '6px' }}>
                   {workplacePhrasalVerbs.map((pv, idx) => (
                     <div key={idx} className="ds-caption" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: '4px' }}>
                       <strong style={{ color: 'var(--color-accent-primary)' }}>{pv.verb}:</strong>{' '}
@@ -243,7 +243,7 @@ export default function EnglishCourseView() {
                 <h4 className="ds-label" style={{ margin: 0 }}>
                   Technical Collocations
                 </h4>
-                <div className="ds-stack-sm" style={{ gap: '6px', maxHeight: '240px', overflowY: 'auto' }}>
+                <div className="ds-stack-sm" style={{ gap: '6px' }}>
                   {technicalCollocations.map((tc, idx) => (
                     <div key={idx} className="ds-caption" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: '4px' }}>
                       <strong style={{ color: 'var(--color-accent-primary)' }}>{tc.collocation}:</strong>{' '}

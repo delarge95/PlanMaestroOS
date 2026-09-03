@@ -60,7 +60,7 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
         </div>
 
         {/* CHAT DE CONVERSACIÓN Y CORRECCIÓN */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '300px', overflowY: 'auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {chatHistory.map((msg, idx) => (
             <div
               key={idx}
