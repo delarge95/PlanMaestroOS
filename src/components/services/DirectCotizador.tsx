@@ -202,7 +202,7 @@ export function DirectCotizador() {
   };
 
   return (
-    <div className="cx-root" style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
+    <div className="cx-root" style={{ maxWidth: '100%', padding: '24px 0 60px' }}>
       <style dangerouslySetInnerHTML={{ __html: CX_CSS }} />
 
       {/* Encabezado formal visible solo al imprimir/PDF (cotización) */}
