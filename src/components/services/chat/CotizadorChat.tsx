@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { MessageCircle } from 'lucide-react';
 import { CONTACT_EMAIL } from '../../../lib/services/share';
 import { matchIntent, quickRepliesFor } from '../../../lib/services/chat/chatIntents';
 import type { ChatContext } from '../../../lib/services/chat/chatIntents';

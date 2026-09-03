@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Package } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import SectionNav from '../ui/SectionNav';
 import {
@@ -224,7 +225,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingLeft: '36px' }}>
                     {m.deliverables.map((d, dIdx) => (
                       <span key={dIdx} style={{ fontSize: '0.75rem', color: 'var(--color-text-primary)', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '4px 10px', borderRadius: '8px' }}>
-                        📦 {d}
+                        <Package size={12} style={{ verticalAlign: '-2px', marginRight: 4 }} />{d}
                       </span>
                     ))}
                   </div>

@@ -1,4 +1,5 @@
 import './cotizador.css';
+import { Package } from 'lucide-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { SERVICES } from '../../data/services/catalogCore';
 import type { ServiceDef } from '../../data/services/catalogCore';
@@ -449,7 +450,7 @@ export function DirectCotizador() {
 
           {svc.entregablesEs.length > 0 && (
             <div style={{ background: '#f0faf4', border: '1px solid #c3e6cb', borderRadius: 10, padding: 14, marginBottom: 12 }}>
-              <strong style={{ fontSize: 13, color: '#1b8a5a' }}>📦 Recibes:</strong>
+              <strong style={{ fontSize: 13, color: '#1b8a5a' }}><Package size={13} style={{ verticalAlign: '-2px', marginRight: 4 }} />Recibes:</strong>
               <ul style={{ fontSize: 13, paddingLeft: 16, marginTop: 6, color: '#1a1d29' }}>
                 {quote.entregables.map((e: string) => <li key={e}>✓ {e}</li>)}
               </ul>

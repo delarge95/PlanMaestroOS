@@ -1,7 +1,7 @@
 // src/components/fitness/LibraryDatabase.tsx
 import React, { useState, useMemo, useEffect } from 'react';
 import ExerciseModal from './ExerciseModal';
-import { Search, ChevronRight, ChevronDown, Check, ArrowUpDown, ExternalLink, ChevronsUpDown } from 'lucide-react';
+import { Search, ChevronRight, ChevronDown, Check, ArrowUpDown, ExternalLink, ChevronsUpDown, Film } from 'lucide-react';
 import { exerciseDatabase, exerciseGroups } from '../../data/exercises';
 import { YouTubePlayer } from '../ui/YouTubePlayer';
 
@@ -233,7 +233,7 @@ export default function LibraryDatabase() {
           <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', background: 'rgba(0,0,0,0.3)' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0a84ff' }}>
-                🎬 Reproducción en Video
+                <Film size={14} style={{ verticalAlign: '-2px', marginRight: 4 }} />Reproducción en Video
               </span>
               <button
                 type="button"
@@ -652,7 +652,7 @@ export default function LibraryDatabase() {
                       fontWeight: 600
                     }}
                   >
-                    <span>🎬 Video</span>
+                    <span><Film size={12} style={{ verticalAlign: '-2px', marginRight: 3 }} />Video</span>
                     {isInlineExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                   </button>
                 </div>
@@ -743,7 +743,7 @@ export default function LibraryDatabase() {
                                 fontWeight: 600
                               }}
                             >
-                              <span>🎬 Video</span>
+                              <span><Film size={12} style={{ verticalAlign: '-2px', marginRight: 3 }} />Video</span>
                               {isInlineExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                             </button>
                           </div>

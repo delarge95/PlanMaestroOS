@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Settings } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import type { CanonicalEntity } from '../../data/canonicalDomainModel';
 
@@ -76,7 +77,7 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
               onClick={() => setActiveTab('how')}
               style={{ background: activeTab === 'how' ? 'var(--color-state-done)' : 'transparent', color: activeTab === 'how' ? '#ffffff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
             >
-              ⚙️ Cómo hacerlo
+              <Settings size={12} style={{ verticalAlign: '-2px', marginRight: 4 }} />Cómo hacerlo
             </button>
             <button
               type="button"
