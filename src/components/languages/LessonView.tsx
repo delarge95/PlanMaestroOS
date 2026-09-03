@@ -35,12 +35,12 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
 
   return (
     <ErrorBoundary>
-      <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+      <div className="ds-card ds-stack">
         
         {/* CABECERA DE LECCIÓN CON NAVEGACIÓN TEORÍA / EJERCICIOS */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-xs)', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
+        <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-1)', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-1)' }}>
           <div>
-            <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+            <span className="ds-eyebrow">
               Lección {lesson.order} · {lesson.estimatedMinutes} min
             </span>
             <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--text)' }}>
@@ -48,7 +48,7 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
             </h3>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
             {lesson.sourcePdfUrl && (
               <a href={lesson.sourcePdfUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                 <Button variant="ghost" size="sm">
@@ -97,7 +97,7 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
 
         {/* PESTAÑA TEORÍA EN BLOQUES CORTOS */}
         {activeTab === 'theory' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
+          <div className="ds-stack-sm">
             {lesson.content.map((block, idx) => (
               <div key={idx} style={{ background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid var(--color-accent-primary)', padding: '10px 14px', borderRadius: '0 6px 6px 0', fontSize: '0.86rem', color: 'var(--text-secondary)' }}>
                 {block}
@@ -108,18 +108,18 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
 
         {/* PESTAÑA EJERCICIOS (MÁXIMO 3) */}
         {activeTab === 'exercises' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+          <div className="ds-stack">
             {lesson.exercises.slice(0, maxExercises).map((ex, idx) => {
               const answered = (userAnswers[ex.id] ?? '').trim() !== '';
               const isCorrect = answered && answersMatch(userAnswers[ex.id], ex.correctAnswer);
               return (
-              <div key={ex.id} style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${answered ? (isCorrect ? 'var(--color-state-done)' : 'var(--color-state-error, var(--color-accent-warning))') : 'var(--color-border-subtle)'}`, borderRadius: 'var(--radius-sm)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div key={ex.id} className="ds-stack-sm" style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${answered ? (isCorrect ? 'var(--color-state-done)' : 'var(--color-state-error, var(--color-accent-warning))') : 'var(--color-border-subtle)'}`, borderRadius: 'var(--radius-s)', padding: 'var(--space-3)' }}>
                 <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
                   Ejercicio {idx + 1}: {ex.prompt}
                 </span>
 
                 {ex.type === 'multiple_choice' && ex.options ? (
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <div className="ds-row-wrap">
                     {ex.options.map((opt) => (
                       <button
                         key={opt}

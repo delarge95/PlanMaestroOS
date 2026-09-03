@@ -65,47 +65,18 @@ export default function TodayTabWorkspace({
 
   return (
     <ErrorBoundary>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--space-md)",
-          width: "100%",
-        }}
-      >
+      <div className="ds-stack" style={{ width: "100%" }}>
         {/* NAVEGACIÓN NIVEL 2 */}
         {/* SUGERENCIAS DEL SISTEMA — corte vertical reglas Fase 3 (CORE surface) */}
         <SuggestionInbox />
 
         {/* ENCABEZADO PRESCRIPTIVO: "Hoy" + FECHA */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "var(--space-xs)",
-            paddingBottom: "var(--space-xs)",
-            borderBottom: "1px solid var(--color-border-subtle)",
-          }}
-        >
+        <div className="ds-row-between" style={{ flexWrap: "wrap", gap: "var(--space-1)", paddingBottom: "var(--space-1)", borderBottom: "1px solid var(--color-border-subtle)" }}>
           <div>
-            <h1
-              style={{
-                fontSize: "var(--fs-page, 1.75rem)",
-                fontWeight: 700,
-                margin: 0,
-                color: "var(--text-primary)",
-              }}
-            >
+            <h1 className="ds-h2">
               Hoy
             </h1>
-            <span
-              style={{
-                fontSize: "var(--fs-meta, 0.8125rem)",
-                color: "var(--text-secondary)",
-              }}
-            >
+            <span className="ds-caption">
               {formattedDate}
             </span>
           </div>
@@ -127,21 +98,8 @@ export default function TodayTabWorkspace({
             gap: "var(--space-xs)",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "var(--fs-eyebrow, 0.75rem)",
-                fontWeight: 700,
-                color: "var(--text-secondary)",
-                textTransform: "uppercase",
-              }}
-            >
+          <div className="ds-row-between">
+            <span className="ds-eyebrow" style={{ color: "var(--text-secondary)" }}>
               Top 3
             </span>
             <Button
@@ -157,16 +115,7 @@ export default function TodayTabWorkspace({
           </div>
 
           {top3.length === 0 ? (
-            <div
-              style={{
-                padding: "var(--space-md)",
-                background: "var(--surface-1)",
-                border: "1px solid var(--color-border-subtle)",
-                borderRadius: "var(--radius-m)",
-                fontSize: "0.85rem",
-                color: "var(--text-tertiary)",
-              }}
-            >
+            <div className="ds-empty">
               Sin prioridades todavía. Elige hasta 3 tareas para hoy.
             </div>
           ) : (
@@ -179,25 +128,9 @@ export default function TodayTabWorkspace({
                   label={`${t.area.toUpperCase()} · ${t.title}`}
                   summary={t.singleNextAction}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
-                      paddingTop: "4px",
-                    }}
-                  >
+                  <div className="ds-stack-sm" style={{ paddingTop: "4px" }}>
                     {t.area === "fitness" ? (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "6px",
-                          background: "rgba(255,255,255,0.02)",
-                          padding: "10px",
-                          borderRadius: "8px",
-                        }}
-                      >
+                      <div className="ds-stack-sm" style={{ gap: "6px", background: "rgba(255,255,255,0.02)", padding: "10px", borderRadius: "var(--radius-s)" }}>
                         <span
                           style={{
                             fontSize: "var(--fs-eyebrow, 0.75rem)",
@@ -237,12 +170,7 @@ export default function TodayTabWorkspace({
                         </div>
                       </div>
                     ) : (
-                      <div
-                        style={{
-                          fontSize: "var(--fs-meta, 0.8125rem)",
-                          color: "var(--text-secondary)",
-                        }}
-                      >
+                      <div className="ds-caption">
                         Siguiente: <strong>{t.singleNextAction}</strong> · {t.estimatedMinutes} min
                       </div>
                     )}
@@ -261,27 +189,9 @@ export default function TodayTabWorkspace({
             gap: "var(--space-sm)",
           }}
         >
-          <div
-            style={{
-              background: "var(--surface-1, #0d0d0f)",
-              border: "1px solid var(--color-border-subtle)",
-              borderRadius: "var(--radius-m)",
-              padding: "12px 16px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "12px",
-            }}
-          >
+          <div className="ds-card ds-row-between" style={{ padding: "var(--space-3) var(--space-4)" }}>
             <div>
-              <span
-                style={{
-                  fontSize: "var(--fs-eyebrow)",
-                  color: "var(--text-secondary)",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                }}
-              >
+              <span className="ds-eyebrow" style={{ color: "var(--text-secondary)" }}>
                 Bloque A
               </span>
               <strong
@@ -305,27 +215,9 @@ export default function TodayTabWorkspace({
             </Button>
           </div>
 
-          <div
-            style={{
-              background: "var(--surface-1, #0d0d0f)",
-              border: "1px solid var(--color-border-subtle)",
-              borderRadius: "var(--radius-m)",
-              padding: "12px 16px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "12px",
-            }}
-          >
+          <div className="ds-card ds-row-between" style={{ padding: "var(--space-3) var(--space-4)" }}>
             <div>
-              <span
-                style={{
-                  fontSize: "var(--fs-eyebrow)",
-                  color: "var(--warning)",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                }}
-              >
+              <span className="ds-eyebrow" style={{ color: "var(--warning)" }}>
                 Bloque B
               </span>
               <strong
@@ -351,27 +243,9 @@ export default function TodayTabWorkspace({
         </div>
 
         {/* FILA CONDENSADA DE FITNESS */}
-        <div
-          style={{
-            background: "var(--surface-1, #0d0d0f)",
-            border: "1px solid var(--color-border-subtle)",
-            borderRadius: "var(--radius-m)",
-            padding: "12px 16px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "12px",
-          }}
-        >
+        <div className="ds-card ds-row-between" style={{ padding: "var(--space-3) var(--space-4)" }}>
           <div>
-            <span
-              style={{
-                fontSize: "var(--fs-eyebrow)",
-                color: "var(--success)",
-                fontWeight: 700,
-                textTransform: "uppercase",
-              }}
-            >
+            <span className="ds-eyebrow" style={{ color: "var(--success)" }}>
               Fitness
             </span>
             <strong

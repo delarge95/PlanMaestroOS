@@ -65,19 +65,11 @@ export default function DailyOperatingView() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+      <div className="ds-stack">
 
         {/* CONTROLES DE VISTA */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 'var(--space-xs)',
-          paddingBottom: 'var(--space-xs)',
-          borderBottom: '1px solid var(--color-border-subtle)'
-        }}>
-          <div style={{ display: 'flex', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: '12px', border: '1px solid var(--color-border-subtle)' }}>
+        <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-1)', paddingBottom: 'var(--space-1)', borderBottom: '1px solid var(--color-border-subtle)' }}>
+          <div style={{ display: 'flex', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px', borderRadius: 'var(--radius-m)', border: '1px solid var(--color-border-subtle)' }}>
             <button
               type="button"
               onClick={() => setViewMode('timeline')}
@@ -86,7 +78,7 @@ export default function DailyOperatingView() {
                 color: viewMode === 'timeline' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-s)',
                 fontSize: '0.8rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -106,7 +98,7 @@ export default function DailyOperatingView() {
                 color: viewMode === 'kanban' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-s)',
                 fontSize: '0.8rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -126,7 +118,7 @@ export default function DailyOperatingView() {
                 color: viewMode === 'stats' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-s)',
                 fontSize: '0.8rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -152,17 +144,7 @@ export default function DailyOperatingView() {
               key={cat}
               type="button"
               onClick={() => setActiveCategory(cat)}
-              style={{
-                background: activeCategory === cat ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.04)',
-                color: activeCategory === cat ? '#000000' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '4px 12px',
-                borderRadius: '20px',
-                fontSize: '0.75rem',
-                fontWeight: activeCategory === cat ? 700 : 500,
-                cursor: 'pointer',
-                whiteSpace: 'nowrap'
-              }}
+              className="ds-chip" data-active={activeCategory === cat ? 'true' : 'false'} style={{ whiteSpace: 'nowrap' }}
             >
               {cat === 'all' ? 'Todas' : cat.toUpperCase()}
             </button>
@@ -171,7 +153,7 @@ export default function DailyOperatingView() {
 
         {/* LÍNEA TEMPORAL */}
         {viewMode === 'timeline' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div className="ds-stack-sm">
             {filtered.map((b) => {
               const isDone = b.status === 'completed';
               const isInProgress = b.status === 'in_progress';
@@ -179,6 +161,7 @@ export default function DailyOperatingView() {
               return (
                 <div
                   key={b.id}
+                  className="ds-card ds-row-between"
                   style={{
                     background: isInProgress
                       ? 'rgba(10, 132, 255, 0.08)'
@@ -186,12 +169,7 @@ export default function DailyOperatingView() {
                       ? 'rgba(48, 209, 88, 0.04)'
                       : 'var(--surface)',
                     border: `1px solid ${isInProgress ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
-                    borderRadius: 'var(--radius-md)',
-                    padding: '12px 16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '12px',
+                    padding: 'var(--space-3) var(--space-4)',
                     opacity: isDone ? 0.65 : 1,
                     transition: 'all 150ms ease'
                   }}
@@ -221,19 +199,12 @@ export default function DailyOperatingView() {
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
                     {b.actionUrl && (
                       <a
                         href={b.actionUrl}
-                        style={{
-                          fontSize: '0.72rem',
-                          color: 'var(--color-accent-primary)',
-                          textDecoration: 'none',
-                          fontWeight: 600,
-                          padding: '2px 8px',
-                          borderRadius: '4px',
-                          background: 'var(--color-accent-primary-soft)'
-                        }}
+                        className="ds-badge ds-badge-accent"
+                        style={{ textDecoration: 'none' }}
                       >
                         {b.actionLabel}
                       </a>
@@ -242,16 +213,7 @@ export default function DailyOperatingView() {
                     <button
                       type="button"
                       onClick={(e) => toggleStatus(b.id, e)}
-                      style={{
-                        background: isDone ? 'var(--color-state-done-soft)' : isInProgress ? 'var(--color-accent-primary-soft)' : 'rgba(255,255,255,0.06)',
-                        color: isDone ? 'var(--color-state-done)' : isInProgress ? 'var(--color-accent-primary)' : 'var(--text-tertiary)',
-                        border: 'none',
-                        padding: '4px 10px',
-                        borderRadius: '6px',
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        cursor: 'pointer'
-                      }}
+                      className={`ds-badge ${isDone ? 'ds-badge-success' : isInProgress ? 'ds-badge-accent' : 'ds-badge-neutral'}`} style={{ cursor: 'pointer' }}
                     >
                       {isDone ? 'Hecho' : isInProgress ? 'En curso' : 'Por hacer'}
                     </button>
@@ -272,9 +234,9 @@ export default function DailyOperatingView() {
 
               {filtered.filter(b => b.status === 'pending').map((b) => (
                 <div key={b.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-visible)', borderRadius: 'var(--radius-md)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="ds-row-between">
                     <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
-                    <button type="button" onClick={() => moveStatus(b.id, 'in_progress')} style={{ background: 'transparent', border: 'none', color: 'var(--color-accent-primary)', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 600 }}>
+                    <button type="button" onClick={() => moveStatus(b.id, 'in_progress')} className="ds-btn ds-btn-ghost ds-btn-sm">
                       Empezar 10 min
                     </button>
                   </div>
@@ -290,9 +252,9 @@ export default function DailyOperatingView() {
 
               {filtered.filter(b => b.status === 'in_progress').map((b) => (
                 <div key={b.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-accent-primary)', borderRadius: 'var(--radius-md)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="ds-row-between">
                     <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
-                    <button type="button" onClick={() => moveStatus(b.id, 'completed')} style={{ background: 'var(--color-state-done-soft)', border: 'none', color: 'var(--color-state-done)', padding: '2px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}>
+                    <button type="button" onClick={() => moveStatus(b.id, 'completed')} className="ds-badge ds-badge-success" style={{ cursor: 'pointer' }}>
                       Hecho
                     </button>
                   </div>
@@ -319,16 +281,16 @@ export default function DailyOperatingView() {
         {/* RESUMEN */}
         {viewMode === 'stats' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-md)' }}>
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Completado hoy</span>
-              <strong style={{ fontSize: '1.5rem', color: 'var(--color-state-done)', display: 'block', marginTop: '4px' }}>
+            <div className="ds-stat">
+              <span className="ds-stat-label">Completado hoy</span>
+              <strong className="ds-stat-value" style={{ color: 'var(--color-state-done)' }}>
                 {Math.round((blocks.filter(b => b.status === 'completed').length / blocks.length) * 100)}%
               </strong>
             </div>
 
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)' }}>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 600 }}>Enfocado en</span>
-              <strong style={{ fontSize: '1.1rem', color: 'var(--color-accent-primary)', display: 'block', marginTop: '4px' }}>
+            <div className="ds-stat">
+              <span className="ds-stat-label">Enfocado en</span>
+              <strong className="ds-stat-value" style={{ color: 'var(--color-accent-primary)' }}>
                 TwinSight MVP & Sustentación
               </strong>
             </div>

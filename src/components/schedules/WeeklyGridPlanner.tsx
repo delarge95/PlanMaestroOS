@@ -30,14 +30,14 @@ export default function WeeklyGridPlanner() {
         WebkitBackdropFilter: 'blur(24px)',
         border: '1px solid var(--color-border-subtle)',
         borderRadius: '24px',
-        padding: '24px',
+        padding: 'var(--space-5)',
         boxShadow: '0 30px 60px rgba(0, 0, 0, 0.5)',
         display: 'flex',
         flexDirection: 'column',
         gap: '20px'
       }}>
         {/* HEADER & PHASE SELECTOR */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-4)' }}>
           <div>
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
               MATRIZ OPERATIVA INTEGRADA V3
@@ -48,7 +48,7 @@ export default function WeeklyGridPlanner() {
           </div>
 
           {/* PHASE SELECTOR */}
-          <div style={{ display: 'flex', gap: '6px', background: 'rgba(0, 0, 0, 0.4)', padding: '4px', borderRadius: '12px', border: '1px solid var(--color-border-subtle)' }}>
+          <div style={{ display: 'flex', gap: '6px', background: 'rgba(0, 0, 0, 0.4)', padding: '4px', borderRadius: 'var(--radius-m)', border: '1px solid var(--color-border-subtle)' }}>
             <button
               type="button"
               onClick={(e) => { e.preventDefault(); setSelectedPhase(1); }}
@@ -57,7 +57,7 @@ export default function WeeklyGridPlanner() {
                 border: 'none',
                 color: selectedPhase === 1 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-s)',
                 fontSize: '0.78rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -74,7 +74,7 @@ export default function WeeklyGridPlanner() {
                 border: 'none',
                 color: selectedPhase === 2 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-s)',
                 fontSize: '0.78rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -91,7 +91,7 @@ export default function WeeklyGridPlanner() {
                 border: 'none',
                 color: selectedPhase === 3 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-s)',
                 fontSize: '0.78rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -104,16 +104,12 @@ export default function WeeklyGridPlanner() {
         </div>
 
         {/* PHASE METADATA SUMMARY */}
-        <div style={{
+        <div className="ds-row-wrap ds-caption" style={{
           background: 'rgba(255, 255, 255, 0.03)',
           border: '1px solid var(--color-border-subtle)',
-          borderRadius: '16px',
+          borderRadius: 'var(--radius-l)',
           padding: '12px 18px',
-          fontSize: '0.82rem',
-          color: 'var(--color-text-secondary)',
-          display: 'flex',
-          gap: '16px',
-          flexWrap: 'wrap',
+          gap: 'var(--space-4)',
           alignItems: 'center'
         }}>
           <div><strong style={{ color: 'var(--color-text-primary)' }}>Fase Activa:</strong> {selectedPhase === 1 ? 'Fase 1 (Reaclimatación & Tesis)' : selectedPhase === 2 ? 'Fase 2 (Exposición & Materiales)' : 'Fase 3 (Soft Launch & Entrevistas)'}</div>
@@ -123,7 +119,7 @@ export default function WeeklyGridPlanner() {
         </div>
 
         {/* MAIN GRID TABLE */}
-        <div style={{ overflowX: 'auto', borderRadius: '16px', border: '1px solid var(--color-border-subtle)' }}>
+        <div style={{ overflowX: 'auto', borderRadius: 'var(--radius-l)', border: '1px solid var(--color-border-subtle)' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '900px' }}>
             <thead>
               <tr style={{ background: 'rgba(0, 0, 0, 0.5)', borderBottom: '1px solid var(--color-border-subtle)', fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-accent-primary)' }}>
@@ -165,7 +161,7 @@ export default function WeeklyGridPlanner() {
                             background: isSelected ? badge.bg : 'rgba(0, 0, 0, 0.3)',
                             border: `1px solid ${isSelected ? badge.color : 'var(--color-border-subtle)'}`,
                             borderRadius: '10px',
-                            padding: '8px',
+                            padding: 'var(--space-2)',
                             textAlign: 'left',
                             cursor: 'pointer',
                             display: 'flex',
@@ -227,12 +223,12 @@ export default function WeeklyGridPlanner() {
             }}
           >
             {/* DRAWER HEADER */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div className="ds-row-between" style={{ alignItems: 'flex-start' }}>
               <div>
                 <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
                   {selectedCell.time} • DETALLE OPERATIVO
                 </span>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
+                <h3 className="ds-h3" style={{ margin: '4px 0 0' }}>
                   {selectedCell.activity}
                 </h3>
               </div>
@@ -257,7 +253,7 @@ export default function WeeklyGridPlanner() {
             </div>
 
             {/* MODULE & RULE */}
-            <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '14px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div className="ds-stack-sm" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '14px', padding: '14px' }}>
               <div>
                 <strong style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                   Módulo Aplicado:
@@ -309,14 +305,11 @@ export default function WeeklyGridPlanner() {
             </div>
 
             {/* REENTRY STEP — PASO OBLIGATORIO AL CERRAR EL BLOQUE */}
-            <div style={{
+            <div className="ds-stack-sm" style={{
               background: 'rgba(10, 132, 255, 0.08)',
               border: '1px solid var(--color-border-visible)',
               borderRadius: '14px',
-              padding: '14px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '8px'
+              padding: '14px'
             }}>
               <strong style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                 📌 Paso de Reentrada Escrito:
