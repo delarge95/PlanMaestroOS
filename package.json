@@ -9,7 +9,8 @@
     "preview": "astro preview --host 127.0.0.1",
     "validate:fitness": "npx tsx scripts/validateFitness.ts",
     "test": "npx vitest run",
-    "ci": "npm run validate:fitness && npm run test && npx astro check"
+    "ci": "npm run validate:fitness && npm run test && npx astro check",
+    "test:impl": "tsx --test MuseAudits/impl/**/*.test.ts"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.1",
