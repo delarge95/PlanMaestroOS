@@ -82,7 +82,7 @@ export default function VocabularySession({ language = 'de', catalogItems }: Voc
       <div className="ds-card ds-stack">
 
         <div className="ds-row-between" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-1)' }}>
-          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
             Vocabulario
           </h3>
           <span className="ds-micro">

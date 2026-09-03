@@ -84,7 +84,7 @@ export function Sheet({
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--space-md)' }}>
           <div>
-            <h2 id="sheet-title" style={{ fontSize: 'var(--font-size-title)', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+            <h2 id="sheet-title" style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
               {title}
             </h2>
             {description && (

@@ -1154,7 +1154,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             <span className="ds-eyebrow" style={{ fontSize: '0.68rem', letterSpacing: '0.5px' }}>
               Visor anatómico 3D · compuesto
             </span>
-            <h3 className="ds-h3" style={{ fontSize: '1.05rem', fontWeight: 800 }}>
+            <h3 className="ds-h3" style={{ fontWeight: 700 }}>
               {FOCUS_LABELS[focus]} <span style={{ fontSize: '0.72rem', fontWeight: 500, color: 'var(--text-tertiary)' }}>{COMPOSITE_STATS.total} piezas · 5 modelos</span>
             </h3>
           </div>

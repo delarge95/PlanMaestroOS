@@ -175,7 +175,7 @@ ${documentContent}
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
               CONECTOR EN VIVO DE CONOCIMIENTO & NOTAS
             </span>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Integración Nativa con Obsidian & Notion Workspace
             </h3>
           </div>

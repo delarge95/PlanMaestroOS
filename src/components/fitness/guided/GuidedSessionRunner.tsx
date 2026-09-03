@@ -190,7 +190,7 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
                 <X size={18} />
               </button>
             </div>
-            <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800, lineHeight: 1.25 }}>{exercise.displayName}</h2>
+            <h2 style={{ margin: 0, fontSize: 'var(--fs-page)', fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.02em' }}>{exercise.displayName}</h2>
 
             {/* PROGRESO DE SERIES */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
@@ -321,7 +321,7 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
     <ErrorBoundary>
       <div style={{ position: 'fixed', inset: 0, zIndex: 1100, background: '#0d0d0f', overflowY: 'auto' }}>
         <div style={{ maxWidth: '640px', margin: '0 auto', padding: '24px 16px 40px', display: 'flex', flexDirection: 'column', gap: '16px', color: '#fff' }}>
-          <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>
+          <h2 style={{ margin: 0, fontSize: 'var(--fs-page)', fontWeight: 700, letterSpacing: '-0.02em' }}>
             🏁 Sesión completada{totalSetsLogged > 0 ? `: ${totalSetsLogged} series` : ''}
           </h2>
           <p style={{ margin: 0, fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)' }}>

@@ -616,7 +616,7 @@ export default function FitAppWorkoutLogger() {
                     {activeWeek?.isDeload ? ' · 🔄 Descarga' : ''}
                     {activeWeek?.title || activeWeek?.block ? ` · ${activeWeek.title || activeWeek.block}` : ''}
                   </div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#fff' }}>
+                  <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: '#fff' }}>
                     {activeDay?.name || activeDay?.title || 'Sin día activo'}
                   </h3>
                 </div>

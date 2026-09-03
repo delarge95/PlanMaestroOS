@@ -42,7 +42,7 @@ export default function WeeklyGridPlanner() {
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
               MATRIZ OPERATIVA INTEGRADA V3
             </span>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               Cronograma Semanal Integrado • 7 Días / 19 Bloques Horarios
             </h2>
           </div>

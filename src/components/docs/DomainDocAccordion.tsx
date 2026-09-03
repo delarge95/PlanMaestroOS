@@ -37,7 +37,7 @@ export default function DomainDocAccordion({ domainTitle, domainColor, categoryF
               <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: domainColor, fontWeight: 700 }}>
                 CONSULTA DE FUENTES ORIGINALES COMPLETAS
               </span>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+              <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
                 Ver Documentos e Investigación Completa de {domainTitle}
               </h3>
             </div>

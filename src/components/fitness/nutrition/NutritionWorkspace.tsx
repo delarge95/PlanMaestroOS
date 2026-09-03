@@ -25,7 +25,7 @@ const GOALS: Array<{ value: Goal; label: string; hint: string }> = [
 
 function SectionTitle({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <h2 className="ds-h3 ds-row" style={{ gap: 'var(--space-2)' }}>
+    <h2 className="ds-h2 ds-row" style={{ gap: 'var(--space-2)' }}>
       <span style={{ color: 'var(--accent)' }}>{icon}</span>
       {children}
     </h2>

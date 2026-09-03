@@ -138,7 +138,7 @@ export default function LibraryMuscles() {
             <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Base de Datos Anatómica & Biomecánica FitApp
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
               Directorio Anatómico de Músculos ({filteredGroups.length} Regiones)
             </h3>
           </div>

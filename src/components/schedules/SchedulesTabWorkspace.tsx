@@ -34,21 +34,21 @@ export default function SchedulesTabWorkspace() {
           {activeTab === 'rules' && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
               <div style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-primary)', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '0 0 10px' }}>⚡ Regla de Reentrada Inmediata</h3>
+                <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 10px' }}>⚡ Regla de Reentrada Inmediata</h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.6, margin: 0 }}>
                   Si un bloque se interrumpe o descarrila por ansiedad o distracción TDAH, no intentes recuperar el tiempo perdido. Salta directamente al bloque correspondiente al horario actual y abre la mini ventana de rescate.
                 </p>
               </div>
 
               <div style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-accent-warning)', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '0 0 10px' }}>🇩🇪 Alineación Hábito 13:30</h3>
+                <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 10px' }}>🇩🇪 Alineación Hábito 13:30</h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.6, margin: 0 }}>
                   El bloque de 13:30 a 14:00 es intocable de Lunes a Domingo. Si estabas en trabajo profundo, cierra a las 13:28 sin disculpas.
                 </p>
               </div>
 
               <div style={{ background: 'var(--color-surface-base)', border: '1px solid var(--color-border-subtle)', borderTop: '3px solid var(--color-state-done)', borderRadius: '18px', padding: '20px', backdropFilter: 'blur(40px)' }}>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', margin: '0 0 10px' }}>💪 Sincronización FitApp</h3>
+                <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, color: 'var(--color-text-primary)', margin: '0 0 10px' }}>💪 Sincronización FitApp</h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.6, margin: 0 }}>
                   Los bloques de Gimnasio / Calistenia (16:30 - 18:30) abren automáticamente en el drawer lateral la rutina del día con el temporizador de descanso.
                 </p>

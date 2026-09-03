@@ -30,7 +30,7 @@ export default function ExerciseGuide() {
           <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Guía de Cargas por Ejercicio & Porcentajes 1RM
           </span>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
             Calculadora de Zonas Intensidad RPE / RIR
           </h3>
         </div>

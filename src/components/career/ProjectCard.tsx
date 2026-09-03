@@ -72,7 +72,7 @@ export default function ProjectCard() {
         
         {/* PROYECTOS ACTIVOS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+          <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: 0, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
             Proyectos activos
           </h2>
 

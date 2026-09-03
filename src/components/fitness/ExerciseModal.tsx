@@ -162,7 +162,7 @@ export default function ExerciseModal({
             </div>
             <h2
               style={{
-                fontSize: "1.6rem",
+                fontSize: "var(--fs-section)",
                 fontWeight: 700,
                 margin: 0,
                 letterSpacing: "-0.02em",

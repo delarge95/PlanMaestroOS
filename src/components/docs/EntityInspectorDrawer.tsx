@@ -49,7 +49,7 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
               <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
                 INSPECTOR DE ENTIDAD CANÓNICA • {entity.domain.toUpperCase()}
               </span>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
+              <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
                 {entity.title}
               </h3>
             </div>

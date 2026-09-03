@@ -22,7 +22,7 @@ export default function ProgramAnalytics() {
           <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Rendimiento del Programa Activo
           </span>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
             {program.title} (Semana {currentWeek} de {program.weeks?.length || 12})
           </h3>
         </div>

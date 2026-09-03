@@ -21,7 +21,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
       <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
           <HeartPulse size={20} style={{ color: 'var(--color-accent-primary)' }} />
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
             Preparación Articular & Tolerancia de Carga (Prehab)
           </h3>
         </div>

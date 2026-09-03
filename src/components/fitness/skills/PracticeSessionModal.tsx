@@ -55,7 +55,7 @@ export function PracticeSessionModal({
       {savedSuccess ? (
         <div style={{ padding: 'var(--space-lg)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-md)' }}>
           <Check size={48} style={{ color: 'var(--color-state-done)' }} />
-          <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text)' }}>¡Práctica Guardada!</h3>
+          <h3 style={{ margin: 0, fontSize: 'var(--fs-section)', fontWeight: 700, color: 'var(--text-primary)' }}>¡Práctica Guardada!</h3>
           <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', margin: 0 }}>
             Cuando tengas varias exposiciones consistentes y sin molestias, podrás revisar el siguiente paso.
           </p>

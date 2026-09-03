@@ -180,7 +180,7 @@ export function ExplorePathsView({
                 }}
               >
                 <div>
-                  <h2 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.4rem)', fontWeight: 700, margin: '0 0 2px', color: 'var(--text)' }}>
+                  <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '0 0 2px', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
                     {path.title}
                   </h2>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)' }}>

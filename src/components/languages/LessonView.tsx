@@ -43,7 +43,7 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
             <span className="ds-eyebrow">
               Lección {lesson.order} · {lesson.estimatedMinutes} min
             </span>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--text)' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
               {lesson.title}
             </h3>
           </div>

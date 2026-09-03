@@ -210,7 +210,7 @@ export function WorkoutPrescriptionTable({
       </div>
 
       <div style={{ margin: '4px 0 2px' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', lineHeight: 1.25 }}>
+        <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)', lineHeight: 1.25 }}>
           {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayDisplayTitle}
         </h3>
         {activeWeek?.isDeload && (

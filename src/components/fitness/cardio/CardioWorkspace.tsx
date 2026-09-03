@@ -105,7 +105,7 @@ export function CardioWorkspace() {
     <div className="ds-stack-lg" style={{ width: '100%' }}>
       {/* 1) Disciplina */}
       <section className="ds-stack-sm">
-        <h2 className="ds-h3">Disciplina</h2>
+        <h2 className="ds-h2">Disciplina</h2>
         <div className="ds-row-wrap" role="tablist" aria-label="Disciplina">
           {DISCIPLINES.map((d) => (
             <button
@@ -145,7 +145,7 @@ export function CardioWorkspace() {
 
       {/* 2) Enfoques */}
       <section className="ds-stack-sm">
-        <h2 className="ds-h3">Enfoque</h2>
+        <h2 className="ds-h2">Enfoque</h2>
         <div className="ds-row-wrap">
           <button
             type="button"
@@ -192,7 +192,7 @@ export function CardioWorkspace() {
 
       {/* 3) Presets */}
       <section className="ds-stack-sm">
-        <h2 className="ds-h3">
+        <h2 className="ds-h2">
           Sesiones ({presets.length})
         </h2>
         <div className="ds-grid">

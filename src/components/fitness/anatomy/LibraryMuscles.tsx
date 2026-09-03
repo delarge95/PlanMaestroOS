@@ -115,7 +115,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
       {/* CABECERA */}
       <div style={{ ...cardStyle, padding: '14px 16px' }}>
         <span style={kickerStyle}>Base de datos anatómica</span>
-        <h2 style={{ margin: '2px 0 0', fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+        <h2 style={{ margin: '2px 0 0', fontSize: 'var(--fs-page)', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
           Músculos y estructuras
         </h2>
         <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: 'var(--text-tertiary)' }}>

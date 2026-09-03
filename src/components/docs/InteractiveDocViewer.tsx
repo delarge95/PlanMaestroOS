@@ -190,7 +190,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
                 <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: '#ec4899', fontWeight: 700 }}>
                   DOCUMENTO FUENTE #{currentDoc.filename.slice(0, 2)}
                 </span>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
+                <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
                   {currentDoc.title}
                 </h2>
               </div>

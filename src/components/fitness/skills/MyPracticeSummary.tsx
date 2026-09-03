@@ -63,7 +63,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
           <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
             Ruta Híbrida · {currentPath.title}
           </span>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
             {currentStep.title}
           </h3>
         </div>
