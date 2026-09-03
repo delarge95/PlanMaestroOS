@@ -60,7 +60,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
         {activeTab === 'pipeline' && (
           <>
           {/* REGLA DE CONTRATO: única próxima acción por aplicación (doc-12 + validateSingleNextAction) */}
-          <div className="ds-card ds-row" style={{ borderStyle: 'dashed', padding: '8px 12px', gap: '8px', flexWrap: 'wrap' }}>
+          <div className="ds-card ds-row" style={{ borderStyle: 'dashed', padding: 'var(--space-2) var(--space-3)', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
             <span className="ds-eyebrow">
               Regla de contrato
             </span>
@@ -80,7 +80,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                   className="ds-card ds-stack-sm"
                   style={{
                     padding: '10px',
-                    gap: '8px',
+                    gap: 'var(--space-2)',
                     minWidth: '170px'
                   }}
                 >

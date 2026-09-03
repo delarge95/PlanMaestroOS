@@ -60,9 +60,9 @@ export default function CompanyDatabase() {
     <ErrorBoundary>
       <div className="ds-card ds-stack">
 
-        <div className="ds-row-between" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)', alignItems: 'flex-end', flexWrap: 'wrap', gap: '8px' }}>
+        <div className="ds-row-between" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)', alignItems: 'flex-end', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
           <div>
-            <h3 className="ds-h3 ds-row" style={{ margin: 0, gap: '6px' }}>
+            <h3 className="ds-h3 ds-row" style={{ gap: '6px' }}>
               <Building2 size={16} /> Base de datos de empresas
             </h3>
             <span className="ds-caption" style={{ color: 'var(--text-tertiary)' }}>
@@ -93,7 +93,7 @@ export default function CompanyDatabase() {
         {/* ————— TAB EMPRESAS ————— */}
         {tab === 'companies' && (
           <>
-            <div className="ds-row-wrap" style={{ gap: '8px', alignItems: 'center' }}>
+            <div className="ds-row-wrap" style={{ gap: 'var(--space-2)', alignItems: 'center' }}>
               <div className="ds-card ds-row" style={{ padding: '5px 10px', gap: '6px', flex: '1 1 220px', minWidth: '200px' }}>
                 <Search size={13} style={{ color: 'var(--text-tertiary)' }} />
                 <input
@@ -129,7 +129,7 @@ export default function CompanyDatabase() {
                       className="ds-card ds-card-clickable ds-row-between"
                       data-selected={selectedId === c.id}
                       style={{
-                        padding: '9px 12px',
+                        padding: '9px var(--space-3)',
                         textAlign: 'left'
                       }}
                     >
@@ -163,8 +163,8 @@ export default function CompanyDatabase() {
 
               {/* DETALLE */}
               {selected && (
-                <div className="ds-card ds-stack-sm" style={{ padding: '12px', gap: '10px' }}>
-                  <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: '8px' }}>
+                <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)', gap: '10px' }}>
+                  <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: 'var(--space-2)' }}>
                     <div>
                       <strong className="ds-label" style={{ fontSize: '0.95rem' }}>{selected.name}</strong>
                       <div className="ds-micro" style={{ color: 'var(--text-tertiary)' }}>
@@ -196,7 +196,7 @@ export default function CompanyDatabase() {
                   </div>
 
                   {(selected.wave === 'A1' ? selected.whyFirst || selected.verificationFocus : selected.mainUpside || selected.mainFriction) && (
-                    <div className="ds-card ds-caption ds-stack-sm" style={{ borderStyle: 'dashed', padding: '8px', gap: '4px' }}>
+                    <div className="ds-card ds-caption ds-stack-sm" style={{ borderStyle: 'dashed', padding: 'var(--space-2)', gap: '4px' }}>
                       {selected.wave === 'A1' ? (
                         <>
                           {selected.whyFirst && <span><strong style={{ color: 'var(--text)' }}>Por qué primero:</strong> {selected.whyFirst}</span>}
@@ -215,12 +215,12 @@ export default function CompanyDatabase() {
 
                   {/* TIMELINE real (si hay interacciones registradas en el store) */}
                   {selectedTimeline && selectedTimeline.timeline.length > 0 && (
-                    <div className="ds-stack-sm" style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: '8px', gap: '6px' }}>
+                    <div className="ds-stack-sm" style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-2)', gap: '6px' }}>
                       <strong className="ds-label ds-row" style={{ fontSize: '0.78rem', gap: '5px' }}>
                         <History size={12} /> Interacciones registradas
                       </strong>
                       {selectedTimeline.timeline.map((t) => (
-                        <div key={t.id} style={{ borderLeft: '2px solid var(--color-accent-primary)', paddingLeft: '8px', display: 'flex', flexDirection: 'column', gap: '1px' }}>
+                        <div key={t.id} style={{ borderLeft: '2px solid var(--color-accent-primary)', paddingLeft: 'var(--space-2)', display: 'flex', flexDirection: 'column', gap: '1px' }}>
                           <div className="ds-row-between ds-micro">
                             <span style={{ color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
                               {t.type === 'message' ? 'Mensaje' : t.type === 'cv_sent' ? 'CV enviado' : t.type === 'reply' ? 'Respuesta' : t.type === 'interview' ? 'Entrevista' : 'Resultado'}
@@ -292,7 +292,7 @@ function ChannelList({ kind }: { kind: 'board' | 'recruiter' | 'community' }) {
         <div
           key={`${it.name}-${it.url}`}
           className="ds-card"
-          style={{ padding: '8px 10px', display: 'grid', gridTemplateColumns: 'minmax(140px, 1.2fr) 2fr', gap: '4px 12px' }}
+          style={{ padding: 'var(--space-2) 10px', display: 'grid', gridTemplateColumns: 'minmax(140px, 1.2fr) 2fr', gap: '4px var(--space-3)' }}
         >
           <div>
             <a href={it.url} target="_blank" rel="noreferrer" className="ds-row ds-label" style={{ fontWeight: 700, color: 'var(--color-accent-primary)', textDecoration: 'none', gap: '4px' }}>
