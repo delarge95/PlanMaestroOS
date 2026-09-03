@@ -46,6 +46,7 @@ export default function SuggestionInbox() {
     const userState = buildUserState({
       workoutHistory: sources?.workoutHistory ?? [],
       biofeedback: sources?.biofeedback ?? [],
+      cardioSessions: sources?.cardioSessions ?? [],
       nowIso,
     });
 
@@ -56,7 +57,10 @@ export default function SuggestionInbox() {
       week: deriveWeekAggregates(userState, thisWeek),
       previousWeek: deriveWeekAggregates(userState, prevWeek),
       todayIso: today,
-      domain: { energyToday: sources?.biofeedback?.[0]?.energy },
+      domain: {
+        energyToday: sources?.biofeedback?.[0]?.energy,
+        vocabDueCount: sources?.vocabDue?.count ?? 0,
+      },
     };
 
     const evaluations = evaluateRules(FITNESS_SEED_RULES, context);
@@ -64,6 +68,21 @@ export default function SuggestionInbox() {
     for (const candidate of fromRuleEvaluations(evaluations, weekKey)) {
       engine.propose(candidate, nowIso);
     }
+
+    // Sugerencia de repaso de vocabulario (tarjetas SR vencidas)
+    const vocabDue = (context.domain?.vocabDueCount as number) ?? 0;
+    if (vocabDue > 5) {
+      engine.propose({
+        id: `lang:vocab-due--${today}`,
+        domain: 'languages',
+        type: 'review-cards',
+        priority: 4,
+        title: `${vocabDue} tarjetas de alemán vencidas`,
+        body: `Tienes ${vocabDue} tarjetas de repaso esperando. 5 minutos ahora evita que se acumulen.`,
+        ttlHours: 12,
+      }, nowIso);
+    }
+
     engine.expireDue(nowIso);
     const activeNow = engine.active(nowIso);
     for (const s of activeNow) engine.markShown(s.id, nowIso);

@@ -146,10 +146,14 @@ export function biofeedbackToDailyLogs(entries: RawBioFeedback[]): DailyLog[] {
 export function buildUserState(input: {
   workoutHistory: RawLoggedWorkout[];
   biofeedback: RawBioFeedback[];
+  cardioSessions?: RawLoggedWorkout[];
   nowIso?: string;
 }): UserState {
   const state = createEmptyUserState(input.nowIso);
   state.sessions = workoutsToSessions(input.workoutHistory);
+  if (input.cardioSessions?.length) {
+    state.sessions = [...state.sessions, ...workoutsToSessions(input.cardioSessions)];
+  }
   state.dailyLogs = biofeedbackToDailyLogs(input.biofeedback);
   return state;
 }
@@ -158,8 +162,12 @@ export function buildUserState(input: {
 export function readRealUserStateSources(): {
   workoutHistory: RawLoggedWorkout[];
   biofeedback: RawBioFeedback[];
+  cardioSessions: RawLoggedWorkout[];
+  vocabDue: { language: string; count: number };
 } | null {
   if (typeof window === 'undefined') return null;
+
+  // Fitness logger (localStorage directo — zustand persist)
   let workoutHistory: RawLoggedWorkout[] = [];
   try {
     const raw = window.localStorage.getItem('fitapp_workout_history');
@@ -167,17 +175,58 @@ export function readRealUserStateSources(): {
       const parsed: unknown = JSON.parse(raw);
       if (Array.isArray(parsed)) workoutHistory = parsed as RawLoggedWorkout[];
     }
-  } catch {
-    workoutHistory = [];
-  }
+  } catch { workoutHistory = []; }
+
+  // Cardio sessions (localStorage directo si existe)
+  let cardioSessions: RawLoggedWorkout[] = [];
+  try {
+    const raw = window.localStorage.getItem('cardio_session_history');
+    if (raw) {
+      const parsed: unknown = JSON.parse(raw);
+      if (Array.isArray(parsed)) cardioSessions = parsed as RawLoggedWorkout[];
+    }
+  } catch { cardioSessions = []; }
+
+  // Bio-feedback clínico (import estático — no require CJS)
   let biofeedback: RawBioFeedback[] = [];
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires -- lectura puntual del store clínico real
-    const { useClinicalStore } = require('../../data/clinical/clinicalStore') as
-      typeof import('../../data/clinical/clinicalStore');
-    biofeedback = useClinicalStore.getState().biofeedback ?? [];
-  } catch {
-    biofeedback = [];
-  }
-  return { workoutHistory, biofeedback };
+    biofeedback = readClinicalBiofeedback();
+  } catch { biofeedback = []; }
+
+  // Vocabulario vencido (para sugerencias de repaso)
+  let vocabDue: { language: string; count: number } = { language: 'de', count: 0 };
+  try {
+    vocabDue = readVocabDue();
+  } catch { /* sin store → 0 */ }
+
+  return { workoutHistory, biofeedback, cardioSessions, vocabDue };
+}
+
+/** Lee biofeedback del store clínico sin require() dinámico. */
+function readClinicalBiofeedback(): RawBioFeedback[] {
+  try {
+    const raw = window.localStorage.getItem('clinical-state-v1');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as { state?: { biofeedback?: RawBioFeedback[] } };
+    return parsed.state?.biofeedback ?? [];
+  } catch { return []; }
+}
+
+/** Lee tarjetas de vocabulario vencidas desde el store de idiomas. */
+function readVocabDue(): { language: string; count: number } {
+  try {
+    const raw = window.localStorage.getItem('languages-vocabulary-v1');
+    if (!raw) return { language: 'de', count: 0 };
+    const parsed = JSON.parse(raw) as {
+      state?: { byLanguage?: Record<string, { items?: Record<string, { dueDate?: string }> }> };
+    };
+    const today = new Date().toISOString().slice(0, 10);
+    let count = 0;
+    for (const [, lang] of Object.entries(parsed.state?.byLanguage ?? {})) {
+      for (const [, item] of Object.entries(lang.items ?? {})) {
+        if (item.dueDate && item.dueDate <= today) count++;
+      }
+    }
+    return { language: 'de', count };
+  } catch { return { language: 'de', count: 0 }; }
 }
