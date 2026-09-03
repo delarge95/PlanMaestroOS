@@ -38,9 +38,6 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
           <div className="ds-row" style={{ gap: '10px' }}>
             <Briefcase size={22} style={{ color: 'var(--color-accent-primary)' }} />
             <div>
-              <h1 className="ds-h1" style={{ margin: 0 }}>
-                Laboral
-              </h1>
               <span className="ds-caption">
                 Gestión de carrera, portafolio & pipeline de empleo · {activeCount} aplicaciones activas (tracker real)
               </span>

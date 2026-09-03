@@ -188,9 +188,6 @@ export default function PortfolioSimulator() {
 
         {/* NAVEGACIÓN DE 4 PESTAÑAS (ArtStation, LinkedIn, GitHub, Web) */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
-            Portafolio y CV
-          </h2>
 
           <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '3px', borderRadius: '10px', border: '1px solid var(--color-border-subtle)', flexWrap: 'wrap' }}>
             <button

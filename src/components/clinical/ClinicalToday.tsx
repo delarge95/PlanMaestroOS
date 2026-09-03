@@ -32,9 +32,6 @@ export default function ClinicalToday({ currentPath = '/app/clinical' }: Clinica
         {/* NAVEGACIÓN NIVEL 2 */}        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <HeartPulse size={22} style={{ color: 'var(--color-accent-danger, #ff453a)' }} />
           <div>
-            <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-              Clínico
-            </h1>
             <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
               Apoyo a la ejecución, regulación somática & CBT
             </span>
