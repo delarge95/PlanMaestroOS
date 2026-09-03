@@ -102,7 +102,7 @@ export function CardioWorkspace() {
   const openPreset = openPresetId ? CARDIO_PRESETS.find((p) => p.id === openPresetId) : undefined;
 
   return (
-    <div className="ds-stack-lg" style={{ maxWidth: 920, margin: '0 auto', width: '100%' }}>
+    <div className="ds-stack-lg" style={{ width: '100%' }}>
       {/* 1) Disciplina */}
       <section className="ds-stack-sm">
         <h2 className="ds-h3">Disciplina</h2>
