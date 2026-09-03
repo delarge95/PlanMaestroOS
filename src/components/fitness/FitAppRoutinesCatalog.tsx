@@ -166,29 +166,27 @@ export default function FitAppRoutinesCatalog() {
       <div
         key={p.id}
         onClick={() => openProgramDetail(p.id)}
+        className="ds-stack-sm"
         style={{
-          background: isSelected ? 'rgba(10,132,255,0.12)' : 'rgba(255,255,255,0.03)',
+          background: isSelected ? 'var(--accent-soft)' : 'rgba(255,255,255,0.03)',
           border: isSelected
-            ? '1.5px solid var(--accent, #0a84ff)'
-            : '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-          borderRadius: '12px',
+            ? '1.5px solid var(--accent)'
+            : '1px solid var(--color-border-subtle)',
+          borderRadius: 'var(--radius-m)',
           padding: '10px 12px',
-          display: 'flex',
-          flexDirection: 'column',
           justifyContent: 'space-between',
-          gap: '8px',
           cursor: 'pointer',
           transition: 'all 150ms ease',
           boxShadow: isSelected ? '0 0 12px rgba(10,132,255,0.2)' : 'none'
         }}
       >
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
+          <div className="ds-row-between" style={{ marginBottom: '2px' }}>
             <span style={{ fontSize: '0.74rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)' }}>
               {p.durationWeeks} {p.durationWeeks === 1 ? 'sem' : 'sems'} · {p.weeks?.[0]?.days?.length || p.split?.length || 1} d/s
             </span>
             {isActiveInHoy && (
-              <span style={{ fontSize: '0.64rem', background: 'rgba(48,209,88,0.2)', color: '#30d158', padding: '1px 5px', borderRadius: '4px', fontWeight: 700 }}>
+              <span className="ds-badge ds-badge-success">
                 HOY
               </span>
             )}
@@ -202,8 +200,8 @@ export default function FitAppRoutinesCatalog() {
           </span>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <span style={{ fontSize: '0.7rem', background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.7)', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>
+        <div className="ds-row-between" style={{ paddingTop: '6px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <span className="ds-badge ds-badge-neutral">
             {p.discipline || 'Calistenia'}
           </span>
           <button
@@ -212,16 +210,8 @@ export default function FitAppRoutinesCatalog() {
               e.stopPropagation();
               openProgramDetail(p.id);
             }}
-            style={{
-              background: isSelected ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.08)',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '3px 8px',
-              fontSize: '0.72rem',
-              fontWeight: 700,
-              cursor: 'pointer'
-            }}
+            className="ds-chip"
+            data-active={String(isSelected)}
           >
             {isSelected ? 'Ver' : 'Seleccionar'}
           </button>
@@ -245,17 +235,15 @@ export default function FitAppRoutinesCatalog() {
       const isSubCollapsed = collapsedSubgroupKeys.includes(fullSubKey);
 
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div className="ds-stack-sm">
           <button
             type="button"
             onClick={() => toggleSubgroupCollapse(fullSubKey)}
+            className="ds-row-between"
             style={{
               background: 'transparent',
               border: 'none',
               padding: '4px 0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
               cursor: 'pointer',
               width: '100%',
               textAlign: 'left'
@@ -277,31 +265,29 @@ export default function FitAppRoutinesCatalog() {
     };
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div className="ds-stack" style={{ gap: '10px' }}>
         {/* ENCABEZADO COLAPSABLE DE TIER */}
         <button
           type="button"
           onClick={() => toggleTierCollapse(tierId)}
+          className="ds-row-between"
           style={{
             width: '100%',
             background: 'rgba(255,255,255,0.02)',
             border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '12px',
+            borderRadius: 'var(--radius-m)',
             padding: '10px 14px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
             cursor: 'pointer'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
             {icon}
             <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
               {title}
             </h3>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '0.74rem', background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', padding: '2px 8px', borderRadius: '999px', fontWeight: 600 }}>
+          <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
+            <span className="ds-badge ds-badge-neutral" style={{ borderRadius: 'var(--radius-pill)' }}>
               {programs.length} {badge}
             </span>
             <ChevronRightIcon size={16} style={{ color: 'rgba(255,255,255,0.4)', transform: isTierCollapsed ? 'none' : 'rotate(90deg)', transition: 'transform 150ms ease' }} />
@@ -310,8 +296,8 @@ export default function FitAppRoutinesCatalog() {
 
         {/* SUBGRUPOS POR AUTOR / ORIGEN */}
         {!isTierCollapsed && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingLeft: '8px' }}>
-            {renderSubgroup('heria', 'Chris Heria / Thenx', '#ff9f0a', heriaPrograms)}
+          <div className="ds-stack" style={{ gap: '14px', paddingLeft: 'var(--space-2)' }}>
+            {renderSubgroup('heria', 'Chris Heria / Thenx', 'var(--warning)', heriaPrograms)}
             {renderSubgroup('nippard', 'Jeff Nippard', '#9fb2ff', nippardPrograms)}
             {renderSubgroup('planmaestro', 'PlanMaestro OS', '#9fdfa8', planMaestroPrograms)}
           </div>
@@ -322,23 +308,20 @@ export default function FitAppRoutinesCatalog() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
+      <div className="ds-stack" style={{ color: 'var(--text-primary)' }}>
         
         {/* BLOQUE 1: BARRA DE BÚSQUEDA Y FILTROS COLAPSABLE */}
         <div
+          className="ds-stack ds-card"
           style={{
-            background: 'var(--surface-1, #0d0d0f)',
-            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-            borderRadius: '16px',
-            padding: '16px 20px',
-            display: 'flex',
-            flexDirection: 'column',
+            borderRadius: 'var(--radius-l)',
+            padding: 'var(--space-4) 20px',
             gap: '14px',
             boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}
         >
           {/* FILA SUPERIOR: INPUT DE BÚSQUEDA + BOTÓN DE FILTROS AVANZADOS */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="ds-row" style={{ flexWrap: 'wrap' }}>
             <div style={{ position: 'relative', flex: 1, minWidth: '240px' }}>
               <Search
                 size={16}
@@ -372,19 +355,8 @@ export default function FitAppRoutinesCatalog() {
             <button
               type="button"
               onClick={() => setIsFilterExpanded(!isFilterExpanded)}
-              style={{
-                background: isFilterExpanded || isFilteredSearchActive ? 'rgba(10,132,255,0.15)' : 'rgba(255,255,255,0.04)',
-                color: isFilterExpanded || isFilteredSearchActive ? '#0a84ff' : 'rgba(255,255,255,0.7)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '10px',
-                padding: '9px 14px',
-                fontSize: '0.82rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
+              className="ds-chip"
+              data-active={String(isFilterExpanded || isFilteredSearchActive)}
             >
               <Filter size={14} />
               <span>Filtros Avanzados</span>
@@ -395,12 +367,11 @@ export default function FitAppRoutinesCatalog() {
           {/* PANEL EXPANDIBLE DE FILTROS CON BOTONES PILLS (HIGH CONTRAST) */}
           {isFilterExpanded && (
             <div
+              className="ds-stack"
               style={{
-                paddingTop: '12px',
+                paddingTop: 'var(--space-3)',
                 borderTop: '1px solid rgba(255,255,255,0.08)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
+                gap: 'var(--space-3)',
                 fontSize: '0.82rem'
               }}
             >
@@ -408,7 +379,7 @@ export default function FitAppRoutinesCatalog() {
               {isMobile ? (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '10px' }}>
                   <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
-                    <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 600 }}>Metodología</span>
+                    <span className="ds-label-sm">Metodología</span>
                     <select
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
@@ -421,7 +392,7 @@ export default function FitAppRoutinesCatalog() {
                     </select>
                   </label>
                   <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
-                    <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 600 }}>Estructura</span>
+                    <span className="ds-label-sm">Estructura</span>
                     <select
                       value={selectedTierFilter}
                       onChange={(e) => setSelectedTierFilter(e.target.value)}
@@ -434,7 +405,7 @@ export default function FitAppRoutinesCatalog() {
                     </select>
                   </label>
                   <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
-                    <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 600 }}>Disciplina</span>
+                    <span className="ds-label-sm">Disciplina</span>
                     <select
                       value={selectedDiscipline}
                       onChange={(e) => setSelectedDiscipline(e.target.value)}
@@ -449,8 +420,8 @@ export default function FitAppRoutinesCatalog() {
                 </div>
               ) : (
                 <>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Metodología:</span>
+                  <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
+                    <span className="ds-label-sm" style={{ color: 'rgba(255,255,255,0.5)', minWidth: '120px' }}>Metodología:</span>
                     {[
                       { key: 'all', label: 'Todas' },
                       { key: 'heria', label: 'Chris Heria / Thenx' },
@@ -461,24 +432,16 @@ export default function FitAppRoutinesCatalog() {
                         key={item.key}
                         type="button"
                         onClick={() => setSelectedCategory(item.key)}
-                        style={{
-                          background: selectedCategory === item.key ? 'var(--text-primary)' : 'rgba(255,255,255,0.06)',
-                          color: selectedCategory === item.key ? '#000000' : 'rgba(255,255,255,0.7)',
-                          border: 'none',
-                          padding: '4px 10px',
-                          borderRadius: '999px',
-                          fontSize: '0.76rem',
-                          fontWeight: selectedCategory === item.key ? 700 : 500,
-                          cursor: 'pointer'
-                        }}
+                        className="ds-chip"
+                        data-active={String(selectedCategory === item.key)}
                       >
                         {item.label}
                       </button>
                     ))}
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Estructura:</span>
+                  <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
+                    <span className="ds-label-sm" style={{ color: 'rgba(255,255,255,0.5)', minWidth: '120px' }}>Estructura:</span>
                     {[
                       { key: 'all', label: 'Todos' },
                       { key: 'program', label: 'Programas' },
@@ -489,24 +452,16 @@ export default function FitAppRoutinesCatalog() {
                         key={item.key}
                         type="button"
                         onClick={() => setSelectedTierFilter(item.key)}
-                        style={{
-                          background: selectedTierFilter === item.key ? 'var(--text-primary)' : 'rgba(255,255,255,0.06)',
-                          color: selectedTierFilter === item.key ? '#000000' : 'rgba(255,255,255,0.7)',
-                          border: 'none',
-                          padding: '4px 10px',
-                          borderRadius: '999px',
-                          fontSize: '0.76rem',
-                          fontWeight: selectedTierFilter === item.key ? 700 : 500,
-                          cursor: 'pointer'
-                        }}
+                        className="ds-chip"
+                        data-active={String(selectedTierFilter === item.key)}
                       >
                         {item.label}
                       </button>
                     ))}
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600, minWidth: '120px' }}>Disciplina:</span>
+                  <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
+                    <span className="ds-label-sm" style={{ color: 'rgba(255,255,255,0.5)', minWidth: '120px' }}>Disciplina:</span>
                     {[
                       { key: 'all', label: 'Todas' },
                       { key: 'Calistenia', label: 'Calistenia' },
@@ -517,16 +472,8 @@ export default function FitAppRoutinesCatalog() {
                         key={item.key}
                         type="button"
                         onClick={() => setSelectedDiscipline(item.key)}
-                        style={{
-                          background: selectedDiscipline === item.key ? 'var(--text-primary)' : 'rgba(255,255,255,0.06)',
-                          color: selectedDiscipline === item.key ? '#000000' : 'rgba(255,255,255,0.7)',
-                          border: 'none',
-                          padding: '4px 10px',
-                          borderRadius: '999px',
-                          fontSize: '0.76rem',
-                          fontWeight: selectedDiscipline === item.key ? 700 : 500,
-                          cursor: 'pointer'
-                        }}
+                        className="ds-chip"
+                        data-active={String(selectedDiscipline === item.key)}
                       >
                         {item.label}
                       </button>
@@ -540,21 +487,18 @@ export default function FitAppRoutinesCatalog() {
 
         {/* BLOQUE 2: VISTA DEL CATÁLOGO (POR TIERS O RESULTADOS DE BÚSQUEDA) */}
         <div
+          className="ds-stack ds-card"
           style={{
-            background: 'var(--surface-1, #0d0d0f)',
-            border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-            borderRadius: '16px',
+            borderRadius: 'var(--radius-l)',
             padding: '20px',
-            display: 'flex',
-            flexDirection: 'column',
             gap: '20px',
             boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
           }}
         >
           {isFilteredSearchActive ? (
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                <span style={{ fontSize: '0.86rem', fontWeight: 700, color: '#0a84ff' }}>
+              <div className="ds-row-between" style={{ marginBottom: '14px' }}>
+                <span style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--accent)' }}>
                   Resultados Filtrados ({filteredPrograms.length} rutinas)
                 </span>
                 <button
@@ -565,7 +509,7 @@ export default function FitAppRoutinesCatalog() {
                     setSelectedDiscipline('all');
                     setSelectedTierFilter('all');
                   }}
-                  style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', cursor: 'pointer' }}
+                  className="ds-btn ds-btn-ghost ds-btn-sm"
                 >
                   Limpiar Filtros
                 </button>
@@ -580,7 +524,7 @@ export default function FitAppRoutinesCatalog() {
               {renderTierGroup(
                 'program',
                 'Programas',
-                <BookOpen size={18} style={{ color: '#0a84ff' }} />,
+                <BookOpen size={18} style={{ color: 'var(--accent)' }} />,
                 tierPrograms.multiWeek,
                 'programas'
               )}
@@ -589,7 +533,7 @@ export default function FitAppRoutinesCatalog() {
               {renderTierGroup(
                 'week',
                 'Planes Semanales (1 semana)',
-                <Calendar size={18} style={{ color: '#ff9f0a' }} />,
+                <Calendar size={18} style={{ color: 'var(--warning)' }} />,
                 tierPrograms.weekly,
                 'planes'
               )}
@@ -598,7 +542,7 @@ export default function FitAppRoutinesCatalog() {
               {renderTierGroup(
                 'day',
                 'Rutinas Diarias / Master Workouts (1 día)',
-                <Award size={18} style={{ color: '#30d158' }} />,
+                <Award size={18} style={{ color: 'var(--success)' }} />,
                 tierPrograms.daily,
                 'master workouts'
               )}
@@ -615,19 +559,17 @@ export default function FitAppRoutinesCatalog() {
           maxWidth={isMobile ? '100%' : '860px'}
         >
           {/* SWITCH ACTIVADO/DESACTIVADO Y BOTÓN DE PDF */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', paddingBottom: '12px', borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
+          <div className="ds-row" style={{ flexWrap: 'wrap', paddingBottom: 'var(--space-3)', borderBottom: '1px solid var(--color-border-subtle)' }}>
             <div
               onClick={() => toggleActiveProgram(currentProgram.id)}
               title={isActiveInTracker ? 'Activo en "Hoy" - Clic para desactivar' : 'Inactivo - Clic para activar en "Hoy"'}
+              className="ds-row"
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
                 cursor: 'pointer',
                 padding: '4px 8px',
                 borderRadius: '20px',
                 background: 'rgba(255,255,255,0.04)',
-                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))'
+                border: '1px solid var(--color-border-subtle)'
               }}
             >
               <div
@@ -635,7 +577,7 @@ export default function FitAppRoutinesCatalog() {
                   width: '32px',
                   height: '18px',
                   borderRadius: '10px',
-                  background: isActiveInTracker ? 'var(--success, #30d158)' : 'rgba(255,255,255,0.2)',
+                  background: isActiveInTracker ? 'var(--success)' : 'rgba(255,255,255,0.2)',
                   position: 'relative',
                   transition: 'background 150ms ease'
                 }}
@@ -653,7 +595,7 @@ export default function FitAppRoutinesCatalog() {
                   }}
                 />
               </div>
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isActiveInTracker ? 'var(--success, #30d158)' : 'var(--text-secondary)' }}>
+              <span className="ds-label-sm" style={{ color: isActiveInTracker ? 'var(--success)' : 'var(--text-secondary)' }}>
                 {isActiveInTracker ? 'Activo en Hoy' : 'Inactivo'}
               </span>
             </div>
@@ -663,18 +605,8 @@ export default function FitAppRoutinesCatalog() {
                 href={libraryAssetUrl(currentProgram.pdfUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  background: 'var(--accent, #0a84ff)',
-                  color: '#ffffff',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  textDecoration: 'none'
-                }}
+                className="ds-btn ds-btn-primary ds-btn-sm"
+                style={{ textDecoration: 'none' }}
               >
                 <ExternalLink size={13} />
                 <span>Ver PDF Oficial</span>
@@ -685,17 +617,11 @@ export default function FitAppRoutinesCatalog() {
             {isThenxMasterRoutineId(currentProgram.id) && (
               <a
                 href="/app/fitness/skills"
+                className="ds-btn ds-btn-sm"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  background: 'rgba(10,132,255,0.12)',
-                  border: '1px solid rgba(10,132,255,0.35)',
-                  color: 'var(--accent, #0a84ff)',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
+                  background: 'var(--accent-soft)',
+                  border: '1px solid var(--accent-border)',
+                  color: 'var(--accent)',
                   textDecoration: 'none'
                 }}
                 title="Ver la progresión paso a paso y la guía técnica de esta habilidad"
