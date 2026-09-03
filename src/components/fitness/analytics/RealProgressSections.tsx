@@ -47,13 +47,12 @@ function resolveMuscleGroup(exerciseName: string): string | undefined {
 function PendingLoggerCard({ label }: { label: string }) {
   return (
     <div
+      className="ds-row"
       style={{
         background: 'rgba(255,255,255,0.02)',
-        border: '1px dashed rgba(255,255,255,0.14)',
-        borderRadius: '12px',
-        padding: '14px 16px',
-        display: 'flex',
-        alignItems: 'center',
+        border: '1px dashed var(--color-border-visible)',
+        borderRadius: 'var(--radius-m)',
+        padding: '14px var(--space-4)',
         gap: '10px',
         opacity: 0.75
       }}
@@ -71,16 +70,6 @@ function PendingLoggerCard({ label }: { label: string }) {
   );
 }
 
-const sectionStyle: React.CSSProperties = {
-  background: 'var(--surface-1, #0d0d0f)',
-  border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-  borderRadius: 'var(--radius-m, 12px)',
-  padding: '16px 18px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '12px'
-};
-
 const sectionTitleStyle: React.CSSProperties = {
   fontSize: '0.78rem',
   fontWeight: 700,
@@ -89,7 +78,7 @@ const sectionTitleStyle: React.CSSProperties = {
   letterSpacing: '0.4px',
   display: 'flex',
   alignItems: 'center',
-  gap: '8px'
+  gap: 'var(--space-2)'
 };
 
 export default function RealProgressSections() {
@@ -177,9 +166,9 @@ export default function RealProgressSections() {
   const dataLoaded = history !== null;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+    <div className="ds-stack">
       {/* ===================== PROGRAMAS ACTIVOS ===================== */}
-      <section style={sectionStyle}>
+      <section className="ds-card ds-stack-sm" style={{ gap: 'var(--space-3)' }}>
         <span style={sectionTitleStyle}>
           <Dumbbell size={14} /> Programas activos ({activeProgramIds.length})
         </span>
@@ -192,10 +181,10 @@ export default function RealProgressSections() {
               <div
                 key={pid}
                 style={{
-                  background: isInspected ? 'rgba(10,132,255,0.08)' : 'rgba(255,255,255,0.02)',
-                  border: isInspected ? '1px solid rgba(10,132,255,0.35)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))',
-                  borderRadius: '10px',
-                  padding: '10px 12px',
+                  background: isInspected ? 'var(--accent-soft)' : 'rgba(255,255,255,0.02)',
+                  border: isInspected ? '1px solid var(--accent-border)' : '1px solid var(--color-border-subtle)',
+                  borderRadius: 'var(--radius-m)',
+                  padding: '10px var(--space-3)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '4px'
@@ -215,7 +204,7 @@ export default function RealProgressSections() {
       </section>
 
       {/* ===================== SEMANA ACTUAL ===================== */}
-      <section style={sectionStyle}>
+      <section className="ds-card ds-stack-sm" style={{ gap: 'var(--space-3)' }}>
         <span style={sectionTitleStyle}>
           <CalendarCheck size={14} /> Semana actual (calendario real)
         </span>
@@ -235,15 +224,15 @@ export default function RealProgressSections() {
                 key={idx}
                 style={{
                   background: doneToday
-                    ? 'rgba(48,209,88,0.1)'
+                    ? 'var(--success-soft)'
                     : isToday
-                      ? 'rgba(10,132,255,0.12)'
+                      ? 'var(--accent-soft)'
                       : 'rgba(255,255,255,0.02)',
                   border: isToday
-                    ? '1px solid rgba(10,132,255,0.45)'
-                    : '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))',
-                  borderRadius: '9px',
-                  padding: '8px 4px',
+                    ? '1px solid var(--accent-border)'
+                    : '1px solid var(--color-border-subtle)',
+                  borderRadius: 'var(--radius-s)',
+                  padding: 'var(--space-2) 4px',
                   textAlign: 'center',
                   display: 'flex',
                   flexDirection: 'column',
@@ -262,7 +251,7 @@ export default function RealProgressSections() {
                     fontSize: '0.62rem',
                     fontWeight: 700,
                     color: doneToday
-                      ? 'var(--success, #30d158)'
+                      ? 'var(--success)'
                       : d.isTrainingDay
                         ? 'var(--text-tertiary)'
                         : 'var(--text-tertiary)',
@@ -303,40 +292,33 @@ export default function RealProgressSections() {
       </section>
 
       {/* ===================== HISTÓRICO ===================== */}
-      <section style={sectionStyle}>
+      <section className="ds-card ds-stack-sm" style={{ gap: 'var(--space-3)' }}>
         <span style={sectionTitleStyle}>
           <ClipboardList size={14} /> Histórico (sesiones del logger)
         </span>
         {dataLoaded && hasHistory ? (
           <>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '10px' }}>
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', borderRadius: '10px', padding: '10px 12px' }}>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', fontWeight: 700 }}>Sesiones</span>
-                <strong style={{ fontSize: '1.3rem', color: 'var(--text-primary)', display: 'block' }}>{totalSessions}</strong>
+              <div className="ds-stat">
+                <span className="ds-stat-label">Sesiones</span>
+                <strong className="ds-stat-value" style={{ fontSize: '1.3rem', display: 'block' }}>{totalSessions}</strong>
               </div>
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', borderRadius: '10px', padding: '10px 12px' }}>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', fontWeight: 700 }}>Volumen total</span>
-                <strong style={{ fontSize: '1.3rem', color: 'var(--text-primary)', display: 'block' }}>{totalVolumeKg.toLocaleString('es-ES')} kg</strong>
+              <div className="ds-stat">
+                <span className="ds-stat-label">Volumen total</span>
+                <strong className="ds-stat-value" style={{ fontSize: '1.3rem', display: 'block' }}>{totalVolumeKg.toLocaleString('es-ES')} kg</strong>
               </div>
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', borderRadius: '10px', padding: '10px 12px' }}>
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', textTransform: 'uppercase', fontWeight: 700 }}>Duración media</span>
-                <strong style={{ fontSize: '1.3rem', color: 'var(--text-primary)', display: 'block' }}>{avgDuration} min</strong>
+              <div className="ds-stat">
+                <span className="ds-stat-label">Duración media</span>
+                <strong className="ds-stat-value" style={{ fontSize: '1.3rem', display: 'block' }}>{avgDuration} min</strong>
               </div>
             </div>
 
             {muscleVolume.length > 0 && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              <div className="ds-row-wrap" style={{ gap: '6px' }}>
                 {muscleVolume.map((mv) => (
                   <span
                     key={mv.muscleGroup}
-                    style={{
-                      fontSize: '0.74rem',
-                      color: 'var(--text-secondary)',
-                      background: 'rgba(10,132,255,0.07)',
-                      border: '1px solid rgba(10,132,255,0.2)',
-                      padding: '3px 9px',
-                      borderRadius: '6px'
-                    }}
+                    className="ds-badge ds-badge-accent"
                   >
                     {mv.muscleGroup}: {mv.totalSets} series · {Math.round(mv.totalVolumeKg).toLocaleString('es-ES')} kg
                   </span>
@@ -352,7 +334,7 @@ export default function RealProgressSections() {
       </section>
 
       {/* ===================== RÉCORDS ===================== */}
-      <section style={sectionStyle}>
+      <section className="ds-card ds-stack-sm" style={{ gap: 'var(--space-3)' }}>
         <span style={sectionTitleStyle}>
           <Trophy size={14} /> Récords (PRs reales por ejercicio)
         </span>
@@ -362,22 +344,19 @@ export default function RealProgressSections() {
               {records.slice(0, 5).map((r, idx) => (
                 <div
                   key={r.exerciseName}
+                  className="ds-row-between"
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: '10px',
                     background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))',
-                    borderRadius: '9px',
-                    padding: '8px 12px'
+                    border: '1px solid var(--color-border-subtle)',
+                    borderRadius: 'var(--radius-s)',
+                    padding: 'var(--space-2) var(--space-3)'
                   }}
                 >
                   <span style={{ fontSize: '0.84rem', color: 'var(--text-primary)', fontWeight: idx === 0 ? 700 : 500 }}>
                     {idx === 0 && '🥇 '}{r.exerciseName}
                   </span>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                    PR <strong style={{ color: 'var(--accent, #0a84ff)' }}>{r.maxWeightKg} kg</strong> · mejor serie {r.bestSet.weightKg} kg × {r.bestSet.reps} · e1RM ≈ {Math.round(r.bestE1rmKg)} kg
+                    PR <strong style={{ color: 'var(--accent)' }}>{r.maxWeightKg} kg</strong> · mejor serie {r.bestSet.weightKg} kg × {r.bestSet.reps} · e1RM ≈ {Math.round(r.bestE1rmKg)} kg
                   </span>
                 </div>
               ))}
@@ -386,15 +365,15 @@ export default function RealProgressSections() {
             {suggestedLoad && topRecord && (
               <div
                 style={{
-                  background: 'rgba(10,132,255,0.06)',
-                  border: '1px solid rgba(10,132,255,0.25)',
-                  borderRadius: '10px',
-                  padding: '10px 12px',
+                  background: 'var(--accent-soft)',
+                  border: '1px solid var(--accent-border)',
+                  borderRadius: 'var(--radius-m)',
+                  padding: '10px var(--space-3)',
                   fontSize: '0.8rem',
                   color: 'var(--text-secondary)'
                 }}
               >
-                <strong style={{ color: 'var(--accent, #0a84ff)' }}>{topRecord.exerciseName}</strong> — carga objetivo RPE 8 desde tu e1RM:{' '}
+                <strong style={{ color: 'var(--accent)' }}>{topRecord.exerciseName}</strong> — carga objetivo RPE 8 desde tu e1RM:{' '}
                 <strong style={{ color: 'var(--text-primary)' }}>{suggestedLoad.targetWeightKg} kg</strong>
                 {suggestedLoad.platesPerSide.length > 0 && (
                   <span>

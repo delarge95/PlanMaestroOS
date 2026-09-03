@@ -74,12 +74,12 @@ export function NutritionWorkspace() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'var(--surface, var(--color-surface-base))',
+    background: 'var(--surface-1)',
     border: '1px solid var(--color-border-subtle)',
-    borderRadius: 'var(--radius-sm)',
+    borderRadius: 'var(--radius-s)',
     padding: '10px 12px',
     color: 'var(--text-primary)',
-    fontSize: 'var(--font-size-body)',
+    fontSize: 'var(--fs-body)',
     boxSizing: 'border-box',
   };
 

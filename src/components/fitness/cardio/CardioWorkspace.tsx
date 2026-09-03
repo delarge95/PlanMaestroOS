@@ -123,7 +123,7 @@ export function CardioWorkspace() {
           ))}
         </div>
         <div className="ds-card ds-stack-sm">
-          <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{disc.description}</p>
+          <p className="ds-caption" style={{ lineHeight: 1.55 }}>{disc.description}</p>
           <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
             <StatusBadge label={`METs típicos: ${disc.typicalMets.value}`} />
             <span className="ds-micro">
@@ -175,8 +175,8 @@ export function CardioWorkspace() {
               <strong className="ds-row" style={{ gap: 6, color: 'var(--text-primary)' }}>
                 {APPROACH_ICONS[a.id]} {a.name}
               </strong>
-              <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{a.description}</p>
-              <p className="ds-micro" style={{ margin: 0, lineHeight: 1.5 }}>
+              <p className="ds-caption" style={{ lineHeight: 1.55 }}>{a.description}</p>
+              <p className="ds-micro" style={{ lineHeight: 1.5 }}>
                 <strong>Cuándo usarlo:</strong> {a.whenToUse}
               </p>
               <details>
@@ -215,7 +215,7 @@ export function CardioWorkspace() {
                   <strong style={{ color: 'var(--text-primary)', lineHeight: 1.3 }}>{shown.name}</strong>
                   {edited && <StatusBadge label="Editado" variant="active" />}
                 </div>
-                <p className="ds-caption" style={{ margin: 0, lineHeight: 1.5 }}>{shown.summary}</p>
+                <p className="ds-caption" style={{ lineHeight: 1.5 }}>{shown.summary}</p>
                 <div className="ds-row-wrap" style={{ gap: 6, alignItems: 'center' }}>
                   <StatusBadge label={`${shown.totalMin} min`} />
                   <DifficultyBadge difficulty={shown.difficulty} />
@@ -228,7 +228,7 @@ export function CardioWorkspace() {
             );
           })}
         </div>
-        <p className="ds-micro" style={{ margin: 0 }}>
+        <p className="ds-micro">
           Toca una sesión para ver el desglose bloque a bloque con su cita, y edítala como copia local (los presets originales nunca se sobrescriben).
         </p>
       </section>
