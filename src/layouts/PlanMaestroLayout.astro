@@ -20,6 +20,20 @@ const mappedDomain = (activeDomain === 'general' || activeDomain === 'today')
   : activeDomain === 'schedules'
   ? 'plan'
   : activeDomain;
+
+// Nivel 3 (subsecciones) — se renderiza DESPUÉS del h1, dentro del contenedor de contenido.
+import { SECTION_NAV } from '../components/shell/sectionNavConfig';
+
+function detectLevel3(path: string): string | null {
+  if (/^\/app\/fitness\/library/.test(path)) return 'fitness.library';
+  return null;
+}
+
+const l3Key = detectLevel3(Astro.url.pathname);
+const l3Items = l3Key ? SECTION_NAV[l3Key] : undefined;
+const l3Exact = l3Items?.find(i => i.end && Astro.url.pathname === i.href);
+const l3Prefix = l3Items?.find(i => !i.end && Astro.url.pathname.startsWith(i.href));
+const l3ActiveFinal = (l3Exact ?? l3Prefix ?? l3Items?.find(i => i.end)?.href ?? l3Items?.[0]?.href) ?? '';
 ---
 
 <!DOCTYPE html>
@@ -36,13 +50,23 @@ const mappedDomain = (activeDomain === 'general' || activeDomain === 'today')
       <NavigationShell client:load currentPath={Astro.url.pathname} activeDomain={mappedDomain} breadcrumb={breadcrumb} />
       <SectionNavBar />
 
-      {pageTitle && (
-        <div style="padding: 20px 20px 0;">
-          <h1 style="font: 700 clamp(1.5rem, 3vw, 2.25rem) var(--font-family-system); letter-spacing: -0.02em; color: var(--text-primary); margin: 0; line-height: 1.15;">{pageTitle}</h1>
-        </div>
-      )}
-
       <main class={styles.appMain} id="app-main">
+        {pageTitle && (
+          <h1 style="font: 700 clamp(1.5rem, 3vw, 2.25rem) var(--font-family-system); letter-spacing: -0.02em; color: var(--text-primary); margin: 0 0 var(--space-3); line-height: 1.15;">{pageTitle}</h1>
+        )}
+
+        {l3Items && l3Items.length > 0 && (
+          <nav class="snb-l3" aria-label="Navegación de subsección" style="margin: 0 0 var(--space-4);">
+            {l3Items.map(item => (
+              <a
+                href={item.href}
+                class:list={['snb-l3-link', { 'snb-l3-link-active': item.href === l3ActiveFinal }]}
+                aria-current={item.href === l3ActiveFinal ? 'page' : undefined}
+              >{item.label}</a>
+            ))}
+          </nav>
+        )}
+
         <slot />
       </main>
     </div>

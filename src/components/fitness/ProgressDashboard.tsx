@@ -102,125 +102,38 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
         {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
-        {/* NAVEGACIÓN NIVEL 3: SUB-PESTAÑAS DE PROGRESO (APPLE CLEAN TAB BAR) */}
-        <div style={{
-          display: 'flex',
-          gap: '6px',
-          paddingBottom: '6px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-          overflowX: 'auto',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}>
-          <button
-            type="button"
-            onClick={() => setActiveTab('analytics')}
-            style={{
-              background: activeTab === 'analytics' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'analytics' ? '#ffffff' : 'rgba(255,255,255,0.55)',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.84rem',
-              fontWeight: activeTab === 'analytics' ? 600 : 500,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          >
-            <BarChart2 size={14} />
-            <span>Rendimiento Global</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('program')}
-            style={{
-              background: activeTab === 'program' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'program' ? '#ffffff' : 'rgba(255,255,255,0.55)',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.84rem',
-              fontWeight: activeTab === 'program' ? 600 : 500,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          >
-            <Target size={14} />
-            <span>Programa Activo</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('loading')}
-            style={{
-              background: activeTab === 'loading' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'loading' ? '#ffffff' : 'rgba(255,255,255,0.55)',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.84rem',
-              fontWeight: activeTab === 'loading' ? 600 : 500,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          >
-            <Dumbbell size={14} />
-            <span>Tabla Universal Cargas</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('guide')}
-            style={{
-              background: activeTab === 'guide' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'guide' ? '#ffffff' : 'rgba(255,255,255,0.55)',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.84rem',
-              fontWeight: activeTab === 'guide' ? 600 : 500,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          >
-            <BookOpen size={14} />
-            <span>Guía por Ejercicio</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('history')}
-            style={{
-              background: activeTab === 'history' ? 'rgba(255,255,255,0.12)' : 'transparent',
-              color: activeTab === 'history' ? '#ffffff' : 'rgba(255,255,255,0.55)',
-              border: 'none',
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.84rem',
-              fontWeight: activeTab === 'history' ? 600 : 500,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 150ms cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          >
-            <History size={14} />
-            <span>Historial ({totalSessions})</span>
-          </button>
+        {/* NAVEGACIÓN NIVEL 3: SUB-PESTAÑAS (mismo lenguaje visual que snb-l3 del layout) */}
+        <div style={{ display: 'flex', gap: '2px', paddingBottom: '6px', borderBottom: '1px solid var(--separator)', overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {([
+            { key: 'analytics', icon: <BarChart2 size={14} />, label: 'Rendimiento Global' },
+            { key: 'program', icon: <Target size={14} />, label: 'Programa Activo' },
+            { key: 'loading', icon: <Dumbbell size={14} />, label: 'Tabla Universal Cargas' },
+            { key: 'guide', icon: <BookOpen size={14} />, label: 'Guía por Ejercicio' },
+            { key: 'history', icon: <History size={14} />, label: `Historial (${totalSessions})` },
+          ] as const).map(({ key, icon, label }) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setActiveTab(key)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                padding: '5px 12px',
+                borderRadius: '6px',
+                fontSize: '0.8125rem',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: activeTab === key ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                fontWeight: activeTab === key ? 500 : 400,
+                transition: 'color 0.15s'
+              }}
+            >
+              {icon}
+              <span>{label}</span>
+            </button>
+          ))}
         </div>
 
         {/* 1. SUB-PESTAÑA: RENDIMIENTO GLOBAL & TENDENCIAS SVG */}
