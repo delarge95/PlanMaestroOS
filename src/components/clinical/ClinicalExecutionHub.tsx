@@ -133,44 +133,24 @@ export default function ClinicalExecutionHub() {
             </h3>
           </div>
 
-          {/* TAB NAVIGATION */}
-          <div className="ds-row-wrap">
-            <button
-              type="button"
-              onClick={() => setActiveTab('checkin')}
-              className="ds-chip"
-              data-active={activeTab === 'checkin'}
-            >
-              📊 Estado Diario
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('exposure')}
-              className="ds-chip"
-              data-active={activeTab === 'exposure'}
-            >
-              🎯 Exposición Social CBT
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('rescue')}
-              className="ds-chip"
-              data-active={activeTab === 'rescue'}
-            >
-              🚨 Rescate 10 min TDAH
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('sleep')}
-              className="ds-chip"
-              data-active={activeTab === 'sleep'}
-            >
-              🌙 Sueño CBT-I
-            </button>
-          </div>
+          {/* VISTAS DEL HUB (sin ruta): mismo lenguaje visual que snb-l3 */}
+          <nav className="snb-l3" aria-label="Vistas de Ejecución Clínica" style={{ margin: 0, padding: '0 0 2px', borderBottom: '1px solid var(--separator)' }}>
+            {([
+              { key: 'checkin', label: 'Estado Diario' },
+              { key: 'exposure', label: 'Exposición Social CBT' },
+              { key: 'rescue', label: 'Rescate 10 min TDAH' },
+              { key: 'sleep', label: 'Sueño CBT-I' },
+            ] as const).map(({ key, label }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setActiveTab(key)}
+                className={`snb-l3-link${activeTab === key ? ' snb-l3-link-active' : ''}`}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
         </div>
 
         {/* TAB 1: BIO-FEEDBACK DAILY CHECK-IN */}

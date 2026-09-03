@@ -173,7 +173,21 @@
 .ds-anim-2 { animation-delay: 0.1s; }
 .ds-anim-3 { animation-delay: 0.15s; }
 
-/* ── SECTION NAV BAR (nivel 2 + nivel 3) ── */
+/* ── SECTION NAV BAR (jerarquía canónica de navegación) ──
+   REGLAS (canon, no negociable):
+   1. Nivel 1 — Dominios: NavigationShell (header superior). Fijo.
+   2. Nivel 2 — Secciones de un dominio (RUTAS): .snb-l2 pill chips sticky.
+      Es el ÚNICO lugar con pills de navegación.
+   3. Título: h1 del layout (pageTitle), primer elemento del contenedor de contenido.
+   4. Nivel 3 — Subsecciones con ruta propia: .snb-l3 links de texto ligeros,
+      SIEMPRE después del h1 (ej. Base de datos → Rutinas/Progresiones/...).
+   5. Vistas de página (tabs client-state SIN ruta): mismo lenguaje visual que
+      nivel 3 — contenedor .snb-l3 + botones .snb-l3-link (ej. Empleo, Portafolio,
+      Progreso). Nunca chips accent: los chips accent son SOLO filtros de datos.
+   6. Filtros de datos (refinan un dataset dentro del contenido): .ds-chip
+      con data-active accent (ej. Cardio Disciplina, Anatomía foco, tiers).
+   7. Controles segmentados dentro de un widget (Teoría/Ejercicios, RIR/RPE):
+      control local del widget, no navegación. */
 .snb-wrap {
   position: sticky; top: 0; z-index: 30;
   background: var(--bg);
@@ -204,11 +218,13 @@
 }
 .snb-l3::-webkit-scrollbar { display: none; }
 .snb-l3-link {
+  display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 12px; border-radius: 6px;
   font: 400 0.8125rem var(--font-family-system);
   color: var(--text-tertiary); text-decoration: none;
   white-space: nowrap; transition: color 0.15s;
 }
+button.snb-l3-link { border: none; background: transparent; cursor: pointer; font-family: inherit; }
 .snb-l3-link:hover { color: var(--text-primary); }
 .snb-l3-link-active { color: var(--text-primary); font-weight: 500; }
 

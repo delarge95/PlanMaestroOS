@@ -102,8 +102,8 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
         {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
-        {/* NAVEGACIÓN NIVEL 3: SUB-PESTAÑAS (mismo lenguaje visual que snb-l3 del layout) */}
-        <div style={{ display: 'flex', gap: '2px', paddingBottom: '6px', borderBottom: '1px solid var(--separator)', overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                {/* VISTAS DE PÁGINA (sin ruta): mismo lenguaje visual que snb-l3 */}
+        <nav className="snb-l3" aria-label="Vistas de Progreso" style={{ margin: 0, padding: 0, borderBottom: '1px solid var(--separator)' }}>
           {([
             { key: 'analytics', icon: <BarChart2 size={14} />, label: 'Rendimiento Global' },
             { key: 'program', icon: <Target size={14} />, label: 'Programa Activo' },
@@ -115,28 +115,16 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
               key={key}
               type="button"
               onClick={() => setActiveTab(key)}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                padding: '5px 12px',
-                borderRadius: '6px',
-                fontSize: '0.8125rem',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                color: activeTab === key ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontWeight: activeTab === key ? 500 : 400,
-                transition: 'color 0.15s'
-              }}
+              className={`snb-l3-link${activeTab === key ? ' snb-l3-link-active' : ''}`}
             >
               {icon}
-              <span>{label}</span>
+              {label}
             </button>
           ))}
-        </div>
+        </nav>
 
-        {/* 1. SUB-PESTAÑA: RENDIMIENTO GLOBAL & TENDENCIAS SVG */}
+
+{/* 1. SUB-PESTAÑA: RENDIMIENTO GLOBAL & TENDENCIAS SVG */}
         {activeTab === 'analytics' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
             {/* BARRA DESTACADA DE OVERALL PERFORMANCE & PROGRESS */}

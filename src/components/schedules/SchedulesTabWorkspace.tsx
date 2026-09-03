@@ -3,8 +3,8 @@ import ErrorBoundary from '../ErrorBoundary';
 import WeeklyGridPlanner from './WeeklyGridPlanner';
 
 const TABS = [
-  { id: 'grid', label: '📅 Matriz Semanal Grid (Fases 1, 2, 3)' },
-  { id: 'rules', label: '📌 Reglas Operativas & Pasos de Reentrada' }
+  { id: 'grid', label: 'Matriz Semanal Grid (Fases 1, 2, 3)' },
+  { id: 'rules', label: 'Reglas Operativas & Pasos de Reentrada' }
 ];
 
 export default function SchedulesTabWorkspace() {
@@ -12,52 +12,21 @@ export default function SchedulesTabWorkspace() {
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        {/* APPLE SEGMENTED CONTROL BAR (STICKY BELOW HEADER) */}
-        <div style={{
-          position: 'sticky',
-          top: '68px',
-          zIndex: 85,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4px',
-          background: 'var(--color-surface-base)',
-          backdropFilter: 'blur(30px) saturate(190%)',
-          WebkitBackdropFilter: 'blur(30px) saturate(190%)',
-          padding: '6px',
-          borderRadius: '18px',
-          border: '1px solid var(--color-border-visible)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)',
-          overflowX: 'auto',
-          maxWidth: '100%'
-        }}>
-          {TABS.map((tab) => {
-            const isSelected = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                style={{
-                  background: isSelected ? 'var(--color-accent-primary)' : 'transparent',
-                  color: isSelected ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
-                  border: 'none',
-                  padding: '8px 18px',
-                  borderRadius: '12px',
-                  fontSize: '0.84rem',
-                  fontWeight: isSelected ? 700 : 500,
-                  fontFamily: '-apple-system, SF Pro Text, system-ui, sans-serif',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  boxShadow: isSelected ? '0 3px 12px rgba(10, 132, 255, 0.35)' : 'none',
-                  transition: 'all 200ms cubic-bezier(0.16, 1, 0.3, 1)'
-                }}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
+        {/* VISTAS DE PÁGINA (sin ruta): mismo lenguaje visual que snb-l3 */}
+        <nav className="snb-l3" aria-label="Vistas de Cronogramas" style={{ margin: 0, padding: '0 0 6px', borderBottom: '1px solid var(--separator)' }}>
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`snb-l3-link${activeTab === tab.id ? ' snb-l3-link-active' : ''}`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </nav>
+
 
         {/* SUBSECTION CONTENT */}
         <div style={{ minHeight: '500px' }}>
