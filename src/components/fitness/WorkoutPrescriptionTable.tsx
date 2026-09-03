@@ -124,7 +124,7 @@ export function WorkoutPrescriptionTable({
                     type="button"
                     onClick={() => setWeek(wNum)}
                     style={{
-                      background: isSelected ? 'var(--color-accent-primary, #0a84ff)' : 'transparent',
+                      background: isSelected ? 'var(--color-accent-primary, var(--accent))' : 'transparent',
                       color: isSelected ? '#ffffff' : 'var(--text-secondary)',
                       border: 'none',
                       padding: '6px 10px',
@@ -189,7 +189,7 @@ export function WorkoutPrescriptionTable({
                     onClick={() => setSelectedDayIndex(idx)}
                     title={`Día ${idx + 1}${focus ? ': ' + focus : ''}`}
                     style={{
-                      background: isSelected ? 'var(--color-accent-primary, #0a84ff)' : 'transparent',
+                      background: isSelected ? 'var(--color-accent-primary, var(--accent))' : 'transparent',
                       color: isSelected ? '#ffffff' : 'var(--text-secondary)',
                       border: 'none',
                       padding: '6px 12px',
@@ -354,7 +354,7 @@ export function WorkoutPrescriptionTable({
                                 borderRadius: '4px',
                                 fontSize: '0.76rem',
                                 fontWeight: 600,
-                                color: cleanRir === '0' || cleanRir.includes('Fallo') ? '#ff453a' : 'var(--text)'
+                                color: cleanRir === '0' || cleanRir.includes('Fallo') ? 'var(--danger)' : 'var(--text)'
                               }}
                             >
                               S{rIdx + 1}: RIR {cleanRir}

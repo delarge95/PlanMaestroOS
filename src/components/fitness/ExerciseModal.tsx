@@ -78,9 +78,9 @@ export default function ExerciseModal({
 
   // Score bar fill color
   function scoreColor(score: number): string {
-    if (score >= 0.7) return "#30d158"; // green
-    if (score >= 0.45) return "#ff9f0a"; // orange
-    return "#0a84ff"; // blue
+    if (score >= 0.7) return "var(--success)"; // green
+    if (score >= 0.45) return "var(--warning)"; // orange
+    return "var(--accent)"; // blue
   }
 
   return (
@@ -277,7 +277,7 @@ export default function ExerciseModal({
               border: "none",
               color:
                 activeTab === "mobility"
-                  ? "var(--accent, #0a84ff)"
+                  ? "var(--accent)"
                   : "var(--color-text-secondary)",
               padding: "6px 14px",
               borderRadius: "8px",
@@ -300,7 +300,7 @@ export default function ExerciseModal({
               border: "none",
               color:
                 activeTab === "substitutions"
-                  ? "var(--color-accent-warning, #ff9f0a)"
+                  ? "var(--color-accent-warning, var(--warning))"
                   : "var(--color-text-secondary)",
               padding: "6px 14px",
               borderRadius: "8px",
@@ -438,7 +438,7 @@ export default function ExerciseModal({
               <span
                 style={{
                   fontSize: "0.82rem",
-                  color: "var(--accent, #0a84ff)",
+                  color: "var(--accent)",
                   fontWeight: 700,
                   textTransform: "uppercase",
                 }}
@@ -570,7 +570,7 @@ export default function ExerciseModal({
                             key={m}
                             style={{
                               fontSize: "0.7rem",
-                              background: "rgba(48,209,88,0.12)",
+                              background: "var(--success-soft)",
                               color: "#6ee7b7",
                               padding: "2px 6px",
                               borderRadius: "4px",

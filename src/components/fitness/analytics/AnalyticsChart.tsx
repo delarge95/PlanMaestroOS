@@ -125,12 +125,12 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
   }, [chartData]);
 
   return (
-    <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
       
       {/* CABECERA CON SELECCIÓN DE MÉTRICAS */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Gráfico de Rendimiento Global
           </span>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
@@ -147,7 +147,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
               onClick={() => setMetric(m.id)}
               title={m.tooltip}
               style={{
-                background: metric === m.id ? 'var(--accent, #0a84ff)' : 'transparent',
+                background: metric === m.id ? 'var(--accent)' : 'transparent',
                 color: metric === m.id ? '#ffffff' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '5px 10px',
@@ -367,7 +367,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                     cursor: 'pointer'
                   }}
                 >
-                  <span style={{ fontSize: '0.72rem', color: p.isMax ? 'var(--success, #30d158)' : 'var(--accent, #0a84ff)', fontWeight: 700 }}>
+                  <span style={{ fontSize: '0.72rem', color: p.isMax ? 'var(--success)' : 'var(--accent)', fontWeight: 700 }}>
                     {p.value} {metric === 'volume' || metric === 'e1rm' || metric === 'maxWeight' ? unit : ''}
                   </span>
 
@@ -377,10 +377,10 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                       maxWidth: '42px',
                       height: `${heightPct}%`,
                       background: p.isMax
-                        ? 'linear-gradient(180deg, var(--success, #30d158), rgba(48, 209, 88, 0.4))'
+                        ? 'linear-gradient(180deg, var(--success), rgba(48, 209, 88, 0.4))'
                         : isSelected
-                        ? 'linear-gradient(180deg, #58a6ff, #0a84ff)'
-                        : 'linear-gradient(180deg, var(--accent, #0a84ff), rgba(10, 132, 255, 0.3))',
+                        ? 'linear-gradient(180deg, #58a6ff, var(--accent))'
+                        : 'linear-gradient(180deg, var(--accent), rgba(10, 132, 255, 0.3))',
                       borderRadius: '6px',
                       transition: 'all 150ms ease',
                       boxShadow: isSelected ? '0 0 10px var(--accent)' : 'none'

@@ -154,7 +154,7 @@ export function PresetSheet({ preset, onClose }: { preset: CardioPreset; onClose
     <Sheet isOpen onClose={onClose} title={shown.name} description={`${shown.totalMin} min · ${shown.difficulty} · ${shown.avgMets} METs promedio`} maxWidth="760px">
       {/* Banner edición guardada / activa */}
       {saved && local && editMode === 'off' && (
-        <p className="ds-row ds-caption" style={{ gap: 6, color: 'var(--success, #30d158)', margin: 0 }}>
+        <p className="ds-row ds-caption" style={{ gap: 6, color: 'var(--success)', margin: 0 }}>
           <Check size={14} aria-hidden="true" /> Copia local guardada. El preset original permanece intacto.
         </p>
       )}

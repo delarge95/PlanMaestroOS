@@ -232,7 +232,7 @@ export default function LibraryDatabase() {
         {(videoUrl1 || videoUrl2) && (
           <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', background: 'rgba(0,0,0,0.3)' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0a84ff' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--accent)' }}>
                 <Film size={14} style={{ verticalAlign: '-2px', marginRight: 4 }} />Reproducción en Video
               </span>
               <button
@@ -270,7 +270,7 @@ export default function LibraryDatabase() {
 
         {/* FUERZA PRIMARIA */}
         <div>
-          <strong style={{ fontSize: '0.78rem', color: 'var(--success, #30d158)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+          <strong style={{ fontSize: '0.78rem', color: 'var(--success)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
             Strength Muscles (Músculos de Fuerza Primaria):
           </strong>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -281,7 +281,7 @@ export default function LibraryDatabase() {
                 title={`Ver ${m} en Base de Datos de Músculos`}
                 style={{
                   background: 'rgba(48,209,88,0.15)',
-                  border: '1px solid var(--success, #30d158)',
+                  border: '1px solid var(--success)',
                   color: '#6ee7b7',
                   padding: '3px 10px',
                   borderRadius: '6px',
@@ -303,7 +303,7 @@ export default function LibraryDatabase() {
         {/* ESTABILIZADORES CLAVE */}
         {exInfo.muscles.stability && exInfo.muscles.stability.length > 0 && (
           <div>
-            <strong style={{ fontSize: '0.78rem', color: 'var(--accent, #0a84ff)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+            <strong style={{ fontSize: '0.78rem', color: 'var(--accent)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
               Stability Muscles (Sinergia & Estabilización):
             </strong>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -344,7 +344,7 @@ export default function LibraryDatabase() {
         {/* PUNTOS DE TÉCNICA */}
         {exInfo.techniquePoints && exInfo.techniquePoints.length > 0 && (
           <div>
-            <strong style={{ fontSize: '0.78rem', color: '#ff9f0a', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+            <strong style={{ fontSize: '0.78rem', color: 'var(--warning)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
               Technique Points (Claves de Forma):
             </strong>
             <ol style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
@@ -383,7 +383,7 @@ export default function LibraryDatabase() {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
       {/* BLOQUE 1: FILTROS & BÚSQUEDA DE EJERCICIOS */}
       <div style={{
-        background: 'var(--surface-1, #0d0d0f)',
+        background: 'var(--surface-1)',
         border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
         borderRadius: '16px',
         padding: '16px 20px',
@@ -450,7 +450,7 @@ export default function LibraryDatabase() {
                 type="button"
                 onClick={() => setIsGroupedView(true)}
                 style={{
-                  background: isGroupedView ? 'var(--accent, #0a84ff)' : 'transparent',
+                  background: isGroupedView ? 'var(--accent)' : 'transparent',
                   color: isGroupedView ? '#ffffff' : 'var(--text-secondary)',
                   border: 'none',
                   padding: '4px 14px',
@@ -466,7 +466,7 @@ export default function LibraryDatabase() {
                 type="button"
                 onClick={() => setIsGroupedView(false)}
                 style={{
-                  background: !isGroupedView ? 'var(--accent, #0a84ff)' : 'transparent',
+                  background: !isGroupedView ? 'var(--accent)' : 'transparent',
                   color: !isGroupedView ? '#ffffff' : 'var(--text-secondary)',
                   border: 'none',
                   padding: '4px 14px',
@@ -520,9 +520,9 @@ export default function LibraryDatabase() {
                   type="button"
                   onClick={() => handleCategoryToggle(cat)}
                   style={{
-                    background: isSelected ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.03)',
+                    background: isSelected ? 'var(--accent)' : 'rgba(255,255,255,0.03)',
                     color: isSelected ? '#ffffff' : 'var(--text-primary)',
-                    border: isSelected ? '1px solid var(--accent, #0a84ff)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                    border: isSelected ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
                     borderRadius: '20px',
                     padding: '4px 10px',
                     fontSize: '0.76rem',
@@ -556,9 +556,9 @@ export default function LibraryDatabase() {
                   type="button"
                   onClick={() => handleMuscleGroupToggle(group)}
                   style={{
-                    background: isSelected ? 'var(--success, #30d158)' : 'rgba(255,255,255,0.03)',
+                    background: isSelected ? 'var(--success)' : 'rgba(255,255,255,0.03)',
                     color: isSelected ? '#000000' : 'var(--text-primary)',
-                    border: isSelected ? '1px solid var(--success, #30d158)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                    border: isSelected ? '1px solid var(--success)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
                     borderRadius: '20px',
                     padding: '4px 10px',
                     fontSize: '0.76rem',
@@ -585,7 +585,7 @@ export default function LibraryDatabase() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: 'var(--accent, #0a84ff)',
+                color: 'var(--accent)',
                 fontSize: '0.76rem',
                 fontWeight: 600,
                 cursor: 'pointer'
@@ -609,7 +609,7 @@ export default function LibraryDatabase() {
               <div
                 key={name}
                 style={{
-                  background: 'var(--surface-1, #0d0d0f)',
+                  background: 'var(--surface-1)',
                   border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
                   borderRadius: 'var(--radius-m, 12px)',
                   overflow: 'hidden'
@@ -669,7 +669,7 @@ export default function LibraryDatabase() {
             const isGroupExpanded = Boolean(expandedGroups[groupName]);
 
             return (
-              <div key={groupName} style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', overflow: 'hidden' }}>
+              <div key={groupName} style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', overflow: 'hidden' }}>
                 
                 {/* CABECERA DEL GRUPO */}
                 <div
@@ -685,11 +685,11 @@ export default function LibraryDatabase() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <strong style={{ fontSize: '1.05rem', color: '#0a84ff', fontWeight: 800 }}>{groupName}</strong>
+                    <strong style={{ fontSize: '1.05rem', color: 'var(--accent)', fontWeight: 800 }}>{groupName}</strong>
                   </div>
                   
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.78rem', background: 'rgba(10,132,255,0.15)', color: '#0a84ff', border: '1px solid rgba(10,132,255,0.3)', padding: '3px 10px', borderRadius: '999px', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.78rem', background: 'rgba(10,132,255,0.15)', color: 'var(--accent)', border: '1px solid rgba(10,132,255,0.3)', padding: '3px 10px', borderRadius: '999px', fontWeight: 700 }}>
                       {exercises.length} variations
                     </span>
                     {isGroupExpanded ? <ChevronDown size={18} style={{ color: 'var(--text-secondary)' }} /> : <ChevronRight size={18} style={{ color: 'var(--text-secondary)' }} />}

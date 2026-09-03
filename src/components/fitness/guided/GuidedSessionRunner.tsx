@@ -183,7 +183,7 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
           <div style={{ maxWidth: '640px', margin: '0 auto', padding: '16px 16px 32px', display: 'flex', flexDirection: 'column', gap: '16px', color: 'var(--text-primary, #fff)' }}>
             {/* HEADER */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.7rem', fontWeight: 700, color: '#30d158', background: 'rgba(48,209,88,0.12)', border: '1px solid rgba(48,209,88,0.3)', padding: '4px 10px', borderRadius: '999px', whiteSpace: 'nowrap' }}>
+              <span style={{ fontFamily: 'SF Mono, monospace', fontSize: '0.7rem', fontWeight: 700, color: 'var(--success)', background: 'var(--success-soft)', border: '1px solid rgba(48,209,88,0.3)', padding: '4px 10px', borderRadius: '999px', whiteSpace: 'nowrap' }}>
                 EJERCICIO {state.exIdx + 1}/{plan.exercises.length}
               </span>
               <button type="button" onClick={requestClose} title="Salir del modo guiado" style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.7)', width: '36px', height: '36px', borderRadius: '10px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -197,7 +197,7 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
               <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'rgba(255,255,255,0.65)' }}>Serie {setNumber} de {totalSets}</span>
               <div style={{ display: 'flex', gap: '4px', flex: 1 }}>
                 {Array.from({ length: totalSets }).map((_, i) => (
-                  <div key={i} style={{ flex: 1, height: '6px', borderRadius: '3px', background: i < state.setIdx ? '#30d158' : i === state.setIdx ? 'rgba(48,209,88,0.45)' : 'rgba(255,255,255,0.08)' }} />
+                  <div key={i} style={{ flex: 1, height: '6px', borderRadius: '3px', background: i < state.setIdx ? 'var(--success)' : i === state.setIdx ? 'rgba(48,209,88,0.45)' : 'rgba(255,255,255,0.08)' }} />
                 ))}
               </div>
             </div>
@@ -223,7 +223,7 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
               <span style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '5px 10px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 700 }}>Descanso: {fmtClock(exercise.restSec)}</span>
             </div>
             {exercise.notes && (
-              <p style={{ margin: 0, fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)', background: 'rgba(255,255,255,0.03)', padding: '8px 10px', borderRadius: '8px', borderLeft: '2px solid var(--accent, #0a84ff)' }}>{exercise.notes}</p>
+              <p style={{ margin: 0, fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)', background: 'rgba(255,255,255,0.03)', padding: '8px 10px', borderRadius: '8px', borderLeft: '2px solid var(--accent)' }}>{exercise.notes}</p>
             )}
 
             {/* INPUTS DE LA SERIE */}
@@ -244,14 +244,14 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
 
             {/* ACCIONES (sticky bottom en móvil) */}
             <div style={{ position: 'sticky', bottom: 0, background: 'linear-gradient(to top, #0d0d0f 70%, transparent)', paddingTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <button type="button" onClick={completeSet} style={{ background: '#30d158', color: '#000', border: 'none', padding: '16px', borderRadius: '14px', fontSize: '1rem', fontWeight: 800, cursor: 'pointer', boxShadow: '0 6px 18px rgba(48,209,88,0.35)' }}>
+              <button type="button" onClick={completeSet} style={{ background: 'var(--success)', color: '#000', border: 'none', padding: '16px', borderRadius: '14px', fontSize: '1rem', fontWeight: 800, cursor: 'pointer', boxShadow: '0 6px 18px rgba(48,209,88,0.35)' }}>
                 ✓ Completar serie {setNumber}
               </button>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button type="button" onClick={() => setState((prev) => addExtraSetToCurrent(prev))} style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)', padding: '10px', borderRadius: '10px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>
                   + Añadir serie extra
                 </button>
-                <button type="button" onClick={() => (hasAnyLog ? setState((prev) => finishEarly(prev)) : onClose())} style={{ flex: 1, background: 'transparent', border: '1px solid rgba(255,69,58,0.35)', color: '#ff453a', padding: '10px', borderRadius: '10px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>
+                <button type="button" onClick={() => (hasAnyLog ? setState((prev) => finishEarly(prev)) : onClose())} style={{ flex: 1, background: 'transparent', border: '1px solid rgba(255,69,58,0.35)', color: 'var(--danger)', padding: '10px', borderRadius: '10px', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>
                   {hasAnyLog ? 'Terminar aquí' : 'Cancelar'}
                 </button>
               </div>
@@ -294,7 +294,7 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
               <button type="button" onClick={() => setState((prev) => adjustRest(prev, 30))} style={{ background: 'rgba(100,210,255,0.12)', border: '1px solid rgba(100,210,255,0.35)', color: '#64d2ff', padding: '14px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 800, cursor: 'pointer' }}>
                 +30 s
               </button>
-              <button type="button" onClick={() => setState((prev) => skipRest(prev))} style={{ background: '#30d158', border: 'none', color: '#000', padding: '14px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 800, cursor: 'pointer' }}>
+              <button type="button" onClick={() => setState((prev) => skipRest(prev))} style={{ background: 'var(--success)', border: 'none', color: '#000', padding: '14px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 800, cursor: 'pointer' }}>
                 Saltar ▸
               </button>
             </div>
@@ -355,14 +355,14 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
           )}
 
           {!savedId && collected.length > 0 && (
-            <button type="button" onClick={saveAndBuildSnapshot} style={{ background: '#30d158', color: '#000', border: 'none', padding: '16px', borderRadius: '14px', fontSize: '1rem', fontWeight: 800, cursor: 'pointer', boxShadow: '0 6px 18px rgba(48,209,88,0.35)' }}>
+            <button type="button" onClick={saveAndBuildSnapshot} style={{ background: 'var(--success)', color: '#000', border: 'none', padding: '16px', borderRadius: '14px', fontSize: '1rem', fontWeight: 800, cursor: 'pointer', boxShadow: '0 6px 18px rgba(48,209,88,0.35)' }}>
               Guardar sesión y generar snapshot NUTRI
             </button>
           )}
 
           {savedId && (
             <>
-              <div style={{ background: 'rgba(48,209,88,0.12)', border: '1px solid rgba(48,209,88,0.35)', borderRadius: '12px', padding: '12px 14px', fontSize: '0.85rem', color: '#30d158', fontWeight: 700 }}>
+              <div style={{ background: 'var(--success-soft)', border: '1px solid rgba(48,209,88,0.35)', borderRadius: '12px', padding: '12px 14px', fontSize: '0.85rem', color: 'var(--success)', fontWeight: 700 }}>
                 ✓ Guardada en Progreso (fitapp_workout_history). Snapshot de sesión listo para AG-NUTRI:
               </div>
               <pre style={{ margin: 0, maxHeight: '260px', overflow: 'auto', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px', fontSize: '0.72rem', lineHeight: 1.5, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{snapshotJson}</pre>
@@ -370,7 +370,7 @@ export default function GuidedSessionRunner({ plan, onClose }: GuidedSessionRunn
                 <button type="button" onClick={copySnapshot} style={{ flex: 1, background: 'rgba(100,210,255,0.12)', border: '1px solid rgba(100,210,255,0.35)', color: '#64d2ff', padding: '12px', borderRadius: '12px', fontSize: '0.88rem', fontWeight: 800, cursor: 'pointer' }}>
                   {copied ? '✓ Copiado' : 'Copiar JSON'}
                 </button>
-                <button type="button" onClick={onClose} style={{ flex: 1, background: 'var(--color-state-done, #30d158)', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontSize: '0.88rem', fontWeight: 800, cursor: 'pointer' }}>
+                <button type="button" onClick={onClose} style={{ flex: 1, background: 'var(--color-state-done, var(--success))', border: 'none', color: '#000', padding: '12px', borderRadius: '12px', fontSize: '0.88rem', fontWeight: 800, cursor: 'pointer' }}>
                   Cerrar
                 </button>
               </div>

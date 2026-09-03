@@ -26,7 +26,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
 
   if (!currentStep || !currentPath) {
     return (
-      <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+      <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
         Sin habilidad activa seleccionada.
       </div>
     );
@@ -232,7 +232,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
           {isSaved ? (
-            <span style={{ fontSize: '0.8rem', color: 'var(--success, #30d158)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--success)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
               <CheckCircle2 size={14} /> ¡Práctica registrada correctamente!
             </span>
           ) : (

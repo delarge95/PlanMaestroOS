@@ -156,7 +156,7 @@ export function ExplorePathsView({
             <div
               key={path.id}
               style={{
-                background: 'var(--surface-1, #0d0d0f)',
+                background: 'var(--surface-1)',
                 border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
                 borderRadius: '14px',
                 overflow: 'hidden',

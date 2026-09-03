@@ -228,7 +228,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
             {/* BARRA DESTACADA DE OVERALL PERFORMANCE & PROGRESS */}
             <div style={{
-              background: 'linear-gradient(135deg, rgba(10,132,255,0.12), rgba(48,209,88,0.12))',
+              background: 'linear-gradient(135deg, var(--accent-soft), var(--success-soft))',
               border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
               borderRadius: '16px',
               padding: '18px 22px',
@@ -238,7 +238,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
               boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(10,132,255,0.2)', display: 'grid', placeItems: 'center', color: 'var(--accent, #0a84ff)' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(10,132,255,0.2)', display: 'grid', placeItems: 'center', color: 'var(--accent)' }}>
                   <TrendingUp size={22} />
                 </div>
                 <div>
@@ -250,7 +250,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(48,209,88,0.2)', display: 'grid', placeItems: 'center', color: 'var(--success, #30d158)' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(48,209,88,0.2)', display: 'grid', placeItems: 'center', color: 'var(--success)' }}>
                   <Award size={22} />
                 </div>
                 <div>
@@ -262,7 +262,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(255,159,10,0.2)', display: 'grid', placeItems: 'center', color: '#ff9f0a' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(255,159,10,0.2)', display: 'grid', placeItems: 'center', color: 'var(--warning)' }}>
                   <Zap size={22} />
                 </div>
                 <div>
@@ -277,7 +277,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
             <AnalyticsChart flatLog={flatLog} />
 
             {/* RESUMEN DE VOLUMEN ACUMULADO POR GRUPO MUSCULAR */}
-            <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
                 Volumen Acumulado por Grupo Muscular (Histórico)
               </span>
@@ -291,7 +291,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                   {muscleVolume.map((mv) => (
                     <div key={mv.muscleGroup} style={{ background: 'rgba(255,255,255,0.02)', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-primary)' }}>{mv.muscleGroup}</span>
-                      <strong style={{ fontSize: '0.88rem', color: 'var(--accent, #0a84ff)' }}>{mv.totalSets} series ({mv.totalVolumeKg} kg)</strong>
+                      <strong style={{ fontSize: '0.88rem', color: 'var(--accent)' }}>{mv.totalSets} series ({mv.totalVolumeKg} kg)</strong>
                     </div>
                   ))}
                 </div>
@@ -313,7 +313,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
         {activeTab === 'history' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
             {totalSessions === 0 ? (
-              <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-lg)', textAlign: 'center', color: 'var(--text-secondary)' }}>
+              <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-lg)', textAlign: 'center', color: 'var(--text-secondary)' }}>
                 <History size={24} style={{ color: 'var(--text-tertiary)', marginBottom: '8px' }} />
                 <h4 style={{ margin: '0 0 4px', color: 'var(--text-primary)' }}>Sin sesiones registradas aún</h4>
                 <p style={{ margin: 0, fontSize: '0.85rem' }}>Las rutinas completadas en Hoy se guardarán automáticamente aquí.</p>
@@ -323,7 +323,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                 <div
                   key={s.sessionId || idx}
                   style={{
-                    background: 'var(--surface-1, #0d0d0f)',
+                    background: 'var(--surface-1)',
                     border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
                     borderRadius: 'var(--radius-m, 12px)',
                     padding: '14px 16px',
@@ -344,10 +344,10 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--accent, #0a84ff)' }}>
+                    <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--accent)' }}>
                       {s.totalVolumeKg ? `${s.totalVolumeKg} kg` : ''}
                     </span>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--success, #30d158)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--success)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                       <CheckCircle2 size={14} /> Completada
                     </span>
                   </div>
