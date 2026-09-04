@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -292,11 +293,21 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                />
+              ) : (
+                <div style={{ padding: '24px', color: 'var(--color-accent-danger, #ff453a)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                  <p style={{ fontWeight: 700, margin: '0 0 8px 0' }}>⚠️ URL de Embed No Válida o No Segura</p>
+                  <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, maxWidth: '400px' }}>
+                    Por razones de seguridad, solo se permiten URLs con HTTPS de dominios autorizados (Notion, YouTube, Vimeo).
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
