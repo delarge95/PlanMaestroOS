@@ -34,7 +34,7 @@ type BranchEn = {
 const branchEn = (id: string): BranchEn | undefined =>
   (TREE_EN.branches as Record<string, BranchEn | undefined>)[id];
 
-export function GuidedWizard({ onComplete, lang = 'es', homeSignal = 0 }: { onComplete?: (plan: WizardQuotePlan, answers?: Record<string, string | number | boolean>) => void; lang?: Lang; homeSignal?: number }) {
+export function GuidedWizard({ onComplete, onProgress, lang = 'es', homeSignal = 0 }: { onComplete?: (plan: WizardQuotePlan, answers?: Record<string, string | number | boolean>) => void; onProgress?: (plan: WizardQuotePlan) => void; lang?: Lang; homeSignal?: number }) {
   const [level, setLevel] = useState(1);
   const [rootChoice, setRootChoice] = useState('');
   const [subChoice, setSubChoice] = useState('');
@@ -58,6 +58,13 @@ export function GuidedWizard({ onComplete, lang = 'es', homeSignal = 0 }: { onCo
     } else {
       window.history.pushState(state, '');
     }
+  }, [level, rootChoice, subChoice, answers]);
+  /** Ciclo 17 — visor del precio: plan en vivo en cada cambio de respuesta
+   *  (el padre lo deriva a COP/USD con el mismo motor que el panel final). */
+  useEffect(() => {
+    if (level !== 3) return;
+    onProgress?.(planFromTreeAnswers(rootChoice, subChoice, answers));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level, rootChoice, subChoice, answers]);
 
   // Escucha popstate: restaura el paso correspondiente (nivel 1 = base).
