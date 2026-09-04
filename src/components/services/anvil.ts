@@ -20,6 +20,7 @@
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
 export const ANVIL_URL = `${import.meta.env.BASE_URL}cotizador/models/yunke.glb`;
 /** Nodo cuya mesh es la que morphea (identificado en el GLB). */
@@ -103,7 +104,9 @@ export function loadAnvil(): Promise<THREE.Group> {
           return r.arrayBuffer();
         })
         .then(buf => {
-          new GLTFLoader().parse(buf, '', gltf => resolve(normalize(gltf.scene)), err => reject(err));
+          const loader = new GLTFLoader();
+          loader.setMeshoptDecoder(MeshoptDecoder); // GLBs optimizados con meshopt (ciclo 15)
+          loader.parse(buf, '', gltf => resolve(normalize(gltf.scene)), err => reject(err));
         })
         .catch(reject);
     });
