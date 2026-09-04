@@ -44,6 +44,25 @@ const smooth = (x: number) => { const t = Math.max(0, Math.min(1, x)); return t 
 /** Escala de un grupo cuya ventana de aparición es [a, b] sobre el slider d. */
 const grow = (d: number, a: number, b: number) => smooth((d - a) / (b - a));
 
+/** Ciclo 16d — direccion de explosion UNIVERSAL: las piezas perifericas se
+ *  alejan radialmente del centro; las piezas CERCANAS AL CENTRO (dir ~ 0,
+ *  que antes se quedaban quietas) usan una direccion estable por hash del
+ *  nombre, con desplazamiento minimo garantizado. Devuelve el OFFSET. */
+const hashDir = (s: string) => {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  const a = ((h >>> 0) % 1000) / 1000 * Math.PI * 2;
+  const b = (((h >>> 10) % 1000) / 1000) * 1.2 - 0.6;
+  return new THREE.Vector3(Math.cos(a) * Math.cos(b), Math.sin(b), Math.sin(a) * Math.cos(b)).normalize();
+};
+const dirExplosion = (home: THREE.Vector3, centro: THREE.Vector3, nombre: string, factor: number) => {
+  const dir = home.clone().sub(centro);
+  const len = dir.length();
+  if (len > 0.15) return dir.normalize().multiplyScalar(len * factor);
+  const semilla = Math.abs(Math.sin(home.x * 7.3 + home.y * 5.1 + home.z * 3.7));
+  return hashDir(nombre || String(len)).multiplyScalar(0.45 + 0.3 * semilla);
+};
+
 export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface = 1, variantSel, variantSlots, finish = 'detallado', estilo = 2, hotspots = 0, lang = 'es', height = 290 }: {
   mode: PreviewMode;
   /** Slider continuo 1–5 (detail). */
@@ -1052,8 +1071,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
             if (!m.isMesh || !m.visible) return;
             const home = m.userData.assmHome as THREE.Vector3 | undefined;
             if (!home) return;
-            const dir = home.clone().sub(hbCenter);
-            const target = home.clone().add(dir.clone().normalize().multiplyScalar(dir.length() * 0.95 * e));
+            const target = home.clone().add(dirExplosion(home, hbCenter, m.name ?? String(m.id), 0.95).multiplyScalar(e));
             m.position.lerp(target, 0.12);
           });
         }
@@ -1166,8 +1184,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
                 if (!m.isMesh) return;
                 const home = m.userData.storyHome as THREE.Vector3 | undefined;
                 if (!home) return;
-                const dir = home.clone().sub(storyCenter);
-                const target = home.clone().add(dir.clone().normalize().multiplyScalar(dir.length() * 1.1 * k));
+                const target = home.clone().add(dirExplosion(home, storyCenter, m.name ?? String(m.id), 1.1).multiplyScalar(k));
                 m.position.copy(target);
               });
             }
@@ -1243,9 +1260,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
               if (!m.isMesh || !m.visible) return;
               const home = m.userData.variantHome as THREE.Vector3 | undefined;
               if (!home) return;
-              const len = home.length();
-              if (len < 0.001) { m.position.lerp(home, 0.12); return; }
-              const target = home.clone().add(home.clone().normalize().multiplyScalar(len * 0.7 * e));
+              const target = home.clone().add(dirExplosion(home, new THREE.Vector3(), m.name ?? String(m.id), 0.7).multiplyScalar(e));
               m.position.lerp(target, 0.12);
             });
           }
