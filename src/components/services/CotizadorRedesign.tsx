@@ -293,6 +293,21 @@ function VariableControl({ v, value, onValue, lang, serviceId }: {
 // ═══════════════════════════════════════════════════════════════
 export function CotizadorRedesign() {
   const [lang, setLang] = useState<Lang>('es');
+  /** Ciclo 15: idioma persistido (cx-lang) con deteccion inicial de navigator.
+   *  El estado nace en 'es' (SSR-safe); el ajuste ocurre post-hidratacion. */
+  useEffect(() => {
+    try {
+      const guardado = localStorage.getItem('cx-lang');
+      const inicial = guardado === 'en' || guardado === 'es'
+        ? guardado
+        : (navigator.language && navigator.language.toLowerCase().startsWith('en') ? 'en' : 'es');
+      if (inicial !== 'es') setLang(inicial);
+    } catch { /* sin almacenamiento */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    try { localStorage.setItem('cx-lang', lang); } catch { /* sin almacenamiento */ }
+  }, [lang]);
   /** Moneda independiente del idioma (ciclo 8): por defecto ES + COP. */
   const [currency, setCurrency] = useState<Currency>('COP');
   const [serviceId, setServiceId] = useState('');
@@ -807,7 +822,7 @@ export function CotizadorRedesign() {
                       <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--cx-accent)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>
                         {lang === 'en' ? EN.yourProject(numServicios) : `Tu proyecto · ${numServicios} servicios`}
                       </div>
-                      <div style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--cx-text)', lineHeight: 1 }}>
+                      <div aria-live="polite" aria-atomic="true" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--cx-text)', lineHeight: 1 }}>
                         {fmt(currency, totalProyecto.min)}
                       </div>
                       <div style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', fontWeight: 500, color: 'var(--cx-muted)', marginTop: 4 }}>
