@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -75,11 +76,21 @@ export default function SecondBrainInspector({
     }
   }, []);
 
+  const [urlError, setUrlError] = useState<string | null>(null);
+
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+
+    if (!isValidEmbedUrl(trimmed)) {
+      setUrlError('URL no permitida. Debe ser HTTPS y pertenecer a un dominio de Notion, YouTube o Vimeo.');
+      return;
+    }
+
+    setUrlError(null);
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -276,6 +287,12 @@ export default function SecondBrainInspector({
               </button>
             </div>
 
+            {urlError && (
+              <div style={{ color: 'var(--color-accent-danger, #ff453a)', fontSize: '0.8rem', fontWeight: 600 }}>
+                ⚠️ {urlError}
+              </div>
+            )}
+
             {/* EMBEDDED MACOS WINDOW FRAME */}
             <div style={{ background: '#000000', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '18px', overflow: 'hidden', height: '500px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ background: '#1c1c1e', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -292,11 +309,18 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                />
+              ) : (
+                <div style={{ padding: '24px', color: 'var(--color-accent-danger, #ff453a)', textAlign: 'center' }}>
+                  URL de Embed no válida o no permitida por políticas de seguridad.
+                </div>
+              )}
             </div>
           </div>
         )}
