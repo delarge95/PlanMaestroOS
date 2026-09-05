@@ -5,6 +5,10 @@ import { WEB3D_BRANCHES } from '../src/data/services/decisionTree';
 
 console.log('subbranches web-3d:', Object.keys(WEB3D_BRANCHES).join(' | '));
 
+const plan0 = planFromTreeAnswers('web-3d', 'ver-modelo', { 'modelo-existente': 'no-crear' });
+console.log('defaults picks[0].vals:', JSON.stringify(plan0.picks[0]?.vals));
+console.log('defaults picks[0].serviceId:', plan0.picks[0]?.serviceId);
+
 function cita(a: Record<string, any>, tag: string) {
   const plan = planFromTreeAnswers('web-3d', 'ver-modelo', a);
   if (!plan || plan.picks.length === 0) { console.log(`[${tag}] SIN PICKS`); return; }
