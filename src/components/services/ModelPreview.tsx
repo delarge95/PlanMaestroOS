@@ -30,6 +30,8 @@ import { loadHolybroInstance, applyFinish, ensureVariadoSet, revealFrameOnly, dr
 import type { AssemblyEntry } from './holybro';
 import type { FinishKind, VariadoSet } from './holybro';
 import { loadAnvilInstance, applySurfaceMorph, ANVIL_MORPH_NODE } from './anvil';
+import { loadTurbine, bucketByStation } from './turbine';
+import type { TurbineBucket } from './turbine';
 import type { Lang } from '../../data/services/i18n';
 
 // Constantes y tipos del preview viven en previewConstants.ts (sin three) para
@@ -452,9 +454,59 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         .catch(() => { anvilStarted = false; /* fallback: morph procedural cubo→esfera */ });
     }
 
+    // ── Turbina real (detail, ciclo 18): silueta low + GLB por estaciones ──
+    const turbineRoot = new THREE.Group();
+    group.add(turbineRoot);
+    // vista 3/4 frontal: el intake (−X) gira hacia la cámara (+Z) — el disco
+    // de fan de canto es ilegible en perfil puro
+    turbineRoot.rotation.y = 0.6;
+    // silueta low-poly procedural (siempre presente: boceto interno/fallback)
+    const lowTur = new THREE.Group();
+    const loMat = new THREE.MeshStandardMaterial({ color: 0x9aa0a8, roughness: 0.45, metalness: 0.6, flatShading: true, transparent: true });
+    const loAcc = new THREE.MeshStandardMaterial({ color: 0x0071e3, roughness: 0.4, metalness: 0.3, flatShading: true, transparent: true });
+    {
+      const nac = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.44, 1.35, 14), loMat);
+      nac.rotation.z = Math.PI / 2; nac.position.x = -0.25;
+      const spin = new THREE.Mesh(new THREE.ConeGeometry(0.24, 0.34, 10), loMat);
+      spin.rotation.z = Math.PI / 2; spin.position.x = -1.02;
+      const core = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.8, 12), loMat);
+      core.rotation.z = Math.PI / 2; core.position.x = 0.35;
+      const exh = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.4, 12), loMat);
+      exh.rotation.z = -Math.PI / 2; exh.position.x = 1.02;
+      lowTur.add(nac, spin, core, exh);
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        const pivot = new THREE.Group();
+        pivot.rotation.x = a;
+        const bl = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.024, 0.55), loAcc);
+        bl.position.set(-0.98, 0, 0.62);
+        pivot.add(bl);
+        lowTur.add(pivot);
+      }
+    }
+    turbineRoot.add(lowTur);
+    let turbineReady: THREE.Group | null = null;
+    let turbineBuckets: TurbineBucket[] = [];
+    let turbineStarted = false;
+    function startTurbine() {
+      if (turbineStarted) return;
+      turbineStarted = true;
+      loadTurbine()
+        .then(root => {
+          turbineRoot.add(root);
+          turbineReady = root;
+          turbineBuckets = bucketByStation(root, 5);
+          turbineBuckets.forEach(b => b.meshes.forEach(m => { m.visible = false; }));
+          root.visible = stateRef.current.mode === 'detail';
+        })
+        .catch(() => { turbineStarted = false; /* fallback: silueta procedural */ });
+    }
+
     // Visibilidad por modo
     const applyModeVisibility = (m: PreviewMode) => {
-      detailRoot.visible = m === 'detail';
+      detailRoot.visible = m === 'detail' && !turbineReady;
+      turbineRoot.visible = m === 'detail';
+      if (m === 'detail') startTurbine();
       hub.visible = satRoot.visible = m === 'pieces';
       // ciclo 6: story usa el drone HolyBro real; prod queda para variants/hotspots/shaders
       prod.visible = m === 'variants' || m === 'hotspots' || m === 'shader-dial';
@@ -992,6 +1044,43 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
 
       if (cur.mode === 'detail') {
         const d = Math.max(1, Math.min(5, cur.detail));
+        if (turbineReady) {
+          // ── ciclo 18: turbina real — revelado por estaciones + morph de silueta ──
+          (window as any).__turbineReady = true;
+          const spinSlow = performance.now() / 1000 * 0.25;
+          // morph de la silueta: pitch de aspas y cross-fade a medida que lo real toma el mando
+          const takeover = grow(d, 3.6, 5);
+          loMat.opacity = 1 - takeover;
+          loAcc.opacity = 1 - takeover;
+          lowTur.visible = takeover < 0.999;
+          // pitch de las aspas del boceto: determinista (pivot orbital + hoja)
+          const pitch = 0.14 + 0.3 * grow(d, 1, 5);
+          lowTur.children.forEach((c) => {
+            if ((c as THREE.Group).isGroup && c.children.length === 1) {
+              (c.children[0] as THREE.Mesh).rotation.y = pitch;
+            }
+          });
+          lowTur.rotation.x = spinSlow * 0.4;
+          // revelado real: 5 ventanas secuenciales que CUBREN [1,5] exacto
+          turbineBuckets.forEach((b, i) => {
+            const w0 = 1 + (i / turbineBuckets.length) * 4;
+            const w1 = 1 + ((i + 1) / turbineBuckets.length) * 4;
+            const g = grow(d, w0, w1);
+            const vis = g > 0.001;
+            for (const m of b.meshes) {
+              m.visible = vis;
+              if (vis) {
+                const pop = 0.82 + 0.18 * g;
+                m.scale.setScalar(pop);
+              }
+            }
+          });
+          turbineReady.rotation.x = spinSlow;
+          setEnv(grow(d, 3.2, 5));
+          renderer.toneMappingExposure = 1.0 + 0.05 * takeover;
+        } else {
+          // fallback: demo procedural del cubo (estado pre-carga / error)
+          (window as any).__turbineReady = false;
         // [1,2] la malla se RELLENA dentro de sus aristas; edges se desvanecen después
         const fill = grow(d, 1.0, 2.0);
         detailMesh.scale.setScalar(0.9 + 0.1 * fill);
@@ -1016,6 +1105,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         accentMat.emissive.setHex(0x0071e3);
         accentMat.emissiveIntensity = grow(d, 4.0, 5) * 0.35;
         if (bodyMat.metalness > 0.5 || bodyMat.roughness < 0.3) { bodyMat.metalness = 0.3; bodyMat.roughness = 0.4; }
+        }
       }
       if (cur.mode === 'finish') {
         // ciclo 9: reentrada sin remount (o cambio de modo) — asegura visibilidad
