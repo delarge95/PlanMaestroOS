@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -76,15 +77,18 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed || !isValidEmbedUrl(trimmed)) return;
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
     setInputUrl('');
   };
+
+  const safeNotionEmbedUrl = isValidEmbedUrl(notionEmbedUrl) ? notionEmbedUrl : defaultNotionUrl;
 
   const selectedNote = SAMPLE_OBSIDIAN_NOTES[selectedNoteIndex] || SAMPLE_OBSIDIAN_NOTES[0];
 
@@ -293,8 +297,9 @@ export default function SecondBrainInspector({
               </div>
 
               <iframe
-                src={notionEmbedUrl}
+                src={safeNotionEmbedUrl}
                 title="Notion Second Brain Live Inspection"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
               />
             </div>

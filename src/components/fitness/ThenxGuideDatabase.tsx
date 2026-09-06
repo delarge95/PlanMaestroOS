@@ -128,6 +128,7 @@ export default function ThenxGuideDatabase({
               <iframe
                 src={introEmbedUrl}
                 title={selectedGuide.title}
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                 style={{ width: '100%', height: '100%', border: 'none' }}
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
