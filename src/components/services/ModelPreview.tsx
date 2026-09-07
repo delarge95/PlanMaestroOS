@@ -30,8 +30,8 @@ import { loadHolybroInstance, applyFinish, ensureVariadoSet, revealFrameOnly, dr
 import type { AssemblyEntry } from './holybro';
 import type { FinishKind, VariadoSet } from './holybro';
 import { loadAnvilInstance, applySurfaceMorph, ANVIL_MORPH_NODE } from './anvil';
-import { loadTurbine, bucketByStation } from './turbine';
-import type { TurbineBucket } from './turbine';
+import { loadTurbine, buildTurbineLayout } from './turbine';
+import type { TurbineLayout } from './turbine';
 import type { Lang } from '../../data/services/i18n';
 
 // Constantes y tipos del preview viven en previewConstants.ts (sin three) para
@@ -486,7 +486,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     }
     turbineRoot.add(lowTur);
     let turbineReady: THREE.Group | null = null;
-    let turbineBuckets: TurbineBucket[] = [];
+    let turbLayout: TurbineLayout | null = null;
     let turbineStarted = false;
     function startTurbine() {
       if (turbineStarted) return;
@@ -494,9 +494,13 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
       loadTurbine()
         .then(root => {
           turbineRoot.add(root);
+          turbLayout = buildTurbineLayout(root);
+          turbLayout.pieces.forEach(p => { p.mesh.visible = false; });
           turbineReady = root;
-          turbineBuckets = bucketByStation(root, 5);
-          turbineBuckets.forEach(b => b.meshes.forEach(m => { m.visible = false; }));
+          // silueta proporcional al bbox real: mismas posiciones, mismo largo
+          const len = turbLayout.box.max.x - turbLayout.box.min.x;
+          lowTur.scale.setScalar(len / 2.41);
+          lowTur.position.x = (turbLayout.box.min.x + turbLayout.box.max.x) / 2;
           root.visible = stateRef.current.mode === 'detail';
         })
         .catch(() => { turbineStarted = false; /* fallback: silueta procedural */ });
@@ -1033,51 +1037,75 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     // ── Loop ──
     let raf = 0;
     let frameDist = 4.8;
+    // ciclo 19: estado del despiece idle de la turbina (detalle)
+    let lastDetailT = -1;
+    let lastDetailChange = 0;
+    let turbE = 0;      // factor de explosión suavizado [0,1]
+    let spinAcc = 0;    // rotación acumulada del rotor (frena al explosionar)
+    let lastT = 0;
     const start = performance.now();
     const loop = () => {
       raf = requestAnimationFrame(loop);
       if (!visible || document.hidden) return;
       const t = (performance.now() - start) / 1000;
+      const dt = Math.min(0.05, Math.max(0.001, t - lastT));
+      lastT = t;
       const cur = stateRef.current;
 
       if (cur.mode !== group.userData.mode) { group.userData.mode = cur.mode; applyModeVisibility(cur.mode); }
 
       if (cur.mode === 'detail') {
         const d = Math.max(1, Math.min(5, cur.detail));
-        if (turbineReady) {
-          // ── ciclo 18: turbina real — revelado por estaciones + morph de silueta ──
+        if (turbineReady && turbLayout) {
+          // ── ciclo 19: revelado PIEZA A PIEZA + despiece axial en reposo ──
           (window as any).__turbineReady = true;
-          const spinSlow = performance.now() / 1000 * 0.25;
-          // morph de la silueta: pitch de aspas y cross-fade a medida que lo real toma el mando
-          const takeover = grow(d, 3.6, 5);
+          // idle: 2.5 s quieto → 1 s desarmar → 2 s explosionado → 1 s armar → 3 s reposo
+          if (cur.detail !== lastDetailT) { lastDetailT = cur.detail; lastDetailChange = t; }
+          const idleT = t - lastDetailChange;
+          let eTarget = 0;
+          if (idleT > 2.5) {
+            const ph = (idleT - 2.5) % 8;
+            eTarget = ph < 1 ? ph : ph < 3 ? 1 : ph < 4 ? 1 - (ph - 3) : 0;
+          }
+          turbE += (eTarget - turbE) * 0.09;
+          (window as any).__turbE = +turbE.toFixed(2);
+
+          // silueta: cross-fade temprano — las piezas reales empiezan a llegar ya
+          const takeover = grow(d, 1.1, 2.4);
           loMat.opacity = 1 - takeover;
           loAcc.opacity = 1 - takeover;
-          lowTur.visible = takeover < 0.999;
-          // pitch de las aspas del boceto: determinista (pivot orbital + hoja)
+          lowTur.visible = takeover < 0.995;
           const pitch = 0.14 + 0.3 * grow(d, 1, 5);
           lowTur.children.forEach((c) => {
             if ((c as THREE.Group).isGroup && c.children.length === 1) {
               (c.children[0] as THREE.Mesh).rotation.y = pitch;
             }
           });
-          lowTur.rotation.x = spinSlow * 0.4;
-          // revelado real: 5 ventanas secuenciales que CUBREN [1,5] exacto
-          turbineBuckets.forEach((b, i) => {
-            const w0 = 1 + (i / turbineBuckets.length) * 4;
-            const w1 = 1 + ((i + 1) / turbineBuckets.length) * 4;
-            const g = grow(d, w0, w1);
+          lowTur.rotation.x = t * 0.4;
+
+          // revelado pieza a pieza (frente→atrás): cada pieza VUELA desde su
+          // posición explosionada hasta su hogar — mismo lenguaje visual que
+          // el despiece idle
+          let visN = 0;
+          for (const p of turbLayout.pieces) {
+            const w0 = 1 + p.t0 * 3.2;
+            const g = grow(d, w0, w0 + 0.8);
             const vis = g > 0.001;
-            for (const m of b.meshes) {
-              m.visible = vis;
-              if (vis) {
-                const pop = 0.82 + 0.18 * g;
-                m.scale.setScalar(pop);
-              }
+            p.mesh.visible = vis;
+            if (vis) {
+              visN++;
+              const fly = 1 - g;
+              const desp = fly + turbE * (0.2 + 0.8 * p.t0);
+              p.mesh.position.copy(p.home).addScaledVector(p.offset, desp);
             }
-          });
-          turbineReady.rotation.x = spinSlow;
+          }
+          (window as any).__turbVis = visN;
+
+          // rotor gira y frena al explosionar (como la referencia)
+          spinAcc += dt * (0.45 * (1 - 0.75 * turbE) + 0.05);
+          turbineReady.rotation.x = spinAcc;
           setEnv(grow(d, 3.2, 5));
-          renderer.toneMappingExposure = 1.0 + 0.05 * takeover;
+          renderer.toneMappingExposure = 1.0 + 0.05 * grow(d, 3.6, 5);
         } else {
           // fallback: demo procedural del cubo (estado pre-carga / error)
           (window as any).__turbineReady = false;

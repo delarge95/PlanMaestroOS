@@ -1,14 +1,13 @@
 /**
  * turbine.ts — Turbina real (colección TURBINE de Blender, 1065 nodos,
- * 181k tris) para el slider de nivel de detalle (ciclo 18).
+ * 181k tris) para el slider de nivel de detalle (ciclo 18/19).
  *
- * Pipeline: Blender → GLB (1.065 nodos) → webp+meshopt SIN prune (nodos
- * preservados para el revelado progresivo) → 1.28 MB.
+ * Pipeline: Blender (transforms APLICADAS: 1065 nodos identidad, geometría
+ * en coords mundo) → GLB → webp+meshopt (grafo preservado) → 2.36 MB.
  *
- * La transición del slider es un "morph" de dos capas:
- *  - capa baja: silueta procedural low-poly (fallback si el GLB falla)
- *  - capa real: piezas del GLB reveladas por estación X (entrada→escape)
- *    con pop-in suave — la silueta queda de boceto interno debajo.
+ * Revelado pieza a pieza (frente→atrás) + despiece axial estilo exploded
+ * view técnico: cada pieza vuela desde su posición explosionada hacia su
+ * hogar a medida que sube el nivel de detalle.
  */
 
 import * as THREE from 'three';
@@ -42,8 +41,6 @@ export function loadTurbine(): Promise<THREE.Group> {
             const box2 = new THREE.Box3().setFromObject(root);
             const c = box2.getCenter(new THREE.Vector3());
             root.position.sub(c);
-            // orienta el eje largo a X si salio en Y/Z (export yup: el motor
-            // se modelo a lo largo de X en Blender -> yup mantiene X)
             if (size.y > size.x && size.y > size.z) root.rotation.z = Math.PI / 2;
             else if (size.z > size.x && size.z > size.y) root.rotation.y = Math.PI / 2;
             resolve(root);
@@ -55,30 +52,81 @@ export function loadTurbine(): Promise<THREE.Group> {
   return cache;
 }
 
-export interface TurbineBucket { meshes: THREE.Mesh[]; cx: number }
+export interface TurbinePiece {
+  mesh: THREE.Mesh;
+  /** posición de reposo (ensamblada) en el espacio del grupo */
+  home: THREE.Vector3;
+  /** desplazamiento explosionado (axial + jitter radial determinista) */
+  offset: THREE.Vector3;
+  /** momento de entrada en el slider: 0 = primer bloque, 1 = último */
+  t0: number;
+}
 
-/** Agrupa las meshes por estación a lo largo del eje del motor (X):
- *  ordena por X del centro y reparte en `n` grupos de tamaño similar.
- *  Devuelve n buckets entrada→escape. */
-export function bucketByStation(root: THREE.Group, n = 5): TurbineBucket[] {
-  const meshes: { m: THREE.Mesh; cx: number }[] = [];
+export interface TurbineLayout {
+  pieces: TurbinePiece[];
+  /** bbox ensamblado (para alinear la silueta low-poly) */
+  box: THREE.Box3;
+  radio: number;
+}
+
+/** hash determinista → [0,1) — mismo truco que dirExplosion en ModelPreview */
+function hash01(s: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 1000) / 1000;
+}
+
+/**
+ * Ordena las piezas frente→atrás (X) con desempate radial y calcula el
+ * despiece: dirección AXIAL (estilo vista explosionada técnica — cada
+ * estación se desliza hacia afuera del centro del motor) + un jitter
+ * radial pequeño y determinista para que las piezas apiladas se separen.
+ */
+export function buildTurbineLayout(root: THREE.Group): TurbineLayout {
   root.updateMatrixWorld(true);
+  const items: { m: THREE.Mesh; cx: number; cy: number; cz: number; r: number }[] = [];
   root.traverse(o => {
     const m = o as THREE.Mesh;
     if (!m.isMesh) return;
-    const c = new THREE.Vector3();
-    m.getWorldPosition(c);
-    meshes.push({ m, cx: c.x });
+    if (!m.geometry.boundingSphere) m.geometry.computeBoundingSphere();
+    const bs = m.geometry.boundingSphere!;
+    const c = bs.center.clone().applyMatrix4(m.matrixWorld);
+    items.push({ m, cx: c.x, cy: c.y, cz: c.z, r: Math.hypot(c.y, c.z) });
   });
-  meshes.sort((a, b) => a.cx - b.cx);
-  const buckets: TurbineBucket[] = Array.from({ length: n }, () => ({ meshes: [], cx: 0 }));
-  if (!meshes.length) return buckets;
-  const per = meshes.length / n;
-  meshes.forEach((e, i) => {
-    const b = Math.min(n - 1, Math.floor(i / per));
-    buckets[b].meshes.push(e.m);
-    buckets[b].cx += e.cx;
+  items.sort((a, b) => (a.cx - b.cx) || (a.r - b.r) || (a.cy - b.cy));
+
+  const box = new THREE.Box3().setFromObject(root);
+  const centroX = (box.min.x + box.max.x) / 2;
+  const radio = Math.max(box.max.y - box.min.y, box.max.z - box.min.z) / 2;
+  const largo = Math.max(0.001, box.max.x - box.min.x);
+
+  const pieces: TurbinePiece[] = items.map((it, i) => {
+    // axial: fuera del centro; los extremos viajan más lejos
+    const dx = it.cx - centroX;
+    const sign = dx === 0 ? 1 : Math.sign(dx);
+    const rel = Math.abs(dx) / (largo / 2); // 0 centro, 1 extremo
+    const axial = sign * (0.55 + rel * 1.15);
+    // jitter radial determinista para separar piezas apiladas
+    const h1 = hash01(it.m.name ?? String(i));
+    const h2 = hash01((it.m.name ?? String(i)) + '#');
+    const h3 = hash01((it.m.name ?? String(i)) + '%');
+    const ang = h1 * Math.PI * 2;
+    const rad = 0.18 + 0.4 * h3;
+    const offset = new THREE.Vector3(
+      axial,
+      Math.sin(ang) * rad * 0.55,
+      Math.cos(ang) * rad
+    );
+    return {
+      mesh: it.m,
+      home: it.m.position.clone(),
+      offset,
+      t0: items.length > 1 ? i / (items.length - 1) : 0,
+    };
   });
-  for (const b of buckets) if (b.meshes.length) b.cx /= b.meshes.length;
-  return buckets;
+
+  return { pieces, box, radio };
 }
