@@ -18,6 +18,8 @@ export interface AuditLogEntry {
 const SENSITIVE_PATTERNS = [
   /secret_[a-zA-Z0-9_\-]+/gi,
   /bearer\s+[a-zA-Z0-9_\-\.]+/gi,
+  /basic\s+[a-zA-Z0-9_\-\.\=\+]+/gi,
+  /api[_\-]?key[=\s:]+[a-zA-Z0-9_\-]+/gi,
   /notion_[a-zA-Z0-9_\-]+/gi,
   /ghp_[a-zA-Z0-9_\-]+/gi,
   /AIzaSy[a-zA-Z0-9_\-]+/gi, // Gemini API keys
