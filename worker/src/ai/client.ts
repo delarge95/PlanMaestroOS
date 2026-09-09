@@ -399,7 +399,7 @@ export async function processAiChat(options: AiChatRequestOptions): Promise<AiCh
       // Historial → contents de Gemini (solo roles válidos 'user'|'model')
       const contents = history
         .filter((m) => (m.role === 'user' || m.role === 'model') && m.content && m.content.trim().length > 0)
-        .map((m) => ({ role: m.role, text: m.content }));
+        .map((m) => ({ role: m.role as 'user' | 'model', text: m.content }));
       contents.push({
         role: 'user',
         text: context ? `${message}\n\n(contexto disponible: ${JSON.stringify(context)})` : message,
