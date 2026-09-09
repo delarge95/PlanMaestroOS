@@ -15,6 +15,30 @@ export interface CvRenderOptions {
   includeTraining?: boolean;
 }
 
+/**
+ * Notas editoriales del doc-17 que NUNCA van al CV final — son instrucciones
+ * para el autor, no contenido («[verify final number]», «[include only
+ * if…]», «Expected [date]», «[adjust…]»). El aviso pendiente vive en la UI
+ * de la app (CvGenerator), no en el documento exportado.
+ */
+const EDITORIAL_NOTE_RE = /\s*\[(?:verify[^\]]*|include only[^\]]*|adjust[^\]]*|date|por confirmar[^\]]*)\]/gi;
+
+/** Detecta cuántas notas editoriales quedan en un texto (para el aviso de la UI). */
+export function countEditorialNotes(text: string): number {
+  return (text.match(EDITORIAL_NOTE_RE) ?? []).length;
+}
+
+/** Limpia las notas editoriales del doc-17 para render/export (CV limpio). */
+export function stripEditorialNotes(text: string): string {
+  return text
+    .replace(EDITORIAL_NOTE_RE, '')
+    // «Expected [date]» → «Expected graduation» (sin inventar fecha; la UI
+    // recuerda confirmarla antes de enviar).
+    .replace(/\bExpected\s*$/i, 'Expected graduation')
+    .replace(/\s{2,}/g, ' ')
+    .trimEnd();
+}
+
 /** Ordena proyectos: orden de la variante primero, luego el resto base. */
 function orderedProjects(base: CvBaseData, variant: CvVariant, opts: CvRenderOptions) {
   const included = base.projects.filter((p) => !p.optional || opts.includeOptionalProjects);
@@ -43,7 +67,7 @@ export function renderCvMarkdown(
   lines.push(`# ${base.profile.fullName}`);
   lines.push(`## ${variant.headerTitle}`);
   lines.push('');
-  lines.push(base.profile.location);
+  lines.push(stripEditorialNotes(base.profile.location));
   const links = base.profile.links
     .filter((l) => !l.needsVerification || l.url)
     .map((l) => `${l.label}: ${l.url}`)
@@ -54,7 +78,7 @@ export function renderCvMarkdown(
   // Summary (la de la variante; fallback a la base)
   lines.push('## Professional Summary');
   lines.push('');
-  lines.push(variant.summary || base.summaryBase);
+  lines.push(stripEditorialNotes(variant.summary || base.summaryBase));
   lines.push('');
 
   // Skills: énfasis de la variante primero, luego grupos base
@@ -76,9 +100,9 @@ export function renderCvMarkdown(
     const bullets = variant.projectBullets[p.id] ?? p.bullets;
     lines.push(`### ${p.name}`);
     lines.push('');
-    lines.push(p.meta);
+    lines.push(stripEditorialNotes(p.meta));
     lines.push('');
-    for (const b of bullets) lines.push(`- ${b}`);
+    for (const b of bullets) lines.push(`- ${stripEditorialNotes(b)}`);
     lines.push('');
   }
 
@@ -88,9 +112,9 @@ export function renderCvMarkdown(
   for (const e of base.experience) {
     lines.push(`### ${e.role}`);
     lines.push('');
-    lines.push(`${e.org} | ${e.period}`);
+    lines.push(stripEditorialNotes(`${e.org} | ${e.period}`));
     lines.push('');
-    for (const b of e.bullets) lines.push(`- ${b}`);
+    for (const b of e.bullets) lines.push(`- ${stripEditorialNotes(b)}`);
     lines.push('');
   }
 
@@ -100,22 +124,22 @@ export function renderCvMarkdown(
   for (const ed of base.education) {
     lines.push(`### ${ed.institution}`);
     lines.push('');
-    lines.push(ed.period ? `${ed.degree} | ${ed.period}` : ed.degree);
+    lines.push(stripEditorialNotes(ed.period ? `${ed.degree} | ${ed.period}` : ed.degree));
     lines.push('');
-    for (const b of ed.bullets) lines.push(`- ${b}`);
+    for (const b of ed.bullets) lines.push(`- ${stripEditorialNotes(b)}`);
     lines.push('');
   }
 
   // Languages
   lines.push('## Languages');
   lines.push('');
-  for (const l of base.languages) lines.push(`- ${l.language} — ${l.level}`);
+  for (const l of base.languages) lines.push(`- ${l.language} — ${stripEditorialNotes(l.level)}`);
   lines.push('');
 
   // Availability
   lines.push('## Availability');
   lines.push('');
-  lines.push(base.profile.availability);
+  lines.push(stripEditorialNotes(base.profile.availability));
   lines.push('');
 
   if (opts.includeTraining && base.training.length > 0) {
@@ -123,7 +147,7 @@ export function renderCvMarkdown(
     lines.push('');
     lines.push('Selected non-certified training:');
     lines.push('');
-    for (const t of base.training) lines.push(`- ${t.name}`);
+    for (const t of base.training) lines.push(`- ${stripEditorialNotes(t.name)}`);
     if (base.training.some((t) => t.wordingNote)) {
       lines.push('');
       lines.push('Non-certified training used for skill development and portfolio production.');

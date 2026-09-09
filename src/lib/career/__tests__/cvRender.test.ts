@@ -65,4 +65,24 @@ describe('renderCvMarkdown', () => {
       expect(v.targetRoles.length).toBeGreaterThan(0);
     }
   });
+
+  it('el CV exportado NUNCA contiene notas editoriales del doc-17', () => {
+    for (const v of cvVariants) {
+      const md = renderCvMarkdown(cvBase, v, { includeTraining: true, includeOptionalProjects: true });
+      expect(md).not.toMatch(/\[verify/i);
+      expect(md).not.toMatch(/\[include only/i);
+      expect(md).not.toMatch(/\[adjust/i);
+      expect(md).not.toMatch(/\[date\]/i);
+    }
+  });
+
+  it('«Expected [date]» se limpia a «Expected graduation» sin inventar fecha', () => {
+    const md = renderCvMarkdown(cvBase, cvVariants[0]);
+    expect(md).toContain('Expected graduation');
+    expect(md).not.toContain('[date]');
+    // El claim sospechoso sigue presente pero SIN la nota editorial (variante techvis).
+    const mdTechvis = renderCvMarkdown(cvBase, getCvVariant('techvis-digitaltwin')!);
+    expect(mdTechvis).toContain('perceived workload.');
+    expect(mdTechvis).not.toContain('[verify');
+  });
 });

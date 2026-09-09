@@ -10,7 +10,7 @@
 import React, { useMemo, useState } from 'react';
 import { cvBase } from '../../data/career/cv/cvData';
 import { cvVariants } from '../../data/career/cv/cvVariants';
-import { renderCvMarkdown } from '../../lib/career/cvRender';
+import { renderCvMarkdown, stripEditorialNotes, countEditorialNotes } from '../../lib/career/cvRender';
 import {
   applyTailoring,
   autoTailorFromResearch,
@@ -74,6 +74,17 @@ export default function CvGenerator() {
     () => renderCvMarkdown(cvBase, activeVariant, { includeKeywords }),
     [activeVariant, includeKeywords],
   );
+
+  /** Notas editoriales [verify…] del doc-17 presentes en los datos — aviso UI, nunca en el CV. */
+  const pendingNotes = useMemo(() => {
+    const texts = [
+      ...cvBase.projects.flatMap((p) => [p.meta, ...p.bullets]),
+      ...Object.values(activeVariant.projectBullets).flat(),
+      ...cvBase.education.flatMap((e) => [e.degree, e.period ?? '', ...e.bullets]),
+      ...cvBase.experience.flatMap((e) => [e.period, ...e.bullets]),
+    ];
+    return texts.reduce((n, t) => n + countEditorialNotes(t), 0);
+  }, [activeVariant]);
 
   const companySlug = application ? application.companyName.toLowerCase().replace(/[^a-z0-9]+/g, '-') : null;
   const cvVersion = companySlug
@@ -303,7 +314,7 @@ export default function CvGenerator() {
         </header>
 
         <Section title="Professional Summary">
-          <p style={{ margin: 0, fontSize: '0.84rem' }}>{activeVariant.summary}</p>
+          <p style={{ margin: 0, fontSize: '0.84rem' }}>{stripEditorialNotes(activeVariant.summary)}</p>
         </Section>
 
         <Section title="Technical Skills">
@@ -323,10 +334,10 @@ export default function CvGenerator() {
           {previewProjects.map((p) => (
             <div key={p.id} style={{ marginBottom: '10px' }}>
               <div style={{ fontWeight: 700, fontSize: '0.86rem' }}>{p.name}</div>
-              <div style={{ fontSize: '0.74rem', color: '#555', fontStyle: 'italic' }}>{p.meta}</div>
+              <div style={{ fontSize: '0.74rem', color: '#555', fontStyle: 'italic' }}>{stripEditorialNotes(p.meta)}</div>
               <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
                 {(activeVariant.projectBullets[p.id] ?? p.bullets).map((b, i) => (
-                  <li key={i} style={{ fontSize: '0.8rem', marginBottom: '2px' }}>{b}</li>
+                  <li key={i} style={{ fontSize: '0.8rem', marginBottom: '2px' }}>{stripEditorialNotes(b)}</li>
                 ))}
               </ul>
             </div>
@@ -349,7 +360,7 @@ export default function CvGenerator() {
           {cvBase.education.map((ed) => (
             <div key={ed.id} style={{ marginBottom: '8px' }}>
               <div style={{ fontWeight: 700, fontSize: '0.86rem' }}>{ed.institution}</div>
-              <div style={{ fontSize: '0.74rem', color: '#555' }}>{ed.degree}{ed.period ? ` | ${ed.period}` : ''}</div>
+              <div style={{ fontSize: '0.74rem', color: '#555' }}>{stripEditorialNotes(ed.period ? `${ed.degree} | ${ed.period}` : ed.degree)}</div>
               <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
                 {ed.bullets.map((b, i) => <li key={i} style={{ fontSize: '0.8rem', marginBottom: '2px' }}>{b}</li>)}
               </ul>
@@ -400,7 +411,13 @@ export default function CvGenerator() {
         <span>
           Pendientes de confirmar (doc-17 §2): email, teléfono y URL del portfolio viajan como
           placeholders y NO se renderizan hasta confirmarlos en{' '}
-          <code>src/data/career/cv/cvData.ts</code>.
+          <code>src/data/career/cv/cvData.ts</code>
+          {pendingNotes > 0 && (
+            <> — además hay <strong>{pendingNotes} dato(s) con nota «[verify…]»</strong> del
+            doc-17 (triángulos finales, métricas SUS, fecha de grado): el CV sale limpio,
+            pero confirma el número real antes de enviar.</>
+          )}
+          .
         </span>
       </div>
     </div>
