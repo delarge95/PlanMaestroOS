@@ -25,7 +25,7 @@ const GOALS: Array<{ value: Goal; label: string; hint: string }> = [
 
 function SectionTitle({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <h2 className="ds-h3 ds-row" style={{ gap: 'var(--space-2)' }}>
+    <h2 className="ds-h2 ds-row" style={{ gap: 'var(--space-2)' }}>
       <span style={{ color: 'var(--accent)' }}>{icon}</span>
       {children}
     </h2>
@@ -74,12 +74,12 @@ export function NutritionWorkspace() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'var(--surface, var(--color-surface-base))',
+    background: 'var(--surface-1)',
     border: '1px solid var(--color-border-subtle)',
-    borderRadius: 'var(--radius-sm)',
+    borderRadius: 'var(--radius-s)',
     padding: '10px 12px',
     color: 'var(--text-primary)',
-    fontSize: 'var(--font-size-body)',
+    fontSize: 'var(--fs-body)',
     boxSizing: 'border-box',
   };
 

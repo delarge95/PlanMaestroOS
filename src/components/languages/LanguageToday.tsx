@@ -79,9 +79,9 @@ export default function LanguageToday({
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Languages size={22} style={{ color: 'var(--color-accent-primary)' }} />
             <div>
-              <h1 style={{ fontSize: 'var(--fs-page, 1.75rem)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-                Idiomas
-              </h1>
+              <h2 className="ds-h2" style={{ margin: 0 }}>
+                Hoy
+              </h2>
               <span style={{ fontSize: 'var(--fs-meta, 0.8125rem)', color: 'var(--text-secondary)' }}>
                 Práctica diaria de Alemán e Inglés profesional
               </span>

@@ -61,7 +61,7 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
           fontSize: 'var(--fs-meta, 0.8125rem)'
         }}
       >
-        <span className="ds-label-sm" style={{ color: 'var(--success, #30d158)' }}>
+        <span className="ds-label-sm" style={{ color: 'var(--success)' }}>
           Prehab — {protocol.zoneTitle} · {getPainText()} (Completado)
         </span>
         <ChevronDown size={14} />
@@ -73,15 +73,15 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
     <div
       className="ds-card ds-stack-sm"
       style={{
-        border: '1px solid var(--warning, #ff9f0a)',
+        border: '1px solid var(--warning)',
       }}
     >
       {/* CABECERA DE ZONA AFECTADA Y PREHAB DE HOY */}
       <div className="ds-row-between">
         <div className="ds-row" style={{ gap: '8px' }}>
-          <ShieldAlert size={18} style={{ color: 'var(--warning, #ff9f0a)' }} />
+          <ShieldAlert size={18} style={{ color: 'var(--warning)' }} />
           <div>
-            <span className="ds-eyebrow" style={{ color: 'var(--warning, #ff9f0a)' }}>
+            <span className="ds-eyebrow" style={{ color: 'var(--warning)' }}>
               Zona afectada: {protocol.zoneTitle}
             </span>
             <h3 className="ds-label" style={{ margin: '2px 0 0' }}>
@@ -114,7 +114,7 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
             onClick={() => setPainLevel('none')}
             className="ds-btn ds-btn-sm"
             style={{
-              background: painLevel === 'none' ? 'rgba(48,209,88,0.12)' : 'rgba(255,255,255,0.04)',
+              background: painLevel === 'none' ? 'var(--success-soft)' : 'rgba(255,255,255,0.04)',
               color: painLevel === 'none' ? 'var(--success)' : 'var(--text-secondary)',
               border: 'none',
               padding: '4px 10px',
@@ -129,7 +129,7 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
             onClick={() => setPainLevel('mild')}
             className="ds-btn ds-btn-sm"
             style={{
-              background: painLevel === 'mild' ? 'rgba(255,159,10,0.12)' : 'rgba(255,255,255,0.04)',
+              background: painLevel === 'mild' ? 'var(--warning-soft)' : 'rgba(255,255,255,0.04)',
               color: painLevel === 'mild' ? 'var(--warning)' : 'var(--text-secondary)',
               border: 'none',
               padding: '4px 10px',
@@ -144,8 +144,8 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
             onClick={() => setPainLevel('notable')}
             className="ds-btn ds-btn-sm"
             style={{
-              background: painLevel === 'notable' ? 'rgba(255,69,58,0.12)' : 'rgba(255,255,255,0.04)',
-              color: painLevel === 'notable' ? 'var(--danger, #ff453a)' : 'var(--text-secondary)',
+              background: painLevel === 'notable' ? 'var(--danger-soft)' : 'rgba(255,255,255,0.04)',
+              color: painLevel === 'notable' ? 'var(--danger)' : 'var(--text-secondary)',
               border: 'none',
               padding: '4px 10px',
               fontSize: '0.75rem',

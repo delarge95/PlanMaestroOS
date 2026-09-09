@@ -1,9 +1,9 @@
-﻿// src/data/fitness/nutrition/rules.ts â€” Acceso tipado al RAG de nutriciÃ³n (rag/nutrition.json, formato v4)
+﻿// src/data/fitness/nutrition/rules.ts — Acceso tipado al RAG de nutrición (rag/nutrition.json, formato v4)
 // Desde el ciclo 2 NO existe array rules[] legacy: las reglas viven como chunks
-// (rag/nutrition/fuentes/<sourceId>--rules.md) con sus valores numÃ©ricos codificados
+// (rag/nutrition/fuentes/<sourceId>--rules.md) con sus valores numéricos codificados
 // en `entities` (num:ruta=valor, unit:, confidence:, tier:, cond:clave=valor).
-// Este mÃ³dulo compila un Ã­ndice derivado chunksâ†’RagRule una vez al cargar; los
-// valores de cÃ¡lculo SIEMPRE se leen del JSON reconstruido (fuente Ãºnica de verdad).
+// Este módulo compila un índice derivado chunks→RagRule una vez al cargar; los
+// valores de cálculo SIEMPRE se leen del JSON reconstruido (fuente única de verdad).
 
 import ragJson from '../../../../rag/nutrition.json';
 import type { Confidence, RuleCitation } from './types';
@@ -57,7 +57,7 @@ interface RagFileShape {
 export const nutritionRag = ragJson as unknown as RagFileShape;
 
 const SOURCE_SHORT: Record<string, string> = {
-  'nsca-est-4ed': 'NSCA Essentials 4Âª ed (2016)',
+  'nsca-est-4ed': 'NSCA Essentials 4ª ed (2016)',
   'maughan-nutrition-in-sport': 'Maughan, Nutrition in Sport (IOC, 2000)',
   'sportnutrition-3g-2022': 'Sport Nutrition, 3G E-learning (2022)',
 };
@@ -125,7 +125,7 @@ function chunkToRule(chunk: RawChunk): RagRule | null {
   };
 }
 
-/** Ãndice derivado compilado: todos los chunks que representan reglas (locator cap+page), indexados por id. */
+/** Índice derivado compilado: todos los chunks que representan reglas (locator cap+page), indexados por id. */
 function compileRuleIndex(): Map<string, RagRule> {
   const index = new Map<string, RagRule>();
   for (const chunk of nutritionRag.chunks) {
@@ -140,7 +140,7 @@ const RULE_INDEX = compileRuleIndex();
 /** Reglas derivadas de chunks (compat: mismo consumo que el antiguo rules[] del JSON). */
 export const nutritionRules: RagRule[] = [...RULE_INDEX.values()];
 
-/** Vista compatible del RAG: rules[] ahora es DERIVADO de chunks, nunca leÃ­do del JSON. */
+/** Vista compatible del RAG: rules[] ahora es DERIVADO de chunks, nunca leído del JSON. */
 export const nutritionRagView = { ...nutritionRag, rules: nutritionRules };
 
 export function getRule(ruleId: string): RagRule | undefined {
@@ -160,7 +160,7 @@ export function toChunkCitation(chunkId: string): RuleCitation {
   } else if (typeof loc.page !== 'undefined') {
     locator = `p. ${loc.page}`;
   } else if (typeof loc.section === 'string' && loc.section.trim().length > 0) {
-    locator = `Â§ ${loc.section}`;
+    locator = `§ ${loc.section}`;
   } else {
     locator = chunk.sourceId;
   }
@@ -194,16 +194,16 @@ export function toCitation(ruleId: string): RuleCitation {
   };
 }
 
-/** Valor numÃ©rico de una regla (values.value | values.min/max u objeto por sexo/nivel). */
+/** Valor numérico de una regla (values.value | values.min/max u objeto por sexo/nivel). */
 export function ruleNumber(ruleId: string, key?: string): number {
   const rule = requireRule(ruleId);
   if (!rule.values) {
-    throw new Error(`[nutrition] Regla "${ruleId}" sin valores numÃ©ricos`);
+    throw new Error(`[nutrition] Regla "${ruleId}" sin valores numéricos`);
   }
   if (key !== undefined) {
     const nested = rule.values[key];
     if (typeof nested !== 'number') {
-      throw new Error(`[nutrition] Regla "${ruleId}" sin clave numÃ©rica "${key}"`);
+      throw new Error(`[nutrition] Regla "${ruleId}" sin clave numérica "${key}"`);
     }
     return nested;
   }

@@ -186,136 +186,30 @@ export default function PortfolioSimulator() {
           </span>
         </div>
 
-        {/* NAVEGACIÓN DE 4 PESTAÑAS (ArtStation, LinkedIn, GitHub, Web) */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
-            Portafolio y CV
-          </h2>
-
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.03)', padding: '3px', borderRadius: '10px', border: '1px solid var(--color-border-subtle)', flexWrap: 'wrap' }}>
+                {/* VISTAS DE PÁGINA (sin ruta): mismo lenguaje visual que snb-l3 */}
+        <nav className="snb-l3" aria-label="Vistas de Portafolio" style={{ margin: 0, padding: 0, borderBottom: '1px solid var(--separator)' }}>
+          {([
+            { key: 'board', icon: <ListChecks size={14} />, label: 'Tablero Sprint' },
+            { key: 'launch', icon: <Rocket size={14} />, label: 'Launch' },
+            { key: 'artstation', icon: <Palette size={14} />, label: 'ArtStation' },
+            { key: 'linkedin', icon: <Share2 size={14} />, label: 'LinkedIn' },
+            { key: 'github', icon: <Code2 size={14} />, label: 'GitHub' },
+            { key: 'web', icon: <Globe size={14} />, label: 'Web Personal' },
+          ] as const).map(({ key, icon, label }) => (
             <button
+              key={key}
               type="button"
-              onClick={() => setActiveTab('board')}
-              style={{
-                background: activeTab === 'board' ? 'var(--color-accent-primary)' : 'transparent',
-                color: activeTab === 'board' ? '#000000' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'board' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
+              onClick={() => setActiveTab(key)}
+              className={`snb-l3-link${activeTab === key ? ' snb-l3-link-active' : ''}`}
             >
-              <ListChecks size={14} /> Tablero Sprint
+              {icon}
+              {label}
             </button>
+          ))}
+        </nav>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('launch')}
-              style={{
-                background: activeTab === 'launch' ? 'var(--color-accent-primary)' : 'transparent',
-                color: activeTab === 'launch' ? '#000000' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'launch' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
-              <Rocket size={14} /> Launch
-            </button>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('artstation')}
-              style={{
-                background: activeTab === 'artstation' ? 'var(--color-accent-primary)' : 'transparent',
-                color: activeTab === 'artstation' ? '#000000' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'artstation' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
-              <Palette size={14} /> ArtStation
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('linkedin')}
-              style={{
-                background: activeTab === 'linkedin' ? 'var(--color-accent-primary)' : 'transparent',
-                color: activeTab === 'linkedin' ? '#000000' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'linkedin' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
-              <Share2 size={14} /> LinkedIn
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('github')}
-              style={{
-                background: activeTab === 'github' ? 'var(--color-accent-primary)' : 'transparent',
-                color: activeTab === 'github' ? '#000000' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'github' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
-              <Code2 size={14} /> GitHub
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('web')}
-              style={{
-                background: activeTab === 'web' ? 'var(--color-accent-primary)' : 'transparent',
-                color: activeTab === 'web' ? '#000000' : 'var(--text-secondary)',
-                border: 'none',
-                padding: '6px 12px',
-                borderRadius: '7px',
-                fontSize: '0.78rem',
-                fontWeight: activeTab === 'web' ? 700 : 500,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
-              <Globe size={14} /> Web Personal
-            </button>
-          </div>
-        </div>
-
-        {/* TABLERO SPRINT (doc-33): estado por ítem con responsable visual y fuente citada */}
+{/* TABLERO SPRINT (doc-33): estado por ítem con responsable visual y fuente citada */}
         {activeTab === 'board' && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>

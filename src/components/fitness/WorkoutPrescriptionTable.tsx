@@ -124,7 +124,7 @@ export function WorkoutPrescriptionTable({
                     type="button"
                     onClick={() => setWeek(wNum)}
                     style={{
-                      background: isSelected ? 'var(--color-accent-primary, #0a84ff)' : 'transparent',
+                      background: isSelected ? 'var(--color-accent-primary, var(--accent))' : 'transparent',
                       color: isSelected ? '#ffffff' : 'var(--text-secondary)',
                       border: 'none',
                       padding: '6px 10px',
@@ -189,7 +189,7 @@ export function WorkoutPrescriptionTable({
                     onClick={() => setSelectedDayIndex(idx)}
                     title={`Día ${idx + 1}${focus ? ': ' + focus : ''}`}
                     style={{
-                      background: isSelected ? 'var(--color-accent-primary, #0a84ff)' : 'transparent',
+                      background: isSelected ? 'var(--color-accent-primary, var(--accent))' : 'transparent',
                       color: isSelected ? '#ffffff' : 'var(--text-secondary)',
                       border: 'none',
                       padding: '6px 12px',
@@ -210,7 +210,7 @@ export function WorkoutPrescriptionTable({
       </div>
 
       <div style={{ margin: '4px 0 2px' }}>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', lineHeight: 1.25 }}>
+        <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)', lineHeight: 1.25 }}>
           {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayDisplayTitle}
         </h3>
         {activeWeek?.isDeload && (
@@ -354,7 +354,7 @@ export function WorkoutPrescriptionTable({
                                 borderRadius: '4px',
                                 fontSize: '0.76rem',
                                 fontWeight: 600,
-                                color: cleanRir === '0' || cleanRir.includes('Fallo') ? '#ff453a' : 'var(--text)'
+                                color: cleanRir === '0' || cleanRir.includes('Fallo') ? 'var(--danger)' : 'var(--text)'
                               }}
                             >
                               S{rIdx + 1}: RIR {cleanRir}

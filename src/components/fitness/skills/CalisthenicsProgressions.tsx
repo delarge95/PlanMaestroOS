@@ -403,7 +403,7 @@ export function CalisthenicsProgressions({
               style={{
                 background: "var(--surface, #1c1c1e)",
                 border: isActive
-                  ? "1px solid rgba(10,132,255,0.35)"
+                  ? "1px solid var(--accent-border)"
                   : "1px solid var(--color-border-subtle, rgba(255,255,255,0.08))",
                 borderRadius: "14px",
                 overflow: "hidden",
@@ -603,10 +603,10 @@ export function CalisthenicsProgressions({
                       }
                       style={{
                         background: isRoutineActive
-                          ? "rgba(48,209,88,0.12)"
+                          ? "var(--success-soft)"
                           : "rgba(10,132,255,0.15)",
                         color: isRoutineActive
-                          ? "var(--success, #30d158)"
+                          ? "var(--success)"
                           : "var(--accent)",
                         border: isRoutineActive
                           ? "1px solid rgba(48,209,88,0.5)"
@@ -871,7 +871,7 @@ export function CalisthenicsProgressions({
                                       setModalExerciseId(req.exerciseName)
                                     }
                                     style={{
-                                      background: "rgba(10,132,255,0.12)",
+                                      background: "var(--accent-soft)",
                                       color: "var(--accent)",
                                       border: "1px solid rgba(10,132,255,0.3)",
                                       borderRadius: "6px",
@@ -1095,7 +1095,7 @@ export function CalisthenicsProgressions({
                                                   "rgba(10,132,255,0.15)",
                                                 color: "var(--accent)",
                                                 border:
-                                                  "1px solid rgba(10,132,255,0.35)",
+                                                  "1px solid var(--accent-border)",
                                                 padding: "1px 7px",
                                                 borderRadius: "10px",
                                                 fontWeight: 700,

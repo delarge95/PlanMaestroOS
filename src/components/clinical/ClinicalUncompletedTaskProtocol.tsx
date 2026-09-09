@@ -41,7 +41,7 @@ export default function ClinicalUncompletedTaskProtocol() {
             <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.72rem', color: 'var(--color-accent-danger)', background: 'var(--color-accent-danger-soft)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
               SISTEMA ANTI-FRUSTRACIÓN & PERDÓN EMOCIONAL TDAH
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '6px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '6px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               Protocolo de Rescate cuando una Tarea Falla o No Se Cumple
             </h3>
           </div>

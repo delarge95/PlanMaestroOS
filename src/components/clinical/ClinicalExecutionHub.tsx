@@ -123,7 +123,7 @@ export default function ClinicalExecutionHub() {
         )}
 
         {/* HEADER */}
-        <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: '16px' }}>
+        <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-4)' }}>
           <div>
             <span className="ds-eyebrow">
               SUITE DE TAREAS CLÍNICAS INTERACTIVAS • TDAH & ANSIEDAD SOCIAL
@@ -133,44 +133,24 @@ export default function ClinicalExecutionHub() {
             </h3>
           </div>
 
-          {/* TAB NAVIGATION */}
-          <div className="ds-row-wrap" style={{ gap: '8px' }}>
-            <button
-              type="button"
-              onClick={() => setActiveTab('checkin')}
-              className="ds-chip"
-              data-active={activeTab === 'checkin'}
-            >
-              📊 Estado Diario
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('exposure')}
-              className="ds-chip"
-              data-active={activeTab === 'exposure'}
-            >
-              🎯 Exposición Social CBT
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('rescue')}
-              className="ds-chip"
-              data-active={activeTab === 'rescue'}
-            >
-              🚨 Rescate 10 min TDAH
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('sleep')}
-              className="ds-chip"
-              data-active={activeTab === 'sleep'}
-            >
-              🌙 Sueño CBT-I
-            </button>
-          </div>
+          {/* VISTAS DEL HUB (sin ruta): mismo lenguaje visual que snb-l3 */}
+          <nav className="snb-l3" aria-label="Vistas de Ejecución Clínica" style={{ margin: 0, padding: '0 0 2px', borderBottom: '1px solid var(--separator)' }}>
+            {([
+              { key: 'checkin', label: 'Estado Diario' },
+              { key: 'exposure', label: 'Exposición Social CBT' },
+              { key: 'rescue', label: 'Rescate 10 min TDAH' },
+              { key: 'sleep', label: 'Sueño CBT-I' },
+            ] as const).map(({ key, label }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setActiveTab(key)}
+                className={`snb-l3-link${activeTab === key ? ' snb-l3-link-active' : ''}`}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
         </div>
 
         {/* TAB 1: BIO-FEEDBACK DAILY CHECK-IN */}
@@ -184,7 +164,7 @@ export default function ClinicalExecutionHub() {
               <div className="ds-grid">
                 {/* ENERGY */}
                 <div className="ds-card ds-stack-sm" style={{ padding: '14px' }}>
-                  <div className="ds-row-between" style={{ marginBottom: '8px' }}>
+                  <div className="ds-row-between" style={{ marginBottom: 'var(--space-2)' }}>
                     <span className="ds-eyebrow" style={{ color: 'var(--color-accent-primary)' }}>⚡ Nivel de Energía</span>
                     <strong className="ds-label" style={{ color: 'var(--color-accent-primary)' }}>{energy}/10</strong>
                   </div>
@@ -200,7 +180,7 @@ export default function ClinicalExecutionHub() {
 
                 {/* ANXIETY */}
                 <div className="ds-card ds-stack-sm" style={{ padding: '14px' }}>
-                  <div className="ds-row-between" style={{ marginBottom: '8px' }}>
+                  <div className="ds-row-between" style={{ marginBottom: 'var(--space-2)' }}>
                     <span className="ds-eyebrow" style={{ color: '#d946ef' }}>🧠 Ansiedad / Activación</span>
                     <strong className="ds-label" style={{ color: '#d946ef' }}>{anxiety}/10</strong>
                   </div>
@@ -216,7 +196,7 @@ export default function ClinicalExecutionHub() {
 
                 {/* PAIN / TENDINOPATHY */}
                 <div className="ds-card ds-stack-sm" style={{ padding: '14px' }}>
-                  <div className="ds-row-between" style={{ marginBottom: '8px' }}>
+                  <div className="ds-row-between" style={{ marginBottom: 'var(--space-2)' }}>
                     <span className="ds-eyebrow" style={{ color: 'var(--color-accent-danger)' }}>🦴 Molestia Articular / Tendón</span>
                     <strong className="ds-label" style={{ color: 'var(--color-accent-danger)' }}>{pain}/10</strong>
                   </div>
@@ -232,7 +212,7 @@ export default function ClinicalExecutionHub() {
 
                 {/* SLEEP HOURS */}
                 <div className="ds-card ds-stack-sm" style={{ padding: '14px' }}>
-                  <div className="ds-row-between" style={{ marginBottom: '8px' }}>
+                  <div className="ds-row-between" style={{ marginBottom: 'var(--space-2)' }}>
                     <span className="ds-eyebrow" style={{ color: 'var(--color-state-done)' }}>😴 Horas de Sueño</span>
                     <strong className="ds-label" style={{ color: 'var(--color-state-done)' }}>{sleepHours}h</strong>
                   </div>
@@ -252,7 +232,7 @@ export default function ClinicalExecutionHub() {
                 type="button"
                 onClick={handleSaveBioFeedback}
                 className="ds-btn ds-btn-primary"
-                style={{ width: '100%', marginTop: '8px', padding: '12px' }}
+                style={{ width: '100%', marginTop: 'var(--space-2)', padding: 'var(--space-3)' }}
               >
                 ✓ Registrar Evaluación de Hoy
               </button>
@@ -260,7 +240,7 @@ export default function ClinicalExecutionHub() {
 
             {/* HISTORIAL RECIENTE */}
             {biofeedback.length > 0 && (
-              <div className="ds-card ds-stack-sm" style={{ padding: '16px' }}>
+              <div className="ds-card ds-stack-sm">
                 <strong className="ds-eyebrow">
                   REGISTROS RECIENTES:
                 </strong>
@@ -286,9 +266,9 @@ export default function ClinicalExecutionHub() {
 
         {/* TAB 2: SOCIAL ANXIETY EXPOSURE LADDER */}
         {activeTab === 'exposure' && (
-          <div className="ds-stack" style={{ gap: '16px' }}>
+          <div className="ds-stack">
             <div className="ds-card ds-stack" style={{ borderRadius: '18px', padding: '20px' }}>
-              <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: '12px' }}>
+              <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-3)' }}>
                 <div>
                   <strong className="ds-label">Jerarquía de Exposición Graduada a Ansiedad Social / Desempeño:</strong>
                   <p className="ds-caption" style={{ margin: '2px 0 0' }}>
@@ -297,14 +277,14 @@ export default function ClinicalExecutionHub() {
                 </div>
 
                 {isRuminationActive && activeRuminationTimer !== null && (
-                  <div className="ds-card ds-stack-sm" style={{ padding: '8px 14px', borderRadius: '12px', textAlign: 'center', borderColor: 'var(--color-accent-danger)' }}>
+                  <div className="ds-card ds-stack-sm" style={{ padding: '8px 14px', textAlign: 'center', borderColor: 'var(--color-accent-danger)' }}>
                     <span className="ds-eyebrow" style={{ color: 'var(--color-accent-danger)' }}>LÍMITE DE RUMIACIÓN POST-EVENTO</span>
-                    <strong className="ds-h3" style={{ margin: 0, display: 'block' }}>{formatTime(activeRuminationTimer)}</strong>
+                    <strong className="ds-h3" style={{ display: 'block' }}>{formatTime(activeRuminationTimer)}</strong>
                   </div>
                 )}
               </div>
 
-              <div className="ds-stack-sm" style={{ gap: '12px' }}>
+              <div className="ds-stack-sm" style={{ gap: 'var(--space-3)' }}>
                 {exposures.map((exp) => (
                   <div
                     key={exp.id}
@@ -313,12 +293,12 @@ export default function ClinicalExecutionHub() {
                       background: exp.completed ? 'rgba(16,185,129,0.06)' : undefined,
                       borderColor: exp.completed ? 'rgba(16,185,129,0.3)' : undefined,
                       borderRadius: '14px',
-                      padding: '16px'
+                      padding: 'var(--space-4)'
                     }}
                   >
-                    <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: '12px' }}>
+                    <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: 'var(--space-3)' }}>
                       <div>
-                        <div className="ds-row" style={{ gap: '8px', alignItems: 'center' }}>
+                        <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
                           <span className="ds-badge ds-badge-accent">
                             NIVEL {exp.hierarchyLevel.toUpperCase()}
                           </span>
@@ -336,7 +316,7 @@ export default function ClinicalExecutionHub() {
                       </button>
                     </div>
 
-                    <div className="ds-row-wrap ds-caption" style={{ gap: '16px', alignItems: 'center' }}>
+                    <div className="ds-row-wrap ds-caption" style={{ gap: 'var(--space-4)', alignItems: 'center' }}>
                       <label className="ds-row ds-micro" style={{ gap: '6px' }}>
                         Ansiedad Pre-Evento (0-10):
                         <input
@@ -379,9 +359,9 @@ export default function ClinicalExecutionHub() {
 
         {/* TAB 3: TDAH INERTIA RESCUE & "VERSIÓN MALA" */}
         {activeTab === 'rescue' && (
-          <div className="ds-stack" style={{ gap: '16px' }}>
+          <div className="ds-stack">
             <div className="ds-card ds-stack" style={{ borderRadius: '18px', padding: '20px' }}>
-              <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: '12px' }}>
+              <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-3)' }}>
                 <div>
                   <span className="ds-eyebrow" style={{ color: 'var(--color-accent-danger)' }}>
                     PROTOCOLO CLÍNICO DE DESBLOQUEO INICIAL
@@ -392,9 +372,9 @@ export default function ClinicalExecutionHub() {
                 </div>
 
                 {isRescueTimerActive && rescueTimer !== null && (
-                  <div className="ds-card ds-stack-sm" style={{ padding: '8px 16px', borderRadius: '12px', textAlign: 'center', borderColor: 'var(--color-state-done)' }}>
+                  <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-2) var(--space-4)', textAlign: 'center', borderColor: 'var(--color-state-done)' }}>
                     <span className="ds-eyebrow" style={{ color: 'var(--color-state-done)' }}>TEMPORIZADOR DE ENTRADA</span>
-                    <strong className="ds-h3" style={{ margin: 0, display: 'block' }}>{formatTime(rescueTimer)}</strong>
+                    <strong className="ds-h3" style={{ display: 'block' }}>{formatTime(rescueTimer)}</strong>
                   </div>
                 )}
               </div>
@@ -410,7 +390,7 @@ export default function ClinicalExecutionHub() {
                 </button>
               </div>
 
-              <div className="ds-stack-sm" style={{ gap: '8px' }}>
+              <div className="ds-stack-sm">
                 <label className="ds-eyebrow" style={{ color: 'var(--color-accent-danger)' }}>
                   Escribe aquí una "Versión Mala" o 3 Bullets Caóticos sin Juzgar:
                 </label>
@@ -421,15 +401,15 @@ export default function ClinicalExecutionHub() {
                   placeholder="Escribe el borrador más imperfecto posible. No corrijas ortografía, no organices estructura. Solo suelta la primera idea..."
                   style={{
                     width: '100%',
-                    borderRadius: '12px',
-                    padding: '12px',
+                    borderRadius: 'var(--radius-m)',
+                    padding: 'var(--space-3)',
                     fontSize: '0.85rem',
                     resize: 'vertical'
                   }}
                 />
               </div>
 
-              <div className="ds-card ds-caption" style={{ borderRadius: '12px', padding: '12px', lineHeight: 1.4 }}>
+              <div className="ds-card ds-caption" style={{ padding: 'var(--space-3)', lineHeight: 1.4 }}>
                 💡 <strong style={{ color: 'var(--color-text-primary)' }}>Criterio de corte:</strong> "Suficientemente terminado" es el único estándar requerido hoy. Un borrador feo guardado supera a la parálisis perfecta.
               </div>
             </div>
@@ -438,7 +418,7 @@ export default function ClinicalExecutionHub() {
 
         {/* TAB 4: CBT-I SLEEP HYGIENE CHECKLIST */}
         {activeTab === 'sleep' && (
-          <div className="ds-stack" style={{ gap: '16px' }}>
+          <div className="ds-stack">
             <div className="ds-card ds-stack" style={{ borderRadius: '18px', padding: '20px' }}>
               <div>
                 <span className="ds-eyebrow" style={{ color: 'var(--color-state-done)' }}>
@@ -450,7 +430,7 @@ export default function ClinicalExecutionHub() {
               </div>
 
               <div className="ds-stack-sm" style={{ gap: '10px' }}>
-                <label className="ds-card ds-row" style={{ gap: '10px', padding: '12px', cursor: 'pointer' }}>
+                <label className="ds-card ds-row" style={{ gap: '10px', padding: 'var(--space-3)', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
                     checked={screensOff21}
@@ -462,7 +442,7 @@ export default function ClinicalExecutionHub() {
                   </span>
                 </label>
 
-                <label className="ds-card ds-row" style={{ gap: '10px', padding: '12px', cursor: 'pointer' }}>
+                <label className="ds-card ds-row" style={{ gap: '10px', padding: 'var(--space-3)', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
                     checked={roomCold}
@@ -474,7 +454,7 @@ export default function ClinicalExecutionHub() {
                   </span>
                 </label>
 
-                <label className="ds-card ds-row" style={{ gap: '10px', padding: '12px', cursor: 'pointer' }}>
+                <label className="ds-card ds-row" style={{ gap: '10px', padding: 'var(--space-3)', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
                     checked={relaxingAudio}
@@ -487,7 +467,7 @@ export default function ClinicalExecutionHub() {
                 </label>
               </div>
 
-              <div className="ds-card ds-caption" style={{ borderRadius: '12px', padding: '12px', lineHeight: 1.4 }}>
+              <div className="ds-card ds-caption" style={{ padding: 'var(--space-3)', lineHeight: 1.4 }}>
                 😴 <strong style={{ color: 'var(--color-state-done)' }}>Recordatorio Terapéutico:</strong> El descanso y el sueño no son premios condicionados al rendimiento. Son un requisito fisiológico para la regulación ejecutiva de mañana.
               </div>
             </div>

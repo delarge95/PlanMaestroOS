@@ -1,7 +1,6 @@
 ---
-// SectionNavBar.astro — Navegación de subsección, server-side, SIEMPRE arriba.
-// Nivel 2: pill chips (estilo original que el usuario aprobó).
-// Nivel 3: links más ligeros debajo, sin competir visualmente con nivel 2.
+// SectionNavBar.astro — Nivel 2: pill chips sticky arriba. SIEMPRE lo primero bajo el NavigationShell.
+// El nivel 3 (subsecciones) lo renderiza PlanMaestroLayout DESPUÉS del h1, dentro del contenedor de contenido.
 import { SECTION_NAV } from '../shell/sectionNavConfig';
 
 interface Props {
@@ -11,21 +10,19 @@ interface Props {
 const { sectionKey: overrideKey } = Astro.props;
 const pathname = Astro.url.pathname;
 
-function detectSection(path: string): { level2: string | null; level3: string | null } {
-  if (/^\/app\/fitness\/library/.test(path)) return { level2: 'fitness', level3: 'fitness.library' };
-  if (/^\/app\/fitness/.test(path)) return { level2: 'fitness', level3: null };
-  if (/^\/app\/career/.test(path)) return { level2: 'career', level3: null };
-  if (/^\/app\/clinical/.test(path)) return { level2: 'clinical', level3: null };
-  if (/^\/app\/languages/.test(path)) return { level2: 'languages', level3: null };
-  if (/^\/app\/gastronomy/.test(path)) return { level2: 'gastronomy', level3: null };
-  if (/^\/app\/schedules|^\/app\/today/.test(path)) return { level2: 'today', level3: null };
-  return { level2: null, level3: null };
+function detectSection(path: string): string | null {
+  if (/^\/app\/fitness\/library/.test(path)) return 'fitness';
+  if (/^\/app\/fitness/.test(path)) return 'fitness';
+  if (/^\/app\/career/.test(path)) return 'career';
+  if (/^\/app\/clinical/.test(path)) return 'clinical';
+  if (/^\/app\/languages/.test(path)) return 'languages';
+  if (/^\/app\/gastronomy/.test(path)) return 'gastronomy';
+  if (/^\/app\/schedules|^\/app\/today/.test(path)) return 'today';
+  return null;
 }
 
-const { level2, level3 } = detectSection(pathname);
-
-const l2Items = level2 ? SECTION_NAV[level2] : undefined;
-const l3Items = level3 ? SECTION_NAV[level3] : undefined;
+const key = overrideKey ?? detectSection(pathname);
+const l2Items = key ? SECTION_NAV[key] : undefined;
 
 function activeHref(items: typeof l2Items, path: string): string {
   if (!items) return '';
@@ -33,20 +30,14 @@ function activeHref(items: typeof l2Items, path: string): string {
   if (exact) return exact.href;
   const prefix = items.find(i => !i.end && path.startsWith(i.href));
   if (prefix) return prefix.href;
-  // fallback: first item with end=true
   return items.find(i => i.end)?.href ?? '';
 }
 
 const l2Active = activeHref(l2Items, pathname);
-const l3Active = activeHref(l3Items, pathname);
-
-// Para level 3: si no hay match exacto, activar el primero
-const l3ActiveFinal = l3Active || (l3Items && l3Items.length > 0 ? l3Items.find(i => i.end)?.href ?? l3Items[0]?.href ?? '' : '');
 ---
 
 {l2Items && l2Items.length > 0 && (
   <div class="snb-wrap">
-    {/* ── NIVEL 2: pill chips (el estilo original aprobado) ── */}
     <nav class="snb-l2" aria-label="Navegación de sección">
       {l2Items.map(item => (
         <a
@@ -56,18 +47,5 @@ const l3ActiveFinal = l3Active || (l3Items && l3Items.length > 0 ? l3Items.find(
         >{item.label}</a>
       ))}
     </nav>
-
-    {/* ── NIVEL 3: links ligeros (solo si la subsección tiene entradas) ── */}
-    {l3Items && l3Items.length > 0 && (
-      <nav class="snb-l3" aria-label="Navegación de subsección">
-        {l3Items.map(item => (
-          <a
-            href={item.href}
-            class:list={['snb-l3-link', { 'snb-l3-link-active': item.href === l3ActiveFinal }]}
-            aria-current={item.href === l3ActiveFinal ? 'page' : undefined}
-          >{item.label}</a>
-        ))}
-      </nav>
-    )}
   </div>
 )}

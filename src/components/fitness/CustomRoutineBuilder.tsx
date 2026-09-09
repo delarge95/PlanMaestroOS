@@ -124,7 +124,7 @@ export default function CustomRoutineBuilder() {
             <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
               CREADOR DE RUTINAS A LA MEDIDA FITAPP
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
               Diseña & Guarda tus Propias Rutinas Personalizadas
             </h3>
           </div>
@@ -233,7 +233,7 @@ export default function CustomRoutineBuilder() {
                       fontSize: '0.85rem'
                     }}
                   />
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '200px', overflowY: 'auto' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     {searchResults.map((ex) => (
                       <div
                         key={ex.name}

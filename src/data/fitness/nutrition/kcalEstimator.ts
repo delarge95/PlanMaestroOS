@@ -1,11 +1,11 @@
-﻿// src/data/fitness/nutrition/kcalEstimator.ts â€” Estimador de kcal quemadas (AG-NUTRI ciclo 2, mandato usuario)
-// Motor PURO sin DOM ni stores. Tres vÃ­as:
-//   a) Actividad por METs: kcal = METs Ã— pesoKg Ã— horas (ecuaciÃ³n estÃ¡ndar ACSM/Compendium;
-//      los METs SIEMPRE llegan con cita â€” presets de AG-CARDIO vÃ­a getPresetsWithMet() o entrada manual citada).
-//   b) SesiÃ³n de fuerza: trabajo mecÃ¡nico aproximado (series Ã— reps Ã— carga Ã— distancia estimada)
+﻿// src/data/fitness/nutrition/kcalEstimator.ts — Estimador de kcal quemadas (AG-NUTRI ciclo 2, mandato usuario)
+// Motor PURO sin DOM ni stores. Tres vías:
+//   a) Actividad por METs: kcal = METs × pesoKg × horas (ecuación estándar ACSM/Compendium;
+//      los METs SIEMPRE llegan con cita — presets de AG-CARDIO vía getPresetsWithMet() o entrada manual citada).
+//   b) Sesión de fuerza: trabajo mecánico aproximado (series × reps × carga × distancia estimada)
 //      convertido a kcal como COTA INFERIOR (1 kcal = 4.184 kJ exactos) + factor EPOC citado
-//      (nutri-mau-epoc: +5â€“15%). Confianza 'inferred' marcada en todo el mÃ©todo.
-//   c) Balance del dÃ­a: quemado estimado vs objetivo calÃ³rico.
+//      (nutri-mau-epoc: +5–15%). Confianza 'inferred' marcada en todo el método.
+//   c) Balance del día: quemado estimado vs objetivo calórico.
 // Nada de cifras sin cita: cada estimate lleva why[] con ruleId/cita; las asunciones propias quedan en detail.
 
 import type { Confidence, RuleCitation } from './types';
@@ -16,7 +16,7 @@ const KCAL_PER_KJ = 1 / 4.184;
 
 export const DEFAULT_REP_DISTANCE_M = 0.5;
 
-/** Fuente estructural mÃ­nima que expone getPresetsWithMet() de AG-CARDIO (READ por contrato). */
+/** Fuente estructural mínima que expone getPresetsWithMet() de AG-CARDIO (READ por contrato). */
 export interface MetActivitySource {
   label: string;
   mets: number;
@@ -30,7 +30,7 @@ export interface StrengthSessionInput {
   series: number;
   repsPerSeries: number;
   loadKg: number;
-  /** Distancia vertical estimada de la carga por repeticiÃ³n (m). Default documentado: 0.5 m. */
+  /** Distancia vertical estimada de la carga por repetición (m). Default documentado: 0.5 m. */
   distanceMetersPerRep?: number;
 }
 
@@ -63,12 +63,12 @@ function citationFrom(sourceIdOrSource: string, locator: string): RuleCitation {
     ruleId: sourceIdOrSource,
     source: sourceIdOrSource,
     locator,
-    statement: 'Valor METs del preset/actividad, tomado de la fuente citada por su propio mÃ³dulo.',
+    statement: 'Valor METs del preset/actividad, tomado de la fuente citada por su propio módulo.',
     confidence: 'inferred',
   };
 }
 
-/** a) Actividad cardiosaludosa por METs: kcal = METs Ã— kg Ã— horas. Requiere cita del MET (o queda qualitative). */
+/** a) Actividad cardiosaludosa por METs: kcal = METs × kg × horas. Requiere cita del MET (o queda qualitative). */
 export function estimateKcalFromMetActivity(input: MetActivitySource & { weightKg: number }): KcalEstimate {
   const hours = input.minutes / 60;
   const kcal = input.mets * input.weightKg * hours;
@@ -83,17 +83,17 @@ export function estimateKcalFromMetActivity(input: MetActivitySource & { weightK
     max: round1(kcal * 1.1),
     confidence: cited ? 'inferred' : 'qualitative',
     detail:
-      `${input.mets} METs Ã— ${input.weightKg} kg Ã— ${hours.toFixed(2)} h. EcuaciÃ³n ACSM/Compendium.` +
-      (cited ? ' METs citados por el mÃ³dulo de origen.' : ' âš ï¸ Entrada manual SIN fuente: solo orientativa.'),
+      `${input.mets} METs × ${input.weightKg} kg × ${hours.toFixed(2)} h. Ecuación ACSM/Compendium.` +
+      (cited ? ' METs citados por el módulo de origen.' : ' ⚠️ Entrada manual SIN fuente: solo orientativa.'),
     why,
   };
 }
 
 /**
- * b) SesiÃ³n de fuerza por trabajo mecÃ¡nico (cota inferior) + EPOC citado.
- * Trabajo (kJ) = series Ã— reps Ã— carga(kg) Ã— distancia(m) Ã— g / 1000.
- * La conversiÃ³n directa Jâ†’kcal IGNORA eficiencia muscular y coste basal: es un piso deliberado.
- * Rango: EPOC +5â€“15% (Maughan chX, nutri-mau-epoc, confidence inferred).
+ * b) Sesión de fuerza por trabajo mecánico (cota inferior) + EPOC citado.
+ * Trabajo (kJ) = series × reps × carga(kg) × distancia(m) × g / 1000.
+ * La conversión directa J→kcal IGNORA eficiencia muscular y coste basal: es un piso deliberado.
+ * Rango: EPOC +5–15% (Maughan chX, nutri-mau-epoc, confidence inferred).
  */
 export function estimateKcalFromStrengthSession(input: StrengthSessionInput): KcalEstimate {
   const distance = input.distanceMetersPerRep ?? DEFAULT_REP_DISTANCE_M;
@@ -106,9 +106,9 @@ export function estimateKcalFromStrengthSession(input: StrengthSessionInput): Kc
     max: round1(floorKcal * 1.15),
     confidence: 'inferred',
     detail:
-      `Trabajo mecÃ¡nico: ${input.series}Ã—${input.repsPerSeries} reps Ã— ${input.loadKg} kg Ã— ${distance} m â‰ˆ ` +
+      `Trabajo mecánico: ${input.series}×${input.repsPerSeries} reps × ${input.loadKg} kg × ${distance} m ≈ ` +
       `${round1(workKj)} kJ (${Math.round(workKj * 1000)} J). Convertido como cota inferior (sin eficiencia muscular ni basal) ` +
-      `y ajustado con EPOC +5â€“15%. MÃ©todo propio aproximado.`,
+      `y ajustado con EPOC +5–15%. Método propio aproximado.`,
     why: [toCitation('nutri-mau-epoc')],
   };
 }
@@ -148,7 +148,7 @@ export function estimateDayBurn(entries: BurnedActivityInput[], weightKg: number
 export interface DailyBalanceResult {
   burnedKcal: number;
   targetKcal: number;
-  /** kcal restantes para cerrar el objetivo del dÃ­a (negativo = superado el objetivo). */
+  /** kcal restantes para cerrar el objetivo del día (negativo = superado el objetivo). */
   remainingKcal: number;
   detail: string;
   why: RuleCitation[];
@@ -162,9 +162,9 @@ export function dailyBalance(targetKcal: number, burn: DayBurnEstimate): DailyBa
     targetKcal: Math.round(targetKcal),
     remainingKcal: remaining,
     detail:
-      `Objetivo ${Math.round(targetKcal)} kcal âˆ’ quemado estimado ${burn.totalKcal} kcal ` +
-      `(rango ${burn.minKcal}â€“${burn.maxKcal}) = ${remaining} kcal restantes. El gasto por ejercicio es solo una parte del TDEE ` +
-      `(EAT â‰ˆ5â€“15%; NEAT y TEF dominan el dÃ­a completo), asÃ­ que este balance NO sustituye la evoluciÃ³n semanal del peso.`,
+      `Objetivo ${Math.round(targetKcal)} kcal − quemado estimado ${burn.totalKcal} kcal ` +
+      `(rango ${burn.minKcal}–${burn.maxKcal}) = ${remaining} kcal restantes. El gasto por ejercicio es solo una parte del TDEE ` +
+      `(EAT ≈5–15%; NEAT y TEF dominan el día completo), así que este balance NO sustituye la evolución semanal del peso.`,
     why: [toChunkCitation('aragon-issn-thermic-effect-and-adaptive-thermogenesis')],
   };
 }

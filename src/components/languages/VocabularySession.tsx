@@ -79,13 +79,13 @@ export default function VocabularySession({ language = 'de', catalogItems }: Voc
 
   return (
     <ErrorBoundary>
-      <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+      <div className="ds-card ds-stack">
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+        <div className="ds-row-between" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-1)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
             Vocabulario
           </h3>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+          <span className="ds-micro">
             {totalDue > 0
               ? `Tarjeta ${Math.min(indexInQueue + 1, totalDue)} de ${totalDue} · ${reviewedCount} repasadas hoy`
               : reviewedCount > 0
@@ -109,7 +109,7 @@ export default function VocabularySession({ language = 'de', catalogItems }: Voc
               gap: 'var(--space-sm)',
               minHeight: '140px'
             }}>
-              <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span className="ds-eyebrow">
                 {currentCard.topic} · Level {currentCard.level}
                 {!currentCard.lastReviewed && !progress?.items[currentCard.id] ? ' · Nueva' : ''}
               </span>
@@ -140,7 +140,7 @@ export default function VocabularySession({ language = 'de', catalogItems }: Voc
             </div>
 
             {revealed && (
-              <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-sm)', flexWrap: 'wrap' }}>
+              <div className="ds-row-wrap" style={{ justifyContent: 'center' }}>
                 {QUALITY_BUTTONS.map(({ quality, label, variant }) => (
                   <Button key={quality} variant={variant} size="sm" onClick={() => handleReview(quality)}>
                     {label}

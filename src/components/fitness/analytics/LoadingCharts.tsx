@@ -41,15 +41,15 @@ export default function LoadingCharts() {
   }, [unit, barWeight, bodyWeight]);
 
   return (
-    <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
       
       {/* CABECERA */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Calculadora Universal de Cargas
           </span>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
             Tabla Universal por Lado & Hitos
           </h3>
         </div>
@@ -82,14 +82,14 @@ export default function LoadingCharts() {
             <button
               type="button"
               onClick={() => setUnit('kg')}
-              style={{ background: unit === 'kg' ? 'var(--accent, #0a84ff)' : 'transparent', color: unit === 'kg' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: unit === 'kg' ? 'var(--accent)' : 'transparent', color: unit === 'kg' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
             >
               KG
             </button>
             <button
               type="button"
               onClick={() => setUnit('lbs')}
-              style={{ background: unit === 'lbs' ? 'var(--accent, #0a84ff)' : 'transparent', color: unit === 'lbs' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: unit === 'lbs' ? 'var(--accent)' : 'transparent', color: unit === 'lbs' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
             >
               LBS
             </button>
@@ -112,11 +112,11 @@ export default function LoadingCharts() {
           <tbody>
             {tableRows.map((r, idx) => (
               <tr key={idx} style={{ borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.05))', background: r.milestone ? 'rgba(10,132,255,0.06)' : idx % 2 === 1 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
-                <td style={{ padding: '8px 14px', fontWeight: 700, color: 'var(--accent, #0a84ff)' }}>+{r.loadPerSide} {unit}</td>
+                <td style={{ padding: '8px 14px', fontWeight: 700, color: 'var(--accent)' }}>+{r.loadPerSide} {unit}</td>
                 <td style={{ padding: '8px 14px', color: 'var(--text-secondary)' }}>{r.platesTotal} {unit}</td>
                 <td style={{ padding: '8px 14px', fontWeight: 800, color: 'var(--text-primary)' }}>{r.grandTotal} {unit}</td>
                 <td style={{ padding: '8px 14px', color: 'var(--text-secondary)' }}>{r.bwRatio}x BW</td>
-                <td style={{ padding: '8px 14px', color: 'var(--success, #30d158)', fontWeight: 700 }}>{r.milestone || '-'}</td>
+                <td style={{ padding: '8px 14px', color: 'var(--success)', fontWeight: 700 }}>{r.milestone || '-'}</td>
               </tr>
             ))}
           </tbody>

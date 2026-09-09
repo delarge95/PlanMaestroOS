@@ -1,4 +1,5 @@
 import './cotizador.css';
+import { Package } from 'lucide-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { SERVICES } from '../../data/services/catalogCore';
 import type { ServiceDef } from '../../data/services/catalogCore';
@@ -201,7 +202,7 @@ export function DirectCotizador() {
   };
 
   return (
-    <div className="cx-root" style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px 60px' }}>
+    <div className="cx-root" style={{ maxWidth: '100%', padding: '24px 0 60px' }}>
       <style dangerouslySetInnerHTML={{ __html: CX_CSS }} />
 
       {/* Encabezado formal visible solo al imprimir/PDF (cotización) */}
@@ -317,7 +318,7 @@ export function DirectCotizador() {
             <FilterChip key={f.id} active={familyFilter === f.id} onClick={() => setFamilyFilter(f.id)} label={f.label} />
           ))}
         </div>
-        <div style={{ display: 'grid', gap: 6, maxHeight: 300, overflowY: 'auto' }}>
+        <div style={{ display: 'grid', gap: 6 }}>
           {filtered.length === 0 && (
             <p style={{ ...help, margin: 0 }}>Ningún servicio de este objetivo en esta familia. Prueba con “Todos”.</p>
           )}
@@ -449,7 +450,7 @@ export function DirectCotizador() {
 
           {svc.entregablesEs.length > 0 && (
             <div style={{ background: '#f0faf4', border: '1px solid #c3e6cb', borderRadius: 10, padding: 14, marginBottom: 12 }}>
-              <strong style={{ fontSize: 13, color: '#1b8a5a' }}>📦 Recibes:</strong>
+              <strong style={{ fontSize: 13, color: '#1b8a5a' }}><Package size={13} style={{ verticalAlign: '-2px', marginRight: 4 }} />Recibes:</strong>
               <ul style={{ fontSize: 13, paddingLeft: 16, marginTop: 6, color: '#1a1d29' }}>
                 {quote.entregables.map((e: string) => <li key={e}>✓ {e}</li>)}
               </ul>

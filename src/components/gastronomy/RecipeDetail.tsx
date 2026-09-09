@@ -22,7 +22,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
             <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
               {recipe.cuisine} · {recipe.timeMinutes} min · Dificultad: {recipe.difficulty}
             </span>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text)' }}>
+            <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
               {recipe.title}
             </h2>
           </div>

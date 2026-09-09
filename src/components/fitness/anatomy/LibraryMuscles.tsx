@@ -115,7 +115,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
       {/* CABECERA */}
       <div style={{ ...cardStyle, padding: '14px 16px' }}>
         <span style={kickerStyle}>Base de datos anatómica</span>
-        <h2 style={{ margin: '2px 0 0', fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+        <h2 style={{ margin: '2px 0 0', fontSize: 'var(--fs-page)', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
           Músculos y estructuras
         </h2>
         <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: 'var(--text-tertiary)' }}>
@@ -217,7 +217,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
                   <span style={{ fontSize: '0.82rem', fontWeight: active ? 700 : 500 }}>
                     {s.nameEs}
                     {typeTab === 'muscle' && (s as MuscleEntry).primaryForTraining && (
-                      <span title="Músculo primario de entrenamiento" style={{ marginLeft: 6, fontSize: '0.62rem', color: 'var(--accent, #0a84ff)', fontWeight: 700 }}>
+                      <span title="Músculo primario de entrenamiento" style={{ marginLeft: 6, fontSize: '0.62rem', color: 'var(--accent)', fontWeight: 700 }}>
                         ★
                       </span>
                     )}
@@ -333,7 +333,7 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
           {s.kind === 'joint' && row('Movimientos / ROM por eje', (s as JointEntry).movements)}
           {s.kind === 'joint' && (s as JointEntry).rom?.length ? (
             <div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
+              <span style={{ fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
               <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {(s as JointEntry).rom!.map((r) => (
                   <li key={r.motion} style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
@@ -435,13 +435,13 @@ function ExercisesThatLoad({ structure }: { structure: AnatomyStructure }) {
 // ── estilos ───────────────────────────────────────────────────────────────────
 
 const cardStyle: React.CSSProperties = {
-  background: 'var(--surface-1, #0d0d0f)',
+  background: 'var(--surface-1)',
   border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
   borderRadius: 16,
 };
 
 const kickerStyle: React.CSSProperties = {
-  fontSize: '0.66rem', color: 'var(--accent, #0a84ff)', fontWeight: 700,
+  fontSize: '0.66rem', color: 'var(--accent)', fontWeight: 700,
   textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block',
 };
 
@@ -454,8 +454,8 @@ const chipStyle: React.CSSProperties = {
 
 const chipActiveStyle: React.CSSProperties = {
   ...chipStyle,
-  background: 'var(--accent, #0a84ff)', color: '#fff',
-  border: '1px solid var(--accent, #0a84ff)', fontWeight: 700,
+  background: 'var(--accent)', color: '#fff',
+  border: '1px solid var(--accent)', fontWeight: 700,
 };
 
 const chipSmallStyle: React.CSSProperties = {
@@ -464,8 +464,8 @@ const chipSmallStyle: React.CSSProperties = {
 
 const chipActiveSmallStyle: React.CSSProperties = {
   ...chipSmallStyle,
-  background: 'var(--accent, #0a84ff)', color: '#fff',
-  border: '1px solid var(--accent, #0a84ff)', fontWeight: 700,
+  background: 'var(--accent)', color: '#fff',
+  border: '1px solid var(--accent)', fontWeight: 700,
 };
 
 const ghostBtnStyle: React.CSSProperties = {

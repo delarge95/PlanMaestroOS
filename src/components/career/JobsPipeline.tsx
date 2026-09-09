@@ -23,47 +23,30 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
     <ErrorBoundary>
       <div className="ds-stack">
         
-        {/* NAVEGACIÓN NIVEL 2 */}        {/* CABECERA DE EMPLEO */}
-        <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-xs)', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <h2 className="ds-h1" style={{ margin: 0 }}>
-            Empleo & Pipeline
-          </h2>
-
-          <div className="ds-row" style={{ gap: '4px' }}>
+                {/* VISTAS DE PÁGINA (sin ruta): mismo lenguaje visual que snb-l3 */}
+        <nav className="snb-l3" aria-label="Vistas de Empleo" style={{ margin: 0, padding: 0, borderBottom: '1px solid var(--separator)' }}>
+          {([
+            ['pipeline', 'Pipeline'],
+            ['schedule', 'Cronograma'],
+            ['companies', 'Base de datos de empresas'],
+          ] as const).map(([key, label]) => (
             <button
+              key={key}
               type="button"
-              onClick={() => setActiveTab('pipeline')}
-              className="ds-chip"
-              data-active={activeTab === 'pipeline'}
+              onClick={() => setActiveTab(key)}
+              className={`snb-l3-link${activeTab === key ? ' snb-l3-link-active' : ''}`}
             >
-              Pipeline
+              {label}
             </button>
+          ))}
+        </nav>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('schedule')}
-              className="ds-chip"
-              data-active={activeTab === 'schedule'}
-            >
-              Cronograma
-            </button>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('companies')}
-              className="ds-chip"
-              data-active={activeTab === 'companies'}
-            >
-              Base de datos de empresas
-            </button>
-          </div>
-        </div>
-
-        {/* PIPELINE DE 7 COLUMNAS */}
+{/* PIPELINE DE 7 COLUMNAS */}
         {activeTab === 'pipeline' && (
           <>
           {/* REGLA DE CONTRATO: única próxima acción por aplicación (doc-12 + validateSingleNextAction) */}
-          <div className="ds-card ds-row" style={{ borderStyle: 'dashed', padding: '8px 12px', gap: '8px', flexWrap: 'wrap' }}>
+          <div className="ds-card ds-row" style={{ borderStyle: 'dashed', padding: 'var(--space-2) var(--space-3)', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
             <span className="ds-eyebrow">
               Regla de contrato
             </span>
@@ -83,7 +66,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                   className="ds-card ds-stack-sm"
                   style={{
                     padding: '10px',
-                    gap: '8px',
+                    gap: 'var(--space-2)',
                     minWidth: '170px'
                   }}
                 >

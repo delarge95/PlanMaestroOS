@@ -72,7 +72,7 @@ export default function GuidedModeLauncher({ selectedDayIndex = 1 }: GuidedModeL
           disabled={disabled}
           title={disabled ? undefined : 'Entrenar la rutina de hoy ejercicio por ejercicio, con serie cronometrada'}
           style={{
-            background: disabled ? 'rgba(255,255,255,0.08)' : '#30d158',
+            background: disabled ? 'rgba(255,255,255,0.08)' : 'var(--success)',
             border: 'none',
             color: disabled ? 'rgba(255,255,255,0.35)' : '#000',
             padding: '10px 18px',

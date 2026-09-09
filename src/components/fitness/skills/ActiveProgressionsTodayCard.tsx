@@ -164,7 +164,7 @@ export default function ActiveProgressionsTodayCard() {
         </button>
 
         {/* STEP COUNTER BADGE */}
-        <span className="ds-label" style={{ color: 'var(--success, #30d158)', whiteSpace: 'nowrap' }}>
+        <span className="ds-label" style={{ color: 'var(--success)', whiteSpace: 'nowrap' }}>
           Paso {stepIndex + 1} de {currentGroup.exercises.length}
         </span>
 
@@ -251,7 +251,7 @@ export default function ActiveProgressionsTodayCard() {
           className="ds-btn ds-btn-lg"
           style={{
             width: '100%',
-            background: 'linear-gradient(135deg, #30d158 0%, #28a745 100%)',
+            background: 'linear-gradient(135deg, var(--success) 0%, #28a745 100%)',
             color: '#000000',
             border: 'none',
             borderRadius: '10px',

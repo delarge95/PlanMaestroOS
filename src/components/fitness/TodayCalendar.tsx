@@ -128,7 +128,7 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
       {/* CABECERA: día real + navegador de semanas */}
       <div className="ds-row-between" style={{ flexWrap: 'wrap' }}>
         <div className="ds-row" style={{ flexWrap: 'wrap' }}>
-          <Calendar size={18} style={{ color: 'var(--accent, #0a84ff)' }} />
+          <Calendar size={18} style={{ color: 'var(--accent)' }} />
           <h3 className="ds-h3">
             Hoy es {ctx.todayWeekdayName.toLowerCase()} {formatDateShort(ctx.today)}
           </h3>
@@ -195,16 +195,16 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
                 flexDirection: 'column',
                 alignItems: 'center',
                 padding: '8px 4px',
-                borderRadius: 'var(--radius-s, 8px)',
+                borderRadius: 'var(--radius-s)',
                 background: isSelected
-                  ? 'var(--accent, #0a84ff)'
+                  ? 'var(--accent)'
                   : sd.isToday
                   ? 'rgba(48,209,88,0.15)'
                   : 'rgba(255,255,255,0.02)',
                 border: isSelected
-                  ? '1px solid var(--accent, #0a84ff)'
+                  ? '1px solid var(--accent)'
                   : sd.isToday
-                  ? '1px solid var(--success, #30d158)'
+                  ? '1px solid var(--success)'
                   : '1px solid transparent',
                 color: isSelected ? '#ffffff' : 'var(--text-primary)',
                 gap: '4px',
@@ -217,14 +217,14 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
                 {sd.dayName} {sd.dateFormatted}
               </span>
               {sd.isToday && (
-                <span style={{ fontSize: '0.6rem', fontWeight: 800, background: isSelected ? 'rgba(255,255,255,0.22)' : 'var(--success, #30d158)', color: isSelected ? '#fff' : '#000', padding: '0 4px', borderRadius: '4px' }}>
+                <span style={{ fontSize: '0.6rem', fontWeight: 800, background: isSelected ? 'rgba(255,255,255,0.22)' : 'var(--success)', color: isSelected ? '#fff' : '#000', padding: '0 4px', borderRadius: '4px' }}>
                   HOY
                 </span>
               )}
-              <strong style={{ fontSize: '0.78rem', textAlign: 'center', lineHeight: 1.15, color: isSelected ? '#ffffff' : sd.status === 'done' ? 'var(--success, #30d158)' : 'var(--text-primary)' }}>
+              <strong style={{ fontSize: '0.78rem', textAlign: 'center', lineHeight: 1.15, color: isSelected ? '#ffffff' : sd.status === 'done' ? 'var(--success)' : 'var(--text-primary)' }}>
                 {sd.label}
               </strong>
-              {sd.status === 'done' && <CheckCircle2 size={12} style={{ color: isSelected ? '#ffffff' : 'var(--success, #30d158)' }} />}
+              {sd.status === 'done' && <CheckCircle2 size={12} style={{ color: isSelected ? '#ffffff' : 'var(--success)' }} />}
             </button>
           );
         })}

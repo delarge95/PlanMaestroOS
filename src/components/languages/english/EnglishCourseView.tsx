@@ -3,6 +3,7 @@
 // Consume vocabularyStore para SM-2, lecciones, racha y SpeakingPracticeEN.
 
 import React, { useMemo, useState } from 'react';
+import { Flame, Layers, CheckCircle2 } from 'lucide-react';
 import { englishCourse } from '../../../data/languages/englishCourse';
 import { englishTechnicalVocabulary } from '../../../data/languages/english/vocabulary';
 import { falseFriendsTechESEN, workplacePhrasalVerbs, technicalCollocations } from '../../../data/languages/english/precision';
@@ -50,7 +51,7 @@ export default function EnglishCourseView() {
         {/* STATS & METRICS HEADER */}
         <div className="ds-grid">
           <div className="ds-card ds-row" style={{ padding: 'var(--space-sm) var(--space-md)', gap: 'var(--space-sm)' }}>
-            <span style={{ fontSize: '1.5rem' }}>🔥</span>
+            <Flame size={22} style={{ color: 'var(--warning)' }} />
             <div>
               <span className="ds-eyebrow">
                 Racha en Idiomas
@@ -62,7 +63,7 @@ export default function EnglishCourseView() {
           </div>
 
           <div className="ds-card ds-row" style={{ padding: 'var(--space-sm) var(--space-md)', gap: 'var(--space-sm)' }}>
-            <span style={{ fontSize: '1.5rem' }}>📚</span>
+            <Layers size={22} style={{ color: 'var(--accent)' }} />
             <div>
               <span className="ds-eyebrow">
                 Tarjetas Pendientes (SR)
@@ -74,7 +75,7 @@ export default function EnglishCourseView() {
           </div>
 
           <div className="ds-card ds-row" style={{ padding: 'var(--space-sm) var(--space-md)', gap: 'var(--space-sm)' }}>
-            <span style={{ fontSize: '1.5rem' }}>✅</span>
+            <CheckCircle2 size={22} style={{ color: 'var(--success)' }} />
             <div>
               <span className="ds-eyebrow">
                 Lecciones Completadas
@@ -86,37 +87,24 @@ export default function EnglishCourseView() {
           </div>
         </div>
 
-        {/* NAVIGATION TABS */}
-        <div className="ds-row-wrap" style={{ gap: '6px', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <Button
-            variant={activeMainTab === 'course' ? 'primary' : 'ghost'}
-            size="sm"
-            onClick={() => setActiveMainTab('course')}
-          >
-            📖 Unidades del Curso
-          </Button>
-          <Button
-            variant={activeMainTab === 'spaced_repetition' ? 'primary' : 'ghost'}
-            size="sm"
-            onClick={() => setActiveMainTab('spaced_repetition')}
-          >
-            🧠 Repaso SM-2 ({dueQueueIds.length})
-          </Button>
-          <Button
-            variant={activeMainTab === 'speaking' ? 'primary' : 'ghost'}
-            size="sm"
-            onClick={() => setActiveMainTab('speaking')}
-          >
-            🎙️ Speaking & STAR (Doc-23)
-          </Button>
-          <Button
-            variant={activeMainTab === 'precision' ? 'primary' : 'ghost'}
-            size="sm"
-            onClick={() => setActiveMainTab('precision')}
-          >
-            🎯 Precisión C1 & Falsos Amigos
-          </Button>
-        </div>
+        {/* VISTAS DE PÁGINA (sin ruta): mismo lenguaje visual que snb-l3 */}
+        <nav className="snb-l3" aria-label="Vistas de Inglés" style={{ margin: 0, padding: '0 0 6px', borderBottom: '1px solid var(--separator)' }}>
+          {([
+            { key: 'course', label: 'Unidades del Curso' },
+            { key: 'spaced_repetition', label: `Repaso SM-2 (${dueQueueIds.length})` },
+            { key: 'speaking', label: 'Speaking & STAR (Doc-23)' },
+            { key: 'precision', label: 'Precisión C1 & Falsos Amigos' },
+          ] as const).map(({ key, label }) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setActiveMainTab(key)}
+              className={`snb-l3-link${activeMainTab === key ? ' snb-l3-link-active' : ''}`}
+            >
+              {label}
+            </button>
+          ))}
+        </nav>
 
         {/* TAB 1: CURSO POR UNIDADES */}
         {activeMainTab === 'course' && (
@@ -229,7 +217,7 @@ export default function EnglishCourseView() {
                 <h4 className="ds-label" style={{ margin: 0 }}>
                   Workplace Phrasal Verbs
                 </h4>
-                <div className="ds-stack-sm" style={{ gap: '6px', maxHeight: '240px', overflowY: 'auto' }}>
+                <div className="ds-stack-sm" style={{ gap: '6px' }}>
                   {workplacePhrasalVerbs.map((pv, idx) => (
                     <div key={idx} className="ds-caption" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: '4px' }}>
                       <strong style={{ color: 'var(--color-accent-primary)' }}>{pv.verb}:</strong>{' '}
@@ -243,7 +231,7 @@ export default function EnglishCourseView() {
                 <h4 className="ds-label" style={{ margin: 0 }}>
                   Technical Collocations
                 </h4>
-                <div className="ds-stack-sm" style={{ gap: '6px', maxHeight: '240px', overflowY: 'auto' }}>
+                <div className="ds-stack-sm" style={{ gap: '6px' }}>
                   {technicalCollocations.map((tc, idx) => (
                     <div key={idx} className="ds-caption" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: '4px' }}>
                       <strong style={{ color: 'var(--color-accent-primary)' }}>{tc.collocation}:</strong>{' '}

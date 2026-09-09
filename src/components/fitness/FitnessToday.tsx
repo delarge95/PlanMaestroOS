@@ -66,7 +66,7 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
                   style={{
                     background: 'rgba(255,255,255,0.06)',
                     border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
-                    color: 'var(--accent, #0a84ff)',
+                    color: 'var(--accent)',
                     padding: '4px',
                     borderRadius: '6px',
                     display: 'inline-flex',

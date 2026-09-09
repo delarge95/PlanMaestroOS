@@ -55,7 +55,7 @@ export function PracticeSessionModal({
       {savedSuccess ? (
         <div style={{ padding: 'var(--space-lg)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-md)' }}>
           <Check size={48} style={{ color: 'var(--color-state-done)' }} />
-          <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text)' }}>¡Práctica Guardada!</h3>
+          <h3 style={{ margin: 0, fontSize: 'var(--fs-section)', fontWeight: 700, color: 'var(--text-primary)' }}>¡Práctica Guardada!</h3>
           <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', margin: 0 }}>
             Cuando tengas varias exposiciones consistentes y sin molestias, podrás revisar el siguiente paso.
           </p>
@@ -125,7 +125,7 @@ export function PracticeSessionModal({
               <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Activity size={14} /> Molestia o dolor percibido (0-10):
               </label>
-              <strong style={{ fontSize: '0.9rem', color: discomfort >= 4 ? '#ff453a' : 'var(--text)' }}>
+              <strong style={{ fontSize: '0.9rem', color: discomfort >= 4 ? 'var(--danger)' : 'var(--text)' }}>
                 {discomfort} / 10
               </strong>
             </div>
@@ -136,7 +136,7 @@ export function PracticeSessionModal({
               max="10"
               value={discomfort}
               onChange={(e) => setDiscomfort(Number(e.target.value))}
-              style={{ width: '100%', accentColor: discomfort >= 4 ? '#ff453a' : 'var(--color-accent-primary)' }}
+              style={{ width: '100%', accentColor: discomfort >= 4 ? 'var(--danger)' : 'var(--color-accent-primary)' }}
             />
           </div>
 

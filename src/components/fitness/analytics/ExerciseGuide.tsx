@@ -22,15 +22,15 @@ export default function ExerciseGuide() {
   ];
 
   return (
-    <div style={{ background: 'var(--surface-1, #0d0d0f)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: '16px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
       
       {/* CABECERA */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Guía de Cargas por Ejercicio & Porcentajes 1RM
           </span>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
             Calculadora de Zonas Intensidad RPE / RIR
           </h3>
         </div>
@@ -78,7 +78,7 @@ export default function ExerciseGuide() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'rgba(10,132,255,0.08)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(10,132,255,0.2)' }}>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
             1RM Estimado Resultante:
           </span>
           <strong style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>
@@ -104,7 +104,7 @@ export default function ExerciseGuide() {
               const calculatedKg = Math.round((e1rm * (p.pct / 100)) * 2) / 2;
               return (
                 <tr key={p.pct} style={{ borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.05))' }}>
-                  <td style={{ padding: '8px 14px', fontWeight: 800, color: 'var(--accent, #0a84ff)' }}>{p.pct}%</td>
+                  <td style={{ padding: '8px 14px', fontWeight: 800, color: 'var(--accent)' }}>{p.pct}%</td>
                   <td style={{ padding: '8px 14px', fontWeight: 700, color: 'var(--text-primary)' }}>{calculatedKg} kg</td>
                   <td style={{ padding: '8px 14px', color: 'var(--text-secondary)' }}>{p.reps}</td>
                   <td style={{ padding: '8px 14px', color: 'var(--text-secondary)', fontFamily: 'SF Mono, monospace' }}>{p.rpe}</td>

@@ -8,7 +8,7 @@ export default function ClinicalRoutineList() {
     <ErrorBoundary>
       <div className="ds-stack-lg" style={{ maxWidth: '850px', margin: '0 auto', width: '100%' }}>
         <div className="ds-row-between" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <h2 className="ds-h3" style={{ margin: 0 }}>
+          <h2 className="ds-h2" style={{ margin: 0 }}>
             Rutinas
           </h2>
           <a href="/app/clinical" style={{ textDecoration: 'none' }}>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Package } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import SectionNav from '../ui/SectionNav';
 import {
@@ -68,7 +69,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
                 META: {roadmapGoal.salaryRange}
               </span>
             </div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0 0 6px', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+            <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '0 0 6px', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               Plan de Ejecución Estratégica & Contratación Internacional
             </h2>
             <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>
@@ -140,7 +141,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ background: 'rgba(59, 130, 246, 0.08)', border: '1px solid rgba(59, 130, 246, 0.2)', padding: '14px 18px', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
             <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 4px', color: 'var(--color-text-primary)' }}>
+              <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '0 0 4px', color: 'var(--color-text-primary)' }}>
                 {currentPhaseData.title}
               </h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: 0 }}>
@@ -224,7 +225,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingLeft: '36px' }}>
                     {m.deliverables.map((d, dIdx) => (
                       <span key={dIdx} style={{ fontSize: '0.75rem', color: 'var(--color-text-primary)', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '4px 10px', borderRadius: '8px' }}>
-                        📦 {d}
+                        <Package size={12} style={{ verticalAlign: '-2px', marginRight: 4 }} />{d}
                       </span>
                     ))}
                   </div>

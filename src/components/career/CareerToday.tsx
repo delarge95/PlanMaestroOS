@@ -38,9 +38,6 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
           <div className="ds-row" style={{ gap: '10px' }}>
             <Briefcase size={22} style={{ color: 'var(--color-accent-primary)' }} />
             <div>
-              <h1 className="ds-h1" style={{ margin: 0 }}>
-                Laboral
-              </h1>
               <span className="ds-caption">
                 Gestión de carrera, portafolio & pipeline de empleo · {activeCount} aplicaciones activas (tracker real)
               </span>
@@ -56,12 +53,12 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
 
         {/* PRÓXIMA ACCIÓN LABORAL (UNA SOLA — real, del store) */}
         {top ? (
-          <div className="ds-card ds-row-between" style={{ flexWrap: 'wrap', gap: '12px' }}>
+          <div className="ds-card ds-row-between" style={{ flexWrap: 'wrap' }}>
             <div>
               <span className="ds-eyebrow">
                 Próxima acción · {top.companyName} · {top.roleTitle}
               </span>
-              <strong className="ds-label" style={{ display: 'block', marginTop: '2px' }}>
+              <strong className="ds-label" style={{ marginTop: '2px' }}>
                 {top.singleNextAction}
               </strong>
               <span className="ds-micro">
@@ -91,7 +88,7 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
 
         {/* AVISO DE CONTRATO PENDIENTE */}
         {pendingActionCount > 0 && (
-          <div className="ds-card ds-caption" style={{ borderColor: 'var(--color-accent-warning)', padding: '8px 12px' }}>
+          <div className="ds-card ds-caption" style={{ borderColor: 'var(--color-accent-warning)', padding: 'var(--space-2) var(--space-3)' }}>
             <strong style={{ color: 'var(--color-accent-warning)' }}>{pendingActionCount} aplicación(es)</strong> sin única próxima acción definida — el movimiento de columna está bloqueado hasta definirla.
           </div>
         )}

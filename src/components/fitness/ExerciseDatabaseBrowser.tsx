@@ -124,7 +124,7 @@ export default function ExerciseDatabaseBrowser() {
         )}
 
         {/* LISTADO */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px', maxHeight: '520px', overflowY: 'auto', paddingRight: '4px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px' }}>
           {filteredList.map((ex) => (
             <div
               key={ex.name}

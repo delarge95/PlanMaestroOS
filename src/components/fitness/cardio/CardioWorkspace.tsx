@@ -102,10 +102,10 @@ export function CardioWorkspace() {
   const openPreset = openPresetId ? CARDIO_PRESETS.find((p) => p.id === openPresetId) : undefined;
 
   return (
-    <div className="ds-stack-lg" style={{ maxWidth: 920, margin: '0 auto', width: '100%' }}>
+    <div className="ds-stack-lg" style={{ width: '100%' }}>
       {/* 1) Disciplina */}
       <section className="ds-stack-sm">
-        <h2 className="ds-h3">Disciplina</h2>
+        <h2 className="ds-h2">Disciplina</h2>
         <div className="ds-row-wrap" role="tablist" aria-label="Disciplina">
           {DISCIPLINES.map((d) => (
             <button
@@ -123,7 +123,7 @@ export function CardioWorkspace() {
           ))}
         </div>
         <div className="ds-card ds-stack-sm">
-          <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{disc.description}</p>
+          <p className="ds-caption" style={{ lineHeight: 1.55 }}>{disc.description}</p>
           <div className="ds-row-wrap" style={{ alignItems: 'center' }}>
             <StatusBadge label={`METs típicos: ${disc.typicalMets.value}`} />
             <span className="ds-micro">
@@ -145,7 +145,7 @@ export function CardioWorkspace() {
 
       {/* 2) Enfoques */}
       <section className="ds-stack-sm">
-        <h2 className="ds-h3">Enfoque</h2>
+        <h2 className="ds-h2">Enfoque</h2>
         <div className="ds-row-wrap">
           <button
             type="button"
@@ -175,8 +175,8 @@ export function CardioWorkspace() {
               <strong className="ds-row" style={{ gap: 6, color: 'var(--text-primary)' }}>
                 {APPROACH_ICONS[a.id]} {a.name}
               </strong>
-              <p className="ds-caption" style={{ margin: 0, lineHeight: 1.55 }}>{a.description}</p>
-              <p className="ds-micro" style={{ margin: 0, lineHeight: 1.5 }}>
+              <p className="ds-caption" style={{ lineHeight: 1.55 }}>{a.description}</p>
+              <p className="ds-micro" style={{ lineHeight: 1.5 }}>
                 <strong>Cuándo usarlo:</strong> {a.whenToUse}
               </p>
               <details>
@@ -192,7 +192,7 @@ export function CardioWorkspace() {
 
       {/* 3) Presets */}
       <section className="ds-stack-sm">
-        <h2 className="ds-h3">
+        <h2 className="ds-h2">
           Sesiones ({presets.length})
         </h2>
         <div className="ds-grid">
@@ -215,7 +215,7 @@ export function CardioWorkspace() {
                   <strong style={{ color: 'var(--text-primary)', lineHeight: 1.3 }}>{shown.name}</strong>
                   {edited && <StatusBadge label="Editado" variant="active" />}
                 </div>
-                <p className="ds-caption" style={{ margin: 0, lineHeight: 1.5 }}>{shown.summary}</p>
+                <p className="ds-caption" style={{ lineHeight: 1.5 }}>{shown.summary}</p>
                 <div className="ds-row-wrap" style={{ gap: 6, alignItems: 'center' }}>
                   <StatusBadge label={`${shown.totalMin} min`} />
                   <DifficultyBadge difficulty={shown.difficulty} />
@@ -228,7 +228,7 @@ export function CardioWorkspace() {
             );
           })}
         </div>
-        <p className="ds-micro" style={{ margin: 0 }}>
+        <p className="ds-micro">
           Toca una sesión para ver el desglose bloque a bloque con su cita, y edítala como copia local (los presets originales nunca se sobrescriben).
         </p>
       </section>

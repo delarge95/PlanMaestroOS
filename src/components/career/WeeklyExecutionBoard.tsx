@@ -78,9 +78,9 @@ export default function WeeklyExecutionBoard({ today = new Date() }: WeeklyExecu
     <ErrorBoundary>
       <div className="ds-card ds-stack">
 
-        <div className="ds-row-between" style={{ alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
+        <div className="ds-row-between" style={{ alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
           <div>
-            <h3 className="ds-h3" style={{ margin: 0 }}>
+            <h3 className="ds-h3">
               Tablero semanal de ejecución
             </h3>
             <span className="ds-caption" style={{ color: 'var(--text-tertiary)' }}>
@@ -136,7 +136,7 @@ export default function WeeklyExecutionBoard({ today = new Date() }: WeeklyExecu
               Seguimientos pendientes ({stats.followUpsDue.length})
             </span>
             {stats.followUpsDue.slice(0, 5).map((f) => (
-              <div key={f.id} className="ds-card ds-row-between ds-caption" style={{ padding: '4px 8px' }}>
+              <div key={f.id} className="ds-card ds-row-between ds-caption" style={{ padding: '4px var(--space-2)' }}>
                 <strong style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {f.companyName} · {f.roleTitle}
                 </strong>
@@ -159,7 +159,7 @@ export default function WeeklyExecutionBoard({ today = new Date() }: WeeklyExecu
                 style={{
                   background: isToday ? 'var(--color-accent-primary-soft)' : undefined,
                   borderColor: isToday ? 'var(--color-accent-primary)' : undefined,
-                  padding: '8px',
+                  padding: 'var(--space-2)',
                   gap: '3px'
                 }}
               >
@@ -188,7 +188,7 @@ function CadenceMetric({ label, value, target, ok, warn, ref_ }: {
 }) {
   const color = ok ? 'var(--color-accent-primary)' : warn ? 'var(--color-accent-warning)' : 'var(--text-secondary)';
   return (
-    <div className="ds-card ds-stack-sm" style={{ padding: '8px 10px' }}>
+    <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-2) 10px' }}>
       <span className="ds-eyebrow">{label}</span>
       <strong className="ds-h1" style={{ color, lineHeight: 1.2 }}>{value}</strong>
       <span className="ds-micro">objetivo: {target} · {ref_}</span>

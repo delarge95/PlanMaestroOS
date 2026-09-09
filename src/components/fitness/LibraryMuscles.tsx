@@ -103,7 +103,7 @@ export default function LibraryMuscles() {
 
   const renderDetail = (label: string, content: string | string[]) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-      <span style={{ fontSize: '0.76rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+      <span style={{ fontSize: '0.76rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
         {label}
       </span>
       {Array.isArray(content) ? (
@@ -123,7 +123,7 @@ export default function LibraryMuscles() {
       {/* BLOQUE 1: FILTROS & BÚSQUEDA ANATÓMICA */}
       <div
         style={{
-          background: 'var(--surface-1, #0d0d0f)',
+          background: 'var(--surface-1)',
           border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
           borderRadius: '16px',
           padding: '16px 20px',
@@ -135,10 +135,10 @@ export default function LibraryMuscles() {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontSize: '0.72rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Base de Datos Anatómica & Biomecánica FitApp
             </span>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '2px 0 0', color: 'var(--text-primary)' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
               Directorio Anatómico de Músculos ({filteredGroups.length} Regiones)
             </h3>
           </div>
@@ -178,9 +178,9 @@ export default function LibraryMuscles() {
                   type="button"
                   onClick={() => handleCategoryToggle(category)}
                   style={{
-                    background: isSelected ? 'var(--accent, #0a84ff)' : 'rgba(255,255,255,0.03)',
+                    background: isSelected ? 'var(--accent)' : 'rgba(255,255,255,0.03)',
                     color: isSelected ? '#ffffff' : 'var(--text-primary)',
-                    border: isSelected ? '1px solid var(--accent, #0a84ff)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
+                    border: isSelected ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
                     borderRadius: '20px',
                     padding: '5px 12px',
                     fontSize: '0.78rem',
@@ -207,7 +207,7 @@ export default function LibraryMuscles() {
               key={groupInfo.name}
               ref={(el) => { groupRefs.current.set(groupInfo.name, el); }}
               style={{
-                background: 'var(--surface-1, #0d0d0f)',
+                background: 'var(--surface-1)',
                 border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
                 borderRadius: 'var(--radius-m, 12px)',
                 overflow: 'hidden'
@@ -227,7 +227,7 @@ export default function LibraryMuscles() {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Activity size={18} style={{ color: 'var(--accent, #0a84ff)' }} />
+                  <Activity size={18} style={{ color: 'var(--accent)' }} />
                   <strong style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>
                     {groupInfo.name}
                   </strong>
@@ -248,7 +248,7 @@ export default function LibraryMuscles() {
                     {groupInfo.overview}
                   </p>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '12px', borderLeft: '2px solid var(--accent, #0a84ff)' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '12px', borderLeft: '2px solid var(--accent)' }}>
                     {groupInfo.specificMuscles.map((muscleKey) => {
                       const muscle = specificMusclesDatabase[muscleKey];
                       if (!muscle) return null;
@@ -278,7 +278,7 @@ export default function LibraryMuscles() {
 
                           {/* EJERCICIOS CLAVE ASOCIADOS */}
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                            <span style={{ fontSize: '0.76rem', color: 'var(--accent, #0a84ff)', fontWeight: 700, textTransform: 'uppercase' }}>
+                            <span style={{ fontSize: '0.76rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
                               Ejercicios Principales de Estimulo:
                             </span>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>

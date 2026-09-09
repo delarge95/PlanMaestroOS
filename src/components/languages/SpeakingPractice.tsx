@@ -48,7 +48,7 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <MessageSquare size={18} style={{ color: 'var(--color-accent-primary)' }} />
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
               Práctica de conversación
             </h3>
           </div>
@@ -60,7 +60,7 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
         </div>
 
         {/* CHAT DE CONVERSACIÓN Y CORRECCIÓN */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '300px', overflowY: 'auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           {chatHistory.map((msg, idx) => (
             <div
               key={idx}

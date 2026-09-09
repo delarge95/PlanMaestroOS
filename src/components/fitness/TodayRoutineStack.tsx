@@ -168,7 +168,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                         type="button"
                         onClick={() => setEffortMode('RIR')}
                         style={{
-                          background: effortMode === 'RIR' ? 'var(--accent, #0a84ff)' : 'transparent',
+                          background: effortMode === 'RIR' ? 'var(--accent)' : 'transparent',
                           color: effortMode === 'RIR' ? '#ffffff' : 'var(--text-secondary)',
                           border: 'none',
                           padding: '2px 6px',
@@ -184,7 +184,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                         type="button"
                         onClick={() => setEffortMode('RPE')}
                         style={{
-                          background: effortMode === 'RPE' ? 'var(--accent, #0a84ff)' : 'transparent',
+                          background: effortMode === 'RPE' ? 'var(--accent)' : 'transparent',
                           color: effortMode === 'RPE' ? '#ffffff' : 'var(--text-secondary)',
                           border: 'none',
                           padding: '2px 6px',
@@ -235,8 +235,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                       
                       {/* 1. EJERCICIO Y NOTAS CON BOTÓN REESTABLECER SI FUE MODIFICADO */}
                       <td style={{ padding: '12px 14px', verticalAlign: 'top', maxWidth: '240px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <div className="ds-stack-sm" style={{ gap: 'var(--space-1)' }}>
+                          <div className="ds-row" style={{ gap: '6px' }}>
                             <ExerciseLink
                               exerciseId={effectiveExerciseId}
                               displayName={overrideId ? effectiveDetails.name : (prescription.displayName || effectiveDetails.name)}
@@ -257,7 +257,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                           </div>
 
                           {overrideId && (
-                            <span style={{ fontSize: '0.72rem', color: 'var(--success, #30d158)', fontWeight: 700 }}>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 700 }}>
                               ✓ Sustituido por {effectiveDetails.name}
                             </span>
                           )}
@@ -324,7 +324,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
 
                       {/* 4. RECUADROS PARA INGRESAR PESO POR SERIE EFECTIVA */}
                       <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
-                        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                        <div className="ds-row-wrap" style={{ gap: 'var(--space-1)' }}>
                           {Array.from({ length: logState.workingSets }).map((_, sIdx) => (
                             <div key={sIdx} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                               <span style={{ fontSize: '0.65rem', color: 'var(--text-tertiary)' }}>S{sIdx + 1}</span>
@@ -352,7 +352,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
 
                       {/* 5. VALORES MINIMALISTAS RIR / RPE POR SERIE */}
                       <td style={{ padding: '12px 14px', verticalAlign: 'top' }}>
-                        <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                        <div className="ds-row-wrap" style={{ gap: 'var(--space-1)' }}>
                           {Array.from({ length: logState.workingSets }).map((_, sIdx) => {
                             const rawVal = rirPerSet[sIdx] || logState.effort;
                             const numOnly = rawVal.replace(/^RIR\s*/i, '').replace(/^RPE\s*/i, '').trim();
@@ -418,7 +418,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
           </div>
 
           {/* BOTÓN PROMINENTE DE FINALIZACIÓN DE SESIÓN */}
-          <div className="ds-row" style={{ marginTop: '16px', justifyContent: 'flex-end' }}>
+          <div className="ds-row" style={{ marginTop: 'var(--space-4)', justifyContent: 'flex-end' }}>
             <button
               type="button"
               onClick={() => {
@@ -466,7 +466,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
               }}
               className="ds-btn ds-btn-lg"
               style={{
-                background: 'linear-gradient(135deg, var(--success, #30d158), #28a745)',
+                background: 'linear-gradient(135deg, var(--success), #28a745)',
                 color: '#ffffff',
                 border: 'none',
                 borderRadius: '10px',

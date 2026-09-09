@@ -111,7 +111,7 @@ export default function SecondBrainInspector({
             <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
               SEGUNDO CEREBRO • INTEGRACIÓN DIRECTA NOTION & OBSIDIAN
             </span>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+            <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               Inspección en la Web & Reinterpretación de Datos
             </h3>
           </div>

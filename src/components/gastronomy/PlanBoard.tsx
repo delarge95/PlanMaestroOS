@@ -18,7 +18,7 @@ export default function PlanBoard() {
         
         {/* CABECERA PRESCRIPTIVA CON COPY EXACTO */}
         <div style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text)' }}>
+          <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: 0, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
             Planes
           </h2>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>

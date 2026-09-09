@@ -66,7 +66,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
               <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-danger)', background: 'rgba(239, 68, 68, 0.15)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
                 PROTOCOLO DE RESCATE TDAH • PASO {step} DE 3
               </span>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '6px 0 0', color: 'var(--color-text-primary)' }}>
+              <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '6px 0 0', color: 'var(--color-text-primary)' }}>
                 Desbloqueo de Inercia: {currentTaskName}
               </h3>
             </div>
