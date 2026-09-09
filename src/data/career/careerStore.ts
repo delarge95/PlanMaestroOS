@@ -29,6 +29,7 @@ import {
 } from './applications';
 import type { CompanyRecord, CompanyTimelineEvent } from './companies';
 import type { CompanyResearch } from './careerContracts';
+import type { ApplicationKit } from '../../lib/career/cvTailor';
 
 export interface CareerState {
   /** Versión del shape persistido (migraciones futuras la leen). */
@@ -42,6 +43,11 @@ export interface CareerState {
    * Additive sobre el shape v1: el persist merge mantiene {} si no existía.
    */
   companyResearch: Record<string, CompanyResearch>;
+  /**
+   * Kit de aplicación (CV personalizado + brief de portafolio), claveado
+   * por applicationId. Additive sobre el shape v1.
+   */
+  applicationKits: Record<string, ApplicationKit>;
   /** Última fecha ISO de actualización de cualquier colección. */
   updatedAt: string;
 
@@ -64,6 +70,8 @@ export interface CareerState {
   addTimelineEvent: (companyName: string, event: Omit<CompanyTimelineEvent, 'id'>) => void;
   /** Upsert de la investigación de una empresa (clave: nombre en minúsculas). */
   upsertCompanyResearch: (research: CompanyResearch) => void;
+  /** Upsert del kit de una aplicación (CV personalizado + brief). */
+  upsertApplicationKit: (kit: ApplicationKit) => void;
 }
 
 const todayIso = () => new Date().toISOString().slice(0, 10);
@@ -78,6 +86,7 @@ export const useCareerStore = create<CareerState>()(
       applications: applicationsSeed,
       companies: companiesSeed,
       companyResearch: {},
+      applicationKits: {},
       weeklyPlan: trackerWeeklyPlan,
       updatedAt: trackerImportedAt,
 
@@ -188,6 +197,13 @@ export const useCareerStore = create<CareerState>()(
             ...s.companyResearch,
             [research.companyName.toLowerCase()]: research
           },
+          updatedAt: new Date().toISOString()
+        }));
+      },
+
+      upsertApplicationKit: (kit) => {
+        set((s) => ({
+          applicationKits: { ...s.applicationKits, [kit.applicationId]: kit },
           updatedAt: new Date().toISOString()
         }));
       }
