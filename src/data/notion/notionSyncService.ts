@@ -11,7 +11,7 @@
  * - Sync direction: pull (Notion → app) y push (app → Notion), nunca automático.
  */
 
-import type { NotionClient, NotionPage } from './notionClient';
+import type { NotionClient, NotionPage, NotionQueryResult } from './notionClient';
 import { createNotionClient } from './notionClient';
 
 // ─── Env vars (leer de .env / import.meta.env / process.env) ───

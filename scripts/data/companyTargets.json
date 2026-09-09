@@ -1,0 +1,1262 @@
+[
+  {
+    "empresa": "Active Theory",
+    "rol": "WebGL Developer / Creative Technologist",
+    "url": "https://activetheory.net/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Remoto/híbrido",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Fit 5/5, prob. 4/5; WebGL creative tech con fuerte puente TwinSight; A1: verificar remote/freelance."
+  },
+  {
+    "empresa": "Azumo",
+    "rol": "Unity Developer",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM — remoto",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Alta",
+    "notas": "Vacante viva Unity Developer LATAM remoto; rank 6; apps 3D interactivas."
+  },
+  {
+    "empresa": "BairesDev",
+    "rol": "Unity Developer (Python full-stack)",
+    "url": "https://www.bairesdev.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Prob. 5/5; pipeline LATAM remoto con openings Unity/Python frecuentes; A1."
+  },
+  {
+    "empresa": "Capgemini Engineering",
+    "rol": "Unity Digital Twin / Simulation Consultant",
+    "url": "https://www.capgemini.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE (hiring UE-heavy)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Fit 5/5; consultora digital twin (brazo Unity adquirido); A2: seniority consultora."
+  },
+  {
+    "empresa": "Flat2VR Studios",
+    "rol": "Unity Technical Artist",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "UE y Norteamérica — remoto",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Alta",
+    "notas": "Vacante viva Unity TA EU&NA remoto; rank 4; pipeline grafico Unity + VR."
+  },
+  {
+    "empresa": "FLEXUS",
+    "rol": "Graphic Programmer / Render Developer",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Ucrania — remoto",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Alta",
+    "notas": "Vacante viva (Ucrania, remoto); shaders/rendering/math; rank 5 de best-fit."
+  },
+  {
+    "empresa": "Globant Gaming",
+    "rol": "Unity/XR Developer (tools)",
+    "url": "https://www.globant.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM, remoto/híbrido",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Prob. 4/5; volumen LATAM/global con unidades game/XR; A1: estructura contractor."
+  },
+  {
+    "empresa": "HyperVR Games",
+    "rol": "Senior VR Unity Developer",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Global/Europa — remote flexible",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Alta",
+    "notas": "Vacante viva senior, global/Europa remote flexible; rank 3 best-fit; espera shipped titles."
+  },
+  {
+    "empresa": "Insight Global",
+    "rol": "Sr. Unity Developer",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Solo LATAM (offshore) — $29–43/hr",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Alta",
+    "notas": "Vacante viva vía staffing LATAM offshore $29–43/hr; rank 1 best-fit (Unity+VR+Blender+LATAM)."
+  },
+  {
+    "empresa": "realvirtual.io",
+    "rol": "Unity Simulation / Digital Twin Developer",
+    "url": "https://realvirtual.io/",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "Alemania/UE (remoto desconocido)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Fit 5/5; plataforma Unity de simulación/digital twin; A2: autorización Alemania/UE."
+  },
+  {
+    "empresa": "Teravision Games",
+    "rol": "Unity Developer / Technical Artist",
+    "url": "https://teravisiongames.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "LATAM (Colombia/EE. UU.)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Prob. 4/5; estudio colombiano, ruta realista; A1: openings Unity/tech art."
+  },
+  {
+    "empresa": "Treeview Studio",
+    "rol": "Unity/XR Developer",
+    "url": "https://treeview.studio/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./LATAM (alcance desconocido)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Fit 5/5; Unity/XR/digital twin con señal LATAM; A1: verificar roles actuales y ruta contractor."
+  },
+  {
+    "empresa": "Unity Technologies",
+    "rol": "Technical Artist / Tools Developer (simulation)",
+    "url": "https://unity.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU./UE/Canadá principalmente",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Alta",
+    "notas": "Fit 5/5; motor Unity, roles TA/tools/simulación; A2: seniority y autorización local."
+  },
+  {
+    "empresa": "14islands",
+    "rol": "WebGL / Creative Developer",
+    "url": "https://www.14islands.com/",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "UE (Suecia), remoto incierto",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "WebGL/creative tech; A1: enfasis Three.js vs Unity y restricciones remote."
+  },
+  {
+    "empresa": "Amber Studio",
+    "rol": "Unity Developer / Technical Artist",
+    "url": "https://amberstudio.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global (Rumanía)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Game outsourcing."
+  },
+  {
+    "empresa": "Arch Virtual",
+    "rol": "Unity XR / Simulation Developer",
+    "url": "https://archvirtual.com/",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "EE. UU., remoto incierto",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "VR enterprise; remoto desconocido."
+  },
+  {
+    "empresa": "Autodesk",
+    "rol": "3D Tools / Visualization Developer",
+    "url": "https://www.autodesk.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "CAD/digital twin; A2: seniority y alta competencia."
+  },
+  {
+    "empresa": "Avataar",
+    "rol": "3D Web / Product Visualization Developer (AI)",
+    "url": "https://www.avataar.ai/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./India, remoto incierto",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "3D commerce/AI con solapamiento product viz; A1: openings 3D/WebGL."
+  },
+  {
+    "empresa": "Bentley Systems",
+    "rol": "3D Visualization / Simulation Developer",
+    "url": "https://www.bentley.com/company/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Digital twin infraestructura; A2: dominio y autorización."
+  },
+  {
+    "empresa": "Cesium",
+    "rol": "WebGL / 3D Geospatial Developer",
+    "url": "https://cesium.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "3D geospatial web; no Unity-centric."
+  },
+  {
+    "empresa": "Creamos",
+    "rol": "Senior Unity Developer",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM — remoto",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Media",
+    "notas": "Vacante viva Senior Unity Developer LATAM remoto; rank 2; Unity + web + portfolio; talent pool freelance."
+  },
+  {
+    "empresa": "Critical Software",
+    "rol": "Simulation Tools Developer",
+    "url": "https://criticalsoftware.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Portugal/UK",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Software safety-critical; pasaporte PT futuro."
+  },
+  {
+    "empresa": "Critical TechWorks",
+    "rol": "Simulation / Visualization Software Developer",
+    "url": "https://www.criticaltechworks.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Portugal",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Software BMW/simulación; útil pasaporte PT futuro (~2028)."
+  },
+  {
+    "empresa": "Demodern",
+    "rol": "Unity Developer / Creative Technologist",
+    "url": "https://demodern.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Creative tech/XR alemán; alemán útil."
+  },
+  {
+    "empresa": "Dogstudio",
+    "rol": "WebGL / Creative Developer",
+    "url": "https://dogstudio.co/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Bélgica/EE. UU., remoto posible",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Agencia creative tech; A1: roles actuales y ruta contractor."
+  },
+  {
+    "empresa": "DreamForge",
+    "rol": "Senior Unity Developer",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Estados Unidos — fully remote",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Media",
+    "notas": "Vacante viva senior EE. UU. fully remote; rank 8; Unity + AI + gameplay; competitive + equity."
+  },
+  {
+    "empresa": "DroneDeploy",
+    "rol": "3D Visualization Developer (mapping)",
+    "url": "https://www.dronedeploy.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Drone mapping/digital twin; A2: dominio requerido."
+  },
+  {
+    "empresa": "E Tech Group",
+    "rol": "Unity Simulation Developer (controls)",
+    "url": "https://www.etechgroup.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Simulacion industrial Unity; contractor bajo, autenticacion EE. UU. probable."
+  },
+  {
+    "empresa": "Emersya",
+    "rol": "3D Web / Configurator Developer",
+    "url": "https://emersya.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE (Francia)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Configuradores 3D, fuerte product viz; A1: límites autorización UE."
+  },
+  {
+    "empresa": "EON Reality",
+    "rol": "XR / 3D Developer",
+    "url": "https://eonreality.com/careers/",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "Global (alcance desconocido)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR educación/simulación; alcance remoto desconocido."
+  },
+  {
+    "empresa": "Esri",
+    "rol": "3D Visualization / Web GIS Developer",
+    "url": "https://www.esri.com/en-us/about/careers/main",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "EE. UU. y oficinas globales",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "GIS/3D web visualization."
+  },
+  {
+    "empresa": "Expivi",
+    "rol": "3D Web / Product Visualization Developer",
+    "url": "https://www.expivi.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE (Países Bajos)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Plataforma configuradores 3D; A1: alcance remote y stack técnico."
+  },
+  {
+    "empresa": "FundamentalVR",
+    "rol": "Unity XR Simulation Developer",
+    "url": "https://fundamentalvr.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UK/EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR simulación medica; A2: autorización UK/EE. UU. y seniority."
+  },
+  {
+    "empresa": "Gameloft",
+    "rol": "Unity Developer / Technical Artist",
+    "url": "https://www.gameloft.com/corporate/en/jobs",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global, oficinas LATAM",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Mobile games con oficinas locales; inglés/espanol."
+  },
+  {
+    "empresa": "Gorilla Logic",
+    "rol": "Python / Web Developer",
+    "url": "https://gorillalogic.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Fallback LATAM remote; Python/tooling y roles 3D-adjacent; A1 en cola de verificacion."
+  },
+  {
+    "empresa": "HatchWorks AI",
+    "rol": "Python / AI Tools Developer",
+    "url": "https://hatchworks.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Nearshore AI; A1: aplicar si ARA queda portfolio-ready."
+  },
+  {
+    "empresa": "Hexagon AB",
+    "rol": "3D Visualization / Simulation Developer",
+    "url": "https://hexagon.com/company/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/global (Suecia)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Digital reality industrial."
+  },
+  {
+    "empresa": "Holo-Light",
+    "rol": "XR Developer (Unity, streaming)",
+    "url": "https://holo-light.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR industrial/visualización; A2: autorización Alemania/UE."
+  },
+  {
+    "empresa": "Innoactive",
+    "rol": "Unity XR / Training Simulation Developer",
+    "url": "https://www.innoactive.io/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR training enterprise, fuerte fit TwinSight; A2: Alemania e idioma."
+  },
+  {
+    "empresa": "Keywords Studios",
+    "rol": "Technical Artist / Tools",
+    "url": "https://www.keywordsstudios.com/en/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global, oficinas locales",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Servicios games con roles técnicos."
+  },
+  {
+    "empresa": "King",
+    "rol": "Unity Developer / Technical Artist",
+    "url": "https://careers.king.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UK/Suecia/UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Candy Crush; technical artist mobile."
+  },
+  {
+    "empresa": "Lean Tech",
+    "rol": "Python Full-stack Developer",
+    "url": "https://leangroup.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM (Colombia)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Prob. 4/5; nearshore Colombia-friendly; A1: Python automation/tooling."
+  },
+  {
+    "empresa": "MAS Global",
+    "rol": "Python / Web Developer",
+    "url": "https://masglobalconsulting.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM (Colombia)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Prob. 4/5; nearshore Colombia-friendly; A1: Python/tooling y banda salarial."
+  },
+  {
+    "empresa": "Matterport",
+    "rol": "3D Visualization / Web 3D Developer",
+    "url": "https://matterport.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Digital twin/3D capture; A2: hiring EE. UU. y especializacion."
+  },
+  {
+    "empresa": "Media.Monks",
+    "rol": "Creative Technologist / 3D Developer",
+    "url": "https://media.monks.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Red grande de creative production; A1: Unity/WebGL, hubs LATAM, ruta contractor."
+  },
+  {
+    "empresa": "Moment Factory",
+    "rol": "Interactive / Real-Time 3D Developer",
+    "url": "https://momentfactory.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Canadá, híbrido/on-site",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Experiencias inmersivas; auth Canadá probable."
+  },
+  {
+    "empresa": "Monogrid",
+    "rol": "WebGL / 3D Developer",
+    "url": "https://www.monogrid.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Italia, remoto posible",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Interactive 3D y WebGL; A1: contractor UE y viabilidad solo inglés."
+  },
+  {
+    "empresa": "Mudtek",
+    "rol": "VFX Artist (Unity / Shader Graph)",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Puerto Rico — global remote",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Media",
+    "notas": "Vacante viva VFX Artist Unity/Shader Graph; rank 7; salario propuesto por el aplicante."
+  },
+  {
+    "empresa": "Niantic",
+    "rol": "AR Developer (Unity/tools)",
+    "url": "https://nianticlabs.com/jobs/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "AR platform y games."
+  },
+  {
+    "empresa": "Niantic (8th Wall)",
+    "rol": "WebAR Creative Developer",
+    "url": "https://www.8thwall.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "WebAR; angulo web de TwinSight."
+  },
+  {
+    "empresa": "Osso VR",
+    "rol": "Unity XR Technical Artist",
+    "url": "https://www.ossovr.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "VR training medico; A2: autorización EE. UU. y competencia."
+  },
+  {
+    "empresa": "Pix4D",
+    "rol": "3D Visualization Developer (mapping)",
+    "url": "https://www.pix4d.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE (Suiza)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Fotogrametria drone / 3D reconstruction."
+  },
+  {
+    "empresa": "PTC",
+    "rol": "AR/IoT Visualization Developer",
+    "url": "https://www.ptc.com/en/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Vuforia/ThingWorx; A2: seniority enterprise y ubicacion."
+  },
+  {
+    "empresa": "Resn",
+    "rol": "WebGL Developer / Creative Technologist",
+    "url": "https://resn.co.nz/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "NZ/Países Bajos, remoto posible",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Estudio WebGL con interactive 3D fuerte; A1: hiring actual y límites de pais."
+  },
+  {
+    "empresa": "Scopely",
+    "rol": "Unity Developer / Technical Artist",
+    "url": "https://www.scopely.com/en/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Mobile games; compensación alta."
+  },
+  {
+    "empresa": "ShapesXR",
+    "rol": "Unity XR Developer",
+    "url": "https://www.shapesxr.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "UE (Dinamarca)/remoto",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR tooling; A2: equipo pequeño y alcance remote."
+  },
+  {
+    "empresa": "Siemens Digital Industries",
+    "rol": "Digital Twin / Simulation Developer (UX 3D)",
+    "url": "https://www.siemens.com/global/en/company/jobs.html",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/global (Alemania)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Digital twin industrial; A2: auth Alemania/UE y barra enterprise."
+  },
+  {
+    "empresa": "SoftServe",
+    "rol": "XR / Software / AI Developer",
+    "url": "https://www.softserveinc.com/en-us/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Consultora global con unidades XR/AI; A1: elegibilidad LATAM y modelo contractor."
+  },
+  {
+    "empresa": "Talespin",
+    "rol": "Unity/XR Developer",
+    "url": "https://www.talespin.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR training enterprise."
+  },
+  {
+    "empresa": "Threekit",
+    "rol": "3D/WebGL Product Visualization Developer",
+    "url": "https://www.threekit.com/company/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Configurador 3D de producto, fit técnico directo; A1: requisito Unity/WebGL y remote."
+  },
+  {
+    "empresa": "UNIT9",
+    "rol": "Creative Technologist / XR Developer",
+    "url": "https://www.unit9.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Remoto/híbrido",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Agencia XR/WebGL con trabajo por proyectos; A1: contract openings y contacto creative tech."
+  },
+  {
+    "empresa": "Varjo",
+    "rol": "XR Engineer (graphics/simulation)",
+    "url": "https://varjo.com/company/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE (Finlandia)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR hardware high-end; A2: Finlandia/UE y especializacion hardware."
+  },
+  {
+    "empresa": "Vection Technologies",
+    "rol": "Unity/XR Visualization Developer",
+    "url": "https://vection-technologies.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/Australia",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "XR + digital twin."
+  },
+  {
+    "empresa": "Virtalis",
+    "rol": "XR / Simulation Developer (Unity/Unreal)",
+    "url": "https://www.virtalis.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UK/UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Simulacion VR industrial."
+  },
+  {
+    "empresa": "VNTANA",
+    "rol": "3D Pipeline / Web 3D Developer",
+    "url": "https://www.vntana.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Pipeline 3D commerce."
+  },
+  {
+    "empresa": "Wildlife Studios",
+    "rol": "Unity Developer / Tools",
+    "url": "https://wildlifestudios.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "LATAM (Brasil)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Media",
+    "notas": "Mobile games LATAM; inglés/portugués."
+  },
+  {
+    "empresa": "ABB",
+    "rol": "Robotics / Digital Twin Simulation Developer",
+    "url": "https://global.abb/group/en/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global (Suiza)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Robotica/automatización, digital twin."
+  },
+  {
+    "empresa": "Ansys",
+    "rol": "Simulation / Visualization Developer",
+    "url": "https://www.ansys.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Simulacion fisica; menos Unity."
+  },
+  {
+    "empresa": "Auterion",
+    "rol": "Simulation / Visualization Developer",
+    "url": "https://auterion.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Software drones/robotics."
+  },
+  {
+    "empresa": "Bosch",
+    "rol": "Simulation / Tools Developer",
+    "url": "https://www.bosch.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/global (Alemania)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Ruta industrial alemána; alemán útil."
+  },
+  {
+    "empresa": "BUCK",
+    "rol": "Interactive Developer (creative tech)",
+    "url": "https://buck.co/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Design/motion/tech; no siempre 3D dev."
+  },
+  {
+    "empresa": "Chaos / Cylindo",
+    "rol": "3D Visualization / Rendering Developer",
+    "url": "https://www.chaos.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "3D commerce / rendering."
+  },
+  {
+    "empresa": "Dassault Systemes",
+    "rol": "3D Visualization / Simulation Developer",
+    "url": "https://careers.3ds.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/global (Francia)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "3DEXPERIENCE/CAD."
+  },
+  {
+    "empresa": "Decentraland Foundation",
+    "rol": "3D Web / Tools Developer",
+    "url": "https://decentraland.org/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Web3/3D virtual world; Web3 no core."
+  },
+  {
+    "empresa": "Eagle 3D Streaming",
+    "rol": "3D Streaming / Web3D Developer",
+    "url": "https://www.eagle3dstreaming.com/career/",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "Remoto incierto",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Pixel streaming/Web3D; Unreal-heavy."
+  },
+  {
+    "empresa": "Elastique.",
+    "rol": "Creative / 3D Developer",
+    "url": "https://elastique.de/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Estudio interactivo alemán; alemán útil."
+  },
+  {
+    "empresa": "Encora",
+    "rol": "Python Full-stack Developer",
+    "url": "https://www.encora.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback software."
+  },
+  {
+    "empresa": "Endava",
+    "rol": "Software Developer (simulation)",
+    "url": "https://www.endava.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global/LATAM",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback software; simulación incierta."
+  },
+  {
+    "empresa": "EPAM",
+    "rol": "Software Developer (XR)",
+    "url": "https://www.epam.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback software; XR incierto."
+  },
+  {
+    "empresa": "GameDuell",
+    "rol": "Unity Developer / Tools",
+    "url": "https://inside.gameduell.com/jobs/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Juegos Alemania."
+  },
+  {
+    "empresa": "Imaginary Cloud",
+    "rol": "Full-stack / Python Developer",
+    "url": "https://www.imaginarycloud.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Portugal",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback full-stack/Python Portugal."
+  },
+  {
+    "empresa": "InnoGames",
+    "rol": "Unity Technical Artist / Tools",
+    "url": "https://www.innogames.com/career/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Mobile/browser games Alemania."
+  },
+  {
+    "empresa": "Kaedim",
+    "rol": "3D Pipeline / AI Tools Developer",
+    "url": "https://www.kaedim3d.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Remoto/híbrido (UK/remote)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Puente 3D + AI (assets 3D con AI)."
+  },
+  {
+    "empresa": "Kolibri Games",
+    "rol": "Unity Developer / Technical Artist",
+    "url": "https://www.kolibrigames.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Unity mobile games."
+  },
+  {
+    "empresa": "Linden Lab",
+    "rol": "3D Tools / Client Developer",
+    "url": "https://www.lindenlab.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Virtual worlds / 3D platform."
+  },
+  {
+    "empresa": "LOAD",
+    "rol": "Web / Product Developer",
+    "url": "https://www.load.digital/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Portugal",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback product/web Portugal."
+  },
+  {
+    "empresa": "MathWorks",
+    "rol": "Simulation Tools Developer",
+    "url": "https://www.mathworks.com/company/jobs.html",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Simulacion/math; menos portfolio 3D."
+  },
+  {
+    "empresa": "Moth+Flame",
+    "rol": "Unity XR Training Developer",
+    "url": "https://www.mothandflamevr.com/careers",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "EE. UU., remoto incierto",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "VR training enterprise."
+  },
+  {
+    "empresa": "Oxford Medical Simulation",
+    "rol": "Unity XR Simulation Developer",
+    "url": "https://oxfordmedicalsimulation.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UK",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Simulacion training medico."
+  },
+  {
+    "empresa": "Perficient LATAM",
+    "rol": "Software / UX Developer",
+    "url": "https://www.perficient.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "LATAM",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback software/UX/cloud."
+  },
+  {
+    "empresa": "PlayCanvas",
+    "rol": "WebGL Engine Developer",
+    "url": "https://playcanvas.com/",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "UK (alcance desconocido)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Motor WebGL; equipo pequeño."
+  },
+  {
+    "empresa": "RJ Games",
+    "rol": "Unity Developer",
+    "url": null,
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Chipre — remote anywhere",
+    "fuente": "30_live_job_postings_market_snapshot.md",
+    "prioridad": "Baja",
+    "notas": "Vacante viva Unity Developer (middle), Chipre, remote anywhere; negociable; fit medio (enfasis mobile)."
+  },
+  {
+    "empresa": "Rockwell Automation",
+    "rol": "HMI / Simulation Visualization Developer",
+    "url": "https://www.rockwellautomation.com/en-us/company/careers.html",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Automatizacion industrial, HMI."
+  },
+  {
+    "empresa": "Room 8 Studio",
+    "rol": "Technical Artist / 3D Tools",
+    "url": "https://room8studio.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Global, remoto/híbrido",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Game art/co-dev; más art-focused."
+  },
+  {
+    "empresa": "Schneider Electric",
+    "rol": "Digital Twin / Simulation Developer",
+    "url": "https://www.se.com/ww/en/about-us/careers/overview.jsp",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global (Francia)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Automatizacion industrial / digital twin."
+  },
+  {
+    "empresa": "Sourcegraph",
+    "rol": "AI / Dev Tools Developer",
+    "url": "https://sourcegraph.com/jobs",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "AI tooling secundario; remote global más probable."
+  },
+  {
+    "empresa": "Spatial",
+    "rol": "Web 3D Developer",
+    "url": "https://www.spatial.io/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU. principalmente",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Espacios virtuales web/3D."
+  },
+  {
+    "empresa": "Sperasoft",
+    "rol": "Technical Artist / Tools",
+    "url": "https://sperasoft.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Game co-dev."
+  },
+  {
+    "empresa": "Strivr",
+    "rol": "Unity XR Training Developer",
+    "url": "https://www.strivr.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "VR training."
+  },
+  {
+    "empresa": "Virbela",
+    "rol": "Unity Developer (virtual worlds)",
+    "url": "https://www.virbela.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU. principalmente",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Virtual worlds Unity."
+  },
+  {
+    "empresa": "Virti",
+    "rol": "XR / Simulation Developer",
+    "url": "https://www.virti.com/careers",
+    "ubicacionRemoto": null,
+    "ubicacionDetalle": "UK, remoto incierto",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "XR training salud."
+  },
+  {
+    "empresa": "Virtuos",
+    "rol": "Technical Artist / Tools",
+    "url": "https://www.virtuosgames.com/en/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Servicios AAA; competitivo."
+  },
+  {
+    "empresa": "VTProDesign",
+    "rol": "Unity Developer / Creative Technologist",
+    "url": "https://vtprodesign.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Experiential tech."
+  },
+  {
+    "empresa": "Wizeline",
+    "rol": "Python / Web / AI Developer",
+    "url": "https://www.wizeline.com/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "LATAM (México)",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback AI/software."
+  },
+  {
+    "empresa": "xgeeks",
+    "rol": "Full-stack / Cloud / Python Developer",
+    "url": "https://xgeeks.io/careers/",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "Portugal",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback tech Portugal."
+  },
+  {
+    "empresa": "Xpand IT",
+    "rol": "Web / Tools Developer",
+    "url": "https://www.xpand-it.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Portugal",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": "Baja",
+    "notas": "Fallback software Portugal."
+  },
+  {
+    "empresa": "Crytek",
+    "rol": "Technical Artist / Tools",
+    "url": "https://www.crytek.com/career",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "AAA, entrada difícil; watchlist."
+  },
+  {
+    "empresa": "Epic Games",
+    "rol": "Tools / Technical Artist (engine)",
+    "url": "https://www.epicgames.com/site/en-US/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Engine/real-time 3D, Unreal-heavy; watchlist."
+  },
+  {
+    "empresa": "Epic Games (Sketchfab)",
+    "rol": "3D Platform / Tools Developer",
+    "url": "https://www.epicgames.com/site/en-US/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UE/EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Plataforma 3D de assets (Sketchfab, Epic); watchlist."
+  },
+  {
+    "empresa": "GE Aerospace",
+    "rol": "Digital Twin / Simulation Developer",
+    "url": "https://jobs.gecareers.com/aviation/global/en",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Aerospace, restricciones de autorización; watchlist."
+  },
+  {
+    "empresa": "Honeywell",
+    "rol": "Simulation / Visualization Developer",
+    "url": "https://careers.honeywell.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Roles posiblemente security-sensitive; watchlist."
+  },
+  {
+    "empresa": "Humanloop",
+    "rol": "LLM App Developer",
+    "url": "https://humanloop.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "UK",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "LLM tooling, no Unity; watchlist."
+  },
+  {
+    "empresa": "Keen Games",
+    "rol": "Technical Artist / Tools",
+    "url": "https://www.keengames.com/jobs",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Game studio Alemania; watchlist."
+  },
+  {
+    "empresa": "Labelbox",
+    "rol": "Python Tooling Developer",
+    "url": "https://labelbox.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Plataforma de datos AI; secundaria; watchlist."
+  },
+  {
+    "empresa": "LangChain",
+    "rol": "Python / LLM App Developer",
+    "url": "https://www.langchain.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU. principalmente",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "ARA-adjacent, competitivo; watchlist."
+  },
+  {
+    "empresa": "Magic Leap",
+    "rol": "AR Developer (Unity/tools)",
+    "url": "https://www.magicleap.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Hardware AR, alta competencia; watchlist."
+  },
+  {
+    "empresa": "Meta Reality Labs",
+    "rol": "XR Developer / Technical Artist",
+    "url": "https://www.metacareers.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Plataforma XR; compensación alta, entrada difícil; watchlist."
+  },
+  {
+    "empresa": "Microsoft (Babylon.js)",
+    "rol": "WebGL/WebGPU Tools Developer",
+    "url": "https://jobs.careers.microsoft.com/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Ecosistema Babylon.js/Web3D; barra alta; watchlist."
+  },
+  {
+    "empresa": "NVIDIA Omniverse",
+    "rol": "Simulation / Graphics Tools Developer",
+    "url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "RT3D/simulación; muy competitivo; watchlist."
+  },
+  {
+    "empresa": "Replit",
+    "rol": "AI Tools / Python Developer",
+    "url": "https://replit.com/site/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU., algunas remotas",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "AI tools competitivo; watchlist."
+  },
+  {
+    "empresa": "Roblox",
+    "rol": "Tools Developer (3D platform)",
+    "url": "https://corp.roblox.com/careers/",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "3D platform; comp alta y stack distinto; watchlist."
+  },
+  {
+    "empresa": "Roboflow",
+    "rol": "Python / CV Tools Developer",
+    "url": "https://roboflow.com/careers",
+    "ubicacionRemoto": "Remoto",
+    "ubicacionDetalle": "EE. UU. principalmente",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "AI/CV secundario; watchlist."
+  },
+  {
+    "empresa": "Skydio",
+    "rol": "Simulation / Visualization Tools Developer",
+    "url": "https://www.skydio.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU.",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Drones/autonomia; posible defensa; watchlist."
+  },
+  {
+    "empresa": "Snap AR",
+    "rol": "AR Engineer (Lens Studio)",
+    "url": "https://www.snap.com/jobs",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./UE",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Plataforma AR menos Unity-centric; watchlist."
+  },
+  {
+    "empresa": "YAGER",
+    "rol": "Technical Artist / Tools",
+    "url": "https://www.yager.de/career",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "Alemania",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Game studio, probable Unreal; watchlist."
+  },
+  {
+    "empresa": "Zipline",
+    "rol": "Simulation / Tools Developer",
+    "url": "https://www.flyzipline.com/careers",
+    "ubicacionRemoto": "Híbrido",
+    "ubicacionDetalle": "EE. UU./global",
+    "fuente": "11_company_targets_job_boards_recruiters.md",
+    "prioridad": null,
+    "notas": "Drones/logistica; no Unity explicito; watchlist."
+  }
+]
