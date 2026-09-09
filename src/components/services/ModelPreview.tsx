@@ -30,116 +30,40 @@ import { loadHolybroInstance, applyFinish, ensureVariadoSet, revealFrameOnly, dr
 import type { AssemblyEntry } from './holybro';
 import type { FinishKind, VariadoSet } from './holybro';
 import { loadAnvilInstance, applySurfaceMorph, ANVIL_MORPH_NODE } from './anvil';
+import { loadTurbine, buildTurbineLayout } from './turbine';
+import type { TurbineLayout } from './turbine';
 import type { Lang } from '../../data/services/i18n';
 
-export type PreviewMode = 'detail' | 'pieces' | 'story' | 'variants' | 'surface' | 'finish' | 'assembly' | 'hotspots' | 'shader-dial';
-
-// ═══════════════════════════════════════════════════════════════
-// Variantes (ciclo 6): 14 SLOTS sobre el DRONE HolyBro (solo el FRAME al
-// inicio; batería/electrónica/plataforma se añaden como piezas desbloqueables).
-// Se desbloquean con el slider, se activan/apagan en vivo. Ciclo 9: se retiran
-// 'filtros-piezas' y 'color-cuaternario' (feedback Alexander); el estado
-// inicial es BLANCO plano hasta encender el color base.
-// ═══════════════════════════════════════════════════════════════
-export type VariantSlotKind = 'color' | 'toggle' | 'luz';
-export type ColorTarget = 'all' | 'motors' | 'propellers' | 'frames';
-export type SlotFx = 'explode' | 'clip' | 'xray' | 'lineart' | 'flight' | 'battery' | 'electronics' | 'platform';
-
-export interface VariantSlot {
-  id: string;
-  es: string;
-  en: string;
-  kind: VariantSlotKind;
-  /** Para kind='color': qué set de meshes tiñe. */
-  colorTarget?: ColorTarget;
-  /** Comportamiento especial del slot. */
-  fx?: SlotFx;
-}
-
-export const VARIANT_SLOTS: VariantSlot[] = [
-  { id: 'color-base', es: 'Color base', en: 'Base color', kind: 'color', colorTarget: 'all' },
-  { id: 'vista-explosionada', es: 'Vista explosionada', en: 'Exploded view', kind: 'toggle', fx: 'explode' },
-  { id: 'color-secundario', es: 'Color secundario', en: 'Secondary color', kind: 'color', colorTarget: 'motors' },
-  { id: 'color-terciario', es: 'Color terciario', en: 'Tertiary color', kind: 'color', colorTarget: 'propellers' },
-  { id: 'cortes-transversales', es: 'Corte transversal', en: 'Cross-section', kind: 'toggle', fx: 'clip' },
-  { id: 'pieza-adicional-1', es: 'Batería', en: 'Battery', kind: 'toggle', fx: 'battery' },
-  { id: 'pieza-adicional-2', es: 'Electrónica', en: 'Electronics', kind: 'toggle', fx: 'electronics' },
-  { id: 'pieza-adicional-3', es: 'Plataforma superior', en: 'Top platform', kind: 'toggle', fx: 'platform' },
-  { id: 'shader-xray', es: 'Shader rayos X', en: 'Shader X-ray', kind: 'toggle', fx: 'xray' },
-  { id: 'shader-lineart', es: 'Shader line-art', en: 'Shader line-art', kind: 'toggle', fx: 'lineart' },
-  { id: 'animacion-vuelo', es: 'Animación de vuelo', en: 'Flight animation', kind: 'toggle', fx: 'flight' },
-  { id: 'luz-estudio', es: 'Luz de estudio', en: 'Studio lighting', kind: 'luz' },
-  { id: 'luz-natural', es: 'Luz natural', en: 'Natural lighting', kind: 'luz' },
-  { id: 'luz-dramatica', es: 'Luz dramática', en: 'Dramatic lighting', kind: 'luz' },
-];
-
-/** Índices de slots por id (ciclo 9: los accesos por índice se rompían al
- *  reordenar los slots — ahora todo se busca por id y se valida en runtime). */
-const SLOT_IDX = (id: string) => {
-  const i = VARIANT_SLOTS.findIndex(s => s.id === id);
-  if (i < 0) throw new Error(`VariantSlot '${id}' no existe`);
-  return i;
-};
-const IDX_BASE = SLOT_IDX('color-base');
-const IDX_EXPLODE = SLOT_IDX('vista-explosionada');
-const IDX_SEC = SLOT_IDX('color-secundario');
-const IDX_TER = SLOT_IDX('color-terciario');
-const IDX_CLIP = SLOT_IDX('cortes-transversales');
-const IDX_BAT = SLOT_IDX('pieza-adicional-1');
-const IDX_ELE = SLOT_IDX('pieza-adicional-2');
-const IDX_PLA = SLOT_IDX('pieza-adicional-3');
-const IDX_XRAY = SLOT_IDX('shader-xray');
-const IDX_LINEART = SLOT_IDX('shader-lineart');
-const IDX_FLIGHT = SLOT_IDX('animacion-vuelo');
-const IDX_LUZ0 = VARIANT_SLOTS.findIndex(s => s.kind === 'luz');
-
-export interface VariantSlotsState {
-  /** ON/OFF por slot (índice = posición en VARIANT_SLOTS). */
-  on: boolean[];
-  /** Color hex por slot de color (clave = slot.id). */
-  colors: Record<string, string>;
-}
-
-/** Hex por defecto de cada slot de color. */
-export const SLOT_DEFAULT_COLORS: Record<string, string> = {
-  'color-base': '#22262c',
-  'color-secundario': '#0071e3',
-  'color-terciario': '#c9b99a',
-};
-
-/** Blanco PLANO del estado inicial (color-base OFF, ciclo 9): el drone nace
- *  blanco uniforme (#eef0f2, rugosidad 0.5, metal 0.05) hasta encender el base. */
-const BLANK_HEX = '#eef0f2';
-const blankMat = () => new THREE.MeshStandardMaterial({ color: 0xeef0f2, roughness: 0.5, metalness: 0.05 });
-
-/** Catálogo de animaciones del modo story (1.3 replante). */
-export const STORY_ANIMS = [
-  { es: 'Giro', en: 'Spin', glyph: '↻' },
-  { es: 'Explosión', en: 'Explode', glyph: '✦' },
-  { es: 'Primer plano', en: 'Close-up', glyph: '⌕' },
-  { es: 'Salto', en: 'Hop', glyph: '↑' },
-  { es: 'Despliegue', en: 'Deploy', glyph: '✳' },
-  { es: 'Tumble', en: 'Tumble', glyph: '⟳' },
-  { es: 'Pulso', en: 'Pulse', glyph: '◉' },
-  { es: 'Despegue', en: 'Takeoff', glyph: '▲' },
-] as const;
-const STORY_DURATION = 2.4; // segundos por animación
-
-/** Interpolación del contador de tris entre etapas (trazable a POLY_POR_NIVEL). */
-const POLY = [4000, 9000, 40000, 120000, 300000];
-/** Ciclo 13: exportada — la consume la caption del detail en GuidedWizard
- *  (antes flotaba como overlay arriba a la derecha y confundía). */
-export const polyLabel = (d: number) => {
-  const f = Math.max(1, Math.min(5, d));
-  const i = Math.min(3, Math.floor(f - 1));
-  const frac = f - 1 - i;
-  const v = POLY[i] + (POLY[i + 1] - POLY[i]) * frac;
-  return `≈ ${v >= 1000 ? `${Math.round(v / 1000)}k` : Math.round(v)} tris`;
-};
+// Constantes y tipos del preview viven en previewConstants.ts (sin three) para
+// que GuidedWizard las importe sin arrastrar el chunk de three (ciclo 15).
+export * from './previewConstants';
+import { VARIANT_SLOTS, STORY_ANIMS, STORY_DURATION, POLY, SLOT_IDX, BLANK_HEX,
+  IDX_EXPLODE, IDX_FLIGHT, IDX_BASE, IDX_SEC, IDX_TER, IDX_CLIP, IDX_BAT, IDX_ELE,
+  IDX_PLA, IDX_XRAY, IDX_LINEART, IDX_LUZ0 } from './previewConstants';
+import type { VariantSlotsState, PreviewMode, ColorTarget, VariantSlot } from './previewConstants';
 
 const smooth = (x: number) => { const t = Math.max(0, Math.min(1, x)); return t * t * (3 - 2 * t); };
 /** Escala de un grupo cuya ventana de aparición es [a, b] sobre el slider d. */
 const grow = (d: number, a: number, b: number) => smooth((d - a) / (b - a));
+
+/** Ciclo 16d — direccion de explosion UNIVERSAL: las piezas perifericas se
+ *  alejan radialmente del centro; las piezas CERCANAS AL CENTRO (dir ~ 0,
+ *  que antes se quedaban quietas) usan una direccion estable por hash del
+ *  nombre, con desplazamiento minimo garantizado. Devuelve el OFFSET. */
+const hashDir = (s: string) => {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  const a = ((h >>> 0) % 1000) / 1000 * Math.PI * 2;
+  const b = (((h >>> 10) % 1000) / 1000) * 1.2 - 0.6;
+  return new THREE.Vector3(Math.cos(a) * Math.cos(b), Math.sin(b), Math.sin(a) * Math.cos(b)).normalize();
+};
+const dirExplosion = (home: THREE.Vector3, centro: THREE.Vector3, nombre: string, factor: number) => {
+  const dir = home.clone().sub(centro);
+  const len = dir.length();
+  if (len > 0.15) return dir.normalize().multiplyScalar(len * factor);
+  const semilla = Math.abs(Math.sin(home.x * 7.3 + home.y * 5.1 + home.z * 3.7));
+  return hashDir(nombre || String(len)).multiplyScalar(0.45 + 0.3 * semilla);
+};
 
 export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface = 1, variantSel, variantSlots, finish = 'detallado', estilo = 2, hotspots = 0, lang = 'es', height = 290 }: {
   mode: PreviewMode;
@@ -182,6 +106,10 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     mount.appendChild(renderer.domElement);
+    renderer.domElement.setAttribute('aria-label', lang === 'en'
+      ? 'Interactive 3D preview: drag to rotate'
+      : 'Vista 3D interactiva: arrastra para girar');
+    renderer.domElement.setAttribute('role', 'img');
 
     const hemi = new THREE.HemisphereLight(0xffffff, 0xdde4ee, 1.05);
     scene.add(hemi);
@@ -526,9 +454,63 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         .catch(() => { anvilStarted = false; /* fallback: morph procedural cubo→esfera */ });
     }
 
+    // ── Turbina real (detail, ciclo 18): silueta low + GLB por estaciones ──
+    const turbineRoot = new THREE.Group();
+    group.add(turbineRoot);
+    // vista 3/4 frontal: el intake (−X) gira hacia la cámara (+Z) — el disco
+    // de fan de canto es ilegible en perfil puro
+    turbineRoot.rotation.y = 0.6;
+    // silueta low-poly procedural (siempre presente: boceto interno/fallback)
+    const lowTur = new THREE.Group();
+    const loMat = new THREE.MeshStandardMaterial({ color: 0x9aa0a8, roughness: 0.45, metalness: 0.6, flatShading: true, transparent: true });
+    const loAcc = new THREE.MeshStandardMaterial({ color: 0x0071e3, roughness: 0.4, metalness: 0.3, flatShading: true, transparent: true });
+    {
+      const nac = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.44, 1.35, 14), loMat);
+      nac.rotation.z = Math.PI / 2; nac.position.x = -0.25;
+      const spin = new THREE.Mesh(new THREE.ConeGeometry(0.24, 0.34, 10), loMat);
+      spin.rotation.z = Math.PI / 2; spin.position.x = -1.02;
+      const core = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.8, 12), loMat);
+      core.rotation.z = Math.PI / 2; core.position.x = 0.35;
+      const exh = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.4, 12), loMat);
+      exh.rotation.z = -Math.PI / 2; exh.position.x = 1.02;
+      lowTur.add(nac, spin, core, exh);
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        const pivot = new THREE.Group();
+        pivot.rotation.x = a;
+        const bl = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.024, 0.55), loAcc);
+        bl.position.set(-0.98, 0, 0.62);
+        pivot.add(bl);
+        lowTur.add(pivot);
+      }
+    }
+    turbineRoot.add(lowTur);
+    let turbineReady: THREE.Group | null = null;
+    let turbLayout: TurbineLayout | null = null;
+    let turbineStarted = false;
+    function startTurbine() {
+      if (turbineStarted) return;
+      turbineStarted = true;
+      loadTurbine()
+        .then(root => {
+          turbineRoot.add(root);
+          turbLayout = buildTurbineLayout(root);
+          turbLayout.pieces.forEach(p => { p.mesh.visible = false; });
+          turbineReady = root;
+          // silueta proporcional al bbox real: mismas posiciones, mismo largo
+          const len = turbLayout.box.max.x - turbLayout.box.min.x;
+          lowTur.scale.setScalar(len / 2.41);
+          lowTur.position.x = (turbLayout.box.min.x + turbLayout.box.max.x) / 2;
+          root.visible = stateRef.current.mode === 'detail';
+        })
+        .catch(() => { turbineStarted = false; /* fallback: silueta procedural */ });
+    }
+
     // Visibilidad por modo
     const applyModeVisibility = (m: PreviewMode) => {
-      detailRoot.visible = m === 'detail';
+      detailRoot.visible = m === 'detail' && !turbineReady;
+      turbineRoot.visible = m === 'detail';
+      if (m === 'detail') startTurbine();
       hub.visible = satRoot.visible = m === 'pieces';
       // ciclo 6: story usa el drone HolyBro real; prod queda para variants/hotspots/shaders
       prod.visible = m === 'variants' || m === 'hotspots' || m === 'shader-dial';
@@ -1055,17 +1037,78 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
     // ── Loop ──
     let raf = 0;
     let frameDist = 4.8;
+    // ciclo 19: estado del despiece idle de la turbina (detalle)
+    let lastDetailT = -1;
+    let lastDetailChange = 0;
+    let turbE = 0;      // factor de explosión suavizado [0,1]
+    let spinAcc = 0;    // rotación acumulada del rotor (frena al explosionar)
+    let lastT = 0;
     const start = performance.now();
     const loop = () => {
       raf = requestAnimationFrame(loop);
       if (!visible || document.hidden) return;
       const t = (performance.now() - start) / 1000;
+      const dt = Math.min(0.05, Math.max(0.001, t - lastT));
+      lastT = t;
       const cur = stateRef.current;
 
       if (cur.mode !== group.userData.mode) { group.userData.mode = cur.mode; applyModeVisibility(cur.mode); }
 
       if (cur.mode === 'detail') {
         const d = Math.max(1, Math.min(5, cur.detail));
+        if (turbineReady && turbLayout) {
+          // ── ciclo 19: revelado PIEZA A PIEZA + despiece axial en reposo ──
+          (window as any).__turbineReady = true;
+          // idle: 2.5 s quieto → 1 s desarmar → 2 s explosionado → 1 s armar → 3 s reposo
+          if (cur.detail !== lastDetailT) { lastDetailT = cur.detail; lastDetailChange = t; }
+          const idleT = t - lastDetailChange;
+          let eTarget = 0;
+          if (idleT > 2.5) {
+            const ph = (idleT - 2.5) % 8;
+            eTarget = ph < 1 ? ph : ph < 3 ? 1 : ph < 4 ? 1 - (ph - 3) : 0;
+          }
+          turbE += (eTarget - turbE) * 0.09;
+          (window as any).__turbE = +turbE.toFixed(2);
+
+          // silueta: cross-fade temprano — las piezas reales empiezan a llegar ya
+          const takeover = grow(d, 1.1, 2.4);
+          loMat.opacity = 1 - takeover;
+          loAcc.opacity = 1 - takeover;
+          lowTur.visible = takeover < 0.995;
+          const pitch = 0.14 + 0.3 * grow(d, 1, 5);
+          lowTur.children.forEach((c) => {
+            if ((c as THREE.Group).isGroup && c.children.length === 1) {
+              (c.children[0] as THREE.Mesh).rotation.y = pitch;
+            }
+          });
+          lowTur.rotation.x = t * 0.4;
+
+          // revelado pieza a pieza (frente→atrás): cada pieza VUELA desde su
+          // posición explosionada hasta su hogar — mismo lenguaje visual que
+          // el despiece idle
+          let visN = 0;
+          for (const p of turbLayout.pieces) {
+            const w0 = 1 + p.t0 * 3.2;
+            const g = grow(d, w0, w0 + 0.8);
+            const vis = g > 0.001;
+            p.mesh.visible = vis;
+            if (vis) {
+              visN++;
+              const fly = 1 - g;
+              const desp = fly + turbE * (0.2 + 0.8 * p.t0);
+              p.mesh.position.copy(p.home).addScaledVector(p.offset, desp);
+            }
+          }
+          (window as any).__turbVis = visN;
+
+          // rotor gira y frena al explosionar (como la referencia)
+          spinAcc += dt * (0.45 * (1 - 0.75 * turbE) + 0.05);
+          turbineReady.rotation.x = spinAcc;
+          setEnv(grow(d, 3.2, 5));
+          renderer.toneMappingExposure = 1.0 + 0.05 * grow(d, 3.6, 5);
+        } else {
+          // fallback: demo procedural del cubo (estado pre-carga / error)
+          (window as any).__turbineReady = false;
         // [1,2] la malla se RELLENA dentro de sus aristas; edges se desvanecen después
         const fill = grow(d, 1.0, 2.0);
         detailMesh.scale.setScalar(0.9 + 0.1 * fill);
@@ -1090,6 +1133,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
         accentMat.emissive.setHex(0x0071e3);
         accentMat.emissiveIntensity = grow(d, 4.0, 5) * 0.35;
         if (bodyMat.metalness > 0.5 || bodyMat.roughness < 0.3) { bodyMat.metalness = 0.3; bodyMat.roughness = 0.4; }
+        }
       }
       if (cur.mode === 'finish') {
         // ciclo 9: reentrada sin remount (o cambio de modo) — asegura visibilidad
@@ -1145,8 +1189,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
             if (!m.isMesh || !m.visible) return;
             const home = m.userData.assmHome as THREE.Vector3 | undefined;
             if (!home) return;
-            const dir = home.clone().sub(hbCenter);
-            const target = home.clone().add(dir.clone().normalize().multiplyScalar(dir.length() * 0.95 * e));
+            const target = home.clone().add(dirExplosion(home, hbCenter, m.name ?? String(m.id), 0.95).multiplyScalar(e));
             m.position.lerp(target, 0.12);
           });
         }
@@ -1259,8 +1302,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
                 if (!m.isMesh) return;
                 const home = m.userData.storyHome as THREE.Vector3 | undefined;
                 if (!home) return;
-                const dir = home.clone().sub(storyCenter);
-                const target = home.clone().add(dir.clone().normalize().multiplyScalar(dir.length() * 1.1 * k));
+                const target = home.clone().add(dirExplosion(home, storyCenter, m.name ?? String(m.id), 1.1).multiplyScalar(k));
                 m.position.copy(target);
               });
             }
@@ -1336,9 +1378,7 @@ export function ModelPreview({ mode, detail = 3, pieces = 8, story = 5, surface 
               if (!m.isMesh || !m.visible) return;
               const home = m.userData.variantHome as THREE.Vector3 | undefined;
               if (!home) return;
-              const len = home.length();
-              if (len < 0.001) { m.position.lerp(home, 0.12); return; }
-              const target = home.clone().add(home.clone().normalize().multiplyScalar(len * 0.7 * e));
+              const target = home.clone().add(dirExplosion(home, new THREE.Vector3(), m.name ?? String(m.id), 0.7).multiplyScalar(e));
               m.position.lerp(target, 0.12);
             });
           }
