@@ -31,6 +31,7 @@ export const SECTION_NAV: Record<string, NavItemConfig[]> = {
     { href: '/app/career/portfolio', label: 'Portafolio y CV' },
     { href: '/app/career/projects', label: 'Proyectos' },
     { href: '/app/career/jobs', label: 'Empleo' },
+    { href: '/app/career/freelance', label: 'Freelance' },
     { href: '/app/career/learning', label: 'Cursos' },
     { href: '/app/career/news', label: 'Noticias' },
   ],

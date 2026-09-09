@@ -38,6 +38,7 @@ export default function SuggestionInbox() {
   const [engine] = useState(loadEngine);
 
   useEffect(() => {
+    const run = async () => {
     const now = new Date();
     const nowIso = now.toISOString();
     const today = nowIso.slice(0, 10);
@@ -83,12 +84,49 @@ export default function SuggestionInbox() {
       }, nowIso);
     }
 
+    // Sugerencias de CARRERA (pipeline laboral ↔ Hoy — interconexión por
+    // razonamiento, no solo visual): seguimientos vencidos y aplicaciones
+    // activas sin única próxima acción (regla de contrato doc-01/doc-12).
+    try {
+      const { useCareerStore } = await import('../../data/career/careerStore');
+      const apps = useCareerStore.getState().applications.filter((a) => a.stage !== 'Cerrado');
+      const overdue = apps.filter((a) => a.followUpDateIso && a.followUpDateIso <= today);
+      if (overdue.length > 0) {
+        engine.propose({
+          id: `career:followup-overdue--${today}`,
+          domain: 'career',
+          type: 'follow-up',
+          priority: 5,
+          title: `${overdue.length} seguimiento${overdue.length > 1 ? 's' : ''} vencido${overdue.length > 1 ? 's' : ''}`,
+          body: overdue
+            .slice(0, 3)
+            .map((a) => `${a.companyName}: ${a.singleNextAction || 'definir acción'} (${a.followUpDateIso})`)
+            .join(' · '),
+          ttlHours: 24,
+        }, nowIso);
+      }
+      const noAction = apps.filter((a) => !a.singleNextAction || a.singleNextAction.trim() === '');
+      if (noAction.length > 0) {
+        engine.propose({
+          id: `career:missing-next-action--${today}`,
+          domain: 'career',
+          type: 'next-action',
+          priority: 3,
+          title: `${noAction.length} aplicación${noAction.length > 1 ? 'es' : ''} sin próxima acción`,
+          body: 'La regla de contrato exige UNA única próxima acción por aplicación antes de avanzar de columna. Defínela en Empleo → Pipeline.',
+          ttlHours: 48,
+        }, nowIso);
+      }
+    } catch { /* store no disponible en este entorno → sin sugerencias de carrera */ }
+
     engine.expireDue(nowIso);
     const activeNow = engine.active(nowIso);
     for (const s of activeNow) engine.markShown(s.id, nowIso);
     persistEngine(engine);
     setActive(engine.active(nowIso));
     setEvaluatedCount(evaluations.length);
+    };
+    void run();
   }, [engine]);
 
   const dismiss = (id: string, reason: 'not-now' | 'not-interested') => {
