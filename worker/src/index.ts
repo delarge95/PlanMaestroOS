@@ -81,21 +81,22 @@ export default {
       if (url.pathname === '/api/ai/draft' && method === 'POST') {
         const body = (await request.json()) as AiDraftRequestOptions;
         if (!body.action) return errorResponse('Falta "action" en el cuerpo.');
-        const result = await processAiDraft(body);
+        // env permite resolver GEMINI_API_KEY desde los bindings del Worker (no solo process.env)
+        const result = await processAiDraft({ ...body, env });
         return jsonResponse(result);
       }
 
       if (url.pathname === '/api/ai/extract' && method === 'POST') {
         const body = (await request.json()) as AiExtractRequestOptions;
         if (!body.schema || !body.text) return errorResponse('Faltan "schema" o "text" requeridos.');
-        const result = await processAiExtract(body);
+        const result = await processAiExtract({ ...body, env });
         return jsonResponse(result);
       }
 
       if (url.pathname === '/api/ai/chat' && method === 'POST') {
         const body = (await request.json()) as AiChatRequestOptions;
         if (!body.message) return errorResponse('Falta "message" requerido.');
-        const result = await processAiChat(body);
+        const result = await processAiChat({ ...body, env });
         return jsonResponse(result);
       }
 

@@ -1,6 +1,6 @@
 // worker/src/__tests__/workerRouter.test.ts - Tests del Worker IA (§0.3 del Plan Multi-Agente)
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import worker from '../index';
 import { clearAuditLogs } from '../lib/audit';
 
@@ -37,6 +37,13 @@ function makeRequest(
 describe('Worker IA Router & Endpoints (§0.3)', () => {
   beforeEach(() => {
     clearAuditLogs();
+    // Hermeticidad: fuerza el fallback determinista aunque la máquina tenga GEMINI_API_KEY
+    // (estos tests NO deben hacer llamadas de red reales).
+    vi.stubEnv('GEMINI_API_KEY', '');
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
   });
 
   it('Test 1: GET /health responde 200 con status ok y lista de modelos disponibles', async () => {
