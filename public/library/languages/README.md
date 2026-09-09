@@ -1,33 +1,27 @@
-# Biblioteca de idiomas (PDFs académicos)
+# Libros académicos de idiomas
 
-Coloca aquí los PDFs de los libros académicos citados por el currículo de idiomas
-(sección "Idiomas" de Plan Maestro OS). El visor `BookPdfViewer` abre estos
-archivos directamente desde `/library/languages/<fileName>`.
+Los PDFs viven aquí y el visor de lecciones (`BookPdfViewer`) los abre anclados
+a la página cuando el registro (`src/data/languages/books.ts`) tiene
+`pagesVerified: true`.
 
-## Libros registrados
+## Incluidos (dominio público / legales)
 
-Los nombres de archivo deben coincidir EXACTAMENTE con `fileName` del registro
-`src/data/languages/books.ts`:
+| Archivo | Libro | Estado |
+|---|---|---|
+| `FSI_German_Basic_Vol1.pdf` | FSI German Basic Course Vol. 1 (346 págs) | ✅ descargado de [archive.org](https://archive.org/download/Fsi-GermanBasicCourse-StudentText/Fsi-GermanBasicCourse-Volume1-StudentText.pdf) — dominio público (U.S. Government) |
 
-| bookId                 | fileName                       | Título                   | Editorial |
-| ---------------------- | ------------------------------ | ------------------------ | --------- |
-| `grammatik-aktiv-a1-a2`| `Grammatik_Aktiv_A1_A2.pdf`    | Grammatik aktiv A1–A2    | Cornelsen |
-| `menschen-a1-1`        | `Menschen_A1_1.pdf`            | Menschen A1.1            | Hueber    |
-| `menschen-a1-2`        | `Menschen_A1_2.pdf`            | Menschen A1.2            | Hueber    |
+Más material libre del mismo origen: [Live Lingua FSI German](https://www.livelingua.com/course/fsi/german---basic-course---volume-1),
+[fsi-language-courses.org](https://www.fsi-language-courses.org/) y el [archivo Yojik](https://fsi-languages.yojik.eu/languages/FSI/fsi-german-basic-course.html) (Vol. 1 y 2 con audio).
 
-## Flujo de verificación de páginas (regla §0.1: ningún dato inventado)
+## Pendientes del usuario (libros comerciales del curso)
 
-1. Las lecciones citan el libro con `sourceBook: { bookId, section }` — SIN página
-   mientras `pagesVerified` sea `false` en el registro.
-2. Al colocar el PDF aquí, ábrelo, localiza el capítulo (`section`) de cada lección
-   y anota `page` (o `pageRange`) en la lección correspondiente.
-3. Cuando todas las lecciones del libro tengan página verificada, pasa
-   `pagesVerified: true` en `src/data/languages/books.ts`.
+- `Grammatik_Aktiv_A1_A2.pdf` (Cornelsen)
+- `Menschen_A1_1.pdf` / `Menschen_A1_2.pdf` (Hueber)
 
-Hasta entonces el visor muestra "pág. por verificar" y abre el PDF por la portada.
+Cópialos aquí con esos nombres exactos y el visor los abrirá automáticamente.
+Hasta entonces, las lecciones los citan como «página por verificar» (§0.1).
 
-## Nota
-
-Patrón heredado de `public/library/fitness/` (PDFs servidos estáticamente desde
-`public/`, sin build). Los PDF NO se commitean: este directorio se versiona con
-`.gitkeep` y este README.
+> Nota de proveniencia: el contenido de las unidades A1.1 fue redactado por
+> AG-GER a partir de gramática estándar; la atribución al Grammatik aktiv está
+> marcada como PENDIENTE en `rag/german/manifest.json` (evidenceTier
+> `internal-doc`) hasta verificar contra el PDF físico.

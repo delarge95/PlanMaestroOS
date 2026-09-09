@@ -3,13 +3,18 @@
   "sources": [
     {
       "id": "grammatik-aktiv-a1-a2",
-      "title": "Grammatik aktiv — Deutsch als Fremdsprache A1-A2",
+      "title": "Grammatik aktiv A1–A2 (atribución PENDIENTE — contenido redactado por AG-GER desde gramática estándar)",
       "author": "Cornelsen",
       "year": null,
       "edition": "A1-A2",
       "type": "book",
-      "evidenceTier": "expert-book",
-      "authority": { "domains": ["german-grammar"], "priority": 1 }
+      "evidenceTier": "internal-doc",
+      "authority": {
+        "domains": [
+          "german-grammar"
+        ],
+        "priority": 1
+      }
     }
   ]
 }

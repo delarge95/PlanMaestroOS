@@ -17,6 +17,16 @@ export interface LanguageBook {
 
 export const LANGUAGE_BOOKS: LanguageBook[] = [
   {
+    id: 'fsi-german-basic-vol1',
+    title: 'FSI German Basic Course — Volume 1 (Student Text)',
+    author: 'U.S. Foreign Service Institute',
+    publisher: 'U.S. Government (dominio público)',
+    level: 'A0–B1 (curso intensivo, 12 unidades)',
+    fileName: 'FSI_German_Basic_Vol1.pdf',
+    language: 'de',
+    pagesVerified: true // 346 págs — PDF real descargado de archive.org (dominio público)
+  },
+  {
     id: 'grammatik-aktiv-a1-a2',
     title: 'Grammatik aktiv A1–A2',
     author: 'Cornelsen',
@@ -24,7 +34,10 @@ export const LANGUAGE_BOOKS: LanguageBook[] = [
     level: 'A1–A2',
     fileName: 'Grammatik_Aktiv_A1_A2.pdf',
     language: 'de',
-    pagesVerified: false // PDF pendiente de colocar en public/library/languages/
+    pagesVerified: false, // PDF pendiente del usuario (libro comercial).
+    // NOTA DE PROVENIENCIA (§0.1): el contenido de las unidades A1.1 lo
+    // redactó AG-GER a partir de gramática estándar; la atribución a este
+    // libro quedó PENDIENTE de verificación contra el PDF físico.
   },
   {
     id: 'menschen-a1-1',

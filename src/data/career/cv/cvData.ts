@@ -121,8 +121,11 @@ export const cvBase: CvBaseData = {
   languages: [
     { language: 'Spanish', level: 'Native' },
     { language: 'English', level: 'C1 self-assessed; comfortable with technical interviews and documentation' },
-    { language: 'German', level: 'Beginner / planned study' },
-    { language: 'Portuguese', level: 'Planned / strategically relevant for future Portugal/EU route' },
+    // Revisión 2026-09-09 (feedback usuario): FUERA el portugués — revelaba la
+    // estrategia de ciudadanía UE a los empleadores — y el alemán «planned»:
+    // solo se listan idiomas con nivel real. El A1 alemán está en estudio
+    // activo diario (verificado por el propio sistema de idiomas de la app).
+    { language: 'German', level: 'Beginner (A1) — in active daily study' },
   ],
   training: [
     { name: 'CG Cookie HUMAN — High-Fidelity Character Pipeline & Topology' },
