@@ -4,6 +4,7 @@ import { companyTargets, jobBoards, recruiterChannels, communityChannels, applic
 import { useCareerStore } from '../../data/career/careerStore';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
+import CompanyResearchPanel from './CompanyResearchPanel';
 import { Building2, History, ChevronRight, ExternalLink, Search } from 'lucide-react';
 
 type TabKey = 'companies' | 'boards' | 'recruiters' | 'communities';
@@ -212,6 +213,18 @@ export default function CompanyDatabase() {
                   )}
 
                   <span className="ds-micro" style={{ fontStyle: 'italic' }}>Fuente: {selected.sourceRef}</span>
+
+                  {/* INVESTIGACIÓN PROFUNDA (protocolo doc-31 + regla de fit del tracker) */}
+                  <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-2)' }}>
+                    <CompanyResearchPanel companyName={selected.name} />
+                    <a
+                      href="/app/career/portfolio"
+                      className="ds-caption"
+                      style={{ color: 'var(--color-accent-primary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '6px' }}
+                    >
+                      Generar CV adaptado <ChevronRight size={12} />
+                    </a>
+                  </div>
 
                   {/* TIMELINE real (si hay interacciones registradas en el store) */}
                   {selectedTimeline && selectedTimeline.timeline.length > 0 && (

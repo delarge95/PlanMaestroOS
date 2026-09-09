@@ -17,6 +17,8 @@ export const unit03: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Zahlen' },
       content: [
         'Base: null(0) eins(1) zwei(2) drei(3) vier(4) fünf(5) sechs(6) sieben(7) acht(8) neun(9) zehn(10).',
         'De 13 a 19 = raíz + zehn: dreizehn, vierzehn… neunzehn. Decenas: zwanzig(20), dreißig(30), vierzig, fünfzig… hundert(100).',
@@ -38,6 +40,8 @@ export const unit03: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Pronomen/W-Fragen' },
       content: [
         'Pronombres personales nominativo: ich, du, er/sie/es, wir, ihr, sie/Sie. Sustituyen al sujeto: Der Mann ist hier → Er ist hier.',
         'El Sie formal se escribe SIEMPRE con mayúscula y conjuga como sie (ellos): Sie sind… puede ser «ustedes son» o «ellos son» — el contexto decide.',
@@ -59,6 +63,8 @@ export const unit03: Unit = {
       kind: 'vocabulary',
       estimatedMinutes: 10,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Sin línea «Fuente:» propia → capítulo del tema de la unidad; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Zahlen' },
       content: ['Tarjetas de la unidad 3 — números y palabras para dar datos personales.'],
       exercises: []
     },
@@ -69,6 +75,8 @@ export const unit03: Unit = {
       kind: 'listening',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Dictado de números y datos personales; página pendiente de verificar (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Zahlen' },
       content: [
         'TRANSCRIPCIÓN — Diálogo en el registro (Büro):',
         '— Guten Tag! Ihr Name, bitte?',
@@ -93,6 +101,8 @@ export const unit03: Unit = {
       kind: 'writing',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Escritura guiada de números/datos; página pendiente de verificar (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Zahlen' },
       content: [
         'PLANTILLA — rellena un formulario con frases completas:',
         'Name: Ich heiße [nombre completo].',

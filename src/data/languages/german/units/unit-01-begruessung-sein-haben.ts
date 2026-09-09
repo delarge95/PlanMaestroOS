@@ -17,6 +17,8 @@ export const unit01: Unit = {
       kind: 'theory',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Saludo y presentación' },
       content: [
         'Saludos formales: Guten Tag (buenos días), Guten Morgen (buenos días, hasta mediodía), Guten Abend (buenas tardes/noche). Informal: Hallo (hola).',
         'Para preguntar cómo estás: Wie geht es dir? (informal) / Wie geht es Ihnen? (formal). Respuestas típicas: Gut, danke. (bien, gracias) / Es geht. (más o menos).',
@@ -38,6 +40,8 @@ export const unit01: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'sein' },
       content: [
         'El verbo SEIN (ser/estar) es irregular y se memoriza completo: ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie/Sie sind.',
         'Se usa para identidad y profesión: Ich bin Alexander. Ich bin Technical Artist. (Soy artista técnico.)',
@@ -60,6 +64,8 @@ export const unit01: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'haben' },
       content: [
         'El verbo HABEN (tener): ich habe, du hast, er/sie/es hat, wir haben, ihr habt, sie/Sie haben.',
         'Cuidado con el falso amigo del inglés: la edad en alemán va con SEIN (como en español), no con haben → Ich bin 30 Jahre alt. Wie alt bist du?',
@@ -81,6 +87,8 @@ export const unit01: Unit = {
       kind: 'vocabulary',
       estimatedMinutes: 10,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Sin línea «Fuente:» propia → capítulo del tema de la unidad; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Saludo y presentación' },
       content: [
         'Tarjetas de la unidad 1: salúdalas en VocabularySession — entran a la cola SM-2 como tarjetas nuevas.'
       ],
@@ -93,6 +101,8 @@ export const unit01: Unit = {
       kind: 'listening',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Diálogo del capítulo de presentación; página pendiente de verificar (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Saludo y presentación' },
       content: [
         'TRANSCRIPCIÓN — Diálogo A1:',
         '— Hallo Lisa!',
@@ -115,6 +125,8 @@ export const unit01: Unit = {
       kind: 'writing',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Escritura guiada del capítulo de presentación; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Saludo y presentación' },
       content: [
         'PLANTILLA — complétala y escríbela de memoria:',
         'Hallo! Ich heiße [nombre].',

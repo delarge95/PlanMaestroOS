@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import type { Lesson } from '../../data/languages/types';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
-import { ExternalLink, CheckCircle } from 'lucide-react';
+import BookPdfViewer from './BookPdfViewer';
+import { ExternalLink, CheckCircle, BookOpen } from 'lucide-react';
 
 export interface LessonViewProps {
   lesson: Lesson;
@@ -23,6 +24,7 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
   const [activeTab, setActiveTab] = useState<'theory' | 'exercises'>('theory');
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [completed, setCompleted] = useState(initiallyCompleted);
+  const [bookOpen, setBookOpen] = useState(false);
 
   const handleAnswerChange = (exId: string, val: string) => {
     setUserAnswers((prev) => ({ ...prev, [exId]: val }));
@@ -49,7 +51,14 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
           </div>
 
           <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
-            {lesson.sourcePdfUrl && (
+            {lesson.sourceBook ? (
+              <Button variant="ghost" size="sm" onClick={() => setBookOpen(true)}>
+                <BookOpen size={14} /> Ver en el libro
+                {lesson.sourceBook.page || lesson.sourceBook.pageRange
+                  ? ` (pág. ${lesson.sourceBook.page ?? lesson.sourceBook.pageRange![0]})`
+                  : ' (pág. por verificar)'}
+              </Button>
+            ) : lesson.sourcePdfUrl && (
               <a href={lesson.sourcePdfUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                 <Button variant="ghost" size="sm">
                   <ExternalLink size={14} /> Ver libro
@@ -170,6 +179,17 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
         </div>
 
       </div>
+
+      {/* VISOR DEL LIBRO ACADÉMICO ANCLADO A LA PÁGINA DE LA LECCIÓN */}
+      {bookOpen && lesson.sourceBook && (
+        <BookPdfViewer
+          bookId={lesson.sourceBook.bookId}
+          page={lesson.sourceBook.page}
+          pageRange={lesson.sourceBook.pageRange}
+          section={lesson.sourceBook.section}
+          onClose={() => setBookOpen(false)}
+        />
+      )}
     </ErrorBoundary>
   );
 }

@@ -17,6 +17,8 @@ export const unit02: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Artikel/Nominativ' },
       content: [
         'Todo sustantivo alemán tiene género MASCULINO (der), FEMENINO (die) o NEUTRO (das). El artículo SIEMPRE se aprende junto con la palabra: der Tisch (la mesa), die Lampe (la lámpara), das Buch (el libro).',
         'Pistas útiles (con excepciones): palabras en -ung, -heit, -keit, -schaft, -tion suelen ser die; palabras en -chen y -lein son siempre das; muchas profesiones/personas masculinas en -er son der.',
@@ -38,6 +40,8 @@ export const unit02: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Negación' },
       content: [
         'El indefinido: ein para masculino/neutro (ein Tisch, ein Buch), eine para femenino (eine Lampe). En plural no existe indefinido (→ «Tische» sin artículo).',
         'Negación de sustantivos con KEIN: kein/keine niega lo que ein introduciría: Das ist ein Auto. → Das ist kein Auto. Ich habe keine Zeit. (No tengo tiempo.)',
@@ -59,6 +63,8 @@ export const unit02: Unit = {
       kind: 'vocabulary',
       estimatedMinutes: 10,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Sin línea «Fuente:» propia → capítulo del tema de la unidad; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Artikel/Nominativ' },
       content: ['Tarjetas de la unidad 2 — aprende SIEMPRE palabra + artículo juntos.']
       ,
       exercises: []
@@ -70,6 +76,8 @@ export const unit02: Unit = {
       kind: 'listening',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Diálogo de nominativo/artículos; página pendiente de verificar (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Artikel/Nominativ' },
       content: [
         'TRANSCRIPCIÓN — Diálogo A1:',
         '— Was ist das, Anna?',
@@ -92,6 +100,8 @@ export const unit02: Unit = {
       kind: 'writing',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Escritura guiada de nominativo/artículos; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Artikel/Nominativ' },
       content: [
         'PLANTILLA — describe 5 objetos que tienes a mano:',
         'Das ist ein/eine [objeto].',

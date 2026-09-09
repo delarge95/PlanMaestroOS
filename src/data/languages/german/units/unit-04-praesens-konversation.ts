@@ -18,6 +18,8 @@ export const unit04: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Präsens' },
       content: [
         'En alemán, el verbo conjugado ocupa SIEMPRE la posición 2 en oraciones enunciativas principales.',
         'Ejemplo: Ich lerne Deutsch (Sujeto + Verbo en Posición 2 + Objeto).',
@@ -54,6 +56,8 @@ export const unit04: Unit = {
       kind: 'theory',
       estimatedMinutes: 20,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Präsens Regeln' },
       content: [
         'Receta del Präsens regular: raíz + terminación. Infinitivo en -en → raíz = infinitivo sin -en (wohn|en).',
         'Terminaciones: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Ejemplo wohnen: ich wohne, du wohnst, er wohnt, wir wohnen, ihr wohnt, sie wohnen.',
@@ -75,6 +79,8 @@ export const unit04: Unit = {
       kind: 'speaking',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Präsens/kleine Gespräche' },
       content: [
         'MINI-DIÁLOGO MODELO — practícalo en voz alta y luego improvisa cambiando datos:',
         '— Hallo! Ich bin Max. Und du?',
@@ -99,6 +105,8 @@ export const unit04: Unit = {
       kind: 'listening',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Sin línea «Fuente:» propia → capítulo del tema de la unidad; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Präsens' },
       content: [
         'TRANSCRIPCIÓN — Diálogo en el café:',
         '— Guten Tag! Was möchten Sie trinken?',
@@ -122,6 +130,8 @@ export const unit04: Unit = {
       kind: 'writing',
       estimatedMinutes: 15,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Escritura guiada con Präsens/möchten; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Präsens' },
       content: [
         'PLANTILLA — email A1 al centro de idiomas:',
         'Hallo Frau Müller,',
@@ -143,6 +153,8 @@ export const unit04: Unit = {
       kind: 'vocabulary',
       estimatedMinutes: 10,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Sin línea «Fuente:» propia → capítulo del tema de la unidad; página pendiente (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Präsens' },
       content: ['Tarjetas de la unidad 4 — conjúgalas mentalmente en todas las personas al repasarlas.']
       ,
       exercises: []
@@ -154,6 +166,8 @@ export const unit04: Unit = {
       kind: 'theory',
       estimatedMinutes: 25,
       sourcePdfUrl: '/docs/Grammatik_Aktiv_A1_A2.pdf',
+      // Página ausente a propósito: pendiente de verificar contra el PDF (regla §0.1).
+      sourceBook: { bookId: 'grammatik-aktiv-a1-a2', section: 'Wechselpräpositionen' },
       content: [
         'Las preposiciones de cambio (in, an, auf, neben, unter, über, vor, hinter, zwischen) rigen Akkusativ para movimiento (Wohin?) y Dativ para posición fija (Wo?).',
         'Movimiento (Wohin?): Ich gehe in den Park (Akkusativ - den).',

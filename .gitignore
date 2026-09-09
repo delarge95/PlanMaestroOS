@@ -64,3 +64,5 @@ _pdf_biblia/Planeacion_Integral/3D assets/3dFiles.zip
 services-extract-230150/
 turbina/
 _tmp*
+.playwright-mcp/
+gui-test-screenshots/

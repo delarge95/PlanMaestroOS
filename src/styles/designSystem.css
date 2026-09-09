@@ -232,3 +232,21 @@ button.snb-l3-link { border: none; background: transparent; cursor: pointer; fon
   .snb-wrap { padding: 8px 12px 0; }
   .snb-l3 { flex-wrap: wrap; }
 }
+
+/* ————————————————— Impresión de CV (CvGenerator) —————————————————
+   Al imprimir solo se imprime el preview del CV: el chrome de la app
+   y los controles quedan ocultos. El preview es fondo blanco por diseño. */
+@media print {
+  body * { visibility: hidden; }
+  .cv-print-root, .cv-print-root * { visibility: visible; }
+  .cv-print-root {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+  .cv-no-print { display: none !important; }
+}

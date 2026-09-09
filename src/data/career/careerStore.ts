@@ -28,6 +28,7 @@ import {
   type WeeklyPlanWeek
 } from './applications';
 import type { CompanyRecord, CompanyTimelineEvent } from './companies';
+import type { CompanyResearch } from './careerContracts';
 
 export interface CareerState {
   /** Versión del shape persistido (migraciones futuras la leen). */
@@ -36,6 +37,11 @@ export interface CareerState {
   companies: CompanyRecord[];
   /** Progreso del plan semanal de 16 semanas (tracker xlsx, hoja Weekly Plan). */
   weeklyPlan: WeeklyPlanWeek[];
+  /**
+   * Investigación profunda por empresa, claveada por nombre en minúsculas.
+   * Additive sobre el shape v1: el persist merge mantiene {} si no existía.
+   */
+  companyResearch: Record<string, CompanyResearch>;
   /** Última fecha ISO de actualización de cualquier colección. */
   updatedAt: string;
 
@@ -56,6 +62,8 @@ export interface CareerState {
   upsertCompany: (record: CompanyRecord) => void;
   /** Registra un evento inmutable en la línea de tiempo de una empresa. */
   addTimelineEvent: (companyName: string, event: Omit<CompanyTimelineEvent, 'id'>) => void;
+  /** Upsert de la investigación de una empresa (clave: nombre en minúsculas). */
+  upsertCompanyResearch: (research: CompanyResearch) => void;
 }
 
 const todayIso = () => new Date().toISOString().slice(0, 10);
@@ -69,6 +77,7 @@ export const useCareerStore = create<CareerState>()(
       version: 1,
       applications: applicationsSeed,
       companies: companiesSeed,
+      companyResearch: {},
       weeklyPlan: trackerWeeklyPlan,
       updatedAt: trackerImportedAt,
 
@@ -171,6 +180,16 @@ export const useCareerStore = create<CareerState>()(
             updatedAt: new Date().toISOString()
           };
         });
+      },
+
+      upsertCompanyResearch: (research) => {
+        set((s) => ({
+          companyResearch: {
+            ...s.companyResearch,
+            [research.companyName.toLowerCase()]: research
+          },
+          updatedAt: new Date().toISOString()
+        }));
       }
     }),
     {

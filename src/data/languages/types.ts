@@ -17,6 +17,8 @@ export type Lesson = {
   exercises: Exercise[];
   estimatedMinutes: number;
   sourcePdfUrl?: string;
+  /** Anclaje a libro académico: página exacta cuando esté verificada. */
+  sourceBook?: { bookId: string; section?: string; page?: number; pageRange?: [number, number] };
 };
 
 export type Unit = {

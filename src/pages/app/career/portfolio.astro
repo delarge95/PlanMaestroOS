@@ -1,8 +1,12 @@
 ---
 import PlanMaestroLayout from '../../../layouts/PlanMaestroLayout.astro';
+import CvGenerator from '../../../components/career/CvGenerator.tsx';
 import PortfolioSimulator from '../../../components/career/PortfolioSimulator.tsx';
 ---
 
 <PlanMaestroLayout title="Laboral — Portafolio y CV" pageTitle="Portafolio y CV" activeDomain="career">
-  <PortfolioSimulator client:load />
+  <CvGenerator client:load />
+  <div style="margin-top: var(--space-5);">
+    <PortfolioSimulator client:load />
+  </div>
 </PlanMaestroLayout>
