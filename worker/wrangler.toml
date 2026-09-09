@@ -1,0 +1,16 @@
+# worker/wrangler.toml — Config de despliegue del Worker IA & Jobs (§0.3).
+# Los secretos NO van aquí: usar `npx wrangler secret put WORKER_SECRET_KEY`
+# y `npx wrangler secret put GEMINI_API_KEY` desde worker/.
+
+name = "plan-maestro-ia"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+
+# Límites conservadores: los jobs de IA son cortos (drafts con aprobación humana).
+[limits]
+cpu_ms = 5000
+
+# Vars públicas (no secretas). Añadir account_id al desplegar:
+# account_id = "<tu-account-id>"
+[vars]
+APP_ORIGIN = "https://alexanderwoodcock.github.io"
