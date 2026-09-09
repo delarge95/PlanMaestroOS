@@ -49,3 +49,8 @@ export {
   SuggestionEngine,
   createSuggestionEngine,
 } from './suggestionEngine';
+
+export {
+  fromRuleEvaluations,
+  RULE_SUGGESTION_COOLDOWNS,
+} from './fromRuleEvaluations';

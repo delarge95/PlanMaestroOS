@@ -21,7 +21,9 @@ describe('todayAdapter (AG-ORQ)', () => {
     expect(view.top3Tasks[1].area).toBe('Fitness');
     expect(view.top3Tasks[2].area).toBe('Idiomas');
     expect(view.fitnessSummary.activeRoutineTitle).toBeDefined();
-    expect(view.careerSummary.activeApplicationsCount).toBeGreaterThan(0);
+    // §0.1: sin store poblado el conteo honesto es 0 — el adapter NO fabrica.
+    expect(view.careerSummary.activeApplicationsCount).toBeGreaterThanOrEqual(0);
+    expect(Number.isFinite(view.careerSummary.activeApplicationsCount)).toBe(true);
   });
 
   it('consume el calendario real de fitness para calcular el día de entrenamiento', () => {
@@ -46,11 +48,15 @@ describe('todayAdapter (AG-ORQ)', () => {
   it('integra careerStore en getCareerPipelineView', () => {
     const pipeline = getCareerPipelineView();
     expect(pipeline.uiState.status).toBe('ready');
-    expect(pipeline.applications.length).toBeGreaterThan(0);
-    expect(pipeline.applications[0]).toHaveProperty('company');
-    expect(pipeline.applications[0]).toHaveProperty('nextAction');
-    expect(pipeline.assets.length).toBeGreaterThan(0);
-    expect(pipeline.aiDrafts.length).toBeGreaterThan(0);
+    expect(Array.isArray(pipeline.applications)).toBe(true);
+    // §0.1: assets/aiDrafts ya no se fabrican ("Studio X"); llegan vacíos
+    // hasta que exista una fuente real.
+    expect(Array.isArray(pipeline.assets)).toBe(true);
+    expect(Array.isArray(pipeline.aiDrafts)).toBe(true);
+    for (const app of pipeline.applications) {
+      expect(app).toHaveProperty('company');
+      expect(app).toHaveProperty('nextAction');
+    }
   });
 
   it('mapea tareas de Notion cuando se suministran', () => {

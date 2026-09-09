@@ -34,6 +34,10 @@ export interface TodayDomainView {
     activeApplicationsCount: number;
     nextFollowUpDate?: string;
   };
+  languagesSummary: {
+    /** Tarjetas de alemán vencidas según SM-2 (getDueQueue). */
+    germanDueCount: number;
+  };
 }
 
 export interface CareerPipelineItem {

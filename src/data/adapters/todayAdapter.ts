@@ -57,7 +57,10 @@ export function getTodayDomainView(
       (d, idx) => d.order === calendar.todayWorkoutDayIndex || idx + 1 === calendar.todayWorkoutDayIndex,
     );
     const dayLabel = workout?.title || workout?.name || workoutDayLabel(calendar.todayWorkoutDayIndex);
-    nextWorkoutTitle = `Día ${calendar.todayWorkoutDayIndex}: ${dayLabel}`;
+    // El label del programa ya puede traer su propio prefijo "Día N:" — no duplicar.
+    nextWorkoutTitle = /^\s*d[ií]a\s*\d+\s*:/i.test(dayLabel)
+      ? dayLabel
+      : `Día ${calendar.todayWorkoutDayIndex}: ${dayLabel}`;
   } else if (calendar.todayWeekdayIndex >= 5) {
     nextWorkoutTitle =
       calendar.todayWeekdayIndex === 5
@@ -166,13 +169,15 @@ export function getTodayDomainView(
       activeRoutineTitle: routineCleanTitle,
       sessionCompletedToday: false,
       nextWorkoutDayTitle: nextWorkoutTitle,
-      recentPR: { exercise: "Prensa Inclinada", value: "+5 kg (PR MaxWeight)" },
       prehabPending: true,
     },
     careerSummary: {
-      pendingFollowUpsCount: pendingFollowUps.length || 1,
-      activeApplicationsCount: activeApps.length || 3,
+      pendingFollowUpsCount: pendingFollowUps.length,
+      activeApplicationsCount: activeApps.length,
       nextFollowUpDate,
+    },
+    languagesSummary: {
+      germanDueCount,
     },
   };
 }
@@ -218,53 +223,18 @@ export function getCareerPipelineView(): CareerPipelineView {
       status: mappedStatus,
       nextAction: app.singleNextAction,
       followUpDateIso: app.followUpDateIso,
-      remoteType: "Remoto Global",
     };
   });
 
+  // §0.1: sin datos inventados — si el pipeline está vacío se muestra vacío,
+  // no un seed falso ("Studio X") ni assets/drafts hardcodeados.
   return {
     uiState: {
       status: "ready",
       lastUpdatedIso: new Date().toISOString(),
     },
-    applications: mappedApplications.length > 0 ? mappedApplications : [
-      {
-        id: "app_seed_1",
-        company: "Studio X",
-        role: "Unity Technical Artist",
-        status: "Aplicado",
-        nextAction: "Seguimiento por LinkedIn a Lead Tech Artist",
-        followUpDateIso: new Date().toISOString().split("T")[0],
-        remoteType: "Remoto LATAM",
-      },
-    ],
-    assets: [
-      {
-        id: "asset_1",
-        title: "CV Technical Artist (Versión Inglés)",
-        category: "CV",
-        version: "v2.1",
-        isApproved: true,
-      },
-      {
-        id: "asset_2",
-        title: "Caso de Estudio TwinSight X500 (WebGL)",
-        category: "CaseStudy",
-        version: "v1.0",
-        isApproved: true,
-      },
-    ],
-    aiDrafts: [
-      {
-        id: "draft_1",
-        targetCompany: "Studio X",
-        targetRole: "Unity Technical Artist",
-        draftContent:
-          "Borrador de mensaje de seguimiento enviando demo reel y métricas de optimización CAD.",
-        sourcesUsed: ["TwinSight Case Study", "LinkedIn Profile"],
-        requiresHumanApproval: true,
-        isApproved: false,
-      },
-    ],
+    applications: mappedApplications,
+    assets: [],
+    aiDrafts: [],
   };
 }

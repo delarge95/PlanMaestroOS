@@ -26,6 +26,7 @@ import type {
 } from '../../data/contracts/userState';
 import { createEmptyUserState } from '../../data/contracts/userState';
 import { parseEsShortDate } from '../fitness/programCalendar';
+import { isDue } from '../languages/spacedRepetition';
 
 /** Serie completada tal como la persiste el logger. */
 export interface RawLoggedSet {
@@ -83,7 +84,10 @@ export function workoutsToSessions(history: RawLoggedWorkout[]): TrainingSession
   for (const w of history) {
     const parsed = w.date ? parseEsShortDate(w.date) : null;
     if (!parsed) continue; // sin fecha fiable → fuera (no se fabrica)
-    const year = parsed.monthIdx >= new Date().getMonth() - 1 ? new Date().getFullYear() : new Date().getFullYear();
+    // La fecha display no trae año: un mes "futuro" (p.ej. diciembre visto en
+    // septiembre) pertenece al año anterior; el resto, al año en curso.
+    const now = new Date();
+    const year = parsed.monthIdx > now.getMonth() ? now.getFullYear() - 1 : now.getFullYear();
     const dateIso = `${year}-${String(parsed.monthIdx + 1).padStart(2, '0')}-${String(parsed.day).padStart(2, '0')}`;
 
     const exercises: SessionExercise[] = [];
@@ -217,14 +221,17 @@ function readVocabDue(): { language: string; count: number } {
   try {
     const raw = window.localStorage.getItem('languages-vocabulary-v1');
     if (!raw) return { language: 'de', count: 0 };
+    // Shape persistido: byLanguage[lang].items: Record<id, SrScheduling>.
+    // M1: SrScheduling no tiene dueDate — la Semántica canónica de "vencida"
+    // es isDue() de spacedRepetition (lastReviewed + intervalDays).
     const parsed = JSON.parse(raw) as {
-      state?: { byLanguage?: Record<string, { items?: Record<string, { dueDate?: string }> }> };
+      state?: { byLanguage?: Record<string, { items?: Record<string, { lastReviewed?: string; intervalDays?: number }> }> };
     };
-    const today = new Date().toISOString().slice(0, 10);
+    const now = new Date();
     let count = 0;
     for (const [, lang] of Object.entries(parsed.state?.byLanguage ?? {})) {
       for (const [, item] of Object.entries(lang.items ?? {})) {
-        if (item.dueDate && item.dueDate <= today) count++;
+        if (isDue({ lastReviewed: item.lastReviewed, intervalDays: item.intervalDays ?? 0 }, now)) count++;
       }
     }
     return { language: 'de', count };

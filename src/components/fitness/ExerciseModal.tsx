@@ -28,6 +28,23 @@ export default function ExerciseModal({
 
   const targetExercise =
     exercise || (exerciseId ? getExerciseDetails(exerciseId) : null);
+
+  // Dynamic muscle-similarity substitutions (memoized for performance).
+  // C1: este useMemo debe ejecutarse SIEMPRE, incluso sin targetExercise —
+  // el modal se monta con exercise=null y abrir la ficha no puede cambiar
+  // el número de hooks (React rules).
+  const dynamicSubstitutions = useMemo(() => {
+    if (!targetExercise) return [];
+    return findSimilarExercises(
+      targetExercise.name,
+      targetExercise.muscles.strength || [],
+      targetExercise.muscles.stability || [],
+      exerciseDatabase,
+      6,
+      0.25,
+    );
+  }, [targetExercise]);
+
   if (!targetExercise) return null;
 
   // B5: video SIEMPRE visible en la ficha. Si el ejercicio no tiene enlace
@@ -53,22 +70,6 @@ export default function ExerciseModal({
       "Extensión torácica & control neuromuscular de escápulas",
       "Flexibilidad de isquiotibiales & compresión activa de cadera",
     ];
-
-  // Dynamic muscle-similarity substitutions (memoized for performance)
-  const dynamicSubstitutions = useMemo(() => {
-    return findSimilarExercises(
-      targetExercise.name,
-      targetExercise.muscles.strength || [],
-      targetExercise.muscles.stability || [],
-      exerciseDatabase,
-      6,
-      0.25,
-    );
-  }, [
-    targetExercise.name,
-    targetExercise.muscles.strength,
-    targetExercise.muscles.stability,
-  ]);
 
   const handleMuscleClick = (mName: string) => {
     if (typeof window !== "undefined") {

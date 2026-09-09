@@ -45,7 +45,11 @@ export default function TodayTabWorkspace({
       area: t.area,
       singleNextAction: isFitness
         ? `Entrenar: ${todayData.fitnessSummary?.nextWorkoutDayTitle ?? "sesión de hoy"}`
-        : todayData.primaryAction10Min?.title ?? "Definir siguiente acción",
+        : t.area === "Idiomas"
+          ? todayData.languagesSummary && todayData.languagesSummary.germanDueCount > 0
+            ? `Repasar alemán: ${todayData.languagesSummary.germanDueCount} tarjetas vencidas`
+            : "Practicar alemán: sesión corta de hoy"
+          : todayData.primaryAction10Min?.title ?? "Definir siguiente acción",
       estimatedMinutes: todayData.primaryAction10Min?.estimatedMinutes ?? 10,
       priority: t.priority as "Alta" | "Media" | "Baja",
       status: "PorHacer",
@@ -129,7 +133,7 @@ export default function TodayTabWorkspace({
                   summary={t.singleNextAction}
                 >
                   <div className="ds-stack-sm" style={{ paddingTop: "4px" }}>
-                    {t.area === "fitness" ? (
+                    {t.area === "Fitness" ? (
                       <div className="ds-stack-sm" style={{ gap: "6px", background: "rgba(255,255,255,0.02)", padding: "10px", borderRadius: "var(--radius-s)" }}>
                         <span
                           style={{

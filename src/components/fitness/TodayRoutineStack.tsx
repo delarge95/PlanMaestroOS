@@ -423,33 +423,46 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
               type="button"
               onClick={() => {
                 try {
-                  const nowIso = new Date().toISOString();
-                  const routineTitle = `${program.title} - ${activeDay?.name || 'Sesión del Día'}`;
-                  
+                  const now = new Date();
+                  // C2: shape canónico de `fitapp_workout_history`, idéntico al que
+                  // escribe completedWorkoutFromState (guidedSessionEngine.ts).
+                  // El shape anterior ({sessionId, dateIso, sets, weights}) era
+                  // invisible para Progreso, el calendario real y el motor de reglas.
                   let totalVolKg = 0;
-                  const exercisesLogged = (activeDay?.exercises || []).map((pres: any) => {
-                    const pId = pres.id || pres.exerciseId;
-                    const logSt = exerciseLogs[pId];
-                    const exName = pres.displayName || pres.name || pres.exerciseId;
-                    const wList = logSt?.weights || [];
-                    const reps = Number(logSt?.repRange?.split('-')[0]) || 8;
+                  const exercisesLogged = (activeDay?.exercises || [])
+                    .map((pres: any) => {
+                      const pId = pres.id || pres.exerciseId;
+                      const logSt = exerciseLogs[pId];
+                      const exName = pres.displayName || pres.name || pres.exerciseId;
+                      const wList = (logSt?.weights || []).filter((w: string) => (Number(w) || 0) > 0);
+                      const reps = Number(logSt?.repRange?.split('-')[0]) || 8;
+                      const effortNum = Number(logSt?.effort);
+                      const rpe = Number.isFinite(effortNum) && effortNum > 0
+                        ? (effortMode === 'RPE' ? effortNum : 10 - effortNum)
+                        : undefined;
 
-                    wList.forEach((w: string) => {
-                      const wNum = Number(w) || 0;
-                      totalVolKg += wNum * reps;
-                    });
+                      const completedSets = wList.map((w: string) => {
+                        const weight = Number(w) || 0;
+                        totalVolKg += weight * reps;
+                        return { weight, reps, ...(rpe !== undefined ? { rpe } : {}) };
+                      });
+                      if (completedSets.length === 0) return null;
 
-                    return {
-                      name: exName,
-                      sets: wList.length || 3,
-                      weights: wList
-                    };
-                  });
+                      return {
+                        performedExerciseId: pres.exerciseId || pId,
+                        name: exName,
+                        completedSets
+                      };
+                    })
+                    .filter(Boolean);
 
                   const newSession = {
-                    sessionId: `session_${Date.now()}`,
-                    dateIso: nowIso,
-                    routineTitle,
+                    id: `w_${Date.now()}`,
+                    date: now.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' }),
+                    programId: program.id,
+                    week: currentWeek,
+                    dayId: activeDay?.id || `day-${safeDayIndex}`,
+                    routineTitle: `${program.title} — ${activeDay?.name || activeDay?.title || 'Sesión del Día'}`,
                     durationMinutes: 45,
                     totalVolumeKg: Math.round(totalVolKg),
                     exercises: exercisesLogged
