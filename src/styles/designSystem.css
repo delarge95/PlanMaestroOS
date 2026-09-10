@@ -238,8 +238,8 @@ button.snb-l3-link { border: none; background: transparent; cursor: pointer; fon
    y los controles quedan ocultos. El preview es fondo blanco por diseño. */
 @media print {
   body * { visibility: hidden; }
-  .cv-print-root, .cv-print-root * { visibility: visible; }
-  .cv-print-root {
+  :is(.cv-print-root, .sheet-print-root), :is(.cv-print-root, .sheet-print-root) * { visibility: visible; }
+  :is(.cv-print-root, .sheet-print-root) {
     position: absolute;
     inset: 0;
     width: 100%;

@@ -12,6 +12,7 @@ import {
   offeringPitch,
   type FreelanceOffering,
 } from '../../data/career/freelance';
+import ServiceOfferSheet from './ServiceOfferSheet';
 import Button from '../ui/Button';
 import { Copy, CheckCircle2, ExternalLink, Search, Box, ChevronRight } from 'lucide-react';
 
@@ -30,6 +31,9 @@ export default function FreelanceHub() {
 
   return (
     <div className="ds-stack">
+      {/* ——— Hoja de oferta imprimible (muestra de producto temporal) ——— */}
+      <ServiceOfferSheet />
+
       <div>
         <span className="ds-eyebrow">Freelance B2B · Agencias industriales</span>
         <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 4px' }}>
