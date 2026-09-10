@@ -5,6 +5,7 @@ import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
 import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock, ExternalLink } from 'lucide-react';
 import { getProgramById } from '../../data/fitness/programs';
+import { pushFitnessSessionToWorker } from '../../lib/ai/workerClient';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
 
@@ -471,6 +472,20 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                   const existingHist = JSON.parse(localStorage.getItem('fitapp_workout_history') || '[]');
                   const updatedHist = [newSession, ...existingHist];
                   localStorage.setItem('fitapp_workout_history', JSON.stringify(updatedHist));
+
+                  // Push a Notion (Fitness Sessions) via Worker IA - fire-and-forget:
+                  // la app sigue 100% funcional offline (seccion 0.5).
+                  void pushFitnessSessionToWorker({
+                    sessionId: newSession.id,
+                    programId: program.id,
+                    programTitle: program.title,
+                    week: currentWeek,
+                    dayId: newSession.dayId,
+                    dayTitle: activeDay?.name || activeDay?.title || 'Sesion',
+                    dateIso: now.toISOString().slice(0, 10),
+                    durationMinutes: newSession.durationMinutes,
+                    totalVolumeKg: newSession.totalVolumeKg,
+                  });
 
                   alert('🎉 ¡Sesión de entrenamiento completada y guardada con éxito en la sección de Progreso!');
                 } catch (e) {

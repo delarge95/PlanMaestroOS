@@ -4,7 +4,7 @@
  * del día: calendario, progresión activa, rutina del día.
  */
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ShieldAlert } from 'lucide-react';
 import ErrorBoundary from '../ErrorBoundary';
 import TodayRoutineStack from './TodayRoutineStack';
@@ -24,19 +24,37 @@ export default function FitnessTabWorkspace() {
   const activePrehabProtocols = getActivePrehabProtocols(prehabZones);
   const showPrehabAlert = activePrehabProtocols.length > 0 && !isBannerDismissedToday(prehabDismissedOn);
 
-  // Día seleccionado: default = día REAL del sistema
-  const [todayDayIndex, setTodayDayIndex] = useState<number>(() => {
-    const s = useActiveProgramStore.getState();
-    const program = getProgramById(s.programId);
-    const ctx = buildProgramCalendar(
-      { startedAt: s.startedAt, postponedDays: s.postponedDays || 0 },
-      program?.durationWeeks ?? 12,
-    );
-    return ctx.todayWeekdayIndex;
-  });
+  // ——— Calendario del programa: SUSCRITO al store (no lectura única) ———
+  // Bugfix: antes se leía getState() UNA vez y se elegía la rutina por
+  // todayWeekdayIndex (día de semana crudo). Las postergaciones y los cambios
+  // de programa no movían la rutina aunque las fechas avanzaran. Ahora:
+  // - ctx se recalcula cuando startedAt/postponedDays/program cambian;
+  // - la RUTINA usa ctx.derivedDayIndex (día EFECTIVO, respeta postergaciones);
+  // - el calendario sigue en espacio weekday (0=Lunes…6=Domingo).
+  const programId = useActiveProgramStore((s) => s.programId);
+  const startedAt = useActiveProgramStore((s) => s.startedAt);
+  const postponedDays = useActiveProgramStore((s) => s.postponedDays || 0);
+  const program = getProgramById(programId);
+
+  const ctx = useMemo(
+    () => buildProgramCalendar({ startedAt, postponedDays }, program?.durationWeeks ?? 12),
+    [startedAt, postponedDays, program?.durationWeeks],
+  );
+
+  // null = seguir al día real; número = día elegido por el usuario (weekday).
+  const [selWeekday, setSelWeekday] = useState<number | null>(null);
+  const calendarSelected = selWeekday ?? ctx.todayWeekdayIndex;
+  /** Índice del día de ENTRENAMIENTO para la rutina (espacio days[], no weekday). */
+  const routineDayIndex =
+    selWeekday !== null
+      ? selWeekday < 5
+        ? selWeekday // L-V: día de entreno directo (Min-Max 1:1 con weekday)
+        : undefined // fin de semana: descanso → primera rutina como fallback visual
+      : ctx.derivedDayIndex;
 
   return (
-    <ErrorBoundary>      {showPrehabAlert && (
+    <ErrorBoundary>
+      {showPrehabAlert && (
         <div
           className="ds-row-between"
           style={{
@@ -61,9 +79,12 @@ export default function FitnessTabWorkspace() {
       )}
 
       <div className="ds-stack">
-        <TodayCalendar selectedDayIndex={todayDayIndex} onSelectDayIndex={setTodayDayIndex} />
+        <TodayCalendar
+          selectedDayIndex={calendarSelected}
+          onSelectDayIndex={(i) => setSelWeekday(i === ctx.todayWeekdayIndex ? null : i)}
+        />
         <ActiveProgressionsTodayCard />
-        <TodayRoutineStack selectedDayIndex={todayDayIndex} />
+        <TodayRoutineStack selectedDayIndex={routineDayIndex ?? 0} />
       </div>
     </ErrorBoundary>
   );

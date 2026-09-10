@@ -67,7 +67,7 @@ export function NavigationShell({
   return (
     <>
       <header className={styles.header}>
-        <NotionSyncStatus status="offline_local" lastHoursAgo={1} />
+        <NotionSyncStatus />
 
         {/* NAV ESCRITORIO CON MÁXIMO 4 ITEMS + MÁS DROPDOWN PER FIX 01 */}
         <nav className={styles.desktopNav} aria-label="Navegación principal">

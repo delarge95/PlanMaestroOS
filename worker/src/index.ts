@@ -12,10 +12,16 @@ import {
 } from './ai/client';
 import { getAuditLogs, logAiCall, clearAuditLogs, type LogAiCallOptions } from './lib/audit';
 import type { AiActionName } from './ai/actions';
+import { handleNotionStatus, handleNotionFitnessSession } from './notion/proxy';
 
 export interface WorkerEnv {
   WORKER_SECRET_KEY?: string;
   GEMINI_API_KEY?: string;
+  NOTION_TOKEN?: string;
+  NOTION_TASKS_DB_ID?: string;
+  NOTION_CAREER_DB_ID?: string;
+  NOTION_SESSIONS_DB_ID?: string;
+  NOTION_MEASUREMENTS_DB_ID?: string;
   NODE_ENV?: string;
 }
 
@@ -72,12 +78,24 @@ export default {
       return jsonResponse(getWorkerHealth());
     }
 
+    // Notion: estado PÚBLICO (no expone secretos, solo booleans)
+    if (url.pathname === '/notion/status') {
+      if (method !== 'GET') return errorResponse('Método no permitido', 405);
+      return handleNotionStatus(env);
+    }
+
     // Rutas protegidas de API
     if (!checkAuth(request, env)) {
       return errorResponse('401 Unauthorized: Header x-pm-key inválido o ausente.', 401);
     }
 
     try {
+      // Notion: push de sesión de fitness desde la app (auth x-pm-key)
+      if (url.pathname === '/notion/fitness-session' && method === 'POST') {
+        const body = await request.json();
+        return handleNotionFitnessSession(body, env);
+      }
+
       if (url.pathname === '/api/ai/draft' && method === 'POST') {
         const body = (await request.json()) as AiDraftRequestOptions;
         if (!body.action) return errorResponse('Falta "action" en el cuerpo.');

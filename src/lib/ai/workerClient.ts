@@ -47,7 +47,8 @@ export class WorkerAiClient {
     this.maxRetries = options?.maxRetries ?? 2;
   }
 
-  private async fetchWithRetry<T>(
+  /** POST con retry/timeout — público para wrappers de rutas nuevas. */
+  async fetchWithRetry<T>(
     endpoint: string,
     body: any,
     options?: { timeoutMs?: number }
@@ -279,3 +280,28 @@ export const requestAiChat = (
 ) => defaultWorkerAiClient.requestChat(message, history, context, agent);
 
 export const checkWorkerHealth = () => defaultWorkerAiClient.checkHealth();
+
+/** Payload de sesión para POST /notion/fitness-session (sin secretos). */
+export interface WorkerFitnessSessionPayload {
+  sessionId: string;
+  programId: string;
+  programTitle: string;
+  week: number;
+  dayId: string;
+  dayTitle: string;
+  dateIso: string;
+  durationMinutes?: number;
+  totalVolumeKg?: number;
+  sessionRpe?: number;
+  notes?: string;
+}
+
+/**
+ * Push de sesión completada a la DB Fitness Sessions de Notion vía worker.
+ * Fire-and-forget tolerante: la app sigue 100% funcional offline (§0.5).
+ */
+export const pushFitnessSessionToWorker = (session: WorkerFitnessSessionPayload) =>
+  defaultWorkerAiClient.fetchWithRetry<{ ok: boolean; pageId?: string; url?: string }>(
+    '/notion/fitness-session',
+    session,
+  );
