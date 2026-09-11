@@ -1,6 +1,9 @@
 // src/components/ui/YouTubePlayer.tsx
 import React, { useState } from 'react';
 import { ExternalLink, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
+
+const ALLOWED_VIDEO_DOMAINS = ['youtube.com', 'youtu.be', 'vimeo.com', 'player.vimeo.com'];
 
 export interface YouTubePlayerProps {
   youtubeLink: string | null | undefined;
@@ -94,7 +97,7 @@ export function YouTubePlayer({
         ? `https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay ? 1 : 0}&title=0&byline=0&portrait=0&badge=0`
         : activeLink;
 
-      return (
+      return isValidEmbedUrl(vimeoEmbedUrl, ALLOWED_VIDEO_DOMAINS) ? (
         <iframe
           key={vimeoEmbedUrl}
           style={{ width: '100%', height: '100%', border: 'none' }}
@@ -103,7 +106,12 @@ export function YouTubePlayer({
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups"
         />
+      ) : (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-tertiary, rgba(255,255,255,0.5))', fontSize: '0.82rem' }}>
+          Video no disponible o URL no autorizada
+        </div>
       );
     }
 
@@ -138,7 +146,7 @@ export function YouTubePlayer({
         }
       }
 
-      return (
+      return isValidEmbedUrl(embedUrl, ALLOWED_VIDEO_DOMAINS) ? (
         <iframe
           key={embedUrl}
           style={{ width: '100%', height: '100%', border: 'none' }}
@@ -147,7 +155,12 @@ export function YouTubePlayer({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups"
         />
+      ) : (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-tertiary, rgba(255,255,255,0.5))', fontSize: '0.82rem' }}>
+          Video no disponible o URL no autorizada
+        </div>
       );
     }
 
