@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
+
+const ALLOWED_NOTION_DOMAINS = ['notion.so', 'notion.site', 'notion.com', 'embednotion.com', 'v1.embednotion.com'];
 
 interface Props {
   defaultNotionUrl?: string;
@@ -292,11 +295,18 @@ export default function SecondBrainInspector({
                 </a>
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isValidEmbedUrl(notionEmbedUrl, ALLOWED_NOTION_DOMAINS) ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                />
+              ) : (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-accent-danger, #ff453a)', fontSize: '0.85rem' }}>
+                  URL de Notion no permitida o no segura
+                </div>
+              )}
             </div>
           </div>
         )}
