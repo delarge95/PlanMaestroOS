@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import thenxGuidesData from '../../data/fitness/thenx_technique_guides.json';
 import { BookOpen, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
 
 export interface ThenxGuideDatabaseProps {
   selectedGuideId?: string;
@@ -59,6 +60,7 @@ export default function ThenxGuideDatabase({
   };
 
   const introEmbedUrl = getEmbedUrl(selectedGuide?.introVideo);
+  const isIntroEmbedValid = isValidEmbedUrl(introEmbedUrl);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
@@ -123,7 +125,7 @@ export default function ThenxGuideDatabase({
           </div>
 
           {/* VÍDEO INTRODUCTORIO DE LA GUÍA */}
-          {introEmbedUrl && (
+          {introEmbedUrl && isIntroEmbedValid && (
             <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border-subtle)', background: '#000', aspectRatio: '16/9' }}>
               <iframe
                 src={introEmbedUrl}
@@ -131,6 +133,7 @@ export default function ThenxGuideDatabase({
                 style={{ width: '100%', height: '100%', border: 'none' }}
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
+                sandbox="allow-scripts allow-same-origin allow-presentation"
               />
             </div>
           )}
@@ -182,7 +185,7 @@ export default function ThenxGuideDatabase({
                           </span>
                         </div>
 
-                        {ex.exerciseVideoUrl && (
+                        {ex.exerciseVideoUrl && isValidEmbedUrl(ex.exerciseVideoUrl) && (
                           <a
                             href={ex.exerciseVideoUrl}
                             target="_blank"
