@@ -10,7 +10,7 @@
 // triaje entrega hipótesis funcionales con tests y disclaimer (§0.1/§0.3).
 
 import type { BodyZone } from '../../data/fitness/anatomyGraph';
-import { getMuscles, getTendons, BODY_ZONE_LABELS_ES } from '../../data/fitness/anatomyGraph';
+import { getMuscles, getTendons, getJoints, getNerves, getLigaments, BODY_ZONE_LABELS_ES } from '../../data/fitness/anatomyGraph';
 import { triage, TRIAGE_DISCLAIMER, type Onset, type PainQuality, type TriageResult } from './injuryTriage';
 import { prehabProtocols, type PrehabProtocol } from '../../data/fitness/prehabProtocols';
 import { getExerciseAlternatives } from '../../data/fitness/alternatives';
@@ -56,7 +56,7 @@ export interface AffectedExercise {
 export interface HealthIntelligenceResult {
   zoneLabel: string;
   triage: TriageResult;
-  structures: { muscles: string[]; tendons: string[] };
+  structures: { muscles: string[]; tendons: string[]; joints: string[]; nerves: string[]; ligaments: string[] };
   affectedExercises: AffectedExercise[];
   prehab?: PrehabProtocol;
   advisories: HealthAdvisory[];
@@ -98,6 +98,9 @@ export function runHealthIntelligence(
   const zoneLabel = BODY_ZONE_LABELS_ES[report.zone] ?? report.zone;
   const muscles = getMuscles(report.zone).map((m) => m.nameEn);
   const tendons = getTendons(report.zone).map((t) => t.nameEn);
+  const joints = getJoints(report.zone).map((j) => j.nameEn);
+  const nerves = getNerves(report.zone).map((n) => n.nameEn);
+  const ligaments = getLigaments(report.zone).map((l) => l.nameEn);
   const structureTokens = [...muscles, ...tendons].flatMap(tokens);
   // La etiqueta de zona también matchea ('rodilla' en 'knee extension').
   const zoneTokens = [...tokens(zoneLabel), ...tokens(report.zone)];
@@ -215,7 +218,7 @@ export function runHealthIntelligence(
   return {
     zoneLabel,
     triage: t,
-    structures: { muscles, tendons },
+    structures: { muscles, tendons, joints, nerves, ligaments },
     affectedExercises,
     prehab,
     advisories,

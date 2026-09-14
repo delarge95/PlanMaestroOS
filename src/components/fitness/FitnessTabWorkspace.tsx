@@ -10,6 +10,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import TodayRoutineStack from './TodayRoutineStack';
 import TodayCalendar from './TodayCalendar';
 import HealthAdvisorPanel from './HealthAdvisorPanel';
+import RoutineGeneratorPanel from './RoutineGeneratorPanel';
 import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
 import SectionNav from '../ui/SectionNav';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
@@ -85,6 +86,7 @@ export default function FitnessTabWorkspace() {
           onSelectDayIndex={(i) => setSelWeekday(i === ctx.todayWeekdayIndex ? null : i)}
         />
         <HealthAdvisorPanel />
+        <RoutineGeneratorPanel />
         <ActiveProgressionsTodayCard />
         <TodayRoutineStack selectedDayIndex={routineDayIndex ?? 0} />
       </div>

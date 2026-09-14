@@ -5,7 +5,7 @@
 // cargan la zona → sustituciones → prehab → triaje con citas → guardas de
 // reglas). El advisory del día queda persistido y visible como banner.
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   BODY_ZONES,
   BODY_ZONE_LABELS_ES,
@@ -18,6 +18,7 @@ import {
   type PlannedExercise,
 } from '../../lib/fitness/healthIntelligence';
 import type { Onset, PainQuality } from '../../lib/fitness/injuryTriage';
+import { testsForZone, scoreCandidates, type GuidedTest, type ScoredCandidate } from '../../lib/fitness/diagnosticTests';
 import { exerciseDatabase } from '../../data/exercises/exerciseData';
 import { getProgramById } from '../../data/fitness/programs';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
@@ -67,7 +68,12 @@ export default function HealthAdvisorPanel() {
   });
   const [redFlagsText, setRedFlagsText] = useState('');
   const [result, setResult] = useState<HealthIntelligenceResult | null>(null);
-  const [stored, setStored] = useState<StoredAdvisory | null>(() => (typeof window !== 'undefined' ? loadStored() : null));
+  const [testAnswers, setTestAnswers] = useState<Record<string, boolean>>({});
+  const [testsDone, setTestsDone] = useState(false);
+  // SSR-safe: el banner se resuelve tras el montaje (localStorage no existe
+  // en el server — leerlo en el initializer rompe la hidratación).
+  const [stored, setStored] = useState<StoredAdvisory | null>(null);
+  useEffect(() => { setStored(loadStored()); }, []);
 
   // Sesión de HOY (mismas derivaciones que TodayRoutineStack).
   const plannedToday: PlannedExercise[] = useMemo(() => {
@@ -104,6 +110,8 @@ export default function HealthAdvisorPanel() {
     };
     const r = runHealthIntelligence(report, plannedToday);
     setResult(r);
+    setTestAnswers({});
+    setTestsDone(false);
     const worst = r.advisories.reduce<'info' | 'caution' | 'stop'>(
       (acc, a) => (a.severity === 'stop' || (a.severity === 'caution' && acc === 'info') ? a.severity : acc),
       'info',
@@ -238,6 +246,59 @@ export default function HealthAdvisorPanel() {
                 </div>
               ))}
 
+              {/* PRUEBAS GUIADAS DE DIFERENCIACIÓN */}
+              {result && !testsDone && (() => {
+                const battery = testsForZone(zone);
+                const pending = battery.filter((t) => !(t.id in testAnswers));
+                const answered = battery.length - pending.length;
+                const scored = Object.keys(testAnswers).length > 0
+                  ? scoreCandidates(result.triage.candidates, testAnswers)
+                  : null;
+                return (
+                  <div className="ds-stack-sm" style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-2)' }}>
+                    <span className="ds-eyebrow">Pruebas guiadas ({answered}/{battery.length}) — afinar la causa</span>
+                    {pending.length > 0 ? (
+                      <div className="ds-stack-sm" style={{ gap: '6px' }}>
+                        <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>{pending[0].question}</span>
+                        <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>{pending[0].help}</span>
+                        <div className="ds-row" style={{ gap: 'var(--space-1)' }}>
+                          <Button variant="primary" size="sm" onClick={() => setTestAnswers((a) => ({ ...a, [pending[0].id]: true }))}>Sí</Button>
+                          <Button variant="secondary" size="sm" onClick={() => setTestAnswers((a) => ({ ...a, [pending[0].id]: false }))}>No</Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button type="button" onClick={() => setTestsDone(true)} className="ds-btn ds-btn-sm" style={{ width: 'fit-content' }}>
+                        Ver causa más probable
+                      </button>
+                    )}
+                    {scored && scored.length > 0 && (
+                      <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+                        Provisorio: <strong>{scored[0].structureHint}</strong> ({scored[0].tissue}) — {scored[0].confidencePct}%
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
+
+              {/* ESTRUCTURAS ANATÓMICAS DE LA ZONA (grafo completo) */}
+              {(() => {
+                const st = result.structures;
+                const groups: Array<[string, string[]]> = [
+                  ['Músculos', st.muscles], ['Tendones', st.tendons], ['Articulaciones', st.joints],
+                  ['Ligamentos', st.ligaments], ['Nervios', st.nerves],
+                ];
+                return (
+                  <details style={{ fontSize: '0.74rem' }}>
+                    <summary style={{ cursor: 'pointer', fontWeight: 700, color: 'var(--text-secondary)' }}>Estructuras de la zona (grafo anatómico)</summary>
+                    {groups.map(([label, list]) => (
+                      <div key={label} style={{ marginTop: '4px' }}>
+                        <strong style={{ color: 'var(--color-accent-primary)' }}>{label} ({list.length}):</strong>{' '}
+                        <span style={{ color: 'var(--text-tertiary)' }}>{list.join(', ') || '—'}</span>
+                      </div>
+                    ))}
+                  </details>
+                );
+              })()}
               {result.affectedExercises.length > 0 && (
                 <div className="ds-stack-sm" style={{ gap: '4px' }}>
                   <span className="ds-eyebrow">Ejercicios de hoy que cargan la zona</span>

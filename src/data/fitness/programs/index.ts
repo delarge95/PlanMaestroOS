@@ -147,7 +147,39 @@ const rawPrograms = [
 
 export const allPrograms: TrainingProgram[] = rawPrograms.map(normalizeProgram);
 
+// ——— Rutinas GENERADAS por objetivo (routineGenerator) ———
+// Persistidas en localStorage 'fitapp-generated-routines-v1' y visibles para
+// getProgramById desde el arranque (SSR-safe).
+const GENERATED_KEY = 'fitapp-generated-routines-v1';
+
+function loadGenerated(): TrainingProgram[] {
+  if (typeof window === 'undefined' || !window.localStorage) return [];
+  try {
+    const raw = JSON.parse(window.localStorage.getItem(GENERATED_KEY) || '[]');
+    return Array.isArray(raw) ? raw.map(normalizeProgram) : [];
+  } catch {
+    return [];
+  }
+}
+
+let generatedPrograms: TrainingProgram[] = loadGenerated();
+
+/** Registra (y persiste) una rutina generada por objetivo. */
+export function registerGeneratedProgram(program: TrainingProgram): void {
+  const normalized = normalizeProgram(program);
+  generatedPrograms = [normalized, ...generatedPrograms.filter((p) => p.id !== normalized.id)];
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem(GENERATED_KEY, JSON.stringify(generatedPrograms));
+    }
+  } catch { /* sin storage → solo runtime */ }
+}
+
+export function getGeneratedPrograms(): TrainingProgram[] {
+  return generatedPrograms;
+}
+
 export function getProgramById(id: string): TrainingProgram {
-  const found = allPrograms.find((p) => p.id === id);
+  const found = allPrograms.find((p) => p.id === id) || generatedPrograms.find((p) => p.id === id);
   return found || allPrograms[0];
 }
