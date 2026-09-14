@@ -56,6 +56,8 @@ export interface JobApplication {
   contactUrl?: string;
   /** Versión del CV enviada (id de variante + fecha, p.ej. 'unity-ta-v1 (2026-09-09)'). */
   cvVersionSent?: string;
+  /** Id de página en Notion (Career Applications) tras el primer push — enables updates. */
+  notionPageId?: string;
   notes?: string;
   source?: 'tracker-xlsx' | 'doc-11' | 'manual';
 }

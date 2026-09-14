@@ -15,6 +15,7 @@ import ErrorBoundary from '../../ErrorBoundary';
 export default function GermanCourseView() {
   const byLanguage = useVocabularyStore((s) => s.byLanguage);
   const completeLessonAction = useVocabularyStore((s) => s.completeLesson);
+  const logStudySession = useVocabularyStore((s) => s.logStudySession);
   const placementUnitId = byLanguage.de?.placementUnitId;
   const completedLessons = useMemo(
     () => new Set(byLanguage.de?.completedLessons ?? []),
@@ -73,7 +74,7 @@ export default function GermanCourseView() {
               <LessonView
                 lesson={lesson}
                 initiallyCompleted={completedLessons.has(lesson.id)}
-                onLessonCompleted={() => completeLessonAction('de', lesson.id)}
+                onLessonCompleted={() => { completeLessonAction('de', lesson.id); logStudySession({ language: 'de', minutes: lesson.estimatedMinutes, lessonsCompleted: 1 }); }}
                 maxExercises={lesson.exercises.length}
               />
             </div>

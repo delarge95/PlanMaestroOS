@@ -305,3 +305,25 @@ export const pushFitnessSessionToWorker = (session: WorkerFitnessSessionPayload)
     '/notion/fitness-session',
     session,
   );
+
+/** Payload de aplicación laboral para POST /notion/career-app (sin secretos). */
+export interface WorkerCareerAppPayload {
+  id: string;
+  notionPageId?: string;
+  company: string;
+  role: string;
+  stage: string;
+  nextAction?: string;
+  followUpDateIso?: string;
+  appliedDateIso?: string;
+  cvVersionSent?: string;
+  notes?: string;
+  sourceUrl?: string;
+}
+
+/** Upsert de aplicación laboral en la DB Career Applications (vía worker). */
+export const pushCareerAppToWorker = (app: WorkerCareerAppPayload) =>
+  defaultWorkerAiClient.fetchWithRetry<{ ok: boolean; pageId?: string; url?: string; updated?: boolean }>(
+    '/notion/career-app',
+    app,
+  );

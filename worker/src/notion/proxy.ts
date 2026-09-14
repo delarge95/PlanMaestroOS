@@ -137,3 +137,86 @@ function cors(): Record<string, string> {
     'Access-Control-Allow-Headers': 'Content-Type, x-pm-key, X-PM-Key',
   };
 }
+
+// ——————————————————— Career Applications ———————————————————
+
+/**
+ * Mapeo stage interno (PipelineStage) → opción del select Estado de la DB
+ * Career Applications (schema.ts). Investigar/Revisar no existen en Notion:
+ * se pliegan a 'Preparar' (documentado, sin inventar estados).
+ */
+export const STAGE_TO_NOTION: Record<string, string> = {
+  Prospecto: 'Prospecto',
+  Investigar: 'Preparar',
+  Preparar: 'Preparar',
+  Revisar: 'Preparar',
+  Aplicado: 'Aplicado',
+  Seguimiento: 'Seguimiento',
+  Entrevista: 'Entrevista',
+  Oferta: 'Oferta',
+  Cerrado: 'Cerrado',
+};
+
+/** Payload de aplicación laboral desde la app (sin secretos). */
+export interface ClientCareerApp {
+  id: string;
+  /** Id de página de Notion si ya existe (update); undefined → create. */
+  notionPageId?: string;
+  company: string;
+  role: string;
+  stage: string;
+  nextAction?: string;
+  followUpDateIso?: string;
+  appliedDateIso?: string;
+  cvVersionSent?: string;
+  notes?: string;
+  sourceUrl?: string;
+}
+
+/**
+ * POST /notion/career-app — upsert de una aplicación en la DB Career
+ * Applications. Sin notionPageId crea; con él hace PATCH (update).
+ */
+export async function handleNotionCareerApp(body: unknown, env?: NotionEnv): Promise<Response> {
+  const e = resolveEnv(env);
+  if (!e.NOTION_TOKEN || !e.NOTION_CAREER_DB_ID) {
+    return Response.json({ ok: false, error: 'NOTION_TOKEN/NOTION_CAREER_DB_ID no configurados en el worker' }, { status: 503, headers: cors() });
+  }
+
+  const a = body as ClientCareerApp;
+  if (!a || typeof a.company !== 'string' || !a.company.trim() || typeof a.role !== 'string') {
+    return Response.json({ ok: false, error: 'Payload inválido: se esperan company y role' }, { status: 400, headers: cors() });
+  }
+
+  const rt = (t?: string) => (t ? [{ text: { content: String(t).slice(0, 1800) } }] : undefined);
+  const properties: Record<string, unknown> = {
+    Empresa: { title: [{ text: { content: a.company.slice(0, 180) } }] },
+    Rol: { rich_text: rt(a.role) },
+    Estado: { select: { name: STAGE_TO_NOTION[a.stage] ?? 'Prospecto' } },
+  };
+  if (a.nextAction) properties.ProximaAccion = { rich_text: rt(a.nextAction) };
+  if (a.followUpDateIso && /^\d{4}-\d{2}-\d{2}$/.test(a.followUpDateIso)) properties.FechaSeguimiento = { date: { start: a.followUpDateIso } };
+  if (a.appliedDateIso && /^\d{4}-\d{2}-\d{2}$/.test(a.appliedDateIso)) properties.FechaAplicacion = { date: { start: a.appliedDateIso } };
+  if (a.cvVersionSent) properties.CvVersion = { rich_text: rt(a.cvVersionSent) };
+  if (a.notes) properties.Notas = { rich_text: rt(a.notes) };
+  if (a.sourceUrl) properties.Url = { url: a.sourceUrl };
+  // La app solo sube su propio pipeline; el opt-in de envío se gestiona en Notion.
+  properties.ConsentimientoEnvio = { checkbox: false };
+
+  const isUpdate = typeof a.notionPageId === 'string' && a.notionPageId.length > 0;
+  try {
+    const res = await fetch(isUpdate ? `${NOTION_API}/pages/${a.notionPageId}` : `${NOTION_API}/pages`, {
+      method: isUpdate ? 'PATCH' : 'POST',
+      headers: notionHeaders(e.NOTION_TOKEN),
+      body: JSON.stringify(isUpdate ? { properties } : { parent: { database_id: e.NOTION_CAREER_DB_ID }, properties }),
+      signal: AbortSignal.timeout(10000),
+    });
+    const data: any = await res.json();
+    if (!res.ok) {
+      return Response.json({ ok: false, error: `Notion ${res.status}`, detail: JSON.stringify(data).slice(0, 200) }, { status: 502, headers: cors() });
+    }
+    return Response.json({ ok: true, pageId: data.id, url: data.url, updated: isUpdate }, { headers: cors() });
+  } catch (err) {
+    return Response.json({ ok: false, error: err instanceof Error ? err.message : String(err) }, { status: 502, headers: cors() });
+  }
+}

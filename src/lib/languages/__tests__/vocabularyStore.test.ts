@@ -129,4 +129,15 @@ describe('vocabularyStore — acciones', () => {
   it('exposes the persist key contract', () => {
     expect(VOCABULARY_STORAGE_KEY).toBe('languages-vocabulary-v1');
   });
+
+  it('logStudySession acumula sesiones con fecha por defecto de hoy', () => {
+    const store = useVocabularyStore.getState();
+    const before = store.studySessions.length;
+    store.logStudySession({ language: 'de', minutes: 15, cardsReviewed: 12 });
+    store.logStudySession({ language: 'en', minutes: 25, lessonsCompleted: 1, dateIso: '2026-09-01' });
+    const after = useVocabularyStore.getState().studySessions;
+    expect(after.length).toBe(before + 2);
+    expect(after[after.length - 2]).toMatchObject({ language: 'de', minutes: 15, cardsReviewed: 12 });
+    expect(after[after.length - 1]).toMatchObject({ language: 'en', dateIso: '2026-09-01', lessonsCompleted: 1 });
+  });
 });

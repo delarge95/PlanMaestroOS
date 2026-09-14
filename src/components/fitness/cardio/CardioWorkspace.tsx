@@ -2,7 +2,7 @@
 // Disciplina → enfoques → grid de presets citados. Detalle + edición en Sheet (PresetSheet).
 // Regla §0: NINGÚN número sin cita; los METs alimentan el estimador kcal de AG-NUTRI (getPresetsWithMet).
 import React, { useMemo, useState } from 'react';
-import { Bike, Flame, Dumbbell, Footprints, Gauge, Info, PersonStanding, Timer, Zap } from 'lucide-react';
+import { Bike, Flame, Dumbbell, Footprints, Gauge, Info, PersonStanding, Timer, Zap, CheckCircle2 } from 'lucide-react';
 import { DISCIPLINES, getDiscipline } from '../../../data/fitness/cardio/disciplines';
 import { APPROACHES } from '../../../data/fitness/cardio/approaches';
 import { CARDIO_PRESETS } from '../../../data/fitness/cardio/presets';
@@ -11,6 +11,7 @@ import { useCardioStore } from '../../../data/fitness/cardio/cardioStore';
 import StatusBadge from '../../ui/StatusBadge';
 import useIsMobile from '../../ui/useIsMobile';
 import PresetSheet from './PresetSheet';
+import { logCardioSession, getCardioHistory } from '../../../lib/fitness/cardioHistory';
 
 const DISCIPLINE_ICONS: Record<DisciplineId, React.ReactNode> = {
   running: <Footprints size={16} aria-hidden="true" />,
@@ -101,8 +102,74 @@ export function CardioWorkspace() {
   );
   const openPreset = openPresetId ? CARDIO_PRESETS.find((p) => p.id === openPresetId) : undefined;
 
+  // ——— Registro de sesión (deuda T2: cardio_session_history ya tiene escritor) ———
+  const [cardioType, setCardioType] = useState('Caminata LISS');
+  const [cardioMinutes, setCardioMinutes] = useState(30);
+  const [cardioRpe, setCardioRpe] = useState('');
+  const [cardioSaved, setCardioSaved] = useState(false);
+  const [recentCardio, setRecentCardio] = useState(() => getCardioHistory().slice(0, 5));
+
+  const handleLogCardio = () => {
+    const rpeNum = Number(cardioRpe);
+    const entry = logCardioSession({
+      type: cardioType,
+      minutes: cardioMinutes,
+      ...(Number.isFinite(rpeNum) && rpeNum > 0 ? { rpe: rpeNum } : {}),
+    });
+    if (entry) {
+      setRecentCardio(getCardioHistory().slice(0, 5));
+      setCardioSaved(true);
+      setTimeout(() => setCardioSaved(false), 2200);
+    }
+  };
+
   return (
     <div className="ds-stack-lg" style={{ width: '100%' }}>
+      {/* 0) Registrar sesión de cardio — alimenta el motor de reglas (cardio_session_history) */}
+      <section className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)' }}>
+        <h2 className="ds-h2">Registrar sesión de cardio</h2>
+        <div className="ds-row-wrap" style={{ alignItems: 'center', gap: 'var(--space-2)' }}>
+          <select
+            value={cardioType}
+            onChange={(e) => setCardioType(e.target.value)}
+            aria-label="Tipo de cardio"
+            style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 10px', fontSize: '0.8rem' }}
+          >
+            {['Caminata LISS', 'Caminata rápida', 'Bici', 'Spinning', 'Rower', 'Comba', 'Movilidad activa', 'Otro'].map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+          <label className="ds-row" style={{ gap: '6px', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+            Minutos:
+            <input
+              type="number" min={1} max={300} value={cardioMinutes}
+              onChange={(e) => setCardioMinutes(Number(e.target.value) || 1)}
+              style={{ width: '70px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
+            />
+          </label>
+          <label className="ds-row" style={{ gap: '6px', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+            RPE (opcional):
+            <input
+              type="number" min={1} max={10} value={cardioRpe} placeholder="—"
+              onChange={(e) => setCardioRpe(e.target.value)}
+              style={{ width: '60px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
+            />
+          </label>
+          <button type="button" onClick={handleLogCardio} className="ds-btn ds-btn-sm">
+            {cardioSaved ? <CheckCircle2 size={14} /> : null} {cardioSaved ? 'Guardado' : 'Guardar sesión'}
+          </button>
+        </div>
+        {recentCardio.length > 0 && (
+          <ul className="ds-stack-sm" style={{ margin: 0, paddingLeft: 'var(--space-3)', gap: '2px' }}>
+            {recentCardio.map((c) => (
+              <li key={c.id} className="ds-micro" style={{ color: 'var(--text-tertiary)' }}>
+                {c.date} · {c.routineTitle}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
       {/* 1) Disciplina */}
       <section className="ds-stack-sm">
         <h2 className="ds-h2">Disciplina</h2>

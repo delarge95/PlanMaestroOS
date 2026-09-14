@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { initialVocabulary } from '../../data/languages/vocabulary';
 import {
   useVocabularyStore,
@@ -29,6 +29,7 @@ const QUALITY_BUTTONS: { quality: ReviewQuality; label: string; variant: 'primar
 export default function VocabularySession({ language = 'de', catalogItems }: VocabularySessionProps) {
   const byLanguage = useVocabularyStore((s) => s.byLanguage);
   const recordReviewAction = useVocabularyStore((s) => s.recordReview);
+  const logStudySession = useVocabularyStore((s) => s.logStudySession);
 
   const catalog = useMemo<VocabularyItem[]>(
     () =>
@@ -47,6 +48,19 @@ export default function VocabularySession({ language = 'de', catalogItems }: Voc
   const [indexInQueue, setIndexInQueue] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [reviewedCount, setReviewedCount] = useState(0);
+
+  // Log de sesión de estudio: minutos REALES transcurridos + tarjetas repasadas.
+  const startedAtRef = useRef(Date.now());
+  const reviewedCountRef = useRef(0);
+  reviewedCountRef.current = reviewedCount;
+  useEffect(() => {
+    return () => {
+      const minutes = Math.max(1, Math.round((Date.now() - startedAtRef.current) / 60000));
+      if (reviewedCountRef.current > 0) {
+        logStudySession({ language, minutes, cardsReviewed: reviewedCountRef.current });
+      }
+    };
+  }, [language, logStudySession]);
 
   const queue = dueIds
     .map((id) => itemById.get(id))

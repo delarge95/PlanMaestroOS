@@ -36,10 +36,21 @@ function emptyLanguageProgress(): LanguageProgress {
   return { items: {}, completedLessons: [] };
 }
 
+/** Sesión de estudio registrada (log histórico — analítica y reglas futuras). */
+export interface StudySessionLog {
+  dateIso: string;
+  minutes: number;
+  cardsReviewed?: number;
+  lessonsCompleted?: number;
+  language: string;
+}
+
 export interface LanguagesProgressData {
   byLanguage: Record<string, LanguageProgress>;
   /** Fechas ISO YYYY-MM-DD con cualquier actividad de estudio (racha real). */
   activityDates: string[];
+  /** Histórico de sesiones de estudio (append-only, additive al shape). */
+  studySessions: StudySessionLog[];
 }
 
 // --- Lógica pura (testeable sin DOM/zustand) ---
@@ -130,12 +141,14 @@ export function getDueQueue(
 interface LanguagesProgressState extends LanguagesProgressData {
   recordReview: (language: string, itemId: string, quality: AcceptedQuality, now?: Date) => void;
   completeLesson: (language: string, lessonId: string, now?: Date) => void;
+  /** Registra una sesión de estudio (minutos reales o estimados de la lección). */
+  logStudySession: (entry: Omit<StudySessionLog, 'dateIso'> & { dateIso?: string; now?: Date }) => void;
   setPlacement: (language: string, unitId: string) => void;
   resetLanguage: (language: string) => void;
 }
 
 export function initialLanguagesProgressState(): LanguagesProgressData {
-  return { byLanguage: {}, activityDates: [] };
+  return { byLanguage: {}, activityDates: [], studySessions: [] };
 }
 
 /** Saneado defensivo al rehidratar (patrón cardioStore). */
@@ -172,6 +185,12 @@ function sanitizeAll(raw: unknown): LanguagesProgressData {
       data.byLanguage[lang] = sanitizeLanguageProgress(p);
     }
   }
+  if (Array.isArray(c.studySessions)) {
+    data.studySessions = c.studySessions.filter(
+      (e): e is StudySessionLog =>
+        Boolean(e) && typeof e.dateIso === 'string' && typeof e.minutes === 'number' && e.minutes > 0
+    );
+  }
   if (Array.isArray(c.activityDates)) {
     data.activityDates = c.activityDates.filter((d): d is string => typeof d === 'string');
   }
@@ -200,6 +219,14 @@ export const useVocabularyStore = create<LanguagesProgressState>()(
   persist(
     (set) => ({
       ...initialLanguagesProgressState(),
+
+      logStudySession: ({ dateIso, now = new Date(), ...entry }) =>
+        set((s) => ({
+          studySessions: [
+            ...s.studySessions,
+            { ...entry, dateIso: dateIso ?? toISODate(now) }
+          ]
+        })),
 
       recordReview: (language, itemId, quality, now = new Date()) =>
         set((s) => {

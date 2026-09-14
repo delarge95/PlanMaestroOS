@@ -18,6 +18,7 @@ export default function EnglishCourseView() {
   const byLanguage = useVocabularyStore((s) => s.byLanguage);
   const activityDates = useVocabularyStore((s) => s.activityDates);
   const completeLessonAction = useVocabularyStore((s) => s.completeLesson);
+  const logStudySession = useVocabularyStore((s) => s.logStudySession);
 
   const englishProgress = byLanguage.en;
   const streakDays = computeStreakDays(activityDates);
@@ -41,6 +42,7 @@ export default function EnglishCourseView() {
   const handleLessonComplete = () => {
     if (selectedLesson) {
       completeLessonAction('en', selectedLesson.id);
+      logStudySession({ language: 'en', minutes: selectedLesson.estimatedMinutes, lessonsCompleted: 1 });
     }
   };
 

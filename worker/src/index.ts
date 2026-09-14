@@ -12,7 +12,7 @@ import {
 } from './ai/client';
 import { getAuditLogs, logAiCall, clearAuditLogs, type LogAiCallOptions } from './lib/audit';
 import type { AiActionName } from './ai/actions';
-import { handleNotionStatus, handleNotionFitnessSession } from './notion/proxy';
+import { handleNotionStatus, handleNotionFitnessSession, handleNotionCareerApp } from './notion/proxy';
 
 export interface WorkerEnv {
   WORKER_SECRET_KEY?: string;
@@ -94,6 +94,12 @@ export default {
       if (url.pathname === '/notion/fitness-session' && method === 'POST') {
         const body = await request.json();
         return handleNotionFitnessSession(body, env);
+      }
+
+      // Notion: upsert de aplicación laboral (auth x-pm-key)
+      if (url.pathname === '/notion/career-app' && method === 'POST') {
+        const body = await request.json();
+        return handleNotionCareerApp(body, env);
       }
 
       if (url.pathname === '/api/ai/draft' && method === 'POST') {

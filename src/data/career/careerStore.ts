@@ -30,6 +30,7 @@ import {
 import type { CompanyRecord, CompanyTimelineEvent } from './companies';
 import type { CompanyResearch } from './careerContracts';
 import type { ApplicationKit } from '../../lib/career/cvTailor';
+import { pushApplicationToNotion } from '../../lib/career/careerNotionPush';
 
 export interface CareerState {
   /** Versión del shape persistido (migraciones futuras la leen). */
@@ -72,6 +73,8 @@ export interface CareerState {
   upsertCompanyResearch: (research: CompanyResearch) => void;
   /** Upsert del kit de una aplicación (CV personalizado + brief). */
   upsertApplicationKit: (kit: ApplicationKit) => void;
+  /** Guarda el notionPageId de una aplicación (tras el primer push). */
+  setNotionPageId: (id: string, pageId: string) => void;
 }
 
 const todayIso = () => new Date().toISOString().slice(0, 10);
@@ -104,6 +107,7 @@ export const useCareerStore = create<CareerState>()(
           updatedAtIso: todayIso()
         };
         set((s) => ({ applications: [...s.applications, app], updatedAt: new Date().toISOString() }));
+        pushApplicationToNotion(app); // espejo Notion (fire-and-forget, offline-tolerante)
         return id;
       },
 
@@ -111,6 +115,15 @@ export const useCareerStore = create<CareerState>()(
         set((s) => ({
           applications: s.applications.map((a) => (a.id === id ? { ...a, ...patch, updatedAtIso: todayIso() } : a)),
           updatedAt: new Date().toISOString()
+        }));
+        const updated = get().applications.find((a) => a.id === id);
+        if (updated) pushApplicationToNotion(updated);
+      },
+
+      /** Guarda el pageId de Notion tras el primer push (upsert, no duplicados). */
+      setNotionPageId: (id, pageId) => {
+        set((s) => ({
+          applications: s.applications.map((a) => (a.id === id ? { ...a, notionPageId: pageId } : a))
         }));
       },
 
@@ -132,6 +145,8 @@ export const useCareerStore = create<CareerState>()(
           ),
           updatedAt: new Date().toISOString()
         }));
+        const moved = get().applications.find((a) => a.id === id);
+        if (moved) pushApplicationToNotion(moved);
         return true;
       },
 
@@ -151,6 +166,8 @@ export const useCareerStore = create<CareerState>()(
           ),
           updatedAt: new Date().toISOString()
         }));
+        const updated = get().applications.find((a) => a.id === id);
+        if (updated) pushApplicationToNotion(updated);
       },
 
       resetToSeed: () => {
