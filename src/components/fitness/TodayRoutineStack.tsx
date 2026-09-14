@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Disclosure from '../ui/Disclosure';
 import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
-import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock, ExternalLink } from 'lucide-react';
+import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { getProgramById } from '../../data/fitness/programs';
 import { pushFitnessSessionToWorker } from '../../lib/ai/workerClient';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
@@ -38,6 +38,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const activeDay = activeWeek?.days?.[safeDayIndex] || activeWeek?.days?.[0];
 
   const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
+  // Confirmación inline de sesión guardada (reemplaza al alert nativo).
+  const [sessionSavedAt, setSessionSavedAt] = useState<number | null>(null);
   const [effortMode, setEffortMode] = useState<'RIR' | 'RPE'>('RIR');
   const [substitutionTarget, setSubstitutionTarget] = useState<{
     prescriptionId: string;
@@ -418,6 +420,17 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
             </table>
           </div>
 
+          {/* CONFIRMACIÓN INLINE DE SESIÓN GUARDADA */}
+          {sessionSavedAt && (
+            <div className="ds-row" role="status" style={{ gap: '8px', alignItems: 'center', background: 'rgba(48,209,88,0.08)', border: '1px solid var(--success, #30d158)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}>
+              <CheckCircle2 size={16} style={{ color: 'var(--success, #30d158)', flexShrink: 0 }} />
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-primary)' }}>
+                Sesión guardada en Progreso{typeof window !== 'undefined' && !window.localStorage.getItem('PUBLIC_WORKER_ON') ? ' · pendiente de sincronizar con Notion' : ''}.
+              </span>
+              <button type="button" onClick={() => setSessionSavedAt(null)} className="ds-btn ds-btn-ghost ds-btn-sm" style={{ marginLeft: 'auto' }}>✕</button>
+            </div>
+          )}
+
           {/* BOTÓN PROMINENTE DE FINALIZACIÓN DE SESIÓN */}
           <div className="ds-row" style={{ marginTop: 'var(--space-4)', justifyContent: 'flex-end' }}>
             <button
@@ -487,7 +500,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                     totalVolumeKg: newSession.totalVolumeKg,
                   });
 
-                  alert('🎉 ¡Sesión de entrenamiento completada y guardada con éxito en la sección de Progreso!');
+                  setSessionSavedAt(Date.now());
                 } catch (e) {
                   console.error(e);
                 }

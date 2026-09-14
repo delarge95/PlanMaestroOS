@@ -335,7 +335,7 @@ export default function CvGenerator() {
             <div key={p.id} style={{ marginBottom: '10px' }}>
               <div style={{ fontWeight: 700, fontSize: '0.86rem' }}>{p.name}</div>
               <div style={{ fontSize: '0.74rem', color: '#555', fontStyle: 'italic' }}>{stripEditorialNotes(p.meta)}</div>
-              <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
+              <ul style={{ margin: '4px 0 0', padding: 0, listStylePosition: 'outside', paddingLeft: '18px' }}>
                 {(activeVariant.projectBullets[p.id] ?? p.bullets).map((b, i) => (
                   <li key={i} style={{ fontSize: '0.8rem', marginBottom: '2px' }}>{stripEditorialNotes(b)}</li>
                 ))}
@@ -349,7 +349,7 @@ export default function CvGenerator() {
             <div key={e.id} style={{ marginBottom: '8px' }}>
               <div style={{ fontWeight: 700, fontSize: '0.86rem' }}>{e.role}</div>
               <div style={{ fontSize: '0.74rem', color: '#555' }}>{e.org} | {e.period}</div>
-              <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
+              <ul style={{ margin: '4px 0 0', padding: 0, listStylePosition: 'outside', paddingLeft: '18px' }}>
                 {e.bullets.map((b, i) => <li key={i} style={{ fontSize: '0.8rem', marginBottom: '2px' }}>{b}</li>)}
               </ul>
             </div>
@@ -361,7 +361,7 @@ export default function CvGenerator() {
             <div key={ed.id} style={{ marginBottom: '8px' }}>
               <div style={{ fontWeight: 700, fontSize: '0.86rem' }}>{ed.institution}</div>
               <div style={{ fontSize: '0.74rem', color: '#555' }}>{stripEditorialNotes(ed.period ? `${ed.degree} | ${ed.period}` : ed.degree)}</div>
-              <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
+              <ul style={{ margin: '4px 0 0', padding: 0, listStylePosition: 'outside', paddingLeft: '18px' }}>
                 {ed.bullets.map((b, i) => <li key={i} style={{ fontSize: '0.8rem', marginBottom: '2px' }}>{b}</li>)}
               </ul>
             </div>
@@ -478,7 +478,7 @@ function KitField({ label, children }: { label: string; children: React.ReactNod
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section style={{ marginBottom: '12px' }}>
-      <h3 style={{ margin: '0 0 6px', fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '1px solid #ddd', paddingBottom: '3px' }}>
+      <h3 style={{ margin: '0 0 6px', fontSize: '0.88rem', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '1px solid #ddd', paddingBottom: '4px', marginBottom: '8px' }}>
         {title}
       </h3>
       {children}

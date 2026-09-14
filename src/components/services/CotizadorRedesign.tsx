@@ -273,10 +273,14 @@ function VariableControl({ v, value, onValue, lang, serviceId }: {
       )}
       {v.type === 'toggle' && (
         <label style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
-          <div onClick={() => onValue(!val)}
-            style={{ width: 44, height: 26, borderRadius: 13, background: val ? '#30d158' : 'var(--cx-border-strong)', position: 'relative', transition: 'background 0.25s', flexShrink: 0 }}>
-            <div style={{ position: 'absolute', top: 2, left: val ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)' }} />
-          </div>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={Boolean(val)}
+            onClick={() => onValue(!val)}
+            style={{ width: 44, height: 26, borderRadius: 13, background: val ? '#30d158' : 'var(--cx-border-strong)', position: 'relative', transition: 'background 0.25s', flexShrink: 0, border: 'none', padding: 0, cursor: 'pointer' }}>
+            <span style={{ position: 'absolute', top: 2, left: val ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s cubic-bezier(0.3,0.9,0.4,1)', display: 'block' }} />
+          </button>
           <span style={{ fontSize: 15, color: 'var(--cx-text)' }}>{lang === 'en' ? VARS_EN[serviceId]?.[v.id]?.question ?? v.preguntaEs : v.preguntaEs}</span>
         </label>
       )}
@@ -822,10 +826,10 @@ export function CotizadorRedesign() {
                   ))}
                 </div>
                 <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 16, cursor: 'pointer' }}>
-                  <div onClick={() => setFirstClient(!firstClient)}
+                  <button type="button" onClick={() => setFirstClient(!firstClient)}
                     style={{ width: 44, height: 26, borderRadius: 13, background: firstClient ? '#30d158' : 'var(--cx-border-strong)', position: 'relative', flexShrink: 0 }}>
                     <div style={{ position: 'absolute', top: 2, left: firstClient ? 20 : 2, width: 22, height: 22, borderRadius: '50%', background: 'var(--cx-card-solid)', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.25s' }} />
-                  </div>
+                  </button>
                   <span style={{ fontSize: 14, color: 'var(--cx-muted)' }}>{lang === 'es' ? 'Descuento lanzamiento' : 'Launch discount'} −{LAUNCH_DISCOUNT.defaultPct}%</span>
                 </label>
               </div>

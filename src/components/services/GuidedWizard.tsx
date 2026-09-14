@@ -529,7 +529,12 @@ function QuestionCard({ q, answers, onAnswer, lang, branchId, compact = false }:
 
       {/* TOGGLE (avanzado) */}
       {q.type === 'toggle' && (
-        <div onClick={() => onAnswer(q.id, !current)}
+        <div
+          role="switch"
+          aria-checked={Boolean(current)}
+          tabIndex={0}
+          onClick={() => onAnswer(q.id, !current)}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onAnswer(q.id, !current); } }}
           style={{
             width: 48, height: 28, borderRadius: 14, cursor: 'pointer', position: 'relative',
             background: current ? '#30d158' : 'var(--cx-soft)', transition: 'background 0.25s',

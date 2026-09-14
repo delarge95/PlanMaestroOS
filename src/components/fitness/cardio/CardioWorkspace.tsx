@@ -128,7 +128,10 @@ export function CardioWorkspace() {
       {/* 0) Registrar sesión de cardio — alimenta el motor de reglas (cardio_session_history) */}
       <section className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)' }}>
         <h2 className="ds-h2">Registrar sesión de cardio</h2>
-        <div className="ds-row-wrap" style={{ alignItems: 'center', gap: 'var(--space-2)' }}>
+        <p className="ds-caption" style={{ margin: 0, color: 'var(--text-tertiary)' }}>
+          Cada sesión alimenta el calendario de recuperación y el motor de reglas (cardio_session_history).
+        </p>
+        <div className="ds-row-wrap" style={{ alignItems: 'center', gap: 'var(--space-2)', marginTop: 'var(--space-1)' }}>
           <select
             value={cardioType}
             onChange={(e) => setCardioType(e.target.value)}
@@ -144,18 +147,18 @@ export function CardioWorkspace() {
             <input
               type="number" min={1} max={300} value={cardioMinutes}
               onChange={(e) => setCardioMinutes(Number(e.target.value) || 1)}
-              style={{ width: '70px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
+              style={{ width: '72px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
             />
           </label>
           <label className="ds-row" style={{ gap: '6px', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
             RPE (opcional):
             <input
-              type="number" min={1} max={10} value={cardioRpe} placeholder="—"
+              type="number" min={1} max={10} value={cardioRpe} placeholder="1–10"
               onChange={(e) => setCardioRpe(e.target.value)}
-              style={{ width: '60px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
+              style={{ width: '72px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
             />
           </label>
-          <button type="button" onClick={handleLogCardio} className="ds-btn ds-btn-sm">
+          <button type="button" onClick={handleLogCardio} className="ds-btn ds-btn-primary ds-btn-sm">
             {cardioSaved ? <CheckCircle2 size={14} /> : null} {cardioSaved ? 'Guardado' : 'Guardar sesión'}
           </button>
         </div>
