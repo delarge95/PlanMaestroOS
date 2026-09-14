@@ -1,11 +1,13 @@
 // src/components/fitness/TodayRoutineStack.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Disclosure from '../ui/Disclosure';
 import ExerciseLink from './ExerciseLink';
 import ExerciseSubstitutionDrawer from './ExerciseSubstitutionDrawer';
-import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { ArrowLeftRight, ChevronDown, ChevronUp, RotateCcw, Clock, ExternalLink, CheckCircle2, Flame } from 'lucide-react';
 import { getProgramById } from '../../data/fitness/programs';
 import { pushFitnessSessionToWorker } from '../../lib/ai/workerClient';
+import { estimateSessionKcal } from '../../lib/fitness/exerciseKcal';
+import { exerciseDatabase } from '../../data/exercises/exerciseData';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { getExerciseDetails } from '../../data/fitness/exerciseResolver';
 
@@ -40,6 +42,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
   // Confirmación inline de sesión guardada (reemplaza al alert nativo).
   const [sessionSavedAt, setSessionSavedAt] = useState<number | null>(null);
+
   const [effortMode, setEffortMode] = useState<'RIR' | 'RPE'>('RIR');
   const [substitutionTarget, setSubstitutionTarget] = useState<{
     prescriptionId: string;
@@ -50,6 +53,28 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
 
   // Estado editable in-situ para ejercicios del día
   const [exerciseLogs, setExerciseLogs] = useState<Record<string, ExerciseLogState>>({});
+  // Peso corporal para la estimación de kcal (persistido por RoutineGeneratorPanel).
+  const [bodyWeightKg, setBodyWeightKg] = useState(0);
+  useEffect(() => {
+    try { setBodyWeightKg(Number(localStorage.getItem('fit-bodyweight-kg')) || 0); } catch { /* noop */ }
+  }, []);
+
+  // ≈kcal de ESTA sesión según lo editado (series/reps/esfuerzo reales del
+  // configurador + músculos del catálogo) — MET×RPE×masa muscular.
+  const sessionKcal = useMemo(() => {
+    if (bodyWeightKg <= 0 || !activeDay?.exercises) return null;
+    const specs = activeDay.exercises.map((pres: { id?: string; exerciseId?: string; workingSets?: number | string; targetReps?: string }) => {
+      const logSt = exerciseLogs[pres.id || pres.exerciseId || ''] ;
+      const sets = Number(logSt?.workingSets ?? pres.workingSets ?? 3) || 3;
+      const reps = Number((logSt?.repRange ?? pres.targetReps ?? '8-10').split('-')[0]) || 8;
+      const rirNum = Number(logSt?.effort);
+      const rpe = Number.isFinite(rirNum) && rirNum > 0 ? 10 - rirNum : 8;
+      const info = exerciseDatabase[pres.exerciseId ?? ''] as { muscles?: { strength?: string[] } } | undefined;
+      return { series: sets, reps, rpe, muscleGroups: info?.muscles?.strength ?? [] };
+    });
+    return estimateSessionKcal(specs, bodyWeightKg);
+  }, [bodyWeightKg, activeDay, exerciseLogs]);
+
 
   const getLogState = (exId: string, defaultWarmup: number, defaultSets: number, defaultReps: string, defaultEffort: string): ExerciseLogState => {
     if (exerciseLogs[exId]) return exerciseLogs[exId];
@@ -428,6 +453,14 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                 Sesión guardada en Progreso{typeof window !== 'undefined' && !window.localStorage.getItem('PUBLIC_WORKER_ON') ? ' · pendiente de sincronizar con Notion' : ''}.
               </span>
               <button type="button" onClick={() => setSessionSavedAt(null)} className="ds-btn ds-btn-ghost ds-btn-sm" style={{ marginLeft: 'auto' }}>✕</button>
+            </div>
+          )}
+
+          {/* ≈ KCAL DE LA SESIÓN (MET×RPE×músculo) */}
+          {sessionKcal && (
+            <div className="ds-row" style={{ gap: '6px', alignItems: 'center', fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+              <Flame size={13} style={{ color: 'var(--warning)' }} />
+              ≈{sessionKcal.kcal} kcal · {sessionKcal.minutes} min (estimado por esfuerzo y masa muscular — base 'inferred')
             </div>
           )}
 
