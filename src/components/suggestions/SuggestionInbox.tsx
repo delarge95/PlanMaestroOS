@@ -117,7 +117,41 @@ export default function SuggestionInbox() {
           ttlHours: 48,
         }, nowIso);
       }
+
+      // Objetivo semanal de aplicaciones (doc-34 §3.3: 5–8/semana): aviso
+      // proactivo a partir del miércoles si el ritmo va corto.
+      // Stages de avance ('Aplicado' en adelante) con movimiento en los últimos 7 días.
+      const appliedThisWeek = apps.filter(
+        (a) =>
+          (a.stage === 'Aplicado' || a.stage === 'Seguimiento' || a.stage === 'Entrevista') &&
+          new Date(a.updatedAtIso).getTime() >= Date.now() - 7 * 86400000,
+      ).length;
+      if (appliedThisWeek < 5 && new Date().getDay() >= 3) {
+        engine.propose({
+          id: `career:weekly-target--${today}`,
+          domain: 'career',
+          type: 'weekly-target',
+          priority: 4,
+          title: `${appliedThisWeek}/5 aplicaciones esta semana`,
+          body: 'Objetivo doc-34 §3.3: 5–8 aplicaciones semanales en modo selectivo. Retoma la onda A1 de la Base de datos (fit ≥10) y genera el CV por aplicación.',
+          ttlHours: 36,
+        }, nowIso);
+      }
     } catch { /* store no disponible en este entorno → sin sugerencias de carrera */ }
+
+    // Dolor reportado en biofeedback (clinical) ≥4/10 → asistente de salud.
+    const latestPain = sources?.biofeedback?.[0]?.pain ?? 0;
+    if (latestPain >= 4) {
+      engine.propose({
+        id: `fit:health-advisory--${today}`,
+        domain: 'fitness',
+        type: 'biofeedback',
+        priority: 6,
+        title: `Dolor ${latestPain}/10 registrado`,
+        body: 'Abre Fitness → ¿Dolor o molestia? para el advisory completo: estructuras afectadas, sustituciones de la sesión de hoy, prehab y guardas de volumen (reglas fit:pain-*).',
+        ttlHours: 20,
+      }, nowIso);
+    }
 
     engine.expireDue(nowIso);
     const activeNow = engine.active(nowIso);
