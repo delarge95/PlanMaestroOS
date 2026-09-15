@@ -21,6 +21,8 @@ import type { Onset, PainQuality } from '../../lib/fitness/injuryTriage';
 import { testsForZone, scoreCandidates, type GuidedTest, type ScoredCandidate } from '../../lib/fitness/diagnosticTests';
 import { exerciseDatabase } from '../../data/exercises/exerciseData';
 import { getProgramById } from '../../data/fitness/programs';
+import { getActiveProgressionState } from '../../data/fitness/activeProgressionStore';
+import { calisthenicsProgressions } from '../../data/fitness/progressionsData';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
 import { buildProgramCalendar } from '../../lib/fitness/programCalendar';
 import Button from '../ui/Button';
@@ -95,6 +97,26 @@ export default function HealthAdvisorPanel() {
     });
   }, []);
 
+  // Progresiones activas (mismas fuentes que ActiveProgressionsTodayCard).
+  const activeProgressions = useMemo(() => {
+    const state = getActiveProgressionState();
+    const activeIds = (state as { activeGroupIds?: string[] }).activeGroupIds ?? Object.keys(state.currentStepIndex ?? {});
+    return calisthenicsProgressions
+      .filter((g: { id: string }) => activeIds.includes(g.id))
+      .map((g: { id: string; title: string; exercises?: Array<{ name?: string; id?: string }> }) => {
+        const idx = (state.currentStepIndex as Record<string, number>)[g.id] ?? 0;
+        const step = g.exercises?.[idx];
+        const info = step?.id ? (exerciseDatabase[step.id] as { muscles?: { strength?: string[] } } | undefined) : undefined;
+        return {
+          groupId: g.id,
+          title: g.title,
+          stepIndex: idx,
+          stepName: step?.name ?? 'step actual',
+          stepMuscles: info?.muscles?.strength ?? [],
+        };
+      });
+  }, []);
+
   const handleRun = () => {
     const report: PainReport = {
       zone,
@@ -108,7 +130,7 @@ export default function HealthAdvisorPanel() {
       tingling: flags.tingling,
       redFlags: redFlagsText.split(',').map((x) => x.trim()).filter(Boolean),
     };
-    const r = runHealthIntelligence(report, plannedToday);
+    const r = runHealthIntelligence(report, plannedToday, activeProgressions);
     setResult(r);
     setTestAnswers({});
     setTestsDone(false);
@@ -309,6 +331,21 @@ export default function HealthAdvisorPanel() {
                       {a.substitutions.length > 0 && (
                         <span style={{ color: 'var(--color-accent-primary)' }}> → {a.substitutions.map((s) => s.name).join(' / ')}</span>
                       )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {result.progressionImpact.length > 0 && (
+                <div className="ds-stack-sm" style={{ gap: '4px' }}>
+                  <span className="ds-eyebrow">Progresiones activas — impacto</span>
+                  {result.progressionImpact.map((p) => (
+                    <div key={p.groupId} style={{ fontSize: '0.76rem' }}>
+                      <strong style={{ color: p.verdict === 'freeze' ? 'var(--danger, #ff453a)' : p.verdict === 'caution' ? 'var(--warning, #ff9f0a)' : 'var(--success, #30d158)' }}>
+                        {p.verdict === 'freeze' ? '⛔ congelar' : p.verdict === 'caution' ? '⚠️ vigilar' : '✅ ok'}
+                      </strong>{' '}
+                      {p.title.split(':')[0]} — step: {p.stepName}
+                      <div style={{ color: 'var(--text-tertiary)', fontSize: '0.7rem' }}>{p.reason}</div>
                     </div>
                   ))}
                 </div>

@@ -2,7 +2,7 @@
 // inteligencia de salud: dolor → estructuras → sesión → sustituciones → prehab → reglas.
 
 import { describe, expect, it } from 'vitest';
-import { runHealthIntelligence, type PainReport, type PlannedExercise } from '../healthIntelligence';
+import { runHealthIntelligence, assessProgressionImpact, type PainReport, type PlannedExercise, type ActiveProgressionInput } from '../healthIntelligence';
 
 const kneePain: PainReport = {
   zone: 'knee',
@@ -83,5 +83,34 @@ describe('runHealthIntelligence', () => {
       a.loadedStructures.some((s) => /delt|shoulder/i.test(s)),
     );
     expect(shoulderLoads.length).toBe(0);
+  });
+});
+
+
+describe('assessProgressionImpact (progresiones ↔ salud)', () => {
+  const active: ActiveProgressionInput[] = [
+    { groupId: 'p1', title: '7.0 Foundational Leg Strength: The Pistol Squat Progression', stepIndex: 2, stepName: 'Box Pistol Squat', stepMuscles: ['Quadriceps'] },
+    { groupId: 'p2', title: '5.0 Vertical Pushing Power: The Handstand & HSPU Progression', stepIndex: 1, stepName: 'Wall Handstand Hold', stepMuscles: ['Deltoids'] },
+  ];
+
+  it('dolor de rodilla congela pistol pero deja ok el handstand', () => {
+    const impacts = assessProgressionImpact('knee', ['quadriceps', 'patellar'], active);
+    const pistol = impacts.find((i) => i.groupId === 'p1')!;
+    const hs = impacts.find((i) => i.groupId === 'p2')!;
+    expect(pistol.verdict).toBe('freeze');
+    expect(pistol.reason).toMatch(/isométrico/i);
+    expect(hs.verdict).toBe('ok');
+  });
+
+  it('dolor de hombro pone el handstand en caution/freeze, pistol ok', () => {
+    const impacts = assessProgressionImpact('shoulder', ['deltoid', 'supraspinatus'], active);
+    expect(impacts.find((i) => i.groupId === 'p2')!.verdict).toMatch(/caution|freeze/);
+    expect(impacts.find((i) => i.groupId === 'p1')!.verdict).toBe('ok');
+  });
+
+  it('se integra al motor completo (progressionImpact en el resultado)', () => {
+    const r = runHealthIntelligence(kneePain, lowerDay, active);
+    expect(r.progressionImpact).toHaveLength(2);
+    expect(r.progressionImpact.find((i) => i.groupId === 'p1')!.verdict).toBe('freeze');
   });
 });

@@ -66,3 +66,6 @@ turbina/
 _tmp*
 .playwright-mcp/
 gui-test-screenshots/
+
+# Libros comerciales LOCALES (el visor los sirve en dev; no se publican)
+public/library/languages/Oxford_Living_Grammar_*.pdf

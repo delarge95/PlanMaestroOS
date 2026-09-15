@@ -58,6 +58,7 @@ export interface HealthIntelligenceResult {
   triage: TriageResult;
   structures: { muscles: string[]; tendons: string[]; joints: string[]; nerves: string[]; ligaments: string[] };
   affectedExercises: AffectedExercise[];
+  progressionImpact: ProgressionImpact[];
   prehab?: PrehabProtocol;
   advisories: HealthAdvisory[];
   disclaimer: string;
@@ -87,6 +88,68 @@ function tokens(name?: string): string[] {
   return norm(name).split(/[\s-]+/).filter((t) => t.length >= 5 && !AMBIGUOUS.has(t));
 }
 
+/** Progresión activa para evaluar impacto del advisory. */
+export interface ActiveProgressionInput {
+  groupId: string;
+  title: string;
+  stepIndex: number;
+  stepName: string;
+  stepMuscles: string[];
+}
+
+export interface ProgressionImpact {
+  groupId: string;
+  title: string;
+  stepName: string;
+  verdict: 'freeze' | 'caution' | 'ok';
+  reason: string;
+}
+
+/** Zona → dominios de progresión que cargan esa zona. */
+const ZONE_TO_DOMAINS: Record<string, string[]> = {
+  knee: ['legs'], thigh: ['legs'], hip: ['legs'],
+  shoulder: ['push', 'pull'], chest: ['push'], arm: ['push', 'pull'], 'forearm-hand': ['push', 'pull'],
+  back: ['pull', 'core'], cervical: ['pull', 'core'], spine: ['core'],
+  core: ['core'],
+};
+
+function progressionDomain(title: string): string {
+  const t = norm(title);
+  if (/pistol|leg|squat/.test(t)) return 'legs';
+  if (/planche|handstand|hspu|push|dip/.test(t)) return 'push';
+  if (/lever|muscle|pull/.test(t)) return 'pull';
+  if (/l-sit|manna|flag|core|90/.test(t)) return 'core';
+  return 'mixed';
+}
+
+/**
+ * Impacto del advisory sobre las progresiones ACTIVAS: qué steps congelar o
+ * vigilar según la zona afectada (dominio de la progresión + músculos del
+ * step vía tokens de estructura).
+ */
+export function assessProgressionImpact(
+  zone: string,
+  structureTokens: string[],
+  active: ActiveProgressionInput[],
+): ProgressionImpact[] {
+  const riskyDomains = ZONE_TO_DOMAINS[zone] ?? [];
+  return active.map((p) => {
+    const dom = progressionDomain(p.title);
+    const domainHit = riskyDomains.includes(dom);
+    const muscleHit = p.stepMuscles.some((m) => {
+      const mt = tokens(m);
+      return structureTokens.some((st) => mt.some((x) => x === st || (x.length >= 6 && st.startsWith(x)) || (st.length >= 6 && x.startsWith(st))));
+    });
+    if (domainHit && muscleHit) {
+      return { ...p, verdict: 'freeze', reason: `Dominio ${dom} + step carga la zona: congela el avance y mantén solo trabajo isométrico tolerable (dolor ≤3/10).` };
+    }
+    if (domainHit || muscleHit) {
+      return { ...p, verdict: 'caution', reason: `Relación parcial con la zona (${domainHit ? 'dominio ' + dom : 'músculo del step'}): progresa SOLO sin dolor durante ni 24h después.` };
+    }
+    return { ...p, verdict: 'ok', reason: 'Sin relación con la zona afectada: continúa normal.' };
+  });
+}
+
 /**
  * El motor completo. `plannedToday` son los ejercicios de la sesión de HOY;
  * el resultado dice qué tocar, qué sustituir, qué prehab y con qué citas.
@@ -94,6 +157,7 @@ function tokens(name?: string): string[] {
 export function runHealthIntelligence(
   report: PainReport,
   plannedToday: PlannedExercise[] = [],
+  activeProgressions: ActiveProgressionInput[] = [],
 ): HealthIntelligenceResult {
   const zoneLabel = BODY_ZONE_LABELS_ES[report.zone] ?? report.zone;
   const muscles = getMuscles(report.zone).map((m) => m.nameEn);
@@ -220,6 +284,7 @@ export function runHealthIntelligence(
     triage: t,
     structures: { muscles, tendons, joints, nerves, ligaments },
     affectedExercises,
+    progressionImpact: assessProgressionImpact(report.zone, structureTokens, activeProgressions),
     prehab,
     advisories,
     disclaimer: TRIAGE_DISCLAIMER,

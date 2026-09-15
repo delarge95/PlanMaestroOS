@@ -40,6 +40,36 @@ export const LANGUAGE_BOOKS: LanguageBook[] = [
     // libro quedó PENDIENTE de verificación contra el PDF físico.
   },
   {
+    id: 'oxford-living-grammar-elementary',
+    title: 'Oxford Living Grammar — Elementary',
+    author: 'Ken Paterson / Norman Coe',
+    publisher: 'Oxford University Press',
+    level: 'A1–A2',
+    fileName: 'Oxford_Living_Grammar_Elementary.pdf',
+    language: 'en',
+    pagesVerified: true // PDF local del usuario (gitignored: no se publica)
+  },
+  {
+    id: 'oxford-living-grammar-preintermediate',
+    title: 'Oxford Living Grammar — Pre-Intermediate',
+    author: 'Norman Coe / Mark Harrison',
+    publisher: 'Oxford University Press',
+    level: 'A2–B1',
+    fileName: 'Oxford_Living_Grammar_PreIntermediate.pdf',
+    language: 'en',
+    pagesVerified: true // PDF local del usuario (gitignored)
+  },
+  {
+    id: 'oxford-living-grammar-intermediate',
+    title: 'Oxford Living Grammar — Intermediate',
+    author: 'Mark Harrison',
+    publisher: 'Oxford University Press',
+    level: 'B1–B2',
+    fileName: 'Oxford_Living_Grammar_Intermediate.pdf',
+    language: 'en',
+    pagesVerified: true // PDF local del usuario (gitignored)
+  },
+  {
     id: 'menschen-a1-1',
     title: 'Menschen A1.1',
     author: 'Hueber',

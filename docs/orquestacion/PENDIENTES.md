@@ -3,7 +3,10 @@
 > Lista viva. Todo lo que estamos aplazando, con dueño y desbloqueo.
 > Actualizada por el orquestador en cada despacho.
 
-## A. Pendientes del USUARIO (encargos externos)
+## A. Pendientes del USUARIO — ordenados por RAZONAMIENTO requerido (mayor→menor)
+
+> Reordenado 2026-09-14 tras los despachos 6-9. A1 exige más criterio; A9 es
+> copiar un archivo. Todas desbloquean valor distinto.
 
 | # | Pendiente | Detalle | Desbloquea |
 |---|---|---|---|
@@ -12,7 +15,7 @@
 | U3 | **Deploy del Worker IA** | `cd worker && npm i && npx wrangler secret put WORKER_SECRET_KEY && npx wrangler secret put GEMINI_API_KEY && npm run deploy` (llamada real a Gemini YA implementada, fallback determinista sin key) | Borradores automáticos: investigación de empresa, tailoring de CV, cartas |
 | U4 | **PDFs comerciales de alemán** | Copiar a `public/library/languages/`: `Menschen_A1_1.pdf`, `Menschen_A1_2.pdf`, `Grammatik_Aktiv_A1_A2.pdf` | Anclaje a página exacta de las unidades A1.1 (hoy citan «por verificar») |
 | U5 | **Datos del CV por confirmar (doc-17 §2)** | email, teléfono, URL portfolio, número final de triángulos, métricas SUS/NASA-TLX, fecha de grado | CV 100% final (hoy sale limpio pero con 4 claims sin confirmar) |
-| U6 | **Validar WIP de agent/portfolio** | 1 commit «SIN VERIFICAR» (rediseño portafolio público) — revisar y merge o descartar | — |
+| U6 | ~~Validar WIP de agent/portfolio~~ **RESUELTO 2026-09-14**: auditoría del orquestador → NO merge (predaterría el barrido de diseño y trae tooling ajeno `.opencode`); rama archivada como referencia para cherry-pick futuro (SphericalGallery) | — |
 | U7 | **Cotizador en chat separado** | Traer resultados de OX Alpha para verificación + merge final | Despliegue del cotizador público |
 | U8 | **Instalar deps del worker** | `cd worker && npm i` (wrangler para deploy local) | Test local del worker con `npm run dev` |
 
@@ -39,3 +42,10 @@
 | F5 | Notion push bidireccional (pull funciona; push de Tasks/Career desde la app al editar) | Baja (Spark puede sustituir) |
 | F6 | Kitchen/gaming sections (mediano plazo, pedido explícito del usuario) | Baja prioridad confirmada |
 | F7 | Deploy GitHub Pages del app completo | A pedido |
+
+## D. Nota de deploy (F7)
+
+`public/library/languages/Oxford_Living_Grammar_*.pdf` (219 MB, copyright del
+usuario) están GITIGNORED: el visor los sirve en dev/build local pero **no se
+publican**. El workflow de deploy público debe mantenerlos fuera (ya cubierto
+al no commitearlos). FSI German (dominio público, 6.5 MB) sí viaja.
