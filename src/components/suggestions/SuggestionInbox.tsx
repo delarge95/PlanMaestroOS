@@ -139,6 +139,23 @@ export default function SuggestionInbox() {
       }
     } catch { /* store no disponible en este entorno → sin sugerencias de carrera */ }
 
+    // Refuerzo inteligente de errores de idiomas (SM-2 de errores).
+    try {
+      const { countDueErrors } = await import('../../lib/languages/errorStore');
+      const dueErrors = countDueErrors();
+      if (dueErrors >= 3) {
+        engine.propose({
+          id: `lang:error-review--${today}`,
+          domain: 'languages',
+          type: 'error-review',
+          priority: 5,
+          title: `${dueErrors} errores de idioma listos para reforzar`,
+          body: 'Fallaste estos ejercicios y ya venció su repaso. 3 minutos en Idiomas → Refuerzo de errores los consolida (acertar espacia; fallar repite mañana).',
+          ttlHours: 14,
+        }, nowIso);
+      }
+    } catch { /* store no disponible → sin sugerencia */ }
+
     // Dolor reportado en biofeedback (clinical) ≥4/10 → asistente de salud.
     const latestPain = sources?.biofeedback?.[0]?.pain ?? 0;
     if (latestPain >= 4) {

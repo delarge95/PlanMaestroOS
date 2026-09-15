@@ -3,10 +3,13 @@ import type { Lesson } from '../../data/languages/types';
 import ErrorBoundary from '../ErrorBoundary';
 import Button from '../ui/Button';
 import BookPdfViewer from './BookPdfViewer';
+import { useErrorReviewStore } from '../../lib/languages/errorStore';
 import { ExternalLink, CheckCircle, BookOpen } from 'lucide-react';
 
 export interface LessonViewProps {
   lesson: Lesson;
+  /** Idioma de la lección ('de' | 'en') — alimenta el refuerzo de errores. */
+  language?: 'de' | 'en';
   onLessonCompleted?: () => void;
   /** Ejercicios mostrados (compatibilidad: el comportamiento histórico es 3). */
   maxExercises?: number;
@@ -20,11 +23,39 @@ function answersMatch(user: string, correct: string): boolean {
   return norm(user) === norm(correct);
 }
 
-export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3, initiallyCompleted = false }: LessonViewProps) {
+export default function LessonView({ lesson, language = 'de', onLessonCompleted, maxExercises = 3, initiallyCompleted = false }: LessonViewProps) {
   const [activeTab, setActiveTab] = useState<'theory' | 'exercises'>('theory');
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [completed, setCompleted] = useState(initiallyCompleted);
   const [bookOpen, setBookOpen] = useState(false);
+
+  // Refuerzo inteligente: registra UNA respuesta incorrecta por ejercicio y
+  // sesión. Multiple-choice registra al elegir; texto libre, al perder foco
+  // (así un carácter a medias no cuenta como error).
+  const recordedErrorsRef = React.useRef<Set<string>>(new Set());
+  const commitWrongAnswer = (ex: { id: string; prompt: string; correctAnswer: string }, raw: string) => {
+    const val = (raw ?? '').trim();
+    if (!val || recordedErrorsRef.current.has(ex.id)) return;
+    const norm = (x: string) => x.trim().toLowerCase().replace(/\s+/g, ' ');
+    if (norm(val) === norm(ex.correctAnswer)) return;
+    recordedErrorsRef.current.add(ex.id);
+    useErrorReviewStore.getState().recordError({
+      language,
+      exerciseId: ex.id,
+      lessonId: lesson.id,
+      prompt: ex.prompt,
+      correctAnswer: ex.correctAnswer,
+      userAnswer: val,
+    });
+  };
+  React.useEffect(() => {
+    for (const ex of lesson.exercises) {
+      if (ex.type === 'multiple_choice' && ex.options) {
+        commitWrongAnswer(ex, userAnswers[ex.id] ?? '');
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userAnswers, lesson, language]);
 
   const handleAnswerChange = (exId: string, val: string) => {
     setUserAnswers((prev) => ({ ...prev, [exId]: val }));
@@ -154,6 +185,8 @@ export default function LessonView({ lesson, onLessonCompleted, maxExercises = 3
                     type="text"
                     value={userAnswers[ex.id] || ''}
                     onChange={(e) => handleAnswerChange(ex.id, e.target.value)}
+                    onBlur={() => commitWrongAnswer(ex, userAnswers[ex.id] ?? '')}
+                    onKeyDown={(e) => { if (e.key === 'Enter') commitWrongAnswer(ex, userAnswers[ex.id] ?? ''); }}
                     placeholder="Escribe tu respuesta..."
                     style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px 12px', color: 'var(--text)', fontSize: '0.85rem' }}
                   />

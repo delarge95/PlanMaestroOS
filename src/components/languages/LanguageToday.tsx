@@ -6,6 +6,8 @@ import { Languages, Flame } from 'lucide-react';
 import { computeStreakDays, useVocabularyStore } from '../../lib/languages/vocabularyStore';
 import { germanCourse } from '../../data/languages/germanCourse';
 import { englishCourse } from '../../data/languages/englishCourse';
+import ErrorReviewSession from './ErrorReviewSession';
+import BookStudyMode from './BookStudyMode';
 
 /** Bloque prescriptivo de un idioma para "hoy". */
 export interface LanguageTodayBlock {
@@ -69,7 +71,8 @@ export default function LanguageToday({
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
 
-        {/* NAVEGACIÓN NIVEL 2 */}        {/* CABECERA PRESCRIPTIVA DE IDIOMAS */}
+        {/* NAVEGACIÓN NIVEL 2 */}
+        {/* CABECERA PRESCRIPTIVA DE IDIOMAS */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -123,6 +126,10 @@ export default function LanguageToday({
             </div>
           ) : null
         )}
+
+        {/* Refuerzo inteligente de errores + estudio con libro (traslado del libro a la app) */}
+        <ErrorReviewSession />
+        <BookStudyMode />
 
       </div>
     </ErrorBoundary>
