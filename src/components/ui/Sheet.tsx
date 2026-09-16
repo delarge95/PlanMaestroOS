@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import IconButton from './IconButton';
 import { X } from 'lucide-react';
 
@@ -20,6 +20,32 @@ export function Sheet({
   maxWidth = '720px'
 }: SheetProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const [exiting, setExiting] = useState(false);
+  const wasOpenRef = useRef(false);
+
+  // M1 — salida animada: al cerrar, el Sheet permanece montado 220ms mientras
+  // corre el fade-out/sheet-down, y recién entonces se desmonta. Con
+  // prefers-reduced-motion se salta el timeout y desmonta directo.
+  // [mot-duracion-easing] [mot-disney-purpose]
+  useEffect(() => {
+    if (isOpen) {
+      wasOpenRef.current = true;
+      setExiting(false);
+      return;
+    }
+    // Solo anima la salida si estuvo abierto (evita render fantasma al montar cerrado)
+    if (!wasOpenRef.current) return;
+    wasOpenRef.current = false;
+
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return; // desmonta directo, sin animación de salida
+
+    setExiting(true);
+    const timer = setTimeout(() => setExiting(false), 220);
+    return () => clearTimeout(timer);
+  }, [isOpen]);
 
   // Close on Escape key & Lock body scroll
   useEffect(() => {
@@ -40,12 +66,13 @@ export function Sheet({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen && !exiting) return null;
 
   return (
     <div
       role="presentation"
       onClick={onClose}
+      className={exiting ? 'sheet-overlay sheet-overlay-exiting' : 'sheet-overlay'}
       style={{
         position: 'fixed',
         inset: 0,
@@ -56,8 +83,7 @@ export function Sheet({
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'center',
-        padding: 'var(--space-md)',
-        animation: 'fadeIn 180ms ease-out'
+        padding: 'var(--space-md)'
       }}
     >
       <div
@@ -67,6 +93,7 @@ export function Sheet({
         aria-labelledby="sheet-title"
         aria-describedby={description ? 'sheet-desc' : undefined}
         onClick={(e) => e.stopPropagation()}
+        className={exiting ? 'sheet-panel sheet-exiting' : 'sheet-panel'}
         style={{
           width: `min(${maxWidth}, 100%)`,
           maxHeight: '85vh',

@@ -173,6 +173,17 @@
 .ds-anim-2 { animation-delay: 0.1s; }
 .ds-anim-3 { animation-delay: 0.15s; }
 
+/* ── SHEET — entrada/salida animada (M1) [mot-duracion-easing] [mot-disney-purpose] ──
+   Entra deslizando desde abajo (sheet-up); al cerrar baja + fade rápido del
+   overlay mientras el componente permanece montado 220ms. */
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes sheet-down { from { transform: none; } to { transform: translateY(100%); } }
+@keyframes sheet-overlay-out { from { opacity: 1; } to { opacity: 0; } }
+.sheet-overlay { animation: fadeIn 180ms ease-out both; }
+.sheet-overlay-exiting { animation: sheet-overlay-out 200ms ease-in both; }
+.sheet-panel { animation: sheet-up 300ms var(--ease-product) both; }
+.sheet-exiting { animation: sheet-down 200ms ease-in both; }
+
 /* ── SECTION NAV BAR (jerarquía canónica de navegación) ──
    REGLAS (canon, no negociable):
    1. Nivel 1 — Dominios: NavigationShell (header superior). Fijo.
