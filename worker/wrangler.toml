@@ -14,3 +14,7 @@ cpu_ms = 5000
 # account_id = "<tu-account-id>"
 [vars]
 APP_ORIGIN = "https://alexanderwoodcock.github.io"
+NOTION_TASKS_DB_ID = "3d0e80ddc86681ac9e83e45d68760003"
+NOTION_CAREER_DB_ID = "3d0e80ddc866812c8912c4933f965293"
+NOTION_SESSIONS_DB_ID = "3d0e80ddc86681c39629f28b92b544c0"
+NOTION_MEASUREMENTS_DB_ID = "3d0e80ddc86681ad92b2c81f23037fd0"
