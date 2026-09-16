@@ -13,6 +13,7 @@ import { deriveWeekAggregates, getWeekStartIso, addDaysIso } from '../../data/co
 import { evaluateRules } from '../../lib/rules';
 import type { RuleContext } from '../../lib/rules';
 import { FITNESS_SEED_RULES } from '../../data/fitness/rules/fitnessRules';
+import { FITNESS_EXTENDED_RULES } from '../../data/fitness/rules/fitnessRulesExtended';
 import { createSuggestionEngine, SuggestionEngine } from '../../lib/suggestions';
 import { fromRuleEvaluations, RULE_SUGGESTION_COOLDOWNS } from '../../lib/suggestions/fromRuleEvaluations';
 import type { Suggestion } from '../../lib/suggestions';
@@ -71,7 +72,9 @@ export default function SuggestionInbox() {
       },
     };
 
-    const evaluations = evaluateRules(FITNESS_SEED_RULES, context);
+    // U1 integrado: semillas + catálogo extendido citado (39 reglas; las
+    // extendidas devuelven not-applicable sin datos — sin costo de ruido).
+    const evaluations = evaluateRules([...FITNESS_SEED_RULES, ...FITNESS_EXTENDED_RULES], context);
     const weekKey = thisWeek;
     for (const candidate of fromRuleEvaluations(evaluations, weekKey)) {
       engine.propose(candidate, nowIso);
