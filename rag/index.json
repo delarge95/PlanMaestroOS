@@ -21,6 +21,11 @@
       "sources": 15,
       "chunks": 61
     },
+    "design": {
+      "version": "4.0.0",
+      "sources": 4,
+      "chunks": 16
+    },
     "english": {
       "version": "4.0.0",
       "sources": 2,
@@ -45,6 +50,11 @@
       "version": "4.0.0",
       "sources": 6,
       "chunks": 36
+    },
+    "wearable": {
+      "version": "4.0.0",
+      "sources": 2,
+      "chunks": 4
     }
   }
 }
