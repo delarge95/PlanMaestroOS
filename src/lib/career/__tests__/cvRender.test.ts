@@ -80,9 +80,10 @@ describe('renderCvMarkdown', () => {
     const md = renderCvMarkdown(cvBase, cvVariants[0]);
     expect(md).toContain('Expected graduation');
     expect(md).not.toContain('[date]');
-    // El claim sospechoso sigue presente pero SIN la nota editorial (variante techvis).
+    // U5: los claims ahora traen las métricas REALES (doc-01:274) sin notas.
     const mdTechvis = renderCvMarkdown(cvBase, getCvVariant('techvis-digitaltwin')!);
-    expect(mdTechvis).toContain('perceived workload.');
+    expect(mdTechvis).toContain('91.88');
+    expect(cvBase.projects[0].bullets.some((b) => b.includes('95,617'))).toBe(true);
     expect(mdTechvis).not.toContain('[verify');
   });
 });

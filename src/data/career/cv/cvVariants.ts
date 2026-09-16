@@ -47,7 +47,7 @@ export const cvVariants: CvVariant[] = [
       'twinsight-x500': [
         'Converted CAD-derived drone assembly assets into an optimized Unity WebGL visualization prototype for inspection and spatial understanding.',
         'Built inspection features including component selection, exploded view, cross-section/clipping, visual modes, and technical part information panels.',
-        'Connected technical implementation with evaluation methods, using SUS, NASA-TLX Raw, and Think-Aloud to compare user experience and perceived workload. [verify exact metrics]',
+        'Connected technical implementation with evaluation methods — SUS average 91.88 and NASA-TLX Raw 8.69 (3D viewer) vs 19.89 (2D support) across 12 participants (Think-Aloud included).',
       ],
       'ara-framework': [
         'Built a Python-based research automation prototype supporting structured analysis, documentation, and technical report generation.',

@@ -58,8 +58,8 @@ export function buildServiceSheet(highlightOfferingId?: string): ServiceSheetDat
     evidenceTitle: 'TwinSight X500 — Unity WebGL technical visualization',
     evidenceBullets: [
       'Browser-based drone assembly inspection: component selection, exploded view, cross-section, visual modes and technical UI.',
-      'CAD-to-realtime pipeline: CAD-derived geometry optimized from over 6.5M to ~95,617 triangles. [verify final number]',
-      'Validated with SUS, NASA-TLX Raw and Think-Aloud usability methods.',
+      'CAD-to-realtime pipeline: CAD-derived geometry optimized from 6.5M+ to 95,617 triangles.',
+      'Validated with 12 participants — SUS 91.88 average, NASA-TLX Raw 8.69 (3D) vs 19.89 (2D), Think-Aloud.',
     ],
     cta: { cotizador: SERVICE_LINKS.cotizador, twinsight: SERVICE_LINKS.twinsightDemo },
     links: [

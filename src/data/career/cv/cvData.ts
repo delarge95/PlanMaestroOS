@@ -53,8 +53,8 @@ export const cvBase: CvBaseData = {
       meta: 'Thesis project | Unity, C#, WebGL, URP, UI Toolkit, Blender',
       bullets: [
         'Built TwinSight X500, a Unity WebGL technical visualization prototype for drone assembly inspection, including component selection, exploded view, cross-section tools, visual modes, and technical UI.',
-        'Created a CAD-to-realtime pipeline using Blender optimization and asset preparation, reducing CAD-derived geometry from over 6.5M triangles to approximately 95,617 triangles. [verify final number]',
-        'Evaluated the prototype using SUS, NASA-TLX Raw, and Think-Aloud methodology, connecting technical implementation with user-centered validation. [verify final metrics]',
+        'Created a CAD-to-realtime pipeline using Blender optimization and asset preparation, reducing CAD-derived geometry from 6.5M+ triangles to 95,617 optimized triangles.',
+        'Evaluated the prototype with 12 participants (96 task-condition records) using SUS (average 91.88), NASA-TLX Raw (8.69 for the 3D viewer vs 19.89 for 2D support), and Think-Aloud methodology.',
       ],
     },
     {

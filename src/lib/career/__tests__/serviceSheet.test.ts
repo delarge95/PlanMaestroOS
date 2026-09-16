@@ -19,8 +19,10 @@ describe('buildServiceSheet', () => {
     for (const l of s.links) expect(l.url).toMatch(/^https:\/\//);
   });
 
-  it('la evidencia conserva la nota editorial en datos (§0.1) para que la UI avise', () => {
+  it('la evidencia trae las métricas REALES verificadas (U5: doc-01:274)', () => {
     const s = buildServiceSheet();
-    expect(s.evidenceBullets.some((b) => /\[verify/i.test(b))).toBe(true);
+    expect(s.evidenceBullets.some((b) => b.includes('95,617'))).toBe(true);
+    expect(s.evidenceBullets.some((b) => b.includes('91.88'))).toBe(true);
+    expect(s.evidenceBullets.some((b) => /\[verify/i.test(b))).toBe(false);
   });
 });
