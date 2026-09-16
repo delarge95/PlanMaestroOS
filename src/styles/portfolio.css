@@ -1,0 +1,1095 @@
+/* ============================================================
+   src/styles/portfolio.css — Capa de diseño del portafolio público.
+   TODO va namespaced bajo .pf-* para no filtrar estilos al resto
+   del sitio. Consume tokens de tokens.css (--accent, --surface-*,
+   --fs-*, --radius-*, --space-*) y respeta prefers-reduced-motion.
+   Comentarios en español (regla de casa).
+   ============================================================ */
+
+/* ── A11y global del scroll: reduced-motion desactiva smooth ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Utilidades base ── */
+.pf-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pf-shell {
+  width: min(1160px, calc(100% - 44px));
+  margin-inline: auto;
+}
+
+.pf-section {
+  padding-block: clamp(120px, 14vw, 160px); /* respiración awwwards */
+}
+
+/* Kickers mono (Azeret Mono ya la carga BaseLayout) */
+.pf-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-family: "Azeret Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pf-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", var(--font-family-system);
+  font-size: clamp(var(--fs-page), 3.4vw, 2.9rem);
+  font-weight: 600;
+  letter-spacing: -0.025em; /* tracking negativo solo en grandes */
+  line-height: 1.05;
+}
+
+.pf-lead {
+  margin: 0;
+  max-width: 58ch;
+  color: var(--text-secondary);
+  font-size: var(--fs-step);
+  line-height: 1.65;
+}
+
+/* ════════════════════════════════════════════════════════════
+   HERO — WebGL full-screen (PortfolioHero.tsx)
+   ════════════════════════════════════════════════════════════ */
+.pf-hero {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: 100svh;
+  padding: clamp(140px, 18vh, 220px) 0 clamp(96px, 12vh, 140px);
+  overflow: clip;
+  isolation: isolate;
+}
+
+/* Fondo estático de respaldo (visible si WebGL falla o reduced-motion) */
+.pf-hero-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(10, 132, 255, 0.10), transparent 26rem),
+    radial-gradient(circle at 82% 72%, rgba(10, 132, 255, 0.06), transparent 30rem),
+    radial-gradient(1.5px 1.5px at 12% 30%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 28% 68%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1.5px 1.5px at 46% 18%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 63% 82%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1.5px 1.5px at 78% 36%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 90% 60%, rgba(255, 255, 255, 0.3), transparent),
+    var(--bg);
+}
+
+.pf-hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  /* sin transition: el fade lo escribe el rAF del hero frame a frame */
+}
+
+.pf-hero.is-fallback .pf-hero-canvas {
+  display: none;
+}
+
+/* Velo inferior para legibilidad del texto sobre el 3D (bl/neg permitido en overlay) */
+.pf-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 42%;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.66));
+  pointer-events: none;
+}
+
+.pf-hero-inner {
+  display: grid;
+  gap: var(--space-5);
+}
+
+/* Entrada del hero: CSS puro (no bloquea, no depende de hidratación) */
+@keyframes pf-hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.pf-hero-inner > * {
+  animation: pf-hero-in 0.85s var(--ease-product) both;
+}
+
+.pf-hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+.pf-hero-inner > *:nth-child(2) { animation-delay: 0.14s; }
+.pf-hero-inner > *:nth-child(3) { animation-delay: 0.23s; }
+.pf-hero-inner > *:nth-child(4) { animation-delay: 0.34s; }
+.pf-hero-inner > *:nth-child(5) { animation-delay: 0.44s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-hero-inner > * {
+    animation: none;
+  }
+}
+
+.pf-hero-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", var(--font-family-system);
+  font-size: clamp(2.6rem, 7.4vw, 5.6rem); /* display expresivo, escala desde --fs-display */
+  font-weight: 600;
+  letter-spacing: -0.035em; /* Bringhurst: tracking negativo solo en tamaños grandes */
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.pf-hero-title span {
+  display: block;
+}
+
+.pf-hero-title .pf-hero-accent {
+  color: var(--accent);
+}
+
+.pf-hero-copy {
+  margin: 0;
+  max-width: 54ch;
+  color: var(--text-secondary);
+  font-size: var(--fs-step);
+  line-height: 1.65;
+}
+
+.pf-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Botones del hero — consumen tokens, micro-interacción translateY */
+.pf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font: 600 var(--fs-body) var(--font-family-system);
+  text-decoration: none;
+  transition:
+    transform 0.15s var(--ease-standard),
+    border-color 0.2s var(--ease-standard),
+    background 0.2s var(--ease-standard),
+    box-shadow 0.2s var(--ease-standard);
+}
+
+.pf-btn:active {
+  transform: scale(0.98);
+}
+
+.pf-btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.pf-btn-primary:hover,
+.pf-btn-primary:focus-visible {
+  background: var(--accent);
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(10, 132, 255, 0.28);
+  outline: none;
+}
+
+.pf-btn-secondary {
+  border-color: var(--color-border-visible);
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+}
+
+.pf-btn-secondary:hover,
+.pf-btn-secondary:focus-visible {
+  border-color: var(--text-tertiary);
+  background: var(--glass-strong);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.pf-btn-ghost {
+  color: var(--text-secondary);
+}
+
+.pf-btn-ghost:hover,
+.pf-btn-ghost:focus-visible {
+  color: var(--text-primary);
+  outline: none;
+}
+
+.pf-btn-arrow {
+  transition: transform 0.2s var(--ease-standard);
+}
+
+.pf-btn:hover .pf-btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Fila de métricas rápidas del hero */
+.pf-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-hero-stats li {
+  display: grid;
+  gap: 2px;
+}
+
+.pf-hero-stats strong {
+  color: var(--text-primary);
+  font-size: var(--fs-section);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.pf-hero-stats span {
+  color: var(--text-tertiary);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Esquinas meta + indicador de scroll */
+.pf-hero-meta {
+  position: absolute;
+  bottom: clamp(28px, 5vh, 48px);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  color: var(--text-tertiary);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.pf-hero-scroll {
+  position: absolute;
+  bottom: clamp(20px, 4vh, 36px);
+  left: 50%;
+  translate: -50% 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.pf-hero-scroll:hover {
+  color: var(--text-primary);
+}
+
+.pf-scroll-line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(180deg, var(--text-secondary), transparent);
+  overflow: hidden;
+  position: relative;
+}
+
+.pf-scroll-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, var(--accent));
+  animation: pf-scroll-pulse 2.2s var(--ease-standard) infinite;
+}
+
+@keyframes pf-scroll-pulse {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+@media (max-width: 720px) {
+  .pf-hero-meta {
+    display: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   SELECTED WORK — scrollytelling (ProjectShowcase.tsx)
+   ════════════════════════════════════════════════════════════ */
+.pf-work-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.pf-work-body {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(320px, 4fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+
+/* Columna de pasos que activan el panel al scroll */
+.pf-steps {
+  display: grid;
+  gap: clamp(72px, 10vh, 128px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-step {
+  display: grid;
+  gap: var(--space-4);
+  min-height: 62vh; /* cada paso domina el viewport para el switch */
+  padding-block: clamp(24px, 4vh, 48px);
+}
+
+.pf-step-index {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  color: var(--text-tertiary);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.16em;
+}
+
+.pf-step-index b {
+  color: var(--accent);
+  font-size: clamp(var(--fs-page), 2.6vw, 2.1rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s var(--ease-standard);
+}
+
+.pf-step h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", var(--font-family-system);
+  font-size: clamp(var(--fs-page), 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.pf-step-tag {
+  margin: 0;
+  color: var(--accent);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-meta);
+  letter-spacing: 0.08em;
+}
+
+.pf-step p {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--text-secondary);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+/* Parallax sutil en métricas — data-pf-parallax */
+.pf-step-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.pf-metric {
+  display: grid;
+  gap: 2px;
+  min-width: 128px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-m);
+  background: var(--surface-1);
+  will-change: transform;
+}
+
+.pf-metric strong {
+  color: var(--text-primary);
+  font-size: var(--fs-page);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.pf-metric span {
+  color: var(--text-tertiary);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-step-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-step-tools li {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font: 500 var(--fs-meta) var(--font-family-system);
+  transition: border-color 0.2s var(--ease-standard), color 0.2s var(--ease-standard);
+}
+
+.pf-step:hover .pf-step-tools li {
+  border-color: var(--color-border-visible);
+  color: var(--text-primary);
+}
+
+/* Panel pegajoso que sigue al scroll */
+.pf-panel {
+  position: sticky;
+  top: clamp(96px, 12vh, 128px);
+}
+
+.pf-panel-card {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(var(--space-5), 3vw, var(--space-6));
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-l);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-float);
+  overflow: clip;
+}
+
+.pf-panel-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent 72%);
+  opacity: 0.85;
+}
+
+/* Crossfade entre proyectos: re-mount por key */
+.pf-panel-inner {
+  display: grid;
+  gap: var(--space-4);
+  animation: pf-panel-in 0.5s var(--ease-product) both;
+}
+
+@keyframes pf-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pf-panel-eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pf-panel h4 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", var(--font-family-system);
+  font-size: var(--fs-page);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.pf-panel-summary {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-body);
+  line-height: 1.62;
+}
+
+/* Bloque etiquetado dentro del panel (etapas, stack) */
+.pf-panel-block {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.pf-panel-facts {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.pf-panel-facts > div {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+}
+
+.pf-panel-facts span {
+  color: var(--text-tertiary);
+  font: 700 var(--fs-eyebrow) var(--font-family-system);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pf-panel-facts p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--fs-meta);
+  line-height: 1.55;
+}
+
+.pf-panel-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pf-panel-stack span {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font: 500 var(--fs-meta) var(--font-family-system);
+}
+
+.pf-panel-stack span.is-muted {
+  color: var(--text-tertiary);
+}
+
+.pf-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.pf-panel-actions .pf-btn {
+  min-height: 42px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--fs-meta);
+}
+
+.pf-panel-actions .pf-btn-primary {
+  background: transparent;
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.pf-panel-actions .pf-btn-primary:hover,
+.pf-panel-actions .pf-btn-primary:focus-visible {
+  background: var(--accent-soft);
+  filter: none;
+  border-color: var(--accent);
+}
+
+.pf-panel-note {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--fs-eyebrow);
+  line-height: 1.55;
+  border-top: 1px solid var(--separator);
+  padding-top: var(--space-3);
+}
+
+/* Progreso del panel: 01/03 fichas clicables (van al paso correspondiente) */
+.pf-panel-progress {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.pf-panel-progress button {
+  width: 22px;
+  height: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--separator);
+  cursor: pointer;
+  transition: background 0.3s var(--ease-standard), height 0.2s var(--ease-standard);
+}
+
+.pf-panel-progress button:hover {
+  background: var(--color-border-visible);
+}
+
+.pf-panel-progress button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.pf-panel-progress button.is-on {
+  background: var(--accent);
+  height: 3px;
+}
+
+@media (max-width: 960px) {
+  .pf-work-body {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-panel {
+    position: static;
+    order: -1;
+    margin-bottom: clamp(40px, 6vw, 64px);
+  }
+
+  .pf-step {
+    min-height: 0;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   SERVICES — grid compacto (ServicesGrid.tsx)
+   ════════════════════════════════════════════════════════════ */
+.pf-services-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.pf-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.pf-service {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-l);
+  background: var(--surface-1);
+  text-decoration: none;
+  transition:
+    transform 0.18s var(--ease-standard),
+    border-color 0.2s var(--ease-standard),
+    box-shadow 0.25s var(--ease-standard);
+}
+
+.pf-service:hover,
+.pf-service:focus-visible {
+  transform: translateY(-2px); /* micro-interacción reglamentaria */
+  border-color: var(--color-border-visible);
+  box-shadow: var(--shadow-pop);
+  outline: none;
+}
+
+.pf-service:active {
+  transform: translateY(0);
+}
+
+.pf-service-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-tertiary);
+  font-family: "Azeret Mono", ui-monospace, monospace;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.14em;
+}
+
+.pf-service-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  color: var(--accent);
+  transition: border-color 0.2s var(--ease-standard), background 0.2s var(--ease-standard);
+}
+
+.pf-service:hover .pf-service-icon,
+.pf-service:focus-visible .pf-service-icon {
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+}
+
+.pf-service h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", var(--font-family-system);
+  font-size: var(--fs-section);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pf-service p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.pf-service-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  color: var(--accent);
+  font: 600 var(--fs-meta) var(--font-family-system);
+}
+
+.pf-service-cta .pf-btn-arrow {
+  transition: transform 0.2s var(--ease-standard);
+}
+
+.pf-service:hover .pf-service-cta .pf-btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Banner CTA al cotizador desplegado */
+.pf-services-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  padding: clamp(var(--space-5), 3.4vw, var(--space-8));
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-l);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(10, 132, 255, 0.14), transparent 22rem),
+    var(--surface-1);
+}
+
+.pf-services-cta-text {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pf-services-cta-text h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", var(--font-family-system);
+  font-size: var(--fs-page);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.pf-services-cta-text p {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--text-secondary);
+  font-size: var(--fs-body);
+}
+
+/* ════════════════════════════════════════════════════════════
+   FOOTER del portafolio (PortfolioFooter.astro)
+   ════════════════════════════════════════════════════════════ */
+.pf-footer {
+  position: relative;
+  margin-top: clamp(80px, 10vw, 140px);
+  padding: clamp(72px, 9vw, 120px) 0 var(--space-8);
+  border-top: 1px solid var(--separator);
+  background: linear-gradient(180deg, transparent, rgba(10, 132, 255, 0.04));
+}
+
+.pf-footer-avail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  color: var(--text-secondary);
+  font: 500 var(--fs-meta) var(--font-family-system);
+}
+
+.pf-status-dot {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--success);
+  flex-shrink: 0;
+}
+
+.pf-status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--success);
+  opacity: 0.5;
+  animation: pf-dot-ping 2.4s var(--ease-standard) infinite;
+}
+
+@keyframes pf-dot-ping {
+  0% { transform: scale(0.6); opacity: 0.6; }
+  70%, 100% { transform: scale(1.6); opacity: 0; }
+}
+
+.pf-footer-title {
+  margin: 0 0 var(--space-6);
+  max-width: 18ch;
+  color: var(--text-primary);
+  font-family: "Space Grotesk", var(--font-family-system);
+  font-size: clamp(2.2rem, 5.4vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+.pf-footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.pf-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font: 500 var(--fs-meta) var(--font-family-system);
+  text-decoration: none;
+  transition:
+    transform 0.15s var(--ease-standard),
+    border-color 0.2s var(--ease-standard),
+    color 0.2s var(--ease-standard);
+}
+
+.pf-footer-links a:hover,
+.pf-footer-links a:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-border-visible);
+  color: var(--text-primary);
+  outline: none;
+}
+
+/* Toggle de idioma (rescate del WIP: data-lang-btn) */
+.pf-lang {
+  display: flex;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  background: var(--surface-1);
+}
+
+.pf-lang button {
+  min-width: 44px;
+  min-height: 34px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font: 700 var(--fs-eyebrow) var(--font-family-system);
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: color 0.2s var(--ease-standard), background 0.2s var(--ease-standard);
+}
+
+.pf-lang button:hover {
+  color: var(--text-primary);
+}
+
+.pf-lang button.is-active {
+  background: var(--text-primary);
+  color: var(--surface-1);
+}
+
+.pf-footer-note {
+  margin: var(--space-8) 0 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--separator);
+  color: var(--text-tertiary);
+  font-size: var(--fs-eyebrow);
+  line-height: 1.6;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCROLLYTELLING — reveals IO + parallax (index.astro script)
+   html.pf-js se añade inline antes del CSS: sin JS todo visible.
+   ════════════════════════════════════════════════════════════ */
+html.pf-js [data-pf-reveal] {
+  opacity: 0;
+  transform: translateY(26px) scale(0.99);
+  transition:
+    opacity 0.7s var(--ease-product),
+    transform 0.7s var(--ease-product);
+  transition-delay: var(--pf-delay, 0s);
+}
+
+html.pf-js [data-pf-reveal].is-inview {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.pf-js [data-pf-reveal] {
+    transform: none;
+    transition: opacity 0.2s ease; /* degrade a fades cortos [mot-reduced-motion] */
+  }
+
+  .pf-panel-inner {
+    animation: none;
+  }
+
+  .pf-scroll-line::after,
+  .pf-status-dot::after {
+    animation: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   CURSOR personalizado — dot + ring, difference, solo desktop
+   ════════════════════════════════════════════════════════════ */
+.pf-cursor-dot,
+.pf-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  opacity: 0;
+  translate: -50% -50%;
+}
+
+.pf-cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+}
+
+.pf-cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #ffffff;
+  transition: width 0.2s var(--ease-standard), height 0.2s var(--ease-standard), opacity 0.2s linear;
+}
+
+body.pf-cursor-on .pf-cursor-dot,
+body.pf-cursor-on .pf-cursor-ring {
+  opacity: 1;
+}
+
+body.pf-cursor-on.pf-cursor-hot .pf-cursor-ring {
+  width: 56px;
+  height: 56px;
+}
+
+/* Ocultar el cursor nativo solo cuando el custom está activo */
+@media (hover: hover) and (pointer: fine) {
+  body.pf-cursor-on,
+  body.pf-cursor-on a,
+  body.pf-cursor-on button,
+  body.pf-cursor-on [role="button"] {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-cursor-ring {
+    transition: opacity 0.2s linear;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   Ajustes responsive
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .pf-shell {
+    width: calc(100% - 32px);
+  }
+
+  .pf-hero {
+    min-height: 92svh;
+  }
+
+  .pf-hero-actions .pf-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .pf-step-metrics {
+    gap: var(--space-3);
+  }
+
+  .pf-metric {
+    flex: 1 1 140px;
+  }
+}

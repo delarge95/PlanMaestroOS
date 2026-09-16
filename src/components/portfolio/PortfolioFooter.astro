@@ -1,0 +1,59 @@
+---
+/*
+ * PortfolioFooter — cierre del portafolio público.
+ * Disponibilidad ("Available for remote contractor/B2B work from Colombia"),
+ * links sociales y toggle de idioma (data-lang-btn → siteLang.ts).
+ * Los textos usan data-i18n para el runtime ES/EN.
+ */
+import { isPlaceholderLink, links } from "@data/links";
+
+const socials = [
+  { href: links.linkedIn, label: "LinkedIn" },
+  { href: links.githubProfile, label: "GitHub" },
+  { href: links.artStation, label: "ArtStation" },
+  { href: links.email, label: "Email", i18n: "footerEmail" }
+].filter((social) => !isPlaceholderLink(social.href));
+---
+
+<footer class="pf-footer" aria-label="Portfolio footer">
+  <div class="pf-shell">
+    <p class="pf-footer-avail">
+      <span class="pf-status-dot" aria-hidden="true"></span>
+      <span data-i18n="footerAvail">Available for remote contractor / B2B work · Colombia (UTC−5)</span>
+    </p>
+
+    <h2 class="pf-footer-title" data-i18n="footerTitle" data-pf-reveal>Let's build your next real-time system.</h2>
+
+    <div class="pf-footer-grid">
+      <ul class="pf-footer-links" data-pf-stagger>
+        {socials.map((social) => (
+          <li data-pf-reveal>
+            <a href={social.href} target="_blank" rel="noopener noreferrer">
+              <span data-i18n={social.i18n}>{social.label}</span>
+            </a>
+          </li>
+        ))}
+        <li data-pf-reveal>
+          <a href="https://services.alexwoodcock.me/cotizador/" target="_blank" rel="noopener noreferrer">
+            <span data-i18n="footerQuote">Estimate a project</span>
+          </a>
+        </li>
+        <li data-pf-reveal>
+          <a href="/contact"><span data-i18n="footerContact">Contact</span></a>
+        </li>
+      </ul>
+
+      <div class="pf-lang" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang-btn="es" aria-pressed="false">ES</button>
+      </div>
+    </div>
+
+    <p class="pf-footer-note" data-pf-reveal>
+      <span data-i18n="footerBuilt">Portfolio built with Astro, React 19 and Three.js</span>
+      <span data-i18n="footerNote">
+        Conservative public claims by design — metrics and links stay verified before they ship.
+      </span>
+    </p>
+  </div>
+</footer>

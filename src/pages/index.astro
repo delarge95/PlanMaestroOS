@@ -1,139 +1,198 @@
 ---
-import CTAButton from "@components/CTAButton.astro";
-import FocusVariantSwitcher from "@components/FocusVariantSwitcher";
-import MediaFrame from "@components/MediaFrame.astro";
-import ProjectCard from "@components/ProjectCard.astro";
-import SphericalGallery from "@components/SphericalGallery";
-import TechTag from "@components/TechTag.astro";
+/*
+ * Portafolio público — index.astro
+ * Arquitectura: Hero WebGL (PortfolioHero) → Selected Work scrollytelling
+ * (ProjectShowcase) → SphericalGallery (funcionalidad consolidada, intacta)
+ * → Services (ServicesGrid → cotizador) → PortfolioFooter.
+ * Todo lo que no es above-the-fold va con client:visible. El 3D no bloquea
+ * el primer paint: el texto del hero es SSR y el canvas es una isla lazy.
+ */
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { focusVariants } from "@data/focusVariants";
-import { links } from "@data/links";
+import PortfolioFooter from "@components/portfolio/PortfolioFooter.astro";
+import PortfolioHero from "@components/portfolio/PortfolioHero";
+import ProjectShowcase from "@components/portfolio/ProjectShowcase";
+import ServicesGrid from "@components/portfolio/ServicesGrid";
+import SphericalGallery from "@components/SphericalGallery";
 import { galleryItems, projects } from "@data/projects";
-
-const twinsight = projects.find((project) => project.id === "twinsight")!;
-const human = projects.find((project) => project.id === "human")!;
-const ara = projects.find((project) => project.id === "ara")!;
-const coreStack = ["Unity WebGL", "C#", "Blender", "CAD-to-Realtime", "Technical UI", "Python Tooling"];
+import "../styles/portfolio.css";
 ---
 
 <BaseLayout
   title="Real-Time 3D Developer / Unity Technical Artist"
-  description="Portfolio for Alexander Woodcock Salomon, focused on Unity WebGL technical visualization, CAD-to-realtime optimization and Blender 3D pipeline craft."
+  description="Portfolio of Alexander Woodcock — Unity WebGL technical visualization, CAD-to-realtime optimization and Blender 3D pipeline craft. Interactive drone-inspection digital twin, character pipeline and Python automation."
 >
-  <section class="page-shell hero">
-    <div class="hero-content">
-      <p class="eyebrow" data-scramble="Based in Colombia. Available for remote contractor/B2B roles.">
-        Based in Colombia. Available for remote contractor/B2B roles.
-      </p>
-      <h1 class="hero-title" data-animate-title>
-        <span>Real-Time 3D</span>
-        <span>Developer /</span>
-        <span>Unity Technical Artist</span>
-      </h1>
-      <p class="hero-copy">
-        I build interactive technical visualization systems with Unity, WebGL, C#, Blender and
-        CAD-to-realtime optimization. TwinSight X500 leads this work: a browser-based drone assembly
-        inspection viewer. Human adds the production eye behind it.
-      </p>
-      <div class="tag-row" aria-label="Core stack">
-        {coreStack.map((tag) => <TechTag label={tag} tone="cyan" />)}
-      </div>
-      <div class="hero-actions">
-        <CTAButton href="/twinsight-x500" label="View TwinSight X500" />
-        <CTAButton href="/human-character-pipeline" label="View Human pipeline" variant="secondary" />
-        <CTAButton href={links.githubProfile} label="GitHub" variant="ghost" />
-        <CTAButton href="/contact" label="Contact" variant="ghost" />
-      </div>
-    </div>
-    <div class="hero-visual" data-reveal>
-      <div class="screen-shell" aria-label="TwinSight X500 interface preview">
-        <div class="screen-chrome">
-          <span></span>
-          <span></span>
-          <span></span>
-          <small>TWINSIGHT_X500 / WEBGL_VIEWER</small>
-        </div>
-        <MediaFrame
-          src={twinsight.media}
-          alt={twinsight.mediaAlt}
-          label="Flagship: Unity WebGL technical visualization"
-          priority
-        />
-        <div class="screen-readout" aria-hidden="true">
-          <span>Runtime UI</span>
-          <span>CAD-to-realtime</span>
-          <span>Browser build</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  {/* Marca JS antes del CSS de reveals: sin JS todo queda visible */}
+  <script is:inline>
+    document.documentElement.classList.add("pf-js");
+  </script>
 
-  <section class="page-shell proof-strip" aria-label="Portfolio evidence summary" data-reveal>
-    <div>
-      <strong>TwinSight X500</strong>
-      <p><b>Unity WebGL</b>, runtime interaction, CAD-to-realtime and formative evaluation.</p>
-    </div>
-    <div>
-      <strong>Human Pipeline</strong>
-      <p><b>Blender workflow depth</b>: sculpt, topology, UVs, materials, grooming and render control.</p>
-    </div>
-    <div>
-      <strong>ARA Framework</strong>
-      <p><b>Python tooling</b>, research automation and structured technical documentation.</p>
-    </div>
-    <div>
-      <strong>Focus Variants</strong>
-      <p>Reusable routes for technical visualization, Unity WebGL, TA and 3D pipeline applications.</p>
-    </div>
-  </section>
+  {/* 1 · HERO — WebGL full-screen, partículas que responden al mouse */}
+  <PortfolioHero client:visible />
 
+  {/* 2 · SELECTED WORK — scrollytelling: TwinSight → Human → ARA */}
+  <ProjectShowcase projects={projects} initialId="twinsight" client:visible />
+
+  {/* Interludio · órbita 3D (galería consolidada — API items intacta) */}
   <SphericalGallery items={galleryItems} client:visible />
 
-  <section class="section-shell sticky-proof-section" aria-label="Main proof systems">
-    <div class="sticky-proof-copy" data-reveal>
-      <p class="eyebrow">Two anchors</p>
-      <h2>Runtime systems. Production craft.</h2>
-      <p>
-        Keep this read in view while the proof changes: <strong>TwinSight</strong> is the flagship for Unity/WebGL roles. <strong>Human</strong> has real weight as the second pillar because it shows the 3D workflow behind technical-art judgment.
-      </p>
-      <div class="sticky-proof-readout" aria-hidden="true">
-        <span>Realtime viewer</span>
-        <span>Asset pipeline</span>
-        <span>Recruiter scan</span>
-      </div>
-    </div>
-    <div class="sticky-proof-track">
-      <ProjectCard project={twinsight} featured />
-      <ProjectCard project={human} featured />
-    </div>
-  </section>
+  {/* 3 · SERVICES — 5 cards + CTA al cotizador desplegado */}
+  <ServicesGrid client:visible />
 
-  <section class="section-shell split-section">
-    <div>
-      <p class="eyebrow">Application-ready storytelling</p>
-      <h2>Same portfolio, different emphasis per role.</h2>
-      <p class="section-lead">
-        The site is structured as a living portfolio. It can lead with technical visualization, Unity WebGL, technical art, or Blender pipeline depth while keeping the facts consistent.
-      </p>
-    </div>
-    <FocusVariantSwitcher variants={focusVariants} client:load />
-  </section>
-
-  <section class="section-shell sticky-proof-section sticky-support-section" aria-label="Supporting automation system">
-    <div class="sticky-proof-copy" data-reveal>
-      <p class="eyebrow">Supporting system</p>
-      <h2>Automation stays useful, not loud.</h2>
-      <p>
-        ARA adds <strong>Python automation</strong> and AI-assisted workflow range, while the public identity stays centered on Unity, WebGL and 3D pipeline craft.
-      </p>
-      <div class="sticky-proof-readout" aria-hidden="true">
-        <span>Secondary proof</span>
-        <span>Tooling signal</span>
-        <span>Documentation</span>
-      </div>
-    </div>
-    <div class="sticky-proof-track sticky-proof-track-single">
-      <ProjectCard project={ara} />
-    </div>
-  </section>
+  {/* 4 · FOOTER — disponibilidad + links + idioma */}
+  <PortfolioFooter />
 </BaseLayout>
+
+<script>
+  /*
+   * Orquestación de la página: i18n (siteLang), reveals con
+   * IntersectionObserver + transforms CSS, parallax sutil en métricas
+   * y cursor custom (dot + ring, difference) solo en desktop puntero fino.
+   * TODO respeta prefers-reduced-motion.
+   */
+  import "../scripts/siteLang";
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── Reveals: IO + clase .is-inview (transitions en portfolio.css) ── */
+  const initReveals = () => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-pf-reveal]"));
+
+    /* stagger: grupos con data-pf-stagger reparten --pf-delay entre hijos */
+    document.querySelectorAll<HTMLElement>("[data-pf-stagger]").forEach((group) => {
+      Array.from(group.querySelectorAll<HTMLElement>("[data-pf-reveal]")).forEach((child, index) => {
+        child.style.setProperty("--pf-delay", `${Math.min(index * 70, 280)}ms`);
+      });
+    });
+
+    if (reduced) {
+      elements.forEach((element) => element.classList.add("is-inview"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-inview");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    /* red de seguridad: al llegar al final del documento revela lo que
+       haya quedado dentro de la zona muerta del rootMargin inferior */
+    const revealAll = () => {
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 160) {
+        elements.forEach((element) => element.classList.add("is-inview"));
+        window.removeEventListener("scroll", revealAll);
+      }
+    };
+    window.addEventListener("scroll", revealAll, { passive: true });
+  };
+
+  /* ── Parallax sutil en métricas (±14px, rAF sobre scroll) ── */
+  const initParallax = () => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-pf-parallax]"));
+    if (!elements.length || reduced) return;
+
+    let ticking = false;
+    const update = () => {
+      const viewport = window.innerHeight;
+      for (const element of elements) {
+        const rect = element.getBoundingClientRect();
+        if (rect.bottom < -80 || rect.top > viewport + 80) continue;
+        const center = rect.top + rect.height / 2;
+        const ratio = (center - viewport / 2) / viewport; /* -1..1 */
+        element.style.transform = `translate3d(0, ${(ratio * -14).toFixed(1)}px, 0)`;
+      }
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    update();
+  };
+
+  /* ── Cursor custom: dot + ring con mix-blend difference (solo desktop) ── */
+  const initCursor = () => {
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!fine || window.innerWidth < 900) return;
+
+    const dot = document.createElement("div");
+    const ring = document.createElement("div");
+    dot.className = "pf-cursor-dot";
+    ring.className = "pf-cursor-ring";
+    dot.setAttribute("aria-hidden", "true");
+    ring.setAttribute("aria-hidden", "true");
+    document.body.append(dot, ring);
+    document.body.classList.add("pf-cursor-on");
+
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 2;
+    let ringX = x;
+    let ringY = y;
+    let pressScale = 1;
+
+    const render = () => {
+      window.requestAnimationFrame(render);
+      dot.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${pressScale})`;
+      /* reduced-motion: el anillo sigue instantáneo (sin lerp) */
+      if (reduced) {
+        ringX = x;
+        ringY = y;
+      } else {
+        ringX += (x - ringX) * 0.16;
+        ringY += (y - ringY) * 0.16;
+      }
+      ring.style.transform = `translate3d(${ringX.toFixed(1)}px, ${ringY.toFixed(1)}px, 0)`;
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      x = event.clientX;
+      y = event.clientY;
+    };
+
+    /* estado "hot" sobre interactivos → el anillo crece (CSS) */
+    const onPointerOver = (event: PointerEvent) => {
+      const target = event.target instanceof Element ? event.target : null;
+      const hot = Boolean(target?.closest("a, button, [role='button'], input, select, textarea"));
+      document.body.classList.toggle("pf-cursor-hot", hot);
+    };
+
+    const onPointerDown = () => {
+      pressScale = 1.8;
+    };
+
+    const onPointerUp = () => {
+      pressScale = 1;
+    };
+
+    const onLeave = () => document.body.classList.remove("pf-cursor-on");
+    const onEnter = () => document.body.classList.add("pf-cursor-on");
+
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerover", onPointerOver, { passive: true });
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointerup", onPointerUp, { passive: true });
+    document.documentElement.addEventListener("mouseleave", onLeave);
+    document.documentElement.addEventListener("mouseenter", onEnter);
+
+    render();
+  };
+
+  initReveals();
+  initParallax();
+  initCursor();
+</script>
