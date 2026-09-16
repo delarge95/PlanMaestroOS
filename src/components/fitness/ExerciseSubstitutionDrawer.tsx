@@ -48,8 +48,8 @@ export function ExerciseSubstitutionDrawer({
         {/* ESTADO ACTUAL Y BOTÓN REVERTIR */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface-elevated)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)' }}>
           <div>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>EJERCICIO ACTIVO EN TRACKER</span>
-            <strong style={{ display: 'block', fontSize: 'var(--font-size-body)', color: 'var(--text)' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', fontWeight: 600 }}>EJERCICIO ACTIVO EN TRACKER</span>
+            <strong style={{ display: 'block', fontSize: 'var(--fs-body)', color: 'var(--text)' }}>
               {getExerciseDetails(currentActiveId).name}
             </strong>
           </div>
@@ -67,7 +67,7 @@ export function ExerciseSubstitutionDrawer({
 
         {/* 1. SECCIÓN RECOMENDACIONES DEL PROGRAMA */}
         <div>
-          <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}>
             <Star size={14} /> Recomendadas por el programa
           </span>
 
@@ -113,7 +113,7 @@ export function ExerciseSubstitutionDrawer({
         {/* 2. SECCIÓN OTROS SUSTITUTOS COMPATIBLES FITAPP */}
         {fitAppAlternatives.length > 0 && (
           <div>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
               Alternativas compatibles
             </span>
 

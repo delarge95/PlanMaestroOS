@@ -14,7 +14,8 @@ export const typo = {
     fontWeight: 650,
     lineHeight: 1.3,
     fontFamily: 'var(--font-family-system)',
-    letterSpacing: '-0.01em',
+    // [tit-tracking]: el tracking negativo se reserva para display (36px+);
+    // a 20px el título pierde aire sin ganancia visual.
   },
   body: {
     fontSize: 'var(--fs-body)',

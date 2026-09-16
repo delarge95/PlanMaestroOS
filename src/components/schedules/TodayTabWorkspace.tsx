@@ -24,7 +24,24 @@ export default function TodayTabWorkspace({
   const [todayData, setTodayData] = useState(() =>
     getTodayDomainView({ ssrSafe: true }),
   );
-  const [blockDone, setBlockDone] = useState(false);
+  // U5: Bloques A/B independientes y PERSISTIDOS (antes compartían un solo
+  // boolean volátil — marcar A marcaba B y al recargar se perdía).
+  const [doneA, setDoneA] = useState(false);
+  const [doneB, setDoneB] = useState(false);
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('today-blocks-done') || '{}');
+      const today = new Date().toISOString().slice(0, 10);
+      if (saved.date === today) { setDoneA(!!saved.a); setDoneB(!!saved.b); }
+    } catch { /* sin datos */ }
+  }, []);
+  const persistBlocks = (a: boolean, b: boolean) => {
+    try {
+      localStorage.setItem('today-blocks-done', JSON.stringify({ date: new Date().toISOString().slice(0, 10), a, b }));
+    } catch { /* noop */ }
+  };
+  const toggleA = () => { setDoneA((v) => { persistBlocks(!v, doneB); return !v; }); };
+  const toggleB = () => { setDoneB((v) => { persistBlocks(doneA, !v); return !v; }); };
 
   const [formattedDate, setFormattedDate] = useState("");
 
@@ -85,11 +102,11 @@ export default function TodayTabWorkspace({
           </div>
 
           <Button
-            variant={blockDone ? "ghost" : "primary"}
+            variant={doneA ? "ghost" : "primary"}
             size="sm"
-            onClick={() => setBlockDone(!blockDone)}
+            onClick={toggleA}
           >
-            {blockDone ? "Hecho" : "Iniciar"}
+            {doneA ? "Hecho" : "Iniciar"}
           </Button>
         </div>
 
@@ -207,11 +224,11 @@ export default function TodayTabWorkspace({
             </div>
 
             <Button
-              variant="secondary"
+              variant={doneA ? "ghost" : "secondary"}
               size="sm"
-              onClick={() => setBlockDone(!blockDone)}
+              onClick={toggleA}
             >
-              10 min
+              {doneA ? "Hecho" : "10 min"}
             </Button>
           </div>
 
@@ -233,11 +250,11 @@ export default function TodayTabWorkspace({
             </div>
 
             <Button
-              variant="secondary"
+              variant={doneB ? "ghost" : "secondary"}
               size="sm"
-              onClick={() => setBlockDone(!blockDone)}
+              onClick={toggleB}
             >
-              10 min
+              {doneB ? "Hecho" : "10 min"}
             </Button>
           </div>
         </div>

@@ -40,10 +40,10 @@ export function LibraryDocumentSheet({ document, isOpen, onClose }: LibraryDocum
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', background: 'var(--surface-elevated)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)' }}>
           <Icon size={24} style={{ color: 'var(--accent)' }} aria-hidden="true" />
           <div>
-            <strong style={{ display: 'block', fontSize: '0.92rem', color: 'var(--text)' }}>
+            <strong style={{ display: 'block', fontSize: 'var(--fs-body)', color: 'var(--text)' }}>
               {document.title}
             </strong>
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
               {document.author ? `${document.author} · ` : ''}{document.year || 'Documento Oficial'}
             </span>
           </div>
@@ -52,10 +52,10 @@ export function LibraryDocumentSheet({ document, isOpen, onClose }: LibraryDocum
         {/* DESCRIPCIÓN CORTA */}
         {document.description && (
           <div>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
               Resumen
             </span>
-            <p style={{ fontSize: 'var(--font-size-body)', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+            <p style={{ fontSize: 'var(--fs-body)', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
               {document.description}
             </p>
           </div>
@@ -64,7 +64,7 @@ export function LibraryDocumentSheet({ document, isOpen, onClose }: LibraryDocum
         {/* ETIQUETAS */}
         {document.tags && document.tags.length > 0 && (
           <div>
-            <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', fontWeight: 600, textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
               Etiquetas
             </span>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -76,7 +76,7 @@ export function LibraryDocumentSheet({ document, isOpen, onClose }: LibraryDocum
                     border: '1px solid var(--color-border-subtle)',
                     padding: '3px 8px',
                     borderRadius: 'var(--radius-sm)',
-                    fontSize: '0.78rem',
+                    fontSize: 'var(--fs-meta)',
                     color: 'var(--text-secondary)'
                   }}
                 >
