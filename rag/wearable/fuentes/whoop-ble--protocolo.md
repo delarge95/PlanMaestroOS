@@ -1,0 +1,31 @@
+<!-- chunk
+id: wear-ble-uuids
+topic: ble-protocol
+tags: whoop, ble, uuid, characteristics, gatt, framing, crc, pairing
+section: Protocolo BLE — servicios, características y framing (WHOOP 4.0)
+-->
+WHOOP 4.0: servicio custom `61080001-8d6d-82b8-614a-1c8cb0f8dcc6` con chars `61080002` write (comandos), `61080003`/`04`/`05` notify (respuestas/eventos/datos), `61080007` memfault. Estándar sin bond: `0x180D`/`0x2A37` (HR+R-R), batería `0x180F`, info `0x180A`. Framing: `[0xAA][len u16 LE][crc8-0x07 sobre len][type][seq][cmd][payload pad×4][crc32 zlib]`; reensamblar por longitud (fragments ~244B → tramas ~1920B). Tipos: `0x23` cmd, `0x24` resp, `0x28` live HR (4 R-R en [16:24]), `0x2B` raw IMU+PPG, `0x2F` históricos 1Hz, `0x30` eventos, `0x31` marcadores sync. Opcodes: 11 clock, 22 send-history, 23 history-result, 26 batería, 34 data-range, 35 hello. El custom exige link cifrado: un write confirmado a `61080002` fuerza just-works bonding (BLE_BONDED); el bond del teléfono se conserva. Sync: set-clock primero (reloj de fábrica sin setear), 5 init-packets, eco del token 8B (inner[13:21]) con write acknowledged tras persistir, o reenvía el lote infinito (Groundhog Day); el flash nunca se borra (~14 días). 5.0/MG: servicio `fd4b0001-…`, CRC16-Modbus, paquetes "puffin", un solo bond; HR vivo vía `0x180D`. whoop-reader: UUIDs desplazadas (61080000/61080004), no fiables.
+
+<!-- chunk
+id: wear-data-metrics
+topic: metrics
+tags: hrv, rhr, sleep, strain, recovery, spo2, skin-temp, r-r, battery, ppg, imu
+section: Métricas — qué datos se pueden extraer y cómo
+-->
+Sin membresía se obtiene: **FC vivo** (tipo `0x28`: bpm [14], RR-count [15], hasta 4 intervalos R-R u16 ms en [16:24]; ídem por `0x2A37` sin bond). **HRV** no viaja como valor: se computa local de los R-R (RMSSD/SDNN, Task Force 1996); el offload inicial trae ~14 días de historial. **IMU** (`0x2B` sub10): 100 muestras i16 por eje (accel 82/282/482, gyro 685/885/1085), ~3900 LSB≈1g, 52 Hz. **PPG raw**: paquete 1921B, muestras 24-bit LE, ~4 canales intercalados (mapeo LED sin resolver). **Históricos 1Hz** (`0x2F`): accel [36:48], temp ≈[70], SpO2 ≈[72], RHR ≈[88] — offsets empíricos no confirmados. **Batería**: cmd 26 → u16/10 %; cmd 98 → mV. En 4.0 **NO viajan por BLE**: SpO2 calibrada ni skin temp (se computan en cloud desde PPG raw) ni los scores recovery/strain/sueño — los proyectos open-source los recalculan local con métodos publicados: recovery 0–100 (z-score HRV + logística), strain 0–21 (Karvonen %HRR, TRIMP), sueño 4 fases por stillness + FC/HRV. La API oficial no completa OAuth sin membresía activa.
+
+<!-- chunk
+id: wear-arch-bridge
+topic: architecture
+tags: bridge, esp32, rpi, web-bluetooth, bleak, worker, ingest, homelab
+section: Arquitectura — cómo conectar la banda a la web app
+-->
+No existe PWA que integre WHOOP open-source. **Web Bluetooth NO sustituye al bridge**: solo Chromium (no Safari/Firefox/iOS), HTTPS + gesto de usuario + pestaña enfocada (sin background), solo rol central, y no gestiona pairing/bonding del SO → el servicio custom 4.0 (link cifrado) queda fuera del navegador; único uso realista: HR vivo por `0x180D` (bond-free) como feature secundaria; nadie lo ha demostrado con WHOOP. Arquitecturas demostradas: **(A) bridge local Python + bleak** — patrón del cliente de referencia `research_playground.py` de OpenStrap (Windows 10+/macOS/Linux) que decodifica y sube JSON a un endpoint del worker con auth `x-pm-key`; mismo patrón homelab que gowhoop (daemon Go + ClickHouse + Grafana auto-sincronizando en casa). **(B) app móvil como fuente**: edge (Flutter, MIT) o noop capturan por BLE y exportan; edge trae backend TS self-hosted. Para web app + worker: (A) bridge → POST `/wearable/ingest` → stores/Notion → feed UserState; decoder TS (port del Dart puro `openstrap_protocol`) para visualización. Hardware: banda + PC con BT LE o Android 8+; sin Raspberry Pi ni dongle especial.
+
+<!-- chunk
+id: wear-repo-comparison
+topic: repos
+tags: openwhoop, noop, openstrap, my-whoop, goose, gowhoop, whoop-reader, licencia
+section: Comparativa — ecosistema de repos WHOOP open-source
+-->
+`SKULLFIRE07/openwhoop`: solo README-manifiesto (2 commits, 2★, cero código, vaporware); no confundir con el openwhoop Rust de bWanShiTong (repo retirado; doc vive en mintlify; origen del decode type-47 y del clasificador de sueño). `ryanbr/noop` (fork de muftiarfan/noop): 881★, 2861 commits, Swift+Kotlin+SQLite; la app más completa (4.0 full: HR, R-R, HRV, recovery, strain, sueño, skin temp, SpO2; 5.0/MG y Oura experimentales) pero **PolyForm Noncommercial** y stack nativo no portable a web. **OpenStrap** (org MIT activa, prensa Hackaday/Android Central/TechRadar): edge (585★, 1305 commits, Flutter, 4.0/5/MG + straps estándar), protocol (decoder Dart puro zero-dep), analytics (métodos citados), research (protocolo 4.0 + cliente Python bleak), backend (TS). `johnmiddleton12/wearable` (my-whoop): 310★, Swift + FastAPI/TimescaleDB; su FINDINGS.md es la referencia de protocolo más validada. `b-nnett/goose`: 2.7k★, SwiftUI+Rust, 5.0 "puffin", archivado jun-2026. `cs-balazs/gowhoop`: Go+ClickHouse, patrón bridge homelab. `christianmeurer/whoop-reader`: UUIDs no fiables. Para integración web: OpenStrap (MIT, modular, cliente ejecutable); noop solo como referencia de algoritmos.

@@ -1,0 +1,25 @@
+{
+  "domain": "wearable",
+  "sources": [
+    {
+      "id": "whoop-ble",
+      "title": "WHOOP BLE Reverse Engineering (síntesis — investigación 2026-09-16)",
+      "author": "OpenStrap / noop / my-whoop / openwhoop communities",
+      "year": 2026,
+      "edition": "síntesis del agente wearable",
+      "type": "md",
+      "evidenceTier": "internal-doc",
+      "authority": { "domains": ["wearable-whoop", "ble", "hrv"], "priority": 1 }
+    },
+    {
+      "id": "whoop-data-metrics",
+      "title": "WHOOP Metrics Dictionary (HRV, RHR, Sleep, Strain, Recovery)",
+      "author": "WHOOP Labs (documentación pública + síntesis)",
+      "year": 2024,
+      "edition": "síntesis",
+      "type": "md",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["wearable-metrics", "sleep", "recovery"], "priority": 1 }
+    }
+  ]
+}
