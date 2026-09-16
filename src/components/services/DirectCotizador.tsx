@@ -248,7 +248,7 @@ export function DirectCotizador() {
       {/* Cómo funciona (no-engineer) + garantías — colapsable tras primera interacción */}
       {!serviceId && (
         <details data-noprint className="cx-card cx-anim" style={{ marginBottom: 14, padding: '20px 24px' }}>
-        <summary style={{ cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, color: 'var(--cx-text-2)', listStyle: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <summary style={{ cursor: 'pointer', fontSize: 'var(--fs-body)', fontWeight: 600, color: 'var(--cx-text-2)', listStyle: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
           <span style={{ fontSize: 16 }}>ⓘ</span> Cómo funciona y garantías
         </summary>
         <div style={{ marginTop: 16 }}>

@@ -145,13 +145,13 @@ export function GuidedWizard({ onComplete, onProgress, lang = 'es', homeSignal =
               return (
                 <button key={o.id}
                   onClick={() => { setRootChoice(o.id); setLevel(o.id === 'no-se' ? 1 : 2); }}
+                  className={`ds-anim ds-anim-${(i % 3) + 1}`}
                   style={{
                     display: 'flex', alignItems: 'flex-start', gap: 14, padding: '20px 22px',
                     background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
                     border: '1px solid var(--cx-border)', borderRadius: 20,
                     cursor: 'pointer', font: 'inherit', textAlign: 'left',
                     transition: 'transform 0.25s cubic-bezier(0.25,0.8,0.4,1), box-shadow 0.25s',
-                    animation: `cardIn 0.3s ${i * 0.06}s cubic-bezier(0.25,0.8,0.4,1) both`,
                   }}
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--cx-shadow-hover)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
@@ -235,12 +235,12 @@ export function GuidedWizard({ onComplete, onProgress, lang = 'es', homeSignal =
               return (
                 <button key={o.id}
                   onClick={() => { setSubChoice(o.id); setLevel(3); }}
+                  className={`ds-anim ds-anim-${(i % 3) + 1}`}
                   style={{
                     display: 'flex', flexDirection: 'column', gap: 6, padding: '22px 20px',
                     background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
                     border: '1px solid var(--cx-border)', borderRadius: 20,
                     cursor: 'pointer', font: 'inherit', textAlign: 'left',
-                    animation: `cardIn 0.3s ${i * 0.06}s both`,
                   }}>
                   <span style={{ color: 'var(--cx-accent)', display: 'flex', marginBottom: 8 }}>
                     <TreeIcon name={o.icon ?? ''} size={24} />
@@ -312,7 +312,6 @@ export function GuidedWizard({ onComplete, onProgress, lang = 'es', homeSignal =
       )}
 
       <style>{`
-        @keyframes cardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
         .cx-tip:hover .cx-tip-box, .cx-tip:focus .cx-tip-box { opacity: 1 !important; visibility: visible !important; }
         /* ciclo 12 — área táctil del "?" invisible (16px visual -> 36px de hit
            area) sin romper el minimalismo; aplica en todos los viewports. */

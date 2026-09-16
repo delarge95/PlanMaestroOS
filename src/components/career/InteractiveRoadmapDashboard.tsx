@@ -63,24 +63,24 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div style={{ display: 'flex', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: '#3b82f6', background: 'rgba(59, 130, 246, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: '#3b82f6', background: 'rgba(59, 130, 246, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
                 ROADMAP LABORAL 16 SEMANAS / 90 DÍAS
               </span>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.12)', padding: '4px 10px', borderRadius: '999px', fontWeight: 700 }}>
                 META: {roadmapGoal.salaryRange}
               </span>
             </div>
             <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '0 0 6px', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
               Plan de Ejecución Estratégica & Contratación Internacional
             </h2>
-            <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-text-secondary)' }}>
               Fuentes: doc-14 §Phase 1–3 (plan 30/60/90) · doc-15 §4–5 (familias y salario) · hitos con cita por tarjeta
             </span>
           </div>
 
           {/* OVERALL PROGRESS */}
           <div style={{ background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '12px 18px', textAlign: 'right' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', display: 'block', fontWeight: 600 }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-text-secondary)', display: 'block', fontWeight: 600 }}>
               PROGRESO DE HITOS COMPLETADOS
             </span>
             <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#3b82f6' }}>
@@ -91,20 +91,20 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
 
         {/* FAMILIAS DE ROLES TARGET */}
         <div>
-          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             Familias de Roles Prioritarias (25h/sem Trabajo Útil)
           </span>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px', marginTop: '10px' }}>
             {roadmapRoleFamilies.map((rf) => (
               <div key={rf.title} style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(59, 130, 246, 0.15)', borderRadius: '14px', padding: '14px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', gap: '6px' }}>
-                  <strong style={{ fontSize: '0.88rem', color: 'var(--color-text-primary)' }}>{rf.title}</strong>
-                  <span style={{ fontSize: '0.68rem', color: 'var(--color-state-done)', background: 'rgba(16,185,129,0.15)', padding: '2px 6px', borderRadius: '4px', height: 'fit-content', flexShrink: 0 }}>
+                  <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--color-text-primary)' }}>{rf.title}</strong>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-state-done)', background: 'rgba(16,185,129,0.15)', padding: '2px 6px', borderRadius: '4px', height: 'fit-content', flexShrink: 0 }}>
                     {rf.priority}
                   </span>
                 </div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--accent)', display: 'block' }}>Stack: {rf.stack}</span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>Target: {rf.target}</span>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', display: 'block' }}>Stack: {rf.stack}</span>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>Target: {rf.target}</span>
                 <span style={{ fontSize: '0.62rem', color: 'var(--color-text-secondary)', opacity: 0.7, display: 'block', marginTop: '6px', fontStyle: 'italic' }}>{rf.sourceRef}</span>
               </div>
             ))}
@@ -128,7 +128,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
                   borderRadius: '10px',
                   cursor: 'pointer',
                   fontWeight: isSelected ? 800 : 500,
-                  fontSize: '0.85rem',
+                  fontSize: 'var(--fs-body)',
                   transition: 'all 150ms ease'
                 }}
               >
@@ -145,14 +145,14 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
               <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '0 0 4px', color: 'var(--color-text-primary)' }}>
                 {currentPhaseData.title}
               </h3>
-              <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: 0 }}>
+              <p style={{ fontSize: 'var(--fs-body)', color: 'var(--color-text-secondary)', margin: 0 }}>
                 {currentPhaseData.objective}
               </p>
               <span style={{ fontSize: '0.65rem', color: 'var(--color-text-secondary)', opacity: 0.75, fontStyle: 'italic' }}>
                 Fuente: {currentPhaseData.sourceRef}
               </span>
             </div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.78rem', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.15)', padding: '6px 12px', borderRadius: '8px', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-meta)', color: 'var(--color-state-done)', background: 'rgba(16, 185, 129, 0.15)', padding: '6px 12px', borderRadius: '8px', fontWeight: 700 }}>
               📊 Target: {currentPhaseData.targetApps}
             </span>
           </div>
@@ -191,7 +191,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
                           display: 'grid',
                           placeItems: 'center',
                           fontWeight: 700,
-                          fontSize: '0.85rem',
+                          fontSize: 'var(--fs-body)',
                           marginTop: '2px',
                           flexShrink: 0
                         }}
@@ -201,31 +201,31 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
 
                       <div>
                         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '4px' }}>
-                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', background: 'rgba(119, 231, 255, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>
+                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', background: 'rgba(119, 231, 255, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>
                             {m.weeks}
                           </span>
-                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', background: 'rgba(168, 85, 247, 0.12)', padding: '2px 6px', borderRadius: '4px' }}>
+                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', background: 'rgba(168, 85, 247, 0.12)', padding: '2px 6px', borderRadius: '4px' }}>
                             🔗 Conectado a: {m.connectedTimeBlock}
                           </span>
                         </div>
-                        <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: isChecked ? '#6ee7b7' : 'var(--color-text-primary)' }}>
+                        <h4 style={{ fontSize: 'var(--fs-step)', fontWeight: 700, margin: 0, color: isChecked ? '#6ee7b7' : 'var(--color-text-primary)' }}>
                           {m.title}
                         </h4>
                       </div>
                     </div>
 
-                    <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
+                    <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: 'var(--color-state-done)', fontWeight: 700 }}>
                       🎯 {m.keyMetric}
                     </span>
                   </div>
 
-                  <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45, paddingLeft: '36px' }}>
+                  <p style={{ fontSize: 'var(--fs-body)', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45, paddingLeft: '36px' }}>
                     {m.description}
                   </p>
 
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', paddingLeft: '36px' }}>
                     {m.deliverables.map((d, dIdx) => (
-                      <span key={dIdx} style={{ fontSize: '0.75rem', color: 'var(--color-text-primary)', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '4px 10px', borderRadius: '8px' }}>
+                      <span key={dIdx} style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-text-primary)', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '4px 10px', borderRadius: '8px' }}>
                         <Package size={12} style={{ verticalAlign: '-2px', marginRight: 4 }} />{d}
                       </span>
                     ))}

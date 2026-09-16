@@ -33,18 +33,18 @@ export default function JobsSchedule() {
 
             return (
               <div key={sec} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                   {sec}
                 </span>
 
                 {items.length === 0 ? (
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>Sin acciones programadas</span>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>Sin acciones programadas</span>
                 ) : (
                   items.map((i) => (
                     <div key={i.id} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                      <strong style={{ fontSize: '0.85rem', color: 'var(--text)' }}>{i.company}</strong>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--warning)', fontWeight: 600 }}>{i.actionType}</span>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>{i.detail}</span>
+                      <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)' }}>{i.company}</strong>
+                      <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--warning)', fontWeight: 600 }}>{i.actionType}</span>
+                      <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>{i.detail}</span>
                     </div>
                   ))
                 )}

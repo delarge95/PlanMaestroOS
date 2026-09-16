@@ -36,7 +36,7 @@ export default function NewsInbox() {
                 border: 'none',
                 padding: '6px 12px',
                 borderRadius: '7px',
-                fontSize: '0.78rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: viewFilter === 'inbox' ? 700 : 500,
                 cursor: 'pointer'
               }}
@@ -53,7 +53,7 @@ export default function NewsInbox() {
                 border: 'none',
                 padding: '6px 12px',
                 borderRadius: '7px',
-                fontSize: '0.78rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: viewFilter === 'saved' ? 700 : 500,
                 cursor: 'pointer'
               }}
@@ -76,7 +76,7 @@ export default function NewsInbox() {
                 border: 'none',
                 padding: '4px 10px',
                 borderRadius: '20px',
-                fontSize: '0.75rem',
+                fontSize: 'var(--fs-eyebrow)',
                 fontWeight: selectedCategory === cat ? 700 : 500,
                 cursor: 'pointer'
               }}
@@ -89,7 +89,7 @@ export default function NewsInbox() {
         {/* COLA PAGINADA DE MÁXIMO 10 ELEMENTOS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
           {visibleQueue.length === 0 ? (
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', fontSize: '0.85rem', color: 'var(--text-tertiary)' }}>
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', fontSize: 'var(--fs-body)', color: 'var(--text-tertiary)' }}>
               Sin noticias pendientes en esta cola.
             </div>
           ) : (
@@ -109,15 +109,15 @@ export default function NewsInbox() {
               >
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.68rem', color: 'var(--accent)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
                       {item.category}
                     </span>
-                    <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
                       {item.source} · {item.dateIso}
                     </span>
                   </div>
 
-                  <strong style={{ fontSize: '0.9rem', color: 'var(--text)', display: 'block', marginTop: '4px' }}>
+                  <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)', display: 'block', marginTop: '4px' }}>
                     {item.title}
                   </strong>
                 </div>

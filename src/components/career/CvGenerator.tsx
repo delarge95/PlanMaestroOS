@@ -175,7 +175,7 @@ export default function CvGenerator() {
                 background: mode === m ? 'var(--accent)' : 'transparent',
                 color: mode === m ? '#000000' : 'var(--text-secondary)',
                 border: 'none', padding: '6px 14px', borderRadius: '7px',
-                fontSize: '0.78rem', fontWeight: mode === m ? 700 : 500, cursor: 'pointer',
+                fontSize: 'var(--fs-meta)', fontWeight: mode === m ? 700 : 500, cursor: 'pointer',
               }}
             >
               {label}
@@ -191,7 +191,7 @@ export default function CvGenerator() {
               ))}
             </div>
             <VariantInfo variantId={variantId} />
-            <label className="ds-row" style={{ gap: '6px', fontSize: '0.78rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+            <label className="ds-row" style={{ gap: '6px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', cursor: 'pointer' }}>
               <input type="checkbox" checked={includeKeywords} onChange={(e) => setIncludeKeywords(e.target.checked)} />
               Incluir línea de keywords al copiar
             </label>
@@ -206,7 +206,7 @@ export default function CvGenerator() {
               <select
                 value={appId}
                 onChange={(e) => selectApplication(e.target.value)}
-                style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 10px', fontSize: '0.8rem', minWidth: '260px' }}
+                style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 10px', fontSize: 'var(--fs-meta)', minWidth: '260px' }}
               >
                 <option value="">— elegir aplicación del pipeline —</option>
                 {applications.filter((a) => a.stage !== 'Cerrado').map((a) => (
@@ -221,7 +221,7 @@ export default function CvGenerator() {
             </div>
 
             {application && !research && (
-              <div className="ds-row" style={{ gap: '6px', fontSize: '0.76rem', color: 'var(--warning)' }}>
+              <div className="ds-row" style={{ gap: '6px', fontSize: 'var(--fs-meta)', color: 'var(--warning)' }}>
                 <AlertCircle size={13} />
                 Sin investigación de {application.companyName} — complétala en Empleo → Base de datos para un mejor auto-tailoring.
               </div>
@@ -231,11 +231,11 @@ export default function CvGenerator() {
               <>
                 {/* Paso 2: variante (sugerida) */}
                 <div className="ds-row" style={{ gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Variante:</span>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>Variante:</span>
                   {cvVariants.map((v) => (
                     <VariantChip key={v.id} active={v.id === kit.variantId} label={v.name} secondary={v.secondaryRoute} onClick={() => setKit((k) => (k ? { ...k, variantId: v.id, variantConfidence: 'explicit' } : k))} />
                   ))}
-                  <span className="ds-chip" style={{ fontSize: '0.68rem', border: '1px solid var(--color-border-subtle)' }}>
+                  <span className="ds-chip" style={{ fontSize: 'var(--fs-eyebrow)', border: '1px solid var(--color-border-subtle)' }}>
                     sugerida: {CONFIDENCE_LABEL[kit.variantConfidence]}
                   </span>
                 </div>
@@ -389,24 +389,24 @@ export default function CvGenerator() {
       {mode === 'application' && kit && application && (
         <div className="cv-no-print ds-card" style={{ padding: 'var(--space-3)' }}>
           <span className="ds-eyebrow">Brief de portafolio — {application.companyName}</span>
-          <div style={{ fontSize: '0.84rem', marginTop: '6px' }}>
+          <div style={{ fontSize: 'var(--fs-meta)', marginTop: '6px' }}>
             {kit.briefLead || <em style={{ color: 'var(--text-tertiary)' }}>Frase de apertura pendiente (arrriba, en el kit).</em>}
           </div>
           <ol style={{ margin: '10px 0 0 18px', padding: 0, display: 'grid', gap: '6px' }}>
             {previewProjects.map((p) => (
-              <li key={p.id} style={{ fontSize: '0.8rem' }}>
+              <li key={p.id} style={{ fontSize: 'var(--fs-meta)' }}>
                 <strong>{p.name.split(' — ')[0]}</strong>
                 {kit.briefAngles[p.id] ? <> — {kit.briefAngles[p.id]}</> : <em style={{ color: 'var(--text-tertiary)' }}> — ángulo pendiente</em>}
               </li>
             ))}
           </ol>
-          <span style={{ display: 'block', marginTop: '8px', fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>
+          <span style={{ display: 'block', marginTop: '8px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
             El brief viaja con el markdown al copiar. Los ángulos se editan en el kit.
           </span>
         </div>
       )}
 
-      <div className="cv-no-print ds-row" style={{ gap: '6px', alignItems: 'flex-start', color: 'var(--text-tertiary)', fontSize: '0.72rem' }}>
+      <div className="cv-no-print ds-row" style={{ gap: '6px', alignItems: 'flex-start', color: 'var(--text-tertiary)', fontSize: 'var(--fs-eyebrow)' }}>
         <AlertCircle size={13} style={{ flexShrink: 0, marginTop: '1px' }} />
         <span>
           Pendientes de confirmar (doc-17 §2): email, teléfono y URL del portfolio viajan como
@@ -429,7 +429,7 @@ export default function CvGenerator() {
 const inputStyle: React.CSSProperties = {
   background: 'var(--surface-2)', color: 'var(--text-primary)',
   border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)',
-  padding: '8px 10px', fontSize: '0.8rem', resize: 'vertical', fontFamily: 'inherit', width: '100%',
+  padding: '8px 10px', fontSize: 'var(--fs-meta)', resize: 'vertical', fontFamily: 'inherit', width: '100%',
 };
 
 function splitCsv(s: string): string[] {
@@ -457,7 +457,7 @@ function VariantInfo({ variantId }: { variantId: string }) {
   const v = cvVariants.find((x) => x.id === variantId);
   if (!v) return null;
   return (
-    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+    <div style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
       <strong style={{ color: 'var(--text-primary)' }}>Usar para:</strong> {v.targetRoles.join(' · ')}
       {v.skillsDeemphasize.length > 0 && (
         <span style={{ display: 'block', marginTop: '2px' }}><em>De-emfatizar: {v.skillsDeemphasize.join(', ')}</em></span>
@@ -468,7 +468,7 @@ function VariantInfo({ variantId }: { variantId: string }) {
 
 function KitField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+    <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
       {label}
       {children}
     </label>
@@ -478,7 +478,7 @@ function KitField({ label, children }: { label: string; children: React.ReactNod
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section style={{ marginBottom: '12px' }}>
-      <h3 style={{ margin: '0 0 6px', fontSize: '0.88rem', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '1px solid #ddd', paddingBottom: '4px', marginBottom: '8px' }}>
+      <h3 style={{ margin: '0 0 6px', fontSize: 'var(--fs-body)', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '1px solid #ddd', paddingBottom: '4px', marginBottom: '8px' }}>
         {title}
       </h3>
       {children}

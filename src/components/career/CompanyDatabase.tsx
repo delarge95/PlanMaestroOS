@@ -101,7 +101,7 @@ export default function CompanyDatabase() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Empresa, categoría, rol, región…"
-                  style={{ background: 'transparent', border: 'none', outline: 'none', color: 'var(--text)', fontSize: '0.78rem', width: '100%' }}
+                  style={{ background: 'transparent', border: 'none', outline: 'none', color: 'var(--text)', fontSize: 'var(--fs-meta)', width: '100%' }}
                 />
               </div>
               {tierOptions.map((t) => (
@@ -135,7 +135,7 @@ export default function CompanyDatabase() {
                       }}
                     >
                       <div style={{ minWidth: 0 }}>
-                        <strong className="ds-label" style={{ fontSize: '0.85rem', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <strong className="ds-label" style={{ fontSize: 'var(--fs-body)', display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {c.name}
                         </strong>
                         <span className="ds-micro" style={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -178,7 +178,7 @@ export default function CompanyDatabase() {
                 <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)', gap: '10px' }}>
                   <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: 'var(--space-2)' }}>
                     <div>
-                      <strong className="ds-label" style={{ fontSize: '0.95rem' }}>{selected.name}</strong>
+                      <strong className="ds-label" style={{ fontSize: 'var(--fs-body)' }}>{selected.name}</strong>
                       <div className="ds-micro" style={{ color: 'var(--text-tertiary)' }}>
                         #{selected.doc11Number} · {selected.region} · {selected.category}
                       </div>
@@ -240,7 +240,7 @@ export default function CompanyDatabase() {
                   {/* TIMELINE real (si hay interacciones registradas en el store) */}
                   {selectedTimeline && selectedTimeline.timeline.length > 0 && (
                     <div className="ds-stack-sm" style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-2)', gap: '6px' }}>
-                      <strong className="ds-label ds-row" style={{ fontSize: '0.78rem', gap: '5px' }}>
+                      <strong className="ds-label ds-row" style={{ fontSize: 'var(--fs-meta)', gap: '5px' }}>
                         <History size={12} /> Interacciones registradas
                       </strong>
                       {selectedTimeline.timeline.map((t) => (

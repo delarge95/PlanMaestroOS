@@ -147,7 +147,7 @@ export default function PortfolioSimulator() {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <AlertCircle size={16} style={{ color: 'var(--warning)' }} />
-            <strong style={{ fontSize: '0.82rem', color: 'var(--text)' }}>
+            <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--text)' }}>
               Simulación de referencia — no es la plataforma real
             </strong>
           </div>
@@ -170,13 +170,13 @@ export default function PortfolioSimulator() {
           flexWrap: 'wrap'
         }}>
           <ListChecks size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-          <strong style={{ fontSize: '0.82rem', color: 'var(--text)' }}>
+          <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--text)' }}>
             Assets pendientes (doc-33): {notDoneCount} de {boardCards.length}
           </strong>
-          <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-success, #34c759)', fontWeight: 700 }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-accent-success, #34c759)', fontWeight: 700 }}>
             Hechos: {doneCount}
           </span>
-          <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
             {(['artstation', 'github', 'linkedin', 'web'] as PortfolioAssetPlatform[])
               .map(
                 (platform) =>
@@ -213,7 +213,7 @@ export default function PortfolioSimulator() {
         {activeTab === 'board' && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Tablero de producción de assets — doc-33
               </span>
               <button
@@ -224,7 +224,7 @@ export default function PortfolioSimulator() {
                   border: '1px solid var(--color-border-subtle)',
                   borderRadius: '7px',
                   padding: '4px 10px',
-                  fontSize: '0.68rem',
+                  fontSize: 'var(--fs-eyebrow)',
                   color: 'var(--text-secondary)',
                   cursor: 'pointer'
                 }}
@@ -233,7 +233,7 @@ export default function PortfolioSimulator() {
               </button>
             </div>
 
-            <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>
+            <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0 }}>
               Estado vivo del sprint (se guarda en este navegador). El baseline del dataset arranca todo en «Pendiente»: un ítem solo avanza cuando el asset real existe. Cada tarjeta muestra su responsable y cita la sección de doc-33 que exige el asset.
             </p>
 
@@ -254,7 +254,7 @@ export default function PortfolioSimulator() {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.68rem', fontWeight: 700, color: STATUS_ACCENT[status], textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: STATUS_ACCENT[status], textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                       {PORTFOLIO_ASSET_STATUS_LABELS[status]}
                     </span>
                     <span style={{ fontSize: '0.65rem', color: 'var(--text-tertiary)', fontWeight: 700 }}>
@@ -281,7 +281,7 @@ export default function PortfolioSimulator() {
                         gap: '4px'
                       }}
                     >
-                      <strong style={{ fontSize: '0.73rem', color: 'var(--text)' }}>{card.title}</strong>
+                      <strong style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text)' }}>{card.title}</strong>
                       <p style={{ fontSize: '0.65rem', color: 'var(--text-tertiary)', margin: 0 }}>{card.detail}</p>
 
                       <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
@@ -343,7 +343,7 @@ export default function PortfolioSimulator() {
           <>
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                   Secuencia de launch — doc-36
                 </span>
                 <button
@@ -354,7 +354,7 @@ export default function PortfolioSimulator() {
                     border: '1px solid var(--color-border-subtle)',
                     borderRadius: '7px',
                     padding: '4px 10px',
-                    fontSize: '0.68rem',
+                    fontSize: 'var(--fs-eyebrow)',
                     color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
@@ -363,7 +363,7 @@ export default function PortfolioSimulator() {
                 </button>
               </div>
 
-              <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>
+              <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0 }}>
                 Un paso se habilita cuando sus assets del Tablero Sprint están «Hechos» (y, donde doc-36 §4.2 lo exige, cuando sus pasos previos están completos). Las URLs son placeholders explícitos entre corchetes — nada se publica con enlaces inventados. Soft launch primero; hard launch tras QA (doc-36 §17).
               </p>
 
@@ -372,7 +372,7 @@ export default function PortfolioSimulator() {
                 if (daySteps.length === 0) return null;
                 return (
                   <div key={day} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                       {portfolioLaunchDayLabels[day]}
                     </span>
 
@@ -408,7 +408,7 @@ export default function PortfolioSimulator() {
                               aria-label={`Completar paso: ${step.title}`}
                               style={{ accentColor: 'var(--color-accent-success, #34c759)', cursor: enabled || done ? 'pointer' : 'not-allowed' }}
                             />
-                            <strong style={{ fontSize: '0.8rem', color: 'var(--text)' }}>
+                            <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--text)' }}>
                               {String(step.order).padStart(2, '0')}. {step.title}
                             </strong>
                             <span style={{ fontSize: '0.62rem', padding: '1px 6px', borderRadius: '4px', fontWeight: 700, background: badge.bg, color: badge.fg }}>
@@ -416,7 +416,7 @@ export default function PortfolioSimulator() {
                             </span>
                           </div>
 
-                          <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>{step.detail}</p>
+                          <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0 }}>{step.detail}</p>
 
                           {!done && blockers.length > 0 && (
                             <span style={{ fontSize: '0.66rem', color: 'var(--warning)' }}>
@@ -469,17 +469,17 @@ export default function PortfolioSimulator() {
 
             {/* PUERTA FINAL PRE-APLICACIONES (doc-36 §21), derivada de los pasos completados */}
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Puerta final pre-aplicaciones — doc-36 §21
               </span>
-              <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>
+              <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0 }}>
                 Volumen serio de aplicaciones solo cuando las seis condiciones estén en verde. Se derivan automáticamente de los pasos completados arriba.
               </p>
               {getPreApplicationGate(completedStepIds).map(({ row, satisfied }) => (
                 <div key={row.id} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span
                     style={{
-                      fontSize: '0.7rem',
+                      fontSize: 'var(--fs-eyebrow)',
                       fontWeight: 700,
                       width: '16px',
                       textAlign: 'center',
@@ -488,12 +488,12 @@ export default function PortfolioSimulator() {
                   >
                     {satisfied ? '✓' : '○'}
                   </span>
-                  <span style={{ fontSize: '0.74rem', color: satisfied ? 'var(--text)' : 'var(--text-secondary)' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: satisfied ? 'var(--text)' : 'var(--text-secondary)' }}>
                     {row.label}
                   </span>
                 </div>
               ))}
-              <p style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', margin: 0, fontStyle: 'italic' }}>
+              <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0, fontStyle: 'italic' }}>
                 Excepción doc-36 §21: aplicaciones selectivas Priority A antes del hard launch si portfolio + GitHub + demo funcionan.
               </p>
             </div>
@@ -503,12 +503,12 @@ export default function PortfolioSimulator() {
         {/* ORDEN DE PROYECTOS Y SIMULADOR */}
         {activeTab !== 'board' && activeTab !== 'launch' && (
         <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
             Orden de proyectos ({activeTab.toUpperCase()})
           </span>
 
           {activeTab === 'artstation' && (
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0 }}>
               Orden específico ArtStation (doc-29C §19.2): 1) TwinSight technical breakdown · 2) Blender portrait breakdown · 3) estudios de shader/modos visuales si se separan.
             </span>
           )}
@@ -528,7 +528,7 @@ export default function PortfolioSimulator() {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', fontWeight: 700 }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontWeight: 700 }}>
                     #{idx + 1}
                   </span>
                   <div style={{ display: 'flex', gap: '4px' }}>
@@ -537,11 +537,11 @@ export default function PortfolioSimulator() {
                   </div>
                 </div>
 
-                <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>
+                <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)' }}>
                   {p.title}
                 </strong>
 
-                <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', margin: 0 }}>
+                <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0 }}>
                   {p.summary}
                 </p>
 
@@ -569,7 +569,7 @@ export default function PortfolioSimulator() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Layers size={16} style={{ color: 'var(--accent)' }} />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                     Estructura del post (breakdown) — doc-29C
                   </span>
                 </div>
@@ -585,7 +585,7 @@ export default function PortfolioSimulator() {
                         border: 'none',
                         padding: '5px 10px',
                         borderRadius: '7px',
-                        fontSize: '0.72rem',
+                        fontSize: 'var(--fs-eyebrow)',
                         fontWeight: selectedSpecId === spec.id ? 700 : 500,
                         cursor: 'pointer'
                       }}
@@ -596,7 +596,7 @@ export default function PortfolioSimulator() {
                 </div>
               </div>
 
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: 0 }}>
+              <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', margin: 0 }}>
                 {selectedSpec.positioning} <span style={{ color: 'var(--text-tertiary)' }}>({selectedSpec.source})</span>
               </p>
 
@@ -615,10 +615,10 @@ export default function PortfolioSimulator() {
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', fontWeight: 700 }}>
+                      <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontWeight: 700 }}>
                         {String(section.order).padStart(2, '0')}
                       </span>
-                      <strong style={{ fontSize: '0.8rem', color: 'var(--text)' }}>{section.title}</strong>
+                      <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--text)' }}>{section.title}</strong>
                       {KIND_BADGE[section.kind] && (
                         <span style={{ fontSize: '0.62rem', background: 'rgba(10,132,255,0.12)', color: 'var(--accent)', padding: '1px 6px', borderRadius: '4px', fontWeight: 700 }}>
                           {KIND_BADGE[section.kind]}
@@ -637,7 +637,7 @@ export default function PortfolioSimulator() {
                         {REQUIREMENT_LABEL[section.requirement]}
                       </span>
                     </div>
-                    <p style={{ fontSize: '0.73rem', color: 'var(--text-tertiary)', margin: 0 }}>
+                    <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0 }}>
                       {section.guidance} <span style={{ opacity: 0.7 }}>[{section.source}]</span>
                     </p>
                   </div>
@@ -645,7 +645,7 @@ export default function PortfolioSimulator() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: '4px', borderTop: '1px solid var(--color-border-subtle)' }}>
-                <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', fontWeight: 700 }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontWeight: 700 }}>
                   Software del asset (solo herramientas realmente usadas — doc-29C §12):
                 </span>
                 <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
@@ -655,7 +655,7 @@ export default function PortfolioSimulator() {
                     </span>
                   ))}
                 </div>
-                <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', fontWeight: 700, paddingTop: '4px' }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontWeight: 700, paddingTop: '4px' }}>
                   Tags del post:
                 </span>
                 <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
@@ -669,13 +669,13 @@ export default function PortfolioSimulator() {
             </div>
 
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Checklist de publicación del perfil — doc-28E
               </span>
 
               {artstationChecklistAreas.map(({ area, label }) => (
                 <div key={area} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                     {label}
                   </span>
                   {artstationProfileChecklist
@@ -690,8 +690,8 @@ export default function PortfolioSimulator() {
                           padding: '8px 12px'
                         }}
                       >
-                        <strong style={{ fontSize: '0.78rem', color: 'var(--text)' }}>{item.title}</strong>
-                        <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>
+                        <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--text)' }}>{item.title}</strong>
+                        <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: '2px 0 0 0' }}>
                           {item.detail} <span style={{ opacity: 0.7 }}>[{item.source}]</span>
                         </p>
                       </div>
@@ -699,7 +699,7 @@ export default function PortfolioSimulator() {
                 </div>
               ))}
 
-              <p style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', margin: 0, fontStyle: 'italic' }}>
+              <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', margin: 0, fontStyle: 'italic' }}>
                 Estructura simulada con fines de planificación: usa la estructura y el orden, no el branding de la plataforma. Los textos copy-pasteable viven en doc-28E.
               </p>
             </div>

@@ -71,7 +71,7 @@ export default function ServiceOfferSheet() {
         </div>
 
         <div className="ds-row" style={{ gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Servicio destacado:</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>Servicio destacado:</span>
           {FREELANCE_OFFERINGS.map((o) => (
             <button
               key={o.id}
@@ -80,7 +80,7 @@ export default function ServiceOfferSheet() {
               className="ds-chip"
               style={{
                 cursor: 'pointer',
-                fontSize: '0.7rem',
+                fontSize: 'var(--fs-eyebrow)',
                 border: o.id === highlight ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle)',
                 background: o.id === highlight ? 'var(--accent)' : 'transparent',
                 color: o.id === highlight ? '#000000' : 'var(--text-secondary)',
@@ -183,7 +183,7 @@ export default function ServiceOfferSheet() {
       </article>
 
       {pendingNotes > 0 && (
-        <div className="cv-no-print ds-row" style={{ gap: '6px', color: 'var(--text-tertiary)', fontSize: '0.72rem' }}>
+        <div className="cv-no-print ds-row" style={{ gap: '6px', color: 'var(--text-tertiary)', fontSize: 'var(--fs-eyebrow)' }}>
           <AlertCircle size={13} style={{ flexShrink: 0 }} />
           <span>
             {pendingNotes} dato(s) con nota «[verify…]» (triángulos finales): la hoja sale limpia — confirma la cifra real antes de imprimir.
@@ -196,7 +196,7 @@ export default function ServiceOfferSheet() {
 
 const h3Style: React.CSSProperties = {
   margin: '0 0 6px',
-  fontSize: '0.8rem',
+  fontSize: 'var(--fs-meta)',
   textTransform: 'uppercase',
   letterSpacing: '0.06em',
   borderBottom: '1px solid #ddd',

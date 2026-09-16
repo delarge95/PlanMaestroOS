@@ -87,7 +87,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                       }}
                     >
                       <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: '6px' }}>
-                        <strong className="ds-label" style={{ fontSize: '0.85rem' }}>
+                        <strong className="ds-label" style={{ fontSize: 'var(--fs-body)' }}>
                           {app.companyName}
                         </strong>
                         <span style={{ display: 'flex', gap: '3px', flexShrink: 0 }}>
@@ -145,7 +145,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                             }}
                             style={{
                               borderRadius: '4px',
-                              fontSize: '0.7rem',
+                              fontSize: 'var(--fs-eyebrow)',
                               padding: '4px 6px',
                               width: '100%'
                             }}
@@ -167,7 +167,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                             background: 'transparent',
                             border: 'none',
                             color: hasAction ? 'var(--text-secondary)' : 'var(--text-tertiary)',
-                            fontSize: '0.68rem',
+                            fontSize: 'var(--fs-eyebrow)',
                             fontWeight: 600,
                             cursor: hasAction ? 'pointer' : 'not-allowed',
                             opacity: hasAction ? 1 : 0.5,

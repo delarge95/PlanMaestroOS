@@ -28,7 +28,7 @@ export default function CareerRoadmapWorkspace() {
               border: 'none',
               padding: '6px 14px',
               borderRadius: '7px',
-              fontSize: '0.78rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: tab === 'dashboard' ? 700 : 500,
               cursor: 'pointer'
             }}
@@ -44,7 +44,7 @@ export default function CareerRoadmapWorkspace() {
               border: 'none',
               padding: '6px 14px',
               borderRadius: '7px',
-              fontSize: '0.78rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: tab === 'board' ? 700 : 500,
               cursor: 'pointer'
             }}

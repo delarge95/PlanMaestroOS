@@ -16,7 +16,7 @@ export default function CourseTracker() {
         
         {/* ENCABEZADO PRESCRIPTIVO CON COPY EXACTO */}
         <div style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
             Formación activa, metas de aprendizaje y oportunidades
           </span>
         </div>
@@ -25,10 +25,10 @@ export default function CourseTracker() {
         {activeCourses[0]?.todayTask && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
             <div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
                 Hoy · {activeCourses[0].title}
               </span>
-              <strong style={{ fontSize: '0.92rem', color: 'var(--text)', display: 'block', marginTop: '2px' }}>
+              <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)', display: 'block', marginTop: '2px' }}>
                 {activeCourses[0].todayTask}
               </strong>
             </div>
@@ -43,16 +43,16 @@ export default function CourseTracker() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--space-md)' }}>
           {/* CURSOS ACTIVOS */}
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
               Cursos activos ({activeCourses.length})
             </span>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {activeCourses.map((c) => (
                 <div key={c.id} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{c.title}</strong>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>{c.provider}</span>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.72rem', marginTop: '4px' }}>
+                  <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)' }}>{c.title}</strong>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>{c.provider}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'var(--fs-eyebrow)', marginTop: '4px' }}>
                     <span style={{ color: 'var(--color-state-done)', fontWeight: 700 }}>{c.progressPercent}% completado</span>
                   </div>
                 </div>
@@ -62,17 +62,17 @@ export default function CourseTracker() {
 
           {/* EN LA MIRA */}
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
               En la mira ({watchlistCourses.length})
             </span>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {watchlistCourses.map((c) => (
                 <div key={c.id} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{c.title}</strong>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>{c.provider}</span>
+                  <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)' }}>{c.title}</strong>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>{c.provider}</span>
                   {c.newsNote && (
-                    <span style={{ fontSize: '0.72rem', color: 'var(--warning)', fontWeight: 600, marginTop: '2px' }}>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--warning)', fontWeight: 600, marginTop: '2px' }}>
                       Noticias: {c.newsNote}
                     </span>
                   )}

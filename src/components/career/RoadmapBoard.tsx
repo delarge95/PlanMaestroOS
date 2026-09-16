@@ -56,7 +56,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
         gap: '10px'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             {title} ({list.length})
           </span>
         </div>
@@ -76,34 +76,34 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.68rem', color: 'var(--accent)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
                   {g.area}
                 </span>
 
                 <div style={{ display: 'flex', gap: '4px' }}>
                   {timeframe !== 'short' && (
-                    <button type="button" onClick={() => moveGoalTimeframe(g.id, 'short')} style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '0.7rem' }}>
+                    <button type="button" onClick={() => moveGoalTimeframe(g.id, 'short')} style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: 'var(--fs-eyebrow)' }}>
                       Corto
                     </button>
                   )}
                   {timeframe !== 'medium' && (
-                    <button type="button" onClick={() => moveGoalTimeframe(g.id, 'medium')} style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '0.7rem' }}>
+                    <button type="button" onClick={() => moveGoalTimeframe(g.id, 'medium')} style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: 'var(--fs-eyebrow)' }}>
                       Mediano
                     </button>
                   )}
                   {timeframe !== 'long' && (
-                    <button type="button" onClick={() => moveGoalTimeframe(g.id, 'long')} style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '0.7rem' }}>
+                    <button type="button" onClick={() => moveGoalTimeframe(g.id, 'long')} style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: 'var(--fs-eyebrow)' }}>
                       Largo
                     </button>
                   )}
                 </div>
               </div>
 
-              <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>
+              <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)' }}>
                 {g.title}
               </strong>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
                 <span>Meta: {g.targetDate}</span>
                 <span>{g.linkedTaskCount} tareas vinculadas</span>
               </div>
@@ -115,7 +115,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            style={{ background: 'transparent', border: 'none', color: 'var(--accent)', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer', textAlign: 'center', paddingTop: '4px' }}
+            style={{ background: 'transparent', border: 'none', color: 'var(--accent)', fontSize: 'var(--fs-meta)', fontWeight: 600, cursor: 'pointer', textAlign: 'center', paddingTop: '4px' }}
           >
             {showAll ? 'Mostrar menos' : `Ver todos (${list.length})`}
           </button>
@@ -141,7 +141,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
                 border: 'none',
                 padding: '6px 12px',
                 borderRadius: '7px',
-                fontSize: '0.78rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: viewMode === 'board' ? 700 : 500,
                 cursor: 'pointer',
                 display: 'flex',
@@ -161,7 +161,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
                 border: 'none',
                 padding: '6px 12px',
                 borderRadius: '7px',
-                fontSize: '0.78rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: viewMode === 'calendar' ? 700 : 500,
                 cursor: 'pointer',
                 display: 'flex',
@@ -183,12 +183,12 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
           </div>
         ) : (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
               Vista Calendario de Metas
             </span>
 
             {goals.map((g) => (
-              <div key={g.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', borderBottom: '1px solid var(--color-border-subtle)', padding: '8px 0' }}>
+              <div key={g.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-body)', borderBottom: '1px solid var(--color-border-subtle)', padding: '8px 0' }}>
                 <strong style={{ color: 'var(--text)' }}>{g.title} ({g.area})</strong>
                 <span style={{ color: 'var(--text-tertiary)' }}>{g.targetDate}</span>
               </div>

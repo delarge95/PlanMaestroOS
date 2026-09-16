@@ -155,6 +155,7 @@ function ServiceCard({ svc, currency, onPick, index, lang }: {
       onClick={onPick}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
+      className={`ds-anim ds-anim-${(index % 3) + 1}`}
       style={{
         position: 'relative', display: 'flex', flexDirection: 'column', gap: 6,
         padding: '22px 20px 18px', textAlign: 'left', font: 'inherit',
@@ -163,7 +164,6 @@ function ServiceCard({ svc, currency, onPick, index, lang }: {
         cursor: 'pointer', overflow: 'hidden',
         transition: 'transform 0.3s cubic-bezier(0.25,0.8,0.4,1), box-shadow 0.3s',
         boxShadow: '0 2px 16px var(--cx-border)',
-        animation: `cardIn 0.3s ${index * 0.05}s cubic-bezier(0.25,0.8,0.4,1) both`,
       }}
     >
       {/* Glare effect */}
@@ -184,7 +184,6 @@ function ServiceCard({ svc, currency, onPick, index, lang }: {
       )}
       <style>{`
         button:hover .card-glare { opacity: 1; }
-        @keyframes cardIn { from { opacity: 0; transform: translateY(24px) scale(0.96); } to { opacity: 1; transform: none; } }
       `}</style>
     </button>
   );

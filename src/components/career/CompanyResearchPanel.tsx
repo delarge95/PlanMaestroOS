@@ -131,7 +131,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
               border: '1px solid var(--color-border-subtle)',
               borderRadius: 'var(--radius-s)',
               padding: '3px 8px',
-              fontSize: '0.75rem',
+              fontSize: 'var(--fs-eyebrow)',
             }}
             aria-label="Estado de la investigación"
           >
@@ -154,7 +154,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
 
       {/* Fit score propio + regla */}
       <div className="ds-row" style={{ gap: 'var(--space-2)', alignItems: 'center', flexWrap: 'wrap' }}>
-        <label style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+        <label style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
           Fit propio (0–12):
           <input
             type="number"
@@ -171,7 +171,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
               border: '1px solid var(--color-border-subtle)',
               borderRadius: 'var(--radius-s)',
               padding: '4px 8px',
-              fontSize: '0.8rem',
+              fontSize: 'var(--fs-meta)',
             }}
           />
         </label>
@@ -179,7 +179,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
           <span
             className="ds-chip"
             style={{
-              fontSize: '0.7rem',
+              fontSize: 'var(--fs-eyebrow)',
               color: draft.fitScoreUser >= FIT_APPLY_AT ? 'var(--color-success, #30d158)' : draft.fitScoreUser >= FIT_INVESTIGATE_AT ? 'var(--warning)' : 'var(--text-tertiary)',
               border: '1px solid var(--color-border-subtle)',
             }}
@@ -196,7 +196,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
       {/* Campos de investigación */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--space-2)' }}>
         {FIELDS.map((f) => (
-          <label key={f.key} style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+          <label key={f.key} style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
             {f.label}
             <textarea
               rows={f.rows}
@@ -209,14 +209,14 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
                 border: '1px solid var(--color-border-subtle)',
                 borderRadius: 'var(--radius-s)',
                 padding: '8px 10px',
-                fontSize: '0.8rem',
+                fontSize: 'var(--fs-meta)',
                 resize: 'vertical',
                 fontFamily: 'inherit',
               }}
             />
           </label>
         ))}
-        <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+        <label style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
           Fuentes (una URL por línea)
           <textarea
             rows={3}
@@ -229,7 +229,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
               border: '1px solid var(--color-border-subtle)',
               borderRadius: 'var(--radius-s)',
               padding: '8px 10px',
-              fontSize: '0.8rem',
+              fontSize: 'var(--fs-meta)',
               resize: 'vertical',
               fontFamily: 'inherit',
             }}
@@ -251,13 +251,13 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
           ) : (
             <AlertTriangle size={14} style={{ color: 'var(--warning)' }} />
           )}
-          <strong style={{ fontSize: '0.8rem' }}>
+          <strong style={{ fontSize: 'var(--fs-meta)' }}>
             {readiness.ready ? 'Lista para aplicar' : 'Checklist antes de aplicar'}
           </strong>
         </div>
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: '4px' }}>
           {readiness.checks.map((c) => (
-            <li key={c.label} className="ds-row" style={{ gap: '6px', fontSize: '0.76rem', color: c.ok ? 'var(--text-secondary)' : 'var(--text-tertiary)' }}>
+            <li key={c.label} className="ds-row" style={{ gap: '6px', fontSize: 'var(--fs-meta)', color: c.ok ? 'var(--text-secondary)' : 'var(--text-tertiary)' }}>
               {c.ok ? (
                 <CheckCircle2 size={13} style={{ color: 'var(--color-success, #30d158)', flexShrink: 0 }} />
               ) : (

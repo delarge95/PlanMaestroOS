@@ -93,27 +93,27 @@ export default function ProjectCard() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <GitBranch size={16} style={{ color: 'var(--accent)' }} />
-                    <strong style={{ fontSize: '1rem', color: 'var(--text)' }}>
+                    <strong style={{ fontSize: 'var(--fs-step)', color: 'var(--text)' }}>
                       {p.name}
                     </strong>
                   </div>
 
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', fontFamily: 'monospace' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontFamily: 'monospace' }}>
                     {p.repo}
                   </span>
                 </div>
 
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <GitCommit size={14} />
                   <span>Último commit: <em>"{p.lastCommitMessage}"</em> ({p.lastCommitDate})</span>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 600 }}>
+                  <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--accent)', fontWeight: 600 }}>
                     Próxima acción: {p.nextAction}
                   </span>
 
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
                     Issues abiertos: {p.openIssuesCount}
                   </span>
                 </div>
@@ -131,7 +131,7 @@ export default function ProjectCard() {
               background: 'transparent',
               border: 'none',
               color: 'var(--text)',
-              fontSize: '0.92rem',
+              fontSize: 'var(--fs-body)',
               fontWeight: 700,
               cursor: 'pointer',
               display: 'flex',
@@ -161,16 +161,16 @@ export default function ProjectCard() {
                   }}
                 >
                   <div>
-                    <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>
+                    <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)' }}>
                       {p.name}
                     </strong>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', display: 'block', marginTop: '2px' }}>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', display: 'block', marginTop: '2px' }}>
                       {p.nextAction}
                     </span>
                   </div>
 
                   <span style={{
-                    fontSize: '0.72rem',
+                    fontSize: 'var(--fs-eyebrow)',
                     fontWeight: 700,
                     padding: '2px 8px',
                     borderRadius: '4px',
