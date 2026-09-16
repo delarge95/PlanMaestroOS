@@ -156,9 +156,20 @@ export default function CompanyDatabase() {
                   );
                 })}
                 {filtered.length === 0 && (
-                  <span className="ds-caption" style={{ color: 'var(--text-tertiary)', padding: '10px' }}>
-                    Sin resultados para ese filtro.
-                  </span>
+                  <div className="ds-stack-sm" style={{ padding: '10px', gap: '6px' }}>
+                    <span className="ds-caption" style={{ color: 'var(--text-tertiary)' }}>
+                      Sin resultados para ese filtro.
+                    </span>
+                    {/* U11a: salida accionable del estado vacío */}
+                    <button
+                      type="button"
+                      className="ds-btn ds-btn-secondary ds-btn-sm"
+                      style={{ alignSelf: 'flex-start' }}
+                      onClick={() => { setQuery(''); setTierFilter('all'); }}
+                    >
+                      Limpiar filtro
+                    </button>
+                  </div>
                 )}
               </div>
 

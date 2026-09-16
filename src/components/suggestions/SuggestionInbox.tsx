@@ -19,6 +19,13 @@ import type { Suggestion } from '../../lib/suggestions';
 
 const ENGINE_KEY = 'suggestions-engine-v1';
 
+// [U6] Destino accionable por dominio: además de descartar, el usuario puede ir.
+const SUGGESTION_LINKS: Record<string, string> = {
+  fitness: '/app/fitness',
+  career: '/app/career/jobs',
+  languages: '/app/languages',
+};
+
 function loadEngine(): SuggestionEngine {
   const engine = createSuggestionEngine({ cooldownsByType: RULE_SUGGESTION_COOLDOWNS });
   try {
@@ -207,6 +214,11 @@ export default function SuggestionInbox() {
           <div style={{ fontWeight: 600, fontSize: 'var(--fs-body)', color: 'var(--text-primary)', marginBottom: 2 }}>{s.title}</div>
           <div style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>{s.body}</div>
           <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+            {SUGGESTION_LINKS[s.domain] && (
+              <a href={SUGGESTION_LINKS[s.domain]} className="ds-btn ds-btn-sm" style={{ fontSize: '0.72rem', padding: '3px 8px', textDecoration: 'none', font: 'inherit' }}>
+                Ir
+              </a>
+            )}
             <button type="button" onClick={() => dismiss(s.id, 'not-now')}
               style={{ background: 'transparent', border: '1px solid var(--color-border-subtle)', color: 'var(--text-secondary)', borderRadius: 6, padding: '3px 8px', fontSize: '0.72rem', cursor: 'pointer', font: 'inherit' }}>
               Ahora no

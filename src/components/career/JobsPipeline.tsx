@@ -125,6 +125,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                           <input
                             type="text"
                             placeholder="Definir la única próxima acción…"
+                            aria-label={`Definir la única próxima acción para ${app.companyName}`}
                             onKeyDown={(e) => {
                               if (e.key === 'Enter') {
                                 const value = (e.target as HTMLInputElement).value;
@@ -132,6 +133,14 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                                   setNextAction(app.id, value);
                                   (e.target as HTMLInputElement).value = '';
                                 }
+                              }
+                            }}
+                            onBlur={(e) => {
+                              // U12: commit también al salir del campo si hay valor sin guardar.
+                              const value = (e.target as HTMLInputElement).value;
+                              if (value.trim()) {
+                                setNextAction(app.id, value);
+                                (e.target as HTMLInputElement).value = '';
                               }
                             }}
                             style={{
