@@ -138,6 +138,70 @@ function cors(): Record<string, string> {
   };
 }
 
+// ——————————————————— Wearable (WHOOP vía bridge) ———————————————————
+
+/**
+ * Payload diario de la banda WHOOP (compatible con export de OpenStrap/edge).
+ * Todos los numéricos son opcionales: se valida rango biológico/plausible
+ * SOLO de los campos presentes (la banda 4.0 no reporta SpO2/skin temp por BLE).
+ */
+export interface ClientWearableDaily {
+  dateIso: string; // YYYY-MM-DD
+  sleepHours?: number;
+  hrvRmssdMs?: number;
+  restingHr?: number;
+  strain?: number;
+  batteryPct?: number;
+  skinTempOffsetC?: number;
+  source: string; // identificador del bridge (p.ej. 'openstrap-edge')
+}
+
+/** Rangos plausibles por campo (rechaza basura sin exigir campos). */
+const WEARABLE_RANGES: Record<string, { min: number; max: number }> = {
+  sleepHours: { min: 0, max: 24 },
+  hrvRmssdMs: { min: 0, max: 500 },
+  restingHr: { min: 20, max: 220 },
+  strain: { min: 0, max: 21 },
+  batteryPct: { min: 0, max: 100 },
+  skinTempOffsetC: { min: -5, max: 5 },
+};
+
+/**
+ * POST /wearable/ingest — recibe daily metrics de la banda WHOOP (vía bridge
+ * Android OpenStrap/edge o scripts/wearable_push.py). Auth x-pm-key igual que
+ * el resto de endpoints protegidos.
+ *
+ * NO escribe en Notion: solo valida y devuelve OK ({ ok, ingestedAtIso }).
+ * La persistencia es LOCAL en el cliente (localStorage 'wearable-daily-v1' vía
+ * wearableStore) — el wearable es un accesorio, nunca una dependencia.
+ */
+export function handleWearableIngest(body: unknown): Response {
+  const w = body as ClientWearableDaily;
+
+  if (!w || typeof w !== 'object') {
+    return Response.json({ ok: false, error: 'Payload inválido: se esperaba un objeto JSON' }, { status: 400, headers: cors() });
+  }
+  if (typeof w.dateIso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(w.dateIso)) {
+    return Response.json({ ok: false, error: "Payload inválido: se espera 'dateIso' (YYYY-MM-DD)" }, { status: 400, headers: cors() });
+  }
+  if (typeof w.source !== 'string' || !w.source.trim()) {
+    return Response.json({ ok: false, error: "Payload inválido: se espera 'source' (identificador del bridge)" }, { status: 400, headers: cors() });
+  }
+  const record = w as unknown as Record<string, unknown>;
+  for (const [field, range] of Object.entries(WEARABLE_RANGES)) {
+    const v = record[field];
+    if (v === undefined) continue; // opcional
+    if (typeof v !== 'number' || !Number.isFinite(v) || v < range.min || v > range.max) {
+      return Response.json(
+        { ok: false, error: `Payload inválido: '${field}' debe ser número finito en [${range.min}, ${range.max}]` },
+        { status: 400, headers: cors() },
+      );
+    }
+  }
+
+  return Response.json({ ok: true, ingestedAtIso: new Date().toISOString() }, { headers: cors() });
+}
+
 // ——————————————————— Career Applications ———————————————————
 
 /**

@@ -12,7 +12,7 @@ import {
 } from './ai/client';
 import { getAuditLogs, logAiCall, clearAuditLogs, type LogAiCallOptions } from './lib/audit';
 import type { AiActionName } from './ai/actions';
-import { handleNotionStatus, handleNotionFitnessSession, handleNotionCareerApp } from './notion/proxy';
+import { handleNotionStatus, handleNotionFitnessSession, handleNotionCareerApp, handleWearableIngest } from './notion/proxy';
 
 export interface WorkerEnv {
   WORKER_SECRET_KEY?: string;
@@ -100,6 +100,13 @@ export default {
       if (url.pathname === '/notion/career-app' && method === 'POST') {
         const body = await request.json();
         return handleNotionCareerApp(body, env);
+      }
+
+      // Wearable: ingest de daily metrics WHOOP vía bridge (auth x-pm-key).
+      // Solo valida y devuelve OK — la persistencia es local en el cliente.
+      if (url.pathname === '/wearable/ingest' && method === 'POST') {
+        const body = await request.json();
+        return handleWearableIngest(body);
       }
 
       if (url.pathname === '/api/ai/draft' && method === 'POST') {

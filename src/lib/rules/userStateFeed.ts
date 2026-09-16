@@ -13,6 +13,12 @@
  * - Bio-feedback clínico → DailyLog: sleepHours directo; pain→generalPain;
  *   anxiety→stress es PROXY documentado (inferred). `energy` no está en el
  *   contrato DailyLog: viaja en `context.domain.energyToday`.
+ * - Wearable WHOOP (ACCESORIO opcional, ENCARGO-WEARABLE): si hay entry del
+ *   wearable para una fecha, su `sleepHours` medido es PREFERENTE y el
+ *   self-report del clinicalStore queda como fallback. Sin wearable, TODO
+ *   funciona igual (REGLA DURA §0.1). HRV/RHR/z-score viajan en
+ *   `context.domain` (vía buildWearableDomainContext) para las reglas
+ *   wearable-aware.
  * - Patrón de movimiento por heurística de nombre (inferred); el canónico
  *   vendrá del anatomyGraph (ticket futuro).
  */
@@ -27,6 +33,7 @@ import type {
 import { createEmptyUserState } from '../../data/contracts/userState';
 import { parseEsShortDate } from '../fitness/programCalendar';
 import { isDue } from '../languages/spacedRepetition';
+import { getHrvTrend } from '../wearable/wearableStore';
 
 /** Serie completada tal como la persiste el logger. */
 export interface RawLoggedSet {
@@ -58,6 +65,21 @@ export interface RawBioFeedback {
   anxiety: number;
   pain: number;
   sleepHours: number;
+}
+
+/**
+ * Entrada diaria del wearable WHOOP (structural — compatible con
+ * WearableDailyEntry del wearableStore sin acoplar el contrato).
+ */
+export interface RawWearableDaily {
+  dateIso: string;
+  sleepHours?: number;
+  hrvRmssdMs?: number;
+  restingHr?: number;
+  strain?: number;
+  batteryPct?: number;
+  skinTempOffsetC?: number;
+  source?: string;
 }
 
 /** Heurística de patrón por nombre (documentada como inferred). */
@@ -129,8 +151,13 @@ export function workoutsToSessions(history: RawLoggedWorkout[]): TrainingSession
   return sessions.sort((a, b) => a.date.localeCompare(b.date));
 }
 
-/** Bio-feedback clínico → DailyLogs (mapeo documentado en la cabecera). */
-export function biofeedbackToDailyLogs(entries: RawBioFeedback[]): DailyLog[] {
+/**
+ * Bio-feedback clínico → DailyLogs (mapeo documentado en la cabecera).
+ * Con `wearableDaily`, el sleepHours MEDIDO del wearable es preferente por
+ * fecha (el self-report queda como fallback); las fechas con solo wearable
+ * también generan DailyLog (sueño objetivo sin auto-reporte).
+ */
+export function biofeedbackToDailyLogs(entries: RawBioFeedback[], wearableDaily?: RawWearableDaily[]): DailyLog[] {
   const byDate = new Map<string, DailyLog>();
   for (const e of entries) {
     if (!e.dateIso) continue;
@@ -143,7 +170,85 @@ export function biofeedbackToDailyLogs(entries: RawBioFeedback[]): DailyLog[] {
       illness: false,
     });
   }
+  if (wearableDaily?.length) {
+    for (const w of wearableDaily) {
+      if (!w?.dateIso) continue;
+      const measured = Number(w.sleepHours);
+      const log = byDate.get(w.dateIso);
+      if (log) {
+        // Preferencia del medido (solo si es un número válido >0; si no, fallback)
+        if (Number.isFinite(measured) && measured > 0) log.sleepHours = measured;
+      } else if (Number.isFinite(measured) && measured > 0) {
+        byDate.set(w.dateIso, { date: w.dateIso, sleepHours: measured, illness: false });
+      }
+    }
+  }
   return [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/**
+ * Fragmento wearable para `context.domain` (INPUT OPCIONAL del motor de
+ * reglas). Requiere entry de HOY; el z-score compara el HRV de hoy contra el
+ * baseline de los 7 días PREVIOS (hoy excluido — "hoy vs baseline" honesto).
+ * Sin datos → objeto vacío: cero cambios visibles (accesorio, no dependencia).
+ */
+export function buildWearableDomainContext(
+  wearableDaily: RawWearableDaily[] | undefined,
+  todayIso: string,
+): Record<string, unknown> {
+  const fragment: Record<string, unknown> = {};
+  if (!wearableDaily?.length || !/^\d{4}-\d{2}-\d{2}$/.test(todayIso)) return fragment;
+
+  const today = wearableDaily.find((w) => w.dateIso === todayIso);
+  if (!today) return fragment; // sin entry de HOY → sin overrides ni métricas
+
+  if (typeof today.hrvRmssdMs === 'number' && Number.isFinite(today.hrvRmssdMs)) {
+    fragment.hrvRmssdMs = today.hrvRmssdMs;
+  }
+  if (typeof today.restingHr === 'number' && Number.isFinite(today.restingHr)) {
+    fragment.restingHr = today.restingHr;
+  }
+  if (typeof today.strain === 'number' && Number.isFinite(today.strain)) {
+    fragment.strain = today.strain;
+  }
+  if (today.source) fragment.wearableSource = today.source;
+  if (typeof today.sleepHours === 'number' && Number.isFinite(today.sleepHours) && today.sleepHours > 0) {
+    fragment.wearableSleepHours = today.sleepHours;
+  }
+
+  // Record para getHrvTrend (clave única por fecha; hoy gana si hay duplicados)
+  const daily: Record<string, { dateIso: string; hrvRmssdMs?: number; restingHr?: number }> = {};
+  for (const w of wearableDaily) {
+    if (!w?.dateIso) continue;
+    daily[w.dateIso] = { dateIso: w.dateIso, hrvRmssdMs: w.hrvRmssdMs, restingHr: w.restingHr };
+  }
+
+  // Baseline HRV: 7 días TERMINANDO AYER (hoy fuera del baseline)
+  const [y, m, d] = todayIso.split('-').map(Number);
+  const yesterday = new Date(Date.UTC(y!, m! - 1, d! - 1));
+  const yesterdayIso = `${yesterday.getUTCFullYear()}-${String(yesterday.getUTCMonth() + 1).padStart(2, '0')}-${String(yesterday.getUTCDate()).padStart(2, '0')}`;
+  const trend = getHrvTrend(daily, 7, yesterdayIso);
+  if (typeof fragment.hrvRmssdMs === 'number' && trend.stdDev > 0) {
+    fragment.hrvZScore = Math.round(((fragment.hrvRmssdMs as number) - trend.mean) * 100 / trend.stdDev) / 100;
+  }
+
+  // Baseline RHR: media de los 7 días previos (para fit:rhr-elevated)
+  const rhrWindow = Object.values(daily).filter(
+    (e) => typeof e.restingHr === 'number' && e.dateIso >= addDaysIsoLocal(todayIso, -7) && e.dateIso < todayIso,
+  );
+  if (typeof fragment.restingHr === 'number' && rhrWindow.length >= 2) {
+    fragment.restingHrBaseline7d =
+      Math.round((rhrWindow.reduce((a, e) => a + (e.restingHr as number), 0) / rhrWindow.length) * 100) / 100;
+  }
+  return fragment;
+}
+
+/** addDaysIso local (fecha suelta ± días). */
+function addDaysIsoLocal(dateIso: string, days: number): string {
+  const [y, m, d] = dateIso.split('-').map(Number);
+  const t = new Date(Date.UTC(y!, m! - 1, d!));
+  t.setUTCDate(t.getUTCDate() + days);
+  return `${t.getUTCFullYear()}-${String(t.getUTCMonth() + 1).padStart(2, '0')}-${String(t.getUTCDate()).padStart(2, '0')}`;
 }
 
 /** Ensambla el UserState desde las fuentes reales. */
@@ -151,6 +256,8 @@ export function buildUserState(input: {
   workoutHistory: RawLoggedWorkout[];
   biofeedback: RawBioFeedback[];
   cardioSessions?: RawLoggedWorkout[];
+  /** Entradas del wearable WHOOP (opcional — accesorio, no dependencia). */
+  wearableDaily?: RawWearableDaily[];
   nowIso?: string;
 }): UserState {
   const state = createEmptyUserState(input.nowIso);
@@ -158,7 +265,7 @@ export function buildUserState(input: {
   if (input.cardioSessions?.length) {
     state.sessions = [...state.sessions, ...workoutsToSessions(input.cardioSessions)];
   }
-  state.dailyLogs = biofeedbackToDailyLogs(input.biofeedback);
+  state.dailyLogs = biofeedbackToDailyLogs(input.biofeedback, input.wearableDaily);
   return state;
 }
 
@@ -167,6 +274,7 @@ export function readRealUserStateSources(): {
   workoutHistory: RawLoggedWorkout[];
   biofeedback: RawBioFeedback[];
   cardioSessions: RawLoggedWorkout[];
+  wearableDaily: RawWearableDaily[];
   vocabDue: { language: string; count: number };
 } | null {
   if (typeof window === 'undefined') return null;
@@ -197,13 +305,19 @@ export function readRealUserStateSources(): {
     biofeedback = readClinicalBiofeedback();
   } catch { biofeedback = []; }
 
+  // Wearable WHOOP (localStorage directo — zustand persist 'wearable-daily-v1')
+  let wearableDaily: RawWearableDaily[] = [];
+  try {
+    wearableDaily = readWearableDaily();
+  } catch { wearableDaily = []; }
+
   // Vocabulario vencido (para sugerencias de repaso)
   let vocabDue: { language: string; count: number } = { language: 'de', count: 0 };
   try {
     vocabDue = readVocabDue();
   } catch { /* sin store → 0 */ }
 
-  return { workoutHistory, biofeedback, cardioSessions, vocabDue };
+  return { workoutHistory, biofeedback, cardioSessions, wearableDaily, vocabDue };
 }
 
 /** Lee biofeedback del store clínico sin require() dinámico. */
@@ -213,6 +327,25 @@ function readClinicalBiofeedback(): RawBioFeedback[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw) as { state?: { biofeedback?: RawBioFeedback[] } };
     return parsed.state?.biofeedback ?? [];
+  } catch { return []; }
+}
+
+/**
+ * Lee los daily metrics del wearable ('wearable-daily-v1', shape del persist
+ * de zustand: { state: { daily: Record<dateIso, entry> } }). SIN wearable →
+ * [] (la app sigue idéntica con self-report).
+ */
+export function readWearableDaily(): RawWearableDaily[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem('wearable-daily-v1');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as { state?: { daily?: Record<string, RawWearableDaily> } };
+    const daily = parsed.state?.daily;
+    if (!daily || typeof daily !== 'object') return [];
+    return Object.values(daily).filter(
+      (e): e is RawWearableDaily => Boolean(e) && typeof e.dateIso === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(e.dateIso),
+    );
   } catch { return []; }
 }
 

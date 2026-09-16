@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import SectionNav from '../ui/SectionNav';
 import PrehabBlock from './PrehabBlock';
+import WearableStatusChip from './WearableStatusChip';
 import TodayRoutineStack from './TodayRoutineStack';
 import TodayCalendar from './TodayCalendar';
 import MyPracticeSummary from './skills/MyPracticeSummary';
@@ -38,6 +39,10 @@ export default function FitnessToday({ currentPath = '/app/fitness' }: FitnessTo
 
         {/* 1. CUADRO DE PREHAB */}
         {hasPainZone && <PrehabBlock />}
+
+        {/* 1.5 INDICADOR WEARABLE (accesorio opcional: verde sincronizado /
+            gris self-report; junto al banner de prehab, sin panel de gestión) */}
+        <WearableStatusChip />
 
         {/* 2. CRONOGRAMA INTERACTIVO */}
         <TodayCalendar

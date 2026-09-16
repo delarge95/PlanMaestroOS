@@ -7,6 +7,7 @@
 import { useEffect, useState } from 'react';
 import {
   buildUserState,
+  buildWearableDomainContext,
   readRealUserStateSources,
 } from '../../lib/rules/userStateFeed';
 import { deriveWeekAggregates, getWeekStartIso, addDaysIso } from '../../data/contracts/userState';
@@ -56,6 +57,9 @@ export default function SuggestionInbox() {
       workoutHistory: sources?.workoutHistory ?? [],
       biofeedback: sources?.biofeedback ?? [],
       cardioSessions: sources?.cardioSessions ?? [],
+      // Wearable WHOOP (accesorio opcional): sleepHours medido preferente +
+      // métricas HRV/RHR al context.domain; sin él, todo sigue igual.
+      wearableDaily: sources?.wearableDaily ?? [],
       nowIso,
     });
 
@@ -69,10 +73,11 @@ export default function SuggestionInbox() {
       domain: {
         energyToday: sources?.biofeedback?.[0]?.energy,
         vocabDueCount: sources?.vocabDue?.count ?? 0,
+        ...buildWearableDomainContext(sources?.wearableDaily, today),
       },
     };
 
-    // U1 integrado: semillas + catálogo extendido citado (39 reglas; las
+    // U1 integrado: semillas + catálogo extendido citado (41 reglas; las
     // extendidas devuelven not-applicable sin datos — sin costo de ruido).
     const evaluations = evaluateRules([...FITNESS_SEED_RULES, ...FITNESS_EXTENDED_RULES], context);
     const weekKey = thisWeek;

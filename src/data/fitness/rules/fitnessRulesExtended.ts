@@ -16,8 +16,8 @@
  *   `warning` replica `optimalRange` (cualquier desviación es subóptima) y
  *   NO se inventan umbrales de violation.
  *
- * `type` 'mobility' extiende el enum sugerido del prompt (el contrato
- * `DomainRule.type` es `string`).
+ * `type` 'mobility' y 'recovery' extienden el enum sugerido del prompt (el
+ * contrato `DomainRule.type` es `string`).
  */
 
 import type { DomainRule, RuleContext } from '../../../lib/rules';
@@ -35,6 +35,8 @@ const SRC_SQUAT_BIBLE = 'horschig-squat-bible';
 const SRC_BLAHNIK = 'blahnik-full-body-flexibility-2ed';
 const SRC_WILSON = 'wilson-exercise-therapy-msk';
 const SRC_DIAS = 'dias-training-conditioning-mma';
+/** docId del RAG wearable (rag/wearable/manifest.json — síntesis WHOOP BLE). */
+const SRC_WHOOP_BLE = 'whoop-ble';
 
 // ---------------------------------------------------------------------------
 // helpers de contexto (puros y deterministas)
@@ -252,7 +254,7 @@ function trainingAge(context: RuleContext): number | undefined {
 }
 
 // ---------------------------------------------------------------------------
-// catálogo extendido (29 reglas nuevas; extienden, no duplican, la semilla)
+// catálogo extendido (31 reglas nuevas; extienden, no duplican, la semilla)
 // ---------------------------------------------------------------------------
 
 export const FITNESS_EXTENDED_RULES: DomainRule[] = [
@@ -787,6 +789,52 @@ export const FITNESS_EXTENDED_RULES: DomainRule[] = [
     sourceRef: { docId: SRC_OG2, chapter: 9, page: 172 },
     messages: {
       warning: 'Series isométricas fuera de 3-8 por ejercicio: consulta la tabla de dosificación según tu tiempo máximo de hold.',
+    },
+  },
+  // ── WEARABLE-AWARE (WHOOP vía wearableStore → context.domain; accesorio opcional:
+  //    sin banda resolveValue → undefined ⇒ not-applicable, nunca ruido) ──
+  //    Fuente: síntesis WHOOP BLE (rag/wearable, chunk wear-data-metrics — los
+  //    proyectos open-source recalculan recovery con z-score de HRV RMSSD).
+  {
+    id: 'fit:hrv-depressed',
+    domain: 'fitness',
+    description: 'HRV de hoy < promedio 7d − 1 desviación estándar → recuperación deprimida: reduce intensidad de la sesión',
+    type: 'recovery',
+    metric: 'hrvZScore',
+    optimalRange: { min: -1 },
+    riskThresholds: { warning: { min: -1 } },
+    // Solo aplica con wearable sincronizado HOY (context.domain.hrvRmssdMs lo pone el feed)
+    appliesWhen: (ctx) => ctx.domain?.hrvRmssdMs !== undefined,
+    resolveValue: (ctx) => ctx.domain?.hrvZScore as number | undefined,
+    confidence: 'inferred',
+    evidenceTier: 'internal-doc',
+    sourceRef: { docId: SRC_WHOOP_BLE, chapter: 'Metrics' },
+    messages: {
+      warning: 'HRV por debajo de tu baseline 7d (z < −1): recuperación deprimida — prioriza técnica/movilidad o baja la intensidad hoy.',
+    },
+  },
+  {
+    id: 'fit:rhr-elevated',
+    domain: 'fitness',
+    description: 'RHR > 10 bpm por encima del promedio 7d → señal objetiva de estrés/fatiga acumulada (o enfermedad incipiente)',
+    type: 'recovery',
+    metric: 'restingHrDeltaVsBaseline7d',
+    optimalRange: { max: 10 },
+    riskThresholds: { warning: { max: 10 } },
+    // Solo aplica con wearable sincronizado HOY (RHR de hoy + baseline 7d en context.domain)
+    appliesWhen: (ctx) => ctx.domain?.restingHr !== undefined && ctx.domain?.restingHrBaseline7d !== undefined,
+    // Valor evaluado: elevación del RHR de hoy vs baseline 7d (bpm) — sin baseline no aplica
+    resolveValue: (ctx) => {
+      const rhr = ctx.domain?.restingHr as number | undefined;
+      const baseline = ctx.domain?.restingHrBaseline7d as number | undefined;
+      if (rhr === undefined || baseline === undefined) return undefined;
+      return round2(rhr - baseline);
+    },
+    confidence: 'inferred',
+    evidenceTier: 'internal-doc',
+    sourceRef: { docId: SRC_WHOOP_BLE, chapter: 'Metrics' },
+    messages: {
+      warning: 'RHR >10 bpm sobre tu baseline 7d: fatiga/estrés acumulado — considera sesión regenerativa y revisa sueño/hidratación.',
     },
   },
 ];
