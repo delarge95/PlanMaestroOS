@@ -1,0 +1,363 @@
+{
+  "domain": "design",
+  "version": "4.0.0",
+  "sources": [
+    {
+      "id": "design-visual-swiss-rams",
+      "title": "Escuela Suiza + Rams (síntesis — páginas por verificar)",
+      "author": "Müller-Brockmann / Dieter Rams",
+      "year": null,
+      "edition": "síntesis del orquestador",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "design-visual"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "design-typography-bringhurst",
+      "title": "The Elements of Typographic Style (síntesis — páginas por verificar)",
+      "author": "Robert Bringhurst",
+      "year": null,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "design-typography"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "design-motion-disney-material",
+      "title": "12 principios Disney aplicados a UI + Material motion (síntesis)",
+      "author": "Disney / Google Material",
+      "year": null,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "design-motion"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "design-ux-nielsen",
+      "title": "10 heurísticas de usabilidad de Nielsen (síntesis)",
+      "author": "Jakob Nielsen / Norman Group",
+      "year": null,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "design-ux"
+        ],
+        "priority": 1
+      }
+    }
+  ],
+  "chunks": [
+    {
+      "id": "mot-duracion-easing",
+      "sourceId": "design-motion-disney-material",
+      "topic": "timing",
+      "tags": [
+        "duracion",
+        "easing",
+        "micro-interacciones"
+      ],
+      "locator": {
+        "chapter": "Material motion — duración",
+        "section": "Síntesis"
+      },
+      "summary": "Material: micro-interacciones 150–250ms (transiciones de estado, hover, toggles), superficies que entran/salen 250–350ms. Menos de 100ms se percibe como salto (no transición); más de 400ms en elementos pequeños se siente lenta. Easing: ease-out al entrar (decelera, el ojo alcanza), ease-in al salir (acelera, despide) — linear solo en progresos continuos.",
+      "entities": [
+        "principle:150-300ms"
+      ],
+      "rules": []
+    },
+    {
+      "id": "mot-disney-purpose",
+      "sourceId": "design-motion-disney-material",
+      "topic": "principles",
+      "tags": [
+        "disney",
+        "anticipation",
+        "follow-through"
+      ],
+      "locator": {
+        "chapter": "The Illusion of Life — aplicado a UI",
+        "section": "Síntesis"
+      },
+      "summary": "De los 12 principios de Disney, los que trasladan a UI son: anticipación (un botón que se hunde anuncia la acción), follow-through/overlapping (los elementos de una lista escalonan su entrada, no aparecen en bloque) y arcs (las superficies se mueven en trayectorias naturales, no en L). Regla dura: todo movimiento debe comunicar jerarquía, feedback o continuidad espacial; el movimiento decorativo es ruido animado.",
+      "entities": [
+        "principle:motion-communicates"
+      ],
+      "rules": []
+    },
+    {
+      "id": "mot-reduced-motion",
+      "sourceId": "design-motion-disney-material",
+      "topic": "accessibility",
+      "tags": [
+        "a11y",
+        "vestibular"
+      ],
+      "locator": {
+        "chapter": "WCAG 2.3.3 / buena práctica",
+        "section": "Síntesis"
+      },
+      "summary": "Animation from motion can trigger vestibular disorders: `@media (prefers-reduced-motion: reduce)` debe degradar movimientos grandes (parallax, desplazamientos de página, zooms) a fades cortos o a nada. Las micro-transiciones de color/opacidad son tolerables; los cambios de layout animados no.",
+      "entities": [
+        "principle:prefers-reduced-motion"
+      ],
+      "rules": []
+    },
+    {
+      "id": "mot-feedback-immediate",
+      "sourceId": "design-motion-disney-material",
+      "topic": "feedback",
+      "tags": [
+        "feedback",
+        "estado"
+      ],
+      "locator": {
+        "chapter": "Material — feedback",
+        "section": "Síntesis"
+      },
+      "summary": "Toda acción del usuario recibe confirmación visual inmediata (<100ms) aunque el trabajo real tarde más: ripple/press states, spinners solo si la espera supera ~1s (antes, estados optimistas). Un botón que no responde al instante parece roto aunque funcione.",
+      "entities": [
+        "principle:instant-feedback"
+      ],
+      "rules": []
+    },
+    {
+      "id": "tip-scale-modular",
+      "sourceId": "design-typography-bringhurst",
+      "topic": "scale",
+      "tags": [
+        "escala",
+        "modular"
+      ],
+      "locator": {
+        "chapter": "Elements of Typographic Style",
+        "section": "Síntesis — escala"
+      },
+      "summary": "Una escala tipográfica (p.ej. razón 1.25) define tamaños armónicos en lugar de valores arbitrarios; en UI esto vive como tokens (--fs-*). Respetar la escala existente importa más que el valor concreto: los tamaños que no están en la escala rompen el ritmo aunque parezcan «casi iguales».",
+      "entities": [
+        "principle:modular-scale"
+      ],
+      "rules": []
+    },
+    {
+      "id": "tip-measure-lineheight",
+      "sourceId": "design-typography-bringhurst",
+      "topic": "readability",
+      "tags": [
+        "line-length",
+        "interlineado"
+      ],
+      "locator": {
+        "chapter": "Elements of Typographic Style",
+        "section": "Síntesis — legibilidad"
+      },
+      "summary": "La medida (longitud de línea) óptima para lectura sostenida es 45–75 caracteres; más larga exige saltos oculares costosos. Interlineado 1.4–1.6 para cuerpo (mayor si la medida crece); en bloques grandes de texto, max-width con estas medidas no es un detalle estético sino la diferencia entre leer y decodificar.",
+      "entities": [
+        "principle:45-75-chars"
+      ],
+      "rules": []
+    },
+    {
+      "id": "tip-vertical-rhythm",
+      "sourceId": "design-typography-bringhurst",
+      "topic": "rhythm",
+      "tags": [
+        "ritmo-vertical",
+        "espaciado"
+      ],
+      "locator": {
+        "chapter": "Elements of Typographic Style",
+        "section": "Síntesis — ritmo"
+      },
+      "summary": "El ritmo vertical alinea las líneas de texto consecutivas a una retícula horizontal implícita: márgenes y saltos coherentes (múltiplos del interlineado) hacen que la página «se sostenga». Espaciados idiosincráticos por sección rompen el ritmo aunque cada valor individual parezca razonable.",
+      "entities": [
+        "principle:vertical-rhythm"
+      ],
+      "rules": []
+    },
+    {
+      "id": "tit-tracking",
+      "sourceId": "design-typography-bringhurst",
+      "topic": "titles",
+      "tags": [
+        "tracking",
+        "titulos"
+      ],
+      "locator": {
+        "chapter": "Elements of Typographic Style",
+        "section": "Síntesis — títulos"
+      },
+      "summary": "Los títulos grandes llevan tracking ligeramente negativo (las letras grandes necesitan menos aire entre sí); el cuerpo nunca. En UI esto se traduce en letter-spacing −0.01…−0.02em solo en h1/h2 grandes.",
+      "entities": [
+        "principle:tracking-titles"
+      ],
+      "rules": []
+    },
+    {
+      "id": "ux-visibility-status",
+      "sourceId": "design-ux-nielsen",
+      "topic": "heuristics",
+      "tags": [
+        "nielsen",
+        "estado"
+      ],
+      "locator": {
+        "chapter": "10 heurísticas de usabilidad",
+        "section": "Síntesis — H1"
+      },
+      "summary": "Heurística 1 de Nielsen: el sistema mantiene SIEMPRE visible su estado — dónde estás, qué está cargando, qué cambió tras tu acción. En apps de datos: contadores en vivo, badges de sincronización, diferencia entre «vacío porque no hay datos» y «vacío porque falló».",
+      "entities": [
+        "principle:system-status"
+      ],
+      "rules": []
+    },
+    {
+      "id": "ux-errors",
+      "sourceId": "design-ux-nielsen",
+      "topic": "heuristics",
+      "tags": [
+        "nielsen",
+        "errores"
+      ],
+      "locator": {
+        "chapter": "10 heurísticas",
+        "section": "Síntesis — H5/H9"
+      },
+      "summary": "Prevención de errores (H5): restringir entradas inválidas antes que validar después (selects sobre campos libres cuando el dominio es cerrado). Recuperación (H9): mensajes de error que dicen QUÉ pasó, QUÉ hacer y sin culpar al usuario; acompañados de la acción de recuperación a un clic.",
+      "entities": [
+        "principle:error-prevention-recovery"
+      ],
+      "rules": []
+    },
+    {
+      "id": "ux-empty-states",
+      "sourceId": "design-ux-nielsen",
+      "topic": "patterns",
+      "tags": [
+        "empty-state",
+        "onboarding"
+      ],
+      "locator": {
+        "chapter": "Práctica UX",
+        "section": "Síntesis"
+      },
+      "summary": "Un estado vacío enseña: qué vivirá aquí, qué acción lo llena y (si aplica) un ejemplo. «No hay datos» es un dead-end; «Completa tu primera sesión para ver tu progreso — [empezar]» es una puerta. Jamás inventar datos de relleno para evitar el vacío.",
+      "entities": [
+        "principle:empty-states-teach"
+      ],
+      "rules": []
+    },
+    {
+      "id": "ux-recognition-cognitive",
+      "sourceId": "design-ux-nielsen",
+      "topic": "heuristics",
+      "tags": [
+        "nielsen",
+        "carga-cognitiva",
+        "hick"
+      ],
+      "locator": {
+        "chapter": "10 heurísticas — H6",
+        "section": "Síntesis"
+      },
+      "summary": "Reconocer pesa menos que recordar (H6): opciones visibles y etiquetas claras frente a comandos memorizables. La carga cognitiva por vista es finita (Miller/Hick): agrupar, priorizar 1 acción primaria, y mover lo raro a un segundo nivel en vez de mostrarlo todo plano.",
+      "entities": [
+        "principle:recognition-over-recall"
+      ],
+      "rules": []
+    },
+    {
+      "id": "vis-grid-systems",
+      "sourceId": "design-visual-swiss-rams",
+      "topic": "grid",
+      "tags": [
+        "grid",
+        "8pt",
+        "layout"
+      ],
+      "locator": {
+        "chapter": "Grid systems in Graphic Design",
+        "section": "Síntesis — retícula"
+      },
+      "summary": "La retícula suiza (Müller-Brockmann) organiza el contenido en módulos predecibles: en UI, la grilla de 8 puntos (8/16/24/32) crea ritmo consistente porque todos los espaciados son múltiplos del mismo módulo. Un layout sin retícula produce alineaciones accidentales que el ojo percibe como descuido aunque no sepa nombrarlas.",
+      "entities": [
+        "principle:8pt-grid"
+      ],
+      "rules": []
+    },
+    {
+      "id": "vis-rams-ten",
+      "sourceId": "design-visual-swiss-rams",
+      "topic": "principles",
+      "tags": [
+        "rams",
+        "minimalismo",
+        "principios"
+      ],
+      "locator": {
+        "chapter": "Diez principios del buen diseño",
+        "section": "Síntesis"
+      },
+      "summary": "Dieter Rams: buen diseño es lo menos posible («weniger, aber besser»): elimina todo lo que no ayude a entender o usar; es honesto (no promete lo que no cumple), es discreto (los objetos neutrales dejan espacio al contenido) y hace útil al producto. Cada elemento decorativo que sobrevive una revisión debe justificar su existencia.",
+      "entities": [
+        "principle:less-but-better"
+      ],
+      "rules": []
+    },
+    {
+      "id": "vis-color-60-30-10",
+      "sourceId": "design-visual-swiss-rams",
+      "topic": "color",
+      "tags": [
+        "color",
+        "contraste",
+        "acento"
+      ],
+      "locator": {
+        "chapter": "Práctica profesional",
+        "section": "Síntesis — color"
+      },
+      "summary": "La regla 60-30-10 distribuye el color en superficie dominante (60%), secundaria (30%) y acento (10%). En UI oscura: superficie base, superficies elevadas, y UN acento para acciones/estados clave. Múltiples acentos compiten, diluyen la jerarquía y elevan el ruido; el contraste de texto debe cumplir WCAG AA (4.5:1 cuerpo).",
+      "entities": [
+        "principle:60-30-10"
+      ],
+      "rules": []
+    },
+    {
+      "id": "vis-hierarchy",
+      "sourceId": "design-visual-swiss-rams",
+      "topic": "hierarchy",
+      "tags": [
+        "jerarquia",
+        "peso",
+        "tamano"
+      ],
+      "locator": {
+        "chapter": "HIG — jerarquía",
+        "section": "Síntesis"
+      },
+      "summary": "La jerarquía se construye primero con tamaño y peso tipográfico, luego con color/espacio — nunca añadiendo colores nuevos por nivel. Tres niveles visibles por vista bastan (título/sección/cuerpo); un cuarto nivel suele significar que la vista debería dividirse.",
+      "entities": [
+        "principle:hierarchy-size-weight"
+      ],
+      "rules": []
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "domain": "design",
+  "sources": [
+    {
+      "id": "design-visual-swiss-rams",
+      "title": "Escuela Suiza + Rams (síntesis — páginas por verificar)",
+      "author": "Müller-Brockmann / Dieter Rams",
+      "year": null,
+      "edition": "síntesis del orquestador",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["design-visual"], "priority": 1 }
+    },
+    {
+      "id": "design-typography-bringhurst",
+      "title": "The Elements of Typographic Style (síntesis — páginas por verificar)",
+      "author": "Robert Bringhurst",
+      "year": null,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["design-typography"], "priority": 1 }
+    },
+    {
+      "id": "design-motion-disney-material",
+      "title": "12 principios Disney aplicados a UI + Material motion (síntesis)",
+      "author": "Disney / Google Material",
+      "year": null,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["design-motion"], "priority": 1 }
+    },
+    {
+      "id": "design-ux-nielsen",
+      "title": "10 heurísticas de usabilidad de Nielsen (síntesis)",
+      "author": "Jakob Nielsen / Norman Group",
+      "year": null,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["design-ux"], "priority": 1 }
+    }
+  ]
+}
