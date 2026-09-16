@@ -195,7 +195,7 @@ export default function StructureThumbnail({ structureId, height = 170 }: Props)
       }}
     >
       {status !== 'ready' && (
-        <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', color: 'var(--text-secondary)', fontSize: '0.72rem' }}>
+        <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', color: 'var(--text-secondary)', fontSize: 'var(--fs-eyebrow)' }}>
           {status === 'error' ? 'No se pudo cargar el modelo 3D' : (<span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Loader2 size={13} /> Miniatura 3D…</span>)}
         </div>
       )}

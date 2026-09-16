@@ -53,11 +53,11 @@ export function SkillDetailSheet({
         {/* CABECERA Y FICHA LOCAL ANTES DE FITAPP */}
         <div style={{ background: 'var(--surface-elevated)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
               Objetivo: <strong style={{ color: 'var(--text)' }}>{step.practice.target}</strong> ({step.practice.defaultSets} series)
             </span>
             {isActive && (
-              <span style={{ fontSize: '0.72rem', background: 'var(--color-state-done)', color: '#ffffff', padding: '2px 8px', borderRadius: '12px', fontWeight: 700 }}>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', background: 'var(--color-state-done)', color: '#ffffff', padding: '2px 8px', borderRadius: '12px', fontWeight: 700 }}>
                 Habilidad Activa Hoy
               </span>
             )}
@@ -66,17 +66,17 @@ export function SkillDetailSheet({
           {/* INSTRUCCIONES LOCALES CONCISAS (3-5 PASOS) */}
           {localExercise && (
             <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px 12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-subtle)' }}>
-              <span style={{ fontSize: '0.74rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
                 Ejecución Técnica Local:
               </span>
-              <ol style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <ol style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 {localExercise.instructions.map((inst, i) => (
                   <li key={i}>{inst}</li>
                 ))}
               </ol>
 
               {localExercise.commonErrors && localExercise.commonErrors.length > 0 && (
-                <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px dashed var(--color-border-subtle)', fontSize: '0.78rem', color: '#f59e0b' }}>
+                <div style={{ marginTop: '8px', paddingTop: '6px', borderTop: '1px dashed var(--color-border-subtle)', fontSize: 'var(--fs-meta)', color: '#f59e0b' }}>
                   <strong>Puntos de atención:</strong> {localExercise.commonErrors.join(' · ')}
                 </div>
               )}
@@ -97,7 +97,7 @@ export function SkillDetailSheet({
                 border: 'none',
                 borderRadius: 'var(--radius-md)',
                 fontWeight: 700,
-                fontSize: '0.9rem',
+                fontSize: 'var(--fs-body)',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -128,7 +128,7 @@ export function SkillDetailSheet({
                   color: 'var(--text-tertiary)',
                   border: '1px solid var(--color-border-subtle)',
                   borderRadius: 'var(--radius-md)',
-                  fontSize: '0.82rem',
+                  fontSize: 'var(--fs-meta)',
                   fontWeight: 600,
                   padding: '0 12px',
                   cursor: 'not-allowed',
@@ -163,7 +163,7 @@ export function SkillDetailSheet({
 
         {/* NAVEGACIÓN ENTRE PASOS (ANTERIOR / SIGUIENTE) DENTRO DE LA BASE DE DATOS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <span style={{ fontSize: '0.74rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Escala de Progresión
           </span>
           {prevStep && (
@@ -207,7 +207,7 @@ export function SkillDetailSheet({
               alignItems: 'center',
               cursor: 'pointer',
               color: 'var(--text)',
-              fontSize: '0.86rem',
+              fontSize: 'var(--fs-body)',
               fontWeight: 700
             }}
           >
@@ -216,7 +216,7 @@ export function SkillDetailSheet({
           </button>
 
           {showCriteria && (
-            <div style={{ padding: '0 12px 12px', fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <div style={{ padding: '0 12px 12px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <span style={{ fontWeight: 600, color: 'var(--text)' }}>Técnicos & Tolerancia:</span>
               <ul style={{ margin: 0, paddingLeft: '18px' }}>
                 {step.readiness.technical.map((t, i) => <li key={i}>{t}</li>)}

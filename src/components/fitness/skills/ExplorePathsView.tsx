@@ -88,7 +88,7 @@ export function ExplorePathsView({
               border: onlyActive ? '1px solid var(--color-state-done)' : '1px solid var(--color-border-subtle)',
               padding: '6px 14px',
               borderRadius: 'var(--radius-sm)',
-              fontSize: '0.82rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: 700,
               cursor: 'pointer',
               whiteSpace: 'nowrap',
@@ -111,7 +111,7 @@ export function ExplorePathsView({
               border: selectedDomain === 'all' ? '1px solid var(--color-border-visible)' : '1px solid transparent',
               padding: '6px 14px',
               borderRadius: 'var(--radius-sm)',
-              fontSize: '0.82rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: 600,
               cursor: 'pointer',
               whiteSpace: 'nowrap'
@@ -130,7 +130,7 @@ export function ExplorePathsView({
                 border: selectedDomain === dom ? '1px solid var(--color-border-visible)' : '1px solid transparent',
                 padding: '6px 14px',
                 borderRadius: 'var(--radius-sm)',
-                fontSize: '0.82rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 whiteSpace: 'nowrap'
@@ -183,7 +183,7 @@ export function ExplorePathsView({
                   <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '0 0 2px', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
                     {path.title}
                   </h2>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)' }}>
+                  <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
                     {path.stepIds.length} pasos · {equipmentLabel}
                   </span>
                 </div>

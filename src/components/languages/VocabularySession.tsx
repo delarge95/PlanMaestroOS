@@ -134,15 +134,15 @@ export default function VocabularySession({ language = 'de', catalogItems }: Voc
 
               {revealed ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: '4px' }}>
-                  <span style={{ fontSize: '1.1rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
+                  <span style={{ fontSize: 'var(--fs-step)', color: 'var(--color-state-done)', fontWeight: 700 }}>
                     {currentCard.translation}
                   </span>
                   {currentCard.example && (
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
+                    <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
                       "{currentCard.example}"
                     </span>
                   )}
-                  <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
                     ease {getSchedulingFor(progress, currentCard.id).easeFactor.toFixed(2)} · intervalo {getSchedulingFor(progress, currentCard.id).intervalDays}d
                   </span>
                 </div>
@@ -174,7 +174,7 @@ export default function VocabularySession({ language = 'de', catalogItems }: Voc
         )}
 
         {!currentCard && reviewedCount === 0 && (
-          <div style={{ textAlign: 'center', padding: 'var(--space-md)', color: 'var(--text-tertiary)', fontSize: '0.85rem' }}>
+          <div style={{ textAlign: 'center', padding: 'var(--space-md)', color: 'var(--text-tertiary)', fontSize: 'var(--fs-body)' }}>
             {catalog.length === 0
               ? 'Aún no hay vocabulario para este idioma.'
               : 'Todo al día: no hay tarjetas vencidas ni nuevas.'}

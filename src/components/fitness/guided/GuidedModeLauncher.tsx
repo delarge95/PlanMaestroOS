@@ -57,8 +57,8 @@ export default function GuidedModeLauncher({ selectedDayIndex = 1 }: GuidedModeL
         padding: '12px 16px'
       }}>
         <div style={{ flex: '1 1 220px', minWidth: 0 }}>
-          <strong style={{ display: 'block', fontSize: '0.92rem', color: 'var(--text-primary)' }}>Modo guiado set a set</strong>
-          <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+          <strong style={{ display: 'block', fontSize: 'var(--fs-body)', color: 'var(--text-primary)' }}>Modo guiado set a set</strong>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
             {isRestDay
               ? 'Hoy toca descanso: no hay rutina guiada.'
               : disabled
@@ -77,7 +77,7 @@ export default function GuidedModeLauncher({ selectedDayIndex = 1 }: GuidedModeL
             color: disabled ? 'rgba(255,255,255,0.35)' : '#000',
             padding: '10px 18px',
             borderRadius: '10px',
-            fontSize: '0.85rem',
+            fontSize: 'var(--fs-body)',
             fontWeight: 800,
             cursor: disabled ? 'not-allowed' : 'pointer',
             whiteSpace: 'nowrap'

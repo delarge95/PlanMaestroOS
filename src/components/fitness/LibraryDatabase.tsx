@@ -232,13 +232,13 @@ export default function LibraryDatabase() {
         {(videoUrl1 || videoUrl2) && (
           <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', background: 'rgba(0,0,0,0.3)' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--accent)' }}>
+              <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--accent)' }}>
                 <Film size={14} style={{ verticalAlign: '-2px', marginRight: 4 }} />Reproducción en Video
               </span>
               <button
                 type="button"
                 onClick={(e) => toggleInlineVideo(name, e)}
-                style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '0.74rem', cursor: 'pointer' }}
+                style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: 'var(--fs-eyebrow)', cursor: 'pointer' }}
               >
                 {isVideoCollapsed ? 'Mostrar Video ▼' : 'Replegar Video ▲'}
               </button>
@@ -258,11 +258,11 @@ export default function LibraryDatabase() {
 
         {/* ETIQUETAS DE CATEGORÍA Y SUBCATEGORÍA */}
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.7rem', fontWeight: 700, background: 'rgba(16,185,129,0.15)', color: '#6ee7b7', border: '1px solid rgba(16,185,129,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, background: 'rgba(16,185,129,0.15)', color: '#6ee7b7', border: '1px solid rgba(16,185,129,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
             {exInfo.category}
           </span>
           {exInfo.subcategory && (
-            <span style={{ fontSize: '0.7rem', fontWeight: 700, background: 'rgba(10,132,255,0.15)', color: '#77e7ff', border: '1px solid rgba(10,132,255,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, background: 'rgba(10,132,255,0.15)', color: '#77e7ff', border: '1px solid rgba(10,132,255,0.3)', padding: '2px 8px', borderRadius: '999px' }}>
               {exInfo.subcategory}
             </span>
           )}
@@ -270,7 +270,7 @@ export default function LibraryDatabase() {
 
         {/* FUERZA PRIMARIA */}
         <div>
-          <strong style={{ fontSize: '0.78rem', color: 'var(--success)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+          <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--success)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
             Strength Muscles (Músculos de Fuerza Primaria):
           </strong>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -285,7 +285,7 @@ export default function LibraryDatabase() {
                   color: '#6ee7b7',
                   padding: '3px 10px',
                   borderRadius: '6px',
-                  fontSize: '0.78rem',
+                  fontSize: 'var(--fs-meta)',
                   fontWeight: 600,
                   cursor: 'pointer',
                   display: 'inline-flex',
@@ -303,7 +303,7 @@ export default function LibraryDatabase() {
         {/* ESTABILIZADORES CLAVE */}
         {exInfo.muscles.stability && exInfo.muscles.stability.length > 0 && (
           <div>
-            <strong style={{ fontSize: '0.78rem', color: 'var(--accent)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
+            <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--accent)', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
               Stability Muscles (Sinergia & Estabilización):
             </strong>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -317,7 +317,7 @@ export default function LibraryDatabase() {
                     color: '#77e7ff',
                     padding: '3px 10px',
                     borderRadius: '6px',
-                    fontSize: '0.78rem',
+                    fontSize: 'var(--fs-meta)',
                     fontWeight: 600,
                     cursor: 'pointer'
                   }}
@@ -331,10 +331,10 @@ export default function LibraryDatabase() {
 
         {/* REQUISITOS DE MOVILIDAD */}
         <div>
-          <strong style={{ fontSize: '0.78rem', color: 'var(--text-primary)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+          <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-primary)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
             Mobility Requirements (Movilidad & ROM):
           </strong>
-          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
             {mobilityList.map((mob: string, idx: number) => (
               <li key={idx}>{mob}</li>
             ))}
@@ -344,10 +344,10 @@ export default function LibraryDatabase() {
         {/* PUNTOS DE TÉCNICA */}
         {exInfo.techniquePoints && exInfo.techniquePoints.length > 0 && (
           <div>
-            <strong style={{ fontSize: '0.78rem', color: 'var(--warning)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+            <strong style={{ fontSize: 'var(--fs-meta)', color: 'var(--warning)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
               Technique Points (Claves de Forma):
             </strong>
-            <ol style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+            <ol style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
               {exInfo.techniquePoints.map((pt, idx) => (
                 <li key={idx}>{pt}</li>
               ))}
@@ -358,7 +358,7 @@ export default function LibraryDatabase() {
         {/* SUSTITUCIONES */}
         {exInfo.substitutions && exInfo.substitutions.length > 0 && (
           <div>
-            <strong style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+            <strong style={{ fontSize: 'var(--fs-meta)', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
               Suggested Substitutions (Sustituciones Recomendadas):
             </strong>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -367,7 +367,7 @@ export default function LibraryDatabase() {
                   key={sub}
                   type="button"
                   onClick={() => setModalExerciseId(sub)}
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-primary)', padding: '2px 8px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-primary)', padding: '2px 8px', borderRadius: '6px', fontSize: 'var(--fs-eyebrow)', cursor: 'pointer' }}
                 >
                   {sub}
                 </button>
@@ -408,7 +408,7 @@ export default function LibraryDatabase() {
                 borderRadius: '8px',
                 padding: '8px 12px 8px 32px',
                 color: 'var(--text-primary)',
-                fontSize: '0.86rem',
+                fontSize: 'var(--fs-body)',
                 outline: 'none'
               }}
             />
@@ -425,7 +425,7 @@ export default function LibraryDatabase() {
               color: 'var(--text-primary)',
               borderRadius: '8px',
               padding: '8px 14px',
-              fontSize: '0.8rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: 700,
               fontFamily: 'SF Mono, monospace',
               cursor: 'pointer',
@@ -442,7 +442,7 @@ export default function LibraryDatabase() {
         {/* MODOS DE VISTA: GRUPOS VS LISTA (RENOVADO ESTILO FITAPP MINIMALISTA) */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
               Modo de Visualización:
             </span>
             <div style={{ display: 'inline-flex', gap: '4px', background: 'rgba(0,0,0,0.3)', padding: '3px', borderRadius: '8px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
@@ -455,7 +455,7 @@ export default function LibraryDatabase() {
                   border: 'none',
                   padding: '4px 14px',
                   borderRadius: '6px',
-                  fontSize: '0.78rem',
+                  fontSize: 'var(--fs-meta)',
                   fontWeight: isGroupedView ? 700 : 500,
                   cursor: 'pointer'
                 }}
@@ -471,7 +471,7 @@ export default function LibraryDatabase() {
                   border: 'none',
                   padding: '4px 14px',
                   borderRadius: '6px',
-                  fontSize: '0.78rem',
+                  fontSize: 'var(--fs-meta)',
                   fontWeight: !isGroupedView ? 700 : 500,
                   cursor: 'pointer'
                 }}
@@ -492,7 +492,7 @@ export default function LibraryDatabase() {
                 color: 'var(--text-primary)',
                 borderRadius: '8px',
                 padding: '6px 12px',
-                fontSize: '0.78rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 display: 'inline-flex',
@@ -508,7 +508,7 @@ export default function LibraryDatabase() {
 
         {/* FILTROS POR CATEGORÍAS */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
             Equipamiento / Categoría
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -525,7 +525,7 @@ export default function LibraryDatabase() {
                     border: isSelected ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
                     borderRadius: '20px',
                     padding: '4px 10px',
-                    fontSize: '0.76rem',
+                    fontSize: 'var(--fs-meta)',
                     fontWeight: isSelected ? 700 : 500,
                     cursor: 'pointer',
                     display: 'inline-flex',
@@ -543,7 +543,7 @@ export default function LibraryDatabase() {
 
         {/* FILTROS POR GRUPOS MUSCULARES */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
             Músculo Principal
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -561,7 +561,7 @@ export default function LibraryDatabase() {
                     border: isSelected ? '1px solid var(--success)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
                     borderRadius: '20px',
                     padding: '4px 10px',
-                    fontSize: '0.76rem',
+                    fontSize: 'var(--fs-meta)',
                     fontWeight: isSelected ? 700 : 500,
                     cursor: 'pointer',
                     display: 'inline-flex',
@@ -586,7 +586,7 @@ export default function LibraryDatabase() {
                 background: 'transparent',
                 border: 'none',
                 color: 'var(--accent)',
-                fontSize: '0.76rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: 600,
                 cursor: 'pointer'
               }}
@@ -627,8 +627,8 @@ export default function LibraryDatabase() {
                   }}
                 >
                   <div>
-                    <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)', display: 'block' }}>{name}</strong>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
+                    <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text-primary)', display: 'block' }}>{name}</strong>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
                       {(exInfo?.muscles?.strength || []).join(', ')}
                     </span>
                   </div>
@@ -648,7 +648,7 @@ export default function LibraryDatabase() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',
-                      fontSize: '0.78rem',
+                      fontSize: 'var(--fs-meta)',
                       fontWeight: 600
                     }}
                   >
@@ -685,11 +685,11 @@ export default function LibraryDatabase() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <strong style={{ fontSize: '1.05rem', color: 'var(--accent)', fontWeight: 800 }}>{groupName}</strong>
+                    <strong style={{ fontSize: 'var(--fs-step)', color: 'var(--accent)', fontWeight: 800 }}>{groupName}</strong>
                   </div>
                   
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.78rem', background: 'rgba(10,132,255,0.15)', color: 'var(--accent)', border: '1px solid rgba(10,132,255,0.3)', padding: '3px 10px', borderRadius: '999px', fontWeight: 700 }}>
+                    <span style={{ fontSize: 'var(--fs-meta)', background: 'rgba(10,132,255,0.15)', color: 'var(--accent)', border: '1px solid rgba(10,132,255,0.3)', padding: '3px 10px', borderRadius: '999px', fontWeight: 700 }}>
                       {exercises.length} variations
                     </span>
                     {isGroupExpanded ? <ChevronDown size={18} style={{ color: 'var(--text-secondary)' }} /> : <ChevronRight size={18} style={{ color: 'var(--text-secondary)' }} />}
@@ -722,7 +722,7 @@ export default function LibraryDatabase() {
                               cursor: 'pointer'
                             }}
                           >
-                            <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)' }}>{name}</span>
+                            <span style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: 'var(--text-primary)' }}>{name}</span>
 
                             {/* PÍLDORA UNIFICADA VIDEO > (CAPTURAS FITAPP 4 Y 5) */}
                             <button
@@ -739,7 +739,7 @@ export default function LibraryDatabase() {
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '6px',
-                                fontSize: '0.78rem',
+                                fontSize: 'var(--fs-meta)',
                                 fontWeight: 600
                               }}
                             >

@@ -118,7 +118,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
         <h2 style={{ margin: '2px 0 0', fontSize: 'var(--fs-page)', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
           Músculos y estructuras
         </h2>
-        <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: 'var(--text-tertiary)' }}>
+        <p style={{ margin: '4px 0 0', fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
           {stats.total} estructuras · {stats.muscles} músculos · {stats.tendons} tendones · {stats.ligaments} ligamentos ·{' '}
           {stats.joints} articulaciones · {stats.nerves} nervios · {stats.bones} huesos · {stats.with3dMapping} en el visor 3D
         </p>
@@ -131,7 +131,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Buscar estructura (español, inglés, sinónimos)…"
-          style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-primary)', fontSize: '0.88rem' }}
+          style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-primary)', fontSize: 'var(--fs-body)' }}
         />
         {query && (
           <button type="button" onClick={() => setQuery('')} style={ghostBtnStyle}><X size={14} /></button>
@@ -195,7 +195,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
       {/* LISTA + FICHA */}
       <div style={{ display: 'flex', gap: 12, flexDirection: isMobile ? 'column' : 'row', alignItems: 'flex-start' }}>
         <div style={{ ...cardStyle, flex: 1, minWidth: 0, padding: 0, overflow: 'hidden' }}>
-          <div style={{ padding: '10px 14px 6px', fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+          <div style={{ padding: '10px 14px 6px', fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
             {structures.length} {structures.length === 1 ? 'estructura' : 'estructuras'}
             {zone ? ` · ${BODY_ZONE_LABELS_ES[zone]}` : ''}
           </div>
@@ -214,7 +214,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
                     color: 'var(--text-primary)', display: 'flex', justifyContent: 'space-between', gap: 8, alignItems: 'center',
                   }}
                 >
-                  <span style={{ fontSize: '0.82rem', fontWeight: active ? 700 : 500 }}>
+                  <span style={{ fontSize: 'var(--fs-meta)', fontWeight: active ? 700 : 500 }}>
                     {s.nameEs}
                     {typeTab === 'muscle' && (s as MuscleEntry).primaryForTraining && (
                       <span title="Músculo primario de entrenamiento" style={{ marginLeft: 6, fontSize: '0.62rem', color: 'var(--accent)', fontWeight: 700 }}>
@@ -229,7 +229,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
               );
             })}
             {!structures.length && (
-              <p style={{ padding: 12, fontSize: '0.82rem', color: 'var(--text-tertiary)', textAlign: 'center' }}>
+              <p style={{ padding: 12, fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', textAlign: 'center' }}>
                 Sin resultados con los filtros actuales.
               </p>
             )}
@@ -241,7 +241,7 @@ export default function LibraryMuscles({ initialStructure }: Props) {
           {selected ? (
             <StructureCard structure={selected} onClose={() => setSelectedId(null)} />
           ) : (
-            <div style={{ ...cardStyle, padding: '18px 16px', color: 'var(--text-tertiary)', fontSize: '0.82rem' }}>
+            <div style={{ ...cardStyle, padding: '18px 16px', color: 'var(--text-tertiary)', fontSize: 'var(--fs-meta)' }}>
               Selecciona una estructura de la lista para ver su ficha (función, zona, ejercicios que la cargan y enlace al visor 3D).
             </div>
           )}
@@ -277,7 +277,7 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
     return (
       <div>
         <span style={kickerStyle}>{label}</span>
-        <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+        <p style={{ margin: 0, fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
           {Array.isArray(value) ? value.join(' · ') : value}
         </p>
       </div>
@@ -292,15 +292,15 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '12px 14px 4px' }}>
         <div>
           <span style={kickerStyle}>{KIND_LABELS[s.kind]} · {BODY_ZONE_LABELS_ES[s.zone]}</span>
-          <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)' }}>{s.nameEs}</h3>
-          <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>{s.nameEn}</p>
+          <h3 style={{ margin: 0, fontSize: 'var(--fs-step)', fontWeight: 800, color: 'var(--text-primary)' }}>{s.nameEs}</h3>
+          <p style={{ margin: 0, fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>{s.nameEn}</p>
         </div>
         <button type="button" onClick={onClose} style={ghostBtnStyle}><X size={14} /></button>
       </div>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 14px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '0.74rem', fontWeight: 700 }}
+        style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 14px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: 'var(--fs-eyebrow)', fontWeight: 700 }}
       >
         Detalles {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
       </button>
@@ -333,13 +333,13 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
           {s.kind === 'joint' && row('Movimientos / ROM por eje', (s as JointEntry).movements)}
           {s.kind === 'joint' && (s as JointEntry).rom?.length ? (
             <div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
               <ul style={{ margin: 0, paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {(s as JointEntry).rom!.map((r) => (
-                  <li key={r.motion} style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  <li key={r.motion} style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                     <strong style={{ color: 'var(--text-primary)' }}>{r.motion}:</strong> {r.value}
                     {r.condition ? ` — ${r.condition}` : ''}
-                    <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)' }}> ({r.sourceRefs.map((sr) => sr.locator).join('; ')})</span>
+                    <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}> ({r.sourceRefs.map((sr) => sr.locator).join('; ')})</span>
                   </li>
                 ))}
               </ul>
@@ -369,7 +369,7 @@ function StructureCard({ structure: s, onClose }: { structure: AnatomyStructure;
           <div>
             <span style={kickerStyle}>Fuente</span>
             {s.sourceRefs.map((r, i) => (
-              <p key={i} style={{ margin: 0, fontSize: '0.72rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
+              <p key={i} style={{ margin: 0, fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
                 {r.locator ? `${r.sourceId} · ${r.locator}` : r.sourceId}
                 {r.pending && (
                   <span style={{ marginLeft: 6, color: '#e8b26a', fontWeight: 700 }} title="Verificación capítulo/página contra la biblioteca pendiente (plan Gemini)">
@@ -418,7 +418,7 @@ function ExercisesThatLoad({ structure }: { structure: AnatomyStructure }) {
             key={e.name}
             title={e.strength ? 'Carga de fuerza' : 'Carga de estabilidad'}
             style={{
-              fontSize: '0.7rem', padding: '3px 8px', borderRadius: 10, cursor: 'default',
+              fontSize: 'var(--fs-eyebrow)', padding: '3px 8px', borderRadius: 10, cursor: 'default',
               background: e.strength ? 'rgba(53,208,255,0.1)' : 'rgba(255,255,255,0.04)',
               border: `1px solid ${e.strength ? 'rgba(53,208,255,0.35)' : 'var(--color-border-subtle, rgba(255,255,255,0.1))'}`,
               color: e.strength ? '#7fdcff' : 'var(--text-secondary)',
@@ -449,7 +449,7 @@ const chipStyle: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', gap: 5, cursor: 'pointer',
   background: 'rgba(255,255,255,0.03)', color: 'var(--text-primary)',
   border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
-  borderRadius: 18, padding: '6px 13px', fontSize: '0.8rem', fontWeight: 500,
+  borderRadius: 18, padding: '6px 13px', fontSize: 'var(--fs-meta)', fontWeight: 500,
 };
 
 const chipActiveStyle: React.CSSProperties = {
@@ -459,7 +459,7 @@ const chipActiveStyle: React.CSSProperties = {
 };
 
 const chipSmallStyle: React.CSSProperties = {
-  ...chipStyle, padding: '4px 11px', fontSize: '0.74rem',
+  ...chipStyle, padding: '4px 11px', fontSize: 'var(--fs-eyebrow)',
 };
 
 const chipActiveSmallStyle: React.CSSProperties = {
@@ -477,5 +477,5 @@ const ghostBtnStyle: React.CSSProperties = {
 const primaryBtnStyle: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
   background: 'rgba(53,208,255,0.14)', border: '1px solid rgba(53,208,255,0.5)', color: '#7fdcff',
-  borderRadius: 10, padding: '8px 14px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700,
+  borderRadius: 10, padding: '8px 14px', cursor: 'pointer', fontSize: 'var(--fs-meta)', fontWeight: 700,
 };

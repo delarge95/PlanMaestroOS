@@ -255,14 +255,14 @@ export function CalisthenicsProgressions({
     borderRadius: "8px",
     padding: "7px 10px",
     color: "var(--text-primary, #fff)",
-    fontSize: "0.82rem",
+    fontSize: "var(--fs-meta)",
     outline: "none",
     cursor: "pointer",
     minWidth: "150px",
   };
 
   const labelStyle: React.CSSProperties = {
-    fontSize: "0.72rem",
+    fontSize: "var(--fs-eyebrow)",
     fontWeight: 600,
     color: "var(--text-tertiary)",
     textTransform: "uppercase",
@@ -305,7 +305,7 @@ export function CalisthenicsProgressions({
               borderRadius: "8px",
               padding: "8px 12px 8px 34px",
               color: "var(--text-primary)",
-              fontSize: "0.86rem",
+              fontSize: "var(--fs-body)",
               outline: "none",
             }}
           />
@@ -437,7 +437,7 @@ export function CalisthenicsProgressions({
                   >
                     <h3
                       style={{
-                        fontSize: "1.05rem",
+                        fontSize: "var(--fs-step)",
                         fontWeight: 700,
                         margin: 0,
                         color: "var(--text-primary)",
@@ -468,7 +468,7 @@ export function CalisthenicsProgressions({
 
                   <span
                     style={{
-                      fontSize: "0.76rem",
+                      fontSize: "var(--fs-meta)",
                       color: "var(--text-tertiary)",
                       marginTop: "4px",
                       display: "block",
@@ -513,7 +513,7 @@ export function CalisthenicsProgressions({
                         : "1px solid var(--color-border-subtle)",
                       borderRadius: "18px",
                       padding: "5px 12px",
-                      fontSize: "0.74rem",
+                      fontSize: "var(--fs-eyebrow)",
                       fontWeight: 700,
                       cursor: "pointer",
                       display: "inline-flex",
@@ -541,7 +541,7 @@ export function CalisthenicsProgressions({
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "4px",
-                        fontSize: "0.68rem",
+                        fontSize: "var(--fs-eyebrow)",
                         color: "var(--text-tertiary)",
                         padding: "3px 8px",
                         borderRadius: "999px",
@@ -579,7 +579,7 @@ export function CalisthenicsProgressions({
                 >
                   <span
                     style={{
-                      fontSize: "0.76rem",
+                      fontSize: "var(--fs-meta)",
                       color: "var(--text-secondary)",
                       display: "inline-flex",
                       alignItems: "center",
@@ -613,7 +613,7 @@ export function CalisthenicsProgressions({
                           : "1px solid rgba(10,132,255,0.5)",
                         borderRadius: "16px",
                         padding: "4px 11px",
-                        fontSize: "0.72rem",
+                        fontSize: "var(--fs-eyebrow)",
                         fontWeight: 700,
                         cursor: "pointer",
                         display: "inline-flex",
@@ -640,7 +640,7 @@ export function CalisthenicsProgressions({
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "4px",
-                        fontSize: "0.72rem",
+                        fontSize: "var(--fs-eyebrow)",
                         fontWeight: 600,
                         color: "var(--accent)",
                         textDecoration: "none",
@@ -670,7 +670,7 @@ export function CalisthenicsProgressions({
                 >
                   <p
                     style={{
-                      fontSize: "0.84rem",
+                      fontSize: "var(--fs-meta)",
                       color: "var(--text-secondary)",
                       margin: 0,
                       lineHeight: 1.5,
@@ -709,7 +709,7 @@ export function CalisthenicsProgressions({
                       >
                         <span
                           style={{
-                            fontSize: "0.8rem",
+                            fontSize: "var(--fs-meta)",
                             fontWeight: 600,
                             color: "var(--accent)",
                             display: "flex",
@@ -721,7 +721,7 @@ export function CalisthenicsProgressions({
                         </span>
                         <span
                           style={{
-                            fontSize: "0.72rem",
+                            fontSize: "var(--fs-eyebrow)",
                             color: "var(--text-tertiary)",
                           }}
                         >
@@ -753,7 +753,7 @@ export function CalisthenicsProgressions({
                     >
                       <span
                         style={{
-                          fontSize: "0.78rem",
+                          fontSize: "var(--fs-meta)",
                           fontWeight: 700,
                           color: "var(--text)",
                           display: "block",
@@ -795,7 +795,7 @@ export function CalisthenicsProgressions({
                                   justifyContent: "space-between",
                                   alignItems: "center",
                                   cursor: "pointer",
-                                  fontSize: "0.82rem",
+                                  fontSize: "var(--fs-meta)",
                                 }}
                               >
                                 <span
@@ -817,7 +817,7 @@ export function CalisthenicsProgressions({
                                     style={{
                                       color: "var(--accent)",
                                       fontWeight: 700,
-                                      fontSize: "0.76rem",
+                                      fontSize: "var(--fs-meta)",
                                     }}
                                   >
                                     {req.repeatFormatted ||
@@ -856,7 +856,7 @@ export function CalisthenicsProgressions({
                                   ) : (
                                     <span
                                       style={{
-                                        fontSize: "0.76rem",
+                                        fontSize: "var(--fs-meta)",
                                         color: "var(--text-tertiary)",
                                         fontStyle: "italic",
                                       }}
@@ -876,7 +876,7 @@ export function CalisthenicsProgressions({
                                       border: "1px solid rgba(10,132,255,0.3)",
                                       borderRadius: "6px",
                                       padding: "6px 12px",
-                                      fontSize: "0.76rem",
+                                      fontSize: "var(--fs-meta)",
                                       fontWeight: 600,
                                       cursor: "pointer",
                                       width: "fit-content",
@@ -938,7 +938,7 @@ export function CalisthenicsProgressions({
                           >
                             <span
                               style={{
-                                fontSize: "0.82rem",
+                                fontSize: "var(--fs-meta)",
                                 fontWeight: 700,
                                 color: "var(--text-secondary)",
                                 letterSpacing: "-0.01em",
@@ -955,7 +955,7 @@ export function CalisthenicsProgressions({
                             >
                               <span
                                 style={{
-                                  fontSize: "0.72rem",
+                                  fontSize: "var(--fs-eyebrow)",
                                   color: "var(--text-tertiary)",
                                 }}
                               >
@@ -1075,7 +1075,7 @@ export function CalisthenicsProgressions({
                                         >
                                           <h4
                                             style={{
-                                              fontSize: "0.9rem",
+                                              fontSize: "var(--fs-body)",
                                               fontWeight: 600,
                                               margin: 0,
                                               color: "var(--text)",
@@ -1135,7 +1135,7 @@ export function CalisthenicsProgressions({
                                           {ex.level && (
                                             <span
                                               style={{
-                                                fontSize: "0.72rem",
+                                                fontSize: "var(--fs-eyebrow)",
                                                 color: "var(--text-tertiary)",
                                                 border:
                                                   "1px solid var(--color-border-subtle)",
@@ -1188,7 +1188,7 @@ export function CalisthenicsProgressions({
                                             >
                                               <span
                                                 style={{
-                                                  fontSize: "0.72rem",
+                                                  fontSize: "var(--fs-eyebrow)",
                                                   color: "var(--accent)",
                                                   fontWeight: 700,
                                                   display: "block",
@@ -1236,7 +1236,7 @@ export function CalisthenicsProgressions({
                                                             : "1px solid var(--color-border-subtle)",
                                                         borderRadius: "6px",
                                                         padding: "3px 9px",
-                                                        fontSize: "0.72rem",
+                                                        fontSize: "var(--fs-eyebrow)",
                                                         fontWeight:
                                                           activeVariantIndex ===
                                                           candIdx
@@ -1283,7 +1283,7 @@ export function CalisthenicsProgressions({
                                                   : "1px solid var(--color-border-subtle)",
                                                 borderRadius: "7px",
                                                 padding: "5px 12px",
-                                                fontSize: "0.76rem",
+                                                fontSize: "var(--fs-meta)",
                                                 fontWeight: 600,
                                                 cursor: "pointer",
                                               }}
@@ -1303,7 +1303,7 @@ export function CalisthenicsProgressions({
                                                   background: "transparent",
                                                   color: "var(--accent)",
                                                   border: "none",
-                                                  fontSize: "0.76rem",
+                                                  fontSize: "var(--fs-meta)",
                                                   fontWeight: 600,
                                                   cursor: "pointer",
                                                 }}
@@ -1336,7 +1336,7 @@ export function CalisthenicsProgressions({
                                           ) : (
                                             <span
                                               style={{
-                                                fontSize: "0.76rem",
+                                                fontSize: "var(--fs-meta)",
                                                 color: "var(--text-tertiary)",
                                                 fontStyle: "italic",
                                               }}
@@ -1352,7 +1352,7 @@ export function CalisthenicsProgressions({
                                               justifyContent: "space-between",
                                               flexWrap: "wrap",
                                               gap: "8px",
-                                              fontSize: "0.82rem",
+                                              fontSize: "var(--fs-meta)",
                                             }}
                                           >
                                             <div>
@@ -1397,7 +1397,7 @@ export function CalisthenicsProgressions({
                                             <div>
                                               <strong
                                                 style={{
-                                                  fontSize: "0.82rem",
+                                                  fontSize: "var(--fs-meta)",
                                                   color: "var(--text)",
                                                   display: "block",
                                                   marginBottom: "4px",
@@ -1409,7 +1409,7 @@ export function CalisthenicsProgressions({
                                                 style={{
                                                   margin: 0,
                                                   paddingLeft: "18px",
-                                                  fontSize: "0.8rem",
+                                                  fontSize: "var(--fs-meta)",
                                                   color:
                                                     "var(--text-secondary)",
                                                   lineHeight: 1.5,
@@ -1429,7 +1429,7 @@ export function CalisthenicsProgressions({
                                             <div>
                                               <strong
                                                 style={{
-                                                  fontSize: "0.82rem",
+                                                  fontSize: "var(--fs-meta)",
                                                   color: "var(--text)",
                                                   display: "block",
                                                   marginBottom: "6px",
@@ -1462,7 +1462,7 @@ export function CalisthenicsProgressions({
                                                           "var(--text-secondary)",
                                                         padding: "2px 9px",
                                                         borderRadius: "5px",
-                                                        fontSize: "0.76rem",
+                                                        fontSize: "var(--fs-meta)",
                                                         fontWeight: 500,
                                                         cursor: "pointer",
                                                       }}
@@ -1480,7 +1480,7 @@ export function CalisthenicsProgressions({
                                             <div>
                                               <strong
                                                 style={{
-                                                  fontSize: "0.82rem",
+                                                  fontSize: "var(--fs-meta)",
                                                   color: "var(--text)",
                                                   display: "block",
                                                   marginBottom: "6px",
@@ -1508,7 +1508,7 @@ export function CalisthenicsProgressions({
                                                           "var(--text-secondary)",
                                                         padding: "2px 9px",
                                                         borderRadius: "5px",
-                                                        fontSize: "0.76rem",
+                                                        fontSize: "var(--fs-meta)",
                                                         fontWeight: 500,
                                                       }}
                                                     >
@@ -1525,7 +1525,7 @@ export function CalisthenicsProgressions({
                                             <div>
                                               <strong
                                                 style={{
-                                                  fontSize: "0.82rem",
+                                                  fontSize: "var(--fs-meta)",
                                                   color: "var(--text)",
                                                   display: "block",
                                                   marginBottom: "6px",
@@ -1537,7 +1537,7 @@ export function CalisthenicsProgressions({
                                                 style={{
                                                   margin: 0,
                                                   paddingLeft: "18px",
-                                                  fontSize: "0.8rem",
+                                                  fontSize: "var(--fs-meta)",
                                                   color:
                                                     "var(--text-secondary)",
                                                   lineHeight: 1.5,

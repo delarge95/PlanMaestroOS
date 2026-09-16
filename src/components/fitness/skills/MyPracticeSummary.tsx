@@ -26,7 +26,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
 
   if (!currentStep || !currentPath) {
     return (
-      <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+      <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', fontSize: 'var(--fs-body)', color: 'var(--text-secondary)' }}>
         Sin habilidad activa seleccionada.
       </div>
     );
@@ -60,7 +60,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
       {/* NAVEGADOR Y CABECERA DE PROGRESIÓN */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
         <div>
-          <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', fontWeight: 600 }}>
             Ruta Híbrida · {currentPath.title}
           </span>
           <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
@@ -82,7 +82,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
               color: 'var(--text-primary)',
               borderRadius: '6px',
               padding: '5px 10px',
-              fontSize: '0.8rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: 600,
               cursor: stepIndex <= 0 ? 'not-allowed' : 'pointer',
               opacity: stepIndex <= 0 ? 0.4 : 1,
@@ -95,7 +95,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
             <span>Anterior</span>
           </button>
 
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, padding: '0 4px' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', fontWeight: 700, padding: '0 4px' }}>
             {stepIndex + 1} / {totalSteps}
           </span>
 
@@ -111,7 +111,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
               color: 'var(--text-primary)',
               borderRadius: '6px',
               padding: '5px 10px',
-              fontSize: '0.8rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: 600,
               cursor: stepIndex >= totalSteps - 1 ? 'not-allowed' : 'pointer',
               opacity: stepIndex >= totalSteps - 1 ? 0.4 : 1,
@@ -129,20 +129,20 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
       {/* DETALLE TÉCNICO COMPLETO E INSTRUCCIONES DE EJECUCIÓN */}
       <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))', padding: '12px 14px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--text-primary)' }}>
             🎯 Objetivo de Sesión: {currentStep.practice.target}
           </span>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
             Descanso sugerido: 2-3 min
           </span>
         </div>
 
         {currentStep.readiness?.technical && currentStep.readiness.technical.length > 0 && (
           <div style={{ marginTop: '4px' }}>
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-primary)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-primary)', fontWeight: 700, display: 'block', marginBottom: '4px' }}>
               Claves Biomecánicas de Ejecución:
             </span>
-            <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+            <ul style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
               {currentStep.readiness.technical.map((item: string, idx: number) => (
                 <li key={idx}>{item}</li>
               ))}
@@ -153,14 +153,14 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
 
       {/* REGISTRO RÁPIDO DE SESIÓN DE PRÁCTICA IN-SITU CON 3 CAMPOS LIMPIOS */}
       <form onSubmit={handleSavePractice} style={{ display: 'flex', flexDirection: 'column', gap: '10px', background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))' }}>
-        <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+        <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--text-primary)' }}>
           Log de Práctica de Hoy
         </span>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '10px' }}>
           {/* CAMPO 1: NÚMERO DE SERIES */}
           <div>
-            <label style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+            <label style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
               Número de Series
             </label>
             <input
@@ -177,7 +177,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
                 borderRadius: '6px',
                 padding: '6px 10px',
                 color: 'var(--text-primary)',
-                fontSize: '0.84rem',
+                fontSize: 'var(--fs-meta)',
                 outline: 'none'
               }}
             />
@@ -185,7 +185,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
 
           {/* CAMPO 2: SEGUNDOS O REPETICIONES */}
           <div>
-            <label style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+            <label style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
               Segundos o Repeticiones
             </label>
             <input
@@ -200,7 +200,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
                 borderRadius: '6px',
                 padding: '6px 10px',
                 color: 'var(--text-primary)',
-                fontSize: '0.84rem',
+                fontSize: 'var(--fs-meta)',
                 outline: 'none'
               }}
             />
@@ -208,7 +208,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
 
           {/* CAMPO 3: NOTAS DE CONTROL TÉCNICO */}
           <div>
-            <label style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+            <label style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
               Notas Técnicas
             </label>
             <input
@@ -223,7 +223,7 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
                 borderRadius: '6px',
                 padding: '6px 10px',
                 color: 'var(--text-primary)',
-                fontSize: '0.84rem',
+                fontSize: 'var(--fs-meta)',
                 outline: 'none'
               }}
             />
@@ -232,11 +232,11 @@ export function MyPracticeSummary({ onOpenPaths }: MyPracticeSummaryProps) {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
           {isSaved ? (
-            <span style={{ fontSize: '0.8rem', color: 'var(--success)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--success)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
               <CheckCircle2 size={14} /> ¡Práctica registrada correctamente!
             </span>
           ) : (
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
               Registra tu volumen y control técnico
             </span>
           )}

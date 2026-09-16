@@ -56,7 +56,7 @@ export function PracticeSessionModal({
         <div style={{ padding: 'var(--space-lg)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-md)' }}>
           <Check size={48} style={{ color: 'var(--color-state-done)' }} />
           <h3 style={{ margin: 0, fontSize: 'var(--fs-section)', fontWeight: 700, color: 'var(--text-primary)' }}>¡Práctica Guardada!</h3>
-          <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', margin: 0 }}>
+          <p style={{ fontSize: 'var(--fs-body)', color: 'var(--text-secondary)', margin: 0 }}>
             Cuando tengas varias exposiciones consistentes y sin molestias, podrás revisar el siguiente paso.
           </p>
         </div>
@@ -64,7 +64,7 @@ export function PracticeSessionModal({
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
           {/* DOSIS REALIZADA */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+            <label style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', fontWeight: 600 }}>
               Series completadas:
             </label>
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -92,7 +92,7 @@ export function PracticeSessionModal({
 
           {/* CALIDAD DE EJECUCIÓN */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+            <label style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', fontWeight: 600 }}>
               Calidad técnica de la sesión:
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '6px' }}>
@@ -107,7 +107,7 @@ export function PracticeSessionModal({
                     color: quality === q ? 'var(--text)' : 'var(--text-tertiary)',
                     border: quality === q ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle)',
                     borderRadius: 'var(--radius-sm)',
-                    fontSize: '0.8rem',
+                    fontSize: 'var(--fs-meta)',
                     fontWeight: 600,
                     textTransform: 'capitalize',
                     cursor: 'pointer'
@@ -122,10 +122,10 @@ export function PracticeSessionModal({
           {/* EVALUACIÓN DE MOLESTIA / DOLOR (0-10) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'var(--surface-elevated)', padding: '12px', borderRadius: 'var(--radius-md)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <label style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Activity size={14} /> Molestia o dolor percibido (0-10):
               </label>
-              <strong style={{ fontSize: '0.9rem', color: discomfort >= 4 ? 'var(--danger)' : 'var(--text)' }}>
+              <strong style={{ fontSize: 'var(--fs-body)', color: discomfort >= 4 ? 'var(--danger)' : 'var(--text)' }}>
                 {discomfort} / 10
               </strong>
             </div>
@@ -151,7 +151,7 @@ export function PracticeSessionModal({
               border: 'none',
               borderRadius: 'var(--radius-md)',
               fontWeight: 700,
-              fontSize: '0.92rem',
+              fontSize: 'var(--fs-body)',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',

@@ -91,7 +91,7 @@ export default function LanguageToday({
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px 10px', borderRadius: '20px', border: '1px solid var(--color-border-subtle)', fontSize: '0.78rem', color: 'var(--text-secondary)' }} title="Días consecutivos con actividad de estudio">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px 10px', borderRadius: '20px', border: '1px solid var(--color-border-subtle)', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }} title="Días consecutivos con actividad de estudio">
             <Flame size={15} style={{ color: streakDays > 0 ? 'var(--warning)' : 'var(--text-tertiary)' }} />
             <span>Racha: {streakDays} {streakDays === 1 ? 'día' : 'días'}</span>
           </div>
@@ -110,7 +110,7 @@ export default function LanguageToday({
               gap: '12px'
             }}>
               <div>
-                <span style={{ fontSize: '0.68rem', color: i === 0 && !germanBlock ? 'var(--accent)' : 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: i === 0 && !germanBlock ? 'var(--accent)' : 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
                   {block.label}
                 </span>
                 <strong style={{ fontSize: i === 0 && !germanBlock ? '1rem' : '0.92rem', color: 'var(--text)', display: 'block', marginTop: '2px' }}>

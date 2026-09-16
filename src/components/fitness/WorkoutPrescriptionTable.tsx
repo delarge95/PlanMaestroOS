@@ -67,7 +67,7 @@ export function WorkoutPrescriptionTable({
               color: 'var(--text)',
               padding: '6px 14px',
               borderRadius: 'var(--radius-md)',
-              fontSize: '0.84rem',
+              fontSize: 'var(--fs-meta)',
               fontWeight: 600,
               textDecoration: 'none',
               display: 'inline-flex',
@@ -85,7 +85,7 @@ export function WorkoutPrescriptionTable({
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-sm)', justifyContent: 'space-between', alignItems: 'center' }}>
         {/* SEMANA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', width: isMobile ? '100%' : 'auto', justifyContent: isMobile ? 'space-between' : 'flex-start' }}>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Semana
           </span>
 
@@ -100,7 +100,7 @@ export function WorkoutPrescriptionTable({
                 border: '1px solid var(--color-border-subtle)',
                 borderRadius: 'var(--radius-s)',
                 padding: '6px 10px',
-                fontSize: '0.82rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: 600
               }}
             >
@@ -129,7 +129,7 @@ export function WorkoutPrescriptionTable({
                       border: 'none',
                       padding: '6px 10px',
                       borderRadius: 'var(--radius-sm)',
-                      fontSize: '0.82rem',
+                      fontSize: 'var(--fs-meta)',
                       fontWeight: isSelected ? 700 : 500,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap'
@@ -145,7 +145,7 @@ export function WorkoutPrescriptionTable({
 
         {/* DÍA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', width: isMobile ? '100%' : 'auto', justifyContent: isMobile ? 'space-between' : 'flex-start' }}>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Día
           </span>
 
@@ -160,7 +160,7 @@ export function WorkoutPrescriptionTable({
                 border: '1px solid var(--color-border-subtle)',
                 borderRadius: 'var(--radius-s)',
                 padding: '6px 10px',
-                fontSize: '0.82rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: 600
               }}
             >
@@ -194,7 +194,7 @@ export function WorkoutPrescriptionTable({
                       border: 'none',
                       padding: '6px 12px',
                       borderRadius: 'var(--radius-sm)',
-                      fontSize: '0.82rem',
+                      fontSize: 'var(--fs-meta)',
                       fontWeight: isSelected ? 700 : 500,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap'
@@ -214,7 +214,7 @@ export function WorkoutPrescriptionTable({
           {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayDisplayTitle}
         </h3>
         {activeWeek?.isDeload && (
-          <span style={{ fontSize: '0.78rem', color: 'var(--warning)', fontWeight: 600, marginTop: '2px', display: 'inline-block' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--warning)', fontWeight: 600, marginTop: '2px', display: 'inline-block' }}>
             ⚡ Semana de descarga estratégica (Reducir carga y mantener margen)
           </span>
         )}
@@ -223,7 +223,7 @@ export function WorkoutPrescriptionTable({
       <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', background: 'var(--surface)' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--font-size-body)' }}>
           <thead>
-            <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-tertiary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>
+            <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-tertiary)', fontSize: 'var(--fs-eyebrow)', textTransform: 'uppercase' }}>
               <th style={{ padding: 'var(--space-2)' }}>Ejercicio / Código</th>
               <th style={{ padding: 'var(--space-2)' }}>Series Aprox</th>
               <th style={{ padding: 'var(--space-2)' }}>Series × Reps</th>
@@ -268,7 +268,7 @@ export function WorkoutPrescriptionTable({
                       />
                       {overrideId && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                          <span style={{ fontSize: '0.72rem', color: 'var(--color-state-done)', fontWeight: 600 }}>
+                          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-state-done)', fontWeight: 600 }}>
                             ✓ Sustituido
                           </span>
                           <button
@@ -278,7 +278,7 @@ export function WorkoutPrescriptionTable({
                               background: 'transparent',
                               border: 'none',
                               color: 'var(--text-tertiary)',
-                              fontSize: '0.7rem',
+                              fontSize: 'var(--fs-eyebrow)',
                               fontWeight: 600,
                               cursor: 'pointer',
                               padding: '1px 6px',
@@ -305,7 +305,7 @@ export function WorkoutPrescriptionTable({
                               background: 'transparent',
                               border: 'none',
                               color: 'var(--accent)',
-                              fontSize: '0.74rem',
+                              fontSize: 'var(--fs-eyebrow)',
                               fontWeight: 600,
                               cursor: 'pointer',
                               padding: 0,
@@ -319,7 +319,7 @@ export function WorkoutPrescriptionTable({
                           </button>
 
                           {isNoteExpanded && (
-                            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.45, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--accent)' }}>
+                            <p style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.45, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--accent)' }}>
                               {prescription.notes}
                             </p>
                           )}
@@ -352,7 +352,7 @@ export function WorkoutPrescriptionTable({
                                 border: '1px solid var(--color-border-visible)',
                                 padding: '2px 6px',
                                 borderRadius: '4px',
-                                fontSize: '0.76rem',
+                                fontSize: 'var(--fs-meta)',
                                 fontWeight: 600,
                                 color: cleanRir === '0' || cleanRir.includes('Fallo') ? 'var(--danger)' : 'var(--text)'
                               }}
@@ -362,7 +362,7 @@ export function WorkoutPrescriptionTable({
                           );
                         })
                       ) : (
-                        <span style={{ background: 'var(--surface-elevated)', border: '1px solid var(--color-border-visible)', padding: '2px 6px', borderRadius: '4px', fontSize: '0.76rem', fontWeight: 600 }}>
+                        <span style={{ background: 'var(--surface-elevated)', border: '1px solid var(--color-border-visible)', padding: '2px 6px', borderRadius: '4px', fontSize: 'var(--fs-meta)', fontWeight: 600 }}>
                           S1: {earlyEffort} / S2+: {lastEffort}
                         </span>
                       )}
@@ -392,7 +392,7 @@ export function WorkoutPrescriptionTable({
                         color: 'var(--text)',
                         padding: '6px 10px',
                         borderRadius: '6px',
-                        fontSize: '0.78rem',
+                        fontSize: 'var(--fs-meta)',
                         fontWeight: 600,
                         cursor: 'pointer',
                         display: 'inline-flex',

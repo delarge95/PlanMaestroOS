@@ -107,7 +107,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                   border: 'none',
                   padding: '6px 12px',
                   borderRadius: '7px',
-                  fontSize: '0.78rem',
+                  fontSize: 'var(--fs-meta)',
                   fontWeight: activeTab === 'theory' ? 700 : 500,
                   cursor: 'pointer'
                 }}
@@ -124,7 +124,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                   border: 'none',
                   padding: '6px 12px',
                   borderRadius: '7px',
-                  fontSize: '0.78rem',
+                  fontSize: 'var(--fs-meta)',
                   fontWeight: activeTab === 'exercises' ? 700 : 500,
                   cursor: 'pointer'
                 }}
@@ -154,7 +154,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
               const isCorrect = answered && answersMatch(userAnswers[ex.id], ex.correctAnswer);
               return (
               <div key={ex.id} className="ds-stack-sm" style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${answered ? (isCorrect ? 'var(--color-state-done)' : 'var(--color-state-error, var(--warning))') : 'var(--color-border-subtle)'}`, borderRadius: 'var(--radius-s)', padding: 'var(--space-3)' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 700 }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700 }}>
                   Ejercicio {idx + 1}: {ex.prompt}
                 </span>
 
@@ -171,7 +171,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                           border: `1px solid ${userAnswers[ex.id] === opt ? 'var(--accent)' : 'var(--color-border-subtle)'}`,
                           padding: '6px 12px',
                           borderRadius: '6px',
-                          fontSize: '0.8rem',
+                          fontSize: 'var(--fs-meta)',
                           fontWeight: 600,
                           cursor: 'pointer'
                         }}
@@ -188,12 +188,12 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                     onBlur={() => commitWrongAnswer(ex, userAnswers[ex.id] ?? '')}
                     onKeyDown={(e) => { if (e.key === 'Enter') commitWrongAnswer(ex, userAnswers[ex.id] ?? ''); }}
                     placeholder="Escribe tu respuesta..."
-                    style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px 12px', color: 'var(--text)', fontSize: '0.85rem' }}
+                    style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px 12px', color: 'var(--text)', fontSize: 'var(--fs-body)' }}
                   />
                 )}
 
                 {answered && (
-                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: isCorrect ? 'var(--color-state-done)' : 'var(--warning)' }}>
+                  <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: isCorrect ? 'var(--color-state-done)' : 'var(--warning)' }}>
                     {isCorrect ? '✓ Correcto' : `✗ Revisa — solución: ${ex.correctAnswer}`}
                   </span>
                 )}

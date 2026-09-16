@@ -130,7 +130,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
       {/* CABECERA CON SELECCIÓN DE MÉTRICAS */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Gráfico de Rendimiento Global
           </span>
           <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
@@ -152,7 +152,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                 border: 'none',
                 padding: '5px 10px',
                 borderRadius: '6px',
-                fontSize: '0.76rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: metric === m.id ? 700 : 500,
                 cursor: 'pointer',
                 display: 'inline-flex',
@@ -172,7 +172,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
         
         {/* TIPO DE FILTRO */}
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Filtrar por:</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 600 }}>Filtrar por:</span>
           
           <select
             value={filterType}
@@ -183,7 +183,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
               border: '1px solid var(--color-border-subtle)',
               borderRadius: '6px',
               padding: '4px 8px',
-              fontSize: '0.78rem',
+              fontSize: 'var(--fs-meta)',
               outline: 'none'
             }}
           >
@@ -205,7 +205,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                   border: '1px solid var(--color-border-subtle)',
                   borderRadius: '6px',
                   padding: '4px 8px',
-                  fontSize: '0.78rem',
+                  fontSize: 'var(--fs-meta)',
                   outline: 'none',
                   minWidth: '180px'
                 }}
@@ -216,7 +216,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                   onClick={() => setExerciseFilter('')}
                   style={{
                     position: 'absolute', right: '6px', top: '50%', transform: 'translateY(-50%)',
-                    background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: '0.75rem'
+                    background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', fontSize: 'var(--fs-eyebrow)'
                   }}
                 >
                   ✕
@@ -250,7 +250,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                         onClick={() => setExerciseFilter(ex)}
                         style={{
                           padding: '6px 10px',
-                          fontSize: '0.78rem',
+                          fontSize: 'var(--fs-meta)',
                           color: 'var(--text-primary)',
                           cursor: 'pointer',
                           borderBottom: '1px solid rgba(255,255,255,0.03)'
@@ -274,7 +274,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                 border: '1px solid var(--color-border-subtle)',
                 borderRadius: '6px',
                 padding: '4px 8px',
-                fontSize: '0.78rem',
+                fontSize: 'var(--fs-meta)',
                 outline: 'none'
               }}
             >
@@ -295,7 +295,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
               style={{
                 background: granularity === 'week' ? 'rgba(255,255,255,0.1)' : 'transparent',
                 color: granularity === 'week' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 600, cursor: 'pointer'
+                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: 'var(--fs-eyebrow)', fontWeight: 600, cursor: 'pointer'
               }}
             >
               Semanal
@@ -306,7 +306,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
               style={{
                 background: granularity === 'day' ? 'rgba(255,255,255,0.1)' : 'transparent',
                 color: granularity === 'day' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 600, cursor: 'pointer'
+                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: 'var(--fs-eyebrow)', fontWeight: 600, cursor: 'pointer'
               }}
             >
               Diario
@@ -320,7 +320,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
               style={{
                 background: chartType === 'bar' ? 'rgba(255,255,255,0.1)' : 'transparent',
                 color: chartType === 'bar' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 600, cursor: 'pointer'
+                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: 'var(--fs-eyebrow)', fontWeight: 600, cursor: 'pointer'
               }}
             >
               Barras
@@ -331,7 +331,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
               style={{
                 background: chartType === 'line' ? 'rgba(255,255,255,0.1)' : 'transparent',
                 color: chartType === 'line' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 600, cursor: 'pointer'
+                border: 'none', padding: '3px 8px', borderRadius: '4px', fontSize: 'var(--fs-eyebrow)', fontWeight: 600, cursor: 'pointer'
               }}
             >
               Líneas
@@ -343,7 +343,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
       {/* RENDERIZADO DEL GRÁFICO DINÁMICO SVG */}
       <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '12px', padding: '16px', minHeight: '220px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))' }}>
         {chartData.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-tertiary)', padding: '40px 20px', fontSize: '0.86rem', border: '1px dashed rgba(255,255,255,0.14)', borderRadius: '10px', opacity: 0.8 }}>
+          <div style={{ textAlign: 'center', color: 'var(--text-tertiary)', padding: '40px 20px', fontSize: 'var(--fs-body)', border: '1px dashed rgba(255,255,255,0.14)', borderRadius: '10px', opacity: 0.8 }}>
             Pendiente: logger — completa una sesión en Hoy para ver rendimiento real aquí.
           </div>
         ) : (
@@ -367,7 +367,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                     cursor: 'pointer'
                   }}
                 >
-                  <span style={{ fontSize: '0.72rem', color: p.isMax ? 'var(--success)' : 'var(--accent)', fontWeight: 700 }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: p.isMax ? 'var(--success)' : 'var(--accent)', fontWeight: 700 }}>
                     {p.value} {metric === 'volume' || metric === 'e1rm' || metric === 'maxWeight' ? unit : ''}
                   </span>
 
@@ -387,7 +387,7 @@ export default function AnalyticsChart({ title = 'Rendimiento Global', flatLog =
                     }}
                   />
 
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontFamily: 'SF Mono, monospace', whiteSpace: 'nowrap' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontFamily: 'SF Mono, monospace', whiteSpace: 'nowrap' }}>
                     {p.label}
                   </span>
                 </div>

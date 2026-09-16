@@ -101,14 +101,14 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
       {/* HEADER & PROGRESS BAR */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
+          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: 'var(--color-state-done)', fontWeight: 700 }}>
             MINI-VENTANA FITNESS FITAPP
           </span>
-          <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 700 }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700 }}>
             Progreso: {doneSetsCount}/{totalSets} series ({progressPct}%)
           </span>
         </div>
-        <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 8px', color: 'var(--color-text-primary)' }}>
+        <h4 style={{ fontSize: 'var(--fs-step)', fontWeight: 700, margin: '0 0 8px', color: 'var(--color-text-primary)' }}>
           {currentRoutine.dayName}
         </h4>
         <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.08)', borderRadius: '999px', overflow: 'hidden' }}>
@@ -152,7 +152,7 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                     padding: 0,
                     color: 'var(--color-state-done)',
                     fontWeight: 700,
-                    fontSize: '0.88rem',
+                    fontSize: 'var(--fs-body)',
                     textAlign: 'left',
                     cursor: 'pointer',
                     display: 'flex',
@@ -161,29 +161,29 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                   }}
                 >
                   <span>⚡ {ex.primary}</span>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--color-accent-danger)', background: 'rgba(239,68,68,0.15)', padding: '2px 6px', borderRadius: '4px' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-accent-danger)', background: 'rgba(239,68,68,0.15)', padding: '2px 6px', borderRadius: '4px' }}>
                     ▶ FitApp Video
                   </span>
                 </button>
                 {ex.primary !== ex.name && (
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>
                     Original: {ex.name}
                   </span>
                 )}
               </div>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--accent)', background: 'rgba(119,231,255,0.1)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', background: 'rgba(119,231,255,0.1)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
                 {ex.rir}
               </span>
             </div>
 
             {/* REASON CUE (dataset notes) */}
-            <span style={{ fontSize: '0.78rem', color: 'var(--color-text-tertiary)', lineHeight: 1.35 }}>
+            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--color-text-tertiary)', lineHeight: 1.35 }}>
               💡 {ex.reason}
             </span>
 
             {/* SETS CHECKBOXES (FITAPP STYLE) */}
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontWeight: 600 }}>Series:</span>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--color-text-secondary)', fontWeight: 600 }}>Series:</span>
               {Array.from({ length: ex.sets }).map((_, setIdx) => {
                 const isChecked = !!completedSets[`${exIdx}-${setIdx}`];
                 return (
@@ -197,7 +197,7 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                       color: isChecked ? 'var(--color-state-done)' : 'var(--color-text-secondary)',
                       padding: '4px 10px',
                       borderRadius: '8px',
-                      fontSize: '0.75rem',
+                      fontSize: 'var(--fs-eyebrow)',
                       fontWeight: 700,
                       cursor: 'pointer',
                       display: 'flex',

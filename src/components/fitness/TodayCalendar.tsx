@@ -213,7 +213,7 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
                 transition: 'all 150ms ease'
               }}
             >
-              <span style={{ fontSize: '0.68rem', opacity: isSelected ? 0.95 : 0.7 }}>
+              <span style={{ fontSize: 'var(--fs-eyebrow)', opacity: isSelected ? 0.95 : 0.7 }}>
                 {sd.dayName} {sd.dateFormatted}
               </span>
               {sd.isToday && (
@@ -221,7 +221,7 @@ export default function TodayCalendar({ selectedDayIndex, onSelectDayIndex }: To
                   HOY
                 </span>
               )}
-              <strong style={{ fontSize: '0.78rem', textAlign: 'center', lineHeight: 1.15, color: isSelected ? '#ffffff' : sd.status === 'done' ? 'var(--success)' : 'var(--text-primary)' }}>
+              <strong style={{ fontSize: 'var(--fs-meta)', textAlign: 'center', lineHeight: 1.15, color: isSelected ? '#ffffff' : sd.status === 'done' ? 'var(--success)' : 'var(--text-primary)' }}>
                 {sd.label}
               </strong>
               {sd.status === 'done' && <CheckCircle2 size={12} style={{ color: isSelected ? '#ffffff' : 'var(--success)' }} />}

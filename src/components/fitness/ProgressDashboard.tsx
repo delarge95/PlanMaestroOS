@@ -101,7 +101,8 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
     <ErrorBoundary>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', color: 'var(--text-primary)' }}>
         
-        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
+        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
+        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
                 {/* VISTAS DE PÁGINA (sin ruta): mismo lenguaje visual que snb-l3 */}
         <nav className="snb-l3" aria-label="Vistas de Progreso" style={{ margin: 0, padding: 0, borderBottom: '1px solid var(--separator)' }}>
           {([
@@ -143,7 +144,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                   <TrendingUp size={22} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Overall Progress</span>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Overall Progress</span>
                   <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
                     {totalSessions > 0 ? `${totalSessions} Sesiones Registradas` : 'Listo para iniciar'}
                   </strong>
@@ -155,7 +156,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                   <Award size={22} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Volumen Total Acumulado</span>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Volumen Total Acumulado</span>
                   <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
                     {totalVolumeKg > 0 ? `${totalVolumeKg.toLocaleString()} kg` : '0 kg'}
                   </strong>
@@ -167,7 +168,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                   <Zap size={22} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia Semanal (real)</span>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia Semanal (real)</span>
                   <strong style={{ fontSize: '1.4rem', display: 'block', color: 'var(--text-primary)' }}>
                     {totalSessions > 0 ? `${adherenceReal} sesiones` : 'Pendiente: logger'}
                   </strong>
@@ -179,20 +180,20 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
 
             {/* RESUMEN DE VOLUMEN ACUMULADO POR GRUPO MUSCULAR */}
             <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+              <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>
                 Volumen Acumulado por Grupo Muscular (Histórico)
               </span>
 
               {muscleVolume.length === 0 ? (
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-tertiary)' }}>
+                <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
                   Completa tus primeras sesiones en la pestaña Hoy para visualizar el desglose por grupo muscular.
                 </span>
               ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '10px' }}>
                   {muscleVolume.map((mv) => (
                     <div key={mv.muscleGroup} style={{ background: 'rgba(255,255,255,0.02)', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.06))', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-primary)' }}>{mv.muscleGroup}</span>
-                      <strong style={{ fontSize: '0.88rem', color: 'var(--accent)' }}>{mv.totalSets} series ({mv.totalVolumeKg} kg)</strong>
+                      <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 600, color: 'var(--text-primary)' }}>{mv.muscleGroup}</span>
+                      <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--accent)' }}>{mv.totalSets} series ({mv.totalVolumeKg} kg)</strong>
                     </div>
                   ))}
                 </div>
@@ -217,7 +218,7 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
               <div style={{ background: 'var(--surface-1)', border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', borderRadius: 'var(--radius-m, 12px)', padding: 'var(--space-lg)', textAlign: 'center', color: 'var(--text-secondary)' }}>
                 <History size={24} style={{ color: 'var(--text-tertiary)', marginBottom: '8px' }} />
                 <h4 style={{ margin: '0 0 4px', color: 'var(--text-primary)' }}>Sin sesiones registradas aún</h4>
-                <p style={{ margin: 0, fontSize: '0.85rem' }}>Las rutinas completadas en Hoy se guardarán automáticamente aquí.</p>
+                <p style={{ margin: 0, fontSize: 'var(--fs-body)' }}>Las rutinas completadas en Hoy se guardarán automáticamente aquí.</p>
               </div>
             ) : (
               sessions.map((s: any, idx: number) => (
@@ -236,19 +237,19 @@ export default function ProgressDashboard({ currentPath = '/app/fitness/progress
                   }}
                 >
                   <div>
-                    <strong style={{ fontSize: '0.94rem', color: 'var(--text-primary)', display: 'block' }}>
+                    <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text-primary)', display: 'block' }}>
                       {s.routineTitle || 'Sesión de Entrenamiento'}
                     </strong>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
+                    <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', marginTop: '2px', display: 'block' }}>
                       {s.dateIso ? new Date(s.dateIso).toLocaleDateString('es-ES', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'Fecha reciente'} · Duración: {s.durationMinutes || 45} min
                     </span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontSize: '0.86rem', fontWeight: 800, color: 'var(--accent)' }}>
+                    <span style={{ fontSize: 'var(--fs-body)', fontWeight: 800, color: 'var(--accent)' }}>
                       {s.totalVolumeKg ? `${s.totalVolumeKg} kg` : ''}
                     </span>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--success)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--success)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                       <CheckCircle2 size={14} /> Completada
                     </span>
                   </div>

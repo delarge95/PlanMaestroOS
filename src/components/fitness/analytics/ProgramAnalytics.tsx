@@ -19,7 +19,7 @@ export default function ProgramAnalytics() {
       {/* HEADER */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Rendimiento del Programa Activo
           </span>
           <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
@@ -31,21 +31,21 @@ export default function ProgramAnalytics() {
       {/* TARJETAS DE ADHERENCIA Y CUMPLIMIENTO */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
         <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', borderRadius: '12px', padding: '14px' }}>
-          <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia Global</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase' }}>Adherencia Global</span>
           <strong style={{ fontSize: '1.6rem', display: 'block', margin: '4px 0', color: 'var(--text-primary)' }}>{adherencePct}%</strong>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{completedDaysEstimate} días completados</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>{completedDaysEstimate} días completados</span>
         </div>
 
         <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', borderRadius: '12px', padding: '14px' }}>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>Carga Planificada vs Real</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>Carga Planificada vs Real</span>
           <strong style={{ fontSize: '1.6rem', display: 'block', margin: '4px 0', color: 'var(--text-primary)' }}>101%</strong>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>4,850 kg ejecutados / 4,800 kg plan</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>4,850 kg ejecutados / 4,800 kg plan</span>
         </div>
 
         <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', borderRadius: '12px', padding: '14px' }}>
-          <span style={{ fontSize: '0.72rem', color: 'var(--warning)', fontWeight: 700, textTransform: 'uppercase' }}>Días Postergados</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--warning)', fontWeight: 700, textTransform: 'uppercase' }}>Días Postergados</span>
           <strong style={{ fontSize: '1.6rem', display: 'block', margin: '4px 0', color: 'var(--text-primary)' }}>{postponedDays} días</strong>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Ajuste automático de calendario</span>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>Ajuste automático de calendario</span>
         </div>
       </div>
     </div>

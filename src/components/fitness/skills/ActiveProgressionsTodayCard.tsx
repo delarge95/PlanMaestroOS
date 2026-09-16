@@ -220,7 +220,7 @@ export default function ActiveProgressionsTodayCard() {
             <strong className="ds-eyebrow" style={{ marginBottom: '4px' }}>
               Puntos Clave de Técnica:
             </strong>
-            <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: '#e2e8f0', lineHeight: 1.5 }}>
+            <ul style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--fs-meta)', color: '#e2e8f0', lineHeight: 1.5 }}>
               {technique.map((pt: string, idx: number) => (
                 <li key={idx}>{pt}</li>
               ))}

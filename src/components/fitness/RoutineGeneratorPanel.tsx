@@ -78,11 +78,11 @@ export default function RoutineGeneratorPanel() {
         className="ds-row-between"
         style={{ width: '100%', textAlign: 'left', cursor: 'pointer', background: 'transparent', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}
       >
-        <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: '0.84rem', fontWeight: 700 }}>
+        <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: 'var(--fs-meta)', fontWeight: 700 }}>
           <Wand2 size={15} style={{ color: 'var(--accent)' }} />
           Generar rutina por objetivo
         </span>
-        <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>{open ? 'cerrar' : '¿qué buscas? arma tu semana'}</span>
+        <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>{open ? 'cerrar' : '¿qué buscas? arma tu semana'}</span>
       </button>
 
       {open && (
@@ -121,20 +121,20 @@ export default function RoutineGeneratorPanel() {
               <div className="ds-row-between">
                 <span className="ds-eyebrow">{preview.days.length} días · {preview.weeklyHardSets} series duras/semana</span>
                 {kcal && (
-                  <span className="ds-row" style={{ gap: '4px', fontSize: '0.74rem', color: 'var(--text-secondary)' }}>
+                  <span className="ds-row" style={{ gap: '4px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
                     <Flame size={12} style={{ color: 'var(--warning)' }} /> ≈{kcal.kcal} kcal/sesión ({kcal.minutes} min) — MET×RPE×músculo
                   </span>
                 )}
               </div>
               {preview.days.map((d) => (
-                <div key={d.name} style={{ fontSize: '0.78rem' }}>
+                <div key={d.name} style={{ fontSize: 'var(--fs-meta)' }}>
                   <strong>{d.name}</strong> <span style={{ color: 'var(--text-tertiary)' }}>— {d.focus}</span>
                   <div style={{ color: 'var(--text-secondary)', marginTop: '2px' }}>
                     {d.exercises.map((e) => `${e.name} ${e.sets}×${e.repRange} (RIR ${e.rir})`).join(' · ')}
                   </div>
                 </div>
               ))}
-              <div style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
+              <div style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
                 {preview.citations.join(' · ')}
               </div>
               <Button variant={activated ? 'ghost' : 'secondary'} size="sm" onClick={handleActivate}>
@@ -148,5 +148,5 @@ export default function RoutineGeneratorPanel() {
   );
 }
 
-const lbl: React.CSSProperties = { display: 'flex', gap: '6px', alignItems: 'center', fontSize: '0.75rem', color: 'var(--text-secondary)' };
-const sel: React.CSSProperties = { background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 8px', fontSize: '0.78rem' };
+const lbl: React.CSSProperties = { display: 'flex', gap: '6px', alignItems: 'center', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' };
+const sel: React.CSSProperties = { background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 8px', fontSize: 'var(--fs-meta)' };

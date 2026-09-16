@@ -59,10 +59,10 @@ function PendingLoggerCard({ label }: { label: string }) {
     >
       <Hourglass size={18} style={{ color: 'var(--text-tertiary)', flexShrink: 0 }} />
       <div>
-        <span style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block' }}>
+        <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 700, color: 'var(--text-secondary)', display: 'block' }}>
           Pendiente: logger
         </span>
-        <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+        <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
           {label}
         </span>
       </div>
@@ -71,7 +71,7 @@ function PendingLoggerCard({ label }: { label: string }) {
 }
 
 const sectionTitleStyle: React.CSSProperties = {
-  fontSize: '0.78rem',
+  fontSize: 'var(--fs-meta)',
   fontWeight: 700,
   color: 'var(--text-secondary)',
   textTransform: 'uppercase',
@@ -190,15 +190,15 @@ export default function RealProgressSections() {
                   gap: '4px'
                 }}
               >
-                <strong style={{ fontSize: '0.86rem', color: 'var(--text-primary)' }}>{title}</strong>
-                <span style={{ fontSize: '0.74rem', color: 'var(--text-secondary)' }}>
+                <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text-primary)' }}>{title}</strong>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
                   {program.durationWeeks} sem · {program.discipline}
                 </span>
               </div>
             );
           })}
         </div>
-        <span style={{ fontSize: '0.76rem', color: 'var(--text-tertiary)' }}>
+        <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
           Arranque {calendar.programStartMonday.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })} · Semana derivada {calendar.derivedWeek} (postergaciones: {postponedDays})
         </span>
       </section>
@@ -240,10 +240,10 @@ export default function RealProgressSections() {
                   minHeight: '58px'
                 }}
               >
-                <span style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, color: 'var(--text-secondary)' }}>
                   {DAY_SHORT[idx]}
                 </span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
                   {formatDateShort(d.date)}
                 </span>
                 <span
@@ -268,7 +268,7 @@ export default function RealProgressSections() {
         {dataLoaded ? (
           hasHistory ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+              <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
                 Sesiones completadas esta semana:{' '}
                 <strong style={{ color: 'var(--text-primary)' }}>{sessionsThisWeek.length}</strong>
                 {sessionsThisWeek.map((w) => w.routineTitle || 'Sesión').length > 0 && (
@@ -278,7 +278,7 @@ export default function RealProgressSections() {
                 )}
               </span>
               {trackerSetsTotal > 0 && (
-                <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+                <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
                   Tracker de Hoy (min-max): {trackerSetsTotal} series marcadas en total.
                 </span>
               )}
@@ -352,10 +352,10 @@ export default function RealProgressSections() {
                     padding: 'var(--space-2) var(--space-3)'
                   }}
                 >
-                  <span style={{ fontSize: '0.84rem', color: 'var(--text-primary)', fontWeight: idx === 0 ? 700 : 500 }}>
+                  <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-primary)', fontWeight: idx === 0 ? 700 : 500 }}>
                     {idx === 0 && '🥇 '}{r.exerciseName}
                   </span>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
                     PR <strong style={{ color: 'var(--accent)' }}>{r.maxWeightKg} kg</strong> · mejor serie {r.bestSet.weightKg} kg × {r.bestSet.reps} · e1RM ≈ {Math.round(r.bestE1rmKg)} kg
                   </span>
                 </div>
@@ -369,7 +369,7 @@ export default function RealProgressSections() {
                   border: '1px solid var(--accent-border)',
                   borderRadius: 'var(--radius-m)',
                   padding: '10px var(--space-3)',
-                  fontSize: '0.8rem',
+                  fontSize: 'var(--fs-meta)',
                   color: 'var(--text-secondary)'
                 }}
               >

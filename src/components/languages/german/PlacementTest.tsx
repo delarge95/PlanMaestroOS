@@ -149,7 +149,7 @@ export default function PlacementTest({ onPlaced }: PlacementTestProps) {
         </div>
 
         <div style={{ padding: 'var(--space-sm) 0' }}>
-          <strong className="ds-label" style={{ fontSize: '1rem' }}>{current.prompt}</strong>
+          <strong className="ds-label" style={{ fontSize: 'var(--fs-step)' }}>{current.prompt}</strong>
         </div>
 
         <div className="ds-stack-sm" style={{ gap: '8px' }}>

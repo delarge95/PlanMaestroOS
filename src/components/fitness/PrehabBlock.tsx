@@ -118,7 +118,7 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
               color: painLevel === 'none' ? 'var(--success)' : 'var(--text-secondary)',
               border: 'none',
               padding: '4px 10px',
-              fontSize: '0.75rem',
+              fontSize: 'var(--fs-eyebrow)',
             }}
           >
             Sin molestia
@@ -133,7 +133,7 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
               color: painLevel === 'mild' ? 'var(--warning)' : 'var(--text-secondary)',
               border: 'none',
               padding: '4px 10px',
-              fontSize: '0.75rem',
+              fontSize: 'var(--fs-eyebrow)',
             }}
           >
             Leve
@@ -148,7 +148,7 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
               color: painLevel === 'notable' ? 'var(--danger)' : 'var(--text-secondary)',
               border: 'none',
               padding: '4px 10px',
-              fontSize: '0.75rem',
+              fontSize: 'var(--fs-eyebrow)',
             }}
           >
             Notable
@@ -158,7 +158,7 @@ export default function PrehabBlock({ activeZoneId = 'knee', onCompletePrehab }:
 
       {/* ADVERTENCIA DE SEGURIDAD SI AUMENTA EL DOLOR */}
       {painLevel === 'notable' && (
-        <div className="ds-badge ds-badge-danger" style={{ width: '100%', padding: '6px 10px', fontSize: '0.78rem' }}>
+        <div className="ds-badge ds-badge-danger" style={{ width: '100%', padding: '6px 10px', fontSize: 'var(--fs-meta)' }}>
           Considera reducir rango o pausar hoy
         </div>
       )}

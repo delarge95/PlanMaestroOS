@@ -69,7 +69,7 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
       <ErrorBoundary>
         <div role="dialog" aria-modal="true" style={{ position: 'fixed', inset: 0, zIndex: 300, background: 'rgba(4, 6, 8, 0.85)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', display: 'grid', placeItems: 'center', padding: 'var(--space-lg, 24px)' }}>
           <div style={{ background: 'var(--surface, #12161c)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-l, 16px)', padding: 'var(--space-lg, 24px)', maxWidth: '420px', color: 'var(--text-primary)' }}>
-            <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+            <p style={{ margin: 0, fontSize: 'var(--fs-body)', color: 'var(--text-secondary)' }}>
               Libro no registrado: <code>{bookId}</code>
             </p>
             <div style={{ marginTop: '16px', textAlign: 'right' }}>
@@ -135,7 +135,7 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
               {book.title}
             </h3>
             {section && (
-              <p style={{ margin: '2px 0 0', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+              <p style={{ margin: '2px 0 0', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
                 Capítulo/tema: {section}
               </p>
             )}
@@ -174,7 +174,7 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
           )}
 
           {availability === 'checking' && (
-            <div style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+            <div style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center', color: 'var(--text-secondary)', fontSize: 'var(--fs-body)' }}>
               Comprobando el PDF…
             </div>
           )}
@@ -183,8 +183,8 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
             <div style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center', padding: 'var(--space-3)' }}>
               <div className="ds-stack-sm" style={{ maxWidth: '480px', textAlign: 'center', justifyContent: 'center' }}>
                 <FileText size={28} style={{ color: 'var(--accent)', margin: '0 auto' }} />
-                <p style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{book.title}</p>
-                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                <p style={{ margin: 0, fontSize: 'var(--fs-step)', fontWeight: 700, color: 'var(--text-primary)' }}>{book.title}</p>
+                <p style={{ margin: 0, fontSize: 'var(--fs-body)', color: 'var(--text-secondary)' }}>
                   El PDF aún no está en el repo. Colócalo en{' '}
                   <code style={{ color: 'var(--accent)' }}>public/library/languages/{book.fileName}</code>{' '}
                   y se abrirá aquí automáticamente.
@@ -199,7 +199,7 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
 
         {/* CONTROLES DE PÁGINA */}
         <div className="ds-row-between" style={{ gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
             {pdfPath}
           </span>
           <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
@@ -208,7 +208,7 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
             </Button>
             <span
               style={{
-                fontSize: '0.8rem',
+                fontSize: 'var(--fs-meta)',
                 fontWeight: 600,
                 color: current == null ? 'var(--warning)' : 'var(--text-primary)',
                 display: 'inline-flex',

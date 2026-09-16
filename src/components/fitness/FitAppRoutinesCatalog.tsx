@@ -182,7 +182,7 @@ export default function FitAppRoutinesCatalog() {
       >
         <div>
           <div className="ds-row-between" style={{ marginBottom: '2px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)' }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 600, color: 'rgba(255,255,255,0.5)' }}>
               {p.durationWeeks} {p.durationWeeks === 1 ? 'sem' : 'sems'} · {p.weeks?.[0]?.days?.length || p.split?.length || 1} d/s
             </span>
             {isActiveInHoy && (
@@ -191,11 +191,11 @@ export default function FitAppRoutinesCatalog() {
               </span>
             )}
           </div>
-          <h4 style={{ fontSize: '0.88rem', fontWeight: 700, margin: 0, color: '#ffffff', lineHeight: 1.3 }}>
+          <h4 style={{ fontSize: 'var(--fs-body)', fontWeight: 700, margin: 0, color: '#ffffff', lineHeight: 1.3 }}>
             {title}
           </h4>
           {/* B6: autor visible en la tarjeta compacta */}
-          <span style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.45)', fontWeight: 600 }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'rgba(255,255,255,0.45)', fontWeight: 600 }}>
             {p.authorCategory || p.source || 'PlanMaestro OS'}
           </span>
         </div>
@@ -249,7 +249,7 @@ export default function FitAppRoutinesCatalog() {
               textAlign: 'left'
             }}
           >
-            <span style={{ fontSize: '0.76rem', fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <span style={{ fontSize: 'var(--fs-meta)', fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               {subTitle} ({subPrograms.length})
             </span>
             <ChevronRightIcon size={14} style={{ color: 'rgba(255,255,255,0.4)', transform: isSubCollapsed ? 'none' : 'rotate(90deg)', transition: 'transform 150ms ease' }} />
@@ -282,7 +282,7 @@ export default function FitAppRoutinesCatalog() {
         >
           <div className="ds-row" style={{ gap: 'var(--space-2)' }}>
             {icon}
-            <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+            <h3 style={{ fontSize: 'var(--fs-step)', fontWeight: 800, margin: 0, color: '#ffffff' }}>
               {title}
             </h3>
           </div>
@@ -345,7 +345,7 @@ export default function FitAppRoutinesCatalog() {
                   background: 'rgba(255,255,255,0.04)',
                   border: '1px solid rgba(255,255,255,0.08)',
                   color: '#ffffff',
-                  fontSize: '0.86rem',
+                  fontSize: 'var(--fs-body)',
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
@@ -372,7 +372,7 @@ export default function FitAppRoutinesCatalog() {
                 paddingTop: 'var(--space-3)',
                 borderTop: '1px solid rgba(255,255,255,0.08)',
                 gap: 'var(--space-3)',
-                fontSize: '0.82rem'
+                fontSize: 'var(--fs-meta)'
               }}
             >
               {/* FILTROS: desktop botones, móvil desplegables */}
@@ -498,7 +498,7 @@ export default function FitAppRoutinesCatalog() {
           {isFilteredSearchActive ? (
             <div>
               <div className="ds-row-between" style={{ marginBottom: '14px' }}>
-                <span style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--accent)' }}>
+                <span style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: 'var(--accent)' }}>
                   Resultados Filtrados ({filteredPrograms.length} rutinas)
                 </span>
                 <button

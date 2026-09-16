@@ -136,26 +136,26 @@ export function CardioWorkspace() {
             value={cardioType}
             onChange={(e) => setCardioType(e.target.value)}
             aria-label="Tipo de cardio"
-            style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 10px', fontSize: '0.8rem' }}
+            style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 10px', fontSize: 'var(--fs-meta)' }}
           >
             {['Caminata LISS', 'Caminata rápida', 'Bici', 'Spinning', 'Rower', 'Comba', 'Movilidad activa', 'Otro'].map((t) => (
               <option key={t} value={t}>{t}</option>
             ))}
           </select>
-          <label className="ds-row" style={{ gap: '6px', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+          <label className="ds-row" style={{ gap: '6px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
             Minutos:
             <input
               type="number" min={1} max={300} value={cardioMinutes}
               onChange={(e) => setCardioMinutes(Number(e.target.value) || 1)}
-              style={{ width: '72px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
+              style={{ width: '72px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: 'var(--fs-meta)' }}
             />
           </label>
-          <label className="ds-row" style={{ gap: '6px', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+          <label className="ds-row" style={{ gap: '6px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
             RPE (opcional):
             <input
               type="number" min={1} max={10} value={cardioRpe} placeholder="1–10"
               onChange={(e) => setCardioRpe(e.target.value)}
-              style={{ width: '72px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: '0.8rem' }}
+              style={{ width: '72px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 8px', fontSize: 'var(--fs-meta)' }}
             />
           </label>
           <button type="button" onClick={handleLogCardio} className="ds-btn ds-btn-primary ds-btn-sm">

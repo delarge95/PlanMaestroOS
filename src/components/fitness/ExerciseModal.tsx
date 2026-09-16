@@ -135,7 +135,7 @@ export default function ExerciseModal({
               <span
                 style={{
                   fontFamily: "Azeret Mono, monospace",
-                  fontSize: "0.68rem",
+                  fontSize: "var(--fs-eyebrow)",
                   fontWeight: 700,
                   color: "var(--color-state-done)",
                   background: "rgba(16, 185, 129, 0.12)",
@@ -150,7 +150,7 @@ export default function ExerciseModal({
                 <span
                   style={{
                     fontFamily: "Azeret Mono, monospace",
-                    fontSize: "0.68rem",
+                    fontSize: "var(--fs-eyebrow)",
                     color: "var(--accent)",
                     background: "rgba(119, 231, 255, 0.1)",
                     padding: "4px 10px",
@@ -187,7 +187,7 @@ export default function ExerciseModal({
               cursor: "pointer",
               display: "grid",
               placeItems: "center",
-              fontSize: "1.1rem",
+              fontSize: "var(--fs-step)",
               transition: "all 150ms ease",
             }}
           >
@@ -238,7 +238,7 @@ export default function ExerciseModal({
               borderRadius: "8px",
               cursor: "pointer",
               fontWeight: 600,
-              fontSize: "0.85rem",
+              fontSize: "var(--fs-body)",
             }}
           >
             Puntos de Técnica ({targetExercise.techniquePoints.length})
@@ -261,7 +261,7 @@ export default function ExerciseModal({
               borderRadius: "8px",
               cursor: "pointer",
               fontWeight: 600,
-              fontSize: "0.85rem",
+              fontSize: "var(--fs-body)",
             }}
           >
             Músculos Solicitados
@@ -284,7 +284,7 @@ export default function ExerciseModal({
               borderRadius: "8px",
               cursor: "pointer",
               fontWeight: 600,
-              fontSize: "0.85rem",
+              fontSize: "var(--fs-body)",
             }}
           >
             Requisitos de Movilidad
@@ -307,7 +307,7 @@ export default function ExerciseModal({
               borderRadius: "8px",
               cursor: "pointer",
               fontWeight: 600,
-              fontSize: "0.85rem",
+              fontSize: "var(--fs-body)",
             }}
           >
             Sustituciones ({dynamicSubstitutions.length})
@@ -330,7 +330,7 @@ export default function ExerciseModal({
                 <li
                   key={idx}
                   style={{
-                    fontSize: "0.88rem",
+                    fontSize: "var(--fs-body)",
                     color: "#e2e8f0",
                     lineHeight: 1.5,
                   }}
@@ -348,7 +348,7 @@ export default function ExerciseModal({
               <div>
                 <strong
                   style={{
-                    fontSize: "0.78rem",
+                    fontSize: "var(--fs-meta)",
                     color: "var(--color-state-done)",
                     fontFamily: "Azeret Mono, monospace",
                     textTransform: "uppercase",
@@ -374,7 +374,7 @@ export default function ExerciseModal({
                         color: "#6ee7b7",
                         padding: "4px 10px",
                         borderRadius: "6px",
-                        fontSize: "0.8rem",
+                        fontSize: "var(--fs-meta)",
                         border: "1px solid rgba(16,185,129,0.3)",
                         cursor: "pointer",
                         fontWeight: 600,
@@ -391,7 +391,7 @@ export default function ExerciseModal({
                   <div>
                     <strong
                       style={{
-                        fontSize: "0.78rem",
+                        fontSize: "var(--fs-meta)",
                         color: "var(--accent)",
                         fontFamily: "Azeret Mono, monospace",
                         textTransform: "uppercase",
@@ -417,7 +417,7 @@ export default function ExerciseModal({
                             color: "#77e7ff",
                             padding: "4px 10px",
                             borderRadius: "6px",
-                            fontSize: "0.8rem",
+                            fontSize: "var(--fs-meta)",
                             border: "1px solid rgba(119,231,255,0.25)",
                             cursor: "pointer",
                             fontWeight: 600,
@@ -438,7 +438,7 @@ export default function ExerciseModal({
             >
               <span
                 style={{
-                  fontSize: "0.82rem",
+                  fontSize: "var(--fs-meta)",
                   color: "var(--accent)",
                   fontWeight: 700,
                   textTransform: "uppercase",
@@ -459,7 +459,7 @@ export default function ExerciseModal({
                   <li
                     key={idx}
                     style={{
-                      fontSize: "0.88rem",
+                      fontSize: "var(--fs-body)",
                       color: "#e2e8f0",
                       lineHeight: 1.5,
                     }}
@@ -477,7 +477,7 @@ export default function ExerciseModal({
             >
               <p
                 style={{
-                  fontSize: "0.8rem",
+                  fontSize: "var(--fs-meta)",
                   color: "rgba(255,255,255,0.5)",
                   margin: 0,
                 }}
@@ -518,7 +518,7 @@ export default function ExerciseModal({
                       >
                         <span
                           style={{
-                            fontSize: "0.88rem",
+                            fontSize: "var(--fs-body)",
                             fontWeight: 700,
                             color: "#ffffff",
                           }}
@@ -527,7 +527,7 @@ export default function ExerciseModal({
                         </span>
                         <span
                           style={{
-                            fontSize: "0.75rem",
+                            fontSize: "var(--fs-eyebrow)",
                             fontWeight: 700,
                             color: scoreColor(sub.score),
                           }}
@@ -570,7 +570,7 @@ export default function ExerciseModal({
                           <span
                             key={m}
                             style={{
-                              fontSize: "0.7rem",
+                              fontSize: "var(--fs-eyebrow)",
                               background: "var(--success-soft)",
                               color: "#6ee7b7",
                               padding: "2px 6px",
@@ -585,7 +585,7 @@ export default function ExerciseModal({
                           <span
                             key={m}
                             style={{
-                              fontSize: "0.7rem",
+                              fontSize: "var(--fs-eyebrow)",
                               background: "rgba(119,231,255,0.08)",
                               color: "#77e7ff",
                               padding: "2px 6px",
@@ -602,7 +602,7 @@ export default function ExerciseModal({
               ) : (
                 <p
                   style={{
-                    fontSize: "0.86rem",
+                    fontSize: "var(--fs-body)",
                     color: "rgba(255,255,255,0.4)",
                     fontStyle: "italic",
                   }}
@@ -629,7 +629,7 @@ export default function ExerciseModal({
                         background: "transparent",
                         border: "none",
                         color: "rgba(255,255,255,0.45)",
-                        fontSize: "0.76rem",
+                        fontSize: "var(--fs-meta)",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
@@ -660,7 +660,7 @@ export default function ExerciseModal({
                               color: "rgba(255,255,255,0.7)",
                               padding: "4px 10px",
                               borderRadius: "6px",
-                              fontSize: "0.78rem",
+                              fontSize: "var(--fs-meta)",
                               cursor: "pointer",
                             }}
                           >

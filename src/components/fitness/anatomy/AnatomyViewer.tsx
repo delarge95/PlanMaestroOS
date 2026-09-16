@@ -1151,15 +1151,15 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
       <div className="ds-card ds-stack-sm">
         <div className="ds-row-between ds-row-wrap" style={{ gap: 10 }}>
           <div>
-            <span className="ds-eyebrow" style={{ fontSize: '0.68rem', letterSpacing: '0.5px' }}>
+            <span className="ds-eyebrow" style={{ fontSize: 'var(--fs-eyebrow)', letterSpacing: '0.5px' }}>
               Visor anatómico 3D · compuesto
             </span>
             <h3 className="ds-h3" style={{ fontWeight: 700 }}>
-              {FOCUS_LABELS[focus]} <span style={{ fontSize: '0.72rem', fontWeight: 500, color: 'var(--text-tertiary)' }}>{COMPOSITE_STATS.total} piezas · 5 modelos</span>
+              {FOCUS_LABELS[focus]} <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 500, color: 'var(--text-tertiary)' }}>{COMPOSITE_STATS.total} piezas · 5 modelos</span>
             </h3>
           </div>
           <button type="button" onClick={resetCamera} className="ds-btn ds-btn-secondary ds-btn-sm" title="Resetear cámara">
-            <RotateCcw size={13} /> <span style={{ fontSize: '0.75rem' }}>Cámara</span>
+            <RotateCcw size={13} /> <span style={{ fontSize: 'var(--fs-eyebrow)' }}>Cámara</span>
           </button>
         </div>
 
@@ -1190,7 +1190,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                 background: skullVersion === v ? 'rgba(53,208,255,0.16)' : 'rgba(255,255,255,0.03)',
                 color: skullVersion === v ? '#7fdcff' : 'var(--text-primary)',
                 border: `1px solid ${skullVersion === v ? 'rgba(53,208,255,0.55)' : 'var(--color-border-subtle)'}`,
-                borderRadius: 'var(--radius-m)', padding: '2px 9px', fontSize: '0.7rem', cursor: 'pointer',
+                borderRadius: 'var(--radius-m)', padding: '2px 9px', fontSize: 'var(--fs-eyebrow)', cursor: 'pointer',
               }}>
                 {v === 'colored' ? 'Coloreado' : 'Vista general'}
               </button>
@@ -1198,7 +1198,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             {skullVersion === 'colored' && (
               <label style={{ display: 'flex', alignItems: 'center', gap: 7, flex: 1, minWidth: 200 }}>
                 <Box size={12} style={{ color: 'var(--text-tertiary)' }} />
-                <span style={{ fontSize: '0.68rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>Explosión</span>
+                <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>Explosión</span>
                 <input type="range" min={0} max={1} step={0.01} value={explodeT} onChange={(e) => setExplodeT(Number(e.target.value))} style={{ flex: 1, accentColor: '#35d0ff' }} />
                 <span style={{ fontSize: '0.66rem', color: 'var(--text-tertiary)', width: 32 }}>{Math.round(explodeT * 100)}%</span>
               </label>
@@ -1211,7 +1211,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           <button type="button" onClick={() => setFiltrosOpen((o) => !o)} className="ds-btn ds-btn-secondary ds-btn-sm" style={{ width: '100%', justifyContent: 'space-between', padding: '5px 10px' }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
               <LayersIcon size={13} /> Capas y filtros
-              <span style={{ color: 'var(--text-tertiary)', fontWeight: 500, fontSize: '0.68rem' }}>
+              <span style={{ color: 'var(--text-tertiary)', fontWeight: 500, fontSize: 'var(--fs-eyebrow)' }}>
                 {layers.size}/{LAYER_DEFS.length} visibles · {selectable.size}/{LAYER_DEFS.length} seleccionables
               </span>
             </span>
@@ -1234,7 +1234,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                           background: active ? 'rgba(53,208,255,0.14)' : 'rgba(255,255,255,0.03)',
                           color: active ? '#fff' : 'var(--text-tertiary)',
                           border: `1px solid ${active ? `${hexCss(color)}88` : 'var(--color-border-subtle)'}`,
-                          borderRadius: 'var(--radius-m)', padding: '2px 8px', fontSize: '0.68rem', fontWeight: active ? 700 : 500, cursor: 'pointer', opacity: active ? 1 : 0.7,
+                          borderRadius: 'var(--radius-m)', padding: '2px 8px', fontSize: 'var(--fs-eyebrow)', fontWeight: active ? 700 : 500, cursor: 'pointer', opacity: active ? 1 : 0.7,
                         }}>
                         <span style={{ width: 7, height: 7, borderRadius: 'var(--radius-pill)', background: hexCss(color), display: 'inline-block' }} />
                         {label} <span style={{ opacity: 0.6 }}>{layerCounts[kind] ?? 0}</span>
@@ -1257,7 +1257,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                           background: active ? 'rgba(255,255,255,0.06)' : 'transparent',
                           color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
                           border: `1px dashed ${active ? hexCss(color) : 'var(--color-border-subtle)'}`,
-                          borderRadius: 'var(--radius-m)', padding: '2px 8px', fontSize: '0.68rem', cursor: 'pointer',
+                          borderRadius: 'var(--radius-m)', padding: '2px 8px', fontSize: 'var(--fs-eyebrow)', cursor: 'pointer',
                           opacity: active ? 1 : 0.55, textDecoration: active ? 'none' : 'line-through',
                         }}>
                         {label}
@@ -1286,9 +1286,9 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
           {(loading || error) && (
             <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', background: 'rgba(10,11,14,0.72)', borderRadius: 'var(--radius-l)' }}>
               {error ? (
-                <p style={{ color: '#ff8080', fontSize: '0.85rem', padding: '0 20px', textAlign: 'center' }}>{error}</p>
+                <p style={{ color: '#ff8080', fontSize: 'var(--fs-body)', padding: '0 20px', textAlign: 'center' }}>{error}</p>
               ) : (
-                <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)', color: 'var(--text-secondary)', fontSize: 'var(--fs-body)' }}>
                   <Loader2 size={18} />
                   {progress.label ? `Cargando ${progress.label} (${progress.done + 1}/${progress.total})…` : 'Preparando visor…'}
                   <span style={{ display: 'block', width: 180, height: 4, borderRadius: 'var(--radius-pill)', background: 'var(--separator)', overflow: 'hidden' }}>
@@ -1299,23 +1299,23 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
             </div>
           )}
           {isolationActive && !loading && (
-            <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.5)', borderRadius: 'var(--radius-m)', padding: '5px 10px', fontSize: '0.72rem', color: '#7fdcff', fontWeight: 700 }}>
+            <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.5)', borderRadius: 'var(--radius-m)', padding: '5px 10px', fontSize: 'var(--fs-eyebrow)', color: '#7fdcff', fontWeight: 700 }}>
               Aislado: {isolation?.label} · doble click fuera = ver todo
             </div>
           )}
           {hiddenCount > 0 && !loading && (
-            <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(255,180,80,0.4)', borderRadius: 'var(--radius-m)', padding: '5px 10px', fontSize: '0.72rem', color: '#ffc98a', display: 'flex', gap: 6, alignItems: 'center' }}>
+            <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(255,180,80,0.4)', borderRadius: 'var(--radius-m)', padding: '5px 10px', fontSize: 'var(--fs-eyebrow)', color: '#ffc98a', display: 'flex', gap: 6, alignItems: 'center' }}>
               {hiddenCount} oculta{hiddenCount > 1 ? 's' : ''}
               <button type="button" onClick={() => setHidden(new Set())} style={{ background: 'none', border: 'none', color: '#ffc98a', cursor: 'pointer', fontWeight: 700 }}>desocultar</button>
             </div>
           )}
           {reducedMotion && !loading && (
-            <div style={{ position: 'absolute', bottom: 10, right: 10, background: 'rgba(10,11,14,0.8)', borderRadius: 'var(--radius-m)', padding: '4px var(--space-2)', fontSize: '0.68rem', color: 'var(--text-secondary)', display: 'flex', gap: 5, alignItems: 'center' }}>
+            <div style={{ position: 'absolute', bottom: 10, right: 10, background: 'rgba(10,11,14,0.8)', borderRadius: 'var(--radius-m)', padding: '4px var(--space-2)', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', display: 'flex', gap: 5, alignItems: 'center' }}>
               <Scan size={11} /> movimiento reducido
             </div>
           )}
           {hoverName && !loading && (
-            <div style={{ position: 'absolute', bottom: 10, left: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.4)', borderRadius: 'var(--radius-m)', padding: '4px 9px', fontSize: '0.78rem', color: '#7fdcff', maxWidth: '70%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <div style={{ position: 'absolute', bottom: 10, left: 10, background: 'rgba(10,11,14,0.85)', border: '1px solid rgba(53,208,255,0.4)', borderRadius: 'var(--radius-m)', padding: '4px 9px', fontSize: 'var(--fs-meta)', color: '#7fdcff', maxWidth: '70%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {phaseLabel(hoverName)}
             </div>
           )}
@@ -1329,7 +1329,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                 </button>
                 {path?.groupKey ? (
                   <>
-                    <span style={{ color: 'var(--text-tertiary)', fontSize: '0.68rem' }}>›</span>
+                    <span style={{ color: 'var(--text-tertiary)', fontSize: 'var(--fs-eyebrow)' }}>›</span>
                     <button type="button" onClick={() => setPath({ ...path, pieceKey: null })} style={{ ...crumbStyle, fontWeight: path.pieceKey ? 500 : 800, color: path.pieceKey ? 'var(--text-tertiary)' : 'var(--text-primary)', cursor: path.pieceKey ? 'pointer' : 'default' }}>
                       {path.groupKey === '(estructura)' ? selectedStructure.nameEs : phaseLabel(path.groupKey)}
                     </button>
@@ -1337,13 +1337,13 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                 ) : null}
                 {path?.pieceKey ? (
                   <>
-                    <span style={{ color: 'var(--text-tertiary)', fontSize: '0.68rem' }}>›</span>
+                    <span style={{ color: 'var(--text-tertiary)', fontSize: 'var(--fs-eyebrow)' }}>›</span>
                     <span style={{ ...crumbStyle, fontWeight: 800, color: 'var(--text-primary)' }}>{phaseLabel(path.pieceKey.split(':').slice(1).join(':'))}</span>
                   </>
                 ) : null}
               </div>
               <div style={{ display: 'flex', gap: 5 }}>
-                <button type="button" onClick={centerOnSelection} className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: '0.72rem' }} title="Centrar (F)"><Crosshair size={12} /> Centrar</button>
+                <button type="button" onClick={centerOnSelection} className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: 'var(--fs-eyebrow)' }} title="Centrar (F)"><Crosshair size={12} /> Centrar</button>
                 <button
                   type="button"
                   onClick={() => {
@@ -1353,7 +1353,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                       label: path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : path?.groupKey ? (path.groupKey === '(estructura)' ? (selectedStructure?.nameEs ?? path.groupKey) : phaseLabel(path.groupKey)) : (selectedStructure?.nameEs ?? ''),
                     });
                   }}
-                  className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: '0.72rem', ...(isolationActive ? { borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' } : {}) }}
+                  className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: 'var(--fs-eyebrow)', ...(isolationActive ? { borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' } : {}) }}
                   title="Aislar la selección (doble click en el modelo también)"
                 >
                   {isolationActive ? <EyeOff size={12} /> : <Eye size={12} />} {isolationActive ? 'Ver todo' : 'Aislar'}
@@ -1361,7 +1361,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                 <button
                   type="button"
                   onClick={toggleHideCurrent}
-                  className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: '0.72rem', ...(unitHidden ? { borderColor: 'rgba(255,180,80,0.5)', color: '#ffc98a' } : {}) }}
+                  className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: 'var(--fs-eyebrow)', ...(unitHidden ? { borderColor: 'rgba(255,180,80,0.5)', color: '#ffc98a' } : {}) }}
                   title={unitHidden ? 'Mostrar esta selección' : 'Ocultar esta selección'}
                 >
                   {unitHidden ? <Eye size={12} /> : <EyeOff size={12} />} {unitHidden ? 'Mostrar' : 'Ocultar'}
@@ -1379,7 +1379,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                 flex: 1, padding: '9px 6px', background: panelTab === tab ? 'rgba(53,208,255,0.1)' : 'transparent',
                 border: 'none', borderBottom: `2px solid ${panelTab === tab ? 'var(--accent)' : 'transparent'}`,
                 color: panelTab === tab ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                fontSize: '0.76rem', fontWeight: panelTab === tab ? 800 : 500, cursor: 'pointer',
+                fontSize: 'var(--fs-meta)', fontWeight: panelTab === tab ? 800 : 500, cursor: 'pointer',
               }}>
                 {tab === 'arbol' ? `Estructuras (${compositeStructures.length})` : 'Ficha'}
               </button>
@@ -1395,7 +1395,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                     value={panelQuery}
                     onChange={(e) => setPanelQuery(e.target.value)}
                     placeholder="Buscar estructura… (click = enfocar · doble click = aislar)"
-                    style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-primary)', fontSize: '0.76rem' }}
+                    style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: 'var(--text-primary)', fontSize: 'var(--fs-meta)' }}
                   />
                   {panelQuery ? <button type="button" onClick={() => setPanelQuery('')} style={{ background: 'none', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer' }}><X size={12} /></button> : null}
                 </div>
@@ -1405,14 +1405,14 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                   const color = hexCss(layerDef(STRUCTURE_KIND_TO_COMPOSITE[kind]).color);
                   return (
                     <details key={kind} open>
-                      <summary style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-primary)', listStyle: 'none', padding: '4px 2px' }}>
+                      <summary style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 'var(--fs-eyebrow)', fontWeight: 800, color: 'var(--text-primary)', listStyle: 'none', padding: '4px 2px' }}>
                         <span style={{ width: 8, height: 8, borderRadius: 'var(--radius-pill)', background: color, display: 'inline-block' }} />
                         {KIND_LABELS[kind]}
                         <span style={{ color: 'var(--text-tertiary)', fontWeight: 500, fontSize: '0.66rem' }}>({groups.reduce((a, g) => a + g.items.length, 0)})</span>
                       </summary>
                       {groups.map(({ zone, items }) => (
                         <details key={zone} style={{ marginLeft: 14 }} open={!panelQuery}>
-                          <summary style={{ cursor: 'pointer', fontSize: '0.68rem', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.3px', listStyle: 'none', padding: '3px 0' }}>
+                          <summary style={{ cursor: 'pointer', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.3px', listStyle: 'none', padding: '3px 0' }}>
                             {BODY_ZONE_LABELS_ES[zone]} ({items.length})
                           </summary>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 8 }}>
@@ -1428,7 +1428,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                                       flex: 1, textAlign: 'left', background: active ? 'rgba(53,208,255,0.12)' : 'rgba(255,255,255,0.02)',
                                       border: `1px solid ${active ? 'rgba(53,208,255,0.5)' : 'transparent'}`,
                                       borderRadius: 'var(--radius-s)', padding: '4px 7px', cursor: 'pointer', color: 'var(--text-primary)',
-                                      fontSize: '0.75rem', fontWeight: active ? 700 : 500,
+                                      fontSize: 'var(--fs-eyebrow)', fontWeight: active ? 700 : 500,
                                     }}
                                     title={`${s.nameEn} — click: enfocar · doble click: aislar`}
                                   >
@@ -1451,7 +1451,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                     </details>
                   );
                 })}
-                {!panelTree.length && <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', padding: '4px 2px' }}>Sin resultados para «{panelQuery}».</p>}
+                {!panelTree.length && <p style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', padding: '4px 2px' }}>Sin resultados para «{panelQuery}».</p>}
               </div>
             </>
           )}
@@ -1465,22 +1465,22 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                       <span style={{ fontSize: '0.66rem', color: hexCss(layerDef(STRUCTURE_KIND_TO_COMPOSITE[selectedStructure.kind]).color), fontWeight: 800, textTransform: 'uppercase' }}>
                         {selectedStructure.kind}
                       </span>
-                      <h4 className="ds-h3" style={{ fontSize: '1rem', fontWeight: 800 }}>
+                      <h4 className="ds-h3" style={{ fontSize: 'var(--fs-step)', fontWeight: 800 }}>
                         {path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : selectedStructure.nameEs}
                       </h4>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+                      <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
                         {path?.pieceKey ? `— dentro de ${selectedStructure.nameEs}` : selectedStructure.nameEn}
                       </span>
                     </div>
                     <button type="button" onClick={() => { setSelectedId(null); setPath(null); setPanelTab('arbol'); }} className="ds-btn ds-btn-secondary ds-btn-sm" style={{ border: 'none' }}><X size={13} /></button>
                   </div>
                   {selectedStructure.kind === 'joint' && (
-                    <p style={{ margin: '0 0 6px', fontSize: '0.72rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
+                    <p style={{ margin: '0 0 6px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
                       Marcador cian = localización aproximada de la articulación (centroide de los huesos que la forman).
                     </p>
                   )}
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 'var(--space-2)' }}>
-                    <button type="button" onClick={centerOnSelection} className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: '0.72rem' }} title="Centrar (F)">
+                    <button type="button" onClick={centerOnSelection} className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: 'var(--fs-eyebrow)' }} title="Centrar (F)">
                       <Crosshair size={12} /> Centrar
                     </button>
                     <button
@@ -1492,25 +1492,25 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
                           label: path?.pieceKey ? phaseLabel(path.pieceKey.split(':').slice(1).join(':')) : (selectedStructure.nameEs ?? ''),
                         });
                       }}
-                      className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: '0.72rem', ...(isolationActive ? { borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' } : {}) }}
+                      className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: 'var(--fs-eyebrow)', ...(isolationActive ? { borderColor: 'rgba(53,208,255,0.5)', color: '#7fdcff' } : {}) }}
                     >
                       {isolationActive ? <EyeOff size={12} /> : <Eye size={12} />} {isolationActive ? 'Ver todo' : 'Aislar'}
                     </button>
                     <button
                       type="button"
                       onClick={toggleHideCurrent}
-                      className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: '0.72rem', ...(unitHidden ? { borderColor: 'rgba(255,180,80,0.5)', color: '#ffc98a' } : {}) }}
+                      className="ds-btn ds-btn-secondary ds-btn-sm" style={{ padding: '4px var(--space-2)', fontSize: 'var(--fs-eyebrow)', ...(unitHidden ? { borderColor: 'rgba(255,180,80,0.5)', color: '#ffc98a' } : {}) }}
                     >
                       {unitHidden ? <Eye size={12} /> : <EyeOff size={12} />} {unitHidden ? 'Mostrar' : 'Ocultar'}
                     </button>
                   </div>
                   <StructureFicha structure={selectedStructure} />
-                  <a href={`/app/fitness/library/muscles?structure=${encodeURIComponent(selectedStructure.id)}`} style={{ fontSize: '0.76rem', color: 'var(--accent)', fontWeight: 600, display: 'inline-block', marginTop: 'var(--space-2)' }}>
+                  <a href={`/app/fitness/library/muscles?structure=${encodeURIComponent(selectedStructure.id)}`} style={{ fontSize: 'var(--fs-meta)', color: 'var(--accent)', fontWeight: 600, display: 'inline-block', marginTop: 'var(--space-2)' }}>
                     Ver ficha completa en Músculos →
                   </a>
                 </>
               ) : (
-                <p style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)' }}>
+                <p style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-tertiary)' }}>
                   Selecciona una estructura en el modelo, en la lista, o busca arriba.<br /><br />
                   Click = seleccionar (conjunto → subconjunto → pieza) · Doble click = aislar · F centra · Esc libera.
                 </p>
@@ -1520,7 +1520,7 @@ export default function AnatomyViewer({ initialModel, initialStructure }: Props)
         </div>
       </div>
 
-      <p style={{ margin: 0, fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>
+      <p style={{ margin: 0, fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
         {stats.total} estructuras · {stats.with3dMapping} con mapping 3D · compuesto: {COMPOSITE_STATS.total} piezas de 5 modelos · {stats.pendingCitation} pendientes de verificación bibliográfica ·
         <a href="/app/fitness/library/muscles" style={{ color: 'var(--accent)', marginLeft: 6 }}>BD de Músculos →</a>
       </p>
@@ -1533,7 +1533,7 @@ function hexCss(n: number): string {
 }
 
 const crumbStyle: React.CSSProperties = {
-  background: 'transparent', border: 'none', padding: 0, fontSize: '0.76rem', lineHeight: 1.3,
+  background: 'transparent', border: 'none', padding: 0, fontSize: 'var(--fs-meta)', lineHeight: 1.3,
 };
 
 // ── FICHA RICA ──────────────────────────────────────────────────────────────
@@ -1542,7 +1542,7 @@ function Row({ label, value, color }: { label: string; value?: string | string[]
   return (
     <div>
       <span style={{ fontSize: '0.64rem', color: color ?? 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>{label}</span>
-      <p style={{ margin: 0, fontSize: '0.79rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>{Array.isArray(value) ? value.join(' · ') : value}</p>
+      <p style={{ margin: 0, fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>{Array.isArray(value) ? value.join(' · ') : value}</p>
     </div>
   );
 }
@@ -1599,7 +1599,7 @@ function StructureFicha({ structure }: { structure: AnatomyStructure }) {
 
       {structure.kind === 'joint' && (
         <>
-          <p style={{ margin: 0, fontSize: '0.72rem', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
+          <p style={{ margin: 0, fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', lineHeight: 1.4 }}>
             Marcador cian = localización aproximada (centroide de los huesos que la forman; los GLB no traen la articulación como pieza).
           </p>
           {rom?.length ? (
@@ -1607,7 +1607,7 @@ function StructureFicha({ structure }: { structure: AnatomyStructure }) {
               <span style={{ fontSize: '0.64rem', color: kindColor, fontWeight: 700, textTransform: 'uppercase' }}>ROM verificado (Levangie &amp; Norkin 6ª ed.)</span>
               <ul style={{ margin: 0, paddingLeft: 'var(--space-4)', display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {rom.map((r) => (
-                  <li key={r.motion} style={{ fontSize: '0.79rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  <li key={r.motion} style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                     <strong style={{ color: 'var(--text-primary)' }}>{r.motion}:</strong> {r.value}
                     {r.condition ? ` — ${r.condition}` : ''}
                     <span style={{ fontSize: '0.64rem', color: 'var(--text-tertiary)' }}> ({r.sourceRefs.map((sr) => sr.locator).join('; ')})</span>
@@ -1677,7 +1677,7 @@ function StructureFicha({ structure }: { structure: AnatomyStructure }) {
       <Section title="Trazabilidad">
         <Row label="Fuentes" value={cite || undefined} color={kindColor} />
         {s.wikiEn ? (
-          <a href={`https://en.wikipedia.org/wiki/${encodeURIComponent(s.wikiEn as string)}`} target="_blank" rel="noreferrer" style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>
+          <a href={`https://en.wikipedia.org/wiki/${encodeURIComponent(s.wikiEn as string)}`} target="_blank" rel="noreferrer" style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)' }}>
             Wikipedia: {s.wikiEn as string} →
           </a>
         ) : null}

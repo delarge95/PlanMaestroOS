@@ -53,7 +53,7 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
             </h3>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.04)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.04)', padding: '2px 8px', borderRadius: '4px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
             <MicOff size={12} />
             <span>Voz: Próximamente</span>
           </div>
@@ -76,18 +76,18 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
                 gap: '4px'
               }}
             >
-              <strong style={{ fontSize: '0.85rem', color: 'var(--text)' }}>
+              <strong style={{ fontSize: 'var(--fs-body)', color: 'var(--text)' }}>
                 {msg.text}
               </strong>
 
               {msg.correction && (
-                <div style={{ marginTop: '4px', paddingTop: '4px', borderTop: '1px dashed var(--color-border-subtle)', fontSize: '0.78rem' }}>
+                <div style={{ marginTop: '4px', paddingTop: '4px', borderTop: '1px dashed var(--color-border-subtle)', fontSize: 'var(--fs-meta)' }}>
                   <span style={{ color: 'var(--color-state-done)', fontWeight: 700 }}>
                     Corrección:
                   </span>{' '}
                   <span style={{ color: 'var(--text-secondary)' }}>{msg.correction}</span>
                   {msg.explanation && (
-                    <p style={{ color: 'var(--text-tertiary)', fontSize: '0.72rem', margin: '2px 0 0' }}>
+                    <p style={{ color: 'var(--text-tertiary)', fontSize: 'var(--fs-eyebrow)', margin: '2px 0 0' }}>
                       {msg.explanation}
                     </p>
                   )}
@@ -105,7 +105,7 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') handleSend(); }}
             placeholder={language === 'de' ? 'Schreibe deine Antwort auf Deutsch...' : 'Type your answer in English...'}
-            style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px 12px', color: 'var(--text)', fontSize: '0.85rem' }}
+            style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px 12px', color: 'var(--text)', fontSize: 'var(--fs-body)' }}
           />
 
           <Button variant="primary" size="sm" onClick={handleSend}>

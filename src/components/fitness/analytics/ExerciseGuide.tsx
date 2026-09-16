@@ -27,7 +27,7 @@ export default function ExerciseGuide() {
       {/* CABECERA */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Guía de Cargas por Ejercicio & Porcentajes 1RM
           </span>
           <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
@@ -39,13 +39,13 @@ export default function ExerciseGuide() {
       {/* FORMULARIO DE INGRESO DE SERIE CLAVE */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', background: 'rgba(255,255,255,0.02)', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border-subtle)' }}>
         <div>
-          <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+          <label style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
             Ejercicio Objetivo:
           </label>
           <select
             value={selectedExerciseName}
             onChange={(e) => setSelectedExerciseName(e.target.value)}
-            style={{ width: '100%', background: 'rgba(0,0,0,0.5)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '6px 10px', fontSize: '0.82rem', outline: 'none' }}
+            style={{ width: '100%', background: 'rgba(0,0,0,0.5)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '6px 10px', fontSize: 'var(--fs-meta)', outline: 'none' }}
           >
             {Object.keys(exerciseDatabase).map((name) => (
               <option key={name} value={name}>{name}</option>
@@ -54,31 +54,31 @@ export default function ExerciseGuide() {
         </div>
 
         <div>
-          <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+          <label style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
             Carga Reciente (kg):
           </label>
           <input
             type="number"
             value={enteredWeight}
             onChange={(e) => setEnteredWeight(Number(e.target.value))}
-            style={{ width: '100%', background: 'rgba(0,0,0,0.5)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '6px 10px', fontSize: '0.82rem', outline: 'none' }}
+            style={{ width: '100%', background: 'rgba(0,0,0,0.5)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '6px 10px', fontSize: 'var(--fs-meta)', outline: 'none' }}
           />
         </div>
 
         <div>
-          <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
+          <label style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
             Repeticiones Completadas:
           </label>
           <input
             type="number"
             value={enteredReps}
             onChange={(e) => setEnteredReps(Number(e.target.value))}
-            style={{ width: '100%', background: 'rgba(0,0,0,0.5)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '6px 10px', fontSize: '0.82rem', outline: 'none' }}
+            style={{ width: '100%', background: 'rgba(0,0,0,0.5)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '6px 10px', fontSize: 'var(--fs-meta)', outline: 'none' }}
           />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'rgba(10,132,255,0.08)', padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(10,132,255,0.2)' }}>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
             1RM Estimado Resultante:
           </span>
           <strong style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>
@@ -89,8 +89,8 @@ export default function ExerciseGuide() {
 
       {/* TABLA DE DESGLOSE PORCENTUAL */}
       <div style={{ overflowX: 'auto', border: '1px solid var(--color-border-subtle)', borderRadius: '10px' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.84rem' }}>
-          <thead style={{ background: '#141820', borderBottom: '1px solid var(--color-border-subtle)', textTransform: 'uppercase', fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--fs-meta)' }}>
+          <thead style={{ background: '#141820', borderBottom: '1px solid var(--color-border-subtle)', textTransform: 'uppercase', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
             <tr>
               <th style={{ padding: '10px 14px' }}>% 1RM</th>
               <th style={{ padding: '10px 14px' }}>Carga Calculada (kg)</th>

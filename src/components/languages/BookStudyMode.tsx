@@ -42,7 +42,7 @@ export default function BookStudyMode({ language }: BookStudyModeProps) {
   return (
     <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)' }}>
       <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-1)' }}>
-        <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: '0.84rem', fontWeight: 700 }}>
+        <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: 'var(--fs-meta)', fontWeight: 700 }}>
           <BookOpen size={15} style={{ color: 'var(--accent)' }} />
           Estudio con libro {totalUnits > 0 && <span className="ds-chip" style={{ border: '1px solid var(--color-border-subtle)', fontSize: 'var(--fs-eyebrow)' }}>{totalUnits} unidades registradas</span>}
         </span>
@@ -58,7 +58,7 @@ export default function BookStudyMode({ language }: BookStudyModeProps) {
           value={bookIdx}
           onChange={(e) => setBookIdx(Number(e.target.value))}
           aria-label="Libro de estudio"
-          style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 8px', fontSize: '0.78rem', maxWidth: '320px' }}
+          style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 8px', fontSize: 'var(--fs-meta)', maxWidth: '320px' }}
         >
           {books.map((b, i) => (
             <option key={b.book.id} value={i}>
@@ -71,11 +71,11 @@ export default function BookStudyMode({ language }: BookStudyModeProps) {
           onChange={(e) => setUnit(e.target.value)}
           placeholder="Unidad o páginas (p.ej. Unidad 12)"
           aria-label="Unidad estudiada"
-          style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 8px', fontSize: '0.78rem', flex: 1, minWidth: '160px' }}
+          style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 8px', fontSize: 'var(--fs-meta)', flex: 1, minWidth: '160px' }}
         />
-        <label className="ds-row" style={{ gap: '6px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+        <label className="ds-row" style={{ gap: '6px', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
           Min:
-          <input type="number" min={1} max={240} value={minutes} onChange={(e) => setMinutes(Number(e.target.value) || 1)} style={{ width: '56px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 6px', fontSize: '0.78rem' }} />
+          <input type="number" min={1} max={240} value={minutes} onChange={(e) => setMinutes(Number(e.target.value) || 1)} style={{ width: '56px', background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '5px 6px', fontSize: 'var(--fs-meta)' }} />
         </label>
         <Button variant="primary" size="sm" onClick={handleSave} disabled={!unit.trim()}>
           {saved ? <CheckCircle2 size={14} /> : undefined} {saved ? 'Registrado' : 'Registrar estudio'}

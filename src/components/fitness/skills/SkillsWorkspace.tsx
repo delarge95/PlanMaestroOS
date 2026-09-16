@@ -52,7 +52,7 @@ export function SkillsWorkspace({
           border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
           padding: '8px 12px',
           borderRadius: '10px',
-          fontSize: '0.78rem',
+          fontSize: 'var(--fs-meta)',
           color: 'var(--text-secondary)'
         }}
       >

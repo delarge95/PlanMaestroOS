@@ -30,6 +30,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const clearOverride = useActiveProgramStore((s) => s.clearExerciseOverride);
   const postponeDay = useActiveProgramStore((s) => s.postponeDay);
   const postponedDays = useActiveProgramStore((s) => s.postponedDays || 0);
+  // U7: fecha (YYYY-MM-DD) de la última postergación, ya expuesta y persistida por el store.
+  const lastPostponedOn = useActiveProgramStore((s) => s.lastPostponedOn);
   const resetPostponedDays = useActiveProgramStore((s) => s.resetPostponedDays);
 
   const program = getProgramById(activeProgramId);
@@ -40,6 +42,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const activeDay = activeWeek?.days?.[safeDayIndex] || activeWeek?.days?.[0];
 
   const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
+  // U9: confirmación inline del reset de postergaciones (confirm() nativo prohibido).
+  const [showConfirmReset, setShowConfirmReset] = useState(false);
   // Confirmación inline de sesión guardada (reemplaza al alert nativo).
   const [sessionSavedAt, setSessionSavedAt] = useState<number | null>(null);
   // U2: si el guardado falla (cuota/corrupto), el usuario lo VE — nada de fallo silencioso.
@@ -133,6 +137,10 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
 
   const isRestDay = selectedDayIndex >= 5;
 
+  // U7: límite 1 postergación/día — el botón Clock se deshabilita si ya postergó hoy.
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const postponedToday = lastPostponedOn === todayIso;
+
   return (
     <div className="ds-stack">
       {isRestDay ? (
@@ -146,24 +154,48 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
           summary={`${activeDay?.exercises?.length || 0} ejercicios`}
           actions={
             <div className="ds-row" style={{ gap: '6px' }}>
-              {/* DESHACER POSTERGACIÓN SI EXISTEN DÍAS POSTERGADOS */}
-              {postponedDays > 0 && (
+              {/* DESHACER POSTERGACIÓN SI EXISTEN DÍAS POSTERGADOS — U9: confirmación inline (Sí/No), sin confirm() nativo */}
+              {postponedDays > 0 && !showConfirmReset && (
                 <button
                   type="button"
-                  onClick={resetPostponedDays}
-                  title={`Restablecer días postergados (${postponedDays})`}
+                  onClick={() => setShowConfirmReset(true)}
+                  title="Restablecer postergaciones"
+                  aria-label="Restablecer postergaciones"
                   className="ds-btn ds-btn-danger ds-btn-sm"
                   style={{ padding: '4px' }}
                 >
                   <RotateCcw size={14} />
                 </button>
               )}
+              {postponedDays > 0 && showConfirmReset && (
+                <span className="ds-row" style={{ gap: '4px', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>¿Restablecer {postponedDays} día(s)?</span>
+                  <button
+                    type="button"
+                    onClick={() => { resetPostponedDays(); setShowConfirmReset(false); }}
+                    className="ds-btn ds-btn-danger ds-btn-sm"
+                    style={{ padding: '2px 8px', fontSize: '0.7rem' }}
+                  >
+                    Sí
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmReset(false)}
+                    className="ds-btn ds-btn-ghost ds-btn-sm"
+                    style={{ padding: '2px 8px', fontSize: '0.7rem' }}
+                  >
+                    No
+                  </button>
+                </span>
+              )}
 
-              {/* POSTERGAR DÍA */}
+              {/* POSTERGAR DÍA — U7: deshabilitado si ya se postergó hoy (1/día) */}
               <button
                 type="button"
                 onClick={postponeDay}
-                title="Postergar día de entrenamiento (+1 día)"
+                disabled={postponedToday}
+                title={postponedToday ? 'Ya postergaste hoy (1/día)' : 'Postergar día de entrenamiento (+1 día)'}
+                aria-label="Postergar día de entrenamiento"
                 className="ds-btn ds-btn-secondary ds-btn-sm"
                 style={{ padding: '4px' }}
               >
@@ -173,7 +205,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
               {/* LINK DIRECTO A LA BASE DE DATOS DE RUTINAS */}
               <a
                 href={`/app/fitness/library/catalog?routine=${encodeURIComponent(program.id)}`}
-                title="Ver rutina en Base de Datos"
+                title="Ver rutina en Base de datos"
+                aria-label="Ver rutina en Base de datos"
                 className="ds-btn ds-btn-secondary ds-btn-sm"
                 style={{ padding: '4px', color: 'var(--accent)' }}
               >
@@ -185,7 +218,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
           <div className="ds-card" style={{ overflowX: 'auto', padding: 0 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--fs-body, 0.9rem)' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-secondary)', fontSize: '0.75rem', textTransform: 'uppercase' }}>
+                <tr style={{ borderBottom: '1px solid var(--color-border-subtle)', color: 'var(--text-secondary)', fontSize: 'var(--fs-eyebrow)', textTransform: 'uppercase' }}>
                   <th style={{ padding: '10px 12px' }}>Ejercicio / Código</th>
                   <th style={{ padding: '10px 12px' }}>Series Aprox</th>
                   <th style={{ padding: '10px 12px' }}>Series × Reps</th>
@@ -203,7 +236,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                           border: 'none',
                           padding: '2px 6px',
                           borderRadius: '4px',
-                          fontSize: '0.72rem',
+                          fontSize: 'var(--fs-eyebrow)',
                           fontWeight: 700,
                           cursor: 'pointer'
                         }}
@@ -219,7 +252,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                           border: 'none',
                           padding: '2px 6px',
                           borderRadius: '4px',
-                          fontSize: '0.72rem',
+                          fontSize: 'var(--fs-eyebrow)',
                           fontWeight: 700,
                           cursor: 'pointer'
                         }}
@@ -287,7 +320,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                           </div>
 
                           {overrideId && (
-                            <span style={{ fontSize: '0.72rem', color: 'var(--success)', fontWeight: 700 }}>
+                            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--success)', fontWeight: 700 }}>
                               ✓ Sustituido por {effectiveDetails.name}
                             </span>
                           )}
@@ -298,13 +331,13 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                                 type="button"
                                 onClick={() => toggleNote(pId)}
                                 className="ds-btn ds-btn-ghost ds-btn-sm"
-                                style={{ padding: 0, gap: '4px', fontSize: '0.74rem' }}
+                                style={{ padding: 0, gap: '4px', fontSize: 'var(--fs-eyebrow)' }}
                               >
                                 <span>Nota</span>
                                 {isNoteExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
                               </button>
                               {isNoteExpanded && (
-                                <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.4, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--accent)' }}>
+                                <p style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.4, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--accent)' }}>
                                   {prescription.notes}
                                 </p>
                               )}
@@ -371,7 +404,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                                   border: '1px solid var(--color-border-subtle)',
                                   borderRadius: '4px',
                                   padding: '3px 5px',
-                                  fontSize: '0.78rem',
+                                  fontSize: 'var(--fs-meta)',
                                   outline: 'none'
                                 }}
                               />
@@ -401,7 +434,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                                   border: '1px solid var(--color-border-subtle)',
                                   borderRadius: '4px',
                                   padding: '2px 6px',
-                                  fontSize: '0.75rem',
+                                  fontSize: 'var(--fs-eyebrow)',
                                   fontWeight: 700,
                                   color: 'var(--text-primary)',
                                   fontFamily: 'SF Mono, monospace'
@@ -449,7 +482,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
 
           {saveError && (
             <div role="alert" className="ds-row-between" style={{ background: 'var(--danger-soft, rgba(255,69,58,0.12))', border: '1px solid var(--danger, #ff453a)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>{saveError}</span>
+              <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-primary)' }}>{saveError}</span>
               <button type="button" onClick={() => setSaveError(null)} className="ds-btn ds-btn-ghost ds-btn-sm">✕</button>
             </div>
           )}
@@ -458,7 +491,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
           {sessionSavedAt && (
             <div className="ds-row" role="status" style={{ gap: '8px', alignItems: 'center', background: 'rgba(48,209,88,0.08)', border: '1px solid var(--success, #30d158)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}>
               <CheckCircle2 size={16} style={{ color: 'var(--success, #30d158)', flexShrink: 0 }} />
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-primary)' }}>
+              <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-primary)' }}>
                 Sesión guardada en Progreso{typeof window !== 'undefined' && !window.localStorage.getItem('PUBLIC_WORKER_ON') ? ' · pendiente de sincronizar con Notion' : ''}.
               </span>
               <button type="button" onClick={() => setSessionSavedAt(null)} className="ds-btn ds-btn-ghost ds-btn-sm" style={{ marginLeft: 'auto' }}>✕</button>
@@ -467,7 +500,7 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
 
           {/* ≈ KCAL DE LA SESIÓN (MET×RPE×músculo) */}
           {sessionKcal && (
-            <div className="ds-row" style={{ gap: '6px', alignItems: 'center', fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+            <div className="ds-row" style={{ gap: '6px', alignItems: 'center', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)' }}>
               <Flame size={13} style={{ color: 'var(--warning)' }} />
               ≈{sessionKcal.kcal} kcal · {sessionKcal.minutes} min (estimado por esfuerzo y masa muscular — base 'inferred')
             </div>

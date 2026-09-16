@@ -103,15 +103,15 @@ export default function LibraryMuscles() {
 
   const renderDetail = (label: string, content: string | string[]) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-      <span style={{ fontSize: '0.76rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+      <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
         {label}
       </span>
       {Array.isArray(content) ? (
-        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+        <ul style={{ margin: 0, paddingLeft: '18px', fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
           {content.map((point, i) => <li key={i}>{point}</li>)}
         </ul>
       ) : (
-        <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+        <p style={{ margin: 0, fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
           {content}
         </p>
       )}
@@ -135,7 +135,7 @@ export default function LibraryMuscles() {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Base de Datos Anatómica & Biomecánica FitApp
             </span>
             <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
@@ -156,7 +156,7 @@ export default function LibraryMuscles() {
                 borderRadius: '8px',
                 padding: '8px 12px 8px 32px',
                 color: 'var(--text-primary)',
-                fontSize: '0.84rem',
+                fontSize: 'var(--fs-meta)',
                 outline: 'none'
               }}
             />
@@ -166,7 +166,7 @@ export default function LibraryMuscles() {
 
         {/* PÍLDORAS CATEGORÍA MUSCULAR MULTISELECT */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <span style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase' }}>
             Filtrar por Región Corporal:
           </span>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -183,7 +183,7 @@ export default function LibraryMuscles() {
                     border: isSelected ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle, rgba(255,255,255,0.1))',
                     borderRadius: '20px',
                     padding: '5px 12px',
-                    fontSize: '0.78rem',
+                    fontSize: 'var(--fs-meta)',
                     fontWeight: isSelected ? 700 : 500,
                     cursor: 'pointer',
                     transition: 'all 120ms ease'
@@ -228,13 +228,13 @@ export default function LibraryMuscles() {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Activity size={18} style={{ color: 'var(--accent)' }} />
-                  <strong style={{ fontSize: '1rem', color: 'var(--text-primary)' }}>
+                  <strong style={{ fontSize: 'var(--fs-step)', color: 'var(--text-primary)' }}>
                     {groupInfo.name}
                   </strong>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, background: 'rgba(255,255,255,0.06)', color: 'var(--text-secondary)', padding: '3px 8px', borderRadius: '12px' }}>
+                  <span style={{ fontSize: 'var(--fs-eyebrow)', fontWeight: 700, background: 'rgba(255,255,255,0.06)', color: 'var(--text-secondary)', padding: '3px 8px', borderRadius: '12px' }}>
                     {groupInfo.category}
                   </span>
                   {isOpen ? <ChevronUp size={16} style={{ color: 'var(--text-tertiary)' }} /> : <ChevronDown size={16} style={{ color: 'var(--text-tertiary)' }} />}
@@ -244,7 +244,7 @@ export default function LibraryMuscles() {
               {/* CONTENIDO DETALLADO DEL GRUPO MUSCULAR */}
               {isOpen && (
                 <div style={{ padding: '16px', borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))', display: 'flex', flexDirection: 'column', gap: '14px', background: 'rgba(0,0,0,0.2)' }}>
-                  <p style={{ margin: 0, fontSize: '0.86rem', color: 'var(--text-secondary)', fontStyle: 'italic', lineHeight: 1.45 }}>
+                  <p style={{ margin: 0, fontSize: 'var(--fs-body)', color: 'var(--text-secondary)', fontStyle: 'italic', lineHeight: 1.45 }}>
                     {groupInfo.overview}
                   </p>
 
@@ -267,7 +267,7 @@ export default function LibraryMuscles() {
                             gap: '10px'
                           }}
                         >
-                          <h4 style={{ margin: 0, fontSize: '0.94rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                          <h4 style={{ margin: 0, fontSize: 'var(--fs-body)', fontWeight: 700, color: 'var(--text-primary)' }}>
                             {muscle.name}
                           </h4>
 
@@ -278,7 +278,7 @@ export default function LibraryMuscles() {
 
                           {/* EJERCICIOS CLAVE ASOCIADOS */}
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                            <span style={{ fontSize: '0.76rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
+                            <span style={{ fontSize: 'var(--fs-meta)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
                               Ejercicios Principales de Estimulo:
                             </span>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -293,7 +293,7 @@ export default function LibraryMuscles() {
                                     color: 'var(--text-primary)',
                                     borderRadius: '6px',
                                     padding: '3px 8px',
-                                    fontSize: '0.78rem',
+                                    fontSize: 'var(--fs-meta)',
                                     fontWeight: 600,
                                     cursor: 'pointer',
                                     display: 'inline-flex',

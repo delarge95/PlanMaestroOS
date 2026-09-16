@@ -55,7 +55,7 @@ export default function ErrorReviewSession({ language }: ErrorReviewSessionProps
   return (
     <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)' }}>
       <div className="ds-row-between">
-        <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: '0.84rem', fontWeight: 700 }}>
+        <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: 'var(--fs-meta)', fontWeight: 700 }}>
           <Brain size={15} style={{ color: 'var(--warning)' }} />
           Refuerzo de errores {dueCount > 0 && <span className="ds-chip" style={{ border: '1px solid var(--warning)', fontSize: '0.66rem' }}>{dueCount} vencidos</span>}
         </span>
@@ -67,22 +67,22 @@ export default function ErrorReviewSession({ language }: ErrorReviewSessionProps
       {open && (
         current ? (
           <div className="ds-stack-sm">
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)', textTransform: 'uppercase' }}>
               {current.language === 'en' ? 'Inglés' : 'Alemán'} · fallado {current.timesWrong}× · intervalo {current.intervalDays}d
             </span>
-            <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{current.prompt}</span>
+            <span style={{ fontSize: 'var(--fs-body)', fontWeight: 600 }}>{current.prompt}</span>
             <input
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && (checked === null ? check() : next())}
               placeholder="Tu respuesta…"
-              style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '8px 12px', fontSize: '0.9rem' }}
+              style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '8px 12px', fontSize: 'var(--fs-body)' }}
             />
             {checked === null ? (
               <Button variant="primary" size="sm" onClick={check}>Comprobar</Button>
             ) : (
               <div className="ds-stack-sm" style={{ gap: '4px' }}>
-                <span className="ds-row" style={{ gap: '6px', fontSize: '0.82rem', fontWeight: 700, color: checked ? 'var(--success, #30d158)' : 'var(--danger, #ff453a)' }}>
+                <span className="ds-row" style={{ gap: '6px', fontSize: 'var(--fs-meta)', fontWeight: 700, color: checked ? 'var(--success, #30d158)' : 'var(--danger, #ff453a)' }}>
                   {checked ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
                   {checked ? 'Correcto — intervalo ampliado' : `Otra vez: ${current.correctAnswer} — repites mañana`}
                 </span>
@@ -96,7 +96,7 @@ export default function ErrorReviewSession({ language }: ErrorReviewSessionProps
             )}
           </div>
         ) : (
-          <div className="ds-row" style={{ gap: '8px', fontSize: '0.82rem' }}>
+          <div className="ds-row" style={{ gap: '8px', fontSize: 'var(--fs-meta)' }}>
             <CheckCircle2 size={14} style={{ color: 'var(--success, #30d158)' }} />
             Cola vacía: {sessionStats.right} aciertos · {sessionStats.wrong} fallos esta sesión.
             <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>Cerrar</Button>

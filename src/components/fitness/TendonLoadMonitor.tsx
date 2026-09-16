@@ -25,7 +25,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
             Preparación Articular & Tolerancia de Carga (Prehab)
           </h3>
         </div>
-        <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', margin: 0 }}>
+        <p style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', margin: 0 }}>
           Check-in subjetivo previo/posentrenamiento. Si experimentas dolor agudo $\ge 5$, inflamación clara o pérdida de fuerza, detén el ejercicio y consulta a un profesional de la salud.
         </p>
       </div>
@@ -49,7 +49,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
                     border: '1px solid var(--color-border-subtle)',
                     padding: '6px 14px',
                     borderRadius: 'var(--radius-sm)',
-                    fontSize: '0.82rem',
+                    fontSize: 'var(--fs-meta)',
                     fontWeight: 600,
                     cursor: 'pointer',
                     textTransform: 'capitalize'
@@ -74,7 +74,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
                 onChange={(e) => setPainLevel(Number(e.target.value))}
                 style={{ cursor: 'pointer', width: '160px' }}
               />
-              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: isGreen ? 'var(--color-state-done)' : isYellow ? 'var(--warning)' : 'var(--color-accent-danger)' }}>
+              <span style={{ fontSize: 'var(--fs-step)', fontWeight: 700, color: isGreen ? 'var(--color-state-done)' : isYellow ? 'var(--warning)' : 'var(--color-accent-danger)' }}>
                 {painLevel} / 10
               </span>
             </div>
@@ -112,14 +112,14 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
           )}
 
           <div>
-            <strong style={{ display: 'block', fontSize: '0.95rem', color: 'var(--text)' }}>
+            <strong style={{ display: 'block', fontSize: 'var(--fs-body)', color: 'var(--text)' }}>
               {isGreen
                 ? 'Zona Verde (0 - 2): Tolerancia Óptima'
                 : isYellow
                 ? 'Zona Amarilla (3 - 4): Cargar con Precaución'
                 : 'Zona Roja (≥ 5): Reducir Carga / Reevaluar'}
             </strong>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: '4px 0 0' }}>
+            <p style={{ fontSize: 'var(--fs-meta)', color: 'var(--text-secondary)', margin: '4px 0 0' }}>
               {isGreen
                 ? 'Puedes continuar con el plan de sobrecarga progresiva programado.'
                 : isYellow

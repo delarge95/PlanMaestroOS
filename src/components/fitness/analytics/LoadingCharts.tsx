@@ -46,7 +46,7 @@ export default function LoadingCharts() {
       {/* CABECERA */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Calculadora Universal de Cargas
           </span>
           <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)' }}>
@@ -57,39 +57,39 @@ export default function LoadingCharts() {
         {/* AJUSTES DE UNIDAD Y BARRA */}
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px 8px', borderRadius: '8px', border: '1px solid var(--color-border-subtle)' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Peso Barra:</span>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>Peso Barra:</span>
             <input
               type="number"
               value={barWeight}
               onChange={(e) => setBarWeight(Number(e.target.value))}
-              style={{ width: '50px', background: 'rgba(0,0,0,0.5)', border: '1px solid var(--color-border-subtle)', borderRadius: '4px', padding: '2px 4px', color: 'var(--text-primary)', fontSize: '0.78rem' }}
+              style={{ width: '50px', background: 'rgba(0,0,0,0.5)', border: '1px solid var(--color-border-subtle)', borderRadius: '4px', padding: '2px 4px', color: 'var(--text-primary)', fontSize: 'var(--fs-meta)' }}
             />
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{unit}</span>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>{unit}</span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px 8px', borderRadius: '8px', border: '1px solid var(--color-border-subtle)' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Peso Corporal:</span>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>Peso Corporal:</span>
             <input
               type="number"
               value={bodyWeight}
               onChange={(e) => setBodyWeight(Number(e.target.value))}
-              style={{ width: '55px', background: 'rgba(0,0,0,0.5)', border: '1px solid var(--color-border-subtle)', borderRadius: '4px', padding: '2px 4px', color: 'var(--text-primary)', fontSize: '0.78rem' }}
+              style={{ width: '55px', background: 'rgba(0,0,0,0.5)', border: '1px solid var(--color-border-subtle)', borderRadius: '4px', padding: '2px 4px', color: 'var(--text-primary)', fontSize: 'var(--fs-meta)' }}
             />
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{unit}</span>
+            <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>{unit}</span>
           </div>
 
           <div style={{ display: 'inline-flex', gap: '2px', background: 'rgba(0,0,0,0.4)', padding: '2px', borderRadius: '8px' }}>
             <button
               type="button"
               onClick={() => setUnit('kg')}
-              style={{ background: unit === 'kg' ? 'var(--accent)' : 'transparent', color: unit === 'kg' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: unit === 'kg' ? 'var(--accent)' : 'transparent', color: unit === 'kg' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: 'var(--fs-eyebrow)', fontWeight: 700, cursor: 'pointer' }}
             >
               KG
             </button>
             <button
               type="button"
               onClick={() => setUnit('lbs')}
-              style={{ background: unit === 'lbs' ? 'var(--accent)' : 'transparent', color: unit === 'lbs' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: unit === 'lbs' ? 'var(--accent)' : 'transparent', color: unit === 'lbs' ? '#ffffff' : 'var(--text-secondary)', border: 'none', padding: '4px 10px', borderRadius: '6px', fontSize: 'var(--fs-eyebrow)', fontWeight: 700, cursor: 'pointer' }}
             >
               LBS
             </button>
@@ -99,8 +99,8 @@ export default function LoadingCharts() {
 
       {/* TABLA DE CARGAS Y DISCOS POR LADO */}
       <div style={{ border: '1px solid var(--color-border-subtle)', borderRadius: '10px' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.84rem' }}>
-          <thead style={{ position: 'sticky', top: 0, background: '#141820', zIndex: 10, borderBottom: '1px solid var(--color-border-subtle)', textTransform: 'uppercase', fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 'var(--fs-meta)' }}>
+          <thead style={{ position: 'sticky', top: 0, background: '#141820', zIndex: 10, borderBottom: '1px solid var(--color-border-subtle)', textTransform: 'uppercase', fontSize: 'var(--fs-eyebrow)', color: 'var(--text-secondary)' }}>
             <tr>
               <th style={{ padding: '10px 14px' }}>Carga por Lado ({unit})</th>
               <th style={{ padding: '10px 14px' }}>Total Discos</th>
