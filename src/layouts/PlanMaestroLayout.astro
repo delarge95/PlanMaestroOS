@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import NavigationShell from '../components/navigation/NavigationShell.tsx';
 import SectionNavBar from '../components/shell/SectionNavBar.astro';
+import ContextAssistant from '../components/ai/ContextAssistant';
 import styles from '../components/navigation/NavigationShell.module.css';
 
 interface Props {
@@ -70,6 +71,9 @@ const l3ActiveFinal = (l3Exact ?? l3Prefix ?? l3Items?.find(i => i.end)?.href ??
         <slot />
       </main>
     </div>
+
+    <!-- Asistente contextual anti-alucinación (AG-INTE): RAG + estado vivo, montado UNA vez para toda /app -->
+    <ContextAssistant client:load />
 
     <style>
       .app-body {

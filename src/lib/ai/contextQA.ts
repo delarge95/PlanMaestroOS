@@ -307,9 +307,9 @@ export interface ContextAnswer {
 function cleanSummary(raw: string): string {
   return raw
     .replace(/\*\*/g, '')
-    .replace(/\$/g, '')
     .replace(/\\text\{([^}]*)\}/g, '$1')
-    .replace(/\\[a-zA-Z]+/g, ' ')
+    .replace(/\\[a-zA-Z]+\s?/g, ' ') // comandos LaTeX (\ge, \to…)
+    .replace(/[*$\\]/g, ' ') // resto de marcadores math/markdown
     .replace(/[ \t]+/g, ' ')
     .replace(/\s*\n+\s*/g, ' ')
     .trim();
