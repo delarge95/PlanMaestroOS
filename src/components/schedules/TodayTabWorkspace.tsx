@@ -7,6 +7,9 @@ import Button from "../ui/Button";
 import { getTodayDomainView } from "../../data/adapters/todayAdapter";
 import type { Task } from "../../data/contracts/task";
 import { ArrowRight, Dumbbell } from "lucide-react";
+import { useActiveProgramStore } from "../../data/fitness/activeProgramStore";
+import { getProgramById } from "../../data/fitness/programs";
+import { buildProgramCalendar } from "../../lib/fitness/programCalendar";
 
 export interface TodayTabWorkspaceProps {
   currentPath?: string;
@@ -61,11 +64,7 @@ export default function TodayTabWorkspace({
   const top3 = tasks.slice(0, 3);
 
   // Lista minimalista de ejercicios de ejemplo para tareas de rutina fitness
-  const fitnessExercises = [
-    { name: "Peso muerto", prescription: "1–2 × 6–8" },
-    { name: "Press banca", prescription: "3–4 × 8–10" },
-    { name: "Remo mancuerna", prescription: "2–3 × 10–12" },
-  ];
+  const fitnessExercises: string[] = realTodayExercises();
 
   return (
     <ErrorBoundary>
@@ -154,10 +153,7 @@ export default function TodayTabWorkspace({
                               color: "var(--text-primary)",
                             }}
                           >
-                            <span>{ex.name}</span>
-                            <span style={{ color: "var(--text-secondary)" }}>
-                              {ex.prescription}
-                            </span>
+                            <span>{ex}</span>
                           </div>
                         ))}
                         <div style={{ paddingTop: "6px" }}>
@@ -274,4 +270,17 @@ export default function TodayTabWorkspace({
       </div>
     </ErrorBoundary>
   );
+}
+
+// U4: ejercicios REALES del día (programa activo + calendario) — jamás inventados.
+function realTodayExercises(): string[] {
+  try {
+    const st = useActiveProgramStore.getState();
+    const program = getProgramById(st.programId);
+    if (!program?.weeks?.length) return [];
+    const ctx = buildProgramCalendar({ startedAt: st.startedAt, postponedDays: st.postponedDays || 0 }, program.durationWeeks ?? 12);
+    const week = program.weeks[Math.min(Math.max(ctx.derivedWeek - 1, 0), program.weeks.length - 1)];
+    const day = week?.days?.[ctx.derivedDayIndex ?? 0] ?? week?.days?.[0];
+    return (day?.exercises ?? []).slice(0, 5).map((e: { displayName?: string; name?: string }) => e.displayName || e.name || '').filter(Boolean);
+  } catch { return []; }
 }

@@ -76,7 +76,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                <span style={{ fontSize: '0.68rem', color: 'var(--accent)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
                   {g.area}
                 </span>
 
@@ -115,7 +115,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            style={{ background: 'transparent', border: 'none', color: 'var(--color-accent-primary)', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer', textAlign: 'center', paddingTop: '4px' }}
+            style={{ background: 'transparent', border: 'none', color: 'var(--accent)', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer', textAlign: 'center', paddingTop: '4px' }}
           >
             {showAll ? 'Mostrar menos' : `Ver todos (${list.length})`}
           </button>
@@ -136,7 +136,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
               type="button"
               onClick={() => setViewMode('board')}
               style={{
-                background: viewMode === 'board' ? 'var(--color-accent-primary)' : 'transparent',
+                background: viewMode === 'board' ? 'var(--accent)' : 'transparent',
                 color: viewMode === 'board' ? '#000000' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 12px',
@@ -156,7 +156,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
               type="button"
               onClick={() => setViewMode('calendar')}
               style={{
-                background: viewMode === 'calendar' ? 'var(--color-accent-primary)' : 'transparent',
+                background: viewMode === 'calendar' ? 'var(--accent)' : 'transparent',
                 color: viewMode === 'calendar' ? '#000000' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 12px',
@@ -183,7 +183,7 @@ export default function RoadmapBoard({ currentPath = '/app/career/roadmap' }: Ro
           </div>
         ) : (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
               Vista Calendario de Metas
             </span>
 

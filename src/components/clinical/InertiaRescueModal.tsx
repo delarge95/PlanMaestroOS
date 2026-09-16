@@ -104,7 +104,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
 
               {/* TIMER DISPLAY */}
               <div style={{ textAlign: 'center', background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px', borderRadius: '20px' }}>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '3.5rem', fontWeight: 700, color: 'var(--color-accent-primary)', letterSpacing: '0.05em' }}>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '3.5rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.05em' }}>
                   {formatTime(timerSeconds)}
                 </span>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '14px' }}>
@@ -166,7 +166,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
           {step === 2 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ background: 'rgba(119, 231, 255, 0.08)', border: '1px solid rgba(119, 231, 255, 0.2)', padding: '14px', borderRadius: '16px' }}>
-                <strong style={{ fontSize: '0.88rem', color: 'var(--color-accent-primary)', display: 'block', marginBottom: '4px' }}>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--accent)', display: 'block', marginBottom: '4px' }}>
                   ✍️ Escribe la Peor Versión Posible:
                 </strong>
                 <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45 }}>
@@ -234,7 +234,7 @@ export default function InertiaRescueModal({ isOpen, onClose, currentTaskName = 
           {step === 3 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ background: 'rgba(168, 85, 247, 0.08)', border: '1px solid rgba(168, 85, 247, 0.2)', padding: '14px', borderRadius: '16px' }}>
-                <strong style={{ fontSize: '0.88rem', color: 'var(--color-accent-primary)', display: 'block', marginBottom: '4px' }}>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--accent)', display: 'block', marginBottom: '4px' }}>
                   📌 Paso de Reentrada Sugerido:
                 </strong>
                 <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.45 }}>

@@ -151,7 +151,7 @@ export function GuidedWizard({ onComplete, onProgress, lang = 'es', homeSignal =
                     border: '1px solid var(--cx-border)', borderRadius: 20,
                     cursor: 'pointer', font: 'inherit', textAlign: 'left',
                     transition: 'transform 0.25s cubic-bezier(0.25,0.8,0.4,1), box-shadow 0.25s',
-                    animation: `cardIn 0.4s ${i * 0.06}s cubic-bezier(0.25,0.8,0.4,1) both`,
+                    animation: `cardIn 0.3s ${i * 0.06}s cubic-bezier(0.25,0.8,0.4,1) both`,
                   }}
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--cx-shadow-hover)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
@@ -240,7 +240,7 @@ export function GuidedWizard({ onComplete, onProgress, lang = 'es', homeSignal =
                     background: 'var(--cx-card)', backdropFilter: 'blur(12px)',
                     border: '1px solid var(--cx-border)', borderRadius: 20,
                     cursor: 'pointer', font: 'inherit', textAlign: 'left',
-                    animation: `cardIn 0.4s ${i * 0.06}s both`,
+                    animation: `cardIn 0.3s ${i * 0.06}s both`,
                   }}>
                   <span style={{ color: 'var(--cx-accent)', display: 'flex', marginBottom: 8 }}>
                     <TreeIcon name={o.icon ?? ''} size={24} />

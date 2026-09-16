@@ -63,7 +63,7 @@ export function ContextualAIActionButton({
         aria-label={label}
         style={{ gap: '6px', border: '1px solid var(--color-accent-primary-soft)' }}
       >
-        <Sparkles size={15} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
+        <Sparkles size={15} style={{ color: 'var(--accent)' }} aria-hidden="true" />
         <span>{label}</span>
       </Button>
 
@@ -107,7 +107,7 @@ export function ContextualAIActionButton({
 
               {loading ? (
                 <div style={{ padding: 'var(--space-lg)', textAlign: 'center', color: 'var(--text-tertiary)' }}>
-                  <Sparkles className="animate-spin" size={24} style={{ margin: '0 auto 8px', color: 'var(--color-accent-primary)' }} />
+                  <Sparkles className="animate-spin" size={24} style={{ margin: '0 auto 8px', color: 'var(--accent)' }} />
                   <span>Analizando fuentes y construyendo propuesta...</span>
                 </div>
               ) : isEditing ? (
@@ -119,7 +119,7 @@ export function ContextualAIActionButton({
                     width: '100%',
                     background: 'var(--surface)',
                     color: 'var(--text)',
-                    border: '1px solid var(--color-accent-primary)',
+                    border: '1px solid var(--accent)',
                     borderRadius: 'var(--radius-md)',
                     padding: 'var(--space-sm)',
                     fontSize: 'var(--font-size-body)',
@@ -135,7 +135,7 @@ export function ContextualAIActionButton({
             </div>
 
             {/* AVISO DE APROBACIÓN HUMANA */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--color-accent-primary-soft)', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', color: 'var(--color-accent-primary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--color-accent-primary-soft)', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', color: 'var(--accent)' }}>
               <ShieldCheck size={18} />
               <span style={{ fontSize: 'var(--font-size-meta)', fontWeight: 500 }}>
                 La IA no ejecutará la acción ni modificará tus datos hasta que hagas clic en Aprobar.

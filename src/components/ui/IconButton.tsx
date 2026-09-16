@@ -22,7 +22,7 @@ const toneStyles: Record<IconButtonTone, React.CSSProperties> = {
   },
   accent: {
     background: 'var(--color-accent-primary-soft)',
-    color: 'var(--color-accent-primary)',
+    color: 'var(--accent)',
     border: '1px solid var(--color-border-visible)',
   },
   danger: {

@@ -220,7 +220,7 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
           <div className="ds-card ds-stack-sm" style={{ padding: '6px' }}>
             {currentScenario.dialog.map((turn: DialogTurn, tIdx: number) => (
               <div key={tIdx} className="ds-caption" style={{ lineHeight: 1.35 }}>
-                <strong style={{ color: turn.speaker.includes('Alex') ? 'var(--color-accent-primary)' : 'var(--text-secondary)' }}>
+                <strong style={{ color: turn.speaker.includes('Alex') ? 'var(--accent)' : 'var(--text-secondary)' }}>
                   {turn.speaker}:
                 </strong>{' '}
                 <span style={{ color: 'var(--text)' }}>{turn.text}</span>
@@ -347,7 +347,7 @@ export default function SpeakingPracticeEN({ initialScenarioId }: SpeakingPracti
               <span className="ds-label">
                 {evaluationResult.feedback}
               </span>
-              <span className="ds-h3" style={{ margin: 0, color: evaluationResult.score >= 70 ? 'var(--color-state-done)' : 'var(--color-accent-primary)' }}>
+              <span className="ds-h3" style={{ margin: 0, color: evaluationResult.score >= 70 ? 'var(--color-state-done)' : 'var(--accent)' }}>
                 {evaluationResult.score}% Coincidencia
               </span>
             </div>

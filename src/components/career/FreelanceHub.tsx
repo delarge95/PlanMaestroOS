@@ -41,7 +41,7 @@ export default function FreelanceHub() {
         </h3>
         <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0 }}>
           Cada servicio ancla a evidencia real del portafolio y presupuesta por tier en el{' '}
-          <a href="/cotizador" style={{ color: 'var(--color-accent-primary)' }}>cotizador</a>.
+          <a href="/cotizador" style={{ color: 'var(--accent)' }}>cotizador</a>.
           Las agencias concretas se investigan como cualquier target (Empleo → Base de datos).
         </p>
       </div>
@@ -52,7 +52,7 @@ export default function FreelanceHub() {
           <div key={o.id} className="ds-card" style={{ padding: 'var(--space-3)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div className="ds-row-between" style={{ alignItems: 'flex-start' }}>
               <strong style={{ fontSize: '0.9rem', display: 'flex', gap: '6px', alignItems: 'center' }}>
-                <Box size={14} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
+                <Box size={14} style={{ color: 'var(--accent)', flexShrink: 0 }} />
                 {o.name}
               </strong>
               <span className="ds-chip" style={{ fontSize: '0.66rem', border: '1px solid var(--color-border-subtle)', whiteSpace: 'nowrap' }}>
@@ -71,7 +71,7 @@ export default function FreelanceHub() {
                   target={e.url.startsWith('http') ? '_blank' : undefined}
                   rel={e.url.startsWith('http') ? 'noreferrer' : undefined}
                   className="ds-chip"
-                  style={{ fontSize: '0.68rem', textDecoration: 'none', color: 'var(--color-accent-primary)', border: '1px solid var(--color-border-subtle)', display: 'inline-flex', gap: '4px', alignItems: 'center' }}
+                  style={{ fontSize: '0.68rem', textDecoration: 'none', color: 'var(--accent)', border: '1px solid var(--color-border-subtle)', display: 'inline-flex', gap: '4px', alignItems: 'center' }}
                 >
                   <ExternalLink size={10} /> {e.label}
                 </a>

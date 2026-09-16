@@ -25,7 +25,7 @@ export default function CourseTracker() {
         {activeCourses[0]?.todayTask && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
             <div>
-              <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
                 Hoy · {activeCourses[0].title}
               </span>
               <strong style={{ fontSize: '0.92rem', color: 'var(--text)', display: 'block', marginTop: '2px' }}>
@@ -43,7 +43,7 @@ export default function CourseTracker() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'var(--space-md)' }}>
           {/* CURSOS ACTIVOS */}
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
               Cursos activos ({activeCourses.length})
             </span>
 
@@ -72,7 +72,7 @@ export default function CourseTracker() {
                   <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{c.title}</strong>
                   <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>{c.provider}</span>
                   {c.newsNote && (
-                    <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-warning)', fontWeight: 600, marginTop: '2px' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--warning)', fontWeight: 600, marginTop: '2px' }}>
                       Noticias: {c.newsNote}
                     </span>
                   )}

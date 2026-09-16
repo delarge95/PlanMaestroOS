@@ -41,19 +41,19 @@ export function ExerciseLink({
         transition: 'color 150ms ease'
       }}
       onFocus={(e) => {
-        e.currentTarget.style.color = 'var(--color-accent-primary)';
+        e.currentTarget.style.color = 'var(--accent)';
       }}
       onBlur={(e) => {
         e.currentTarget.style.color = 'var(--text)';
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.color = 'var(--color-accent-primary)';
+        e.currentTarget.style.color = 'var(--accent)';
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.color = 'var(--text)';
       }}
     >
-      <Dumbbell size={15} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} aria-hidden="true" />
+      <Dumbbell size={15} style={{ color: 'var(--accent)', flexShrink: 0 }} aria-hidden="true" />
       <span style={{ textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.2)' }}>{title}</span>
     </button>
   );

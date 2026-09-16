@@ -43,8 +43,8 @@ export default function BookStudyMode({ language }: BookStudyModeProps) {
     <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)' }}>
       <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-1)' }}>
         <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: '0.84rem', fontWeight: 700 }}>
-          <BookOpen size={15} style={{ color: 'var(--color-accent-primary)' }} />
-          Estudio con libro {totalUnits > 0 && <span className="ds-chip" style={{ border: '1px solid var(--color-border-subtle)', fontSize: '0.66rem' }}>{totalUnits} unidades registradas</span>}
+          <BookOpen size={15} style={{ color: 'var(--accent)' }} />
+          Estudio con libro {totalUnits > 0 && <span className="ds-chip" style={{ border: '1px solid var(--color-border-subtle)', fontSize: 'var(--fs-eyebrow)' }}>{totalUnits} unidades registradas</span>}
         </span>
         {current && (
           <Button variant="ghost" size="sm" onClick={() => setViewerOpen(true)}>
@@ -83,7 +83,7 @@ export default function BookStudyMode({ language }: BookStudyModeProps) {
       </div>
 
       {current?.progress && (
-        <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>
+        <span style={{ fontSize: 'var(--fs-eyebrow)', color: 'var(--text-tertiary)' }}>
           Último: {current.progress.lastUnit} ({current.progress.lastStudiedIso}) — {current.progress.unitsCovered.length} unidades de «{current.book.title}»
         </span>
       )}

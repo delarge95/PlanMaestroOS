@@ -165,8 +165,8 @@ export default function ClinicalExecutionHub() {
                 {/* ENERGY */}
                 <div className="ds-card ds-stack-sm" style={{ padding: '14px' }}>
                   <div className="ds-row-between" style={{ marginBottom: 'var(--space-2)' }}>
-                    <span className="ds-eyebrow" style={{ color: 'var(--color-accent-primary)' }}>⚡ Nivel de Energía</span>
-                    <strong className="ds-label" style={{ color: 'var(--color-accent-primary)' }}>{energy}/10</strong>
+                    <span className="ds-eyebrow" style={{ color: 'var(--accent)' }}>⚡ Nivel de Energía</span>
+                    <strong className="ds-label" style={{ color: 'var(--accent)' }}>{energy}/10</strong>
                   </div>
                   <input
                     type="range"
@@ -174,7 +174,7 @@ export default function ClinicalExecutionHub() {
                     max="10"
                     value={energy}
                     onChange={(e) => setEnergy(parseInt(e.target.value))}
-                    style={{ width: '100%', accentColor: 'var(--color-accent-primary)' }}
+                    style={{ width: '100%', accentColor: 'var(--accent)' }}
                   />
                 </div>
 

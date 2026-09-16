@@ -47,7 +47,7 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
         {/* CABECERA PRESCRIPTIVA CON COPY EXACTO */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <MessageSquare size={18} style={{ color: 'var(--color-accent-primary)' }} />
+            <MessageSquare size={18} style={{ color: 'var(--accent)' }} />
             <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
               Práctica de conversación
             </h3>
@@ -68,7 +68,7 @@ export default function SpeakingPractice({ language = 'de' }: SpeakingPracticePr
                 alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
                 maxWidth: '85%',
                 background: msg.role === 'user' ? 'var(--color-accent-primary-soft)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${msg.role === 'user' ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
+                border: `1px solid ${msg.role === 'user' ? 'var(--accent)' : 'var(--color-border-subtle)'}`,
                 borderRadius: 'var(--radius-md)',
                 padding: '10px 14px',
                 display: 'flex',

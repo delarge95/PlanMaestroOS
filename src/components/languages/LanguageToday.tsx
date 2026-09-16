@@ -80,7 +80,7 @@ export default function LanguageToday({
           paddingBottom: 'var(--space-xs)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Languages size={22} style={{ color: 'var(--color-accent-primary)' }} />
+            <Languages size={22} style={{ color: 'var(--accent)' }} />
             <div>
               <h2 className="ds-h2" style={{ margin: 0 }}>
                 Hoy
@@ -92,7 +92,7 @@ export default function LanguageToday({
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '4px 10px', borderRadius: '20px', border: '1px solid var(--color-border-subtle)', fontSize: '0.78rem', color: 'var(--text-secondary)' }} title="Días consecutivos con actividad de estudio">
-            <Flame size={15} style={{ color: streakDays > 0 ? 'var(--color-accent-warning)' : 'var(--text-tertiary)' }} />
+            <Flame size={15} style={{ color: streakDays > 0 ? 'var(--warning)' : 'var(--text-tertiary)' }} />
             <span>Racha: {streakDays} {streakDays === 1 ? 'día' : 'días'}</span>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function LanguageToday({
               gap: '12px'
             }}>
               <div>
-                <span style={{ fontSize: '0.68rem', color: i === 0 && !germanBlock ? 'var(--color-accent-primary)' : 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.68rem', color: i === 0 && !germanBlock ? 'var(--accent)' : 'var(--text-tertiary)', fontWeight: 700, textTransform: 'uppercase' }}>
                   {block.label}
                 </span>
                 <strong style={{ fontSize: i === 0 && !germanBlock ? '1rem' : '0.92rem', color: 'var(--text)', display: 'block', marginTop: '2px' }}>

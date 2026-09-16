@@ -83,7 +83,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
                       style={{
                         padding: '10px',
                         gap: '4px',
-                        borderColor: hasAction ? 'var(--color-border-visible)' : 'var(--color-accent-warning)'
+                        borderColor: hasAction ? 'var(--color-border-visible)' : 'var(--warning)'
                       }}
                     >
                       <div className="ds-row-between" style={{ alignItems: 'flex-start', gap: '6px' }}>
@@ -113,7 +113,7 @@ export default function JobsPipeline({ currentPath = '/app/career/jobs' }: JobsP
 
                       {/* ÚNICA PRÓXIMA ACCIÓN (regla de contrato) */}
                       {hasAction ? (
-                        <span className="ds-row ds-caption" style={{ color: 'var(--color-accent-primary)', fontWeight: 600, marginTop: '2px', gap: '4px', alignItems: 'flex-start' }}>
+                        <span className="ds-row ds-caption" style={{ color: 'var(--accent)', fontWeight: 600, marginTop: '2px', gap: '4px', alignItems: 'flex-start' }}>
                           <span style={{ textTransform: 'uppercase', fontSize: '0.58rem', lineHeight: '1.4', flexShrink: 0 }}>Próxima →</span>
                           <span>{app.singleNextAction}</span>
                         </span>

@@ -81,8 +81,8 @@ export default function ServiceOfferSheet() {
               style={{
                 cursor: 'pointer',
                 fontSize: '0.7rem',
-                border: o.id === highlight ? '1px solid var(--color-accent-primary)' : '1px solid var(--color-border-subtle)',
-                background: o.id === highlight ? 'var(--color-accent-primary)' : 'transparent',
+                border: o.id === highlight ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle)',
+                background: o.id === highlight ? 'var(--accent)' : 'transparent',
                 color: o.id === highlight ? '#000000' : 'var(--text-secondary)',
               }}
             >

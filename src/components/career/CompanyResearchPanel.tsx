@@ -8,7 +8,7 @@ import React, { useMemo, useState } from 'react';
 import { useCareerStore } from '../../data/career/careerStore';
 import type { CompanyResearch, CompanyResearchStatus } from '../../data/career/careerContracts';
 import Button from '../ui/Button';
-import { Search, Save, CheckCircle2, Circle, AlertTriangle } from 'lucide-react';
+import { Search, Save, CheckCircle2, Circle, AlertTriangle, Target } from 'lucide-react';
 
 /** Regla del tracker (fitScoreRule, applicationsSeed.ts): ≥10 aplicar · 7–9 investigar · ≤6 descartar. */
 const FIT_APPLY_AT = 10;
@@ -55,6 +55,27 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
   );
   const [sourcesText, setSourcesText] = useState((research?.sources ?? []).join('\n'));
   const [saved, setSaved] = useState(false);
+  const [appliedOk, setAppliedOk] = useState(false);
+  const addApplication = useCareerStore((s) => s.addApplication);
+
+  /** U3: crea la aplicación en el pipeline desde la investigación (fit ≥10). */
+  const handleApplyToPipeline = () => {
+    const apps = useCareerStore.getState().applications;
+    const already = apps.some((a) => a.companyName.toLowerCase() === companyName.toLowerCase());
+    if (!already) {
+      addApplication({
+        companyName,
+        roleTitle: 'Rol a definir',
+        stage: 'Aplicado',
+        singleNextAction: 'Enviar CV (generar en Portafolio y CV)',
+        followUpDateIso: new Date(Date.now() + 3 * 86400000).toISOString().slice(0, 10),
+        fitScore: draft.fitScoreUser,
+        source: 'manual',
+      } as never);
+    }
+    setAppliedOk(true);
+    setTimeout(() => setAppliedOk(false), 3000);
+  };
 
   /** Checklist «lista para aplicar» — protocolo doc-31 + regla de fit del tracker. */
   const readiness = useMemo(() => {
@@ -105,7 +126,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
             value={draft.status}
             onChange={(e) => set('status', e.target.value as CompanyResearchStatus)}
             style={{
-              background: 'var(--color-surface-2)',
+              background: 'var(--surface-2)',
               color: 'var(--text-primary)',
               border: '1px solid var(--color-border-subtle)',
               borderRadius: 'var(--radius-s)',
@@ -118,9 +139,16 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
               <option key={o.value} value={o.value}>{o.label}</option>
             ))}
           </select>
-          <Button variant="primary" size="sm" onClick={handleSave}>
-            {saved ? <CheckCircle2 size={14} /> : <Save size={14} />} {saved ? 'Guardado' : 'Guardar'}
-          </Button>
+          <div className="ds-row" style={{ gap: '6px' }}>
+            {(draft.fitScoreUser ?? 0) >= FIT_APPLY_AT && (
+              <Button variant="secondary" size="sm" onClick={handleApplyToPipeline}>
+                <Target size={14} /> Aplicar → Pipeline
+              </Button>
+            )}
+            <Button variant="primary" size="sm" onClick={handleSave}>
+              {saved ? <CheckCircle2 size={14} /> : <Save size={14} />} {saved ? 'Guardado' : 'Guardar'}
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -138,7 +166,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
             style={{
               width: '64px',
               marginLeft: '8px',
-              background: 'var(--color-surface-2)',
+              background: 'var(--surface-2)',
               color: 'var(--text-primary)',
               border: '1px solid var(--color-border-subtle)',
               borderRadius: 'var(--radius-s)',
@@ -152,7 +180,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
             className="ds-chip"
             style={{
               fontSize: '0.7rem',
-              color: draft.fitScoreUser >= FIT_APPLY_AT ? 'var(--color-success, #30d158)' : draft.fitScoreUser >= FIT_INVESTIGATE_AT ? 'var(--color-accent-warning)' : 'var(--text-tertiary)',
+              color: draft.fitScoreUser >= FIT_APPLY_AT ? 'var(--color-success, #30d158)' : draft.fitScoreUser >= FIT_INVESTIGATE_AT ? 'var(--warning)' : 'var(--text-tertiary)',
               border: '1px solid var(--color-border-subtle)',
             }}
           >
@@ -176,7 +204,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
               placeholder={f.placeholder}
               onChange={(e) => set(f.key, e.target.value as never)}
               style={{
-                background: 'var(--color-surface-2)',
+                background: 'var(--surface-2)',
                 color: 'var(--text-primary)',
                 border: '1px solid var(--color-border-subtle)',
                 borderRadius: 'var(--radius-s)',
@@ -196,7 +224,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
             placeholder={'https://empresa.com/about\nhttps://LinkedIn…'}
             onChange={(e) => setSourcesText(e.target.value)}
             style={{
-              background: 'var(--color-surface-2)',
+              background: 'var(--surface-2)',
               color: 'var(--text-primary)',
               border: '1px solid var(--color-border-subtle)',
               borderRadius: 'var(--radius-s)',
@@ -221,7 +249,7 @@ export default function CompanyResearchPanel({ companyName }: CompanyResearchPan
           {readiness.ready ? (
             <CheckCircle2 size={14} style={{ color: 'var(--color-success, #30d158)' }} />
           ) : (
-            <AlertTriangle size={14} style={{ color: 'var(--color-accent-warning)' }} />
+            <AlertTriangle size={14} style={{ color: 'var(--warning)' }} />
           )}
           <strong style={{ fontSize: '0.8rem' }}>
             {readiness.ready ? 'Lista para aplicar' : 'Checklist antes de aplicar'}

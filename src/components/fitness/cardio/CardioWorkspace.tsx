@@ -126,7 +126,7 @@ export function CardioWorkspace() {
   return (
     <div className="ds-stack-lg" style={{ width: '100%' }}>
       {/* 0) Registrar sesión de cardio — alimenta el motor de reglas (cardio_session_history) */}
-      <section className="ds-card ds-stack-sm" style={{ padding: 'var(--space-3)' }}>
+      <section className="ds-card ds-stack-sm" style={{ padding: 'var(--space-4)' }}>
         <h2 className="ds-h2">Registrar sesión de cardio</h2>
         <p className="ds-caption" style={{ margin: 0, color: 'var(--text-tertiary)' }}>
           Cada sesión alimenta el calendario de recuperación y el motor de reglas (cardio_session_history).

@@ -158,12 +158,12 @@ export default function WeeklyExecutionBoard({ today = new Date() }: WeeklyExecu
                 className="ds-card ds-stack-sm"
                 style={{
                   background: isToday ? 'var(--color-accent-primary-soft)' : undefined,
-                  borderColor: isToday ? 'var(--color-accent-primary)' : undefined,
+                  borderColor: isToday ? 'var(--accent)' : undefined,
                   padding: 'var(--space-2)',
                   gap: '3px'
                 }}
               >
-                <span className="ds-eyebrow" style={{ color: isToday ? 'var(--color-accent-primary)' : undefined }}>
+                <span className="ds-eyebrow" style={{ color: isToday ? 'var(--accent)' : undefined }}>
                   {d.day}{isToday ? ' · hoy' : ''}
                 </span>
                 <span className="ds-label">{d.goal}</span>
@@ -186,7 +186,7 @@ function CadenceMetric({ label, value, target, ok, warn, ref_ }: {
   warn?: boolean;
   ref_: string;
 }) {
-  const color = ok ? 'var(--color-accent-primary)' : warn ? 'var(--color-accent-warning)' : 'var(--text-secondary)';
+  const color = ok ? 'var(--accent)' : warn ? 'var(--warning)' : 'var(--text-secondary)';
   return (
     <div className="ds-card ds-stack-sm" style={{ padding: 'var(--space-2) 10px' }}>
       <span className="ds-eyebrow">{label}</span>

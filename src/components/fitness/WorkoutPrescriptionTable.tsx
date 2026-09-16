@@ -214,7 +214,7 @@ export function WorkoutPrescriptionTable({
           {activeWeek?.title || activeWeek?.block || `Semana ${weekNum}`} · {dayDisplayTitle}
         </h3>
         {activeWeek?.isDeload && (
-          <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-warning)', fontWeight: 600, marginTop: '2px', display: 'inline-block' }}>
+          <span style={{ fontSize: '0.78rem', color: 'var(--warning)', fontWeight: 600, marginTop: '2px', display: 'inline-block' }}>
             ⚡ Semana de descarga estratégica (Reducir carga y mantener margen)
           </span>
         )}
@@ -304,7 +304,7 @@ export function WorkoutPrescriptionTable({
                             style={{
                               background: 'transparent',
                               border: 'none',
-                              color: 'var(--color-accent-primary)',
+                              color: 'var(--accent)',
                               fontSize: '0.74rem',
                               fontWeight: 600,
                               cursor: 'pointer',
@@ -319,7 +319,7 @@ export function WorkoutPrescriptionTable({
                           </button>
 
                           {isNoteExpanded && (
-                            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.45, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--color-accent-primary)' }}>
+                            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '4px 0 0', lineHeight: 1.45, background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: '4px', borderLeft: '2px solid var(--accent)' }}>
                               {prescription.notes}
                             </p>
                           )}

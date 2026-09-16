@@ -34,7 +34,7 @@ export default function PlanBoard() {
               type="button"
               onClick={() => setSelectedDay(day)}
               style={{
-                background: selectedDay === day ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.03)',
+                background: selectedDay === day ? 'var(--accent)' : 'rgba(255,255,255,0.03)',
                 color: selectedDay === day ? '#000000' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
@@ -51,7 +51,7 @@ export default function PlanBoard() {
 
         {/* RESUMEN DE MACROS DEL DÍA PER TAREA 6.2 */}
         <div style={{ background: 'rgba(10,132,255,0.04)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-sm)', padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
             Macros del día ({selectedDay})
           </span>
           <div style={{ display: 'flex', gap: 'var(--space-md)', fontSize: '0.88rem', color: 'var(--text)', fontWeight: 600 }}>
@@ -74,7 +74,7 @@ export default function PlanBoard() {
                 <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{r.title}</strong>
                 <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', display: 'block' }}>{r.cuisine} · {r.timeMinutes} min</span>
               </div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 600 }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 600 }}>
                 {r.macros?.kcal} kcal
               </span>
             </div>

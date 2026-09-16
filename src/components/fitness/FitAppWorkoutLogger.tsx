@@ -640,8 +640,8 @@ export default function FitAppWorkoutLogger() {
                               type="button"
                               onClick={() => setPerceivedEnergy(level)}
                               style={{
-                                background: perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.06)',
-                                border: `1px solid ${perceivedEnergy === level ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.12)'}`,
+                                background: perceivedEnergy === level ? 'var(--accent)' : 'rgba(255,255,255,0.06)',
+                                border: `1px solid ${perceivedEnergy === level ? 'var(--accent)' : 'rgba(255,255,255,0.12)'}`,
                                 color: perceivedEnergy === level ? '#fff' : 'var(--color-text-secondary)',
                                 padding: '4px 10px',
                                 borderRadius: '8px',
@@ -702,7 +702,7 @@ export default function FitAppWorkoutLogger() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <span style={{ fontSize: '1.6rem' }}>⏱️</span>
                   <div>
-                    <span style={{ fontSize: '0.7rem', fontFamily: 'SF Mono, monospace', color: timerSeconds === 0 ? 'var(--color-state-done)' : 'var(--color-accent-primary)', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.7rem', fontFamily: 'SF Mono, monospace', color: timerSeconds === 0 ? 'var(--color-state-done)' : 'var(--accent)', fontWeight: 700 }}>
                       {timerSeconds === 0 ? '¡DESCANSO COMPLETADO!' : 'TEMPORIZADOR DE DESCANSO EN CURSO'}
                     </span>
                     <h4 style={{ margin: '2px 0 0', fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
@@ -895,7 +895,7 @@ export default function FitAppWorkoutLogger() {
                       <button type="button" onClick={() => handleAddSet(exItem.name)} style={{ background: 'transparent', border: 'none', color: 'var(--color-state-done)', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}>
                         + Agregar otra serie
                       </button>
-                      <button type="button" onClick={() => startRestTimer(exItem.restSec)} style={{ background: 'rgba(100, 210, 255, 0.1)', border: '1px solid rgba(100, 210, 255, 0.25)', color: 'var(--color-accent-primary)', fontSize: '0.72rem', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
+                      <button type="button" onClick={() => startRestTimer(exItem.restSec)} style={{ background: 'rgba(100, 210, 255, 0.1)', border: '1px solid rgba(100, 210, 255, 0.25)', color: 'var(--accent)', fontSize: '0.72rem', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer' }}>
                         ⏱️ Iniciar Descanso ({exItem.restSec}s)
                       </button>
                     </div>
@@ -1012,7 +1012,7 @@ export default function FitAppWorkoutLogger() {
                 <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Peso × reps registrados</span>
               </div>
               <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>Sesiones</span>
+                <span style={{ fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>Sesiones</span>
                 <strong style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff' }}>{totalWorkoutsCount}</strong>
                 <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Entrenamientos completados</span>
               </div>

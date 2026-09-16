@@ -33,10 +33,11 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
     <ErrorBoundary>
       <div className="ds-stack">
 
-        {/* NAVEGACIÓN NIVEL 2 */}        {/* CABECERA PRESCRIPTIVA DE SECCIÓN LABORAL */}
+        {/* NAVEGACIÓN NIVEL 2 */}
+        {/* CABECERA PRESCRIPTIVA DE SECCIÓN LABORAL */}
         <div className="ds-row-between" style={{ paddingBottom: 'var(--space-xs)' }}>
           <div className="ds-row" style={{ gap: '10px' }}>
-            <Briefcase size={22} style={{ color: 'var(--color-accent-primary)' }} />
+            <Briefcase size={22} style={{ color: 'var(--accent)' }} />
             <div>
               <span className="ds-caption">
                 Gestión de carrera, portafolio & pipeline de empleo · {activeCount} aplicaciones activas (tracker real)
@@ -73,7 +74,7 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
             </a>
           </div>
         ) : (
-          <div className="ds-card ds-stack-sm" style={{ borderStyle: 'dashed', borderColor: 'var(--color-accent-warning)' }}>
+          <div className="ds-card ds-stack-sm" style={{ borderStyle: 'dashed', borderColor: 'var(--warning)' }}>
             <strong className="ds-label">
               Sin próxima acción definida en ninguna aplicación activa
             </strong>
@@ -88,8 +89,8 @@ export default function CareerToday({ currentPath = '/app/career' }: CareerToday
 
         {/* AVISO DE CONTRATO PENDIENTE */}
         {pendingActionCount > 0 && (
-          <div className="ds-card ds-caption" style={{ borderColor: 'var(--color-accent-warning)', padding: 'var(--space-2) var(--space-3)' }}>
-            <strong style={{ color: 'var(--color-accent-warning)' }}>{pendingActionCount} aplicación(es)</strong> sin única próxima acción definida — el movimiento de columna está bloqueado hasta definirla.
+          <div className="ds-card ds-caption" style={{ borderColor: 'var(--warning)', padding: 'var(--space-2) var(--space-3)' }}>
+            <strong style={{ color: 'var(--warning)' }}>{pendingActionCount} aplicación(es)</strong> sin única próxima acción definida — el movimiento de columna está bloqueado hasta definirla.
           </div>
         )}
 

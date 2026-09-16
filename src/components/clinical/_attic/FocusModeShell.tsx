@@ -103,7 +103,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             padding: '28px',
             boxShadow: '0 30px 60px rgba(0, 0, 0, 0.6)'
           }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', textTransform: 'uppercase', fontWeight: 700 }}>
               BLOQUE A EN EJECUCIÃ“N (09:20 â€“ 11:40)
             </span>
             <h2 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '6px 0 12px', color: 'var(--color-text-primary)' }}>
@@ -170,7 +170,7 @@ export default function FocusModeShell({ isActive, onExit, children }: Props) {
             flexDirection: 'column',
             gap: '12px'
           }}>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--accent)', textTransform: 'uppercase', fontWeight: 700 }}>
               ðŸ“Œ Paso de Reentrada Escrito (Al Cierre)
             </span>
             <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', margin: 0 }}>

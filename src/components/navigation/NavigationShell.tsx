@@ -128,7 +128,7 @@ export function NavigationShell({
                       gap: '8px',
                       padding: '8px 12px',
                       borderRadius: '6px',
-                      color: isPathActive(item.href) ? 'var(--color-accent-primary)' : 'var(--text)',
+                      color: isPathActive(item.href) ? 'var(--accent)' : 'var(--text)',
                       background: isPathActive(item.href) ? 'var(--color-accent-primary-soft)' : 'transparent',
                       textDecoration: 'none',
                       fontSize: '0.82rem',

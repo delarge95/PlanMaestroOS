@@ -62,7 +62,7 @@ export function LibraryRow({ document, onSelect }: LibraryRowProps) {
             flexShrink: 0
           }}
         >
-          <Icon size={18} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
+          <Icon size={18} style={{ color: 'var(--accent)' }} aria-hidden="true" />
         </div>
 
         <div style={{ minWidth: 0, flex: 1 }}>

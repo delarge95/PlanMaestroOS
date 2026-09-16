@@ -99,7 +99,7 @@ export default function ExerciseModal({
         display: "grid",
         placeItems: "center",
         padding: "20px",
-        animation: "fadeIn 200ms ease",
+        animation: "fadeIn 200ms ease-out",
       }}
       onClick={onClose}
     >
@@ -151,7 +151,7 @@ export default function ExerciseModal({
                   style={{
                     fontFamily: "Azeret Mono, monospace",
                     fontSize: "0.68rem",
-                    color: "var(--color-accent-primary)",
+                    color: "var(--accent)",
                     background: "rgba(119, 231, 255, 0.1)",
                     padding: "4px 10px",
                     borderRadius: "999px",
@@ -255,7 +255,7 @@ export default function ExerciseModal({
               border: "none",
               color:
                 activeTab === "muscles"
-                  ? "var(--color-accent-primary)"
+                  ? "var(--accent)"
                   : "var(--color-text-secondary)",
               padding: "6px 14px",
               borderRadius: "8px",
@@ -392,7 +392,7 @@ export default function ExerciseModal({
                     <strong
                       style={{
                         fontSize: "0.78rem",
-                        color: "var(--color-accent-primary)",
+                        color: "var(--accent)",
                         fontFamily: "Azeret Mono, monospace",
                         textTransform: "uppercase",
                       }}
@@ -553,7 +553,7 @@ export default function ExerciseModal({
                             borderRadius: "999px",
                             transformOrigin: "left center",
                             transform: `scaleX(${Math.max(0, Math.min(1, sub.score))})`,
-                            transition: "transform 300ms ease",
+                            transition: "transform 300ms var(--ease-standard, ease-out)",
                           }}
                         />
                       </div>

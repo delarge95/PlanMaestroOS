@@ -70,7 +70,7 @@ export default function EnglishCourseView() {
               <span className="ds-eyebrow">
                 Tarjetas Pendientes (SR)
               </span>
-              <strong className="ds-h3" style={{ display: 'block', margin: 0, color: dueQueueIds.length > 0 ? 'var(--color-accent-primary)' : 'var(--color-state-done)' }}>
+              <strong className="ds-h3" style={{ display: 'block', margin: 0, color: dueQueueIds.length > 0 ? 'var(--accent)' : 'var(--color-state-done)' }}>
                 {dueQueueIds.length} {dueQueueIds.length === 1 ? 'tarjeta' : 'tarjetas'}
               </strong>
             </div>
@@ -195,7 +195,7 @@ export default function EnglishCourseView() {
                 {falseFriendsTechESEN.map((ff, idx) => (
                   <div key={idx} className="ds-card ds-stack-sm" style={{ padding: '10px 14px' }}>
                     <div className="ds-row-between">
-                      <strong className="ds-label" style={{ color: 'var(--color-accent-primary)' }}>
+                      <strong className="ds-label" style={{ color: 'var(--accent)' }}>
                         {ff.englishWord}
                       </strong>
                       <span className="ds-badge ds-badge-warning">
@@ -222,7 +222,7 @@ export default function EnglishCourseView() {
                 <div className="ds-stack-sm" style={{ gap: '6px' }}>
                   {workplacePhrasalVerbs.map((pv, idx) => (
                     <div key={idx} className="ds-caption" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: '4px' }}>
-                      <strong style={{ color: 'var(--color-accent-primary)' }}>{pv.verb}:</strong>{' '}
+                      <strong style={{ color: 'var(--accent)' }}>{pv.verb}:</strong>{' '}
                       <span style={{ color: 'var(--text-secondary)' }}>{pv.meaning}</span>
                     </div>
                   ))}
@@ -236,7 +236,7 @@ export default function EnglishCourseView() {
                 <div className="ds-stack-sm" style={{ gap: '6px' }}>
                   {technicalCollocations.map((tc, idx) => (
                     <div key={idx} className="ds-caption" style={{ borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: '4px' }}>
-                      <strong style={{ color: 'var(--color-accent-primary)' }}>{tc.collocation}:</strong>{' '}
+                      <strong style={{ color: 'var(--accent)' }}>{tc.collocation}:</strong>{' '}
                       <span style={{ color: 'var(--text-secondary)' }}>{tc.meaning}</span>
                     </div>
                   ))}

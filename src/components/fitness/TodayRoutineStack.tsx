@@ -42,6 +42,8 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
   const [expandedNoteId, setExpandedNoteId] = useState<string | null>(null);
   // Confirmación inline de sesión guardada (reemplaza al alert nativo).
   const [sessionSavedAt, setSessionSavedAt] = useState<number | null>(null);
+  // U2: si el guardado falla (cuota/corrupto), el usuario lo VE — nada de fallo silencioso.
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const [effortMode, setEffortMode] = useState<'RIR' | 'RPE'>('RIR');
   const [substitutionTarget, setSubstitutionTarget] = useState<{
@@ -445,6 +447,13 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
             </table>
           </div>
 
+          {saveError && (
+            <div role="alert" className="ds-row-between" style={{ background: 'var(--danger-soft, rgba(255,69,58,0.12))', border: '1px solid var(--danger, #ff453a)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>{saveError}</span>
+              <button type="button" onClick={() => setSaveError(null)} className="ds-btn ds-btn-ghost ds-btn-sm">✕</button>
+            </div>
+          )}
+
           {/* CONFIRMACIÓN INLINE DE SESIÓN GUARDADA */}
           {sessionSavedAt && (
             <div className="ds-row" role="status" style={{ gap: '8px', alignItems: 'center', background: 'rgba(48,209,88,0.08)', border: '1px solid var(--success, #30d158)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}>
@@ -536,20 +545,12 @@ export default function TodayRoutineStack({ selectedDayIndex = 1 }: TodayRoutine
                   setSessionSavedAt(Date.now());
                 } catch (e) {
                   console.error(e);
+                  setSaveError('No se pudo guardar la sesión (almacenamiento lleno o corrupto). Tus datos siguen en pantalla — reintenta o exporta manualmente.');
                 }
               }}
-              className="ds-btn ds-btn-lg"
-              style={{
-                background: 'linear-gradient(135deg, var(--success), #28a745)',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '12px 24px',
-                fontWeight: 800,
-                boxShadow: '0 4px 14px rgba(48,209,88,0.3)',
-              }}
+              className="ds-btn ds-btn-primary ds-btn-lg"
             >
-              🎉 Finalizar & Guardar Sesión en Progreso
+              Finalizar & Guardar Sesión
             </button>
           </div>
         </Disclosure>

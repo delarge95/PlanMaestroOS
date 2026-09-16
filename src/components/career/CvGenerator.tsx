@@ -172,7 +172,7 @@ export default function CvGenerator() {
               type="button"
               onClick={() => { setMode(m); if (m === 'base') { setAppId(''); setKit(null); } }}
               style={{
-                background: mode === m ? 'var(--color-accent-primary)' : 'transparent',
+                background: mode === m ? 'var(--accent)' : 'transparent',
                 color: mode === m ? '#000000' : 'var(--text-secondary)',
                 border: 'none', padding: '6px 14px', borderRadius: '7px',
                 fontSize: '0.78rem', fontWeight: mode === m ? 700 : 500, cursor: 'pointer',
@@ -206,7 +206,7 @@ export default function CvGenerator() {
               <select
                 value={appId}
                 onChange={(e) => selectApplication(e.target.value)}
-                style={{ background: 'var(--color-surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 10px', fontSize: '0.8rem', minWidth: '260px' }}
+                style={{ background: 'var(--surface-2)', color: 'var(--text-primary)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)', padding: '6px 10px', fontSize: '0.8rem', minWidth: '260px' }}
               >
                 <option value="">— elegir aplicación del pipeline —</option>
                 {applications.filter((a) => a.stage !== 'Cerrado').map((a) => (
@@ -221,7 +221,7 @@ export default function CvGenerator() {
             </div>
 
             {application && !research && (
-              <div className="ds-row" style={{ gap: '6px', fontSize: '0.76rem', color: 'var(--color-accent-warning)' }}>
+              <div className="ds-row" style={{ gap: '6px', fontSize: '0.76rem', color: 'var(--warning)' }}>
                 <AlertCircle size={13} />
                 Sin investigación de {application.companyName} — complétala en Empleo → Base de datos para un mejor auto-tailoring.
               </div>
@@ -299,7 +299,7 @@ export default function CvGenerator() {
       {/* ——— PREVIEW DEL CV (única zona visible al imprimir) ——— */}
       <article className="cv-print-root" style={{
         background: '#ffffff', color: '#111111', borderRadius: 'var(--radius-m)',
-        padding: 'clamp(20px, 4vw, 44px)', maxWidth: '820px', margin: '0 auto',
+        padding: 'clamp(20px, 4vw, 44px)', maxWidth: '660px', margin: '0 auto',
         fontFamily: 'system-ui, -apple-system, sans-serif', lineHeight: 1.45,
       }}>
         <header style={{ borderBottom: '2px solid #111', paddingBottom: '10px', marginBottom: '14px' }}>
@@ -427,7 +427,7 @@ export default function CvGenerator() {
 // ——————————————————— helpers de UI ———————————————————
 
 const inputStyle: React.CSSProperties = {
-  background: 'var(--color-surface-2)', color: 'var(--text-primary)',
+  background: 'var(--surface-2)', color: 'var(--text-primary)',
   border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-s)',
   padding: '8px 10px', fontSize: '0.8rem', resize: 'vertical', fontFamily: 'inherit', width: '100%',
 };
@@ -441,8 +441,8 @@ function VariantChip({ active, label, secondary, onClick }: { active: boolean; l
     <button type="button" onClick={onClick} className="ds-chip"
       style={{
         cursor: 'pointer',
-        border: active ? '1px solid var(--color-accent-primary)' : '1px solid var(--color-border-subtle)',
-        background: active ? 'var(--color-accent-primary)' : 'transparent',
+        border: active ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle)',
+        background: active ? 'var(--accent)' : 'transparent',
         color: active ? '#000000' : 'var(--text-secondary)',
         display: 'inline-flex', alignItems: 'center', gap: '6px',
       }}>

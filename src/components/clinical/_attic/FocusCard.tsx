@@ -53,7 +53,7 @@ export function FocusCard({
           </span>
         )}
         {deferredUntil && (
-          <span style={{ ...typo.micro, color: 'var(--color-accent-warning)', background: 'var(--color-accent-warning-soft)', padding: '4px 10px', borderRadius: '999px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <span style={{ ...typo.micro, color: 'var(--warning)', background: 'var(--color-accent-warning-soft)', padding: '4px 10px', borderRadius: '999px', display: 'flex', alignItems: 'center', gap: '4px' }}>
             <Clock size={12} aria-hidden="true" /> Regresa {deferredUntil}
           </span>
         )}

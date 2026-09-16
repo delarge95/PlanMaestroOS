@@ -95,7 +95,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             {activeBlock.activity}
           </h2>
           <p style={{ fontSize: '0.92rem', color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
-            <strong style={{ color: 'var(--color-accent-primary)' }}>AcciÃ³n de Inicio (10 Min):</strong> {activeBlock.startAction}
+            <strong style={{ color: 'var(--accent)' }}>AcciÃ³n de Inicio (10 Min):</strong> {activeBlock.startAction}
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
           gap: '14px'
         }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', textTransform: 'uppercase', fontWeight: 700 }}>
               Regla ClÃ­nica Vigente
             </span>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)', margin: '4px 0 0', fontWeight: 600 }}>
@@ -118,7 +118,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             </p>
           </div>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-warning)', textTransform: 'uppercase', fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--warning)', textTransform: 'uppercase', fontWeight: 700 }}>
               MÃ­nimo Viable de Entrada
             </span>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: '4px 0 0' }}>
@@ -134,7 +134,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
           borderRadius: '14px',
           padding: '12px 16px',
           fontSize: '0.82rem',
-          color: 'var(--color-accent-primary)',
+          color: 'var(--accent)',
           fontWeight: 600,
           display: 'flex',
           alignItems: 'center',
@@ -169,7 +169,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             style={{
               background: 'var(--color-accent-warning-soft)',
               border: '1px solid var(--color-border-subtle)',
-              color: 'var(--color-accent-warning)',
+              color: 'var(--warning)',
               padding: '8px 14px',
               borderRadius: '10px',
               fontSize: '0.78rem',
@@ -188,7 +188,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             style={{
               background: 'var(--color-accent-primary-soft)',
               border: '1px solid var(--color-border-subtle)',
-              color: 'var(--color-accent-primary)',
+              color: 'var(--accent)',
               padding: '8px 14px',
               borderRadius: '10px',
               fontSize: '0.78rem',
@@ -207,7 +207,7 @@ export default function ClinicalCurrentBlockPanel({ onToggleFocusMode, isFocusMo
             style={{
               background: 'var(--color-accent-primary-soft)',
               border: '1px solid var(--color-border-subtle)',
-              color: 'var(--color-accent-primary)',
+              color: 'var(--accent)',
               padding: '8px 14px',
               borderRadius: '10px',
               fontSize: '0.78rem',

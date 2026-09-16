@@ -76,7 +76,7 @@ export function PracticeSessionModal({
                   style={{
                     flex: 1,
                     minHeight: '40px',
-                    background: sets === num ? 'var(--color-accent-primary)' : 'var(--surface-elevated)',
+                    background: sets === num ? 'var(--accent)' : 'var(--surface-elevated)',
                     color: sets === num ? '#ffffff' : 'var(--text)',
                     border: '1px solid var(--color-border-visible)',
                     borderRadius: 'var(--radius-sm)',
@@ -105,7 +105,7 @@ export function PracticeSessionModal({
                     minHeight: '40px',
                     background: quality === q ? 'var(--color-surface-raised)' : 'transparent',
                     color: quality === q ? 'var(--text)' : 'var(--text-tertiary)',
-                    border: quality === q ? '1px solid var(--color-accent-primary)' : '1px solid var(--color-border-subtle)',
+                    border: quality === q ? '1px solid var(--accent)' : '1px solid var(--color-border-subtle)',
                     borderRadius: 'var(--radius-sm)',
                     fontSize: '0.8rem',
                     fontWeight: 600,
@@ -136,7 +136,7 @@ export function PracticeSessionModal({
               max="10"
               value={discomfort}
               onChange={(e) => setDiscomfort(Number(e.target.value))}
-              style={{ width: '100%', accentColor: discomfort >= 4 ? 'var(--danger)' : 'var(--color-accent-primary)' }}
+              style={{ width: '100%', accentColor: discomfort >= 4 ? 'var(--danger)' : 'var(--accent)' }}
             />
           </div>
 
@@ -146,7 +146,7 @@ export function PracticeSessionModal({
             onClick={handleSave}
             style={{
               minHeight: '44px',
-              background: 'var(--color-accent-primary)',
+              background: 'var(--accent)',
               color: '#ffffff',
               border: 'none',
               borderRadius: 'var(--radius-md)',

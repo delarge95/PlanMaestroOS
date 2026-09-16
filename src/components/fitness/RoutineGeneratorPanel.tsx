@@ -79,7 +79,7 @@ export default function RoutineGeneratorPanel() {
         style={{ width: '100%', textAlign: 'left', cursor: 'pointer', background: 'transparent', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}
       >
         <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: '0.84rem', fontWeight: 700 }}>
-          <Wand2 size={15} style={{ color: 'var(--color-accent-primary)' }} />
+          <Wand2 size={15} style={{ color: 'var(--accent)' }} />
           Generar rutina por objetivo
         </span>
         <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>{open ? 'cerrar' : '¿qué buscas? arma tu semana'}</span>

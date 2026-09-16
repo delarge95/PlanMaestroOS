@@ -20,7 +20,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
       {/* DESCLAMER CLÍNICO CONSERVADOR */}
       <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-          <HeartPulse size={20} style={{ color: 'var(--color-accent-primary)' }} />
+          <HeartPulse size={20} style={{ color: 'var(--accent)' }} />
           <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
             Preparación Articular & Tolerancia de Carga (Prehab)
           </h3>
@@ -44,7 +44,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
                   type="button"
                   onClick={() => setSelectedJoint(joint)}
                   style={{
-                    background: selectedJoint === joint ? 'var(--color-accent-primary)' : 'var(--surface)',
+                    background: selectedJoint === joint ? 'var(--accent)' : 'var(--surface)',
                     color: selectedJoint === joint ? '#ffffff' : 'var(--text-secondary)',
                     border: '1px solid var(--color-border-subtle)',
                     padding: '6px 14px',
@@ -74,7 +74,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
                 onChange={(e) => setPainLevel(Number(e.target.value))}
                 style={{ cursor: 'pointer', width: '160px' }}
               />
-              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: isGreen ? 'var(--color-state-done)' : isYellow ? 'var(--color-accent-warning)' : 'var(--color-accent-danger)' }}>
+              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: isGreen ? 'var(--color-state-done)' : isYellow ? 'var(--warning)' : 'var(--color-accent-danger)' }}>
                 {painLevel} / 10
               </span>
             </div>
@@ -106,7 +106,7 @@ export function TendonLoadMonitor({ onOpenExerciseModal }: TendonLoadMonitorProp
           {isGreen ? (
             <CheckCircle2 size={24} style={{ color: 'var(--color-state-done)', flexShrink: 0 }} />
           ) : isYellow ? (
-            <Activity size={24} style={{ color: 'var(--color-accent-warning)', flexShrink: 0 }} />
+            <Activity size={24} style={{ color: 'var(--warning)', flexShrink: 0 }} />
           ) : (
             <ShieldAlert size={24} style={{ color: 'var(--color-accent-danger)', flexShrink: 0 }} />
           )}

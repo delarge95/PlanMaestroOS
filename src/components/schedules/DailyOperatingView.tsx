@@ -56,8 +56,8 @@ export default function DailyOperatingView() {
   const getCategoryBadgeColor = (cat: string) => {
     switch (cat) {
       case 'fitness': return 'var(--color-state-done)';
-      case 'career': return 'var(--color-accent-primary)';
-      case 'german': return 'var(--color-accent-warning)';
+      case 'career': return 'var(--accent)';
+      case 'german': return 'var(--warning)';
       case 'clinical': return '#ff6b6b';
       default: return 'var(--text-tertiary)';
     }
@@ -75,7 +75,7 @@ export default function DailyOperatingView() {
               onClick={() => setViewMode('timeline')}
               style={{
                 background: viewMode === 'timeline' ? 'var(--color-accent-primary-soft)' : 'transparent',
-                color: viewMode === 'timeline' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
+                color: viewMode === 'timeline' ? 'var(--accent)' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
                 borderRadius: 'var(--radius-s)',
@@ -95,7 +95,7 @@ export default function DailyOperatingView() {
               onClick={() => setViewMode('kanban')}
               style={{
                 background: viewMode === 'kanban' ? 'var(--color-accent-primary-soft)' : 'transparent',
-                color: viewMode === 'kanban' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
+                color: viewMode === 'kanban' ? 'var(--accent)' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
                 borderRadius: 'var(--radius-s)',
@@ -115,7 +115,7 @@ export default function DailyOperatingView() {
               onClick={() => setViewMode('stats')}
               style={{
                 background: viewMode === 'stats' ? 'var(--color-accent-primary-soft)' : 'transparent',
-                color: viewMode === 'stats' ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
+                color: viewMode === 'stats' ? 'var(--accent)' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
                 borderRadius: 'var(--radius-s)',
@@ -132,7 +132,7 @@ export default function DailyOperatingView() {
           </div>
 
           <Button variant="ghost" size="sm" onClick={() => setIsRescueOpen(true)}>
-            <AlertCircle size={15} style={{ color: 'var(--color-accent-warning)' }} />
+            <AlertCircle size={15} style={{ color: 'var(--warning)' }} />
             <span>Ayuda Bloqueo</span>
           </Button>
         </div>
@@ -168,7 +168,7 @@ export default function DailyOperatingView() {
                       : isDone
                       ? 'rgba(48, 209, 88, 0.04)'
                       : 'var(--surface)',
-                    border: `1px solid ${isInProgress ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
+                    border: `1px solid ${isInProgress ? 'var(--accent)' : 'var(--color-border-subtle)'}`,
                     padding: 'var(--space-3) var(--space-4)',
                     opacity: isDone ? 0.65 : 1,
                     transition: 'all 150ms ease'
@@ -246,12 +246,12 @@ export default function DailyOperatingView() {
             </div>
 
             <div style={{ background: 'rgba(10, 132, 255, 0.03)', border: '1px solid var(--color-accent-primary-soft)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 En curso ({filtered.filter(b => b.status === 'in_progress').length})
               </span>
 
               {filtered.filter(b => b.status === 'in_progress').map((b) => (
-                <div key={b.id} style={{ background: 'var(--surface)', border: '1px solid var(--color-accent-primary)', borderRadius: 'var(--radius-md)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <div key={b.id} style={{ background: 'var(--surface)', border: '1px solid var(--accent)', borderRadius: 'var(--radius-md)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <div className="ds-row-between">
                     <span style={{ fontSize: '0.7rem', color: getCategoryBadgeColor(b.category), fontWeight: 700 }}>{b.time}</span>
                     <button type="button" onClick={() => moveStatus(b.id, 'completed')} className="ds-badge ds-badge-success" style={{ cursor: 'pointer' }}>
@@ -290,7 +290,7 @@ export default function DailyOperatingView() {
 
             <div className="ds-stat">
               <span className="ds-stat-label">Enfocado en</span>
-              <strong className="ds-stat-value" style={{ color: 'var(--color-accent-primary)' }}>
+              <strong className="ds-stat-value" style={{ color: 'var(--accent)' }}>
                 TwinSight MVP & Sustentación
               </strong>
             </div>

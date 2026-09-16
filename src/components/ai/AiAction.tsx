@@ -50,7 +50,7 @@ export default function AiAction({
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
         {!draft && (
           <Button variant="secondary" size="sm" onClick={handleGenerate} disabled={loading}>
-            <Sparkles size={14} style={{ color: 'var(--color-accent-warning)' }} />
+            <Sparkles size={14} style={{ color: 'var(--warning)' }} />
             <span>{loading ? 'Generando…' : actionLabel}</span>
           </Button>
         )}

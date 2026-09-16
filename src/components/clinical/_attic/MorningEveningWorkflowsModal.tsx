@@ -55,7 +55,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
           {/* HEADER */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <span style={{ fontSize: '0.72rem', color: mode === 'morning' ? 'var(--color-state-done)' : 'var(--color-accent-primary)', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.72rem', color: mode === 'morning' ? 'var(--color-state-done)' : 'var(--accent)', fontFamily: 'SF Mono, monospace', fontWeight: 700 }}>
                 {mode === 'morning' ? 'ðŸŒ… MODO INICIO RÃPIDO (60 SEGUNDOS)' : 'ðŸŒ™ MODO CIERRE DEL DÃA (3 MINUTOS)'}
               </span>
               <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
@@ -105,7 +105,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                       onClick={() => setSelectedEnergy('medium')}
                       style={{
                         background: selectedEnergy === 'medium' ? 'rgba(100, 210, 255, 0.25)' : 'rgba(255,255,255,0.04)',
-                        border: `1px solid ${selectedEnergy === 'medium' ? 'var(--color-accent-primary)' : 'rgba(255,255,255,0.1)'}`,
+                        border: `1px solid ${selectedEnergy === 'medium' ? 'var(--accent)' : 'rgba(255,255,255,0.1)'}`,
                         borderRadius: '16px',
                         padding: '16px',
                         textAlign: 'left',
@@ -123,7 +123,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                       onClick={() => setSelectedEnergy('low')}
                       style={{
                         background: selectedEnergy === 'low' ? 'rgba(255, 159, 10, 0.25)' : 'rgba(255,255,255,0.04)',
-                        border: `1px solid ${selectedEnergy === 'low' ? 'var(--color-accent-warning)' : 'rgba(255,255,255,0.1)'}`,
+                        border: `1px solid ${selectedEnergy === 'low' ? 'var(--warning)' : 'rgba(255,255,255,0.1)'}`,
                         borderRadius: '16px',
                         padding: '16px',
                         textAlign: 'left',
@@ -210,7 +210,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                   <button
                     type="button"
                     onClick={() => setEveningStep(2)}
-                    style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
+                    style={{ background: 'var(--accent)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
                   >
                     Siguiente â†’ Activar Higiene de SueÃ±o
                   </button>
@@ -223,7 +223,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                     <strong>Paso 2/2:</strong> Activa el protocolo de desconexiÃ³n CBT-I (21:00).
                   </p>
 
-                  <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(191,90,242,0.3)', padding: '14px', borderRadius: '14px', fontSize: '0.84rem', color: 'var(--color-accent-primary)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(191,90,242,0.3)', padding: '14px', borderRadius: '14px', fontSize: '0.84rem', color: 'var(--accent)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <strong>ðŸŒ™ Checklist de DesconexiÃ³n Nocturna:</strong>
                     <span>âœ“ Pantallas apagadas / modo noche activado</span>
                     <span>âœ“ HabitaciÃ³n ventilada y fresca</span>
@@ -233,7 +233,7 @@ export default function MorningEveningWorkflowsModal({ mode, onClose, onSelectEn
                   <button
                     type="button"
                     onClick={onClose}
-                    style={{ background: 'var(--color-accent-primary)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
+                    style={{ background: 'var(--accent)', border: 'none', color: '#fff', padding: '12px', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
                   >
                     ðŸ˜´ Cerrar DÃ­a & A Descansar
                   </button>

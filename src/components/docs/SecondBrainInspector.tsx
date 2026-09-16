@@ -108,7 +108,7 @@ export default function SecondBrainInspector({
         {/* HEADER & VIEW MODE SELECTOR (APPLE GLASS STYLE) */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px' }}>
           <div>
-            <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+            <span style={{ fontFamily: '-apple-system, SF Pro Text, sans-serif', fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
               SEGUNDO CEREBRO • INTEGRACIÓN DIRECTA NOTION & OBSIDIAN
             </span>
             <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
@@ -122,7 +122,7 @@ export default function SecondBrainInspector({
               type="button"
               onClick={() => setViewMode('reinterpreted')}
               style={{
-                background: viewMode === 'reinterpreted' ? 'var(--color-accent-primary)' : 'transparent',
+                background: viewMode === 'reinterpreted' ? 'var(--accent)' : 'transparent',
                 color: viewMode === 'reinterpreted' ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
@@ -140,7 +140,7 @@ export default function SecondBrainInspector({
               type="button"
               onClick={() => setViewMode('notion_embed')}
               style={{
-                background: viewMode === 'notion_embed' ? 'var(--color-accent-warning)' : 'transparent',
+                background: viewMode === 'notion_embed' ? 'var(--warning)' : 'transparent',
                 color: viewMode === 'notion_embed' ? '#000000' : 'var(--color-text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
@@ -158,7 +158,7 @@ export default function SecondBrainInspector({
               type="button"
               onClick={() => setViewMode('obsidian_vault')}
               style={{
-                background: viewMode === 'obsidian_vault' ? 'var(--color-accent-primary)' : 'transparent',
+                background: viewMode === 'obsidian_vault' ? 'var(--accent)' : 'transparent',
                 color: viewMode === 'obsidian_vault' ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                 border: 'none',
                 padding: '6px 14px',
@@ -199,7 +199,7 @@ export default function SecondBrainInspector({
               {/* DEEP WORK HOURS CARD */}
               <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
                     TRABAJO PROFUNDO SEMANAL
                   </span>
                   <span style={{ fontSize: '1.2rem' }}>🚀</span>
@@ -209,7 +209,7 @@ export default function SecondBrainInspector({
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>/ 25h meta</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
-                  <div style={{ width: '90%', height: '100%', background: 'var(--color-accent-primary)', borderRadius: '999px' }} />
+                  <div style={{ width: '90%', height: '100%', background: 'var(--accent)', borderRadius: '999px' }} />
                 </div>
                 <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>Bloque A Tesis + Bloque B TwinSight MVP</span>
               </div>
@@ -217,7 +217,7 @@ export default function SecondBrainInspector({
               {/* FITNESS VOLUME CARD */}
               <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-warning)', fontWeight: 700, textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--warning)', fontWeight: 700, textTransform: 'uppercase' }}>
                     VOLUMEN ACUMULADO FITAPP
                   </span>
                   <span style={{ fontSize: '1.2rem' }}>💪</span>
@@ -227,7 +227,7 @@ export default function SecondBrainInspector({
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>Esta semana</span>
                 </div>
                 <div style={{ background: 'rgba(255,255,255,0.08)', height: '6px', borderRadius: '999px', overflow: 'hidden' }}>
-                  <div style={{ width: '75%', height: '100%', background: 'var(--color-accent-warning)', borderRadius: '999px' }} />
+                  <div style={{ width: '75%', height: '100%', background: 'var(--warning)', borderRadius: '999px' }} />
                 </div>
                 <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>Nippard Min-Max + Calistenia Anillas</span>
               </div>
@@ -262,7 +262,7 @@ export default function SecondBrainInspector({
                 type="button"
                 onClick={handleSaveNotionUrl}
                 style={{
-                  background: 'var(--color-accent-warning)',
+                  background: 'var(--warning)',
                   border: 'none',
                   color: '#000000',
                   fontWeight: 700,
@@ -281,13 +281,13 @@ export default function SecondBrainInspector({
               <div style={{ background: '#1c1c1e', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-accent-danger)' }} />
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-accent-warning)' }} />
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--warning)' }} />
                   <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-state-done)' }} />
                 </div>
                 <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontFamily: 'SF Mono, monospace' }}>
                   Notion In-App Live Inspector • {notionEmbedUrl}
                 </span>
-                <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
+                <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>
                   ↗ Abrir Web
                 </a>
               </div>
@@ -306,7 +306,7 @@ export default function SecondBrainInspector({
           <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '16px', minHeight: '420px' }}>
             {/* FILE TREE */}
             <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: 'var(--accent)', fontWeight: 700 }}>
                 VAULT: {vaultName.toUpperCase()}
               </span>
 
@@ -320,7 +320,7 @@ export default function SecondBrainInspector({
                       textAlign: 'left',
                       background: selectedNoteIndex === idx ? 'rgba(191, 90, 242, 0.2)' : 'rgba(255,255,255,0.04)',
                       border: `1px solid ${selectedNoteIndex === idx ? 'rgba(191, 90, 242, 0.4)' : 'transparent'}`,
-                      color: selectedNoteIndex === idx ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)',
+                      color: selectedNoteIndex === idx ? 'var(--accent)' : 'var(--color-text-secondary)',
                       padding: '8px 12px',
                       borderRadius: '10px',
                       fontSize: '0.78rem',
@@ -340,7 +340,7 @@ export default function SecondBrainInspector({
                   style={{
                     background: 'rgba(191, 90, 242, 0.15)',
                     border: '1px solid rgba(191, 90, 242, 0.35)',
-                    color: 'var(--color-accent-primary)',
+                    color: 'var(--accent)',
                     padding: '8px 12px',
                     borderRadius: '10px',
                     fontSize: '0.75rem',
@@ -361,7 +361,7 @@ export default function SecondBrainInspector({
                 <h4 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--color-text-primary)', fontWeight: 700 }}>{selectedNote.filename}</h4>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   {selectedNote.tags.map((t, idx) => (
-                    <span key={idx} style={{ fontSize: '0.68rem', background: 'rgba(191,90,242,0.15)', color: 'var(--color-accent-primary)', padding: '2px 8px', borderRadius: '4px', fontFamily: 'SF Mono, monospace' }}>
+                    <span key={idx} style={{ fontSize: '0.68rem', background: 'rgba(191,90,242,0.15)', color: 'var(--accent)', padding: '2px 8px', borderRadius: '4px', fontFamily: 'SF Mono, monospace' }}>
                       {t}
                     </span>
                   ))}

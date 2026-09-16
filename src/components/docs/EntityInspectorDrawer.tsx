@@ -46,7 +46,7 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
           {/* HEADER */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'SF Mono, monospace', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
                 INSPECTOR DE ENTIDAD CANÓNICA • {entity.domain.toUpperCase()}
               </span>
               <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '4px 0 0', color: 'var(--color-text-primary)' }}>
@@ -68,7 +68,7 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
             <button
               type="button"
               onClick={() => setActiveTab('what')}
-              style={{ background: activeTab === 'what' ? 'var(--color-accent-primary)' : 'transparent', color: activeTab === 'what' ? '#ffffff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: activeTab === 'what' ? 'var(--accent)' : 'transparent', color: activeTab === 'what' ? '#ffffff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
             >
               📌 Qué es
             </button>
@@ -82,14 +82,14 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
             <button
               type="button"
               onClick={() => setActiveTab('why')}
-              style={{ background: activeTab === 'why' ? 'var(--color-accent-warning)' : 'transparent', color: activeTab === 'why' ? '#ffffff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: activeTab === 'why' ? 'var(--warning)' : 'transparent', color: activeTab === 'why' ? '#ffffff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
             >
               💡 Por qué existe
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('source')}
-              style={{ background: activeTab === 'source' ? 'var(--color-accent-primary)' : 'transparent', color: activeTab === 'source' ? '#ffffff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: activeTab === 'source' ? 'var(--accent)' : 'transparent', color: activeTab === 'source' ? '#ffffff' : 'var(--color-text-secondary)', border: 'none', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer' }}
             >
               📄 Fuente
             </button>
@@ -115,7 +115,7 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
                   <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Etiquetas & Taxonomía:</strong>
                   <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
                     {entity.tags.map((t, idx) => (
-                      <span key={idx} style={{ background: 'var(--color-accent-primary-soft)', color: 'var(--color-accent-primary)', padding: '2px 8px', borderRadius: '6px', fontSize: '0.72rem', fontFamily: 'SF Mono, monospace' }}>
+                      <span key={idx} style={{ background: 'var(--color-accent-primary-soft)', color: 'var(--accent)', padding: '2px 8px', borderRadius: '6px', fontSize: '0.72rem', fontFamily: 'SF Mono, monospace' }}>
                         {t}
                       </span>
                     ))}
@@ -131,12 +131,12 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
                   <p style={{ margin: '4px 0 0', color: 'var(--color-text-primary)' }}>{entity.minViableVersion}</p>
                 </div>
 
-                <div style={{ background: 'var(--color-accent-primary-soft)', border: '1px solid var(--color-accent-primary-glow)', padding: '14px', borderRadius: '12px', color: 'var(--color-accent-primary)' }}>
+                <div style={{ background: 'var(--color-accent-primary-soft)', border: '1px solid var(--color-accent-primary-glow)', padding: '14px', borderRadius: '12px', color: 'var(--accent)' }}>
                   <strong>🩵 Versión Normal Estándar:</strong>
                   <p style={{ margin: '4px 0 0', color: 'var(--color-text-primary)' }}>{entity.normalVersion}</p>
                 </div>
 
-                <div style={{ background: 'var(--color-accent-primary-soft)', border: '1px solid var(--color-accent-primary-glow)', padding: '14px', borderRadius: '12px', color: 'var(--color-accent-primary)' }}>
+                <div style={{ background: 'var(--color-accent-primary-soft)', border: '1px solid var(--color-accent-primary-glow)', padding: '14px', borderRadius: '12px', color: 'var(--accent)' }}>
                   <strong>⚡ Versión Extendida / Máxima Carga:</strong>
                   <p style={{ margin: '4px 0 0', color: 'var(--color-text-primary)' }}>{entity.extendedVersion}</p>
                 </div>
@@ -145,12 +145,12 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
 
             {activeTab === 'why' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.88rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '14px', borderRadius: '12px', borderLeft: '3px solid var(--color-accent-warning)' }}>
+                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '14px', borderRadius: '12px', borderLeft: '3px solid var(--warning)' }}>
                   <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>Racional & Justificación:</strong>
                   <p style={{ margin: '4px 0 0' }}>{entity.rationale}</p>
                 </div>
 
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '14px', borderRadius: '12px', borderLeft: '3px solid var(--color-accent-primary)' }}>
+                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '14px', borderRadius: '12px', borderLeft: '3px solid var(--accent)' }}>
                   <strong style={{ color: 'var(--color-text-primary)', display: 'block' }}>¿Por Qué Existe Esto en el Plan Maestro?</strong>
                   <p style={{ margin: '4px 0 0' }}>{entity.whyThisExists}</p>
                 </div>
@@ -166,7 +166,7 @@ export default function EntityInspectorDrawer({ entity, onClose }: Props) {
                       <strong style={{ color: 'var(--color-text-primary)', display: 'block', fontSize: '0.88rem' }}>{doc.title}</strong>
                       <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontFamily: 'SF Mono, monospace' }}>{doc.filename}</span>
                     </div>
-                    <a href={`/api/doc/${doc.filename.replace('.md', '')}.json`} target="_blank" rel="noreferrer" style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', textDecoration: 'none', fontWeight: 700 }}>
+                    <a href={`/api/doc/${doc.filename.replace('.md', '')}.json`} target="_blank" rel="noreferrer" style={{ fontSize: '0.75rem', color: 'var(--accent)', textDecoration: 'none', fontWeight: 700 }}>
                       ↗ Ver JSON
                     </a>
                   </div>

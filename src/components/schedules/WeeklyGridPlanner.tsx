@@ -14,10 +14,10 @@ export default function WeeklyGridPlanner() {
 
   const getDomainBadgeColor = (domain: string) => {
     switch (domain) {
-      case 'clinical': return { bg: 'rgba(10, 132, 255, 0.12)', color: 'var(--color-accent-primary)', border: 'var(--color-border-visible)' };
+      case 'clinical': return { bg: 'rgba(10, 132, 255, 0.12)', color: 'var(--accent)', border: 'var(--color-border-visible)' };
       case 'fitness': return { bg: 'rgba(48, 209, 88, 0.15)', color: 'var(--color-state-done)', border: 'rgba(48, 209, 88, 0.3)' };
-      case 'career': return { bg: 'rgba(10, 132, 255, 0.12)', color: 'var(--color-accent-primary)', border: 'var(--color-border-visible)' };
-      case 'german': return { bg: 'rgba(255, 159, 10, 0.15)', color: 'var(--color-accent-warning)', border: 'rgba(255, 159, 10, 0.3)' };
+      case 'career': return { bg: 'rgba(10, 132, 255, 0.12)', color: 'var(--accent)', border: 'var(--color-border-visible)' };
+      case 'german': return { bg: 'rgba(255, 159, 10, 0.15)', color: 'var(--warning)', border: 'rgba(255, 159, 10, 0.3)' };
       default: return { bg: 'var(--color-surface-overlay)', color: 'var(--color-text-secondary)', border: 'var(--color-border-subtle)' };
     }
   };
@@ -39,7 +39,7 @@ export default function WeeklyGridPlanner() {
         {/* HEADER & PHASE SELECTOR */}
         <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-4)' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '0.05em' }}>
               MATRIZ OPERATIVA INTEGRADA V3
             </span>
             <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
@@ -53,7 +53,7 @@ export default function WeeklyGridPlanner() {
               type="button"
               onClick={(e) => { e.preventDefault(); setSelectedPhase(1); }}
               style={{
-                background: selectedPhase === 1 ? 'var(--color-accent-primary)' : 'transparent',
+                background: selectedPhase === 1 ? 'var(--accent)' : 'transparent',
                 border: 'none',
                 color: selectedPhase === 1 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
@@ -70,7 +70,7 @@ export default function WeeklyGridPlanner() {
               type="button"
               onClick={(e) => { e.preventDefault(); setSelectedPhase(2); }}
               style={{
-                background: selectedPhase === 2 ? 'var(--color-accent-primary)' : 'transparent',
+                background: selectedPhase === 2 ? 'var(--accent)' : 'transparent',
                 border: 'none',
                 color: selectedPhase === 2 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
@@ -87,7 +87,7 @@ export default function WeeklyGridPlanner() {
               type="button"
               onClick={(e) => { e.preventDefault(); setSelectedPhase(3); }}
               style={{
-                background: selectedPhase === 3 ? 'var(--color-accent-primary)' : 'transparent',
+                background: selectedPhase === 3 ? 'var(--accent)' : 'transparent',
                 border: 'none',
                 color: selectedPhase === 3 ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)',
                 padding: '6px 14px',
@@ -113,16 +113,16 @@ export default function WeeklyGridPlanner() {
           alignItems: 'center'
         }}>
           <div><strong style={{ color: 'var(--color-text-primary)' }}>Fase Activa:</strong> {selectedPhase === 1 ? 'Fase 1 (Reaclimatación & Tesis)' : selectedPhase === 2 ? 'Fase 2 (Exposición & Materiales)' : 'Fase 3 (Soft Launch & Entrevistas)'}</div>
-          <div><strong style={{ color: 'var(--color-accent-warning)' }}>Alemán:</strong> 13:30 – 14:00 (7 días)</div>
+          <div><strong style={{ color: 'var(--warning)' }}>Alemán:</strong> 13:30 – 14:00 (7 días)</div>
           <div><strong style={{ color: 'var(--color-state-done)' }}>Fitness:</strong> Prehab AM 06:20 + Min-Max 06:55 + PM Movilidad 17:15</div>
-          <div><strong style={{ color: 'var(--color-accent-primary)' }}>CBT:</strong> Sustentación & Exposición 14:00 – 14:40</div>
+          <div><strong style={{ color: 'var(--accent)' }}>CBT:</strong> Sustentación & Exposición 14:00 – 14:40</div>
         </div>
 
         {/* MAIN GRID TABLE */}
         <div style={{ overflowX: 'auto', borderRadius: 'var(--radius-l)', border: '1px solid var(--color-border-subtle)' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '900px' }}>
             <thead>
-              <tr style={{ background: 'rgba(0, 0, 0, 0.5)', borderBottom: '1px solid var(--color-border-subtle)', fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-accent-primary)' }}>
+              <tr style={{ background: 'rgba(0, 0, 0, 0.5)', borderBottom: '1px solid var(--color-border-subtle)', fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--accent)' }}>
                 <th style={{ padding: '12px 14px', width: '14%' }}>BLOQUE DE HORA</th>
                 {DAYS_LIST.map(d => (
                   <th key={d} style={{ padding: '12px 14px', width: '12.2%' }}>{d}</th>
@@ -132,7 +132,7 @@ export default function WeeklyGridPlanner() {
             <tbody>
               {TIME_BLOCKS.map((time, tIdx) => (
                 <tr key={time} style={{ borderBottom: tIdx === TIME_BLOCKS.length - 1 ? 'none' : '1px solid var(--color-border-subtle)' }}>
-                  <td style={{ padding: '12px 14px', fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, background: 'rgba(0, 0, 0, 0.3)' }}>
+                  <td style={{ padding: '12px 14px', fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, background: 'rgba(0, 0, 0, 0.3)' }}>
                     {time}
                   </td>
                   {DAYS_LIST.map(day => {
@@ -225,7 +225,7 @@ export default function WeeklyGridPlanner() {
             {/* DRAWER HEADER */}
             <div className="ds-row-between" style={{ alignItems: 'flex-start' }}>
               <div>
-                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+                <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700 }}>
                   {selectedCell.time} • DETALLE OPERATIVO
                 </span>
                 <h3 className="ds-h3" style={{ margin: '4px 0 0' }}>
@@ -255,7 +255,7 @@ export default function WeeklyGridPlanner() {
             {/* MODULE & RULE */}
             <div className="ds-stack-sm" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '14px', padding: '14px' }}>
               <div>
-                <strong style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
+                <strong style={{ fontSize: '0.72rem', color: 'var(--accent)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                   Módulo Aplicado:
                 </strong>
                 <span style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)', display: 'block', fontWeight: 600 }}>
@@ -274,7 +274,7 @@ export default function WeeklyGridPlanner() {
 
             {/* MICRO ACTIONS */}
             <div>
-              <strong style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
+              <strong style={{ fontSize: '0.75rem', color: 'var(--accent)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                 Micro-Acciones de Ejecución:
               </strong>
               <ul style={{ margin: '8px 0 0', paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -293,7 +293,7 @@ export default function WeeklyGridPlanner() {
               borderRadius: '14px',
               padding: '14px'
             }}>
-              <strong style={{ fontSize: '0.72rem', color: 'var(--color-accent-warning)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
+              <strong style={{ fontSize: '0.72rem', color: 'var(--warning)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
                 🛡️ ¿Qué hacer si hoy no sale este bloque?
               </strong>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.8rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
@@ -311,7 +311,7 @@ export default function WeeklyGridPlanner() {
               borderRadius: '14px',
               padding: '14px'
             }}>
-              <strong style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
+              <strong style={{ fontSize: '0.72rem', color: 'var(--accent)', fontFamily: 'Azeret Mono, monospace', textTransform: 'uppercase' }}>
                 📌 Paso de Reentrada Escrito:
               </strong>
               <input

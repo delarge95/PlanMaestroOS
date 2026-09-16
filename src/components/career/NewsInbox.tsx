@@ -31,7 +31,7 @@ export default function NewsInbox() {
               type="button"
               onClick={() => setViewFilter('inbox')}
               style={{
-                background: viewFilter === 'inbox' ? 'var(--color-accent-primary)' : 'transparent',
+                background: viewFilter === 'inbox' ? 'var(--accent)' : 'transparent',
                 color: viewFilter === 'inbox' ? '#000000' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 12px',
@@ -48,7 +48,7 @@ export default function NewsInbox() {
               type="button"
               onClick={() => setViewFilter('saved')}
               style={{
-                background: viewFilter === 'saved' ? 'var(--color-accent-primary)' : 'transparent',
+                background: viewFilter === 'saved' ? 'var(--accent)' : 'transparent',
                 color: viewFilter === 'saved' ? '#000000' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '6px 12px',
@@ -72,7 +72,7 @@ export default function NewsInbox() {
               onClick={() => setSelectedCategory(cat)}
               style={{
                 background: selectedCategory === cat ? 'var(--color-accent-primary-soft)' : 'transparent',
-                color: selectedCategory === cat ? 'var(--color-accent-primary)' : 'var(--text-tertiary)',
+                color: selectedCategory === cat ? 'var(--accent)' : 'var(--text-tertiary)',
                 border: 'none',
                 padding: '4px 10px',
                 borderRadius: '20px',
@@ -109,7 +109,7 @@ export default function NewsInbox() {
               >
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.68rem', color: 'var(--accent)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
                       {item.category}
                     </span>
                     <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>

@@ -102,7 +102,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                 type="button"
                 onClick={() => setActiveTab('theory')}
                 style={{
-                  background: activeTab === 'theory' ? 'var(--color-accent-primary)' : 'transparent',
+                  background: activeTab === 'theory' ? 'var(--accent)' : 'transparent',
                   color: activeTab === 'theory' ? '#000000' : 'var(--text-secondary)',
                   border: 'none',
                   padding: '6px 12px',
@@ -119,7 +119,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                 type="button"
                 onClick={() => setActiveTab('exercises')}
                 style={{
-                  background: activeTab === 'exercises' ? 'var(--color-accent-primary)' : 'transparent',
+                  background: activeTab === 'exercises' ? 'var(--accent)' : 'transparent',
                   color: activeTab === 'exercises' ? '#000000' : 'var(--text-secondary)',
                   border: 'none',
                   padding: '6px 12px',
@@ -139,7 +139,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
         {activeTab === 'theory' && (
           <div className="ds-stack-sm">
             {lesson.content.map((block, idx) => (
-              <div key={idx} style={{ background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid var(--color-accent-primary)', padding: '10px 14px', borderRadius: '0 6px 6px 0', fontSize: '0.86rem', color: 'var(--text-secondary)' }}>
+              <div key={idx} style={{ background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid var(--accent)', padding: '10px 14px', borderRadius: '0 var(--radius-s) var(--radius-s) 0', fontSize: 'var(--fs-body)', lineHeight: 1.5, maxWidth: '65ch', color: 'var(--text-secondary)' }}>
                 {block}
               </div>
             ))}
@@ -153,8 +153,8 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
               const answered = (userAnswers[ex.id] ?? '').trim() !== '';
               const isCorrect = answered && answersMatch(userAnswers[ex.id], ex.correctAnswer);
               return (
-              <div key={ex.id} className="ds-stack-sm" style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${answered ? (isCorrect ? 'var(--color-state-done)' : 'var(--color-state-error, var(--color-accent-warning))') : 'var(--color-border-subtle)'}`, borderRadius: 'var(--radius-s)', padding: 'var(--space-3)' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+              <div key={ex.id} className="ds-stack-sm" style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${answered ? (isCorrect ? 'var(--color-state-done)' : 'var(--color-state-error, var(--warning))') : 'var(--color-border-subtle)'}`, borderRadius: 'var(--radius-s)', padding: 'var(--space-3)' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 700 }}>
                   Ejercicio {idx + 1}: {ex.prompt}
                 </span>
 
@@ -167,8 +167,8 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                         onClick={() => handleAnswerChange(ex.id, opt)}
                         style={{
                           background: userAnswers[ex.id] === opt ? 'var(--color-accent-primary-soft)' : 'rgba(255,255,255,0.04)',
-                          color: userAnswers[ex.id] === opt ? 'var(--color-accent-primary)' : 'var(--text-secondary)',
-                          border: `1px solid ${userAnswers[ex.id] === opt ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
+                          color: userAnswers[ex.id] === opt ? 'var(--accent)' : 'var(--text-secondary)',
+                          border: `1px solid ${userAnswers[ex.id] === opt ? 'var(--accent)' : 'var(--color-border-subtle)'}`,
                           padding: '6px 12px',
                           borderRadius: '6px',
                           fontSize: '0.8rem',
@@ -193,7 +193,7 @@ export default function LessonView({ lesson, language = 'de', onLessonCompleted,
                 )}
 
                 {answered && (
-                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: isCorrect ? 'var(--color-state-done)' : 'var(--color-accent-warning)' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: isCorrect ? 'var(--color-state-done)' : 'var(--warning)' }}>
                     {isCorrect ? '✓ Correcto' : `✗ Revisa — solución: ${ex.correctAnswer}`}
                   </span>
                 )}

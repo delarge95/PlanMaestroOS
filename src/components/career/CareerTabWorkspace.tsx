@@ -66,7 +66,8 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
     <ErrorBoundary>
       <div className="ds-stack">
 
-        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
+        {/* NAVEGACIÓN NIVEL 2 (SUBMENÚ 1: STICKY 62px) */}
+        {/* TÍTULO PRINCIPAL (DESAPARECE AL SCROLLEAR) */}
         <h1 className="ds-h1" style={{ margin: '4px 0 12px 0' }}>
           Gestión de Carrera & Empleo
         </h1>
@@ -97,14 +98,14 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
         <div className="ds-grid">
           <div className="ds-card ds-stack-sm">
             <span className="ds-eyebrow">APLICACIONES ESTA SEMANA</span>
-            <strong className="ds-h2" style={{ color: 'var(--color-accent-primary)', marginTop: '2px' }}>
+            <strong className="ds-h2" style={{ color: 'var(--accent)', marginTop: '2px' }}>
               {metrics.applicationsThisWeek} vacantes
             </strong>
           </div>
 
           <div className="ds-card ds-stack-sm">
             <span className="ds-eyebrow">DÍAS HASTA SEGUIMIENTO</span>
-            <strong className="ds-h2" style={{ color: 'var(--color-accent-warning)', marginTop: '2px' }}>
+            <strong className="ds-h2" style={{ color: 'var(--warning)', marginTop: '2px' }}>
               ~{metrics.avgDaysToFollowUp} días promedio
             </strong>
           </div>
@@ -125,12 +126,12 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                 key={app.id}
                 className="ds-card ds-stack"
                 style={{
-                  borderColor: selectedAppId === app.id ? 'var(--color-accent-primary)' : undefined
+                  borderColor: selectedAppId === app.id ? 'var(--accent)' : undefined
                 }}
               >
                 <div className="ds-row-between" style={{ flexWrap: 'wrap', gap: 'var(--space-xs)' }}>
                   <div>
-                    <span className="ds-eyebrow" style={{ color: 'var(--color-accent-primary)' }}>
+                    <span className="ds-eyebrow" style={{ color: 'var(--accent)' }}>
                       {app.company} · {app.remoteType}
                     </span>
                     <h3 className="ds-h3" style={{ margin: '2px 0 0' }}>
@@ -177,7 +178,7 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                 {/* ÚNICA SIGUIENTE ACCIÓN PER DOCUMENTO 06 */}
                 <div className="ds-card ds-row-between" style={{ padding: 'var(--space-sm)', flexWrap: 'wrap' }}>
                   <div className="ds-row" style={{ gap: 'var(--space-xs)' }}>
-                    <Calendar size={16} style={{ color: 'var(--color-accent-warning)' }} />
+                    <Calendar size={16} style={{ color: 'var(--warning)' }} />
                     <span className="ds-body">
                       <strong>Única siguiente acción:</strong> {app.singleNextAction}
                     </span>
@@ -195,7 +196,7 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
         {activeTab === 'detail' && selectedApp && (
           <div className="ds-card ds-stack" style={{ padding: 'var(--space-lg)' }}>
             <div>
-              <span className="ds-eyebrow" style={{ color: 'var(--color-accent-primary)' }}>
+              <span className="ds-eyebrow" style={{ color: 'var(--accent)' }}>
                 ANÁLISIS DE MATCH Y ENCAJE DETALLADO
               </span>
               <h2 className="ds-h2" style={{ margin: '4px 0 0' }}>
@@ -261,7 +262,7 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                     {ast.title}
                   </strong>
                   {ast.githubRepoUrl && (
-                    <a href={ast.githubRepoUrl} target="_blank" rel="noreferrer" className="ds-row ds-caption" style={{ color: 'var(--color-accent-primary)', textDecoration: 'none', marginTop: '4px', gap: '4px' }}>
+                    <a href={ast.githubRepoUrl} target="_blank" rel="noreferrer" className="ds-row ds-caption" style={{ color: 'var(--accent)', textDecoration: 'none', marginTop: '4px', gap: '4px' }}>
                       <ExternalLink size={13} /> Ver Evidencia en GitHub
                     </a>
                   )}
@@ -286,8 +287,8 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
         {/* VISTA 4: BORRADORES IA CON APROBACIÓN OBLIGATORIA */}
         {activeTab === 'drafts' && (
           <div className="ds-stack">
-            <div className="ds-card ds-row" style={{ background: 'var(--color-accent-primary-soft)', borderColor: 'var(--color-accent-primary)', gap: 'var(--space-sm)' }}>
-              <ShieldAlert size={20} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
+            <div className="ds-card ds-row" style={{ background: 'var(--color-accent-primary-soft)', borderColor: 'var(--accent)', gap: 'var(--space-sm)' }}>
+              <ShieldAlert size={20} style={{ color: 'var(--accent)', flexShrink: 0 }} />
               <span className="ds-body" style={{ fontWeight: 500 }}>
                 Los borradores de IA permanecen aislados de las aplicaciones enviadas. Todo contenido requiere tu revisión y aprobación manual antes de utilizarse.
               </span>
@@ -296,7 +297,7 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
             {aiDrafts.map((dft) => (
               <div key={dft.id} className="ds-card ds-stack">
                 <div className="ds-row-between">
-                  <span className="ds-eyebrow" style={{ color: 'var(--color-accent-warning)' }}>
+                  <span className="ds-eyebrow" style={{ color: 'var(--warning)' }}>
                     BORRADOR ASISTIDO · {dft.company} ({dft.role})
                   </span>
                   <span className="ds-badge ds-badge-warning">
@@ -309,7 +310,7 @@ export default function CareerTabWorkspace({ currentPath = '/app/career' }: Care
                 </div>
 
                 {dft.unverifiedClaimsFlagged.length > 0 && (
-                  <div className="ds-caption" style={{ color: 'var(--color-accent-warning)' }}>
+                  <div className="ds-caption" style={{ color: 'var(--warning)' }}>
                     ⚠️ Afirmación no verificada para revisión: {dft.unverifiedClaimsFlagged.join(', ')}
                   </div>
                 )}

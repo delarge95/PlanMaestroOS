@@ -108,7 +108,7 @@ export default function PlacementTest({ onPlaced }: PlacementTestProps) {
           </div>
 
           <div className="ds-body">
-            Te colocamos en: <strong style={{ color: 'var(--color-accent-primary)' }}>{unitTitle}</strong>
+            Te colocamos en: <strong style={{ color: 'var(--accent)' }}>{unitTitle}</strong>
           </div>
 
           <div className="ds-stack-sm" style={{ gap: '6px' }}>
@@ -134,7 +134,7 @@ export default function PlacementTest({ onPlaced }: PlacementTestProps) {
 
         <div className="ds-row-between">
           <div className="ds-row" style={{ gap: '8px' }}>
-            <ClipboardList size={18} style={{ color: 'var(--color-accent-primary)' }} />
+            <ClipboardList size={18} style={{ color: 'var(--accent)' }} />
             <h3 className="ds-h3" style={{ margin: 0 }}>
               Test de nivelación A1.1
             </h3>
@@ -145,7 +145,7 @@ export default function PlacementTest({ onPlaced }: PlacementTestProps) {
         </div>
 
         <div style={{ height: '4px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px' }}>
-          <div style={{ height: '100%', width: `${progress}%`, background: 'var(--color-accent-primary)', borderRadius: '2px', transition: 'width 200ms' }} />
+          <div style={{ height: '100%', width: `${progress}%`, background: 'var(--accent)', borderRadius: '2px', transition: 'width 200ms' }} />
         </div>
 
         <div style={{ padding: 'var(--space-sm) 0' }}>

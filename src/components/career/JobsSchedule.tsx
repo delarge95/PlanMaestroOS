@@ -33,7 +33,7 @@ export default function JobsSchedule() {
 
             return (
               <div key={sec} style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                   {sec}
                 </span>
 
@@ -43,7 +43,7 @@ export default function JobsSchedule() {
                   items.map((i) => (
                     <div key={i.id} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                       <strong style={{ fontSize: '0.85rem', color: 'var(--text)' }}>{i.company}</strong>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-warning)', fontWeight: 600 }}>{i.actionType}</span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--warning)', fontWeight: 600 }}>{i.actionType}</span>
                       <span style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>{i.detail}</span>
                     </div>
                   ))

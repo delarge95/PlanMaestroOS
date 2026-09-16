@@ -72,7 +72,7 @@ export default function UnblockPanel({
       {/* HEADER PRESCRIPTIVO ¿Bloqueado? */}
       <div className="ds-row-between">
         <div className="ds-row" style={{ gap: '8px' }}>
-          <HelpCircle size={18} style={{ color: 'var(--color-accent-warning)' }} />
+          <HelpCircle size={18} style={{ color: 'var(--warning)' }} />
           <strong className="ds-label">
             ¿Bloqueado?
           </strong>

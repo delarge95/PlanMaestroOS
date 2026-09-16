@@ -18,7 +18,7 @@ export default function AiDraftReview({ draft, onApprove, onDiscard }: AiDraftRe
     <ErrorBoundary>
       <div style={{
         background: 'rgba(10,132,255,0.03)',
-        border: '1px solid var(--color-accent-primary)',
+        border: '1px solid var(--accent)',
         borderRadius: 'var(--radius-md)',
         padding: 'var(--space-md)',
         display: 'flex',
@@ -27,7 +27,7 @@ export default function AiDraftReview({ draft, onApprove, onDiscard }: AiDraftRe
       }}>
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: '4px' }}>
-          <span style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
             Borrador generado por IA
           </span>
           <span style={{ fontSize: '0.68rem', color: 'var(--text-tertiary)' }}>

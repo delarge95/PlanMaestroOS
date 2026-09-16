@@ -104,7 +104,7 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
           <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-state-done)', fontWeight: 700 }}>
             MINI-VENTANA FITNESS FITAPP
           </span>
-          <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--accent)', fontWeight: 700 }}>
             Progreso: {doneSetsCount}/{totalSets} series ({progressPct}%)
           </span>
         </div>
@@ -171,7 +171,7 @@ export default function DrawerMiniFitnessViewer({ dayName, workoutDayIndex, onOp
                   </span>
                 )}
               </div>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--color-accent-primary)', background: 'rgba(119,231,255,0.1)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.72rem', color: 'var(--accent)', background: 'rgba(119,231,255,0.1)', padding: '2px 6px', borderRadius: '4px', whiteSpace: 'nowrap' }}>
                 {ex.rir}
               </span>
             </div>

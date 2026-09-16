@@ -163,7 +163,7 @@ function ServiceCard({ svc, currency, onPick, index, lang }: {
         cursor: 'pointer', overflow: 'hidden',
         transition: 'transform 0.3s cubic-bezier(0.25,0.8,0.4,1), box-shadow 0.3s',
         boxShadow: '0 2px 16px var(--cx-border)',
-        animation: `cardIn 0.5s ${index * 0.05}s cubic-bezier(0.25,0.8,0.4,1) both`,
+        animation: `cardIn 0.3s ${index * 0.05}s cubic-bezier(0.25,0.8,0.4,1) both`,
       }}
     >
       {/* Glare effect */}

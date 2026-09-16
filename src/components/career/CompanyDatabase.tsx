@@ -11,8 +11,8 @@ type TabKey = 'companies' | 'boards' | 'recruiters' | 'communities';
 type TierFilter = 'all' | 'A' | 'B' | 'Watchlist' | 'A1' | 'A2';
 
 const TIER_BADGE: Record<string, { label: string; color: string }> = {
-  'Top Priority': { label: 'A', color: 'var(--color-accent-primary)' },
-  'Standard': { label: 'B', color: 'var(--color-accent-warning)' },
+  'Top Priority': { label: 'A', color: 'var(--accent)' },
+  'Standard': { label: 'B', color: 'var(--warning)' },
   'Watchlist': { label: 'W', color: 'var(--text-tertiary)' }
 };
 
@@ -190,10 +190,10 @@ export default function CompanyDatabase() {
                   </div>
                   <DetailRow label="Autorización" value={selected.authNote} />
                   <div className="ds-row ds-caption" style={{ gap: '10px' }}>
-                    <span>Fit <strong style={{ color: 'var(--color-accent-primary)' }}>{selected.scores.fit}/5</strong></span>
-                    <span>Prob. <strong style={{ color: 'var(--color-accent-primary)' }}>{selected.scores.probability}/5</strong></span>
-                    <span>Comp. <strong style={{ color: 'var(--color-accent-primary)' }}>{selected.scores.compensation}/5</strong></span>
-                    <span>Portafolio <strong style={{ color: 'var(--color-accent-primary)' }}>{selected.scores.portfolio}/5</strong></span>
+                    <span>Fit <strong style={{ color: 'var(--accent)' }}>{selected.scores.fit}/5</strong></span>
+                    <span>Prob. <strong style={{ color: 'var(--accent)' }}>{selected.scores.probability}/5</strong></span>
+                    <span>Comp. <strong style={{ color: 'var(--accent)' }}>{selected.scores.compensation}/5</strong></span>
+                    <span>Portafolio <strong style={{ color: 'var(--accent)' }}>{selected.scores.portfolio}/5</strong></span>
                   </div>
 
                   {(selected.wave === 'A1' ? selected.whyFirst || selected.verificationFocus : selected.mainUpside || selected.mainFriction) && (
@@ -216,11 +216,11 @@ export default function CompanyDatabase() {
 
                   {/* INVESTIGACIÓN PROFUNDA (protocolo doc-31 + regla de fit del tracker) */}
                   <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 'var(--space-2)' }}>
-                    <CompanyResearchPanel companyName={selected.name} />
+                    <CompanyResearchPanel key={selected.name} companyName={selected.name} />
                     <a
                       href="/app/career/portfolio"
                       className="ds-caption"
-                      style={{ color: 'var(--color-accent-primary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '6px' }}
+                      style={{ color: 'var(--accent)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '6px' }}
                     >
                       Generar CV adaptado <ChevronRight size={12} />
                     </a>
@@ -233,9 +233,9 @@ export default function CompanyDatabase() {
                         <History size={12} /> Interacciones registradas
                       </strong>
                       {selectedTimeline.timeline.map((t) => (
-                        <div key={t.id} style={{ borderLeft: '2px solid var(--color-accent-primary)', paddingLeft: 'var(--space-2)', display: 'flex', flexDirection: 'column', gap: '1px' }}>
+                        <div key={t.id} style={{ borderLeft: '2px solid var(--accent)', paddingLeft: 'var(--space-2)', display: 'flex', flexDirection: 'column', gap: '1px' }}>
                           <div className="ds-row-between ds-micro">
-                            <span style={{ color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+                            <span style={{ color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
                               {t.type === 'message' ? 'Mensaje' : t.type === 'cv_sent' ? 'CV enviado' : t.type === 'reply' ? 'Respuesta' : t.type === 'interview' ? 'Entrevista' : 'Resultado'}
                             </span>
                             <span style={{ color: 'var(--text-tertiary)' }}>{t.dateIso}</span>
@@ -308,7 +308,7 @@ function ChannelList({ kind }: { kind: 'board' | 'recruiter' | 'community' }) {
           style={{ padding: 'var(--space-2) 10px', display: 'grid', gridTemplateColumns: 'minmax(140px, 1.2fr) 2fr', gap: '4px var(--space-3)' }}
         >
           <div>
-            <a href={it.url} target="_blank" rel="noreferrer" className="ds-row ds-label" style={{ fontWeight: 700, color: 'var(--color-accent-primary)', textDecoration: 'none', gap: '4px' }}>
+            <a href={it.url} target="_blank" rel="noreferrer" className="ds-row ds-label" style={{ fontWeight: 700, color: 'var(--accent)', textDecoration: 'none', gap: '4px' }}>
               {it.name} <ExternalLink size={11} />
             </a>
             {'category' in it && <span className="ds-micro" style={{ display: 'block' }}>{it.category}</span>}

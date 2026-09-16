@@ -121,7 +121,7 @@ export default function CustomRoutineBuilder() {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '0.05em' }}>
               CREADOR DE RUTINAS A LA MEDIDA FITAPP
             </span>
             <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
@@ -135,7 +135,7 @@ export default function CustomRoutineBuilder() {
             style={{
               background: isBuilding ? 'rgba(239,68,68,0.15)' : 'rgba(119, 231, 255, 0.15)',
               border: `1px solid ${isBuilding ? 'rgba(239,68,68,0.4)' : 'rgba(119, 231, 255, 0.4)'}`,
-              color: isBuilding ? 'var(--color-accent-danger)' : 'var(--color-accent-primary)',
+              color: isBuilding ? 'var(--color-accent-danger)' : 'var(--accent)',
               padding: '8px 16px',
               borderRadius: '12px',
               fontWeight: 700,
@@ -151,7 +151,7 @@ export default function CustomRoutineBuilder() {
         {isBuilding && (
           <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(119,231,255,0.2)', borderRadius: '18px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <label style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--color-accent-primary)', textTransform: 'uppercase', fontWeight: 700 }}>
+              <label style={{ fontSize: '0.75rem', fontFamily: 'Azeret Mono, monospace', color: 'var(--accent)', textTransform: 'uppercase', fontWeight: 700 }}>
                 Título de la Rutina:
               </label>
               <input

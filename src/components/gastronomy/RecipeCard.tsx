@@ -22,7 +22,7 @@ export default function RecipeCard({ recipe, onSelect }: RecipeCardProps) {
       }}
     >
       <div>
-        <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+        <span style={{ fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
           {recipe.cuisine} · {recipe.timeMinutes} min
         </span>
         <strong style={{ fontSize: '0.92rem', color: 'var(--text)', display: 'block', marginTop: '2px' }}>

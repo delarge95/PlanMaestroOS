@@ -39,7 +39,7 @@ export default function ProtocolCard({ protocol }: ProtocolCardProps) {
           style={{
             background: 'transparent',
             border: 'none',
-            color: 'var(--color-accent-primary)',
+            color: 'var(--accent)',
             fontWeight: 600,
             cursor: 'pointer',
             gap: '4px',

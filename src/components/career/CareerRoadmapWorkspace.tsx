@@ -23,7 +23,7 @@ export default function CareerRoadmapWorkspace() {
             type="button"
             onClick={() => setTab('dashboard')}
             style={{
-              background: tab === 'dashboard' ? 'var(--color-accent-primary)' : 'transparent',
+              background: tab === 'dashboard' ? 'var(--accent)' : 'transparent',
               color: tab === 'dashboard' ? '#000000' : 'var(--text-secondary)',
               border: 'none',
               padding: '6px 14px',
@@ -39,7 +39,7 @@ export default function CareerRoadmapWorkspace() {
             type="button"
             onClick={() => setTab('board')}
             style={{
-              background: tab === 'board' ? 'var(--color-accent-primary)' : 'transparent',
+              background: tab === 'board' ? 'var(--accent)' : 'transparent',
               color: tab === 'board' ? '#000000' : 'var(--text-secondary)',
               border: 'none',
               padding: '6px 14px',

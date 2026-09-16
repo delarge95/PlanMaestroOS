@@ -45,7 +45,8 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
 
   return (
     <ErrorBoundary>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>      <div style={{
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', width: '100%' }}>
+      <div style={{
         background: 'rgba(10, 15, 20, 0.65)',
         backdropFilter: 'blur(28px)',
         WebkitBackdropFilter: 'blur(28px)',
@@ -102,7 +103,7 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
                     {rf.priority}
                   </span>
                 </div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-primary)', display: 'block' }}>Stack: {rf.stack}</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--accent)', display: 'block' }}>Stack: {rf.stack}</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>Target: {rf.target}</span>
                 <span style={{ fontSize: '0.62rem', color: 'var(--color-text-secondary)', opacity: 0.7, display: 'block', marginTop: '6px', fontStyle: 'italic' }}>{rf.sourceRef}</span>
               </div>
@@ -200,10 +201,10 @@ export default function InteractiveRoadmapDashboard({ currentPath = '/app/career
 
                       <div>
                         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '4px' }}>
-                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', background: 'rgba(119, 231, 255, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>
+                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', background: 'rgba(119, 231, 255, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>
                             {m.weeks}
                           </span>
-                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', background: 'rgba(168, 85, 247, 0.12)', padding: '2px 6px', borderRadius: '4px' }}>
+                          <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', background: 'rgba(168, 85, 247, 0.12)', padding: '2px 6px', borderRadius: '4px' }}>
                             🔗 Conectado a: {m.connectedTimeBlock}
                           </span>
                         </div>

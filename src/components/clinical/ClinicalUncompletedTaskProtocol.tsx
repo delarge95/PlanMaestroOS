@@ -82,7 +82,7 @@ export default function ClinicalUncompletedTaskProtocol() {
             </span>
           </div>
 
-          <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', borderRadius: '14px', padding: '14px', borderLeft: '3px solid var(--color-accent-warning)' }}>
+          <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--color-border-subtle)', borderRadius: '14px', padding: '14px', borderLeft: '3px solid var(--warning)' }}>
             <strong style={{ color: 'var(--color-text-primary)', fontSize: '0.88rem', display: 'block', marginBottom: '4px' }}>
               2. Entrada Mínima de 2 Minutos
             </strong>
@@ -104,7 +104,7 @@ export default function ClinicalUncompletedTaskProtocol() {
         {/* TASK FREEZER (CONGELADOR DE TAREAS) */}
         <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid var(--color-border-subtle)', borderRadius: '16px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+            <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 700 }}>
               ❄️ CONGELADOR DE TAREAS PENDIENTES (SIN CULPA NI PRESIÓN)
             </span>
             <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)' }}>{frozenTasks.length} archivadas</span>

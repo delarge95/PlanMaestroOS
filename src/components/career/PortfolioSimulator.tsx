@@ -39,8 +39,8 @@ const PLATFORM_LABEL: Record<PortfolioAssetPlatform, string> = {
 
 const STATUS_ACCENT: Record<PortfolioAssetStatus, string> = {
   pending: 'var(--text-tertiary)',
-  in_progress: 'var(--color-accent-primary)',
-  review: 'var(--color-accent-warning)',
+  in_progress: 'var(--accent)',
+  review: 'var(--warning)',
   done: 'var(--color-accent-success, #34c759)'
 };
 
@@ -137,7 +137,7 @@ export default function PortfolioSimulator() {
         {/* BANNER PERMANENTE DE ADVERTENCIA PRESCRIPTIVO */}
         <div style={{
           background: 'rgba(255,159,10,0.08)',
-          border: '1px solid var(--color-accent-warning)',
+          border: '1px solid var(--warning)',
           borderRadius: 'var(--radius-md)',
           padding: '10px 14px',
           display: 'flex',
@@ -146,7 +146,7 @@ export default function PortfolioSimulator() {
           gap: '12px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <AlertCircle size={16} style={{ color: 'var(--color-accent-warning)' }} />
+            <AlertCircle size={16} style={{ color: 'var(--warning)' }} />
             <strong style={{ fontSize: '0.82rem', color: 'var(--text)' }}>
               Simulación de referencia — no es la plataforma real
             </strong>
@@ -169,7 +169,7 @@ export default function PortfolioSimulator() {
           gap: '10px',
           flexWrap: 'wrap'
         }}>
-          <ListChecks size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
+          <ListChecks size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
           <strong style={{ fontSize: '0.82rem', color: 'var(--text)' }}>
             Assets pendientes (doc-33): {notDoneCount} de {boardCards.length}
           </strong>
@@ -213,7 +213,7 @@ export default function PortfolioSimulator() {
         {activeTab === 'board' && (
           <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Tablero de producción de assets — doc-33
               </span>
               <button
@@ -295,7 +295,7 @@ export default function PortfolioSimulator() {
                             borderRadius: '4px',
                             fontWeight: 700,
                             background: card.owner === 'ag-port' ? 'rgba(10,132,255,0.12)' : 'rgba(255,255,255,0.05)',
-                            color: card.owner === 'ag-port' ? 'var(--color-accent-primary)' : 'var(--text-secondary)'
+                            color: card.owner === 'ag-port' ? 'var(--accent)' : 'var(--text-secondary)'
                           }}
                         >
                           {PORTFOLIO_ASSET_OWNER_LABELS[card.owner]}
@@ -343,7 +343,7 @@ export default function PortfolioSimulator() {
           <>
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                   Secuencia de launch — doc-36
                 </span>
                 <button
@@ -383,14 +383,14 @@ export default function PortfolioSimulator() {
                       const badge = done
                         ? { label: 'Completado', bg: 'rgba(52,199,89,0.12)', fg: 'var(--color-accent-success, #34c759)' }
                         : enabled
-                          ? { label: 'Listo para ejecutar', bg: 'rgba(10,132,255,0.12)', fg: 'var(--color-accent-primary)' }
+                          ? { label: 'Listo para ejecutar', bg: 'rgba(10,132,255,0.12)', fg: 'var(--accent)' }
                           : { label: 'Bloqueado', bg: 'rgba(255,255,255,0.05)', fg: 'var(--text-tertiary)' };
                       return (
                         <div
                           key={step.id}
                           style={{
                             background: 'rgba(255,255,255,0.02)',
-                            border: `1px solid ${done ? 'var(--color-accent-success, #34c759)' : enabled ? 'var(--color-accent-primary)' : 'var(--color-border-subtle)'}`,
+                            border: `1px solid ${done ? 'var(--color-accent-success, #34c759)' : enabled ? 'var(--accent)' : 'var(--color-border-subtle)'}`,
                             borderRadius: 'var(--radius-md)',
                             padding: '10px 12px',
                             display: 'flex',
@@ -419,7 +419,7 @@ export default function PortfolioSimulator() {
                           <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>{step.detail}</p>
 
                           {!done && blockers.length > 0 && (
-                            <span style={{ fontSize: '0.66rem', color: 'var(--color-accent-warning)' }}>
+                            <span style={{ fontSize: '0.66rem', color: 'var(--warning)' }}>
                               Bloqueado por: {blockers.map((blocker) => blocker.label).join(' · ')}
                             </span>
                           )}
@@ -451,7 +451,7 @@ export default function PortfolioSimulator() {
                             <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', alignItems: 'center' }}>
                               <span style={{ fontSize: '0.64rem', color: 'var(--text-tertiary)', fontWeight: 700 }}>URLs a completar:</span>
                               {step.urlPlaceholders.map((placeholder) => (
-                                <span key={placeholder.key} title={placeholder.label} style={{ fontSize: '0.62rem', background: 'rgba(255,159,10,0.08)', border: '1px dashed var(--color-accent-warning)', padding: '1px 6px', borderRadius: '4px', color: 'var(--text-secondary)' }}>
+                                <span key={placeholder.key} title={placeholder.label} style={{ fontSize: '0.62rem', background: 'rgba(255,159,10,0.08)', border: '1px dashed var(--warning)', padding: '1px 6px', borderRadius: '4px', color: 'var(--text-secondary)' }}>
                                   [{placeholder.key}]
                                 </span>
                               ))}
@@ -469,7 +469,7 @@ export default function PortfolioSimulator() {
 
             {/* PUERTA FINAL PRE-APLICACIONES (doc-36 §21), derivada de los pasos completados */}
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-xs)' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Puerta final pre-aplicaciones — doc-36 §21
               </span>
               <p style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)', margin: 0 }}>
@@ -503,7 +503,7 @@ export default function PortfolioSimulator() {
         {/* ORDEN DE PROYECTOS Y SIMULADOR */}
         {activeTab !== 'board' && activeTab !== 'launch' && (
         <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
             Orden de proyectos ({activeTab.toUpperCase()})
           </span>
 
@@ -568,8 +568,8 @@ export default function PortfolioSimulator() {
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Layers size={16} style={{ color: 'var(--color-accent-primary)' }} />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+                  <Layers size={16} style={{ color: 'var(--accent)' }} />
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                     Estructura del post (breakdown) — doc-29C
                   </span>
                 </div>
@@ -580,7 +580,7 @@ export default function PortfolioSimulator() {
                       type="button"
                       onClick={() => setSelectedSpecId(spec.id)}
                       style={{
-                        background: selectedSpecId === spec.id ? 'var(--color-accent-primary)' : 'transparent',
+                        background: selectedSpecId === spec.id ? 'var(--accent)' : 'transparent',
                         color: selectedSpecId === spec.id ? '#000000' : 'var(--text-secondary)',
                         border: 'none',
                         padding: '5px 10px',
@@ -620,7 +620,7 @@ export default function PortfolioSimulator() {
                       </span>
                       <strong style={{ fontSize: '0.8rem', color: 'var(--text)' }}>{section.title}</strong>
                       {KIND_BADGE[section.kind] && (
-                        <span style={{ fontSize: '0.62rem', background: 'rgba(10,132,255,0.12)', color: 'var(--color-accent-primary)', padding: '1px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                        <span style={{ fontSize: '0.62rem', background: 'rgba(10,132,255,0.12)', color: 'var(--accent)', padding: '1px 6px', borderRadius: '4px', fontWeight: 700 }}>
                           {KIND_BADGE[section.kind]}
                         </span>
                       )}
@@ -669,7 +669,7 @@ export default function PortfolioSimulator() {
             </div>
 
             <div style={{ background: 'var(--surface)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Checklist de publicación del perfil — doc-28E
               </span>
 

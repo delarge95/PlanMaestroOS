@@ -143,7 +143,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
               type="submit"
               onClick={(e) => e.stopPropagation()}
               style={{
-                background: 'var(--color-accent-primary)',
+                background: 'var(--accent)',
                 color: '#040608',
                 border: 'none',
                 padding: '0 20px',
@@ -160,7 +160,7 @@ export default function InteractiveDocViewer({ categoryFilter = 'all' }: Props) 
           {/* RAG RESULTS LIST */}
           {ragResults.length > 0 && (
             <div style={{ marginTop: '16px', background: 'rgba(0,0,0,0.4)', borderRadius: '8px', padding: '14px', border: '1px solid rgba(119,231,255,0.2)' }}>
-              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+              <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.7rem', color: 'var(--accent)', fontWeight: 700 }}>
                 {ragResults.length} RESULTADOS ENCONTRADOS:
               </span>
               <div style={{ display: 'grid', gap: '10px', marginTop: '10px' }}>

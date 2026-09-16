@@ -92,7 +92,7 @@ export default function ProjectCard() {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <GitBranch size={16} style={{ color: 'var(--color-accent-primary)' }} />
+                    <GitBranch size={16} style={{ color: 'var(--accent)' }} />
                     <strong style={{ fontSize: '1rem', color: 'var(--text)' }}>
                       {p.name}
                     </strong>
@@ -109,7 +109,7 @@ export default function ProjectCard() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 600 }}>
                     Próxima acción: {p.nextAction}
                   </span>
 
@@ -175,7 +175,7 @@ export default function ProjectCard() {
                     padding: '2px 8px',
                     borderRadius: '4px',
                     background: p.readinessStatus === 'Listo para portafolio' ? 'var(--color-state-done-soft)' : 'var(--color-accent-warning-soft)',
-                    color: p.readinessStatus === 'Listo para portafolio' ? 'var(--color-state-done)' : 'var(--color-accent-warning)'
+                    color: p.readinessStatus === 'Listo para portafolio' ? 'var(--color-state-done)' : 'var(--warning)'
                   }}>
                     {p.readinessStatus}
                   </span>

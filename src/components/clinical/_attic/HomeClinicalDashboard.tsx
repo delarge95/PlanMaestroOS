@@ -120,7 +120,7 @@ export default function HomeClinicalDashboard() {
                 onFocus={(e) => { e.currentTarget.style.boxShadow = '0 0 0 3px var(--focus)'; }}
                 onBlur={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
               >
-                <Settings2 size={18} aria-hidden="true" style={{ color: 'var(--color-accent-primary)' }} />
+                <Settings2 size={18} aria-hidden="true" style={{ color: 'var(--accent)' }} />
                 <span>Herramientas</span>
               </button>
             </div>
@@ -232,13 +232,13 @@ export default function HomeClinicalDashboard() {
                     <ListRow
                       title="Rescate de Inercia (10 Minutos)"
                       meta="Desbloqueo de inicio sin juicio ni compromiso"
-                      icon={<ShieldAlert size={18} style={{ color: 'var(--color-accent-warning)' }} />}
+                      icon={<ShieldAlert size={18} style={{ color: 'var(--warning)' }} />}
                       onClick={() => setSheetSubView('rescue')}
                     />
                     <ListRow
                       title="Segundo Cerebro & BÃ³veda"
                       meta="Inspector de notas y contexto de Obsidian"
-                      icon={<BookOpen size={18} style={{ color: 'var(--color-accent-primary)' }} />}
+                      icon={<BookOpen size={18} style={{ color: 'var(--accent)' }} />}
                       onClick={() => setSheetSubView('second_brain')}
                     />
                     <ListRow

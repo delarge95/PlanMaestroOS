@@ -2510,6 +2510,8 @@ strong {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* M2: transiciones espaciales a cero — solo color/opacidad sobrevive [mot-reduced-motion] */
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
   html {
     scroll-behavior: auto !important;
   }

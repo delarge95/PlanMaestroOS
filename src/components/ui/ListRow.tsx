@@ -17,9 +17,9 @@ export interface ListRowProps {
 
 const badgeStyles = {
   default: { color: 'var(--text-tertiary)', background: 'var(--glass)' },
-  accent: { color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)' },
+  accent: { color: 'var(--accent)', background: 'var(--color-accent-primary-soft)' },
   success: { color: 'var(--color-state-done)', background: 'var(--color-state-done-soft)' },
-  warning: { color: 'var(--color-accent-warning)', background: 'var(--color-accent-warning-soft)' },
+  warning: { color: 'var(--warning)', background: 'var(--color-accent-warning-soft)' },
   danger: { color: 'var(--color-accent-danger)', background: 'var(--color-accent-danger-soft)' }
 };
 

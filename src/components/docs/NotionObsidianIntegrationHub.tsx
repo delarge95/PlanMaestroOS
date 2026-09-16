@@ -172,7 +172,7 @@ ${documentContent}
         {/* HEADER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, letterSpacing: '0.05em' }}>
+            <span style={{ fontFamily: 'Azeret Mono, monospace', fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, letterSpacing: '0.05em' }}>
               CONECTOR EN VIVO DE CONOCIMIENTO & NOTAS
             </span>
             <h3 style={{ fontSize: 'var(--fs-section)', fontWeight: 700, margin: '2px 0 0', color: 'var(--color-text-primary)' }}>
@@ -188,7 +188,7 @@ ${documentContent}
               style={{
                 background: activeTab === 'obsidian' ? 'rgba(168, 85, 247, 0.25)' : 'transparent',
                 border: activeTab === 'obsidian' ? '1px solid rgba(168, 85, 247, 0.5)' : 'none',
-                color: activeTab === 'obsidian' ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)',
+                color: activeTab === 'obsidian' ? 'var(--accent)' : 'var(--color-text-secondary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -205,7 +205,7 @@ ${documentContent}
               style={{
                 background: activeTab === 'notion' ? 'rgba(245, 158, 11, 0.25)' : 'transparent',
                 border: activeTab === 'notion' ? '1px solid rgba(245, 158, 11, 0.5)' : 'none',
-                color: activeTab === 'notion' ? 'var(--color-accent-warning)' : 'var(--color-text-secondary)',
+                color: activeTab === 'notion' ? 'var(--warning)' : 'var(--color-text-secondary)',
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
@@ -252,7 +252,7 @@ ${documentContent}
                     style={{
                       background: 'rgba(168, 85, 247, 0.2)',
                       border: '1px solid rgba(168, 85, 247, 0.4)',
-                      color: 'var(--color-accent-primary)',
+                      color: 'var(--accent)',
                       padding: '6px 12px',
                       borderRadius: '8px',
                       fontSize: '0.78rem',
@@ -380,7 +380,7 @@ ${documentContent}
                     border: '1px solid rgba(255,255,255,0.12)',
                     borderRadius: '6px',
                     padding: '4px 10px',
-                    color: 'var(--color-accent-primary)',
+                    color: 'var(--accent)',
                     fontSize: '0.78rem',
                     width: '100%',
                     maxWidth: '300px'
@@ -426,7 +426,7 @@ ${documentContent}
                     padding: '4px 10px',
                     borderRadius: '999px',
                     background: notionToken ? 'rgba(16,185,129,0.2)' : 'rgba(245,158,11,0.2)',
-                    color: notionToken ? 'var(--color-state-done)' : 'var(--color-accent-warning)',
+                    color: notionToken ? 'var(--color-state-done)' : 'var(--warning)',
                     border: `1px solid ${notionToken ? 'rgba(16,185,129,0.4)' : 'rgba(245,158,11,0.4)'}`
                   }}
                 >
@@ -436,7 +436,7 @@ ${documentContent}
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
                 <div>
-                  <label style={{ fontSize: '0.72rem', color: 'var(--color-accent-warning)', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.72rem', color: 'var(--warning)', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
                     Notion Internal Integration Token:
                   </label>
                   <input
@@ -449,7 +449,7 @@ ${documentContent}
                 </div>
 
                 <div>
-                  <label style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
+                  <label style={{ fontSize: '0.72rem', color: 'var(--accent)', fontFamily: 'Azeret Mono, monospace', display: 'block', marginBottom: '4px' }}>
                     Master Plan Database ID:
                   </label>
                   <input

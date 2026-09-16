@@ -38,7 +38,7 @@ export function LibraryDocumentSheet({ document, isOpen, onClose }: LibraryDocum
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
         {/* ENCABEZADO Y TIPO */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', background: 'var(--surface-elevated)', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)' }}>
-          <Icon size={24} style={{ color: 'var(--color-accent-primary)' }} aria-hidden="true" />
+          <Icon size={24} style={{ color: 'var(--accent)' }} aria-hidden="true" />
           <div>
             <strong style={{ display: 'block', fontSize: '0.92rem', color: 'var(--text)' }}>
               {document.title}

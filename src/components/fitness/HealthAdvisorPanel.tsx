@@ -186,7 +186,7 @@ export default function HealthAdvisorPanel() {
         style={{ width: '100%', textAlign: 'left', cursor: 'pointer', background: 'transparent', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-m)', padding: '10px 14px' }}
       >
         <span className="ds-row" style={{ gap: '8px', alignItems: 'center', fontSize: '0.84rem', fontWeight: 700 }}>
-          <Activity size={15} style={{ color: 'var(--color-accent-primary)' }} />
+          <Activity size={15} style={{ color: 'var(--accent)' }} />
           ¿Dolor o molestia? — Asistente de salud
         </span>
         {open ? <ChevronUp size={14} style={{ color: 'var(--text-tertiary)' }} /> : <ChevronDown size={14} style={{ color: 'var(--text-tertiary)' }} />}
@@ -255,12 +255,12 @@ export default function HealthAdvisorPanel() {
                   className="ds-stack-sm"
                   style={{
                     gap: '3px',
-                    borderLeft: `3px solid ${a.severity === 'stop' ? 'var(--danger, #ff453a)' : a.severity === 'caution' ? 'var(--warning, #ff9f0a)' : 'var(--color-accent-primary)'}`,
+                    borderLeft: `3px solid ${a.severity === 'stop' ? 'var(--danger, #ff453a)' : a.severity === 'caution' ? 'var(--warning, #ff9f0a)' : 'var(--accent)'}`,
                     background: 'rgba(255,255,255,0.02)', padding: '8px 12px', borderRadius: '0 6px 6px 0',
                   }}
                 >
                   <span className="ds-row" style={{ gap: '6px', alignItems: 'center', fontSize: '0.8rem', fontWeight: 700 }}>
-                    {a.severity === 'stop' ? <ShieldAlert size={13} style={{ color: 'var(--danger, #ff453a)' }} /> : a.severity === 'caution' ? <AlertTriangle size={13} style={{ color: 'var(--warning, #ff9f0a)' }} /> : <Info size={13} style={{ color: 'var(--color-accent-primary)' }} />}
+                    {a.severity === 'stop' ? <ShieldAlert size={13} style={{ color: 'var(--danger, #ff453a)' }} /> : a.severity === 'caution' ? <AlertTriangle size={13} style={{ color: 'var(--warning, #ff9f0a)' }} /> : <Info size={13} style={{ color: 'var(--accent)' }} />}
                     {a.title}
                   </span>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>{a.body}</span>
@@ -314,7 +314,7 @@ export default function HealthAdvisorPanel() {
                     <summary style={{ cursor: 'pointer', fontWeight: 700, color: 'var(--text-secondary)' }}>Estructuras de la zona (grafo anatómico)</summary>
                     {groups.map(([label, list]) => (
                       <div key={label} style={{ marginTop: '4px' }}>
-                        <strong style={{ color: 'var(--color-accent-primary)' }}>{label} ({list.length}):</strong>{' '}
+                        <strong style={{ color: 'var(--accent)' }}>{label} ({list.length}):</strong>{' '}
                         <span style={{ color: 'var(--text-tertiary)' }}>{list.join(', ') || '—'}</span>
                       </div>
                     ))}
@@ -329,7 +329,7 @@ export default function HealthAdvisorPanel() {
                       <strong>{a.name}</strong>{' '}
                       <span style={{ color: 'var(--text-tertiary)' }}>({a.loadedStructures.join(', ')})</span>
                       {a.substitutions.length > 0 && (
-                        <span style={{ color: 'var(--color-accent-primary)' }}> → {a.substitutions.map((s) => s.name).join(' / ')}</span>
+                        <span style={{ color: 'var(--accent)' }}> → {a.substitutions.map((s) => s.name).join(' / ')}</span>
                       )}
                     </div>
                   ))}

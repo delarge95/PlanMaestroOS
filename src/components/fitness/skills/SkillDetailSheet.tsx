@@ -66,7 +66,7 @@ export function SkillDetailSheet({
           {/* INSTRUCCIONES LOCALES CONCISAS (3-5 PASOS) */}
           {localExercise && (
             <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px 12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-subtle)' }}>
-              <span style={{ fontSize: '0.74rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
+              <span style={{ fontSize: '0.74rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>
                 Ejecución Técnica Local:
               </span>
               <ol style={{ margin: 0, paddingLeft: '18px', fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -92,7 +92,7 @@ export function SkillDetailSheet({
               style={{
                 flex: 1,
                 minHeight: '44px',
-                background: 'var(--color-accent-primary)',
+                background: 'var(--accent)',
                 color: '#ffffff',
                 border: 'none',
                 borderRadius: 'var(--radius-md)',
@@ -182,7 +182,7 @@ export function SkillDetailSheet({
             <ListRow
               title={`Siguiente paso: ${nextStep.title}`}
               meta={`Progresión Nivel ${nextStep.order}`}
-              icon={<ArrowRight size={16} style={{ color: 'var(--color-accent-primary)' }} />}
+              icon={<ArrowRight size={16} style={{ color: 'var(--accent)' }} />}
               onClick={() => {
                 if (onSelectStep && nextStep) {
                   onSelectStep(nextStep.id);

@@ -182,11 +182,11 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
           {availability === 'missing' && (
             <div style={{ width: '100%', height: '100%', display: 'grid', placeItems: 'center', padding: 'var(--space-3)' }}>
               <div className="ds-stack-sm" style={{ maxWidth: '480px', textAlign: 'center', justifyContent: 'center' }}>
-                <FileText size={28} style={{ color: 'var(--color-accent-primary)', margin: '0 auto' }} />
+                <FileText size={28} style={{ color: 'var(--accent)', margin: '0 auto' }} />
                 <p style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)' }}>{book.title}</p>
                 <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
                   El PDF aún no está en el repo. Colócalo en{' '}
-                  <code style={{ color: 'var(--color-accent-primary)' }}>public/library/languages/{book.fileName}</code>{' '}
+                  <code style={{ color: 'var(--accent)' }}>public/library/languages/{book.fileName}</code>{' '}
                   y se abrirá aquí automáticamente.
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 'var(--space-1)' }}>
@@ -210,7 +210,7 @@ export default function BookPdfViewer({ bookId, page, pageRange, section, onClos
               style={{
                 fontSize: '0.8rem',
                 fontWeight: 600,
-                color: current == null ? 'var(--color-accent-warning)' : 'var(--text-primary)',
+                color: current == null ? 'var(--warning)' : 'var(--text-primary)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 padding: '0 6px',

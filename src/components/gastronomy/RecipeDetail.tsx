@@ -19,7 +19,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
         {/* CABECERA CON NOMBRE Y VOLVER */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border-subtle)', paddingBottom: 'var(--space-xs)' }}>
           <div>
-            <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.68rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
               {recipe.cuisine} · {recipe.timeMinutes} min · Dificultad: {recipe.difficulty}
             </span>
             <h2 style={{ fontSize: 'var(--fs-page)', fontWeight: 700, margin: '2px 0 0', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
@@ -59,7 +59,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {recipe.steps.map((st, idx) => (
                 <div key={idx} style={{ fontSize: '0.82rem', color: 'var(--text)', lineHeight: 1.4 }}>
-                  <strong style={{ color: 'var(--color-accent-primary)' }}>{idx + 1}.</strong> {st}
+                  <strong style={{ color: 'var(--accent)' }}>{idx + 1}.</strong> {st}
                 </div>
               ))}
             </div>
@@ -84,7 +84,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
             style={{
               background: 'transparent',
               border: 'none',
-              color: 'var(--color-accent-primary)',
+              color: 'var(--accent)',
               fontSize: '0.8rem',
               fontWeight: 600,
               cursor: 'pointer',
@@ -104,7 +104,7 @@ export default function RecipeDetail({ recipe, onBack }: RecipeDetailProps) {
               {recipe.sourceUrl && (
                 <div>
                   Enlace:{' '}
-                  <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent-primary)' }}>
+                  <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>
                     {recipe.sourceUrl} <ExternalLink size={12} style={{ display: 'inline' }} />
                   </a>
                 </div>

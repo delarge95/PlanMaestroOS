@@ -67,7 +67,7 @@ export function ExerciseSubstitutionDrawer({
 
         {/* 1. SECCIÓN RECOMENDACIONES DEL PROGRAMA */}
         <div>
-          <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}>
+          <span style={{ fontSize: 'var(--font-size-meta)', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}>
             <Star size={14} /> Recomendadas por el programa
           </span>
 
@@ -76,7 +76,7 @@ export function ExerciseSubstitutionDrawer({
             <ListRow
               title={originalName}
               meta="Ejercicio original prescrito"
-              icon={<ArrowLeftRight size={18} style={{ color: 'var(--color-accent-primary)' }} />}
+              icon={<ArrowLeftRight size={18} style={{ color: 'var(--accent)' }} />}
               active={currentActiveId === originalExerciseId}
               badge={currentActiveId === originalExerciseId ? 'Original Activo' : undefined}
               badgeTone={currentActiveId === originalExerciseId ? 'success' : 'default'}
@@ -90,7 +90,7 @@ export function ExerciseSubstitutionDrawer({
                 <div
                   key={alt.exerciseId}
                   style={{
-                    border: isSelected ? '2px solid var(--color-accent-primary)' : '1px solid var(--color-border-visible)',
+                    border: isSelected ? '2px solid var(--accent)' : '1px solid var(--color-border-visible)',
                     borderRadius: 'var(--radius-md)',
                     overflow: 'hidden'
                   }}

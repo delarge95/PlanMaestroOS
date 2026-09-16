@@ -63,7 +63,7 @@ export default function SavedInbox() {
 
         {/* FORMULARIO GUARDAR ENLACE */}
         <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border-subtle)', borderRadius: 'var(--radius-sm)', padding: 'var(--space-md)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <span style={{ fontSize: '0.78rem', color: 'var(--color-accent-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase' }}>
             Guardar enlace
           </span>
 
@@ -117,7 +117,7 @@ export default function SavedInbox() {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.68rem', color: 'var(--color-accent-primary)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700, textTransform: 'uppercase' }}>
+                    <span style={{ fontSize: '0.68rem', color: 'var(--accent)', background: 'var(--color-accent-primary-soft)', padding: '2px 6px', borderRadius: '4px', fontWeight: 700, textTransform: 'uppercase' }}>
                       {item.platform}
                     </span>
                     <strong style={{ fontSize: '0.88rem', color: 'var(--text)' }}>{item.title}</strong>
