@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -76,15 +77,22 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+    if (!isValidEmbedUrl(trimmed)) {
+      alert('URL no válida. Debe ser una URL HTTPS de Notion o servidor autorizada.');
+      return;
+    }
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
     setInputUrl('');
   };
+
+  const safeNotionUrl = isValidEmbedUrl(notionEmbedUrl) ? notionEmbedUrl : defaultNotionUrl;
 
   const selectedNote = SAMPLE_OBSIDIAN_NOTES[selectedNoteIndex] || SAMPLE_OBSIDIAN_NOTES[0];
 
@@ -285,16 +293,17 @@ export default function SecondBrainInspector({
                   <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-state-done)' }} />
                 </div>
                 <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontFamily: 'SF Mono, monospace' }}>
-                  Notion In-App Live Inspector • {notionEmbedUrl}
+                  Notion In-App Live Inspector • {safeNotionUrl}
                 </span>
-                <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
+                <a href={safeNotionUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--color-accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
                   ↗ Abrir Web
                 </a>
               </div>
 
               <iframe
-                src={notionEmbedUrl}
+                src={safeNotionUrl}
                 title="Notion Second Brain Live Inspection"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
               />
             </div>
