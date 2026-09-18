@@ -51,6 +51,11 @@
       "sources": 6,
       "chunks": 36
     },
+    "prediction": {
+      "version": "4.0.0",
+      "sources": 3,
+      "chunks": 10
+    },
     "wearable": {
       "version": "4.0.0",
       "sources": 2,

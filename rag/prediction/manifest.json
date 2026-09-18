@@ -1,0 +1,35 @@
+{
+  "domain": "prediction",
+  "sources": [
+    {
+      "id": "pred-1rm-formulas",
+      "title": "1RM Prediction Formulas (Epley, Brzycki, Lombardi, O'Conner, Wathan, Mayhew)",
+      "author": "Multiple (peer-reviewed synthesis)",
+      "year": 2022,
+      "edition": "síntesis del orquestador",
+      "type": "paper",
+      "evidenceTier": "rct",
+      "authority": { "domains": ["prediction-strength"], "priority": 1 }
+    },
+    {
+      "id": "pred-load-models",
+      "title": "Training Load Models (Banister FFM, ACWR Gabbett, Foster sRPE)",
+      "author": "Banister / Gabbett / Foster",
+      "year": 2020,
+      "edition": "síntesis",
+      "type": "paper",
+      "evidenceTier": "meta-analysis",
+      "authority": { "domains": ["prediction-load", "prediction-injury"], "priority": 1 }
+    },
+    {
+      "id": "pred-bodycomp",
+      "title": "Rate of Muscle Gain (McDonald/Aragon model)",
+      "author": "Lyle McDonald / Alan Aragon",
+      "year": 2018,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": { "domains": ["prediction-bodycomp"], "priority": 1 }
+    }
+  ]
+}
