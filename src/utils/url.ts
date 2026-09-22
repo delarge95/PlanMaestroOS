@@ -1,6 +1,17 @@
 // src/utils/url.ts - Safe base URL resolver for GitHub Pages and relative navigation
 export function withBase(path: string): string {
   if (!path) return '#';
+
+  const normalized = path.trim().toLowerCase();
+  // Prevent DOM XSS via dangerous pseudo-protocols
+  if (
+    normalized.startsWith('javascript:') ||
+    normalized.startsWith('data:') ||
+    normalized.startsWith('vbscript:')
+  ) {
+    return '#';
+  }
+
   if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('#')) {
     return path;
   }
