@@ -12,6 +12,7 @@ import TodayCalendar from './TodayCalendar';
 import HealthAdvisorPanel from './HealthAdvisorPanel';
 import RoutineGeneratorPanel from './RoutineGeneratorPanel';
 import WearableStatusChip from './WearableStatusChip';
+import PredictionPanel from './PredictionPanel';
 import ActiveProgressionsTodayCard from './skills/ActiveProgressionsTodayCard';
 import SectionNav from '../ui/SectionNav';
 import { useActiveProgramStore } from '../../data/fitness/activeProgramStore';
@@ -84,6 +85,7 @@ export default function FitnessTabWorkspace() {
       <div className="ds-stack">
         {/* Estado de la banda WHOOP — accesorio opcional, no dependencia */}
         <WearableStatusChip />
+        <PredictionPanel />
 
         <TodayCalendar
           selectedDayIndex={calendarSelected}
