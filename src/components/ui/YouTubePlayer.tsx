@@ -1,6 +1,7 @@
 // src/components/ui/YouTubePlayer.tsx
 import React, { useState } from 'react';
 import { ExternalLink, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
 
 export interface YouTubePlayerProps {
   youtubeLink: string | null | undefined;
@@ -94,6 +95,14 @@ export function YouTubePlayer({
         ? `https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay ? 1 : 0}&title=0&byline=0&portrait=0&badge=0`
         : activeLink;
 
+      if (!isValidEmbedUrl(vimeoEmbedUrl)) {
+        return (
+          <div style={{ padding: '16px', color: 'var(--text-tertiary, rgba(255,255,255,0.4))', textAlign: 'center' }}>
+            URL de video no válida o no permitida.
+          </div>
+        );
+      }
+
       return (
         <iframe
           key={vimeoEmbedUrl}
@@ -103,6 +112,7 @@ export function YouTubePlayer({
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-presentation"
         />
       );
     }
@@ -138,6 +148,14 @@ export function YouTubePlayer({
         }
       }
 
+      if (!isValidEmbedUrl(embedUrl)) {
+        return (
+          <div style={{ padding: '16px', color: 'var(--text-tertiary, rgba(255,255,255,0.4))', textAlign: 'center' }}>
+            URL de video no válida o no permitida.
+          </div>
+        );
+      }
+
       return (
         <iframe
           key={embedUrl}
@@ -147,6 +165,7 @@ export function YouTubePlayer({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-presentation"
         />
       );
     }
