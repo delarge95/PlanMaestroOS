@@ -69,3 +69,16 @@ gui-test-screenshots/
 
 # Libros comerciales LOCALES (el visor los sirve en dev; no se publican)
 public/library/languages/Oxford_Living_Grammar_*.pdf
+
+# Claude CLI & Agent local settings
+.claude/
+*.zip
+perfil_contactos_*/
+qa*
+qa-*/
+qa-*.mjs
+qa-*.png
+.openclaw-*
+tools/*.glb.bak
+public/cotizador/models/_originales/
+

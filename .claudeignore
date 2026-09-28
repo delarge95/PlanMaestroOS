@@ -1,0 +1,32 @@
+# Claude Code ignore file for Plan Maestro OS
+# Prevents excessive token consumption by blocking worktrees, caches, binary assets, and deep extract libraries
+
+# Parallel agent worktrees (14 full repository clones)
+.worktrees/
+.kilo/
+
+# Deep raw text extraction archives & chat logs
+biblioteca/extracciones/
+biblioteca/_chat-exports/
+biblioteca/_llm-outputs/
+
+# Node & Astro build artifacts
+node_modules/
+dist/
+.astro/
+.npm-cache/
+
+# QA test artifacts, dumps & screenshots
+qa*
+qa-*/
+qa-audit-shots/
+gui-test-screenshots/
+qa-screenshots/
+
+# Large 3D / Binary assets
+*.glb
+*.gltf
+*.tar
+*.zip
+*.bak
+_pdf_biblia/

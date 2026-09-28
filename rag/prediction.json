@@ -1,0 +1,258 @@
+{
+  "domain": "prediction",
+  "version": "4.0.0",
+  "sources": [
+    {
+      "id": "pred-1rm-formulas",
+      "title": "1RM Prediction Formulas (Epley, Brzycki, Lombardi, O'Conner, Wathan, Mayhew)",
+      "author": "Multiple (peer-reviewed synthesis)",
+      "year": 2022,
+      "edition": "síntesis del orquestador",
+      "type": "paper",
+      "evidenceTier": "rct",
+      "authority": {
+        "domains": [
+          "prediction-strength"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "pred-load-models",
+      "title": "Training Load Models (Banister FFM, ACWR Gabbett, Foster sRPE)",
+      "author": "Banister / Gabbett / Foster",
+      "year": 2020,
+      "edition": "síntesis",
+      "type": "paper",
+      "evidenceTier": "meta-analysis",
+      "authority": {
+        "domains": [
+          "prediction-load",
+          "prediction-injury"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "id": "pred-bodycomp",
+      "title": "Rate of Muscle Gain (McDonald/Aragon model)",
+      "author": "Lyle McDonald / Alan Aragon",
+      "year": 2018,
+      "edition": "síntesis",
+      "type": "book",
+      "evidenceTier": "expert-book",
+      "authority": {
+        "domains": [
+          "prediction-bodycomp"
+        ],
+        "priority": 1
+      }
+    }
+  ],
+  "chunks": [
+    {
+      "id": "pred-1rm-epley-brzycki",
+      "sourceId": "pred-1rm-formulas",
+      "topic": "1rm-prediction",
+      "tags": [
+        "epley",
+        "brzycki",
+        "lombardi",
+        "oconner",
+        "wathan",
+        "strength"
+      ],
+      "locator": {
+        "section": "Fórmulas de predicción de 1RM"
+      },
+      "summary": "Predicción de 1RM (One Rep Max) desde series submáximas. Epley (1985): 1RM = peso × (1 + reps/30), más precisa en 1-10 reps. Brzycki (1993): 1RM = peso / (1.0278 − 0.0278 × reps), válida en 2-10 reps. Lombardi: 1RM = peso × reps^0.10 (curva de potencia, diverge a >8 reps). O'Conner: 1RM = peso × (1 + 0.025 × reps), conservadora. Wathan: 1RM = 100 × peso / (48.8 + 53.8 × e^(-0.075 × reps)). Mayhew: 1RM = 100 × peso / (52.2 + 41.9 × e^(-0.055 × reps)). Epley corre 2-4% más alta que Brzycki (prefiera Brzycki para conservador). Todas pierden precisión >10-12 reps: a 20 reps la sobreestimación puede superar 40%. Para la app: usar el promedio de Epley+Brzycki en sets de 3-10 reps con RIR conocido como input.",
+      "entities": [
+        "formula:epley",
+        "formula:brzycki",
+        "formula:lombardi"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-1rm-rir-adjustment",
+      "sourceId": "pred-1rm-formulas",
+      "topic": "1rm-rir",
+      "tags": [
+        "rir",
+        "reps-in-reserva",
+        "adjustment"
+      ],
+      "locator": {
+        "section": "Ajuste por RIR"
+      },
+      "summary": "Ajuste por RIR (Reps In Reserve): si completaste N reps a RIR R, tu máximo estimado es a N+R reps. Para 1RM: usar la fórmula con reps_efectivas = N + R. Ejemplo: 8 reps a RIR 2 → calcular 1RM con 10 reps. Este ajuste es estándar en programs como Scientific Principles de Israetel (ch. 2, RIR 0-3 en hipertrofia). El error estándar del estimado crece con RIR (más incertidumbre a RIR alto).",
+      "entities": [
+        "formula:rir-adjustment"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-1rm-accuracy-table",
+      "sourceId": "pred-1rm-formulas",
+      "topic": "1rm-accuracy",
+      "tags": [
+        "precision",
+        "tabla",
+        "rango-reps"
+      ],
+      "locator": {
+        "section": "Precisión por rango"
+      },
+      "summary": "Precisión de fórmulas por rango de reps (síntesis de Macarilla 2022, PMC9465738 y DiStasio 2014): en 1-5 reps, todas las fórmulas convergen ±2%. En 6-10 reps, Epley/Brzycki siguen válidas ±5%. En 11-15 reps, Brzycki subestima ~5-8%, Lombardi sobreestima ~10%. En >15 reps, TODAS sobreestiman significativamente (>15%). Recomendación práctica: solo confiar en estimados de 1RM desde sets ≤10 reps; para >10, marcar como \"estimado de baja confianza\".",
+      "entities": [
+        "reference:accuracy-table"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-muscle-gain-rates",
+      "sourceId": "pred-bodycomp",
+      "topic": "bodycomp",
+      "tags": [
+        "muscle",
+        "gain",
+        "rate",
+        "novice",
+        "intermediate",
+        "advanced"
+      ],
+      "locator": {
+        "section": "Rate of Muscle Gain (McDonald/Aragon)"
+      },
+      "summary": "Rate de ganancia muscular natural (McDonald + Aragon): Primer año = 1-1.5% del peso corporal/mes (~2 lbs/mes para hombre de 80kg). Segundo año = 0.5-1%/mes (~1 lb/mes). Tercer año+ = 0.25-0.5%/mes (~0.5 lb/mes). Después de 4 años = \"3/5ths of jack squat\" (McDonald). Aragon (percentage-based): Year 1 = 1-1.5% BW/month, Year 2 = 0.5-1%, Year 3+ = 0.25-0.5%. Para la app: calcular training age desde la primera sesión registrada, aplicar la tasa correspondiente, y predecir peso objetivo a 30/60/90 días dado surplus calórico. Si la ganancia real supera la tasa por >50%, marcar como posible grasa.",
+      "entities": [
+        "reference:muscle-gain-rates"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-sleep-performance",
+      "sourceId": "pred-bodycomp",
+      "topic": "sleep",
+      "tags": [
+        "sleep",
+        "debt",
+        "recovery",
+        "performance",
+        "hrv"
+      ],
+      "locator": {
+        "section": "Sleep y Recuperación"
+      },
+      "summary": "Sleep debt y performance: cada noche <6h reduce la síntesis proteica miofibrilar y eleva la pérdida de masa magra en déficit (Nippard muscle-ladder-2024). El sleep debt acumulado (>5h en 7 días) preduce performance entre 3-8% en fuerza. HRV nocturno (RMSSD) como predictor de readiness: si HRV de hoy < media 7d − 1 desviación estándar → riesgo de bajo performance; si < media − 2σ → alto riesgo de enfermedad/lesión. La HRV tarda 48-72h en reflejar una sesión de carga alta (lag fisiológico). Para la app: calcular sleep debt semanal desde wearable/self-report y z-score de HRV desde wearableStore.",
+      "entities": [
+        "reference:sleep-debt"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-stagnation-detection",
+      "sourceId": "pred-bodycomp",
+      "topic": "progress",
+      "tags": [
+        "stagnation",
+        "plateau",
+        "progression",
+        "detection"
+      ],
+      "locator": {
+        "section": "Detección de Estancamiento"
+      },
+      "summary": "Detección de estancamiento: si en las últimas 3 semanas el volumen efectivo (series duras × peso medio) por patrón no crece >2% Y el 1RM estimado no mejora >1%, marcar como \"posible estancamiento\". Causas a sugerir en orden de probabilidad: volumen insuficiente (<MEV), recuperación inadecuada (sleep debt o HRV bajo), monotonía alta (>2.0), o necesidad de deload (fatiga acumulada >4 semanas sin descarga). La app ya tiene las reglas fit:volume-mev/mrv y fit:deload-due; este módulo las conecta con el historial real para detectar cuándo está PASANDO y no solo cuando la regla lo dice en abstracto.",
+      "entities": [
+        "reference:stagnation"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-banister-ffm",
+      "sourceId": "pred-load-models",
+      "topic": "banister-model",
+      "tags": [
+        "fitness",
+        "fatigue",
+        "convolution",
+        "tau",
+        "banister",
+        "performance"
+      ],
+      "locator": {
+        "section": "Banister Fitness-Fatigue Model"
+      },
+      "summary": "Banister Fitness-Fatigue Model (impulse-response): p(t) = p* + k₁·e^(-t/τ₁)⊗w(t) − k₂·e^(-t/τ₂)⊗w(t). p* = performance basal; w(t) = carga diaria de entrenamiento; k₁,k₂ = magnitudes de fitness y fatiga; τ₁ = constante de decaimiento del fitness (~15 días); τ₂ = constante de decaimiento de la fatiga (~1-3 días, mucho más corta). El modelo convoluciona inputs de entrenamiento en adaptación positiva (fitness) y negativa (fatiga). La performance actual = fitness acumulado − fatiga acumulada. Para calibrar: τ₁ fitness 15±5 días, τ₂ fatiga 2±1 días, ratio k₂/k₁ ≈ 2 (la fatiga pesa el doble que el fitness pero se disipa más rápido). Fuente: Banister en \"Modeling Elite Athletic Performance\" (1991); revisión moderna en Sports Medicine Open 2022 (Springer s40798-022-00426-x).",
+      "entities": [
+        "formula:banister-ffm"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-acwr-gabbett",
+      "sourceId": "pred-load-models",
+      "topic": "acwr",
+      "tags": [
+        "acute",
+        "chronic",
+        "workload",
+        "injury",
+        "risk",
+        "gabbett"
+      ],
+      "locator": {
+        "section": "ACWR (Acute:Chronic Workload Ratio)"
+      },
+      "summary": "ACWR (Gabbett): ratio = carga aguda ÷ carga crónica. Aguda = suma de carga de los últimos 7 días. Crónica = promedio semanal de los últimos 28 días (suma 28d ÷ 4). Zonas: <0.8 = undertraining (riesgo relativo alto por desacondicionamiento); 0.8-1.3 = \"sweet spot\" (riesgo mínimo); >1.5 = \"danger zone\" (riesgo máximo de lesión). ACWR=1.0 significa que entrenas exactamente a tu carga habitual. Meta-análisis 2025 (Qin et al., Springer) confirma 0.8-1.3 como zona de bajo riesgo. Limitación reconocida (Zouhal 2021): el ACWR como ratio tiene críticas estadísticas; úselo como bandera, no como diagnóstico. Carga puede medirse con sRPE (RPE × minutos) o tonelaje (series × peso).",
+      "entities": [
+        "formula:acwr"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-foster-srpe",
+      "sourceId": "pred-load-models",
+      "topic": "session-rpe",
+      "tags": [
+        "foster",
+        "monotony",
+        "strain",
+        "load",
+        "overtraining"
+      ],
+      "locator": {
+        "section": "Foster Session-RPE"
+      },
+      "summary": "Foster Session-RPE (PMC5673663): carga de sesión = RPE (escala CR-10) × duración en minutos. Carga diaria = suma de cargas de sesión del día. Carga semanal = suma de cargas diarias. Monotonía = media de carga diaria ÷ desviación estándar de carga diaria (en la semana). Strain semanal = carga semanal × monotonía. Monotonía >2.0 = riesgo elevado de enfermedad/overtraining (Foster 1998). Strain elevado (percentil 75+ de los últimos 3 meses) = bandera roja. Para la app: calcular diaria y semanalmente desde el historial de sesiones + cardio.",
+      "entities": [
+        "formula:srpe",
+        "formula:monotony",
+        "formula:strain"
+      ],
+      "rules": []
+    },
+    {
+      "id": "pred-wellness-composite",
+      "sourceId": "pred-load-models",
+      "topic": "wellness",
+      "tags": [
+        "score",
+        "hrv",
+        "sleep",
+        "soreness",
+        "mood",
+        "stress"
+      ],
+      "locator": {
+        "section": "Wellness Score Compuesto"
+      },
+      "summary": "Wellness score compuesto: media ponderada de 4-5 dimensiones normalizadas a 0-100. Peso típico: sueño 30% (horas vs objetivo 7-9h), estrés 20% (inverso, escala 1-5), dolor/molestia 20% (inverso), energía/estado de ánimo 20%, HRV opcional 10% (z-score de los últimos 7 días). Si no hay HRV, redistribuir a sueño y estrés. Score >70 = verde (listo), 50-70 = amarillo (modificar), <50 = rojo (descanso). Los ítems son los del Hooper-Mackinnon Index validado. Para la app: ya tenemos sueño (wearable o self-report), dolor, energía y estrés del clinicalStore; HRV del wearableStore (si existe).",
+      "entities": [
+        "formula:wellness"
+      ],
+      "rules": []
+    }
+  ]
+}
