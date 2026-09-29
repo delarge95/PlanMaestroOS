@@ -1,6 +1,7 @@
 // src/components/ui/YouTubePlayer.tsx
 import React, { useState } from 'react';
 import { ExternalLink, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
 
 export interface YouTubePlayerProps {
   youtubeLink: string | null | undefined;
@@ -94,16 +95,21 @@ export function YouTubePlayer({
         ? `https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay ? 1 : 0}&title=0&byline=0&portrait=0&badge=0`
         : activeLink;
 
-      return (
+      return isValidEmbedUrl(vimeoEmbedUrl) ? (
         <iframe
           key={vimeoEmbedUrl}
           style={{ width: '100%', height: '100%', border: 'none' }}
           src={vimeoEmbedUrl}
           title={`Video demo para ${exerciseName}`}
           allow="autoplay; fullscreen; picture-in-picture"
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
           allowFullScreen
           loading="lazy"
         />
+      ) : (
+        <div style={{ display: 'grid', placeItems: 'center', height: '100%', color: 'rgba(255,255,255,0.5)', padding: '16px', textAlign: 'center' }}>
+          URL de video no permitida por política de seguridad.
+        </div>
       );
     }
 
@@ -138,16 +144,21 @@ export function YouTubePlayer({
         }
       }
 
-      return (
+      return isValidEmbedUrl(embedUrl) ? (
         <iframe
           key={embedUrl}
           style={{ width: '100%', height: '100%', border: 'none' }}
           src={embedUrl}
           title={`Video demo para ${exerciseName}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
           allowFullScreen
           loading="lazy"
         />
+      ) : (
+        <div style={{ display: 'grid', placeItems: 'center', height: '100%', color: 'rgba(255,255,255,0.5)', padding: '16px', textAlign: 'center' }}>
+          URL de video no permitida por política de seguridad.
+        </div>
       );
     }
 
