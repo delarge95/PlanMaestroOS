@@ -6,6 +6,7 @@
 import { AI_ACTIONS, isAllowedAiAction, type AiActionName } from './actions';
 import { logAiCall, estimateGeminiCost } from '../lib/audit';
 import { callGemini } from './geminiRest';
+import { scrubForLLM } from '../lib/sanitize';
 
 const WORKER_START_TIME = Date.now();
 export const AVAILABLE_MODELS = [
@@ -154,6 +155,12 @@ export async function processAiDraft(options: AiDraftRequestOptions): Promise<Ai
     throw new Error(`Acción de IA no permitida: "${action}". No está en la whitelist.`);
   }
 
+  const scrub = scrubForLLM(JSON.stringify(payload ?? {}));
+  if (scrub.blocked) {
+    throw new Error(`Entrada bloqueada por seguridad: ${scrub.blockReason}`);
+  }
+  const cleanPayloadText = scrub.clean;
+
   const actionConfig = AI_ACTIONS[action];
   const assignedAgent = agent || actionConfig.agent || 'AG-CORE';
   const model = resolveModel(options.model);
@@ -170,7 +177,7 @@ export async function processAiDraft(options: AiDraftRequestOptions): Promise<Ai
         contents: [
           {
             role: 'user',
-            text: `Acción: ${action}.\nContexto/entrada: ${JSON.stringify(payload ?? {})}.\nGenera el borrador solicitado.`,
+            text: `Acción: ${action}.\nContexto/entrada: ${cleanPayloadText}.\nGenera el borrador solicitado.`,
           },
         ],
         maxOutputTokens: actionConfig.maxTokens,
@@ -271,6 +278,12 @@ export async function processAiExtract(options: AiExtractRequestOptions): Promis
     throw new Error('El texto para extracción no puede estar vacío.');
   }
 
+  const scrub = scrubForLLM(text);
+  if (scrub.blocked) {
+    throw new Error(`Texto bloqueado por seguridad: ${scrub.blockReason}`);
+  }
+  const cleanText = scrub.clean;
+
   const model = resolveModel(options.model);
   const apiKey = resolveApiKey(options.env);
   const effectiveSources = sourcesUsed.length > 0 ? sourcesUsed : [`Extracción de documento [${domain}]`];
@@ -286,7 +299,7 @@ export async function processAiExtract(options: AiExtractRequestOptions): Promis
         contents: [
           {
             role: 'user',
-            text: `Esquema objetivo: ${schema}.\nDominio: ${domain}.\nTexto fuente:\n${text}`,
+            text: `Esquema objetivo: ${schema}.\nDominio: ${domain}.\nTexto fuente:\n${cleanText}`,
           },
         ],
         maxOutputTokens,
@@ -389,6 +402,14 @@ export async function processAiChat(options: AiChatRequestOptions): Promise<AiCh
     throw new Error('El mensaje no puede estar vacío.');
   }
 
+  const scrub = scrubForLLM(message + (context ? ' ' + JSON.stringify(context) : ''));
+  if (scrub.blocked) {
+    throw new Error(`Mensaje bloqueado por seguridad: ${scrub.blockReason}`);
+  }
+
+  const scrubMessage = scrubForLLM(message);
+  const cleanMessage = scrubMessage.clean;
+
   const model = resolveModel(options.model);
   const apiKey = resolveApiKey(options.env);
   const effectiveSources = sourcesUsed.length > 0 ? sourcesUsed : ['Plan Maestro OS RAG Dataset'];
@@ -399,10 +420,10 @@ export async function processAiChat(options: AiChatRequestOptions): Promise<AiCh
       // Historial → contents de Gemini (solo roles válidos 'user'|'model')
       const contents = history
         .filter((m) => (m.role === 'user' || m.role === 'model') && m.content && m.content.trim().length > 0)
-        .map((m) => ({ role: m.role as 'user' | 'model', text: m.content }));
+        .map((m) => ({ role: m.role as 'user' | 'model', text: scrubForLLM(m.content).clean }));
       contents.push({
         role: 'user',
-        text: context ? `${message}\n\n(contexto disponible: ${JSON.stringify(context)})` : message,
+        text: context ? `${cleanMessage}\n\n(contexto disponible: ${scrubForLLM(JSON.stringify(context)).clean})` : cleanMessage,
       });
 
       // Llamada REAL a Gemini REST

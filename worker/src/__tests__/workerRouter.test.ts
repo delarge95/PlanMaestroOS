@@ -195,4 +195,18 @@ describe('Worker IA Router & Endpoints (§0.3)', () => {
     expect(data.promptTokens).toBeGreaterThan(0);
     expect(data.completionTokens).toBeGreaterThan(0);
   });
+
+  it('Test 8: POST /api/ai/chat bloquea contenido con marcadores de salud cruda', async () => {
+    const req = makeRequest('/api/ai/chat', {
+      body: {
+        message: 'Mi diagnóstico: lesión rotula, dosis 20mg',
+        agent: 'AG-FIT',
+      },
+    });
+
+    const res = await worker.fetch(req);
+    expect(res.status).toBe(500);
+    const data = (await res.json()) as any;
+    expect(data.error).toContain('bloqueado por seguridad');
+  });
 });
