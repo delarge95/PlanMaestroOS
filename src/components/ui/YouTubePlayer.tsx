@@ -1,6 +1,7 @@
 // src/components/ui/YouTubePlayer.tsx
 import React, { useState } from 'react';
 import { ExternalLink, Play } from 'lucide-react';
+import { isValidEmbedUrl } from '../../utils/security';
 
 export interface YouTubePlayerProps {
   youtubeLink: string | null | undefined;
@@ -60,7 +61,9 @@ export function YouTubePlayer({
   const vimeoId = vimeoMatch ? vimeoMatch[1] : null;
 
   const handleOpenNewTab = () => {
-    window.open(activeLink, '_blank', 'noopener,noreferrer');
+    if (isValidEmbedUrl(activeLink)) {
+      window.open(activeLink, '_blank', 'noopener,noreferrer');
+    }
   };
 
   const getVideoBadgeLabel = (link: string | null | undefined) => {
@@ -94,6 +97,14 @@ export function YouTubePlayer({
         ? `https://player.vimeo.com/video/${vimeoId}?autoplay=${autoPlay ? 1 : 0}&title=0&byline=0&portrait=0&badge=0`
         : activeLink;
 
+      if (!isValidEmbedUrl(vimeoEmbedUrl)) {
+        return (
+          <div style={{ display: 'grid', placeItems: 'center', height: '100%', color: 'var(--text-tertiary)' }}>
+            URL de video no permitida por seguridad.
+          </div>
+        );
+      }
+
       return (
         <iframe
           key={vimeoEmbedUrl}
@@ -103,6 +114,7 @@ export function YouTubePlayer({
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
         />
       );
     }
@@ -138,6 +150,14 @@ export function YouTubePlayer({
         }
       }
 
+      if (!isValidEmbedUrl(embedUrl)) {
+        return (
+          <div style={{ display: 'grid', placeItems: 'center', height: '100%', color: 'var(--text-tertiary)' }}>
+            URL de video no permitida por seguridad.
+          </div>
+        );
+      }
+
       return (
         <iframe
           key={embedUrl}
@@ -147,6 +167,7 @@ export function YouTubePlayer({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
         />
       );
     }
