@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isValidEmbedUrl, DEFAULT_EMBED_ALLOWED_DOMAINS } from '../security';
+import { isValidEmbedUrl } from '../security';
 
 describe('isValidEmbedUrl - Security Embed URL Validator', () => {
   it('permite URLs válidas HTTPS de dominios permitidos', () => {
@@ -7,6 +7,7 @@ describe('isValidEmbedUrl - Security Embed URL Validator', () => {
     expect(isValidEmbedUrl('https://www.notion.so/my-workspace/page-123')).toBe(true);
     expect(isValidEmbedUrl('https://sub.notion.site/doc')).toBe(true);
     expect(isValidEmbedUrl('https://www.youtube.com/embed/dQw4w9WgXcQ')).toBe(true);
+    expect(isValidEmbedUrl('https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ')).toBe(true);
     expect(isValidEmbedUrl('https://youtu.be/dQw4w9WgXcQ')).toBe(true);
     expect(isValidEmbedUrl('https://player.vimeo.com/video/12345678')).toBe(true);
   });

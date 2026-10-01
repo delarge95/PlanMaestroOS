@@ -7,6 +7,8 @@ export const DEFAULT_EMBED_ALLOWED_DOMAINS = [
   'v1.embednotion.com',
   'youtube.com',
   'www.youtube.com',
+  'youtube-nocookie.com',
+  'www.youtube-nocookie.com',
   'youtu.be',
   'vimeo.com',
   'player.vimeo.com'
