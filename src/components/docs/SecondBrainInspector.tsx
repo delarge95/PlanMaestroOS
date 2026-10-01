@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -57,8 +58,11 @@ export default function SecondBrainInspector({
   const [viewMode, setViewMode] = useState<'reinterpreted' | 'notion_embed' | 'obsidian_vault'>('reinterpreted');
 
   // Notion state
-  const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(defaultNotionUrl);
+  const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(
+    isValidEmbedUrl(defaultNotionUrl) ? defaultNotionUrl : 'https://v1.embednotion.com/embed/plan-maestro'
+  );
   const [inputUrl, setInputUrl] = useState<string>('');
+  const [urlError, setUrlError] = useState<string | null>(null);
 
   // Obsidian state
   const [selectedNoteIndex, setSelectedNoteIndex] = useState<number>(0);
@@ -67,7 +71,9 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidEmbedUrl(savedNotion)) {
+        setNotionEmbedUrl(savedNotion);
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +82,18 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const cleanUrl = inputUrl.trim();
+    if (!cleanUrl) return;
+
+    if (!isValidEmbedUrl(cleanUrl)) {
+      setUrlError('URL no válida o dominio no permitido. Debe ser HTTPS (notion.so, v1.embednotion.com).');
+      return;
+    }
+
+    setUrlError(null);
+    setNotionEmbedUrl(cleanUrl);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', cleanUrl);
     } catch (e) {
       console.error(e);
     }
@@ -87,6 +101,7 @@ export default function SecondBrainInspector({
   };
 
   const selectedNote = SAMPLE_OBSIDIAN_NOTES[selectedNoteIndex] || SAMPLE_OBSIDIAN_NOTES[0];
+  const isEmbedValid = isValidEmbedUrl(notionEmbedUrl);
 
   return (
     <ErrorBoundary>
@@ -242,38 +257,48 @@ export default function SecondBrainInspector({
         {/* 2. DIRECT NOTION LIVE EMBEDDED INSPECTOR */}
         {viewMode === 'notion_embed' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-              <input
-                type="text"
-                placeholder="Pega la URL pública o de Embed de tu página/database de Notion..."
-                value={inputUrl}
-                onChange={(e) => setInputUrl(e.target.value)}
-                style={{
-                  flex: 1,
-                  background: 'rgba(0,0,0,0.5)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  borderRadius: '10px',
-                  padding: '10px 14px',
-                  color: 'var(--color-text-primary)',
-                  fontSize: '0.85rem'
-                }}
-              />
-              <button
-                type="button"
-                onClick={handleSaveNotionUrl}
-                style={{
-                  background: 'var(--warning)',
-                  border: 'none',
-                  color: '#000000',
-                  fontWeight: 700,
-                  padding: '10px 18px',
-                  borderRadius: '10px',
-                  fontSize: '0.82rem',
-                  cursor: 'pointer'
-                }}
-              >
-                ✓ Cargar Embed
-              </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <input
+                  type="text"
+                  placeholder="Pega la URL pública o de Embed de tu página/database de Notion..."
+                  value={inputUrl}
+                  onChange={(e) => {
+                    setInputUrl(e.target.value);
+                    if (urlError) setUrlError(null);
+                  }}
+                  style={{
+                    flex: 1,
+                    background: 'rgba(0,0,0,0.5)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '10px',
+                    padding: '10px 14px',
+                    color: 'var(--color-text-primary)',
+                    fontSize: '0.85rem'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={handleSaveNotionUrl}
+                  style={{
+                    background: 'var(--warning)',
+                    border: 'none',
+                    color: '#000000',
+                    fontWeight: 700,
+                    padding: '10px 18px',
+                    borderRadius: '10px',
+                    fontSize: '0.82rem',
+                    cursor: 'pointer'
+                  }}
+                >
+                  ✓ Cargar Embed
+                </button>
+              </div>
+              {urlError && (
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-danger, #ff453a)', paddingLeft: '4px' }}>
+                  {urlError}
+                </span>
+              )}
             </div>
 
             {/* EMBEDDED MACOS WINDOW FRAME */}
@@ -285,18 +310,27 @@ export default function SecondBrainInspector({
                   <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-state-done)' }} />
                 </div>
                 <span style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', fontFamily: 'SF Mono, monospace' }}>
-                  Notion In-App Live Inspector • {notionEmbedUrl}
+                  Notion In-App Live Inspector • {isEmbedValid ? notionEmbedUrl : 'URL no permitida'}
                 </span>
-                <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>
-                  ↗ Abrir Web
-                </a>
+                {isEmbedValid && (
+                  <a href={notionEmbedUrl} target="_blank" rel="noreferrer" style={{ fontSize: '0.72rem', color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>
+                    ↗ Abrir Web
+                  </a>
+                )}
               </div>
 
-              <iframe
-                src={notionEmbedUrl}
-                title="Notion Second Brain Live Inspection"
-                style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
-              />
+              {isEmbedValid ? (
+                <iframe
+                  src={notionEmbedUrl}
+                  title="Notion Second Brain Live Inspection"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
+                />
+              ) : (
+                <div style={{ display: 'grid', placeItems: 'center', height: '100%', color: 'var(--color-text-secondary)', padding: '20px', textAlign: 'center' }}>
+                  ⚠️ URL de embebido no segura o no permitida por política de seguridad.
+                </div>
+              )}
             </div>
           </div>
         )}
