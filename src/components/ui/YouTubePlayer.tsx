@@ -101,6 +101,7 @@ export function YouTubePlayer({
           src={vimeoEmbedUrl}
           title={`Video demo para ${exerciseName}`}
           allow="autoplay; fullscreen; picture-in-picture"
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
           allowFullScreen
           loading="lazy"
         />
@@ -145,6 +146,7 @@ export function YouTubePlayer({
           src={embedUrl}
           title={`Video demo para ${exerciseName}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
           allowFullScreen
           loading="lazy"
         />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
+import { isValidEmbedUrl } from '../../utils/security';
 
 interface Props {
   defaultNotionUrl?: string;
@@ -57,8 +58,11 @@ export default function SecondBrainInspector({
   const [viewMode, setViewMode] = useState<'reinterpreted' | 'notion_embed' | 'obsidian_vault'>('reinterpreted');
 
   // Notion state
-  const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(defaultNotionUrl);
+  const [notionEmbedUrl, setNotionEmbedUrl] = useState<string>(
+    isValidEmbedUrl(defaultNotionUrl) ? defaultNotionUrl : 'https://v1.embednotion.com/embed/plan-maestro'
+  );
   const [inputUrl, setInputUrl] = useState<string>('');
+  const [urlError, setUrlError] = useState<string | null>(null);
 
   // Obsidian state
   const [selectedNoteIndex, setSelectedNoteIndex] = useState<number>(0);
@@ -67,7 +71,9 @@ export default function SecondBrainInspector({
   useEffect(() => {
     try {
       const savedNotion = localStorage.getItem('second_brain_notion_url');
-      if (savedNotion) setNotionEmbedUrl(savedNotion);
+      if (savedNotion && isValidEmbedUrl(savedNotion)) {
+        setNotionEmbedUrl(savedNotion);
+      }
       const savedVault = localStorage.getItem('obsidian_vault_name');
       if (savedVault) setVaultName(savedVault);
     } catch (e) {
@@ -76,10 +82,18 @@ export default function SecondBrainInspector({
   }, []);
 
   const handleSaveNotionUrl = () => {
-    if (!inputUrl.trim()) return;
-    setNotionEmbedUrl(inputUrl.trim());
+    const trimmed = inputUrl.trim();
+    if (!trimmed) return;
+
+    if (!isValidEmbedUrl(trimmed)) {
+      setUrlError('URL no válida. Debe usar HTTPS y pertenecer a un dominio permitido (Notion, YouTube, Vimeo).');
+      return;
+    }
+
+    setUrlError(null);
+    setNotionEmbedUrl(trimmed);
     try {
-      localStorage.setItem('second_brain_notion_url', inputUrl.trim());
+      localStorage.setItem('second_brain_notion_url', trimmed);
     } catch (e) {
       console.error(e);
     }
@@ -276,6 +290,12 @@ export default function SecondBrainInspector({
               </button>
             </div>
 
+            {urlError && (
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-accent-danger, #ff453a)', padding: '4px 8px' }}>
+                ⚠️ {urlError}
+              </div>
+            )}
+
             {/* EMBEDDED MACOS WINDOW FRAME */}
             <div style={{ background: '#000000', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '18px', overflow: 'hidden', height: '500px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ background: '#1c1c1e', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -293,8 +313,9 @@ export default function SecondBrainInspector({
               </div>
 
               <iframe
-                src={notionEmbedUrl}
+                src={isValidEmbedUrl(notionEmbedUrl) ? notionEmbedUrl : 'about:blank'}
                 title="Notion Second Brain Live Inspection"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 style={{ width: '100%', height: '100%', border: 'none', background: '#121212' }}
               />
             </div>
