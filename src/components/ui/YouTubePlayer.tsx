@@ -103,6 +103,7 @@ export function YouTubePlayer({
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"
         />
       );
     }
@@ -147,6 +148,7 @@ export function YouTubePlayer({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"
         />
       );
     }
